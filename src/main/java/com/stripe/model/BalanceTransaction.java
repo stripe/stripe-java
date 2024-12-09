@@ -128,13 +128,13 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
-   * refund}, {@code refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code
-   * stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup}, {@code topup_reversal},
-   * {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code
-   * transfer_refund}. Learn more about <a
-   * href="https://stripe.com/docs/reports/balance-transaction-types">balance transaction types and
-   * what they represent</a>. To classify transactions for accounting purposes, consider {@code
-   * reporting_category} instead.
+   * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code
+   * refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code stripe_fee},
+   * {@code stripe_fx_fee}, {@code tax_fee}, {@code topup}, {@code topup_reversal}, {@code
+   * transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code transfer_refund}. Learn
+   * more about <a href="https://stripe.com/docs/reports/balance-transaction-types">balance
+   * transaction types and what they represent</a>. To classify transactions for accounting
+   * purposes, consider {@code reporting_category} instead.
    *
    * <p>One of {@code adjustment}, {@code advance}, {@code advance_funding}, {@code
    * anticipation_repayment}, {@code application_fee}, {@code application_fee_refund}, {@code
@@ -145,10 +145,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * payment_failure_refund}, {@code payment_network_reserve_hold}, {@code
    * payment_network_reserve_release}, {@code payment_refund}, {@code payment_reversal}, {@code
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
-   * refund}, {@code refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code
-   * stripe_fee}, {@code stripe_fx_fee}, {@code tax_fee}, {@code topup}, {@code topup_reversal},
-   * {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code
-   * transfer_refund}.
+   * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code
+   * refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code stripe_fee},
+   * {@code stripe_fx_fee}, {@code tax_fee}, {@code topup}, {@code topup_reversal}, {@code
+   * transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code transfer_refund}.
    */
   @SerializedName("type")
   String type;

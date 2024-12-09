@@ -446,11 +446,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * Disables Stripe user authentication for this embedded component. This value can only be
+         * true for accounts where {@code controller.requirement_collection} is {@code application}.
+         * The default value is the opposite of the {@code external_account_collection} value. For
+         * example, if you don’t set {@code external_account_collection}, it defaults to true and
+         * {@code disable_stripe_user_authentication} defaults to false.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -504,11 +504,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This feature can only
-           * be false for accounts where you’re responsible for collecting updated information when
-           * requirements are due or change, like custom accounts. The default value for this
-           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
-           * true} otherwise.
+           * Disables Stripe user authentication for this embedded component. This value can only be
+           * true for accounts where {@code controller.requirement_collection} is {@code
+           * application}. The default value is the opposite of the {@code
+           * external_account_collection} value. For example, if you don’t set {@code
+           * external_account_collection}, it defaults to true and {@code
+           * disable_stripe_user_authentication} defaults to false.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -649,11 +650,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * Disables Stripe user authentication for this embedded component. This value can only be
+         * true for accounts where {@code controller.requirement_collection} is {@code application}.
+         * The default value is the opposite of the {@code external_account_collection} value. For
+         * example, if you don’t set {@code external_account_collection}, it defaults to true and
+         * {@code disable_stripe_user_authentication} defaults to false.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -707,11 +708,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This feature can only
-           * be false for accounts where you’re responsible for collecting updated information when
-           * requirements are due or change, like custom accounts. The default value for this
-           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
-           * true} otherwise.
+           * Disables Stripe user authentication for this embedded component. This value can only be
+           * true for accounts where {@code controller.requirement_collection} is {@code
+           * application}. The default value is the opposite of the {@code
+           * external_account_collection} value. For example, if you don’t set {@code
+           * external_account_collection}, it defaults to true and {@code
+           * disable_stripe_user_authentication} defaults to false.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -851,11 +853,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * Disables Stripe user authentication for this embedded component. This value can only be
+         * true for accounts where {@code controller.requirement_collection} is {@code application}.
+         * The default value is the opposite of the {@code external_account_collection} value. For
+         * example, if you don’t set {@code external_account_collection}, it defaults to true and
+         * {@code disable_stripe_user_authentication} defaults to false.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -945,11 +947,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This feature can only
-           * be false for accounts where you’re responsible for collecting updated information when
-           * requirements are due or change, like custom accounts. The default value for this
-           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
-           * true} otherwise.
+           * Disables Stripe user authentication for this embedded component. This value can only be
+           * true for accounts where {@code controller.requirement_collection} is {@code
+           * application}. The default value is the opposite of the {@code
+           * external_account_collection} value. For example, if you don’t set {@code
+           * external_account_collection}, it defaults to true and {@code
+           * disable_stripe_user_authentication} defaults to false.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -1258,11 +1261,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * Disables Stripe user authentication for this embedded component. This value can only be
+         * true for accounts where {@code controller.requirement_collection} is {@code application}.
+         * The default value is the opposite of the {@code external_account_collection} value. For
+         * example, if you don’t set {@code external_account_collection}, it defaults to true and
+         * {@code disable_stripe_user_authentication} defaults to false.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -1316,11 +1319,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This feature can only
-           * be false for accounts where you’re responsible for collecting updated information when
-           * requirements are due or change, like custom accounts. The default value for this
-           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
-           * true} otherwise.
+           * Disables Stripe user authentication for this embedded component. This value can only be
+           * true for accounts where {@code controller.requirement_collection} is {@code
+           * application}. The default value is the opposite of the {@code
+           * external_account_collection} value. For example, if you don’t set {@code
+           * external_account_collection}, it defaults to true and {@code
+           * disable_stripe_user_authentication} defaults to false.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -1910,11 +1914,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts. The default value for this feature
-         * is {@code false} when {@code external_account_collection} is enabled and {@code true}
-         * otherwise.
+         * Disables Stripe user authentication for this embedded component. This value can only be
+         * true for accounts where {@code controller.requirement_collection} is {@code application}.
+         * The default value is the opposite of the {@code external_account_collection} value. For
+         * example, if you don’t set {@code external_account_collection}, it defaults to true and
+         * {@code disable_stripe_user_authentication} defaults to false.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -2004,11 +2008,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This feature can only
-           * be false for accounts where you’re responsible for collecting updated information when
-           * requirements are due or change, like custom accounts. The default value for this
-           * feature is {@code false} when {@code external_account_collection} is enabled and {@code
-           * true} otherwise.
+           * Disables Stripe user authentication for this embedded component. This value can only be
+           * true for accounts where {@code controller.requirement_collection} is {@code
+           * application}. The default value is the opposite of the {@code
+           * external_account_collection} value. For example, if you don’t set {@code
+           * external_account_collection}, it defaults to true and {@code
+           * disable_stripe_user_authentication} defaults to false.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {

@@ -115,19 +115,31 @@ public final class MeterService extends ApiService {
             options);
     return this.request(request, Meter.class);
   }
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(String id, MeterDeactivateParams params) throws StripeException {
     return deactivate(id, params, (RequestOptions) null);
   }
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(String id, RequestOptions options) throws StripeException {
     return deactivate(id, (MeterDeactivateParams) null, options);
   }
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(String id) throws StripeException {
     return deactivate(id, (MeterDeactivateParams) null, (RequestOptions) null);
   }
-  /** Deactivates a billing meter. */
+  /**
+   * When a meter is deactivated, no more meter events will be accepted for this meter. You can’t
+   * attach a deactivated meter to a price.
+   */
   public Meter deactivate(String id, MeterDeactivateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/billing/meters/%s/deactivate", ApiResource.urlEncodeId(id));
@@ -140,19 +152,31 @@ public final class MeterService extends ApiService {
             options);
     return this.request(request, Meter.class);
   }
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(String id, MeterReactivateParams params) throws StripeException {
     return reactivate(id, params, (RequestOptions) null);
   }
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(String id, RequestOptions options) throws StripeException {
     return reactivate(id, (MeterReactivateParams) null, options);
   }
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(String id) throws StripeException {
     return reactivate(id, (MeterReactivateParams) null, (RequestOptions) null);
   }
-  /** Reactivates a billing meter. */
+  /**
+   * When a meter is reactivated, events for this meter can be accepted and you can attach the meter
+   * to a price.
+   */
   public Meter reactivate(String id, MeterReactivateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/billing/meters/%s/reactivate", ApiResource.urlEncodeId(id));

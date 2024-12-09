@@ -9445,8 +9445,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private MandateOptions(Map<String, Object> extraParams) {
+        /**
+         * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+         * consist of only uppercase letters, numbers, spaces, or the following special characters:
+         * '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
+         */
+        @SerializedName("reference_prefix")
+        Object referencePrefix;
+
+        private MandateOptions(Map<String, Object> extraParams, Object referencePrefix) {
           this.extraParams = extraParams;
+          this.referencePrefix = referencePrefix;
         }
 
         public static Builder builder() {
@@ -9456,10 +9465,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private Object referencePrefix;
+
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentCreateParams.PaymentMethodOptions.BacsDebit.MandateOptions build() {
             return new PaymentIntentCreateParams.PaymentMethodOptions.BacsDebit.MandateOptions(
-                this.extraParams);
+                this.extraParams, this.referencePrefix);
           }
 
           /**
@@ -9489,6 +9500,26 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+           * consist of only uppercase letters, numbers, spaces, or the following special
+           * characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
+           */
+          public Builder setReferencePrefix(String referencePrefix) {
+            this.referencePrefix = referencePrefix;
+            return this;
+          }
+
+          /**
+           * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+           * consist of only uppercase letters, numbers, spaces, or the following special
+           * characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
+           */
+          public Builder setReferencePrefix(EmptyParam referencePrefix) {
+            this.referencePrefix = referencePrefix;
             return this;
           }
         }
@@ -17030,8 +17061,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private MandateOptions(Map<String, Object> extraParams) {
+        /**
+         * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+         * consist of only uppercase letters, numbers, spaces, or the following special characters:
+         * '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
+         */
+        @SerializedName("reference_prefix")
+        Object referencePrefix;
+
+        private MandateOptions(Map<String, Object> extraParams, Object referencePrefix) {
           this.extraParams = extraParams;
+          this.referencePrefix = referencePrefix;
         }
 
         public static Builder builder() {
@@ -17041,10 +17081,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private Object referencePrefix;
+
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentCreateParams.PaymentMethodOptions.SepaDebit.MandateOptions build() {
             return new PaymentIntentCreateParams.PaymentMethodOptions.SepaDebit.MandateOptions(
-                this.extraParams);
+                this.extraParams, this.referencePrefix);
           }
 
           /**
@@ -17074,6 +17116,26 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+           * consist of only uppercase letters, numbers, spaces, or the following special
+           * characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
+           */
+          public Builder setReferencePrefix(String referencePrefix) {
+            this.referencePrefix = referencePrefix;
+            return this;
+          }
+
+          /**
+           * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+           * consist of only uppercase letters, numbers, spaces, or the following special
+           * characters: '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
+           */
+          public Builder setReferencePrefix(EmptyParam referencePrefix) {
+            this.referencePrefix = referencePrefix;
             return this;
           }
         }
@@ -17325,7 +17387,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The order ID displayed in the Swish app after the payment is authorized. */
+      /** A reference for this payment to be displayed in the Swish app. */
       @SerializedName("reference")
       Object reference;
 
@@ -17407,13 +17469,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The order ID displayed in the Swish app after the payment is authorized. */
+        /** A reference for this payment to be displayed in the Swish app. */
         public Builder setReference(String reference) {
           this.reference = reference;
           return this;
         }
 
-        /** The order ID displayed in the Swish app after the payment is authorized. */
+        /** A reference for this payment to be displayed in the Swish app. */
         public Builder setReference(EmptyParam reference) {
           this.reference = reference;
           return this;

@@ -122,6 +122,20 @@ public class StripeError extends StripeObject {
   String message;
 
   /**
+   * For card errors resulting from a card issuer decline, a 2 digit code which indicates the advice
+   * given to merchant by the card network on how to proceed with an error.
+   */
+  @SerializedName("network_advice_code")
+  String networkAdviceCode;
+
+  /**
+   * For card errors resulting from a card issuer decline, a brand specific 2, 3, or 4 digit code
+   * which indicates the reason the authorization failed.
+   */
+  @SerializedName("network_decline_code")
+  String networkDeclineCode;
+
+  /**
    * If the error is parameter-specific, the parameter related to the error. For example, you can
    * use this to display a message near the correct form field.
    */
