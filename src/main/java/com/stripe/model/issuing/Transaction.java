@@ -514,6 +514,10 @@ public class Transaction extends ApiResource
     @SerializedName("state")
     String state;
 
+    /** The seller's tax identification number. Currently populated for French merchants only. */
+    @SerializedName("tax_id")
+    String taxId;
+
     /** An ID assigned by the seller to the location of the sale. */
     @SerializedName("terminal_id")
     String terminalId;

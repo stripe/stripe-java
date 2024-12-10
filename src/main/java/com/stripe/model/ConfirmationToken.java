@@ -719,6 +719,14 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("networks")
       Networks networks;
 
+      /**
+       * Status of a card based on the card issuer.
+       *
+       * <p>One of {@code regulated}, or {@code unregulated}.
+       */
+      @SerializedName("regulated_status")
+      String regulatedStatus;
+
       /** Contains details on how this Card may be used for 3D Secure authentication. */
       @SerializedName("three_d_secure_usage")
       ThreeDSecureUsage threeDSecureUsage;
