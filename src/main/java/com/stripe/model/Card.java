@@ -230,6 +230,14 @@ public class Card extends ApiResource
   String object;
 
   /**
+   * Status of a card based on the card issuer.
+   *
+   * <p>One of {@code regulated}, or {@code unregulated}.
+   */
+  @SerializedName("regulated_status")
+  String regulatedStatus;
+
+  /**
    * For external accounts that are cards, possible values are {@code new} and {@code errored}. If a
    * payout fails, the status is set to {@code errored} and <a
    * href="https://stripe.com/docs/payouts#payout-schedule">scheduled payouts</a> are stopped until

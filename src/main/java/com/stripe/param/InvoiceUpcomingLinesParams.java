@@ -1862,21 +1862,24 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
-       * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
-       * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code by_tin}, {@code ca_bn}, {@code
-       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
-       * {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code
-       * cr_tin}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
-       * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
-       * hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
-       * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
-       * kz_bin}, {@code li_uid}, {@code li_vat}, {@code ma_vat}, {@code md_vat}, {@code mx_rfc},
-       * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
-       * no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin},
+       * {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code
+       * ba_tin}, {@code bb_tin}, {@code bg_uic}, {@code bh_vat}, {@code bo_tin}, {@code br_cnpj},
+       * {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code
+       * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code
+       * ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+       * {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code
+       * eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code gn_nif}, {@code hk_br},
+       * {@code hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code
+       * is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kh_tin},
+       * {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code li_vat}, {@code ma_vat}, {@code
+       * md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code my_frp},
+       * {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec}, {@code
+       * np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin},
        * {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code
-       * sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat},
-       * {@code tz_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code
-       * uz_vat}, {@code ve_rif}, {@code vn_tin}, or {@code za_vat}
+       * sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code th_vat},
+       * {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code
+       * ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif},
+       * {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -1938,21 +1941,24 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> Type of the tax ID, one of {@code ad_nrt}, {@code ae_trn},
-         * {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code bg_uic}, {@code bh_vat}, {@code
-         * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code by_tin}, {@code ca_bn}, {@code
-         * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst},
-         * {@code ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code
-         * cr_tin}, {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif},
-         * {@code eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code hk_br}, {@code
-         * hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
-         * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kr_brn}, {@code
-         * kz_bin}, {@code li_uid}, {@code li_vat}, {@code ma_vat}, {@code md_vat}, {@code mx_rfc},
-         * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
-         * no_voec}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code ro_tin},
-         * {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code
-         * sg_uen}, {@code si_tin}, {@code sv_nit}, {@code th_vat}, {@code tr_tin}, {@code tw_vat},
-         * {@code tz_vat}, {@code ua_vat}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code
-         * uz_vat}, {@code ve_rif}, {@code vn_tin}, or {@code za_vat}
+         * {@code am_tin}, {@code ao_tin}, {@code ar_cuit}, {@code au_abn}, {@code au_arn}, {@code
+         * ba_tin}, {@code bb_tin}, {@code bg_uic}, {@code bh_vat}, {@code bo_tin}, {@code br_cnpj},
+         * {@code br_cpf}, {@code bs_tin}, {@code by_tin}, {@code ca_bn}, {@code ca_gst_hst}, {@code
+         * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code ca_qst}, {@code cd_nif}, {@code
+         * ch_uid}, {@code ch_vat}, {@code cl_tin}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+         * {@code de_stn}, {@code do_rcn}, {@code ec_ruc}, {@code eg_tin}, {@code es_cif}, {@code
+         * eu_oss_vat}, {@code eu_vat}, {@code gb_vat}, {@code ge_vat}, {@code gn_nif}, {@code
+         * hk_br}, {@code hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst},
+         * {@code is_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code
+         * kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code li_uid}, {@code li_vat}, {@code ma_vat},
+         * {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc}, {@code
+         * my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code no_voec},
+         * {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin}, {@code
+         * ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code sg_gst},
+         * {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code
+         * th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat},
+         * {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code
+         * ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
          */
         public Builder setType(InvoiceUpcomingLinesParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1973,6 +1979,12 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         @SerializedName("ae_trn")
         AE_TRN("ae_trn"),
 
+        @SerializedName("am_tin")
+        AM_TIN("am_tin"),
+
+        @SerializedName("ao_tin")
+        AO_TIN("ao_tin"),
+
         @SerializedName("ar_cuit")
         AR_CUIT("ar_cuit"),
 
@@ -1981,6 +1993,12 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         @SerializedName("au_arn")
         AU_ARN("au_arn"),
+
+        @SerializedName("ba_tin")
+        BA_TIN("ba_tin"),
+
+        @SerializedName("bb_tin")
+        BB_TIN("bb_tin"),
 
         @SerializedName("bg_uic")
         BG_UIC("bg_uic"),
@@ -1996,6 +2014,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         @SerializedName("br_cpf")
         BR_CPF("br_cpf"),
+
+        @SerializedName("bs_tin")
+        BS_TIN("bs_tin"),
 
         @SerializedName("by_tin")
         BY_TIN("by_tin"),
@@ -2017,6 +2038,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         @SerializedName("ca_qst")
         CA_QST("ca_qst"),
+
+        @SerializedName("cd_nif")
+        CD_NIF("cd_nif"),
 
         @SerializedName("ch_uid")
         CH_UID("ch_uid"),
@@ -2063,6 +2087,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         @SerializedName("ge_vat")
         GE_VAT("ge_vat"),
 
+        @SerializedName("gn_nif")
+        GN_NIF("gn_nif"),
+
         @SerializedName("hk_br")
         HK_BR("hk_br"),
 
@@ -2096,6 +2123,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         @SerializedName("ke_pin")
         KE_PIN("ke_pin"),
 
+        @SerializedName("kh_tin")
+        KH_TIN("kh_tin"),
+
         @SerializedName("kr_brn")
         KR_BRN("kr_brn"),
 
@@ -2113,6 +2143,15 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         @SerializedName("md_vat")
         MD_VAT("md_vat"),
+
+        @SerializedName("me_pib")
+        ME_PIB("me_pib"),
+
+        @SerializedName("mk_vat")
+        MK_VAT("mk_vat"),
+
+        @SerializedName("mr_nif")
+        MR_NIF("mr_nif"),
 
         @SerializedName("mx_rfc")
         MX_RFC("mx_rfc"),
@@ -2134,6 +2173,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         @SerializedName("no_voec")
         NO_VOEC("no_voec"),
+
+        @SerializedName("np_pan")
+        NP_PAN("np_pan"),
 
         @SerializedName("nz_gst")
         NZ_GST("nz_gst"),
@@ -2171,11 +2213,20 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         @SerializedName("si_tin")
         SI_TIN("si_tin"),
 
+        @SerializedName("sn_ninea")
+        SN_NINEA("sn_ninea"),
+
+        @SerializedName("sr_fin")
+        SR_FIN("sr_fin"),
+
         @SerializedName("sv_nit")
         SV_NIT("sv_nit"),
 
         @SerializedName("th_vat")
         TH_VAT("th_vat"),
+
+        @SerializedName("tj_tin")
+        TJ_TIN("tj_tin"),
 
         @SerializedName("tr_tin")
         TR_TIN("tr_tin"),
@@ -2188,6 +2239,9 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
         @SerializedName("ua_vat")
         UA_VAT("ua_vat"),
+
+        @SerializedName("ug_tin")
+        UG_TIN("ug_tin"),
 
         @SerializedName("us_ein")
         US_EIN("us_ein"),
@@ -2208,7 +2262,13 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         VN_TIN("vn_tin"),
 
         @SerializedName("za_vat")
-        ZA_VAT("za_vat");
+        ZA_VAT("za_vat"),
+
+        @SerializedName("zm_tin")
+        ZM_TIN("zm_tin"),
+
+        @SerializedName("zw_tin")
+        ZW_TIN("zw_tin");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
