@@ -3746,6 +3746,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String requestOvercapture;
 
       /**
+       * Request partial authorization on this PaymentIntent.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_partial_authorization")
+      String requestPartialAuthorization;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
        * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
