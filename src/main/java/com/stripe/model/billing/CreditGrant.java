@@ -63,7 +63,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** The time when the billing credits become effective—when they're eligible for use. */
+  /** The time when the billing credits become effective-when they're eligible for use. */
   @SerializedName("effective_at")
   Long effectiveAt;
 
@@ -451,7 +451,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     @EqualsAndHashCode(callSuper = false)
     public static class Scope extends StripeObject {
       /**
-       * The price type for which credit grants can apply. We currently only support the {@code
+       * The price type that credit grants can apply to. We currently only support the {@code
        * metered} price type. This refers to prices that have a <a
        * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
        *

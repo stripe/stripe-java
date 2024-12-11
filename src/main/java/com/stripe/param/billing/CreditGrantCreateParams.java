@@ -28,8 +28,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   String customer;
 
   /**
-   * The time when the billing credits become effective—when they're eligible for use. Defaults to
-   * the current timestamp if not specified.
+   * The time when the billing credits become effective-when they're eligible for use. It defaults
+   * to the current timestamp if not specified.
    */
   @SerializedName("effective_at")
   Long effectiveAt;
@@ -39,8 +39,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
-   * The time when the billing credits will expire. If not specified, the billing credits don't
-   * expire.
+   * The time when the billing credits expire. If not specified, the billing credits don't expire.
    */
   @SerializedName("expires_at")
   Long expiresAt;
@@ -55,8 +54,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object (for example, cost basis) in a structured format.
+   * Set of key-value pairs that you can attach to an object. You can use this to store additional
+   * information about the object (for example, cost basis) in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -154,8 +153,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The time when the billing credits become effective—when they're eligible for use. Defaults to
-     * the current timestamp if not specified.
+     * The time when the billing credits become effective-when they're eligible for use. It defaults
+     * to the current timestamp if not specified.
      */
     public Builder setEffectiveAt(Long effectiveAt) {
       this.effectiveAt = effectiveAt;
@@ -189,8 +188,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The time when the billing credits will expire. If not specified, the billing credits don't
-     * expire.
+     * The time when the billing credits expire. If not specified, the billing credits don't expire.
      */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
@@ -530,7 +528,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The price type for which credit grants can apply. We currently
+       * <strong>Required.</strong> The price type that credit grants can apply to. We currently
        * only support the {@code metered} price type.
        */
       @SerializedName("price_type")
@@ -585,7 +583,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The price type for which credit grants can apply. We currently
+         * <strong>Required.</strong> The price type that credit grants can apply to. We currently
          * only support the {@code metered} price type.
          */
         public Builder setPriceType(

@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 public class MeterUpdateParams extends ApiRequestParams {
-  /** The meter's name. */
+  /** The meter’s name. Not visible to the customer. */
   @SerializedName("display_name")
   Object displayName;
 
@@ -52,13 +52,13 @@ public class MeterUpdateParams extends ApiRequestParams {
       return new MeterUpdateParams(this.displayName, this.expand, this.extraParams);
     }
 
-    /** The meter's name. */
+    /** The meter’s name. Not visible to the customer. */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
       return this;
     }
 
-    /** The meter's name. */
+    /** The meter’s name. Not visible to the customer. */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;
       return this;

@@ -1347,7 +1347,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code
        * ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn},
        * {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code
-       * ma_vat}, {@code by_tin}, or {@code unknown}.
+       * ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin}, {@code cd_nif},
+       * {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif}, {@code
+       * mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code tj_tin},
+       * {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -1974,7 +1977,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {}
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+         * consist of only uppercase letters, numbers, spaces, or the following special characters:
+         * '/', '_', '-', '&amp;', '.'. Cannot begin with 'DDIC' or 'STRIPE'.
+         */
+        @SerializedName("reference_prefix")
+        String referencePrefix;
+      }
     }
 
     /**
@@ -3022,7 +3033,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class MandateOptions extends StripeObject {}
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Prefix used to generate the Mandate reference. Must be at most 12 characters long. Must
+         * consist of only uppercase letters, numbers, spaces, or the following special characters:
+         * '/', '_', '-', '&amp;', '.'. Cannot begin with 'STRIPE'.
+         */
+        @SerializedName("reference_prefix")
+        String referencePrefix;
+      }
     }
 
     /**

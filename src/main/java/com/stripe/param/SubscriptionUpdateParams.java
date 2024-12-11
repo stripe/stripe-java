@@ -2507,8 +2507,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object billingThresholds;
 
     /**
-     * Delete all usage for a given subscription item. Allowed only when {@code deleted} is set to
-     * {@code true} and the current plan's {@code usage_type} is {@code metered}.
+     * Delete all usage for a given subscription item. You must pass this when deleting a usage
+     * records subscription item. {@code clear_usage} has no effect if the plan has a billing meter
+     * attached.
      */
     @SerializedName("clear_usage")
     Boolean clearUsage;
@@ -2671,8 +2672,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Delete all usage for a given subscription item. Allowed only when {@code deleted} is set to
-       * {@code true} and the current plan's {@code usage_type} is {@code metered}.
+       * Delete all usage for a given subscription item. You must pass this when deleting a usage
+       * records subscription item. {@code clear_usage} has no effect if the plan has a billing
+       * meter attached.
        */
       public Builder setClearUsage(Boolean clearUsage) {
         this.clearUsage = clearUsage;
@@ -3596,6 +3598,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * invoice’s default payment method, the subscription’s default payment method, the customer’s
      * default payment method, and your <a
      * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+     * Should not be specified with payment_method_configuration
      */
     @SerializedName("payment_method_types")
     Object paymentMethodTypes;
@@ -3718,6 +3721,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * invoice’s default payment method, the subscription’s default payment method, the customer’s
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+       * Should not be specified with payment_method_configuration
        */
       public Builder setPaymentMethodTypes(EmptyParam paymentMethodTypes) {
         this.paymentMethodTypes = paymentMethodTypes;
@@ -3730,6 +3734,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * invoice’s default payment method, the subscription’s default payment method, the customer’s
        * default payment method, and your <a
        * href="https://dashboard.stripe.com/settings/billing/invoice">invoice template settings</a>.
+       * Should not be specified with payment_method_configuration
        */
       public Builder setPaymentMethodTypes(
           List<SubscriptionUpdateParams.PaymentSettings.PaymentMethodType> paymentMethodTypes) {

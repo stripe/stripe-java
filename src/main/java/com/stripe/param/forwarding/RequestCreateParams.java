@@ -438,7 +438,10 @@ public class RequestCreateParams extends ApiRequestParams {
     CARD_NUMBER("card_number"),
 
     @SerializedName("cardholder_name")
-    CARDHOLDER_NAME("cardholder_name");
+    CARDHOLDER_NAME("cardholder_name"),
+
+    @SerializedName("request_signature")
+    REQUEST_SIGNATURE("request_signature");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

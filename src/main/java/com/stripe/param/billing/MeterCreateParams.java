@@ -19,7 +19,7 @@ public class MeterCreateParams extends ApiRequestParams {
   @SerializedName("default_aggregation")
   DefaultAggregation defaultAggregation;
 
-  /** <strong>Required.</strong> The meter's name. */
+  /** <strong>Required.</strong> The meter’s name. Not visible to the customer. */
   @SerializedName("display_name")
   String displayName;
 
@@ -116,7 +116,7 @@ public class MeterCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The meter's name. */
+    /** <strong>Required.</strong> The meter’s name. Not visible to the customer. */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
       return this;
@@ -199,7 +199,7 @@ public class MeterCreateParams extends ApiRequestParams {
   @Getter
   public static class CustomerMapping {
     /**
-     * <strong>Required.</strong> The key in the usage event payload to use for mapping the event to
+     * <strong>Required.</strong> The key in the meter event payload to use for mapping the event to
      * a customer.
      */
     @SerializedName("event_payload_key")
@@ -245,7 +245,7 @@ public class MeterCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The key in the usage event payload to use for mapping the event
+       * <strong>Required.</strong> The key in the meter event payload to use for mapping the event
        * to a customer.
        */
       public Builder setEventPayloadKey(String eventPayloadKey) {
