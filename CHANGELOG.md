@@ -1,5 +1,12 @@
 # Changelog
 
+## 28.2.0-beta.4 - 2024-12-12
+* [#1929](https://github.com/stripe/stripe-java/pull/1929) Update generated code for beta
+  * Add support for `allow_redisplay` on `Card` and `Source`
+  * Add support for new values `am_tin`, `ao_tin`, `ba_tin`, `bb_tin`, `bs_tin`, `cd_nif`, `gn_nif`, `kh_tin`, `me_pib`, `mk_vat`, `mr_nif`, `np_pan`, `sn_ninea`, `sr_fin`, `tj_tin`, `ug_tin`, `zm_tin`, and `zw_tin` on enums `OrderCreateParams.tax_details.tax_ids[].type` and `OrderUpdateParams.tax_details.tax_ids[].type`
+  * Remove support for `amount_refunded` on `PaymentRecord`
+  * Add support for `account` on `Terminal.Reader.action.collect_payment_method`, `Terminal.Reader.action.confirm_payment_intent`, `Terminal.Reader.action.process_payment_intent`, and `Terminal.Reader.action.refund_payment`
+
 ## 28.2.0-beta.3 - 2024-12-06
 * [#1930](https://github.com/stripe/stripe-java/pull/1930) Change types for capital FinancingSummary back to BigDecimal
   * The type for `Capital.FinancingSummary.Details.advancePaidOutAt`, `Capital.FinancingSummary.Details.repaymentsBeginAt`, `Capital.FinancingSummary.Details.CurrentRepaymentInterval.repaymentsBeginAt` have been changed to `BigDecimal` to reflect the API
