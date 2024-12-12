@@ -1086,7 +1086,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
-      /** Evidence provided for Visa Compliance evidence submission. */
+      /** Evidence provided for Visa compliance evidence submission. */
       @SerializedName("visa_compliance")
       VisaCompliance visaCompliance;
 
@@ -1152,7 +1152,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Evidence provided for Visa Compliance evidence submission. */
+        /** Evidence provided for Visa compliance evidence submission. */
         public Builder setVisaCompliance(
             DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompliance visaCompliance) {
           this.visaCompliance = visaCompliance;
@@ -2250,9 +2250,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * A field acknowledging the fee incurred when countering a Visa Compliance dispute. If this
-         * field is set to true, evidence can be submitted for the compliance dispute, and you may
-         * incur a $500 fee if the case is lost.
+         * A field acknowledging the fee incurred when countering a Visa compliance dispute. If this
+         * field is set to true, evidence can be submitted for the compliance dispute. Stripe
+         * collects a 500 USD (or local equivalent) amount to cover the network costs associated
+         * with resolving compliance disputes. Stripe refunds the 500 USD network fee if you win the
+         * dispute.
          */
         @SerializedName("fee_acknowledged")
         Boolean feeAcknowledged;
@@ -2308,9 +2310,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * A field acknowledging the fee incurred when countering a Visa Compliance dispute. If
-           * this field is set to true, evidence can be submitted for the compliance dispute, and
-           * you may incur a $500 fee if the case is lost.
+           * A field acknowledging the fee incurred when countering a Visa compliance dispute. If
+           * this field is set to true, evidence can be submitted for the compliance dispute. Stripe
+           * collects a 500 USD (or local equivalent) amount to cover the network costs associated
+           * with resolving compliance disputes. Stripe refunds the 500 USD network fee if you win
+           * the dispute.
            */
           public Builder setFeeAcknowledged(Boolean feeAcknowledged) {
             this.feeAcknowledged = feeAcknowledged;
