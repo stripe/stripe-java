@@ -44,10 +44,6 @@ public class PaymentRecord extends ApiResource implements HasId {
   AmountGuaranteed amountGuaranteed;
 
   /** A representation of an amount of money, consisting of an amount and a currency. */
-  @SerializedName("amount_refunded")
-  AmountRefunded amountRefunded;
-
-  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_requested")
   AmountRequested amountRequested;
 
@@ -463,28 +459,6 @@ public class PaymentRecord extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AmountRefunded extends StripeObject {
-    /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
-     */
-    @SerializedName("currency")
-    String currency;
-
-    /**
-     * A positive integer representing the amount in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> e.g., 100
-     * cents for $1.00 or 100 for ¥100, a zero-decimal currency).
-     */
-    @SerializedName("value")
-    Long value;
-  }
-
-  /** A representation of an amount of money, consisting of an amount and a currency. */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class AmountRequested extends StripeObject {
     /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
@@ -683,7 +657,6 @@ public class PaymentRecord extends ApiResource implements HasId {
     trySetResponseGetter(amountCanceled, responseGetter);
     trySetResponseGetter(amountFailed, responseGetter);
     trySetResponseGetter(amountGuaranteed, responseGetter);
-    trySetResponseGetter(amountRefunded, responseGetter);
     trySetResponseGetter(amountRequested, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);

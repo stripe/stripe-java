@@ -79,6 +79,17 @@ public class Card extends ApiResource
   String addressZipCheck;
 
   /**
+   * This field indicates whether this payment method can be shown again to its customer in a
+   * checkout flow. Stripe products such as Checkout and Elements use this field to determine
+   * whether a payment method can be shown as a saved payment method in a checkout flow. The field
+   * defaults to “unspecified”.
+   *
+   * <p>One of {@code always}, {@code limited}, or {@code unspecified}.
+   */
+  @SerializedName("allow_redisplay")
+  String allowRedisplay;
+
+  /**
    * A set of available payout methods for this card. Only values from this set should be passed as
    * the {@code method} when creating a payout.
    */
@@ -228,6 +239,14 @@ public class Card extends ApiResource
    */
   @SerializedName("object")
   String object;
+
+  /**
+   * Status of a card based on the card issuer.
+   *
+   * <p>One of {@code regulated}, or {@code unregulated}.
+   */
+  @SerializedName("regulated_status")
+  String regulatedStatus;
 
   /**
    * For external accounts that are cards, possible values are {@code new} and {@code errored}. If a
