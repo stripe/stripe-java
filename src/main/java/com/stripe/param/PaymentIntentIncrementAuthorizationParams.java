@@ -59,6 +59,10 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Payment method-specific configuration for this PaymentIntent. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /**
    * Text that appears on the customer's statement as the statement descriptor for a non-card or
    * card charge. This value overrides the account's default statement descriptor. For information
@@ -85,6 +89,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      PaymentMethodOptions paymentMethodOptions,
       String statementDescriptor,
       TransferData transferData) {
     this.amount = amount;
@@ -94,6 +99,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.statementDescriptor = statementDescriptor;
     this.transferData = transferData;
   }
@@ -117,6 +123,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
     private Map<String, String> metadata;
 
+    private PaymentMethodOptions paymentMethodOptions;
+
     private String statementDescriptor;
 
     private TransferData transferData;
@@ -131,6 +139,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
           this.expand,
           this.extraParams,
           this.metadata,
+          this.paymentMethodOptions,
           this.statementDescriptor,
           this.transferData);
     }
@@ -245,6 +254,13 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** Payment method-specific configuration for this PaymentIntent. */
+    public Builder setPaymentMethodOptions(
+        PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
       return this;
     }
 
@@ -502,6 +518,171 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
             this.extraParams.putAll(map);
             return this;
           }
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class PaymentMethodOptions {
+    /** Configuration for any card payments attempted on this PaymentIntent. */
+    @SerializedName("card")
+    Card card;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentMethodOptions(Card card, Map<String, Object> extraParams) {
+      this.card = card;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Card card;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions build() {
+        return new PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions(
+            this.card, this.extraParams);
+      }
+
+      /** Configuration for any card payments attempted on this PaymentIntent. */
+      public Builder setCard(
+          PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions.Card card) {
+        this.card = card;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions#extraParams} for
+       * the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Card {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Request partial authorization on this PaymentIntent. */
+      @SerializedName("request_partial_authorization")
+      RequestPartialAuthorization requestPartialAuthorization;
+
+      private Card(
+          Map<String, Object> extraParams,
+          RequestPartialAuthorization requestPartialAuthorization) {
+        this.extraParams = extraParams;
+        this.requestPartialAuthorization = requestPartialAuthorization;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private RequestPartialAuthorization requestPartialAuthorization;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions.Card build() {
+          return new PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions.Card(
+              this.extraParams, this.requestPartialAuthorization);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions.Card#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions.Card#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Request partial authorization on this PaymentIntent. */
+        public Builder setRequestPartialAuthorization(
+            PaymentIntentIncrementAuthorizationParams.PaymentMethodOptions.Card
+                    .RequestPartialAuthorization
+                requestPartialAuthorization) {
+          this.requestPartialAuthorization = requestPartialAuthorization;
+          return this;
+        }
+      }
+
+      public enum RequestPartialAuthorization implements ApiRequestParams.EnumParam {
+        @SerializedName("if_available")
+        IF_AVAILABLE("if_available"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestPartialAuthorization(String value) {
+          this.value = value;
         }
       }
     }
