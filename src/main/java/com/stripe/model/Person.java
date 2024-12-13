@@ -444,8 +444,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<Person.FutureRequirements.Errors> errors;
 
     /**
-     * Fields you must collect when all thresholds are reached. As they become required, they appear
-     * in {@code currently_due} as well, and the account's {@code
+     * Fields that need to be collected assuming all volume thresholds are reached. As they become
+     * required, they appear in {@code currently_due} as well, and the account's {@code
      * future_requirements[current_deadline]} becomes set.
      */
     @SerializedName("eventually_due")
@@ -661,8 +661,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<Person.Requirements.Errors> errors;
 
     /**
-     * Fields you must collect when all thresholds are reached. As they become required, they appear
-     * in {@code currently_due} as well, and the account's {@code current_deadline} becomes set.
+     * Fields that need to be collected assuming all volume thresholds are reached. As they become
+     * required, they appear in {@code currently_due} as well, and the account's {@code
+     * current_deadline} becomes set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;

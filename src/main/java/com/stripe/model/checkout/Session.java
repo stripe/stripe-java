@@ -1001,12 +1001,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code
        * my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic},
        * {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code
-       * ph_tin}, {@code al_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat},
-       * {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code
-       * md_vat}, {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin},
-       * {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code
-       * gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan},
-       * {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, or {@code unknown}.
+       * ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn},
+       * {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code
+       * ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin}, {@code cd_nif},
+       * {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif}, {@code
+       * mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code tj_tin},
+       * {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -1429,12 +1429,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code
        * my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic},
        * {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code
-       * ph_tin}, {@code al_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat},
-       * {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code
-       * md_vat}, {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin},
-       * {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code
-       * gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan},
-       * {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, or {@code unknown}.
+       * ph_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn},
+       * {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code
+       * ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin}, {@code cd_nif},
+       * {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif}, {@code
+       * mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code tj_tin},
+       * {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;

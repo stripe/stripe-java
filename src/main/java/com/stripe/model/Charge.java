@@ -1770,10 +1770,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("amount_authorized")
       Long amountAuthorized;
 
-      /** The latest amount intended to be authorized by this charge. */
-      @SerializedName("amount_requested")
-      Long amountRequested;
-
       /** Authorization code on the charge. */
       @SerializedName("authorization_code")
       String authorizationCode;
@@ -1901,30 +1897,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("network_token")
       NetworkToken networkToken;
 
-      /**
-       * This is used by the financial networks to identify a transaction. Visa calls this the
-       * Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the
-       * Acquirer Reference Data. The first three digits of the Trace ID is the Financial Network
-       * Code, the next 6 digits is the Banknet Reference Number, and the last 4 digits represent
-       * the date (MM/DD). This field will be available for successful Visa, Mastercard, or American
-       * Express transactions and always null for other card brands.
-       */
-      @SerializedName("network_transaction_id")
-      String networkTransactionId;
-
       @SerializedName("overcapture")
       Overcapture overcapture;
-
-      @SerializedName("partial_authorization")
-      PartialAuthorization partialAuthorization;
-
-      /**
-       * Status of a card based on the card issuer.
-       *
-       * <p>One of {@code regulated}, or {@code unregulated}.
-       */
-      @SerializedName("regulated_status")
-      String regulatedStatus;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
@@ -2105,25 +2079,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          * Indicates whether or not the authorized amount can be over-captured.
          *
          * <p>One of {@code available}, or {@code unavailable}.
-         */
-        @SerializedName("status")
-        String status;
-      }
-
-      /**
-       * For more details about PartialAuthorization, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class PartialAuthorization extends StripeObject {
-        /**
-         * Indicates whether the transaction requested for partial authorization feature and the
-         * authorization outcome.
-         *
-         * <p>One of {@code declined}, {@code fully_authorized}, {@code not_requested}, or {@code
-         * partially_authorized}.
          */
         @SerializedName("status")
         String status;

@@ -1965,8 +1965,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<Account.FutureRequirements.Errors> errors;
 
     /**
-     * Fields you must collect when all thresholds are reached. As they become required, they appear
-     * in {@code currently_due} as well.
+     * Fields that need to be collected assuming all volume thresholds are reached. As they become
+     * required, they appear in {@code currently_due} as well.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
@@ -2167,8 +2167,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<Account.Requirements.Errors> errors;
 
     /**
-     * Fields you must collect when all thresholds are reached. As they become required, they appear
-     * in {@code currently_due} as well, and {@code current_deadline} becomes set.
+     * Fields that need to be collected assuming all volume thresholds are reached. As they become
+     * required, they appear in {@code currently_due} as well, and {@code current_deadline} becomes
+     * set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
