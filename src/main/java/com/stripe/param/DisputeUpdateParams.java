@@ -1086,17 +1086,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
-      /** Evidence provided for Visa Compliance evidence submission. */
-      @SerializedName("visa_compliance")
-      VisaCompliance visaCompliance;
-
       private EnhancedEvidence(
-          Map<String, Object> extraParams,
-          VisaCompellingEvidence3 visaCompellingEvidence3,
-          VisaCompliance visaCompliance) {
+          Map<String, Object> extraParams, VisaCompellingEvidence3 visaCompellingEvidence3) {
         this.extraParams = extraParams;
         this.visaCompellingEvidence3 = visaCompellingEvidence3;
-        this.visaCompliance = visaCompliance;
       }
 
       public static Builder builder() {
@@ -1108,12 +1101,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
         private VisaCompellingEvidence3 visaCompellingEvidence3;
 
-        private VisaCompliance visaCompliance;
-
         /** Finalize and obtain parameter instance from this builder. */
         public DisputeUpdateParams.Evidence.EnhancedEvidence build() {
           return new DisputeUpdateParams.Evidence.EnhancedEvidence(
-              this.extraParams, this.visaCompellingEvidence3, this.visaCompliance);
+              this.extraParams, this.visaCompellingEvidence3);
         }
 
         /**
@@ -1149,13 +1140,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
             DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompellingEvidence3
                 visaCompellingEvidence3) {
           this.visaCompellingEvidence3 = visaCompellingEvidence3;
-          return this;
-        }
-
-        /** Evidence provided for Visa Compliance evidence submission. */
-        public Builder setVisaCompliance(
-            DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompliance visaCompliance) {
-          this.visaCompliance = visaCompliance;
           return this;
         }
       }
@@ -2233,88 +2217,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
                 return this;
               }
             }
-          }
-        }
-      }
-
-      @Getter
-      public static class VisaCompliance {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /**
-         * A field acknowledging the fee incurred when countering a Visa Compliance dispute. If this
-         * field is set to true, evidence can be submitted for the compliance dispute, and you may
-         * incur a $500 fee if the case is lost.
-         */
-        @SerializedName("fee_acknowledged")
-        Boolean feeAcknowledged;
-
-        private VisaCompliance(Map<String, Object> extraParams, Boolean feeAcknowledged) {
-          this.extraParams = extraParams;
-          this.feeAcknowledged = feeAcknowledged;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private Boolean feeAcknowledged;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompliance build() {
-            return new DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompliance(
-                this.extraParams, this.feeAcknowledged);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompliance#extraParams} for the field
-           * documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * DisputeUpdateParams.Evidence.EnhancedEvidence.VisaCompliance#extraParams} for the field
-           * documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /**
-           * A field acknowledging the fee incurred when countering a Visa Compliance dispute. If
-           * this field is set to true, evidence can be submitted for the compliance dispute, and
-           * you may incur a $500 fee if the case is lost.
-           */
-          public Builder setFeeAcknowledged(Boolean feeAcknowledged) {
-            this.feeAcknowledged = feeAcknowledged;
-            return this;
           }
         }
       }

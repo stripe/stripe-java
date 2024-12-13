@@ -780,9 +780,6 @@ public class Dispute extends ApiResource
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
-      @SerializedName("visa_compliance")
-      VisaCompliance visaCompliance;
-
       /**
        * For more details about VisaCompellingEvidence3, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -983,23 +980,6 @@ public class Dispute extends ApiResource
           }
         }
       }
-
-      /**
-       * For more details about VisaCompliance, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class VisaCompliance extends StripeObject {
-        /**
-         * A field acknowledging the fee incurred when countering a Visa Compliance dispute. If this
-         * field is set to true, evidence can be submitted for the compliance dispute, and you may
-         * incur a $500 fee if the case is lost.
-         */
-        @SerializedName("fee_acknowledged")
-        Boolean feeAcknowledged;
-      }
     }
   }
 
@@ -1052,9 +1032,6 @@ public class Dispute extends ApiResource
       @SerializedName("visa_compelling_evidence_3")
       VisaCompellingEvidence3 visaCompellingEvidence3;
 
-      @SerializedName("visa_compliance")
-      VisaCompliance visaCompliance;
-
       /**
        * For more details about VisaCompellingEvidence3, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -1074,23 +1051,6 @@ public class Dispute extends ApiResource
          * Visa Compelling Evidence 3.0 eligibility status.
          *
          * <p>One of {@code not_qualified}, {@code qualified}, or {@code requires_action}.
-         */
-        @SerializedName("status")
-        String status;
-      }
-
-      /**
-       * For more details about VisaCompliance, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class VisaCompliance extends StripeObject {
-        /**
-         * Visa Compelling Evidence 3.0 eligibility status.
-         *
-         * <p>One of {@code fee_acknowledged}, or {@code requires_fee_acknowledgement}.
          */
         @SerializedName("status")
         String status;
