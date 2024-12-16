@@ -361,10 +361,13 @@ public class OutboundTransfer extends ApiResource implements HasId {
     @SerializedName("billing_details")
     BillingDetails billingDetails;
 
+    @SerializedName("financial_account")
+    FinancialAccount financialAccount;
+
     /**
      * The type of the payment method used in the OutboundTransfer.
      *
-     * <p>Equal to {@code us_bank_account}.
+     * <p>One of {@code financial_account}, or {@code us_bank_account}.
      */
     @SerializedName("type")
     String type;
@@ -390,6 +393,28 @@ public class OutboundTransfer extends ApiResource implements HasId {
       /** Full name. */
       @SerializedName("name")
       String name;
+    }
+
+    /**
+     * For more details about FinancialAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccount extends StripeObject implements HasId {
+      /** Token of the FinancialAccount. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /**
+       * The rails used to send funds.
+       *
+       * <p>Equal to {@code stripe}.
+       */
+      @SerializedName("network")
+      String network;
     }
 
     /**

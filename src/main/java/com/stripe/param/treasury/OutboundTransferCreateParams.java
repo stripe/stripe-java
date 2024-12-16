@@ -32,6 +32,13 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("destination_payment_method")
   String destinationPaymentMethod;
 
+  /**
+   * Hash used to generate the PaymentMethod to be used for this OutboundTransfer. Exclusive with
+   * {@code destination_payment_method}.
+   */
+  @SerializedName("destination_payment_method_data")
+  DestinationPaymentMethodData destinationPaymentMethodData;
+
   /** Hash describing payment method configuration details. */
   @SerializedName("destination_payment_method_options")
   DestinationPaymentMethodOptions destinationPaymentMethodOptions;
@@ -79,6 +86,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       String currency,
       String description,
       String destinationPaymentMethod,
+      DestinationPaymentMethodData destinationPaymentMethodData,
       DestinationPaymentMethodOptions destinationPaymentMethodOptions,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -90,6 +98,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     this.currency = currency;
     this.description = description;
     this.destinationPaymentMethod = destinationPaymentMethod;
+    this.destinationPaymentMethodData = destinationPaymentMethodData;
     this.destinationPaymentMethodOptions = destinationPaymentMethodOptions;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -112,6 +121,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     private String destinationPaymentMethod;
 
+    private DestinationPaymentMethodData destinationPaymentMethodData;
+
     private DestinationPaymentMethodOptions destinationPaymentMethodOptions;
 
     private List<String> expand;
@@ -133,6 +144,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           this.currency,
           this.description,
           this.destinationPaymentMethod,
+          this.destinationPaymentMethodData,
           this.destinationPaymentMethodOptions,
           this.expand,
           this.extraParams,
@@ -167,6 +179,16 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     /** The PaymentMethod to use as the payment instrument for the OutboundTransfer. */
     public Builder setDestinationPaymentMethod(String destinationPaymentMethod) {
       this.destinationPaymentMethod = destinationPaymentMethod;
+      return this;
+    }
+
+    /**
+     * Hash used to generate the PaymentMethod to be used for this OutboundTransfer. Exclusive with
+     * {@code destination_payment_method}.
+     */
+    public Builder setDestinationPaymentMethodData(
+        OutboundTransferCreateParams.DestinationPaymentMethodData destinationPaymentMethodData) {
+      this.destinationPaymentMethodData = destinationPaymentMethodData;
       return this;
     }
 
@@ -276,6 +298,109 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
       return this;
+    }
+  }
+
+  @Getter
+  public static class DestinationPaymentMethodData {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Required if type is set to {@code financial_account}. The FinancialAccount ID to send funds
+     * to.
+     */
+    @SerializedName("financial_account")
+    String financialAccount;
+
+    /** <strong>Required.</strong> The type of the destination. */
+    @SerializedName("type")
+    Type type;
+
+    private DestinationPaymentMethodData(
+        Map<String, Object> extraParams, String financialAccount, Type type) {
+      this.extraParams = extraParams;
+      this.financialAccount = financialAccount;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String financialAccount;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public OutboundTransferCreateParams.DestinationPaymentMethodData build() {
+        return new OutboundTransferCreateParams.DestinationPaymentMethodData(
+            this.extraParams, this.financialAccount, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * OutboundTransferCreateParams.DestinationPaymentMethodData#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link OutboundTransferCreateParams.DestinationPaymentMethodData#extraParams} for the
+       * field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Required if type is set to {@code financial_account}. The FinancialAccount ID to send funds
+       * to.
+       */
+      public Builder setFinancialAccount(String financialAccount) {
+        this.financialAccount = financialAccount;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The type of the destination. */
+      public Builder setType(OutboundTransferCreateParams.DestinationPaymentMethodData.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("financial_account")
+      FINANCIAL_ACCOUNT("financial_account");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 
