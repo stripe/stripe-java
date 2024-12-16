@@ -344,7 +344,7 @@ public class Form extends ApiResource implements HasId {
     public static class Jurisdiction extends StripeObject {
       /**
        * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-       * 3166-1 alpha-2</a>). Always {@code US}.
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -360,6 +360,7 @@ public class Form extends ApiResource implements HasId {
       /**
        * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 U.S. state code</a>,
        * without country prefix, if any. For example, &quot;NY&quot; for New York, United States.
+       * Null for non-U.S. forms.
        */
       @SerializedName("state")
       String state;
