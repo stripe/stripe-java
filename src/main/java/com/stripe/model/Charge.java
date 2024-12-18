@@ -3414,6 +3414,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class Paypal extends StripeObject {
       /**
+       * Two-letter ISO code representing the buyer's country. Values are provided by PayPal
+       * directly (if supported) at the time of authorization or settlement. They cannot be set or
+       * mutated.
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
        * Owner's email. Values are provided by PayPal directly (if supported) at the time of
        * authorization or settlement. They cannot be set or mutated.
        */
