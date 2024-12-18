@@ -1762,7 +1762,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<Account.FutureRequirements.Alternative> alternatives;
 
     /**
-     * Date on which {@code future_requirements} merges with the main {@code requirements} hash and
+     * Date on which {@code future_requirements} becomes the main {@code requirements} hash and
      * {@code future_requirements} becomes empty. After the transition, {@code currently_due}
      * requirements may immediately become {@code past_due}, but the account may also be given a
      * grace period depending on its enablement state prior to transitioning.
@@ -1799,8 +1799,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<Account.FutureRequirements.Errors> errors;
 
     /**
-     * Fields that need to be collected assuming all volume thresholds are reached. As they become
-     * required, they appear in {@code currently_due} as well.
+     * Fields you must collect when all thresholds are reached. As they become required, they appear
+     * in {@code currently_due} as well.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
@@ -2001,9 +2001,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<Account.Requirements.Errors> errors;
 
     /**
-     * Fields that need to be collected assuming all volume thresholds are reached. As they become
-     * required, they appear in {@code currently_due} as well, and {@code current_deadline} becomes
-     * set.
+     * Fields you must collect when all thresholds are reached. As they become required, they appear
+     * in {@code currently_due} as well, and {@code current_deadline} becomes set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;

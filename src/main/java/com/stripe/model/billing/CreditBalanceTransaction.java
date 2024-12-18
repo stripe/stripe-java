@@ -207,9 +207,16 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     Amount amount;
 
     /**
+     * Details of the invoice to which the reinstated credits were originally applied. Only present
+     * if {@code type} is {@code credits_application_invoice_voided}.
+     */
+    @SerializedName("credits_application_invoice_voided")
+    CreditsApplicationInvoiceVoided creditsApplicationInvoiceVoided;
+
+    /**
      * The type of credit transaction.
      *
-     * <p>Equal to {@code credits_granted}.
+     * <p>One of {@code credits_application_invoice_voided}, or {@code credits_granted}.
      */
     @SerializedName("type")
     String type;
@@ -253,6 +260,43 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
         /** A positive integer representing the amount. */
         @SerializedName("value")
         Long value;
+      }
+    }
+
+    /**
+     * For more details about CreditsApplicationInvoiceVoided, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CreditsApplicationInvoiceVoided extends StripeObject {
+      /** The invoice to which the reinstated billing credits were originally applied. */
+      @SerializedName("invoice")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Invoice> invoice;
+
+      /** The invoice line item to which the reinstated billing credits were originally applied. */
+      @SerializedName("invoice_line_item")
+      String invoiceLineItem;
+
+      /** Get ID of expandable {@code invoice} object. */
+      public String getInvoice() {
+        return (this.invoice != null) ? this.invoice.getId() : null;
+      }
+
+      public void setInvoice(String id) {
+        this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+      }
+
+      /** Get expanded {@code invoice}. */
+      public Invoice getInvoiceObject() {
+        return (this.invoice != null) ? this.invoice.getExpanded() : null;
+      }
+
+      public void setInvoiceObject(Invoice expandableObject) {
+        this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
       }
     }
   }
