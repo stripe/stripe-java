@@ -42,6 +42,13 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
   Features features;
 
   /**
+   * A different bank account where funds can be deposited/debited in order to get the closing FA's
+   * balance to $0.
+   */
+  @SerializedName("forwarding_settings")
+  ForwardingSettings forwardingSettings;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -49,6 +56,10 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /** The nickname for the FinancialAccount. */
+  @SerializedName("nickname")
+  Object nickname;
 
   /** The set of functionalities that the platform can restrict on the FinancialAccount. */
   @SerializedName("platform_restrictions")
@@ -59,13 +70,17 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Features features,
+      ForwardingSettings forwardingSettings,
       Map<String, String> metadata,
+      Object nickname,
       PlatformRestrictions platformRestrictions) {
     this.displayName = displayName;
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
+    this.forwardingSettings = forwardingSettings;
     this.metadata = metadata;
+    this.nickname = nickname;
     this.platformRestrictions = platformRestrictions;
   }
 
@@ -82,7 +97,11 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
 
     private Features features;
 
+    private ForwardingSettings forwardingSettings;
+
     private Map<String, String> metadata;
+
+    private Object nickname;
 
     private PlatformRestrictions platformRestrictions;
 
@@ -93,7 +112,9 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.features,
+          this.forwardingSettings,
           this.metadata,
+          this.nickname,
           this.platformRestrictions);
     }
 
@@ -180,6 +201,16 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * A different bank account where funds can be deposited/debited in order to get the closing
+     * FA's balance to $0.
+     */
+    public Builder setForwardingSettings(
+        FinancialAccountUpdateParams.ForwardingSettings forwardingSettings) {
+      this.forwardingSettings = forwardingSettings;
+      return this;
+    }
+
+    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * FinancialAccountUpdateParams#metadata} for the field documentation.
@@ -202,6 +233,18 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The nickname for the FinancialAccount. */
+    public Builder setNickname(String nickname) {
+      this.nickname = nickname;
+      return this;
+    }
+
+    /** The nickname for the FinancialAccount. */
+    public Builder setNickname(EmptyParam nickname) {
+      this.nickname = nickname;
       return this;
     }
 
@@ -1412,6 +1455,136 @@ public class FinancialAccountUpdateParams extends ApiRequestParams {
             return this;
           }
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class ForwardingSettings {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The financial_account id. */
+    @SerializedName("financial_account")
+    Object financialAccount;
+
+    /** The payment_method or bank account id. This needs to be a verified bank account. */
+    @SerializedName("payment_method")
+    Object paymentMethod;
+
+    /**
+     * <strong>Required.</strong> The type of the bank account provided. This can be either
+     * &quot;financial_account&quot; or &quot;payment_method&quot;
+     */
+    @SerializedName("type")
+    Type type;
+
+    private ForwardingSettings(
+        Map<String, Object> extraParams, Object financialAccount, Object paymentMethod, Type type) {
+      this.extraParams = extraParams;
+      this.financialAccount = financialAccount;
+      this.paymentMethod = paymentMethod;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object financialAccount;
+
+      private Object paymentMethod;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public FinancialAccountUpdateParams.ForwardingSettings build() {
+        return new FinancialAccountUpdateParams.ForwardingSettings(
+            this.extraParams, this.financialAccount, this.paymentMethod, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FinancialAccountUpdateParams.ForwardingSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FinancialAccountUpdateParams.ForwardingSettings#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The financial_account id. */
+      public Builder setFinancialAccount(String financialAccount) {
+        this.financialAccount = financialAccount;
+        return this;
+      }
+
+      /** The financial_account id. */
+      public Builder setFinancialAccount(EmptyParam financialAccount) {
+        this.financialAccount = financialAccount;
+        return this;
+      }
+
+      /** The payment_method or bank account id. This needs to be a verified bank account. */
+      public Builder setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+      }
+
+      /** The payment_method or bank account id. This needs to be a verified bank account. */
+      public Builder setPaymentMethod(EmptyParam paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The type of the bank account provided. This can be either
+       * &quot;financial_account&quot; or &quot;payment_method&quot;
+       */
+      public Builder setType(FinancialAccountUpdateParams.ForwardingSettings.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("financial_account")
+      FINANCIAL_ACCOUNT("financial_account"),
+
+      @SerializedName("payment_method")
+      PAYMENT_METHOD("payment_method");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }

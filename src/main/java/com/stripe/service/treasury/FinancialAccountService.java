@@ -12,6 +12,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.treasury.FinancialAccountCloseParams;
 import com.stripe.param.treasury.FinancialAccountCreateParams;
 import com.stripe.param.treasury.FinancialAccountListParams;
 import com.stripe.param.treasury.FinancialAccountRetrieveParams;
@@ -122,6 +123,48 @@ public final class FinancialAccountService extends ApiService {
     String path =
         String.format(
             "/v1/treasury/financial_accounts/%s", ApiResource.urlEncodeId(financialAccount));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, FinancialAccount.class);
+  }
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(String financialAccount, FinancialAccountCloseParams params)
+      throws StripeException {
+    return close(financialAccount, params, (RequestOptions) null);
+  }
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(String financialAccount, RequestOptions options)
+      throws StripeException {
+    return close(financialAccount, (FinancialAccountCloseParams) null, options);
+  }
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(String financialAccount) throws StripeException {
+    return close(financialAccount, (FinancialAccountCloseParams) null, (RequestOptions) null);
+  }
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(
+      String financialAccount, FinancialAccountCloseParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/treasury/financial_accounts/%s/close", ApiResource.urlEncodeId(financialAccount));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
