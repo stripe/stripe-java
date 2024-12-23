@@ -2162,6 +2162,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Paypal extends StripeObject {
     /**
+     * Two-letter ISO code representing the buyer's country. Values are provided by PayPal directly
+     * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+     */
+    @SerializedName("country")
+    String country;
+
+    /**
      * Uniquely identifies this particular PayPal account. You can use this attribute to check
      * whether two PayPal accounts are the same.
      */

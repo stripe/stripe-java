@@ -258,11 +258,26 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("ae")
     Ae ae;
 
+    @SerializedName("al")
+    Al al;
+
+    @SerializedName("am")
+    Am am;
+
+    @SerializedName("ao")
+    Ao ao;
+
     @SerializedName("at")
     At at;
 
     @SerializedName("au")
     Au au;
+
+    @SerializedName("ba")
+    Ba ba;
+
+    @SerializedName("bb")
+    Bb bb;
 
     @SerializedName("be")
     Be be;
@@ -273,11 +288,17 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("bh")
     Bh bh;
 
+    @SerializedName("bs")
+    Bs bs;
+
     @SerializedName("by")
     By by;
 
     @SerializedName("ca")
     Ca ca;
+
+    @SerializedName("cd")
+    Cd cd;
 
     @SerializedName("ch")
     Ch ch;
@@ -327,6 +348,9 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("ge")
     Ge ge;
 
+    @SerializedName("gn")
+    Gn gn;
+
     @SerializedName("gr")
     Gr gr;
 
@@ -354,6 +378,9 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("ke")
     Ke ke;
 
+    @SerializedName("kh")
+    Kh kh;
+
     @SerializedName("kr")
     Kr kr;
 
@@ -375,6 +402,15 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("md")
     Md md;
 
+    @SerializedName("me")
+    Me me;
+
+    @SerializedName("mk")
+    Mk mk;
+
+    @SerializedName("mr")
+    Mr mr;
+
     @SerializedName("mt")
     Mt mt;
 
@@ -393,11 +429,17 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("no")
     No no;
 
+    @SerializedName("np")
+    Np np;
+
     @SerializedName("nz")
     Nz nz;
 
     @SerializedName("om")
     Om om;
+
+    @SerializedName("pe")
+    Pe pe;
 
     @SerializedName("pl")
     Pl pl;
@@ -429,8 +471,17 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("sk")
     Sk sk;
 
+    @SerializedName("sn")
+    Sn sn;
+
+    @SerializedName("sr")
+    Sr sr;
+
     @SerializedName("th")
     Th th;
+
+    @SerializedName("tj")
+    Tj tj;
 
     @SerializedName("tr")
     Tr tr;
@@ -438,8 +489,14 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("tz")
     Tz tz;
 
+    @SerializedName("ug")
+    Ug ug;
+
     @SerializedName("us")
     Us us;
+
+    @SerializedName("uy")
+    Uy uy;
 
     @SerializedName("uz")
     Uz uz;
@@ -450,6 +507,12 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("za")
     Za za;
 
+    @SerializedName("zm")
+    Zm zm;
+
+    @SerializedName("zw")
+    Zw zw;
+
     /**
      * For more details about Ae, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
@@ -458,6 +521,57 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ae extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Al, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Al extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Am, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Am extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Ao, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ao extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
@@ -512,6 +626,40 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Au extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Ba, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ba extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Bb, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bb extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
@@ -613,6 +761,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Bs, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bs extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about By, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -663,6 +828,23 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("province")
         String province;
       }
+    }
+
+    /**
+     * For more details about Cd, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cd extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
     }
 
     /**
@@ -1098,6 +1280,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Gn, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gn extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Gr, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1351,6 +1550,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Kh, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Kh extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Kr, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1530,6 +1746,57 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Me, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Me extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Mk, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mk extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Mr, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mr extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Mt, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1672,6 +1939,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Np, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Np extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Nz, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1700,6 +1984,23 @@ public class Registration extends ApiResource implements HasId {
        * Type of registration in {@code country}.
        *
        * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Pe, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pe extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
        */
       @SerializedName("type")
       String type;
@@ -1996,6 +2297,40 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Sn, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sn extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Sr, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sr extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Th, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -2003,6 +2338,23 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Th extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Tj, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tj extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
@@ -2037,6 +2389,23 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Tz extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Ug, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ug extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
@@ -2151,6 +2520,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Uy, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Uy extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Uz, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -2192,6 +2578,40 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Za extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Zm, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Zm extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Zw, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Zw extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
