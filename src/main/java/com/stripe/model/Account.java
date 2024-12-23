@@ -1474,6 +1474,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("directors_provided")
     Boolean directorsProvided;
 
+    @SerializedName("directorship_declaration")
+    DirectorshipDeclaration directorshipDeclaration;
+
     /**
      * Whether the company's executives have been provided. This Boolean will be {@code true} if
      * you've manually indicated that all executives are provided via <a
@@ -1644,6 +1647,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /** Town/cho-me. */
       @SerializedName("town")
       String town;
+    }
+
+    /**
+     * For more details about DirectorshipDeclaration, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DirectorshipDeclaration extends StripeObject {
+      /** The Unix timestamp marking when the directorship declaration attestation was made. */
+      @SerializedName("date")
+      Long date;
+
+      /** The IP address from which the directorship declaration attestation was made. */
+      @SerializedName("ip")
+      String ip;
+
+      /**
+       * The user-agent string from the browser where the directorship declaration attestation was
+       * made.
+       */
+      @SerializedName("user_agent")
+      String userAgent;
     }
 
     /**
