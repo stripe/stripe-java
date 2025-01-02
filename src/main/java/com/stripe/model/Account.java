@@ -1529,6 +1529,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("ownership_declaration")
     OwnershipDeclaration ownershipDeclaration;
 
+    @SerializedName("ownership_exemption_reason")
+    String ownershipExemptionReason;
+
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
     String phone;
