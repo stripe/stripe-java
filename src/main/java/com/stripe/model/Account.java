@@ -1474,6 +1474,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("directors_provided")
     Boolean directorsProvided;
 
+    /**
+     * This hash is used to attest that the director information provided to Stripe is both current
+     * and correct.
+     */
     @SerializedName("directorship_declaration")
     DirectorshipDeclaration directorshipDeclaration;
 
