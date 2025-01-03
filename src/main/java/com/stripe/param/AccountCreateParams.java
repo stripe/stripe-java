@@ -7607,6 +7607,9 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("ownership_declaration")
     OwnershipDeclaration ownershipDeclaration;
 
+    @SerializedName("ownership_exemption_reason")
+    ApiRequestParams.EnumParam ownershipExemptionReason;
+
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
     String phone;
@@ -7664,6 +7667,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String nameKanji,
         Boolean ownersProvided,
         OwnershipDeclaration ownershipDeclaration,
+        ApiRequestParams.EnumParam ownershipExemptionReason,
         String phone,
         String registrationNumber,
         ApiRequestParams.EnumParam structure,
@@ -7684,6 +7688,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.nameKanji = nameKanji;
       this.ownersProvided = ownersProvided;
       this.ownershipDeclaration = ownershipDeclaration;
+      this.ownershipExemptionReason = ownershipExemptionReason;
       this.phone = phone;
       this.registrationNumber = registrationNumber;
       this.structure = structure;
@@ -7724,6 +7729,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private OwnershipDeclaration ownershipDeclaration;
 
+      private ApiRequestParams.EnumParam ownershipExemptionReason;
+
       private String phone;
 
       private String registrationNumber;
@@ -7754,6 +7761,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.nameKanji,
             this.ownersProvided,
             this.ownershipDeclaration,
+            this.ownershipExemptionReason,
             this.phone,
             this.registrationNumber,
             this.structure,
@@ -7879,6 +7887,17 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setOwnershipDeclaration(
           AccountCreateParams.Company.OwnershipDeclaration ownershipDeclaration) {
         this.ownershipDeclaration = ownershipDeclaration;
+        return this;
+      }
+
+      public Builder setOwnershipExemptionReason(
+          AccountCreateParams.Company.OwnershipExemptionReason ownershipExemptionReason) {
+        this.ownershipExemptionReason = ownershipExemptionReason;
+        return this;
+      }
+
+      public Builder setOwnershipExemptionReason(EmptyParam ownershipExemptionReason) {
+        this.ownershipExemptionReason = ownershipExemptionReason;
         return this;
       }
 
@@ -8719,6 +8738,21 @@ public class AccountCreateParams extends ApiRequestParams {
             return this;
           }
         }
+      }
+    }
+
+    public enum OwnershipExemptionReason implements ApiRequestParams.EnumParam {
+      @SerializedName("qualified_entity_exceeds_ownership_threshold")
+      QUALIFIED_ENTITY_EXCEEDS_OWNERSHIP_THRESHOLD("qualified_entity_exceeds_ownership_threshold"),
+
+      @SerializedName("qualifies_as_financial_institution")
+      QUALIFIES_AS_FINANCIAL_INSTITUTION("qualifies_as_financial_institution");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      OwnershipExemptionReason(String value) {
+        this.value = value;
       }
     }
 

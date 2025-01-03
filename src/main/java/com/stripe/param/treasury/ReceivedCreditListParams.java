@@ -298,6 +298,9 @@ public class ReceivedCreditListParams extends ApiRequestParams {
       @SerializedName("outbound_payment")
       OUTBOUND_PAYMENT("outbound_payment"),
 
+      @SerializedName("outbound_transfer")
+      OUTBOUND_TRANSFER("outbound_transfer"),
+
       @SerializedName("payout")
       PAYOUT("payout");
 
