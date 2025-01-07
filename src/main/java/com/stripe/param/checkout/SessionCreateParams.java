@@ -13619,7 +13619,11 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   public static class PhoneNumberCollection {
-    /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
+    /**
+     * <strong>Required.</strong> Set to {@code true} to enable phone number collection.
+     *
+     * <p>Can only be set in {@code payment} and {@code subscription} mode.
+     */
     @SerializedName("enabled")
     Boolean enabled;
 
@@ -13651,7 +13655,11 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.PhoneNumberCollection(this.enabled, this.extraParams);
       }
 
-      /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
+      /**
+       * <strong>Required.</strong> Set to {@code true} to enable phone number collection.
+       *
+       * <p>Can only be set in {@code payment} and {@code subscription} mode.
+       */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
         return this;
