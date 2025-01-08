@@ -123,6 +123,14 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("payment_method_types")
   Object paymentMethodTypes;
 
+  /**
+   * Controls phone number collection settings during checkout.
+   *
+   * <p>We recommend that you review your privacy policy and check with your legal contacts.
+   */
+  @SerializedName("phone_number_collection")
+  PhoneNumberCollection phoneNumberCollection;
+
   /** Settings that restrict the usage of a payment link. */
   @SerializedName("restrictions")
   Object restrictions;
@@ -169,6 +177,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       Object paymentMethodTypes,
+      PhoneNumberCollection phoneNumberCollection,
       Object restrictions,
       Object shippingAddressCollection,
       SubmitType submitType,
@@ -191,6 +200,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.phoneNumberCollection = phoneNumberCollection;
     this.restrictions = restrictions;
     this.shippingAddressCollection = shippingAddressCollection;
     this.submitType = submitType;
@@ -237,6 +247,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Object paymentMethodTypes;
 
+    private PhoneNumberCollection phoneNumberCollection;
+
     private Object restrictions;
 
     private Object shippingAddressCollection;
@@ -267,6 +279,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodTypes,
+          this.phoneNumberCollection,
           this.restrictions,
           this.shippingAddressCollection,
           this.submitType,
@@ -566,6 +579,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     public Builder setPaymentMethodTypes(
         List<PaymentLinkUpdateParams.PaymentMethodType> paymentMethodTypes) {
       this.paymentMethodTypes = paymentMethodTypes;
+      return this;
+    }
+
+    /**
+     * Controls phone number collection settings during checkout.
+     *
+     * <p>We recommend that you review your privacy policy and check with your legal contacts.
+     */
+    public Builder setPhoneNumberCollection(
+        PaymentLinkUpdateParams.PhoneNumberCollection phoneNumberCollection) {
+      this.phoneNumberCollection = phoneNumberCollection;
       return this;
     }
 
@@ -3506,6 +3530,75 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
        */
       public Builder setTransferGroup(EmptyParam transferGroup) {
         this.transferGroup = transferGroup;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class PhoneNumberCollection {
+    /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PhoneNumberCollection(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.PhoneNumberCollection build() {
+        return new PaymentLinkUpdateParams.PhoneNumberCollection(this.enabled, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.PhoneNumberCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.PhoneNumberCollection#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
