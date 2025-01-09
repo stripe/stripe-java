@@ -993,9 +993,11 @@ public class Dispute extends ApiResource
       @EqualsAndHashCode(callSuper = false)
       public static class VisaCompliance extends StripeObject {
         /**
-         * A field acknowledging the fee incurred when countering a Visa Compliance dispute. If this
-         * field is set to true, evidence can be submitted for the compliance dispute, and you may
-         * incur a $500 fee if the case is lost.
+         * A field acknowledging the fee incurred when countering a Visa compliance dispute. If this
+         * field is set to true, evidence can be submitted for the compliance dispute. Stripe
+         * collects a 500 USD (or local equivalent) amount to cover the network costs associated
+         * with resolving compliance disputes. Stripe refunds the 500 USD network fee if you win the
+         * dispute.
          */
         @SerializedName("fee_acknowledged")
         Boolean feeAcknowledged;
@@ -1088,7 +1090,7 @@ public class Dispute extends ApiResource
       @EqualsAndHashCode(callSuper = false)
       public static class VisaCompliance extends StripeObject {
         /**
-         * Visa Compelling Evidence 3.0 eligibility status.
+         * Visa compliance eligibility status.
          *
          * <p>One of {@code fee_acknowledged}, or {@code requires_fee_acknowledgement}.
          */

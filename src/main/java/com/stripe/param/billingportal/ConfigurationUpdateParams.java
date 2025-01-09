@@ -1158,9 +1158,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       public enum ProrationBehavior implements ApiRequestParams.EnumParam {
-        @SerializedName("always_invoice")
-        ALWAYS_INVOICE("always_invoice"),
-
         @SerializedName("create_prorations")
         CREATE_PRORATIONS("create_prorations"),
 

@@ -669,6 +669,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("brand")
     String brand;
 
+    @SerializedName("brand_product")
+    String brandProduct;
+
     @SerializedName("country")
     String country;
 
@@ -734,6 +737,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("brand")
     String brand;
+
+    @SerializedName("brand_product")
+    String brandProduct;
 
     @SerializedName("country")
     String country;
@@ -1395,6 +1401,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("brand")
     String brand;
+
+    @SerializedName("brand_product")
+    String brandProduct;
 
     @SerializedName("card")
     String card;

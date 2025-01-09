@@ -105,6 +105,14 @@ public class Card extends ApiResource
   String brand;
 
   /**
+   * The <a href="https://stripe.com/docs/card-product-codes">product code</a> that identifies the
+   * specific program or product associated with a card. (For internal use only and not typically
+   * available in standard API requests.)
+   */
+  @SerializedName("brand_product")
+  String brandProduct;
+
+  /**
    * Two-letter ISO code representing the country of the card. You could use this attribute to get a
    * sense of the international breakdown of cards you've collected.
    */

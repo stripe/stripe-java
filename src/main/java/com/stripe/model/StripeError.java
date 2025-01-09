@@ -10,6 +10,14 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class StripeError extends StripeObject {
+  /**
+   * For card errors resulting from a card issuer decline, a short string indicating <a
+   * href="https://stripe.com/docs/declines#retrying-issuer-declines">how to proceed with an
+   * error</a> if they provide one.
+   */
+  @SerializedName("advice_code")
+  String adviceCode;
+
   /** For card errors, the ID of the failed charge. */
   @SerializedName("charge")
   String charge;

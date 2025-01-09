@@ -418,6 +418,27 @@ public class ReceivedCredit extends ApiResource implements HasId {
       OutboundPayment outboundPayment;
 
       /**
+       * Use <a
+       * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
+       * to transfer funds from a <a
+       * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> to a
+       * PaymentMethod belonging to the same entity. To send funds to a different party, use <a
+       * href="https://stripe.com/docs/api#outbound_payments">OutboundPayments</a> instead. You can
+       * send funds over ACH rails or through a domestic wire transfer to a user's own external bank
+       * account.
+       *
+       * <p>Simulate OutboundTransfer state changes with the {@code
+       * /v1/test_helpers/treasury/outbound_transfers} endpoints. These methods can only be called
+       * on test mode objects.
+       *
+       * <p>Related guide: <a
+       * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">Moving
+       * money with Treasury using OutboundTransfer objects</a>
+       */
+      @SerializedName("outbound_transfer")
+      OutboundTransfer outboundTransfer;
+
+      /**
        * A {@code Payout} object is created when you receive funds from Stripe, or when you initiate
        * a payout to either a bank account or debit card of a <a
        * href="https://stripe.com/docs/connect/bank-debit-card-payouts">connected Stripe
@@ -433,8 +454,8 @@ public class ReceivedCredit extends ApiResource implements HasId {
       /**
        * The type of the source flow that originated the ReceivedCredit.
        *
-       * <p>One of {@code credit_reversal}, {@code other}, {@code outbound_payment}, or {@code
-       * payout}.
+       * <p>One of {@code credit_reversal}, {@code other}, {@code outbound_payment}, {@code
+       * outbound_transfer}, or {@code payout}.
        */
       @SerializedName("type")
       String type;
