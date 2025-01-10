@@ -184,19 +184,19 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Configuration for the financial account component. */
+    /** Configuration for the financial account embedded component. */
     @SerializedName("financial_account")
     FinancialAccount financialAccount;
 
-    /** Configuration for the financial account transactions component. */
+    /** Configuration for the financial account transactions embedded component. */
     @SerializedName("financial_account_transactions")
     FinancialAccountTransactions financialAccountTransactions;
 
-    /** Configuration for the issuing card component. */
+    /** Configuration for the issuing card embedded component. */
     @SerializedName("issuing_card")
     IssuingCard issuingCard;
 
-    /** Configuration for the issuing cards list component. */
+    /** Configuration for the issuing cards list embedded component. */
     @SerializedName("issuing_cards_list")
     IssuingCardsList issuingCardsList;
 
@@ -472,14 +472,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Configuration for the financial account component. */
+      /** Configuration for the financial account embedded component. */
       public Builder setFinancialAccount(
           AccountSessionCreateParams.Components.FinancialAccount financialAccount) {
         this.financialAccount = financialAccount;
         return this;
       }
 
-      /** Configuration for the financial account transactions component. */
+      /** Configuration for the financial account transactions embedded component. */
       public Builder setFinancialAccountTransactions(
           AccountSessionCreateParams.Components.FinancialAccountTransactions
               financialAccountTransactions) {
@@ -487,13 +487,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Configuration for the issuing card component. */
+      /** Configuration for the issuing card embedded component. */
       public Builder setIssuingCard(AccountSessionCreateParams.Components.IssuingCard issuingCard) {
         this.issuingCard = issuingCard;
         return this;
       }
 
-      /** Configuration for the issuing cards list component. */
+      /** Configuration for the issuing cards list embedded component. */
       public Builder setIssuingCardsList(
           AccountSessionCreateParams.Components.IssuingCardsList issuingCardsList) {
         this.issuingCardsList = issuingCardsList;
