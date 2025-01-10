@@ -1,4 +1,4 @@
-# set quiet
+set quiet
 
 import? '../sdk-codegen/justfile'
 
