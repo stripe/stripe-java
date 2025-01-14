@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.Address;
+import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
@@ -13,6 +14,7 @@ import com.stripe.model.LineItemCollection;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
+import com.stripe.model.PromotionCode;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
@@ -191,6 +193,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("customer_email")
   String customerEmail;
+
+  /** List of coupons and promotion codes attached to the Checkout Session. */
+  @SerializedName("discounts")
+  List<Session.Discount> discounts;
 
   /** The timestamp at which the Checkout Session will expire. */
   @SerializedName("expires_at")
@@ -1442,6 +1448,64 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /** The value of the tax ID. */
       @SerializedName("value")
       String value;
+    }
+  }
+
+  /**
+   * For more details about Discount, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Discount extends StripeObject {
+    /** Coupon attached to the Checkout Session. */
+    @SerializedName("coupon")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Coupon> coupon;
+
+    /** Promotion code attached to the Checkout Session. */
+    @SerializedName("promotion_code")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PromotionCode> promotionCode;
+
+    /** Get ID of expandable {@code coupon} object. */
+    public String getCoupon() {
+      return (this.coupon != null) ? this.coupon.getId() : null;
+    }
+
+    public void setCoupon(String id) {
+      this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+    }
+
+    /** Get expanded {@code coupon}. */
+    public Coupon getCouponObject() {
+      return (this.coupon != null) ? this.coupon.getExpanded() : null;
+    }
+
+    public void setCouponObject(Coupon expandableObject) {
+      this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code promotionCode} object. */
+    public String getPromotionCode() {
+      return (this.promotionCode != null) ? this.promotionCode.getId() : null;
+    }
+
+    public void setPromotionCode(String id) {
+      this.promotionCode = ApiResource.setExpandableFieldId(id, this.promotionCode);
+    }
+
+    /** Get expanded {@code promotionCode}. */
+    public PromotionCode getPromotionCodeObject() {
+      return (this.promotionCode != null) ? this.promotionCode.getExpanded() : null;
+    }
+
+    public void setPromotionCodeObject(PromotionCode expandableObject) {
+      this.promotionCode =
+          new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
     }
   }
 
