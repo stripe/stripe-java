@@ -240,6 +240,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("tax_settings")
     TaxSettings taxSettings;
 
+    /** Configuration for the tax threshold monitoring embedded component. */
+    @SerializedName("tax_threshold_monitoring")
+    TaxThresholdMonitoring taxThresholdMonitoring;
+
     private Components(
         AccountManagement accountManagement,
         AccountOnboarding accountOnboarding,
@@ -265,7 +269,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Recipients recipients,
         ReportingChart reportingChart,
         TaxRegistrations taxRegistrations,
-        TaxSettings taxSettings) {
+        TaxSettings taxSettings,
+        TaxThresholdMonitoring taxThresholdMonitoring) {
       this.accountManagement = accountManagement;
       this.accountOnboarding = accountOnboarding;
       this.appInstall = appInstall;
@@ -291,6 +296,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.reportingChart = reportingChart;
       this.taxRegistrations = taxRegistrations;
       this.taxSettings = taxSettings;
+      this.taxThresholdMonitoring = taxThresholdMonitoring;
     }
 
     public static Builder builder() {
@@ -348,6 +354,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       private TaxSettings taxSettings;
 
+      private TaxThresholdMonitoring taxThresholdMonitoring;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AccountSessionCreateParams.Components build() {
         return new AccountSessionCreateParams.Components(
@@ -375,7 +383,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.recipients,
             this.reportingChart,
             this.taxRegistrations,
-            this.taxSettings);
+            this.taxSettings,
+            this.taxThresholdMonitoring);
       }
 
       /** Configuration for the account management embedded component. */
@@ -562,6 +571,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       /** Configuration for the tax settings embedded component. */
       public Builder setTaxSettings(AccountSessionCreateParams.Components.TaxSettings taxSettings) {
         this.taxSettings = taxSettings;
+        return this;
+      }
+
+      /** Configuration for the tax threshold monitoring embedded component. */
+      public Builder setTaxThresholdMonitoring(
+          AccountSessionCreateParams.Components.TaxThresholdMonitoring taxThresholdMonitoring) {
+        this.taxThresholdMonitoring = taxThresholdMonitoring;
         return this;
       }
     }
@@ -4968,6 +4984,153 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link AccountSessionCreateParams.Components.TaxSettings.Features#extraParams}
            * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    public static class TaxThresholdMonitoring {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private TaxThresholdMonitoring(
+          Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.TaxThresholdMonitoring build() {
+          return new AccountSessionCreateParams.Components.TaxThresholdMonitoring(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.TaxThresholdMonitoring#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.TaxThresholdMonitoring#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.TaxThresholdMonitoring.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Features {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.TaxThresholdMonitoring.Features build() {
+            return new AccountSessionCreateParams.Components.TaxThresholdMonitoring.Features(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.TaxThresholdMonitoring.Features#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.TaxThresholdMonitoring.Features#extraParams} for
+           * the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
