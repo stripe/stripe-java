@@ -349,6 +349,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("p24")
     P24 p24;
 
+    @SerializedName("pay_by_bank")
+    PayByBank payByBank;
+
     @SerializedName("payco")
     Payco payco;
 
@@ -406,10 +409,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * {@code grabpay}, {@code id_bank_transfer}, {@code ideal}, {@code interac_present}, {@code
      * kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card}, {@code link}, {@code mb_way},
      * {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code oxxo}, {@code p24}, {@code
-     * payco}, {@code paynow}, {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code
-     * qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code
-     * shopeepay}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
-     * wechat_pay}, or {@code zip}.
+     * pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code payto}, {@code pix},
+     * {@code promptpay}, {@code qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay},
+     * {@code sepa_debit}, {@code shopeepay}, {@code sofort}, {@code swish}, {@code twint}, {@code
+     * us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -1911,6 +1914,15 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @SerializedName("bank")
       String bank;
     }
+
+    /**
+     * For more details about PayByBank, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayByBank extends StripeObject {}
 
     /**
      * For more details about Payco, please refer to the <a href="https://docs.stripe.com/api">API

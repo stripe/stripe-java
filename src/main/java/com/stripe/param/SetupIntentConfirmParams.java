@@ -878,6 +878,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     P24 p24;
 
     /**
+     * If this is a {@code pay_by_bank} PaymentMethod, this hash contains details about the
+     * PayByBank payment method.
+     */
+    @SerializedName("pay_by_bank")
+    PayByBank payByBank;
+
+    /**
      * If this is a {@code payco} PaymentMethod, this hash contains details about the PAYCO payment
      * method.
      */
@@ -1054,6 +1061,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         NaverPay naverPay,
         Oxxo oxxo,
         P24 p24,
+        PayByBank payByBank,
         Payco payco,
         Paynow paynow,
         Paypal paypal,
@@ -1110,6 +1118,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.naverPay = naverPay;
       this.oxxo = oxxo;
       this.p24 = p24;
+      this.payByBank = payByBank;
       this.payco = payco;
       this.paynow = paynow;
       this.paypal = paypal;
@@ -1209,6 +1218,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private P24 p24;
 
+      private PayByBank payByBank;
+
       private Payco payco;
 
       private Paynow paynow;
@@ -1288,6 +1299,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.naverPay,
             this.oxxo,
             this.p24,
+            this.payByBank,
             this.payco,
             this.paynow,
             this.paypal,
@@ -1677,6 +1689,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setP24(SetupIntentConfirmParams.PaymentMethodData.P24 p24) {
         this.p24 = p24;
+        return this;
+      }
+
+      /**
+       * If this is a {@code pay_by_bank} PaymentMethod, this hash contains details about the
+       * PayByBank payment method.
+       */
+      public Builder setPayByBank(SetupIntentConfirmParams.PaymentMethodData.PayByBank payByBank) {
+        this.payByBank = payByBank;
         return this;
       }
 
@@ -4693,6 +4714,63 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
+    public static class PayByBank {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private PayByBank(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.PayByBank build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.PayByBank(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.PayByBank#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.PayByBank#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
     public static class Payco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6233,6 +6311,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("pay_by_bank")
+      PAY_BY_BANK("pay_by_bank"),
 
       @SerializedName("payco")
       PAYCO("payco"),

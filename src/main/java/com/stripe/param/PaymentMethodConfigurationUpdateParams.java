@@ -328,6 +328,15 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   P24 p24;
 
   /**
+   * Pay by bank is a redirect payment method backed by bank transfers. A customer is redirected to
+   * their bank to authorize a bank transfer for a given amount. This removes a lot of the error
+   * risks inherent in waiting for the customer to initiate a transfer themselves, and is less
+   * expensive than card payments.
+   */
+  @SerializedName("pay_by_bank")
+  PayByBank payByBank;
+
+  /**
    * PayNow is a Singapore-based payment method that allows customers to make a payment using their
    * preferred app from participating banks and participating non-bank financial institutions. Check
    * this <a href="https://stripe.com/docs/payments/paynow">page</a> for more details.
@@ -487,6 +496,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
       Object name,
       Oxxo oxxo,
       P24 p24,
+      PayByBank payByBank,
       Paynow paynow,
       Paypal paypal,
       Payto payto,
@@ -538,6 +548,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     this.name = name;
     this.oxxo = oxxo;
     this.p24 = p24;
+    this.payByBank = payByBank;
     this.paynow = paynow;
     this.paypal = paypal;
     this.payto = payto;
@@ -633,6 +644,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
 
     private P24 p24;
 
+    private PayByBank payByBank;
+
     private Paynow paynow;
 
     private Paypal paypal;
@@ -701,6 +714,7 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
           this.name,
           this.oxxo,
           this.p24,
+          this.payByBank,
           this.paynow,
           this.paypal,
           this.payto,
@@ -1150,6 +1164,17 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setP24(PaymentMethodConfigurationUpdateParams.P24 p24) {
       this.p24 = p24;
+      return this;
+    }
+
+    /**
+     * Pay by bank is a redirect payment method backed by bank transfers. A customer is redirected
+     * to their bank to authorize a bank transfer for a given amount. This removes a lot of the
+     * error risks inherent in waiting for the customer to initiate a transfer themselves, and is
+     * less expensive than card payments.
+     */
+    public Builder setPayByBank(PaymentMethodConfigurationUpdateParams.PayByBank payByBank) {
+      this.payByBank = payByBank;
       return this;
     }
 
@@ -6683,6 +6708,170 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
         /** The account's preference for whether or not to display this payment method. */
         public Builder setPreference(
             PaymentMethodConfigurationUpdateParams.P24.DisplayPreference.Preference preference) {
+          this.preference = preference;
+          return this;
+        }
+      }
+
+      public enum Preference implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off")
+        OFF("off"),
+
+        @SerializedName("on")
+        ON("on");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Preference(String value) {
+          this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class PayByBank {
+    /** Whether or not the payment method should be displayed. */
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PayByBank(DisplayPreference displayPreference, Map<String, Object> extraParams) {
+      this.displayPreference = displayPreference;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DisplayPreference displayPreference;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodConfigurationUpdateParams.PayByBank build() {
+        return new PaymentMethodConfigurationUpdateParams.PayByBank(
+            this.displayPreference, this.extraParams);
+      }
+
+      /** Whether or not the payment method should be displayed. */
+      public Builder setDisplayPreference(
+          PaymentMethodConfigurationUpdateParams.PayByBank.DisplayPreference displayPreference) {
+        this.displayPreference = displayPreference;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodConfigurationUpdateParams.PayByBank#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodConfigurationUpdateParams.PayByBank#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class DisplayPreference {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The account's preference for whether or not to display this payment method. */
+      @SerializedName("preference")
+      Preference preference;
+
+      private DisplayPreference(Map<String, Object> extraParams, Preference preference) {
+        this.extraParams = extraParams;
+        this.preference = preference;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Preference preference;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentMethodConfigurationUpdateParams.PayByBank.DisplayPreference build() {
+          return new PaymentMethodConfigurationUpdateParams.PayByBank.DisplayPreference(
+              this.extraParams, this.preference);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.PayByBank.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * PaymentMethodConfigurationUpdateParams.PayByBank.DisplayPreference#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The account's preference for whether or not to display this payment method. */
+        public Builder setPreference(
+            PaymentMethodConfigurationUpdateParams.PayByBank.DisplayPreference.Preference
+                preference) {
           this.preference = preference;
           return this;
         }
