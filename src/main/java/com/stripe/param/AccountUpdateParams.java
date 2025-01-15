@@ -9461,6 +9461,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("proof_of_registration")
     ProofOfRegistration proofOfRegistration;
 
+    /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
+    @SerializedName("proof_of_ultimate_beneficial_ownership")
+    ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
+
     private Documents(
         BankAccountOwnershipVerification bankAccountOwnershipVerification,
         CompanyLicense companyLicense,
@@ -9469,7 +9473,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         CompanyRegistrationVerification companyRegistrationVerification,
         CompanyTaxIdVerification companyTaxIdVerification,
         Map<String, Object> extraParams,
-        ProofOfRegistration proofOfRegistration) {
+        ProofOfRegistration proofOfRegistration,
+        ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership) {
       this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
       this.companyLicense = companyLicense;
       this.companyMemorandumOfAssociation = companyMemorandumOfAssociation;
@@ -9478,6 +9483,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.companyTaxIdVerification = companyTaxIdVerification;
       this.extraParams = extraParams;
       this.proofOfRegistration = proofOfRegistration;
+      this.proofOfUltimateBeneficialOwnership = proofOfUltimateBeneficialOwnership;
     }
 
     public static Builder builder() {
@@ -9501,6 +9507,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private ProofOfRegistration proofOfRegistration;
 
+      private ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AccountUpdateParams.Documents build() {
         return new AccountUpdateParams.Documents(
@@ -9511,7 +9519,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.companyRegistrationVerification,
             this.companyTaxIdVerification,
             this.extraParams,
-            this.proofOfRegistration);
+            this.proofOfRegistration,
+            this.proofOfUltimateBeneficialOwnership);
       }
 
       /**
@@ -9604,6 +9613,14 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setProofOfRegistration(
           AccountUpdateParams.Documents.ProofOfRegistration proofOfRegistration) {
         this.proofOfRegistration = proofOfRegistration;
+        return this;
+      }
+
+      /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
+      public Builder setProofOfUltimateBeneficialOwnership(
+          AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership
+              proofOfUltimateBeneficialOwnership) {
+        this.proofOfUltimateBeneficialOwnership = proofOfUltimateBeneficialOwnership;
         return this;
       }
     }
@@ -10276,6 +10293,106 @@ public class AccountUpdateParams extends ApiRequestParams {
          * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
          * and subsequent calls adds additional elements to the original list. See {@link
          * AccountUpdateParams.Documents.ProofOfRegistration#files} for the field documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class ProofOfUltimateBeneficialOwnership {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private ProofOfUltimateBeneficialOwnership(
+          Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership build() {
+          return new AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership(
+              this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership#files} for the field
+         * documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership#files} for the field
+         * documentation.
          */
         public Builder addAllFile(List<String> elements) {
           if (this.files == null) {
