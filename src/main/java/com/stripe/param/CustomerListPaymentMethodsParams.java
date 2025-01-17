@@ -327,6 +327,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("p24")
     P24("p24"),
 
+    @SerializedName("pay_by_bank")
+    PAY_BY_BANK("pay_by_bank"),
+
     @SerializedName("payco")
     PAYCO("payco"),
 

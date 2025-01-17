@@ -1181,6 +1181,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String p24Payments;
 
     /**
+     * The status of the pay_by_bank payments capability of the account, or whether the account can
+     * directly process pay_by_bank charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("pay_by_bank_payments")
+    String payByBankPayments;
+
+    /**
      * The status of the Payco capability of the account, or whether the account can directly
      * process Payco payments.
      *
@@ -1360,6 +1369,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Boolean directorsProvided;
 
     /**
+     * This hash is used to attest that the director information provided to Stripe is both current
+     * and correct.
+     */
+    @SerializedName("directorship_declaration")
+    DirectorshipDeclaration directorshipDeclaration;
+
+    /**
      * Whether the company's executives have been provided. This Boolean will be {@code true} if
      * you've manually indicated that all executives are provided via <a
      * href="https://stripe.com/docs/api/accounts/update#update_account-company-executives_provided">the
@@ -1410,6 +1426,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("ownership_declaration")
     OwnershipDeclaration ownershipDeclaration;
+
+    @SerializedName("ownership_exemption_reason")
+    String ownershipExemptionReason;
 
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
@@ -1529,6 +1548,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /** Town/cho-me. */
       @SerializedName("town")
       String town;
+    }
+
+    /**
+     * For more details about DirectorshipDeclaration, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DirectorshipDeclaration extends StripeObject {
+      /** The Unix timestamp marking when the directorship declaration attestation was made. */
+      @SerializedName("date")
+      Long date;
+
+      /** The IP address from which the directorship declaration attestation was made. */
+      @SerializedName("ip")
+      String ip;
+
+      /**
+       * The user-agent string from the browser where the directorship declaration attestation was
+       * made.
+       */
+      @SerializedName("user_agent")
+      String userAgent;
     }
 
     /**

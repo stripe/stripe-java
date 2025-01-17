@@ -12,7 +12,8 @@ import lombok.Getter;
 @Getter
 public class TransactionListParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> The ID of the Stripe account whose transactions will be retrieved.
+   * <strong>Required.</strong> The ID of the Financial Connections Account whose transactions will
+   * be retrieved.
    */
   @SerializedName("account")
   String account;
@@ -123,7 +124,8 @@ public class TransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The ID of the Stripe account whose transactions will be retrieved.
+     * <strong>Required.</strong> The ID of the Financial Connections Account whose transactions
+     * will be retrieved.
      */
     public Builder setAccount(String account) {
       this.account = account;

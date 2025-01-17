@@ -1029,6 +1029,16 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @EqualsAndHashCode(callSuper = false)
   public static class Outcome extends StripeObject {
     /**
+     * An enumerated value providing a more detailed explanation on <a
+     * href="https://stripe.com/docs/declines#retrying-issuer-declines">how to proceed with an
+     * error</a>.
+     *
+     * <p>One of {@code confirm_card_data}, {@code do_not_try_again}, or {@code try_again_later}.
+     */
+    @SerializedName("advice_code")
+    String adviceCode;
+
+    /**
      * For charges declined by the network, a 2 digit code which indicates the advice returned by
      * the network on how to proceed with an error.
      */
@@ -1251,6 +1261,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("p24")
     P24 p24;
+
+    @SerializedName("pay_by_bank")
+    PayByBank payByBank;
 
     @SerializedName("payco")
     Payco payco;
@@ -3259,6 +3272,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
 
     /**
+     * For more details about PayByBank, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayByBank extends StripeObject {}
+
+    /**
      * For more details about Payco, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -3292,6 +3314,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paypal extends StripeObject {
+      /**
+       * Two-letter ISO code representing the buyer's country. Values are provided by PayPal
+       * directly (if supported) at the time of authorization or settlement. They cannot be set or
+       * mutated.
+       */
+      @SerializedName("country")
+      String country;
+
       /**
        * Owner's email. Values are provided by PayPal directly (if supported) at the time of
        * authorization or settlement. They cannot be set or mutated.

@@ -12,6 +12,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.treasury.FinancialAccountCloseParams;
 import com.stripe.param.treasury.FinancialAccountCreateParams;
 import com.stripe.param.treasury.FinancialAccountListParams;
 import com.stripe.param.treasury.FinancialAccountRetrieveFeaturesParams;
@@ -70,6 +71,9 @@ public class FinancialAccount extends ApiResource
   @SerializedName("id")
   String id;
 
+  @SerializedName("is_default")
+  Boolean isDefault;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -85,6 +89,10 @@ public class FinancialAccount extends ApiResource
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  /** The nickname for the FinancialAccount. */
+  @SerializedName("nickname")
+  String nickname;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -123,6 +131,72 @@ public class FinancialAccount extends ApiResource
    */
   @SerializedName("supported_currencies")
   List<String> supportedCurrencies;
+
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close() throws StripeException {
+    return close((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(RequestOptions options) throws StripeException {
+    return close((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(Map<String, Object> params) throws StripeException {
+    return close(params, (RequestOptions) null);
+  }
+
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/treasury/financial_accounts/%s/close", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, FinancialAccount.class);
+  }
+
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(FinancialAccountCloseParams params) throws StripeException {
+    return close(params, (RequestOptions) null);
+  }
+
+  /**
+   * Closes a FinancialAccount. A FinancialAccount can only be closed if it has a zero balance, has
+   * no pending InboundTransfers, and has canceled all attached Issuing cards.
+   */
+  public FinancialAccount close(FinancialAccountCloseParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/treasury/financial_accounts/%s/close", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, FinancialAccount.class);
+  }
 
   /**
    * Creates a new FinancialAccount. For now, each connected account can only have one

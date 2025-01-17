@@ -2585,6 +2585,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("p24")
     P24 p24;
 
+    @SerializedName("pay_by_bank")
+    PayByBank payByBank;
+
     @SerializedName("payco")
     Payco payco;
 
@@ -4135,6 +4138,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
+
+    /**
+     * For more details about PayByBank, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayByBank extends StripeObject {}
 
     /**
      * For more details about Payco, please refer to the <a href="https://docs.stripe.com/api">API

@@ -69,6 +69,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   NaverPay naverPay;
 
   /**
+   * If this is a {@code pay_by_bank} PaymentMethod, this hash contains details about the PayByBank
+   * payment method.
+   */
+  @SerializedName("pay_by_bank")
+  PayByBank payByBank;
+
+  /**
    * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
    * bank account payment method.
    */
@@ -84,6 +91,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Link link,
       Object metadata,
       NaverPay naverPay,
+      PayByBank payByBank,
       UsBankAccount usBankAccount) {
     this.allowRedisplay = allowRedisplay;
     this.billingDetails = billingDetails;
@@ -93,6 +101,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     this.link = link;
     this.metadata = metadata;
     this.naverPay = naverPay;
+    this.payByBank = payByBank;
     this.usBankAccount = usBankAccount;
   }
 
@@ -117,6 +126,8 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private NaverPay naverPay;
 
+    private PayByBank payByBank;
+
     private UsBankAccount usBankAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -130,6 +141,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.link,
           this.metadata,
           this.naverPay,
+          this.payByBank,
           this.usBankAccount);
     }
 
@@ -276,6 +288,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setNaverPay(PaymentMethodUpdateParams.NaverPay naverPay) {
       this.naverPay = naverPay;
+      return this;
+    }
+
+    /**
+     * If this is a {@code pay_by_bank} PaymentMethod, this hash contains details about the
+     * PayByBank payment method.
+     */
+    public Builder setPayByBank(PaymentMethodUpdateParams.PayByBank payByBank) {
+      this.payByBank = payByBank;
       return this;
     }
 
@@ -958,6 +979,61 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
       Funding(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class PayByBank {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PayByBank(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodUpdateParams.PayByBank build() {
+        return new PaymentMethodUpdateParams.PayByBank(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodUpdateParams.PayByBank#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodUpdateParams.PayByBank#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

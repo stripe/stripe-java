@@ -3,6 +3,7 @@ package com.stripe.param.treasury;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,6 +41,10 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The nickname for the FinancialAccount. */
+  @SerializedName("nickname")
+  Object nickname;
+
   /** The set of functionalities that the platform can restrict on the FinancialAccount. */
   @SerializedName("platform_restrictions")
   PlatformRestrictions platformRestrictions;
@@ -53,12 +58,14 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Features features,
       Map<String, String> metadata,
+      Object nickname,
       PlatformRestrictions platformRestrictions,
       List<String> supportedCurrencies) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
     this.metadata = metadata;
+    this.nickname = nickname;
     this.platformRestrictions = platformRestrictions;
     this.supportedCurrencies = supportedCurrencies;
   }
@@ -76,6 +83,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Object nickname;
+
     private PlatformRestrictions platformRestrictions;
 
     private List<String> supportedCurrencies;
@@ -87,6 +96,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           this.extraParams,
           this.features,
           this.metadata,
+          this.nickname,
           this.platformRestrictions,
           this.supportedCurrencies);
     }
@@ -175,6 +185,18 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The nickname for the FinancialAccount. */
+    public Builder setNickname(String nickname) {
+      this.nickname = nickname;
+      return this;
+    }
+
+    /** The nickname for the FinancialAccount. */
+    public Builder setNickname(EmptyParam nickname) {
+      this.nickname = nickname;
       return this;
     }
 
