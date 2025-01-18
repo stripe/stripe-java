@@ -3,7 +3,6 @@
 [![Maven Central](https://img.shields.io/badge/maven--central-v28.3.0-beta.1-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
-[![Coverage Status](https://coveralls.io/repos/github/stripe/stripe-java/badge.svg?branch=master)](https://coveralls.io/github/stripe/stripe-java?branch=master)
 
 The official [Stripe][stripe] Java client library.
 
@@ -295,6 +294,8 @@ New features and bug fixes are released on the latest major version of the Strip
 
 ## Development
 
+[Contribution guidelines for this project](CONTRIBUTING.md)
+
 JDK 17 is required to build the Stripe Java library. By default, tests use the same Java runtime as the build.
 To use a custom version of Java runtime for tests set the `JAVA_TEST_HOME` environment variable to runtime's
 home directory.
@@ -308,6 +309,8 @@ go get -u github.com/stripe/stripe-mock
 stripe-mock
 ```
 
+We use [just](https://github.com/casey/just) for conveniently running development tasks. You can use them directly, or copy the commands out of the `justfile`. To our help docs, run `just`.
+
 To run all checks (tests and code formatting):
 
 ```sh
@@ -317,16 +320,20 @@ To run all checks (tests and code formatting):
 To run the tests:
 
 ```sh
-./gradlew test
+just test
+# or: ./gradlew test
 ```
 
 You can run particular tests by passing `--tests Class#method`. Make sure you
 use the fully qualified class name. For example:
 
 ```sh
-./gradlew test --tests com.stripe.model.AccountTest
-./gradlew test --tests com.stripe.functional.CustomerTest
-./gradlew test --tests com.stripe.functional.CustomerTest.testCustomerCreate
+just test-one com.stripe.model.AccountTest
+just test-one com.stripe.functional.CustomerTest
+just test-one com.stripe.functional.CustomerTest.testCustomerCreate
+# or: ./gradlew test --tests com.stripe.model.AccountTest
+# or: ./gradlew test --tests com.stripe.functional.CustomerTest
+# or: ./gradlew test --tests com.stripe.functional.CustomerTest.testCustomerCreate
 ```
 
 The library uses [Spotless][spotless] along with
@@ -335,7 +342,8 @@ formatted before PRs are submitted, otherwise CI will fail. Run the formatter
 with:
 
 ```sh
-./gradlew spotlessApply
+just format
+# or: ./gradlew spotlessApply
 ```
 
 The library uses [Project Lombok][lombok]. While it is not a requirement, you

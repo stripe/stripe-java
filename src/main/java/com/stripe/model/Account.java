@@ -1227,6 +1227,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String p24Payments;
 
     /**
+     * The status of the pay_by_bank payments capability of the account, or whether the account can
+     * directly process pay_by_bank charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("pay_by_bank_payments")
+    String payByBankPayments;
+
+    /**
      * The status of the Payco capability of the account, or whether the account can directly
      * process Payco payments.
      *

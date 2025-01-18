@@ -808,9 +808,9 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
       /**
        * Whether to create prorations when canceling subscriptions. Possible values are {@code none}
-       * and {@code create_prorations}, which is only compatible with {@code mode=immediately}. No
-       * prorations are generated when canceling a subscription at the end of its natural billing
-       * period.
+       * and {@code create_prorations}, which is only compatible with {@code mode=immediately}.
+       * Passing {@code always_invoice} will result in an error. No prorations are generated when
+       * canceling a subscription at the end of its natural billing period.
        */
       @SerializedName("proration_behavior")
       ProrationBehavior prorationBehavior;
@@ -907,8 +907,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         /**
          * Whether to create prorations when canceling subscriptions. Possible values are {@code
          * none} and {@code create_prorations}, which is only compatible with {@code
-         * mode=immediately}. No prorations are generated when canceling a subscription at the end
-         * of its natural billing period.
+         * mode=immediately}. Passing {@code always_invoice} will result in an error. No prorations
+         * are generated when canceling a subscription at the end of its natural billing period.
          */
         public Builder setProrationBehavior(
             ConfigurationCreateParams.Features.SubscriptionCancel.ProrationBehavior
@@ -1116,6 +1116,9 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       }
 
       public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("always_invoice")
+        ALWAYS_INVOICE("always_invoice"),
+
         @SerializedName("create_prorations")
         CREATE_PRORATIONS("create_prorations"),
 

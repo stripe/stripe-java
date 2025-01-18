@@ -386,7 +386,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
        * Whether to create prorations when canceling subscriptions. Possible values are {@code none}
        * and {@code create_prorations}.
        *
-       * <p>One of {@code create_prorations}, or {@code none}.
+       * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
        */
       @SerializedName("proration_behavior")
       String prorationBehavior;
