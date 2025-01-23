@@ -64,8 +64,8 @@ public abstract class StripeException extends Exception {
   }
 
   /**
-   * Returns a description of the exception, including the HTTP status code and request ID (if
-   * applicable).
+   * Returns a developer-facing description of the exception, including the HTTP status code and
+   * request ID (if applicable).
    *
    * @return a string representation of the exception.
    */
@@ -79,25 +79,22 @@ public abstract class StripeException extends Exception {
       additionalInfo += "; request-id: " + requestId;
     }
     // a separate user message is only available on v2 errors
-    if (stripeErrorApiMode == ApiMode.V2 && this.getUserMessage() != null) {
-      additionalInfo += "; user-message: " + this.getUserMessage();
+    String userMessage = this.getUserMessage();
+    if (userMessage != null) {
+      additionalInfo += "; user-message: " + userMessage;
     }
     return super.getMessage() + additionalInfo;
   }
 
   /**
-   * Returns a description of the user facing exception
+   * Returns a description of the issue suitable to show an end-user (if available).
    *
-   * @return a string representation of the user facing exception.
+   * @return a string representation of the user facing exception (or null).
    */
   public String getUserMessage() {
-    if (this.getStripeError() != null) {
-      switch (stripeErrorApiMode) {
-        case V1:
-          return this.getStripeError().getMessage();
-        case V2:
-          return this.getStripeError().getUserMessage();
-      }
+    // only V2 errors have (optional) user messages
+    if (this.getStripeError() != null && stripeErrorApiMode == ApiMode.V2) {
+      return this.getStripeError().getUserMessage();
     }
     return null;
   }
