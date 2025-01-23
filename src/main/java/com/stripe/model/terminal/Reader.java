@@ -954,10 +954,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("payment_method")
       PaymentMethod paymentMethod;
 
-      /** This field will be deprecated. Please use {@code account} instead. */
-      @SerializedName("stripe_account")
-      String stripeAccount;
-
       /** Get ID of expandable {@code paymentIntent} object. */
       public String getPaymentIntent() {
         return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
@@ -1025,10 +1021,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter(lombok.AccessLevel.NONE)
       ExpandableField<PaymentIntent> paymentIntent;
 
-      /** This field will be deprecated. Please use {@code account} instead. */
-      @SerializedName("stripe_account")
-      String stripeAccount;
-
       /** Get ID of expandable {@code paymentIntent} object. */
       public String getPaymentIntent() {
         return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
@@ -1067,10 +1059,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       /** Represents a per-transaction override of a reader configuration. */
       @SerializedName("process_config")
       ProcessConfig processConfig;
-
-      /** This field will be deprecated. Please use {@code account} instead. */
-      @SerializedName("stripe_account")
-      String stripeAccount;
 
       /** Get ID of expandable {@code paymentIntent} object. */
       public String getPaymentIntent() {
@@ -1246,10 +1234,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
        */
       @SerializedName("reverse_transfer")
       Boolean reverseTransfer;
-
-      /** This field will be deprecated. Please use {@code account} instead. */
-      @SerializedName("stripe_account")
-      String stripeAccount;
 
       /** Get ID of expandable {@code charge} object. */
       public String getCharge() {
