@@ -1,5 +1,9 @@
 # Changelog
 
+## 28.3.0-beta.3 - 2025-01-23
+* [#1939](https://github.com/stripe/stripe-java/pull/1939) Update generated code for beta
+  * Remove support for `stripe_account` on `Terminal.Reader.action.collect_payment_method`, `Terminal.Reader.action.confirm_payment_intent`, `Terminal.Reader.action.process_payment_intent`, and `Terminal.Reader.action.refund_payment`
+
 ## 28.3.0-beta.2 - 2025-01-17
 * [#1935](https://github.com/stripe/stripe-java/pull/1935) Update generated code for beta
   * Add support for `pay_by_bank_payments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
