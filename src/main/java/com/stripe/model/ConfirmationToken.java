@@ -1107,7 +1107,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Networks extends StripeObject {
-        /** All available networks for the card. */
+        /**
+         * All networks available for selection via <a
+         * href="https://stripe.com/api/payment_intents/confirm#confirm_payment_intent-payment_method_options-card-network">payment_method_options.card.network</a>.
+         */
         @SerializedName("available")
         List<String> available;
 
@@ -1425,7 +1428,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Networks extends StripeObject {
-        /** All available networks for the card. */
+        /**
+         * All networks available for selection via <a
+         * href="https://stripe.com/api/payment_intents/confirm#confirm_payment_intent-payment_method_options-card-network">payment_method_options.card.network</a>.
+         */
         @SerializedName("available")
         List<String> available;
 
@@ -1732,7 +1738,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Networks extends StripeObject {
-        /** All available networks for the card. */
+        /**
+         * All networks available for selection via <a
+         * href="https://stripe.com/api/payment_intents/confirm#confirm_payment_intent-payment_method_options-card-network">payment_method_options.card.network</a>.
+         */
         @SerializedName("available")
         List<String> available;
 
