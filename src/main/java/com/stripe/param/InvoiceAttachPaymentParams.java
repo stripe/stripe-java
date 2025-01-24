@@ -36,7 +36,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
   @SerializedName("payment_intent")
   String paymentIntent;
 
-  /** The ID of the PaymentRecord to detach from the invoice. */
+  /** The ID of the PaymentRecord to attach to the invoice. */
   @SerializedName("payment_record")
   String paymentRecord;
 
@@ -154,7 +154,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the PaymentRecord to detach from the invoice. */
+    /** The ID of the PaymentRecord to attach to the invoice. */
     public Builder setPaymentRecord(String paymentRecord) {
       this.paymentRecord = paymentRecord;
       return this;
