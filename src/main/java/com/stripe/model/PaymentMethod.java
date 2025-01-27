@@ -182,6 +182,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("p24")
   P24 p24;
 
+  @SerializedName("pay_by_bank")
+  PayByBank payByBank;
+
   @SerializedName("payco")
   Payco payco;
 
@@ -232,9 +235,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
    * {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card},
    * {@code link}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code oxxo}, {@code
-   * p24}, {@code payco}, {@code paynow}, {@code paypal}, {@code pix}, {@code promptpay}, {@code
-   * revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code
-   * twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * p24}, {@code pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code pix}, {@code
+   * promptpay}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code sofort},
+   * {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -2074,6 +2077,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about PayByBank, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PayByBank extends StripeObject {}
+
+  /**
    * For more details about Payco, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -2099,6 +2111,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Paypal extends StripeObject {
+    /**
+     * Two-letter ISO code representing the buyer's country. Values are provided by PayPal directly
+     * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+     */
+    @SerializedName("country")
+    String country;
+
     /**
      * Owner's email. Values are provided by PayPal directly (if supported) at the time of
      * authorization or settlement. They cannot be set or mutated.
@@ -2456,6 +2475,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(naverPay, responseGetter);
     trySetResponseGetter(oxxo, responseGetter);
     trySetResponseGetter(p24, responseGetter);
+    trySetResponseGetter(payByBank, responseGetter);
     trySetResponseGetter(payco, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
     trySetResponseGetter(paypal, responseGetter);

@@ -389,6 +389,13 @@ public class TokenCreateParams extends ApiRequestParams {
       Boolean directorsProvided;
 
       /**
+       * This hash is used to attest that the directors information provided to Stripe is both
+       * current and correct.
+       */
+      @SerializedName("directorship_declaration")
+      DirectorshipDeclaration directorshipDeclaration;
+
+      /**
        * Whether the company's executives have been provided. Set this Boolean to {@code true} after
        * creating all the company's executives with <a href="https://stripe.com/api/persons">the
        * Persons API</a> for accounts with a {@code relationship.executive} requirement.
@@ -450,6 +457,9 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("ownership_declaration_shown_and_signed")
       Boolean ownershipDeclarationShownAndSigned;
 
+      @SerializedName("ownership_exemption_reason")
+      ApiRequestParams.EnumParam ownershipExemptionReason;
+
       /** The company's phone number (used for verification). */
       @SerializedName("phone")
       String phone;
@@ -498,6 +508,7 @@ public class TokenCreateParams extends ApiRequestParams {
           AddressKana addressKana,
           AddressKanji addressKanji,
           Boolean directorsProvided,
+          DirectorshipDeclaration directorshipDeclaration,
           Boolean executivesProvided,
           String exportLicenseId,
           String exportPurposeCode,
@@ -508,6 +519,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Boolean ownersProvided,
           OwnershipDeclaration ownershipDeclaration,
           Boolean ownershipDeclarationShownAndSigned,
+          ApiRequestParams.EnumParam ownershipExemptionReason,
           String phone,
           String registrationNumber,
           ApiRequestParams.EnumParam structure,
@@ -519,6 +531,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.addressKana = addressKana;
         this.addressKanji = addressKanji;
         this.directorsProvided = directorsProvided;
+        this.directorshipDeclaration = directorshipDeclaration;
         this.executivesProvided = executivesProvided;
         this.exportLicenseId = exportLicenseId;
         this.exportPurposeCode = exportPurposeCode;
@@ -529,6 +542,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.ownersProvided = ownersProvided;
         this.ownershipDeclaration = ownershipDeclaration;
         this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
+        this.ownershipExemptionReason = ownershipExemptionReason;
         this.phone = phone;
         this.registrationNumber = registrationNumber;
         this.structure = structure;
@@ -551,6 +565,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private Boolean directorsProvided;
 
+        private DirectorshipDeclaration directorshipDeclaration;
+
         private Boolean executivesProvided;
 
         private String exportLicenseId;
@@ -570,6 +586,8 @@ public class TokenCreateParams extends ApiRequestParams {
         private OwnershipDeclaration ownershipDeclaration;
 
         private Boolean ownershipDeclarationShownAndSigned;
+
+        private ApiRequestParams.EnumParam ownershipExemptionReason;
 
         private String phone;
 
@@ -592,6 +610,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.addressKana,
               this.addressKanji,
               this.directorsProvided,
+              this.directorshipDeclaration,
               this.executivesProvided,
               this.exportLicenseId,
               this.exportPurposeCode,
@@ -602,6 +621,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.ownersProvided,
               this.ownershipDeclaration,
               this.ownershipDeclarationShownAndSigned,
+              this.ownershipExemptionReason,
               this.phone,
               this.registrationNumber,
               this.structure,
@@ -640,6 +660,16 @@ public class TokenCreateParams extends ApiRequestParams {
          */
         public Builder setDirectorsProvided(Boolean directorsProvided) {
           this.directorsProvided = directorsProvided;
+          return this;
+        }
+
+        /**
+         * This hash is used to attest that the directors information provided to Stripe is both
+         * current and correct.
+         */
+        public Builder setDirectorshipDeclaration(
+            TokenCreateParams.Account.Company.DirectorshipDeclaration directorshipDeclaration) {
+          this.directorshipDeclaration = directorshipDeclaration;
           return this;
         }
 
@@ -742,6 +772,17 @@ public class TokenCreateParams extends ApiRequestParams {
         public Builder setOwnershipDeclarationShownAndSigned(
             Boolean ownershipDeclarationShownAndSigned) {
           this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
+          return this;
+        }
+
+        public Builder setOwnershipExemptionReason(
+            TokenCreateParams.Account.Company.OwnershipExemptionReason ownershipExemptionReason) {
+          this.ownershipExemptionReason = ownershipExemptionReason;
+          return this;
+        }
+
+        public Builder setOwnershipExemptionReason(EmptyParam ownershipExemptionReason) {
+          this.ownershipExemptionReason = ownershipExemptionReason;
           return this;
         }
 
@@ -1314,6 +1355,111 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      public static class DirectorshipDeclaration {
+        /** The Unix timestamp marking when the directorship declaration attestation was made. */
+        @SerializedName("date")
+        Long date;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The IP address from which the directorship declaration attestation was made. */
+        @SerializedName("ip")
+        String ip;
+
+        /**
+         * The user agent of the browser from which the directorship declaration attestation was
+         * made.
+         */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private DirectorshipDeclaration(
+            Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+          this.date = date;
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long date;
+
+          private Map<String, Object> extraParams;
+
+          private String ip;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TokenCreateParams.Account.Company.DirectorshipDeclaration build() {
+            return new TokenCreateParams.Account.Company.DirectorshipDeclaration(
+                this.date, this.extraParams, this.ip, this.userAgent);
+          }
+
+          /** The Unix timestamp marking when the directorship declaration attestation was made. */
+          public Builder setDate(Long date) {
+            this.date = date;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.DirectorshipDeclaration#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.DirectorshipDeclaration#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The IP address from which the directorship declaration attestation was made. */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the directorship declaration attestation was
+           * made.
+           */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+        }
+      }
+
+      @Getter
       public static class OwnershipDeclaration {
         /** The Unix timestamp marking when the beneficial owner attestation was made. */
         @SerializedName("date")
@@ -1593,6 +1739,22 @@ public class TokenCreateParams extends ApiRequestParams {
               return this;
             }
           }
+        }
+      }
+
+      public enum OwnershipExemptionReason implements ApiRequestParams.EnumParam {
+        @SerializedName("qualified_entity_exceeds_ownership_threshold")
+        QUALIFIED_ENTITY_EXCEEDS_OWNERSHIP_THRESHOLD(
+            "qualified_entity_exceeds_ownership_threshold"),
+
+        @SerializedName("qualifies_as_financial_institution")
+        QUALIFIES_AS_FINANCIAL_INSTITUTION("qualifies_as_financial_institution");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        OwnershipExemptionReason(String value) {
+          this.value = value;
         }
       }
 

@@ -859,9 +859,9 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
       /**
        * Whether to create prorations when canceling subscriptions. Possible values are {@code none}
-       * and {@code create_prorations}, which is only compatible with {@code mode=immediately}. No
-       * prorations are generated when canceling a subscription at the end of its natural billing
-       * period.
+       * and {@code create_prorations}, which is only compatible with {@code mode=immediately}.
+       * Passing {@code always_invoice} will result in an error. No prorations are generated when
+       * canceling a subscription at the end of its natural billing period.
        */
       @SerializedName("proration_behavior")
       ProrationBehavior prorationBehavior;
@@ -958,8 +958,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         /**
          * Whether to create prorations when canceling subscriptions. Possible values are {@code
          * none} and {@code create_prorations}, which is only compatible with {@code
-         * mode=immediately}. No prorations are generated when canceling a subscription at the end
-         * of its natural billing period.
+         * mode=immediately}. Passing {@code always_invoice} will result in an error. No prorations
+         * are generated when canceling a subscription at the end of its natural billing period.
          */
         public Builder setProrationBehavior(
             ConfigurationUpdateParams.Features.SubscriptionCancel.ProrationBehavior

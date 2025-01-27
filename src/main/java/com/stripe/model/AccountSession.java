@@ -138,6 +138,18 @@ public class AccountSession extends ApiResource {
     @SerializedName("documents")
     Documents documents;
 
+    @SerializedName("financial_account")
+    FinancialAccount financialAccount;
+
+    @SerializedName("financial_account_transactions")
+    FinancialAccountTransactions financialAccountTransactions;
+
+    @SerializedName("issuing_card")
+    IssuingCard issuingCard;
+
+    @SerializedName("issuing_cards_list")
+    IssuingCardsList issuingCardsList;
+
     @SerializedName("notification_banner")
     NotificationBanner notificationBanner;
 
@@ -338,6 +350,172 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about FinancialAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccount extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Disables Stripe user authentication for this embedded component. This value can only be
+         * true for accounts where {@code controller.requirement_collection} is {@code application}.
+         * The default value is the opposite of the {@code external_account_collection} value. For
+         * example, if you don’t set {@code external_account_collection}, it defaults to true and
+         * {@code disable_stripe_user_authentication} defaults to false.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /** Whether to allow external accounts to be linked for money transfer. */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /** Whether to allow sending money. */
+        @SerializedName("send_money")
+        Boolean sendMoney;
+
+        /** Whether to allow transferring balance. */
+        @SerializedName("transfer_balance")
+        Boolean transferBalance;
+      }
+    }
+
+    /**
+     * For more details about FinancialAccountTransactions, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FinancialAccountTransactions extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /** Whether to allow card spend dispute management features. */
+        @SerializedName("card_spend_dispute_management")
+        Boolean cardSpendDisputeManagement;
+      }
+    }
+
+    /**
+     * For more details about IssuingCard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IssuingCard extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /** Whether to allow card management features. */
+        @SerializedName("card_management")
+        Boolean cardManagement;
+
+        /** Whether to allow card spend dispute management features. */
+        @SerializedName("card_spend_dispute_management")
+        Boolean cardSpendDisputeManagement;
+
+        /** Whether to allow cardholder management features. */
+        @SerializedName("cardholder_management")
+        Boolean cardholderManagement;
+
+        /** Whether to allow spend control management features. */
+        @SerializedName("spend_control_management")
+        Boolean spendControlManagement;
+      }
+    }
+
+    /**
+     * For more details about IssuingCardsList, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IssuingCardsList extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /** Whether to allow card management features. */
+        @SerializedName("card_management")
+        Boolean cardManagement;
+
+        /** Whether to allow card spend dispute management features. */
+        @SerializedName("card_spend_dispute_management")
+        Boolean cardSpendDisputeManagement;
+
+        /** Whether to allow cardholder management features. */
+        @SerializedName("cardholder_management")
+        Boolean cardholderManagement;
+
+        /**
+         * Disables Stripe user authentication for this embedded component. This feature can only be
+         * false for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like custom accounts.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /** Whether to allow spend control management features. */
+        @SerializedName("spend_control_management")
+        Boolean spendControlManagement;
+      }
     }
 
     /**
