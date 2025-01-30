@@ -64,13 +64,24 @@ public abstract class StripeException extends Exception {
   }
 
   /**
-   * Returns a developer-facing description of the exception, including the HTTP status code and
-   * request ID (if applicable).
+   * Returns a description of the issue suitable to show an end-user (if available).
+   *
+   * @return a string representation of the user facing exception (or `null`).
+   */
+  public String getUserMessage() {
+    if (this.stripeError == null) {
+      return null;
+    }
+    // pulls the `user_message` field, which _may_ be present in v2 errors
+    return this.stripeError.getUserMessage();
+  }
+
+  /**
+   * Returns a developer-facing description of the exception, including the HTTP status code and request ID (if applicable). Not suitable for showing to end users.
    *
    * @return a string representation of the exception.
    */
-  @Override
-  public String getMessage() {
+  public String getDebugMessage() {
     String additionalInfo = "";
     if (code != null) {
       additionalInfo += "; code: " + code;
@@ -84,19 +95,6 @@ public abstract class StripeException extends Exception {
       additionalInfo += "; user-message: " + userMessage;
     }
     return super.getMessage() + additionalInfo;
-  }
-
-  /**
-   * Returns a description of the issue suitable to show an end-user (if available).
-   *
-   * @return a string representation of the user facing exception (or null).
-   */
-  public String getUserMessage() {
-    // only V2 errors have (optional) user messages
-    if (this.getStripeError() != null && stripeErrorApiMode == ApiMode.V2) {
-      return this.getStripeError().getUserMessage();
-    }
-    return null;
   }
 
   public static StripeException parseV2Exception(
