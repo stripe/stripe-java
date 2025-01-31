@@ -36,7 +36,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("limits")
   Limits limits;
 
-  /** Settings for configuring manual entry of account details for this Session. */
+  /** Customize manual entry behavior. */
   @SerializedName("manual_entry")
   ManualEntry manualEntry;
 
@@ -188,7 +188,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Settings for configuring manual entry of account details for this Session. */
+    /** Customize manual entry behavior. */
     public Builder setManualEntry(SessionCreateParams.ManualEntry manualEntry) {
       this.manualEntry = manualEntry;
       return this;
