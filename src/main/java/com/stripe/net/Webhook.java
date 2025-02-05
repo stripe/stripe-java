@@ -73,7 +73,8 @@ public final class Webhook {
         StripeObject.deserializeStripeObject(
             payload, Event.class, ApiResource.getGlobalResponseGetter());
     Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
-    // StripeObjects source their raw JSON object from their last response, but constructed webhooks don't have that
+    // StripeObjects source their raw JSON object from their last response, but constructed webhooks
+    // don't have that
     // in order to make the raw object available on parsed events, we fake the response.
     if (event.getLastResponse() == null) {
       event.setLastResponse(
