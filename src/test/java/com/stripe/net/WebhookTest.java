@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -324,5 +325,14 @@ public class WebhookTest extends BaseStripeTest {
     reader.delete();
 
     Mockito.verify(responseGetter).request(Mockito.any(), Mockito.any());
+  }
+
+  @Test
+  public void testConstructEventWithRawJson()
+      throws StripeException, NoSuchAlgorithmException, InvalidKeyException {
+
+    final Event event = Webhook.constructEvent(payload, generateSigHeader(), secret);
+
+    assertNotNull(event.getRawJsonObject());
   }
 }

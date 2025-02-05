@@ -9,6 +9,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Clock;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
@@ -72,6 +73,13 @@ public final class Webhook {
         StripeObject.deserializeStripeObject(
             payload, Event.class, ApiResource.getGlobalResponseGetter());
     Signature.verifyHeader(payload, sigHeader, secret, tolerance, clock);
+    // StripeObjects source their raw JSON object from their last response, but constructed webhooks
+    // don't have that
+    // in order to make the raw object available on parsed events, we fake the response.
+    if (event.getLastResponse() == null) {
+      event.setLastResponse(
+          new StripeResponse(200, HttpHeaders.of(Collections.emptyMap()), payload));
+    }
 
     return event;
   }
