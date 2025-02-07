@@ -1,5 +1,8 @@
 # Changelog
 
+## 28.3.1 - 2025-02-07
+* [#1946](https://github.com/stripe/stripe-java/pull/1946) Ensure `getRawJsonObject` returns data for constructed webhooks
+
 ## 28.3.0 - 2025-01-27
 * [#1936](https://github.com/stripe/stripe-java/pull/1936) Update generated code
   * Add support for `close` method on resource `Treasury.FinancialAccount`
