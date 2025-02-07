@@ -76,7 +76,7 @@ public class TaxRateCreateParams extends ApiRequestParams {
   BigDecimal percentage;
 
   /**
-   * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>, without
+   * <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2 subdivision code</a>, without
    * country prefix. For example, &quot;NY&quot; for New York, United States.
    */
   @SerializedName("state")
@@ -295,8 +295,8 @@ public class TaxRateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2:US">ISO 3166-2 subdivision code</a>,
-     * without country prefix. For example, &quot;NY&quot; for New York, United States.
+     * <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2 subdivision code</a>, without
+     * country prefix. For example, &quot;NY&quot; for New York, United States.
      */
     public Builder setState(String state) {
       this.state = state;

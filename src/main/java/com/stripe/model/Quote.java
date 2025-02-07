@@ -1470,13 +1470,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
             /**
              * Tax rates can be applied to <a
-             * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
-             * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
-             * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+             * href="https://stripe.com/invoicing/taxes/tax-rates">invoices</a>, <a
+             * href="https://stripe.com/billing/taxes/tax-rates">subscriptions</a> and <a
+             * href="https://stripe.com/payments/checkout/use-manual-tax-rates">Checkout
              * Sessions</a> to collect tax.
              *
-             * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
-             * rates</a>
+             * <p>Related guide: <a href="https://stripe.com/billing/taxes/tax-rates">Tax rates</a>
              */
             @SerializedName("rate")
             TaxRate rate;
@@ -1610,13 +1609,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
             /**
              * Tax rates can be applied to <a
-             * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
-             * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
-             * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
+             * href="https://stripe.com/invoicing/taxes/tax-rates">invoices</a>, <a
+             * href="https://stripe.com/billing/taxes/tax-rates">subscriptions</a> and <a
+             * href="https://stripe.com/payments/checkout/use-manual-tax-rates">Checkout
              * Sessions</a> to collect tax.
              *
-             * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax
-             * rates</a>
+             * <p>Related guide: <a href="https://stripe.com/billing/taxes/tax-rates">Tax rates</a>
              */
             @SerializedName("rate")
             TaxRate rate;
@@ -2538,12 +2536,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
         /**
          * Tax rates can be applied to <a
-         * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
-         * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
-         * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
-         * Sessions</a> to collect tax.
+         * href="https://stripe.com/invoicing/taxes/tax-rates">invoices</a>, <a
+         * href="https://stripe.com/billing/taxes/tax-rates">subscriptions</a> and <a
+         * href="https://stripe.com/payments/checkout/use-manual-tax-rates">Checkout Sessions</a> to
+         * collect tax.
          *
-         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
+         * <p>Related guide: <a href="https://stripe.com/billing/taxes/tax-rates">Tax rates</a>
          */
         @SerializedName("rate")
         TaxRate rate;

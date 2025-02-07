@@ -205,7 +205,7 @@ jobs:
           mv ../japi-compliance-checker/compat_reports/stripe-java/*/compat_report.html report.html
 
       - name: Upload report as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: JAPI Compliance Report
           path: report.html

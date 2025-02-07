@@ -534,9 +534,20 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       @SerializedName("price_type")
       PriceType priceType;
 
-      private Scope(Map<String, Object> extraParams, PriceType priceType) {
+      /**
+       * A list of prices that the credit grant can apply to. We currently only support the {@code
+       * metered} prices.
+       */
+      @SerializedName("prices")
+      List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
+
+      private Scope(
+          Map<String, Object> extraParams,
+          PriceType priceType,
+          List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices) {
         this.extraParams = extraParams;
         this.priceType = priceType;
+        this.prices = prices;
       }
 
       public static Builder builder() {
@@ -548,10 +559,12 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
         private PriceType priceType;
 
+        private List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CreditGrantCreateParams.ApplicabilityConfig.Scope build() {
           return new CreditGrantCreateParams.ApplicabilityConfig.Scope(
-              this.extraParams, this.priceType);
+              this.extraParams, this.priceType, this.prices);
         }
 
         /**
@@ -590,6 +603,105 @@ public class CreditGrantCreateParams extends ApiRequestParams {
             CreditGrantCreateParams.ApplicabilityConfig.Scope.PriceType priceType) {
           this.priceType = priceType;
           return this;
+        }
+
+        /**
+         * Add an element to `prices` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * CreditGrantCreateParams.ApplicabilityConfig.Scope#prices} for the field documentation.
+         */
+        public Builder addPrice(CreditGrantCreateParams.ApplicabilityConfig.Scope.Price element) {
+          if (this.prices == null) {
+            this.prices = new ArrayList<>();
+          }
+          this.prices.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `prices` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * CreditGrantCreateParams.ApplicabilityConfig.Scope#prices} for the field documentation.
+         */
+        public Builder addAllPrice(
+            List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> elements) {
+          if (this.prices == null) {
+            this.prices = new ArrayList<>();
+          }
+          this.prices.addAll(elements);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Price {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The price ID this credit grant should apply to. */
+        @SerializedName("id")
+        String id;
+
+        private Price(Map<String, Object> extraParams, String id) {
+          this.extraParams = extraParams;
+          this.id = id;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CreditGrantCreateParams.ApplicabilityConfig.Scope.Price build() {
+            return new CreditGrantCreateParams.ApplicabilityConfig.Scope.Price(
+                this.extraParams, this.id);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CreditGrantCreateParams.ApplicabilityConfig.Scope.Price#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CreditGrantCreateParams.ApplicabilityConfig.Scope.Price#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The price ID this credit grant should apply to. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
         }
       }
 

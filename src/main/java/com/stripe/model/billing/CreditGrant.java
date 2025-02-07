@@ -21,6 +21,7 @@ import com.stripe.param.billing.CreditGrantListParams;
 import com.stripe.param.billing.CreditGrantRetrieveParams;
 import com.stripe.param.billing.CreditGrantUpdateParams;
 import com.stripe.param.billing.CreditGrantVoidGrantParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -459,6 +460,28 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
        */
       @SerializedName("price_type")
       String priceType;
+
+      /**
+       * The prices that credit grants can apply to. We currently only support {@code metered}
+       * prices. This refers to prices that have a <a
+       * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
+       */
+      @SerializedName("prices")
+      List<CreditGrant.ApplicabilityConfig.Scope.Price> prices;
+
+      /**
+       * For more details about Price, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Price extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+      }
     }
   }
 
