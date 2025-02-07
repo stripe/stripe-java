@@ -1,5 +1,14 @@
 # Changelog
 
+## 28.4.0-beta.1 - 2025-02-07
+* [#1942](https://github.com/stripe/stripe-java/pull/1942) Update generated code for beta
+  * Add support for `rejected_reason` on `Account.risk_controls`
+  * Add support for `product_tax_code_selector` on `AccountSessionCreateParams.components`
+  * Add support for `prices` on `Billing.CreditGrant.applicability_config.scope`, `billing.CreditBalanceSummaryRetrieveParams.filter.applicability_scope`, and `billing.CreditGrantCreateParams.applicability_config.scope`
+  * Add support for `brand_product` on `Charge.payment_method_details.amazon_pay.funding.card` and `Charge.payment_method_details.revolut_pay.funding.card`
+  * Add support for `restrictions` on `Checkout.Session.payment_method_options.card` and `checkout.SessionCreateParams.payment_method_options.card`
+  * Change type of `TokenCreateParams.person.political_exposure` from `string` to `enum('existing'|'none')`
+
 ## 28.3.0 - 2025-01-27
 * [#1936](https://github.com/stripe/stripe-java/pull/1936) Update generated code
   * Add support for `close` method on resource `Treasury.FinancialAccount`
