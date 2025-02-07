@@ -2354,6 +2354,18 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Payouts payouts;
 
     /**
+     * Represents the rejected reason of the account. Empty if account is not rejected, or rejected
+     * by Stripe. Please see <a href="https://stripe.com/docs/connect/">this page for more
+     * details</a>
+     *
+     * <p>One of {@code credit}, {@code fraud}, {@code fraud_no_intent_to_fulfill}, {@code
+     * fraud_other}, {@code fraud_payment_method_casher}, {@code fraud_payment_method_tester},
+     * {@code other}, or {@code terms_of_service}.
+     */
+    @SerializedName("rejected_reason")
+    String rejectedReason;
+
+    /**
      * For more details about Charges, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */

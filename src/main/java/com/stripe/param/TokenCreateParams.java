@@ -4454,7 +4454,7 @@ public class TokenCreateParams extends ApiRequestParams {
      * any jurisdiction.
      */
     @SerializedName("political_exposure")
-    String politicalExposure;
+    PoliticalExposure politicalExposure;
 
     /** The person's registered address. */
     @SerializedName("registered_address")
@@ -4495,7 +4495,7 @@ public class TokenCreateParams extends ApiRequestParams {
         Object metadata,
         String nationality,
         String phone,
-        String politicalExposure,
+        PoliticalExposure politicalExposure,
         RegisteredAddress registeredAddress,
         Relationship relationship,
         String ssnLast4,
@@ -4578,7 +4578,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String phone;
 
-      private String politicalExposure;
+      private PoliticalExposure politicalExposure;
 
       private RegisteredAddress registeredAddress;
 
@@ -4884,7 +4884,8 @@ public class TokenCreateParams extends ApiRequestParams {
        * related persons, declares that they hold or have held an important public job or function,
        * in any jurisdiction.
        */
-      public Builder setPoliticalExposure(String politicalExposure) {
+      public Builder setPoliticalExposure(
+          TokenCreateParams.Person.PoliticalExposure politicalExposure) {
         this.politicalExposure = politicalExposure;
         return this;
       }
@@ -6769,6 +6770,21 @@ public class TokenCreateParams extends ApiRequestParams {
             return this;
           }
         }
+      }
+    }
+
+    public enum PoliticalExposure implements ApiRequestParams.EnumParam {
+      @SerializedName("existing")
+      EXISTING("existing"),
+
+      @SerializedName("none")
+      NONE("none");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      PoliticalExposure(String value) {
+        this.value = value;
       }
     }
   }

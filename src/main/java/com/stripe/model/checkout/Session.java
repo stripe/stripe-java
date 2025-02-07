@@ -2286,6 +2286,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
 
+      @SerializedName("restrictions")
+      Restrictions restrictions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2341,6 +2344,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         /** Indicates if installments are enabled. */
         @SerializedName("enabled")
         Boolean enabled;
+      }
+
+      /**
+       * For more details about Restrictions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Restrictions extends StripeObject {
+        /**
+         * Specify the card brands to block in the Checkout Session. If a customer enters or selects
+         * a card belonging to a blocked brand, they can't complete the Session.
+         */
+        @SerializedName("brands_blocked")
+        List<String> brandsBlocked;
       }
     }
 
@@ -3660,12 +3679,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
       /**
        * Tax rates can be applied to <a
-       * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
-       * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
-       * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
-       * Sessions</a> to collect tax.
+       * href="https://stripe.com/invoicing/taxes/tax-rates">invoices</a>, <a
+       * href="https://stripe.com/billing/taxes/tax-rates">subscriptions</a> and <a
+       * href="https://stripe.com/payments/checkout/use-manual-tax-rates">Checkout Sessions</a> to
+       * collect tax.
        *
-       * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
+       * <p>Related guide: <a href="https://stripe.com/billing/taxes/tax-rates">Tax rates</a>
        */
       @SerializedName("rate")
       TaxRate rate;
@@ -3827,12 +3846,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
         /**
          * Tax rates can be applied to <a
-         * href="https://stripe.com/docs/billing/invoices/tax-rates">invoices</a>, <a
-         * href="https://stripe.com/docs/billing/subscriptions/taxes">subscriptions</a> and <a
-         * href="https://stripe.com/docs/payments/checkout/set-up-a-subscription#tax-rates">Checkout
-         * Sessions</a> to collect tax.
+         * href="https://stripe.com/invoicing/taxes/tax-rates">invoices</a>, <a
+         * href="https://stripe.com/billing/taxes/tax-rates">subscriptions</a> and <a
+         * href="https://stripe.com/payments/checkout/use-manual-tax-rates">Checkout Sessions</a> to
+         * collect tax.
          *
-         * <p>Related guide: <a href="https://stripe.com/docs/billing/taxes/tax-rates">Tax rates</a>
+         * <p>Related guide: <a href="https://stripe.com/billing/taxes/tax-rates">Tax rates</a>
          */
         @SerializedName("rate")
         TaxRate rate;

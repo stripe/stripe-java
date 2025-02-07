@@ -8062,6 +8062,13 @@ public class SessionCreateParams extends ApiRequestParams {
       RequestThreeDSecure requestThreeDSecure;
 
       /**
+       * Restrictions to apply to the card payment method. For example, you can block specific card
+       * brands.
+       */
+      @SerializedName("restrictions")
+      Restrictions restrictions;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -8112,6 +8119,7 @@ public class SessionCreateParams extends ApiRequestParams {
           RequestMulticapture requestMulticapture,
           RequestOvercapture requestOvercapture,
           RequestThreeDSecure requestThreeDSecure,
+          Restrictions restrictions,
           SetupFutureUsage setupFutureUsage,
           String statementDescriptorSuffixKana,
           String statementDescriptorSuffixKanji) {
@@ -8123,6 +8131,7 @@ public class SessionCreateParams extends ApiRequestParams {
         this.requestMulticapture = requestMulticapture;
         this.requestOvercapture = requestOvercapture;
         this.requestThreeDSecure = requestThreeDSecure;
+        this.restrictions = restrictions;
         this.setupFutureUsage = setupFutureUsage;
         this.statementDescriptorSuffixKana = statementDescriptorSuffixKana;
         this.statementDescriptorSuffixKanji = statementDescriptorSuffixKanji;
@@ -8149,6 +8158,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        private Restrictions restrictions;
+
         private SetupFutureUsage setupFutureUsage;
 
         private String statementDescriptorSuffixKana;
@@ -8166,6 +8177,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.requestMulticapture,
               this.requestOvercapture,
               this.requestThreeDSecure,
+              this.restrictions,
               this.setupFutureUsage,
               this.statementDescriptorSuffixKana,
               this.statementDescriptorSuffixKanji);
@@ -8274,6 +8286,16 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setRequestThreeDSecure(
             SessionCreateParams.PaymentMethodOptions.Card.RequestThreeDSecure requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
+          return this;
+        }
+
+        /**
+         * Restrictions to apply to the card payment method. For example, you can block specific
+         * card brands.
+         */
+        public Builder setRestrictions(
+            SessionCreateParams.PaymentMethodOptions.Card.Restrictions restrictions) {
+          this.restrictions = restrictions;
           return this;
         }
 
@@ -8402,6 +8424,132 @@ public class SessionCreateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Restrictions {
+        /**
+         * Specify the card brands to block in the Checkout Session. If a customer enters or selects
+         * a card belonging to a blocked brand, they can't complete the Session.
+         */
+        @SerializedName("brands_blocked")
+        List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+            brandsBlocked;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Restrictions(
+            List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+                brandsBlocked,
+            Map<String, Object> extraParams) {
+          this.brandsBlocked = brandsBlocked;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+              brandsBlocked;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SessionCreateParams.PaymentMethodOptions.Card.Restrictions build() {
+            return new SessionCreateParams.PaymentMethodOptions.Card.Restrictions(
+                this.brandsBlocked, this.extraParams);
+          }
+
+          /**
+           * Add an element to `brandsBlocked` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link SessionCreateParams.PaymentMethodOptions.Card.Restrictions#brandsBlocked}
+           * for the field documentation.
+           */
+          public Builder addBrandsBlocked(
+              SessionCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked element) {
+            if (this.brandsBlocked == null) {
+              this.brandsBlocked = new ArrayList<>();
+            }
+            this.brandsBlocked.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `brandsBlocked` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link SessionCreateParams.PaymentMethodOptions.Card.Restrictions#brandsBlocked}
+           * for the field documentation.
+           */
+          public Builder addAllBrandsBlocked(
+              List<SessionCreateParams.PaymentMethodOptions.Card.Restrictions.BrandsBlocked>
+                  elements) {
+            if (this.brandsBlocked == null) {
+              this.brandsBlocked = new ArrayList<>();
+            }
+            this.brandsBlocked.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.PaymentMethodOptions.Card.Restrictions#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.PaymentMethodOptions.Card.Restrictions#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum BrandsBlocked implements ApiRequestParams.EnumParam {
+          @SerializedName("american_express")
+          AMERICAN_EXPRESS("american_express"),
+
+          @SerializedName("discover_global_network")
+          DISCOVER_GLOBAL_NETWORK("discover_global_network"),
+
+          @SerializedName("mastercard")
+          MASTERCARD("mastercard"),
+
+          @SerializedName("visa")
+          VISA("visa");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          BrandsBlocked(String value) {
+            this.value = value;
           }
         }
       }
