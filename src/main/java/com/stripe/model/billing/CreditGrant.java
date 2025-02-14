@@ -105,6 +105,12 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @SerializedName("object")
   String object;
 
+  /**
+   * The priority for applying this credit grant. The highest priority is 0 and the lowest is 100.
+   */
+  @SerializedName("priority")
+  Long priority;
+
   /** ID of the test clock this credit grant belongs to. */
   @SerializedName("test_clock")
   @Getter(lombok.AccessLevel.NONE)

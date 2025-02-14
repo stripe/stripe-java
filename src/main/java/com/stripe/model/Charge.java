@@ -1326,13 +1326,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     Twint twint;
 
     /**
-     * The type of transaction-specific details of the payment method used in the payment, one of
-     * {@code ach_credit_transfer}, {@code ach_debit}, {@code acss_debit}, {@code alipay}, {@code
-     * au_becs_debit}, {@code bancontact}, {@code card}, {@code card_present}, {@code eps}, {@code
-     * giropay}, {@code ideal}, {@code klarna}, {@code multibanco}, {@code p24}, {@code sepa_debit},
-     * {@code sofort}, {@code stripe_account}, or {@code wechat}. An additional hash is included on
-     * {@code payment_method_details} with a name matching this value. It contains information
-     * specific to the payment method.
+     * The type of transaction-specific details of the payment method used in the payment. See <a
+     * href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod.type</a>
+     * for the full list of possible types. An additional hash is included on {@code
+     * payment_method_details} with a name matching this value. It contains information specific to
+     * the payment method.
      */
     @SerializedName("type")
     String type;
