@@ -166,15 +166,24 @@ public class Balance extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SourceTypes extends StripeObject {
-      /** Amount for bank account. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+       * payments</a>.
+       */
       @SerializedName("bank_account")
       Long bankAccount;
 
-      /** Amount for card. */
+      /**
+       * Amount coming from most payment methods, including cards as well as <a
+       * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+       */
       @SerializedName("card")
       Long card;
 
-      /** Amount for FPX. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+       * payment method.
+       */
       @SerializedName("fpx")
       Long fpx;
     }
@@ -211,15 +220,24 @@ public class Balance extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SourceTypes extends StripeObject {
-      /** Amount for bank account. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+       * payments</a>.
+       */
       @SerializedName("bank_account")
       Long bankAccount;
 
-      /** Amount for card. */
+      /**
+       * Amount coming from most payment methods, including cards as well as <a
+       * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+       */
       @SerializedName("card")
       Long card;
 
-      /** Amount for FPX. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+       * payment method.
+       */
       @SerializedName("fpx")
       Long fpx;
     }
@@ -279,15 +297,24 @@ public class Balance extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SourceTypes extends StripeObject {
-        /** Amount for bank account. */
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+         * payments</a>.
+         */
         @SerializedName("bank_account")
         Long bankAccount;
 
-        /** Amount for card. */
+        /**
+         * Amount coming from most payment methods, including cards as well as <a
+         * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+         */
         @SerializedName("card")
         Long card;
 
-        /** Amount for FPX. */
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+         * payment method.
+         */
         @SerializedName("fpx")
         Long fpx;
       }
@@ -301,15 +328,24 @@ public class Balance extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SourceTypes extends StripeObject {
-      /** Amount for bank account. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+       * payments</a>.
+       */
       @SerializedName("bank_account")
       Long bankAccount;
 
-      /** Amount for card. */
+      /**
+       * Amount coming from most payment methods, including cards as well as <a
+       * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+       */
       @SerializedName("card")
       Long card;
 
-      /** Amount for FPX. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+       * payment method.
+       */
       @SerializedName("fpx")
       Long fpx;
     }
@@ -358,15 +394,24 @@ public class Balance extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SourceTypes extends StripeObject {
-        /** Amount for bank account. */
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+         * payments</a>.
+         */
         @SerializedName("bank_account")
         Long bankAccount;
 
-        /** Amount for card. */
+        /**
+         * Amount coming from most payment methods, including cards as well as <a
+         * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+         */
         @SerializedName("card")
         Long card;
 
-        /** Amount for FPX. */
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+         * payment method.
+         */
         @SerializedName("fpx")
         Long fpx;
       }
@@ -404,15 +449,24 @@ public class Balance extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SourceTypes extends StripeObject {
-      /** Amount for bank account. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+       * payments</a>.
+       */
       @SerializedName("bank_account")
       Long bankAccount;
 
-      /** Amount for card. */
+      /**
+       * Amount coming from most payment methods, including cards as well as <a
+       * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+       */
       @SerializedName("card")
       Long card;
 
-      /** Amount for FPX. */
+      /**
+       * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+       * payment method.
+       */
       @SerializedName("fpx")
       Long fpx;
     }
