@@ -15,7 +15,11 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Amount amount;
 
-  /** <strong>Required.</strong> Configuration specifying what this credit grant applies to. */
+  /**
+   * <strong>Required.</strong> Configuration specifying what this credit grant applies to. We
+   * currently only support {@code metered} prices that have a <a
+   * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
+   */
   @SerializedName("applicability_config")
   ApplicabilityConfig applicabilityConfig;
 
@@ -64,6 +68,13 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("name")
   String name;
 
+  /**
+   * The desired priority for applying this credit grant. If not specified, it will be set to the
+   * default value of 50. The highest priority is 0 and the lowest is 100.
+   */
+  @SerializedName("priority")
+  Long priority;
+
   private CreditGrantCreateParams(
       Amount amount,
       ApplicabilityConfig applicabilityConfig,
@@ -74,7 +85,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       Long expiresAt,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String name) {
+      String name,
+      Long priority) {
     this.amount = amount;
     this.applicabilityConfig = applicabilityConfig;
     this.category = category;
@@ -85,6 +97,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.name = name;
+    this.priority = priority;
   }
 
   public static Builder builder() {
@@ -112,6 +125,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
     private String name;
 
+    private Long priority;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CreditGrantCreateParams build() {
       return new CreditGrantCreateParams(
@@ -124,7 +139,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
           this.expiresAt,
           this.extraParams,
           this.metadata,
-          this.name);
+          this.name,
+          this.priority);
     }
 
     /** <strong>Required.</strong> Amount of this credit grant. */
@@ -133,7 +149,11 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Configuration specifying what this credit grant applies to. */
+    /**
+     * <strong>Required.</strong> Configuration specifying what this credit grant applies to. We
+     * currently only support {@code metered} prices that have a <a
+     * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
+     */
     public Builder setApplicabilityConfig(
         CreditGrantCreateParams.ApplicabilityConfig applicabilityConfig) {
       this.applicabilityConfig = applicabilityConfig;
@@ -250,6 +270,15 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     /** A descriptive name shown in the Dashboard. */
     public Builder setName(String name) {
       this.name = name;
+      return this;
+    }
+
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    public Builder setPriority(Long priority) {
+      this.priority = priority;
       return this;
     }
   }
@@ -528,15 +557,26 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The price type that credit grants can apply to. We currently
-       * only support the {@code metered} price type.
+       * The price type that credit grants can apply to. We currently only support the {@code
+       * metered} price type.
        */
       @SerializedName("price_type")
       PriceType priceType;
 
-      private Scope(Map<String, Object> extraParams, PriceType priceType) {
+      /**
+       * A list of prices that the credit grant can apply to. We currently only support the {@code
+       * metered} prices.
+       */
+      @SerializedName("prices")
+      List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
+
+      private Scope(
+          Map<String, Object> extraParams,
+          PriceType priceType,
+          List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices) {
         this.extraParams = extraParams;
         this.priceType = priceType;
+        this.prices = prices;
       }
 
       public static Builder builder() {
@@ -548,10 +588,12 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
         private PriceType priceType;
 
+        private List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
+
         /** Finalize and obtain parameter instance from this builder. */
         public CreditGrantCreateParams.ApplicabilityConfig.Scope build() {
           return new CreditGrantCreateParams.ApplicabilityConfig.Scope(
-              this.extraParams, this.priceType);
+              this.extraParams, this.priceType, this.prices);
         }
 
         /**
@@ -583,13 +625,112 @@ public class CreditGrantCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The price type that credit grants can apply to. We currently
-         * only support the {@code metered} price type.
+         * The price type that credit grants can apply to. We currently only support the {@code
+         * metered} price type.
          */
         public Builder setPriceType(
             CreditGrantCreateParams.ApplicabilityConfig.Scope.PriceType priceType) {
           this.priceType = priceType;
           return this;
+        }
+
+        /**
+         * Add an element to `prices` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * CreditGrantCreateParams.ApplicabilityConfig.Scope#prices} for the field documentation.
+         */
+        public Builder addPrice(CreditGrantCreateParams.ApplicabilityConfig.Scope.Price element) {
+          if (this.prices == null) {
+            this.prices = new ArrayList<>();
+          }
+          this.prices.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `prices` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * CreditGrantCreateParams.ApplicabilityConfig.Scope#prices} for the field documentation.
+         */
+        public Builder addAllPrice(
+            List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> elements) {
+          if (this.prices == null) {
+            this.prices = new ArrayList<>();
+          }
+          this.prices.addAll(elements);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Price {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The price ID this credit grant should apply to. */
+        @SerializedName("id")
+        String id;
+
+        private Price(Map<String, Object> extraParams, String id) {
+          this.extraParams = extraParams;
+          this.id = id;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CreditGrantCreateParams.ApplicabilityConfig.Scope.Price build() {
+            return new CreditGrantCreateParams.ApplicabilityConfig.Scope.Price(
+                this.extraParams, this.id);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CreditGrantCreateParams.ApplicabilityConfig.Scope.Price#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CreditGrantCreateParams.ApplicabilityConfig.Scope.Price#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The price ID this credit grant should apply to. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
         }
       }
 
