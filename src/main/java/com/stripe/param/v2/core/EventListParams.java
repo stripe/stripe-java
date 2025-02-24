@@ -3,37 +3,12 @@ package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
 
 @Getter
 public class EventListParams extends ApiRequestParams {
-  /** Filter for events created after the specified timestamp. */
-  @SerializedName("created_gt")
-  Instant createdGt;
-
-  /** Filter for events created at or after the specified timestamp. */
-  @SerializedName("created_gte")
-  Instant createdGte;
-
-  /** Filter for events created before the specified timestamp. */
-  @SerializedName("created_lt")
-  Instant createdLt;
-
-  /** Filter for events created at or before the specified timestamp. */
-  @SerializedName("created_lte")
-  Instant createdLte;
-
-  /**
-   * Filter events based on whether they were successfully delivered to all subscribed event
-   * destinations. If false, events which are still pending or have failed all delivery attempts to
-   * a event destination will be returned.
-   */
-  @SerializedName("delivery_success")
-  Boolean deliverySuccess;
-
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -47,7 +22,7 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName("limit")
   Integer limit;
 
-  /** Primary object ID used to retrieve related events. */
+  /** <strong>Required.</strong> Primary object ID used to retrieve related events. */
   @SerializedName("object_id")
   String objectId;
 
@@ -56,20 +31,7 @@ public class EventListParams extends ApiRequestParams {
   String page;
 
   private EventListParams(
-      Instant createdGt,
-      Instant createdGte,
-      Instant createdLt,
-      Instant createdLte,
-      Boolean deliverySuccess,
-      Map<String, Object> extraParams,
-      Integer limit,
-      String objectId,
-      String page) {
-    this.createdGt = createdGt;
-    this.createdGte = createdGte;
-    this.createdLt = createdLt;
-    this.createdLte = createdLte;
-    this.deliverySuccess = deliverySuccess;
+      Map<String, Object> extraParams, Integer limit, String objectId, String page) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.objectId = objectId;
@@ -81,16 +43,6 @@ public class EventListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Instant createdGt;
-
-    private Instant createdGte;
-
-    private Instant createdLt;
-
-    private Instant createdLte;
-
-    private Boolean deliverySuccess;
-
     private Map<String, Object> extraParams;
 
     private Integer limit;
@@ -101,50 +53,7 @@ public class EventListParams extends ApiRequestParams {
 
     /** Finalize and obtain parameter instance from this builder. */
     public EventListParams build() {
-      return new EventListParams(
-          this.createdGt,
-          this.createdGte,
-          this.createdLt,
-          this.createdLte,
-          this.deliverySuccess,
-          this.extraParams,
-          this.limit,
-          this.objectId,
-          this.page);
-    }
-
-    /** Filter for events created after the specified timestamp. */
-    public Builder setCreatedGt(Instant createdGt) {
-      this.createdGt = createdGt;
-      return this;
-    }
-
-    /** Filter for events created at or after the specified timestamp. */
-    public Builder setCreatedGte(Instant createdGte) {
-      this.createdGte = createdGte;
-      return this;
-    }
-
-    /** Filter for events created before the specified timestamp. */
-    public Builder setCreatedLt(Instant createdLt) {
-      this.createdLt = createdLt;
-      return this;
-    }
-
-    /** Filter for events created at or before the specified timestamp. */
-    public Builder setCreatedLte(Instant createdLte) {
-      this.createdLte = createdLte;
-      return this;
-    }
-
-    /**
-     * Filter events based on whether they were successfully delivered to all subscribed event
-     * destinations. If false, events which are still pending or have failed all delivery attempts
-     * to a event destination will be returned.
-     */
-    public Builder setDeliverySuccess(Boolean deliverySuccess) {
-      this.deliverySuccess = deliverySuccess;
-      return this;
+      return new EventListParams(this.extraParams, this.limit, this.objectId, this.page);
     }
 
     /**
@@ -179,7 +88,7 @@ public class EventListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Primary object ID used to retrieve related events. */
+    /** <strong>Required.</strong> Primary object ID used to retrieve related events. */
     public Builder setObjectId(String objectId) {
       this.objectId = objectId;
       return this;
