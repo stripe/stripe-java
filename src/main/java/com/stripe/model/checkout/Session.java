@@ -16,7 +16,6 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
 import com.stripe.model.PromotionCode;
 import com.stripe.model.SetupIntent;
-import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
@@ -385,7 +384,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
   /** Shipping information for this Checkout Session. */
   @SerializedName("shipping_details")
-  ShippingDetails shippingDetails;
+  com.stripe.model.ShippingDetails shippingDetails;
 
   /** The shipping rate options applied to this Session. */
   @SerializedName("shipping_options")
@@ -979,11 +978,27 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     /** Shipping information for this Checkout Session. */
     @SerializedName("shipping_details")
-    ShippingDetails shippingDetails;
+    com.stripe.model.checkout.Session.CollectedInformation.ShippingDetails shippingDetails;
 
     /** Customer’s tax ids for this Checkout Session. */
     @SerializedName("tax_ids")
     List<Session.CollectedInformation.TaxId> taxIds;
+
+    /**
+     * For more details about ShippingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ShippingDetails extends StripeObject {
+      @SerializedName("address")
+      Address address;
+
+      /** Customer name. */
+      @SerializedName("name")
+      String name;
+    }
 
     /**
      * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API

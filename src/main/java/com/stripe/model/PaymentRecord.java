@@ -508,7 +508,15 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("billing_details")
     BillingDetails billingDetails;
 
-    /** Information about the custom (user-defined) payment method used to make this payment. */
+    /** Details of the card used for this payment attempt. */
+    @SerializedName("card")
+    Card card;
+
+    /**
+     * Custom Payment Methods represent Payment Method types not modeled directly in the Stripe API.
+     * This resource consists of details about the custom payment method used for this payment
+     * attempt.
+     */
     @SerializedName("custom")
     Custom custom;
 
@@ -519,7 +527,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     /**
      * The type of Payment Method used for this payment attempt.
      *
-     * <p>Equal to {@code custom}.
+     * <p>One of {@code card}, or {@code custom}.
      */
     @SerializedName("type")
     String type;
@@ -576,6 +584,153 @@ public class PaymentRecord extends ApiResource implements HasId {
         /** State, county, province, or region. */
         @SerializedName("state")
         String state;
+      }
+    }
+
+    /** Details of the card used for this payment attempt. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
+       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
+       * unknown}.
+       */
+      @SerializedName("brand")
+      String brand;
+
+      /**
+       * When using manual capture, a future timestamp at which the charge will be automatically
+       * refunded if uncaptured.
+       */
+      @SerializedName("capture_before")
+      Long captureBefore;
+
+      /** Check results by Card networks on Card address and CVC at time of payment. */
+      @SerializedName("checks")
+      Checks checks;
+
+      /**
+       * Two-letter ISO code representing the country of the card. You could use this attribute to
+       * get a sense of the international breakdown of cards you've collected.
+       */
+      @SerializedName("country")
+      String country;
+
+      /** Two-digit number representing the card's expiration month. */
+      @SerializedName("exp_month")
+      Long expMonth;
+
+      /** Four-digit number representing the card's expiration year. */
+      @SerializedName("exp_year")
+      Long expYear;
+
+      /**
+       * Uniquely identifies this particular card number. You can use this attribute to check
+       * whether two customers who’ve signed up with you are using the same card number, for
+       * example. For payment methods that tokenize card information (Apple Pay, Google Pay), the
+       * tokenized number might be provided instead of the underlying card number.
+       *
+       * <p><em>As of May 1, 2021, card fingerprint in India for Connect changed to allow two
+       * fingerprints for the same card---one for India and one for the rest of the world.</em>
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /**
+       * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+       * unknown}.
+       */
+      @SerializedName("funding")
+      String funding;
+
+      /** The last four digits of the card. */
+      @SerializedName("last4")
+      String last4;
+
+      /** True if this payment was marked as MOTO and out of scope for SCA. */
+      @SerializedName("moto")
+      Boolean moto;
+
+      /**
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code
+       * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
+       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
+       * unknown}.
+       */
+      @SerializedName("network")
+      String network;
+
+      /**
+       * If this card has network token credentials, this contains the details of the network token
+       * credentials.
+       */
+      @SerializedName("network_token")
+      NetworkToken networkToken;
+
+      /**
+       * This is used by the financial networks to identify a transaction. Visa calls this the
+       * Transaction ID, Mastercard calls this the Trace ID, and American Express calls this the
+       * Acquirer Reference Data. This value will be present if it is returned by the financial
+       * network in the authorization response, and null otherwise.
+       */
+      @SerializedName("network_transaction_id")
+      String networkTransactionId;
+
+      /** Populated if this transaction used 3D Secure authentication. */
+      @SerializedName("three_d_secure")
+      ThreeDSecure threeDSecure;
+
+      /**
+       * For more details about Checks, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Checks extends StripeObject {
+        @SerializedName("address_line1_check")
+        String addressLine1Check;
+
+        @SerializedName("address_postal_code_check")
+        String addressPostalCodeCheck;
+
+        @SerializedName("cvc_check")
+        String cvcCheck;
+      }
+
+      /**
+       * For more details about NetworkToken, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class NetworkToken extends StripeObject {
+        @SerializedName("used")
+        Boolean used;
+      }
+
+      /**
+       * For more details about ThreeDSecure, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ThreeDSecure extends StripeObject {
+        @SerializedName("authentication_flow")
+        String authenticationFlow;
+
+        @SerializedName("result")
+        String result;
+
+        @SerializedName("result_reason")
+        String resultReason;
+
+        @SerializedName("version")
+        String version;
       }
     }
 
