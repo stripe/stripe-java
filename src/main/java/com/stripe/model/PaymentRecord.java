@@ -524,11 +524,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("payment_method")
     String paymentMethod;
 
-    /**
-     * The type of Payment Method used for this payment attempt.
-     *
-     * <p>One of {@code card}, or {@code custom}.
-     */
+    /** The type of Payment Method used for this payment attempt. */
     @SerializedName("type")
     String type;
 
