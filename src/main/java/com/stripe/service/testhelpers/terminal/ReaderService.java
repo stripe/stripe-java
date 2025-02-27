@@ -62,30 +62,22 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /**
-   * Succeeds an input collection on a simulated reader. Can be used to simulate collecting inputs.
-   */
+  /** Use this endpoint to trigger a successful input collection on a simulated reader. */
   public Reader succeedInputCollection(String reader, ReaderSucceedInputCollectionParams params)
       throws StripeException {
     return succeedInputCollection(reader, params, (RequestOptions) null);
   }
-  /**
-   * Succeeds an input collection on a simulated reader. Can be used to simulate collecting inputs.
-   */
+  /** Use this endpoint to trigger a successful input collection on a simulated reader. */
   public Reader succeedInputCollection(String reader, RequestOptions options)
       throws StripeException {
     return succeedInputCollection(reader, (ReaderSucceedInputCollectionParams) null, options);
   }
-  /**
-   * Succeeds an input collection on a simulated reader. Can be used to simulate collecting inputs.
-   */
+  /** Use this endpoint to trigger a successful input collection on a simulated reader. */
   public Reader succeedInputCollection(String reader) throws StripeException {
     return succeedInputCollection(
         reader, (ReaderSucceedInputCollectionParams) null, (RequestOptions) null);
   }
-  /**
-   * Succeeds an input collection on a simulated reader. Can be used to simulate collecting inputs.
-   */
+  /** Use this endpoint to trigger a successful input collection on a simulated reader. */
   public Reader succeedInputCollection(
       String reader, ReaderSucceedInputCollectionParams params, RequestOptions options)
       throws StripeException {
@@ -102,22 +94,30 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Completes an input collection with a timeout error on a simulated reader. */
+  /**
+   * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+   */
   public Reader timeoutInputCollection(String reader, ReaderTimeoutInputCollectionParams params)
       throws StripeException {
     return timeoutInputCollection(reader, params, (RequestOptions) null);
   }
-  /** Completes an input collection with a timeout error on a simulated reader. */
+  /**
+   * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+   */
   public Reader timeoutInputCollection(String reader, RequestOptions options)
       throws StripeException {
     return timeoutInputCollection(reader, (ReaderTimeoutInputCollectionParams) null, options);
   }
-  /** Completes an input collection with a timeout error on a simulated reader. */
+  /**
+   * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+   */
   public Reader timeoutInputCollection(String reader) throws StripeException {
     return timeoutInputCollection(
         reader, (ReaderTimeoutInputCollectionParams) null, (RequestOptions) null);
   }
-  /** Completes an input collection with a timeout error on a simulated reader. */
+  /**
+   * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+   */
   public Reader timeoutInputCollection(
       String reader, ReaderTimeoutInputCollectionParams params, RequestOptions options)
       throws StripeException {

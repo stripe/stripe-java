@@ -85,6 +85,14 @@ public class Settlement extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The total amount of any additional ad-hoc fees accessed by the card network. */
+  @SerializedName("other_fees_amount")
+  Long otherFeesAmount;
+
+  /** The total number of additional ad-hoc fees accessed by the card network. */
+  @SerializedName("other_fees_count")
+  Long otherFeesCount;
+
   /** One of {@code international} or {@code uk_national_net}. */
   @SerializedName("settlement_service")
   String settlementService;
