@@ -26784,7 +26784,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("app_id")
       Object appId;
 
-      /** <strong>Required.</strong> The client type that the end customer will pay from */
+      /** The client type that the end customer will pay from. */
       @SerializedName("client")
       Client client;
 
@@ -26865,7 +26865,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The client type that the end customer will pay from */
+        /** The client type that the end customer will pay from. */
         public Builder setClient(
             PaymentIntentUpdateParams.PaymentMethodOptions.WechatPay.Client client) {
           this.client = client;
