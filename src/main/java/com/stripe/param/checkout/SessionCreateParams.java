@@ -328,7 +328,8 @@ public class SessionCreateParams extends ApiRequestParams {
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
-   * Checkout Sessions in {@code payment} mode. If blank or {@code auto}, {@code pay} is used.
+   * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
+   * {@code pay} is used.
    */
   @SerializedName("submit_type")
   SubmitType submitType;
@@ -1104,7 +1105,8 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Describes the type of transaction being performed by Checkout in order to customize relevant
      * text on the page, such as the submit button. {@code submit_type} can only be specified on
-     * Checkout Sessions in {@code payment} mode. If blank or {@code auto}, {@code pay} is used.
+     * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
+     * {@code pay} is used.
      */
     public Builder setSubmitType(SessionCreateParams.SubmitType submitType) {
       this.submitType = submitType;
