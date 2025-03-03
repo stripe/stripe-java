@@ -260,7 +260,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * The account (if any) the charge was made on behalf of for charges associated with this
-   * subscription. See the Connect documentation for details.
+   * subscription. See the <a
+   * href="https://stripe.com/docs/connect/subscriptions#on-behalf-of">Connect documentation</a> for
+   * details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
