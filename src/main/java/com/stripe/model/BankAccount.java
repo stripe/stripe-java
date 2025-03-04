@@ -34,7 +34,14 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class BankAccount extends ApiResource
     implements MetadataStore<BankAccount>, ExternalAccount, PaymentSource {
-  /** The ID of the account that the bank account is associated with. */
+  /**
+   * The account this bank account belongs to. Only applicable on Accounts (not customers or
+   * recipients) This property is only available when returned as an <a
+   * href="https://stripe.com/api/external_account_bank_accounts/object">External Account</a> where
+   * <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-is_controller">controller.is_controller</a>
+   * is {@code true}.
+   */
   @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

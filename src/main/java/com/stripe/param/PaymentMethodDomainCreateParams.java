@@ -19,7 +19,7 @@ public class PaymentMethodDomainCreateParams extends ApiRequestParams {
 
   /**
    * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-   * that require a payment method domain will not appear in Elements.
+   * that require a payment method domain will not appear in Elements or Embedded Checkout.
    */
   @SerializedName("enabled")
   Boolean enabled;
@@ -74,7 +74,7 @@ public class PaymentMethodDomainCreateParams extends ApiRequestParams {
 
     /**
      * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-     * that require a payment method domain will not appear in Elements.
+     * that require a payment method domain will not appear in Elements or Embedded Checkout.
      */
     public Builder setEnabled(Boolean enabled) {
       this.enabled = enabled;

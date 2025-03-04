@@ -86,8 +86,8 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   Long amountDue;
 
   /**
-   * Amount that was overpaid on the invoice. Overpayments are debited to the customer's credit
-   * balance.
+   * Amount that was overpaid on the invoice. The amount overpaid is credited to the customer's
+   * credit balance.
    */
   @SerializedName("amount_overpaid")
   Long amountOverpaid;
