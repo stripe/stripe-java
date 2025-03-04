@@ -138,7 +138,7 @@ spotless {
 
 gitPublish {
     repoUri = 'https://github.com/stripe/stripe-java.git'
-    branch = 'gh-pages-test'
+    branch = 'gh-pages'
     sign = false // disable commit signing
 
     contents {
