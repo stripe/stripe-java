@@ -132,11 +132,6 @@ jobs:
           bot_token: ${{ secrets.SLACK_BOT_TOKEN }}
 
   publish-docs:
-    if: >-
-      ((github.event_name == 'workflow_dispatch') || (github.event_name == 'push')) &&
-      startsWith(github.ref, 'refs/tags/v') &&
-      !contains(github.ref, 'beta') &&
-      endsWith(github.actor, '-stripe')
     needs: [build, test]
     runs-on: "ubuntu-24.04"
     steps:
