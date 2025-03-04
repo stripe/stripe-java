@@ -2666,6 +2666,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
 
       /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
+      /**
        * Bank account verification method.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
@@ -2926,6 +2934,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
     }
 
     /**
@@ -2962,6 +2978,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
 
       /**
        * For more details about MandateOptions, please refer to the <a
@@ -4419,6 +4443,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String setupFutureUsage;
 
       /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
+      /**
        * For more details about MandateOptions, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -4593,6 +4625,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
 
       /**
        * Bank account verification method.
@@ -4806,13 +4846,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
     /**
-     * Amount intended to be collected by this PaymentIntent. A positive integer representing how
-     * much to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
-     * currency unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal
-     * currency). The minimum amount is $0.50 US or <a
-     * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
-     * charge currency</a>. The amount value supports up to eight digits (e.g., a value of 99999999
-     * for a USD charge of $999,999.99).
+     * The amount transferred to the destination account. This transfer will occur automatically
+     * after the payment succeeds. If no amount is specified, by default the entire payment amount
+     * is transferred to the destination account. The amount must be less than or equal to the <a
+     * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>,
+     * and must be a positive integer representing how much to transfer in the smallest currency
+     * unit (e.g., 100 cents to charge $1.00).
      */
     @SerializedName("amount")
     Long amount;
