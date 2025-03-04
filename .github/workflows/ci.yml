@@ -149,7 +149,7 @@ jobs:
         run: |
           ./gradlew gitPublishPush --stacktrace --info
         env:
-          GRGIT_USER: ${{ secrets.GITHUB_ACTOR }}
+          GRGIT_USER: ${{ github.actor }}
           GRGIT_PASS: ${{ secrets.GITHUB_TOKEN }}
 
   compat:
