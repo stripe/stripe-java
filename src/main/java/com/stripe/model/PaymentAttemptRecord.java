@@ -106,6 +106,14 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   @SerializedName("payment_reference")
   String paymentReference;
 
+  /**
+   * Indicates who reported the payment.
+   *
+   * <p>One of {@code self}, or {@code stripe}.
+   */
+  @SerializedName("reported_by")
+  String reportedBy;
+
   /** Shipping information for this payment. */
   @SerializedName("shipping_details")
   ShippingDetails shippingDetails;

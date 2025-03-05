@@ -73,8 +73,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   PaymentMethodDetails paymentMethodDetails;
 
   /**
-   * <strong>Required.</strong> An opaque string for manual reconciliation of this payment, for
-   * example a check number or a payment processor ID.
+   * An opaque string for manual reconciliation of this payment, for example a check number or a
+   * payment processor ID.
    */
   @SerializedName("payment_reference")
   String paymentReference;
@@ -306,8 +306,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> An opaque string for manual reconciliation of this payment, for
-     * example a check number or a payment processor ID.
+     * An opaque string for manual reconciliation of this payment, for example a check number or a
+     * payment processor ID.
      */
     public Builder setPaymentReference(String paymentReference) {
       this.paymentReference = paymentReference;
