@@ -382,6 +382,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
 
+  /** Shipping information for this Checkout Session. */
+  @SerializedName("shipping_details")
+  com.stripe.model.ShippingDetails shippingDetails;
+
   /** The shipping rate options applied to this Session. */
   @SerializedName("shipping_options")
   List<Session.ShippingOption> shippingOptions;
@@ -974,7 +978,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     /** Shipping information for this Checkout Session. */
     @SerializedName("shipping_details")
-    ShippingDetails shippingDetails;
+    com.stripe.model.checkout.Session.CollectedInformation.ShippingDetails shippingDetails;
 
     /** Customer’s tax ids for this Checkout Session. */
     @SerializedName("tax_ids")
@@ -3953,6 +3957,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
+    trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
