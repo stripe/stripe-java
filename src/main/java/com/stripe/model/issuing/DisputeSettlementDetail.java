@@ -4,11 +4,13 @@ package com.stripe.model.issuing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.issuing.DisputeSettlementDetailListParams;
 import com.stripe.param.issuing.DisputeSettlementDetailRetrieveParams;
 import java.util.Map;
@@ -79,6 +81,10 @@ public class DisputeSettlementDetail extends ApiResource implements HasId {
    */
   @SerializedName("network")
   String network;
+
+  /** Details about the transaction, such as processing dates, set by the card network. */
+  @SerializedName("network_data")
+  NetworkData networkData;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -184,5 +190,28 @@ public class DisputeSettlementDetail extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, DisputeSettlementDetail.class);
+  }
+
+  /**
+   * For more details about NetworkData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkData extends StripeObject {
+    /**
+     * The date the transaction was processed by the card network. This can be different from the
+     * date the seller recorded the transaction depending on when the acquirer submits the
+     * transaction to the network.
+     */
+    @SerializedName("processing_date")
+    String processingDate;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(networkData, responseGetter);
   }
 }

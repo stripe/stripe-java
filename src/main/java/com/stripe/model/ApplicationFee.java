@@ -319,7 +319,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     String payout;
 
     /**
-     * Type of object that created the application fee, either {@code charge} or {@code payout}.
+     * Type of object that created the application fee.
      *
      * <p>One of {@code charge}, or {@code payout}.
      */

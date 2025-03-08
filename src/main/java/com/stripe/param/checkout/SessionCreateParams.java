@@ -328,7 +328,8 @@ public class SessionCreateParams extends ApiRequestParams {
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
-   * Checkout Sessions in {@code payment} mode. If blank or {@code auto}, {@code pay} is used.
+   * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
+   * {@code pay} is used.
    */
   @SerializedName("submit_type")
   SubmitType submitType;
@@ -1104,7 +1105,8 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Describes the type of transaction being performed by Checkout in order to customize relevant
      * text on the page, such as the submit button. {@code submit_type} can only be specified on
-     * Checkout Sessions in {@code payment} mode. If blank or {@code auto}, {@code pay} is used.
+     * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
+     * {@code pay} is used.
      */
     public Builder setSubmitType(SessionCreateParams.SubmitType submitType) {
       this.submitType = submitType;
@@ -6455,6 +6457,14 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
       /** Verification method for the intent. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
@@ -6464,11 +6474,13 @@ public class SessionCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
           SetupFutureUsage setupFutureUsage,
+          String targetDate,
           VerificationMethod verificationMethod) {
         this.currency = currency;
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
+        this.targetDate = targetDate;
         this.verificationMethod = verificationMethod;
       }
 
@@ -6485,6 +6497,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
+        private String targetDate;
+
         private VerificationMethod verificationMethod;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -6494,6 +6508,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.extraParams,
               this.mandateOptions,
               this.setupFutureUsage,
+              this.targetDate,
               this.verificationMethod);
         }
 
@@ -6566,6 +6581,16 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(
             SessionCreateParams.PaymentMethodOptions.AcssDebit.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        public Builder setTargetDate(String targetDate) {
+          this.targetDate = targetDate;
           return this;
         }
 
@@ -7399,9 +7424,19 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
-      private AuBecsDebit(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
+      private AuBecsDebit(
+          Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage, String targetDate) {
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
+        this.targetDate = targetDate;
       }
 
       public static Builder builder() {
@@ -7413,10 +7448,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
+        private String targetDate;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.AuBecsDebit build() {
           return new SessionCreateParams.PaymentMethodOptions.AuBecsDebit(
-              this.extraParams, this.setupFutureUsage);
+              this.extraParams, this.setupFutureUsage, this.targetDate);
         }
 
         /**
@@ -7473,6 +7510,16 @@ public class SessionCreateParams extends ApiRequestParams {
           this.setupFutureUsage = setupFutureUsage;
           return this;
         }
+
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        public Builder setTargetDate(String targetDate) {
+          this.targetDate = targetDate;
+          return this;
+        }
       }
 
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
@@ -7525,13 +7572,23 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
       private BacsDebit(
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
-          SetupFutureUsage setupFutureUsage) {
+          SetupFutureUsage setupFutureUsage,
+          String targetDate) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
+        this.targetDate = targetDate;
       }
 
       public static Builder builder() {
@@ -7545,10 +7602,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
+        private String targetDate;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.BacsDebit build() {
           return new SessionCreateParams.PaymentMethodOptions.BacsDebit(
-              this.extraParams, this.mandateOptions, this.setupFutureUsage);
+              this.extraParams, this.mandateOptions, this.setupFutureUsage, this.targetDate);
         }
 
         /**
@@ -7609,6 +7668,16 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(
             SessionCreateParams.PaymentMethodOptions.BacsDebit.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        public Builder setTargetDate(String targetDate) {
+          this.targetDate = targetDate;
           return this;
         }
       }
@@ -12658,13 +12727,23 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
       private SepaDebit(
           Map<String, Object> extraParams,
           MandateOptions mandateOptions,
-          SetupFutureUsage setupFutureUsage) {
+          SetupFutureUsage setupFutureUsage,
+          String targetDate) {
         this.extraParams = extraParams;
         this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
+        this.targetDate = targetDate;
       }
 
       public static Builder builder() {
@@ -12678,10 +12757,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
+        private String targetDate;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.SepaDebit build() {
           return new SessionCreateParams.PaymentMethodOptions.SepaDebit(
-              this.extraParams, this.mandateOptions, this.setupFutureUsage);
+              this.extraParams, this.mandateOptions, this.setupFutureUsage, this.targetDate);
         }
 
         /**
@@ -12742,6 +12823,16 @@ public class SessionCreateParams extends ApiRequestParams {
         public Builder setSetupFutureUsage(
             SessionCreateParams.PaymentMethodOptions.SepaDebit.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        public Builder setTargetDate(String targetDate) {
+          this.targetDate = targetDate;
           return this;
         }
       }
@@ -13092,6 +13183,14 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("setup_future_usage")
       SetupFutureUsage setupFutureUsage;
 
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
       /** Verification method for the intent. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
@@ -13100,10 +13199,12 @@ public class SessionCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           FinancialConnections financialConnections,
           SetupFutureUsage setupFutureUsage,
+          String targetDate,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.financialConnections = financialConnections;
         this.setupFutureUsage = setupFutureUsage;
+        this.targetDate = targetDate;
         this.verificationMethod = verificationMethod;
       }
 
@@ -13118,6 +13219,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private SetupFutureUsage setupFutureUsage;
 
+        private String targetDate;
+
         private VerificationMethod verificationMethod;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -13126,6 +13229,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.extraParams,
               this.financialConnections,
               this.setupFutureUsage,
+              this.targetDate,
               this.verificationMethod);
         }
 
@@ -13189,6 +13293,16 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.PaymentMethodOptions.UsBankAccount.SetupFutureUsage
                 setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        public Builder setTargetDate(String targetDate) {
+          this.targetDate = targetDate;
           return this;
         }
 

@@ -139,6 +139,8 @@ jobs:
       endsWith(github.actor, '-stripe')
     needs: [build, test]
     runs-on: "ubuntu-24.04"
+    permissions:
+        contents: write
     steps:
       - uses: actions/checkout@master
       - name: Setup Java

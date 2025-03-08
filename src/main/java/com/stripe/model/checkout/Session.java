@@ -16,7 +16,6 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
 import com.stripe.model.PromotionCode;
 import com.stripe.model.SetupIntent;
-import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
@@ -383,10 +382,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
 
-  /** Shipping information for this Checkout Session. */
-  @SerializedName("shipping_details")
-  ShippingDetails shippingDetails;
-
   /** The shipping rate options applied to this Session. */
   @SerializedName("shipping_options")
   List<Session.ShippingOption> shippingOptions;
@@ -554,12 +549,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/checkout/sessions";
@@ -568,12 +563,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(SessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/checkout/sessions";
@@ -589,40 +584,40 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire() throws StripeException {
     return expire((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(RequestOptions options) throws StripeException {
     return expire((Map<String, Object>) null, options);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(Map<String, Object> params) throws StripeException {
     return expire(params, (RequestOptions) null);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
@@ -633,20 +628,20 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(SessionExpireParams params) throws StripeException {
     return expire(params, (RequestOptions) null);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(SessionExpireParams params, RequestOptions options) throws StripeException {
     String path =
@@ -758,17 +753,17 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(String session) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(String session, RequestOptions options) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
@@ -777,7 +772,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
@@ -792,13 +787,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   @Override
   public Session update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   @Override
   public Session update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
@@ -807,12 +802,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(SessionUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(SessionUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
@@ -984,6 +979,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /** Customer’s tax ids for this Checkout Session. */
     @SerializedName("tax_ids")
     List<Session.CollectedInformation.TaxId> taxIds;
+
+    /**
+     * For more details about ShippingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ShippingDetails extends StripeObject {
+      @SerializedName("address")
+      Address address;
+
+      /** Customer name. */
+      @SerializedName("name")
+      String name;
+    }
 
     /**
      * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
@@ -1870,6 +1881,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
 
       /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
+      /**
        * Bank account verification method.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
@@ -2084,6 +2103,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
     }
 
     /**
@@ -2120,6 +2147,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
 
       /**
        * For more details about MandateOptions, please refer to the <a
@@ -3316,6 +3351,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       String setupFutureUsage;
 
       /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
+      /**
        * For more details about MandateOptions, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -3416,6 +3459,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
 
       /**
        * Bank account verification method.
@@ -3902,7 +3953,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
-    trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);

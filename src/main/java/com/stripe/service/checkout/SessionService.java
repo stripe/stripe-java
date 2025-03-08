@@ -48,19 +48,19 @@ public final class SessionService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Session>>() {}.getType());
   }
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public Session create(SessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public Session create(RequestOptions options) throws StripeException {
     return create((SessionCreateParams) null, options);
   }
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public Session create() throws StripeException {
     return create((SessionCreateParams) null, (RequestOptions) null);
   }
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public Session create(SessionCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/checkout/sessions";
     ApiRequest request =
@@ -72,19 +72,19 @@ public final class SessionService extends ApiService {
             options);
     return this.request(request, Session.class);
   }
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public Session retrieve(String session, SessionRetrieveParams params) throws StripeException {
     return retrieve(session, params, (RequestOptions) null);
   }
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public Session retrieve(String session, RequestOptions options) throws StripeException {
     return retrieve(session, (SessionRetrieveParams) null, options);
   }
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public Session retrieve(String session) throws StripeException {
     return retrieve(session, (SessionRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public Session retrieve(String session, SessionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
@@ -97,19 +97,19 @@ public final class SessionService extends ApiService {
             options);
     return this.request(request, Session.class);
   }
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(String session, SessionUpdateParams params) throws StripeException {
     return update(session, params, (RequestOptions) null);
   }
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(String session, RequestOptions options) throws StripeException {
     return update(session, (SessionUpdateParams) null, options);
   }
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(String session) throws StripeException {
     return update(session, (SessionUpdateParams) null, (RequestOptions) null);
   }
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(String session, SessionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
@@ -123,37 +123,37 @@ public final class SessionService extends ApiService {
     return this.request(request, Session.class);
   }
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(String session, SessionExpireParams params) throws StripeException {
     return expire(session, params, (RequestOptions) null);
   }
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(String session, RequestOptions options) throws StripeException {
     return expire(session, (SessionExpireParams) null, options);
   }
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(String session) throws StripeException {
     return expire(session, (SessionExpireParams) null, (RequestOptions) null);
   }
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(String session, SessionExpireParams params, RequestOptions options)
       throws StripeException {

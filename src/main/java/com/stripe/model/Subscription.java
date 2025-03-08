@@ -78,7 +78,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Whether this subscription will (if {@code status=active}) or did (if {@code status=canceled})
-   * cancel at the end of the current billing period.
+   * cancel at the end of the current billing period. This field is deprecated in a new version,
+   * please use {@code cancel_at} instead.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -260,7 +261,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * The account (if any) the charge was made on behalf of for charges associated with this
-   * subscription. See the Connect documentation for details.
+   * subscription. See the <a
+   * href="https://stripe.com/docs/connect/subscriptions#on-behalf-of">Connect documentation</a> for
+   * details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)

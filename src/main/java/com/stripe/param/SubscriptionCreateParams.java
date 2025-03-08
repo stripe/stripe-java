@@ -81,13 +81,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Long cancelAt;
 
   /**
-   * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}.
-   */
-  @SerializedName("cancel_at_period_end")
-  Boolean cancelAtPeriodEnd;
-
-  /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this subscription at the end of the cycle using the default source
    * attached to the customer. When sending an invoice, Stripe will email your customer an invoice
@@ -329,7 +322,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       BillingCycleAnchorConfig billingCycleAnchorConfig,
       Object billingThresholds,
       Long cancelAt,
-      Boolean cancelAtPeriodEnd,
       CollectionMethod collectionMethod,
       String coupon,
       String currency,
@@ -366,7 +358,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
-    this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.collectionMethod = collectionMethod;
     this.coupon = coupon;
     this.currency = currency;
@@ -417,8 +408,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Object billingThresholds;
 
     private Long cancelAt;
-
-    private Boolean cancelAtPeriodEnd;
 
     private CollectionMethod collectionMethod;
 
@@ -487,7 +476,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.billingCycleAnchorConfig,
           this.billingThresholds,
           this.cancelAt,
-          this.cancelAtPeriodEnd,
           this.collectionMethod,
           this.coupon,
           this.currency,
@@ -639,15 +627,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setCancelAt(Long cancelAt) {
       this.cancelAt = cancelAt;
-      return this;
-    }
-
-    /**
-     * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
-     */
-    public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
-      this.cancelAtPeriodEnd = cancelAtPeriodEnd;
       return this;
     }
 
