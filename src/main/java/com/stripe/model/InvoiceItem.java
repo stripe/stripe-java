@@ -134,17 +134,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   Period period;
 
   /**
-   * If the invoice item is a proration, the plan of the subscription that the proration was
-   * computed for.
-   */
-  @SerializedName("plan")
-  Plan plan;
-
-  /** The price of the invoice item. */
-  @SerializedName("price")
-  Price price;
-
-  /**
    * Whether the invoice item was created automatically as a proration adjustment when the customer
    * switched plans.
    */
@@ -583,8 +572,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(period, responseGetter);
-    trySetResponseGetter(plan, responseGetter);
-    trySetResponseGetter(price, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }
