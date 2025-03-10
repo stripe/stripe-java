@@ -311,17 +311,15 @@ public class StripeRequest {
       headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersion()));
     }
 
-    if (apiMode == ApiMode.V1) {
-      if (options.getStripeContext() != null) {
-        throw new UnsupportedOperationException("Context is not supported in V1 APIs");
-      }
-    } else {
-      if (options.getStripeContext() != null) {
-        headerMap.put("Stripe-Context", Arrays.asList(options.getStripeContext()));
-      }
+    if (apiMode == ApiMode.V2) {
       if (content != null) {
         headerMap.put("Content-Type", Arrays.asList(content.contentType()));
       }
+    }
+
+    // Stripe-Context
+    if (options.getStripeContext() != null) {
+      headerMap.put("Stripe-Context", Arrays.asList(options.getStripeContext()));
     }
 
     // Stripe-Account

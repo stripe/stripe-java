@@ -73,6 +73,11 @@ public class GlobalStripeResponseGetterOptions extends StripeResponseGetterOptio
   }
 
   @Override
+  public String getStripeAccount() {
+    return null;
+  }
+
+  @Override
   public String getStripeContext() {
     return null;
   }
