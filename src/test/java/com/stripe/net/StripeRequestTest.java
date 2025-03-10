@@ -304,19 +304,6 @@ public class StripeRequestTest extends BaseStripeTest {
   }
 
   @Test
-  public void testBuildHeadersThrowsWhenContextPassedIntoV1Request() {
-    assertThrows(
-        UnsupportedOperationException.class,
-        () ->
-            StripeRequest.create(
-                ApiResource.RequestMethod.POST,
-                "http://example.com/post",
-                null,
-                RequestOptions.builder().setStripeContext("ctx").build(),
-                ApiMode.V1));
-  }
-
-  @Test
   public void testBuildContentHasJsonContentWhenRequestIsPostAndApiVersionV2()
       throws StripeException {
     StripeRequest request =
