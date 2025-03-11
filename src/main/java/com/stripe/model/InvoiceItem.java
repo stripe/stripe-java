@@ -14,7 +14,6 @@ import com.stripe.param.InvoiceItemCreateParams;
 import com.stripe.param.InvoiceItemListParams;
 import com.stripe.param.InvoiceItemRetrieveParams;
 import com.stripe.param.InvoiceItemUpdateParams;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -169,14 +168,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TestClock> testClock;
-
-  /** Unit amount (in the {@code currency} specified) of the invoice item. */
-  @SerializedName("unit_amount")
-  Long unitAmount;
-
-  /** Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places. */
-  @SerializedName("unit_amount_decimal")
-  BigDecimal unitAmountDecimal;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
