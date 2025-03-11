@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionItemUpdateParams extends ApiRequestParams {
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -546,6 +548,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingThresholds {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -625,6 +628,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -739,6 +743,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PriceData {
     /**
      * <strong>Required.</strong> Three-letter <a
@@ -954,6 +959,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Recurring {
       /**
        * Map of extra parameters for custom features not available in this client library. The

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SourceCreateParams extends ApiRequestParams {
   /**
    * Amount associated with the source. This is the amount for which the source will be chargeable
@@ -430,6 +432,7 @@ public class SourceCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Mandate {
     /**
      * The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
@@ -595,6 +598,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Acceptance {
       /**
        * The Unix timestamp (in seconds) when the mandate was accepted or refused by the customer.
@@ -792,6 +796,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Offline {
         /**
          * <strong>Required.</strong> An email to contact you with if a copy of the mandate is
@@ -870,6 +875,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Online {
         /**
          * The Unix timestamp (in seconds) when the mandate was accepted or refused by the customer.
@@ -1059,6 +1065,7 @@ public class SourceCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Owner {
     /** Owner's address. */
     @SerializedName("address")
@@ -1167,6 +1174,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1323,6 +1331,7 @@ public class SourceCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Receiver {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1422,6 +1431,7 @@ public class SourceCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Redirect {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1498,6 +1508,7 @@ public class SourceCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SourceOrder {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1607,6 +1618,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Item {
       @SerializedName("amount")
       Long amount;
@@ -1775,6 +1787,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Shipping {
       /** <strong>Required.</strong> Shipping address. */
       @SerializedName("address")
@@ -1915,6 +1928,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")

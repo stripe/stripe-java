@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class WebhookEndpointUpdateParams extends ApiRequestParams {
   /** An optional description of what the webhook is used for. */
   @SerializedName("description")

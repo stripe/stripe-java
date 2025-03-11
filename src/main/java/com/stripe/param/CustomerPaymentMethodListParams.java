@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CustomerPaymentMethodListParams extends ApiRequestParams {
   /**
    * This field indicates whether this payment method can be shown again to its customer in a

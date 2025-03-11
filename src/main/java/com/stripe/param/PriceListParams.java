@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PriceListParams extends ApiRequestParams {
   /**
    * Only return prices that are active or inactive (e.g., pass {@code false} to list all inactive
@@ -323,6 +325,7 @@ public class PriceListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -430,6 +433,7 @@ public class PriceListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Recurring {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

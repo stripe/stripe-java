@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class OutboundTransferUpdateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -113,6 +115,7 @@ public class OutboundTransferUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TrackingDetails {
     /** ACH network tracking details. */
     @SerializedName("ach")
@@ -210,6 +213,7 @@ public class OutboundTransferUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ach {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -287,6 +291,7 @@ public class OutboundTransferUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsDomesticWire {
       /**
        * CHIPS System Sequence Number (SSN) for funds sent over the {@code us_domestic_wire}

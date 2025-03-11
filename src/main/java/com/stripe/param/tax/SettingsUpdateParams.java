@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SettingsUpdateParams extends ApiRequestParams {
   /** Default configuration to be used on Stripe Tax calculations. */
   @SerializedName("defaults")
@@ -129,6 +131,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Defaults {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -245,6 +248,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class HeadOffice {
     /** <strong>Required.</strong> The location of the business for tax purposes. */
     @SerializedName("address")
@@ -312,6 +316,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")

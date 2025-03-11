@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The amount to capture from the PaymentIntent, which must be less than or equal to the original
@@ -327,6 +329,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")

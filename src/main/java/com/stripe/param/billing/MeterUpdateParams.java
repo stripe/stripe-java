@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class MeterUpdateParams extends ApiRequestParams {
   /** The meter’s name. Not visible to the customer. */
   @SerializedName("display_name")

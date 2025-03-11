@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AccountPersonUpdateParams extends ApiRequestParams {
   /**
    * Details on the legal guardian's or authorizer's acceptance of the required Stripe agreements.
@@ -774,6 +776,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AdditionalTosAcceptances {
     /** Details on the legal guardian's acceptance of the main Stripe service agreement. */
     @SerializedName("account")
@@ -845,6 +848,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Account {
       /**
        * The Unix timestamp marking when the account representative accepted the service agreement.
@@ -969,6 +973,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Address {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")
@@ -1161,6 +1166,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AddressKana {
     /** City or ward. */
     @SerializedName("city")
@@ -1374,6 +1380,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AddressKanji {
     /** City or ward. */
     @SerializedName("city")
@@ -1587,6 +1594,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Dob {
     /** <strong>Required.</strong> The day of birth, between 1 and 31. */
     @SerializedName("day")
@@ -1681,6 +1689,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Documents {
     /**
      * One or more documents that demonstrate proof that this person is authorized to represent the
@@ -1792,6 +1801,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompanyAuthorization {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1889,6 +1899,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Passport {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1983,6 +1994,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Visa {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2078,6 +2090,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class RegisteredAddress {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")
@@ -2271,6 +2284,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Relationship {
     /** Whether the person is the authorizer of the account's representative. */
     @SerializedName("authorizer")
@@ -2486,6 +2500,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Verification {
     /**
      * A document showing address, either a passport, local ID card, or utility bill from a
@@ -2575,6 +2590,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AdditionalDocument {
       /**
        * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -2701,6 +2717,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Document {
       /**
        * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file

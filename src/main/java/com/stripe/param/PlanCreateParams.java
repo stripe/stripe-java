@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PlanCreateParams extends ApiRequestParams {
   /** Whether the plan is currently available for new subscriptions. Defaults to {@code true}. */
   @SerializedName("active")
@@ -548,6 +550,7 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Product {
     /** Whether the product is currently available for purchase. Defaults to {@code true}. */
     @SerializedName("active")
@@ -763,6 +766,7 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Tier {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -945,6 +949,7 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransformUsage {
     /** <strong>Required.</strong> Divide usage by this number. */
     @SerializedName("divide_by")

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ChargeCaptureParams extends ApiRequestParams {
   /**
    * The amount to capture, which must be less than or equal to the original amount. Any additional
@@ -288,6 +290,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire

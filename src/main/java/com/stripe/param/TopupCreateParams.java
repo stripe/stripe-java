@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class TopupCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> A positive integer representing how much to transfer. */
   @SerializedName("amount")

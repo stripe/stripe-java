@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ShippingRateCreateParams extends ApiRequestParams {
   /**
    * The estimated range for how long shipping will take, meant to be displayable to the customer.
@@ -261,6 +263,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class DeliveryEstimate {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -347,6 +350,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Maximum {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -455,6 +459,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Minimum {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -564,6 +569,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class FixedAmount {
     /**
      * <strong>Required.</strong> A non-negative integer in cents representing how much to charge.
@@ -702,6 +708,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CurrencyOption {
       /**
        * <strong>Required.</strong> A non-negative integer in cents representing how much to charge.
