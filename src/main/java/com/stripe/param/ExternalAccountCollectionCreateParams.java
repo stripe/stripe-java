@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   /**
    * When set to true, or if this is the first external account added in this currency, this account

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentMethodDomainCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The domain name that this payment method domain object represents.

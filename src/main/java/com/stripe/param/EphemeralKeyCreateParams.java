@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class EphemeralKeyCreateParams extends ApiRequestParams {
   /** The ID of the Customer you'd like to modify using the resulting ephemeral key. */
   @SerializedName("customer")

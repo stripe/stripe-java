@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionListParams extends ApiRequestParams {
   /** Filter subscriptions by their automatic tax settings. */
   @SerializedName("automatic_tax")
@@ -372,6 +374,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Enabled automatic tax calculation which will automatically compute
@@ -446,6 +449,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -554,6 +558,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CurrentPeriodEnd {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -664,6 +669,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CurrentPeriodStart {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

@@ -5,9 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> Specifies which event to cancel. */
   @SerializedName("cancel")
@@ -115,6 +117,7 @@ public class MeterEventAdjustmentCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Cancel {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

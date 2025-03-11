@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AccountListParams extends ApiRequestParams {
   /**
    * If present, only return accounts that belong to the specified account holder. {@code
@@ -208,6 +210,7 @@ public class AccountListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder {
     /** The ID of the Stripe account whose accounts will be retrieved. */
     @SerializedName("account")
