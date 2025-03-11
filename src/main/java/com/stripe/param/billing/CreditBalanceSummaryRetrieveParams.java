@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
   @SerializedName("customer")
@@ -125,6 +127,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Filter {
     /** The billing credit applicability scope for which to fetch credit balance summary. */
     @SerializedName("applicability_scope")
@@ -225,6 +228,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ApplicabilityScope {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -345,6 +349,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Price {
         /**
          * Map of extra parameters for custom features not available in this client library. The

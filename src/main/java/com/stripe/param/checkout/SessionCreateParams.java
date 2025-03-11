@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SessionCreateParams extends ApiRequestParams {
   /**
    * Settings for price localization with <a
@@ -1119,6 +1121,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing {
     /**
      * Set to {@code true} to enable <a
@@ -1197,6 +1200,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AfterExpiration {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1264,6 +1268,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Recovery {
       /**
        * Enables user redeemable promotion codes on the recovered Checkout Sessions. Defaults to
@@ -1364,6 +1369,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Set to {@code true} to <a
@@ -1466,6 +1472,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Liability {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -1566,6 +1573,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ConsentCollection {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1694,6 +1702,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethodReuseAgreement {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1824,6 +1833,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomField {
     /** Configuration for {@code type=dropdown} fields. */
     @SerializedName("dropdown")
@@ -1997,6 +2007,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
        * The value that will pre-fill the field on the payment page.Must match a {@code value} in
@@ -2113,6 +2124,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Option {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2213,6 +2225,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Label {
       /**
        * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
@@ -2315,6 +2328,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Numeric {
       /** The value that will pre-fill the field on the payment page. */
       @SerializedName("default_value")
@@ -2416,6 +2430,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Text {
       /** The value that will pre-fill the field on the payment page. */
       @SerializedName("default_value")
@@ -2536,6 +2551,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomText {
     /** Custom text that should be displayed after the payment confirmation button. */
     @SerializedName("after_submit")
@@ -2686,6 +2702,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AfterSubmit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2756,6 +2773,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingAddress {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2826,6 +2844,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Submit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2896,6 +2915,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TermsOfServiceAcceptance {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2968,6 +2988,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerUpdate {
     /**
      * Describes whether Checkout saves the billing address onto {@code customer.address}. To always
@@ -3131,6 +3152,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** The ID of the coupon to apply to this Session. */
     @SerializedName("coupon")
@@ -3212,6 +3234,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class InvoiceCreation {
     /** <strong>Required.</strong> Set to {@code true} to enable invoice creation. */
     @SerializedName("enabled")
@@ -3294,6 +3317,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceData {
       /** The account tax IDs associated with the invoice. */
       @SerializedName("account_tax_ids")
@@ -3575,6 +3599,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CustomField {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3673,6 +3698,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -3773,6 +3799,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class RenderingOptions {
         /**
          * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
@@ -3891,6 +3918,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
     /**
      * When set, provides configuration for this item’s quantity to be adjusted by the customer
@@ -4111,6 +4139,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AdjustableQuantity {
       /**
        * <strong>Required.</strong> Set to true if the quantity can be adjusted to any non-negative
@@ -4227,6 +4256,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -4444,6 +4474,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ProductData {
         /**
          * The product's description, meant to be displayable to the customer. Use this field to
@@ -4641,6 +4672,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Recurring {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4782,6 +4814,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentIntentData {
     /**
      * The amount of the application fee (if any) that will be requested to be applied to the
@@ -5163,6 +5196,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Shipping {
       /** <strong>Required.</strong> Shipping address. */
       @SerializedName("address")
@@ -5303,6 +5337,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -5460,6 +5495,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TransferData {
       /** The amount that will be transferred automatically when a charge succeeds. */
       @SerializedName("amount")
@@ -5588,6 +5624,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodData {
     /**
      * Allow redisplay will be set on the payment method on confirmation and indicates whether this
@@ -5683,6 +5720,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions {
     /** contains details about the ACSS Debit payment method options. */
     @SerializedName("acss_debit")
@@ -6329,6 +6367,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit {
       /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
@@ -6520,6 +6559,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * A URL for custom mandate text to render during confirmation step. The URL will be
@@ -6820,6 +6860,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Affirm {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6941,6 +6982,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7063,6 +7105,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Alipay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7184,6 +7227,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7308,6 +7352,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AuBecsDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7452,6 +7497,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7599,6 +7645,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7710,6 +7757,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Bancontact {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7831,6 +7879,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Boleto {
       /**
        * The number of calendar days before a Boleto voucher expires. For example, if you create a
@@ -7982,6 +8031,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Card {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8313,6 +8363,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Installments {
         /**
          * Setting to true enables installments for this Checkout Session. Setting to false will
@@ -8391,6 +8442,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Restrictions {
         /**
          * Specify the card brands to block in the Checkout Session. If a customer enters or selects
@@ -8611,6 +8663,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cashapp {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8738,6 +8791,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance {
       /**
        * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
@@ -8891,6 +8945,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class BankTransfer {
         /** Configuration for eu_bank_transfer funding type. */
         @SerializedName("eu_bank_transfer")
@@ -9049,6 +9104,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class EuBankTransfer {
           /**
            * <strong>Required.</strong> The desired country code of the bank account information.
@@ -9213,6 +9269,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Eps {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9334,6 +9391,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Fpx {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9455,6 +9513,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Giropay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9576,6 +9635,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Grabpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9697,6 +9757,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ideal {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9818,6 +9879,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KakaoPay {
       /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
@@ -9971,6 +10033,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Klarna {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10092,6 +10155,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Konbini {
       /**
        * The number of calendar days (between 1 and 60) after which Konbini payment instructions
@@ -10239,6 +10303,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KrCard {
       /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
@@ -10392,6 +10457,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Link {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10516,6 +10582,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10637,6 +10704,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Multibanco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10758,6 +10826,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class NaverPay {
       /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
@@ -10911,6 +10980,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo {
       /**
        * The number of calendar days before an OXXO voucher expires. For example, if you create an
@@ -11056,6 +11126,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class P24 {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11193,6 +11264,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PayByBank {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11250,6 +11322,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payco {
       /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
@@ -11334,6 +11407,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Paynow {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11455,6 +11529,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Paypal {
       /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
@@ -11787,6 +11862,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pix {
       /**
        * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
@@ -11864,6 +11940,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11988,6 +12065,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SamsungPay {
       /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
@@ -12072,6 +12150,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12219,6 +12298,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -12330,6 +12410,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sofort {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12451,6 +12532,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Swish {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12528,6 +12610,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12697,6 +12780,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -12936,6 +13020,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class WechatPay {
       /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
       @SerializedName("app_id")
@@ -13106,6 +13191,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PhoneNumberCollection {
     /**
      * <strong>Required.</strong> Set to {@code true} to enable phone number collection.
@@ -13183,6 +13269,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SavedPaymentMethodOptions {
     /**
      * Uses the {@code allow_redisplay} value of each saved payment method to filter the set
@@ -13339,6 +13426,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SetupIntentData {
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
@@ -13463,6 +13551,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingAddressCollection {
     /**
      * <strong>Required.</strong> An array of two-letter ISO country codes representing which
@@ -14285,6 +14374,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingOption {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -14368,6 +14458,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingRateData {
       /**
        * The estimated range for how long shipping will take, meant to be displayable to the
@@ -14591,6 +14682,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DeliveryEstimate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -14688,6 +14780,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Maximum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -14802,6 +14895,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Minimum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -14917,6 +15011,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class FixedAmount {
         /**
          * <strong>Required.</strong> A non-negative integer in cents representing how much to
@@ -15078,6 +15173,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class CurrencyOption {
           /**
            * <strong>Required.</strong> A non-negative integer in cents representing how much to
@@ -15233,6 +15329,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -15568,6 +15665,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceSettings {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -15645,6 +15743,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -15749,6 +15848,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TransferData {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -15842,6 +15942,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TrialSettings {
       /**
        * <strong>Required.</strong> Defines how the subscription should behave when the user's free
@@ -15919,6 +16020,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -16037,6 +16139,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TaxIdCollection {
     /**
      * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code

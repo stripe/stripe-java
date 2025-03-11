@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AccountSessionCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> The identifier of the account to create an Account Session for. */
   @SerializedName("account")
@@ -133,6 +135,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Components {
     /** Configuration for the account management embedded component. */
     @SerializedName("account_management")
@@ -423,6 +426,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AccountManagement {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -508,6 +512,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Disables Stripe user authentication for this embedded component. This value can only be
@@ -627,6 +632,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AccountOnboarding {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -712,6 +718,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Disables Stripe user authentication for this embedded component. This value can only be
@@ -831,6 +838,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Balances {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -915,6 +923,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Disables Stripe user authentication for this embedded component. This value can only be
@@ -1095,6 +1104,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Documents {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -1179,6 +1189,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1238,6 +1249,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class FinancialAccount {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -1323,6 +1335,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Disables Stripe user authentication for this embedded component. This value can only be
@@ -1460,6 +1473,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class FinancialAccountTransactions {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -1547,6 +1561,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /** Whether to allow card spend dispute management features. */
         @SerializedName("card_spend_dispute_management")
@@ -1623,6 +1638,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IssuingCard {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -1707,6 +1723,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /** Whether to allow card management features. */
         @SerializedName("card_management")
@@ -1828,6 +1845,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IssuingCardsList {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -1913,6 +1931,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /** Whether to allow card management features. */
         @SerializedName("card_management")
@@ -2060,6 +2079,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class NotificationBanner {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -2145,6 +2165,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Disables Stripe user authentication for this embedded component. This value can only be
@@ -2264,6 +2285,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentDetails {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -2348,6 +2370,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Whether to allow capturing and cancelling payment intents. This is {@code true} by
@@ -2490,6 +2513,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payments {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -2574,6 +2598,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Whether to allow capturing and cancelling payment intents. This is {@code true} by
@@ -2714,6 +2739,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payouts {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -2798,6 +2824,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Disables Stripe user authentication for this embedded component. This value can only be
@@ -2978,6 +3005,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PayoutsList {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -3062,6 +3090,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3121,6 +3150,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxRegistrations {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -3206,6 +3236,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3268,6 +3299,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxSettings {
       /** <strong>Required.</strong> Whether the embedded component is enabled. */
       @SerializedName("enabled")
@@ -3352,6 +3384,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Map of extra parameters for custom features not available in this client library. The

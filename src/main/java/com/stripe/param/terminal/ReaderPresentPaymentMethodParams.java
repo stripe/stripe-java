@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   /** Simulated on-reader tip amount. */
   @SerializedName("amount_tip")
@@ -162,6 +164,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CardPresent {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -231,6 +234,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class InteracPresent {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

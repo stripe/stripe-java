@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AuthorizationApproveParams extends ApiRequestParams {
   /**
    * If the authorization's {@code pending_request.is_amount_controllable} property is {@code true},
