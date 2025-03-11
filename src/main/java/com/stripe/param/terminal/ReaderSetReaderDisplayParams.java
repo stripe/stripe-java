@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class ReaderSetReaderDisplayParams extends ApiRequestParams {
   /** Cart. */
   @SerializedName("cart")
@@ -126,7 +124,6 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Cart {
     /**
      * <strong>Required.</strong> Three-letter <a
@@ -267,7 +264,6 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class LineItem {
       /** <strong>Required.</strong> The price of the item in cents. */
       @SerializedName("amount")

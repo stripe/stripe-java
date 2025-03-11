@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class ShippingRateUpdateParams extends ApiRequestParams {
   /** Whether the shipping rate can be used for new purchases. Defaults to {@code true}. */
   @SerializedName("active")
@@ -225,7 +223,6 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class FixedAmount {
     /**
      * Shipping rates defined in each available currency option. Each key must be a three-letter <a
@@ -323,7 +320,6 @@ public class ShippingRateUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CurrencyOption {
       /** A non-negative integer in cents representing how much to charge. */
       @SerializedName("amount")

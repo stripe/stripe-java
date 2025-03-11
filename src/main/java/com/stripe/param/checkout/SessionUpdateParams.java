@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class SessionUpdateParams extends ApiRequestParams {
   /** Information about the customer collected within the Checkout Session. */
   @SerializedName("collected_information")
@@ -181,7 +179,6 @@ public class SessionUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CollectedInformation {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -251,7 +248,6 @@ public class SessionUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class ShippingDetails {
       /** <strong>Required.</strong> The address of the customer */
       @SerializedName("address")
@@ -342,7 +338,6 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")

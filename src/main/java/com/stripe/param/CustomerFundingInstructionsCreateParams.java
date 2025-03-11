@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CustomerFundingInstructionsCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> Additional parameters for {@code bank_transfer} funding types */
   @SerializedName("bank_transfer")
@@ -153,7 +151,6 @@ public class CustomerFundingInstructionsCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class BankTransfer {
     /** Configuration for eu_bank_transfer funding type. */
     @SerializedName("eu_bank_transfer")
@@ -289,7 +286,6 @@ public class CustomerFundingInstructionsCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class EuBankTransfer {
       /**
        * <strong>Required.</strong> The desired country code of the bank account information.

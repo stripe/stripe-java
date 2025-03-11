@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CustomerPaymentSourceVerifyParams extends ApiRequestParams {
   /**
    * Two positive integers, in <em>cents</em>, equal to the values of the microdeposits sent to the

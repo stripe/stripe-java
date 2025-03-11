@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CustomerCreateParams extends ApiRequestParams {
   /** The customer's address. */
   @SerializedName("address")
@@ -568,7 +566,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Address {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")
@@ -724,7 +721,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CashBalance {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -798,7 +794,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Settings {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -900,7 +895,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class InvoiceSettings {
     /**
      * The list of up to 4 default custom fields to be displayed on invoices for this customer. When
@@ -1076,7 +1070,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CustomField {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1170,7 +1163,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class RenderingOptions {
       /**
        * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
@@ -1299,7 +1291,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Shipping {
     /** <strong>Required.</strong> Customer shipping address. */
     @SerializedName("address")
@@ -1394,7 +1385,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1553,7 +1543,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Tax {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1680,7 +1669,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class TaxIdData {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

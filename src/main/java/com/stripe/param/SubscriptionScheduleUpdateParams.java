@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   /** Object representing the subscription schedule's default settings. */
   @SerializedName("default_settings")
@@ -272,7 +270,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class DefaultSettings {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -602,7 +599,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AutomaticTax {
       /**
        * <strong>Required.</strong> Enabled automatic tax calculation which will automatically
@@ -703,7 +699,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Liability {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -814,7 +809,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BillingThresholds {
       /** Monetary threshold that triggers the subscription to advance to a new billing period. */
       @SerializedName("amount_gte")
@@ -910,7 +904,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceSettings {
       /**
        * The account tax IDs associated with the subscription schedule. Will be set on invoices
@@ -1071,7 +1064,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -1182,7 +1174,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class TransferData {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -1315,7 +1306,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Phase {
     /**
      * A list of prices and quantities that will generate invoice items appended to the next invoice
@@ -2121,7 +2111,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AddInvoiceItem {
       /** The coupons to redeem into discounts for the item. */
       @SerializedName("discounts")
@@ -2337,7 +2326,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
@@ -2457,7 +2445,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class PriceData {
         /**
          * <strong>Required.</strong> Three-letter <a
@@ -2682,7 +2669,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AutomaticTax {
       /**
        * <strong>Required.</strong> Enabled automatic tax calculation which will automatically
@@ -2781,7 +2767,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Liability {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -2892,7 +2877,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BillingThresholds {
       /** Monetary threshold that triggers the subscription to advance to a new billing period. */
       @SerializedName("amount_gte")
@@ -2986,7 +2970,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -3103,7 +3086,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceSettings {
       /**
        * The account tax IDs associated with this phase of the subscription schedule. Will be set on
@@ -3261,7 +3243,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -3372,7 +3353,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Item {
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -3722,7 +3702,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class BillingThresholds {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3807,7 +3786,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
@@ -3925,7 +3903,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class PriceData {
         /**
          * <strong>Required.</strong> Three-letter <a
@@ -4147,7 +4124,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Recurring {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4292,7 +4268,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class TransferData {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents

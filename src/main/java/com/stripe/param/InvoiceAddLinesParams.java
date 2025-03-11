@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class InvoiceAddLinesParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -201,7 +199,6 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Line {
     /**
      * The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming
@@ -686,7 +683,6 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -785,7 +781,6 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Period {
       /**
        * <strong>Required.</strong> The end of the period, which must be greater than or equal to
@@ -875,7 +870,6 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -1074,7 +1068,6 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class ProductData {
         /**
          * The product's description, meant to be displayable to the customer. Use this field to
@@ -1291,7 +1284,6 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class TaxAmount {
       /** <strong>Required.</strong> The amount, in cents (or local equivalent), of the tax. */
       @SerializedName("amount")
@@ -1415,7 +1407,6 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class TaxRateData {
         /**
          * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO

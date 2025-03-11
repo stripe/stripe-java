@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class AccountExternalAccountUpdateParams extends ApiRequestParams {
   /** The name of the person or business that owns the bank account. */
   @SerializedName("account_holder_name")
@@ -460,7 +458,6 @@ public class AccountExternalAccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Documents {
     /**
      * One or more documents that support the <a
@@ -545,7 +542,6 @@ public class AccountExternalAccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BankAccountOwnershipVerification {
       /**
        * Map of extra parameters for custom features not available in this client library. The

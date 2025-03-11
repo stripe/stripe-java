@@ -5,11 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class SubscriptionItemDeleteParams extends ApiRequestParams {
   /**
    * Delete all usage for the given subscription item. Allowed only when the current plan's {@code

@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class LocationCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> The full address of the location. */
   @SerializedName("address")
@@ -213,7 +211,6 @@ public class LocationCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Address {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")

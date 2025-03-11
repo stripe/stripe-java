@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class ReceivedCreditCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> Amount (in cents) to be transferred. */
   @SerializedName("amount")
@@ -212,7 +210,6 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class InitiatingPaymentMethodDetails {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -298,7 +295,6 @@ public class ReceivedCreditCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /** The bank account holder's name. */
       @SerializedName("account_holder_name")

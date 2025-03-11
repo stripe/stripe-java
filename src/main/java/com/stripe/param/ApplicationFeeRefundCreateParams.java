@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class ApplicationFeeRefundCreateParams extends ApiRequestParams {
   /**
    * A positive integer, in <em>cents (or local equivalent)</em>, representing how much of this fee

@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class ConfigurationUpdateParams extends ApiRequestParams {
   /** An object containing device type specific settings for BBPOS WisePOS E readers. */
   @SerializedName("bbpos_wisepos_e")
@@ -251,7 +249,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class BbposWiseposE {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -327,7 +324,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Offline {
     /**
      * <strong>Required.</strong> Determines whether to allow transactions to be collected while
@@ -402,7 +398,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class RebootWindow {
     /**
      * <strong>Required.</strong> Integer between 0 to 23 that represents the end hour of the reboot
@@ -497,7 +492,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class StripeS700 {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -572,7 +566,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Tipping {
     /** Tipping configuration for AUD. */
     @SerializedName("aud")
@@ -869,7 +862,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Aud {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1017,7 +1009,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Cad {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1165,7 +1156,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Chf {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1313,7 +1303,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Czk {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1461,7 +1450,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Dkk {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1609,7 +1597,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Eur {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1757,7 +1744,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Gbp {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1905,7 +1891,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Hkd {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2053,7 +2038,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Jpy {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2201,7 +2185,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Myr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2349,7 +2332,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Nok {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2497,7 +2479,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Nzd {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2645,7 +2626,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Pln {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2793,7 +2773,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Sek {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2941,7 +2920,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Sgd {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3089,7 +3067,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Usd {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3238,7 +3215,6 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class VerifoneP400 {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

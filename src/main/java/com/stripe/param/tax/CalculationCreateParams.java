@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CalculationCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Three-letter <a
@@ -251,7 +249,6 @@ public class CalculationCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails {
     /** The customer's postal address (for example, home or business location). */
     @SerializedName("address")
@@ -420,7 +417,6 @@ public class CalculationCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -618,7 +614,6 @@ public class CalculationCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class TaxId {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1087,7 +1082,6 @@ public class CalculationCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
     /**
      * <strong>Required.</strong> A positive integer representing the line item's total price in the
@@ -1291,7 +1285,6 @@ public class CalculationCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class ShipFromDetails {
     /** <strong>Required.</strong> The address from which the goods are being shipped from. */
     @SerializedName("address")
@@ -1360,7 +1353,6 @@ public class CalculationCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1556,7 +1548,6 @@ public class CalculationCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
      * A positive integer in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest

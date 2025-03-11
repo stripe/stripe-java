@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class MeterCreateParams extends ApiRequestParams {
   /** Fields that specify how to map a meter event to a customer. */
   @SerializedName("customer_mapping")
@@ -199,7 +197,6 @@ public class MeterCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CustomerMapping {
     /**
      * <strong>Required.</strong> The key in the meter event payload to use for mapping the event to
@@ -306,7 +303,6 @@ public class MeterCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class DefaultAggregation {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -396,7 +392,6 @@ public class MeterCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class ValueSettings {
     /**
      * <strong>Required.</strong> The key in the usage event payload to use as the value for this

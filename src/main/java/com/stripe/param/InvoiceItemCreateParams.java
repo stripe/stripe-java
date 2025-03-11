@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class InvoiceItemCreateParams extends ApiRequestParams {
   /**
    * The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming
@@ -602,7 +600,6 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -699,7 +696,6 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Period {
     /**
      * <strong>Required.</strong> The end of the period, which must be greater than or equal to the
@@ -787,7 +783,6 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class PriceData {
     /**
      * <strong>Required.</strong> Three-letter <a

@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class DisputeUpdateParams extends ApiRequestParams {
   /**
    * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
@@ -210,7 +208,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Evidence {
     /**
      * Any server or activity logs showing proof that the customer accessed or downloaded the
@@ -1075,7 +1072,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class EnhancedEvidence {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1165,7 +1161,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class VisaCompellingEvidence3 {
         /** Disputed transaction details for Visa Compelling Evidence 3.0 evidence submission. */
         @SerializedName("disputed_transaction")
@@ -1301,7 +1296,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class DisputedTransaction {
           /**
            * User Account ID used to log into business platform. Must be recognizable by the user.
@@ -1558,7 +1552,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
           }
 
           @Getter
-          @EqualsAndHashCode(callSuper = false)
           public static class ShippingAddress {
             /** City, district, suburb, town, or village. */
             @SerializedName("city")
@@ -1775,7 +1768,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class PriorUndisputedTransaction {
           /**
            * <strong>Required.</strong> Stripe charge ID for the Visa Compelling Evidence 3.0
@@ -2044,7 +2036,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
           }
 
           @Getter
-          @EqualsAndHashCode(callSuper = false)
           public static class ShippingAddress {
             /** City, district, suburb, town, or village. */
             @SerializedName("city")
@@ -2247,7 +2238,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class VisaCompliance {
         /**
          * Map of extra parameters for custom features not available in this client library. The

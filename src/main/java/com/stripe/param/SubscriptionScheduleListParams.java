@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class SubscriptionScheduleListParams extends ApiRequestParams {
   /** Only return subscription schedules that were created canceled the given date interval. */
   @SerializedName("canceled_at")
@@ -288,7 +286,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CanceledAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -398,7 +395,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CompletedAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -508,7 +504,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -617,7 +612,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class ReleasedAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

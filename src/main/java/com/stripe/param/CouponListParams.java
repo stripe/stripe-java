@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CouponListParams extends ApiRequestParams {
   /**
    * A filter on the list, based on the object {@code created} field. The value can be a string with
@@ -206,7 +204,6 @@ public class CouponListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

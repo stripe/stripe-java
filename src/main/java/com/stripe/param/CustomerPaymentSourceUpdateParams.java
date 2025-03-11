@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CustomerPaymentSourceUpdateParams extends ApiRequestParams {
   /** The name of the person or business that owns the bank account. */
   @SerializedName("account_holder_name")
@@ -413,7 +411,6 @@ public class CustomerPaymentSourceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Owner {
     /** Owner's address. */
     @SerializedName("address")
@@ -541,7 +538,6 @@ public class CustomerPaymentSourceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")

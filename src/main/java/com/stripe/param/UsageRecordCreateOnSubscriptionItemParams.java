@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams {
   /**
    * Valid values are {@code increment} (default) or {@code set}. When using {@code increment} the

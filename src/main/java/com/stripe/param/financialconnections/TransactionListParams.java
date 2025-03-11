@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class TransactionListParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The ID of the Financial Connections Account whose transactions will
@@ -247,7 +245,6 @@ public class TransactionListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class TransactedAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -356,7 +353,6 @@ public class TransactionListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class TransactionRefresh {
     /**
      * <strong>Required.</strong> Return results where the transactions were created or updated by a

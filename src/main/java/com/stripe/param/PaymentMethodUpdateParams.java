@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class PaymentMethodUpdateParams extends ApiRequestParams {
   /**
    * This field indicates whether this payment method can be shown again to its customer in a
@@ -313,7 +311,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class BillingDetails {
     /** Billing address. */
     @SerializedName("address")
@@ -447,7 +444,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -643,7 +639,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Card {
     /** Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")
@@ -738,7 +733,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Networks {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -846,7 +840,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Link {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -902,7 +895,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class NaverPay {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -992,7 +984,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class PayByBank {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1048,7 +1039,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class UsBankAccount {
     /** Bank account holder type. */
     @SerializedName("account_holder_type")

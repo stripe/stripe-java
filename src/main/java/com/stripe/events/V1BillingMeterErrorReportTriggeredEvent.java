@@ -7,12 +7,10 @@ import com.stripe.model.billing.Meter;
 import com.stripe.model.v2.Event;
 import java.time.Instant;
 import java.util.List;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public final class V1BillingMeterErrorReportTriggeredEvent extends Event {
   /** Data for the v1.billing.meter.error_report_triggered event. */
   @SerializedName("data")
@@ -20,7 +18,6 @@ public final class V1BillingMeterErrorReportTriggeredEvent extends Event {
 
   @Getter
   @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static final class EventData {
     /** Extra field included in the event's {@code data} when fetched from /v2/events. */
     @SerializedName("developer_message_summary")

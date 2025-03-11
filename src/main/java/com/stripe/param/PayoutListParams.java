@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class PayoutListParams extends ApiRequestParams {
   /** Only return payouts that are expected to arrive during the given date interval. */
   @SerializedName("arrival_date")
@@ -252,7 +250,6 @@ public class PayoutListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class ArrivalDate {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -361,7 +358,6 @@ public class PayoutListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

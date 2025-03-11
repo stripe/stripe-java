@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class PaymentIntentConfirmParams extends ApiRequestParams {
   /** Controls when the funds will be captured from the customer's account. */
   @SerializedName("capture_method")
@@ -553,7 +551,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class MandateData {
     /** This hash contains details about the customer acceptance of the Mandate. */
     @SerializedName("customer_acceptance")
@@ -623,7 +620,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CustomerAcceptance {
       /** The time at which the customer accepted the Mandate. */
       @SerializedName("accepted_at")
@@ -759,7 +755,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Offline {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -821,7 +816,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Online {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -926,7 +920,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodData {
     /**
      * If this is an {@code acss_debit} PaymentMethod, this hash contains details about the ACSS
@@ -2056,7 +2049,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit {
       /** <strong>Required.</strong> Customer's bank account number. */
       @SerializedName("account_number")
@@ -2158,7 +2150,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Affirm {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2216,7 +2207,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2277,7 +2267,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Alipay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2335,7 +2324,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Alma {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2393,7 +2381,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2451,7 +2438,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AuBecsDebit {
       /** <strong>Required.</strong> The account number for the bank account. */
       @SerializedName("account_number")
@@ -2536,7 +2522,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit {
       /** Account number of the bank account that the funds will be debited from. */
       @SerializedName("account_number")
@@ -2621,7 +2606,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Bancontact {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2679,7 +2663,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BillingDetails {
       /** Billing address. */
       @SerializedName("address")
@@ -2819,7 +2802,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -2979,7 +2961,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Blik {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3037,7 +3018,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Boleto {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3115,7 +3095,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Cashapp {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3173,7 +3152,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3231,7 +3209,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Eps {
       /** The customer's bank. */
       @SerializedName("bank")
@@ -3395,7 +3372,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Fpx {
       /** Account holder type for FPX transaction. */
       @SerializedName("account_holder_type")
@@ -3571,7 +3547,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Giropay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3629,7 +3604,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Grabpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3687,7 +3661,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Ideal {
       /**
        * The customer's bank. Only use this parameter for existing customers. Don't use it for new
@@ -3822,7 +3795,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class InteracPresent {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3880,7 +3852,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class KakaoPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3938,7 +3909,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Klarna {
       /** Customer's date of birth. */
       @SerializedName("dob")
@@ -4009,7 +3979,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Dob {
         /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         @SerializedName("day")
@@ -4109,7 +4078,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Konbini {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4167,7 +4135,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class KrCard {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4225,7 +4192,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Link {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4283,7 +4249,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4341,7 +4306,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Multibanco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4399,7 +4363,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class NaverPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4493,7 +4456,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4551,7 +4513,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class P24 {
       /** The customer's bank. */
       @SerializedName("bank")
@@ -4709,7 +4670,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class PayByBank {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4767,7 +4727,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Payco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4825,7 +4784,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Paynow {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4883,7 +4841,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Paypal {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4941,7 +4898,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Pix {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4999,7 +4955,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Promptpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5057,7 +5012,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class RadarOptions {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5137,7 +5091,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5195,7 +5148,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class SamsungPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5253,7 +5205,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5325,7 +5276,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Sofort {
       /**
        * <strong>Required.</strong> Two-letter ISO code representing the country the bank account is
@@ -5431,7 +5381,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Swish {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5489,7 +5438,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Twint {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5547,7 +5495,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -5715,7 +5662,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class WechatPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5773,7 +5719,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Zip {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5988,7 +5933,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions {
     /**
      * If this is a {@code acss_debit} PaymentMethod, this sub-hash contains details about the ACSS
@@ -7437,7 +7381,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7644,7 +7587,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * A URL for custom mandate text to render during confirmation step. The URL will be
@@ -7870,7 +7812,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Affirm {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -8079,7 +8020,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -8297,7 +8237,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Alipay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8460,7 +8399,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Alma {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -8578,7 +8516,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -8791,7 +8728,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AuBecsDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8981,7 +8917,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9168,7 +9103,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -9280,7 +9214,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Bancontact {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9487,7 +9420,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Blik {
       /**
        * The 6-digit BLIK code that a customer has generated using their banking application. Can
@@ -9669,7 +9601,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Boleto {
       /**
        * The number of calendar days before a Boleto voucher expires. For example, if you create a
@@ -9859,7 +9790,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Card {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -10423,7 +10353,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Installments {
         /**
          * Setting to true enables installments for this PaymentIntent. This will cause the response
@@ -10534,7 +10463,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Plan {
           /**
            * For {@code fixed_count} installment plans, this is required. It represents the number
@@ -10677,7 +10605,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /** <strong>Required.</strong> Amount to be charged for future payments. */
         @SerializedName("amount")
@@ -11008,7 +10935,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class ThreeDSecure {
         /** The {@code transStatus} returned from the card Issuer’s ACS in the ARes. */
         @SerializedName("ares_trans_status")
@@ -11236,7 +11162,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class NetworkOptions {
           /** Cartes Bancaires-specific 3DS fields. */
           @SerializedName("cartes_bancaires")
@@ -11314,7 +11239,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
 
           @Getter
-          @EqualsAndHashCode(callSuper = false)
           public static class CartesBancaires {
             /**
              * <strong>Required.</strong> The cryptogram calculation algorithm used by the card
@@ -11720,7 +11644,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CardPresent {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11854,7 +11777,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Routing {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -11947,7 +11869,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Cashapp {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -12175,7 +12096,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance {
       /**
        * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
@@ -12341,7 +12261,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class BankTransfer {
         /** Configuration for the eu_bank_transfer funding type. */
         @SerializedName("eu_bank_transfer")
@@ -12507,7 +12426,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class EuBankTransfer {
           /**
            * <strong>Required.</strong> The desired country code of the bank account information.
@@ -12672,7 +12590,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Eps {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12802,7 +12719,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Fpx {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12932,7 +12848,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Giropay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13063,7 +12978,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Grabpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13194,7 +13108,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Ideal {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13357,7 +13270,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class InteracPresent {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13418,7 +13330,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class KakaoPay {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -13631,7 +13542,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Klarna {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -13989,7 +13899,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Konbini {
       /**
        * An optional 10 to 11 digit numeric-only string determining the confirmation code at
@@ -14252,7 +14161,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class KrCard {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -14465,7 +14373,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Link {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -14706,7 +14613,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -14899,7 +14805,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Multibanco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -15030,7 +14935,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class NaverPay {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -15148,7 +15052,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo {
       /**
        * The number of calendar days before an OXXO voucher expires. For example, if you create an
@@ -15303,7 +15206,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class P24 {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -15449,7 +15351,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class PayByBank {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -15507,7 +15408,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Payco {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -15625,7 +15525,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Paynow {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -15756,7 +15655,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Paypal {
       /** Controls when the funds will be captured from the customer's account. */
       @SerializedName("capture_method")
@@ -16091,7 +15989,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Pix {
       /**
        * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
@@ -16263,7 +16160,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Promptpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -16394,7 +16290,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -16608,7 +16503,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class SamsungPay {
       /**
        * Controls when the funds are captured from the customer's account.
@@ -16728,7 +16622,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -16915,7 +16808,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -17027,7 +16919,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Sofort {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -17244,7 +17135,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Swish {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -17395,7 +17285,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Twint {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -17526,7 +17415,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -17791,7 +17679,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -18007,7 +17894,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Filters {
           /**
            * The account subcategories to use to filter for selectable accounts. Valid subcategories
@@ -18184,7 +18070,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /** The method used to collect offline mandate customer acceptance. */
         @SerializedName("collection_method")
@@ -18282,7 +18167,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Networks {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -18456,7 +18340,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class WechatPay {
       /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
       @SerializedName("app_id")
@@ -18636,7 +18519,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Zip {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -18767,7 +18649,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class RadarOptions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -18845,7 +18726,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Shipping {
     /** <strong>Required.</strong> Shipping address. */
     @SerializedName("address")
@@ -18983,7 +18863,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")

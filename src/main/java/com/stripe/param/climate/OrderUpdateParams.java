@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class OrderUpdateParams extends ApiRequestParams {
   /**
    * Publicly sharable reference for the end beneficiary of carbon removal. Assumed to be the Stripe
@@ -170,7 +168,6 @@ public class OrderUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Beneficiary {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class OutboundPaymentCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> Amount (in cents) to be transferred. */
   @SerializedName("amount")
@@ -333,7 +331,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class DestinationPaymentMethodData {
     /**
      * Billing information associated with the PaymentMethod that may be used or required by
@@ -516,7 +513,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BillingDetails {
       /** Billing address. */
       @SerializedName("address")
@@ -659,7 +655,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -821,7 +816,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -1008,7 +1002,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class DestinationPaymentMethodOptions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1086,7 +1079,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1188,7 +1180,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class EndUserDetails {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

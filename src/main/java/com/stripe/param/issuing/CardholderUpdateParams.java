@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CardholderUpdateParams extends ApiRequestParams {
   /** The cardholder's billing address. */
   @SerializedName("billing")
@@ -321,7 +319,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Billing {
     /** <strong>Required.</strong> The cardholder’s billing address. */
     @SerializedName("address")
@@ -389,7 +386,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** <strong>Required.</strong> City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -585,7 +581,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Company {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -660,7 +655,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Individual {
     /** Information related to the card_issuing program for this cardholder. */
     @SerializedName("card_issuing")
@@ -828,7 +822,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CardIssuing {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -909,7 +902,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class UserTermsAcceptance {
         /**
          * The Unix timestamp marking when the cardholder accepted the Authorized User Terms.
@@ -1048,7 +1040,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Dob {
       /** <strong>Required.</strong> The day of birth, between 1 and 31. */
       @SerializedName("day")
@@ -1146,7 +1137,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Verification {
       /** An identifying document, either a passport or local ID card. */
       @SerializedName("document")
@@ -1218,7 +1208,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -1336,7 +1325,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class SpendingControls {
     /**
      * Array of strings containing <a
@@ -1632,7 +1620,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class SpendingLimit {
       /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
       @SerializedName("amount")

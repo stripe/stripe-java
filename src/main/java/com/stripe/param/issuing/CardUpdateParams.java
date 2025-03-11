@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CardUpdateParams extends ApiRequestParams {
   /** Reason why the {@code status} of this card is {@code canceled}. */
   @SerializedName("cancellation_reason")
@@ -279,7 +277,6 @@ public class CardUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Pin {
     /** The card's desired new PIN, encrypted under Stripe's public key. */
     @SerializedName("encrypted_number")
@@ -354,7 +351,6 @@ public class CardUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Shipping {
     /** <strong>Required.</strong> The address that the card is shipped to. */
     @SerializedName("address")
@@ -548,7 +544,6 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** <strong>Required.</strong> City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -743,7 +738,6 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class AddressValidation {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -832,7 +826,6 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Customs {
       /**
        * The Economic Operators Registration and Identification (EORI) number to use for Customs.
@@ -952,7 +945,6 @@ public class CardUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class SpendingControls {
     /**
      * Array of strings containing <a
@@ -1214,7 +1206,6 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class SpendingLimit {
       /** <strong>Required.</strong> Maximum amount allowed to spend per interval. */
       @SerializedName("amount")

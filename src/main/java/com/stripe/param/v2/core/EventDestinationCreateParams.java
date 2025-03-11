@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class EventDestinationCreateParams extends ApiRequestParams {
   /** Amazon EventBridge configuration. */
   @SerializedName("amazon_eventbridge")
@@ -315,7 +313,6 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class AmazonEventbridge {
     /** <strong>Required.</strong> The AWS account ID. */
     @SerializedName("aws_account_id")
@@ -400,7 +397,6 @@ public class EventDestinationCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class WebhookEndpoint {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

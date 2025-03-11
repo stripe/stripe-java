@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class QuoteListParams extends ApiRequestParams {
   /** The ID of the customer whose quotes will be retrieved. */
   @SerializedName("customer")

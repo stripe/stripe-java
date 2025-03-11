@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class MeterEventSummaryListParams extends ApiRequestParams {
   /** <strong>Required.</strong> The customer for which to fetch event summaries. */
   @SerializedName("customer")

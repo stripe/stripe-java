@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class TransactionCreateReversalParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -278,7 +276,6 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
     /**
      * <strong>Required.</strong> The amount to reverse, in the <a
@@ -485,7 +482,6 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
      * <strong>Required.</strong> The amount to reverse, in the <a

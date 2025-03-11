@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CustomerBalanceTransactionCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The integer amount in <strong>cents (or local equivalent)</strong>

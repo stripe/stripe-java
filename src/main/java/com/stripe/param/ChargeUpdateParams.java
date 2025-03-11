@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class ChargeUpdateParams extends ApiRequestParams {
   /**
    * The ID of an existing customer that will be associated with this request. This field may only
@@ -342,7 +340,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class FraudDetails {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -432,7 +429,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Shipping {
     /** <strong>Required.</strong> Shipping address. */
     @SerializedName("address")
@@ -597,7 +593,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")

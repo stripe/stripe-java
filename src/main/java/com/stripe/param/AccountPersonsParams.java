@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class AccountPersonsParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -195,7 +193,6 @@ public class AccountPersonsParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Relationship {
     /**
      * A filter on the list of people returned based on whether these people are authorizers of the

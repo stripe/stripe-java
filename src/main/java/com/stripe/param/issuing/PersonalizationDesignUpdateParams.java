@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class PersonalizationDesignUpdateParams extends ApiRequestParams {
   /**
    * The file for the card logo, for use with physical bundles that support card logos. Must have a
@@ -309,7 +307,6 @@ public class PersonalizationDesignUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CarrierText {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -448,7 +445,6 @@ public class PersonalizationDesignUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Preferences {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

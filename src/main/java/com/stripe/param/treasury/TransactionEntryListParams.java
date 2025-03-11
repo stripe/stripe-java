@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class TransactionEntryListParams extends ApiRequestParams {
   /** Only return TransactionEntries that were created during the given date interval. */
   @SerializedName("created")
@@ -264,7 +262,6 @@ public class TransactionEntryListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -373,7 +370,6 @@ public class TransactionEntryListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class EffectiveAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

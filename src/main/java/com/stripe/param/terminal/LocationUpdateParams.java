@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class LocationUpdateParams extends ApiRequestParams {
   /**
    * The full address of the location. You can't change the location's {@code country}. If you need
@@ -233,7 +231,6 @@ public class LocationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Address {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")

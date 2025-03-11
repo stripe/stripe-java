@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -153,7 +151,6 @@ public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Fleet {
     /**
      * Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary
@@ -301,7 +298,6 @@ public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class CardholderPromptData {
       /** Driver ID. */
       @SerializedName("driver_id")
@@ -444,7 +440,6 @@ public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class ReportedBreakdown {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -544,7 +539,6 @@ public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Fuel {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -625,7 +619,6 @@ public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class NonFuel {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -704,7 +697,6 @@ public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Tax {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -845,7 +837,6 @@ public class AuthorizationFinalizeAmountParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Fuel {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

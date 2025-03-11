@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class CouponCreateParams extends ApiRequestParams {
   /**
    * A positive integer representing the amount to subtract from an invoice total (required if
@@ -417,7 +415,6 @@ public class CouponCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class AppliesTo {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -506,7 +503,6 @@ public class CouponCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CurrencyOption {
     /**
      * <strong>Required.</strong> A positive integer representing the amount to subtract from an

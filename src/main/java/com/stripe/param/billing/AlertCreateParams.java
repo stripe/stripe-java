@@ -7,11 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class AlertCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> The type of alert to create. */
   @SerializedName("alert_type")
@@ -144,7 +142,6 @@ public class AlertCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class UsageThreshold {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -292,7 +289,6 @@ public class AlertCreateParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Filter {
       /** Limit the scope to this usage alert only to this customer. */
       @SerializedName("customer")

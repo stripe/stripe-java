@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   /** Settings for automatic tax lookup for this invoice preview. */
   @SerializedName("automatic_tax")
@@ -965,7 +963,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
@@ -1066,7 +1063,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Liability {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -1167,7 +1163,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails {
     /** The customer's address. */
     @SerializedName("address")
@@ -1335,7 +1330,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1491,7 +1485,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Shipping {
       /** <strong>Required.</strong> Customer shipping address. */
       @SerializedName("address")
@@ -1590,7 +1583,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -1752,7 +1744,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Tax {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1845,7 +1836,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class TaxId {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2299,7 +2289,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -2397,7 +2386,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class InvoiceItem {
     /** The integer amount in cents (or local equivalent) of previewed invoice item. */
     @SerializedName("amount")
@@ -2909,7 +2897,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -3008,7 +2995,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Period {
       /**
        * <strong>Required.</strong> The end of the period, which must be greater than or equal to
@@ -3099,7 +3085,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -3308,7 +3293,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Issuer {
     /** The connected account being referenced when {@code type} is {@code account}. */
     @SerializedName("account")
@@ -3405,7 +3389,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class ScheduleDetails {
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
@@ -3548,7 +3531,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Phase {
       /**
        * A list of prices and quantities that will generate invoice items appended to the next
@@ -4343,7 +4325,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class AddInvoiceItem {
         /** The coupons to redeem into discounts for the item. */
         @SerializedName("discounts")
@@ -4562,7 +4543,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Discount {
           /** ID of the coupon to create a new discount for. */
           @SerializedName("coupon")
@@ -4668,7 +4648,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class PriceData {
           /**
            * <strong>Required.</strong> Three-letter <a
@@ -4870,7 +4849,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class AutomaticTax {
         /**
          * <strong>Required.</strong> Enabled automatic tax calculation which will automatically
@@ -4974,7 +4952,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Liability {
           /** The connected account being referenced when {@code type} is {@code account}. */
           @SerializedName("account")
@@ -5081,7 +5058,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class BillingThresholds {
         /** Monetary threshold that triggers the subscription to advance to a new billing period. */
         @SerializedName("amount_gte")
@@ -5180,7 +5156,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
@@ -5282,7 +5257,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class InvoiceSettings {
         /**
          * The account tax IDs associated with this phase of the subscription schedule. Will be set
@@ -5448,7 +5422,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Issuer {
           /** The connected account being referenced when {@code type} is {@code account}. */
           @SerializedName("account")
@@ -5555,7 +5528,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Item {
         /**
          * Define thresholds at which an invoice will be sent, and the subscription advanced to a
@@ -5906,7 +5878,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class BillingThresholds {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -5993,7 +5964,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Discount {
           /** ID of the coupon to create a new discount for. */
           @SerializedName("coupon")
@@ -6098,7 +6068,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class PriceData {
           /**
            * <strong>Required.</strong> Three-letter <a
@@ -6298,7 +6267,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
           }
 
           @Getter
-          @EqualsAndHashCode(callSuper = false)
           public static class Recurring {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -6446,7 +6414,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class TransferData {
         /**
          * A non-negative decimal between 0 and 100, with at most two decimal places. This
@@ -6663,7 +6630,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionDetails {
     /**
      * For new subscriptions, a future timestamp to anchor the subscription's <a
@@ -7064,7 +7030,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Item {
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -7479,7 +7444,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class BillingThresholds {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7564,7 +7528,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
@@ -7666,7 +7629,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class PriceData {
         /**
          * <strong>Required.</strong> Three-letter <a
@@ -7865,7 +7827,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
         }
 
         @Getter
-        @EqualsAndHashCode(callSuper = false)
         public static class Recurring {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -8070,7 +8031,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionItem {
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -8476,7 +8436,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class BillingThresholds {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8560,7 +8519,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -8659,7 +8617,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
     }
 
     @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -8852,7 +8809,6 @@ public class InvoiceUpcomingLinesListParams extends ApiRequestParams {
       }
 
       @Getter
-      @EqualsAndHashCode(callSuper = false)
       public static class Recurring {
         /**
          * Map of extra parameters for custom features not available in this client library. The

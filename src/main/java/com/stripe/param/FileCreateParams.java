@@ -10,11 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
-@EqualsAndHashCode(callSuper = false)
 public class FileCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -174,7 +172,6 @@ public class FileCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class FileLinkData {
     /**
      * <strong>Required.</strong> Set this to {@code true} to create a file link for the newly
