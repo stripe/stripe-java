@@ -142,8 +142,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}. This field has been deprecated and will be
-   * removed in a future API version. Use {@code subscription_details.cancel_at_period_end} instead.
+   * current_period_end}). Defaults to {@code false}. This param is deprecated starting the {@code
+   * 2025-03-31.basil} version, please use {@code cancel_at} instead. This field has been deprecated
+   * and will be removed in a future API version. Use {@code
+   * subscription_details.cancel_at_period_end} instead.
    */
   @SerializedName("subscription_cancel_at_period_end")
   Boolean subscriptionCancelAtPeriodEnd;
@@ -702,9 +704,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}. This field has been deprecated and will be
-     * removed in a future API version. Use {@code subscription_details.cancel_at_period_end}
-     * instead.
+     * current_period_end}). Defaults to {@code false}. This param is deprecated starting the {@code
+     * 2025-03-31.basil} version, please use {@code cancel_at} instead. This field has been
+     * deprecated and will be removed in a future API version. Use {@code
+     * subscription_details.cancel_at_period_end} instead.
      */
     public Builder setSubscriptionCancelAtPeriodEnd(Boolean subscriptionCancelAtPeriodEnd) {
       this.subscriptionCancelAtPeriodEnd = subscriptionCancelAtPeriodEnd;
@@ -12943,7 +12946,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
+     * current_period_end}). Defaults to {@code false}. This param is deprecated starting the {@code
+     * 2025-03-31.basil} version, please use {@code cancel_at} instead.
      */
     @SerializedName("cancel_at_period_end")
     Boolean cancelAtPeriodEnd;
@@ -13145,7 +13149,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       /**
        * Indicate whether this subscription should cancel at the end of the current period ({@code
-       * current_period_end}). Defaults to {@code false}.
+       * current_period_end}). Defaults to {@code false}. This param is deprecated starting the
+       * {@code 2025-03-31.basil} version, please use {@code cancel_at} instead.
        */
       public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
         this.cancelAtPeriodEnd = cancelAtPeriodEnd;
