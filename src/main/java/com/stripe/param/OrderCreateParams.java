@@ -1022,7 +1022,7 @@ public class OrderCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The ID of a <a href="https://stripe.com/docs/api/prices">Price</a> to add to the Order.
+     * The ID of a <a href="https://docs.stripe.com/api/prices">Price</a> to add to the Order.
      *
      * <p>The {@code price} parameter is an alternative to using the {@code product} parameter. If
      * each of your products are sold at a single price, you can set {@code Product.default_price}
@@ -1037,28 +1037,29 @@ public class OrderCreateParams extends ApiRequestParams {
      * Data used to generate a new Price object inline.
      *
      * <p>The {@code price_data} parameter is an alternative to using the {@code product} or {@code
-     * price} parameters. If you create products upfront and configure a {@code
+     * price} parameters. If you create a Product upfront and configure a {@code
      * Product.default_price}, pass the {@code product} parameter when creating a line item. If you
-     * prefer not to define products upfront, or if you charge variable prices, pass the {@code
+     * prefer not to define Products upfront, or if you charge variable prices, pass the {@code
      * price_data} parameter to describe the price for this line item.
      *
-     * <p>Each time you pass {@code price_data} we create a Price for the product. This Price is
+     * <p>Each time you pass {@code price_data} we create a Price for the Product. This Price is
      * hidden in both the Dashboard and API lists and cannot be reused.
      */
     @SerializedName("price_data")
     PriceData priceData;
 
     /**
-     * The ID of a <a href="https://stripe.com/docs/api/products">Product</a> to add to the Order.
+     * The ID of a <a href="https://docs.stripe.com/api/products">Product</a> to add to the Order.
      *
-     * <p>The product must have a {@code default_price} specified. Otherwise, specify the price by
+     * <p>The Product must have a {@code default_price} specified. Otherwise, specify the price by
      * passing the {@code price} or {@code price_data} parameter.
      */
     @SerializedName("product")
     String product;
 
     /**
-     * Defines a Product inline and adds it to the Order.
+     * Defines a <a href="https://docs.stripe.com/api/products">Product</a> inline and adds it to
+     * the Order.
      *
      * <p>{@code product_data} is an alternative to the {@code product} parameter. If you created a
      * Product upfront, use the {@code product} parameter to refer to the existing Product. But if
@@ -1211,7 +1212,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of a <a href="https://stripe.com/docs/api/prices">Price</a> to add to the Order.
+       * The ID of a <a href="https://docs.stripe.com/api/prices">Price</a> to add to the Order.
        *
        * <p>The {@code price} parameter is an alternative to using the {@code product} parameter. If
        * each of your products are sold at a single price, you can set {@code Product.default_price}
@@ -1228,12 +1229,12 @@ public class OrderCreateParams extends ApiRequestParams {
        * Data used to generate a new Price object inline.
        *
        * <p>The {@code price_data} parameter is an alternative to using the {@code product} or
-       * {@code price} parameters. If you create products upfront and configure a {@code
+       * {@code price} parameters. If you create a Product upfront and configure a {@code
        * Product.default_price}, pass the {@code product} parameter when creating a line item. If
-       * you prefer not to define products upfront, or if you charge variable prices, pass the
+       * you prefer not to define Products upfront, or if you charge variable prices, pass the
        * {@code price_data} parameter to describe the price for this line item.
        *
-       * <p>Each time you pass {@code price_data} we create a Price for the product. This Price is
+       * <p>Each time you pass {@code price_data} we create a Price for the Product. This Price is
        * hidden in both the Dashboard and API lists and cannot be reused.
        */
       public Builder setPriceData(OrderCreateParams.LineItem.PriceData priceData) {
@@ -1242,9 +1243,9 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of a <a href="https://stripe.com/docs/api/products">Product</a> to add to the Order.
+       * The ID of a <a href="https://docs.stripe.com/api/products">Product</a> to add to the Order.
        *
-       * <p>The product must have a {@code default_price} specified. Otherwise, specify the price by
+       * <p>The Product must have a {@code default_price} specified. Otherwise, specify the price by
        * passing the {@code price} or {@code price_data} parameter.
        */
       public Builder setProduct(String product) {
@@ -1253,7 +1254,8 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Defines a Product inline and adds it to the Order.
+       * Defines a <a href="https://docs.stripe.com/api/products">Product</a> inline and adds it to
+       * the Order.
        *
        * <p>{@code product_data} is an alternative to the {@code product} parameter. If you created
        * a Product upfront, use the {@code product} parameter to refer to the existing Product. But
@@ -1420,7 +1422,8 @@ public class OrderCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * ID of the product this price belongs to.
+       * ID of the <a href="https://docs.stripe.com/api/products">Product</a> this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> belongs to.
        *
        * <p>Use this to implement a variable-pricing model in your integration. This is required if
        * {@code product_data} is not specified.
@@ -1536,7 +1539,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * ID of the product this price belongs to.
+         * ID of the <a href="https://docs.stripe.com/api/products">Product</a> this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> belongs to.
          *
          * <p>Use this to implement a variable-pricing model in your integration. This is required
          * if {@code product_data} is not specified.
