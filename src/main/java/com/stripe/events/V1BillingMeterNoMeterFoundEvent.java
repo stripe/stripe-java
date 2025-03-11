@@ -5,10 +5,12 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.Event;
 import java.time.Instant;
 import java.util.List;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public final class V1BillingMeterNoMeterFoundEvent extends Event {
   /** Data for the v1.billing.meter.no_meter_found event. */
   @SerializedName("data")
@@ -16,6 +18,7 @@ public final class V1BillingMeterNoMeterFoundEvent extends Event {
 
   @Getter
   @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static final class EventData {
     /** Extra field included in the event's {@code data} when fetched from /v2/events. */
     @SerializedName("developer_message_summary")

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class MeterEventStreamCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> List of meter events to include in the request. */
   @SerializedName("events")
@@ -99,6 +101,7 @@ public class MeterEventStreamCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Event {
     /**
      * <strong>Required.</strong> The name of the meter event. Corresponds with the {@code

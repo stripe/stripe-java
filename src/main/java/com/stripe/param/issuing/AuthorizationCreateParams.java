@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AuthorizationCreateParams extends ApiRequestParams {
   /**
    * The total amount to attempt to authorize. This amount is in the provided currency, or defaults
@@ -380,6 +382,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails {
     /** The ATM withdrawal fee. */
     @SerializedName("atm_fee")
@@ -463,6 +466,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Fleet {
     /**
      * Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary
@@ -607,6 +611,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CardholderPromptData {
       /** Driver ID. */
       @SerializedName("driver_id")
@@ -749,6 +754,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ReportedBreakdown {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -847,6 +853,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Fuel {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -925,6 +932,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class NonFuel {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1001,6 +1009,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Tax {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1139,6 +1148,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Fuel {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1360,6 +1370,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class MerchantData {
     /**
      * A categorization of the seller's type of business. See our <a
@@ -2479,6 +2490,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class NetworkData {
     /** Identifier assigned to the acquirer by the card network. */
     @SerializedName("acquiring_institution_id")
@@ -2548,6 +2560,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class VerificationData {
     /**
      * Whether the cardholder provided an address first line and if it matched the cardholder’s
@@ -2714,6 +2727,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AuthenticationExemption {
       /**
        * <strong>Required.</strong> The entity that requested the exemption, either the acquiring
@@ -2843,6 +2857,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ThreeDSecure {
       /**
        * Map of extra parameters for custom features not available in this client library. The

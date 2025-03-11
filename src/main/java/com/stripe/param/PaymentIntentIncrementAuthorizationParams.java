@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The updated total amount that you intend to collect from the
@@ -256,6 +258,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")
