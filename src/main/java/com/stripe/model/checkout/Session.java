@@ -109,8 +109,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String clientReferenceId;
 
   /**
-   * The client secret of the Session. Use this with <a
-   * href="https://stripe.com/docs/js/custom_checkout/init">initCheckout</a> on your front end.
+   * The client secret of your Checkout Session. Applies to Checkout Sessions with {@code ui_mode:
+   * embedded} or {@code ui_mode: custom}. For {@code ui_mode: embedded}, the client secret is to be
+   * used when initializing Stripe.js embedded checkout. For {@code ui_mode: custom}, use the client
+   * secret with <a href="https://stripe.com/docs/js/custom_checkout/init">initCheckout</a> on your
+   * front end.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -431,10 +434,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String uiMode;
 
   /**
-   * The URL to the Checkout Session. Redirect customers to this URL to take them to Checkout. If
-   * you’re using <a href="https://stripe.com/docs/payments/checkout/custom-domains">Custom
-   * Domains</a>, the URL will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.}
-   * This value is only present when the session is active.
+   * The URL to the Checkout Session. Applies to Checkout Sessions with {@code ui_mode: hosted}.
+   * Redirect customers to this URL to take them to Checkout. If you’re using <a
+   * href="https://stripe.com/docs/payments/checkout/custom-domains">Custom Domains</a>, the URL
+   * will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.} This value is only
+   * present when the session is active.
    */
   @SerializedName("url")
   String url;
