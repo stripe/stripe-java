@@ -105,13 +105,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("period")
   Period period;
 
-  /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+  /** The ID of the price object. */
   @SerializedName("price")
   String price;
 
   /**
    * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-   * inline. One of {@code price} or {@code price_data} is required.
+   * inline.
    */
   @SerializedName("price_data")
   PriceData priceData;
@@ -161,9 +161,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   Long unitAmount;
 
   /**
-   * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at
-   * most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be
-   * set.
+   * The decimal unit amount in cents (or local equivalent) of the charge to be applied to the
+   * upcoming invoice. This {@code unit_amount_decimal} will be multiplied by the quantity to get
+   * the full amount. Passing in a negative {@code unit_amount_decimal} will reduce the {@code
+   * amount_due} on the invoice. Accepts at most 12 decimal places.
    */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
@@ -531,7 +532,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+    /** The ID of the price object. */
     public Builder setPrice(String price) {
       this.price = price;
       return this;
@@ -539,7 +540,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline.
      */
     public Builder setPriceData(InvoiceItemCreateParams.PriceData priceData) {
       this.priceData = priceData;
@@ -627,9 +628,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
-     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
-     * can be set.
+     * The decimal unit amount in cents (or local equivalent) of the charge to be applied to the
+     * upcoming invoice. This {@code unit_amount_decimal} will be multiplied by the quantity to get
+     * the full amount. Passing in a negative {@code unit_amount_decimal} will reduce the {@code
+     * amount_due} on the invoice. Accepts at most 12 decimal places.
      */
     public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
