@@ -11,7 +11,6 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceLineItemUpdateParams;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -35,13 +34,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   /** The amount, in cents (or local equivalent). */
   @SerializedName("amount")
   Long amount;
-
-  /**
-   * The integer amount in cents (or local equivalent) representing the amount for this line item,
-   * excluding all tax and discounts.
-   */
-  @SerializedName("amount_excluding_tax")
-  Long amountExcludingTax;
 
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
@@ -184,13 +176,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    */
   @SerializedName("type")
   String type;
-
-  /**
-   * The amount in cents (or local equivalent) representing the unit amount for this line item,
-   * excluding all tax and discounts.
-   */
-  @SerializedName("unit_amount_excluding_tax")
-  BigDecimal unitAmountExcludingTax;
 
   /** Get ID of expandable {@code invoiceItem} object. */
   public String getInvoiceItem() {
