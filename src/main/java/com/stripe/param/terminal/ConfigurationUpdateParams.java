@@ -280,7 +280,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -330,13 +330,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image to display on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image to display on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;

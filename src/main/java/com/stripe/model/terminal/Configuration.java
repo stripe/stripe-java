@@ -258,7 +258,7 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BbposWiseposE extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
@@ -327,7 +327,7 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StripeS700 extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
@@ -801,7 +801,7 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerifoneP400 extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
