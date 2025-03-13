@@ -2716,6 +2716,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @SerializedName("default_account_tax_ids")
       List<ExpandableField<TaxId>> defaultAccountTaxIds;
 
+      /**
+       * Whether payment methods should be saved when a payment is completed for a one-time invoices
+       * on a hosted invoice page.
+       *
+       * <p>One of {@code always}, {@code never}, or {@code offer}.
+       */
+      @SerializedName("hosted_payment_method_save")
+      String hostedPaymentMethodSave;
+
       /** Get IDs of expandable {@code defaultAccountTaxIds} object list. */
       public List<String> getDefaultAccountTaxIds() {
         return (this.defaultAccountTaxIds != null)
