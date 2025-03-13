@@ -1399,13 +1399,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     CollectionMethod collectionMethod;
 
     /**
-     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
-     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    @SerializedName("coupon")
-    Object coupon;
-
-    /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
      * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
      * currency</a>.
@@ -1567,7 +1560,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         BillingCycleAnchor billingCycleAnchor,
         Object billingThresholds,
         CollectionMethod collectionMethod,
-        Object coupon,
         Object currency,
         Object defaultPaymentMethod,
         Object defaultTaxRates,
@@ -1594,7 +1586,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.billingCycleAnchor = billingCycleAnchor;
       this.billingThresholds = billingThresholds;
       this.collectionMethod = collectionMethod;
-      this.coupon = coupon;
       this.currency = currency;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.defaultTaxRates = defaultTaxRates;
@@ -1633,8 +1624,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       private Object billingThresholds;
 
       private CollectionMethod collectionMethod;
-
-      private Object coupon;
 
       private Object currency;
 
@@ -1685,7 +1674,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.billingCycleAnchor,
             this.billingThresholds,
             this.collectionMethod,
-            this.coupon,
             this.currency,
             this.defaultPaymentMethod,
             this.defaultTaxRates,
@@ -1797,24 +1785,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       public Builder setCollectionMethod(
           SubscriptionScheduleUpdateParams.Phase.CollectionMethod collectionMethod) {
         this.collectionMethod = collectionMethod;
-        return this;
-      }
-
-      /**
-       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
-       */
-      public Builder setCoupon(String coupon) {
-        this.coupon = coupon;
-        return this;
-      }
-
-      /**
-       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
-       */
-      public Builder setCoupon(EmptyParam coupon) {
-        this.coupon = coupon;
         return this;
       }
 

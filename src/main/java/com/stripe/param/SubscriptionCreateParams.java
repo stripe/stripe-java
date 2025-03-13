@@ -91,14 +91,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   CollectionMethod collectionMethod;
 
   /**
-   * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-   * only affect invoices created for that particular subscription. This field has been deprecated
-   * and will be removed in a future API version. Use {@code discounts} instead.
-   */
-  @SerializedName("coupon")
-  String coupon;
-
-  /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
@@ -256,14 +248,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Prebilling prebilling;
 
   /**
-   * The promotion code to apply to this subscription. A promotion code applied to a subscription
-   * will only affect invoices created for that particular subscription. This field has been
-   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-   */
-  @SerializedName("promotion_code")
-  String promotionCode;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
    * the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
@@ -323,7 +307,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Object billingThresholds,
       Long cancelAt,
       CollectionMethod collectionMethod,
-      String coupon,
       String currency,
       String customer,
       Long daysUntilDue,
@@ -343,7 +326,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       PaymentSettings paymentSettings,
       Object pendingInvoiceItemInterval,
       Prebilling prebilling,
-      String promotionCode,
       ProrationBehavior prorationBehavior,
       TransferData transferData,
       Object trialEnd,
@@ -359,7 +341,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.collectionMethod = collectionMethod;
-    this.coupon = coupon;
     this.currency = currency;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
@@ -379,7 +360,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.prebilling = prebilling;
-    this.promotionCode = promotionCode;
     this.prorationBehavior = prorationBehavior;
     this.transferData = transferData;
     this.trialEnd = trialEnd;
@@ -410,8 +390,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Long cancelAt;
 
     private CollectionMethod collectionMethod;
-
-    private String coupon;
 
     private String currency;
 
@@ -451,8 +429,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Prebilling prebilling;
 
-    private String promotionCode;
-
     private ProrationBehavior prorationBehavior;
 
     private TransferData transferData;
@@ -477,7 +453,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.billingThresholds,
           this.cancelAt,
           this.collectionMethod,
-          this.coupon,
           this.currency,
           this.customer,
           this.daysUntilDue,
@@ -497,7 +472,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.paymentSettings,
           this.pendingInvoiceItemInterval,
           this.prebilling,
-          this.promotionCode,
           this.prorationBehavior,
           this.transferData,
           this.trialEnd,
@@ -639,16 +613,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setCollectionMethod(SubscriptionCreateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
-      return this;
-    }
-
-    /**
-     * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-     * only affect invoices created for that particular subscription. This field has been deprecated
-     * and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    public Builder setCoupon(String coupon) {
-      this.coupon = coupon;
       return this;
     }
 
@@ -1031,16 +995,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /** If specified, the invoicing for the given billing cycle iterations will be processed now. */
     public Builder setPrebilling(SubscriptionCreateParams.Prebilling prebilling) {
       this.prebilling = prebilling;
-      return this;
-    }
-
-    /**
-     * The promotion code to apply to this subscription. A promotion code applied to a subscription
-     * will only affect invoices created for that particular subscription. This field has been
-     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    public Builder setPromotionCode(String promotionCode) {
-      this.promotionCode = promotionCode;
       return this;
     }
 

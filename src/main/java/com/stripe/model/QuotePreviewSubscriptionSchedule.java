@@ -793,12 +793,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @SerializedName("collection_method")
     String collectionMethod;
 
-    /** ID of the coupon to use during this phase of the subscription schedule. */
-    @SerializedName("coupon")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Coupon> coupon;
-
     /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
      * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
@@ -917,24 +911,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     /** Settings related to any trials on the subscription during this phase. */
     @SerializedName("trial_settings")
     TrialSettings trialSettings;
-
-    /** Get ID of expandable {@code coupon} object. */
-    public String getCoupon() {
-      return (this.coupon != null) ? this.coupon.getId() : null;
-    }
-
-    public void setCoupon(String id) {
-      this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
-    }
-
-    /** Get expanded {@code coupon}. */
-    public Coupon getCouponObject() {
-      return (this.coupon != null) ? this.coupon.getExpanded() : null;
-    }
-
-    public void setCouponObject(Coupon expandableObject) {
-      this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
-    }
 
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {

@@ -18,13 +18,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
-   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-   */
-  @SerializedName("coupon")
-  String coupon;
-
-  /**
    * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
    */
   @SerializedName("currency")
@@ -276,7 +269,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
   private InvoiceUpcomingLinesParams(
       AutomaticTax automaticTax,
-      String coupon,
       String currency,
       String customer,
       CustomerDetails customerDetails,
@@ -308,7 +300,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       Object subscriptionTrialEnd,
       Boolean subscriptionTrialFromPlan) {
     this.automaticTax = automaticTax;
-    this.coupon = coupon;
     this.currency = currency;
     this.customer = customer;
     this.customerDetails = customerDetails;
@@ -347,8 +338,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
 
   public static class Builder {
     private AutomaticTax automaticTax;
-
-    private String coupon;
 
     private String currency;
 
@@ -414,7 +403,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     public InvoiceUpcomingLinesParams build() {
       return new InvoiceUpcomingLinesParams(
           this.automaticTax,
-          this.coupon,
           this.currency,
           this.customer,
           this.customerDetails,
@@ -450,15 +438,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice preview. */
     public Builder setAutomaticTax(InvoiceUpcomingLinesParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /**
-     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
-     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    public Builder setCoupon(String coupon) {
-      this.coupon = coupon;
       return this;
     }
 
@@ -8287,13 +8266,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
       CollectionMethod collectionMethod;
 
       /**
-       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
-       */
-      @SerializedName("coupon")
-      String coupon;
-
-      /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
        * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
        * currency</a>.
@@ -8456,7 +8428,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
           BillingCycleAnchor billingCycleAnchor,
           Object billingThresholds,
           CollectionMethod collectionMethod,
-          String coupon,
           String currency,
           String defaultPaymentMethod,
           Object defaultTaxRates,
@@ -8483,7 +8454,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         this.billingCycleAnchor = billingCycleAnchor;
         this.billingThresholds = billingThresholds;
         this.collectionMethod = collectionMethod;
-        this.coupon = coupon;
         this.currency = currency;
         this.defaultPaymentMethod = defaultPaymentMethod;
         this.defaultTaxRates = defaultTaxRates;
@@ -8523,8 +8493,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         private Object billingThresholds;
 
         private CollectionMethod collectionMethod;
-
-        private String coupon;
 
         private String currency;
 
@@ -8575,7 +8543,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
               this.billingCycleAnchor,
               this.billingThresholds,
               this.collectionMethod,
-              this.coupon,
               this.currency,
               this.defaultPaymentMethod,
               this.defaultTaxRates,
@@ -8690,16 +8657,6 @@ public class InvoiceUpcomingLinesParams extends ApiRequestParams {
         public Builder setCollectionMethod(
             InvoiceUpcomingLinesParams.ScheduleDetails.Phase.CollectionMethod collectionMethod) {
           this.collectionMethod = collectionMethod;
-          return this;
-        }
-
-        /**
-         * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-         * been deprecated and will be removed in a future API version. Use {@code discounts}
-         * instead.
-         */
-        public Builder setCoupon(String coupon) {
-          this.coupon = coupon;
           return this;
         }
 

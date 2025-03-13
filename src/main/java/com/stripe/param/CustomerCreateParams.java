@@ -29,6 +29,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("cash_balance")
   CashBalance cashBalance;
 
+  /**
+   * If you provide a coupon code, the customer will have a discount applied on all recurring
+   * charges. Charges you create through the API will not have the discount.
+   */
   @SerializedName("coupon")
   String coupon;
 
@@ -293,6 +297,10 @@ public class CustomerCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * If you provide a coupon code, the customer will have a discount applied on all recurring
+     * charges. Charges you create through the API will not have the discount.
+     */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
       return this;

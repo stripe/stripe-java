@@ -293,13 +293,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   String description;
 
   /**
-   * Describes the current discount applied to this invoice, if there is one. Not populated if there
-   * are multiple discounts.
-   */
-  @SerializedName("discount")
-  Discount discount;
-
-  /**
    * The discounts applied to the invoice. Line item discounts are applied before invoice discounts.
    * Use {@code expand[]=discounts} to expand each discount.
    */
@@ -2100,7 +2093,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(customerShipping, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
-    trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(fromInvoice, responseGetter);
     trySetResponseGetter(issuer, responseGetter);
     trySetResponseGetter(lastFinalizationError, responseGetter);
