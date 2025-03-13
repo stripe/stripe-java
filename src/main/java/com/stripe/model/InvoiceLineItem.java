@@ -119,19 +119,11 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("period")
   Period period;
 
-  /** The plan of the subscription, if the line item is a subscription or a proration. */
-  @SerializedName("plan")
-  Plan plan;
-
   /**
    * Contains pretax credit amounts (ex: discount, credit grants, etc) that apply to this line item.
    */
   @SerializedName("pretax_credit_amounts")
   List<InvoiceLineItem.PretaxCreditAmount> pretaxCreditAmounts;
-
-  /** The price of the line item. */
-  @SerializedName("price")
-  Price price;
 
   /** Whether this is a proration. */
   @SerializedName("proration")
@@ -159,14 +151,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<SubscriptionItem> subscriptionItem;
-
-  /** The amount of tax calculated per tax rate for this line item. */
-  @SerializedName("tax_amounts")
-  List<InvoiceLineItem.TaxAmount> taxAmounts;
-
-  /** The tax rates which apply to the line item. */
-  @SerializedName("tax_rates")
-  List<TaxRate> taxRates;
 
   /**
    * A string identifying the type of the source of this line item, either an {@code invoiceitem} or
@@ -605,71 +589,11 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
   }
 
-  /**
-   * For more details about TaxAmount, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class TaxAmount extends StripeObject {
-    /** The amount, in cents (or local equivalent), of the tax. */
-    @SerializedName("amount")
-    Long amount;
-
-    /** Whether this tax amount is inclusive or exclusive. */
-    @SerializedName("inclusive")
-    Boolean inclusive;
-
-    /** The tax rate that was applied to get this tax amount. */
-    @SerializedName("tax_rate")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<TaxRate> taxRate;
-
-    /**
-     * The reasoning behind this tax, for example, if the product is tax exempt. The possible values
-     * for this field may be extended as new tax rules are supported.
-     *
-     * <p>One of {@code customer_exempt}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
-     * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
-     * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
-     * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code standard_rated},
-     * {@code taxable_basis_reduced}, or {@code zero_rated}.
-     */
-    @SerializedName("taxability_reason")
-    String taxabilityReason;
-
-    /** The amount on which tax is calculated, in cents (or local equivalent). */
-    @SerializedName("taxable_amount")
-    Long taxableAmount;
-
-    /** Get ID of expandable {@code taxRate} object. */
-    public String getTaxRate() {
-      return (this.taxRate != null) ? this.taxRate.getId() : null;
-    }
-
-    public void setTaxRate(String id) {
-      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
-    }
-
-    /** Get expanded {@code taxRate}. */
-    public TaxRate getTaxRateObject() {
-      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
-    }
-
-    public void setTaxRateObject(TaxRate expandableObject) {
-      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
-    }
-  }
-
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(invoiceItem, responseGetter);
     trySetResponseGetter(period, responseGetter);
-    trySetResponseGetter(plan, responseGetter);
-    trySetResponseGetter(price, responseGetter);
     trySetResponseGetter(prorationDetails, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(subscriptionItem, responseGetter);
