@@ -113,12 +113,17 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * End of the current period that the subscription has been invoiced for. At the end of this
-   * period, a new invoice will be created.
+   * period, a new invoice will be created. This field is deprecated starting on the {@code
+   * 2025-03-31.basil} version, please use {@code current_period_end} on the items[] field instead
    */
   @SerializedName("current_period_end")
   Long currentPeriodEnd;
 
-  /** Start of the current period that the subscription has been invoiced for. */
+  /**
+   * Start of the current period that the subscription has been invoiced for. This field is
+   * deprecated starting on the {@code 2025-03-31.basil} version, please use {@code
+   * current_period_start} on the items[] field instead
+   */
   @SerializedName("current_period_start")
   Long currentPeriodStart;
 
