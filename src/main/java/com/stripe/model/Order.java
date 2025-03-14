@@ -929,6 +929,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
           String setupFutureUsage;
 
           /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          @SerializedName("target_date")
+          String targetDate;
+
+          /**
            * Bank account verification method.
            *
            * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
@@ -1629,6 +1637,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
            */
           @SerializedName("setup_future_usage")
           String setupFutureUsage;
+
+          /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          @SerializedName("target_date")
+          String targetDate;
 
           /**
            * For more details about MandateOptions, please refer to the <a
