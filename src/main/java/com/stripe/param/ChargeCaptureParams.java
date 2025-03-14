@@ -11,10 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ChargeCaptureParams extends ApiRequestParams {
-  /**
-   * The amount to capture, which must be less than or equal to the original amount. Any additional
-   * amount will be automatically refunded.
-   */
+  /** The amount to capture, which must be less than or equal to the original amount. */
   @SerializedName("amount")
   Long amount;
 
@@ -161,10 +158,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
           this.transferGroup);
     }
 
-    /**
-     * The amount to capture, which must be less than or equal to the original amount. Any
-     * additional amount will be automatically refunded.
-     */
+    /** The amount to capture, which must be less than or equal to the original amount. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;

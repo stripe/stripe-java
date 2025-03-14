@@ -5179,38 +5179,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testInvoicesUpcomingGet() throws StripeException {
-    InvoiceUpcomingParams params =
-        InvoiceUpcomingParams.builder().setCustomer("cus_9utnxg47pWjV1e").build();
-
-    Invoice invoice = Invoice.upcoming(params);
-    assertNotNull(invoice);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v1/invoices/upcoming",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testInvoicesUpcomingGetServices() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.InvoiceUpcomingParams params =
-        com.stripe.param.InvoiceUpcomingParams.builder().setCustomer("cus_9utnxg47pWjV1e").build();
-
-    com.stripe.model.Invoice invoice = client.invoices().upcoming(params);
-    assertNotNull(invoice);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v1/invoices/upcoming",
-        params.toMap(),
-        null);
-  }
-
-  @Test
   public void testInvoicesVoidPost() throws StripeException {
     Invoice resource = Invoice.retrieve("in_xxxxxxxxxxxxx");
 

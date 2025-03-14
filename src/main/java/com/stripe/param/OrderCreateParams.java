@@ -1022,7 +1022,7 @@ public class OrderCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The ID of a <a href="https://stripe.com/docs/api/prices">Price</a> to add to the Order.
+     * The ID of a <a href="https://docs.stripe.com/api/prices">Price</a> to add to the Order.
      *
      * <p>The {@code price} parameter is an alternative to using the {@code product} parameter. If
      * each of your products are sold at a single price, you can set {@code Product.default_price}
@@ -1037,28 +1037,29 @@ public class OrderCreateParams extends ApiRequestParams {
      * Data used to generate a new Price object inline.
      *
      * <p>The {@code price_data} parameter is an alternative to using the {@code product} or {@code
-     * price} parameters. If you create products upfront and configure a {@code
+     * price} parameters. If you create a Product upfront and configure a {@code
      * Product.default_price}, pass the {@code product} parameter when creating a line item. If you
-     * prefer not to define products upfront, or if you charge variable prices, pass the {@code
+     * prefer not to define Products upfront, or if you charge variable prices, pass the {@code
      * price_data} parameter to describe the price for this line item.
      *
-     * <p>Each time you pass {@code price_data} we create a Price for the product. This Price is
+     * <p>Each time you pass {@code price_data} we create a Price for the Product. This Price is
      * hidden in both the Dashboard and API lists and cannot be reused.
      */
     @SerializedName("price_data")
     PriceData priceData;
 
     /**
-     * The ID of a <a href="https://stripe.com/docs/api/products">Product</a> to add to the Order.
+     * The ID of a <a href="https://docs.stripe.com/api/products">Product</a> to add to the Order.
      *
-     * <p>The product must have a {@code default_price} specified. Otherwise, specify the price by
+     * <p>The Product must have a {@code default_price} specified. Otherwise, specify the price by
      * passing the {@code price} or {@code price_data} parameter.
      */
     @SerializedName("product")
     String product;
 
     /**
-     * Defines a Product inline and adds it to the Order.
+     * Defines a <a href="https://docs.stripe.com/api/products">Product</a> inline and adds it to
+     * the Order.
      *
      * <p>{@code product_data} is an alternative to the {@code product} parameter. If you created a
      * Product upfront, use the {@code product} parameter to refer to the existing Product. But if
@@ -1211,7 +1212,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of a <a href="https://stripe.com/docs/api/prices">Price</a> to add to the Order.
+       * The ID of a <a href="https://docs.stripe.com/api/prices">Price</a> to add to the Order.
        *
        * <p>The {@code price} parameter is an alternative to using the {@code product} parameter. If
        * each of your products are sold at a single price, you can set {@code Product.default_price}
@@ -1228,12 +1229,12 @@ public class OrderCreateParams extends ApiRequestParams {
        * Data used to generate a new Price object inline.
        *
        * <p>The {@code price_data} parameter is an alternative to using the {@code product} or
-       * {@code price} parameters. If you create products upfront and configure a {@code
+       * {@code price} parameters. If you create a Product upfront and configure a {@code
        * Product.default_price}, pass the {@code product} parameter when creating a line item. If
-       * you prefer not to define products upfront, or if you charge variable prices, pass the
+       * you prefer not to define Products upfront, or if you charge variable prices, pass the
        * {@code price_data} parameter to describe the price for this line item.
        *
-       * <p>Each time you pass {@code price_data} we create a Price for the product. This Price is
+       * <p>Each time you pass {@code price_data} we create a Price for the Product. This Price is
        * hidden in both the Dashboard and API lists and cannot be reused.
        */
       public Builder setPriceData(OrderCreateParams.LineItem.PriceData priceData) {
@@ -1242,9 +1243,9 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of a <a href="https://stripe.com/docs/api/products">Product</a> to add to the Order.
+       * The ID of a <a href="https://docs.stripe.com/api/products">Product</a> to add to the Order.
        *
-       * <p>The product must have a {@code default_price} specified. Otherwise, specify the price by
+       * <p>The Product must have a {@code default_price} specified. Otherwise, specify the price by
        * passing the {@code price} or {@code price_data} parameter.
        */
       public Builder setProduct(String product) {
@@ -1253,7 +1254,8 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Defines a Product inline and adds it to the Order.
+       * Defines a <a href="https://docs.stripe.com/api/products">Product</a> inline and adds it to
+       * the Order.
        *
        * <p>{@code product_data} is an alternative to the {@code product} parameter. If you created
        * a Product upfront, use the {@code product} parameter to refer to the existing Product. But
@@ -1420,7 +1422,8 @@ public class OrderCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * ID of the product this price belongs to.
+       * ID of the <a href="https://docs.stripe.com/api/products">Product</a> this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> belongs to.
        *
        * <p>Use this to implement a variable-pricing model in your integration. This is required if
        * {@code product_data} is not specified.
@@ -1536,7 +1539,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * ID of the product this price belongs to.
+         * ID of the <a href="https://docs.stripe.com/api/products">Product</a> this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> belongs to.
          *
          * <p>Use this to implement a variable-pricing model in your integration. This is required
          * if {@code product_data} is not specified.
@@ -2787,6 +2791,14 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName("setup_future_usage")
           ApiRequestParams.EnumParam setupFutureUsage;
 
+          /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          @SerializedName("target_date")
+          String targetDate;
+
           /** Bank account verification method. */
           @SerializedName("verification_method")
           VerificationMethod verificationMethod;
@@ -2795,10 +2807,12 @@ public class OrderCreateParams extends ApiRequestParams {
               Map<String, Object> extraParams,
               MandateOptions mandateOptions,
               ApiRequestParams.EnumParam setupFutureUsage,
+              String targetDate,
               VerificationMethod verificationMethod) {
             this.extraParams = extraParams;
             this.mandateOptions = mandateOptions;
             this.setupFutureUsage = setupFutureUsage;
+            this.targetDate = targetDate;
             this.verificationMethod = verificationMethod;
           }
 
@@ -2813,6 +2827,8 @@ public class OrderCreateParams extends ApiRequestParams {
 
             private ApiRequestParams.EnumParam setupFutureUsage;
 
+            private String targetDate;
+
             private VerificationMethod verificationMethod;
 
             /** Finalize and obtain parameter instance from this builder. */
@@ -2821,6 +2837,7 @@ public class OrderCreateParams extends ApiRequestParams {
                   this.extraParams,
                   this.mandateOptions,
                   this.setupFutureUsage,
+                  this.targetDate,
                   this.verificationMethod);
             }
 
@@ -2919,6 +2936,16 @@ public class OrderCreateParams extends ApiRequestParams {
              */
             public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
+              return this;
+            }
+
+            /**
+             * Controls when Stripe will attempt to debit the funds from the customer's account. The
+             * date must be a string in YYYY-MM-DD format. The date must be in the future and
+             * between 3 and 15 calendar days from now.
+             */
+            public Builder setTargetDate(String targetDate) {
+              this.targetDate = targetDate;
               return this;
             }
 
@@ -6326,13 +6353,23 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName("setup_future_usage")
           ApiRequestParams.EnumParam setupFutureUsage;
 
+          /**
+           * Controls when Stripe will attempt to debit the funds from the customer's account. The
+           * date must be a string in YYYY-MM-DD format. The date must be in the future and between
+           * 3 and 15 calendar days from now.
+           */
+          @SerializedName("target_date")
+          String targetDate;
+
           private SepaDebit(
               Map<String, Object> extraParams,
               MandateOptions mandateOptions,
-              ApiRequestParams.EnumParam setupFutureUsage) {
+              ApiRequestParams.EnumParam setupFutureUsage,
+              String targetDate) {
             this.extraParams = extraParams;
             this.mandateOptions = mandateOptions;
             this.setupFutureUsage = setupFutureUsage;
+            this.targetDate = targetDate;
           }
 
           public static Builder builder() {
@@ -6346,10 +6383,12 @@ public class OrderCreateParams extends ApiRequestParams {
 
             private ApiRequestParams.EnumParam setupFutureUsage;
 
+            private String targetDate;
+
             /** Finalize and obtain parameter instance from this builder. */
             public OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit build() {
               return new OrderCreateParams.Payment.Settings.PaymentMethodOptions.SepaDebit(
-                  this.extraParams, this.mandateOptions, this.setupFutureUsage);
+                  this.extraParams, this.mandateOptions, this.setupFutureUsage, this.targetDate);
             }
 
             /**
@@ -6447,6 +6486,16 @@ public class OrderCreateParams extends ApiRequestParams {
              */
             public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
+              return this;
+            }
+
+            /**
+             * Controls when Stripe will attempt to debit the funds from the customer's account. The
+             * date must be a string in YYYY-MM-DD format. The date must be in the future and
+             * between 3 and 15 calendar days from now.
+             */
+            public Builder setTargetDate(String targetDate) {
+              this.targetDate = targetDate;
               return this;
             }
           }
@@ -6790,7 +6839,7 @@ public class OrderCreateParams extends ApiRequestParams {
           @SerializedName("app_id")
           String appId;
 
-          /** <strong>Required.</strong> The client type that the end customer will pay from */
+          /** The client type that the end customer will pay from. */
           @SerializedName("client")
           Client client;
 
@@ -6869,7 +6918,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** <strong>Required.</strong> The client type that the end customer will pay from */
+            /** The client type that the end customer will pay from. */
             public Builder setClient(
                 OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay.Client client) {
               this.client = client;

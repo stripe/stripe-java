@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,14 +10,7 @@ import java.util.Map;
 import lombok.Getter;
 
 @Getter
-public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
-  /**
-   * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-   * that require a payment method domain will not appear in Elements or Embedded Checkout.
-   */
-  @SerializedName("enabled")
-  Boolean enabled;
-
+public class ReaderSucceedInputCollectionParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -31,11 +24,17 @@ public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private PaymentMethodDomainUpdateParams(
-      Boolean enabled, List<String> expand, Map<String, Object> extraParams) {
-    this.enabled = enabled;
+  /** This parameter defines the skip behavior for input collection. */
+  @SerializedName("skip_non_required_inputs")
+  SkipNonRequiredInputs skipNonRequiredInputs;
+
+  private ReaderSucceedInputCollectionParams(
+      List<String> expand,
+      Map<String, Object> extraParams,
+      SkipNonRequiredInputs skipNonRequiredInputs) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.skipNonRequiredInputs = skipNonRequiredInputs;
   }
 
   public static Builder builder() {
@@ -43,30 +42,22 @@ public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Boolean enabled;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    /** Finalize and obtain parameter instance from this builder. */
-    public PaymentMethodDomainUpdateParams build() {
-      return new PaymentMethodDomainUpdateParams(this.enabled, this.expand, this.extraParams);
-    }
+    private SkipNonRequiredInputs skipNonRequiredInputs;
 
-    /**
-     * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-     * that require a payment method domain will not appear in Elements or Embedded Checkout.
-     */
-    public Builder setEnabled(Boolean enabled) {
-      this.enabled = enabled;
-      return this;
+    /** Finalize and obtain parameter instance from this builder. */
+    public ReaderSucceedInputCollectionParams build() {
+      return new ReaderSucceedInputCollectionParams(
+          this.expand, this.extraParams, this.skipNonRequiredInputs);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodDomainUpdateParams#expand} for the field documentation.
+     * ReaderSucceedInputCollectionParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -79,7 +70,7 @@ public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodDomainUpdateParams#expand} for the field documentation.
+     * ReaderSucceedInputCollectionParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -92,7 +83,7 @@ public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentMethodDomainUpdateParams#extraParams} for the field documentation.
+     * ReaderSucceedInputCollectionParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -105,7 +96,7 @@ public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentMethodDomainUpdateParams#extraParams} for the field documentation.
+     * See {@link ReaderSucceedInputCollectionParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -113,6 +104,28 @@ public class PaymentMethodDomainUpdateParams extends ApiRequestParams {
       }
       this.extraParams.putAll(map);
       return this;
+    }
+
+    /** This parameter defines the skip behavior for input collection. */
+    public Builder setSkipNonRequiredInputs(
+        ReaderSucceedInputCollectionParams.SkipNonRequiredInputs skipNonRequiredInputs) {
+      this.skipNonRequiredInputs = skipNonRequiredInputs;
+      return this;
+    }
+  }
+
+  public enum SkipNonRequiredInputs implements ApiRequestParams.EnumParam {
+    @SerializedName("all")
+    ALL("all"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SkipNonRequiredInputs(String value) {
+      this.value = value;
     }
   }
 }

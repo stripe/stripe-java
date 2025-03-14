@@ -87,13 +87,13 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
   @SerializedName("period")
   Period period;
 
-  /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+  /** The ID of the price object. */
   @SerializedName("price")
   Object price;
 
   /**
    * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-   * inline. One of {@code price} or {@code price_data} is required.
+   * inline.
    */
   @SerializedName("price_data")
   PriceData priceData;
@@ -461,13 +461,13 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+    /** The ID of the price object. */
     public Builder setPrice(String price) {
       this.price = price;
       return this;
     }
 
-    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+    /** The ID of the price object. */
     public Builder setPrice(EmptyParam price) {
       this.price = price;
       return this;
@@ -475,7 +475,7 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline.
      */
     public Builder setPriceData(InvoiceLineItemUpdateParams.PriceData priceData) {
       this.priceData = priceData;
@@ -1072,15 +1072,16 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The ID of the product that this price will belong to. One of {@code product} or {@code
-     * product_data} is required.
+     * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+     * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code product} or
+     * {@code product_data} is required.
      */
     @SerializedName("product")
     Object product;
 
     /**
-     * Data used to generate a new product object inline. One of {@code product} or {@code
-     * product_data} is required.
+     * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a> object
+     * inline. One of {@code product} or {@code product_data} is required.
      */
     @SerializedName("product_data")
     ProductData productData;
@@ -1206,8 +1207,9 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the product that this price will belong to. One of {@code product} or {@code
-       * product_data} is required.
+       * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code product}
+       * or {@code product_data} is required.
        */
       public Builder setProduct(String product) {
         this.product = product;
@@ -1215,8 +1217,9 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the product that this price will belong to. One of {@code product} or {@code
-       * product_data} is required.
+       * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code product}
+       * or {@code product_data} is required.
        */
       public Builder setProduct(EmptyParam product) {
         this.product = product;
@@ -1224,8 +1227,8 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new product object inline. One of {@code product} or {@code
-       * product_data} is required.
+       * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+       * object inline. One of {@code product} or {@code product_data} is required.
        */
       public Builder setProductData(InvoiceLineItemUpdateParams.PriceData.ProductData productData) {
         this.productData = productData;

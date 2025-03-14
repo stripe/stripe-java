@@ -23,8 +23,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
-   * <strong>Required.</strong> Please refer to full <a
-   * href="https://stripe.com/docs/api">documentation</a> instead.
+   * <strong>Required.</strong> A token, like the ones returned by <a
+   * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+   * account details (with the options shown below). Please refer to full <a
+   * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
    */
   @SerializedName("external_account")
   Object externalAccount;
@@ -121,8 +123,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
@@ -130,8 +134,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(AccountExternalAccountCreateParams.Card externalAccount) {
       this.externalAccount = externalAccount;
@@ -139,8 +145,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(
         AccountExternalAccountCreateParams.BankAccount externalAccount) {
@@ -149,8 +157,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(
         AccountExternalAccountCreateParams.CardToken externalAccount) {

@@ -39,8 +39,7 @@ public class SessionUpdateParams extends ApiRequestParams {
    * <p>To update an existing line item, specify its {@code id} along with the new values of the
    * fields to update.
    *
-   * <p>To add a new line item, specify a {@code price} and {@code quantity}. We don't currently
-   * support recurring prices.
+   * <p>To add a new line item, specify a {@code price} and {@code quantity}.
    *
    * <p>To remove an existing line item, omit the line item's ID from the retransmitted array.
    *

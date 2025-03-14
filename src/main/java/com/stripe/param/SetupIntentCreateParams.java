@@ -151,6 +151,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   /**
    * If you populate this hash, this SetupIntent generates a {@code single_use} mandate after
    * successful completion.
+   *
+   * <p>Single-use mandates are only valid for the following payment methods: {@code acss_debit},
+   * {@code alipay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code boleto},
+   * {@code ideal}, {@code link}, {@code sepa_debit}, and {@code us_bank_account}.
    */
   @SerializedName("single_use")
   SingleUse singleUse;
@@ -558,6 +562,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     /**
      * If you populate this hash, this SetupIntent generates a {@code single_use} mandate after
      * successful completion.
+     *
+     * <p>Single-use mandates are only valid for the following payment methods: {@code acss_debit},
+     * {@code alipay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact}, {@code
+     * boleto}, {@code ideal}, {@code link}, {@code sepa_debit}, and {@code us_bank_account}.
      */
     public Builder setSingleUse(SetupIntentCreateParams.SingleUse singleUse) {
       this.singleUse = singleUse;

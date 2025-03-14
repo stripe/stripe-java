@@ -272,13 +272,13 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     @SerializedName("period")
     Period period;
 
-    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+    /** The ID of the price object. */
     @SerializedName("price")
     String price;
 
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline.
      */
     @SerializedName("price_data")
     PriceData priceData;
@@ -612,7 +612,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
+      /** The ID of the price object. */
       public Builder setPrice(String price) {
         this.price = price;
         return this;
@@ -620,7 +620,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
 
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline.
        */
       public Builder setPriceData(InvoiceAddLinesParams.Line.PriceData priceData) {
         this.priceData = priceData;
@@ -1206,15 +1206,16 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The ID of the product that this price will belong to. One of {@code product} or {@code
-       * product_data} is required.
+       * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code product}
+       * or {@code product_data} is required.
        */
       @SerializedName("product")
       String product;
 
       /**
-       * Data used to generate a new product object inline. One of {@code product} or {@code
-       * product_data} is required.
+       * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+       * object inline. One of {@code product} or {@code product_data} is required.
        */
       @SerializedName("product_data")
       ProductData productData;
@@ -1332,8 +1333,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         }
 
         /**
-         * The ID of the product that this price will belong to. One of {@code product} or {@code
-         * product_data} is required.
+         * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code
+         * product} or {@code product_data} is required.
          */
         public Builder setProduct(String product) {
           this.product = product;
@@ -1341,8 +1343,8 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         }
 
         /**
-         * Data used to generate a new product object inline. One of {@code product} or {@code
-         * product_data} is required.
+         * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+         * object inline. One of {@code product} or {@code product_data} is required.
          */
         public Builder setProductData(
             InvoiceAddLinesParams.Line.PriceData.ProductData productData) {

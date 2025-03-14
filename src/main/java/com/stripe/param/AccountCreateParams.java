@@ -12842,6 +12842,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Settings specific to the account’s use of Invoices. */
+    @SerializedName("invoices")
+    Invoices invoices;
+
     /** Settings that apply across payment methods for charging on the account. */
     @SerializedName("payments")
     Payments payments;
@@ -12866,6 +12870,7 @@ public class AccountCreateParams extends ApiRequestParams {
         CardIssuing cardIssuing,
         CardPayments cardPayments,
         Map<String, Object> extraParams,
+        Invoices invoices,
         Payments payments,
         Payouts payouts,
         TaxForms taxForms,
@@ -12877,6 +12882,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.cardIssuing = cardIssuing;
       this.cardPayments = cardPayments;
       this.extraParams = extraParams;
+      this.invoices = invoices;
       this.payments = payments;
       this.payouts = payouts;
       this.taxForms = taxForms;
@@ -12902,6 +12908,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Invoices invoices;
+
       private Payments payments;
 
       private Payouts payouts;
@@ -12920,6 +12928,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.cardIssuing,
             this.cardPayments,
             this.extraParams,
+            this.invoices,
             this.payments,
             this.payouts,
             this.taxForms,
@@ -12990,6 +12999,12 @@ public class AccountCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Settings specific to the account’s use of Invoices. */
+      public Builder setInvoices(AccountCreateParams.Settings.Invoices invoices) {
+        this.invoices = invoices;
         return this;
       }
 
@@ -13933,6 +13948,103 @@ public class AccountCreateParams extends ApiRequestParams {
             this.extraParams.putAll(map);
             return this;
           }
+        }
+      }
+    }
+
+    @Getter
+    public static class Invoices {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Whether payment methods should be saved when a payment is completed for a one-time invoices
+       * on a hosted invoice page.
+       */
+      @SerializedName("hosted_payment_method_save")
+      HostedPaymentMethodSave hostedPaymentMethodSave;
+
+      private Invoices(
+          Map<String, Object> extraParams, HostedPaymentMethodSave hostedPaymentMethodSave) {
+        this.extraParams = extraParams;
+        this.hostedPaymentMethodSave = hostedPaymentMethodSave;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private HostedPaymentMethodSave hostedPaymentMethodSave;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Settings.Invoices build() {
+          return new AccountCreateParams.Settings.Invoices(
+              this.extraParams, this.hostedPaymentMethodSave);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.Invoices#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.Invoices#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Whether payment methods should be saved when a payment is completed for a one-time
+         * invoices on a hosted invoice page.
+         */
+        public Builder setHostedPaymentMethodSave(
+            AccountCreateParams.Settings.Invoices.HostedPaymentMethodSave hostedPaymentMethodSave) {
+          this.hostedPaymentMethodSave = hostedPaymentMethodSave;
+          return this;
+        }
+      }
+
+      public enum HostedPaymentMethodSave implements ApiRequestParams.EnumParam {
+        @SerializedName("always")
+        ALWAYS("always"),
+
+        @SerializedName("never")
+        NEVER("never"),
+
+        @SerializedName("offer")
+        OFFER("offer");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        HostedPaymentMethodSave(String value) {
+          this.value = value;
         }
       }
     }

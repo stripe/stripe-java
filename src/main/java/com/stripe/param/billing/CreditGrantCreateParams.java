@@ -15,7 +15,11 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Amount amount;
 
-  /** <strong>Required.</strong> Configuration specifying what this credit grant applies to. */
+  /**
+   * <strong>Required.</strong> Configuration specifying what this credit grant applies to. We
+   * currently only support {@code metered} prices that have a <a
+   * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
+   */
   @SerializedName("applicability_config")
   ApplicabilityConfig applicabilityConfig;
 
@@ -64,6 +68,13 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("name")
   String name;
 
+  /**
+   * The desired priority for applying this credit grant. If not specified, it will be set to the
+   * default value of 50. The highest priority is 0 and the lowest is 100.
+   */
+  @SerializedName("priority")
+  Long priority;
+
   private CreditGrantCreateParams(
       Amount amount,
       ApplicabilityConfig applicabilityConfig,
@@ -74,7 +85,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       Long expiresAt,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String name) {
+      String name,
+      Long priority) {
     this.amount = amount;
     this.applicabilityConfig = applicabilityConfig;
     this.category = category;
@@ -85,6 +97,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.name = name;
+    this.priority = priority;
   }
 
   public static Builder builder() {
@@ -112,6 +125,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
     private String name;
 
+    private Long priority;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CreditGrantCreateParams build() {
       return new CreditGrantCreateParams(
@@ -124,7 +139,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
           this.expiresAt,
           this.extraParams,
           this.metadata,
-          this.name);
+          this.name,
+          this.priority);
     }
 
     /** <strong>Required.</strong> Amount of this credit grant. */
@@ -133,7 +149,11 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Configuration specifying what this credit grant applies to. */
+    /**
+     * <strong>Required.</strong> Configuration specifying what this credit grant applies to. We
+     * currently only support {@code metered} prices that have a <a
+     * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
+     */
     public Builder setApplicabilityConfig(
         CreditGrantCreateParams.ApplicabilityConfig applicabilityConfig) {
       this.applicabilityConfig = applicabilityConfig;
@@ -250,6 +270,15 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     /** A descriptive name shown in the Dashboard. */
     public Builder setName(String name) {
       this.name = name;
+      return this;
+    }
+
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    public Builder setPriority(Long priority) {
+      this.priority = priority;
       return this;
     }
   }
@@ -528,15 +557,15 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The price type that credit grants can apply to. We currently
-       * only support the {@code metered} price type.
+       * The price type that credit grants can apply to. We currently only support the {@code
+       * metered} price type. Cannot be used in combination with {@code prices}.
        */
       @SerializedName("price_type")
       PriceType priceType;
 
       /**
        * A list of prices that the credit grant can apply to. We currently only support the {@code
-       * metered} prices.
+       * metered} prices. Cannot be used in combination with {@code price_type}.
        */
       @SerializedName("prices")
       List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
@@ -596,8 +625,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The price type that credit grants can apply to. We currently
-         * only support the {@code metered} price type.
+         * The price type that credit grants can apply to. We currently only support the {@code
+         * metered} price type. Cannot be used in combination with {@code prices}.
          */
         public Builder setPriceType(
             CreditGrantCreateParams.ApplicabilityConfig.Scope.PriceType priceType) {

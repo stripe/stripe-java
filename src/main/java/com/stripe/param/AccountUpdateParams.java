@@ -14043,9 +14043,20 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Invoices(Object defaultAccountTaxIds, Map<String, Object> extraParams) {
+      /**
+       * Whether payment methods should be saved when a payment is completed for a one-time invoices
+       * on a hosted invoice page.
+       */
+      @SerializedName("hosted_payment_method_save")
+      HostedPaymentMethodSave hostedPaymentMethodSave;
+
+      private Invoices(
+          Object defaultAccountTaxIds,
+          Map<String, Object> extraParams,
+          HostedPaymentMethodSave hostedPaymentMethodSave) {
         this.defaultAccountTaxIds = defaultAccountTaxIds;
         this.extraParams = extraParams;
+        this.hostedPaymentMethodSave = hostedPaymentMethodSave;
       }
 
       public static Builder builder() {
@@ -14057,10 +14068,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private HostedPaymentMethodSave hostedPaymentMethodSave;
+
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Settings.Invoices build() {
           return new AccountUpdateParams.Settings.Invoices(
-              this.defaultAccountTaxIds, this.extraParams);
+              this.defaultAccountTaxIds, this.extraParams, this.hostedPaymentMethodSave);
         }
 
         /**
@@ -14139,6 +14152,34 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * Whether payment methods should be saved when a payment is completed for a one-time
+         * invoices on a hosted invoice page.
+         */
+        public Builder setHostedPaymentMethodSave(
+            AccountUpdateParams.Settings.Invoices.HostedPaymentMethodSave hostedPaymentMethodSave) {
+          this.hostedPaymentMethodSave = hostedPaymentMethodSave;
+          return this;
+        }
+      }
+
+      public enum HostedPaymentMethodSave implements ApiRequestParams.EnumParam {
+        @SerializedName("always")
+        ALWAYS("always"),
+
+        @SerializedName("never")
+        NEVER("never"),
+
+        @SerializedName("offer")
+        OFFER("offer");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        HostedPaymentMethodSave(String value) {
+          this.value = value;
         }
       }
     }

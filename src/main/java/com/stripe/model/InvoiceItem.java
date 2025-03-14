@@ -14,7 +14,6 @@ import com.stripe.param.InvoiceItemCreateParams;
 import com.stripe.param.InvoiceItemListParams;
 import com.stripe.param.InvoiceItemRetrieveParams;
 import com.stripe.param.InvoiceItemUpdateParams;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -134,17 +133,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   Period period;
 
   /**
-   * If the invoice item is a proration, the plan of the subscription that the proration was
-   * computed for.
-   */
-  @SerializedName("plan")
-  Plan plan;
-
-  /** The price of the invoice item. */
-  @SerializedName("price")
-  Price price;
-
-  /**
    * Whether the invoice item was created automatically as a proration adjustment when the customer
    * switched plans.
    */
@@ -180,14 +168,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TestClock> testClock;
-
-  /** Unit amount (in the {@code currency} specified) of the invoice item. */
-  @SerializedName("unit_amount")
-  Long unitAmount;
-
-  /** Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places. */
-  @SerializedName("unit_amount_decimal")
-  BigDecimal unitAmountDecimal;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -583,8 +563,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(period, responseGetter);
-    trySetResponseGetter(plan, responseGetter);
-    trySetResponseGetter(price, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }

@@ -18,13 +18,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
-   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-   */
-  @SerializedName("coupon")
-  String coupon;
-
-  /**
    * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
    */
   @SerializedName("currency")
@@ -142,8 +135,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}. This field has been deprecated and will be
-   * removed in a future API version. Use {@code subscription_details.cancel_at_period_end} instead.
+   * current_period_end}). Defaults to {@code false}. This param is deprecated starting the {@code
+   * 2025-03-31.basil} version, please use {@code cancel_at} instead. This field has been deprecated
+   * and will be removed in a future API version. Use {@code
+   * subscription_details.cancel_at_period_end} instead.
    */
   @SerializedName("subscription_cancel_at_period_end")
   Boolean subscriptionCancelAtPeriodEnd;
@@ -249,7 +244,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   private InvoiceUpcomingParams(
       AutomaticTax automaticTax,
-      String coupon,
       String currency,
       String customer,
       CustomerDetails customerDetails,
@@ -278,7 +272,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Object subscriptionTrialEnd,
       Boolean subscriptionTrialFromPlan) {
     this.automaticTax = automaticTax;
-    this.coupon = coupon;
     this.currency = currency;
     this.customer = customer;
     this.customerDetails = customerDetails;
@@ -314,8 +307,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   public static class Builder {
     private AutomaticTax automaticTax;
-
-    private String coupon;
 
     private String currency;
 
@@ -375,7 +366,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     public InvoiceUpcomingParams build() {
       return new InvoiceUpcomingParams(
           this.automaticTax,
-          this.coupon,
           this.currency,
           this.customer,
           this.customerDetails,
@@ -408,15 +398,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice preview. */
     public Builder setAutomaticTax(InvoiceUpcomingParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /**
-     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
-     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    public Builder setCoupon(String coupon) {
-      this.coupon = coupon;
       return this;
     }
 
@@ -702,9 +683,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}. This field has been deprecated and will be
-     * removed in a future API version. Use {@code subscription_details.cancel_at_period_end}
-     * instead.
+     * current_period_end}). Defaults to {@code false}. This param is deprecated starting the {@code
+     * 2025-03-31.basil} version, please use {@code cancel_at} instead. This field has been
+     * deprecated and will be removed in a future API version. Use {@code
+     * subscription_details.cancel_at_period_end} instead.
      */
     public Builder setSubscriptionCancelAtPeriodEnd(Boolean subscriptionCancelAtPeriodEnd) {
       this.subscriptionCancelAtPeriodEnd = subscriptionCancelAtPeriodEnd;
@@ -8168,13 +8150,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       CollectionMethod collectionMethod;
 
       /**
-       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
-       */
-      @SerializedName("coupon")
-      String coupon;
-
-      /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
        * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
        * currency</a>.
@@ -8337,7 +8312,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           BillingCycleAnchor billingCycleAnchor,
           Object billingThresholds,
           CollectionMethod collectionMethod,
-          String coupon,
           String currency,
           String defaultPaymentMethod,
           Object defaultTaxRates,
@@ -8364,7 +8338,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         this.billingCycleAnchor = billingCycleAnchor;
         this.billingThresholds = billingThresholds;
         this.collectionMethod = collectionMethod;
-        this.coupon = coupon;
         this.currency = currency;
         this.defaultPaymentMethod = defaultPaymentMethod;
         this.defaultTaxRates = defaultTaxRates;
@@ -8403,8 +8376,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         private Object billingThresholds;
 
         private CollectionMethod collectionMethod;
-
-        private String coupon;
 
         private String currency;
 
@@ -8455,7 +8426,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
               this.billingCycleAnchor,
               this.billingThresholds,
               this.collectionMethod,
-              this.coupon,
               this.currency,
               this.defaultPaymentMethod,
               this.defaultTaxRates,
@@ -8569,16 +8539,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         public Builder setCollectionMethod(
             InvoiceUpcomingParams.ScheduleDetails.Phase.CollectionMethod collectionMethod) {
           this.collectionMethod = collectionMethod;
-          return this;
-        }
-
-        /**
-         * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-         * been deprecated and will be removed in a future API version. Use {@code discounts}
-         * instead.
-         */
-        public Builder setCoupon(String coupon) {
-          this.coupon = coupon;
           return this;
         }
 
@@ -12943,7 +12903,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
+     * current_period_end}). Defaults to {@code false}. This param is deprecated starting the {@code
+     * 2025-03-31.basil} version, please use {@code cancel_at} instead.
      */
     @SerializedName("cancel_at_period_end")
     Boolean cancelAtPeriodEnd;
@@ -13145,7 +13106,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       /**
        * Indicate whether this subscription should cancel at the end of the current period ({@code
-       * current_period_end}). Defaults to {@code false}.
+       * current_period_end}). Defaults to {@code false}. This param is deprecated starting the
+       * {@code 2025-03-31.basil} version, please use {@code cancel_at} instead.
        */
       public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
         this.cancelAtPeriodEnd = cancelAtPeriodEnd;
