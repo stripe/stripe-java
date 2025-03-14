@@ -28,7 +28,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
-   * collected will be capped at the total payment amount. For more information, see the
+   * collected will be capped at the total amount captured. For more information, see the
    * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
@@ -532,7 +532,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
-     * application fee collected will be capped at the total payment amount. For more information,
+     * application fee collected will be capped at the total amount captured. For more information,
      * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
      * for connected accounts</a>.
      */
