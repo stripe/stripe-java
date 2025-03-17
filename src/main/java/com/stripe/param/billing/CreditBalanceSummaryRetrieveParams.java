@@ -236,8 +236,8 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The price type that credit grants can apply to. We currently
-       * only support the {@code metered} price type.
+       * The price type that credit grants can apply to. We currently only support the {@code
+       * metered} price type.
        */
       @SerializedName("price_type")
       PriceType priceType;
@@ -304,8 +304,8 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The price type that credit grants can apply to. We currently
-         * only support the {@code metered} price type.
+         * The price type that credit grants can apply to. We currently only support the {@code
+         * metered} price type.
          */
         public Builder setPriceType(
             CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.PriceType priceType) {
