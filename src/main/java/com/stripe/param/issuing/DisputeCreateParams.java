@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class DisputeCreateParams extends ApiRequestParams {
   /**
    * The dispute amount in the card's currency and in the <a
@@ -216,6 +218,7 @@ public class DisputeCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Evidence {
     /** Evidence provided when {@code reason} is 'canceled'. */
     @SerializedName("canceled")
@@ -464,6 +467,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Canceled {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -774,6 +778,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Duplicate {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -995,6 +1000,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Fraudulent {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -1101,6 +1107,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MerchandiseNotAsDescribed {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -1311,6 +1318,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class NoValidAuthorization {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -1417,6 +1425,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class NotReceived {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -1606,6 +1615,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Other {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -1773,6 +1783,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ServiceNotAsDescribed {
       /**
        * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
@@ -1980,6 +1991,7 @@ public class DisputeCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Treasury {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

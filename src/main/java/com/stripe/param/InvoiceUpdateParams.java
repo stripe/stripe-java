@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class InvoiceUpdateParams extends ApiRequestParams {
   /** The account tax IDs associated with the invoice. Only editable when the invoice is a draft. */
   @SerializedName("account_tax_ids")
@@ -958,6 +960,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
@@ -1056,6 +1059,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Liability {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -1162,6 +1166,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomField {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1265,6 +1270,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -1379,6 +1385,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Issuer {
     /** The connected account being referenced when {@code type} is {@code account}. */
     @SerializedName("account")
@@ -1481,6 +1488,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentSettings {
     /**
      * ID of the mandate to be used for this invoice. It must correspond to the payment method used
@@ -1662,6 +1670,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethodOptions {
       /**
        * If paying by {@code acss_debit}, this sub-hash contains details about the Canadian
@@ -1937,6 +1946,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AcssDebit {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2030,6 +2040,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -2142,6 +2153,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Bancontact {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2245,6 +2257,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Card {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2367,6 +2380,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Installments {
           /**
            * Setting to true enables installments for this invoice. Setting to false will prevent
@@ -2468,6 +2482,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Plan {
             /**
              * For {@code fixed_count} installment plans, this is required. It represents the number
@@ -2636,6 +2651,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CustomerBalance {
         /**
          * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
@@ -2746,6 +2762,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class BankTransfer {
           /** Configuration for eu_bank_transfer funding type. */
           @SerializedName("eu_bank_transfer")
@@ -2856,6 +2873,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class EuBankTransfer {
             /**
              * <strong>Required.</strong> The desired country code of the bank account information.
@@ -2952,6 +2970,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Konbini {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3013,6 +3032,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3074,6 +3094,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class UsBankAccount {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3169,6 +3190,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class FinancialConnections {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -3366,6 +3388,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Filters {
             /**
              * The account subcategories to use to filter for selectable accounts. Valid
@@ -3677,6 +3700,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Rendering {
     /**
      * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs. One
@@ -3823,6 +3847,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pdf {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3935,6 +3960,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -4024,6 +4050,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingRateData {
       /**
        * The estimated range for how long shipping will take, meant to be displayable to the
@@ -4264,6 +4291,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DeliveryEstimate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4359,6 +4387,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Maximum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4473,6 +4502,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Minimum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4588,6 +4618,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class FixedAmount {
         /**
          * <strong>Required.</strong> A non-negative integer in cents representing how much to
@@ -4758,6 +4789,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class CurrencyOption {
           /**
            * <strong>Required.</strong> A non-negative integer in cents representing how much to
@@ -4913,6 +4945,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingDetails {
     /** <strong>Required.</strong> Shipping address */
     @SerializedName("address")
@@ -5020,6 +5053,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -5215,6 +5249,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /**
      * The amount that will be transferred automatically when the invoice is paid. If no amount is

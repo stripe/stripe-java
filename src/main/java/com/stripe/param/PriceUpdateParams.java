@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PriceUpdateParams extends ApiRequestParams {
   /** Whether the price can be used for new purchases. Defaults to {@code true}. */
   @SerializedName("active")
@@ -345,6 +347,7 @@ public class PriceUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CurrencyOption {
     /**
      * When set, provides configuration for the amount to be adjusted by the customer during
@@ -544,6 +547,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomUnitAmount {
       /**
        * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
@@ -671,6 +675,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Tier {
       /**
        * Map of extra parameters for custom features not available in this client library. The

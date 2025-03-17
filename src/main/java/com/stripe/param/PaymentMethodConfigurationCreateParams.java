@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   /**
    * Canadian pre-authorized debit payments, check this <a
@@ -1203,6 +1205,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AcssDebit {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -1273,6 +1276,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1367,6 +1371,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Affirm {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -1437,6 +1442,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1530,6 +1536,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AfterpayClearpay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -1602,6 +1609,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1696,6 +1704,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Alipay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -1766,6 +1775,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1859,6 +1869,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Alma {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -1929,6 +1940,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2022,6 +2034,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AmazonPay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -2092,6 +2105,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2186,6 +2200,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ApplePay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -2256,6 +2271,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2350,6 +2366,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ApplePayLater {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -2422,6 +2439,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2516,6 +2534,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AuBecsDebit {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -2587,6 +2606,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2681,6 +2701,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BacsDebit {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -2751,6 +2772,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2845,6 +2867,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Bancontact {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -2915,6 +2938,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3009,6 +3033,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Blik {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -3079,6 +3104,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3172,6 +3198,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Boleto {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -3242,6 +3269,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3335,6 +3363,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Card {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -3405,6 +3434,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3498,6 +3528,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CartesBancaires {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -3570,6 +3601,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3664,6 +3696,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Cashapp {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -3734,6 +3767,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3828,6 +3862,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerBalance {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -3900,6 +3935,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3994,6 +4030,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Eps {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -4064,6 +4101,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4155,6 +4193,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Fpx {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -4225,6 +4264,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4316,6 +4356,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Giropay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -4386,6 +4427,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4480,6 +4522,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class GooglePay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -4550,6 +4593,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4644,6 +4688,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Grabpay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -4714,6 +4759,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4808,6 +4854,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Ideal {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -4878,6 +4925,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4971,6 +5019,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Jcb {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -5041,6 +5090,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5132,6 +5182,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Klarna {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -5202,6 +5253,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5295,6 +5347,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Konbini {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -5365,6 +5418,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5459,6 +5513,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Link {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -5529,6 +5584,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5622,6 +5678,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Mobilepay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -5692,6 +5749,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5786,6 +5844,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Multibanco {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -5856,6 +5915,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5950,6 +6010,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Oxxo {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -6020,6 +6081,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6113,6 +6175,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class P24 {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -6183,6 +6246,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6274,6 +6338,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PayByBank {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -6344,6 +6409,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6438,6 +6504,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Paynow {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -6508,6 +6575,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6601,6 +6669,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Paypal {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -6671,6 +6740,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6764,6 +6834,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Promptpay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -6834,6 +6905,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6928,6 +7000,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class RevolutPay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -6998,6 +7071,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7092,6 +7166,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SepaDebit {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -7162,6 +7237,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7256,6 +7332,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Sofort {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -7326,6 +7403,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7419,6 +7497,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Swish {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -7489,6 +7568,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7582,6 +7662,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Twint {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -7652,6 +7733,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7745,6 +7827,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class UsBankAccount {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -7817,6 +7900,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7911,6 +7995,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class WechatPay {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -7981,6 +8066,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8075,6 +8161,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Zip {
     /** Whether or not the payment method should be displayed. */
     @SerializedName("display_preference")
@@ -8145,6 +8232,7 @@ public class PaymentMethodConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DisplayPreference {
       /**
        * Map of extra parameters for custom features not available in this client library. The

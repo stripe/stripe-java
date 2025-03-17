@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class TokenCreateParams extends ApiRequestParams {
   /** Information for the account this token represents. */
   @SerializedName("account")
@@ -239,6 +241,7 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Account {
     /** The business type. */
     @SerializedName("business_type")
@@ -365,6 +368,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Company {
       /** The company's primary address. */
       @SerializedName("address")
@@ -857,6 +861,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -1013,6 +1018,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AddressKana {
         /** City or ward. */
         @SerializedName("city")
@@ -1184,6 +1190,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AddressKanji {
         /** City or ward. */
         @SerializedName("city")
@@ -1355,6 +1362,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DirectorshipDeclaration {
         /** The Unix timestamp marking when the directorship declaration attestation was made. */
         @SerializedName("date")
@@ -1460,6 +1468,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class OwnershipDeclaration {
         /** The Unix timestamp marking when the beneficial owner attestation was made. */
         @SerializedName("date")
@@ -1559,6 +1568,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Verification {
         /** A document verifying the business. */
         @SerializedName("document")
@@ -1631,6 +1641,7 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Document {
           /**
            * The back of a document returned by a <a
@@ -1838,6 +1849,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Individual {
       /** The individual's primary address. */
       @SerializedName("address")
@@ -2372,6 +2384,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -2528,6 +2541,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AddressKana {
         /** City or ward. */
         @SerializedName("city")
@@ -2699,6 +2713,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AddressKanji {
         /** City or ward. */
         @SerializedName("city")
@@ -2870,6 +2885,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Dob {
         /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         @SerializedName("day")
@@ -2968,6 +2984,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class RegisteredAddress {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -3124,6 +3141,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Relationship {
         /**
          * Whether the person is a director of the account's legal entity. Directors are typically
@@ -3279,6 +3297,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Verification {
         /**
          * A document showing address, either a passport, local ID card, or utility bill from a
@@ -3375,6 +3394,7 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class AdditionalDocument {
           /**
            * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -3484,6 +3504,7 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Document {
           /**
            * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -3632,6 +3653,7 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BankAccount {
     /**
      * The name of the person or business that owns the bank account. This field is required when
@@ -3902,6 +3924,7 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Card {
     /** City / District / Suburb / Town / Village. */
     @SerializedName("address_city")
@@ -4166,6 +4189,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Networks {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4261,6 +4285,7 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CvcUpdate {
     /** <strong>Required.</strong> The CVC value, in string form. */
     @SerializedName("cvc")
@@ -4329,6 +4354,7 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Person {
     /**
      * Details on the legal guardian's or authorizer's acceptance of the required Stripe agreements.
@@ -4916,6 +4942,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AdditionalTosAcceptances {
       /** Details on the legal guardian's acceptance of the main Stripe service agreement. */
       @SerializedName("account")
@@ -4987,6 +5014,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Account {
         /**
          * The Unix timestamp marking when the account representative accepted the service
@@ -5109,6 +5137,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -5264,6 +5293,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -5434,6 +5464,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -5604,6 +5635,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Dob {
       /** <strong>Required.</strong> The day of birth, between 1 and 31. */
       @SerializedName("day")
@@ -5699,6 +5731,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Documents {
       /**
        * One or more documents that demonstrate proof that this person is authorized to represent
@@ -5814,6 +5847,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CompanyAuthorization {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5912,6 +5946,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Passport {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -6007,6 +6042,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Visa {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -6103,6 +6139,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class RegisteredAddress {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -6258,6 +6295,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Relationship {
       /** Whether the person is the authorizer of the account's representative. */
       @SerializedName("authorizer")
@@ -6469,6 +6507,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Verification {
       /**
        * A document showing address, either a passport, local ID card, or utility bill from a
@@ -6562,6 +6601,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AdditionalDocument {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -6667,6 +6707,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -6774,6 +6815,7 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Pii {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

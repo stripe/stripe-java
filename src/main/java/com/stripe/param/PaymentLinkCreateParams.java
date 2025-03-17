@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentLinkCreateParams extends ApiRequestParams {
   /** Behavior after the purchase is complete. */
   @SerializedName("after_completion")
@@ -729,6 +731,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AfterCompletion {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -835,6 +838,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class HostedConfirmation {
       /** A custom message to display to the customer after the purchase is complete. */
       @SerializedName("custom_message")
@@ -906,6 +910,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Redirect {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1004,6 +1009,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Set to {@code true} to <a
@@ -1107,6 +1113,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Liability {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -1207,6 +1214,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ConsentCollection {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1337,6 +1345,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethodReuseAgreement {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1468,6 +1477,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomField {
     /** Configuration for {@code type=dropdown} fields. */
     @SerializedName("dropdown")
@@ -1641,6 +1651,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1736,6 +1747,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Option {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1836,6 +1848,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Label {
       /**
        * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
@@ -1938,6 +1951,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Numeric {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2022,6 +2036,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Text {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2125,6 +2140,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomText {
     /** Custom text that should be displayed after the payment confirmation button. */
     @SerializedName("after_submit")
@@ -2275,6 +2291,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AfterSubmit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2345,6 +2362,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingAddress {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2416,6 +2434,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Submit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2486,6 +2505,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TermsOfServiceAcceptance {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2558,6 +2578,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class InvoiceCreation {
     /** <strong>Required.</strong> Whether the feature is enabled */
     @SerializedName("enabled")
@@ -2642,6 +2663,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceData {
       /** The account tax IDs associated with the invoice. */
       @SerializedName("account_tax_ids")
@@ -2951,6 +2973,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CustomField {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3049,6 +3072,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -3150,6 +3174,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class RenderingOptions {
         /**
          * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
@@ -3268,6 +3293,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
     /**
      * When set, provides configuration for this item’s quantity to be adjusted by the customer
@@ -3381,6 +3407,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AdjustableQuantity {
       /**
        * <strong>Required.</strong> Set to true if the quantity can be adjusted to any non-negative
@@ -3498,6 +3525,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentIntentData {
     /** Controls when the funds will be captured from the customer's account. */
     @SerializedName("capture_method")
@@ -3800,6 +3828,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PhoneNumberCollection {
     /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
     @SerializedName("enabled")
@@ -3869,6 +3898,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Restrictions {
     /**
      * <strong>Required.</strong> Configuration for the {@code completed_sessions} restriction type.
@@ -3942,6 +3972,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompletedSessions {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4020,6 +4051,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingAddressCollection {
     /**
      * <strong>Required.</strong> An array of two-letter ISO country codes representing which
@@ -4843,6 +4875,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingOption {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -4911,6 +4944,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData {
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
@@ -5085,6 +5119,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceSettings {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5162,6 +5197,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -5266,6 +5302,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TrialSettings {
       /**
        * <strong>Required.</strong> Defines how the subscription should behave when the user's free
@@ -5343,6 +5380,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5447,6 +5485,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TaxIdCollection {
     /**
      * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
@@ -5551,6 +5590,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ConfigurationCreateParams extends ApiRequestParams {
   /** The business information shown to customers in the portal. */
   @SerializedName("business_profile")
@@ -232,6 +234,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BusinessProfile {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -338,6 +341,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Features {
     /** Information about updating the customer details in the portal. */
     @SerializedName("customer_update")
@@ -474,6 +478,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomerUpdate {
       /**
        * The types of customer updates that are supported. When empty, customers are not updateable.
@@ -639,6 +644,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceHistory {
       /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
@@ -710,6 +716,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethodUpdate {
       /** <strong>Required.</strong> Whether the feature is enabled. */
       @SerializedName("enabled")
@@ -781,6 +788,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionCancel {
       /**
        * Whether the cancellation reasons will be collected in the portal and which options are
@@ -919,6 +927,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CancellationReason {
         /** <strong>Required.</strong> Whether the feature is enabled. */
         @SerializedName("enabled")
@@ -1135,6 +1144,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionUpdate {
       /**
        * The types of subscription updates that are supported. When empty, subscriptions are not
@@ -1387,6 +1397,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Product {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1499,6 +1510,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ScheduleAtPeriodEnd {
         /**
          * List of conditions. When any condition is true, the update will be scheduled at the end
@@ -1612,6 +1624,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Condition {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1745,6 +1758,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class LoginPage {
     /**
      * <strong>Required.</strong> Set to {@code true} to generate a shareable URL <a
