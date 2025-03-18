@@ -1,5 +1,11 @@
 # Changelog
 
+## 28.5.0-beta.1 - 2025-03-18
+* [#1956](https://github.com/stripe/stripe-java/pull/1956) Beta SDK updates between Open API versions 1473 and 1505
+  
+  * Add support for `succeed_input_collection` and `timeout_input_collection` test helper methods on resource `Terminal.Reader`
+  * Add support for `target_date` on `Order.payment.settings.payment_method_options.acss_debit`, `Order.payment.settings.payment_method_options.sepa_debit`, `OrderCreateParams.payment.settings.payment_method_options.acss_debit`, `OrderCreateParams.payment.settings.payment_method_options.sepa_debit`, `OrderUpdateParams.payment.settings.payment_method_options.acss_debit`, and `OrderUpdateParams.payment.settings.payment_method_options.sepa_debit`
+
 ## 28.4.0 - 2025-02-24
 * [#1943](https://github.com/stripe/stripe-java/pull/1943) Update generated code
   * Add support for `prices` on `Billing.CreditGrant.applicability_config.scope`, `billing.CreditBalanceSummaryRetrieveParams.filter.applicability_scope`, and `billing.CreditGrantCreateParams.applicability_config.scope`
