@@ -13835,9 +13835,27 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("update")
     Update update;
 
-    private Permissions(Map<String, Object> extraParams, Update update) {
+    /**
+     * Determines which entity is allowed to update the shipping details.
+     *
+     * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+     * shipping details. If set to {@code server_only}, only your server is allowed to update the
+     * shipping details.
+     *
+     * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
+     * when initializing the Stripe Checkout client and manually update the shipping details from
+     * your server using the Stripe API.
+     */
+    @SerializedName("update_shipping_details")
+    UpdateShippingDetails updateShippingDetails;
+
+    private Permissions(
+        Map<String, Object> extraParams,
+        Update update,
+        UpdateShippingDetails updateShippingDetails) {
       this.extraParams = extraParams;
       this.update = update;
+      this.updateShippingDetails = updateShippingDetails;
     }
 
     public static Builder builder() {
@@ -13849,9 +13867,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Update update;
 
+      private UpdateShippingDetails updateShippingDetails;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Permissions build() {
-        return new SessionCreateParams.Permissions(this.extraParams, this.update);
+        return new SessionCreateParams.Permissions(
+            this.extraParams, this.update, this.updateShippingDetails);
       }
 
       /**
@@ -13883,6 +13904,23 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Permissions for updating the Checkout Session. */
       public Builder setUpdate(SessionCreateParams.Permissions.Update update) {
         this.update = update;
+        return this;
+      }
+
+      /**
+       * Determines which entity is allowed to update the shipping details.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+       * shipping details. If set to {@code server_only}, only your server is allowed to update the
+       * shipping details.
+       *
+       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
+       * when initializing the Stripe Checkout client and manually update the shipping details from
+       * your server using the Stripe API.
+       */
+      public Builder setUpdateShippingDetails(
+          SessionCreateParams.Permissions.UpdateShippingDetails updateShippingDetails) {
+        this.updateShippingDetails = updateShippingDetails;
         return this;
       }
     }
@@ -14041,6 +14079,21 @@ public class SessionCreateParams extends ApiRequestParams {
         ShippingDetails(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum UpdateShippingDetails implements ApiRequestParams.EnumParam {
+      @SerializedName("client_only")
+      CLIENT_ONLY("client_only"),
+
+      @SerializedName("server_only")
+      SERVER_ONLY("server_only");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      UpdateShippingDetails(String value) {
+        this.value = value;
       }
     }
   }

@@ -3568,6 +3568,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     Update update;
 
     /**
+     * Determines which entity is allowed to update the shipping details.
+     *
+     * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+     * shipping details. If set to {@code server_only}, only your server is allowed to update the
+     * shipping details.
+     *
+     * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
+     * when initializing the Stripe Checkout client and manually update the shipping details from
+     * your server using the Stripe API.
+     *
+     * <p>One of {@code client_only}, or {@code server_only}.
+     */
+    @SerializedName("update_shipping_details")
+    String updateShippingDetails;
+
+    /**
      * For more details about Update, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
