@@ -53,10 +53,6 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName("object_id")
   String objectId;
 
-  /** The requested page. */
-  @SerializedName("page")
-  String page;
-
   private EventListParams(
       Instant createdGt,
       Instant createdGte,
@@ -65,8 +61,7 @@ public class EventListParams extends ApiRequestParams {
       Boolean deliverySuccess,
       Map<String, Object> extraParams,
       Integer limit,
-      String objectId,
-      String page) {
+      String objectId) {
     this.createdGt = createdGt;
     this.createdGte = createdGte;
     this.createdLt = createdLt;
@@ -75,7 +70,6 @@ public class EventListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.objectId = objectId;
-    this.page = page;
   }
 
   public static Builder builder() {
@@ -99,8 +93,6 @@ public class EventListParams extends ApiRequestParams {
 
     private String objectId;
 
-    private String page;
-
     /** Finalize and obtain parameter instance from this builder. */
     public EventListParams build() {
       return new EventListParams(
@@ -111,8 +103,7 @@ public class EventListParams extends ApiRequestParams {
           this.deliverySuccess,
           this.extraParams,
           this.limit,
-          this.objectId,
-          this.page);
+          this.objectId);
     }
 
     /** Filter for events created after the specified timestamp. */
@@ -184,12 +175,6 @@ public class EventListParams extends ApiRequestParams {
     /** Primary object ID used to retrieve related events. */
     public Builder setObjectId(String objectId) {
       this.objectId = objectId;
-      return this;
-    }
-
-    /** The requested page. */
-    public Builder setPage(String page) {
-      this.page = page;
       return this;
     }
   }
