@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditBalanceTransactionListParams extends ApiRequestParams {
   /** The credit grant for which to fetch credit balance transactions. */
   @SerializedName("credit_grant")

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SessionCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> The account holder to link accounts for. */
   @SerializedName("account_holder")
@@ -257,6 +259,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder {
     /**
      * The ID of the Stripe account whose accounts will be retrieved. Should only be present if
@@ -380,6 +383,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Filters {
     /**
      * Restricts the Session to subcategories of accounts that can be linked. Valid subcategories
@@ -548,6 +552,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Limits {
     /** <strong>Required.</strong> The number of accounts that can be linked in this Session. */
     @SerializedName("accounts")
@@ -616,6 +621,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ManualEntry {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

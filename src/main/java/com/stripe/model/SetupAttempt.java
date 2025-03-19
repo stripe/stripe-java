@@ -313,6 +313,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("naver_pay")
+    NaverPay naverPay;
+
     @SerializedName("paypal")
     Paypal paypal;
 
@@ -943,6 +946,22 @@ public class SetupAttempt extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {}
+
+    /**
+     * For more details about NaverPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NaverPay extends StripeObject {
+      /**
+       * Uniquely identifies this particular Naver Pay account. You can use this attribute to check
+       * whether two Naver Pay accounts are the same.
+       */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
 
     /**
      * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API

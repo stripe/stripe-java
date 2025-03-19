@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   /** Details about the application submission. */
   @SerializedName("application")
@@ -250,6 +252,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Application {
     /**
      * The channel through which the applicant has submitted their application. Defaults to {@code
@@ -393,6 +396,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CreditUser {
     /** <strong>Required.</strong> Email of the applicant or accountholder. */
     @SerializedName("email")
@@ -476,6 +480,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Decision {
     /** Details about the application rejection. */
     @SerializedName("application_rejected")
@@ -621,6 +626,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ApplicationRejected {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -937,6 +943,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CreditLimitApproved {
       /**
        * <strong>Required.</strong> The credit approved, in the currency of the account and <a
@@ -1029,6 +1036,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CreditLimitDecreased {
       /**
        * <strong>Required.</strong> The credit approved, in the currency of the account and <a
@@ -1408,6 +1416,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CreditLineClosed {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1778,6 +1787,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class UnderwritingException {
     /** <strong>Required.</strong> Written explanation for the exception. */
     @SerializedName("explanation")

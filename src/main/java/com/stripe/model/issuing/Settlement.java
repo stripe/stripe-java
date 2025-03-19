@@ -43,8 +43,8 @@ public class Settlement extends StripeObject implements HasId {
   String id;
 
   /** The total interchange received as reimbursement for the transactions. */
-  @SerializedName("interchange_fees")
-  Long interchangeFees;
+  @SerializedName("interchange_fees_amount")
+  Long interchangeFeesAmount;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -62,16 +62,16 @@ public class Settlement extends StripeObject implements HasId {
   Map<String, String> metadata;
 
   /** The total net amount required to settle with the network. */
-  @SerializedName("net_total")
-  Long netTotal;
+  @SerializedName("net_total_amount")
+  Long netTotalAmount;
 
   /** The card network for this settlement report. One of [&quot;visa&quot;, &quot;maestro&quot;] */
   @SerializedName("network")
   String network;
 
   /** The total amount of fees owed to the network. */
-  @SerializedName("network_fees")
-  Long networkFees;
+  @SerializedName("network_fees_amount")
+  Long networkFeesAmount;
 
   /** The Settlement Identification Number assigned by the network. */
   @SerializedName("network_settlement_identifier")
@@ -85,6 +85,14 @@ public class Settlement extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** The total amount of any additional fees assessed by the card network. */
+  @SerializedName("other_fees_amount")
+  Long otherFeesAmount;
+
+  /** The total number of additional fees assessed by the card network. */
+  @SerializedName("other_fees_count")
+  Long otherFeesCount;
+
   /** One of {@code international} or {@code uk_national_net}. */
   @SerializedName("settlement_service")
   String settlementService;
@@ -97,11 +105,11 @@ public class Settlement extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
+  /** The total transaction amount reflected in this settlement. */
+  @SerializedName("transaction_amount")
+  Long transactionAmount;
+
   /** The total number of transactions reflected in this settlement. */
   @SerializedName("transaction_count")
   Long transactionCount;
-
-  /** The total transaction amount reflected in this settlement. */
-  @SerializedName("transaction_volume")
-  Long transactionVolume;
 }

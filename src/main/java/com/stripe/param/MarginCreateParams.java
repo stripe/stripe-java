@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class MarginCreateParams extends ApiRequestParams {
   /**
    * Whether the margin can be applied to invoices, invoice items, or invoice line items or not.

@@ -1196,6 +1196,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("bancontact")
     Bancontact bancontact;
 
+    @SerializedName("billie")
+    Billie billie;
+
     @SerializedName("blik")
     Blik blik;
 
@@ -1303,6 +1306,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("samsung_pay")
     SamsungPay samsungPay;
+
+    @SerializedName("satispay")
+    Satispay satispay;
 
     @SerializedName("sepa_credit_transfer")
     SepaCreditTransfer sepaCreditTransfer;
@@ -1747,6 +1753,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    /**
+     * For more details about Billie, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Billie extends StripeObject {}
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -3688,6 +3703,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("buyer_id")
       String buyerId;
     }
+
+    /**
+     * For more details about Satispay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay extends StripeObject {}
 
     /**
      * For more details about SepaCreditTransfer, please refer to the <a

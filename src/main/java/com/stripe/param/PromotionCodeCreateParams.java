@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PromotionCodeCreateParams extends ApiRequestParams {
   /** Whether the promotion code is currently active. */
   @SerializedName("active")
@@ -278,6 +280,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Restrictions {
     /**
      * Promotion codes defined in each available currency option. Each key must be a three-letter <a
@@ -436,6 +439,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CurrencyOption {
       /**
        * Map of extra parameters for custom features not available in this client library. The

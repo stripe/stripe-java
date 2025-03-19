@@ -950,6 +950,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String bankTransferPayments;
 
     /**
+     * The status of the Billie capability of the account, or whether the account can directly
+     * process Billie payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("billie_payments")
+    String billiePayments;
+
+    /**
      * The status of the blik payments capability of the account, or whether the account can
      * directly process blik charges.
      *
@@ -1317,6 +1326,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String samsungPayPayments;
 
     /**
+     * The status of the Satispay capability of the account, or whether the account can directly
+     * process Satispay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("satispay_payments")
+    String satispayPayments;
+
+    /**
      * The status of the SEPA customer_balance payments (EUR currency) capability of the account, or
      * whether the account can directly process SEPA customer_balance charges.
      *
@@ -1542,6 +1560,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("ownership_declaration")
     OwnershipDeclaration ownershipDeclaration;
 
+    /**
+     * This value is used to determine if a business is exempt from providing ultimate beneficial
+     * owners. See <a
+     * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+     * support article</a> and <a
+     * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+     * for more details.
+     *
+     * <p>One of {@code qualified_entity_exceeds_ownership_threshold}, or {@code
+     * qualifies_as_financial_institution}.
+     */
     @SerializedName("ownership_exemption_reason")
     String ownershipExemptionReason;
 
@@ -2715,6 +2744,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("default_account_tax_ids")
       List<ExpandableField<TaxId>> defaultAccountTaxIds;
+
+      /**
+       * Whether payment methods should be saved when a payment is completed for a one-time invoices
+       * on a hosted invoice page.
+       *
+       * <p>One of {@code always}, {@code never}, or {@code offer}.
+       */
+      @SerializedName("hosted_payment_method_save")
+      String hostedPaymentMethodSave;
 
       /** Get IDs of expandable {@code defaultAccountTaxIds} object list. */
       public List<String> getDefaultAccountTaxIds() {

@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionCreateParams extends ApiRequestParams {
   /**
    * A list of prices and quantities that will generate invoice items appended to the next invoice
@@ -78,14 +80,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * period.
    */
   @SerializedName("cancel_at")
-  Long cancelAt;
-
-  /**
-   * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}.
-   */
-  @SerializedName("cancel_at_period_end")
-  Boolean cancelAtPeriodEnd;
+  Object cancelAt;
 
   /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
@@ -96,14 +91,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
-
-  /**
-   * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-   * only affect invoices created for that particular subscription. This field has been deprecated
-   * and will be removed in a future API version. Use {@code discounts} instead.
-   */
-  @SerializedName("coupon")
-  String coupon;
 
   /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
@@ -263,14 +250,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Prebilling prebilling;
 
   /**
-   * The promotion code to apply to this subscription. A promotion code applied to a subscription
-   * will only affect invoices created for that particular subscription. This field has been
-   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-   */
-  @SerializedName("promotion_code")
-  String promotionCode;
-
-  /**
    * Determines how to handle <a
    * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
    * the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
@@ -328,10 +307,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
       Object billingThresholds,
-      Long cancelAt,
-      Boolean cancelAtPeriodEnd,
+      Object cancelAt,
       CollectionMethod collectionMethod,
-      String coupon,
       String currency,
       String customer,
       Long daysUntilDue,
@@ -351,7 +328,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       PaymentSettings paymentSettings,
       Object pendingInvoiceItemInterval,
       Prebilling prebilling,
-      String promotionCode,
       ProrationBehavior prorationBehavior,
       TransferData transferData,
       Object trialEnd,
@@ -366,9 +342,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
-    this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.collectionMethod = collectionMethod;
-    this.coupon = coupon;
     this.currency = currency;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
@@ -388,7 +362,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.paymentSettings = paymentSettings;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.prebilling = prebilling;
-    this.promotionCode = promotionCode;
     this.prorationBehavior = prorationBehavior;
     this.transferData = transferData;
     this.trialEnd = trialEnd;
@@ -416,13 +389,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Object billingThresholds;
 
-    private Long cancelAt;
-
-    private Boolean cancelAtPeriodEnd;
+    private Object cancelAt;
 
     private CollectionMethod collectionMethod;
-
-    private String coupon;
 
     private String currency;
 
@@ -462,8 +431,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Prebilling prebilling;
 
-    private String promotionCode;
-
     private ProrationBehavior prorationBehavior;
 
     private TransferData transferData;
@@ -487,9 +454,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.billingCycleAnchorConfig,
           this.billingThresholds,
           this.cancelAt,
-          this.cancelAtPeriodEnd,
           this.collectionMethod,
-          this.coupon,
           this.currency,
           this.customer,
           this.daysUntilDue,
@@ -509,7 +474,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.paymentSettings,
           this.pendingInvoiceItemInterval,
           this.prebilling,
-          this.promotionCode,
           this.prorationBehavior,
           this.transferData,
           this.trialEnd,
@@ -643,11 +607,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
      */
-    public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
-      this.cancelAtPeriodEnd = cancelAtPeriodEnd;
+    public Builder setCancelAt(SubscriptionCreateParams.CancelAt cancelAt) {
+      this.cancelAt = cancelAt;
       return this;
     }
 
@@ -660,16 +626,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setCollectionMethod(SubscriptionCreateParams.CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
-      return this;
-    }
-
-    /**
-     * The ID of the coupon to apply to this subscription. A coupon applied to a subscription will
-     * only affect invoices created for that particular subscription. This field has been deprecated
-     * and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    public Builder setCoupon(String coupon) {
-      this.coupon = coupon;
       return this;
     }
 
@@ -1056,16 +1012,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The promotion code to apply to this subscription. A promotion code applied to a subscription
-     * will only affect invoices created for that particular subscription. This field has been
-     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    public Builder setPromotionCode(String promotionCode) {
-      this.promotionCode = promotionCode;
-      return this;
-    }
-
-    /**
      * Determines how to handle <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
      * the {@code billing_cycle_anchor}. If no value is passed, the default is {@code
@@ -1145,6 +1091,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AddInvoiceItem {
     /** The coupons to redeem into discounts for the item. */
     @SerializedName("discounts")
@@ -1347,6 +1294,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -1462,6 +1410,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DiscountEnd {
         /** Time span for the redeemed discount. */
         @SerializedName("duration")
@@ -1570,6 +1519,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Duration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1709,6 +1659,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -1900,6 +1851,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Enabled automatic tax calculation which will automatically compute
@@ -1995,6 +1947,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Liability {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -2095,6 +2048,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingCycleAnchorConfig {
     /**
      * <strong>Required.</strong> The day of the month the billing_cycle_anchor should be. Ranges
@@ -2229,6 +2183,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingThresholds {
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
@@ -2321,6 +2276,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -2433,6 +2389,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DiscountEnd {
       /** Time span for the redeemed discount. */
       @SerializedName("duration")
@@ -2537,6 +2494,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Duration {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2673,6 +2631,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class InvoiceSettings {
     /**
      * The account tax IDs associated with the subscription. Will be set on invoices generated by
@@ -2804,6 +2763,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Issuer {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -2904,6 +2864,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Item {
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -3230,6 +3191,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BillingThresholds {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3311,6 +3273,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -3426,6 +3389,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DiscountEnd {
         /** Time span for the redeemed discount. */
         @SerializedName("duration")
@@ -3531,6 +3495,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Duration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -3669,6 +3634,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -3860,6 +3826,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Recurring {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4000,6 +3967,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Trial {
       /**
        * List of price IDs which, if present on the subscription following a paid trial, constitute
@@ -4123,6 +4091,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentSettings {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -4300,6 +4269,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethodOptions {
       /**
        * This sub-hash contains details about the Canadian pre-authorized debit payment method
@@ -4611,6 +4581,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AcssDebit {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4705,6 +4676,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4818,6 +4790,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Bancontact {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4922,6 +4895,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Card {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5054,6 +5028,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class MandateOptions {
           /** Amount to be charged for future payments. */
           @SerializedName("amount")
@@ -5258,6 +5233,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CustomerBalance {
         /**
          * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
@@ -5361,6 +5337,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class BankTransfer {
           /** Configuration for eu_bank_transfer funding type. */
           @SerializedName("eu_bank_transfer")
@@ -5461,6 +5438,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class EuBankTransfer {
             /**
              * <strong>Required.</strong> The desired country code of the bank account information.
@@ -5547,6 +5525,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class IdBankTransfer {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5609,6 +5588,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Konbini {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5670,6 +5650,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5731,6 +5712,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class UsBankAccount {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5827,6 +5809,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class FinancialConnections {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -6024,6 +6007,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Filters {
             /**
              * The account subcategories to use to filter for selectable accounts. Valid
@@ -6374,6 +6358,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PendingInvoiceItemInterval {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -6495,6 +6480,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Prebilling {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -6605,6 +6591,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -6696,6 +6683,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TrialSettings {
     /**
      * <strong>Required.</strong> Defines how the subscription should behave when the user's free
@@ -6770,6 +6758,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class EndBehavior {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6865,6 +6854,18 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.value = value;
         }
       }
+    }
+  }
+
+  public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("min_period_end")
+    MIN_PERIOD_END("min_period_end");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CancelAt(String value) {
+      this.value = value;
     }
   }
 

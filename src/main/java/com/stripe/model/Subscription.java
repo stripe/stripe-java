@@ -77,13 +77,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Long cancelAt;
 
   /**
-   * Whether this subscription will (if {@code status=active}) or did (if {@code status=canceled})
-   * cancel at the end of the current billing period.
-   */
-  @SerializedName("cancel_at_period_end")
-  Boolean cancelAtPeriodEnd;
-
-  /**
    * If the subscription has been canceled, the date of that cancellation. If the subscription was
    * canceled with {@code cancel_at_period_end}, {@code canceled_at} will reflect the time of the
    * most recent update request, not the end of the subscription period when the subscription is
@@ -117,17 +110,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("currency")
   String currency;
-
-  /**
-   * End of the current period that the subscription has been invoiced for. At the end of this
-   * period, a new invoice will be created.
-   */
-  @SerializedName("current_period_end")
-  Long currentPeriodEnd;
-
-  /** Start of the current period that the subscription has been invoiced for. */
-  @SerializedName("current_period_start")
-  Long currentPeriodStart;
 
   /** ID of the customer who owns the subscription. */
   @SerializedName("customer")
@@ -184,15 +166,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("description")
   String description;
-
-  /**
-   * Describes the current discount applied to this subscription, if there is one. When billing, a
-   * discount applied to a subscription overrides a discount applied on a customer-wide basis. This
-   * field has been deprecated and will be removed in a future API version. Use {@code discounts}
-   * instead.
-   */
-  @SerializedName("discount")
-  Discount discount;
 
   /**
    * The discounts applied to the subscription. Subscription item discounts are applied before
@@ -260,7 +233,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * The account (if any) the charge was made on behalf of for charges associated with this
-   * subscription. See the Connect documentation for details.
+   * subscription. See the <a
+   * href="https://stripe.com/docs/connect/subscriptions#on-behalf-of">Connect documentation</a> for
+   * details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -2165,7 +2140,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
-    trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(items, responseGetter);
     trySetResponseGetter(lastPriceMigrationError, responseGetter);

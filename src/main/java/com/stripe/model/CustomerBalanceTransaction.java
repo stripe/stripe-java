@@ -111,13 +111,17 @@ public class CustomerBalanceTransaction extends ApiResource
   /**
    * Transaction type: {@code adjustment}, {@code applied_to_invoice}, {@code credit_note}, {@code
    * initial}, {@code invoice_overpaid}, {@code invoice_too_large}, {@code invoice_too_small},
-   * {@code unspent_receiver_credit}, or {@code unapplied_from_invoice}. See the <a
+   * {@code unspent_receiver_credit}, {@code unapplied_from_invoice}, {@code
+   * checkout_session_subscription_payment}, or {@code
+   * checkout_session_subscription_payment_canceled}. See the <a
    * href="https://stripe.com/docs/billing/customer/balance#types">Customer Balance page</a> to
    * learn more about transaction types.
    *
-   * <p>One of {@code adjustment}, {@code applied_to_invoice}, {@code credit_note}, {@code initial},
-   * {@code invoice_overpaid}, {@code invoice_too_large}, {@code invoice_too_small}, {@code
-   * migration}, {@code unapplied_from_invoice}, or {@code unspent_receiver_credit}.
+   * <p>One of {@code adjustment}, {@code applied_to_invoice}, {@code
+   * checkout_session_subscription_payment}, {@code checkout_session_subscription_payment_canceled},
+   * {@code credit_note}, {@code initial}, {@code invoice_overpaid}, {@code invoice_too_large},
+   * {@code invoice_too_small}, {@code migration}, {@code unapplied_from_invoice}, or {@code
+   * unspent_receiver_credit}.
    */
   @SerializedName("type")
   String type;

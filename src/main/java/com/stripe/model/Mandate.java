@@ -233,6 +233,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("naver_pay")
+    NaverPay naverPay;
+
     @SerializedName("paypal")
     Paypal paypal;
 
@@ -395,6 +398,15 @@ public class Mandate extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {}
+
+    /**
+     * For more details about NaverPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NaverPay extends StripeObject {}
 
     /**
      * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API

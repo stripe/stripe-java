@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentMethodListParams extends ApiRequestParams {
   /** The ID of the customer whose PaymentMethods will be retrieved. */
   @SerializedName("customer")
@@ -238,6 +240,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
 
+    @SerializedName("billie")
+    BILLIE("billie"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -339,6 +344,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     @SerializedName("samsung_pay")
     SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

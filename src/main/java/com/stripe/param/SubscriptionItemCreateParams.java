@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionItemCreateParams extends ApiRequestParams {
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -507,6 +509,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingThresholds {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -586,6 +589,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -698,6 +702,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DiscountEnd {
       /** Time span for the redeemed discount. */
       @SerializedName("duration")
@@ -802,6 +807,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Duration {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -938,6 +944,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PriceData {
     /**
      * <strong>Required.</strong> Three-letter <a
@@ -1127,6 +1134,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Recurring {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1266,6 +1274,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Trial {
     /**
      * List of price IDs which, if present on the subscription following a paid trial, constitute

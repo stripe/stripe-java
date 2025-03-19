@@ -6,9 +6,11 @@ import com.stripe.net.ApiRequestParams;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class EventListParams extends ApiRequestParams {
   /** Filter for events created after the specified timestamp. */
   @SerializedName("created_gt")

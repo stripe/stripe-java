@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   /**
    * The integer amount in cents (or local equivalent) representing the total amount of the credit
@@ -499,6 +501,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Line {
     /**
      * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}. If
@@ -818,6 +821,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxAmount {
       /** <strong>Required.</strong> The amount, in cents (or local equivalent), of the tax. */
       @SerializedName("amount")
@@ -944,6 +948,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Refund {
     /**
      * Amount of the refund that applies to this credit note, in cents (or local equivalent).
@@ -1033,6 +1038,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

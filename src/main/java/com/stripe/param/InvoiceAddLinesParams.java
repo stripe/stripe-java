@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class InvoiceAddLinesParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -199,6 +201,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Line {
     /**
      * The integer amount in cents (or local equivalent) of the charge to be applied to the upcoming
@@ -272,16 +275,16 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     @SerializedName("period")
     Period period;
 
-    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
-    @SerializedName("price")
-    String price;
-
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline.
      */
     @SerializedName("price_data")
     PriceData priceData;
+
+    /** The pricing information for the invoice item. */
+    @SerializedName("pricing")
+    Pricing pricing;
 
     /** Non-negative integer. The quantity of units for the line item. */
     @SerializedName("quantity")
@@ -318,8 +321,8 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         Object margins,
         Object metadata,
         Period period,
-        String price,
         PriceData priceData,
+        Pricing pricing,
         Long quantity,
         Object taxAmounts,
         Object taxRates) {
@@ -332,8 +335,8 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       this.margins = margins;
       this.metadata = metadata;
       this.period = period;
-      this.price = price;
       this.priceData = priceData;
+      this.pricing = pricing;
       this.quantity = quantity;
       this.taxAmounts = taxAmounts;
       this.taxRates = taxRates;
@@ -362,9 +365,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
 
       private Period period;
 
-      private String price;
-
       private PriceData priceData;
+
+      private Pricing pricing;
 
       private Long quantity;
 
@@ -384,8 +387,8 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
             this.margins,
             this.metadata,
             this.period,
-            this.price,
             this.priceData,
+            this.pricing,
             this.quantity,
             this.taxAmounts,
             this.taxRates);
@@ -612,18 +615,18 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
-      public Builder setPrice(String price) {
-        this.price = price;
-        return this;
-      }
-
       /**
        * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-       * inline. One of {@code price} or {@code price_data} is required.
+       * inline.
        */
       public Builder setPriceData(InvoiceAddLinesParams.Line.PriceData priceData) {
         this.priceData = priceData;
+        return this;
+      }
+
+      /** The pricing information for the invoice item. */
+      public Builder setPricing(InvoiceAddLinesParams.Line.Pricing pricing) {
+        this.pricing = pricing;
         return this;
       }
 
@@ -741,6 +744,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -855,6 +859,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DiscountEnd {
         /** Time span for the redeemed discount. */
         @SerializedName("duration")
@@ -960,6 +965,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Duration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1098,6 +1104,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Period {
       /**
        * <strong>Required.</strong> The end of the period, which must be greater than or equal to
@@ -1187,6 +1194,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -1206,15 +1214,16 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The ID of the product that this price will belong to. One of {@code product} or {@code
-       * product_data} is required.
+       * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code product}
+       * or {@code product_data} is required.
        */
       @SerializedName("product")
       String product;
 
       /**
-       * Data used to generate a new product object inline. One of {@code product} or {@code
-       * product_data} is required.
+       * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+       * object inline. One of {@code product} or {@code product_data} is required.
        */
       @SerializedName("product_data")
       ProductData productData;
@@ -1332,8 +1341,9 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         }
 
         /**
-         * The ID of the product that this price will belong to. One of {@code product} or {@code
-         * product_data} is required.
+         * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code
+         * product} or {@code product_data} is required.
          */
         public Builder setProduct(String product) {
           this.product = product;
@@ -1341,8 +1351,8 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         }
 
         /**
-         * Data used to generate a new product object inline. One of {@code product} or {@code
-         * product_data} is required.
+         * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+         * object inline. One of {@code product} or {@code product_data} is required.
          */
         public Builder setProductData(
             InvoiceAddLinesParams.Line.PriceData.ProductData productData) {
@@ -1385,6 +1395,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ProductData {
         /**
          * The product's description, meant to be displayable to the customer. Use this field to
@@ -1601,6 +1612,78 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pricing {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the price object. */
+      @SerializedName("price")
+      String price;
+
+      private Pricing(Map<String, Object> extraParams, String price) {
+        this.extraParams = extraParams;
+        this.price = price;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String price;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceAddLinesParams.Line.Pricing build() {
+          return new InvoiceAddLinesParams.Line.Pricing(this.extraParams, this.price);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceAddLinesParams.Line.Pricing#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceAddLinesParams.Line.Pricing#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the price object. */
+        public Builder setPrice(String price) {
+          this.price = price;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxAmount {
       /** <strong>Required.</strong> The amount, in cents (or local equivalent), of the tax. */
       @SerializedName("amount")
@@ -1627,6 +1710,10 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       @SerializedName("tax_rate_data")
       TaxRateData taxRateData;
 
+      /** The reasoning behind this tax, for example, if the product is tax exempt. */
+      @SerializedName("taxability_reason")
+      TaxabilityReason taxabilityReason;
+
       /**
        * <strong>Required.</strong> The amount on which tax is calculated, in cents (or local
        * equivalent).
@@ -1638,10 +1725,12 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
           Long amount,
           Map<String, Object> extraParams,
           TaxRateData taxRateData,
+          TaxabilityReason taxabilityReason,
           Long taxableAmount) {
         this.amount = amount;
         this.extraParams = extraParams;
         this.taxRateData = taxRateData;
+        this.taxabilityReason = taxabilityReason;
         this.taxableAmount = taxableAmount;
       }
 
@@ -1656,12 +1745,18 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
 
         private TaxRateData taxRateData;
 
+        private TaxabilityReason taxabilityReason;
+
         private Long taxableAmount;
 
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceAddLinesParams.Line.TaxAmount build() {
           return new InvoiceAddLinesParams.Line.TaxAmount(
-              this.amount, this.extraParams, this.taxRateData, this.taxableAmount);
+              this.amount,
+              this.extraParams,
+              this.taxRateData,
+              this.taxabilityReason,
+              this.taxableAmount);
         }
 
         /** <strong>Required.</strong> The amount, in cents (or local equivalent), of the tax. */
@@ -1713,6 +1808,13 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
           return this;
         }
 
+        /** The reasoning behind this tax, for example, if the product is tax exempt. */
+        public Builder setTaxabilityReason(
+            InvoiceAddLinesParams.Line.TaxAmount.TaxabilityReason taxabilityReason) {
+          this.taxabilityReason = taxabilityReason;
+          return this;
+        }
+
         /**
          * <strong>Required.</strong> The amount on which tax is calculated, in cents (or local
          * equivalent).
@@ -1724,6 +1826,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class TaxRateData {
         /**
          * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
@@ -1767,6 +1870,10 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
         @SerializedName("jurisdiction")
         String jurisdiction;
 
+        /** The level of the jurisdiction that imposes this tax rate. */
+        @SerializedName("jurisdiction_level")
+        JurisdictionLevel jurisdictionLevel;
+
         /**
          * <strong>Required.</strong> The statutory tax rate percent. This field accepts decimal
          * values between 0 and 100 inclusive with at most 4 decimal places. To accommodate
@@ -1794,6 +1901,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             Boolean inclusive,
             String jurisdiction,
+            JurisdictionLevel jurisdictionLevel,
             BigDecimal percentage,
             String state,
             TaxType taxType) {
@@ -1803,6 +1911,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
           this.extraParams = extraParams;
           this.inclusive = inclusive;
           this.jurisdiction = jurisdiction;
+          this.jurisdictionLevel = jurisdictionLevel;
           this.percentage = percentage;
           this.state = state;
           this.taxType = taxType;
@@ -1825,6 +1934,8 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
 
           private String jurisdiction;
 
+          private JurisdictionLevel jurisdictionLevel;
+
           private BigDecimal percentage;
 
           private String state;
@@ -1840,6 +1951,7 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
                 this.extraParams,
                 this.inclusive,
                 this.jurisdiction,
+                this.jurisdictionLevel,
                 this.percentage,
                 this.state,
                 this.taxType);
@@ -1917,6 +2029,14 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
             return this;
           }
 
+          /** The level of the jurisdiction that imposes this tax rate. */
+          public Builder setJurisdictionLevel(
+              InvoiceAddLinesParams.Line.TaxAmount.TaxRateData.JurisdictionLevel
+                  jurisdictionLevel) {
+            this.jurisdictionLevel = jurisdictionLevel;
+            return this;
+          }
+
           /**
            * <strong>Required.</strong> The statutory tax rate percent. This field accepts decimal
            * values between 0 and 100 inclusive with at most 4 decimal places. To accommodate
@@ -1942,6 +2062,33 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
               InvoiceAddLinesParams.Line.TaxAmount.TaxRateData.TaxType taxType) {
             this.taxType = taxType;
             return this;
+          }
+        }
+
+        public enum JurisdictionLevel implements ApiRequestParams.EnumParam {
+          @SerializedName("city")
+          CITY("city"),
+
+          @SerializedName("country")
+          COUNTRY("country"),
+
+          @SerializedName("county")
+          COUNTY("county"),
+
+          @SerializedName("district")
+          DISTRICT("district"),
+
+          @SerializedName("multiple")
+          MULTIPLE("multiple"),
+
+          @SerializedName("state")
+          STATE("state");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          JurisdictionLevel(String value) {
+            this.value = value;
           }
         }
 
@@ -1994,6 +2141,60 @@ public class InvoiceAddLinesParams extends ApiRequestParams {
           TaxType(String value) {
             this.value = value;
           }
+        }
+      }
+
+      public enum TaxabilityReason implements ApiRequestParams.EnumParam {
+        @SerializedName("customer_exempt")
+        CUSTOMER_EXEMPT("customer_exempt"),
+
+        @SerializedName("not_collecting")
+        NOT_COLLECTING("not_collecting"),
+
+        @SerializedName("not_subject_to_tax")
+        NOT_SUBJECT_TO_TAX("not_subject_to_tax"),
+
+        @SerializedName("not_supported")
+        NOT_SUPPORTED("not_supported"),
+
+        @SerializedName("portion_product_exempt")
+        PORTION_PRODUCT_EXEMPT("portion_product_exempt"),
+
+        @SerializedName("portion_reduced_rated")
+        PORTION_REDUCED_RATED("portion_reduced_rated"),
+
+        @SerializedName("portion_standard_rated")
+        PORTION_STANDARD_RATED("portion_standard_rated"),
+
+        @SerializedName("product_exempt")
+        PRODUCT_EXEMPT("product_exempt"),
+
+        @SerializedName("product_exempt_holiday")
+        PRODUCT_EXEMPT_HOLIDAY("product_exempt_holiday"),
+
+        @SerializedName("proportionally_rated")
+        PROPORTIONALLY_RATED("proportionally_rated"),
+
+        @SerializedName("reduced_rated")
+        REDUCED_RATED("reduced_rated"),
+
+        @SerializedName("reverse_charge")
+        REVERSE_CHARGE("reverse_charge"),
+
+        @SerializedName("standard_rated")
+        STANDARD_RATED("standard_rated"),
+
+        @SerializedName("taxable_basis_reduced")
+        TAXABLE_BASIS_REDUCED("taxable_basis_reduced"),
+
+        @SerializedName("zero_rated")
+        ZERO_RATED("zero_rated");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxabilityReason(String value) {
+          this.value = value;
         }
       }
     }

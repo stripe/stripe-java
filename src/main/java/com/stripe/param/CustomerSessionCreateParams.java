@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CustomerSessionCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Configuration for each component. Exactly 1 component must be
@@ -140,6 +142,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Components {
     /** Configuration for buy button. */
     @SerializedName("buy_button")
@@ -240,6 +243,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BuyButton {
       /** <strong>Required.</strong> Whether the buy button is enabled. */
       @SerializedName("enabled")
@@ -311,6 +315,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentElement {
       /** <strong>Required.</strong> Whether the Payment Element is enabled. */
       @SerializedName("enabled")
@@ -395,6 +400,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -754,6 +760,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PricingTable {
       /** <strong>Required.</strong> Whether the pricing table is enabled. */
       @SerializedName("enabled")

@@ -86,8 +86,8 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   Long amountDue;
 
   /**
-   * Amount that was overpaid on the invoice. Overpayments are debited to the customer's credit
-   * balance.
+   * Amount that was overpaid on the invoice. The amount overpaid is credited to the customer's
+   * credit balance.
    */
   @SerializedName("amount_overpaid")
   Long amountOverpaid;
@@ -293,13 +293,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   String description;
 
   /**
-   * Describes the current discount applied to this invoice, if there is one. Not populated if there
-   * are multiple discounts.
-   */
-  @SerializedName("discount")
-  Discount discount;
-
-  /**
    * The discounts applied to the invoice. Line item discounts are applied before invoice discounts.
    * Use {@code expand[]=discounts} to expand each discount.
    */
@@ -437,16 +430,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("paid_out_of_band")
   Boolean paidOutOfBand;
 
-  /**
-   * The PaymentIntent associated with this invoice. The PaymentIntent is generated when the invoice
-   * is finalized, and can then be used to pay the invoice. Note that voiding an invoice will cancel
-   * the PaymentIntent.
-   */
-  @SerializedName("payment_intent")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<PaymentIntent> paymentIntent;
-
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
 
@@ -479,12 +462,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   /** Total amount of all pre-payment credit notes issued for this invoice. */
   @SerializedName("pre_payment_credit_notes_amount")
   Long prePaymentCreditNotesAmount;
-
-  /** The quote this invoice was generated from. */
-  @SerializedName("quote")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Quote> quote;
 
   /** This is the transaction number that appears on email receipts sent for this invoice. */
   @SerializedName("receipt_number")
@@ -536,16 +513,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
-  /** Details about the subscription that created this invoice. */
-  @SerializedName("subscription_details")
-  SubscriptionDetails subscriptionDetails;
-
-  /**
-   * Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
-   */
-  @SerializedName("subscription_proration_date")
-  Long subscriptionProrationDate;
-
   /**
    * Total of all subscriptions, invoice items, and prorations on the invoice before any invoice
    * level discount or exclusive tax is applied. Item discounts are already incorporated
@@ -559,10 +526,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
    */
   @SerializedName("subtotal_excluding_tax")
   Long subtotalExcludingTax;
-
-  /** The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice. */
-  @SerializedName("tax")
-  Long tax;
 
   /** ID of the test clock this invoice belongs to. */
   @SerializedName("test_clock")
@@ -598,10 +561,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
    */
   @SerializedName("total_pretax_credit_amounts")
   List<QuotePreviewInvoice.TotalPretaxCreditAmount> totalPretaxCreditAmounts;
-
-  /** The aggregate amounts calculated per tax rate for all line items. */
-  @SerializedName("total_tax_amounts")
-  List<QuotePreviewInvoice.TotalTaxAmount> totalTaxAmounts;
 
   /**
    * The account (if any) the payment will be attributed to for tax reporting, and where funds from
@@ -710,43 +669,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
 
   public void setOnBehalfOfObject(Account expandableObject) {
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code paymentIntent} object. */
-  public String getPaymentIntent() {
-    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
-  }
-
-  public void setPaymentIntent(String id) {
-    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
-  }
-
-  /** Get expanded {@code paymentIntent}. */
-  public PaymentIntent getPaymentIntentObject() {
-    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
-  }
-
-  public void setPaymentIntentObject(PaymentIntent expandableObject) {
-    this.paymentIntent =
-        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code quote} object. */
-  public String getQuote() {
-    return (this.quote != null) ? this.quote.getId() : null;
-  }
-
-  public void setQuote(String id) {
-    this.quote = ApiResource.setExpandableFieldId(id, this.quote);
-  }
-
-  /** Get expanded {@code quote}. */
-  public Quote getQuoteObject() {
-    return (this.quote != null) ? this.quote.getExpanded() : null;
-  }
-
-  public void setQuoteObject(Quote expandableObject) {
-    this.quote = new ExpandableField<Quote>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code subscription} object. */
@@ -1740,53 +1662,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   }
 
   /**
-   * For more details about SubscriptionDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SubscriptionDetails extends StripeObject {
-    /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> defined as
-     * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
-     * subscription metadata at the time of invoice finalization. <em>Note: This attribute is
-     * populated only for invoices created on or after June 29, 2023.</em>
-     */
-    @SerializedName("metadata")
-    Map<String, String> metadata;
-
-    /**
-     * If specified, payment collection for this subscription will be paused. Note that the
-     * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
-     * collection</a>.
-     */
-    @SerializedName("pause_collection")
-    PauseCollection pauseCollection;
-
-    /**
-     * The Pause Collection settings determine how we will pause collection for this subscription
-     * and for how long the subscription should be paused.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class PauseCollection extends StripeObject {
-      /**
-       * The payment collection behavior for this subscription while paused. One of {@code
-       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
-       */
-      @SerializedName("behavior")
-      String behavior;
-
-      /** The time after which the subscription will resume collecting payments. */
-      @SerializedName("resumes_at")
-      Long resumesAt;
-    }
-  }
-
-  /**
    * For more details about ThresholdReason, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1992,64 +1867,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   }
 
   /**
-   * For more details about TotalTaxAmount, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class TotalTaxAmount extends StripeObject {
-    /** The amount, in cents (or local equivalent), of the tax. */
-    @SerializedName("amount")
-    Long amount;
-
-    /** Whether this tax amount is inclusive or exclusive. */
-    @SerializedName("inclusive")
-    Boolean inclusive;
-
-    /** The tax rate that was applied to get this tax amount. */
-    @SerializedName("tax_rate")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<TaxRate> taxRate;
-
-    /**
-     * The reasoning behind this tax, for example, if the product is tax exempt. The possible values
-     * for this field may be extended as new tax rules are supported.
-     *
-     * <p>One of {@code customer_exempt}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
-     * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
-     * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
-     * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code standard_rated},
-     * {@code taxable_basis_reduced}, or {@code zero_rated}.
-     */
-    @SerializedName("taxability_reason")
-    String taxabilityReason;
-
-    /** The amount on which tax is calculated, in cents (or local equivalent). */
-    @SerializedName("taxable_amount")
-    Long taxableAmount;
-
-    /** Get ID of expandable {@code taxRate} object. */
-    public String getTaxRate() {
-      return (this.taxRate != null) ? this.taxRate.getId() : null;
-    }
-
-    public void setTaxRate(String id) {
-      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
-    }
-
-    /** Get expanded {@code taxRate}. */
-    public TaxRate getTaxRateObject() {
-      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
-    }
-
-    public void setTaxRateObject(TaxRate expandableObject) {
-      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
-    }
-  }
-
-  /**
    * For more details about TransferData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2099,23 +1916,19 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(customerShipping, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
-    trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(fromInvoice, responseGetter);
     trySetResponseGetter(issuer, responseGetter);
     trySetResponseGetter(lastFinalizationError, responseGetter);
     trySetResponseGetter(latestRevision, responseGetter);
     trySetResponseGetter(lines, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
-    trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(payments, responseGetter);
-    trySetResponseGetter(quote, responseGetter);
     trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
-    trySetResponseGetter(subscriptionDetails, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(thresholdReason, responseGetter);
     trySetResponseGetter(transferData, responseGetter);
