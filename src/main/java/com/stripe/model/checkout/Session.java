@@ -335,6 +335,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("phone_number_collection")
   PhoneNumberCollection phoneNumberCollection;
 
+  @SerializedName("presentment_details")
+  PresentmentDetails presentmentDetails;
+
   /** The ID of the original expired Checkout Session that triggered the recovery flow. */
   @SerializedName("recovered_from")
   String recoveredFrom;
@@ -3620,6 +3623,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about PresentmentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PresentmentDetails extends StripeObject {
+    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    @SerializedName("presentment_amount")
+    Long presentmentAmount;
+
+    /** Currency presented to the customer during payment. */
+    @SerializedName("presentment_currency")
+    String presentmentCurrency;
+  }
+
+  /**
    * For more details about SavedPaymentMethodOptions, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -3953,6 +3973,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(paymentMethodOptions, responseGetter);
     trySetResponseGetter(permissions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
+    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(savedPaymentMethodOptions, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);

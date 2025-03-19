@@ -1068,7 +1068,11 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+    /**
+     * <strong>Required.</strong> The ID of the <a
+     * href="https://docs.stripe.com/api/products">Product</a> that this <a
+     * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+     */
     @SerializedName("product")
     Object product;
 
@@ -1187,13 +1191,21 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+       */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+       */
       public Builder setProduct(EmptyParam product) {
         this.product = product;
         return this;

@@ -147,6 +147,10 @@ public class BaseStripeTest {
     Stripe.clientId = this.origClientId;
   }
 
+  public static String getStripeMockUrl() {
+    return "http://localhost:" + port;
+  }
+
   /**
    * {@code params} and {@code options} defaults to {@code null}.
    *

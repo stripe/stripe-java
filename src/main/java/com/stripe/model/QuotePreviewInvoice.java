@@ -562,12 +562,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("total_pretax_credit_amounts")
   List<QuotePreviewInvoice.TotalPretaxCreditAmount> totalPretaxCreditAmounts;
 
-  /**
-   * The account (if any) the payment will be attributed to for tax reporting, and where funds from
-   * the payment will be transferred to for the invoice.
-   */
-  @SerializedName("transfer_data")
-  TransferData transferData;
+  /** The aggregate tax information of all line items. */
+  @SerializedName("total_taxes")
+  List<QuotePreviewInvoice.TotalTax> totalTaxes;
 
   /**
    * Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all
@@ -1867,42 +1864,68 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   }
 
   /**
-   * For more details about TransferData, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * For more details about TotalTax, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
-    /**
-     * The amount in cents (or local equivalent) that will be transferred to the destination account
-     * when the invoice is paid. By default, the entire amount is transferred to the destination.
-     */
+  public static class TotalTax extends StripeObject {
+    /** The amount of the tax, in cents (or local equivalent). */
     @SerializedName("amount")
     Long amount;
 
-    /** The account where funds from the payment will be transferred to upon payment success. */
-    @SerializedName("destination")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Account> destination;
+    /**
+     * Whether this tax is inclusive or exclusive.
+     *
+     * <p>One of {@code exclusive}, or {@code inclusive}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
 
-    /** Get ID of expandable {@code destination} object. */
-    public String getDestination() {
-      return (this.destination != null) ? this.destination.getId() : null;
-    }
+    /**
+     * Additional details about the tax rate. Only present when {@code type} is {@code
+     * tax_rate_details}.
+     */
+    @SerializedName("tax_rate_details")
+    TaxRateDetails taxRateDetails;
 
-    public void setDestination(String id) {
-      this.destination = ApiResource.setExpandableFieldId(id, this.destination);
-    }
+    /**
+     * The reasoning behind this tax, for example, if the product is tax exempt. The possible values
+     * for this field may be extended as new tax rules are supported.
+     *
+     * <p>One of {@code customer_exempt}, {@code not_available}, {@code not_collecting}, {@code
+     * not_subject_to_tax}, {@code not_supported}, {@code portion_product_exempt}, {@code
+     * portion_reduced_rated}, {@code portion_standard_rated}, {@code product_exempt}, {@code
+     * product_exempt_holiday}, {@code proportionally_rated}, {@code reduced_rated}, {@code
+     * reverse_charge}, {@code standard_rated}, {@code taxable_basis_reduced}, or {@code
+     * zero_rated}.
+     */
+    @SerializedName("taxability_reason")
+    String taxabilityReason;
 
-    /** Get expanded {@code destination}. */
-    public Account getDestinationObject() {
-      return (this.destination != null) ? this.destination.getExpanded() : null;
-    }
+    /** The amount on which tax is calculated, in cents (or local equivalent). */
+    @SerializedName("taxable_amount")
+    Long taxableAmount;
 
-    public void setDestinationObject(Account expandableObject) {
-      this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    /**
+     * The type of tax information.
+     *
+     * <p>Equal to {@code tax_rate_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxRateDetails extends StripeObject {
+      @SerializedName("tax_rate")
+      String taxRate;
     }
   }
 
@@ -1931,6 +1954,5 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(thresholdReason, responseGetter);
-    trySetResponseGetter(transferData, responseGetter);
   }
 }

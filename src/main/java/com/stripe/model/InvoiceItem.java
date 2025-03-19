@@ -129,6 +129,9 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("object")
   String object;
 
+  @SerializedName("parent")
+  Parent parent;
+
   @SerializedName("period")
   Period period;
 
@@ -509,6 +512,51 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
+   * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Parent extends StripeObject {
+    @SerializedName("rate_card_subscription_details")
+    RateCardSubscriptionDetails rateCardSubscriptionDetails;
+
+    @SerializedName("subscription_details")
+    SubscriptionDetails subscriptionDetails;
+
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about RateCardSubscriptionDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RateCardSubscriptionDetails extends StripeObject {
+      @SerializedName("rate_card_subscription")
+      String rateCardSubscription;
+    }
+
+    /**
+     * For more details about SubscriptionDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionDetails extends StripeObject {
+      @SerializedName("subscription")
+      String subscription;
+
+      @SerializedName("subscription_item")
+      String subscriptionItem;
+    }
+  }
+
+  /**
    * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -533,6 +581,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
+    trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }

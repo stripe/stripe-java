@@ -95,8 +95,6 @@ public final class EventDataClassLookup {
     classLookup.put("topup", Topup.class);
     classLookup.put("transfer", Transfer.class);
     classLookup.put("transfer_reversal", TransferReversal.class);
-    classLookup.put("usage_record", UsageRecord.class);
-    classLookup.put("usage_record_summary", UsageRecordSummary.class);
     classLookup.put("webhook_endpoint", WebhookEndpoint.class);
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);

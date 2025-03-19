@@ -235,6 +235,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("payment_method_details")
   PaymentMethodDetails paymentMethodDetails;
 
+  @SerializedName("presentment_details")
+  PresentmentDetails presentmentDetails;
+
   /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
@@ -4037,6 +4040,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
+   * For more details about PresentmentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PresentmentDetails extends StripeObject {
+    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    @SerializedName("presentment_amount")
+    Long presentmentAmount;
+
+    /** Currency presented to the customer during payment. */
+    @SerializedName("presentment_currency")
+    String presentmentCurrency;
+  }
+
+  /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
    */
@@ -4112,6 +4132,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
     trySetResponseGetter(review, responseGetter);

@@ -73,6 +73,10 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
 
+  /** The tax information of the line item. */
+  @SerializedName("taxes")
+  List<CreditNoteLineItem.Tax> taxes;
+
   /**
    * The type of the credit note line item, one of {@code invoice_line_item} or {@code
    * custom_line_item}. When the type is {@code invoice_line_item} there is an additional {@code
@@ -197,6 +201,72 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Tax extends StripeObject {
+    /** The amount of the tax, in cents (or local equivalent). */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Whether this tax is inclusive or exclusive.
+     *
+     * <p>One of {@code exclusive}, or {@code inclusive}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
+
+    /**
+     * Additional details about the tax rate. Only present when {@code type} is {@code
+     * tax_rate_details}.
+     */
+    @SerializedName("tax_rate_details")
+    TaxRateDetails taxRateDetails;
+
+    /**
+     * The reasoning behind this tax, for example, if the product is tax exempt. The possible values
+     * for this field may be extended as new tax rules are supported.
+     *
+     * <p>One of {@code customer_exempt}, {@code not_available}, {@code not_collecting}, {@code
+     * not_subject_to_tax}, {@code not_supported}, {@code portion_product_exempt}, {@code
+     * portion_reduced_rated}, {@code portion_standard_rated}, {@code product_exempt}, {@code
+     * product_exempt_holiday}, {@code proportionally_rated}, {@code reduced_rated}, {@code
+     * reverse_charge}, {@code standard_rated}, {@code taxable_basis_reduced}, or {@code
+     * zero_rated}.
+     */
+    @SerializedName("taxability_reason")
+    String taxabilityReason;
+
+    /** The amount on which tax is calculated, in cents (or local equivalent). */
+    @SerializedName("taxable_amount")
+    Long taxableAmount;
+
+    /**
+     * The type of tax information.
+     *
+     * <p>Equal to {@code tax_rate_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxRateDetails extends StripeObject {
+      @SerializedName("tax_rate")
+      String taxRate;
     }
   }
 }

@@ -4264,6 +4264,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("kakao_pay")
       KAKAO_PAY("kakao_pay"),
 
+      @SerializedName("klarna")
+      KLARNA("klarna"),
+
       @SerializedName("konbini")
       KONBINI("konbini"),
 

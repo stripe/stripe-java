@@ -85,7 +85,10 @@ public class PriceCreateParams extends ApiRequestParams {
   @SerializedName("nickname")
   String nickname;
 
-  /** The ID of the product that this price will belong to. */
+  /**
+   * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+   * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+   */
   @SerializedName("product")
   String product;
 
@@ -423,7 +426,10 @@ public class PriceCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the product that this price will belong to. */
+    /**
+     * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+     * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+     */
     public Builder setProduct(String product) {
       this.product = product;
       return this;

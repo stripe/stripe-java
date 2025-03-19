@@ -14,7 +14,6 @@ import com.stripe.param.SubscriptionItemDeleteParams;
 import com.stripe.param.SubscriptionItemListParams;
 import com.stripe.param.SubscriptionItemRetrieveParams;
 import com.stripe.param.SubscriptionItemUpdateParams;
-import com.stripe.param.SubscriptionItemUsageRecordSummariesParams;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -382,99 +381,6 @@ public class SubscriptionItem extends ApiResource
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, SubscriptionItem.class);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries() throws StripeException {
-    return usageRecordSummaries((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(Map<String, Object> params)
-      throws StripeException {
-    return usageRecordSummaries(params, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/subscription_items/%s/usage_record_summaries",
-            ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      SubscriptionItemUsageRecordSummariesParams params) throws StripeException {
-    return usageRecordSummaries(params, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      SubscriptionItemUsageRecordSummariesParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/subscription_items/%s/usage_record_summaries",
-            ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
   }
 
   /**

@@ -280,6 +280,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  @SerializedName("presentment_details")
+  PresentmentDetails presentmentDetails;
+
   /** If present, this property tells you about the processing state of the payment. */
   @SerializedName("processing")
   Processing processing;
@@ -5855,6 +5858,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about PresentmentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PresentmentDetails extends StripeObject {
+    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    @SerializedName("presentment_amount")
+    Long presentmentAmount;
+
+    /** Currency presented to the customer during payment. */
+    @SerializedName("presentment_currency")
+    String presentmentCurrency;
+  }
+
+  /**
    * For more details about Processing, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -5970,6 +5990,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(processing, responseGetter);
     trySetResponseGetter(review, responseGetter);
     trySetResponseGetter(shipping, responseGetter);

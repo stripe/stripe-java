@@ -217,12 +217,20 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     this.product = new ExpandableField<Product>(expandableObject.getId(), expandableObject);
   }
 
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  /**
+   * Creates a new <a href="https://docs.stripe.com/api/prices">Price</a> for an existing <a
+   * href="https://docs.stripe.com/api/products">Product</a>. The Price can be recurring or
+   * one-time.
+   */
   public static Price create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  /**
+   * Creates a new <a href="https://docs.stripe.com/api/prices">Price</a> for an existing <a
+   * href="https://docs.stripe.com/api/products">Product</a>. The Price can be recurring or
+   * one-time.
+   */
   public static Price create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/prices";
@@ -231,12 +239,20 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
     return getGlobalResponseGetter().request(request, Price.class);
   }
 
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  /**
+   * Creates a new <a href="https://docs.stripe.com/api/prices">Price</a> for an existing <a
+   * href="https://docs.stripe.com/api/products">Product</a>. The Price can be recurring or
+   * one-time.
+   */
   public static Price create(PriceCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  /**
+   * Creates a new <a href="https://docs.stripe.com/api/prices">Price</a> for an existing <a
+   * href="https://docs.stripe.com/api/products">Product</a>. The Price can be recurring or
+   * one-time.
+   */
   public static Price create(PriceCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/prices";
