@@ -462,7 +462,7 @@ public class RequestOptions {
           clientOptions.getClientId(), // clientId
           null, // idempotencyKey
           clientOptions.getStripeContext(), // stripeContext
-          null, // stripeAccount
+          clientOptions.getStripeAccount(), // stripeAccount
           null, // stripeVersionOverride
           null, // baseUrl
           clientOptions.getConnectTimeout(), // connectTimeout
@@ -481,7 +481,9 @@ public class RequestOptions {
         options.getStripeContext() != null
             ? options.getStripeContext()
             : clientOptions.getStripeContext(),
-        options.getStripeAccount(),
+        options.getStripeAccount() != null
+            ? options.getStripeAccount()
+            : clientOptions.getStripeAccount(),
         RequestOptions.unsafeGetStripeVersionOverride(options),
         options.getBaseUrl(),
         options.getConnectTimeout() != null

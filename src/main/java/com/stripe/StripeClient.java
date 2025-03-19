@@ -431,6 +431,9 @@ public class StripeClient {
     private final String meterEventsBase;
 
     @Getter(onMethod_ = {@Override})
+    private final String stripeAccount;
+
+    @Getter(onMethod_ = {@Override})
     private final String stripeContext;
 
     ClientStripeResponseGetterOptions(
@@ -445,6 +448,7 @@ public class StripeClient {
         String filesBase,
         String connectBase,
         String meterEventsBase,
+        String stripeAccount,
         String stripeContext) {
       this.authenticator = authenticator;
       this.clientId = clientId;
@@ -457,6 +461,7 @@ public class StripeClient {
       this.filesBase = filesBase;
       this.connectBase = connectBase;
       this.meterEventsBase = meterEventsBase;
+      this.stripeAccount = stripeAccount;
       this.stripeContext = stripeContext;
     }
   }
@@ -481,6 +486,7 @@ public class StripeClient {
     private String filesBase = Stripe.UPLOAD_API_BASE;
     private String connectBase = Stripe.CONNECT_API_BASE;
     private String meterEventsBase = Stripe.METER_EVENTS_API_BASE;
+    private String stripeAccount;
     private String stripeContext;
 
     /**
@@ -667,6 +673,15 @@ public class StripeClient {
       return this.meterEventsBase;
     }
 
+    public StripeClientBuilder setStripeAccount(String account) {
+      this.stripeAccount = account;
+      return this;
+    }
+
+    public String getStripeAccount() {
+      return this.stripeAccount;
+    }
+
     public StripeClientBuilder setStripeContext(String context) {
       this.stripeContext = context;
       return this;
@@ -689,15 +704,16 @@ public class StripeClient {
       return new ClientStripeResponseGetterOptions(
           this.authenticator,
           this.clientId,
-          connectTimeout,
-          readTimeout,
-          maxNetworkRetries,
-          connectionProxy,
-          proxyCredential,
-          apiBase,
-          filesBase,
-          connectBase,
-          meterEventsBase,
+          this.connectTimeout,
+          this.readTimeout,
+          this.maxNetworkRetries,
+          this.connectionProxy,
+          this.proxyCredential,
+          this.apiBase,
+          this.filesBase,
+          this.connectBase,
+          this.meterEventsBase,
+          this.stripeAccount,
           this.stripeContext);
     }
   }
