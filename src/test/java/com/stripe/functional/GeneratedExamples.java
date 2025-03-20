@@ -2138,8 +2138,7 @@ class GeneratedExamples extends BaseStripeTest {
     CouponCreateParams params =
         CouponCreateParams.builder()
             .setPercentOff(new BigDecimal(25.5))
-            .setDuration(CouponCreateParams.Duration.REPEATING)
-            .setDurationInMonths(3L)
+            .setDuration(CouponCreateParams.Duration.ONCE)
             .build();
 
     Coupon coupon = Coupon.create(params);
@@ -2155,8 +2154,7 @@ class GeneratedExamples extends BaseStripeTest {
     com.stripe.param.CouponCreateParams params =
         com.stripe.param.CouponCreateParams.builder()
             .setPercentOff(new BigDecimal(25.5))
-            .setDuration(com.stripe.param.CouponCreateParams.Duration.REPEATING)
-            .setDurationInMonths(3L)
+            .setDuration(com.stripe.param.CouponCreateParams.Duration.ONCE)
             .build();
 
     com.stripe.model.Coupon coupon = client.coupons().create(params);
@@ -4780,10 +4778,7 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testInvoiceitemsPost() throws StripeException {
     InvoiceItemCreateParams params =
-        InvoiceItemCreateParams.builder()
-            .setCustomer("cus_xxxxxxxxxxxxx")
-            .setPrice("price_xxxxxxxxxxxxx")
-            .build();
+        InvoiceItemCreateParams.builder().setCustomer("cus_xxxxxxxxxxxxx").build();
 
     InvoiceItem invoiceItem = InvoiceItem.create(params);
     assertNotNull(invoiceItem);
@@ -4796,10 +4791,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.InvoiceItemCreateParams params =
-        com.stripe.param.InvoiceItemCreateParams.builder()
-            .setCustomer("cus_xxxxxxxxxxxxx")
-            .setPrice("price_xxxxxxxxxxxxx")
-            .build();
+        com.stripe.param.InvoiceItemCreateParams.builder().setCustomer("cus_xxxxxxxxxxxxx").build();
 
     com.stripe.model.InvoiceItem invoiceItem = client.invoiceItems().create(params);
     assertNotNull(invoiceItem);
@@ -5176,38 +5168,6 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v1/invoices/in_xxxxxxxxxxxxx/send",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testInvoicesUpcomingGet() throws StripeException {
-    InvoiceUpcomingParams params =
-        InvoiceUpcomingParams.builder().setCustomer("cus_9utnxg47pWjV1e").build();
-
-    Invoice invoice = Invoice.upcoming(params);
-    assertNotNull(invoice);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v1/invoices/upcoming",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testInvoicesUpcomingGetServices() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.InvoiceUpcomingParams params =
-        com.stripe.param.InvoiceUpcomingParams.builder().setCustomer("cus_9utnxg47pWjV1e").build();
-
-    com.stripe.model.Invoice invoice = client.invoices().upcoming(params);
-    assertNotNull(invoice);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v1/invoices/upcoming",
         params.toMap(),
         null);
   }
@@ -10102,82 +10062,6 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v1/subscription_items/si_xxxxxxxxxxxxx",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testSubscriptionItemsUsageRecordSummariesGet() throws StripeException {
-    SubscriptionItem resource = SubscriptionItem.retrieve("si_xxxxxxxxxxxxx");
-
-    SubscriptionItemUsageRecordSummariesParams params =
-        SubscriptionItemUsageRecordSummariesParams.builder().setLimit(3L).build();
-
-    UsageRecordSummaryCollection usageRecordSummaries = resource.usageRecordSummaries(params);
-    assertNotNull(usageRecordSummaries);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v1/subscription_items/si_xxxxxxxxxxxxx/usage_record_summaries",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testSubscriptionItemsUsageRecordSummariesGetServices() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.SubscriptionItemUsageRecordSummaryListParams params =
-        com.stripe.param.SubscriptionItemUsageRecordSummaryListParams.builder()
-            .setLimit(3L)
-            .build();
-
-    com.stripe.model.StripeCollection<com.stripe.model.UsageRecordSummary> stripeCollection =
-        client.subscriptionItems().usageRecordSummaries().list("si_xxxxxxxxxxxxx", params);
-    assertNotNull(stripeCollection);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v1/subscription_items/si_xxxxxxxxxxxxx/usage_record_summaries",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testSubscriptionItemsUsageRecordsPost() throws StripeException {
-    UsageRecordCreateOnSubscriptionItemParams params =
-        UsageRecordCreateOnSubscriptionItemParams.builder()
-            .setQuantity(100L)
-            .setTimestamp(1571252444L)
-            .build();
-
-    UsageRecord usageRecord = UsageRecord.createOnSubscriptionItem("si_xxxxxxxxxxxxx", params);
-    assertNotNull(usageRecord);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/subscription_items/si_xxxxxxxxxxxxx/usage_records",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testSubscriptionItemsUsageRecordsPostServices() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.SubscriptionItemUsageRecordCreateParams params =
-        com.stripe.param.SubscriptionItemUsageRecordCreateParams.builder()
-            .setQuantity(100L)
-            .setTimestamp(1571252444L)
-            .build();
-
-    com.stripe.model.UsageRecord usageRecord =
-        client.subscriptionItems().usageRecords().create("si_xxxxxxxxxxxxx", params);
-    assertNotNull(usageRecord);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/subscription_items/si_xxxxxxxxxxxxx/usage_records",
         params.toMap(),
         null);
   }
