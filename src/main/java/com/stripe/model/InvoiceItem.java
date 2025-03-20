@@ -519,26 +519,11 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
-    @SerializedName("rate_card_subscription_details")
-    RateCardSubscriptionDetails rateCardSubscriptionDetails;
-
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
 
     @SerializedName("type")
     String type;
-
-    /**
-     * For more details about RateCardSubscriptionDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class RateCardSubscriptionDetails extends StripeObject {
-      @SerializedName("rate_card_subscription")
-      String rateCardSubscription;
-    }
 
     /**
      * For more details about SubscriptionDetails, please refer to the <a
