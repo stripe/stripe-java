@@ -417,13 +417,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   ExpandableField<Account> onBehalfOf;
 
   /**
-   * Whether payment was successfully collected for this invoice. An invoice can be paid (most
-   * commonly) with a charge or with credit from the customer's account balance.
-   */
-  @SerializedName("paid")
-  Boolean paid;
-
-  /**
    * Returns true if the invoice was manually marked paid, returns false if the invoice hasn't been
    * paid yet or was paid on Stripe.
    */
