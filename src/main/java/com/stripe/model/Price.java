@@ -622,15 +622,6 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @EqualsAndHashCode(callSuper = false)
   public static class Recurring extends StripeObject {
     /**
-     * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Defaults to
-     * {@code sum}.
-     *
-     * <p>One of {@code last_during_period}, {@code last_ever}, {@code max}, or {@code sum}.
-     */
-    @SerializedName("aggregate_usage")
-    String aggregateUsage;
-
-    /**
      * The frequency at which a subscription is billed. One of {@code day}, {@code week}, {@code
      * month} or {@code year}.
      */

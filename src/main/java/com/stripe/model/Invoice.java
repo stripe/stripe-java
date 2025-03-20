@@ -476,6 +476,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("paid_out_of_band")
   Boolean paidOutOfBand;
 
+  @SerializedName("parent")
+  Parent parent;
+
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
 
@@ -2412,6 +2415,72 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Parent extends StripeObject {
+    @SerializedName("quote_details")
+    QuoteDetails quoteDetails;
+
+    @SerializedName("subscription_details")
+    SubscriptionDetails subscriptionDetails;
+
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about QuoteDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class QuoteDetails extends StripeObject {
+      @SerializedName("quote")
+      String quote;
+    }
+
+    /**
+     * For more details about SubscriptionDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionDetails extends StripeObject {
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      @SerializedName("pause_collection")
+      PauseCollection pauseCollection;
+
+      @SerializedName("subscription")
+      String subscription;
+
+      @SerializedName("subscription_proration_date")
+      Long subscriptionProrationDate;
+
+      /**
+       * For more details about PauseCollection, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PauseCollection extends StripeObject {
+        @SerializedName("behavior")
+        String behavior;
+
+        @SerializedName("resumes_at")
+        Long resumesAt;
+      }
+    }
+  }
+
+  /**
    * For more details about PaymentSettings, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -3197,6 +3266,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(latestRevision, responseGetter);
     trySetResponseGetter(lines, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
+    trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
     trySetResponseGetter(payments, responseGetter);
     trySetResponseGetter(rendering, responseGetter);

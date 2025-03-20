@@ -1400,13 +1400,6 @@ public class PriceCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Recurring {
     /**
-     * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Defaults to
-     * {@code sum}.
-     */
-    @SerializedName("aggregate_usage")
-    AggregateUsage aggregateUsage;
-
-    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1452,14 +1445,12 @@ public class PriceCreateParams extends ApiRequestParams {
     UsageType usageType;
 
     private Recurring(
-        AggregateUsage aggregateUsage,
         Map<String, Object> extraParams,
         Interval interval,
         Long intervalCount,
         String meter,
         Long trialPeriodDays,
         UsageType usageType) {
-      this.aggregateUsage = aggregateUsage;
       this.extraParams = extraParams;
       this.interval = interval;
       this.intervalCount = intervalCount;
@@ -1473,8 +1464,6 @@ public class PriceCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private AggregateUsage aggregateUsage;
-
       private Map<String, Object> extraParams;
 
       private Interval interval;
@@ -1490,22 +1479,12 @@ public class PriceCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PriceCreateParams.Recurring build() {
         return new PriceCreateParams.Recurring(
-            this.aggregateUsage,
             this.extraParams,
             this.interval,
             this.intervalCount,
             this.meter,
             this.trialPeriodDays,
             this.usageType);
-      }
-
-      /**
-       * Specifies a usage aggregation strategy for prices of {@code usage_type=metered}. Defaults
-       * to {@code sum}.
-       */
-      public Builder setAggregateUsage(PriceCreateParams.Recurring.AggregateUsage aggregateUsage) {
-        this.aggregateUsage = aggregateUsage;
-        return this;
       }
 
       /**
@@ -1578,27 +1557,6 @@ public class PriceCreateParams extends ApiRequestParams {
       public Builder setUsageType(PriceCreateParams.Recurring.UsageType usageType) {
         this.usageType = usageType;
         return this;
-      }
-    }
-
-    public enum AggregateUsage implements ApiRequestParams.EnumParam {
-      @SerializedName("last_during_period")
-      LAST_DURING_PERIOD("last_during_period"),
-
-      @SerializedName("last_ever")
-      LAST_EVER("last_ever"),
-
-      @SerializedName("max")
-      MAX("max"),
-
-      @SerializedName("sum")
-      SUM("sum");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      AggregateUsage(String value) {
-        this.value = value;
       }
     }
 

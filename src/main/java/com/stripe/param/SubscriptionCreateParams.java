@@ -67,13 +67,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
   /**
-   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-   * billing period. Pass an empty string to remove previously-defined thresholds.
-   */
-  @SerializedName("billing_thresholds")
-  Object billingThresholds;
-
-  /**
    * A timestamp at which the subscription should cancel. If set to a date before the current period
    * ends, this will cause a proration if prorations have been enabled using {@code
    * proration_behavior}. If set during a future period, this will always cause a proration for that
@@ -306,7 +299,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long backdateStartDate,
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
-      Object billingThresholds,
       Object cancelAt,
       CollectionMethod collectionMethod,
       String currency,
@@ -340,7 +332,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.backdateStartDate = backdateStartDate;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
-    this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.collectionMethod = collectionMethod;
     this.currency = currency;
@@ -386,8 +377,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Long billingCycleAnchor;
 
     private BillingCycleAnchorConfig billingCycleAnchorConfig;
-
-    private Object billingThresholds;
 
     private Object cancelAt;
 
@@ -452,7 +441,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.backdateStartDate,
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
-          this.billingThresholds,
           this.cancelAt,
           this.collectionMethod,
           this.currency,
@@ -573,25 +561,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     public Builder setBillingCycleAnchorConfig(
         SubscriptionCreateParams.BillingCycleAnchorConfig billingCycleAnchorConfig) {
       this.billingCycleAnchorConfig = billingCycleAnchorConfig;
-      return this;
-    }
-
-    /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period. Pass an empty string to remove previously-defined thresholds.
-     */
-    public Builder setBillingThresholds(
-        SubscriptionCreateParams.BillingThresholds billingThresholds) {
-      this.billingThresholds = billingThresholds;
-      return this;
-    }
-
-    /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period. Pass an empty string to remove previously-defined thresholds.
-     */
-    public Builder setBillingThresholds(EmptyParam billingThresholds) {
-      this.billingThresholds = billingThresholds;
       return this;
     }
 
@@ -2192,99 +2161,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingThresholds {
-    /** Monetary threshold that triggers the subscription to advance to a new billing period. */
-    @SerializedName("amount_gte")
-    Long amountGte;
-
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached. If
-     * true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was last
-     * reached; otherwise, the value will remain unchanged.
-     */
-    @SerializedName("reset_billing_cycle_anchor")
-    Boolean resetBillingCycleAnchor;
-
-    private BillingThresholds(
-        Long amountGte, Map<String, Object> extraParams, Boolean resetBillingCycleAnchor) {
-      this.amountGte = amountGte;
-      this.extraParams = extraParams;
-      this.resetBillingCycleAnchor = resetBillingCycleAnchor;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Long amountGte;
-
-      private Map<String, Object> extraParams;
-
-      private Boolean resetBillingCycleAnchor;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public SubscriptionCreateParams.BillingThresholds build() {
-        return new SubscriptionCreateParams.BillingThresholds(
-            this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
-      }
-
-      /** Monetary threshold that triggers the subscription to advance to a new billing period. */
-      public Builder setAmountGte(Long amountGte) {
-        this.amountGte = amountGte;
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionCreateParams.BillingThresholds#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionCreateParams.BillingThresholds#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached.
-       * If true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was
-       * last reached; otherwise, the value will remain unchanged.
-       */
-      public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
-        this.resetBillingCycleAnchor = resetBillingCycleAnchor;
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -2874,13 +2750,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Item {
-    /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period. When updating, pass an empty string to remove previously-defined thresholds.
-     */
-    @SerializedName("billing_thresholds")
-    Object billingThresholds;
-
     /** The coupons to redeem into discounts for the subscription item. */
     @SerializedName("discounts")
     Object discounts;
@@ -2937,7 +2806,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     Trial trial;
 
     private Item(
-        Object billingThresholds,
         Object discounts,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
@@ -2947,7 +2815,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         Long quantity,
         Object taxRates,
         Trial trial) {
-      this.billingThresholds = billingThresholds;
       this.discounts = discounts;
       this.extraParams = extraParams;
       this.metadata = metadata;
@@ -2964,8 +2831,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Object billingThresholds;
-
       private Object discounts;
 
       private Map<String, Object> extraParams;
@@ -2987,7 +2852,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionCreateParams.Item build() {
         return new SubscriptionCreateParams.Item(
-            this.billingThresholds,
             this.discounts,
             this.extraParams,
             this.metadata,
@@ -2997,27 +2861,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
             this.quantity,
             this.taxRates,
             this.trial);
-      }
-
-      /**
-       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period. When updating, pass an empty string to remove previously-defined
-       * thresholds.
-       */
-      public Builder setBillingThresholds(
-          SubscriptionCreateParams.Item.BillingThresholds billingThresholds) {
-        this.billingThresholds = billingThresholds;
-        return this;
-      }
-
-      /**
-       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period. When updating, pass an empty string to remove previously-defined
-       * thresholds.
-       */
-      public Builder setBillingThresholds(EmptyParam billingThresholds) {
-        this.billingThresholds = billingThresholds;
-        return this;
       }
 
       /**
@@ -3195,88 +3038,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       public Builder setTrial(SubscriptionCreateParams.Item.Trial trial) {
         this.trial = trial;
         return this;
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillingThresholds {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /**
-       * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
-       * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-       * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-       * threshold</a>)
-       */
-      @SerializedName("usage_gte")
-      Long usageGte;
-
-      private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
-        this.extraParams = extraParams;
-        this.usageGte = usageGte;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private Long usageGte;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public SubscriptionCreateParams.Item.BillingThresholds build() {
-          return new SubscriptionCreateParams.Item.BillingThresholds(
-              this.extraParams, this.usageGte);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SubscriptionCreateParams.Item.BillingThresholds#extraParams} for the
-         * field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SubscriptionCreateParams.Item.BillingThresholds#extraParams} for the
-         * field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /**
-         * <strong>Required.</strong> Number of units that meets the billing threshold to advance
-         * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-         * threshold</a>)
-         */
-        public Builder setUsageGte(Long usageGte) {
-          this.usageGte = usageGte;
-          return this;
-        }
       }
     }
 
