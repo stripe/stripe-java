@@ -134,8 +134,7 @@ public class InvoicePayment extends StripeObject implements HasId {
     /**
      * Type of payment object associated with this invoice payment.
      *
-     * <p>One of {@code charge}, {@code out_of_band_payment}, {@code payment_intent}, or {@code
-     * payment_record}.
+     * <p>One of {@code charge}, or {@code payment_intent}.
      */
     @SerializedName("type")
     String type;
