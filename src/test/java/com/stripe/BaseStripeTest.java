@@ -20,6 +20,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +33,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 import org.mockito.exceptions.base.MockitoAssertionError;
+import org.mockito.stubbing.Answer;
 
 public class BaseStripeTest {
   private static final String MOCK_MINIMUM_VERSION = "0.109.0";
@@ -346,6 +348,35 @@ public class BaseStripeTest {
                           || new RequestOptionsMatcher(options).matches(req.getOptions()));
                 }),
             Mockito.<Type>any());
+  }
+
+  /**
+   * Stubs an API request. This should rarely be necessary, but some endpoints are not supported by
+   * stripe-mock yet.
+   *
+   * @param method HTTP method (GET, POST or DELETE)
+   * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
+   * @param params map containing the parameters. If null, the parameters are not checked.
+   * @param options request options. If null, the options are not checked.
+   * @param typeToken Class of the API resource that will be returned for the stubbed request.
+   * @param response JSON payload of the API resource that will be returned for the stubbed request.
+   */
+  public static <T extends StripeObjectInterface> void stubRequestReturnError(
+      BaseAddress baseAddress,
+      ApiResource.RequestMethod method,
+      String path,
+      Map<String, Object> params,
+      RequestOptions options,
+      String response,
+      Integer code)
+      throws StripeException {
+
+    Mockito.doAnswer(
+            (Answer<StripeResponse>)
+                invocation ->
+                    new StripeResponse(400, HttpHeaders.of(Collections.emptyMap()), response))
+        .when(httpClientSpy)
+        .request(Mockito.any());
   }
 
   /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
