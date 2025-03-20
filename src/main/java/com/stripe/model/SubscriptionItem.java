@@ -34,6 +34,14 @@ public class SubscriptionItem extends ApiResource
   @SerializedName("created")
   Long created;
 
+  /** The end time of this subscription item's current billing period. */
+  @SerializedName("current_period_end")
+  Long currentPeriodEnd;
+
+  /** The start time of this subscription item's current billing period. */
+  @SerializedName("current_period_start")
+  Long currentPeriodStart;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
