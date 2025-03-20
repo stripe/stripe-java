@@ -185,12 +185,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("id")
   String id;
 
-  /** ID of the invoice that created this PaymentIntent, if it exists. */
-  @SerializedName("invoice")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Invoice> invoice;
-
   /**
    * The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if
    * the PaymentIntent is later updated for any reason.
@@ -429,24 +423,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code invoice} object. */
-  public String getInvoice() {
-    return (this.invoice != null) ? this.invoice.getId() : null;
-  }
-
-  public void setInvoice(String id) {
-    this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
-  }
-
-  /** Get expanded {@code invoice}. */
-  public Invoice getInvoiceObject() {
-    return (this.invoice != null) ? this.invoice.getExpanded() : null;
-  }
-
-  public void setInvoiceObject(Invoice expandableObject) {
-    this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code latestCharge} object. */
@@ -5981,7 +5957,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(asyncWorkflows, responseGetter);
     trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
-    trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(lastPaymentError, responseGetter);
     trySetResponseGetter(latestCharge, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
