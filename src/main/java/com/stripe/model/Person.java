@@ -501,16 +501,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       /**
        * The code for the type of error.
        *
-       * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
-       * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted}, {@code
-       * invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+       * <p>One of {@code information_missing}, {@code invalid_address_city_state_postal_code},
+       * {@code invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox},
+       * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+       * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
        * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
        * invalid_product_description_length}, {@code invalid_product_description_url_match}, {@code
-       * invalid_representative_country}, {@code invalid_statement_descriptor_business_mismatch},
-       * {@code invalid_statement_descriptor_denylisted}, {@code
-       * invalid_statement_descriptor_length}, {@code
-       * invalid_statement_descriptor_prefix_denylisted}, {@code
+       * invalid_representative_country}, {@code invalid_signator}, {@code
+       * invalid_statement_descriptor_business_mismatch}, {@code
+       * invalid_statement_descriptor_denylisted}, {@code invalid_statement_descriptor_length},
+       * {@code invalid_statement_descriptor_prefix_denylisted}, {@code
        * invalid_statement_descriptor_prefix_mismatch}, {@code invalid_street_address}, {@code
        * invalid_tax_id}, {@code invalid_tax_id_format}, {@code invalid_tos_acceptance}, {@code
        * invalid_url_denylisted}, {@code invalid_url_format}, {@code invalid_url_length}, {@code
@@ -545,14 +545,15 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
        * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
        * {@code verification_extraneous_directors}, {@code verification_failed_address_match},
-       * {@code verification_failed_business_iec_number}, {@code
-       * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
-       * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_representative_authority}, {@code
+       * {@code verification_failed_authorizer_authority}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
        * verification_supportability}.
@@ -715,16 +716,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       /**
        * The code for the type of error.
        *
-       * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
-       * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted}, {@code
-       * invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+       * <p>One of {@code information_missing}, {@code invalid_address_city_state_postal_code},
+       * {@code invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox},
+       * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+       * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
        * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
        * invalid_product_description_length}, {@code invalid_product_description_url_match}, {@code
-       * invalid_representative_country}, {@code invalid_statement_descriptor_business_mismatch},
-       * {@code invalid_statement_descriptor_denylisted}, {@code
-       * invalid_statement_descriptor_length}, {@code
-       * invalid_statement_descriptor_prefix_denylisted}, {@code
+       * invalid_representative_country}, {@code invalid_signator}, {@code
+       * invalid_statement_descriptor_business_mismatch}, {@code
+       * invalid_statement_descriptor_denylisted}, {@code invalid_statement_descriptor_length},
+       * {@code invalid_statement_descriptor_prefix_denylisted}, {@code
        * invalid_statement_descriptor_prefix_mismatch}, {@code invalid_street_address}, {@code
        * invalid_tax_id}, {@code invalid_tax_id_format}, {@code invalid_tos_acceptance}, {@code
        * invalid_url_denylisted}, {@code invalid_url_format}, {@code invalid_url_length}, {@code
@@ -759,14 +760,15 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
        * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
        * {@code verification_extraneous_directors}, {@code verification_failed_address_match},
-       * {@code verification_failed_business_iec_number}, {@code
-       * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
-       * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_representative_authority}, {@code
+       * {@code verification_failed_authorizer_authority}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
        * verification_supportability}.

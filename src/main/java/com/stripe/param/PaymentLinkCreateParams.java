@@ -124,6 +124,16 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   String onBehalfOf;
 
   /**
+   * A list of optional items the customer can add to their order at checkout. Use this parameter to
+   * pass one-time or recurring <a href="https://stripe.com/docs/api/prices">Prices</a>. There is a
+   * maximum of 10 optional items allowed on a payment link, and the existing limits on the number
+   * of line items allowed on a payment link apply to the combined number of line items and optional
+   * items. There is a maximum of 20 combined line items and optional items.
+   */
+  @SerializedName("optional_items")
+  List<PaymentLinkCreateParams.OptionalItem> optionalItems;
+
+  /**
    * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
    * payment} mode.
    */
@@ -224,6 +234,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       List<PaymentLinkCreateParams.LineItem> lineItems,
       Map<String, String> metadata,
       String onBehalfOf,
+      List<PaymentLinkCreateParams.OptionalItem> optionalItems,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes,
@@ -253,6 +264,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
+    this.optionalItems = optionalItems;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -307,6 +319,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private String onBehalfOf;
 
+    private List<PaymentLinkCreateParams.OptionalItem> optionalItems;
+
     private PaymentIntentData paymentIntentData;
 
     private PaymentMethodCollection paymentMethodCollection;
@@ -350,6 +364,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.lineItems,
           this.metadata,
           this.onBehalfOf,
+          this.optionalItems,
           this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodTypes,
@@ -587,6 +602,32 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     /** The account on behalf of which to charge. */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
+      return this;
+    }
+
+    /**
+     * Add an element to `optionalItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkCreateParams#optionalItems} for the field documentation.
+     */
+    public Builder addOptionalItem(PaymentLinkCreateParams.OptionalItem element) {
+      if (this.optionalItems == null) {
+        this.optionalItems = new ArrayList<>();
+      }
+      this.optionalItems.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `optionalItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkCreateParams#optionalItems} for the field documentation.
+     */
+    public Builder addAllOptionalItem(List<PaymentLinkCreateParams.OptionalItem> elements) {
+      if (this.optionalItems == null) {
+        this.optionalItems = new ArrayList<>();
+      }
+      this.optionalItems.addAll(elements);
       return this;
     }
 
@@ -3570,6 +3611,246 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         /**
          * The minimum quantity the customer can purchase. By default this value is 0. If there is
          * only one item in the cart then that item's quantity cannot go down to 0.
+         */
+        public Builder setMinimum(Long minimum) {
+          this.minimum = minimum;
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OptionalItem {
+    /**
+     * When set, provides configuration for the customer to adjust the quantity of the line item
+     * created when a customer chooses to add this optional item to their order.
+     */
+    @SerializedName("adjustable_quantity")
+    AdjustableQuantity adjustableQuantity;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> The ID of the <a
+     * href="https://stripe.com/docs/api/prices">Price</a> or <a
+     * href="https://stripe.com/docs/api/plans">Plan</a> object.
+     */
+    @SerializedName("price")
+    String price;
+
+    /**
+     * <strong>Required.</strong> The initial quantity of the line item created when a customer
+     * chooses to add this optional item to their order.
+     */
+    @SerializedName("quantity")
+    Long quantity;
+
+    private OptionalItem(
+        AdjustableQuantity adjustableQuantity,
+        Map<String, Object> extraParams,
+        String price,
+        Long quantity) {
+      this.adjustableQuantity = adjustableQuantity;
+      this.extraParams = extraParams;
+      this.price = price;
+      this.quantity = quantity;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AdjustableQuantity adjustableQuantity;
+
+      private Map<String, Object> extraParams;
+
+      private String price;
+
+      private Long quantity;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkCreateParams.OptionalItem build() {
+        return new PaymentLinkCreateParams.OptionalItem(
+            this.adjustableQuantity, this.extraParams, this.price, this.quantity);
+      }
+
+      /**
+       * When set, provides configuration for the customer to adjust the quantity of the line item
+       * created when a customer chooses to add this optional item to their order.
+       */
+      public Builder setAdjustableQuantity(
+          PaymentLinkCreateParams.OptionalItem.AdjustableQuantity adjustableQuantity) {
+        this.adjustableQuantity = adjustableQuantity;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.OptionalItem#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.OptionalItem#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://stripe.com/docs/api/prices">Price</a> or <a
+       * href="https://stripe.com/docs/api/plans">Plan</a> object.
+       */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The initial quantity of the line item created when a customer
+       * chooses to add this optional item to their order.
+       */
+      public Builder setQuantity(Long quantity) {
+        this.quantity = quantity;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdjustableQuantity {
+      /**
+       * <strong>Required.</strong> Set to true if the quantity can be adjusted to any non-negative
+       * integer.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The maximum quantity of this item the customer can purchase. By default this value is 99.
+       */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum quantity of this item the customer must purchase, if they choose to purchase
+       * it. Because this item is optional, the customer will always be able to remove it from their
+       * order, even if the {@code minimum} configured here is greater than 0. By default this value
+       * is 0.
+       */
+      @SerializedName("minimum")
+      Long minimum;
+
+      private AdjustableQuantity(
+          Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.maximum = maximum;
+        this.minimum = minimum;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Long maximum;
+
+        private Long minimum;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkCreateParams.OptionalItem.AdjustableQuantity build() {
+          return new PaymentLinkCreateParams.OptionalItem.AdjustableQuantity(
+              this.enabled, this.extraParams, this.maximum, this.minimum);
+        }
+
+        /**
+         * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+         * non-negative integer.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.OptionalItem.AdjustableQuantity#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.OptionalItem.AdjustableQuantity#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The maximum quantity of this item the customer can purchase. By default this value is 99.
+         */
+        public Builder setMaximum(Long maximum) {
+          this.maximum = maximum;
+          return this;
+        }
+
+        /**
+         * The minimum quantity of this item the customer must purchase, if they choose to purchase
+         * it. Because this item is optional, the customer will always be able to remove it from
+         * their order, even if the {@code minimum} configured here is greater than 0. By default
+         * this value is 0.
          */
         public Builder setMinimum(Long minimum) {
           this.minimum = minimum;
