@@ -107,6 +107,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("object")
   String object;
 
+  @SerializedName("parent")
+  Parent parent;
+
   @SerializedName("period")
   Period period;
 
@@ -371,6 +374,95 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   }
 
   /**
+   * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Parent extends StripeObject {
+    @SerializedName("invoice_item_details")
+    InvoiceItemDetails invoiceItemDetails;
+
+    @SerializedName("subscription_item_details")
+    SubscriptionItemDetails subscriptionItemDetails;
+
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about InvoiceItemDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InvoiceItemDetails extends StripeObject {
+      @SerializedName("invoice_item")
+      String invoiceItem;
+    }
+
+    /**
+     * For more details about SubscriptionItemDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionItemDetails extends StripeObject {
+      @SerializedName("invoice_item")
+      String invoiceItem;
+
+      /** Whether this is a proration. */
+      @SerializedName("proration")
+      Boolean proration;
+
+      /** Additional details for proration line items. */
+      @SerializedName("proration_details")
+      ProrationDetails prorationDetails;
+
+      @SerializedName("subscription")
+      String subscription;
+
+      @SerializedName("subscription_item")
+      String subscriptionItem;
+
+      /**
+       * For more details about ProrationDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ProrationDetails extends StripeObject {
+        /**
+         * For a credit proration {@code line_item}, the original debit line_items to which the
+         * credit proration applies.
+         */
+        @SerializedName("credited_items")
+        CreditedItems creditedItems;
+
+        /**
+         * For more details about CreditedItems, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CreditedItems extends StripeObject {
+          /** Invoice containing the credited invoice line items. */
+          @SerializedName("invoice")
+          String invoice;
+
+          /** Credited invoice line items. */
+          @SerializedName("invoice_line_items")
+          List<String> invoiceLineItems;
+        }
+      }
+    }
+  }
+
+  /**
    * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -556,6 +648,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
   }
