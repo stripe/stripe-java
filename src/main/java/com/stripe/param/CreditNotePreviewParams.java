@@ -92,10 +92,6 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   @SerializedName("reason")
   Reason reason;
 
-  /** ID of an existing refund to link this credit note to. */
-  @SerializedName("refund")
-  String refund;
-
   /**
    * The integer amount in cents (or local equivalent) representing the amount to refund. If set, a
    * refund will be created for the charge associated with the invoice.
@@ -127,7 +123,6 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       Map<String, String> metadata,
       Long outOfBandAmount,
       Reason reason,
-      String refund,
       Long refundAmount,
       List<CreditNotePreviewParams.Refund> refunds,
       ShippingCost shippingCost) {
@@ -143,7 +138,6 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     this.metadata = metadata;
     this.outOfBandAmount = outOfBandAmount;
     this.reason = reason;
-    this.refund = refund;
     this.refundAmount = refundAmount;
     this.refunds = refunds;
     this.shippingCost = shippingCost;
@@ -178,8 +172,6 @@ public class CreditNotePreviewParams extends ApiRequestParams {
 
     private Reason reason;
 
-    private String refund;
-
     private Long refundAmount;
 
     private List<CreditNotePreviewParams.Refund> refunds;
@@ -201,7 +193,6 @@ public class CreditNotePreviewParams extends ApiRequestParams {
           this.metadata,
           this.outOfBandAmount,
           this.reason,
-          this.refund,
           this.refundAmount,
           this.refunds,
           this.shippingCost);
@@ -375,12 +366,6 @@ public class CreditNotePreviewParams extends ApiRequestParams {
      */
     public Builder setReason(CreditNotePreviewParams.Reason reason) {
       this.reason = reason;
-      return this;
-    }
-
-    /** ID of an existing refund to link this credit note to. */
-    public Builder setRefund(String refund) {
-      this.refund = refund;
       return this;
     }
 
