@@ -133,13 +133,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   ExpandableField<Application> application;
 
   /**
-   * The fee in cents (or local equivalent) that will be applied to the invoice and transferred to
-   * the application owner's Stripe account when the invoice is paid.
-   */
-  @SerializedName("application_fee_amount")
-  Long applicationFeeAmount;
-
-  /**
    * Number of payment attempts made for this invoice, from the perspective of the payment retry
    * schedule. Any payment attempt counts as the first attempt, and subsequently only automatic
    * retries increment the attempt count. In other words, manual payment attempts after the first

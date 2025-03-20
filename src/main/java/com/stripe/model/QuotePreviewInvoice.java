@@ -117,13 +117,6 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
 
-  /**
-   * The fee in cents (or local equivalent) that will be applied to the invoice and transferred to
-   * the application owner's Stripe account when the invoice is paid.
-   */
-  @SerializedName("application_fee_amount")
-  Long applicationFeeAmount;
-
   @SerializedName("applies_to")
   AppliesTo appliesTo;
 
