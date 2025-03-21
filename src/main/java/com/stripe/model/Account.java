@@ -49,11 +49,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   BusinessProfile businessProfile;
 
   /**
-   * The business type. After you create an <a href="https://stripe.com/api/account_links">Account
-   * Link</a> or <a href="https://stripe.com/api/account_sessions">Account Session</a>, this
-   * property is only returned for accounts where <a
-   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
-   * is {@code application}, which includes Custom accounts.
+   * The business type.
    *
    * <p>One of {@code company}, {@code government_entity}, {@code individual}, or {@code
    * non_profit}.
@@ -132,7 +128,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * This is an object representing a person associated with a Stripe account.
    *
-   * <p>A platform cannot access a person for an account where <a
+   * <p>A platform can only access a subset of data in a person for an account where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
    * is {@code stripe}, which includes Standard and Express accounts, after creating an Account Link
    * or Account Session to start Connect onboarding.
@@ -1529,15 +1525,29 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("export_purpose_code")
     String exportPurposeCode;
 
-    /** The company's legal name. */
+    /**
+     * The company's legal name. Also available for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}.
+     */
     @SerializedName("name")
     String name;
 
-    /** The Kana variation of the company's legal name (Japan only). */
+    /**
+     * The Kana variation of the company's legal name (Japan only). Also available for accounts
+     * where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}.
+     */
     @SerializedName("name_kana")
     String nameKana;
 
-    /** The Kanji variation of the company's legal name (Japan only). */
+    /**
+     * The Kanji variation of the company's legal name (Japan only). Also available for accounts
+     * where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}.
+     */
     @SerializedName("name_kanji")
     String nameKanji;
 
@@ -1579,7 +1589,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String phone;
 
     /**
-     * The category identifying the legal structure of the company or legal entity. See <a
+     * The category identifying the legal structure of the company or legal entity. Also available
+     * for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}. See <a
      * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
      * structure</a> for more details.
      *

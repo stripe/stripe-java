@@ -20,7 +20,7 @@ import lombok.Setter;
 /**
  * This is an object representing a person associated with a Stripe account.
  *
- * <p>A platform cannot access a person for an account where <a
+ * <p>A platform can only access a subset of data in a person for an account where <a
  * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
  * is {@code stripe}, which includes Standard and Express accounts, after creating an Account Link
  * or Account Session to start Connect onboarding.
@@ -64,23 +64,46 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("dob")
   Dob dob;
 
-  /** The person's email address. */
+  /**
+   * The person's email address. Also available for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("email")
   String email;
 
-  /** The person's first name. */
+  /**
+   * The person's first name. Also available for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("first_name")
   String firstName;
 
-  /** The Kana variation of the person's first name (Japan only). */
+  /**
+   * The Kana variation of the person's first name (Japan only). Also available for accounts where
+   * <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("first_name_kana")
   String firstNameKana;
 
-  /** The Kanji variation of the person's first name (Japan only). */
+  /**
+   * The Kanji variation of the person's first name (Japan only). Also available for accounts where
+   * <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("first_name_kanji")
   String firstNameKanji;
 
-  /** A list of alternate names or aliases that the person is known by. */
+  /**
+   * A list of alternate names or aliases that the person is known by. Also available for accounts
+   * where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("full_name_aliases")
   List<String> fullNameAliases;
 
@@ -114,15 +137,28 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("id_number_secondary_provided")
   Boolean idNumberSecondaryProvided;
 
-  /** The person's last name. */
+  /**
+   * The person's last name. Also available for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("last_name")
   String lastName;
 
-  /** The Kana variation of the person's last name (Japan only). */
+  /**
+   * The Kana variation of the person's last name (Japan only). Also available for accounts where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("last_name_kana")
   String lastNameKana;
 
-  /** The Kanji variation of the person's last name (Japan only). */
+  /**
+   * The Kanji variation of the person's last name (Japan only). Also available for accounts where
+   * <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+   * is {@code stripe}.
+   */
   @SerializedName("last_name_kanji")
   String lastNameKanji;
 
