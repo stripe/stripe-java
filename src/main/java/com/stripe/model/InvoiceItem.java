@@ -14,6 +14,7 @@ import com.stripe.param.InvoiceItemCreateParams;
 import com.stripe.param.InvoiceItemListParams;
 import com.stripe.param.InvoiceItemRetrieveParams;
 import com.stripe.param.InvoiceItemUpdateParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -134,6 +135,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
 
   @SerializedName("period")
   Period period;
+
+  /** The pricing information of the invoice item. */
+  @SerializedName("pricing")
+  Pricing pricing;
 
   /**
    * Whether the invoice item was created automatically as a proration adjustment when the customer
@@ -561,6 +566,50 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     Long start;
   }
 
+  /**
+   * For more details about Pricing, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Pricing extends StripeObject {
+    @SerializedName("price_details")
+    PriceDetails priceDetails;
+
+    /**
+     * The type of the pricing details.
+     *
+     * <p>Equal to {@code price_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * The unit amount (in the {@code currency} specified) of the item which contains a decimal
+     * value with at most 12 decimal places.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
+
+    /**
+     * For more details about PriceDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PriceDetails extends StripeObject {
+      /** The ID of the price this item is associated with. */
+      @SerializedName("price")
+      String price;
+
+      /** The ID of the product this item is associated with. */
+      @SerializedName("product")
+      String product;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -568,6 +617,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
+    trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }
 }

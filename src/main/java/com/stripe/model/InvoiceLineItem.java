@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.InvoiceLineItemUpdateParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -118,6 +119,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
    */
   @SerializedName("pretax_credit_amounts")
   List<InvoiceLineItem.PretaxCreditAmount> pretaxCreditAmounts;
+
+  /** The pricing information of the line item. */
+  @SerializedName("pricing")
+  Pricing pricing;
 
   /** The quantity of the subscription, if the line item is a subscription or a proration. */
   @SerializedName("quantity")
@@ -624,6 +629,50 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   }
 
   /**
+   * For more details about Pricing, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Pricing extends StripeObject {
+    @SerializedName("price_details")
+    PriceDetails priceDetails;
+
+    /**
+     * The type of the pricing details.
+     *
+     * <p>Equal to {@code price_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * The unit amount (in the {@code currency} specified) of the item which contains a decimal
+     * value with at most 12 decimal places.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
+
+    /**
+     * For more details about PriceDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PriceDetails extends StripeObject {
+      /** The ID of the price this item is associated with. */
+      @SerializedName("price")
+      String price;
+
+      /** The ID of the product this item is associated with. */
+      @SerializedName("product")
+      String product;
+    }
+  }
+
+  /**
    * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -694,6 +743,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
+    trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
   }
 }
