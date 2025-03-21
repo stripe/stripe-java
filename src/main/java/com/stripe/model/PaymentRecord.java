@@ -623,6 +623,9 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("naver_pay")
     NaverPay naverPay;
 
+    @SerializedName("nz_bank_account")
+    NzBankAccount nzBankAccount;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -2327,6 +2330,42 @@ public class PaymentRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+    }
+
+    /**
+     * For more details about NzBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccount extends StripeObject {
+      /**
+       * The name on the bank account. Only present if the account holder name is different from the
+       * name of the authorized signatory collected in the PaymentMethod’s billing details.
+       */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The numeric code for the bank account's bank. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** The name of the bank. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The numeric code for the bank account's bank branch. */
+      @SerializedName("branch_code")
+      String branchCode;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** The suffix of the bank account number. */
+      @SerializedName("suffix")
+      String suffix;
     }
 
     /**

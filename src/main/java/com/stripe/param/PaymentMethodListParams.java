@@ -306,6 +306,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     @SerializedName("naver_pay")
     NAVER_PAY("naver_pay"),
 
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 

@@ -649,6 +649,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("mx_bank_transfer")
     MxBankTransfer mxBankTransfer;
 
+    @SerializedName("nz_bank_transfer")
+    NzBankTransfer nzBankTransfer;
+
     @SerializedName("p24")
     P24 p24;
 
@@ -996,6 +999,15 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       @SerializedName("reference_status")
       String referenceStatus;
     }
+
+    /**
+     * For more details about NzBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NzBankTransfer extends StripeObject {}
 
     /**
      * For more details about P24, please refer to the <a href="https://docs.stripe.com/api">API
