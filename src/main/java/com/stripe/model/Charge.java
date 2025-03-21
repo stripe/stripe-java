@@ -167,12 +167,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("id")
   String id;
 
-  /** ID of the invoice this charge is for if one exists. */
-  @SerializedName("invoice")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Invoice> invoice;
-
   @SerializedName("level3")
   Level3 level3;
 
@@ -453,24 +447,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public void setFailureBalanceTransactionObject(BalanceTransaction expandableObject) {
     this.failureBalanceTransaction =
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code invoice} object. */
-  public String getInvoice() {
-    return (this.invoice != null) ? this.invoice.getId() : null;
-  }
-
-  public void setInvoice(String id) {
-    this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
-  }
-
-  /** Get expanded {@code invoice}. */
-  public Invoice getInvoiceObject() {
-    return (this.invoice != null) ? this.invoice.getExpanded() : null;
-  }
-
-  public void setInvoiceObject(Invoice expandableObject) {
-    this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code onBehalfOf} object. */
@@ -4165,7 +4141,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(fraudDetails, responseGetter);
-    trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(level3, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(outcome, responseGetter);
