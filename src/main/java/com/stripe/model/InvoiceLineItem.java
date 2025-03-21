@@ -400,6 +400,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     public static class InvoiceItemDetails extends StripeObject {
       @SerializedName("invoice_item")
       String invoiceItem;
+
+      @SerializedName("subscription")
+      String subscription;
     }
 
     /**
