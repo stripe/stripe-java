@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The total amount to attempt to refund. This amount is in the
@@ -202,6 +204,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class MerchantData {
     /**
      * A categorization of the seller's type of business. See our <a
@@ -1324,6 +1327,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PurchaseDetails {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1496,6 +1500,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Fleet {
       /**
        * Answers to prompts presented to the cardholder at the point of sale. Prompted fields vary
@@ -1646,6 +1651,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CardholderPromptData {
         /** Driver ID. */
         @SerializedName("driver_id")
@@ -1793,6 +1799,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ReportedBreakdown {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1900,6 +1907,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Fuel {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1982,6 +1990,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class NonFuel {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -2063,6 +2072,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Tax {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -2205,6 +2215,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Flight {
       /** The time that the flight departed. */
       @SerializedName("departure_at")
@@ -2362,6 +2373,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Segment {
         /** The three-letter IATA airport code of the flight's destination. */
         @SerializedName("arrival_airport_code")
@@ -2515,6 +2527,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Fuel {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2740,6 +2753,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Lodging {
       /** The time of checking into the lodging. */
       @SerializedName("check_in_at")
@@ -2826,6 +2840,7 @@ public class TransactionCreateUnlinkedRefundParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Receipt {
       @SerializedName("description")
       String description;

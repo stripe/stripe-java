@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class TransactionCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The amount of the transaction. A negative amount deducts funds, and
@@ -274,6 +276,7 @@ public class TransactionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CreatedBy {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -354,6 +357,7 @@ public class TransactionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payment {
       /**
        * Map of extra parameters for custom features not available in this client library. The

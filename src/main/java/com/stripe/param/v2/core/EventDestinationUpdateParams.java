@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class EventDestinationUpdateParams extends ApiRequestParams {
   /** An optional description of what the event destination is used for. */
   @SerializedName("description")
@@ -250,6 +252,7 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class WebhookEndpoint {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

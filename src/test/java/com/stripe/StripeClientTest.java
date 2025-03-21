@@ -112,6 +112,19 @@ public class StripeClientTest extends BaseStripeTest {
   }
 
   @Test
+  public void clientOptionsWithStripeContext() {
+    StripeResponseGetterOptions options = StripeClient.builder().setApiKey("sk_123").buildOptions();
+
+    assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, options.getConnectTimeout());
+    assertEquals(Stripe.DEFAULT_READ_TIMEOUT, options.getReadTimeout());
+    assertEquals(Stripe.LIVE_API_BASE, options.getApiBase());
+    assertEquals(Stripe.CONNECT_API_BASE, options.getConnectBase());
+    assertEquals(Stripe.UPLOAD_API_BASE, options.getFilesBase());
+    assertEquals(Stripe.METER_EVENTS_API_BASE, options.getMeterEventsBase());
+    assertEquals(0, options.getMaxNetworkRetries());
+  }
+
+  @Test
   public void checksWebhookSignature()
       throws InvalidKeyException, NoSuchAlgorithmException, SignatureVerificationException {
     StripeClient client = new StripeClient("sk_123");
@@ -217,5 +230,51 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals("fa_123", baseThinEvent.relatedObject.id);
     assertEquals("financial_account", baseThinEvent.relatedObject.type);
     assertEquals("/v2/financial_accounts/fa_123", baseThinEvent.relatedObject.url);
+  }
+
+  @Test
+  public void stripeClientWithStripeAccount() throws StripeException {
+
+    StripeResponseGetterOptions options =
+        StripeClient.builder()
+            .setStripeAccount("acct")
+            .setApiKey(TEST_API_KEY)
+            .setApiBase(getStripeMockUrl())
+            .buildOptions();
+
+    httpClientSpy = Mockito.spy(new HttpURLConnectionClient());
+    networkSpy = Mockito.spy(new LiveStripeResponseGetter(options, httpClientSpy));
+    mockClient = new StripeClient(networkSpy);
+
+    mockClient.customers().create();
+
+    verifyStripeRequest(
+        (stripeRequest) -> {
+          assert (stripeRequest.headers().firstValue("Stripe-Account").isPresent());
+          assertEquals("acct", stripeRequest.headers().firstValue("Stripe-Account").get());
+        });
+  }
+
+  @Test
+  public void stripeClientWithStripeContextInV1Api() throws StripeException {
+
+    StripeResponseGetterOptions options =
+        StripeClient.builder()
+            .setStripeContext("ctx")
+            .setApiKey(TEST_API_KEY)
+            .setApiBase(getStripeMockUrl())
+            .buildOptions();
+
+    httpClientSpy = Mockito.spy(new HttpURLConnectionClient());
+    networkSpy = Mockito.spy(new LiveStripeResponseGetter(options, httpClientSpy));
+    mockClient = new StripeClient(networkSpy);
+
+    mockClient.customers().create();
+
+    verifyStripeRequest(
+        (stripeRequest) -> {
+          assert (stripeRequest.headers().firstValue("Stripe-Context").isPresent());
+          assertEquals("ctx", stripeRequest.headers().firstValue("Stripe-Context").get());
+        });
   }
 }

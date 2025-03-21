@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditUnderwritingRecordReportDecisionParams extends ApiRequestParams {
   /** <strong>Required.</strong> Date when a decision was made. */
   @SerializedName("decided_at")
@@ -222,6 +224,7 @@ public class CreditUnderwritingRecordReportDecisionParams extends ApiRequestPara
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Decision {
     /** Details about the application rejection. */
     @SerializedName("application_rejected")
@@ -334,6 +337,7 @@ public class CreditUnderwritingRecordReportDecisionParams extends ApiRequestPara
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ApplicationRejected {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -654,6 +658,7 @@ public class CreditUnderwritingRecordReportDecisionParams extends ApiRequestPara
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CreditLimitApproved {
       /**
        * <strong>Required.</strong> The credit approved, in the currency of the account and <a
@@ -768,6 +773,7 @@ public class CreditUnderwritingRecordReportDecisionParams extends ApiRequestPara
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class UnderwritingException {
     /** <strong>Required.</strong> Written explanation for the exception. */
     @SerializedName("explanation")

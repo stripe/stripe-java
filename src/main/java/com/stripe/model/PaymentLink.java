@@ -163,6 +163,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  /** The optional items presented to the customer at checkout. */
+  @SerializedName("optional_items")
+  List<PaymentLink.OptionalItem> optionalItems;
+
   /** Indicates the parameters to be passed to PaymentIntent creation during checkout. */
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
@@ -681,6 +685,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown extends StripeObject {
+      /** The value that will pre-fill on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The options available for the customer to select. Up to 200 options allowed. */
       @SerializedName("options")
       List<PaymentLink.CustomField.Dropdown.Option> options;
@@ -736,6 +744,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric extends StripeObject {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The maximum character length constraint for the customer's input. */
       @SerializedName("maximum_length")
       Long maximumLength;
@@ -753,6 +765,10 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Text extends StripeObject {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /** The maximum character length constraint for the customer's input. */
       @SerializedName("maximum_length")
       Long maximumLength;
@@ -1017,6 +1033,52 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
         @SerializedName("amount_tax_display")
         String amountTaxDisplay;
       }
+    }
+  }
+
+  /**
+   * For more details about OptionalItem, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OptionalItem extends StripeObject {
+    @SerializedName("adjustable_quantity")
+    AdjustableQuantity adjustableQuantity;
+
+    @SerializedName("price")
+    String price;
+
+    @SerializedName("quantity")
+    Long quantity;
+
+    /**
+     * For more details about AdjustableQuantity, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdjustableQuantity extends StripeObject {
+      /** Set to true if the quantity can be adjusted to any non-negative integer. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * The maximum quantity of this item the customer can purchase. By default this value is 99.
+       */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum quantity of this item the customer must purchase, if they choose to purchase
+       * it. Because this item is optional, the customer will always be able to remove it from their
+       * order, even if the {@code minimum} configured here is greater than 0. By default this value
+       * is 0.
+       */
+      @SerializedName("minimum")
+      Long minimum;
     }
   }
 

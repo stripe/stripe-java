@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ReaderCollectInputsParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -173,6 +175,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Input {
     /**
      * <strong>Required.</strong> Customize the text which will be displayed while collecting this
@@ -330,6 +333,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomText {
       /** The description which will be displayed when collecting this input. */
       @SerializedName("description")
@@ -447,6 +451,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Selection {
       /** <strong>Required.</strong> List of choices for the {@code selection} input */
       @SerializedName("choices")
@@ -539,6 +544,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Choice {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -642,6 +648,7 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Toggle {
       /** The default value of the toggle. */
       @SerializedName("default_value")

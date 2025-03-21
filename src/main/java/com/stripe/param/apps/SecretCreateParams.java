@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SecretCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -162,6 +164,7 @@ public class SecretCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Scope {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

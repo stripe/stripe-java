@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
   /** Configuration overrides. */
   @SerializedName("collect_config")
@@ -128,6 +130,7 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CollectConfig {
     /**
      * This field indicates whether this payment method can be shown again to its customer in a
@@ -254,6 +257,7 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Tipping {
       /**
        * Amount used to calculate tip suggestions on tipping selection screen for this transaction.

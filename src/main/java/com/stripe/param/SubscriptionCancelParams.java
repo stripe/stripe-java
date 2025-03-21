@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionCancelParams extends ApiRequestParams {
   /** Details about why this subscription was cancelled. */
   @SerializedName("cancellation_details")
@@ -156,6 +158,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CancellationDetails {
     /**
      * Additional comments about why the user canceled the subscription, if the subscription was

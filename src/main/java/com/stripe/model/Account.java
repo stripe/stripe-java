@@ -49,11 +49,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   BusinessProfile businessProfile;
 
   /**
-   * The business type. After you create an <a href="https://stripe.com/api/account_links">Account
-   * Link</a> or <a href="https://stripe.com/api/account_sessions">Account Session</a>, this
-   * property is only returned for accounts where <a
-   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
-   * is {@code application}, which includes Custom accounts.
+   * The business type.
    *
    * <p>One of {@code company}, {@code government_entity}, {@code individual}, or {@code
    * non_profit}.
@@ -132,7 +128,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * This is an object representing a person associated with a Stripe account.
    *
-   * <p>A platform cannot access a person for an account where <a
+   * <p>A platform can only access a subset of data in a person for an account where <a
    * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">account.controller.requirement_collection</a>
    * is {@code stripe}, which includes Standard and Express accounts, after creating an Account Link
    * or Account Session to start Connect onboarding.
@@ -950,6 +946,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String bankTransferPayments;
 
     /**
+     * The status of the Billie capability of the account, or whether the account can directly
+     * process Billie payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("billie_payments")
+    String billiePayments;
+
+    /**
      * The status of the blik payments capability of the account, or whether the account can
      * directly process blik charges.
      *
@@ -1317,6 +1322,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String samsungPayPayments;
 
     /**
+     * The status of the Satispay capability of the account, or whether the account can directly
+     * process Satispay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("satispay_payments")
+    String satispayPayments;
+
+    /**
      * The status of the SEPA customer_balance payments (EUR currency) capability of the account, or
      * whether the account can directly process SEPA customer_balance charges.
      *
@@ -1511,15 +1525,29 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("export_purpose_code")
     String exportPurposeCode;
 
-    /** The company's legal name. */
+    /**
+     * The company's legal name. Also available for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}.
+     */
     @SerializedName("name")
     String name;
 
-    /** The Kana variation of the company's legal name (Japan only). */
+    /**
+     * The Kana variation of the company's legal name (Japan only). Also available for accounts
+     * where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}.
+     */
     @SerializedName("name_kana")
     String nameKana;
 
-    /** The Kanji variation of the company's legal name (Japan only). */
+    /**
+     * The Kanji variation of the company's legal name (Japan only). Also available for accounts
+     * where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}.
+     */
     @SerializedName("name_kanji")
     String nameKanji;
 
@@ -1542,6 +1570,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("ownership_declaration")
     OwnershipDeclaration ownershipDeclaration;
 
+    /**
+     * This value is used to determine if a business is exempt from providing ultimate beneficial
+     * owners. See <a
+     * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+     * support article</a> and <a
+     * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+     * for more details.
+     *
+     * <p>One of {@code qualified_entity_exceeds_ownership_threshold}, or {@code
+     * qualifies_as_financial_institution}.
+     */
     @SerializedName("ownership_exemption_reason")
     String ownershipExemptionReason;
 
@@ -1550,7 +1589,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String phone;
 
     /**
-     * The category identifying the legal structure of the company or legal entity. See <a
+     * The category identifying the legal structure of the company or legal entity. Also available
+     * for accounts where <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code stripe}. See <a
      * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
      * structure</a> for more details.
      *
@@ -2064,16 +2106,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /**
        * The code for the type of error.
        *
-       * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
-       * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted}, {@code
-       * invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+       * <p>One of {@code information_missing}, {@code invalid_address_city_state_postal_code},
+       * {@code invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox},
+       * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+       * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
        * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
        * invalid_product_description_length}, {@code invalid_product_description_url_match}, {@code
-       * invalid_representative_country}, {@code invalid_statement_descriptor_business_mismatch},
-       * {@code invalid_statement_descriptor_denylisted}, {@code
-       * invalid_statement_descriptor_length}, {@code
-       * invalid_statement_descriptor_prefix_denylisted}, {@code
+       * invalid_representative_country}, {@code invalid_signator}, {@code
+       * invalid_statement_descriptor_business_mismatch}, {@code
+       * invalid_statement_descriptor_denylisted}, {@code invalid_statement_descriptor_length},
+       * {@code invalid_statement_descriptor_prefix_denylisted}, {@code
        * invalid_statement_descriptor_prefix_mismatch}, {@code invalid_street_address}, {@code
        * invalid_tax_id}, {@code invalid_tax_id_format}, {@code invalid_tos_acceptance}, {@code
        * invalid_url_denylisted}, {@code invalid_url_format}, {@code invalid_url_length}, {@code
@@ -2108,14 +2150,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
        * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
        * {@code verification_extraneous_directors}, {@code verification_failed_address_match},
-       * {@code verification_failed_business_iec_number}, {@code
-       * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
-       * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_representative_authority}, {@code
+       * {@code verification_failed_authorizer_authority}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
        * verification_supportability}.
@@ -2264,16 +2307,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /**
        * The code for the type of error.
        *
-       * <p>One of {@code invalid_address_city_state_postal_code}, {@code
-       * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
-       * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted}, {@code
-       * invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+       * <p>One of {@code information_missing}, {@code invalid_address_city_state_postal_code},
+       * {@code invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox},
+       * {@code invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted},
+       * {@code invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
        * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
        * invalid_product_description_length}, {@code invalid_product_description_url_match}, {@code
-       * invalid_representative_country}, {@code invalid_statement_descriptor_business_mismatch},
-       * {@code invalid_statement_descriptor_denylisted}, {@code
-       * invalid_statement_descriptor_length}, {@code
-       * invalid_statement_descriptor_prefix_denylisted}, {@code
+       * invalid_representative_country}, {@code invalid_signator}, {@code
+       * invalid_statement_descriptor_business_mismatch}, {@code
+       * invalid_statement_descriptor_denylisted}, {@code invalid_statement_descriptor_length},
+       * {@code invalid_statement_descriptor_prefix_denylisted}, {@code
        * invalid_statement_descriptor_prefix_mismatch}, {@code invalid_street_address}, {@code
        * invalid_tax_id}, {@code invalid_tax_id_format}, {@code invalid_tos_acceptance}, {@code
        * invalid_url_denylisted}, {@code invalid_url_format}, {@code invalid_url_length}, {@code
@@ -2308,14 +2351,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
        * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
        * {@code verification_extraneous_directors}, {@code verification_failed_address_match},
-       * {@code verification_failed_business_iec_number}, {@code
-       * verification_failed_document_match}, {@code verification_failed_id_number_match}, {@code
-       * verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_representative_authority}, {@code
+       * {@code verification_failed_authorizer_authority}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
        * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
        * verification_supportability}.
@@ -2715,6 +2759,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("default_account_tax_ids")
       List<ExpandableField<TaxId>> defaultAccountTaxIds;
+
+      /**
+       * Whether payment methods should be saved when a payment is completed for a one-time invoices
+       * on a hosted invoice page.
+       *
+       * <p>One of {@code always}, {@code never}, or {@code offer}.
+       */
+      @SerializedName("hosted_payment_method_save")
+      String hostedPaymentMethodSave;
 
       /** Get IDs of expandable {@code defaultAccountTaxIds} object list. */
       public List<String> getDefaultAccountTaxIds() {

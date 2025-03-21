@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class FormListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -210,6 +212,7 @@ public class FormListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Payee {
     /** The ID of the Stripe account whose forms will be retrieved. */
     @SerializedName("account")

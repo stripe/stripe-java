@@ -29,5 +29,7 @@ public abstract class StripeResponseGetterOptions {
 
   public abstract int getReadTimeout();
 
+  public abstract String getStripeAccount();
+
   public abstract String getStripeContext();
 }

@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentLinkCreateParams extends ApiRequestParams {
   /** Behavior after the purchase is complete. */
   @SerializedName("after_completion")
@@ -122,6 +124,16 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   String onBehalfOf;
 
   /**
+   * A list of optional items the customer can add to their order at checkout. Use this parameter to
+   * pass one-time or recurring <a href="https://stripe.com/docs/api/prices">Prices</a>. There is a
+   * maximum of 10 optional items allowed on a payment link, and the existing limits on the number
+   * of line items allowed on a payment link apply to the combined number of line items and optional
+   * items. There is a maximum of 20 combined line items and optional items.
+   */
+  @SerializedName("optional_items")
+  List<PaymentLinkCreateParams.OptionalItem> optionalItems;
+
+  /**
    * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
    * payment} mode.
    */
@@ -222,6 +234,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       List<PaymentLinkCreateParams.LineItem> lineItems,
       Map<String, String> metadata,
       String onBehalfOf,
+      List<PaymentLinkCreateParams.OptionalItem> optionalItems,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes,
@@ -251,6 +264,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
+    this.optionalItems = optionalItems;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -305,6 +319,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     private String onBehalfOf;
 
+    private List<PaymentLinkCreateParams.OptionalItem> optionalItems;
+
     private PaymentIntentData paymentIntentData;
 
     private PaymentMethodCollection paymentMethodCollection;
@@ -348,6 +364,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.lineItems,
           this.metadata,
           this.onBehalfOf,
+          this.optionalItems,
           this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodTypes,
@@ -589,6 +606,32 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `optionalItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkCreateParams#optionalItems} for the field documentation.
+     */
+    public Builder addOptionalItem(PaymentLinkCreateParams.OptionalItem element) {
+      if (this.optionalItems == null) {
+        this.optionalItems = new ArrayList<>();
+      }
+      this.optionalItems.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `optionalItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentLinkCreateParams#optionalItems} for the field documentation.
+     */
+    public Builder addAllOptionalItem(List<PaymentLinkCreateParams.OptionalItem> elements) {
+      if (this.optionalItems == null) {
+        this.optionalItems = new ArrayList<>();
+      }
+      this.optionalItems.addAll(elements);
+      return this;
+    }
+
+    /**
      * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
      * payment} mode.
      */
@@ -729,6 +772,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AfterCompletion {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -835,6 +879,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class HostedConfirmation {
       /** A custom message to display to the customer after the purchase is complete. */
       @SerializedName("custom_message")
@@ -906,6 +951,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Redirect {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1004,6 +1050,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Set to {@code true} to <a
@@ -1107,6 +1154,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Liability {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -1207,6 +1255,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ConsentCollection {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1337,6 +1386,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentMethodReuseAgreement {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1468,6 +1518,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomField {
     /** Configuration for {@code type=dropdown} fields. */
     @SerializedName("dropdown")
@@ -1641,7 +1692,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
+      /**
+       * The value that will pre-fill the field on the payment page.Must match a {@code value} in
+       * the {@code options} array.
+       */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1659,8 +1718,10 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       List<PaymentLinkCreateParams.CustomField.Dropdown.Option> options;
 
       private Dropdown(
+          String defaultValue,
           Map<String, Object> extraParams,
           List<PaymentLinkCreateParams.CustomField.Dropdown.Option> options) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.options = options;
       }
@@ -1670,13 +1731,25 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String defaultValue;
+
         private Map<String, Object> extraParams;
 
         private List<PaymentLinkCreateParams.CustomField.Dropdown.Option> options;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentLinkCreateParams.CustomField.Dropdown build() {
-          return new PaymentLinkCreateParams.CustomField.Dropdown(this.extraParams, this.options);
+          return new PaymentLinkCreateParams.CustomField.Dropdown(
+              this.defaultValue, this.extraParams, this.options);
+        }
+
+        /**
+         * The value that will pre-fill the field on the payment page.Must match a {@code value} in
+         * the {@code options} array.
+         */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -1736,6 +1809,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Option {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1836,6 +1910,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Label {
       /**
        * <strong>Required.</strong> Custom text for the label, displayed to the customer. Up to 50
@@ -1938,7 +2013,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Numeric {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1956,7 +2036,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName("minimum_length")
       Long minimumLength;
 
-      private Numeric(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+      private Numeric(
+          String defaultValue,
+          Map<String, Object> extraParams,
+          Long maximumLength,
+          Long minimumLength) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.maximumLength = maximumLength;
         this.minimumLength = minimumLength;
@@ -1967,6 +2052,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String defaultValue;
+
         private Map<String, Object> extraParams;
 
         private Long maximumLength;
@@ -1976,7 +2063,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentLinkCreateParams.CustomField.Numeric build() {
           return new PaymentLinkCreateParams.CustomField.Numeric(
-              this.extraParams, this.maximumLength, this.minimumLength);
+              this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -2022,7 +2115,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Text {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      String defaultValue;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2040,7 +2138,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName("minimum_length")
       Long minimumLength;
 
-      private Text(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+      private Text(
+          String defaultValue,
+          Map<String, Object> extraParams,
+          Long maximumLength,
+          Long minimumLength) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.maximumLength = maximumLength;
         this.minimumLength = minimumLength;
@@ -2051,6 +2154,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private String defaultValue;
+
         private Map<String, Object> extraParams;
 
         private Long maximumLength;
@@ -2060,7 +2165,13 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentLinkCreateParams.CustomField.Text build() {
           return new PaymentLinkCreateParams.CustomField.Text(
-              this.extraParams, this.maximumLength, this.minimumLength);
+              this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -2125,6 +2236,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomText {
     /** Custom text that should be displayed after the payment confirmation button. */
     @SerializedName("after_submit")
@@ -2275,6 +2387,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AfterSubmit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2345,6 +2458,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingAddress {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2416,6 +2530,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Submit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2486,6 +2601,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TermsOfServiceAcceptance {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2558,6 +2674,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class InvoiceCreation {
     /** <strong>Required.</strong> Whether the feature is enabled */
     @SerializedName("enabled")
@@ -2642,6 +2759,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceData {
       /** The account tax IDs associated with the invoice. */
       @SerializedName("account_tax_ids")
@@ -2951,6 +3069,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CustomField {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3049,6 +3168,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -3150,6 +3270,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class RenderingOptions {
         /**
          * How line-item prices and amounts will be displayed with respect to tax on invoice PDFs.
@@ -3268,6 +3389,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
     /**
      * When set, provides configuration for this item’s quantity to be adjusted by the customer
@@ -3381,6 +3503,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AdjustableQuantity {
       /**
        * <strong>Required.</strong> Set to true if the quantity can be adjusted to any non-negative
@@ -3498,6 +3621,247 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OptionalItem {
+    /**
+     * When set, provides configuration for the customer to adjust the quantity of the line item
+     * created when a customer chooses to add this optional item to their order.
+     */
+    @SerializedName("adjustable_quantity")
+    AdjustableQuantity adjustableQuantity;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> The ID of the <a
+     * href="https://stripe.com/docs/api/prices">Price</a> or <a
+     * href="https://stripe.com/docs/api/plans">Plan</a> object.
+     */
+    @SerializedName("price")
+    String price;
+
+    /**
+     * <strong>Required.</strong> The initial quantity of the line item created when a customer
+     * chooses to add this optional item to their order.
+     */
+    @SerializedName("quantity")
+    Long quantity;
+
+    private OptionalItem(
+        AdjustableQuantity adjustableQuantity,
+        Map<String, Object> extraParams,
+        String price,
+        Long quantity) {
+      this.adjustableQuantity = adjustableQuantity;
+      this.extraParams = extraParams;
+      this.price = price;
+      this.quantity = quantity;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AdjustableQuantity adjustableQuantity;
+
+      private Map<String, Object> extraParams;
+
+      private String price;
+
+      private Long quantity;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkCreateParams.OptionalItem build() {
+        return new PaymentLinkCreateParams.OptionalItem(
+            this.adjustableQuantity, this.extraParams, this.price, this.quantity);
+      }
+
+      /**
+       * When set, provides configuration for the customer to adjust the quantity of the line item
+       * created when a customer chooses to add this optional item to their order.
+       */
+      public Builder setAdjustableQuantity(
+          PaymentLinkCreateParams.OptionalItem.AdjustableQuantity adjustableQuantity) {
+        this.adjustableQuantity = adjustableQuantity;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkCreateParams.OptionalItem#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkCreateParams.OptionalItem#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://stripe.com/docs/api/prices">Price</a> or <a
+       * href="https://stripe.com/docs/api/plans">Plan</a> object.
+       */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The initial quantity of the line item created when a customer
+       * chooses to add this optional item to their order.
+       */
+      public Builder setQuantity(Long quantity) {
+        this.quantity = quantity;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdjustableQuantity {
+      /**
+       * <strong>Required.</strong> Set to true if the quantity can be adjusted to any non-negative
+       * integer.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The maximum quantity of this item the customer can purchase. By default this value is 99.
+       */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum quantity of this item the customer must purchase, if they choose to purchase
+       * it. Because this item is optional, the customer will always be able to remove it from their
+       * order, even if the {@code minimum} configured here is greater than 0. By default this value
+       * is 0.
+       */
+      @SerializedName("minimum")
+      Long minimum;
+
+      private AdjustableQuantity(
+          Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.maximum = maximum;
+        this.minimum = minimum;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Long maximum;
+
+        private Long minimum;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkCreateParams.OptionalItem.AdjustableQuantity build() {
+          return new PaymentLinkCreateParams.OptionalItem.AdjustableQuantity(
+              this.enabled, this.extraParams, this.maximum, this.minimum);
+        }
+
+        /**
+         * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+         * non-negative integer.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.OptionalItem.AdjustableQuantity#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.OptionalItem.AdjustableQuantity#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The maximum quantity of this item the customer can purchase. By default this value is 99.
+         */
+        public Builder setMaximum(Long maximum) {
+          this.maximum = maximum;
+          return this;
+        }
+
+        /**
+         * The minimum quantity of this item the customer must purchase, if they choose to purchase
+         * it. Because this item is optional, the customer will always be able to remove it from
+         * their order, even if the {@code minimum} configured here is greater than 0. By default
+         * this value is 0.
+         */
+        public Builder setMinimum(Long minimum) {
+          this.minimum = minimum;
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentIntentData {
     /** Controls when the funds will be captured from the customer's account. */
     @SerializedName("capture_method")
@@ -3800,6 +4164,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PhoneNumberCollection {
     /** <strong>Required.</strong> Set to {@code true} to enable phone number collection. */
     @SerializedName("enabled")
@@ -3869,6 +4234,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Restrictions {
     /**
      * <strong>Required.</strong> Configuration for the {@code completed_sessions} restriction type.
@@ -3942,6 +4308,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompletedSessions {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4020,6 +4387,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingAddressCollection {
     /**
      * <strong>Required.</strong> An array of two-letter ISO country codes representing which
@@ -4843,6 +5211,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingOption {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -4911,6 +5280,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData {
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
@@ -5085,6 +5455,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InvoiceSettings {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5162,6 +5533,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Issuer {
         /** The connected account being referenced when {@code type} is {@code account}. */
         @SerializedName("account")
@@ -5266,6 +5638,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TrialSettings {
       /**
        * <strong>Required.</strong> Defines how the subscription should behave when the user's free
@@ -5343,6 +5716,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5447,6 +5821,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TaxIdCollection {
     /**
      * <strong>Required.</strong> Enable tax ID collection during checkout. Defaults to {@code
@@ -5551,6 +5926,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")
@@ -5709,6 +6085,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
 
+    @SerializedName("billie")
+    BILLIE("billie"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -5786,6 +6165,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     @SerializedName("rechnung")
     RECHNUNG("rechnung"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

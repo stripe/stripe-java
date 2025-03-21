@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ProductCreateParams extends ApiRequestParams {
   /** Whether the product is currently available for purchase. Defaults to {@code true}. */
   @SerializedName("active")
@@ -464,6 +466,7 @@ public class ProductCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class DefaultPriceData {
     /**
      * <strong>Required.</strong> Three-letter <a
@@ -740,6 +743,7 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CurrencyOption {
       /**
        * When set, provides configuration for the amount to be adjusted by the customer during
@@ -933,6 +937,7 @@ public class ProductCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class CustomUnitAmount {
         /**
          * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
@@ -1063,6 +1068,7 @@ public class ProductCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Tier {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1270,6 +1276,7 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomUnitAmount {
       /**
        * <strong>Required.</strong> Pass in {@code true} to enable {@code custom_unit_amount},
@@ -1397,6 +1404,7 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Recurring {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1536,6 +1544,7 @@ public class ProductCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class MarketingFeature {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1604,6 +1613,7 @@ public class ProductCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PackageDimensions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1717,6 +1727,7 @@ public class ProductCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Provisioning {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1801,6 +1812,7 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class GiftCard {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1889,6 +1901,7 @@ public class ProductCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class FixedAmount {
         /**
          * <strong>Required.</strong> The initial amount with which the provisioned gift card will

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AccountExternalAccountCreateParams extends ApiRequestParams {
   /**
    * When set to true, or if this is the first external account added in this currency, this account
@@ -23,8 +25,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
-   * <strong>Required.</strong> Please refer to full <a
-   * href="https://stripe.com/docs/api">documentation</a> instead.
+   * <strong>Required.</strong> A token, like the ones returned by <a
+   * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+   * account details (with the options shown below). Please refer to full <a
+   * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
    */
   @SerializedName("external_account")
   Object externalAccount;
@@ -121,8 +125,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
@@ -130,8 +136,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(AccountExternalAccountCreateParams.Card externalAccount) {
       this.externalAccount = externalAccount;
@@ -139,8 +147,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(
         AccountExternalAccountCreateParams.BankAccount externalAccount) {
@@ -149,8 +159,10 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Please refer to full <a
-     * href="https://stripe.com/docs/api">documentation</a> instead.
+     * <strong>Required.</strong> A token, like the ones returned by <a
+     * href="https://stripe.com/docs/js">Stripe.js</a> or a dictionary containing a user's external
+     * account details (with the options shown below). Please refer to full <a
+     * href="https://stripe.com/docs/api/external_accounts">documentation</a> instead.
      */
     public Builder setExternalAccount(
         AccountExternalAccountCreateParams.CardToken externalAccount) {
@@ -212,6 +224,7 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BankAccount {
     /**
      * The name of the person or business that owns the bank account.This field is required when
@@ -425,6 +438,7 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Card {
     @SerializedName("address_city")
     String addressCity;
@@ -699,6 +713,7 @@ public class AccountExternalAccountCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CardToken {
     @SerializedName("currency")
     String currency;

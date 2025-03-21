@@ -9,23 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PlanCreateParams extends ApiRequestParams {
   /** Whether the plan is currently available for new subscriptions. Defaults to {@code true}. */
   @SerializedName("active")
   Boolean active;
-
-  /**
-   * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values
-   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for using
-   * the last usage record reported within a period, {@code last_ever} for using the last usage
-   * record ever (across period bounds) or {@code max} which uses the usage record with the maximum
-   * reported usage during a period. Defaults to {@code sum}.
-   */
-  @SerializedName("aggregate_usage")
-  AggregateUsage aggregateUsage;
 
   /**
    * A positive integer in cents (or local equivalent) (or 0 for a free plan) representing how much
@@ -157,7 +149,6 @@ public class PlanCreateParams extends ApiRequestParams {
 
   private PlanCreateParams(
       Boolean active,
-      AggregateUsage aggregateUsage,
       Long amount,
       BigDecimal amountDecimal,
       BillingScheme billingScheme,
@@ -177,7 +168,6 @@ public class PlanCreateParams extends ApiRequestParams {
       Long trialPeriodDays,
       UsageType usageType) {
     this.active = active;
-    this.aggregateUsage = aggregateUsage;
     this.amount = amount;
     this.amountDecimal = amountDecimal;
     this.billingScheme = billingScheme;
@@ -204,8 +194,6 @@ public class PlanCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Boolean active;
-
-    private AggregateUsage aggregateUsage;
 
     private Long amount;
 
@@ -247,7 +235,6 @@ public class PlanCreateParams extends ApiRequestParams {
     public PlanCreateParams build() {
       return new PlanCreateParams(
           this.active,
-          this.aggregateUsage,
           this.amount,
           this.amountDecimal,
           this.billingScheme,
@@ -271,18 +258,6 @@ public class PlanCreateParams extends ApiRequestParams {
     /** Whether the plan is currently available for new subscriptions. Defaults to {@code true}. */
     public Builder setActive(Boolean active) {
       this.active = active;
-      return this;
-    }
-
-    /**
-     * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed
-     * values are {@code sum} for summing up all usage during a period, {@code last_during_period}
-     * for using the last usage record reported within a period, {@code last_ever} for using the
-     * last usage record ever (across period bounds) or {@code max} which uses the usage record with
-     * the maximum reported usage during a period. Defaults to {@code sum}.
-     */
-    public Builder setAggregateUsage(PlanCreateParams.AggregateUsage aggregateUsage) {
-      this.aggregateUsage = aggregateUsage;
       return this;
     }
 
@@ -548,6 +523,7 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Product {
     /** Whether the product is currently available for purchase. Defaults to {@code true}. */
     @SerializedName("active")
@@ -763,6 +739,7 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Tier {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -945,6 +922,7 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransformUsage {
     /** <strong>Required.</strong> Divide usage by this number. */
     @SerializedName("divide_by")
@@ -1043,27 +1021,6 @@ public class PlanCreateParams extends ApiRequestParams {
       Round(String value) {
         this.value = value;
       }
-    }
-  }
-
-  public enum AggregateUsage implements ApiRequestParams.EnumParam {
-    @SerializedName("last_during_period")
-    LAST_DURING_PERIOD("last_during_period"),
-
-    @SerializedName("last_ever")
-    LAST_EVER("last_ever"),
-
-    @SerializedName("max")
-    MAX("max"),
-
-    @SerializedName("sum")
-    SUM("sum");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    AggregateUsage(String value) {
-      this.value = value;
     }
   }
 

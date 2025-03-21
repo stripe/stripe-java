@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AccountNoticeUpdateParams extends ApiRequestParams {
   /** <strong>Required.</strong> Information about the email you sent. */
   @SerializedName("email")
@@ -168,6 +170,7 @@ public class AccountNoticeUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Email {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

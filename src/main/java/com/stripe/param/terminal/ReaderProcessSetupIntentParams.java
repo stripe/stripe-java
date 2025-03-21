@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ReaderProcessSetupIntentParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> This field indicates whether this payment method can be shown again
@@ -152,6 +154,7 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ProcessConfig {
     /** Enables cancel button on transaction screens. */
     @SerializedName("enable_customer_cancellation")

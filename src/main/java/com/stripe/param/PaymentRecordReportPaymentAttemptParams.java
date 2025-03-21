@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
@@ -254,6 +256,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Failed {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -329,6 +332,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Guaranteed {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -406,6 +410,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails {
     /** The billing details associated with the method of payment. */
     @SerializedName("billing_details")
@@ -532,6 +537,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BillingDetails {
       /** The billing address associated with the method of payment. */
       @SerializedName("address")
@@ -650,6 +656,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -811,6 +818,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Custom {
       /**
        * Display name for the custom (user-defined) payment method type used to make this payment.
@@ -914,6 +922,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingDetails {
     /** The physical shipping address. */
     @SerializedName("address")
@@ -1012,6 +1021,7 @@ public class PaymentRecordReportPaymentAttemptParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")

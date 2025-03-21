@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class FinancialAccountCreateParams extends ApiRequestParams {
   /**
    * The display name for the FinancialAccount. Use this field to customize the names of the
@@ -268,6 +270,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Features {
     /**
      * Encodes the FinancialAccount's ability to be used with the Issuing product, including
@@ -471,6 +474,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CardIssuing {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -542,6 +546,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DepositInsurance {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -613,6 +618,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class FinancialAddresses {
       /** Adds an ABA FinancialAddress to the FinancialAccount. */
       @SerializedName("aba")
@@ -683,6 +689,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Aba {
         /** Requested bank partner. */
         @SerializedName("bank")
@@ -790,6 +797,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InboundTransfers {
       /** Enables ACH Debits via the InboundTransfers API. */
       @SerializedName("ach")
@@ -860,6 +868,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Ach {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -933,6 +942,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IntraStripeFlows {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1004,6 +1014,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class OutboundPayments {
       /** Enables ACH transfers via the OutboundPayments API. */
       @SerializedName("ach")
@@ -1089,6 +1100,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Ach {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1161,6 +1173,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class UsDomesticWire {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1236,6 +1249,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class OutboundTransfers {
       /** Enables ACH transfers via the OutboundTransfers API. */
       @SerializedName("ach")
@@ -1321,6 +1335,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Ach {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1395,6 +1410,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class UsDomesticWire {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1471,6 +1487,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PlatformRestrictions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

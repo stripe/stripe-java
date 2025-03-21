@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class VerificationSessionUpdateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -194,6 +196,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Options {
     /**
      * Options that apply to the <a
@@ -279,6 +282,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Document {
       /**
        * Array of strings of allowed identity document types. If the provided identity document
@@ -469,6 +473,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ProvidedDetails {
     /** Email of user being verified. */
     @SerializedName("email")

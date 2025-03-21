@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ReaderRefundPaymentParams extends ApiRequestParams {
   /**
    * A positive integer in <strong>cents</strong> representing how much of this charge to refund.
@@ -254,6 +256,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class RefundPaymentConfig {
     /** Enables cancel button on transaction screens. */
     @SerializedName("enable_customer_cancellation")

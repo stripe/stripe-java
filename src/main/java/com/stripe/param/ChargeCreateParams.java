@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ChargeCreateParams extends ApiRequestParams {
   /**
    * Amount intended to be collected by this payment. A positive integer representing how much to
@@ -578,6 +580,7 @@ public class ChargeCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Destination {
     /** <strong>Required.</strong> ID of an existing, connected Stripe account. */
     @SerializedName("account")
@@ -667,6 +670,7 @@ public class ChargeCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class RadarOptions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -743,6 +747,7 @@ public class ChargeCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Shipping {
     /** <strong>Required.</strong> Shipping address. */
     @SerializedName("address")
@@ -880,6 +885,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1036,6 +1042,7 @@ public class ChargeCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire

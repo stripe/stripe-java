@@ -151,13 +151,4 @@ public final class SubscriptionItemService extends ApiService {
             options);
     return this.request(request, SubscriptionItem.class);
   }
-
-  public com.stripe.service.SubscriptionItemUsageRecordSummaryService usageRecordSummaries() {
-    return new com.stripe.service.SubscriptionItemUsageRecordSummaryService(
-        this.getResponseGetter());
-  }
-
-  public com.stripe.service.SubscriptionItemUsageRecordService usageRecords() {
-    return new com.stripe.service.SubscriptionItemUsageRecordService(this.getResponseGetter());
-  }
 }

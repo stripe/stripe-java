@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class RegistrationCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Time at which the Tax Registration becomes active. It can be either
@@ -197,6 +199,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CountryOptions {
     /** Options for the registration in AE. */
     @SerializedName("ae")
@@ -1544,6 +1547,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ae {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1626,6 +1630,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Al {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1708,6 +1713,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Am {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1790,6 +1796,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ao {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1872,6 +1879,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class At {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1955,6 +1963,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2070,6 +2079,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Au {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2152,6 +2162,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ba {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2234,6 +2245,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Bb {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2316,6 +2328,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Be {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2399,6 +2412,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2514,6 +2528,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Bg {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2597,6 +2612,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2712,6 +2728,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Bh {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2794,6 +2811,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Bs {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2876,6 +2894,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class By {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2958,6 +2977,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ca {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3042,6 +3062,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ProvinceStandard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3141,6 +3162,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cd {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3223,6 +3245,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ch {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3305,6 +3328,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cl {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3387,6 +3411,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Co {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3469,6 +3494,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3551,6 +3577,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cy {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3634,6 +3661,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3749,6 +3777,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cz {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3832,6 +3861,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3947,6 +3977,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class De {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4030,6 +4061,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4145,6 +4177,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Dk {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4228,6 +4261,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4343,6 +4377,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ec {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4425,6 +4460,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ee {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4508,6 +4544,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4623,6 +4660,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Eg {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4705,6 +4743,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Es {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4788,6 +4827,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4903,6 +4943,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Fi {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4986,6 +5027,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5101,6 +5143,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Fr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5184,6 +5227,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5299,6 +5343,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Gb {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5381,6 +5426,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ge {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5463,6 +5509,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Gn {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5545,6 +5592,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Gr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5628,6 +5676,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5743,6 +5792,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Hr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5826,6 +5876,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -5941,6 +5992,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Hu {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6024,6 +6076,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -6139,6 +6192,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Id {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6221,6 +6275,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ie {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6304,6 +6359,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -6419,6 +6475,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Is {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6501,6 +6558,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class It {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6584,6 +6642,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -6699,6 +6758,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Jp {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6781,6 +6841,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ke {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6863,6 +6924,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Kh {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6945,6 +7007,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Kr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7027,6 +7090,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Kz {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7109,6 +7173,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Lt {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7192,6 +7257,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7307,6 +7373,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Lu {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7390,6 +7457,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7505,6 +7573,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Lv {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7588,6 +7657,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7703,6 +7773,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ma {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7785,6 +7856,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Md {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7867,6 +7939,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Me {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7949,6 +8022,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Mk {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8031,6 +8105,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Mr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8113,6 +8188,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Mt {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8196,6 +8272,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -8311,6 +8388,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Mx {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8393,6 +8471,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class My {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8475,6 +8554,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ng {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8557,6 +8637,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Nl {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8640,6 +8721,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -8755,6 +8837,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class No {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8837,6 +8920,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Np {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8919,6 +9003,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Nz {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9001,6 +9086,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Om {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9083,6 +9169,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pe {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9165,6 +9252,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pl {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9248,6 +9336,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -9363,6 +9452,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pt {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9446,6 +9536,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -9561,6 +9652,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ro {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9644,6 +9736,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -9759,6 +9852,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Rs {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9841,6 +9935,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ru {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9923,6 +10018,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sa {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10005,6 +10101,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Se {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10088,6 +10185,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -10203,6 +10301,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sg {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10285,6 +10384,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Si {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10368,6 +10468,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -10483,6 +10584,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sk {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10566,6 +10668,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Standard {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -10681,6 +10784,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sn {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10763,6 +10867,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10845,6 +10950,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Th {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10927,6 +11033,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Tj {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11009,6 +11116,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Tr {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11091,6 +11199,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Tz {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11173,6 +11282,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ug {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11255,6 +11365,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Us {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11397,6 +11508,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class LocalAmusementTax {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -11412,8 +11524,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
          * <strong>Required.</strong> A <a
          * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
          * representing the local jurisdiction. Supported FIPS codes are: {@code 14000} (Chicago),
-         * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston), and
-         * {@code 68081} (Schiller Park).
+         * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston),
+         * {@code 45421} (Lynwood), {@code 64343} (River Grove), and {@code 68081} (Schiller Park).
          */
         @SerializedName("jurisdiction")
         String jurisdiction;
@@ -11472,8 +11584,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> A <a
            * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
            * representing the local jurisdiction. Supported FIPS codes are: {@code 14000} (Chicago),
-           * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston), and
-           * {@code 68081} (Schiller Park).
+           * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston),
+           * {@code 45421} (Lynwood), {@code 64343} (River Grove), and {@code 68081} (Schiller
+           * Park).
            */
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;
@@ -11483,6 +11596,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class LocalLeaseTax {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -11563,6 +11677,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class StateSalesTax {
         /** <strong>Required.</strong> Elections for the state sales tax registration. */
         @SerializedName("elections")
@@ -11660,6 +11775,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Election {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -11806,6 +11922,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Uy {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11888,6 +12005,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Uz {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -11970,6 +12088,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Vn {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12052,6 +12171,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Za {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12134,6 +12254,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Zm {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12216,6 +12337,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Zw {
       /**
        * Map of extra parameters for custom features not available in this client library. The

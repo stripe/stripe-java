@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SessionUpdateParams extends ApiRequestParams {
   /** Information about the customer collected within the Checkout Session. */
   @SerializedName("collected_information")
@@ -39,8 +41,7 @@ public class SessionUpdateParams extends ApiRequestParams {
    * <p>To update an existing line item, specify its {@code id} along with the new values of the
    * fields to update.
    *
-   * <p>To add a new line item, specify a {@code price} and {@code quantity}. We don't currently
-   * support recurring prices.
+   * <p>To add a new line item, specify a {@code price} and {@code quantity}.
    *
    * <p>To remove an existing line item, omit the line item's ID from the retransmitted array.
    *
@@ -282,6 +283,7 @@ public class SessionUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CollectedInformation {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -351,6 +353,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingDetails {
       /** <strong>Required.</strong> The address of the customer */
       @SerializedName("address")
@@ -441,6 +444,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -640,6 +644,7 @@ public class SessionUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
     /**
      * When set, provides configuration for this item’s quantity to be adjusted by the customer
@@ -897,6 +902,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AdjustableQuantity {
       /**
        * <strong>Required.</strong> Set to true if the quantity can be adjusted to any positive
@@ -1014,6 +1020,7 @@ public class SessionUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingOption {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1103,6 +1110,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingRateData {
       /**
        * The estimated range for how long shipping will take, meant to be displayable to the
@@ -1344,6 +1352,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DeliveryEstimate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1441,6 +1450,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Maximum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1555,6 +1565,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Minimum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1670,6 +1681,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class FixedAmount {
         /**
          * <strong>Required.</strong> A non-negative integer in cents representing how much to
@@ -1842,6 +1854,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class CurrencyOption {
           /**
            * <strong>Required.</strong> A non-negative integer in cents representing how much to

@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditNoteCreateParams extends ApiRequestParams {
   /**
    * The integer amount in cents (or local equivalent) representing the total amount of the credit
@@ -90,10 +92,6 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   @SerializedName("reason")
   Reason reason;
 
-  /** ID of an existing refund to link this credit note to. */
-  @SerializedName("refund")
-  String refund;
-
   /**
    * The integer amount in cents (or local equivalent) representing the amount to refund. If set, a
    * refund will be created for the charge associated with the invoice.
@@ -125,7 +123,6 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Long outOfBandAmount,
       Reason reason,
-      String refund,
       Long refundAmount,
       List<CreditNoteCreateParams.Refund> refunds,
       ShippingCost shippingCost) {
@@ -141,7 +138,6 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.outOfBandAmount = outOfBandAmount;
     this.reason = reason;
-    this.refund = refund;
     this.refundAmount = refundAmount;
     this.refunds = refunds;
     this.shippingCost = shippingCost;
@@ -176,8 +172,6 @@ public class CreditNoteCreateParams extends ApiRequestParams {
 
     private Reason reason;
 
-    private String refund;
-
     private Long refundAmount;
 
     private List<CreditNoteCreateParams.Refund> refunds;
@@ -199,7 +193,6 @@ public class CreditNoteCreateParams extends ApiRequestParams {
           this.metadata,
           this.outOfBandAmount,
           this.reason,
-          this.refund,
           this.refundAmount,
           this.refunds,
           this.shippingCost);
@@ -376,12 +369,6 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of an existing refund to link this credit note to. */
-    public Builder setRefund(String refund) {
-      this.refund = refund;
-      return this;
-    }
-
     /**
      * The integer amount in cents (or local equivalent) representing the amount to refund. If set,
      * a refund will be created for the charge associated with the invoice.
@@ -428,6 +415,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Line {
     /**
      * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}. If
@@ -745,6 +733,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxAmount {
       /** <strong>Required.</strong> The amount, in cents (or local equivalent), of the tax. */
       @SerializedName("amount")
@@ -871,6 +860,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Refund {
     /**
      * Amount of the refund that applies to this credit note, in cents (or local equivalent).
@@ -959,6 +949,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

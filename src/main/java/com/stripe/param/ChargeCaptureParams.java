@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ChargeCaptureParams extends ApiRequestParams {
-  /**
-   * The amount to capture, which must be less than or equal to the original amount. Any additional
-   * amount will be automatically refunded.
-   */
+  /** The amount to capture, which must be less than or equal to the original amount. */
   @SerializedName("amount")
   Long amount;
 
@@ -161,10 +160,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
           this.transferGroup);
     }
 
-    /**
-     * The amount to capture, which must be less than or equal to the original amount. Any
-     * additional amount will be automatically refunded.
-     */
+    /** The amount to capture, which must be less than or equal to the original amount. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
@@ -303,6 +299,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentDetails {
     /** Car rental details for this PaymentIntent. */
     @SerializedName("car_rental")
@@ -434,6 +431,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CarRental {
       /** Affiliate details for this purchase. */
       @SerializedName("affiliate")
@@ -847,6 +845,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Affiliate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -919,6 +918,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Delivery {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1004,6 +1004,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
@@ -1127,6 +1128,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Driver {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1201,6 +1203,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class PickupAddress {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -1357,6 +1360,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ReturnAddress {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -1556,6 +1560,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class EventDetails {
       /** Indicates if the tickets are digitally checked when entering the venue. */
       @SerializedName("access_controlled_venue")
@@ -1751,6 +1756,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -1907,6 +1913,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Affiliate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1979,6 +1986,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Delivery {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2065,6 +2073,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
@@ -2189,6 +2198,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Flight {
       /** Affiliate details for this purchase. */
       @SerializedName("affiliate")
@@ -2421,6 +2431,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Affiliate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2493,6 +2504,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Delivery {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2578,6 +2590,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
@@ -2701,6 +2714,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Passenger {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2777,6 +2791,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Segment {
         /** The flight segment amount. */
         @SerializedName("amount")
@@ -3003,6 +3018,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Lodging {
       /** The lodging location's address. */
       @SerializedName("address")
@@ -3437,6 +3453,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -3593,6 +3610,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Affiliate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3665,6 +3683,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Delivery {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3750,6 +3769,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Recipient {
           /** The email of the recipient the ticket is delivered to. */
           @SerializedName("email")
@@ -3873,6 +3893,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Passenger {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -3993,6 +4014,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Subscription {
       /** Affiliate details for this purchase. */
       @SerializedName("affiliate")
@@ -4149,6 +4171,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Affiliate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4221,6 +4244,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class BillingInterval {
         /**
          * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
@@ -4344,6 +4368,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire

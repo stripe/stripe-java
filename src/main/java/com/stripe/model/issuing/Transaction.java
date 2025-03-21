@@ -151,6 +151,10 @@ public class Transaction extends ApiResource
   @SerializedName("purchase_details")
   PurchaseDetails purchaseDetails;
 
+  /**
+   * The ID of the <a href="https://stripe.com/docs/api/issuing/settlements">settlement</a> to which
+   * this transaction belongs.
+   */
   @SerializedName("settlement")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

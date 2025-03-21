@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ReaderSucceedInputCollectionParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -24,7 +26,7 @@ public class ReaderSucceedInputCollectionParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Skip behavior for input collection. */
+  /** This parameter defines the skip behavior for input collection. */
   @SerializedName("skip_non_required_inputs")
   SkipNonRequiredInputs skipNonRequiredInputs;
 
@@ -106,7 +108,7 @@ public class ReaderSucceedInputCollectionParams extends ApiRequestParams {
       return this;
     }
 
-    /** Skip behavior for input collection. */
+    /** This parameter defines the skip behavior for input collection. */
     public Builder setSkipNonRequiredInputs(
         ReaderSucceedInputCollectionParams.SkipNonRequiredInputs skipNonRequiredInputs) {
       this.skipNonRequiredInputs = skipNonRequiredInputs;

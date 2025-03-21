@@ -166,6 +166,10 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Payout> originalPayout;
 
+  /** ID of the v2 FinancialAccount the funds are sent to. */
+  @SerializedName("payout_method")
+  String payoutMethod;
+
   /**
    * If {@code completed}, you can use the <a
    * href="https://stripe.com/docs/api/balance_transactions/list#balance_transaction_list-payout">Balance

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> When the reported payment was canceled. Measured in seconds since
