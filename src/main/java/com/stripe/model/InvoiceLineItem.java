@@ -401,8 +401,49 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       @SerializedName("invoice_item")
       String invoiceItem;
 
+      /** Whether this is a proration. */
+      @SerializedName("proration")
+      Boolean proration;
+
+      /** Additional details for proration line items. */
+      @SerializedName("proration_details")
+      ProrationDetails prorationDetails;
+
       @SerializedName("subscription")
       String subscription;
+
+      /**
+       * For more details about ProrationDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ProrationDetails extends StripeObject {
+        /**
+         * For a credit proration {@code line_item}, the original debit line_items to which the
+         * credit proration applies.
+         */
+        @SerializedName("credited_items")
+        CreditedItems creditedItems;
+
+        /**
+         * For more details about CreditedItems, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CreditedItems extends StripeObject {
+          /** Invoice containing the credited invoice line items. */
+          @SerializedName("invoice")
+          String invoice;
+
+          /** Credited invoice line items. */
+          @SerializedName("invoice_line_items")
+          List<String> invoiceLineItems;
+        }
+      }
     }
 
     /**
