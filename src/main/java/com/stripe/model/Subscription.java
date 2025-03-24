@@ -70,6 +70,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Long cancelAt;
 
   /**
+   * Whether this subscription will (if {@code status=active}) or did (if {@code status=canceled})
+   * cancel at the end of the current billing period.
+   */
+  @SerializedName("cancel_at_period_end")
+  Boolean cancelAtPeriodEnd;
+
+  /**
    * If the subscription has been canceled, the date of that cancellation. If the subscription was
    * canceled with {@code cancel_at_period_end}, {@code canceled_at} will reflect the time of the
    * most recent update request, not the end of the subscription period when the subscription is

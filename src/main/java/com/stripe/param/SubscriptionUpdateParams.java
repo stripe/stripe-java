@@ -58,6 +58,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("cancel_at")
   Object cancelAt;
 
+  /**
+   * Indicate whether this subscription should cancel at the end of the current period ({@code
+   * current_period_end}). Defaults to {@code false}.
+   */
+  @SerializedName("cancel_at_period_end")
+  Boolean cancelAtPeriodEnd;
+
   /** Details about why this subscription was cancelled. */
   @SerializedName("cancellation_details")
   CancellationDetails cancellationDetails;
@@ -280,6 +287,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       BillingCycleAnchor billingCycleAnchor,
       Object cancelAt,
+      Boolean cancelAtPeriodEnd,
       CancellationDetails cancellationDetails,
       CollectionMethod collectionMethod,
       Long daysUntilDue,
@@ -311,6 +319,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.billingCycleAnchor = billingCycleAnchor;
     this.cancelAt = cancelAt;
+    this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.cancellationDetails = cancellationDetails;
     this.collectionMethod = collectionMethod;
     this.daysUntilDue = daysUntilDue;
@@ -353,6 +362,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private BillingCycleAnchor billingCycleAnchor;
 
     private Object cancelAt;
+
+    private Boolean cancelAtPeriodEnd;
 
     private CancellationDetails cancellationDetails;
 
@@ -414,6 +425,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.automaticTax,
           this.billingCycleAnchor,
           this.cancelAt,
+          this.cancelAtPeriodEnd,
           this.cancellationDetails,
           this.collectionMethod,
           this.daysUntilDue,
@@ -545,6 +557,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setCancelAt(EmptyParam cancelAt) {
       this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
+     * Indicate whether this subscription should cancel at the end of the current period ({@code
+     * current_period_end}). Defaults to {@code false}.
+     */
+    public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
+      this.cancelAtPeriodEnd = cancelAtPeriodEnd;
       return this;
     }
 

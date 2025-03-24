@@ -76,6 +76,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Object cancelAt;
 
   /**
+   * Indicate whether this subscription should cancel at the end of the current period ({@code
+   * current_period_end}). Defaults to {@code false}.
+   */
+  @SerializedName("cancel_at_period_end")
+  Boolean cancelAtPeriodEnd;
+
+  /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this subscription at the end of the cycle using the default source
    * attached to the customer. When sending an invoice, Stripe will email your customer an invoice
@@ -300,6 +307,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
       Object cancelAt,
+      Boolean cancelAtPeriodEnd,
       CollectionMethod collectionMethod,
       String currency,
       String customer,
@@ -333,6 +341,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
     this.cancelAt = cancelAt;
+    this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.collectionMethod = collectionMethod;
     this.currency = currency;
     this.customer = customer;
@@ -379,6 +388,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private BillingCycleAnchorConfig billingCycleAnchorConfig;
 
     private Object cancelAt;
+
+    private Boolean cancelAtPeriodEnd;
 
     private CollectionMethod collectionMethod;
 
@@ -442,6 +453,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
           this.cancelAt,
+          this.cancelAtPeriodEnd,
           this.collectionMethod,
           this.currency,
           this.customer,
@@ -583,6 +595,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setCancelAt(SubscriptionCreateParams.CancelAt cancelAt) {
       this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
+     * Indicate whether this subscription should cancel at the end of the current period ({@code
+     * current_period_end}). Defaults to {@code false}.
+     */
+    public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
+      this.cancelAtPeriodEnd = cancelAtPeriodEnd;
       return this;
     }
 
