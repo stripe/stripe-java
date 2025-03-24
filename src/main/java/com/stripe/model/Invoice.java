@@ -201,6 +201,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("collection_method")
   String collectionMethod;
 
+  /**
+   * The confirmation secret associated with this invoice. Currently, this contains the
+   * client_secret of the PaymentIntent that Stripe creates during invoice finalization.
+   */
+  @SerializedName("confirmation_secret")
+  ConfirmationSecret confirmationSecret;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -2262,6 +2269,26 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about ConfirmationSecret, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ConfirmationSecret extends StripeObject {
+    /** The client_secret of the payment that Stripe creates for the invoice after finalization. */
+    @SerializedName("client_secret")
+    String clientSecret;
+
+    /**
+     * The type of client_secret. Currently this is always payment_intent, referencing the default
+     * payment_intent that Stripe creates during invoice finalization
+     */
+    @SerializedName("type")
+    String type;
+  }
+
+  /**
    * For more details about CustomField, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -3234,6 +3261,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
+    trySetResponseGetter(confirmationSecret, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerAddress, responseGetter);
     trySetResponseGetter(customerShipping, responseGetter);
