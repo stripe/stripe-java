@@ -31,7 +31,11 @@ public abstract class Stripe {
   // Used to set the default version in RequestOptions
   @Getter private static String stripeVersionWithBetaHeaders = stripeVersion;
 
-  /** Add a specified beta to the global Stripe API Version. Only call this method once per beta. */
+  /** Add a specified beta to the global Stripe API Version. If the betaName already exists, the higher
+   * version will be used.
+   *
+   * @throws IllegalArgumentException if the betaVersion is not in the format 'v<number>'
+   */
   public static void addBetaVersion(String betaName, String betaVersion) {
     if (!betaVersion.matches("v\\d+")) {
       throw new IllegalArgumentException(
