@@ -52,7 +52,7 @@ public class StripeTest extends BaseStripeTest {
 
     Stripe.addBetaVersion("super_cool_beta", "v11");
     assertEquals(
-        Stripe.API_VERSION + "; super_hot_beta=v1; super_cool_beta=v11",
+        Stripe.API_VERSION + "; super_hot_beta=v2; super_cool_beta=v11",
         Stripe.getStripeVersionWithBetaHeaders());
   }
 }
