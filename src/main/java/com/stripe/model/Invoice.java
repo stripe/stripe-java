@@ -2122,29 +2122,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @SerializedName("metadata")
       Map<String, String> metadata;
 
-      @SerializedName("pause_collection")
-      PauseCollection pauseCollection;
-
       @SerializedName("subscription")
       String subscription;
 
       @SerializedName("subscription_proration_date")
       Long subscriptionProrationDate;
-
-      /**
-       * For more details about PauseCollection, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class PauseCollection extends StripeObject {
-        @SerializedName("behavior")
-        String behavior;
-
-        @SerializedName("resumes_at")
-        Long resumesAt;
-      }
     }
   }
 
