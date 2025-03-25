@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class EventDestinationListParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -30,19 +32,13 @@ public class EventDestinationListParams extends ApiRequestParams {
   @SerializedName("limit")
   Integer limit;
 
-  /** The requested page. */
-  @SerializedName("page")
-  String page;
-
   private EventDestinationListParams(
       Map<String, Object> extraParams,
       List<EventDestinationListParams.Include> include,
-      Integer limit,
-      String page) {
+      Integer limit) {
     this.extraParams = extraParams;
     this.include = include;
     this.limit = limit;
-    this.page = page;
   }
 
   public static Builder builder() {
@@ -56,11 +52,9 @@ public class EventDestinationListParams extends ApiRequestParams {
 
     private Integer limit;
 
-    private String page;
-
     /** Finalize and obtain parameter instance from this builder. */
     public EventDestinationListParams build() {
-      return new EventDestinationListParams(this.extraParams, this.include, this.limit, this.page);
+      return new EventDestinationListParams(this.extraParams, this.include, this.limit);
     }
 
     /**
@@ -118,12 +112,6 @@ public class EventDestinationListParams extends ApiRequestParams {
     /** The page size. */
     public Builder setLimit(Integer limit) {
       this.limit = limit;
-      return this;
-    }
-
-    /** The requested page. */
-    public Builder setPage(String page) {
-      this.page = page;
       return this;
     }
   }

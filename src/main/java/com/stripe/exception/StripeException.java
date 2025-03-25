@@ -113,6 +113,21 @@ public abstract class StripeException extends Exception {
       case "temporary_session_expired":
         return com.stripe.exception.TemporarySessionExpiredException.parse(
             body, statusCode, requestId, responseGetter);
+      case "blocked_by_stripe":
+        return com.stripe.exception.BlockedByStripeException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "invalid_payout_method":
+        return com.stripe.exception.InvalidPayoutMethodException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "quota_exceeded":
+        return com.stripe.exception.QuotaExceededException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "controlled_by_dashboard":
+        return com.stripe.exception.ControlledByDashboardException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "invalid_payment_method":
+        return com.stripe.exception.InvalidPaymentMethodException.parse(
+            body, statusCode, requestId, responseGetter);
         // The end of the section generated from our OpenAPI spec
     }
     return null;

@@ -16,4 +16,8 @@ public final class CoreService extends ApiService {
   public com.stripe.service.v2.core.EventService events() {
     return new com.stripe.service.v2.core.EventService(this.getResponseGetter());
   }
+
+  public com.stripe.service.v2.core.VaultService vault() {
+    return new com.stripe.service.v2.core.VaultService(this.getResponseGetter());
+  }
 }

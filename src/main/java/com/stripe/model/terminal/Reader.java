@@ -1455,34 +1455,22 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       return resource.getResponseGetter().request(request, Reader.class);
     }
 
-    /**
-     * Succeeds an input collection on a simulated reader. Can be used to simulate collecting
-     * inputs.
-     */
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
     public Reader succeedInputCollection() throws StripeException {
       return succeedInputCollection((Map<String, Object>) null, (RequestOptions) null);
     }
 
-    /**
-     * Succeeds an input collection on a simulated reader. Can be used to simulate collecting
-     * inputs.
-     */
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
     public Reader succeedInputCollection(RequestOptions options) throws StripeException {
       return succeedInputCollection((Map<String, Object>) null, options);
     }
 
-    /**
-     * Succeeds an input collection on a simulated reader. Can be used to simulate collecting
-     * inputs.
-     */
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
     public Reader succeedInputCollection(Map<String, Object> params) throws StripeException {
       return succeedInputCollection(params, (RequestOptions) null);
     }
 
-    /**
-     * Succeeds an input collection on a simulated reader. Can be used to simulate collecting
-     * inputs.
-     */
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
     public Reader succeedInputCollection(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path =
@@ -1494,19 +1482,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       return resource.getResponseGetter().request(request, Reader.class);
     }
 
-    /**
-     * Succeeds an input collection on a simulated reader. Can be used to simulate collecting
-     * inputs.
-     */
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
     public Reader succeedInputCollection(ReaderSucceedInputCollectionParams params)
         throws StripeException {
       return succeedInputCollection(params, (RequestOptions) null);
     }
 
-    /**
-     * Succeeds an input collection on a simulated reader. Can be used to simulate collecting
-     * inputs.
-     */
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
     public Reader succeedInputCollection(
         ReaderSucceedInputCollectionParams params, RequestOptions options) throws StripeException {
       String path =
@@ -1524,22 +1506,30 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       return resource.getResponseGetter().request(request, Reader.class);
     }
 
-    /** Completes an input collection with a timeout error on a simulated reader. */
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
     public Reader timeoutInputCollection() throws StripeException {
       return timeoutInputCollection((Map<String, Object>) null, (RequestOptions) null);
     }
 
-    /** Completes an input collection with a timeout error on a simulated reader. */
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
     public Reader timeoutInputCollection(RequestOptions options) throws StripeException {
       return timeoutInputCollection((Map<String, Object>) null, options);
     }
 
-    /** Completes an input collection with a timeout error on a simulated reader. */
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
     public Reader timeoutInputCollection(Map<String, Object> params) throws StripeException {
       return timeoutInputCollection(params, (RequestOptions) null);
     }
 
-    /** Completes an input collection with a timeout error on a simulated reader. */
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
     public Reader timeoutInputCollection(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path =
@@ -1551,13 +1541,17 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       return resource.getResponseGetter().request(request, Reader.class);
     }
 
-    /** Completes an input collection with a timeout error on a simulated reader. */
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
     public Reader timeoutInputCollection(ReaderTimeoutInputCollectionParams params)
         throws StripeException {
       return timeoutInputCollection(params, (RequestOptions) null);
     }
 
-    /** Completes an input collection with a timeout error on a simulated reader. */
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
     public Reader timeoutInputCollection(
         ReaderTimeoutInputCollectionParams params, RequestOptions options) throws StripeException {
       String path =

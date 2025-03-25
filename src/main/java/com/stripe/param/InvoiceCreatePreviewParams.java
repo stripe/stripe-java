@@ -9,20 +9,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class InvoiceCreatePreviewParams extends ApiRequestParams {
   /** Settings for automatic tax lookup for this invoice preview. */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
-
-  /**
-   * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
-   * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-   */
-  @SerializedName("coupon")
-  String coupon;
 
   /**
    * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
@@ -128,7 +123,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
   private InvoiceCreatePreviewParams(
       AutomaticTax automaticTax,
-      String coupon,
       String currency,
       String customer,
       CustomerDetails customerDetails,
@@ -144,7 +138,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String subscription,
       SubscriptionDetails subscriptionDetails) {
     this.automaticTax = automaticTax;
-    this.coupon = coupon;
     this.currency = currency;
     this.customer = customer;
     this.customerDetails = customerDetails;
@@ -167,8 +160,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
   public static class Builder {
     private AutomaticTax automaticTax;
-
-    private String coupon;
 
     private String currency;
 
@@ -202,7 +193,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     public InvoiceCreatePreviewParams build() {
       return new InvoiceCreatePreviewParams(
           this.automaticTax,
-          this.coupon,
           this.currency,
           this.customer,
           this.customerDetails,
@@ -222,15 +212,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice preview. */
     public Builder setAutomaticTax(InvoiceCreatePreviewParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /**
-     * The ID of the coupon to apply to this phase of the subscription schedule. This field has been
-     * deprecated and will be removed in a future API version. Use {@code discounts} instead.
-     */
-    public Builder setCoupon(String coupon) {
-      this.coupon = coupon;
       return this;
     }
 
@@ -473,6 +454,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
@@ -573,6 +555,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Liability {
       /** The connected account being referenced when {@code type} is {@code account}. */
       @SerializedName("account")
@@ -673,6 +656,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails {
     /** The customer's address. */
     @SerializedName("address")
@@ -838,6 +822,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -993,6 +978,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Shipping {
       /** <strong>Required.</strong> Customer shipping address. */
       @SerializedName("address")
@@ -1091,6 +1077,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -1252,6 +1239,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Tax {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1344,6 +1332,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxId {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1797,6 +1786,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -1909,6 +1899,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DiscountEnd {
       /** Time span for the redeemed discount. */
       @SerializedName("duration")
@@ -2013,6 +2004,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Duration {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2149,6 +2141,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class InvoiceItem {
     /** The integer amount in cents (or local equivalent) of previewed invoice item. */
     @SerializedName("amount")
@@ -2656,6 +2649,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -2771,6 +2765,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DiscountEnd {
         /** Time span for the redeemed discount. */
         @SerializedName("duration")
@@ -2879,6 +2874,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Duration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -3018,6 +3014,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Period {
       /**
        * <strong>Required.</strong> The end of the period, which must be greater than or equal to
@@ -3108,6 +3105,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * <strong>Required.</strong> Three-letter <a
@@ -3126,7 +3124,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+       */
       @SerializedName("product")
       String product;
 
@@ -3237,7 +3239,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+        /**
+         * <strong>Required.</strong> The ID of the <a
+         * href="https://docs.stripe.com/api/products">Product</a> that this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+         */
         public Builder setProduct(String product) {
           this.product = product;
           return this;
@@ -3316,6 +3322,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Issuer {
     /** The connected account being referenced when {@code type} is {@code account}. */
     @SerializedName("account")
@@ -3412,6 +3419,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ScheduleDetails {
     /** Changes to apply to the phases of the subscription schedule, in the order provided. */
     @SerializedName("amendments")
@@ -3673,6 +3681,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Amendment {
       /**
        * Details to identify the end of the time range modified by the proposed change. If not
@@ -4022,6 +4031,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AmendmentEnd {
         /** Use the {@code end} time of a given discount. */
         @SerializedName("discount_end")
@@ -4153,6 +4163,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class DiscountEnd {
           /** <strong>Required.</strong> The ID of a specific discount. */
           @SerializedName("discount")
@@ -4228,6 +4239,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Duration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4382,6 +4394,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AmendmentStart {
         /**
          * Details of another amendment in the same array, immediately after which this amendment
@@ -4515,6 +4528,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class AmendmentEnd {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4598,6 +4612,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class DiscountEnd {
           /** <strong>Required.</strong> The ID of a specific discount. */
           @SerializedName("discount")
@@ -4707,6 +4722,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DiscountAction {
         /** Details of the discount to add. */
         @SerializedName("add")
@@ -4824,6 +4840,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Add {
           /** The coupon code to redeem. */
           @SerializedName("coupon")
@@ -4968,6 +4985,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class DiscountEnd {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -5066,6 +5084,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Remove {
           /** The coupon code to remove from the {@code discounts} array. */
           @SerializedName("coupon")
@@ -5171,6 +5190,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Set {
           /** The coupon code to replace the {@code discounts} array with. */
           @SerializedName("coupon")
@@ -5294,6 +5314,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ItemAction {
         /**
          * Details of the subscription item to add. If an item with the same {@code price} exists,
@@ -5427,6 +5448,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Add {
           /**
            * The discounts applied to the item. Subscription item discounts are applied before
@@ -5667,6 +5689,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Discount {
             /** ID of the coupon to create a new discount for. */
             @SerializedName("coupon")
@@ -5793,6 +5816,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class DiscountEnd {
               /** Time span for the redeemed discount. */
               @SerializedName("duration")
@@ -5908,6 +5932,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               }
 
               @Getter
+              @EqualsAndHashCode(callSuper = false)
               public static class Duration {
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -6053,6 +6078,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Trial {
             /**
              * List of price IDs which, if present on the subscription following a paid trial,
@@ -6186,6 +6212,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Remove {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -6260,6 +6287,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Set {
           /**
            * If an item with the {@code price} already exists, passing this will override the {@code
@@ -6523,6 +6551,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Discount {
             /** ID of the coupon to create a new discount for. */
             @SerializedName("coupon")
@@ -6649,6 +6678,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class DiscountEnd {
               /** Time span for the redeemed discount. */
               @SerializedName("duration")
@@ -6764,6 +6794,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               }
 
               @Getter
+              @EqualsAndHashCode(callSuper = false)
               public static class Duration {
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -6909,6 +6940,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Trial {
             /**
              * List of price IDs which, if present on the subscription following a paid trial,
@@ -7061,6 +7093,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MetadataAction {
         /**
          * Key-value pairs to add to schedule phase metadata. These values will merge with existing
@@ -7298,6 +7331,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class SetPauseCollection {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7386,6 +7420,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Set {
           /**
            * <strong>Required.</strong> The payment collection behavior for this subscription while
@@ -7504,6 +7539,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class TrialSettings {
         /** Defines how the subscription should behave when a trial ends. */
         @SerializedName("end_behavior")
@@ -7579,6 +7615,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class EndBehavior {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -7728,6 +7765,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Phase {
       /**
        * A list of prices and quantities that will generate invoice items appended to the next
@@ -7761,13 +7799,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       BillingCycleAnchor billingCycleAnchor;
 
       /**
-       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period. Pass an empty string to remove previously-defined thresholds.
-       */
-      @SerializedName("billing_thresholds")
-      Object billingThresholds;
-
-      /**
        * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
        * Stripe will attempt to pay the underlying subscription at the end of each billing cycle
        * using the default source attached to the customer. When sending an invoice, Stripe will
@@ -7776,13 +7807,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        */
       @SerializedName("collection_method")
       CollectionMethod collectionMethod;
-
-      /**
-       * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-       * been deprecated and will be removed in a future API version. Use {@code discounts} instead.
-       */
-      @SerializedName("coupon")
-      String coupon;
 
       /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
@@ -7945,9 +7969,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           BigDecimal applicationFeePercent,
           AutomaticTax automaticTax,
           BillingCycleAnchor billingCycleAnchor,
-          Object billingThresholds,
           CollectionMethod collectionMethod,
-          String coupon,
           String currency,
           String defaultPaymentMethod,
           Object defaultTaxRates,
@@ -7972,9 +7994,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         this.applicationFeePercent = applicationFeePercent;
         this.automaticTax = automaticTax;
         this.billingCycleAnchor = billingCycleAnchor;
-        this.billingThresholds = billingThresholds;
         this.collectionMethod = collectionMethod;
-        this.coupon = coupon;
         this.currency = currency;
         this.defaultPaymentMethod = defaultPaymentMethod;
         this.defaultTaxRates = defaultTaxRates;
@@ -8011,11 +8031,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         private BillingCycleAnchor billingCycleAnchor;
 
-        private Object billingThresholds;
-
         private CollectionMethod collectionMethod;
-
-        private String coupon;
 
         private String currency;
 
@@ -8064,9 +8080,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               this.applicationFeePercent,
               this.automaticTax,
               this.billingCycleAnchor,
-              this.billingThresholds,
               this.collectionMethod,
-              this.coupon,
               this.currency,
               this.defaultPaymentMethod,
               this.defaultTaxRates,
@@ -8153,25 +8167,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
-         * new billing period. Pass an empty string to remove previously-defined thresholds.
-         */
-        public Builder setBillingThresholds(
-            InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds billingThresholds) {
-          this.billingThresholds = billingThresholds;
-          return this;
-        }
-
-        /**
-         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
-         * new billing period. Pass an empty string to remove previously-defined thresholds.
-         */
-        public Builder setBillingThresholds(EmptyParam billingThresholds) {
-          this.billingThresholds = billingThresholds;
-          return this;
-        }
-
-        /**
          * Either {@code charge_automatically}, or {@code send_invoice}. When charging
          * automatically, Stripe will attempt to pay the underlying subscription at the end of each
          * billing cycle using the default source attached to the customer. When sending an invoice,
@@ -8181,16 +8176,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         public Builder setCollectionMethod(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.CollectionMethod collectionMethod) {
           this.collectionMethod = collectionMethod;
-          return this;
-        }
-
-        /**
-         * The ID of the coupon to apply to this phase of the subscription schedule. This field has
-         * been deprecated and will be removed in a future API version. Use {@code discounts}
-         * instead.
-         */
-        public Builder setCoupon(String coupon) {
-          this.coupon = coupon;
           return this;
         }
 
@@ -8574,6 +8559,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AddInvoiceItem {
         /** The coupons to redeem into discounts for the item. */
         @SerializedName("discounts")
@@ -8789,6 +8775,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Discount {
           /** ID of the coupon to create a new discount for. */
           @SerializedName("coupon")
@@ -8913,6 +8900,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class DiscountEnd {
             /** Time span for the redeemed discount. */
             @SerializedName("duration")
@@ -9027,6 +9015,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class Duration {
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -9171,6 +9160,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class PriceData {
           /**
            * <strong>Required.</strong> Three-letter <a
@@ -9191,7 +9181,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+          /**
+           * <strong>Required.</strong> The ID of the <a
+           * href="https://docs.stripe.com/api/products">Product</a> that this <a
+           * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+           */
           @SerializedName("product")
           String product;
 
@@ -9307,7 +9301,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               return this;
             }
 
-            /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+            /**
+             * <strong>Required.</strong> The ID of the <a
+             * href="https://docs.stripe.com/api/products">Product</a> that this <a
+             * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+             */
             public Builder setProduct(String product) {
               this.product = product;
               return this;
@@ -9371,6 +9369,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AutomaticTax {
         /**
          * <strong>Required.</strong> Enabled automatic tax calculation which will automatically
@@ -9473,6 +9472,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Liability {
           /** The connected account being referenced when {@code type} is {@code account}. */
           @SerializedName("account")
@@ -9577,104 +9577,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
-      public static class BillingThresholds {
-        /** Monetary threshold that triggers the subscription to advance to a new billing period. */
-        @SerializedName("amount_gte")
-        Long amountGte;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /**
-         * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is
-         * reached. If true, {@code billing_cycle_anchor} will be updated to the date/time the
-         * threshold was last reached; otherwise, the value will remain unchanged.
-         */
-        @SerializedName("reset_billing_cycle_anchor")
-        Boolean resetBillingCycleAnchor;
-
-        private BillingThresholds(
-            Long amountGte, Map<String, Object> extraParams, Boolean resetBillingCycleAnchor) {
-          this.amountGte = amountGte;
-          this.extraParams = extraParams;
-          this.resetBillingCycleAnchor = resetBillingCycleAnchor;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Long amountGte;
-
-          private Map<String, Object> extraParams;
-
-          private Boolean resetBillingCycleAnchor;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds build() {
-            return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds(
-                this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
-          }
-
-          /**
-           * Monetary threshold that triggers the subscription to advance to a new billing period.
-           */
-          public Builder setAmountGte(Long amountGte) {
-            this.amountGte = amountGte;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /**
-           * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is
-           * reached. If true, {@code billing_cycle_anchor} will be updated to the date/time the
-           * threshold was last reached; otherwise, the value will remain unchanged.
-           */
-          public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
-            this.resetBillingCycleAnchor = resetBillingCycleAnchor;
-            return this;
-          }
-        }
-      }
-
-      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
@@ -9791,6 +9694,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class DiscountEnd {
           /** Time span for the redeemed discount. */
           @SerializedName("duration")
@@ -9900,6 +9804,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Duration {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -10042,6 +9947,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class InvoiceSettings {
         /**
          * The account tax IDs associated with this phase of the subscription schedule. Will be set
@@ -10207,6 +10113,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Issuer {
           /** The connected account being referenced when {@code type} is {@code account}. */
           @SerializedName("account")
@@ -10311,15 +10218,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Item {
-        /**
-         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
-         * new billing period. When updating, pass an empty string to remove previously-defined
-         * thresholds.
-         */
-        @SerializedName("billing_thresholds")
-        Object billingThresholds;
-
         /** The coupons to redeem into discounts for the subscription item. */
         @SerializedName("discounts")
         Object discounts;
@@ -10387,7 +10287,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Trial trial;
 
         private Item(
-            Object billingThresholds,
             Object discounts,
             Map<String, Object> extraParams,
             Map<String, String> metadata,
@@ -10397,7 +10296,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             Long quantity,
             Object taxRates,
             Trial trial) {
-          this.billingThresholds = billingThresholds;
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -10414,8 +10312,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Object billingThresholds;
-
           private Object discounts;
 
           private Map<String, Object> extraParams;
@@ -10437,7 +10333,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item build() {
             return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item(
-                this.billingThresholds,
                 this.discounts,
                 this.extraParams,
                 this.metadata,
@@ -10447,28 +10342,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                 this.quantity,
                 this.taxRates,
                 this.trial);
-          }
-
-          /**
-           * Define thresholds at which an invoice will be sent, and the subscription advanced to a
-           * new billing period. When updating, pass an empty string to remove previously-defined
-           * thresholds.
-           */
-          public Builder setBillingThresholds(
-              InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds
-                  billingThresholds) {
-            this.billingThresholds = billingThresholds;
-            return this;
-          }
-
-          /**
-           * Define thresholds at which an invoice will be sent, and the subscription advanced to a
-           * new billing period. When updating, pass an empty string to remove previously-defined
-           * thresholds.
-           */
-          public Builder setBillingThresholds(EmptyParam billingThresholds) {
-            this.billingThresholds = billingThresholds;
-            return this;
           }
 
           /**
@@ -10673,91 +10546,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
-        public static class BillingThresholds {
-          /**
-           * Map of extra parameters for custom features not available in this client library. The
-           * content in this map is not serialized under this field's {@code @SerializedName} value.
-           * Instead, each key/value pair is serialized as if the key is a root-level field
-           * (serialized) name in this param object. Effectively, this map is flattened to its
-           * parent instance.
-           */
-          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-          Map<String, Object> extraParams;
-
-          /**
-           * <strong>Required.</strong> Number of units that meets the billing threshold to advance
-           * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-           * threshold</a>)
-           */
-          @SerializedName("usage_gte")
-          Long usageGte;
-
-          private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
-            this.extraParams = extraParams;
-            this.usageGte = usageGte;
-          }
-
-          public static Builder builder() {
-            return new Builder();
-          }
-
-          public static class Builder {
-            private Map<String, Object> extraParams;
-
-            private Long usageGte;
-
-            /** Finalize and obtain parameter instance from this builder. */
-            public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds build() {
-              return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds(
-                  this.extraParams, this.usageGte);
-            }
-
-            /**
-             * Add a key/value pair to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds#extraParams}
-             * for the field documentation.
-             */
-            public Builder putExtraParam(String key, Object value) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.put(key, value);
-              return this;
-            }
-
-            /**
-             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
-             * original map. See {@link
-             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds#extraParams}
-             * for the field documentation.
-             */
-            public Builder putAllExtraParam(Map<String, Object> map) {
-              if (this.extraParams == null) {
-                this.extraParams = new HashMap<>();
-              }
-              this.extraParams.putAll(map);
-              return this;
-            }
-
-            /**
-             * <strong>Required.</strong> Number of units that meets the billing threshold to
-             * advance the subscription to a new billing period (e.g., it takes 10 $5 units to meet
-             * a $50 <a
-             * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-             * threshold</a>)
-             */
-            public Builder setUsageGte(Long usageGte) {
-              this.usageGte = usageGte;
-              return this;
-            }
-          }
-        }
-
-        @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Discount {
           /** ID of the coupon to create a new discount for. */
           @SerializedName("coupon")
@@ -10881,6 +10670,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class DiscountEnd {
             /** Time span for the redeemed discount. */
             @SerializedName("duration")
@@ -10993,6 +10783,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class Duration {
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -11136,6 +10927,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class PriceData {
           /**
            * <strong>Required.</strong> Three-letter <a
@@ -11156,7 +10948,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+          /**
+           * <strong>Required.</strong> The ID of the <a
+           * href="https://docs.stripe.com/api/products">Product</a> that this <a
+           * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+           */
           @SerializedName("product")
           String product;
 
@@ -11282,7 +11078,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               return this;
             }
 
-            /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+            /**
+             * <strong>Required.</strong> The ID of the <a
+             * href="https://docs.stripe.com/api/products">Product</a> that this <a
+             * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+             */
             public Builder setProduct(String product) {
               this.product = product;
               return this;
@@ -11335,6 +11135,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Recurring {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -11480,6 +11281,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Trial {
           /**
            * List of price IDs which, if present on the subscription following a paid trial,
@@ -11610,6 +11412,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class PauseCollection {
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
@@ -11709,6 +11512,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class TransferData {
         /**
          * A non-negative decimal between 0 and 100, with at most two decimal places. This
@@ -11806,6 +11610,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class TrialSettings {
         /** Defines how the subscription should behave when a trial ends. */
         @SerializedName("end_behavior")
@@ -11881,6 +11686,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class EndBehavior {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -12081,6 +11887,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Prebilling {
       /** The end of the prebilled time period. */
       @SerializedName("bill_until")
@@ -12165,6 +11972,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class BillUntil {
         /** End the prebilled period when a specified amendment ends. */
         @SerializedName("amendment_end")
@@ -12296,6 +12104,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class AmendmentEnd {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -12379,6 +12188,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Duration {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -12574,6 +12384,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionDetails {
     /**
      * For new subscriptions, a future timestamp to anchor the subscription's <a
@@ -12791,6 +12602,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * proration_behavior}. If set during a future period, this will always cause a proration for
        * that period.
        */
+      public Builder setCancelAt(InvoiceCreatePreviewParams.SubscriptionDetails.CancelAt cancelAt) {
+        this.cancelAt = cancelAt;
+        return this;
+      }
+
+      /**
+       * A timestamp at which the subscription should cancel. If set to a date before the current
+       * period ends, this will cause a proration if prorations have been enabled using {@code
+       * proration_behavior}. If set during a future period, this will always cause a proration for
+       * that period.
+       */
       public Builder setCancelAt(EmptyParam cancelAt) {
         this.cancelAt = cancelAt;
         return this;
@@ -12986,15 +12808,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Item {
-      /**
-       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period. When updating, pass an empty string to remove previously-defined
-       * thresholds.
-       */
-      @SerializedName("billing_thresholds")
-      Object billingThresholds;
-
       /**
        * Delete all usage for a given subscription item. You must pass this when deleting a usage
        * records subscription item. {@code clear_usage} has no effect if the plan has a billing
@@ -13067,7 +12882,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       Object taxRates;
 
       private Item(
-          Object billingThresholds,
           Boolean clearUsage,
           Boolean deleted,
           Object discounts,
@@ -13079,7 +12893,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           PriceData priceData,
           Long quantity,
           Object taxRates) {
-        this.billingThresholds = billingThresholds;
         this.clearUsage = clearUsage;
         this.deleted = deleted;
         this.discounts = discounts;
@@ -13098,8 +12911,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Object billingThresholds;
-
         private Boolean clearUsage;
 
         private Boolean deleted;
@@ -13125,7 +12936,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceCreatePreviewParams.SubscriptionDetails.Item build() {
           return new InvoiceCreatePreviewParams.SubscriptionDetails.Item(
-              this.billingThresholds,
               this.clearUsage,
               this.deleted,
               this.discounts,
@@ -13137,28 +12947,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               this.priceData,
               this.quantity,
               this.taxRates);
-        }
-
-        /**
-         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
-         * new billing period. When updating, pass an empty string to remove previously-defined
-         * thresholds.
-         */
-        public Builder setBillingThresholds(
-            InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds
-                billingThresholds) {
-          this.billingThresholds = billingThresholds;
-          return this;
-        }
-
-        /**
-         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
-         * new billing period. When updating, pass an empty string to remove previously-defined
-         * thresholds.
-         */
-        public Builder setBillingThresholds(EmptyParam billingThresholds) {
-          this.billingThresholds = billingThresholds;
-          return this;
         }
 
         /**
@@ -13400,90 +13188,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
-      public static class BillingThresholds {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /**
-         * <strong>Required.</strong> Number of units that meets the billing threshold to advance
-         * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-         * threshold</a>)
-         */
-        @SerializedName("usage_gte")
-        Long usageGte;
-
-        private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
-          this.extraParams = extraParams;
-          this.usageGte = usageGte;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private Long usageGte;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds build() {
-            return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds(
-                this.extraParams, this.usageGte);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds#extraParams} for
-           * the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds#extraParams} for
-           * the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /**
-           * <strong>Required.</strong> Number of units that meets the billing threshold to advance
-           * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-           * threshold</a>)
-           */
-          public Builder setUsageGte(Long usageGte) {
-            this.usageGte = usageGte;
-            return this;
-          }
-        }
-      }
-
-      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
@@ -13603,6 +13308,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class DiscountEnd {
           /** Time span for the redeemed discount. */
           @SerializedName("duration")
@@ -13714,6 +13420,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class Duration {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -13857,6 +13564,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class PriceData {
         /**
          * <strong>Required.</strong> Three-letter <a
@@ -13876,7 +13584,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+        /**
+         * <strong>Required.</strong> The ID of the <a
+         * href="https://docs.stripe.com/api/products">Product</a> that this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+         */
         @SerializedName("product")
         String product;
 
@@ -14002,7 +13714,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+          /**
+           * <strong>Required.</strong> The ID of the <a
+           * href="https://docs.stripe.com/api/products">Product</a> that this <a
+           * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+           */
           public Builder setProduct(String product) {
             this.product = product;
             return this;
@@ -14054,6 +13770,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Recurring {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -14199,6 +13916,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Prebilling {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -14286,6 +14004,18 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       private final String value;
 
       BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum CancelAt implements ApiRequestParams.EnumParam {
+      @SerializedName("min_period_end")
+      MIN_PERIOD_END("min_period_end");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CancelAt(String value) {
         this.value = value;
       }
     }

@@ -48,22 +48,23 @@ public class StripeError extends StripeObject {
    * expired_card}, {@code financial_connections_account_inactive}, {@code
    * financial_connections_institution_unavailable}, {@code
    * financial_connections_no_successful_transaction_refresh}, {@code forwarding_api_inactive},
-   * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_upstream_connection_error},
-   * {@code forwarding_api_upstream_connection_timeout}, {@code gift_card_balance_insufficient},
-   * {@code gift_card_code_exists}, {@code gift_card_inactive}, {@code idempotency_key_in_use},
-   * {@code incorrect_address}, {@code incorrect_cvc}, {@code incorrect_number}, {@code
-   * incorrect_zip}, {@code instant_payouts_config_disabled}, {@code
-   * instant_payouts_currency_disabled}, {@code instant_payouts_limit_exceeded}, {@code
-   * instant_payouts_unsupported}, {@code insufficient_funds}, {@code intent_invalid_state}, {@code
-   * intent_verification_method_missing}, {@code invalid_card_type}, {@code invalid_characters},
-   * {@code invalid_charge_amount}, {@code invalid_cvc}, {@code invalid_expiry_month}, {@code
-   * invalid_expiry_year}, {@code invalid_mandate_reference_prefix_format}, {@code invalid_number},
-   * {@code invalid_source_usage}, {@code invalid_tax_location}, {@code
-   * invoice_no_customer_line_items}, {@code invoice_no_payment_method_types}, {@code
-   * invoice_no_subscription_line_items}, {@code invoice_not_editable}, {@code
-   * invoice_on_behalf_of_not_editable}, {@code invoice_payment_intent_requires_action}, {@code
-   * invoice_upcoming_none}, {@code livemode_mismatch}, {@code lock_timeout}, {@code missing},
-   * {@code no_account}, {@code not_allowed_on_standard_account}, {@code out_of_inventory}, {@code
+   * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_retryable_upstream_error},
+   * {@code forwarding_api_upstream_connection_error}, {@code
+   * forwarding_api_upstream_connection_timeout}, {@code gift_card_balance_insufficient}, {@code
+   * gift_card_code_exists}, {@code gift_card_inactive}, {@code idempotency_key_in_use}, {@code
+   * incorrect_address}, {@code incorrect_cvc}, {@code incorrect_number}, {@code incorrect_zip},
+   * {@code instant_payouts_config_disabled}, {@code instant_payouts_currency_disabled}, {@code
+   * instant_payouts_limit_exceeded}, {@code instant_payouts_unsupported}, {@code
+   * insufficient_funds}, {@code intent_invalid_state}, {@code intent_verification_method_missing},
+   * {@code invalid_card_type}, {@code invalid_characters}, {@code invalid_charge_amount}, {@code
+   * invalid_cvc}, {@code invalid_expiry_month}, {@code invalid_expiry_year}, {@code
+   * invalid_mandate_reference_prefix_format}, {@code invalid_number}, {@code invalid_source_usage},
+   * {@code invalid_tax_location}, {@code invoice_no_customer_line_items}, {@code
+   * invoice_no_payment_method_types}, {@code invoice_no_subscription_line_items}, {@code
+   * invoice_not_editable}, {@code invoice_on_behalf_of_not_editable}, {@code
+   * invoice_payment_intent_requires_action}, {@code invoice_upcoming_none}, {@code
+   * livemode_mismatch}, {@code lock_timeout}, {@code missing}, {@code no_account}, {@code
+   * not_allowed_on_standard_account}, {@code out_of_inventory}, {@code
    * ownership_declaration_not_allowed}, {@code parameter_invalid_empty}, {@code
    * parameter_invalid_integer}, {@code parameter_invalid_string_blank}, {@code
    * parameter_invalid_string_empty}, {@code parameter_missing}, {@code parameter_unknown}, {@code
@@ -94,14 +95,15 @@ public class StripeError extends StripeObject {
    * {@code secret_key_required}, {@code sensitive_data_access_expired}, {@code
    * sepa_unsupported_account}, {@code setup_attempt_failed}, {@code
    * setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
-   * setup_intent_mandate_invalid}, {@code setup_intent_setup_attempt_expired}, {@code
-   * setup_intent_unexpected_state}, {@code shipping_address_invalid}, {@code
-   * shipping_calculation_failed}, {@code sku_inactive}, {@code state_unsupported}, {@code
-   * status_transition_invalid}, {@code stripe_tax_inactive}, {@code tax_id_invalid}, {@code
-   * taxes_calculation_failed}, {@code terminal_location_country_unsupported}, {@code
-   * terminal_reader_busy}, {@code terminal_reader_collected_data_invalid}, {@code
-   * terminal_reader_hardware_fault}, {@code terminal_reader_invalid_location_for_activation},
-   * {@code terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code
+   * setup_intent_mandate_invalid}, {@code setup_intent_mobile_wallet_unsupported}, {@code
+   * setup_intent_setup_attempt_expired}, {@code setup_intent_unexpected_state}, {@code
+   * shipping_address_invalid}, {@code shipping_calculation_failed}, {@code sku_inactive}, {@code
+   * state_unsupported}, {@code status_transition_invalid}, {@code stripe_tax_inactive}, {@code
+   * tax_id_invalid}, {@code taxes_calculation_failed}, {@code
+   * terminal_location_country_unsupported}, {@code terminal_reader_busy}, {@code
+   * terminal_reader_collected_data_invalid}, {@code terminal_reader_hardware_fault}, {@code
+   * terminal_reader_invalid_location_for_activation}, {@code
+   * terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code
    * terminal_reader_timeout}, {@code testmode_charges_only}, {@code tls_version_unsupported},
    * {@code token_already_used}, {@code token_card_network_invalid}, {@code token_in_use}, {@code
    * transfer_source_balance_parameters_mismatch}, {@code transfers_not_allowed}, or {@code

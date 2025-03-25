@@ -1217,6 +1217,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("liability")
     Liability liability;
 
+    /** The tax provider powering automatic tax. */
+    @SerializedName("provider")
+    String provider;
+
     /**
      * The status of the most recent automated tax calculation for this quote.
      *

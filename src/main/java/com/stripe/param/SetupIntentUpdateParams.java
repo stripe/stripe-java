@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SetupIntentUpdateParams extends ApiRequestParams {
   /**
    * If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.
@@ -435,6 +437,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodData {
     /**
      * If this is an {@code acss_debit} PaymentMethod, this hash contains details about the ACSS
@@ -506,6 +509,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     @SerializedName("bancontact")
     Bancontact bancontact;
+
+    /**
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * payment method.
+     */
+    @SerializedName("billie")
+    Billie billie;
 
     /**
      * Billing information associated with the PaymentMethod that may be used or required by
@@ -679,6 +689,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     NaverPay naverPay;
 
     /**
+     * If this is an nz_bank_account PaymentMethod, this hash contains details about the
+     * nz_bank_account payment method.
+     */
+    @SerializedName("nz_bank_account")
+    NzBankAccount nzBankAccount;
+
+    /**
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
@@ -777,6 +794,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
+     * If this is a Satispay PaymentMethod, this hash contains details about the Satispay payment
+     * method.
+     */
+    @SerializedName("satispay")
+    Satispay satispay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
@@ -850,6 +874,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
         Bancontact bancontact,
+        Billie billie,
         BillingDetails billingDetails,
         Blik blik,
         Boleto boleto,
@@ -874,6 +899,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Mobilepay mobilepay,
         Multibanco multibanco,
         NaverPay naverPay,
+        NzBankAccount nzBankAccount,
         Oxxo oxxo,
         P24 p24,
         PayByBank payByBank,
@@ -888,6 +914,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Rechnung rechnung,
         RevolutPay revolutPay,
         SamsungPay samsungPay,
+        Satispay satispay,
         SepaDebit sepaDebit,
         Shopeepay shopeepay,
         Sofort sofort,
@@ -907,6 +934,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
+      this.billie = billie;
       this.billingDetails = billingDetails;
       this.blik = blik;
       this.boleto = boleto;
@@ -931,6 +959,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
       this.naverPay = naverPay;
+      this.nzBankAccount = nzBankAccount;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.payByBank = payByBank;
@@ -945,6 +974,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.rechnung = rechnung;
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
+      this.satispay = satispay;
       this.sepaDebit = sepaDebit;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
@@ -980,6 +1010,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private BacsDebit bacsDebit;
 
       private Bancontact bancontact;
+
+      private Billie billie;
 
       private BillingDetails billingDetails;
 
@@ -1029,6 +1061,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private NaverPay naverPay;
 
+      private NzBankAccount nzBankAccount;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -1056,6 +1090,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private RevolutPay revolutPay;
 
       private SamsungPay samsungPay;
+
+      private Satispay satispay;
 
       private SepaDebit sepaDebit;
 
@@ -1088,6 +1124,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.auBecsDebit,
             this.bacsDebit,
             this.bancontact,
+            this.billie,
             this.billingDetails,
             this.blik,
             this.boleto,
@@ -1112,6 +1149,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.mobilepay,
             this.multibanco,
             this.naverPay,
+            this.nzBankAccount,
             this.oxxo,
             this.p24,
             this.payByBank,
@@ -1126,6 +1164,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.rechnung,
             this.revolutPay,
             this.samsungPay,
+            this.satispay,
             this.sepaDebit,
             this.shopeepay,
             this.sofort,
@@ -1229,6 +1268,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setBancontact(
           SetupIntentUpdateParams.PaymentMethodData.Bancontact bancontact) {
         this.bancontact = bancontact;
+        return this;
+      }
+
+      /**
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * payment method.
+       */
+      public Builder setBillie(SetupIntentUpdateParams.PaymentMethodData.Billie billie) {
+        this.billie = billie;
         return this;
       }
 
@@ -1489,6 +1537,16 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is an nz_bank_account PaymentMethod, this hash contains details about the
+       * nz_bank_account payment method.
+       */
+      public Builder setNzBankAccount(
+          SetupIntentUpdateParams.PaymentMethodData.NzBankAccount nzBankAccount) {
+        this.nzBankAccount = nzBankAccount;
+        return this;
+      }
+
+      /**
        * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
        * method.
        */
@@ -1618,6 +1676,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a Satispay PaymentMethod, this hash contains details about the Satispay payment
+       * method.
+       */
+      public Builder setSatispay(SetupIntentUpdateParams.PaymentMethodData.Satispay satispay) {
+        this.satispay = satispay;
+        return this;
+      }
+
+      /**
        * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
        * debit bank account.
        */
@@ -1702,6 +1769,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit {
       /** <strong>Required.</strong> Customer's bank account number. */
       @SerializedName("account_number")
@@ -1821,6 +1889,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Affirm {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1878,6 +1947,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1935,6 +2005,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Alipay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1992,6 +2063,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Alma {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2049,6 +2121,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2106,6 +2179,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AuBecsDebit {
       /** <strong>Required.</strong> The account number for the bank account. */
       @SerializedName("account_number")
@@ -2202,6 +2276,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit {
       /** Account number of the bank account that the funds will be debited from. */
       @SerializedName("account_number")
@@ -2298,6 +2373,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Bancontact {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2355,6 +2431,65 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Billie {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Billie(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Billie build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Billie(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Billie#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Billie#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BillingDetails {
       /** Billing address. */
       @SerializedName("address")
@@ -2494,6 +2629,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -2692,6 +2828,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Blik {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2749,6 +2886,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Boleto {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2834,6 +2972,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Cashapp {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2891,6 +3030,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2948,6 +3088,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Eps {
       /** The customer's bank. */
       @SerializedName("bank")
@@ -3111,6 +3252,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Fpx {
       /** Account holder type for FPX transaction. */
       @SerializedName("account_holder_type")
@@ -3286,6 +3428,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Giropay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3343,6 +3486,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Gopay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3400,6 +3544,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Grabpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3457,6 +3602,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IdBankTransfer {
       /** Bank where the account is held. */
       @SerializedName("bank")
@@ -3552,6 +3698,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Ideal {
       /**
        * The customer's bank. Only use this parameter for existing customers. Don't use it for new
@@ -3685,6 +3832,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class InteracPresent {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3742,6 +3890,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KakaoPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3799,6 +3948,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Klarna {
       /** Customer's date of birth. */
       @SerializedName("dob")
@@ -3868,6 +4018,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Dob {
         /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         @SerializedName("day")
@@ -3967,6 +4118,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Konbini {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4024,6 +4176,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KrCard {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4081,6 +4234,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Link {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4138,6 +4292,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MbWay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4195,6 +4350,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4252,6 +4408,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Multibanco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4309,6 +4466,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class NaverPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4402,6 +4560,199 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccount {
+      /**
+       * The name on the bank account. Only required if the account holder name is different from
+       * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+       */
+      @SerializedName("account_holder_name")
+      Object accountHolderName;
+
+      /** <strong>Required.</strong> The account number for the bank account. */
+      @SerializedName("account_number")
+      Object accountNumber;
+
+      /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+      @SerializedName("bank_code")
+      Object bankCode;
+
+      /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+      @SerializedName("branch_code")
+      Object branchCode;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      @SerializedName("reference")
+      Object reference;
+
+      /** <strong>Required.</strong> The suffix of the bank account number. */
+      @SerializedName("suffix")
+      Object suffix;
+
+      private NzBankAccount(
+          Object accountHolderName,
+          Object accountNumber,
+          Object bankCode,
+          Object branchCode,
+          Map<String, Object> extraParams,
+          Object reference,
+          Object suffix) {
+        this.accountHolderName = accountHolderName;
+        this.accountNumber = accountNumber;
+        this.bankCode = bankCode;
+        this.branchCode = branchCode;
+        this.extraParams = extraParams;
+        this.reference = reference;
+        this.suffix = suffix;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object accountHolderName;
+
+        private Object accountNumber;
+
+        private Object bankCode;
+
+        private Object branchCode;
+
+        private Map<String, Object> extraParams;
+
+        private Object reference;
+
+        private Object suffix;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.NzBankAccount build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.NzBankAccount(
+              this.accountHolderName,
+              this.accountNumber,
+              this.bankCode,
+              this.branchCode,
+              this.extraParams,
+              this.reference,
+              this.suffix);
+        }
+
+        /**
+         * The name on the bank account. Only required if the account holder name is different from
+         * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+         */
+        public Builder setAccountHolderName(String accountHolderName) {
+          this.accountHolderName = accountHolderName;
+          return this;
+        }
+
+        /**
+         * The name on the bank account. Only required if the account holder name is different from
+         * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+         */
+        public Builder setAccountHolderName(EmptyParam accountHolderName) {
+          this.accountHolderName = accountHolderName;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The account number for the bank account. */
+        public Builder setAccountNumber(String accountNumber) {
+          this.accountNumber = accountNumber;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The account number for the bank account. */
+        public Builder setAccountNumber(EmptyParam accountNumber) {
+          this.accountNumber = accountNumber;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+        public Builder setBankCode(String bankCode) {
+          this.bankCode = bankCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+        public Builder setBankCode(EmptyParam bankCode) {
+          this.bankCode = bankCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+        public Builder setBranchCode(String branchCode) {
+          this.branchCode = branchCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+        public Builder setBranchCode(EmptyParam branchCode) {
+          this.branchCode = branchCode;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.NzBankAccount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.NzBankAccount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        public Builder setReference(EmptyParam reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The suffix of the bank account number. */
+        public Builder setSuffix(String suffix) {
+          this.suffix = suffix;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The suffix of the bank account number. */
+        public Builder setSuffix(EmptyParam suffix) {
+          this.suffix = suffix;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4459,6 +4810,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class P24 {
       /** The customer's bank. */
       @SerializedName("bank")
@@ -4616,6 +4968,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PayByBank {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4673,6 +5026,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payco {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4730,6 +5084,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Paynow {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4787,6 +5142,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Paypal {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4844,6 +5200,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payto {
       /** The account number for the bank account. */
       @SerializedName("account_number")
@@ -4960,6 +5317,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pix {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5017,6 +5375,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Promptpay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5074,6 +5433,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Qris {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5131,6 +5491,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class RadarOptions {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5220,6 +5581,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Rechnung {
       /** <strong>Required.</strong> Customer's date of birth */
       @SerializedName("dob")
@@ -5289,6 +5651,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Dob {
         /** <strong>Required.</strong> The day of birth, between 1 and 31. */
         @SerializedName("day")
@@ -5388,6 +5751,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5445,6 +5809,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SamsungPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5502,6 +5867,65 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Satispay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Satispay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Satispay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Satispay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Satispay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5579,6 +6003,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Shopeepay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5636,6 +6061,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Sofort {
       /**
        * <strong>Required.</strong> Two-letter ISO code representing the country the bank account is
@@ -5741,6 +6167,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Swish {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5798,6 +6225,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Twint {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5855,6 +6283,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /** Account holder type: individual or company. */
       @SerializedName("account_holder_type")
@@ -6040,6 +6469,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class WechatPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6097,6 +6527,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Zip {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6199,6 +6630,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
 
+      @SerializedName("billie")
+      BILLIE("billie"),
+
       @SerializedName("blik")
       BLIK("blik"),
 
@@ -6259,6 +6693,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("naver_pay")
       NAVER_PAY("naver_pay"),
 
+      @SerializedName("nz_bank_account")
+      NZ_BANK_ACCOUNT("nz_bank_account"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
@@ -6298,6 +6735,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("samsung_pay")
       SAMSUNG_PAY("samsung_pay"),
 
+      @SerializedName("satispay")
+      SATISPAY("satispay"),
+
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
 
@@ -6332,6 +6772,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions {
     /**
      * If this is a {@code acss_debit} SetupIntent, this sub-hash contains details about the ACSS
@@ -6599,6 +7040,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit {
       /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
@@ -6711,6 +7153,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * A URL for custom mandate text to render during confirmation step. The URL will be
@@ -7000,6 +7443,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7057,6 +7501,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7128,6 +7573,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7221,6 +7667,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Card {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7399,6 +7846,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /** <strong>Required.</strong> Amount to be charged for future payments. */
         @SerializedName("amount")
@@ -7777,6 +8225,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class ThreeDSecure {
         /** The {@code transStatus} returned from the card Issuer’s ACS in the ARes. */
         @SerializedName("ares_trans_status")
@@ -8015,6 +8464,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class NetworkOptions {
           /** Cartes Bancaires-specific 3DS fields. */
           @SerializedName("cartes_bancaires")
@@ -8092,6 +8542,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class CartesBancaires {
             /**
              * <strong>Required.</strong> The cryptogram calculation algorithm used by the card
@@ -8402,6 +8853,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CardPresent {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8459,6 +8911,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Link {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8539,6 +8992,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Paypal {
       /**
        * The PayPal Billing Agreement ID (BAID). This is an ID generated by PayPal which represents
@@ -8685,6 +9139,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payto {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8756,6 +9211,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
@@ -9069,6 +9525,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9140,6 +9597,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -9233,6 +9691,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9358,6 +9817,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class FinancialConnections {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -9604,6 +10064,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Filters {
           /**
            * The account subcategories to use to filter for selectable accounts. Valid subcategories
@@ -9761,6 +10222,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class ManualEntry {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -9902,6 +10364,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class MandateOptions {
         /** The method used to collect offline mandate customer acceptance. */
         @SerializedName("collection_method")
@@ -9998,6 +10461,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Networks {
         /**
          * Map of extra parameters for custom features not available in this client library. The

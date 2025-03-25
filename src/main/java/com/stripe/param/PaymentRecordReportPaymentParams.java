@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   /** <strong>Required.</strong> The amount you intend to collect for this payment. */
   @SerializedName("amount_requested")
@@ -73,8 +75,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   PaymentMethodDetails paymentMethodDetails;
 
   /**
-   * <strong>Required.</strong> An opaque string for manual reconciliation of this payment, for
-   * example a check number or a payment processor ID.
+   * An opaque string for manual reconciliation of this payment, for example a check number or a
+   * payment processor ID.
    */
   @SerializedName("payment_reference")
   String paymentReference;
@@ -306,8 +308,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> An opaque string for manual reconciliation of this payment, for
-     * example a check number or a payment processor ID.
+     * An opaque string for manual reconciliation of this payment, for example a check number or a
+     * payment processor ID.
      */
     public Builder setPaymentReference(String paymentReference) {
       this.paymentReference = paymentReference;
@@ -323,6 +325,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AmountRequested {
     /**
      * <strong>Required.</strong> Three-letter <a
@@ -422,6 +425,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails {
     /** The customer who made the payment. */
     @SerializedName("customer")
@@ -532,6 +536,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Failed {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -607,6 +612,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Guaranteed {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -682,6 +688,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails {
     /** The billing details associated with the method of payment. */
     @SerializedName("billing_details")
@@ -806,6 +813,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BillingDetails {
       /** The billing address associated with the method of payment. */
       @SerializedName("address")
@@ -923,6 +931,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Address {
         /** City, district, suburb, town, or village. */
         @SerializedName("city")
@@ -1083,6 +1092,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Custom {
       /**
        * Display name for the custom (user-defined) payment method type used to make this payment.
@@ -1184,6 +1194,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingDetails {
     /** The physical shipping address. */
     @SerializedName("address")
@@ -1280,6 +1291,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")

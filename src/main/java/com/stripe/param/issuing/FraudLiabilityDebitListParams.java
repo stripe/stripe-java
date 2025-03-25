@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class FraudLiabilityDebitListParams extends ApiRequestParams {
   /**
    * Only return Issuing Fraud Liability Debits that were created during the given date interval.
@@ -199,6 +201,7 @@ public class FraudLiabilityDebitListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
