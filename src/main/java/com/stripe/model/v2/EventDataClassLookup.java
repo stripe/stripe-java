@@ -28,6 +28,21 @@ public final class EventDataClassLookup {
     classLookup.put("v2.core.event", com.stripe.model.v2.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.EventDestination.class);
 
+    classLookup.put(
+        "v2.core.vault.gb_bank_account", com.stripe.model.v2.core.vault.GbBankAccount.class);
+    classLookup.put(
+        "v2.core.vault.us_bank_account", com.stripe.model.v2.core.vault.UsBankAccount.class);
+
+    classLookup.put(
+        "v2.money_management.outbound_setup_intent",
+        com.stripe.model.v2.moneymanagement.OutboundSetupIntent.class);
+    classLookup.put(
+        "v2.money_management.payout_method",
+        com.stripe.model.v2.moneymanagement.PayoutMethod.class);
+    classLookup.put(
+        "v2.money_management.payout_methods_bank_account_spec",
+        com.stripe.model.v2.moneymanagement.PayoutMethodsBankAccountSpec.class);
+
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
         com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
