@@ -4,7 +4,6 @@ package com.stripe.service;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Invoice;
-import com.stripe.model.InvoiceLineItem;
 import com.stripe.model.StripeCollection;
 import com.stripe.model.StripeSearchResult;
 import com.stripe.net.ApiRequest;
@@ -25,8 +24,6 @@ import com.stripe.param.InvoiceRemoveLinesParams;
 import com.stripe.param.InvoiceRetrieveParams;
 import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
-import com.stripe.param.InvoiceUpcomingLinesParams;
-import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateLinesParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
@@ -254,158 +251,6 @@ public final class InvoiceService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeSearchResult<Invoice>>() {}.getType());
-  }
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public Invoice upcoming(InvoiceUpcomingParams params) throws StripeException {
-    return upcoming(params, (RequestOptions) null);
-  }
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public Invoice upcoming(RequestOptions options) throws StripeException {
-    return upcoming((InvoiceUpcomingParams) null, options);
-  }
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public Invoice upcoming() throws StripeException {
-    return upcoming((InvoiceUpcomingParams) null, (RequestOptions) null);
-  }
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public Invoice upcoming(InvoiceUpcomingParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/invoices/upcoming";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, Invoice.class);
-  }
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> upcomingLines(InvoiceUpcomingLinesParams params)
-      throws StripeException {
-    return upcomingLines(params, (RequestOptions) null);
-  }
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> upcomingLines(RequestOptions options)
-      throws StripeException {
-    return upcomingLines((InvoiceUpcomingLinesParams) null, options);
-  }
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> upcomingLines() throws StripeException {
-    return upcomingLines((InvoiceUpcomingLinesParams) null, (RequestOptions) null);
-  }
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public StripeCollection<InvoiceLineItem> upcomingLines(
-      InvoiceUpcomingLinesParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/invoices/upcoming/lines";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, new TypeToken<StripeCollection<InvoiceLineItem>>() {}.getType());
   }
   /**
    * Adds multiple line items to an invoice. This is only possible when an invoice is still a draft.

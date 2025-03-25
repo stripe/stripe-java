@@ -199,16 +199,16 @@ public class FinancialAccount extends ApiResource
   }
 
   /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
+   * Creates a new FinancialAccount. Each connected account can have up to three FinancialAccounts
+   * by default.
    */
   public static FinancialAccount create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
+   * Creates a new FinancialAccount. Each connected account can have up to three FinancialAccounts
+   * by default.
    */
   public static FinancialAccount create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -219,8 +219,8 @@ public class FinancialAccount extends ApiResource
   }
 
   /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
+   * Creates a new FinancialAccount. Each connected account can have up to three FinancialAccounts
+   * by default.
    */
   public static FinancialAccount create(FinancialAccountCreateParams params)
       throws StripeException {
@@ -228,8 +228,8 @@ public class FinancialAccount extends ApiResource
   }
 
   /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
+   * Creates a new FinancialAccount. Each connected account can have up to three FinancialAccounts
+   * by default.
    */
   public static FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
       throws StripeException {

@@ -461,6 +461,14 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("ownership_declaration_shown_and_signed")
       Boolean ownershipDeclarationShownAndSigned;
 
+      /**
+       * This value is used to determine if a business is exempt from providing ultimate beneficial
+       * owners. See <a
+       * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+       * support article</a> and <a
+       * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+       * for more details.
+       */
       @SerializedName("ownership_exemption_reason")
       ApiRequestParams.EnumParam ownershipExemptionReason;
 
@@ -779,12 +787,28 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * This value is used to determine if a business is exempt from providing ultimate
+         * beneficial owners. See <a
+         * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+         * support article</a> and <a
+         * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+         * for more details.
+         */
         public Builder setOwnershipExemptionReason(
             TokenCreateParams.Account.Company.OwnershipExemptionReason ownershipExemptionReason) {
           this.ownershipExemptionReason = ownershipExemptionReason;
           return this;
         }
 
+        /**
+         * This value is used to determine if a business is exempt from providing ultimate
+         * beneficial owners. See <a
+         * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+         * support article</a> and <a
+         * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+         * for more details.
+         */
         public Builder setOwnershipExemptionReason(EmptyParam ownershipExemptionReason) {
           this.ownershipExemptionReason = ownershipExemptionReason;
           return this;

@@ -49,13 +49,6 @@ public class CouponCreateParams extends ApiRequestParams {
   @SerializedName("duration")
   Duration duration;
 
-  /**
-   * Required only if {@code duration} is {@code repeating}, in which case it must be a positive
-   * integer that specifies the number of months the discount will be in effect.
-   */
-  @SerializedName("duration_in_months")
-  Long durationInMonths;
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -121,7 +114,6 @@ public class CouponCreateParams extends ApiRequestParams {
       String currency,
       Map<String, CouponCreateParams.CurrencyOption> currencyOptions,
       Duration duration,
-      Long durationInMonths,
       List<String> expand,
       Map<String, Object> extraParams,
       String id,
@@ -135,7 +127,6 @@ public class CouponCreateParams extends ApiRequestParams {
     this.currency = currency;
     this.currencyOptions = currencyOptions;
     this.duration = duration;
-    this.durationInMonths = durationInMonths;
     this.expand = expand;
     this.extraParams = extraParams;
     this.id = id;
@@ -161,8 +152,6 @@ public class CouponCreateParams extends ApiRequestParams {
 
     private Duration duration;
 
-    private Long durationInMonths;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -187,7 +176,6 @@ public class CouponCreateParams extends ApiRequestParams {
           this.currency,
           this.currencyOptions,
           this.duration,
-          this.durationInMonths,
           this.expand,
           this.extraParams,
           this.id,
@@ -254,15 +242,6 @@ public class CouponCreateParams extends ApiRequestParams {
      */
     public Builder setDuration(CouponCreateParams.Duration duration) {
       this.duration = duration;
-      return this;
-    }
-
-    /**
-     * Required only if {@code duration} is {@code repeating}, in which case it must be a positive
-     * integer that specifies the number of months the discount will be in effect.
-     */
-    public Builder setDurationInMonths(Long durationInMonths) {
-      this.durationInMonths = durationInMonths;
       return this;
     }
 
@@ -585,10 +564,7 @@ public class CouponCreateParams extends ApiRequestParams {
     FOREVER("forever"),
 
     @SerializedName("once")
-    ONCE("once"),
-
-    @SerializedName("repeating")
-    REPEATING("repeating");
+    ONCE("once");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

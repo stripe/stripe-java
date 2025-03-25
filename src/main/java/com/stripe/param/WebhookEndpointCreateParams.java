@@ -606,7 +606,13 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_01_27_ACACIA("2025-01-27.acacia"),
 
     @SerializedName("2025-02-24.acacia")
-    VERSION_2025_02_24_ACACIA("2025-02-24.acacia");
+    VERSION_2025_02_24_ACACIA("2025-02-24.acacia"),
+
+    @SerializedName("2025-03-01.dashboard")
+    VERSION_2025_03_01_DASHBOARD("2025-03-01.dashboard"),
+
+    @SerializedName("2025-03-31.basil")
+    VERSION_2025_03_31_BASIL("2025-03-31.basil");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -890,6 +896,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("invoice.overdue")
     INVOICE__OVERDUE("invoice.overdue"),
+
+    @SerializedName("invoice.overpaid")
+    INVOICE__OVERPAID("invoice.overpaid"),
 
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),

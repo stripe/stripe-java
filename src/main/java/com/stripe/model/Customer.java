@@ -960,7 +960,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("ip_address")
     String ipAddress;
 
-    /** The customer's location as identified by Stripe Tax. */
+    /** The identified tax location of the customer. */
     @SerializedName("location")
     Location location;
 
@@ -972,7 +972,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Location extends StripeObject {
-      /** The customer's country as identified by Stripe Tax. */
+      /** The identified tax country of the customer. */
       @SerializedName("country")
       String country;
 
@@ -985,7 +985,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       @SerializedName("source")
       String source;
 
-      /** The customer's state, county, province, or region as identified by Stripe Tax. */
+      /** The identified tax state, county, province, or region of the customer. */
       @SerializedName("state")
       String state;
     }

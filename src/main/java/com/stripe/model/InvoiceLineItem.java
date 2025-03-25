@@ -37,13 +37,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   Long amount;
 
   /**
-   * The integer amount in cents (or local equivalent) representing the amount for this line item,
-   * excluding all tax and discounts.
-   */
-  @SerializedName("amount_excluding_tax")
-  Long amountExcludingTax;
-
-  /**
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
    * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
@@ -79,15 +72,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   String invoice;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/invoiceitems">invoice item</a> associated
-   * with this line item if any.
-   */
-  @SerializedName("invoice_item")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<InvoiceItem> invoiceItem;
-
-  /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
    */
@@ -113,12 +97,11 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("object")
   String object;
 
+  @SerializedName("parent")
+  Parent parent;
+
   @SerializedName("period")
   Period period;
-
-  /** The plan of the subscription, if the line item is a subscription or a proration. */
-  @SerializedName("plan")
-  Plan plan;
 
   /**
    * Contains pretax credit amounts (ex: discount, credit grants, etc) that apply to this line item.
@@ -126,78 +109,22 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("pretax_credit_amounts")
   List<InvoiceLineItem.PretaxCreditAmount> pretaxCreditAmounts;
 
-  /** The price of the line item. */
-  @SerializedName("price")
-  Price price;
-
-  /** Whether this is a proration. */
-  @SerializedName("proration")
-  Boolean proration;
-
-  /** Additional details for proration line items. */
-  @SerializedName("proration_details")
-  ProrationDetails prorationDetails;
+  /** The pricing information of the line item. */
+  @SerializedName("pricing")
+  Pricing pricing;
 
   /** The quantity of the subscription, if the line item is a subscription or a proration. */
   @SerializedName("quantity")
   Long quantity;
 
-  /** The subscription that the invoice item pertains to, if any. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
-  /**
-   * The subscription item that generated this line item. Left empty if the line item is not an
-   * explicit result of a subscription.
-   */
-  @SerializedName("subscription_item")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<SubscriptionItem> subscriptionItem;
-
-  /** The amount of tax calculated per tax rate for this line item. */
-  @SerializedName("tax_amounts")
-  List<InvoiceLineItem.TaxAmount> taxAmounts;
-
-  /** The tax rates which apply to the line item. */
-  @SerializedName("tax_rates")
-  List<TaxRate> taxRates;
-
-  /**
-   * A string identifying the type of the source of this line item, either an {@code invoiceitem} or
-   * a {@code subscription}.
-   *
-   * <p>One of {@code invoiceitem}, or {@code subscription}.
-   */
-  @SerializedName("type")
-  String type;
-
-  /**
-   * The amount in cents (or local equivalent) representing the unit amount for this line item,
-   * excluding all tax and discounts.
-   */
-  @SerializedName("unit_amount_excluding_tax")
-  BigDecimal unitAmountExcludingTax;
-
-  /** Get ID of expandable {@code invoiceItem} object. */
-  public String getInvoiceItem() {
-    return (this.invoiceItem != null) ? this.invoiceItem.getId() : null;
-  }
-
-  public void setInvoiceItem(String id) {
-    this.invoiceItem = ApiResource.setExpandableFieldId(id, this.invoiceItem);
-  }
-
-  /** Get expanded {@code invoiceItem}. */
-  public InvoiceItem getInvoiceItemObject() {
-    return (this.invoiceItem != null) ? this.invoiceItem.getExpanded() : null;
-  }
-
-  public void setInvoiceItemObject(InvoiceItem expandableObject) {
-    this.invoiceItem = new ExpandableField<InvoiceItem>(expandableObject.getId(), expandableObject);
-  }
+  /** The tax information of the line item. */
+  @SerializedName("taxes")
+  List<InvoiceLineItem.Tax> taxes;
 
   /** Get ID of expandable {@code subscription} object. */
   public String getSubscription() {
@@ -216,25 +143,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   public void setSubscriptionObject(Subscription expandableObject) {
     this.subscription =
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code subscriptionItem} object. */
-  public String getSubscriptionItem() {
-    return (this.subscriptionItem != null) ? this.subscriptionItem.getId() : null;
-  }
-
-  public void setSubscriptionItem(String id) {
-    this.subscriptionItem = ApiResource.setExpandableFieldId(id, this.subscriptionItem);
-  }
-
-  /** Get expanded {@code subscriptionItem}. */
-  public SubscriptionItem getSubscriptionItemObject() {
-    return (this.subscriptionItem != null) ? this.subscriptionItem.getExpanded() : null;
-  }
-
-  public void setSubscriptionItemObject(SubscriptionItem expandableObject) {
-    this.subscriptionItem =
-        new ExpandableField<SubscriptionItem>(expandableObject.getId(), expandableObject);
   }
 
   /** Get IDs of expandable {@code discounts} object list. */
@@ -382,6 +290,139 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   }
 
   /**
+   * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Parent extends StripeObject {
+    @SerializedName("invoice_item_details")
+    InvoiceItemDetails invoiceItemDetails;
+
+    @SerializedName("subscription_item_details")
+    SubscriptionItemDetails subscriptionItemDetails;
+
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about InvoiceItemDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InvoiceItemDetails extends StripeObject {
+      @SerializedName("invoice_item")
+      String invoiceItem;
+
+      /** Whether this is a proration. */
+      @SerializedName("proration")
+      Boolean proration;
+
+      /** Additional details for proration line items. */
+      @SerializedName("proration_details")
+      ProrationDetails prorationDetails;
+
+      @SerializedName("subscription")
+      String subscription;
+
+      /**
+       * For more details about ProrationDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ProrationDetails extends StripeObject {
+        /**
+         * For a credit proration {@code line_item}, the original debit line_items to which the
+         * credit proration applies.
+         */
+        @SerializedName("credited_items")
+        CreditedItems creditedItems;
+
+        /**
+         * For more details about CreditedItems, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CreditedItems extends StripeObject {
+          /** Invoice containing the credited invoice line items. */
+          @SerializedName("invoice")
+          String invoice;
+
+          /** Credited invoice line items. */
+          @SerializedName("invoice_line_items")
+          List<String> invoiceLineItems;
+        }
+      }
+    }
+
+    /**
+     * For more details about SubscriptionItemDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionItemDetails extends StripeObject {
+      @SerializedName("invoice_item")
+      String invoiceItem;
+
+      /** Whether this is a proration. */
+      @SerializedName("proration")
+      Boolean proration;
+
+      /** Additional details for proration line items. */
+      @SerializedName("proration_details")
+      ProrationDetails prorationDetails;
+
+      @SerializedName("subscription")
+      String subscription;
+
+      @SerializedName("subscription_item")
+      String subscriptionItem;
+
+      /**
+       * For more details about ProrationDetails, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ProrationDetails extends StripeObject {
+        /**
+         * For a credit proration {@code line_item}, the original debit line_items to which the
+         * credit proration applies.
+         */
+        @SerializedName("credited_items")
+        CreditedItems creditedItems;
+
+        /**
+         * For more details about CreditedItems, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CreditedItems extends StripeObject {
+          /** Invoice containing the credited invoice line items. */
+          @SerializedName("invoice")
+          String invoice;
+
+          /** Credited invoice line items. */
+          @SerializedName("invoice_line_items")
+          List<String> invoiceLineItems;
+        }
+      }
+    }
+  }
+
+  /**
    * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -475,69 +516,86 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   }
 
   /**
-   * For more details about ProrationDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ProrationDetails extends StripeObject {
-    /**
-     * For a credit proration {@code line_item}, the original debit line_items to which the credit
-     * proration applies.
-     */
-    @SerializedName("credited_items")
-    CreditedItems creditedItems;
-
-    /**
-     * For more details about CreditedItems, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class CreditedItems extends StripeObject {
-      /** Invoice containing the credited invoice line items. */
-      @SerializedName("invoice")
-      String invoice;
-
-      /** Credited invoice line items. */
-      @SerializedName("invoice_line_items")
-      List<String> invoiceLineItems;
-    }
-  }
-
-  /**
-   * For more details about TaxAmount, please refer to the <a href="https://docs.stripe.com/api">API
+   * For more details about Pricing, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TaxAmount extends StripeObject {
-    /** The amount, in cents (or local equivalent), of the tax. */
+  public static class Pricing extends StripeObject {
+    @SerializedName("price_details")
+    PriceDetails priceDetails;
+
+    /**
+     * The type of the pricing details.
+     *
+     * <p>Equal to {@code price_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * The unit amount (in the {@code currency} specified) of the item which contains a decimal
+     * value with at most 12 decimal places.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
+
+    /**
+     * For more details about PriceDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PriceDetails extends StripeObject {
+      /** The ID of the price this item is associated with. */
+      @SerializedName("price")
+      String price;
+
+      /** The ID of the product this item is associated with. */
+      @SerializedName("product")
+      String product;
+    }
+  }
+
+  /**
+   * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Tax extends StripeObject {
+    /** The amount of the tax, in cents (or local equivalent). */
     @SerializedName("amount")
     Long amount;
 
-    /** Whether this tax amount is inclusive or exclusive. */
-    @SerializedName("inclusive")
-    Boolean inclusive;
+    /**
+     * Whether this tax is inclusive or exclusive.
+     *
+     * <p>One of {@code exclusive}, or {@code inclusive}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
 
-    /** The tax rate that was applied to get this tax amount. */
-    @SerializedName("tax_rate")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<TaxRate> taxRate;
+    /**
+     * Additional details about the tax rate. Only present when {@code type} is {@code
+     * tax_rate_details}.
+     */
+    @SerializedName("tax_rate_details")
+    TaxRateDetails taxRateDetails;
 
     /**
      * The reasoning behind this tax, for example, if the product is tax exempt. The possible values
      * for this field may be extended as new tax rules are supported.
      *
-     * <p>One of {@code customer_exempt}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
-     * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
-     * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
-     * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code standard_rated},
-     * {@code taxable_basis_reduced}, or {@code zero_rated}.
+     * <p>One of {@code customer_exempt}, {@code not_available}, {@code not_collecting}, {@code
+     * not_subject_to_tax}, {@code not_supported}, {@code portion_product_exempt}, {@code
+     * portion_reduced_rated}, {@code portion_standard_rated}, {@code product_exempt}, {@code
+     * product_exempt_holiday}, {@code proportionally_rated}, {@code reduced_rated}, {@code
+     * reverse_charge}, {@code standard_rated}, {@code taxable_basis_reduced}, or {@code
+     * zero_rated}.
      */
     @SerializedName("taxability_reason")
     String taxabilityReason;
@@ -546,34 +604,33 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
-    /** Get ID of expandable {@code taxRate} object. */
-    public String getTaxRate() {
-      return (this.taxRate != null) ? this.taxRate.getId() : null;
-    }
+    /**
+     * The type of tax information.
+     *
+     * <p>Equal to {@code tax_rate_details}.
+     */
+    @SerializedName("type")
+    String type;
 
-    public void setTaxRate(String id) {
-      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
-    }
-
-    /** Get expanded {@code taxRate}. */
-    public TaxRate getTaxRateObject() {
-      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
-    }
-
-    public void setTaxRateObject(TaxRate expandableObject) {
-      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxRateDetails extends StripeObject {
+      @SerializedName("tax_rate")
+      String taxRate;
     }
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(invoiceItem, responseGetter);
+    trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
-    trySetResponseGetter(plan, responseGetter);
-    trySetResponseGetter(price, responseGetter);
-    trySetResponseGetter(prorationDetails, responseGetter);
+    trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
-    trySetResponseGetter(subscriptionItem, responseGetter);
   }
 }

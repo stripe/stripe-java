@@ -16,7 +16,6 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentLink;
 import com.stripe.model.PromotionCode;
 import com.stripe.model.SetupIntent;
-import com.stripe.model.ShippingDetails;
 import com.stripe.model.ShippingRate;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
@@ -109,7 +108,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("client_reference_id")
   String clientReferenceId;
 
-  /** Client secret to be used when initializing Stripe.js embedded checkout. */
+  /**
+   * The client secret of your Checkout Session. Applies to Checkout Sessions with {@code ui_mode:
+   * embedded}. Client secret to be used when initializing Stripe.js embedded checkout.
+   */
   @SerializedName("client_secret")
   String clientSecret;
 
@@ -264,6 +266,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("object")
   String object;
 
+  /** The optional items presented to the customer at checkout. */
+  @SerializedName("optional_items")
+  List<Session.OptionalItem> optionalItems;
+
   /**
    * The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. You can't confirm or
    * cancel the PaymentIntent for a Checkout Session. To cancel, <a
@@ -317,8 +323,21 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("payment_status")
   String paymentStatus;
 
+  /**
+   * This property is used to set up permissions for various actions (e.g., update) on the
+   * CheckoutSession object.
+   *
+   * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
+   * permissions.update.shipping_details}.
+   */
+  @SerializedName("permissions")
+  Permissions permissions;
+
   @SerializedName("phone_number_collection")
   PhoneNumberCollection phoneNumberCollection;
+
+  @SerializedName("presentment_details")
+  PresentmentDetails presentmentDetails;
 
   /** The ID of the original expired Checkout Session that triggered the recovery flow. */
   @SerializedName("recovered_from")
@@ -369,10 +388,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
 
-  /** Shipping information for this Checkout Session. */
-  @SerializedName("shipping_details")
-  ShippingDetails shippingDetails;
-
   /** The shipping rate options applied to this Session. */
   @SerializedName("shipping_options")
   List<Session.ShippingOption> shippingOptions;
@@ -416,16 +431,17 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * The UI mode of the Session. Defaults to {@code hosted}.
    *
-   * <p>One of {@code embedded}, or {@code hosted}.
+   * <p>One of {@code custom}, {@code embedded}, or {@code hosted}.
    */
   @SerializedName("ui_mode")
   String uiMode;
 
   /**
-   * The URL to the Checkout Session. Redirect customers to this URL to take them to Checkout. If
-   * you’re using <a href="https://stripe.com/docs/payments/checkout/custom-domains">Custom
-   * Domains</a>, the URL will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.}
-   * This value is only present when the session is active.
+   * The URL to the Checkout Session. Applies to Checkout Sessions with {@code ui_mode: hosted}.
+   * Redirect customers to this URL to take them to Checkout. If you’re using <a
+   * href="https://stripe.com/docs/payments/checkout/custom-domains">Custom Domains</a>, the URL
+   * will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.} This value is only
+   * present when the session is active.
    */
   @SerializedName("url")
   String url;
@@ -540,12 +556,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/checkout/sessions";
@@ -554,12 +570,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(SessionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a Session object. */
+  /** Creates a Checkout Session object. */
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/checkout/sessions";
@@ -575,40 +591,40 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire() throws StripeException {
     return expire((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(RequestOptions options) throws StripeException {
     return expire((Map<String, Object>) null, options);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(Map<String, Object> params) throws StripeException {
     return expire(params, (RequestOptions) null);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
@@ -619,20 +635,20 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(SessionExpireParams params) throws StripeException {
     return expire(params, (RequestOptions) null);
   }
 
   /**
-   * A Session can be expired when it is in one of these statuses: {@code open}
+   * A Checkout Session can be expired when it is in one of these statuses: {@code open}
    *
-   * <p>After it expires, a customer can’t complete a Session and customers loading the Session see
-   * a message saying the Session is expired.
+   * <p>After it expires, a customer can’t complete a Checkout Session and customers loading the
+   * Checkout Session see a message saying the Checkout Session is expired.
    */
   public Session expire(SessionExpireParams params, RequestOptions options) throws StripeException {
     String path =
@@ -744,17 +760,17 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, LineItemCollection.class);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(String session) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(String session, RequestOptions options) throws StripeException {
     return retrieve(session, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(String session, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
@@ -763,7 +779,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Retrieves a Session object. */
+  /** Retrieves a Checkout Session object. */
   public static Session retrieve(
       String session, SessionRetrieveParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
@@ -778,13 +794,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   @Override
   public Session update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   @Override
   public Session update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
@@ -793,12 +809,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(SessionUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Session object. */
+  /** Updates a Checkout Session object. */
   public Session update(SessionUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
@@ -954,6 +970,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /** Shipping information for this Checkout Session. */
     @SerializedName("shipping_details")
     ShippingDetails shippingDetails;
+
+    /**
+     * For more details about ShippingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ShippingDetails extends StripeObject {
+      @SerializedName("address")
+      Address address;
+
+      /** Customer name. */
+      @SerializedName("name")
+      String name;
+    }
   }
 
   /**
@@ -1616,6 +1648,53 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("amount_tax_display")
         String amountTaxDisplay;
       }
+    }
+  }
+
+  /**
+   * For more details about OptionalItem, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OptionalItem extends StripeObject {
+    @SerializedName("adjustable_quantity")
+    AdjustableQuantity adjustableQuantity;
+
+    @SerializedName("price")
+    String price;
+
+    @SerializedName("quantity")
+    Long quantity;
+
+    /**
+     * For more details about AdjustableQuantity, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AdjustableQuantity extends StripeObject {
+      /** Set to true if the quantity can be adjusted to any non-negative integer. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * The maximum quantity of this item the customer can purchase. By default this value is 99.
+       * You can specify a value up to 999999.
+       */
+      @SerializedName("maximum")
+      Long maximum;
+
+      /**
+       * The minimum quantity of this item the customer must purchase, if they choose to purchase
+       * it. Because this item is optional, the customer will always be able to remove it from their
+       * order, even if the {@code minimum} configured here is greater than 0. By default this value
+       * is 0.
+       */
+      @SerializedName("minimum")
+      Long minimum;
     }
   }
 
@@ -3325,6 +3404,31 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about Permissions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Permissions extends StripeObject {
+    /**
+     * Determines which entity is allowed to update the shipping details.
+     *
+     * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+     * shipping details. If set to {@code server_only}, only your server is allowed to update the
+     * shipping details.
+     *
+     * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
+     * when initializing the Stripe Checkout client and manually update the shipping details from
+     * your server using the Stripe API.
+     *
+     * <p>One of {@code client_only}, or {@code server_only}.
+     */
+    @SerializedName("update_shipping_details")
+    String updateShippingDetails;
+  }
+
+  /**
    * For more details about PhoneNumberCollection, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -3335,6 +3439,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     /** Indicates whether phone number collection is enabled for the session. */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  /**
+   * For more details about PresentmentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PresentmentDetails extends StripeObject {
+    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    @SerializedName("presentment_amount")
+    Long presentmentAmount;
+
+    /** Currency presented to the customer during payment. */
+    @SerializedName("presentment_currency")
+    String presentmentCurrency;
   }
 
   /**
@@ -3669,12 +3790,13 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(paymentLink, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(permissions, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);
+    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(savedPaymentMethodOptions, responseGetter);
     trySetResponseGetter(setupIntent, responseGetter);
     trySetResponseGetter(shippingAddressCollection, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
-    trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);

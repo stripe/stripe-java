@@ -51,7 +51,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("provided_details")
   ProvidedDetails providedDetails;
 
-  /** Token referencing a Customer resource. */
+  /** Customer ID. */
   @SerializedName("related_customer")
   String relatedCustomer;
 
@@ -237,7 +237,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Token referencing a Customer resource. */
+    /** Customer ID. */
     public Builder setRelatedCustomer(String relatedCustomer) {
       this.relatedCustomer = relatedCustomer;
       return this;

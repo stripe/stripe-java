@@ -269,6 +269,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
 
+    @SerializedName("billie")
+    BILLIE("billie"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -323,6 +326,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("naver_pay")
     NAVER_PAY("naver_pay"),
 
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
     @SerializedName("oxxo")
     OXXO("oxxo"),
 
@@ -352,6 +358,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
 
     @SerializedName("samsung_pay")
     SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

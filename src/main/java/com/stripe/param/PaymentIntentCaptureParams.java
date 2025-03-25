@@ -16,8 +16,7 @@ import lombok.Getter;
 public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The amount to capture from the PaymentIntent, which must be less than or equal to the original
-   * amount. Any additional amount is automatically refunded. Defaults to the full {@code
-   * amount_capturable} if it's not provided.
+   * amount. Defaults to the full {@code amount_capturable} if it's not provided.
    */
   @SerializedName("amount_to_capture")
   Long amountToCapture;
@@ -25,7 +24,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
-   * collected will be capped at the total payment amount. For more information, see the
+   * collected will be capped at the total amount captured. For more information, see the
    * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
@@ -155,8 +154,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     /**
      * The amount to capture from the PaymentIntent, which must be less than or equal to the
-     * original amount. Any additional amount is automatically refunded. Defaults to the full {@code
-     * amount_capturable} if it's not provided.
+     * original amount. Defaults to the full {@code amount_capturable} if it's not provided.
      */
     public Builder setAmountToCapture(Long amountToCapture) {
       this.amountToCapture = amountToCapture;
@@ -166,7 +164,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
-     * application fee collected will be capped at the total payment amount. For more information,
+     * application fee collected will be capped at the total amount captured. For more information,
      * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
      * for connected accounts</a>.
      */

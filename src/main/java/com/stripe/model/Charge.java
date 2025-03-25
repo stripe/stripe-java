@@ -167,12 +167,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("id")
   String id;
 
-  /** ID of the invoice this charge is for if one exists. */
-  @SerializedName("invoice")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Invoice> invoice;
-
   @SerializedName("level3")
   Level3 level3;
 
@@ -234,6 +228,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   /** Details about the payment method at the time of the transaction. */
   @SerializedName("payment_method_details")
   PaymentMethodDetails paymentMethodDetails;
+
+  @SerializedName("presentment_details")
+  PresentmentDetails presentmentDetails;
 
   /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
@@ -450,24 +447,6 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public void setFailureBalanceTransactionObject(BalanceTransaction expandableObject) {
     this.failureBalanceTransaction =
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code invoice} object. */
-  public String getInvoice() {
-    return (this.invoice != null) ? this.invoice.getId() : null;
-  }
-
-  public void setInvoice(String id) {
-    this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
-  }
-
-  /** Get expanded {@code invoice}. */
-  public Invoice getInvoiceObject() {
-    return (this.invoice != null) ? this.invoice.getExpanded() : null;
-  }
-
-  public void setInvoiceObject(Invoice expandableObject) {
-    this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code onBehalfOf} object. */
@@ -1196,6 +1175,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("bancontact")
     Bancontact bancontact;
 
+    @SerializedName("billie")
+    Billie billie;
+
     @SerializedName("blik")
     Blik blik;
 
@@ -1256,6 +1238,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("naver_pay")
     NaverPay naverPay;
 
+    @SerializedName("nz_bank_account")
+    NzBankAccount nzBankAccount;
+
     @SerializedName("oxxo")
     Oxxo oxxo;
 
@@ -1285,6 +1270,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("samsung_pay")
     SamsungPay samsungPay;
+
+    @SerializedName("satispay")
+    Satispay satispay;
 
     @SerializedName("sepa_credit_transfer")
     SepaCreditTransfer sepaCreditTransfer;
@@ -1718,6 +1706,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    /**
+     * For more details about Billie, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Billie extends StripeObject {}
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -3217,6 +3214,42 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
 
     /**
+     * For more details about NzBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccount extends StripeObject {
+      /**
+       * The name on the bank account. Only present if the account holder name is different from the
+       * name of the authorized signatory collected in the PaymentMethod’s billing details.
+       */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The numeric code for the bank account's bank. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** The name of the bank. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The numeric code for the bank account's bank branch. */
+      @SerializedName("branch_code")
+      String branchCode;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** The suffix of the bank account number. */
+      @SerializedName("suffix")
+      String suffix;
+    }
+
+    /**
      * For more details about Oxxo, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -3478,6 +3511,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("buyer_id")
       String buyerId;
     }
+
+    /**
+     * For more details about Satispay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay extends StripeObject {}
 
     /**
      * For more details about SepaCreditTransfer, please refer to the <a
@@ -3794,6 +3836,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   }
 
   /**
+   * For more details about PresentmentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PresentmentDetails extends StripeObject {
+    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    @SerializedName("presentment_amount")
+    Long presentmentAmount;
+
+    /** Currency presented to the customer during payment. */
+    @SerializedName("presentment_currency")
+    String presentmentCurrency;
+  }
+
+  /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
    */
@@ -3863,12 +3922,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(failureBalanceTransaction, responseGetter);
     trySetResponseGetter(fraudDetails, responseGetter);
-    trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(level3, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(outcome, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
     trySetResponseGetter(review, responseGetter);
