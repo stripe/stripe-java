@@ -7,11 +7,8 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
 /**
- * Returned when the number of country bank accounts has exceeded the limit in a given workspace.
- * PayoutMethodBankAccount objects may be archived with the /archive API, at which point they will
- * not count against the limit. If you are not passing a V2 Account ID in the Stripe-Context header
- * you may receive this error since you are creating all your bank account objects in your own
- * workspace.
+ * Error returned when the recipient's recent total amount in outbound payments has exceeded its
+ * limit.
  */
 public final class QuotaExceededException extends ApiException {
   private static final long serialVersionUID = 2L;

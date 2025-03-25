@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.core;
+package com.stripe.param.v2.core.accounts;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class EventListParams extends ApiRequestParams {
+public class PersonListParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -20,18 +20,13 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The page size. */
+  /** The upper limit on the number of accounts returned by the List Account request. */
   @SerializedName("limit")
   Integer limit;
 
-  /** <strong>Required.</strong> Primary object ID used to retrieve related events. */
-  @SerializedName("object_id")
-  String objectId;
-
-  private EventListParams(Map<String, Object> extraParams, Integer limit, String objectId) {
+  private PersonListParams(Map<String, Object> extraParams, Integer limit) {
     this.extraParams = extraParams;
     this.limit = limit;
-    this.objectId = objectId;
   }
 
   public static Builder builder() {
@@ -43,17 +38,15 @@ public class EventListParams extends ApiRequestParams {
 
     private Integer limit;
 
-    private String objectId;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public EventListParams build() {
-      return new EventListParams(this.extraParams, this.limit, this.objectId);
+    public PersonListParams build() {
+      return new PersonListParams(this.extraParams, this.limit);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * EventListParams#extraParams} for the field documentation.
+     * PersonListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -66,7 +59,7 @@ public class EventListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link EventListParams#extraParams} for the field documentation.
+     * See {@link PersonListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -76,15 +69,9 @@ public class EventListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The page size. */
+    /** The upper limit on the number of accounts returned by the List Account request. */
     public Builder setLimit(Integer limit) {
       this.limit = limit;
-      return this;
-    }
-
-    /** <strong>Required.</strong> Primary object ID used to retrieve related events. */
-    public Builder setObjectId(String objectId) {
-      this.objectId = objectId;
       return this;
     }
   }

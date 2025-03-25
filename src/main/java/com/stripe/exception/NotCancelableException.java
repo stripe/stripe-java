@@ -6,30 +6,27 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/**
- * Returned if an InboundTransfer is not allowed for risk, legal, regulatory or other unforeseen
- * reasons.
- */
-public final class BlockedByStripeException extends ApiException {
+/** Error returned when user tries to cancel an OutboundPayment that is not cancelable. */
+public final class NotCancelableException extends ApiException {
   private static final long serialVersionUID = 2L;
 
-  private BlockedByStripeException(
+  private NotCancelableException(
       String message, String requestId, String code, Integer statusCode, Throwable e) {
     super(message, requestId, code, statusCode, e);
   }
 
-  static BlockedByStripeException parse(
+  static NotCancelableException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
-    BlockedByStripeException.BlockedByStripeError error =
-        (BlockedByStripeException.BlockedByStripeError)
+    NotCancelableException.NotCancelableError error =
+        (NotCancelableException.NotCancelableError)
             StripeObject.deserializeStripeObject(
-                body, BlockedByStripeException.BlockedByStripeError.class, responseGetter);
-    BlockedByStripeException exception =
-        new BlockedByStripeException(
+                body, NotCancelableException.NotCancelableError.class, responseGetter);
+    NotCancelableException exception =
+        new NotCancelableException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);
     exception.setStripeError(error);
     return exception;
   }
 
-  public static class BlockedByStripeError extends StripeError {}
+  public static class NotCancelableError extends StripeError {}
 }

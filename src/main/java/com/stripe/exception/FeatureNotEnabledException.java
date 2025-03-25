@@ -7,29 +7,29 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
 /**
- * Returned if an InboundTransfer is not allowed for risk, legal, regulatory or other unforeseen
- * reasons.
+ * Error returned when recipient does not have the active features required to receive funds from
+ * this OutboundPayment request.
  */
-public final class BlockedByStripeException extends ApiException {
+public final class FeatureNotEnabledException extends ApiException {
   private static final long serialVersionUID = 2L;
 
-  private BlockedByStripeException(
+  private FeatureNotEnabledException(
       String message, String requestId, String code, Integer statusCode, Throwable e) {
     super(message, requestId, code, statusCode, e);
   }
 
-  static BlockedByStripeException parse(
+  static FeatureNotEnabledException parse(
       JsonObject body, int statusCode, String requestId, StripeResponseGetter responseGetter) {
-    BlockedByStripeException.BlockedByStripeError error =
-        (BlockedByStripeException.BlockedByStripeError)
+    FeatureNotEnabledException.FeatureNotEnabledError error =
+        (FeatureNotEnabledException.FeatureNotEnabledError)
             StripeObject.deserializeStripeObject(
-                body, BlockedByStripeException.BlockedByStripeError.class, responseGetter);
-    BlockedByStripeException exception =
-        new BlockedByStripeException(
+                body, FeatureNotEnabledException.FeatureNotEnabledError.class, responseGetter);
+    FeatureNotEnabledException exception =
+        new FeatureNotEnabledException(
             error.getMessage(), requestId, error.getCode(), statusCode, null);
     exception.setStripeError(error);
     return exception;
   }
 
-  public static class BlockedByStripeError extends StripeError {}
+  public static class FeatureNotEnabledError extends StripeError {}
 }

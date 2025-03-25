@@ -9,8 +9,33 @@ public final class MoneyManagementService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.v2.moneymanagement.FinancialAccountService financialAccounts() {
+    return new com.stripe.service.v2.moneymanagement.FinancialAccountService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.FinancialAddressService financialAddresses() {
+    return new com.stripe.service.v2.moneymanagement.FinancialAddressService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.InboundTransferService inboundTransfers() {
+    return new com.stripe.service.v2.moneymanagement.InboundTransferService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.OutboundPaymentService outboundPayments() {
+    return new com.stripe.service.v2.moneymanagement.OutboundPaymentService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.OutboundSetupIntentService outboundSetupIntents() {
     return new com.stripe.service.v2.moneymanagement.OutboundSetupIntentService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.OutboundTransferService outboundTransfers() {
+    return new com.stripe.service.v2.moneymanagement.OutboundTransferService(
         this.getResponseGetter());
   }
 
@@ -22,5 +47,14 @@ public final class MoneyManagementService extends ApiService {
       payoutMethodsBankAccountSpec() {
     return new com.stripe.service.v2.moneymanagement.PayoutMethodsBankAccountSpecService(
         this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.ReceivedCreditService receivedCredits() {
+    return new com.stripe.service.v2.moneymanagement.ReceivedCreditService(
+        this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.moneymanagement.ReceivedDebitService receivedDebits() {
+    return new com.stripe.service.v2.moneymanagement.ReceivedDebitService(this.getResponseGetter());
   }
 }
