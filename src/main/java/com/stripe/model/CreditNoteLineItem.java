@@ -69,6 +69,10 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
   @SerializedName("quantity")
   Long quantity;
 
+  /** The tax calculation identifiers of the line item. */
+  @SerializedName("tax_calculation_reference")
+  TaxCalculationReference taxCalculationReference;
+
   /** The tax rates which apply to the line item. */
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
@@ -268,5 +272,22 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
       @SerializedName("tax_rate")
       String taxRate;
     }
+  }
+
+  /**
+   * For more details about TaxCalculationReference, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxCalculationReference extends StripeObject {
+    /** The calculation identifier for tax calculation response. */
+    @SerializedName("calculation_id")
+    String calculationId;
+
+    /** The calculation identifier for tax calculation response line item. */
+    @SerializedName("calculation_item_id")
+    String calculationItemId;
   }
 }

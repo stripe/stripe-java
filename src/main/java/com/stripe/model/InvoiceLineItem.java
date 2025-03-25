@@ -133,6 +133,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
+  /** The tax calculation identifiers of the line item. */
+  @SerializedName("tax_calculation_reference")
+  TaxCalculationReference taxCalculationReference;
+
   /** The tax information of the line item. */
   @SerializedName("taxes")
   List<InvoiceLineItem.Tax> taxes;
@@ -738,6 +742,23 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
   }
 
+  /**
+   * For more details about TaxCalculationReference, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxCalculationReference extends StripeObject {
+    /** The calculation identifier for tax calculation response. */
+    @SerializedName("calculation_id")
+    String calculationId;
+
+    /** The calculation identifier for tax calculation response line item. */
+    @SerializedName("calculation_item_id")
+    String calculationItemId;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -745,5 +766,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
+    trySetResponseGetter(taxCalculationReference, responseGetter);
   }
 }

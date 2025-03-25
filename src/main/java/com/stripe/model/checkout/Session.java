@@ -913,6 +913,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("liability")
     Liability liability;
 
+    /** The tax provider powering automatic tax. */
+    @SerializedName("provider")
+    String provider;
+
     /**
      * The status of the most recent automated tax calculation for this session.
      *
