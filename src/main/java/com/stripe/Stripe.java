@@ -31,18 +31,21 @@ public abstract class Stripe {
   // Used to set the default version in RequestOptions
   @Getter private static String stripeVersionWithBetaHeaders = stripeVersion;
 
-  /** Add a specified beta to the global Stripe API Version. If the betaName already exists, the higher
-   * version will be used.
+  /**
+   * Add a specified beta to the global Stripe API Version. If the betaName already exists, the
+   * higher version will be used.
    *
    * @throws IllegalArgumentException if the betaVersion is not in the format 'v<number>'
    */
   public static void addBetaVersion(String betaName, String betaVersion) {
     if (!betaVersion.matches("v\\d+")) {
       throw new IllegalArgumentException(
-          String.format("Invalid beta version format: %s. Expected format is 'v<number>'.", betaVersion));
+          String.format(
+              "Invalid beta version format: %s. Expected format is 'v<number>'.", betaVersion));
     }
 
-    int incomingVersion = Integer.parseInt(betaVersion.substring(1)); // Extract the number after 'v'
+    int incomingVersion =
+        Integer.parseInt(betaVersion.substring(1)); // Extract the number after 'v'
 
     String existingEntry = "; " + betaName + "=";
     int existingIndex = stripeVersionWithBetaHeaders.indexOf(existingEntry);
@@ -53,7 +56,8 @@ public abstract class Stripe {
       endIndex = (endIndex == -1) ? stripeVersionWithBetaHeaders.length() : endIndex;
 
       String existingVersionStr = stripeVersionWithBetaHeaders.substring(startIndex, endIndex);
-      int existingVersion = Integer.parseInt(existingVersionStr.substring(1)); // Extract the number after 'v'
+      int existingVersion =
+          Integer.parseInt(existingVersionStr.substring(1)); // Extract the number after 'v'
 
       if (incomingVersion <= existingVersion) {
         return; // Keep the higher version (existing one)
