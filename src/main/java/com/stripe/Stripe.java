@@ -33,13 +33,35 @@ public abstract class Stripe {
 
   /** Add a specified beta to the global Stripe API Version. Only call this method once per beta. */
   public static void addBetaVersion(String betaName, String betaVersion) {
-    if (stripeVersionWithBetaHeaders.indexOf("; " + betaName + "=") >= 0) {
-      throw new RuntimeException(
-          String.format(
-              "Stripe version header %s already contains entry for beta %s",
-              stripeVersionWithBetaHeaders, betaName));
+    if (!betaVersion.matches("v\\d+")) {
+      throw new IllegalArgumentException(
+          String.format("Invalid beta version format: %s. Expected format is 'v<number>'.", betaVersion));
     }
 
+    int incomingVersion = Integer.parseInt(betaVersion.substring(1)); // Extract the number after 'v'
+
+    String existingEntry = "; " + betaName + "=";
+    int existingIndex = stripeVersionWithBetaHeaders.indexOf(existingEntry);
+
+    if (existingIndex >= 0) {
+      int startIndex = existingIndex + existingEntry.length();
+      int endIndex = stripeVersionWithBetaHeaders.indexOf(";", startIndex);
+      endIndex = (endIndex == -1) ? stripeVersionWithBetaHeaders.length() : endIndex;
+
+      String existingVersionStr = stripeVersionWithBetaHeaders.substring(startIndex, endIndex);
+      int existingVersion = Integer.parseInt(existingVersionStr.substring(1)); // Extract the number after 'v'
+
+      if (incomingVersion <= existingVersion) {
+        return; // Keep the higher version (existing one)
+      }
+
+      // Remove the existing entry
+      stripeVersionWithBetaHeaders =
+          stripeVersionWithBetaHeaders.substring(0, existingIndex)
+              + stripeVersionWithBetaHeaders.substring(endIndex);
+    }
+
+    // Add the new beta version
     stripeVersionWithBetaHeaders =
         String.format("%s; %s=%s", stripeVersionWithBetaHeaders, betaName, betaVersion);
   }
