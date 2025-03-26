@@ -52,7 +52,7 @@ public class PayoutMethodsBankAccountSpec extends StripeObject {
 
       /** The human readable local name of the field. */
       @SerializedName("local_name_human")
-      String localNameHuman;
+      LocalNameHuman localNameHuman;
 
       /** The maximum length of the field. */
       @SerializedName("max_length")
@@ -73,6 +73,21 @@ public class PayoutMethodsBankAccountSpec extends StripeObject {
       /** The validation regex of the field. */
       @SerializedName("validation_regex")
       String validationRegex;
+
+      /**
+       * For more details about LocalNameHuman, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LocalNameHuman extends StripeObject {
+        @SerializedName("content")
+        String content;
+
+        @SerializedName("localization_key")
+        String localizationKey;
+      }
     }
   }
 }
