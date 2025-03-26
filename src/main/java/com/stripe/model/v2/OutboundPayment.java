@@ -73,6 +73,13 @@ public class OutboundPayment extends StripeObject implements HasId {
   String object;
 
   /**
+   * The quote for this OutboundPayment. Only required for countries with regulatory mandates to
+   * display fee estimates before OutboundPayment creation.
+   */
+  @SerializedName("outbound_payment_quote")
+  String outboundPaymentQuote;
+
+  /**
    * A hosted transaction receipt URL that is provided when money movement is considered regulated
    * under Stripe's money transmission licenses.
    */

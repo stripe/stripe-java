@@ -105,4 +105,9 @@ public final class OutboundPaymentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, OutboundPayment.class);
   }
+
+  public com.stripe.service.v2.moneymanagement.outboundpayments.QuoteService quotes() {
+    return new com.stripe.service.v2.moneymanagement.outboundpayments.QuoteService(
+        this.getResponseGetter());
+  }
 }

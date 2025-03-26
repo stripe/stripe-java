@@ -26,6 +26,7 @@ public final class EventDataClassLookup {
         com.stripe.model.v2.FinancialAddressGeneratedMicrodeposits.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.EventDestination.class);
+    classLookup.put("v2.money_management.adjustment", com.stripe.model.v2.Adjustment.class);
     classLookup.put(
         "v2.money_management.financial_account", com.stripe.model.v2.FinancialAccount.class);
     classLookup.put(
@@ -35,10 +36,16 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.money_management.outbound_payment", com.stripe.model.v2.OutboundPayment.class);
     classLookup.put(
+        "v2.money_management.outbound_payment_quote",
+        com.stripe.model.v2.OutboundPaymentQuote.class);
+    classLookup.put(
         "v2.money_management.outbound_transfer", com.stripe.model.v2.OutboundTransfer.class);
     classLookup.put(
         "v2.money_management.received_credit", com.stripe.model.v2.ReceivedCredit.class);
     classLookup.put("v2.money_management.received_debit", com.stripe.model.v2.ReceivedDebit.class);
+    classLookup.put("v2.money_management.transaction", com.stripe.model.v2.Transaction.class);
+    classLookup.put(
+        "v2.money_management.transaction_entry", com.stripe.model.v2.TransactionEntry.class);
 
     classLookup.put("v2.billing.meter_event", com.stripe.model.v2.billing.MeterEvent.class);
     classLookup.put(
@@ -71,6 +78,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v1.billing.meter.no_meter_found", com.stripe.events.V1BillingMeterNoMeterFoundEvent.class);
     eventClassLookup.put(
+        "v2.money_management.financial_account.created",
+        com.stripe.events.V2MoneyManagementFinancialAccountCreatedEvent.class);
+    eventClassLookup.put(
         "v2.money_management.financial_address.activated",
         com.stripe.events.V2MoneyManagementFinancialAddressActivatedEvent.class);
     eventClassLookup.put(
@@ -94,6 +104,36 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.inbound_transfer.bank_debit_succeeded",
         com.stripe.events.V2MoneyManagementInboundTransferBankDebitSucceededEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_payment.canceled",
+        com.stripe.events.V2MoneyManagementOutboundPaymentCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_payment.created",
+        com.stripe.events.V2MoneyManagementOutboundPaymentCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_payment.failed",
+        com.stripe.events.V2MoneyManagementOutboundPaymentFailedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_payment.posted",
+        com.stripe.events.V2MoneyManagementOutboundPaymentPostedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_payment.returned",
+        com.stripe.events.V2MoneyManagementOutboundPaymentReturnedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_transfer.canceled",
+        com.stripe.events.V2MoneyManagementOutboundTransferCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_transfer.created",
+        com.stripe.events.V2MoneyManagementOutboundTransferCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_transfer.failed",
+        com.stripe.events.V2MoneyManagementOutboundTransferFailedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_transfer.posted",
+        com.stripe.events.V2MoneyManagementOutboundTransferPostedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.outbound_transfer.returned",
+        com.stripe.events.V2MoneyManagementOutboundTransferReturnedEvent.class);
     eventClassLookup.put(
         "v2.money_management.received_credit.available",
         com.stripe.events.V2MoneyManagementReceivedCreditAvailableEvent.class);

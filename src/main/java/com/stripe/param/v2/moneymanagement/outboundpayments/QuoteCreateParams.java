@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.moneymanagement;
+package com.stripe.param.v2.moneymanagement.outboundpayments;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -11,18 +11,14 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class OutboundPaymentCreateParams extends ApiRequestParams {
+public class QuoteCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> The &quot;presentment amount&quot; to be sent to the recipient. */
   @SerializedName("amount")
   Amount amount;
 
-  /** Delivery options to be used to send the OutboundPayment. */
+  /** Method to be used to send the OutboundPayment. */
   @SerializedName("delivery_options")
   DeliveryOptions deliveryOptions;
-
-  /** An arbitrary string attached to the OutboundPayment. Often useful for displaying to users. */
-  @SerializedName("description")
-  String description;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -33,50 +29,24 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> From which FinancialAccount and BalanceType to pull funds from. */
+  /** <strong>Required.</strong> Request details about the sender of an OutboundPaymentQuote. */
   @SerializedName("from")
   From from;
 
-  /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
-   */
-  @SerializedName("metadata")
-  Map<String, String> metadata;
-
-  /**
-   * The quote for this OutboundPayment. Only required for countries with regulatory mandates to
-   * display fee estimates before OutboundPayment creation.
-   */
-  @SerializedName("outbound_payment_quote")
-  String outboundPaymentQuote;
-
-  /** Details about the notification settings for the OutboundPayment recipient. */
-  @SerializedName("recipient_notification")
-  RecipientNotification recipientNotification;
-
-  /** <strong>Required.</strong> To which payout method to send the OutboundPayment. */
+  /** <strong>Required.</strong> Request details about the recipient of an OutboundPaymentQuote. */
   @SerializedName("to")
   To to;
 
-  private OutboundPaymentCreateParams(
+  private QuoteCreateParams(
       Amount amount,
       DeliveryOptions deliveryOptions,
-      String description,
       Map<String, Object> extraParams,
       From from,
-      Map<String, String> metadata,
-      String outboundPaymentQuote,
-      RecipientNotification recipientNotification,
       To to) {
     this.amount = amount;
     this.deliveryOptions = deliveryOptions;
-    this.description = description;
     this.extraParams = extraParams;
     this.from = from;
-    this.metadata = metadata;
-    this.outboundPaymentQuote = outboundPaymentQuote;
-    this.recipientNotification = recipientNotification;
     this.to = to;
   }
 
@@ -89,32 +59,16 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     private DeliveryOptions deliveryOptions;
 
-    private String description;
-
     private Map<String, Object> extraParams;
 
     private From from;
 
-    private Map<String, String> metadata;
-
-    private String outboundPaymentQuote;
-
-    private RecipientNotification recipientNotification;
-
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public OutboundPaymentCreateParams build() {
-      return new OutboundPaymentCreateParams(
-          this.amount,
-          this.deliveryOptions,
-          this.description,
-          this.extraParams,
-          this.from,
-          this.metadata,
-          this.outboundPaymentQuote,
-          this.recipientNotification,
-          this.to);
+    public QuoteCreateParams build() {
+      return new QuoteCreateParams(
+          this.amount, this.deliveryOptions, this.extraParams, this.from, this.to);
     }
 
     /**
@@ -125,24 +79,16 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Delivery options to be used to send the OutboundPayment. */
-    public Builder setDeliveryOptions(OutboundPaymentCreateParams.DeliveryOptions deliveryOptions) {
+    /** Method to be used to send the OutboundPayment. */
+    public Builder setDeliveryOptions(QuoteCreateParams.DeliveryOptions deliveryOptions) {
       this.deliveryOptions = deliveryOptions;
-      return this;
-    }
-
-    /**
-     * An arbitrary string attached to the OutboundPayment. Often useful for displaying to users.
-     */
-    public Builder setDescription(String description) {
-      this.description = description;
       return this;
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OutboundPaymentCreateParams#extraParams} for the field documentation.
+     * QuoteCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -155,7 +101,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OutboundPaymentCreateParams#extraParams} for the field documentation.
+     * See {@link QuoteCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -165,58 +111,16 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * <strong>Required.</strong> From which FinancialAccount and BalanceType to pull funds from.
-     */
-    public Builder setFrom(OutboundPaymentCreateParams.From from) {
+    /** <strong>Required.</strong> Request details about the sender of an OutboundPaymentQuote. */
+    public Builder setFrom(QuoteCreateParams.From from) {
       this.from = from;
       return this;
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OutboundPaymentCreateParams#metadata} for the field documentation.
+     * <strong>Required.</strong> Request details about the recipient of an OutboundPaymentQuote.
      */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OutboundPaymentCreateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * The quote for this OutboundPayment. Only required for countries with regulatory mandates to
-     * display fee estimates before OutboundPayment creation.
-     */
-    public Builder setOutboundPaymentQuote(String outboundPaymentQuote) {
-      this.outboundPaymentQuote = outboundPaymentQuote;
-      return this;
-    }
-
-    /** Details about the notification settings for the OutboundPayment recipient. */
-    public Builder setRecipientNotification(
-        OutboundPaymentCreateParams.RecipientNotification recipientNotification) {
-      this.recipientNotification = recipientNotification;
-      return this;
-    }
-
-    /** <strong>Required.</strong> To which payout method to send the OutboundPayment. */
-    public Builder setTo(OutboundPaymentCreateParams.To to) {
+    public Builder setTo(QuoteCreateParams.To to) {
       this.to = to;
       return this;
     }
@@ -253,13 +157,12 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public OutboundPaymentCreateParams.DeliveryOptions build() {
-        return new OutboundPaymentCreateParams.DeliveryOptions(this.bankAccount, this.extraParams);
+      public QuoteCreateParams.DeliveryOptions build() {
+        return new QuoteCreateParams.DeliveryOptions(this.bankAccount, this.extraParams);
       }
 
       /** Open Enum. Method for bank account. */
-      public Builder setBankAccount(
-          OutboundPaymentCreateParams.DeliveryOptions.BankAccount bankAccount) {
+      public Builder setBankAccount(QuoteCreateParams.DeliveryOptions.BankAccount bankAccount) {
         this.bankAccount = bankAccount;
         return this;
       }
@@ -267,7 +170,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OutboundPaymentCreateParams.DeliveryOptions#extraParams} for the field documentation.
+       * QuoteCreateParams.DeliveryOptions#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -280,8 +183,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OutboundPaymentCreateParams.DeliveryOptions#extraParams} for the field
-       * documentation.
+       * See {@link QuoteCreateParams.DeliveryOptions#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -314,7 +216,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class From {
-    /** <strong>Required.</strong> Describes the FinancialAmount's currency drawn from. */
+    /** <strong>Required.</strong> Describes the FinancialAccount's currency drawn from. */
     @SerializedName("currency")
     String currency;
 
@@ -349,12 +251,11 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       private String financialAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public OutboundPaymentCreateParams.From build() {
-        return new OutboundPaymentCreateParams.From(
-            this.currency, this.extraParams, this.financialAccount);
+      public QuoteCreateParams.From build() {
+        return new QuoteCreateParams.From(this.currency, this.extraParams, this.financialAccount);
       }
 
-      /** <strong>Required.</strong> Describes the FinancialAmount's currency drawn from. */
+      /** <strong>Required.</strong> Describes the FinancialAccount's currency drawn from. */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
@@ -363,7 +264,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OutboundPaymentCreateParams.From#extraParams} for the field documentation.
+       * QuoteCreateParams.From#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -376,7 +277,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OutboundPaymentCreateParams.From#extraParams} for the field documentation.
+       * See {@link QuoteCreateParams.From#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -390,100 +291,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       public Builder setFinancialAccount(String financialAccount) {
         this.financialAccount = financialAccount;
         return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class RecipientNotification {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-     * notifications to recipients. Do not send notifications when setting is NONE. Default to
-     * account setting when setting is CONFIGURED or not set.
-     */
-    @SerializedName("setting")
-    Setting setting;
-
-    private RecipientNotification(Map<String, Object> extraParams, Setting setting) {
-      this.extraParams = extraParams;
-      this.setting = setting;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Setting setting;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public OutboundPaymentCreateParams.RecipientNotification build() {
-        return new OutboundPaymentCreateParams.RecipientNotification(
-            this.extraParams, this.setting);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OutboundPaymentCreateParams.RecipientNotification#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OutboundPaymentCreateParams.RecipientNotification#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * <strong>Required.</strong> Closed Enum. Configuration option to enable or disable
-       * notifications to recipients. Do not send notifications when setting is NONE. Default to
-       * account setting when setting is CONFIGURED or not set.
-       */
-      public Builder setSetting(OutboundPaymentCreateParams.RecipientNotification.Setting setting) {
-        this.setting = setting;
-        return this;
-      }
-    }
-
-    public enum Setting implements ApiRequestParams.EnumParam {
-      @SerializedName("configured")
-      CONFIGURED("configured"),
-
-      @SerializedName("none")
-      NONE("none");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Setting(String value) {
-        this.value = value;
       }
     }
   }
@@ -541,8 +348,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       private String recipient;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public OutboundPaymentCreateParams.To build() {
-        return new OutboundPaymentCreateParams.To(
+      public QuoteCreateParams.To build() {
+        return new QuoteCreateParams.To(
             this.currency, this.extraParams, this.payoutMethod, this.recipient);
       }
 
@@ -562,7 +369,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OutboundPaymentCreateParams.To#extraParams} for the field documentation.
+       * QuoteCreateParams.To#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -575,7 +382,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OutboundPaymentCreateParams.To#extraParams} for the field documentation.
+       * See {@link QuoteCreateParams.To#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
