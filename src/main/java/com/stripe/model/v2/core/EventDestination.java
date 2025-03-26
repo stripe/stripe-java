@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.model.v2;
+package com.stripe.model.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;

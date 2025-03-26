@@ -3,8 +3,8 @@ package com.stripe.service.v2.core;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
-import com.stripe.model.v2.Event;
 import com.stripe.model.v2.StripeCollection;
+import com.stripe.model.v2.core.Event;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -22,14 +22,6 @@ public final class EventService extends ApiService {
   /** List events, going back up to 30 days. */
   public StripeCollection<Event> list(EventListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
-  }
-  /** List events, going back up to 30 days. */
-  public StripeCollection<Event> list(RequestOptions options) throws StripeException {
-    return list((EventListParams) null, options);
-  }
-  /** List events, going back up to 30 days. */
-  public StripeCollection<Event> list() throws StripeException {
-    return list((EventListParams) null, (RequestOptions) null);
   }
   /** List events, going back up to 30 days. */
   public StripeCollection<Event> list(EventListParams params, RequestOptions options)
