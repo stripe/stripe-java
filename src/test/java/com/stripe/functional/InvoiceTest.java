@@ -11,7 +11,6 @@ import com.stripe.model.InvoiceCollection;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.InvoiceCreateParams;
-import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
@@ -226,39 +225,6 @@ public class InvoiceTest extends BaseStripeTest {
     assertNotNull(sentInvoice);
     verifyRequest(
         ApiResource.RequestMethod.POST, String.format("/v1/invoices/%s/send", invoice.getId()));
-  }
-
-  @Test
-  public void testUpcoming() throws StripeException {
-    Map<String, Object> params = new HashMap<>();
-    params.put("customer", "cus_123");
-
-    final Invoice upcomingInvoice = Invoice.upcoming(params);
-
-    assertNotNull(upcomingInvoice);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/invoices/upcoming", params);
-  }
-
-  @Test
-  public void testUpcomingWithTypedParams() throws StripeException {
-    InvoiceUpcomingParams.InvoiceItem item =
-        InvoiceUpcomingParams.InvoiceItem.builder().setAmount(123L).setCurrency("usd").build();
-    InvoiceUpcomingParams.InvoiceItem item2 =
-        InvoiceUpcomingParams.InvoiceItem.builder().setAmount(456L).setCurrency("jpy").build();
-    InvoiceUpcomingParams typedParams =
-        InvoiceUpcomingParams.builder().addInvoiceItem(item).addInvoiceItem(item2).build();
-
-    final Invoice upcomingInvoice = Invoice.upcoming(typedParams, RequestOptions.getDefault());
-
-    Map<String, Object> params = new HashMap<>();
-    params.put(
-        "invoice_items",
-        Arrays.asList(
-            ImmutableMap.of("amount", 123L, "currency", "usd"),
-            ImmutableMap.of("amount", 456L, "currency", "jpy")));
-
-    assertNotNull(upcomingInvoice);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/invoices/upcoming", params);
   }
 
   @Test
