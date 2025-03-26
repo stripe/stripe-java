@@ -35,7 +35,8 @@ public abstract class Stripe {
    * Add a specified beta to the global Stripe API Version. If the betaName already exists, the
    * higher version will be used.
    *
-   * @throws IllegalArgumentException if the betaVersion is not in the format 'v<number>'
+   * @throws IllegalArgumentException if the betaVersion is not in the format 'v' + number (e.g.
+   *     "v3")
    */
   public static void addBetaVersion(String betaName, String betaVersion) {
     if (!betaVersion.matches("v\\d+")) {
