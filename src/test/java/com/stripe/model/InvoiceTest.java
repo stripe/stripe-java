@@ -16,7 +16,7 @@ public class InvoiceTest extends BaseStripeTest {
     assertNotNull(invoice);
     assertNotNull(invoice.getId());
     assertEquals("invoice", invoice.getObject());
-    assertNull(invoice.getChargeObject());
+    assertNull(invoice.getApplicationObject());
   }
 
   @Test
@@ -29,10 +29,6 @@ public class InvoiceTest extends BaseStripeTest {
     final Invoice invoice = ApiResource.GSON.fromJson(data, Invoice.class);
     assertNotNull(invoice);
     assertNotNull(invoice.getId());
-    final Charge charge = invoice.getChargeObject();
-    assertNotNull(charge);
-    assertNotNull(charge.getId());
-    assertEquals(invoice.getCharge(), charge.getId());
     final Customer customer = invoice.getCustomerObject();
     assertNotNull(customer);
     assertNotNull(customer.getId());
