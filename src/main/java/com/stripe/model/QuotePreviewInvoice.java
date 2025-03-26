@@ -1180,12 +1180,19 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
+    /** Details about the quote that generated this invoice. */
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
 
+    /** Details about the subscription that generated this invoice. */
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
 
+    /**
+     * The type of parent that generated this invoice
+     *
+     * <p>One of {@code quote_details}, or {@code subscription_details}.
+     */
     @SerializedName("type")
     String type;
 
@@ -1197,6 +1204,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class QuoteDetails extends StripeObject {
+      /** The quote that generated this invoice. */
       @SerializedName("quote")
       String quote;
     }
@@ -1209,15 +1217,32 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionDetails extends StripeObject {
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> defined as
+       * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
+       * subscription metadata at the time of invoice finalization. <em>Note: This attribute is
+       * populated only for invoices created on or after June 29, 2023.</em>
+       */
       @SerializedName("metadata")
       Map<String, String> metadata;
 
+      /**
+       * If specified, payment collection for this subscription will be paused. Note that the
+       * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+       * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+       * collection</a>.
+       */
       @SerializedName("pause_collection")
       PauseCollection pauseCollection;
 
+      /** The subscription that generated this invoice. */
       @SerializedName("subscription")
       String subscription;
 
+      /**
+       * Only set for upcoming invoices that preview prorations. The time used to calculate
+       * prorations.
+       */
       @SerializedName("subscription_proration_date")
       Long subscriptionProrationDate;
 
@@ -1229,9 +1254,14 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class PauseCollection extends StripeObject {
+        /**
+         * The payment collection behavior for this subscription while paused. One of {@code
+         * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         */
         @SerializedName("behavior")
         String behavior;
 
+        /** The time after which the subscription will resume collecting payments. */
         @SerializedName("resumes_at")
         Long resumesAt;
       }
