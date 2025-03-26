@@ -21,7 +21,6 @@ public class InvoiceItemTest extends BaseStripeTest {
     assertEquals("invoiceitem", invoiceItem.getObject());
     assertNull(invoiceItem.getCustomerObject());
     assertNull(invoiceItem.getInvoiceObject());
-    assertNull(invoiceItem.getSubscriptionObject());
   }
 
   @Test
@@ -40,10 +39,6 @@ public class InvoiceItemTest extends BaseStripeTest {
     assertNotNull(invoice);
     assertNotNull(invoice.getId());
     assertEquals(invoiceItem.getInvoice(), invoice.getId());
-    final Subscription subscription = invoiceItem.getSubscriptionObject();
-    assertNotNull(subscription);
-    assertNotNull(subscription.getId());
-    assertEquals(invoiceItem.getSubscription(), subscription.getId());
   }
 
   @Test
