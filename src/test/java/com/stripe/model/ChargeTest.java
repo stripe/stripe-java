@@ -20,7 +20,6 @@ public class ChargeTest extends BaseStripeTest {
     assertNull(charge.getApplicationFeeObject());
     assertNull(charge.getBalanceTransactionObject());
     assertNull(charge.getCustomerObject());
-    assertNull(charge.getInvoiceObject());
     assertNull(charge.getOnBehalfOfObject());
     assertNull(charge.getReviewObject());
     assertNull(charge.getSourceTransferObject());
@@ -57,10 +56,6 @@ public class ChargeTest extends BaseStripeTest {
     assertNotNull(customer);
     assertNotNull(customer.getId());
     assertEquals(charge.getCustomer(), customer.getId());
-    final Invoice invoice = charge.getInvoiceObject();
-    assertNotNull(invoice);
-    assertNotNull(invoice.getId());
-    assertEquals(charge.getInvoice(), invoice.getId());
     final Account onBehalfOf = charge.getOnBehalfOfObject();
     assertNotNull(onBehalfOf);
     assertNotNull(onBehalfOf.getId());
