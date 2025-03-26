@@ -65,6 +65,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The ID of the account who will be billed when this invoice item is billed. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("date")
   Long date;

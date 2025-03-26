@@ -29,6 +29,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The identifier of the account to create the subscription schedule for. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Object representing the subscription schedule's default settings. */
   @SerializedName("default_settings")
   DefaultSettings defaultSettings;
@@ -97,6 +101,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   private SubscriptionScheduleCreateParams(
       BillingBehavior billingBehavior,
       String customer,
+      String customerAccount,
       DefaultSettings defaultSettings,
       EndBehavior endBehavior,
       List<String> expand,
@@ -108,6 +113,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Object startDate) {
     this.billingBehavior = billingBehavior;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.defaultSettings = defaultSettings;
     this.endBehavior = endBehavior;
     this.expand = expand;
@@ -127,6 +133,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     private BillingBehavior billingBehavior;
 
     private String customer;
+
+    private String customerAccount;
 
     private DefaultSettings defaultSettings;
 
@@ -151,6 +159,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       return new SubscriptionScheduleCreateParams(
           this.billingBehavior,
           this.customer,
+          this.customerAccount,
           this.defaultSettings,
           this.endBehavior,
           this.expand,
@@ -178,6 +187,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     /** The identifier of the customer to create the subscription schedule for. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The identifier of the account to create the subscription schedule for. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

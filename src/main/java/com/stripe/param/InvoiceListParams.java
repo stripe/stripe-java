@@ -28,6 +28,9 @@ public class InvoiceListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  @SerializedName("customer_account")
+  String customerAccount;
+
   @SerializedName("due_date")
   Object dueDate;
 
@@ -85,6 +88,7 @@ public class InvoiceListParams extends ApiRequestParams {
       CollectionMethod collectionMethod,
       Object created,
       String customer,
+      String customerAccount,
       Object dueDate,
       String endingBefore,
       List<String> expand,
@@ -96,6 +100,7 @@ public class InvoiceListParams extends ApiRequestParams {
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.dueDate = dueDate;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -116,6 +121,8 @@ public class InvoiceListParams extends ApiRequestParams {
     private Object created;
 
     private String customer;
+
+    private String customerAccount;
 
     private Object dueDate;
 
@@ -139,6 +146,7 @@ public class InvoiceListParams extends ApiRequestParams {
           this.collectionMethod,
           this.created,
           this.customer,
+          this.customerAccount,
           this.dueDate,
           this.endingBefore,
           this.expand,
@@ -173,6 +181,11 @@ public class InvoiceListParams extends ApiRequestParams {
     /** Only return invoices for the customer specified by this customer ID. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

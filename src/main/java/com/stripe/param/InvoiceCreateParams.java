@@ -78,6 +78,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of the account who will be billed. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * The number of days from when the invoice is created until it is due. Valid only for invoices
    * where {@code collection_method=send_invoice}.
@@ -268,6 +272,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       String currency,
       Object customFields,
       String customer,
+      String customerAccount,
       Long daysUntilDue,
       List<String> defaultMargins,
       String defaultPaymentMethod,
@@ -303,6 +308,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.currency = currency;
     this.customFields = customFields;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.daysUntilDue = daysUntilDue;
     this.defaultMargins = defaultMargins;
     this.defaultPaymentMethod = defaultPaymentMethod;
@@ -354,6 +360,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private Object customFields;
 
     private String customer;
+
+    private String customerAccount;
 
     private Long daysUntilDue;
 
@@ -418,6 +426,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.currency,
           this.customFields,
           this.customer,
+          this.customerAccount,
           this.daysUntilDue,
           this.defaultMargins,
           this.defaultPaymentMethod,
@@ -636,6 +645,12 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /** The ID of the customer who will be billed. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of the account who will be billed. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

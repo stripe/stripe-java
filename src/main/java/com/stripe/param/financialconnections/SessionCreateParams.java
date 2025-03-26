@@ -276,6 +276,13 @@ public class SessionCreateParams extends ApiRequestParams {
     String customer;
 
     /**
+     * The ID of the Stripe customer Account whose accounts will be retrieved. Should only be
+     * present if {@code type} is {@code customer}.
+     */
+    @SerializedName("customer_account")
+    String customerAccount;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -289,9 +296,14 @@ public class SessionCreateParams extends ApiRequestParams {
     Type type;
 
     private AccountHolder(
-        String account, String customer, Map<String, Object> extraParams, Type type) {
+        String account,
+        String customer,
+        String customerAccount,
+        Map<String, Object> extraParams,
+        Type type) {
       this.account = account;
       this.customer = customer;
+      this.customerAccount = customerAccount;
       this.extraParams = extraParams;
       this.type = type;
     }
@@ -305,6 +317,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private String customer;
 
+      private String customerAccount;
+
       private Map<String, Object> extraParams;
 
       private Type type;
@@ -312,7 +326,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.AccountHolder build() {
         return new SessionCreateParams.AccountHolder(
-            this.account, this.customer, this.extraParams, this.type);
+            this.account, this.customer, this.customerAccount, this.extraParams, this.type);
       }
 
       /**
@@ -330,6 +344,15 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;
+        return this;
+      }
+
+      /**
+       * The ID of the Stripe customer Account whose accounts will be retrieved. Should only be
+       * present if {@code type} is {@code customer}.
+       */
+      public Builder setCustomerAccount(String customerAccount) {
+        this.customerAccount = customerAccount;
         return this;
       }
 

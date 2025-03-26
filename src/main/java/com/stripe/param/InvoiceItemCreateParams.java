@@ -37,6 +37,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of the account who will be billed when this invoice item is billed. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * An arbitrary string which you can attach to the invoice item. The description is displayed in
    * the invoice for easy tracking.
@@ -166,6 +170,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       Long amount,
       String currency,
       String customer,
+      String customerAccount,
       String description,
       Boolean discountable,
       Object discounts,
@@ -186,6 +191,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     this.amount = amount;
     this.currency = currency;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.description = description;
     this.discountable = discountable;
     this.discounts = discounts;
@@ -215,6 +221,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     private String currency;
 
     private String customer;
+
+    private String customerAccount;
 
     private String description;
 
@@ -256,6 +264,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           this.amount,
           this.currency,
           this.customer,
+          this.customerAccount,
           this.description,
           this.discountable,
           this.discounts,
@@ -301,6 +310,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of the account who will be billed when this invoice item is billed. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

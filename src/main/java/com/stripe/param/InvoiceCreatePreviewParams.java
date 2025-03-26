@@ -34,6 +34,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   String customer;
 
   /**
+   * The identifier of the account whose upcoming invoice you'd like to retrieve. If {@code
+   * automatic_tax} is enabled then one of {@code customer}, {@code customer_account}, {@code
+   * customer_details}, {@code subscription}, or {@code schedule} must be set.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * Details about the customer you want to invoice or overrides for an existing customer. If {@code
    * automatic_tax} is enabled then one of {@code customer}, {@code customer_details}, {@code
    * subscription}, or {@code schedule} must be set.
@@ -125,6 +133,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       String currency,
       String customer,
+      String customerAccount,
       CustomerDetails customerDetails,
       Object discounts,
       List<String> expand,
@@ -140,6 +149,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.currency = currency;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.customerDetails = customerDetails;
     this.discounts = discounts;
     this.expand = expand;
@@ -164,6 +174,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     private String currency;
 
     private String customer;
+
+    private String customerAccount;
 
     private CustomerDetails customerDetails;
 
@@ -195,6 +207,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           this.automaticTax,
           this.currency,
           this.customer,
+          this.customerAccount,
           this.customerDetails,
           this.discounts,
           this.expand,
@@ -231,6 +244,16 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * The identifier of the account whose upcoming invoice you'd like to retrieve. If {@code
+     * automatic_tax} is enabled then one of {@code customer}, {@code customer_account}, {@code
+     * customer_details}, {@code subscription}, or {@code schedule} must be set.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

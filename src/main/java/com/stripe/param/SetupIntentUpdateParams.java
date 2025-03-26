@@ -33,6 +33,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   @SerializedName("customer")
   Object customer;
 
+  /**
+   * ID of the Account this SetupIntent belongs to, if one exists.
+   *
+   * <p>If present, the SetupIntent's payment method will be attached to the Account on successful
+   * setup. Payment methods attached to other Accounts cannot be used with this SetupIntent.
+   */
+  @SerializedName("customer_account")
+  Object customerAccount;
+
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   Object description;
@@ -107,6 +116,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   private SetupIntentUpdateParams(
       Boolean attachToSelf,
       Object customer,
+      Object customerAccount,
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -119,6 +129,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       List<String> paymentMethodTypes) {
     this.attachToSelf = attachToSelf;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -139,6 +150,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     private Boolean attachToSelf;
 
     private Object customer;
+
+    private Object customerAccount;
 
     private Object description;
 
@@ -165,6 +178,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       return new SetupIntentUpdateParams(
           this.attachToSelf,
           this.customer,
+          this.customerAccount,
           this.description,
           this.expand,
           this.extraParams,
@@ -212,6 +226,28 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      */
     public Builder setCustomer(EmptyParam customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * ID of the Account this SetupIntent belongs to, if one exists.
+     *
+     * <p>If present, the SetupIntent's payment method will be attached to the Account on successful
+     * setup. Payment methods attached to other Accounts cannot be used with this SetupIntent.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
+      return this;
+    }
+
+    /**
+     * ID of the Account this SetupIntent belongs to, if one exists.
+     *
+     * <p>If present, the SetupIntent's payment method will be attached to the Account on successful
+     * setup. Payment methods attached to other Accounts cannot be used with this SetupIntent.
+     */
+    public Builder setCustomerAccount(EmptyParam customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

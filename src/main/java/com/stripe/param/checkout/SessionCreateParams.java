@@ -108,6 +108,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** ID of an existing Account, if one exists. Has the same behavior as {@code customer}. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * Configure whether a Checkout Session creates a <a
    * href="https://stripe.com/docs/api/customers">Customer</a> during Session confirmation.
@@ -391,6 +395,7 @@ public class SessionCreateParams extends ApiRequestParams {
       List<SessionCreateParams.CustomField> customFields,
       CustomText customText,
       String customer,
+      String customerAccount,
       CustomerCreation customerCreation,
       String customerEmail,
       CustomerUpdate customerUpdate,
@@ -435,6 +440,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.customFields = customFields;
     this.customText = customText;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.customerCreation = customerCreation;
     this.customerEmail = customerEmail;
     this.customerUpdate = customerUpdate;
@@ -497,6 +503,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private CustomText customText;
 
     private String customer;
+
+    private String customerAccount;
 
     private CustomerCreation customerCreation;
 
@@ -577,6 +585,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.customFields,
           this.customText,
           this.customer,
+          this.customerAccount,
           this.customerCreation,
           this.customerEmail,
           this.customerUpdate,
@@ -743,6 +752,12 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** ID of an existing Account, if one exists. Has the same behavior as {@code customer}. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

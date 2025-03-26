@@ -64,6 +64,10 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account receiving the billing credits. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** The time when the billing credits become effective-when they're eligible for use. */
   @SerializedName("effective_at")
   Long effectiveAt;

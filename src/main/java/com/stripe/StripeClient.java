@@ -149,6 +149,10 @@ public class StripeClient {
     return new com.stripe.service.BalanceService(this.getResponseGetter());
   }
 
+  public com.stripe.service.BalanceSettingsService balanceSettings() {
+    return new com.stripe.service.BalanceSettingsService(this.getResponseGetter());
+  }
+
   public com.stripe.service.BalanceTransactionService balanceTransactions() {
     return new com.stripe.service.BalanceTransactionService(this.getResponseGetter());
   }
@@ -219,6 +223,10 @@ public class StripeClient {
 
   public com.stripe.service.ExchangeRateService exchangeRates() {
     return new com.stripe.service.ExchangeRateService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.ExternalAccountService externalAccounts() {
+    return new com.stripe.service.ExternalAccountService(this.getResponseGetter());
   }
 
   public com.stripe.service.FileLinkService fileLinks() {

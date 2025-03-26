@@ -229,6 +229,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The ID of the account who will be billed. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * The customer's address. Until the invoice is finalized, this field will equal {@code
    * customer.address}. Once the invoice is finalized, this field will no longer be updated.

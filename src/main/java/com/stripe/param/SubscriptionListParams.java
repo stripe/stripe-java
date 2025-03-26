@@ -40,6 +40,9 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -111,6 +114,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       Object currentPeriodEnd,
       Object currentPeriodStart,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -126,6 +130,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     this.currentPeriodEnd = currentPeriodEnd;
     this.currentPeriodStart = currentPeriodStart;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -154,6 +159,8 @@ public class SubscriptionListParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -181,6 +188,7 @@ public class SubscriptionListParams extends ApiRequestParams {
           this.currentPeriodEnd,
           this.currentPeriodStart,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -251,6 +259,11 @@ public class SubscriptionListParams extends ApiRequestParams {
     /** The ID of the customer whose subscriptions will be retrieved. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

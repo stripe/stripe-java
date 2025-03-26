@@ -202,6 +202,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("custom_fields")
   List<QuotePreviewInvoice.CustomField> customFields;
 
+  /** The ID of the account who will be billed. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * The customer's address. Until the invoice is finalized, this field will equal {@code
    * customer.address}. Once the invoice is finalized, this field will no longer be updated.

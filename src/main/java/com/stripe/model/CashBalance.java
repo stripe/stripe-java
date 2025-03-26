@@ -37,6 +37,10 @@ public class CashBalance extends ApiResource {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of the account whose cash balance this object represents. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.

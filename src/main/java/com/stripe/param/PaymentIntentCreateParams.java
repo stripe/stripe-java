@@ -103,6 +103,23 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * ID of the Account this PaymentIntent belongs to, if one exists.
+   *
+   * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
+   *
+   * <p>If <a
+   * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
+   * method attaches to the Account after the PaymentIntent has been confirmed and any required
+   * actions from the user are complete. If the payment method is {@code card_present} and isn't a
+   * digital wallet, then a <a
+   * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * payment method representing the card is created and attached to the Account instead.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -334,6 +351,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String confirmationToken,
       String currency,
       String customer,
+      String customerAccount,
       String description,
       Boolean errorOnRequiresAction,
       List<String> expand,
@@ -370,6 +388,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.confirmationToken = confirmationToken;
     this.currency = currency;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.description = description;
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
@@ -422,6 +441,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private String currency;
 
     private String customer;
+
+    private String customerAccount;
 
     private String description;
 
@@ -488,6 +509,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.confirmationToken,
           this.currency,
           this.customer,
+          this.customerAccount,
           this.description,
           this.errorOnRequiresAction,
           this.expand,
@@ -625,6 +647,25 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * ID of the Account this PaymentIntent belongs to, if one exists.
+     *
+     * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
+     *
+     * <p>If <a
+     * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
+     * method attaches to the Account after the PaymentIntent has been confirmed and any required
+     * actions from the user are complete. If the payment method is {@code card_present} and isn't a
+     * digital wallet, then a <a
+     * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * payment method representing the card is created and attached to the Account instead.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

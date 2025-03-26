@@ -292,6 +292,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Customer> customer;
 
+    @SerializedName("customer_account")
+    String customerAccount;
+
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 

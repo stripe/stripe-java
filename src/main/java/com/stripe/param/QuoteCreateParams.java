@@ -60,6 +60,13 @@ public class QuoteCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * The account for which this quote belongs to. A customer or account is required before
+   * finalizing the quote. Once specified, it cannot be changed.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** The tax rates that will apply to any line item that does not have {@code tax_rates} set. */
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
@@ -186,6 +193,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       CollectionMethod collectionMethod,
       String customer,
+      String customerAccount,
       Object defaultTaxRates,
       Object description,
       Object discounts,
@@ -210,6 +218,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.collectionMethod = collectionMethod;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.defaultTaxRates = defaultTaxRates;
     this.description = description;
     this.discounts = discounts;
@@ -246,6 +255,8 @@ public class QuoteCreateParams extends ApiRequestParams {
     private CollectionMethod collectionMethod;
 
     private String customer;
+
+    private String customerAccount;
 
     private Object defaultTaxRates;
 
@@ -292,6 +303,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           this.automaticTax,
           this.collectionMethod,
           this.customer,
+          this.customerAccount,
           this.defaultTaxRates,
           this.description,
           this.discounts,
@@ -389,6 +401,15 @@ public class QuoteCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * The account for which this quote belongs to. A customer or account is required before
+     * finalizing the quote. Once specified, it cannot be changed.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

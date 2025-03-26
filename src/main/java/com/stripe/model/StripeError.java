@@ -106,8 +106,9 @@ public class StripeError extends StripeObject {
    * terminal_reader_invalid_location_for_payment}, {@code terminal_reader_offline}, {@code
    * terminal_reader_timeout}, {@code testmode_charges_only}, {@code tls_version_unsupported},
    * {@code token_already_used}, {@code token_card_network_invalid}, {@code token_in_use}, {@code
-   * transfer_source_balance_parameters_mismatch}, {@code transfers_not_allowed}, or {@code
-   * url_invalid}.
+   * transfer_source_balance_parameters_mismatch}, {@code transfers_not_allowed}, {@code
+   * url_invalid}, {@code v2_account_disconnection_unsupported}, or {@code
+   * v2_account_missing_configuration}.
    */
   @SerializedName("code")
   String code;

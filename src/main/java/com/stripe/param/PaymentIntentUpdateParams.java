@@ -68,6 +68,23 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName("customer")
   Object customer;
 
+  /**
+   * ID of the Account this PaymentIntent belongs to, if one exists.
+   *
+   * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
+   *
+   * <p>If <a
+   * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
+   * method attaches to the Account after the PaymentIntent has been confirmed and any required
+   * actions from the user are complete. If the payment method is {@code card_present} and isn't a
+   * digital wallet, then a <a
+   * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * payment method representing the card is created and attached to the Account instead.
+   */
+  @SerializedName("customer_account")
+  Object customerAccount;
+
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   Object description;
@@ -216,6 +233,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       CaptureMethod captureMethod,
       Object currency,
       Object customer,
+      Object customerAccount,
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -240,6 +258,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.captureMethod = captureMethod;
     this.currency = currency;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -276,6 +295,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     private Object currency;
 
     private Object customer;
+
+    private Object customerAccount;
 
     private Object description;
 
@@ -322,6 +343,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.captureMethod,
           this.currency,
           this.customer,
+          this.customerAccount,
           this.description,
           this.expand,
           this.extraParams,
@@ -447,6 +469,44 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      */
     public Builder setCustomer(EmptyParam customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * ID of the Account this PaymentIntent belongs to, if one exists.
+     *
+     * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
+     *
+     * <p>If <a
+     * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
+     * method attaches to the Account after the PaymentIntent has been confirmed and any required
+     * actions from the user are complete. If the payment method is {@code card_present} and isn't a
+     * digital wallet, then a <a
+     * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * payment method representing the card is created and attached to the Account instead.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
+      return this;
+    }
+
+    /**
+     * ID of the Account this PaymentIntent belongs to, if one exists.
+     *
+     * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
+     *
+     * <p>If <a
+     * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
+     * method attaches to the Account after the PaymentIntent has been confirmed and any required
+     * actions from the user are complete. If the payment method is {@code card_present} and isn't a
+     * digital wallet, then a <a
+     * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * payment method representing the card is created and attached to the Account instead.
+     */
+    public Builder setCustomerAccount(EmptyParam customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

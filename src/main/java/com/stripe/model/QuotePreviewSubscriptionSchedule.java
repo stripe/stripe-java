@@ -74,6 +74,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account who owns the subscription schedule. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   @SerializedName("default_settings")
   DefaultSettings defaultSettings;
 

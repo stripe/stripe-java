@@ -118,6 +118,13 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /**
+   * The account which this quote belongs to. A customer or account is required before finalizing
+   * the quote. Once specified, it cannot be changed.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** The tax rates applied to this quote. */
   @SerializedName("default_tax_rates")
   List<ExpandableField<TaxRate>> defaultTaxRates;

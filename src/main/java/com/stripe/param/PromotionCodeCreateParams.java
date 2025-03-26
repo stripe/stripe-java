@@ -38,6 +38,13 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * The account that this promotion code can be used by. If not set, the promotion code can be used
+   * by all accounts.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -84,6 +91,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
       String code,
       String coupon,
       String customer,
+      String customerAccount,
       List<String> expand,
       Long expiresAt,
       Map<String, Object> extraParams,
@@ -94,6 +102,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     this.code = code;
     this.coupon = coupon;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.expiresAt = expiresAt;
     this.extraParams = extraParams;
@@ -115,6 +124,8 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private List<String> expand;
 
     private Long expiresAt;
@@ -134,6 +145,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
           this.code,
           this.coupon,
           this.customer,
+          this.customerAccount,
           this.expand,
           this.expiresAt,
           this.extraParams,
@@ -172,6 +184,15 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * The account that this promotion code can be used by. If not set, the promotion code can be
+     * used by all accounts.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

@@ -105,6 +105,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("customer_account")
+  String customerAccount;
+
   @SerializedName("customer_balance")
   CustomerBalance customerBalance;
 

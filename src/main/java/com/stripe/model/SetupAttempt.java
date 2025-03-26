@@ -60,6 +60,14 @@ public class SetupAttempt extends ApiResource implements HasId {
   ExpandableField<Customer> customer;
 
   /**
+   * The value of <a
+   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-customer_account">customer_account</a>
+   * on the SetupIntent at the time of this confirmation.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * Indicates the directions of money movement for which this payment method is intended to be
    * used.
    *

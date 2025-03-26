@@ -17,6 +17,10 @@ public class QuoteListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of the account whose quotes will be retrieved. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -72,6 +76,7 @@ public class QuoteListParams extends ApiRequestParams {
 
   private QuoteListParams(
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -81,6 +86,7 @@ public class QuoteListParams extends ApiRequestParams {
       Status status,
       String testClock) {
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -97,6 +103,8 @@ public class QuoteListParams extends ApiRequestParams {
 
   public static class Builder {
     private String customer;
+
+    private String customerAccount;
 
     private String endingBefore;
 
@@ -118,6 +126,7 @@ public class QuoteListParams extends ApiRequestParams {
     public QuoteListParams build() {
       return new QuoteListParams(
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -131,6 +140,12 @@ public class QuoteListParams extends ApiRequestParams {
     /** The ID of the customer whose quotes will be retrieved. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of the account whose quotes will be retrieved. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

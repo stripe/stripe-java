@@ -27,6 +27,10 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of an existing Account for which to create the Customer Session. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -43,10 +47,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   private CustomerSessionCreateParams(
       Components components,
       String customer,
+      String customerAccount,
       List<String> expand,
       Map<String, Object> extraParams) {
     this.components = components;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -60,6 +66,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -67,7 +75,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerSessionCreateParams build() {
       return new CustomerSessionCreateParams(
-          this.components, this.customer, this.expand, this.extraParams);
+          this.components, this.customer, this.customerAccount, this.expand, this.extraParams);
     }
 
     /**
@@ -85,6 +93,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of an existing Account for which to create the Customer Session. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

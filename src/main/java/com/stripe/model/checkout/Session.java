@@ -172,6 +172,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The ID of the account for this Session. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
    *

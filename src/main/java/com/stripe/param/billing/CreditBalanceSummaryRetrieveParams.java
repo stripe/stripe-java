@@ -17,6 +17,10 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The account for which to fetch credit balance summary. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -35,8 +39,13 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   Filter filter;
 
   private CreditBalanceSummaryRetrieveParams(
-      String customer, List<String> expand, Map<String, Object> extraParams, Filter filter) {
+      String customer,
+      String customerAccount,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Filter filter) {
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
     this.filter = filter;
@@ -49,6 +58,8 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   public static class Builder {
     private String customer;
 
+    private String customerAccount;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -58,12 +69,18 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CreditBalanceSummaryRetrieveParams build() {
       return new CreditBalanceSummaryRetrieveParams(
-          this.customer, this.expand, this.extraParams, this.filter);
+          this.customer, this.customerAccount, this.expand, this.extraParams, this.filter);
     }
 
     /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The account for which to fetch credit balance summary. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

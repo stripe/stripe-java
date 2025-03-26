@@ -71,6 +71,9 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("currency")
   String currency;
 
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * ID of the default payment source for the customer.
    *

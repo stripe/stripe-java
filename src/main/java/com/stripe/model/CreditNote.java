@@ -60,6 +60,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Customer balance transaction related to this credit note. */
   @SerializedName("customer_balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
