@@ -1367,6 +1367,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String sofortPayments;
 
     /**
+     * The status of the stripe_balance payments capability of the account, or whether the account
+     * can directly process stripe_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("stripe_balance_payments")
+    String stripeBalancePayments;
+
+    /**
      * The status of the Swish capability of the account, or whether the account can directly
      * process Swish payments.
      *

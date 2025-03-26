@@ -580,6 +580,10 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     @SerializedName("sofort")
     Sofort sofort;
 
+    /** This hash contains details about the Stripe balance payment method. */
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
+
     /**
      * If this is a {@code swish} PaymentMethod, this hash contains details about the Swish payment
      * method.
@@ -677,6 +681,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Shopeepay shopeepay,
         Sofort sofort,
+        StripeBalance stripeBalance,
         Swish swish,
         Twint twint,
         Type type,
@@ -737,6 +742,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
+      this.stripeBalance = stripeBalance;
       this.swish = swish;
       this.twint = twint;
       this.type = type;
@@ -858,6 +864,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       private Sofort sofort;
 
+      private StripeBalance stripeBalance;
+
       private Swish swish;
 
       private Twint twint;
@@ -927,6 +935,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
             this.sepaDebit,
             this.shopeepay,
             this.sofort,
+            this.stripeBalance,
             this.swish,
             this.twint,
             this.type,
@@ -1480,6 +1489,13 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
        */
       public Builder setSofort(ConfirmationTokenCreateParams.PaymentMethodData.Sofort sofort) {
         this.sofort = sofort;
+        return this;
+      }
+
+      /** This hash contains details about the Stripe balance payment method. */
+      public Builder setStripeBalance(
+          ConfirmationTokenCreateParams.PaymentMethodData.StripeBalance stripeBalance) {
+        this.stripeBalance = stripeBalance;
         return this;
       }
 
@@ -5804,6 +5820,121 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance {
+      /** The connected account ID whose Stripe balance to use as the source of payment. */
+      @SerializedName("account")
+      String account;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The <a
+       * href="https://docs.stripe.com/api/balance/balance_object#balance_object-available-source_types">source_type</a>
+       * of the balance
+       */
+      @SerializedName("source_type")
+      SourceType sourceType;
+
+      private StripeBalance(
+          String account, Map<String, Object> extraParams, SourceType sourceType) {
+        this.account = account;
+        this.extraParams = extraParams;
+        this.sourceType = sourceType;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String account;
+
+        private Map<String, Object> extraParams;
+
+        private SourceType sourceType;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfirmationTokenCreateParams.PaymentMethodData.StripeBalance build() {
+          return new ConfirmationTokenCreateParams.PaymentMethodData.StripeBalance(
+              this.account, this.extraParams, this.sourceType);
+        }
+
+        /** The connected account ID whose Stripe balance to use as the source of payment. */
+        public Builder setAccount(String account) {
+          this.account = account;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * ConfirmationTokenCreateParams.PaymentMethodData.StripeBalance#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * ConfirmationTokenCreateParams.PaymentMethodData.StripeBalance#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The <a
+         * href="https://docs.stripe.com/api/balance/balance_object#balance_object-available-source_types">source_type</a>
+         * of the balance
+         */
+        public Builder setSourceType(
+            ConfirmationTokenCreateParams.PaymentMethodData.StripeBalance.SourceType sourceType) {
+          this.sourceType = sourceType;
+          return this;
+        }
+      }
+
+      public enum SourceType implements ApiRequestParams.EnumParam {
+        @SerializedName("bank_account")
+        BANK_ACCOUNT("bank_account"),
+
+        @SerializedName("card")
+        CARD("card"),
+
+        @SerializedName("fpx")
+        FPX("fpx");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SourceType(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Swish {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6366,6 +6497,9 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       @SerializedName("sofort")
       SOFORT("sofort"),
+
+      @SerializedName("stripe_balance")
+      STRIPE_BALANCE("stripe_balance"),
 
       @SerializedName("swish")
       SWISH("swish"),

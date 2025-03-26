@@ -1469,6 +1469,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("sofort_payments")
     SofortPayments sofortPayments;
 
+    /** The stripe_balance_payments capability. */
+    @SerializedName("stripe_balance_payments")
+    StripeBalancePayments stripeBalancePayments;
+
     /** The swish_payments capability. */
     @SerializedName("swish_payments")
     SwishPayments swishPayments;
@@ -1576,6 +1580,7 @@ public class AccountCreateParams extends ApiRequestParams {
         SepaDebitPayments sepaDebitPayments,
         ShopeepayPayments shopeepayPayments,
         SofortPayments sofortPayments,
+        StripeBalancePayments stripeBalancePayments,
         SwishPayments swishPayments,
         TaxReportingUs1099K taxReportingUs1099K,
         TaxReportingUs1099Misc taxReportingUs1099Misc,
@@ -1646,6 +1651,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.sepaDebitPayments = sepaDebitPayments;
       this.shopeepayPayments = shopeepayPayments;
       this.sofortPayments = sofortPayments;
+      this.stripeBalancePayments = stripeBalancePayments;
       this.swishPayments = swishPayments;
       this.taxReportingUs1099K = taxReportingUs1099K;
       this.taxReportingUs1099Misc = taxReportingUs1099Misc;
@@ -1781,6 +1787,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private SofortPayments sofortPayments;
 
+      private StripeBalancePayments stripeBalancePayments;
+
       private SwishPayments swishPayments;
 
       private TaxReportingUs1099K taxReportingUs1099K;
@@ -1866,6 +1874,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.sepaDebitPayments,
             this.shopeepayPayments,
             this.sofortPayments,
+            this.stripeBalancePayments,
             this.swishPayments,
             this.taxReportingUs1099K,
             this.taxReportingUs1099Misc,
@@ -2291,6 +2300,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setSofortPayments(
           AccountCreateParams.Capabilities.SofortPayments sofortPayments) {
         this.sofortPayments = sofortPayments;
+        return this;
+      }
+
+      /** The stripe_balance_payments capability. */
+      public Builder setStripeBalancePayments(
+          AccountCreateParams.Capabilities.StripeBalancePayments stripeBalancePayments) {
+        this.stripeBalancePayments = stripeBalancePayments;
         return this;
       }
 
@@ -6910,6 +6926,86 @@ public class AccountCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.SofortPayments#extraParams} for the
          * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalancePayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private StripeBalancePayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.StripeBalancePayments build() {
+          return new AccountCreateParams.Capabilities.StripeBalancePayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.StripeBalancePayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.StripeBalancePayments#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

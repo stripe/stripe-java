@@ -403,6 +403,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @SerializedName("sofort")
     Sofort sofort;
 
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
+
     @SerializedName("swish")
     Swish swish;
 
@@ -424,8 +427,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
      * nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco}, {@code
      * paynow}, {@code paypal}, {@code payto}, {@code pix}, {@code promptpay}, {@code qris}, {@code
      * rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code sepa_debit},
-     * {@code shopeepay}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account},
-     * {@code wechat_pay}, or {@code zip}.
+     * {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code swish}, {@code twint},
+     * {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
      */
     @SerializedName("type")
     String type;
@@ -2278,6 +2281,29 @@ public class ConfirmationToken extends ApiResource implements HasId {
       /** Two-letter ISO code representing the country the bank account is located in. */
       @SerializedName("country")
       String country;
+    }
+
+    /**
+     * For more details about StripeBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance extends StripeObject {
+      /** The connected account ID whose Stripe balance to use as the source of payment. */
+      @SerializedName("account")
+      String account;
+
+      /**
+       * The <a
+       * href="https://docs.stripe.com/api/balance/balance_object#balance_object-available-source_types">source_type</a>
+       * of the balance
+       *
+       * <p>One of {@code bank_account}, {@code card}, or {@code fpx}.
+       */
+      @SerializedName("source_type")
+      String sourceType;
     }
 
     /**

@@ -342,6 +342,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("sofort")
     Sofort sofort;
 
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
+
     /**
      * The type of the payment method used in the SetupIntent (e.g., {@code card}). An additional
      * hash is included on {@code payment_method_details} with a name matching this value. It
@@ -1115,6 +1118,15 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    /**
+     * For more details about StripeBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance extends StripeObject {}
 
     /**
      * For more details about UsBankAccount, please refer to the <a

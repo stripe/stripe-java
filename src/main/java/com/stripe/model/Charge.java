@@ -1307,6 +1307,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("stripe_account")
     StripeAccount stripeAccount;
 
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
+
     @SerializedName("swish")
     Swish swish;
 
@@ -3909,6 +3912,29 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeAccount extends StripeObject {}
+
+    /**
+     * For more details about StripeBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance extends StripeObject {
+      /** The connected account ID whose Stripe balance to use as the source of payment. */
+      @SerializedName("account")
+      String account;
+
+      /**
+       * The <a
+       * href="https://docs.stripe.com/api/balance/balance_object#balance_object-available-source_types">source_type</a>
+       * of the balance
+       *
+       * <p>One of {@code bank_account}, {@code card}, or {@code fpx}.
+       */
+      @SerializedName("source_type")
+      String sourceType;
+    }
 
     /**
      * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API

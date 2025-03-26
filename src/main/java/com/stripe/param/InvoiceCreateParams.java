@@ -4283,6 +4283,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("sofort")
       SOFORT("sofort"),
 
+      @SerializedName("stripe_balance")
+      STRIPE_BALANCE("stripe_balance"),
+
       @SerializedName("swish")
       SWISH("swish"),
 
