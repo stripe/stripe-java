@@ -2,7 +2,7 @@
 package com.stripe.service.v2.moneymanagement.outboundpayments;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.v2.OutboundPaymentQuote;
+import com.stripe.model.v2.moneymanagement.OutboundPaymentQuote;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;

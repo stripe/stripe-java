@@ -4,7 +4,7 @@ package com.stripe.service.v2.moneymanagement;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
-import com.stripe.model.v2.TransactionEntry;
+import com.stripe.model.v2.moneymanagement.TransactionEntry;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;

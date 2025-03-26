@@ -26,26 +26,6 @@ public final class EventDataClassLookup {
         com.stripe.model.v2.FinancialAddressGeneratedMicrodeposits.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.EventDestination.class);
-    classLookup.put("v2.money_management.adjustment", com.stripe.model.v2.Adjustment.class);
-    classLookup.put(
-        "v2.money_management.financial_account", com.stripe.model.v2.FinancialAccount.class);
-    classLookup.put(
-        "v2.money_management.financial_address", com.stripe.model.v2.FinancialAddress.class);
-    classLookup.put(
-        "v2.money_management.inbound_transfer", com.stripe.model.v2.InboundTransfer.class);
-    classLookup.put(
-        "v2.money_management.outbound_payment", com.stripe.model.v2.OutboundPayment.class);
-    classLookup.put(
-        "v2.money_management.outbound_payment_quote",
-        com.stripe.model.v2.OutboundPaymentQuote.class);
-    classLookup.put(
-        "v2.money_management.outbound_transfer", com.stripe.model.v2.OutboundTransfer.class);
-    classLookup.put(
-        "v2.money_management.received_credit", com.stripe.model.v2.ReceivedCredit.class);
-    classLookup.put("v2.money_management.received_debit", com.stripe.model.v2.ReceivedDebit.class);
-    classLookup.put("v2.money_management.transaction", com.stripe.model.v2.Transaction.class);
-    classLookup.put(
-        "v2.money_management.transaction_entry", com.stripe.model.v2.TransactionEntry.class);
 
     classLookup.put("v2.billing.meter_event", com.stripe.model.v2.billing.MeterEvent.class);
     classLookup.put(
@@ -55,6 +35,7 @@ public final class EventDataClassLookup {
         "v2.billing.meter_event_session", com.stripe.model.v2.billing.MeterEventSession.class);
 
     classLookup.put("v2.core.account", com.stripe.model.v2.core.Account.class);
+    classLookup.put("v2.core.account_link", com.stripe.model.v2.core.AccountLink.class);
     classLookup.put("v2.core.account_person", com.stripe.model.v2.core.Person.class);
 
     classLookup.put(
@@ -63,15 +44,48 @@ public final class EventDataClassLookup {
         "v2.core.vault.us_bank_account", com.stripe.model.v2.core.vault.UsBankAccount.class);
 
     classLookup.put(
+        "v2.money_management.adjustment", com.stripe.model.v2.moneymanagement.Adjustment.class);
+    classLookup.put(
+        "v2.money_management.financial_account",
+        com.stripe.model.v2.moneymanagement.FinancialAccount.class);
+    classLookup.put(
+        "v2.money_management.financial_address",
+        com.stripe.model.v2.moneymanagement.FinancialAddress.class);
+    classLookup.put(
+        "v2.money_management.inbound_transfer",
+        com.stripe.model.v2.moneymanagement.InboundTransfer.class);
+    classLookup.put(
+        "v2.money_management.outbound_payment",
+        com.stripe.model.v2.moneymanagement.OutboundPayment.class);
+    classLookup.put(
+        "v2.money_management.outbound_payment_quote",
+        com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class);
+    classLookup.put(
         "v2.money_management.outbound_setup_intent",
         com.stripe.model.v2.moneymanagement.OutboundSetupIntent.class);
+    classLookup.put(
+        "v2.money_management.outbound_transfer",
+        com.stripe.model.v2.moneymanagement.OutboundTransfer.class);
     classLookup.put(
         "v2.money_management.payout_method",
         com.stripe.model.v2.moneymanagement.PayoutMethod.class);
     classLookup.put(
         "v2.money_management.payout_methods_bank_account_spec",
         com.stripe.model.v2.moneymanagement.PayoutMethodsBankAccountSpec.class);
+    classLookup.put(
+        "v2.money_management.received_credit",
+        com.stripe.model.v2.moneymanagement.ReceivedCredit.class);
+    classLookup.put(
+        "v2.money_management.received_debit",
+        com.stripe.model.v2.moneymanagement.ReceivedDebit.class);
+    classLookup.put(
+        "v2.money_management.transaction", com.stripe.model.v2.moneymanagement.Transaction.class);
+    classLookup.put(
+        "v2.money_management.transaction_entry",
+        com.stripe.model.v2.moneymanagement.TransactionEntry.class);
 
+    eventClassLookup.put(
+        "v2.core.account_link.completed", com.stripe.events.V2CoreAccountLinkCompletedEvent.class);
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
         com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);

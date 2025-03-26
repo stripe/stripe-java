@@ -4,7 +4,7 @@ package com.stripe.events;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.Event;
-import com.stripe.model.v2.FinancialAddress;
+import com.stripe.model.v2.moneymanagement.FinancialAddress;
 import lombok.Getter;
 
 @Getter

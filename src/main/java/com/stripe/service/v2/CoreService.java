@@ -9,6 +9,10 @@ public final class CoreService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.v2.core.AccountLinkService accountLinks() {
+    return new com.stripe.service.v2.core.AccountLinkService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.AccountService accounts() {
     return new com.stripe.service.v2.core.AccountService(this.getResponseGetter());
   }
