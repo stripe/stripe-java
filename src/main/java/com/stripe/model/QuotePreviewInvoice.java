@@ -1242,7 +1242,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
 
       /** The subscription that generated this invoice. */
       @SerializedName("subscription")
-      String subscription;
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Subscription> subscription;
 
       /**
        * Only set for upcoming invoices that preview prorations. The time used to calculate
@@ -1250,6 +1252,25 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
        */
       @SerializedName("subscription_proration_date")
       Long subscriptionProrationDate;
+
+      /** Get ID of expandable {@code subscription} object. */
+      public String getSubscription() {
+        return (this.subscription != null) ? this.subscription.getId() : null;
+      }
+
+      public void setSubscription(String id) {
+        this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
+      }
+
+      /** Get expanded {@code subscription}. */
+      public Subscription getSubscriptionObject() {
+        return (this.subscription != null) ? this.subscription.getExpanded() : null;
+      }
+
+      public void setSubscriptionObject(Subscription expandableObject) {
+        this.subscription =
+            new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+      }
 
       /**
        * For more details about PauseCollection, please refer to the <a
