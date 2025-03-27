@@ -147,6 +147,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * Currency conversion details for <a
    * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a> sessions
+   * created before 2025-03-31.
    */
   @SerializedName("currency_conversion")
   CurrencyConversion currencyConversion;
