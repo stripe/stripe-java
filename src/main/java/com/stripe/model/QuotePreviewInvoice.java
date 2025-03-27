@@ -420,6 +420,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  /** The parent that generated this invoice. */
   @SerializedName("parent")
   Parent parent;
 

@@ -134,6 +134,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("object")
   String object;
 
+  /** The parent that generated this invoice. */
   @SerializedName("parent")
   Parent parent;
 

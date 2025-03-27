@@ -466,6 +466,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  /** The parent that generated this invoice. */
   @SerializedName("parent")
   Parent parent;
 
