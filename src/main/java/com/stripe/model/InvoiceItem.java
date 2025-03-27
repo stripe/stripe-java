@@ -123,6 +123,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("object")
   String object;
 
+  /** The parent that generated this invoice. */
   @SerializedName("parent")
   Parent parent;
 
@@ -476,9 +477,15 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
+    /** Details about the subscription that generated this invoice item. */
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
 
+    /**
+     * The type of parent that generated this invoice item
+     *
+     * <p>Equal to {@code subscription_details}.
+     */
     @SerializedName("type")
     String type;
 
@@ -490,9 +497,11 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionDetails extends StripeObject {
+      /** The subscription that generated this invoice item. */
       @SerializedName("subscription")
       String subscription;
 
+      /** The subscription item that generated this invoice item. */
       @SerializedName("subscription_item")
       String subscriptionItem;
     }

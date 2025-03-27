@@ -97,6 +97,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("object")
   String object;
 
+  /** The parent that generated this invoice. */
   @SerializedName("parent")
   Parent parent;
 
@@ -297,12 +298,19 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
+    /** Details about the invoice item that generated this line item. */
     @SerializedName("invoice_item_details")
     InvoiceItemDetails invoiceItemDetails;
 
+    /** Details about the subscription item that generated this line item. */
     @SerializedName("subscription_item_details")
     SubscriptionItemDetails subscriptionItemDetails;
 
+    /**
+     * The type of parent that generated this line item
+     *
+     * <p>One of {@code invoice_item_details}, or {@code subscription_item_details}.
+     */
     @SerializedName("type")
     String type;
 
@@ -314,6 +322,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class InvoiceItemDetails extends StripeObject {
+      /** The invoice item that generated this line item. */
       @SerializedName("invoice_item")
       String invoiceItem;
 
@@ -325,6 +334,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       @SerializedName("proration_details")
       ProrationDetails prorationDetails;
 
+      /** The subscription that the invoice item belongs to. */
       @SerializedName("subscription")
       String subscription;
 
@@ -370,6 +380,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionItemDetails extends StripeObject {
+      /** The invoice item that generated this line item. */
       @SerializedName("invoice_item")
       String invoiceItem;
 
@@ -381,9 +392,11 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       @SerializedName("proration_details")
       ProrationDetails prorationDetails;
 
+      /** The subscription that the subscription item belongs to. */
       @SerializedName("subscription")
       String subscription;
 
+      /** The subscription item that generated this line item. */
       @SerializedName("subscription_item")
       String subscriptionItem;
 

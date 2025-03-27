@@ -512,8 +512,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
-     * If this is a Satispay PaymentMethod, this hash contains details about the Satispay payment
-     * method.
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * payment method.
      */
     @SerializedName("satispay")
     Satispay satispay;
@@ -1306,8 +1306,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a Satispay PaymentMethod, this hash contains details about the Satispay payment
-       * method.
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * payment method.
        */
       public Builder setSatispay(
           ConfirmationTokenCreateParams.PaymentMethodData.Satispay satispay) {

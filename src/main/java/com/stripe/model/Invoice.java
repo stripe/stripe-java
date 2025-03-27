@@ -446,6 +446,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  /** The parent that generated this invoice. */
   @SerializedName("parent")
   Parent parent;
 
@@ -2090,12 +2091,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
+    /** Details about the quote that generated this invoice. */
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
 
+    /** Details about the subscription that generated this invoice. */
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
 
+    /**
+     * The type of parent that generated this invoice
+     *
+     * <p>One of {@code quote_details}, or {@code subscription_details}.
+     */
     @SerializedName("type")
     String type;
 
@@ -2107,6 +2115,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class QuoteDetails extends StripeObject {
+      /** The quote that generated this invoice. */
       @SerializedName("quote")
       String quote;
     }
@@ -2119,14 +2128,46 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionDetails extends StripeObject {
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> defined as
+       * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
+       * subscription metadata at the time of invoice finalization. <em>Note: This attribute is
+       * populated only for invoices created on or after June 29, 2023.</em>
+       */
       @SerializedName("metadata")
       Map<String, String> metadata;
 
+      /** The subscription that generated this invoice. */
       @SerializedName("subscription")
-      String subscription;
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Subscription> subscription;
 
+      /**
+       * Only set for upcoming invoices that preview prorations. The time used to calculate
+       * prorations.
+       */
       @SerializedName("subscription_proration_date")
       Long subscriptionProrationDate;
+
+      /** Get ID of expandable {@code subscription} object. */
+      public String getSubscription() {
+        return (this.subscription != null) ? this.subscription.getId() : null;
+      }
+
+      public void setSubscription(String id) {
+        this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
+      }
+
+      /** Get expanded {@code subscription}. */
+      public Subscription getSubscriptionObject() {
+        return (this.subscription != null) ? this.subscription.getExpanded() : null;
+      }
+
+      public void setSubscriptionObject(Subscription expandableObject) {
+        this.subscription =
+            new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+      }
     }
   }
 

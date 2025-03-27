@@ -35,6 +35,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The identifier of the invoice whose payments to return. */
   @SerializedName("invoice")
   String invoice;
 
@@ -45,6 +46,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** The payment details of the invoice payments to return. */
   @SerializedName("payment")
   Payment payment;
 
@@ -57,6 +59,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /** The status of the invoice payments to return. */
   @SerializedName("status")
   Status status;
 
@@ -176,6 +179,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
       return this;
     }
 
+    /** The identifier of the invoice whose payments to return. */
     public Builder setInvoice(String invoice) {
       this.invoice = invoice;
       return this;
@@ -190,6 +194,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
       return this;
     }
 
+    /** The payment details of the invoice payments to return. */
     public Builder setPayment(InvoicePaymentListParams.Payment payment) {
       this.payment = payment;
       return this;
@@ -206,6 +211,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
       return this;
     }
 
+    /** The status of the invoice payments to return. */
     public Builder setStatus(InvoicePaymentListParams.Status status) {
       this.status = status;
       return this;
@@ -224,10 +230,11 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Only return invoice payments associated by this payment intent ID. */
     @SerializedName("payment_intent")
     String paymentIntent;
 
-    /** <strong>Required.</strong> */
+    /** <strong>Required.</strong> Only return invoice payments associated by this payment type. */
     @SerializedName("type")
     Type type;
 
@@ -280,12 +287,15 @@ public class InvoicePaymentListParams extends ApiRequestParams {
         return this;
       }
 
+      /** Only return invoice payments associated by this payment intent ID. */
       public Builder setPaymentIntent(String paymentIntent) {
         this.paymentIntent = paymentIntent;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Only return invoice payments associated by this payment type.
+       */
       public Builder setType(InvoicePaymentListParams.Payment.Type type) {
         this.type = type;
         return this;
