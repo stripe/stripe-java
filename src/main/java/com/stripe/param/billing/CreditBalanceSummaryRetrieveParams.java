@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
+  /** The customer for which to fetch credit balance summary. */
   @SerializedName("customer")
   String customer;
 
@@ -72,7 +72,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
           this.customer, this.customerAccount, this.expand, this.extraParams, this.filter);
     }
 
-    /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
+    /** The customer for which to fetch credit balance summary. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

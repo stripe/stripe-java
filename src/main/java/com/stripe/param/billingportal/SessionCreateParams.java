@@ -22,7 +22,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("configuration")
   String configuration;
 
-  /** <strong>Required.</strong> The ID of an existing customer. */
+  /** The ID of an existing customer. */
   @SerializedName("customer")
   String customer;
 
@@ -147,7 +147,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of an existing customer. */
+    /** The ID of an existing customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

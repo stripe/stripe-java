@@ -325,6 +325,48 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
    * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
    */
+  public PaymentMethod attach() throws StripeException {
+    return attach((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
+   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * future payments</a> for more information about setting up future payments.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
+   */
+  public PaymentMethod attach(RequestOptions options) throws StripeException {
+    return attach((Map<String, Object>) null, options);
+  }
+
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
+   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * future payments</a> for more information about setting up future payments.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
+   */
   public PaymentMethod attach(Map<String, Object> params) throws StripeException {
     return attach(params, (RequestOptions) null);
   }

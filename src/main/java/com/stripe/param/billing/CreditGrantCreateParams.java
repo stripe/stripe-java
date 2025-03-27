@@ -29,7 +29,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("category")
   Category category;
 
-  /** <strong>Required.</strong> ID of the customer to receive the billing credits. */
+  /** ID of the customer to receive the billing credits. */
   @SerializedName("customer")
   String customer;
 
@@ -177,7 +177,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> ID of the customer to receive the billing credits. */
+    /** ID of the customer to receive the billing credits. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

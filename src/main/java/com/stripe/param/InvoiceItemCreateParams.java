@@ -30,10 +30,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /**
-   * <strong>Required.</strong> The ID of the customer who will be billed when this invoice item is
-   * billed.
-   */
+  /** The ID of the customer who will be billed when this invoice item is billed. */
   @SerializedName("customer")
   String customer;
 
@@ -304,10 +301,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * <strong>Required.</strong> The ID of the customer who will be billed when this invoice item
-     * is billed.
-     */
+    /** The ID of the customer who will be billed when this invoice item is billed. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

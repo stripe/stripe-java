@@ -99,7 +99,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /** <strong>Required.</strong> The identifier of the customer to subscribe. */
+  /** The identifier of the customer to subscribe. */
   @SerializedName("customer")
   String customer;
 
@@ -626,7 +626,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The identifier of the customer to subscribe. */
+    /** The identifier of the customer to subscribe. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentMethodAttachParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The ID of the customer to which to attach the PaymentMethod. */
+  /** The ID of the customer to which to attach the PaymentMethod. */
   @SerializedName("customer")
   String customer;
 
@@ -64,7 +64,7 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
           this.customer, this.customerAccount, this.expand, this.extraParams);
     }
 
-    /** <strong>Required.</strong> The ID of the customer to which to attach the PaymentMethod. */
+    /** The ID of the customer to which to attach the PaymentMethod. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
