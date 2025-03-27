@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class MeterCreateParams extends ApiRequestParams {
   /** Fields that specify how to map a meter event to a customer. */
   @SerializedName("customer_mapping")
@@ -197,6 +199,7 @@ public class MeterCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerMapping {
     /**
      * <strong>Required.</strong> The key in the meter event payload to use for mapping the event to
@@ -303,6 +306,7 @@ public class MeterCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class DefaultAggregation {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -315,7 +319,8 @@ public class MeterCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Specifies how events are aggregated. Allowed values are {@code
-     * count} to count the number of events and {@code sum} to sum each event's value.
+     * count} to count the number of events, {@code sum} to sum each event's value and {@code last}
+     * to take the last event's value in the window.
      */
     @SerializedName("formula")
     Formula formula;
@@ -367,7 +372,8 @@ public class MeterCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Specifies how events are aggregated. Allowed values are {@code
-       * count} to count the number of events and {@code sum} to sum each event's value.
+       * count} to count the number of events, {@code sum} to sum each event's value and {@code
+       * last} to take the last event's value in the window.
        */
       public Builder setFormula(MeterCreateParams.DefaultAggregation.Formula formula) {
         this.formula = formula;
@@ -378,6 +384,9 @@ public class MeterCreateParams extends ApiRequestParams {
     public enum Formula implements ApiRequestParams.EnumParam {
       @SerializedName("count")
       COUNT("count"),
+
+      @SerializedName("last")
+      LAST("last"),
 
       @SerializedName("sum")
       SUM("sum");
@@ -392,6 +401,7 @@ public class MeterCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ValueSettings {
     /**
      * <strong>Required.</strong> The key in the usage event payload to use as the value for this

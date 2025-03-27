@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CustomerSessionCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Configuration for each component. Exactly 1 component must be
@@ -24,6 +26,10 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
    */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of an existing Account for which to create the Customer Session. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -41,10 +47,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   private CustomerSessionCreateParams(
       Components components,
       String customer,
+      String customerAccount,
       List<String> expand,
       Map<String, Object> extraParams) {
     this.components = components;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -58,6 +66,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -65,7 +75,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerSessionCreateParams build() {
       return new CustomerSessionCreateParams(
-          this.components, this.customer, this.expand, this.extraParams);
+          this.components, this.customer, this.customerAccount, this.expand, this.extraParams);
     }
 
     /**
@@ -83,6 +93,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of an existing Account for which to create the Customer Session. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -140,6 +156,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Components {
     /** Configuration for buy button. */
     @SerializedName("buy_button")
@@ -240,6 +257,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BuyButton {
       /** <strong>Required.</strong> Whether the buy button is enabled. */
       @SerializedName("enabled")
@@ -311,6 +329,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaymentElement {
       /** <strong>Required.</strong> Whether the Payment Element is enabled. */
       @SerializedName("enabled")
@@ -395,6 +414,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -754,6 +774,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PricingTable {
       /** <strong>Required.</strong> Whether the pricing table is enabled. */
       @SerializedName("enabled")

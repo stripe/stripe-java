@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The updated total amount that you intend to collect from the
@@ -23,7 +25,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
   /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
-   * collected will be capped at the total payment amount. For more information, see the
+   * collected will be capped at the total amount captured. For more information, see the
    * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
@@ -134,7 +136,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
     /**
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
-     * application fee collected will be capped at the total payment amount. For more information,
+     * application fee collected will be capped at the total amount captured. For more information,
      * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
      * for connected accounts</a>.
      */
@@ -248,6 +250,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AsyncWorkflows {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -319,6 +322,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Inputs {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -392,6 +396,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Tax {
         /**
          * <strong>Required.</strong> The <a
@@ -483,6 +488,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ConfigurationListParams extends ApiRequestParams {
   /**
    * Only return configurations that are active or inactive (e.g., pass {@code true} to only list

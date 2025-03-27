@@ -7,7 +7,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.SubscriptionItem;
 import com.stripe.model.SubscriptionItemCollection;
-import com.stripe.model.UsageRecordSummaryCollection;
 import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,21 +84,5 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
     assertNotNull(subscriptionItems);
     verifyRequest(ApiResource.RequestMethod.GET, "/v1/subscription_items", params);
-  }
-
-  @Test
-  public void testUsageRecordSummaries() throws StripeException {
-    final SubscriptionItem subscriptionItem = getItemFixture();
-
-    final Map<String, Object> params = new HashMap<>();
-    params.put("limit", 1);
-
-    final UsageRecordSummaryCollection summaries = subscriptionItem.usageRecordSummaries(params);
-
-    assertNotNull(summaries);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/subscription_items/%s/usage_record_summaries", subscriptionItem.getId()),
-        params);
   }
 }

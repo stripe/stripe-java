@@ -436,7 +436,7 @@ public class Meter extends ApiResource implements HasId {
     /**
      * Specifies how events are aggregated.
      *
-     * <p>One of {@code count}, or {@code sum}.
+     * <p>One of {@code count}, {@code last}, or {@code sum}.
      */
     @SerializedName("formula")
     String formula;

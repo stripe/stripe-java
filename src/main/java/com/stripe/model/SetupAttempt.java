@@ -60,6 +60,14 @@ public class SetupAttempt extends ApiResource implements HasId {
   ExpandableField<Customer> customer;
 
   /**
+   * The value of <a
+   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-customer_account">customer_account</a>
+   * on the SetupIntent at the time of this confirmation.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * Indicates the directions of money movement for which this payment method is intended to be
    * used.
    *
@@ -313,6 +321,12 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("link")
     Link link;
 
+    @SerializedName("naver_pay")
+    NaverPay naverPay;
+
+    @SerializedName("nz_bank_account")
+    NzBankAccount nzBankAccount;
+
     @SerializedName("paypal")
     Paypal paypal;
 
@@ -327,6 +341,9 @@ public class SetupAttempt extends ApiResource implements HasId {
 
     @SerializedName("sofort")
     Sofort sofort;
+
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
 
     /**
      * The type of the payment method used in the SetupIntent (e.g., {@code card}). An additional
@@ -945,6 +962,31 @@ public class SetupAttempt extends ApiResource implements HasId {
     public static class Link extends StripeObject {}
 
     /**
+     * For more details about NaverPay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NaverPay extends StripeObject {
+      /**
+       * Uniquely identifies this particular Naver Pay account. You can use this attribute to check
+       * whether two Naver Pay accounts are the same.
+       */
+      @SerializedName("buyer_id")
+      String buyerId;
+    }
+
+    /**
+     * For more details about NzBankAccount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccount extends StripeObject {}
+
+    /**
      * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1076,6 +1118,15 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    /**
+     * For more details about StripeBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance extends StripeObject {}
 
     /**
      * For more details about UsBankAccount, please refer to the <a

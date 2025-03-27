@@ -7,13 +7,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
   @SerializedName("customer")
   String customer;
+
+  /** The account for which to fetch credit balance summary. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -33,8 +39,13 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   Filter filter;
 
   private CreditBalanceSummaryRetrieveParams(
-      String customer, List<String> expand, Map<String, Object> extraParams, Filter filter) {
+      String customer,
+      String customerAccount,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Filter filter) {
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
     this.filter = filter;
@@ -47,6 +58,8 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   public static class Builder {
     private String customer;
 
+    private String customerAccount;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -56,12 +69,18 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CreditBalanceSummaryRetrieveParams build() {
       return new CreditBalanceSummaryRetrieveParams(
-          this.customer, this.expand, this.extraParams, this.filter);
+          this.customer, this.customerAccount, this.expand, this.extraParams, this.filter);
     }
 
     /** <strong>Required.</strong> The customer for which to fetch credit balance summary. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The account for which to fetch credit balance summary. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -125,6 +144,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Filter {
     /** The billing credit applicability scope for which to fetch credit balance summary. */
     @SerializedName("applicability_scope")
@@ -225,6 +245,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ApplicabilityScope {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -237,14 +258,14 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
 
       /**
        * The price type that credit grants can apply to. We currently only support the {@code
-       * metered} price type.
+       * metered} price type. Cannot be used in combination with {@code prices}.
        */
       @SerializedName("price_type")
       PriceType priceType;
 
       /**
        * A list of prices that the credit grant can apply to. We currently only support the {@code
-       * metered} prices.
+       * metered} prices. Cannot be used in combination with {@code price_type}.
        */
       @SerializedName("prices")
       List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.Price> prices;
@@ -305,7 +326,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
 
         /**
          * The price type that credit grants can apply to. We currently only support the {@code
-         * metered} price type.
+         * metered} price type. Cannot be used in combination with {@code prices}.
          */
         public Builder setPriceType(
             CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.PriceType priceType) {
@@ -345,6 +366,7 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Price {
         /**
          * Map of extra parameters for custom features not available in this client library. The

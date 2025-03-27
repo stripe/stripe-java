@@ -50,15 +50,15 @@ public final class FinancialAccountService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<FinancialAccount>>() {}.getType());
   }
   /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
+   * Creates a new FinancialAccount. Each connected account can have up to three FinancialAccounts
+   * by default.
    */
   public FinancialAccount create(FinancialAccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Creates a new FinancialAccount. For now, each connected account can only have one
-   * FinancialAccount.
+   * Creates a new FinancialAccount. Each connected account can have up to three FinancialAccounts
+   * by default.
    */
   public FinancialAccount create(FinancialAccountCreateParams params, RequestOptions options)
       throws StripeException {

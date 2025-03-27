@@ -7,13 +7,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class QuoteListParams extends ApiRequestParams {
   /** The ID of the customer whose quotes will be retrieved. */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of the account whose quotes will be retrieved. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -70,6 +76,7 @@ public class QuoteListParams extends ApiRequestParams {
 
   private QuoteListParams(
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -79,6 +86,7 @@ public class QuoteListParams extends ApiRequestParams {
       Status status,
       String testClock) {
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -95,6 +103,8 @@ public class QuoteListParams extends ApiRequestParams {
 
   public static class Builder {
     private String customer;
+
+    private String customerAccount;
 
     private String endingBefore;
 
@@ -116,6 +126,7 @@ public class QuoteListParams extends ApiRequestParams {
     public QuoteListParams build() {
       return new QuoteListParams(
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -129,6 +140,12 @@ public class QuoteListParams extends ApiRequestParams {
     /** The ID of the customer whose quotes will be retrieved. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of the account whose quotes will be retrieved. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

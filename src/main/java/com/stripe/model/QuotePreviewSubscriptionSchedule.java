@@ -74,6 +74,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account who owns the subscription schedule. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   @SerializedName("default_settings")
   DefaultSettings defaultSettings;
 
@@ -356,13 +360,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     String billingCycleAnchor;
 
     /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period.
-     */
-    @SerializedName("billing_thresholds")
-    BillingThresholds billingThresholds;
-
-    /**
      * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
      * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
      * the default source attached to the customer. When sending an invoice, Stripe will email your
@@ -515,29 +512,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
           this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
         }
       }
-    }
-
-    /**
-     * For more details about BillingThresholds, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillingThresholds extends StripeObject {
-      /** Monetary threshold that triggers the subscription to create an invoice. */
-      @SerializedName("amount_gte")
-      Long amountGte;
-
-      /**
-       * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached.
-       * If true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was
-       * last reached; otherwise, the value will remain unchanged. This value may not be {@code
-       * true} if the subscription contains items with plans that have {@code
-       * aggregate_usage=last_ever}.
-       */
-      @SerializedName("reset_billing_cycle_anchor")
-      Boolean resetBillingCycleAnchor;
     }
 
     /**
@@ -776,13 +750,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     String billingCycleAnchor;
 
     /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period.
-     */
-    @SerializedName("billing_thresholds")
-    BillingThresholds billingThresholds;
-
-    /**
      * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
      * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
      * the default source attached to the customer. When sending an invoice, Stripe will email your
@@ -792,12 +759,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
      */
     @SerializedName("collection_method")
     String collectionMethod;
-
-    /** ID of the coupon to use during this phase of the subscription schedule. */
-    @SerializedName("coupon")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Coupon> coupon;
 
     /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
@@ -917,24 +878,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     /** Settings related to any trials on the subscription during this phase. */
     @SerializedName("trial_settings")
     TrialSettings trialSettings;
-
-    /** Get ID of expandable {@code coupon} object. */
-    public String getCoupon() {
-      return (this.coupon != null) ? this.coupon.getId() : null;
-    }
-
-    public void setCoupon(String id) {
-      this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
-    }
-
-    /** Get expanded {@code coupon}. */
-    public Coupon getCouponObject() {
-      return (this.coupon != null) ? this.coupon.getExpanded() : null;
-    }
-
-    public void setCouponObject(Coupon expandableObject) {
-      this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
-    }
 
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
@@ -1201,29 +1144,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     }
 
     /**
-     * For more details about BillingThresholds, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillingThresholds extends StripeObject {
-      /** Monetary threshold that triggers the subscription to create an invoice. */
-      @SerializedName("amount_gte")
-      Long amountGte;
-
-      /**
-       * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached.
-       * If true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was
-       * last reached; otherwise, the value will remain unchanged. This value may not be {@code
-       * true} if the subscription contains items with plans that have {@code
-       * aggregate_usage=last_ever}.
-       */
-      @SerializedName("reset_billing_cycle_anchor")
-      Boolean resetBillingCycleAnchor;
-    }
-
-    /**
      * For more details about Discount, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1454,13 +1374,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @EqualsAndHashCode(callSuper = false)
     public static class Item extends StripeObject {
       /**
-       * Define thresholds at which an invoice will be sent, and the related subscription advanced
-       * to a new billing period.
-       */
-      @SerializedName("billing_thresholds")
-      BillingThresholds billingThresholds;
-
-      /**
        * The discounts applied to the subscription item. Subscription item discounts are applied
        * before subscription discounts. Use {@code expand[]=discounts} to expand each discount.
        */
@@ -1536,19 +1449,6 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
 
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
-      }
-
-      /**
-       * For more details about BillingThresholds, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillingThresholds extends StripeObject {
-        /** Usage threshold that triggers the subscription to create an invoice. */
-        @SerializedName("usage_gte")
-        Long usageGte;
       }
 
       /**

@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   /** Changes to apply to the phases of the subscription schedule, in the order provided. */
   @SerializedName("amendments")
@@ -224,6 +226,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Amendment {
     /**
      * Details to identify the end of the time range modified by the proposed change. If not
@@ -562,6 +565,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AmendmentEnd {
       /** Use the {@code end} time of a given discount. */
       @SerializedName("discount_end")
@@ -686,6 +690,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DiscountEnd {
         /** <strong>Required.</strong> The ID of a specific discount. */
         @SerializedName("discount")
@@ -760,6 +765,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Duration {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -912,6 +918,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AmendmentStart {
       /**
        * Details of another amendment in the same array, immediately after which this amendment
@@ -1038,6 +1045,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AmendmentEnd {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1120,6 +1128,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DiscountEnd {
         /** <strong>Required.</strong> The ID of a specific discount. */
         @SerializedName("discount")
@@ -1228,6 +1237,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DiscountAction {
       /** Details of the discount to add. */
       @SerializedName("add")
@@ -1339,6 +1349,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Add {
         /** The coupon code to redeem. */
         @SerializedName("coupon")
@@ -1483,6 +1494,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class DiscountEnd {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1579,6 +1591,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Remove {
         /** The coupon code to remove from the {@code discounts} array. */
         @SerializedName("coupon")
@@ -1680,6 +1693,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Set {
         /** The coupon code to replace the {@code discounts} array with. */
         @SerializedName("coupon")
@@ -1800,6 +1814,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ItemAction {
       /**
        * Details of the subscription item to add. If an item with the same {@code price} exists, it
@@ -1927,6 +1942,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Add {
         /**
          * The discounts applied to the item. Subscription item discounts are applied before
@@ -2156,6 +2172,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Discount {
           /** ID of the coupon to create a new discount for. */
           @SerializedName("coupon")
@@ -2279,6 +2296,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class DiscountEnd {
             /** Time span for the redeemed discount. */
             @SerializedName("duration")
@@ -2391,6 +2409,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class Duration {
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -2534,6 +2553,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Trial {
           /**
            * List of price IDs which, if present on the subscription following a paid trial,
@@ -2664,6 +2684,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Remove {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2738,6 +2759,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Set {
         /**
          * If an item with the {@code price} already exists, passing this will override the {@code
@@ -2988,6 +3010,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Discount {
           /** ID of the coupon to create a new discount for. */
           @SerializedName("coupon")
@@ -3111,6 +3134,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class DiscountEnd {
             /** Time span for the redeemed discount. */
             @SerializedName("duration")
@@ -3223,6 +3247,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class Duration {
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -3366,6 +3391,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Trial {
           /**
            * List of price IDs which, if present on the subscription following a paid trial,
@@ -3515,6 +3541,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MetadataAction {
       /**
        * Key-value pairs to add to schedule phase metadata. These values will merge with existing
@@ -3746,6 +3773,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SetPauseCollection {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3831,6 +3859,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Set {
         /**
          * <strong>Required.</strong> The payment collection behavior for this subscription while
@@ -3946,6 +3975,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TrialSettings {
       /** Defines how the subscription should behave when a trial ends. */
       @SerializedName("end_behavior")
@@ -4017,6 +4047,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class EndBehavior {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4164,6 +4195,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Prebilling {
     /** The beginning of the prebilled time period. The default value is {@code now}. */
     @SerializedName("bill_from")
@@ -4284,6 +4316,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BillFrom {
       /** Start the prebilled period when a specified amendment begins. */
       @SerializedName("amendment_start")
@@ -4394,6 +4427,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AmendmentStart {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4495,6 +4529,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BillUntil {
       /** End the prebilled period when a specified amendment ends. */
       @SerializedName("amendment_end")
@@ -4618,6 +4653,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AmendmentEnd {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4700,6 +4736,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Duration {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4871,6 +4908,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ScheduleSettings {
     /** Behavior of the subscription schedule and underlying subscription when it ends. */
     @SerializedName("end_behavior")

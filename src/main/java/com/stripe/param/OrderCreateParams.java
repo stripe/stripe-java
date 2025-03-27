@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class OrderCreateParams extends ApiRequestParams {
   /** Settings for automatic tax calculation for this order. */
   @SerializedName("automatic_tax")
@@ -464,6 +466,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticTax {
     /**
      * <strong>Required.</strong> Enable automatic tax calculation which will automatically compute
@@ -538,6 +541,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BillingDetails {
     /** The billing address provided by the customer. */
     @SerializedName("address")
@@ -646,6 +650,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -808,6 +813,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Credit {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -907,6 +913,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -1003,6 +1010,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class LineItem {
     /** The description for the line item. Will default to the name of the associated product. */
     @SerializedName("description")
@@ -1022,7 +1030,7 @@ public class OrderCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The ID of a <a href="https://stripe.com/docs/api/prices">Price</a> to add to the Order.
+     * The ID of a <a href="https://docs.stripe.com/api/prices">Price</a> to add to the Order.
      *
      * <p>The {@code price} parameter is an alternative to using the {@code product} parameter. If
      * each of your products are sold at a single price, you can set {@code Product.default_price}
@@ -1037,28 +1045,29 @@ public class OrderCreateParams extends ApiRequestParams {
      * Data used to generate a new Price object inline.
      *
      * <p>The {@code price_data} parameter is an alternative to using the {@code product} or {@code
-     * price} parameters. If you create products upfront and configure a {@code
+     * price} parameters. If you create a Product upfront and configure a {@code
      * Product.default_price}, pass the {@code product} parameter when creating a line item. If you
-     * prefer not to define products upfront, or if you charge variable prices, pass the {@code
+     * prefer not to define Products upfront, or if you charge variable prices, pass the {@code
      * price_data} parameter to describe the price for this line item.
      *
-     * <p>Each time you pass {@code price_data} we create a Price for the product. This Price is
+     * <p>Each time you pass {@code price_data} we create a Price for the Product. This Price is
      * hidden in both the Dashboard and API lists and cannot be reused.
      */
     @SerializedName("price_data")
     PriceData priceData;
 
     /**
-     * The ID of a <a href="https://stripe.com/docs/api/products">Product</a> to add to the Order.
+     * The ID of a <a href="https://docs.stripe.com/api/products">Product</a> to add to the Order.
      *
-     * <p>The product must have a {@code default_price} specified. Otherwise, specify the price by
+     * <p>The Product must have a {@code default_price} specified. Otherwise, specify the price by
      * passing the {@code price} or {@code price_data} parameter.
      */
     @SerializedName("product")
     String product;
 
     /**
-     * Defines a Product inline and adds it to the Order.
+     * Defines a <a href="https://docs.stripe.com/api/products">Product</a> inline and adds it to
+     * the Order.
      *
      * <p>{@code product_data} is an alternative to the {@code product} parameter. If you created a
      * Product upfront, use the {@code product} parameter to refer to the existing Product. But if
@@ -1211,7 +1220,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of a <a href="https://stripe.com/docs/api/prices">Price</a> to add to the Order.
+       * The ID of a <a href="https://docs.stripe.com/api/prices">Price</a> to add to the Order.
        *
        * <p>The {@code price} parameter is an alternative to using the {@code product} parameter. If
        * each of your products are sold at a single price, you can set {@code Product.default_price}
@@ -1228,12 +1237,12 @@ public class OrderCreateParams extends ApiRequestParams {
        * Data used to generate a new Price object inline.
        *
        * <p>The {@code price_data} parameter is an alternative to using the {@code product} or
-       * {@code price} parameters. If you create products upfront and configure a {@code
+       * {@code price} parameters. If you create a Product upfront and configure a {@code
        * Product.default_price}, pass the {@code product} parameter when creating a line item. If
-       * you prefer not to define products upfront, or if you charge variable prices, pass the
+       * you prefer not to define Products upfront, or if you charge variable prices, pass the
        * {@code price_data} parameter to describe the price for this line item.
        *
-       * <p>Each time you pass {@code price_data} we create a Price for the product. This Price is
+       * <p>Each time you pass {@code price_data} we create a Price for the Product. This Price is
        * hidden in both the Dashboard and API lists and cannot be reused.
        */
       public Builder setPriceData(OrderCreateParams.LineItem.PriceData priceData) {
@@ -1242,9 +1251,9 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of a <a href="https://stripe.com/docs/api/products">Product</a> to add to the Order.
+       * The ID of a <a href="https://docs.stripe.com/api/products">Product</a> to add to the Order.
        *
-       * <p>The product must have a {@code default_price} specified. Otherwise, specify the price by
+       * <p>The Product must have a {@code default_price} specified. Otherwise, specify the price by
        * passing the {@code price} or {@code price_data} parameter.
        */
       public Builder setProduct(String product) {
@@ -1253,7 +1262,8 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Defines a Product inline and adds it to the Order.
+       * Defines a <a href="https://docs.stripe.com/api/products">Product</a> inline and adds it to
+       * the Order.
        *
        * <p>{@code product_data} is an alternative to the {@code product} parameter. If you created
        * a Product upfront, use the {@code product} parameter to refer to the existing Product. But
@@ -1317,6 +1327,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Discount {
       /** ID of the coupon to create a new discount for. */
       @SerializedName("coupon")
@@ -1401,6 +1412,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PriceData {
       /**
        * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
@@ -1420,7 +1432,8 @@ public class OrderCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * ID of the product this price belongs to.
+       * ID of the <a href="https://docs.stripe.com/api/products">Product</a> this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> belongs to.
        *
        * <p>Use this to implement a variable-pricing model in your integration. This is required if
        * {@code product_data} is not specified.
@@ -1536,7 +1549,8 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * ID of the product this price belongs to.
+         * ID of the <a href="https://docs.stripe.com/api/products">Product</a> this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> belongs to.
          *
          * <p>Use this to implement a variable-pricing model in your integration. This is required
          * if {@code product_data} is not specified.
@@ -1600,6 +1614,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ProductData {
       /**
        * The product's description, meant to be displayable to the customer. Use this field to
@@ -1942,6 +1957,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class PackageDimensions {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2066,6 +2082,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Payment {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -2139,6 +2156,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Settings {
       /**
        * The amount of the application fee (if any) that will be requested to be applied to the
@@ -2355,6 +2373,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class PaymentMethodOptions {
         /**
          * If paying by {@code acss_debit}, this sub-hash contains details about the ACSS Debit
@@ -2745,6 +2764,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class AcssDebit {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -2955,6 +2975,7 @@ public class OrderCreateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class MandateOptions {
             /**
              * A URL for custom mandate text to render during confirmation step. The URL will be
@@ -3185,6 +3206,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class AfterpayClearpay {
           /**
            * Controls when the funds are captured from the customer's account.
@@ -3391,6 +3413,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Alipay {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -3558,6 +3581,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Bancontact {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -3769,6 +3793,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Card {
           /** Controls when the funds will be captured from the customer's account. */
           @SerializedName("capture_method")
@@ -3937,6 +3962,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class CustomerBalance {
           /**
            * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
@@ -4105,6 +4131,7 @@ public class OrderCreateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class BankTransfer {
             /** Configuration for the eu_bank_transfer funding type. */
             @SerializedName("eu_bank_transfer")
@@ -4273,6 +4300,7 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class EuBankTransfer {
               /**
                * <strong>Required.</strong> The desired country code of the bank account
@@ -4437,6 +4465,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Ideal {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -4604,6 +4633,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Klarna {
           /**
            * Controls when the funds are captured from the customer's account.
@@ -4974,6 +5004,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Link {
           /**
            * Controls when the funds are captured from the customer's account.
@@ -5224,6 +5255,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Oxxo {
           /**
            * The number of calendar days before an OXXO voucher expires. For example, if you create
@@ -5382,6 +5414,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class P24 {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -5532,6 +5565,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Paypal {
           /** Controls when the funds will be captured from the customer's account. */
           @SerializedName("capture_method")
@@ -5883,6 +5917,7 @@ public class OrderCreateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class LineItem {
             /** Type of the line item. */
             @SerializedName("category")
@@ -6076,6 +6111,7 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             @Getter
+            @EqualsAndHashCode(callSuper = false)
             public static class Tax {
               /**
                * <strong>Required.</strong> The tax for a single unit of the line item in minor
@@ -6307,6 +6343,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class SepaDebit {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -6497,6 +6534,7 @@ public class OrderCreateParams extends ApiRequestParams {
           }
 
           @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class MandateOptions {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -6610,6 +6648,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Sofort {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -6830,12 +6869,13 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class WechatPay {
           /** The app ID registered with WeChat Pay. Only required when client is ios or android. */
           @SerializedName("app_id")
           String appId;
 
-          /** <strong>Required.</strong> The client type that the end customer will pay from */
+          /** The client type that the end customer will pay from. */
           @SerializedName("client")
           Client client;
 
@@ -6914,7 +6954,7 @@ public class OrderCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** <strong>Required.</strong> The client type that the end customer will pay from */
+            /** The client type that the end customer will pay from. */
             public Builder setClient(
                 OrderCreateParams.Payment.Settings.PaymentMethodOptions.WechatPay.Client client) {
               this.client = client;
@@ -7016,6 +7056,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class TransferData {
         /**
          * The amount that will be transferred automatically when the order is paid. If no amount is
@@ -7183,6 +7224,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -7266,6 +7308,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShippingRateData {
       /**
        * The estimated range for how long shipping will take, meant to be displayable to the
@@ -7488,6 +7531,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DeliveryEstimate {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7583,6 +7627,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Maximum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -7697,6 +7742,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Minimum {
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -7812,6 +7858,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class FixedAmount {
         /**
          * <strong>Required.</strong> A non-negative integer in cents representing how much to
@@ -7969,6 +8016,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class CurrencyOption {
           /**
            * <strong>Required.</strong> A non-negative integer in cents representing how much to
@@ -8124,6 +8172,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ShippingDetails {
     /** <strong>Required.</strong> The shipping address for the order. */
     @SerializedName("address")
@@ -8225,6 +8274,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -8387,6 +8437,7 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TaxDetails {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -8505,6 +8556,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxId {
       /**
        * Map of extra parameters for custom features not available in this client library. The

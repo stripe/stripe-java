@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditUnderwritingRecordCreateFromApplicationParams extends ApiRequestParams {
   /** <strong>Required.</strong> Details about the application submission. */
   @SerializedName("application")
@@ -177,6 +179,7 @@ public class CreditUnderwritingRecordCreateFromApplicationParams extends ApiRequ
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Application {
     /**
      * The channel through which the applicant has submitted their application. Defaults to {@code
@@ -323,6 +326,7 @@ public class CreditUnderwritingRecordCreateFromApplicationParams extends ApiRequ
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CreditUser {
     /** <strong>Required.</strong> Email of the applicant or accountholder. */
     @SerializedName("email")

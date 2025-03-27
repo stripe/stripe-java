@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditBalanceTransactionListParams extends ApiRequestParams {
   /** The credit grant for which to fetch credit balance transactions. */
   @SerializedName("credit_grant")
@@ -18,6 +20,10 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
   /** <strong>Required.</strong> The customer for which to fetch credit balance transactions. */
   @SerializedName("customer")
   String customer;
+
+  /** The account for which to fetch credit balance transactions. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -60,6 +66,7 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
   private CreditBalanceTransactionListParams(
       String creditGrant,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -67,6 +74,7 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
       String startingAfter) {
     this.creditGrant = creditGrant;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -83,6 +91,8 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -98,6 +108,7 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
       return new CreditBalanceTransactionListParams(
           this.creditGrant,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -114,6 +125,12 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
     /** <strong>Required.</strong> The customer for which to fetch credit balance transactions. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The account for which to fetch credit balance transactions. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

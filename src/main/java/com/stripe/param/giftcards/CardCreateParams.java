@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CardCreateParams extends ApiRequestParams {
   /**
    * The active state for the new gift card, defaults to false. The active state can be updated
@@ -215,6 +217,7 @@ public class CardCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CreatedBy {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -295,6 +298,7 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payment {
       /**
        * Map of extra parameters for custom features not available in this client library. The

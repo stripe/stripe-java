@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditGrantCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> Amount of this credit grant. */
   @SerializedName("amount")
@@ -30,6 +32,10 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> ID of the customer to receive the billing credits. */
   @SerializedName("customer")
   String customer;
+
+  /** ID of the account to receive the billing credits. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * The time when the billing credits become effective-when they're eligible for use. It defaults
@@ -80,6 +86,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       ApplicabilityConfig applicabilityConfig,
       Category category,
       String customer,
+      String customerAccount,
       Long effectiveAt,
       List<String> expand,
       Long expiresAt,
@@ -91,6 +98,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     this.applicabilityConfig = applicabilityConfig;
     this.category = category;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.effectiveAt = effectiveAt;
     this.expand = expand;
     this.expiresAt = expiresAt;
@@ -113,6 +121,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private Long effectiveAt;
 
     private List<String> expand;
@@ -134,6 +144,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
           this.applicabilityConfig,
           this.category,
           this.customer,
+          this.customerAccount,
           this.effectiveAt,
           this.expand,
           this.expiresAt,
@@ -169,6 +180,12 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> ID of the customer to receive the billing credits. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** ID of the account to receive the billing credits. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -284,6 +301,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Amount {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -370,6 +388,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Monetary {
       /**
        * <strong>Required.</strong> Three-letter <a href="https://stripe.com/docs/currencies">ISO
@@ -478,6 +497,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ApplicabilityConfig {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -546,6 +566,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Scope {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -558,14 +579,14 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
       /**
        * The price type that credit grants can apply to. We currently only support the {@code
-       * metered} price type.
+       * metered} price type. Cannot be used in combination with {@code prices}.
        */
       @SerializedName("price_type")
       PriceType priceType;
 
       /**
        * A list of prices that the credit grant can apply to. We currently only support the {@code
-       * metered} prices.
+       * metered} prices. Cannot be used in combination with {@code price_type}.
        */
       @SerializedName("prices")
       List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
@@ -626,7 +647,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
         /**
          * The price type that credit grants can apply to. We currently only support the {@code
-         * metered} price type.
+         * metered} price type. Cannot be used in combination with {@code prices}.
          */
         public Builder setPriceType(
             CreditGrantCreateParams.ApplicabilityConfig.Scope.PriceType priceType) {
@@ -663,6 +684,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Price {
         /**
          * Map of extra parameters for custom features not available in this client library. The

@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditNoteListParams extends ApiRequestParams {
   /** Only return credit notes that were created during the given date interval. */
   @SerializedName("created")
@@ -18,6 +20,10 @@ public class CreditNoteListParams extends ApiRequestParams {
   /** Only return credit notes for the customer specified by this customer ID. */
   @SerializedName("customer")
   String customer;
+
+  /** Only return credit notes for the account specified by this account ID. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -64,6 +70,7 @@ public class CreditNoteListParams extends ApiRequestParams {
   private CreditNoteListParams(
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -72,6 +79,7 @@ public class CreditNoteListParams extends ApiRequestParams {
       String startingAfter) {
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -88,6 +96,8 @@ public class CreditNoteListParams extends ApiRequestParams {
     private Object created;
 
     private String customer;
+
+    private String customerAccount;
 
     private String endingBefore;
 
@@ -106,6 +116,7 @@ public class CreditNoteListParams extends ApiRequestParams {
       return new CreditNoteListParams(
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -129,6 +140,12 @@ public class CreditNoteListParams extends ApiRequestParams {
     /** Only return credit notes for the customer specified by this customer ID. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Only return credit notes for the account specified by this account ID. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -223,6 +240,7 @@ public class CreditNoteListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

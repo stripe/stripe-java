@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class FinancingTransactionListParams extends ApiRequestParams {
   /**
    * For transactions of type {@code paydown} and reason {@code automatic_withholding} only, only
