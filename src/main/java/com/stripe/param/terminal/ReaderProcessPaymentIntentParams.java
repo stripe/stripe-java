@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -128,6 +130,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ProcessConfig {
     /**
      * This field indicates whether this payment method can be shown again to its customer in a
@@ -254,6 +257,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Tipping {
       /**
        * Amount used to calculate tip suggestions on tipping selection screen for this transaction.

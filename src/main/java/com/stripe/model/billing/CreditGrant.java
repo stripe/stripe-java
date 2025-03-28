@@ -64,6 +64,10 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account receiving the billing credits. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** The time when the billing credits become effective-when they're eligible for use. */
   @SerializedName("effective_at")
   Long effectiveAt;
@@ -460,7 +464,8 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
       /**
        * The price type that credit grants can apply to. We currently only support the {@code
        * metered} price type. This refers to prices that have a <a
-       * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
+       * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them. Cannot
+       * be used in combination with {@code prices}.
        *
        * <p>Equal to {@code metered}.
        */
@@ -470,7 +475,8 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
       /**
        * The prices that credit grants can apply to. We currently only support {@code metered}
        * prices. This refers to prices that have a <a
-       * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them.
+       * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them. Cannot
+       * be used in combination with {@code price_type}.
        */
       @SerializedName("prices")
       List<CreditGrant.ApplicabilityConfig.Scope.Price> prices;

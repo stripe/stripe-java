@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class VerificationSessionCreateParams extends ApiRequestParams {
   /**
    * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
@@ -53,6 +55,10 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("related_customer")
   String relatedCustomer;
 
+  /** Token referencing a Customer Account resource. */
+  @SerializedName("related_customer_account")
+  String relatedCustomerAccount;
+
   /** The URL that the user will be redirected to upon completing the verification flow. */
   @SerializedName("return_url")
   String returnUrl;
@@ -80,6 +86,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       Options options,
       ProvidedDetails providedDetails,
       String relatedCustomer,
+      String relatedCustomerAccount,
       String returnUrl,
       Type type,
       String verificationFlow) {
@@ -90,6 +97,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     this.options = options;
     this.providedDetails = providedDetails;
     this.relatedCustomer = relatedCustomer;
+    this.relatedCustomerAccount = relatedCustomerAccount;
     this.returnUrl = returnUrl;
     this.type = type;
     this.verificationFlow = verificationFlow;
@@ -114,6 +122,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
     private String relatedCustomer;
 
+    private String relatedCustomerAccount;
+
     private String returnUrl;
 
     private Type type;
@@ -130,6 +140,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
           this.options,
           this.providedDetails,
           this.relatedCustomer,
+          this.relatedCustomerAccount,
           this.returnUrl,
           this.type,
           this.verificationFlow);
@@ -241,6 +252,12 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Token referencing a Customer Account resource. */
+    public Builder setRelatedCustomerAccount(String relatedCustomerAccount) {
+      this.relatedCustomerAccount = relatedCustomerAccount;
+      return this;
+    }
+
     /** The URL that the user will be redirected to upon completing the verification flow. */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
@@ -268,6 +285,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Options {
     /**
      * Options that apply to the <a
@@ -353,6 +371,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Document {
       /**
        * Array of strings of allowed identity document types. If the provided identity document
@@ -543,6 +562,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ProvidedDetails {
     /** Email of user being verified. */
     @SerializedName("email")

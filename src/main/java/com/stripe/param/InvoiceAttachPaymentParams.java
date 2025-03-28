@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class InvoiceAttachPaymentParams extends ApiRequestParams {
   /**
    * The portion of the {@code amount} on the PaymentIntent or out of band payment to apply to this
@@ -169,6 +171,7 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentRecordData {
     /** <strong>Required.</strong> The amount that was paid out of band. */
     @SerializedName("amount")

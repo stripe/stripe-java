@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CouponUpdateParams extends ApiRequestParams {
   /**
    * Coupons defined in each available currency option (only supported if the coupon is
@@ -232,6 +234,7 @@ public class CouponUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CurrencyOption {
     /**
      * <strong>Required.</strong> A positive integer representing the amount to subtract from an

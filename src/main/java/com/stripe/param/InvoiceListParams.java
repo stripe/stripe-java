@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class InvoiceListParams extends ApiRequestParams {
   /**
    * The collection method of the invoice to retrieve. Either {@code charge_automatically} or {@code
@@ -25,6 +27,9 @@ public class InvoiceListParams extends ApiRequestParams {
   /** Only return invoices for the customer specified by this customer ID. */
   @SerializedName("customer")
   String customer;
+
+  @SerializedName("customer_account")
+  String customerAccount;
 
   @SerializedName("due_date")
   Object dueDate;
@@ -83,6 +88,7 @@ public class InvoiceListParams extends ApiRequestParams {
       CollectionMethod collectionMethod,
       Object created,
       String customer,
+      String customerAccount,
       Object dueDate,
       String endingBefore,
       List<String> expand,
@@ -94,6 +100,7 @@ public class InvoiceListParams extends ApiRequestParams {
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.dueDate = dueDate;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -114,6 +121,8 @@ public class InvoiceListParams extends ApiRequestParams {
     private Object created;
 
     private String customer;
+
+    private String customerAccount;
 
     private Object dueDate;
 
@@ -137,6 +146,7 @@ public class InvoiceListParams extends ApiRequestParams {
           this.collectionMethod,
           this.created,
           this.customer,
+          this.customerAccount,
           this.dueDate,
           this.endingBefore,
           this.expand,
@@ -171,6 +181,11 @@ public class InvoiceListParams extends ApiRequestParams {
     /** Only return invoices for the customer specified by this customer ID. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -285,6 +300,7 @@ public class InvoiceListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -393,6 +409,7 @@ public class InvoiceListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class DueDate {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

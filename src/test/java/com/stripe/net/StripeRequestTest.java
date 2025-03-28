@@ -311,6 +311,19 @@ public class StripeRequestTest extends BaseStripeTest {
   }
 
   @Test
+  public void testBuildHeadersHasStripeAccount() throws StripeException {
+    StripeRequest request =
+        StripeRequest.create(
+            ApiResource.RequestMethod.POST,
+            "http://example.com/post",
+            null,
+            RequestOptions.builder().setStripeAccount("acct").setApiKey("123").build(),
+            ApiMode.V2);
+
+    assertEquals("acct", request.headers().firstValue("Stripe-Account").get());
+  }
+
+  @Test
   public void testBuildHeadersHasStripeContext() throws StripeException {
     StripeRequest request =
         StripeRequest.create(
@@ -334,19 +347,6 @@ public class StripeRequestTest extends BaseStripeTest {
             ApiMode.V2);
 
     assertFalse(request.headers().map().containsKey("Stripe-Account"));
-  }
-
-  @Test
-  public void testBuildHeadersThrowsWhenContextPassedIntoV1Request() {
-    assertThrows(
-        UnsupportedOperationException.class,
-        () ->
-            StripeRequest.create(
-                ApiResource.RequestMethod.POST,
-                "http://example.com/post",
-                null,
-                RequestOptions.builder().setStripeContext("ctx").build(),
-                ApiMode.V1));
   }
 
   @Test

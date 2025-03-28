@@ -72,10 +72,6 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(customer);
     assertNotNull(customer.getId());
     assertEquals(resource.getCustomer(), customer.getId());
-    final Invoice invoice = resource.getInvoiceObject();
-    assertNotNull(invoice);
-    assertNotNull(invoice.getId());
-    assertEquals(resource.getInvoice(), invoice.getId());
     final Account account = resource.getOnBehalfOfObject();
     assertNotNull(account);
     assertNotNull(account.getId());

@@ -205,6 +205,9 @@ public class Session extends ApiResource implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Customer> customer;
 
+    @SerializedName("customer_account")
+    String customerAccount;
+
     /**
      * Type of account holder that this account belongs to.
      *

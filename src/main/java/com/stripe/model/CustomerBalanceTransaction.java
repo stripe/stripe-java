@@ -3,6 +3,7 @@ package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
+import com.stripe.model.checkout.Session;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -38,6 +39,12 @@ public class CustomerBalanceTransaction extends ApiResource
   @SerializedName("amount")
   Long amount;
 
+  /** The ID of the checkout session (if any) that created the transaction. */
+  @SerializedName("checkout_session")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Session> checkoutSession;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -60,6 +67,9 @@ public class CustomerBalanceTransaction extends ApiResource
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
+
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
@@ -111,16 +121,38 @@ public class CustomerBalanceTransaction extends ApiResource
   /**
    * Transaction type: {@code adjustment}, {@code applied_to_invoice}, {@code credit_note}, {@code
    * initial}, {@code invoice_overpaid}, {@code invoice_too_large}, {@code invoice_too_small},
-   * {@code unspent_receiver_credit}, or {@code unapplied_from_invoice}. See the <a
+   * {@code unspent_receiver_credit}, {@code unapplied_from_invoice}, {@code
+   * checkout_session_subscription_payment}, or {@code
+   * checkout_session_subscription_payment_canceled}. See the <a
    * href="https://stripe.com/docs/billing/customer/balance#types">Customer Balance page</a> to
    * learn more about transaction types.
    *
-   * <p>One of {@code adjustment}, {@code applied_to_invoice}, {@code credit_note}, {@code initial},
-   * {@code invoice_overpaid}, {@code invoice_too_large}, {@code invoice_too_small}, {@code
-   * migration}, {@code unapplied_from_invoice}, or {@code unspent_receiver_credit}.
+   * <p>One of {@code adjustment}, {@code applied_to_invoice}, {@code
+   * checkout_session_subscription_payment}, {@code checkout_session_subscription_payment_canceled},
+   * {@code credit_note}, {@code initial}, {@code invoice_overpaid}, {@code invoice_too_large},
+   * {@code invoice_too_small}, {@code migration}, {@code unapplied_from_invoice}, or {@code
+   * unspent_receiver_credit}.
    */
   @SerializedName("type")
   String type;
+
+  /** Get ID of expandable {@code checkoutSession} object. */
+  public String getCheckoutSession() {
+    return (this.checkoutSession != null) ? this.checkoutSession.getId() : null;
+  }
+
+  public void setCheckoutSession(String id) {
+    this.checkoutSession = ApiResource.setExpandableFieldId(id, this.checkoutSession);
+  }
+
+  /** Get expanded {@code checkoutSession}. */
+  public Session getCheckoutSessionObject() {
+    return (this.checkoutSession != null) ? this.checkoutSession.getExpanded() : null;
+  }
+
+  public void setCheckoutSessionObject(Session expandableObject) {
+    this.checkoutSession = new ExpandableField<Session>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code creditNote} object. */
   public String getCreditNote() {
@@ -235,6 +267,7 @@ public class CustomerBalanceTransaction extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(checkoutSession, responseGetter);
     trySetResponseGetter(creditNote, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(invoice, responseGetter);

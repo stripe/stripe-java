@@ -65,6 +65,10 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The account that this promotion code can be used by. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Date at which the promotion code can no longer be redeemed. */
   @SerializedName("expires_at")
   Long expiresAt;

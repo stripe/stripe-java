@@ -7,13 +7,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class CreditGrantListParams extends ApiRequestParams {
   /** Only return credit grants for this customer. */
   @SerializedName("customer")
   String customer;
+
+  /** Only return credit grants for this account. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -55,12 +61,14 @@ public class CreditGrantListParams extends ApiRequestParams {
 
   private CreditGrantListParams(
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter) {
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -74,6 +82,8 @@ public class CreditGrantListParams extends ApiRequestParams {
 
   public static class Builder {
     private String customer;
+
+    private String customerAccount;
 
     private String endingBefore;
 
@@ -89,6 +99,7 @@ public class CreditGrantListParams extends ApiRequestParams {
     public CreditGrantListParams build() {
       return new CreditGrantListParams(
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -99,6 +110,12 @@ public class CreditGrantListParams extends ApiRequestParams {
     /** Only return credit grants for this customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Only return credit grants for this account. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

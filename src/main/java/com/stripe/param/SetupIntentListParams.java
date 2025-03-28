@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SetupIntentListParams extends ApiRequestParams {
   /**
    * If present, the SetupIntent's payment method will be attached to the in-context Stripe Account.
@@ -31,6 +33,10 @@ public class SetupIntentListParams extends ApiRequestParams {
   /** Only return SetupIntents for the customer specified by this customer ID. */
   @SerializedName("customer")
   String customer;
+
+  /** Only return SetupIntents for the account specified by this customer ID. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -78,6 +84,7 @@ public class SetupIntentListParams extends ApiRequestParams {
       Boolean attachToSelf,
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -87,6 +94,7 @@ public class SetupIntentListParams extends ApiRequestParams {
     this.attachToSelf = attachToSelf;
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -106,6 +114,8 @@ public class SetupIntentListParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -124,6 +134,7 @@ public class SetupIntentListParams extends ApiRequestParams {
           this.attachToSelf,
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -169,6 +180,12 @@ public class SetupIntentListParams extends ApiRequestParams {
     /** Only return SetupIntents for the customer specified by this customer ID. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Only return SetupIntents for the account specified by this customer ID. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -263,6 +280,7 @@ public class SetupIntentListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

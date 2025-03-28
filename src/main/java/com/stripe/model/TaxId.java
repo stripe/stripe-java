@@ -44,6 +44,10 @@ public class TaxId extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -302,6 +306,10 @@ public class TaxId extends ApiResource implements HasId {
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Customer> customer;
+
+    /** The account being referenced when {@code type} is {@code customer}. */
+    @SerializedName("customer_account")
+    String customerAccount;
 
     /**
      * Type of owner referenced.

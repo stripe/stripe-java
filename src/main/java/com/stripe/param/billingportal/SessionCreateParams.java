@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SessionCreateParams extends ApiRequestParams {
   /**
    * The ID of an existing <a
@@ -20,9 +22,13 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("configuration")
   String configuration;
 
-  /** <strong>Required.</strong> The ID of an existing customer. */
+  /** The ID of an existing customer. */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of an existing account. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -75,6 +81,7 @@ public class SessionCreateParams extends ApiRequestParams {
   private SessionCreateParams(
       String configuration,
       String customer,
+      String customerAccount,
       List<String> expand,
       Map<String, Object> extraParams,
       FlowData flowData,
@@ -83,6 +90,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String returnUrl) {
     this.configuration = configuration;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
     this.flowData = flowData;
@@ -99,6 +107,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private String configuration;
 
     private String customer;
+
+    private String customerAccount;
 
     private List<String> expand;
 
@@ -117,6 +127,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return new SessionCreateParams(
           this.configuration,
           this.customer,
+          this.customerAccount,
           this.expand,
           this.extraParams,
           this.flowData,
@@ -136,9 +147,15 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of an existing customer. */
+    /** The ID of an existing customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of an existing account. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -239,6 +256,7 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class FlowData {
     /** Behavior after the flow is completed. */
     @SerializedName("after_completion")
@@ -374,6 +392,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AfterCompletion {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -475,6 +494,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class HostedConfirmation {
         /** A custom message to display to the customer after the flow is completed. */
         @SerializedName("custom_message")
@@ -549,6 +569,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Redirect {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -646,6 +667,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionCancel {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -731,6 +753,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Retention {
         /** <strong>Required.</strong> Configuration when {@code retention.type=coupon_offer}. */
         @SerializedName("coupon_offer")
@@ -817,6 +840,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class CouponOffer {
           /** <strong>Required.</strong> The ID of the coupon to be offered. */
           @SerializedName("coupon")
@@ -905,6 +929,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionUpdate {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -976,6 +1001,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionUpdateConfirm {
       /**
        * The coupon or promotion code to apply to this subscription update. Currently, only up to
@@ -1132,6 +1158,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** The ID of the coupon to apply to this subscription update. */
         @SerializedName("coupon")
@@ -1219,6 +1246,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Item {
         /**
          * Map of extra parameters for custom features not available in this client library. The

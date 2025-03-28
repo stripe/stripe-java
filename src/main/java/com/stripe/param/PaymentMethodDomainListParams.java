@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class PaymentMethodDomainListParams extends ApiRequestParams {
   /** The domain name that this payment method domain object represents. */
   @SerializedName("domain_name")
@@ -17,7 +19,7 @@ public class PaymentMethodDomainListParams extends ApiRequestParams {
 
   /**
    * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-   * will not appear in Elements
+   * will not appear in Elements or Embedded Checkout
    */
   @SerializedName("enabled")
   Boolean enabled;
@@ -116,7 +118,7 @@ public class PaymentMethodDomainListParams extends ApiRequestParams {
 
     /**
      * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-     * will not appear in Elements
+     * will not appear in Elements or Embedded Checkout
      */
     public Builder setEnabled(Boolean enabled) {
       this.enabled = enabled;

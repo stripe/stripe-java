@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionScheduleListParams extends ApiRequestParams {
   /** Only return subscription schedules that were created canceled the given date interval. */
   @SerializedName("canceled_at")
@@ -26,6 +28,10 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   /** Only return subscription schedules for the given customer. */
   @SerializedName("customer")
   String customer;
+
+  /** Only return subscription schedules for the given account. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
@@ -78,6 +84,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       Object completedAt,
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -89,6 +96,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     this.completedAt = completedAt;
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -111,6 +119,8 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -132,6 +142,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
           this.completedAt,
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -180,6 +191,12 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     /** Only return subscription schedules for the given customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Only return subscription schedules for the given account. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -286,6 +303,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CanceledAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -395,6 +413,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CompletedAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -504,6 +523,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -612,6 +632,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class ReleasedAt {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

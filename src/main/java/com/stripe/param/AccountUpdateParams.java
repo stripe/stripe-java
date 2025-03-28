@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class AccountUpdateParams extends ApiRequestParams {
   /**
    * An <a href="https://stripe.com/docs/api#create_account_token">account token</a>, used to
@@ -582,6 +584,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class BusinessProfile {
     /** The applicant's gross annual revenue for its preceding fiscal year. */
     @SerializedName("annual_revenue")
@@ -881,6 +884,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AnnualRevenue {
       /**
        * <strong>Required.</strong> A non-negative integer representing the amount in the <a
@@ -1018,6 +1022,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MonthlyEstimatedRevenue {
       /**
        * <strong>Required.</strong> A non-negative integer representing how much to charge in the <a
@@ -1127,6 +1132,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SupportAddress {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1322,6 +1328,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Capabilities {
     /** The acss_debit_payments capability. */
     @SerializedName("acss_debit_payments")
@@ -1362,6 +1369,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     /** The bank_transfer_payments capability. */
     @SerializedName("bank_transfer_payments")
     BankTransferPayments bankTransferPayments;
+
+    /** The billie_payments capability. */
+    @SerializedName("billie_payments")
+    BilliePayments billiePayments;
 
     /** The blik_payments capability. */
     @SerializedName("blik_payments")
@@ -1536,6 +1547,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("samsung_pay_payments")
     SamsungPayPayments samsungPayPayments;
 
+    /** The satispay_payments capability. */
+    @SerializedName("satispay_payments")
+    SatispayPayments satispayPayments;
+
     /** The sepa_bank_transfer_payments capability. */
     @SerializedName("sepa_bank_transfer_payments")
     SepaBankTransferPayments sepaBankTransferPayments;
@@ -1551,6 +1566,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     /** The sofort_payments capability. */
     @SerializedName("sofort_payments")
     SofortPayments sofortPayments;
+
+    /** The stripe_balance_payments capability. */
+    @SerializedName("stripe_balance_payments")
+    StripeBalancePayments stripeBalancePayments;
 
     /** The swish_payments capability. */
     @SerializedName("swish_payments")
@@ -1611,6 +1630,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         BacsDebitPayments bacsDebitPayments,
         BancontactPayments bancontactPayments,
         BankTransferPayments bankTransferPayments,
+        BilliePayments billiePayments,
         BlikPayments blikPayments,
         BoletoPayments boletoPayments,
         CardIssuing cardIssuing,
@@ -1653,10 +1673,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         RechnungPayments rechnungPayments,
         RevolutPayPayments revolutPayPayments,
         SamsungPayPayments samsungPayPayments,
+        SatispayPayments satispayPayments,
         SepaBankTransferPayments sepaBankTransferPayments,
         SepaDebitPayments sepaDebitPayments,
         ShopeepayPayments shopeepayPayments,
         SofortPayments sofortPayments,
+        StripeBalancePayments stripeBalancePayments,
         SwishPayments swishPayments,
         TaxReportingUs1099K taxReportingUs1099K,
         TaxReportingUs1099Misc taxReportingUs1099Misc,
@@ -1679,6 +1701,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.bacsDebitPayments = bacsDebitPayments;
       this.bancontactPayments = bancontactPayments;
       this.bankTransferPayments = bankTransferPayments;
+      this.billiePayments = billiePayments;
       this.blikPayments = blikPayments;
       this.boletoPayments = boletoPayments;
       this.cardIssuing = cardIssuing;
@@ -1721,10 +1744,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.rechnungPayments = rechnungPayments;
       this.revolutPayPayments = revolutPayPayments;
       this.samsungPayPayments = samsungPayPayments;
+      this.satispayPayments = satispayPayments;
       this.sepaBankTransferPayments = sepaBankTransferPayments;
       this.sepaDebitPayments = sepaDebitPayments;
       this.shopeepayPayments = shopeepayPayments;
       this.sofortPayments = sofortPayments;
+      this.stripeBalancePayments = stripeBalancePayments;
       this.swishPayments = swishPayments;
       this.taxReportingUs1099K = taxReportingUs1099K;
       this.taxReportingUs1099Misc = taxReportingUs1099Misc;
@@ -1763,6 +1788,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private BancontactPayments bancontactPayments;
 
       private BankTransferPayments bankTransferPayments;
+
+      private BilliePayments billiePayments;
 
       private BlikPayments blikPayments;
 
@@ -1848,6 +1875,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private SamsungPayPayments samsungPayPayments;
 
+      private SatispayPayments satispayPayments;
+
       private SepaBankTransferPayments sepaBankTransferPayments;
 
       private SepaDebitPayments sepaDebitPayments;
@@ -1855,6 +1884,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       private ShopeepayPayments shopeepayPayments;
 
       private SofortPayments sofortPayments;
+
+      private StripeBalancePayments stripeBalancePayments;
 
       private SwishPayments swishPayments;
 
@@ -1893,6 +1924,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.bacsDebitPayments,
             this.bancontactPayments,
             this.bankTransferPayments,
+            this.billiePayments,
             this.blikPayments,
             this.boletoPayments,
             this.cardIssuing,
@@ -1935,10 +1967,12 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.rechnungPayments,
             this.revolutPayPayments,
             this.samsungPayPayments,
+            this.satispayPayments,
             this.sepaBankTransferPayments,
             this.sepaDebitPayments,
             this.shopeepayPayments,
             this.sofortPayments,
+            this.stripeBalancePayments,
             this.swishPayments,
             this.taxReportingUs1099K,
             this.taxReportingUs1099Misc,
@@ -2019,6 +2053,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setBankTransferPayments(
           AccountUpdateParams.Capabilities.BankTransferPayments bankTransferPayments) {
         this.bankTransferPayments = bankTransferPayments;
+        return this;
+      }
+
+      /** The billie_payments capability. */
+      public Builder setBilliePayments(
+          AccountUpdateParams.Capabilities.BilliePayments billiePayments) {
+        this.billiePayments = billiePayments;
         return this;
       }
 
@@ -2325,6 +2366,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The satispay_payments capability. */
+      public Builder setSatispayPayments(
+          AccountUpdateParams.Capabilities.SatispayPayments satispayPayments) {
+        this.satispayPayments = satispayPayments;
+        return this;
+      }
+
       /** The sepa_bank_transfer_payments capability. */
       public Builder setSepaBankTransferPayments(
           AccountUpdateParams.Capabilities.SepaBankTransferPayments sepaBankTransferPayments) {
@@ -2350,6 +2398,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setSofortPayments(
           AccountUpdateParams.Capabilities.SofortPayments sofortPayments) {
         this.sofortPayments = sofortPayments;
+        return this;
+      }
+
+      /** The stripe_balance_payments capability. */
+      public Builder setStripeBalancePayments(
+          AccountUpdateParams.Capabilities.StripeBalancePayments stripeBalancePayments) {
+        this.stripeBalancePayments = stripeBalancePayments;
         return this;
       }
 
@@ -2436,6 +2491,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AcssDebitPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2515,6 +2571,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AffirmPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2594,6 +2651,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2673,6 +2731,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AlmaPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2752,6 +2811,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AmazonPayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2831,6 +2891,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AuBecsDebitPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2910,6 +2971,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AutomaticIndirectTax {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2989,6 +3051,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BacsDebitPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3068,6 +3131,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BancontactPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3147,6 +3211,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BankTransferPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3226,6 +3291,87 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BilliePayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private BilliePayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.BilliePayments build() {
+          return new AccountUpdateParams.Capabilities.BilliePayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.BilliePayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.BilliePayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BlikPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3305,6 +3451,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BoletoPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3384,6 +3531,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CardIssuing {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3462,6 +3610,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CardPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3541,6 +3690,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CartesBancairesPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3620,6 +3770,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CashappPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3699,6 +3850,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class EpsPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3777,6 +3929,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class FpxPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3855,6 +4008,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class GbBankTransferPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3934,6 +4088,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class GiropayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4013,6 +4168,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class GopayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4092,6 +4248,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class GrabpayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4171,6 +4328,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IdBankTransferPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4250,6 +4408,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IdBankTransferPaymentsBca {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4329,6 +4488,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IdealPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4408,6 +4568,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class IndiaInternationalPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4487,6 +4648,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class JcbPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4565,6 +4727,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class JpBankTransferPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4644,6 +4807,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KakaoPayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4723,6 +4887,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KlarnaPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4802,6 +4967,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KonbiniPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4881,6 +5047,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class KrCardPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4960,6 +5127,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class LegacyPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5039,6 +5207,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class LinkPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5118,6 +5287,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MbWayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5197,6 +5367,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MobilepayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5276,6 +5447,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MultibancoPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5355,6 +5527,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class MxBankTransferPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5434,6 +5607,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class NaverPayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5513,6 +5687,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class OxxoPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5592,6 +5767,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class P24Payments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5670,6 +5846,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PayByBankPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5749,6 +5926,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaycoPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5828,6 +6006,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaynowPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5907,6 +6086,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaypalPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5986,6 +6166,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaytoPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6065,6 +6246,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PromptpayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6144,6 +6326,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class QrisPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6223,6 +6406,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class RechnungPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6302,6 +6486,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class RevolutPayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6381,6 +6566,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SamsungPayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6460,6 +6646,87 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SatispayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private SatispayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.SatispayPayments build() {
+          return new AccountUpdateParams.Capabilities.SatispayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.SatispayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.SatispayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaBankTransferPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6539,6 +6806,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebitPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6618,6 +6886,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ShopeepayPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6697,6 +6966,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SofortPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6776,6 +7046,87 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalancePayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private StripeBalancePayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.StripeBalancePayments build() {
+          return new AccountUpdateParams.Capabilities.StripeBalancePayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.StripeBalancePayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Capabilities.StripeBalancePayments#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SwishPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6855,6 +7206,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxReportingUs1099K {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6934,6 +7286,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxReportingUs1099Misc {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7013,6 +7366,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Transfers {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7091,6 +7445,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Treasury {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7169,6 +7524,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TreasuryEvolve {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7248,6 +7604,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TreasuryFifthThird {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7327,6 +7684,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TreasuryGoldmanSachs {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7406,6 +7764,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TwintPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7485,6 +7844,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccountAchPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7564,6 +7924,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankTransferPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7643,6 +8004,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ZipPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7722,6 +8084,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Company {
     /** The company's primary address. */
     @SerializedName("address")
@@ -7807,6 +8170,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("ownership_declaration")
     OwnershipDeclaration ownershipDeclaration;
 
+    /**
+     * This value is used to determine if a business is exempt from providing ultimate beneficial
+     * owners. See <a
+     * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+     * support article</a> and <a
+     * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+     * for more details.
+     */
     @SerializedName("ownership_exemption_reason")
     ApiRequestParams.EnumParam ownershipExemptionReason;
 
@@ -8138,12 +8509,28 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * This value is used to determine if a business is exempt from providing ultimate beneficial
+       * owners. See <a
+       * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+       * support article</a> and <a
+       * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+       * for more details.
+       */
       public Builder setOwnershipExemptionReason(
           AccountUpdateParams.Company.OwnershipExemptionReason ownershipExemptionReason) {
         this.ownershipExemptionReason = ownershipExemptionReason;
         return this;
       }
 
+      /**
+       * This value is used to determine if a business is exempt from providing ultimate beneficial
+       * owners. See <a
+       * href="https://support.stripe.com/questions/exemption-from-providing-ownership-details">this
+       * support article</a> and <a
+       * href="https://docs.stripe.com/changelog/acacia/2025-01-27/ownership-exemption-reason-accounts-api">changelog</a>
+       * for more details.
+       */
       public Builder setOwnershipExemptionReason(EmptyParam ownershipExemptionReason) {
         this.ownershipExemptionReason = ownershipExemptionReason;
         return this;
@@ -8259,6 +8646,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -8453,6 +8841,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -8668,6 +9057,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -8883,6 +9273,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class DirectorshipDeclaration {
       /** The Unix timestamp marking when the directorship declaration attestation was made. */
       @SerializedName("date")
@@ -9001,6 +9392,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class OwnershipDeclaration {
       /** The Unix timestamp marking when the beneficial owner attestation was made. */
       @SerializedName("date")
@@ -9111,6 +9503,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Verification {
       /** A document verifying the business. */
       @SerializedName("document")
@@ -9180,6 +9573,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
          * The back of a document returned by a <a
@@ -9408,6 +9802,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Documents {
     /**
      * One or more documents that support the <a
@@ -9626,6 +10021,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BankAccountOwnershipVerification {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9726,6 +10122,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompanyLicense {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9820,6 +10217,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompanyMemorandumOfAssociation {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -9917,6 +10315,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompanyMinisterialDecree {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10014,6 +10413,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompanyRegistrationVerification {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10113,6 +10513,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CompanyTaxIdVerification {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10210,6 +10611,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ProofOfRegistration {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10305,6 +10707,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class ProofOfUltimateBeneficialOwnership {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -10406,6 +10809,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Groups {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -10492,6 +10896,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Individual {
     /** The individual's primary address. */
     @SerializedName("address")
@@ -11106,6 +11511,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -11300,6 +11706,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -11515,6 +11922,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -11730,6 +12138,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Dob {
       /** <strong>Required.</strong> The day of birth, between 1 and 31. */
       @SerializedName("day")
@@ -11827,6 +12236,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class RegisteredAddress {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -12021,6 +12431,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Relationship {
       /**
        * Whether the person is a director of the account's legal entity. Directors are typically
@@ -12181,6 +12592,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Verification {
       /**
        * A document showing address, either a passport, local ID card, or utility bill from a
@@ -12274,6 +12686,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class AdditionalDocument {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -12403,6 +12816,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
          * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
@@ -12547,6 +12961,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class RiskControls {
     /**
      * Represents the risk control status of charges. Please see <a
@@ -12643,6 +13058,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Charges {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12722,6 +13138,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payouts {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -12802,6 +13219,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Settings {
     /** Settings specific to Bacs Direct Debit payments. */
     @SerializedName("bacs_debit_payments")
@@ -13031,6 +13449,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BacsDebitPayments {
       /**
        * The Bacs Direct Debit Display Name for this account. For payments made with Bacs Direct
@@ -13132,6 +13551,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class BankBcaOnboarding {
       /** Bank BCA business account holder name. */
       @SerializedName("account_holder_name")
@@ -13229,6 +13649,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Branding {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13389,6 +13810,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Capital {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13523,6 +13945,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CardIssuing {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13601,6 +14024,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class TosAcceptance {
         /**
          * The Unix timestamp marking when the account representative accepted the service
@@ -13732,6 +14156,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CardPayments {
       /**
        * Automatically declines certain charge types regardless of whether the card issuer accepted
@@ -13926,6 +14351,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class DeclineOn {
         /**
          * Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This
@@ -14026,6 +14452,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Invoices {
       /**
        * The list of default Account Tax IDs to automatically include on invoices. Account Tax IDs
@@ -14043,9 +14470,20 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Invoices(Object defaultAccountTaxIds, Map<String, Object> extraParams) {
+      /**
+       * Whether payment methods should be saved when a payment is completed for a one-time invoices
+       * on a hosted invoice page.
+       */
+      @SerializedName("hosted_payment_method_save")
+      HostedPaymentMethodSave hostedPaymentMethodSave;
+
+      private Invoices(
+          Object defaultAccountTaxIds,
+          Map<String, Object> extraParams,
+          HostedPaymentMethodSave hostedPaymentMethodSave) {
         this.defaultAccountTaxIds = defaultAccountTaxIds;
         this.extraParams = extraParams;
+        this.hostedPaymentMethodSave = hostedPaymentMethodSave;
       }
 
       public static Builder builder() {
@@ -14057,10 +14495,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private HostedPaymentMethodSave hostedPaymentMethodSave;
+
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Settings.Invoices build() {
           return new AccountUpdateParams.Settings.Invoices(
-              this.defaultAccountTaxIds, this.extraParams);
+              this.defaultAccountTaxIds, this.extraParams, this.hostedPaymentMethodSave);
         }
 
         /**
@@ -14140,10 +14580,39 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Whether payment methods should be saved when a payment is completed for a one-time
+         * invoices on a hosted invoice page.
+         */
+        public Builder setHostedPaymentMethodSave(
+            AccountUpdateParams.Settings.Invoices.HostedPaymentMethodSave hostedPaymentMethodSave) {
+          this.hostedPaymentMethodSave = hostedPaymentMethodSave;
+          return this;
+        }
+      }
+
+      public enum HostedPaymentMethodSave implements ApiRequestParams.EnumParam {
+        @SerializedName("always")
+        ALWAYS("always"),
+
+        @SerializedName("never")
+        NEVER("never"),
+
+        @SerializedName("offer")
+        OFFER("offer");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        HostedPaymentMethodSave(String value) {
+          this.value = value;
+        }
       }
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -14323,6 +14792,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Payouts {
       /**
        * A Boolean indicating whether Stripe should try to reclaim negative balances from an
@@ -14461,6 +14931,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Schedule {
         /**
          * The number of days charge funds are held before being paid out. May also be set to {@code
@@ -14699,6 +15170,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class TaxForms {
       /** Whether the account opted out of receiving their tax forms by postal delivery. */
       @SerializedName("consented_to_paperless_delivery")
@@ -14770,6 +15242,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Treasury {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -14840,6 +15313,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class TosAcceptance {
         /**
          * The Unix timestamp marking when the account representative accepted the service
@@ -14972,6 +15446,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class TosAcceptance {
     /**
      * The Unix timestamp marking when the account representative accepted their service agreement.

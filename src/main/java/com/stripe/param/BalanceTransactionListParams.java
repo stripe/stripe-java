@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class BalanceTransactionListParams extends ApiRequestParams {
   /** Only return transactions that were created during the given date interval. */
   @SerializedName("created")
@@ -84,8 +86,10 @@ public class BalanceTransactionListParams extends ApiRequestParams {
    * payment_unreconciled}, {@code payout}, {@code payout_cancel}, {@code payout_failure}, {@code
    * payout_minimum_balance_hold}, {@code payout_minimum_balance_release}, {@code refund}, {@code
    * refund_failure}, {@code reserve_transaction}, {@code reserved_funds}, {@code stripe_fee},
-   * {@code stripe_fx_fee}, {@code tax_fee}, {@code topup}, {@code topup_reversal}, {@code
-   * transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code transfer_refund}.
+   * {@code stripe_fx_fee}, {@code stripe_balance_payment_debit}, {@code
+   * stripe_balance_payment_debit_reversal}, {@code tax_fee}, {@code topup}, {@code topup_reversal},
+   * {@code transfer}, {@code transfer_cancel}, {@code transfer_failure}, or {@code
+   * transfer_refund}.
    */
   @SerializedName("type")
   String type;
@@ -286,8 +290,9 @@ public class BalanceTransactionListParams extends ApiRequestParams {
      * {@code payout_cancel}, {@code payout_failure}, {@code payout_minimum_balance_hold}, {@code
      * payout_minimum_balance_release}, {@code refund}, {@code refund_failure}, {@code
      * reserve_transaction}, {@code reserved_funds}, {@code stripe_fee}, {@code stripe_fx_fee},
-     * {@code tax_fee}, {@code topup}, {@code topup_reversal}, {@code transfer}, {@code
-     * transfer_cancel}, {@code transfer_failure}, or {@code transfer_refund}.
+     * {@code stripe_balance_payment_debit}, {@code stripe_balance_payment_debit_reversal}, {@code
+     * tax_fee}, {@code topup}, {@code topup_reversal}, {@code transfer}, {@code transfer_cancel},
+     * {@code transfer_failure}, or {@code transfer_refund}.
      */
     public Builder setType(String type) {
       this.type = type;
@@ -296,6 +301,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

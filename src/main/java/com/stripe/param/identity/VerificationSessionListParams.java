@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
+@EqualsAndHashCode(callSuper = false)
 public class VerificationSessionListParams extends ApiRequestParams {
   /**
    * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
@@ -54,6 +56,9 @@ public class VerificationSessionListParams extends ApiRequestParams {
   @SerializedName("related_customer")
   String relatedCustomer;
 
+  @SerializedName("related_customer_account")
+  String relatedCustomerAccount;
+
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
@@ -79,6 +84,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Long limit,
       String relatedCustomer,
+      String relatedCustomerAccount,
       String startingAfter,
       Status status) {
     this.clientReferenceId = clientReferenceId;
@@ -88,6 +94,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.relatedCustomer = relatedCustomer;
+    this.relatedCustomerAccount = relatedCustomerAccount;
     this.startingAfter = startingAfter;
     this.status = status;
   }
@@ -111,6 +118,8 @@ public class VerificationSessionListParams extends ApiRequestParams {
 
     private String relatedCustomer;
 
+    private String relatedCustomerAccount;
+
     private String startingAfter;
 
     private Status status;
@@ -125,6 +134,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.relatedCustomer,
+          this.relatedCustomerAccount,
           this.startingAfter,
           this.status);
     }
@@ -227,6 +237,11 @@ public class VerificationSessionListParams extends ApiRequestParams {
       return this;
     }
 
+    public Builder setRelatedCustomerAccount(String relatedCustomerAccount) {
+      this.relatedCustomerAccount = relatedCustomerAccount;
+      return this;
+    }
+
     /**
      * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
      * place in the list. For instance, if you make a list request and receive 100 objects, ending
@@ -250,6 +265,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
   }
 
   @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

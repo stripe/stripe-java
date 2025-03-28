@@ -93,6 +93,10 @@ public class LineItem extends StripeObject implements HasId {
   @SerializedName("quantity")
   Long quantity;
 
+  /** The tax calculation identifiers of the line item. */
+  @SerializedName("tax_calculation_reference")
+  TaxCalculationReference taxCalculationReference;
+
   /** The taxes applied to the line item. */
   @SerializedName("taxes")
   List<LineItem.Tax> taxes;
@@ -216,5 +220,22 @@ public class LineItem extends StripeObject implements HasId {
     /** The amount on which tax is calculated, in cents (or local equivalent). */
     @SerializedName("taxable_amount")
     Long taxableAmount;
+  }
+
+  /**
+   * For more details about TaxCalculationReference, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxCalculationReference extends StripeObject {
+    /** The calculation identifier for tax calculation response. */
+    @SerializedName("calculation_id")
+    String calculationId;
+
+    /** The calculation identifier for tax calculation response line item. */
+    @SerializedName("calculation_item_id")
+    String calculationItemId;
   }
 }

@@ -22,6 +22,7 @@ public final class EventDataClassLookup {
     classLookup.put("application", Application.class);
     classLookup.put("application_fee", ApplicationFee.class);
     classLookup.put("balance", Balance.class);
+    classLookup.put("balance_settings", BalanceSettings.class);
     classLookup.put("balance_transaction", BalanceTransaction.class);
     classLookup.put("bank_account", BankAccount.class);
     classLookup.put("capability", Capability.class);
@@ -95,8 +96,6 @@ public final class EventDataClassLookup {
     classLookup.put("topup", Topup.class);
     classLookup.put("transfer", Transfer.class);
     classLookup.put("transfer_reversal", TransferReversal.class);
-    classLookup.put("usage_record", UsageRecord.class);
-    classLookup.put("usage_record_summary", UsageRecordSummary.class);
     classLookup.put("webhook_endpoint", WebhookEndpoint.class);
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
