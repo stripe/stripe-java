@@ -1168,6 +1168,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String naverPayPayments;
 
     /**
+     * The status of the New Zealand BECS Direct Debit payments capability of the account, or
+     * whether the account can directly process New Zealand BECS Direct Debit charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("nz_bank_account_becs_debit_payments")
+    String nzBankAccountBecsDebitPayments;
+
+    /**
      * The status of the OXXO payments capability of the account, or whether the account can
      * directly process OXXO charges.
      *
