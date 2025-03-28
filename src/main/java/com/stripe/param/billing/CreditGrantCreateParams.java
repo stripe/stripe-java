@@ -564,14 +564,14 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
       /**
        * The price type that credit grants can apply to. We currently only support the {@code
-       * metered} price type.
+       * metered} price type. Cannot be used in combination with {@code prices}.
        */
       @SerializedName("price_type")
       PriceType priceType;
 
       /**
        * A list of prices that the credit grant can apply to. We currently only support the {@code
-       * metered} prices.
+       * metered} prices. Cannot be used in combination with {@code price_type}.
        */
       @SerializedName("prices")
       List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
@@ -632,7 +632,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
         /**
          * The price type that credit grants can apply to. We currently only support the {@code
-         * metered} price type.
+         * metered} price type. Cannot be used in combination with {@code prices}.
          */
         public Builder setPriceType(
             CreditGrantCreateParams.ApplicabilityConfig.Scope.PriceType priceType) {

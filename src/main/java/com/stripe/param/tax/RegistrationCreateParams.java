@@ -11524,8 +11524,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
          * <strong>Required.</strong> A <a
          * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
          * representing the local jurisdiction. Supported FIPS codes are: {@code 14000} (Chicago),
-         * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston), and
-         * {@code 68081} (Schiller Park).
+         * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston),
+         * {@code 45421} (Lynwood), {@code 64343} (River Grove), and {@code 68081} (Schiller Park).
          */
         @SerializedName("jurisdiction")
         String jurisdiction;
@@ -11584,8 +11584,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> A <a
            * href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
            * representing the local jurisdiction. Supported FIPS codes are: {@code 14000} (Chicago),
-           * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston), and
-           * {@code 68081} (Schiller Park).
+           * {@code 06613} (Bloomington), {@code 21696} (East Dundee), {@code 24582} (Evanston),
+           * {@code 45421} (Lynwood), {@code 64343} (River Grove), and {@code 68081} (Schiller
+           * Park).
            */
           public Builder setJurisdiction(String jurisdiction) {
             this.jurisdiction = jurisdiction;

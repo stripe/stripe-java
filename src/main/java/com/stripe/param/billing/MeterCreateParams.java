@@ -319,7 +319,8 @@ public class MeterCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Specifies how events are aggregated. Allowed values are {@code
-     * count} to count the number of events and {@code sum} to sum each event's value.
+     * count} to count the number of events, {@code sum} to sum each event's value and {@code last}
+     * to take the last event's value in the window.
      */
     @SerializedName("formula")
     Formula formula;
@@ -371,7 +372,8 @@ public class MeterCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Specifies how events are aggregated. Allowed values are {@code
-       * count} to count the number of events and {@code sum} to sum each event's value.
+       * count} to count the number of events, {@code sum} to sum each event's value and {@code
+       * last} to take the last event's value in the window.
        */
       public Builder setFormula(MeterCreateParams.DefaultAggregation.Formula formula) {
         this.formula = formula;
@@ -382,6 +384,9 @@ public class MeterCreateParams extends ApiRequestParams {
     public enum Formula implements ApiRequestParams.EnumParam {
       @SerializedName("count")
       COUNT("count"),
+
+      @SerializedName("last")
+      LAST("last"),
 
       @SerializedName("sum")
       SUM("sum");

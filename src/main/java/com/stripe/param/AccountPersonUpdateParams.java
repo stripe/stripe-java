@@ -150,7 +150,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
    * any jurisdiction.
    */
   @SerializedName("political_exposure")
-  Object politicalExposure;
+  PoliticalExposure politicalExposure;
 
   /** The person's registered address. */
   @SerializedName("registered_address")
@@ -193,7 +193,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
       Object nationality,
       Object personToken,
       Object phone,
-      Object politicalExposure,
+      PoliticalExposure politicalExposure,
       RegisteredAddress registeredAddress,
       Relationship relationship,
       Object ssnLast4,
@@ -282,7 +282,7 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
 
     private Object phone;
 
-    private Object politicalExposure;
+    private PoliticalExposure politicalExposure;
 
     private RegisteredAddress registeredAddress;
 
@@ -728,17 +728,8 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
      * related persons, declares that they hold or have held an important public job or function, in
      * any jurisdiction.
      */
-    public Builder setPoliticalExposure(String politicalExposure) {
-      this.politicalExposure = politicalExposure;
-      return this;
-    }
-
-    /**
-     * Indicates if the person or any of their representatives, family members, or other closely
-     * related persons, declares that they hold or have held an important public job or function, in
-     * any jurisdiction.
-     */
-    public Builder setPoliticalExposure(EmptyParam politicalExposure) {
+    public Builder setPoliticalExposure(
+        AccountPersonUpdateParams.PoliticalExposure politicalExposure) {
       this.politicalExposure = politicalExposure;
       return this;
     }
@@ -2841,6 +2832,21 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
           return this;
         }
       }
+    }
+  }
+
+  public enum PoliticalExposure implements ApiRequestParams.EnumParam {
+    @SerializedName("existing")
+    EXISTING("existing"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PoliticalExposure(String value) {
+      this.value = value;
     }
   }
 }

@@ -65,13 +65,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_cycle_anchor_config")
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
-  /**
-   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-   * billing period.
-   */
-  @SerializedName("billing_thresholds")
-  BillingThresholds billingThresholds;
-
   /** A date in the future at which the subscription will automatically get canceled. */
   @SerializedName("cancel_at")
   Long cancelAt;
@@ -117,17 +110,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("currency")
   String currency;
-
-  /**
-   * End of the current period that the subscription has been invoiced for. At the end of this
-   * period, a new invoice will be created.
-   */
-  @SerializedName("current_period_end")
-  Long currentPeriodEnd;
-
-  /** Start of the current period that the subscription has been invoiced for. */
-  @SerializedName("current_period_start")
-  Long currentPeriodStart;
 
   /** ID of the customer who owns the subscription. */
   @SerializedName("customer")
@@ -184,15 +166,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("description")
   String description;
-
-  /**
-   * Describes the current discount applied to this subscription, if there is one. When billing, a
-   * discount applied to a subscription overrides a discount applied on a customer-wide basis. This
-   * field has been deprecated and will be removed in a future API version. Use {@code discounts}
-   * instead.
-   */
-  @SerializedName("discount")
-  Discount discount;
 
   /**
    * The discounts applied to the subscription. Subscription item discounts are applied before
@@ -256,7 +229,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * The account (if any) the charge was made on behalf of for charges associated with this
-   * subscription. See the Connect documentation for details.
+   * subscription. See the <a
+   * href="https://stripe.com/docs/connect/subscriptions#on-behalf-of">Connect documentation</a> for
+   * details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -1369,28 +1344,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * For more details about BillingThresholds, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class BillingThresholds extends StripeObject {
-    /** Monetary threshold that triggers the subscription to create an invoice. */
-    @SerializedName("amount_gte")
-    Long amountGte;
-
-    /**
-     * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached. If
-     * true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was last
-     * reached; otherwise, the value will remain unchanged. This value may not be {@code true} if
-     * the subscription contains items with plans that have {@code aggregate_usage=last_ever}.
-     */
-    @SerializedName("reset_billing_cycle_anchor")
-    Boolean resetBillingCycleAnchor;
-  }
-
-  /**
    * For more details about CancellationDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2039,12 +1992,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(billingCycleAnchorConfig, responseGetter);
-    trySetResponseGetter(billingThresholds, responseGetter);
     trySetResponseGetter(cancellationDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
-    trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(invoiceSettings, responseGetter);
     trySetResponseGetter(items, responseGetter);
     trySetResponseGetter(latestInvoice, responseGetter);

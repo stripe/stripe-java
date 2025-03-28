@@ -100,16 +100,16 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("period")
   Period period;
 
-  /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
-  @SerializedName("price")
-  String price;
-
   /**
    * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-   * inline. One of {@code price} or {@code price_data} is required.
+   * inline.
    */
   @SerializedName("price_data")
   PriceData priceData;
+
+  /** The pricing information for the invoice item. */
+  @SerializedName("pricing")
+  Pricing pricing;
 
   /** Non-negative integer. The quantity of units for the invoice item. */
   @SerializedName("quantity")
@@ -147,18 +147,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   List<String> taxRates;
 
   /**
-   * The integer unit amount in cents (or local equivalent) of the charge to be applied to the
-   * upcoming invoice. This {@code unit_amount} will be multiplied by the quantity to get the full
-   * amount. Passing in a negative {@code unit_amount} will reduce the {@code amount_due} on the
-   * invoice.
-   */
-  @SerializedName("unit_amount")
-  Long unitAmount;
-
-  /**
-   * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with at
-   * most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal} can be
-   * set.
+   * The decimal unit amount in cents (or local equivalent) of the charge to be applied to the
+   * upcoming invoice. This {@code unit_amount_decimal} will be multiplied by the quantity to get
+   * the full amount. Passing in a negative {@code unit_amount_decimal} will reduce the {@code
+   * amount_due} on the invoice. Accepts at most 12 decimal places.
    */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
@@ -175,14 +167,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       String invoice,
       Object metadata,
       Period period,
-      String price,
       PriceData priceData,
+      Pricing pricing,
       Long quantity,
       String subscription,
       TaxBehavior taxBehavior,
       Object taxCode,
       List<String> taxRates,
-      Long unitAmount,
       BigDecimal unitAmountDecimal) {
     this.amount = amount;
     this.currency = currency;
@@ -195,14 +186,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     this.invoice = invoice;
     this.metadata = metadata;
     this.period = period;
-    this.price = price;
     this.priceData = priceData;
+    this.pricing = pricing;
     this.quantity = quantity;
     this.subscription = subscription;
     this.taxBehavior = taxBehavior;
     this.taxCode = taxCode;
     this.taxRates = taxRates;
-    this.unitAmount = unitAmount;
     this.unitAmountDecimal = unitAmountDecimal;
   }
 
@@ -233,9 +223,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     private Period period;
 
-    private String price;
-
     private PriceData priceData;
+
+    private Pricing pricing;
 
     private Long quantity;
 
@@ -246,8 +236,6 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     private Object taxCode;
 
     private List<String> taxRates;
-
-    private Long unitAmount;
 
     private BigDecimal unitAmountDecimal;
 
@@ -265,14 +253,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           this.invoice,
           this.metadata,
           this.period,
-          this.price,
           this.priceData,
+          this.pricing,
           this.quantity,
           this.subscription,
           this.taxBehavior,
           this.taxCode,
           this.taxRates,
-          this.unitAmount,
           this.unitAmountDecimal);
     }
 
@@ -495,18 +482,18 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
-    public Builder setPrice(String price) {
-      this.price = price;
-      return this;
-    }
-
     /**
      * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
-     * inline. One of {@code price} or {@code price_data} is required.
+     * inline.
      */
     public Builder setPriceData(InvoiceItemCreateParams.PriceData priceData) {
       this.priceData = priceData;
+      return this;
+    }
+
+    /** The pricing information for the invoice item. */
+    public Builder setPricing(InvoiceItemCreateParams.Pricing pricing) {
+      this.pricing = pricing;
       return this;
     }
 
@@ -580,20 +567,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer unit amount in cents (or local equivalent) of the charge to be applied to the
-     * upcoming invoice. This {@code unit_amount} will be multiplied by the quantity to get the full
-     * amount. Passing in a negative {@code unit_amount} will reduce the {@code amount_due} on the
-     * invoice.
-     */
-    public Builder setUnitAmount(Long unitAmount) {
-      this.unitAmount = unitAmount;
-      return this;
-    }
-
-    /**
-     * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent) with
-     * at most 12 decimal places. Only one of {@code unit_amount} and {@code unit_amount_decimal}
-     * can be set.
+     * The decimal unit amount in cents (or local equivalent) of the charge to be applied to the
+     * upcoming invoice. This {@code unit_amount_decimal} will be multiplied by the quantity to get
+     * the full amount. Passing in a negative {@code unit_amount_decimal} will reduce the {@code
+     * amount_due} on the invoice. Accepts at most 12 decimal places.
      */
     public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
@@ -806,7 +783,11 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+    /**
+     * <strong>Required.</strong> The ID of the <a
+     * href="https://docs.stripe.com/api/products">Product</a> that this <a
+     * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+     */
     @SerializedName("product")
     String product;
 
@@ -915,7 +896,11 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+       */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
@@ -969,6 +954,75 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
       TaxBehavior(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Pricing {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The ID of the price object. */
+    @SerializedName("price")
+    String price;
+
+    private Pricing(Map<String, Object> extraParams, String price) {
+      this.extraParams = extraParams;
+      this.price = price;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String price;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceItemCreateParams.Pricing build() {
+        return new InvoiceItemCreateParams.Pricing(this.extraParams, this.price);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceItemCreateParams.Pricing#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceItemCreateParams.Pricing#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The ID of the price object. */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
       }
     }
   }

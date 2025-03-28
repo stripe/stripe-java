@@ -31,9 +31,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("cash_balance")
   CashBalance cashBalance;
 
-  @SerializedName("coupon")
-  String coupon;
-
   /**
    * An arbitrary string that you can attach to a customer object. It is displayed alongside the
    * customer in the dashboard.
@@ -100,13 +97,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("preferred_locales")
   List<String> preferredLocales;
 
-  /**
-   * The ID of a promotion code to apply to the customer. The customer will have a discount applied
-   * on all recurring payments. Charges you create through the API will not have the discount.
-   */
-  @SerializedName("promotion_code")
-  String promotionCode;
-
   /** The customer's shipping information. Appears on invoices emailed to this customer. */
   @SerializedName("shipping")
   Object shipping;
@@ -137,7 +127,6 @@ public class CustomerCreateParams extends ApiRequestParams {
       Object address,
       Long balance,
       CashBalance cashBalance,
-      String coupon,
       String description,
       String email,
       List<String> expand,
@@ -150,7 +139,6 @@ public class CustomerCreateParams extends ApiRequestParams {
       String paymentMethod,
       String phone,
       List<String> preferredLocales,
-      String promotionCode,
       Object shipping,
       String source,
       Tax tax,
@@ -161,7 +149,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.address = address;
     this.balance = balance;
     this.cashBalance = cashBalance;
-    this.coupon = coupon;
     this.description = description;
     this.email = email;
     this.expand = expand;
@@ -174,7 +161,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.paymentMethod = paymentMethod;
     this.phone = phone;
     this.preferredLocales = preferredLocales;
-    this.promotionCode = promotionCode;
     this.shipping = shipping;
     this.source = source;
     this.tax = tax;
@@ -194,8 +180,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     private Long balance;
 
     private CashBalance cashBalance;
-
-    private String coupon;
 
     private String description;
 
@@ -221,8 +205,6 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private List<String> preferredLocales;
 
-    private String promotionCode;
-
     private Object shipping;
 
     private String source;
@@ -243,7 +225,6 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.address,
           this.balance,
           this.cashBalance,
-          this.coupon,
           this.description,
           this.email,
           this.expand,
@@ -256,7 +237,6 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.paymentMethod,
           this.phone,
           this.preferredLocales,
-          this.promotionCode,
           this.shipping,
           this.source,
           this.tax,
@@ -292,11 +272,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     /** Balance information and default balance settings for this customer. */
     public Builder setCashBalance(CustomerCreateParams.CashBalance cashBalance) {
       this.cashBalance = cashBalance;
-      return this;
-    }
-
-    public Builder setCoupon(String coupon) {
-      this.coupon = coupon;
       return this;
     }
 
@@ -481,16 +456,6 @@ public class CustomerCreateParams extends ApiRequestParams {
         this.preferredLocales = new ArrayList<>();
       }
       this.preferredLocales.addAll(elements);
-      return this;
-    }
-
-    /**
-     * The ID of a promotion code to apply to the customer. The customer will have a discount
-     * applied on all recurring payments. Charges you create through the API will not have the
-     * discount.
-     */
-    public Builder setPromotionCode(String promotionCode) {
-      this.promotionCode = promotionCode;
       return this;
     }
 

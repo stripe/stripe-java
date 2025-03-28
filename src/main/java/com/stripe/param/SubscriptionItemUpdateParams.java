@@ -15,13 +15,6 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class SubscriptionItemUpdateParams extends ApiRequestParams {
-  /**
-   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-   * billing period. When updating, pass an empty string to remove previously-defined thresholds.
-   */
-  @SerializedName("billing_thresholds")
-  Object billingThresholds;
-
   /** The coupons to redeem into discounts for the subscription item. */
   @SerializedName("discounts")
   Object discounts;
@@ -138,7 +131,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   Object taxRates;
 
   private SubscriptionItemUpdateParams(
-      Object billingThresholds,
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -152,7 +144,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       Long prorationDate,
       Long quantity,
       Object taxRates) {
-    this.billingThresholds = billingThresholds;
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -173,8 +164,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Object billingThresholds;
-
     private Object discounts;
 
     private List<String> expand;
@@ -204,7 +193,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemUpdateParams build() {
       return new SubscriptionItemUpdateParams(
-          this.billingThresholds,
           this.discounts,
           this.expand,
           this.extraParams,
@@ -218,25 +206,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
           this.prorationDate,
           this.quantity,
           this.taxRates);
-    }
-
-    /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period. When updating, pass an empty string to remove previously-defined thresholds.
-     */
-    public Builder setBillingThresholds(
-        SubscriptionItemUpdateParams.BillingThresholds billingThresholds) {
-      this.billingThresholds = billingThresholds;
-      return this;
-    }
-
-    /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period. When updating, pass an empty string to remove previously-defined thresholds.
-     */
-    public Builder setBillingThresholds(EmptyParam billingThresholds) {
-      this.billingThresholds = billingThresholds;
-      return this;
     }
 
     /**
@@ -549,86 +518,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingThresholds {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
-     * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-     * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-     * threshold</a>)
-     */
-    @SerializedName("usage_gte")
-    Long usageGte;
-
-    private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
-      this.extraParams = extraParams;
-      this.usageGte = usageGte;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Long usageGte;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public SubscriptionItemUpdateParams.BillingThresholds build() {
-        return new SubscriptionItemUpdateParams.BillingThresholds(this.extraParams, this.usageGte);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionItemUpdateParams.BillingThresholds#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionItemUpdateParams.BillingThresholds#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
-       * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-       * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
-       * threshold</a>)
-       */
-      public Builder setUsageGte(Long usageGte) {
-        this.usageGte = usageGte;
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /** ID of the coupon to create a new discount for. */
     @SerializedName("coupon")
@@ -762,7 +651,11 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+    /**
+     * <strong>Required.</strong> The ID of the <a
+     * href="https://docs.stripe.com/api/products">Product</a> that this <a
+     * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+     */
     @SerializedName("product")
     Object product;
 
@@ -893,13 +786,21 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+       */
       public Builder setProduct(String product) {
         this.product = product;
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the product that this price will belong to. */
+      /**
+       * <strong>Required.</strong> The ID of the <a
+       * href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to.
+       */
       public Builder setProduct(EmptyParam product) {
         this.product = product;
         return this;

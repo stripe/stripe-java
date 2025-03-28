@@ -15934,7 +15934,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventListParams params =
-        com.stripe.param.v2.core.EventListParams.builder().build();
+        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
 
     com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
         client.v2().core().events().list(params);

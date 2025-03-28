@@ -646,7 +646,8 @@ public class Calculation extends ApiResource implements HasId {
 
       /**
        * Indicates the type of tax rate applied to the taxable amount. This value can be {@code
-       * null} when no tax applies to the location.
+       * null} when no tax applies to the location. This field is only present for TaxRates created
+       * by Stripe Tax.
        *
        * <p>One of {@code flat_amount}, or {@code percentage}.
        */

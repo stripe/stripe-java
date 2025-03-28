@@ -78,6 +78,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("verifone_p400")
   VerifoneP400 verifoneP400;
 
+  @SerializedName("wifi")
+  Wifi wifi;
+
   /** Creates a new {@code Configuration} object. */
   public static Configuration create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -255,7 +258,7 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BbposWiseposE extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
@@ -324,7 +327,7 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StripeS700 extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
@@ -798,7 +801,7 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerifoneP400 extends StripeObject {
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
@@ -823,6 +826,104 @@ public class Configuration extends ApiResource implements HasId {
     }
   }
 
+  /**
+   * For more details about Wifi, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Wifi extends StripeObject {
+    @SerializedName("enterprise_eap_peap")
+    EnterpriseEapPeap enterpriseEapPeap;
+
+    @SerializedName("enterprise_eap_tls")
+    EnterpriseEapTls enterpriseEapTls;
+
+    @SerializedName("personal_psk")
+    PersonalPsk personalPsk;
+
+    /**
+     * Security type of the WiFi network. The hash with the corresponding name contains the
+     * credentials for this security type.
+     *
+     * <p>One of {@code enterprise_eap_peap}, {@code enterprise_eap_tls}, or {@code personal_psk}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about EnterpriseEapPeap, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnterpriseEapPeap extends StripeObject {
+      /** A File ID representing a PEM file containing the server certificate. */
+      @SerializedName("ca_certificate_file")
+      String caCertificateFile;
+
+      /** Password for connecting to the WiFi network. */
+      @SerializedName("password")
+      String password;
+
+      /** Name of the WiFi network. */
+      @SerializedName("ssid")
+      String ssid;
+
+      /** Username for connecting to the WiFi network. */
+      @SerializedName("username")
+      String username;
+    }
+
+    /**
+     * For more details about EnterpriseEapTls, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnterpriseEapTls extends StripeObject {
+      /** A File ID representing a PEM file containing the server certificate. */
+      @SerializedName("ca_certificate_file")
+      String caCertificateFile;
+
+      /** A File ID representing a PEM file containing the client certificate. */
+      @SerializedName("client_certificate_file")
+      String clientCertificateFile;
+
+      /** A File ID representing a PEM file containing the client RSA private key. */
+      @SerializedName("private_key_file")
+      String privateKeyFile;
+
+      /** Password for the private key file. */
+      @SerializedName("private_key_file_password")
+      String privateKeyFilePassword;
+
+      /** Name of the WiFi network. */
+      @SerializedName("ssid")
+      String ssid;
+    }
+
+    /**
+     * For more details about PersonalPsk, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PersonalPsk extends StripeObject {
+      /** Password for connecting to the WiFi network. */
+      @SerializedName("password")
+      String password;
+
+      /** Name of the WiFi network. */
+      @SerializedName("ssid")
+      String ssid;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -832,5 +933,6 @@ public class Configuration extends ApiResource implements HasId {
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
     trySetResponseGetter(verifoneP400, responseGetter);
+    trySetResponseGetter(wifi, responseGetter);
   }
 }

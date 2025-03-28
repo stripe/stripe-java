@@ -65,11 +65,19 @@ public final class PriceService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Price>>() {}.getType());
   }
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  /**
+   * Creates a new <a href="https://docs.stripe.com/api/prices">Price</a> for an existing <a
+   * href="https://docs.stripe.com/api/products">Product</a>. The Price can be recurring or
+   * one-time.
+   */
   public Price create(PriceCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Creates a new price for an existing product. The price can be recurring or one-time. */
+  /**
+   * Creates a new <a href="https://docs.stripe.com/api/prices">Price</a> for an existing <a
+   * href="https://docs.stripe.com/api/products">Product</a>. The Price can be recurring or
+   * one-time.
+   */
   public Price create(PriceCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/prices";
     ApiRequest request =

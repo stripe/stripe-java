@@ -22,8 +22,6 @@ import com.stripe.param.InvoiceRemoveLinesParams;
 import com.stripe.param.InvoiceRetrieveParams;
 import com.stripe.param.InvoiceSearchParams;
 import com.stripe.param.InvoiceSendInvoiceParams;
-import com.stripe.param.InvoiceUpcomingLinesParams;
-import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateLinesParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.InvoiceVoidInvoiceParams;
@@ -100,6 +98,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("amount_due")
   Long amountDue;
 
+  /**
+   * Amount that was overpaid on the invoice. The amount overpaid is credited to the customer's
+   * credit balance.
+   */
+  @SerializedName("amount_overpaid")
+  Long amountOverpaid;
+
   /** The amount, in cents (or local equivalent), that was paid. */
   @SerializedName("amount_paid")
   Long amountPaid;
@@ -117,13 +122,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
-
-  /**
-   * The fee in cents (or local equivalent) that will be applied to the invoice and transferred to
-   * the application owner's Stripe account when the invoice is paid.
-   */
-  @SerializedName("application_fee_amount")
-  Long applicationFeeAmount;
 
   /**
    * Number of payment attempts made for this invoice, from the perspective of the payment retry
@@ -184,12 +182,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("billing_reason")
   String billingReason;
 
-  /** ID of the latest charge generated for this invoice, if any. */
-  @SerializedName("charge")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Charge> charge;
-
   /**
    * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
    * Stripe will attempt to pay this invoice using the default source attached to the customer. When
@@ -199,6 +191,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("collection_method")
   String collectionMethod;
+
+  /**
+   * The confirmation secret associated with this invoice. Currently, this contains the
+   * client_secret of the PaymentIntent that Stripe creates during invoice finalization.
+   */
+  @SerializedName("confirmation_secret")
+  ConfirmationSecret confirmationSecret;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -307,13 +306,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("description")
   String description;
-
-  /**
-   * Describes the current discount applied to this invoice, if there is one. Not populated if there
-   * are multiple discounts.
-   */
-  @SerializedName("discount")
-  Discount discount;
 
   /**
    * The discounts applied to the invoice. Line item discounts are applied before invoice discounts.
@@ -454,32 +446,16 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
-  /**
-   * Whether payment was successfully collected for this invoice. An invoice can be paid (most
-   * commonly) with a charge or with credit from the customer's account balance.
-   */
-  @SerializedName("paid")
-  Boolean paid;
-
-  /**
-   * Returns true if the invoice was manually marked paid, returns false if the invoice hasn't been
-   * paid yet or was paid on Stripe.
-   */
-  @SerializedName("paid_out_of_band")
-  Boolean paidOutOfBand;
-
-  /**
-   * The PaymentIntent associated with this invoice. The PaymentIntent is generated when the invoice
-   * is finalized, and can then be used to pay the invoice. Note that voiding an invoice will cancel
-   * the PaymentIntent.
-   */
-  @SerializedName("payment_intent")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<PaymentIntent> paymentIntent;
+  /** The parent that generated this invoice. */
+  @SerializedName("parent")
+  Parent parent;
 
   @SerializedName("payment_settings")
   PaymentSettings paymentSettings;
+
+  /** Payments for this invoice. */
+  @SerializedName("payments")
+  InvoicePaymentCollection payments;
 
   /**
    * End of the usage period during which invoice items were added to this invoice. This looks back
@@ -506,12 +482,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** Total amount of all pre-payment credit notes issued for this invoice. */
   @SerializedName("pre_payment_credit_notes_amount")
   Long prePaymentCreditNotesAmount;
-
-  /** The quote this invoice was generated from. */
-  @SerializedName("quote")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Quote> quote;
 
   /** This is the transaction number that appears on email receipts sent for this invoice. */
   @SerializedName("receipt_number")
@@ -558,21 +528,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /** The subscription that this invoice was prepared for, if any. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
-
-  /** Details about the subscription that created this invoice. */
-  @SerializedName("subscription_details")
-  SubscriptionDetails subscriptionDetails;
-
-  /**
-   * Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
-   */
-  @SerializedName("subscription_proration_date")
-  Long subscriptionProrationDate;
 
   /**
    * Total of all subscriptions, invoice items, and prorations on the invoice before any invoice
@@ -587,10 +546,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("subtotal_excluding_tax")
   Long subtotalExcludingTax;
-
-  /** The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice. */
-  @SerializedName("tax")
-  Long tax;
 
   /** ID of the test clock this invoice belongs to. */
   @SerializedName("test_clock")
@@ -623,16 +578,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("total_pretax_credit_amounts")
   List<Invoice.TotalPretaxCreditAmount> totalPretaxCreditAmounts;
 
-  /** The aggregate amounts calculated per tax rate for all line items. */
-  @SerializedName("total_tax_amounts")
-  List<Invoice.TotalTaxAmount> totalTaxAmounts;
-
-  /**
-   * The account (if any) the payment will be attributed to for tax reporting, and where funds from
-   * the payment will be transferred to for the invoice.
-   */
-  @SerializedName("transfer_data")
-  TransferData transferData;
+  /** The aggregate tax information of all line items. */
+  @SerializedName("total_taxes")
+  List<Invoice.TotalTax> totalTaxes;
 
   /**
    * Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all
@@ -660,24 +608,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   public void setApplicationObject(Application expandableObject) {
     this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code charge} object. */
-  public String getCharge() {
-    return (this.charge != null) ? this.charge.getId() : null;
-  }
-
-  public void setCharge(String id) {
-    this.charge = ApiResource.setExpandableFieldId(id, this.charge);
-  }
-
-  /** Get expanded {@code charge}. */
-  public Charge getChargeObject() {
-    return (this.charge != null) ? this.charge.getExpanded() : null;
-  }
-
-  public void setChargeObject(Charge expandableObject) {
-    this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code customer} object. */
@@ -770,43 +700,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   public void setOnBehalfOfObject(Account expandableObject) {
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code paymentIntent} object. */
-  public String getPaymentIntent() {
-    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
-  }
-
-  public void setPaymentIntent(String id) {
-    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
-  }
-
-  /** Get expanded {@code paymentIntent}. */
-  public PaymentIntent getPaymentIntentObject() {
-    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
-  }
-
-  public void setPaymentIntentObject(PaymentIntent expandableObject) {
-    this.paymentIntent =
-        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code quote} object. */
-  public String getQuote() {
-    return (this.quote != null) ? this.quote.getId() : null;
-  }
-
-  public void setQuote(String id) {
-    this.quote = ApiResource.setExpandableFieldId(id, this.quote);
-  }
-
-  /** Get expanded {@code quote}. */
-  public Quote getQuoteObject() {
-    return (this.quote != null) ? this.quote.getExpanded() : null;
-  }
-
-  public void setQuoteObject(Quote expandableObject) {
-    this.quote = new ExpandableField<Quote>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code subscription} object. */
@@ -1733,211 +1626,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public static Invoice upcoming() throws StripeException {
-    return upcoming((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public static Invoice upcoming(Map<String, Object> params) throws StripeException {
-    return upcoming(params, (RequestOptions) null);
-  }
-
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public static Invoice upcoming(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/invoices/upcoming";
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getGlobalResponseGetter().request(request, Invoice.class);
-  }
-
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public static Invoice upcoming(InvoiceUpcomingParams params) throws StripeException {
-    return upcoming(params, (RequestOptions) null);
-  }
-
-  /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
-   *
-   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
-   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
-   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
-   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
-   * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
-   *
-   * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
-   * vary between the time of the preview and the time of the actual invoice creation. <a
-   * href="https://docs.stripe.com/currencies/conversions">Learn more</a>
-   */
-  public static Invoice upcoming(InvoiceUpcomingParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/invoices/upcoming";
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getGlobalResponseGetter().request(request, Invoice.class);
-  }
-
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public static InvoiceLineItemCollection upcomingLines() throws StripeException {
-    return upcomingLines((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public static InvoiceLineItemCollection upcomingLines(Map<String, Object> params)
-      throws StripeException {
-    return upcomingLines(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public static InvoiceLineItemCollection upcomingLines(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = "/v1/invoices/upcoming/lines";
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getGlobalResponseGetter().request(request, InvoiceLineItemCollection.class);
-  }
-
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public static InvoiceLineItemCollection upcomingLines(InvoiceUpcomingLinesParams params)
-      throws StripeException {
-    return upcomingLines(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an upcoming invoice, you’ll get a <strong>lines</strong> property containing
-   * the total count of line items and the first handful of those items. There is also a URL where
-   * you can retrieve the full (paginated) list of line items.
-   */
-  public static InvoiceLineItemCollection upcomingLines(
-      InvoiceUpcomingLinesParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/invoices/upcoming/lines";
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getGlobalResponseGetter().request(request, InvoiceLineItemCollection.class);
-  }
-
-  /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="https://stripe.com/docs/billing/invoices/workflow#finalized">finalized</a>, monetary
    * values, as well as {@code collection_method}, become uneditable.
@@ -2244,6 +1932,26 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about ConfirmationSecret, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ConfirmationSecret extends StripeObject {
+    /** The client_secret of the payment that Stripe creates for the invoice after finalization. */
+    @SerializedName("client_secret")
+    String clientSecret;
+
+    /**
+     * The type of client_secret. Currently this is always payment_intent, referencing the default
+     * payment_intent that Stripe creates during invoice finalization
+     */
+    @SerializedName("type")
+    String type;
+  }
+
+  /**
    * For more details about CustomField, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2372,6 +2080,94 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
     public void setAccountObject(Account expandableObject) {
       this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Parent extends StripeObject {
+    /** Details about the quote that generated this invoice. */
+    @SerializedName("quote_details")
+    QuoteDetails quoteDetails;
+
+    /** Details about the subscription that generated this invoice. */
+    @SerializedName("subscription_details")
+    SubscriptionDetails subscriptionDetails;
+
+    /**
+     * The type of parent that generated this invoice
+     *
+     * <p>One of {@code quote_details}, or {@code subscription_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about QuoteDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class QuoteDetails extends StripeObject {
+      /** The quote that generated this invoice. */
+      @SerializedName("quote")
+      String quote;
+    }
+
+    /**
+     * For more details about SubscriptionDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionDetails extends StripeObject {
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> defined as
+       * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
+       * subscription metadata at the time of invoice finalization. <em>Note: This attribute is
+       * populated only for invoices created on or after June 29, 2023.</em>
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** The subscription that generated this invoice. */
+      @SerializedName("subscription")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Subscription> subscription;
+
+      /**
+       * Only set for upcoming invoices that preview prorations. The time used to calculate
+       * prorations.
+       */
+      @SerializedName("subscription_proration_date")
+      Long subscriptionProrationDate;
+
+      /** Get ID of expandable {@code subscription} object. */
+      public String getSubscription() {
+        return (this.subscription != null) ? this.subscription.getId() : null;
+      }
+
+      public void setSubscription(String id) {
+        this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
+      }
+
+      /** Get expanded {@code subscription}. */
+      public Subscription getSubscriptionObject() {
+        return (this.subscription != null) ? this.subscription.getExpanded() : null;
+      }
+
+      public void setSubscriptionObject(Subscription expandableObject) {
+        this.subscription =
+            new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+      }
     }
   }
 
@@ -2855,24 +2651,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * For more details about SubscriptionDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SubscriptionDetails extends StripeObject {
-    /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> defined as
-     * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
-     * subscription metadata at the time of invoice finalization. <em>Note: This attribute is
-     * populated only for invoices created on or after June 29, 2023.</em>
-     */
-    @SerializedName("metadata")
-    Map<String, String> metadata;
-  }
-
-  /**
    * For more details about ThresholdReason, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -3017,36 +2795,42 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * For more details about TotalTaxAmount, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * For more details about TotalTax, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class TotalTaxAmount extends StripeObject {
-    /** The amount, in cents (or local equivalent), of the tax. */
+  public static class TotalTax extends StripeObject {
+    /** The amount of the tax, in cents (or local equivalent). */
     @SerializedName("amount")
     Long amount;
 
-    /** Whether this tax amount is inclusive or exclusive. */
-    @SerializedName("inclusive")
-    Boolean inclusive;
+    /**
+     * Whether this tax is inclusive or exclusive.
+     *
+     * <p>One of {@code exclusive}, or {@code inclusive}.
+     */
+    @SerializedName("tax_behavior")
+    String taxBehavior;
 
-    /** The tax rate that was applied to get this tax amount. */
-    @SerializedName("tax_rate")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<TaxRate> taxRate;
+    /**
+     * Additional details about the tax rate. Only present when {@code type} is {@code
+     * tax_rate_details}.
+     */
+    @SerializedName("tax_rate_details")
+    TaxRateDetails taxRateDetails;
 
     /**
      * The reasoning behind this tax, for example, if the product is tax exempt. The possible values
      * for this field may be extended as new tax rules are supported.
      *
-     * <p>One of {@code customer_exempt}, {@code not_collecting}, {@code not_subject_to_tax}, {@code
-     * not_supported}, {@code portion_product_exempt}, {@code portion_reduced_rated}, {@code
-     * portion_standard_rated}, {@code product_exempt}, {@code product_exempt_holiday}, {@code
-     * proportionally_rated}, {@code reduced_rated}, {@code reverse_charge}, {@code standard_rated},
-     * {@code taxable_basis_reduced}, or {@code zero_rated}.
+     * <p>One of {@code customer_exempt}, {@code not_available}, {@code not_collecting}, {@code
+     * not_subject_to_tax}, {@code not_supported}, {@code portion_product_exempt}, {@code
+     * portion_reduced_rated}, {@code portion_standard_rated}, {@code product_exempt}, {@code
+     * product_exempt_holiday}, {@code proportionally_rated}, {@code reduced_rated}, {@code
+     * reverse_charge}, {@code standard_rated}, {@code taxable_basis_reduced}, or {@code
+     * zero_rated}.
      */
     @SerializedName("taxability_reason")
     String taxabilityReason;
@@ -3055,62 +2839,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @SerializedName("taxable_amount")
     Long taxableAmount;
 
-    /** Get ID of expandable {@code taxRate} object. */
-    public String getTaxRate() {
-      return (this.taxRate != null) ? this.taxRate.getId() : null;
-    }
-
-    public void setTaxRate(String id) {
-      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
-    }
-
-    /** Get expanded {@code taxRate}. */
-    public TaxRate getTaxRateObject() {
-      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
-    }
-
-    public void setTaxRateObject(TaxRate expandableObject) {
-      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
-    }
-  }
-
-  /**
-   * For more details about TransferData, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class TransferData extends StripeObject {
     /**
-     * The amount in cents (or local equivalent) that will be transferred to the destination account
-     * when the invoice is paid. By default, the entire amount is transferred to the destination.
+     * The type of tax information.
+     *
+     * <p>Equal to {@code tax_rate_details}.
      */
-    @SerializedName("amount")
-    Long amount;
+    @SerializedName("type")
+    String type;
 
-    /** The account where funds from the payment will be transferred to upon payment success. */
-    @SerializedName("destination")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Account> destination;
-
-    /** Get ID of expandable {@code destination} object. */
-    public String getDestination() {
-      return (this.destination != null) ? this.destination.getId() : null;
-    }
-
-    public void setDestination(String id) {
-      this.destination = ApiResource.setExpandableFieldId(id, this.destination);
-    }
-
-    /** Get expanded {@code destination}. */
-    public Account getDestinationObject() {
-      return (this.destination != null) ? this.destination.getExpanded() : null;
-    }
-
-    public void setDestinationObject(Account expandableObject) {
-      this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    /**
+     * For more details about TaxRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxRateDetails extends StripeObject {
+      @SerializedName("tax_rate")
+      String taxRate;
     }
   }
 
@@ -3119,30 +2865,27 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
-    trySetResponseGetter(charge, responseGetter);
+    trySetResponseGetter(confirmationSecret, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(customerAddress, responseGetter);
     trySetResponseGetter(customerShipping, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);
     trySetResponseGetter(defaultSource, responseGetter);
-    trySetResponseGetter(discount, responseGetter);
     trySetResponseGetter(fromInvoice, responseGetter);
     trySetResponseGetter(issuer, responseGetter);
     trySetResponseGetter(lastFinalizationError, responseGetter);
     trySetResponseGetter(latestRevision, responseGetter);
     trySetResponseGetter(lines, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
-    trySetResponseGetter(paymentIntent, responseGetter);
+    trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(paymentSettings, responseGetter);
-    trySetResponseGetter(quote, responseGetter);
+    trySetResponseGetter(payments, responseGetter);
     trySetResponseGetter(rendering, responseGetter);
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
-    trySetResponseGetter(subscriptionDetails, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(thresholdReason, responseGetter);
-    trySetResponseGetter(transferData, responseGetter);
   }
 }

@@ -358,6 +358,9 @@ public class AuthorizationListParams extends ApiRequestParams {
     @SerializedName("closed")
     CLOSED("closed"),
 
+    @SerializedName("expired")
+    EXPIRED("expired"),
+
     @SerializedName("pending")
     PENDING("pending"),
 

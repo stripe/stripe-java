@@ -64,13 +64,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   Object metadata;
 
   /**
-   * If this is a {@code naver_pay} PaymentMethod, this hash contains details about the Naver Pay
-   * payment method.
-   */
-  @SerializedName("naver_pay")
-  NaverPay naverPay;
-
-  /**
    * If this is a {@code pay_by_bank} PaymentMethod, this hash contains details about the PayByBank
    * payment method.
    */
@@ -92,7 +85,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Link link,
       Object metadata,
-      NaverPay naverPay,
       PayByBank payByBank,
       UsBankAccount usBankAccount) {
     this.allowRedisplay = allowRedisplay;
@@ -102,7 +94,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.link = link;
     this.metadata = metadata;
-    this.naverPay = naverPay;
     this.payByBank = payByBank;
     this.usBankAccount = usBankAccount;
   }
@@ -126,8 +117,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
-    private NaverPay naverPay;
-
     private PayByBank payByBank;
 
     private UsBankAccount usBankAccount;
@@ -142,7 +131,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.link,
           this.metadata,
-          this.naverPay,
           this.payByBank,
           this.usBankAccount);
     }
@@ -281,15 +269,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
-      return this;
-    }
-
-    /**
-     * If this is a {@code naver_pay} PaymentMethod, this hash contains details about the Naver Pay
-     * payment method.
-     */
-    public Builder setNaverPay(PaymentMethodUpdateParams.NaverPay naverPay) {
-      this.naverPay = naverPay;
       return this;
     }
 
@@ -897,96 +876,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class NaverPay {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * Whether to use Naver Pay points or a card to fund this transaction. If not provided, this
-     * defaults to {@code card}.
-     */
-    @SerializedName("funding")
-    Funding funding;
-
-    private NaverPay(Map<String, Object> extraParams, Funding funding) {
-      this.extraParams = extraParams;
-      this.funding = funding;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Funding funding;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PaymentMethodUpdateParams.NaverPay build() {
-        return new PaymentMethodUpdateParams.NaverPay(this.extraParams, this.funding);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentMethodUpdateParams.NaverPay#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentMethodUpdateParams.NaverPay#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Whether to use Naver Pay points or a card to fund this transaction. If not provided, this
-       * defaults to {@code card}.
-       */
-      public Builder setFunding(PaymentMethodUpdateParams.NaverPay.Funding funding) {
-        this.funding = funding;
-        return this;
-      }
-    }
-
-    public enum Funding implements ApiRequestParams.EnumParam {
-      @SerializedName("card")
-      CARD("card"),
-
-      @SerializedName("points")
-      POINTS("points");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Funding(String value) {
-        this.value = value;
       }
     }
   }

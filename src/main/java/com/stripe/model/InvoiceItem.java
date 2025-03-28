@@ -123,19 +123,16 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("object")
   String object;
 
+  /** The parent that generated this invoice. */
+  @SerializedName("parent")
+  Parent parent;
+
   @SerializedName("period")
   Period period;
 
-  /**
-   * If the invoice item is a proration, the plan of the subscription that the proration was
-   * computed for.
-   */
-  @SerializedName("plan")
-  Plan plan;
-
-  /** The price of the invoice item. */
-  @SerializedName("price")
-  Price price;
+  /** The pricing information of the invoice item. */
+  @SerializedName("pricing")
+  Pricing pricing;
 
   /**
    * Whether the invoice item was created automatically as a proration adjustment when the customer
@@ -151,16 +148,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("quantity")
   Long quantity;
 
-  /** The subscription that this invoice item has been created for, if any. */
-  @SerializedName("subscription")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Subscription> subscription;
-
-  /** The subscription item that this invoice item has been created for, if any. */
-  @SerializedName("subscription_item")
-  String subscriptionItem;
-
   /**
    * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
    * invoice do not apply to this invoice item.
@@ -173,14 +160,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TestClock> testClock;
-
-  /** Unit amount (in the {@code currency} specified) of the invoice item. */
-  @SerializedName("unit_amount")
-  Long unitAmount;
-
-  /** Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places. */
-  @SerializedName("unit_amount_decimal")
-  BigDecimal unitAmountDecimal;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -216,25 +195,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
 
   public void setInvoiceObject(Invoice expandableObject) {
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code subscription} object. */
-  public String getSubscription() {
-    return (this.subscription != null) ? this.subscription.getId() : null;
-  }
-
-  public void setSubscription(String id) {
-    this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
-  }
-
-  /** Get expanded {@code subscription}. */
-  public Subscription getSubscriptionObject() {
-    return (this.subscription != null) ? this.subscription.getExpanded() : null;
-  }
-
-  public void setSubscriptionObject(Subscription expandableObject) {
-    this.subscription =
-        new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code testClock} object. */
@@ -510,6 +470,44 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
+   * For more details about Parent, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Parent extends StripeObject {
+    /** Details about the subscription that generated this invoice item. */
+    @SerializedName("subscription_details")
+    SubscriptionDetails subscriptionDetails;
+
+    /**
+     * The type of parent that generated this invoice item
+     *
+     * <p>Equal to {@code subscription_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about SubscriptionDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SubscriptionDetails extends StripeObject {
+      /** The subscription that generated this invoice item. */
+      @SerializedName("subscription")
+      String subscription;
+
+      /** The subscription item that generated this invoice item. */
+      @SerializedName("subscription_item")
+      String subscriptionItem;
+    }
+  }
+
+  /**
    * For more details about Period, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -529,15 +527,58 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     Long start;
   }
 
+  /**
+   * For more details about Pricing, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Pricing extends StripeObject {
+    @SerializedName("price_details")
+    PriceDetails priceDetails;
+
+    /**
+     * The type of the pricing details.
+     *
+     * <p>Equal to {@code price_details}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * The unit amount (in the {@code currency} specified) of the item which contains a decimal
+     * value with at most 12 decimal places.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
+
+    /**
+     * For more details about PriceDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PriceDetails extends StripeObject {
+      /** The ID of the price this item is associated with. */
+      @SerializedName("price")
+      String price;
+
+      /** The ID of the product this item is associated with. */
+      @SerializedName("product")
+      String product;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(invoice, responseGetter);
+    trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
-    trySetResponseGetter(plan, responseGetter);
-    trySetResponseGetter(price, responseGetter);
-    trySetResponseGetter(subscription, responseGetter);
+    trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }
 }

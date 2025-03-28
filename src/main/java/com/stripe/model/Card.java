@@ -28,13 +28,6 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Card extends ApiResource
     implements MetadataStore<Card>, ExternalAccount, PaymentSource {
-  /**
-   * The account this card belongs to. This attribute will not be in the card object if the card
-   * belongs to a customer or recipient instead. This property is only available for accounts where
-   * <a
-   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
-   * is {@code application}, which includes Custom accounts.
-   */
   @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -115,10 +108,11 @@ public class Card extends ApiResource
    * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO code for
    * currency</a> in lowercase. Must be a <a href="https://docs.stripe.com/currencies">supported
    * currency</a>. Only applicable on accounts (not customers or recipients). The card can be used
-   * as a transfer destination for funds in this currency. This property is only available for
-   * accounts where <a
-   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
-   * is {@code application}, which includes Custom accounts.
+   * as a transfer destination for funds in this currency. This property is only available when
+   * returned as an <a href="https://stripe.com/api/external_account_cards/object">External
+   * Account</a> where <a
+   * href="https://stripe.com/api/accounts/object#account_object-controller-is_controller">controller.is_controller</a>
+   * is {@code true}.
    */
   @SerializedName("currency")
   String currency;
