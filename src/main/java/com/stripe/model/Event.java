@@ -240,7 +240,7 @@ public class Event extends ApiResource implements HasId {
    * treasury.received_debit.created}, {@code billing.credit_balance_transaction.created}, {@code
    * billing.credit_grant.created}, {@code billing.credit_grant.updated}, {@code
    * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},
-   * or {@code billing.meter.updated}.
+   * {@code billing.meter.updated}, or {@code balance_settings.updated}.
    */
   @SerializedName("type")
   String type;
