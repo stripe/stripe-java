@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.moneymanagement.outboundpayments;
+package com.stripe.param.v2.moneymanagement;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class QuoteCreateParams extends ApiRequestParams {
+public class OutboundPaymentQuoteCreateParams extends ApiRequestParams {
   /** <strong>Required.</strong> The &quot;presentment amount&quot; to be sent to the recipient. */
   @SerializedName("amount")
   Amount amount;
@@ -37,7 +37,7 @@ public class QuoteCreateParams extends ApiRequestParams {
   @SerializedName("to")
   To to;
 
-  private QuoteCreateParams(
+  private OutboundPaymentQuoteCreateParams(
       Amount amount,
       DeliveryOptions deliveryOptions,
       Map<String, Object> extraParams,
@@ -66,8 +66,8 @@ public class QuoteCreateParams extends ApiRequestParams {
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public QuoteCreateParams build() {
-      return new QuoteCreateParams(
+    public OutboundPaymentQuoteCreateParams build() {
+      return new OutboundPaymentQuoteCreateParams(
           this.amount, this.deliveryOptions, this.extraParams, this.from, this.to);
     }
 
@@ -80,7 +80,8 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     /** Method to be used to send the OutboundPayment. */
-    public Builder setDeliveryOptions(QuoteCreateParams.DeliveryOptions deliveryOptions) {
+    public Builder setDeliveryOptions(
+        OutboundPaymentQuoteCreateParams.DeliveryOptions deliveryOptions) {
       this.deliveryOptions = deliveryOptions;
       return this;
     }
@@ -88,7 +89,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * QuoteCreateParams#extraParams} for the field documentation.
+     * OutboundPaymentQuoteCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -101,7 +102,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link QuoteCreateParams#extraParams} for the field documentation.
+     * See {@link OutboundPaymentQuoteCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -112,7 +113,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     /** <strong>Required.</strong> Request details about the sender of an OutboundPaymentQuote. */
-    public Builder setFrom(QuoteCreateParams.From from) {
+    public Builder setFrom(OutboundPaymentQuoteCreateParams.From from) {
       this.from = from;
       return this;
     }
@@ -120,7 +121,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> Request details about the recipient of an OutboundPaymentQuote.
      */
-    public Builder setTo(QuoteCreateParams.To to) {
+    public Builder setTo(OutboundPaymentQuoteCreateParams.To to) {
       this.to = to;
       return this;
     }
@@ -157,12 +158,14 @@ public class QuoteCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public QuoteCreateParams.DeliveryOptions build() {
-        return new QuoteCreateParams.DeliveryOptions(this.bankAccount, this.extraParams);
+      public OutboundPaymentQuoteCreateParams.DeliveryOptions build() {
+        return new OutboundPaymentQuoteCreateParams.DeliveryOptions(
+            this.bankAccount, this.extraParams);
       }
 
       /** Open Enum. Method for bank account. */
-      public Builder setBankAccount(QuoteCreateParams.DeliveryOptions.BankAccount bankAccount) {
+      public Builder setBankAccount(
+          OutboundPaymentQuoteCreateParams.DeliveryOptions.BankAccount bankAccount) {
         this.bankAccount = bankAccount;
         return this;
       }
@@ -170,7 +173,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * QuoteCreateParams.DeliveryOptions#extraParams} for the field documentation.
+       * OutboundPaymentQuoteCreateParams.DeliveryOptions#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -183,7 +186,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link QuoteCreateParams.DeliveryOptions#extraParams} for the field documentation.
+       * See {@link OutboundPaymentQuoteCreateParams.DeliveryOptions#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -251,8 +255,9 @@ public class QuoteCreateParams extends ApiRequestParams {
       private String financialAccount;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public QuoteCreateParams.From build() {
-        return new QuoteCreateParams.From(this.currency, this.extraParams, this.financialAccount);
+      public OutboundPaymentQuoteCreateParams.From build() {
+        return new OutboundPaymentQuoteCreateParams.From(
+            this.currency, this.extraParams, this.financialAccount);
       }
 
       /** <strong>Required.</strong> Describes the FinancialAccount's currency drawn from. */
@@ -264,7 +269,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * QuoteCreateParams.From#extraParams} for the field documentation.
+       * OutboundPaymentQuoteCreateParams.From#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -277,7 +282,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link QuoteCreateParams.From#extraParams} for the field documentation.
+       * See {@link OutboundPaymentQuoteCreateParams.From#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -348,8 +353,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private String recipient;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public QuoteCreateParams.To build() {
-        return new QuoteCreateParams.To(
+      public OutboundPaymentQuoteCreateParams.To build() {
+        return new OutboundPaymentQuoteCreateParams.To(
             this.currency, this.extraParams, this.payoutMethod, this.recipient);
       }
 
@@ -369,7 +374,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * QuoteCreateParams.To#extraParams} for the field documentation.
+       * OutboundPaymentQuoteCreateParams.To#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -382,7 +387,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link QuoteCreateParams.To#extraParams} for the field documentation.
+       * See {@link OutboundPaymentQuoteCreateParams.To#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

@@ -28,6 +28,11 @@ public final class MoneyManagementService extends ApiService {
         this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.OutboundPaymentQuoteService outboundPaymentQuotes() {
+    return new com.stripe.service.v2.moneymanagement.OutboundPaymentQuoteService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.OutboundPaymentService outboundPayments() {
     return new com.stripe.service.v2.moneymanagement.OutboundPaymentService(
         this.getResponseGetter());

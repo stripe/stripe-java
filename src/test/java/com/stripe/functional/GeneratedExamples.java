@@ -16791,28 +16791,27 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2MoneyManagementOutboundPaymentsQuotePostServices() throws StripeException {
+  public void testV2MoneyManagementOutboundPaymentQuotePostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments/quotes",
+        "/v2/money_management/outbound_payment_quotes",
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
         "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"rates\":{\"undefined\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"to_currency\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"}}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.moneymanagement.outboundpayments.QuoteCreateParams params =
-        com.stripe.param.v2.moneymanagement.outboundpayments.QuoteCreateParams.builder()
+    com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams params =
+        com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.builder()
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setFrom(
-                com.stripe.param.v2.moneymanagement.outboundpayments.QuoteCreateParams.From
-                    .builder()
+                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.From.builder()
                     .setCurrency("currency")
                     .setFinancialAccount("financial_account")
                     .build())
             .setTo(
-                com.stripe.param.v2.moneymanagement.outboundpayments.QuoteCreateParams.To.builder()
+                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.To.builder()
                     .setCurrency("currency")
                     .setPayoutMethod("payout_method")
                     .setRecipient("recipient")
@@ -16820,12 +16819,12 @@ class GeneratedExamples extends BaseStripeTest {
             .build();
 
     com.stripe.model.v2.moneymanagement.OutboundPaymentQuote outboundPaymentQuote =
-        client.v2().moneyManagement().outboundPayments().quotes().create(params);
+        client.v2().moneyManagement().outboundPaymentQuotes().create(params);
     assertNotNull(outboundPaymentQuote);
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments/quotes",
+        "/v2/money_management/outbound_payment_quotes",
         params.toMap(),
         null);
   }

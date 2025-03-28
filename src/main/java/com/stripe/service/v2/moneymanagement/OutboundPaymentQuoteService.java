@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.service.v2.moneymanagement.outboundpayments;
+package com.stripe.service.v2.moneymanagement;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.moneymanagement.OutboundPaymentQuote;
@@ -10,21 +10,22 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.v2.moneymanagement.outboundpayments.QuoteCreateParams;
+import com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams;
 
-public final class QuoteService extends ApiService {
-  public QuoteService(StripeResponseGetter responseGetter) {
+public final class OutboundPaymentQuoteService extends ApiService {
+  public OutboundPaymentQuoteService(StripeResponseGetter responseGetter) {
     super(responseGetter);
   }
 
   /** Creates an OutboundPaymentQuote usable in an OutboundPayment. */
-  public OutboundPaymentQuote create(QuoteCreateParams params) throws StripeException {
+  public OutboundPaymentQuote create(OutboundPaymentQuoteCreateParams params)
+      throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /** Creates an OutboundPaymentQuote usable in an OutboundPayment. */
-  public OutboundPaymentQuote create(QuoteCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v2/money_management/outbound_payments/quotes";
+  public OutboundPaymentQuote create(
+      OutboundPaymentQuoteCreateParams params, RequestOptions options) throws StripeException {
+    String path = "/v2/money_management/outbound_payment_quotes";
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
