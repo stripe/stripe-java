@@ -30,7 +30,10 @@ public class Account extends StripeObject implements HasId {
   @SerializedName("configuration")
   Configuration configuration;
 
-  /** The default contact email address for the Account. */
+  /**
+   * The default contact email address for the Account. Required when configuring the account as a
+   * merchant or recipient.
+   */
   @SerializedName("contact_email")
   String contactEmail;
 
@@ -105,7 +108,11 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("customer")
     Customer customer;
 
-    /** The Merchant Configuration allows the Account to make charges. */
+    /**
+     * The Merchant configuration allows the Account to act as a connected account and collect
+     * payments facilitated by a Connect platform. You can add this configuration to your connected
+     * accounts only if you’ve completed onboarding as a Connect platform.
+     */
     @SerializedName("merchant")
     Merchant merchant;
 
@@ -3800,7 +3807,12 @@ public class Account extends StripeObject implements HasId {
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class DefaultOutboundDestination extends StripeObject {
+      public static class DefaultOutboundDestination extends StripeObject implements HasId {
+        /** The payout method ID of the default outbound destination. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
         /**
          * Closed Enum. The payout method type of the default outbound destination.
          *
@@ -6139,7 +6151,9 @@ public class Account extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Summary extends StripeObject {
       /**
-       * An aggregate soonest point when the account will be impacted by not providing requirements.
+       * The soonest date and time a requirement on the Account will become {@code past due}.
+       * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+       * {@code 2022-09-18T13:22:18.123Z}.
        */
       @SerializedName("minimum_deadline")
       MinimumDeadline minimumDeadline;
