@@ -845,20 +845,30 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
-        public static class Selection extends StripeObject {
+        public static class Selection extends StripeObject implements HasId {
           /** List of possible choices to be selected. */
           @SerializedName("choices")
           List<Reader.Action.CollectInputs.Input.Selection.Choice> choices;
 
-          /** The value of the selected choice. */
-          @SerializedName("value")
-          String value;
+          /** The id of the selected choice. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+
+          /** The text of the selected choice. */
+          @SerializedName("text")
+          String text;
 
           /** Choice to be selected on a Reader. */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
-          public static class Choice extends StripeObject {
+          public static class Choice extends StripeObject implements HasId {
+            /** The id to be selected. */
+            @Getter(onMethod_ = {@Override})
+            @SerializedName("id")
+            String id;
+
             /**
              * The button style for the choice
              *
@@ -867,9 +877,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
             @SerializedName("style")
             String style;
 
-            /** A value to be selected. */
-            @SerializedName("value")
-            String value;
+            /** The text to be selected. */
+            @SerializedName("text")
+            String text;
           }
         }
 

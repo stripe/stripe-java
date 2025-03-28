@@ -23,7 +23,10 @@ public class AccountUpdateParams extends ApiRequestParams {
   @SerializedName("configuration")
   Configuration configuration;
 
-  /** The default contact email address for the Account. */
+  /**
+   * The default contact email address for the Account. Required when configuring the account as a
+   * merchant or recipient.
+   */
   @SerializedName("contact_email")
   Object contactEmail;
 
@@ -136,13 +139,19 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The default contact email address for the Account. */
+    /**
+     * The default contact email address for the Account. Required when configuring the account as a
+     * merchant or recipient.
+     */
     public Builder setContactEmail(String contactEmail) {
       this.contactEmail = contactEmail;
       return this;
     }
 
-    /** The default contact email address for the Account. */
+    /**
+     * The default contact email address for the Account. Required when configuring the account as a
+     * merchant or recipient.
+     */
     public Builder setContactEmail(EmptyParam contactEmail) {
       this.contactEmail = contactEmail;
       return this;
@@ -300,7 +309,11 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The Merchant Configuration allows the Account to make charges. */
+    /**
+     * The Merchant configuration allows the Account to act as a connected account and collect
+     * payments facilitated by a Connect platform. You can add this configuration to your connected
+     * accounts only if you’ve completed onboarding as a Connect platform.
+     */
     @SerializedName("merchant")
     Merchant merchant;
 
@@ -370,7 +383,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Merchant Configuration allows the Account to make charges. */
+      /**
+       * The Merchant configuration allows the Account to act as a connected account and collect
+       * payments facilitated by a Connect platform. You can add this configuration to your
+       * connected accounts only if you’ve completed onboarding as a Connect platform.
+       */
       public Builder setMerchant(AccountUpdateParams.Configuration.Merchant merchant) {
         this.merchant = merchant;
         return this;
