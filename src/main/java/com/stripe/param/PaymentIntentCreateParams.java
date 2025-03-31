@@ -30,7 +30,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
-   * collected will be capped at the total payment amount. For more information, see the
+   * collected will be capped at the total amount captured. For more information, see the
    * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
@@ -504,7 +504,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
-     * application fee collected will be capped at the total payment amount. For more information,
+     * application fee collected will be capped at the total amount captured. For more information,
      * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
      * for connected accounts</a>.
      */
@@ -1527,6 +1527,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Bancontact bancontact;
 
     /**
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * payment method.
+     */
+    @SerializedName("billie")
+    Billie billie;
+
+    /**
      * Billing information associated with the PaymentMethod that may be used or required by
      * particular types of payment methods.
      */
@@ -1678,6 +1685,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     NaverPay naverPay;
 
     /**
+     * If this is an nz_bank_account PaymentMethod, this hash contains details about the
+     * nz_bank_account payment method.
+     */
+    @SerializedName("nz_bank_account")
+    NzBankAccount nzBankAccount;
+
+    /**
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
@@ -1755,6 +1769,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * payment method.
+     */
+    @SerializedName("satispay")
+    Satispay satispay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
@@ -1821,6 +1842,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
         Bancontact bancontact,
+        Billie billie,
         BillingDetails billingDetails,
         Blik blik,
         Boleto boleto,
@@ -1842,6 +1864,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Mobilepay mobilepay,
         Multibanco multibanco,
         NaverPay naverPay,
+        NzBankAccount nzBankAccount,
         Oxxo oxxo,
         P24 p24,
         PayByBank payByBank,
@@ -1853,6 +1876,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         RadarOptions radarOptions,
         RevolutPay revolutPay,
         SamsungPay samsungPay,
+        Satispay satispay,
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
@@ -1871,6 +1895,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
+      this.billie = billie;
       this.billingDetails = billingDetails;
       this.blik = blik;
       this.boleto = boleto;
@@ -1892,6 +1917,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
       this.naverPay = naverPay;
+      this.nzBankAccount = nzBankAccount;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.payByBank = payByBank;
@@ -1903,6 +1929,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.radarOptions = radarOptions;
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
+      this.satispay = satispay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
@@ -1937,6 +1964,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private BacsDebit bacsDebit;
 
       private Bancontact bancontact;
+
+      private Billie billie;
 
       private BillingDetails billingDetails;
 
@@ -1980,6 +2009,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private NaverPay naverPay;
 
+      private NzBankAccount nzBankAccount;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -2001,6 +2032,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private RevolutPay revolutPay;
 
       private SamsungPay samsungPay;
+
+      private Satispay satispay;
 
       private SepaDebit sepaDebit;
 
@@ -2031,6 +2064,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.auBecsDebit,
             this.bacsDebit,
             this.bancontact,
+            this.billie,
             this.billingDetails,
             this.blik,
             this.boleto,
@@ -2052,6 +2086,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.mobilepay,
             this.multibanco,
             this.naverPay,
+            this.nzBankAccount,
             this.oxxo,
             this.p24,
             this.payByBank,
@@ -2063,6 +2098,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.radarOptions,
             this.revolutPay,
             this.samsungPay,
+            this.satispay,
             this.sepaDebit,
             this.sofort,
             this.swish,
@@ -2165,6 +2201,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public Builder setBancontact(
           PaymentIntentCreateParams.PaymentMethodData.Bancontact bancontact) {
         this.bancontact = bancontact;
+        return this;
+      }
+
+      /**
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * payment method.
+       */
+      public Builder setBillie(PaymentIntentCreateParams.PaymentMethodData.Billie billie) {
+        this.billie = billie;
         return this;
       }
 
@@ -2398,6 +2443,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is an nz_bank_account PaymentMethod, this hash contains details about the
+       * nz_bank_account payment method.
+       */
+      public Builder setNzBankAccount(
+          PaymentIntentCreateParams.PaymentMethodData.NzBankAccount nzBankAccount) {
+        this.nzBankAccount = nzBankAccount;
+        return this;
+      }
+
+      /**
        * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
        * method.
        */
@@ -2496,6 +2551,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public Builder setSamsungPay(
           PaymentIntentCreateParams.PaymentMethodData.SamsungPay samsungPay) {
         this.samsungPay = samsungPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * payment method.
+       */
+      public Builder setSatispay(PaymentIntentCreateParams.PaymentMethodData.Satispay satispay) {
+        this.satispay = satispay;
         return this;
       }
 
@@ -3183,6 +3247,64 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Bancontact#extraParams} for
          * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Billie {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Billie(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodData.Billie build() {
+          return new PaymentIntentCreateParams.PaymentMethodData.Billie(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Billie#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Billie#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -5008,6 +5130,160 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccount {
+      /**
+       * The name on the bank account. Only required if the account holder name is different from
+       * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+       */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** <strong>Required.</strong> The account number for the bank account. */
+      @SerializedName("account_number")
+      String accountNumber;
+
+      /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+      @SerializedName("branch_code")
+      String branchCode;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      @SerializedName("reference")
+      String reference;
+
+      /** <strong>Required.</strong> The suffix of the bank account number. */
+      @SerializedName("suffix")
+      String suffix;
+
+      private NzBankAccount(
+          String accountHolderName,
+          String accountNumber,
+          String bankCode,
+          String branchCode,
+          Map<String, Object> extraParams,
+          String reference,
+          String suffix) {
+        this.accountHolderName = accountHolderName;
+        this.accountNumber = accountNumber;
+        this.bankCode = bankCode;
+        this.branchCode = branchCode;
+        this.extraParams = extraParams;
+        this.reference = reference;
+        this.suffix = suffix;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String accountHolderName;
+
+        private String accountNumber;
+
+        private String bankCode;
+
+        private String branchCode;
+
+        private Map<String, Object> extraParams;
+
+        private String reference;
+
+        private String suffix;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodData.NzBankAccount build() {
+          return new PaymentIntentCreateParams.PaymentMethodData.NzBankAccount(
+              this.accountHolderName,
+              this.accountNumber,
+              this.bankCode,
+              this.branchCode,
+              this.extraParams,
+              this.reference,
+              this.suffix);
+        }
+
+        /**
+         * The name on the bank account. Only required if the account holder name is different from
+         * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+         */
+        public Builder setAccountHolderName(String accountHolderName) {
+          this.accountHolderName = accountHolderName;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The account number for the bank account. */
+        public Builder setAccountNumber(String accountNumber) {
+          this.accountNumber = accountNumber;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+        public Builder setBankCode(String bankCode) {
+          this.bankCode = bankCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+        public Builder setBranchCode(String branchCode) {
+          this.branchCode = branchCode;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.NzBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.NzBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The suffix of the bank account number. */
+        public Builder setSuffix(String suffix) {
+          this.suffix = suffix;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5768,6 +6044,64 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Satispay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Satispay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodData.Satispay build() {
+          return new PaymentIntentCreateParams.PaymentMethodData.Satispay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Satispay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Satispay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6390,6 +6724,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
 
+      @SerializedName("billie")
+      BILLIE("billie"),
+
       @SerializedName("blik")
       BLIK("blik"),
 
@@ -6441,6 +6778,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("naver_pay")
       NAVER_PAY("naver_pay"),
 
+      @SerializedName("nz_bank_account")
+      NZ_BANK_ACCOUNT("nz_bank_account"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
@@ -6470,6 +6810,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       @SerializedName("samsung_pay")
       SAMSUNG_PAY("samsung_pay"),
+
+      @SerializedName("satispay")
+      SATISPAY("satispay"),
 
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),
@@ -6714,6 +7057,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object naverPay;
 
     /**
+     * If this is a {@code nz_bank_account} PaymentMethod, this sub-hash contains details about the
+     * NZ BECS Direct Debit payment method options.
+     */
+    @SerializedName("nz_bank_account")
+    Object nzBankAccount;
+
+    /**
      * If this is a {@code oxxo} PaymentMethod, this sub-hash contains details about the OXXO
      * payment method options.
      */
@@ -6863,6 +7213,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object mobilepay,
         Object multibanco,
         Object naverPay,
+        Object nzBankAccount,
         Object oxxo,
         Object p24,
         Object payByBank,
@@ -6910,6 +7261,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
       this.naverPay = naverPay;
+      this.nzBankAccount = nzBankAccount;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.payByBank = payByBank;
@@ -6994,6 +7346,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Object naverPay;
 
+      private Object nzBankAccount;
+
       private Object oxxo;
 
       private Object p24;
@@ -7061,6 +7415,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.mobilepay,
             this.multibanco,
             this.naverPay,
+            this.nzBankAccount,
             this.oxxo,
             this.p24,
             this.payByBank,
@@ -7631,6 +7986,25 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setNaverPay(EmptyParam naverPay) {
         this.naverPay = naverPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code nz_bank_account} PaymentMethod, this sub-hash contains details about
+       * the NZ BECS Direct Debit payment method options.
+       */
+      public Builder setNzBankAccount(
+          PaymentIntentCreateParams.PaymentMethodOptions.NzBankAccount nzBankAccount) {
+        this.nzBankAccount = nzBankAccount;
+        return this;
+      }
+
+      /**
+       * If this is a {@code nz_bank_account} PaymentMethod, this sub-hash contains details about
+       * the NZ BECS Direct Debit payment method options.
+       */
+      public Builder setNzBankAccount(EmptyParam nzBankAccount) {
+        this.nzBankAccount = nzBankAccount;
         return this;
       }
 
@@ -15560,9 +15934,35 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private NaverPay(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private NaverPay(
+          ApiRequestParams.EnumParam captureMethod,
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage) {
         this.captureMethod = captureMethod;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -15574,10 +15974,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.NaverPay build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.NaverPay(
-              this.captureMethod, this.extraParams);
+              this.captureMethod, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -15638,6 +16040,58 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.extraParams.putAll(map);
           return this;
         }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.NaverPay.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
       }
 
       public enum CaptureMethod implements ApiRequestParams.EnumParam {
@@ -15648,6 +16102,211 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         private final String value;
 
         CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccount {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If you've already set {@code setup_future_usage} and you're performing a request using a
+       * publishable key, you can only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      /**
+       * Controls when Stripe will attempt to debit the funds from the customer's account. The date
+       * must be a string in YYYY-MM-DD format. The date must be in the future and between 3 and 15
+       * calendar days from now.
+       */
+      @SerializedName("target_date")
+      String targetDate;
+
+      private NzBankAccount(
+          Map<String, Object> extraParams,
+          ApiRequestParams.EnumParam setupFutureUsage,
+          String targetDate) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+        this.targetDate = targetDate;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        private String targetDate;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodOptions.NzBankAccount build() {
+          return new PaymentIntentCreateParams.PaymentMethodOptions.NzBankAccount(
+              this.extraParams, this.setupFutureUsage, this.targetDate);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.NzBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.NzBankAccount#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.NzBankAccount.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Controls when Stripe will attempt to debit the funds from the customer's account. The
+         * date must be a string in YYYY-MM-DD format. The date must be in the future and between 3
+         * and 15 calendar days from now.
+         */
+        public Builder setTargetDate(String targetDate) {
+          this.targetDate = targetDate;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session"),
+
+        @SerializedName("on_session")
+        ON_SESSION("on_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
           this.value = value;
         }
       }
@@ -18962,7 +19621,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("app_id")
       String appId;
 
-      /** <strong>Required.</strong> The client type that the end customer will pay from */
+      /** The client type that the end customer will pay from. */
       @SerializedName("client")
       Client client;
 
@@ -19037,7 +19696,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The client type that the end customer will pay from */
+        /** The client type that the end customer will pay from. */
         public Builder setClient(
             PaymentIntentCreateParams.PaymentMethodOptions.WechatPay.Client client) {
           this.client = client;

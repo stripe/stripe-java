@@ -14,7 +14,6 @@ import com.stripe.param.SubscriptionItemDeleteParams;
 import com.stripe.param.SubscriptionItemListParams;
 import com.stripe.param.SubscriptionItemRetrieveParams;
 import com.stripe.param.SubscriptionItemUpdateParams;
-import com.stripe.param.SubscriptionItemUsageRecordSummariesParams;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,16 +30,17 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class SubscriptionItem extends ApiResource
     implements HasId, MetadataStore<SubscriptionItem> {
-  /**
-   * Define thresholds at which an invoice will be sent, and the related subscription advanced to a
-   * new billing period.
-   */
-  @SerializedName("billing_thresholds")
-  BillingThresholds billingThresholds;
-
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
+
+  /** The end time of this subscription item's current billing period. */
+  @SerializedName("current_period_end")
+  Long currentPeriodEnd;
+
+  /** The start time of this subscription item's current billing period. */
+  @SerializedName("current_period_start")
+  Long currentPeriodStart;
 
   /** Always true for a deleted object. */
   @SerializedName("deleted")
@@ -380,116 +380,9 @@ public class SubscriptionItem extends ApiResource
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
 
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries() throws StripeException {
-    return usageRecordSummaries((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(Map<String, Object> params)
-      throws StripeException {
-    return usageRecordSummaries(params, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v1/subscription_items/%s/usage_record_summaries",
-            ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      SubscriptionItemUsageRecordSummariesParams params) throws StripeException {
-    return usageRecordSummaries(params, (RequestOptions) null);
-  }
-
-  /**
-   * For the specified subscription item, returns a list of summary objects. Each object in the list
-   * provides usage information that’s been summarized from multiple usage records and over a
-   * subscription billing period (e.g., 15 usage records in the month of September).
-   *
-   * <p>The list is sorted in reverse-chronological order (newest first). The first list item
-   * represents the most current usage period that hasn’t ended yet. Since new usage records can
-   * still be added, the returned summary information for the subscription item’s ID should be seen
-   * as unstable until the subscription billing period ends.
-   */
-  public UsageRecordSummaryCollection usageRecordSummaries(
-      SubscriptionItemUsageRecordSummariesParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/subscription_items/%s/usage_record_summaries",
-            ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, UsageRecordSummaryCollection.class);
-  }
-
-  /**
-   * For more details about BillingThresholds, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class BillingThresholds extends StripeObject {
-    /** Usage threshold that triggers the subscription to create an invoice. */
-    @SerializedName("usage_gte")
-    Long usageGte;
-  }
-
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(billingThresholds, responseGetter);
     trySetResponseGetter(plan, responseGetter);
     trySetResponseGetter(price, responseGetter);
   }

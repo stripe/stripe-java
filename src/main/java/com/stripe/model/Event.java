@@ -143,8 +143,8 @@ public class Event extends ApiResource implements HasId {
    * {@code identity.verification_session.requires_input}, {@code
    * identity.verification_session.verified}, {@code invoice.created}, {@code invoice.deleted},
    * {@code invoice.finalization_failed}, {@code invoice.finalized}, {@code
-   * invoice.marked_uncollectible}, {@code invoice.overdue}, {@code invoice.paid}, {@code
-   * invoice.payment_action_required}, {@code invoice.payment_failed}, {@code
+   * invoice.marked_uncollectible}, {@code invoice.overdue}, {@code invoice.overpaid}, {@code
+   * invoice.paid}, {@code invoice.payment_action_required}, {@code invoice.payment_failed}, {@code
    * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
    * invoice.updated}, {@code invoice.voided}, {@code invoice.will_be_due}, {@code
    * invoiceitem.created}, {@code invoiceitem.deleted}, {@code issuing_authorization.created},
@@ -208,8 +208,11 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_transfer.failed}, {@code treasury.outbound_transfer.posted}, {@code
    * treasury.outbound_transfer.returned}, {@code
    * treasury.outbound_transfer.tracking_details_updated}, {@code treasury.received_credit.created},
-   * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, or {@code
-   * treasury.received_debit.created}.
+   * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
+   * treasury.received_debit.created}, {@code billing.credit_balance_transaction.created}, {@code
+   * billing.credit_grant.created}, {@code billing.credit_grant.updated}, {@code
+   * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},
+   * or {@code billing.meter.updated}.
    */
   @SerializedName("type")
   String type;

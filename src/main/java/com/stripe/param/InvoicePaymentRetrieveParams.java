@@ -12,20 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentMethodDomainCreateParams extends ApiRequestParams {
-  /**
-   * <strong>Required.</strong> The domain name that this payment method domain object represents.
-   */
-  @SerializedName("domain_name")
-  String domainName;
-
-  /**
-   * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-   * that require a payment method domain will not appear in Elements or Embedded Checkout.
-   */
-  @SerializedName("enabled")
-  Boolean enabled;
-
+public class InvoicePaymentRetrieveParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -39,10 +26,7 @@ public class PaymentMethodDomainCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private PaymentMethodDomainCreateParams(
-      String domainName, Boolean enabled, List<String> expand, Map<String, Object> extraParams) {
-    this.domainName = domainName;
-    this.enabled = enabled;
+  private InvoicePaymentRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -52,41 +36,19 @@ public class PaymentMethodDomainCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String domainName;
-
-    private Boolean enabled;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public PaymentMethodDomainCreateParams build() {
-      return new PaymentMethodDomainCreateParams(
-          this.domainName, this.enabled, this.expand, this.extraParams);
-    }
-
-    /**
-     * <strong>Required.</strong> The domain name that this payment method domain object represents.
-     */
-    public Builder setDomainName(String domainName) {
-      this.domainName = domainName;
-      return this;
-    }
-
-    /**
-     * Whether this payment method domain is enabled. If the domain is not enabled, payment methods
-     * that require a payment method domain will not appear in Elements or Embedded Checkout.
-     */
-    public Builder setEnabled(Boolean enabled) {
-      this.enabled = enabled;
-      return this;
+    public InvoicePaymentRetrieveParams build() {
+      return new InvoicePaymentRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodDomainCreateParams#expand} for the field documentation.
+     * InvoicePaymentRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -99,7 +61,7 @@ public class PaymentMethodDomainCreateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodDomainCreateParams#expand} for the field documentation.
+     * InvoicePaymentRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -112,7 +74,7 @@ public class PaymentMethodDomainCreateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentMethodDomainCreateParams#extraParams} for the field documentation.
+     * InvoicePaymentRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -125,7 +87,7 @@ public class PaymentMethodDomainCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentMethodDomainCreateParams#extraParams} for the field documentation.
+     * See {@link InvoicePaymentRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

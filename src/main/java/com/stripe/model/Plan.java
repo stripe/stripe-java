@@ -48,18 +48,6 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   Boolean active;
 
   /**
-   * Specifies a usage aggregation strategy for plans of {@code usage_type=metered}. Allowed values
-   * are {@code sum} for summing up all usage during a period, {@code last_during_period} for using
-   * the last usage record reported within a period, {@code last_ever} for using the last usage
-   * record ever (across period bounds) or {@code max} which uses the usage record with the maximum
-   * reported usage during a period. Defaults to {@code sum}.
-   *
-   * <p>One of {@code last_during_period}, {@code last_ever}, {@code max}, or {@code sum}.
-   */
-  @SerializedName("aggregate_usage")
-  String aggregateUsage;
-
-  /**
    * The unit amount in cents (or local equivalent) to be charged, represented as a whole integer if
    * possible. Only set if {@code billing_scheme=per_unit}.
    */

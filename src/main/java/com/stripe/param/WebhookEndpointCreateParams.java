@@ -606,7 +606,13 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_01_27_ACACIA("2025-01-27.acacia"),
 
     @SerializedName("2025-02-24.acacia")
-    VERSION_2025_02_24_ACACIA("2025-02-24.acacia");
+    VERSION_2025_02_24_ACACIA("2025-02-24.acacia"),
+
+    @SerializedName("2025-03-01.dashboard")
+    VERSION_2025_03_01_DASHBOARD("2025-03-01.dashboard"),
+
+    @SerializedName("2025-03-31.basil")
+    VERSION_2025_03_31_BASIL("2025-03-31.basil");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -890,6 +896,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("invoice.overdue")
     INVOICE__OVERDUE("invoice.overdue"),
+
+    @SerializedName("invoice.overpaid")
+    INVOICE__OVERPAID("invoice.overpaid"),
 
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),
@@ -1346,7 +1355,28 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     TREASURY__RECEIVED_CREDIT__SUCCEEDED("treasury.received_credit.succeeded"),
 
     @SerializedName("treasury.received_debit.created")
-    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created");
+    TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
+
+    @SerializedName("billing.credit_balance_transaction.created")
+    BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),
+
+    @SerializedName("billing.credit_grant.created")
+    BILLING__CREDIT_GRANT__CREATED("billing.credit_grant.created"),
+
+    @SerializedName("billing.credit_grant.updated")
+    BILLING__CREDIT_GRANT__UPDATED("billing.credit_grant.updated"),
+
+    @SerializedName("billing.meter.created")
+    BILLING__METER__CREATED("billing.meter.created"),
+
+    @SerializedName("billing.meter.deactivated")
+    BILLING__METER__DEACTIVATED("billing.meter.deactivated"),
+
+    @SerializedName("billing.meter.reactivated")
+    BILLING__METER__REACTIVATED("billing.meter.reactivated"),
+
+    @SerializedName("billing.meter.updated")
+    BILLING__METER__UPDATED("billing.meter.updated");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
