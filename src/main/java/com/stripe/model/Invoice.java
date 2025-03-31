@@ -528,11 +528,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  @SerializedName("subscription")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Subscription> subscription;
-
   /**
    * Total of all subscriptions, invoice items, and prorations on the invoice before any invoice
    * level discount or exclusive tax is applied. Item discounts are already incorporated
@@ -700,25 +695,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   public void setOnBehalfOfObject(Account expandableObject) {
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get ID of expandable {@code subscription} object. */
-  public String getSubscription() {
-    return (this.subscription != null) ? this.subscription.getId() : null;
-  }
-
-  public void setSubscription(String id) {
-    this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
-  }
-
-  /** Get expanded {@code subscription}. */
-  public Subscription getSubscriptionObject() {
-    return (this.subscription != null) ? this.subscription.getExpanded() : null;
-  }
-
-  public void setSubscriptionObject(Subscription expandableObject) {
-    this.subscription =
-        new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code testClock} object. */
@@ -2884,7 +2860,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     trySetResponseGetter(shippingCost, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
-    trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
     trySetResponseGetter(thresholdReason, responseGetter);
   }
