@@ -129,7 +129,7 @@ public class VerificationSession extends ApiResource
   @SerializedName("redaction")
   Redaction redaction;
 
-  /** Token referencing a Customer resource. */
+  /** Customer ID. */
   @SerializedName("related_customer")
   String relatedCustomer;
 

@@ -130,13 +130,13 @@ public final class PaymentMethodDomainService extends ApiService {
     return this.request(request, PaymentMethodDomain.class);
   }
   /**
-   * Some payment methods such as Apple Pay require additional steps to verify a domain. If the
-   * requirements weren’t satisfied when the domain was created, the payment method will be inactive
-   * on the domain. The payment method doesn’t appear in Elements for this domain until it is
-   * active.
+   * Some payment methods might require additional steps to register a domain. If the requirements
+   * weren’t satisfied when the domain was created, the payment method will be inactive on the
+   * domain. The payment method doesn’t appear in Elements or Embedded Checkout for this domain
+   * until it is active.
    *
    * <p>To activate a payment method on an existing payment method domain, complete the required
-   * validation steps specific to the payment method, and then validate the payment method domain
+   * registration steps specific to the payment method, and then validate the payment method domain
    * with this endpoint.
    *
    * <p>Related guides: <a
@@ -148,13 +148,13 @@ public final class PaymentMethodDomainService extends ApiService {
     return validate(paymentMethodDomain, params, (RequestOptions) null);
   }
   /**
-   * Some payment methods such as Apple Pay require additional steps to verify a domain. If the
-   * requirements weren’t satisfied when the domain was created, the payment method will be inactive
-   * on the domain. The payment method doesn’t appear in Elements for this domain until it is
-   * active.
+   * Some payment methods might require additional steps to register a domain. If the requirements
+   * weren’t satisfied when the domain was created, the payment method will be inactive on the
+   * domain. The payment method doesn’t appear in Elements or Embedded Checkout for this domain
+   * until it is active.
    *
    * <p>To activate a payment method on an existing payment method domain, complete the required
-   * validation steps specific to the payment method, and then validate the payment method domain
+   * registration steps specific to the payment method, and then validate the payment method domain
    * with this endpoint.
    *
    * <p>Related guides: <a
@@ -166,13 +166,13 @@ public final class PaymentMethodDomainService extends ApiService {
     return validate(paymentMethodDomain, (PaymentMethodDomainValidateParams) null, options);
   }
   /**
-   * Some payment methods such as Apple Pay require additional steps to verify a domain. If the
-   * requirements weren’t satisfied when the domain was created, the payment method will be inactive
-   * on the domain. The payment method doesn’t appear in Elements for this domain until it is
-   * active.
+   * Some payment methods might require additional steps to register a domain. If the requirements
+   * weren’t satisfied when the domain was created, the payment method will be inactive on the
+   * domain. The payment method doesn’t appear in Elements or Embedded Checkout for this domain
+   * until it is active.
    *
    * <p>To activate a payment method on an existing payment method domain, complete the required
-   * validation steps specific to the payment method, and then validate the payment method domain
+   * registration steps specific to the payment method, and then validate the payment method domain
    * with this endpoint.
    *
    * <p>Related guides: <a
@@ -184,13 +184,13 @@ public final class PaymentMethodDomainService extends ApiService {
         paymentMethodDomain, (PaymentMethodDomainValidateParams) null, (RequestOptions) null);
   }
   /**
-   * Some payment methods such as Apple Pay require additional steps to verify a domain. If the
-   * requirements weren’t satisfied when the domain was created, the payment method will be inactive
-   * on the domain. The payment method doesn’t appear in Elements for this domain until it is
-   * active.
+   * Some payment methods might require additional steps to register a domain. If the requirements
+   * weren’t satisfied when the domain was created, the payment method will be inactive on the
+   * domain. The payment method doesn’t appear in Elements or Embedded Checkout for this domain
+   * until it is active.
    *
    * <p>To activate a payment method on an existing payment method domain, complete the required
-   * validation steps specific to the payment method, and then validate the payment method domain
+   * registration steps specific to the payment method, and then validate the payment method domain
    * with this endpoint.
    *
    * <p>Related guides: <a

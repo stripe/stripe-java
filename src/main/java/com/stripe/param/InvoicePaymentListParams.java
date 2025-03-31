@@ -12,16 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class CustomerListPaymentMethodsParams extends ApiRequestParams {
-  /**
-   * This field indicates whether this payment method can be shown again to its customer in a
-   * checkout flow. Stripe products such as Checkout and Elements use this field to determine
-   * whether a payment method can be shown as a saved payment method in a checkout flow. The field
-   * defaults to {@code unspecified}.
-   */
-  @SerializedName("allow_redisplay")
-  AllowRedisplay allowRedisplay;
-
+public class InvoicePaymentListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -44,12 +35,20 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The identifier of the invoice whose payments to return. */
+  @SerializedName("invoice")
+  String invoice;
+
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
    */
   @SerializedName("limit")
   Long limit;
+
+  /** The payment details of the invoice payments to return. */
+  @SerializedName("payment")
+  Payment payment;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -60,29 +59,27 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /**
-   * An optional filter on the list, based on the object {@code type} field. Without the filter, the
-   * list includes all current and future payment method types. If your integration expects only one
-   * type of payment method in the response, make sure to provide a type value in the request.
-   */
-  @SerializedName("type")
-  Type type;
+  /** The status of the invoice payments to return. */
+  @SerializedName("status")
+  Status status;
 
-  private CustomerListPaymentMethodsParams(
-      AllowRedisplay allowRedisplay,
+  private InvoicePaymentListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
+      String invoice,
       Long limit,
+      Payment payment,
       String startingAfter,
-      Type type) {
-    this.allowRedisplay = allowRedisplay;
+      Status status) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.invoice = invoice;
     this.limit = limit;
+    this.payment = payment;
     this.startingAfter = startingAfter;
-    this.type = type;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -90,42 +87,33 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private AllowRedisplay allowRedisplay;
-
     private String endingBefore;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
+    private String invoice;
+
     private Long limit;
+
+    private Payment payment;
 
     private String startingAfter;
 
-    private Type type;
+    private Status status;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CustomerListPaymentMethodsParams build() {
-      return new CustomerListPaymentMethodsParams(
-          this.allowRedisplay,
+    public InvoicePaymentListParams build() {
+      return new InvoicePaymentListParams(
           this.endingBefore,
           this.expand,
           this.extraParams,
+          this.invoice,
           this.limit,
+          this.payment,
           this.startingAfter,
-          this.type);
-    }
-
-    /**
-     * This field indicates whether this payment method can be shown again to its customer in a
-     * checkout flow. Stripe products such as Checkout and Elements use this field to determine
-     * whether a payment method can be shown as a saved payment method in a checkout flow. The field
-     * defaults to {@code unspecified}.
-     */
-    public Builder setAllowRedisplay(
-        CustomerListPaymentMethodsParams.AllowRedisplay allowRedisplay) {
-      this.allowRedisplay = allowRedisplay;
-      return this;
+          this.status);
     }
 
     /**
@@ -142,7 +130,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerListPaymentMethodsParams#expand} for the field documentation.
+     * InvoicePaymentListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -155,7 +143,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerListPaymentMethodsParams#expand} for the field documentation.
+     * InvoicePaymentListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -168,7 +156,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerListPaymentMethodsParams#extraParams} for the field documentation.
+     * InvoicePaymentListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -181,7 +169,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerListPaymentMethodsParams#extraParams} for the field documentation.
+     * See {@link InvoicePaymentListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -191,12 +179,24 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
       return this;
     }
 
+    /** The identifier of the invoice whose payments to return. */
+    public Builder setInvoice(String invoice) {
+      this.invoice = invoice;
+      return this;
+    }
+
     /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
      * default is 10.
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /** The payment details of the invoice payments to return. */
+    public Builder setPayment(InvoicePaymentListParams.Payment payment) {
+      this.payment = payment;
       return this;
     }
 
@@ -211,182 +211,124 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * An optional filter on the list, based on the object {@code type} field. Without the filter,
-     * the list includes all current and future payment method types. If your integration expects
-     * only one type of payment method in the response, make sure to provide a type value in the
-     * request.
-     */
-    public Builder setType(CustomerListPaymentMethodsParams.Type type) {
-      this.type = type;
+    /** The status of the invoice payments to return. */
+    public Builder setStatus(InvoicePaymentListParams.Status status) {
+      this.status = status;
       return this;
     }
   }
 
-  public enum AllowRedisplay implements ApiRequestParams.EnumParam {
-    @SerializedName("always")
-    ALWAYS("always"),
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Payment {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
 
-    @SerializedName("limited")
-    LIMITED("limited"),
+    /** Only return invoice payments associated by this payment intent ID. */
+    @SerializedName("payment_intent")
+    String paymentIntent;
 
-    @SerializedName("unspecified")
-    UNSPECIFIED("unspecified");
+    /** <strong>Required.</strong> Only return invoice payments associated by this payment type. */
+    @SerializedName("type")
+    Type type;
 
-    @Getter(onMethod_ = {@Override})
-    private final String value;
+    private Payment(Map<String, Object> extraParams, String paymentIntent, Type type) {
+      this.extraParams = extraParams;
+      this.paymentIntent = paymentIntent;
+      this.type = type;
+    }
 
-    AllowRedisplay(String value) {
-      this.value = value;
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String paymentIntent;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoicePaymentListParams.Payment build() {
+        return new InvoicePaymentListParams.Payment(
+            this.extraParams, this.paymentIntent, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoicePaymentListParams.Payment#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoicePaymentListParams.Payment#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Only return invoice payments associated by this payment intent ID. */
+      public Builder setPaymentIntent(String paymentIntent) {
+        this.paymentIntent = paymentIntent;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Only return invoice payments associated by this payment type.
+       */
+      public Builder setType(InvoicePaymentListParams.Payment.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("payment_intent")
+      PAYMENT_INTENT("payment_intent");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("acss_debit")
-    ACSS_DEBIT("acss_debit"),
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("canceled")
+    CANCELED("canceled"),
 
-    @SerializedName("affirm")
-    AFFIRM("affirm"),
+    @SerializedName("open")
+    OPEN("open"),
 
-    @SerializedName("afterpay_clearpay")
-    AFTERPAY_CLEARPAY("afterpay_clearpay"),
-
-    @SerializedName("alipay")
-    ALIPAY("alipay"),
-
-    @SerializedName("alma")
-    ALMA("alma"),
-
-    @SerializedName("amazon_pay")
-    AMAZON_PAY("amazon_pay"),
-
-    @SerializedName("au_becs_debit")
-    AU_BECS_DEBIT("au_becs_debit"),
-
-    @SerializedName("bacs_debit")
-    BACS_DEBIT("bacs_debit"),
-
-    @SerializedName("bancontact")
-    BANCONTACT("bancontact"),
-
-    @SerializedName("billie")
-    BILLIE("billie"),
-
-    @SerializedName("blik")
-    BLIK("blik"),
-
-    @SerializedName("boleto")
-    BOLETO("boleto"),
-
-    @SerializedName("card")
-    CARD("card"),
-
-    @SerializedName("cashapp")
-    CASHAPP("cashapp"),
-
-    @SerializedName("customer_balance")
-    CUSTOMER_BALANCE("customer_balance"),
-
-    @SerializedName("eps")
-    EPS("eps"),
-
-    @SerializedName("fpx")
-    FPX("fpx"),
-
-    @SerializedName("giropay")
-    GIROPAY("giropay"),
-
-    @SerializedName("grabpay")
-    GRABPAY("grabpay"),
-
-    @SerializedName("ideal")
-    IDEAL("ideal"),
-
-    @SerializedName("kakao_pay")
-    KAKAO_PAY("kakao_pay"),
-
-    @SerializedName("klarna")
-    KLARNA("klarna"),
-
-    @SerializedName("konbini")
-    KONBINI("konbini"),
-
-    @SerializedName("kr_card")
-    KR_CARD("kr_card"),
-
-    @SerializedName("link")
-    LINK("link"),
-
-    @SerializedName("mobilepay")
-    MOBILEPAY("mobilepay"),
-
-    @SerializedName("multibanco")
-    MULTIBANCO("multibanco"),
-
-    @SerializedName("naver_pay")
-    NAVER_PAY("naver_pay"),
-
-    @SerializedName("nz_bank_account")
-    NZ_BANK_ACCOUNT("nz_bank_account"),
-
-    @SerializedName("oxxo")
-    OXXO("oxxo"),
-
-    @SerializedName("p24")
-    P24("p24"),
-
-    @SerializedName("pay_by_bank")
-    PAY_BY_BANK("pay_by_bank"),
-
-    @SerializedName("payco")
-    PAYCO("payco"),
-
-    @SerializedName("paynow")
-    PAYNOW("paynow"),
-
-    @SerializedName("paypal")
-    PAYPAL("paypal"),
-
-    @SerializedName("pix")
-    PIX("pix"),
-
-    @SerializedName("promptpay")
-    PROMPTPAY("promptpay"),
-
-    @SerializedName("revolut_pay")
-    REVOLUT_PAY("revolut_pay"),
-
-    @SerializedName("samsung_pay")
-    SAMSUNG_PAY("samsung_pay"),
-
-    @SerializedName("satispay")
-    SATISPAY("satispay"),
-
-    @SerializedName("sepa_debit")
-    SEPA_DEBIT("sepa_debit"),
-
-    @SerializedName("sofort")
-    SOFORT("sofort"),
-
-    @SerializedName("swish")
-    SWISH("swish"),
-
-    @SerializedName("twint")
-    TWINT("twint"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account"),
-
-    @SerializedName("wechat_pay")
-    WECHAT_PAY("wechat_pay"),
-
-    @SerializedName("zip")
-    ZIP("zip");
+    @SerializedName("paid")
+    PAID("paid");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
-    Type(String value) {
+    Status(String value) {
       this.value = value;
     }
   }

@@ -1341,6 +1341,13 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
+       * The value that will pre-fill the field on the payment page.Must match a {@code value} in
+       * the {@code options} array.
+       */
+      @SerializedName("default_value")
+      Object defaultValue;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -1357,8 +1364,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       List<PaymentLinkUpdateParams.CustomField.Dropdown.Option> options;
 
       private Dropdown(
+          Object defaultValue,
           Map<String, Object> extraParams,
           List<PaymentLinkUpdateParams.CustomField.Dropdown.Option> options) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.options = options;
       }
@@ -1368,13 +1377,34 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object defaultValue;
+
         private Map<String, Object> extraParams;
 
         private List<PaymentLinkUpdateParams.CustomField.Dropdown.Option> options;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentLinkUpdateParams.CustomField.Dropdown build() {
-          return new PaymentLinkUpdateParams.CustomField.Dropdown(this.extraParams, this.options);
+          return new PaymentLinkUpdateParams.CustomField.Dropdown(
+              this.defaultValue, this.extraParams, this.options);
+        }
+
+        /**
+         * The value that will pre-fill the field on the payment page.Must match a {@code value} in
+         * the {@code options} array.
+         */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
+        }
+
+        /**
+         * The value that will pre-fill the field on the payment page.Must match a {@code value} in
+         * the {@code options} array.
+         */
+        public Builder setDefaultValue(EmptyParam defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -1668,6 +1698,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      Object defaultValue;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1685,7 +1719,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @SerializedName("minimum_length")
       Long minimumLength;
 
-      private Numeric(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+      private Numeric(
+          Object defaultValue,
+          Map<String, Object> extraParams,
+          Long maximumLength,
+          Long minimumLength) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.maximumLength = maximumLength;
         this.minimumLength = minimumLength;
@@ -1696,6 +1735,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object defaultValue;
+
         private Map<String, Object> extraParams;
 
         private Long maximumLength;
@@ -1705,7 +1746,19 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentLinkUpdateParams.CustomField.Numeric build() {
           return new PaymentLinkUpdateParams.CustomField.Numeric(
-              this.extraParams, this.maximumLength, this.minimumLength);
+              this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(EmptyParam defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -1753,6 +1806,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Text {
+      /** The value that will pre-fill the field on the payment page. */
+      @SerializedName("default_value")
+      Object defaultValue;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1770,7 +1827,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       @SerializedName("minimum_length")
       Long minimumLength;
 
-      private Text(Map<String, Object> extraParams, Long maximumLength, Long minimumLength) {
+      private Text(
+          Object defaultValue,
+          Map<String, Object> extraParams,
+          Long maximumLength,
+          Long minimumLength) {
+        this.defaultValue = defaultValue;
         this.extraParams = extraParams;
         this.maximumLength = maximumLength;
         this.minimumLength = minimumLength;
@@ -1781,6 +1843,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object defaultValue;
+
         private Map<String, Object> extraParams;
 
         private Long maximumLength;
@@ -1790,7 +1854,19 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentLinkUpdateParams.CustomField.Text build() {
           return new PaymentLinkUpdateParams.CustomField.Text(
-              this.extraParams, this.maximumLength, this.minimumLength);
+              this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(String defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
+        }
+
+        /** The value that will pre-fill the field on the payment page. */
+        public Builder setDefaultValue(EmptyParam defaultValue) {
+          this.defaultValue = defaultValue;
+          return this;
         }
 
         /**
@@ -5345,6 +5421,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName("bancontact")
     BANCONTACT("bancontact"),
 
+    @SerializedName("billie")
+    BILLIE("billie"),
+
     @SerializedName("blik")
     BLIK("blik"),
 
@@ -5407,6 +5486,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
 
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),

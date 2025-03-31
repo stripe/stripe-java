@@ -55,6 +55,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("verifone_p400")
   VerifoneP400 verifoneP400;
 
+  /** Configurations for connecting to a WiFi network. */
+  @SerializedName("wifi")
+  Object wifi;
+
   private ConfigurationCreateParams(
       BbposWiseposE bbposWiseposE,
       List<String> expand,
@@ -64,7 +68,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       RebootWindow rebootWindow,
       StripeS700 stripeS700,
       Object tipping,
-      VerifoneP400 verifoneP400) {
+      VerifoneP400 verifoneP400,
+      Object wifi) {
     this.bbposWiseposE = bbposWiseposE;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -74,6 +79,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     this.stripeS700 = stripeS700;
     this.tipping = tipping;
     this.verifoneP400 = verifoneP400;
+    this.wifi = wifi;
   }
 
   public static Builder builder() {
@@ -99,6 +105,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private VerifoneP400 verifoneP400;
 
+    private Object wifi;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ConfigurationCreateParams build() {
       return new ConfigurationCreateParams(
@@ -110,7 +118,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.rebootWindow,
           this.stripeS700,
           this.tipping,
-          this.verifoneP400);
+          this.verifoneP400,
+          this.wifi);
     }
 
     /** An object containing device type specific settings for BBPOS WisePOS E readers. */
@@ -218,6 +227,18 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       this.verifoneP400 = verifoneP400;
       return this;
     }
+
+    /** Configurations for connecting to a WiFi network. */
+    public Builder setWifi(ConfigurationCreateParams.Wifi wifi) {
+      this.wifi = wifi;
+      return this;
+    }
+
+    /** Configurations for connecting to a WiFi network. */
+    public Builder setWifi(EmptyParam wifi) {
+      this.wifi = wifi;
+      return this;
+    }
   }
 
   @Getter
@@ -232,7 +253,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image to display on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -282,13 +303,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image to display on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image to display on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;
@@ -3278,6 +3299,498 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Wifi {
+    /** Credentials for a WPA-Enterprise WiFi network using the EAP-PEAP authentication method. */
+    @SerializedName("enterprise_eap_peap")
+    EnterpriseEapPeap enterpriseEapPeap;
+
+    /** Credentials for a WPA-Enterprise WiFi network using the EAP-TLS authentication method. */
+    @SerializedName("enterprise_eap_tls")
+    EnterpriseEapTls enterpriseEapTls;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Credentials for a WPA-Personal WiFi network. */
+    @SerializedName("personal_psk")
+    PersonalPsk personalPsk;
+
+    /**
+     * <strong>Required.</strong> Security type of the WiFi network. Fill out the hash with the
+     * corresponding name to provide the set of credentials for this security type.
+     */
+    @SerializedName("type")
+    Type type;
+
+    private Wifi(
+        EnterpriseEapPeap enterpriseEapPeap,
+        EnterpriseEapTls enterpriseEapTls,
+        Map<String, Object> extraParams,
+        PersonalPsk personalPsk,
+        Type type) {
+      this.enterpriseEapPeap = enterpriseEapPeap;
+      this.enterpriseEapTls = enterpriseEapTls;
+      this.extraParams = extraParams;
+      this.personalPsk = personalPsk;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private EnterpriseEapPeap enterpriseEapPeap;
+
+      private EnterpriseEapTls enterpriseEapTls;
+
+      private Map<String, Object> extraParams;
+
+      private PersonalPsk personalPsk;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.Wifi build() {
+        return new ConfigurationCreateParams.Wifi(
+            this.enterpriseEapPeap,
+            this.enterpriseEapTls,
+            this.extraParams,
+            this.personalPsk,
+            this.type);
+      }
+
+      /** Credentials for a WPA-Enterprise WiFi network using the EAP-PEAP authentication method. */
+      public Builder setEnterpriseEapPeap(
+          ConfigurationCreateParams.Wifi.EnterpriseEapPeap enterpriseEapPeap) {
+        this.enterpriseEapPeap = enterpriseEapPeap;
+        return this;
+      }
+
+      /** Credentials for a WPA-Enterprise WiFi network using the EAP-TLS authentication method. */
+      public Builder setEnterpriseEapTls(
+          ConfigurationCreateParams.Wifi.EnterpriseEapTls enterpriseEapTls) {
+        this.enterpriseEapTls = enterpriseEapTls;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.Wifi#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.Wifi#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Credentials for a WPA-Personal WiFi network. */
+      public Builder setPersonalPsk(ConfigurationCreateParams.Wifi.PersonalPsk personalPsk) {
+        this.personalPsk = personalPsk;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Security type of the WiFi network. Fill out the hash with the
+       * corresponding name to provide the set of credentials for this security type.
+       */
+      public Builder setType(ConfigurationCreateParams.Wifi.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnterpriseEapPeap {
+      /** A File ID representing a PEM file containing the server certificate. */
+      @SerializedName("ca_certificate_file")
+      String caCertificateFile;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Password for connecting to the WiFi network */
+      @SerializedName("password")
+      String password;
+
+      /** <strong>Required.</strong> Name of the WiFi network */
+      @SerializedName("ssid")
+      String ssid;
+
+      /** <strong>Required.</strong> Username for connecting to the WiFi network */
+      @SerializedName("username")
+      String username;
+
+      private EnterpriseEapPeap(
+          String caCertificateFile,
+          Map<String, Object> extraParams,
+          String password,
+          String ssid,
+          String username) {
+        this.caCertificateFile = caCertificateFile;
+        this.extraParams = extraParams;
+        this.password = password;
+        this.ssid = ssid;
+        this.username = username;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String caCertificateFile;
+
+        private Map<String, Object> extraParams;
+
+        private String password;
+
+        private String ssid;
+
+        private String username;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfigurationCreateParams.Wifi.EnterpriseEapPeap build() {
+          return new ConfigurationCreateParams.Wifi.EnterpriseEapPeap(
+              this.caCertificateFile, this.extraParams, this.password, this.ssid, this.username);
+        }
+
+        /** A File ID representing a PEM file containing the server certificate. */
+        public Builder setCaCertificateFile(String caCertificateFile) {
+          this.caCertificateFile = caCertificateFile;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Wifi.EnterpriseEapPeap#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Wifi.EnterpriseEapPeap#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Password for connecting to the WiFi network */
+        public Builder setPassword(String password) {
+          this.password = password;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Name of the WiFi network */
+        public Builder setSsid(String ssid) {
+          this.ssid = ssid;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Username for connecting to the WiFi network */
+        public Builder setUsername(String username) {
+          this.username = username;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EnterpriseEapTls {
+      /** A File ID representing a PEM file containing the server certificate. */
+      @SerializedName("ca_certificate_file")
+      String caCertificateFile;
+
+      /**
+       * <strong>Required.</strong> A File ID representing a PEM file containing the client
+       * certificate
+       */
+      @SerializedName("client_certificate_file")
+      String clientCertificateFile;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> A File ID representing a PEM file containing the client RSA
+       * private key
+       */
+      @SerializedName("private_key_file")
+      String privateKeyFile;
+
+      /** Password for the private key file. */
+      @SerializedName("private_key_file_password")
+      String privateKeyFilePassword;
+
+      /** <strong>Required.</strong> Name of the WiFi network */
+      @SerializedName("ssid")
+      String ssid;
+
+      private EnterpriseEapTls(
+          String caCertificateFile,
+          String clientCertificateFile,
+          Map<String, Object> extraParams,
+          String privateKeyFile,
+          String privateKeyFilePassword,
+          String ssid) {
+        this.caCertificateFile = caCertificateFile;
+        this.clientCertificateFile = clientCertificateFile;
+        this.extraParams = extraParams;
+        this.privateKeyFile = privateKeyFile;
+        this.privateKeyFilePassword = privateKeyFilePassword;
+        this.ssid = ssid;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String caCertificateFile;
+
+        private String clientCertificateFile;
+
+        private Map<String, Object> extraParams;
+
+        private String privateKeyFile;
+
+        private String privateKeyFilePassword;
+
+        private String ssid;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfigurationCreateParams.Wifi.EnterpriseEapTls build() {
+          return new ConfigurationCreateParams.Wifi.EnterpriseEapTls(
+              this.caCertificateFile,
+              this.clientCertificateFile,
+              this.extraParams,
+              this.privateKeyFile,
+              this.privateKeyFilePassword,
+              this.ssid);
+        }
+
+        /** A File ID representing a PEM file containing the server certificate. */
+        public Builder setCaCertificateFile(String caCertificateFile) {
+          this.caCertificateFile = caCertificateFile;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> A File ID representing a PEM file containing the client
+         * certificate
+         */
+        public Builder setClientCertificateFile(String clientCertificateFile) {
+          this.clientCertificateFile = clientCertificateFile;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Wifi.EnterpriseEapTls#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Wifi.EnterpriseEapTls#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> A File ID representing a PEM file containing the client RSA
+         * private key
+         */
+        public Builder setPrivateKeyFile(String privateKeyFile) {
+          this.privateKeyFile = privateKeyFile;
+          return this;
+        }
+
+        /** Password for the private key file. */
+        public Builder setPrivateKeyFilePassword(String privateKeyFilePassword) {
+          this.privateKeyFilePassword = privateKeyFilePassword;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Name of the WiFi network */
+        public Builder setSsid(String ssid) {
+          this.ssid = ssid;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PersonalPsk {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Password for connecting to the WiFi network */
+      @SerializedName("password")
+      String password;
+
+      /** <strong>Required.</strong> Name of the WiFi network */
+      @SerializedName("ssid")
+      String ssid;
+
+      private PersonalPsk(Map<String, Object> extraParams, String password, String ssid) {
+        this.extraParams = extraParams;
+        this.password = password;
+        this.ssid = ssid;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String password;
+
+        private String ssid;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfigurationCreateParams.Wifi.PersonalPsk build() {
+          return new ConfigurationCreateParams.Wifi.PersonalPsk(
+              this.extraParams, this.password, this.ssid);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Wifi.PersonalPsk#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Wifi.PersonalPsk#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Password for connecting to the WiFi network */
+        public Builder setPassword(String password) {
+          this.password = password;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Name of the WiFi network */
+        public Builder setSsid(String ssid) {
+          this.ssid = ssid;
+          return this;
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("enterprise_eap_peap")
+      ENTERPRISE_EAP_PEAP("enterprise_eap_peap"),
+
+      @SerializedName("enterprise_eap_tls")
+      ENTERPRISE_EAP_TLS("enterprise_eap_tls"),
+
+      @SerializedName("personal_psk")
+      PERSONAL_PSK("personal_psk");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }

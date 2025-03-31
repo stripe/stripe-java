@@ -511,6 +511,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Bancontact bancontact;
 
     /**
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * payment method.
+     */
+    @SerializedName("billie")
+    Billie billie;
+
+    /**
      * Billing information associated with the PaymentMethod that may be used or required by
      * particular types of payment methods.
      */
@@ -662,6 +669,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     NaverPay naverPay;
 
     /**
+     * If this is an nz_bank_account PaymentMethod, this hash contains details about the
+     * nz_bank_account payment method.
+     */
+    @SerializedName("nz_bank_account")
+    NzBankAccount nzBankAccount;
+
+    /**
      * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
      * method.
      */
@@ -739,6 +753,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * payment method.
+     */
+    @SerializedName("satispay")
+    Satispay satispay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
      * debit bank account.
      */
@@ -805,6 +826,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         AuBecsDebit auBecsDebit,
         BacsDebit bacsDebit,
         Bancontact bancontact,
+        Billie billie,
         BillingDetails billingDetails,
         Blik blik,
         Boleto boleto,
@@ -826,6 +848,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Mobilepay mobilepay,
         Multibanco multibanco,
         NaverPay naverPay,
+        NzBankAccount nzBankAccount,
         Oxxo oxxo,
         P24 p24,
         PayByBank payByBank,
@@ -837,6 +860,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         RadarOptions radarOptions,
         RevolutPay revolutPay,
         SamsungPay samsungPay,
+        Satispay satispay,
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
@@ -855,6 +879,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.auBecsDebit = auBecsDebit;
       this.bacsDebit = bacsDebit;
       this.bancontact = bancontact;
+      this.billie = billie;
       this.billingDetails = billingDetails;
       this.blik = blik;
       this.boleto = boleto;
@@ -876,6 +901,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.mobilepay = mobilepay;
       this.multibanco = multibanco;
       this.naverPay = naverPay;
+      this.nzBankAccount = nzBankAccount;
       this.oxxo = oxxo;
       this.p24 = p24;
       this.payByBank = payByBank;
@@ -887,6 +913,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.radarOptions = radarOptions;
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
+      this.satispay = satispay;
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
@@ -921,6 +948,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private BacsDebit bacsDebit;
 
       private Bancontact bancontact;
+
+      private Billie billie;
 
       private BillingDetails billingDetails;
 
@@ -964,6 +993,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private NaverPay naverPay;
 
+      private NzBankAccount nzBankAccount;
+
       private Oxxo oxxo;
 
       private P24 p24;
@@ -985,6 +1016,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       private RevolutPay revolutPay;
 
       private SamsungPay samsungPay;
+
+      private Satispay satispay;
 
       private SepaDebit sepaDebit;
 
@@ -1015,6 +1048,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.auBecsDebit,
             this.bacsDebit,
             this.bancontact,
+            this.billie,
             this.billingDetails,
             this.blik,
             this.boleto,
@@ -1036,6 +1070,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.mobilepay,
             this.multibanco,
             this.naverPay,
+            this.nzBankAccount,
             this.oxxo,
             this.p24,
             this.payByBank,
@@ -1047,6 +1082,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.radarOptions,
             this.revolutPay,
             this.samsungPay,
+            this.satispay,
             this.sepaDebit,
             this.sofort,
             this.swish,
@@ -1149,6 +1185,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setBancontact(
           SetupIntentUpdateParams.PaymentMethodData.Bancontact bancontact) {
         this.bancontact = bancontact;
+        return this;
+      }
+
+      /**
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * payment method.
+       */
+      public Builder setBillie(SetupIntentUpdateParams.PaymentMethodData.Billie billie) {
+        this.billie = billie;
         return this;
       }
 
@@ -1381,6 +1426,16 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is an nz_bank_account PaymentMethod, this hash contains details about the
+       * nz_bank_account payment method.
+       */
+      public Builder setNzBankAccount(
+          SetupIntentUpdateParams.PaymentMethodData.NzBankAccount nzBankAccount) {
+        this.nzBankAccount = nzBankAccount;
+        return this;
+      }
+
+      /**
        * If this is an {@code oxxo} PaymentMethod, this hash contains details about the OXXO payment
        * method.
        */
@@ -1479,6 +1534,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       public Builder setSamsungPay(
           SetupIntentUpdateParams.PaymentMethodData.SamsungPay samsungPay) {
         this.samsungPay = samsungPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * payment method.
+       */
+      public Builder setSatispay(SetupIntentUpdateParams.PaymentMethodData.Satispay satispay) {
+        this.satispay = satispay;
         return this;
       }
 
@@ -2207,6 +2271,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Bancontact#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Billie {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Billie(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Billie build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Billie(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Billie#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Billie#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
@@ -4080,6 +4202,198 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccount {
+      /**
+       * The name on the bank account. Only required if the account holder name is different from
+       * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+       */
+      @SerializedName("account_holder_name")
+      Object accountHolderName;
+
+      /** <strong>Required.</strong> The account number for the bank account. */
+      @SerializedName("account_number")
+      Object accountNumber;
+
+      /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+      @SerializedName("bank_code")
+      Object bankCode;
+
+      /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+      @SerializedName("branch_code")
+      Object branchCode;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      @SerializedName("reference")
+      Object reference;
+
+      /** <strong>Required.</strong> The suffix of the bank account number. */
+      @SerializedName("suffix")
+      Object suffix;
+
+      private NzBankAccount(
+          Object accountHolderName,
+          Object accountNumber,
+          Object bankCode,
+          Object branchCode,
+          Map<String, Object> extraParams,
+          Object reference,
+          Object suffix) {
+        this.accountHolderName = accountHolderName;
+        this.accountNumber = accountNumber;
+        this.bankCode = bankCode;
+        this.branchCode = branchCode;
+        this.extraParams = extraParams;
+        this.reference = reference;
+        this.suffix = suffix;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object accountHolderName;
+
+        private Object accountNumber;
+
+        private Object bankCode;
+
+        private Object branchCode;
+
+        private Map<String, Object> extraParams;
+
+        private Object reference;
+
+        private Object suffix;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.NzBankAccount build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.NzBankAccount(
+              this.accountHolderName,
+              this.accountNumber,
+              this.bankCode,
+              this.branchCode,
+              this.extraParams,
+              this.reference,
+              this.suffix);
+        }
+
+        /**
+         * The name on the bank account. Only required if the account holder name is different from
+         * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+         */
+        public Builder setAccountHolderName(String accountHolderName) {
+          this.accountHolderName = accountHolderName;
+          return this;
+        }
+
+        /**
+         * The name on the bank account. Only required if the account holder name is different from
+         * the name of the authorized signatory collected in the PaymentMethod’s billing details.
+         */
+        public Builder setAccountHolderName(EmptyParam accountHolderName) {
+          this.accountHolderName = accountHolderName;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The account number for the bank account. */
+        public Builder setAccountNumber(String accountNumber) {
+          this.accountNumber = accountNumber;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The account number for the bank account. */
+        public Builder setAccountNumber(EmptyParam accountNumber) {
+          this.accountNumber = accountNumber;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+        public Builder setBankCode(String bankCode) {
+          this.bankCode = bankCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank. */
+        public Builder setBankCode(EmptyParam bankCode) {
+          this.bankCode = bankCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+        public Builder setBranchCode(String branchCode) {
+          this.branchCode = branchCode;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The numeric code for the bank account's bank branch. */
+        public Builder setBranchCode(EmptyParam branchCode) {
+          this.branchCode = branchCode;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.NzBankAccount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.NzBankAccount#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        public Builder setReference(String reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        public Builder setReference(EmptyParam reference) {
+          this.reference = reference;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The suffix of the bank account number. */
+        public Builder setSuffix(String suffix) {
+          this.suffix = suffix;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The suffix of the bank account number. */
+        public Builder setSuffix(EmptyParam suffix) {
+          this.suffix = suffix;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Oxxo {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4850,6 +5164,64 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Satispay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Satispay(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodData.Satispay build() {
+          return new SetupIntentUpdateParams.PaymentMethodData.Satispay(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Satispay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Satispay#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class SepaDebit {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -5496,6 +5868,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("bancontact")
       BANCONTACT("bancontact"),
 
+      @SerializedName("billie")
+      BILLIE("billie"),
+
       @SerializedName("blik")
       BLIK("blik"),
 
@@ -5547,6 +5922,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("naver_pay")
       NAVER_PAY("naver_pay"),
 
+      @SerializedName("nz_bank_account")
+      NZ_BANK_ACCOUNT("nz_bank_account"),
+
       @SerializedName("oxxo")
       OXXO("oxxo"),
 
@@ -5576,6 +5954,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("samsung_pay")
       SAMSUNG_PAY("samsung_pay"),
+
+      @SerializedName("satispay")
+      SATISPAY("satispay"),
 
       @SerializedName("sepa_debit")
       SEPA_DEBIT("sepa_debit"),

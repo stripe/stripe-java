@@ -71,6 +71,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("bancontact")
   Bancontact bancontact;
 
+  @SerializedName("billie")
+  Billie billie;
+
   @SerializedName("billing_details")
   BillingDetails billingDetails;
 
@@ -168,6 +171,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("naver_pay")
   NaverPay naverPay;
 
+  @SerializedName("nz_bank_account")
+  NzBankAccount nzBankAccount;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -213,6 +219,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("samsung_pay")
   SamsungPay samsungPay;
 
+  @SerializedName("satispay")
+  Satispay satispay;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -231,13 +240,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay}, {@code
    * alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact},
-   * {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code cashapp}, {@code
-   * customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal},
-   * {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card},
-   * {@code link}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code oxxo}, {@code
-   * p24}, {@code pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code pix}, {@code
-   * promptpay}, {@code revolut_pay}, {@code samsung_pay}, {@code sepa_debit}, {@code sofort},
-   * {@code swish}, {@code twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
+   * {@code billie}, {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code
+   * cashapp}, {@code customer_balance}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay},
+   * {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini},
+   * {@code kr_card}, {@code link}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code
+   * nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco}, {@code
+   * paynow}, {@code paypal}, {@code pix}, {@code promptpay}, {@code revolut_pay}, {@code
+   * samsung_pay}, {@code satispay}, {@code sepa_debit}, {@code sofort}, {@code swish}, {@code
+   * twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -788,6 +798,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Bancontact extends StripeObject {}
+
+  /**
+   * For more details about Billie, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Billie extends StripeObject {}
 
   /**
    * For more details about BillingDetails, please refer to the <a
@@ -2043,12 +2062,55 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class NaverPay extends StripeObject {
     /**
+     * Uniquely identifies this particular Naver Pay account. You can use this attribute to check
+     * whether two Naver Pay accounts are the same.
+     */
+    @SerializedName("buyer_id")
+    String buyerId;
+
+    /**
      * Whether to fund this transaction with Naver Pay points or a card.
      *
      * <p>One of {@code card}, or {@code points}.
      */
     @SerializedName("funding")
     String funding;
+  }
+
+  /**
+   * For more details about NzBankAccount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NzBankAccount extends StripeObject {
+    /**
+     * The name on the bank account. Only present if the account holder name is different from the
+     * name of the authorized signatory collected in the PaymentMethod’s billing details.
+     */
+    @SerializedName("account_holder_name")
+    String accountHolderName;
+
+    /** The numeric code for the bank account's bank. */
+    @SerializedName("bank_code")
+    String bankCode;
+
+    /** The name of the bank. */
+    @SerializedName("bank_name")
+    String bankName;
+
+    /** The numeric code for the bank account's bank branch. */
+    @SerializedName("branch_code")
+    String branchCode;
+
+    /** Last four digits of the bank account number. */
+    @SerializedName("last4")
+    String last4;
+
+    /** The suffix of the bank account number. */
+    @SerializedName("suffix")
+    String suffix;
   }
 
   /**
@@ -2189,6 +2251,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SamsungPay extends StripeObject {}
+
+  /**
+   * For more details about Satispay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Satispay extends StripeObject {}
 
   /**
    * For more details about SepaDebit, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2458,6 +2529,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(auBecsDebit, responseGetter);
     trySetResponseGetter(bacsDebit, responseGetter);
     trySetResponseGetter(bancontact, responseGetter);
+    trySetResponseGetter(billie, responseGetter);
     trySetResponseGetter(billingDetails, responseGetter);
     trySetResponseGetter(blik, responseGetter);
     trySetResponseGetter(boleto, responseGetter);
@@ -2480,6 +2552,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(mobilepay, responseGetter);
     trySetResponseGetter(multibanco, responseGetter);
     trySetResponseGetter(naverPay, responseGetter);
+    trySetResponseGetter(nzBankAccount, responseGetter);
     trySetResponseGetter(oxxo, responseGetter);
     trySetResponseGetter(p24, responseGetter);
     trySetResponseGetter(payByBank, responseGetter);
@@ -2491,6 +2564,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(radarOptions, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(samsungPay, responseGetter);
+    trySetResponseGetter(satispay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
     trySetResponseGetter(swish, responseGetter);
