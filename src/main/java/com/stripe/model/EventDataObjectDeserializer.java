@@ -213,8 +213,14 @@ public class EventDataObjectDeserializer {
     }
 
     // versions are yyyy-MM-dd.releaseIdentifier
-    String eventReleaseTrain = this.apiVersion.split("\\.", 2)[1];
     String currentReleaseTrain = getIntegrationApiVersion().split("\\.", 2)[1];
+
+    // beta SDKs have to match their API version exactly
+    if (currentReleaseTrain.equals("preview")) {
+      return this.apiVersion.equals(currentApiVersion);
+    }
+
+    String eventReleaseTrain = this.apiVersion.split("\\.", 2)[1];
     return eventReleaseTrain.equals(currentReleaseTrain);
   }
 
