@@ -2507,8 +2507,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       }
 
       /**
-       * For more details about PauseCollection, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The Pause Collection settings determine how we will pause collection for this subscription
+       * and for how long the subscription should be paused.
        */
       @Getter
       @Setter
