@@ -6,7 +6,6 @@ import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
 import com.stripe.net.ApiMode;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.util.StringUtils;
 import java.util.Map;
 import java.util.Optional;
 import lombok.EqualsAndHashCode;
@@ -198,23 +197,9 @@ public class EventDataObjectDeserializer {
   }
 
   private boolean apiVersionMatch() {
-
-    String eventApiVersion = StringUtils.trimApiVersion(this.apiVersion);
-    if (!Stripe.API_VERSION.contains(".")) {
-      return eventApiVersion.equals(Stripe.API_VERSION);
-    }
-
-    // If the event api version is from before we started adding
-    // a major release identifier, there's no way its compatible with this
-    // version
-    if (!eventApiVersion.contains(".")) {
-      return false;
-    }
-
-    // versions are yyyy-MM-dd.releaseIdentifier
-    String eventReleaseTrain = eventApiVersion.split("\\.", 2)[1];
-    String currentReleaseTrain = Stripe.API_VERSION.split("\\.", 2)[1];
-    return eventReleaseTrain.equals(currentReleaseTrain);
+    // for beta SDKs, API version must match exactly (because breaking
+    // changes are both more frequent and more likely)
+    return Stripe.API_VERSION.equals(this.apiVersion);
   }
 
   /**
