@@ -1196,9 +1196,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1222,9 +1223,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1248,9 +1250,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1274,9 +1277,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1304,9 +1308,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1330,9 +1335,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
