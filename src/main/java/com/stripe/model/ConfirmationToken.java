@@ -216,6 +216,46 @@ public class ConfirmationToken extends ApiResource implements HasId {
       /** The {@code cvc_update} Token collected from the Payment Element. */
       @SerializedName("cvc_token")
       String cvcToken;
+
+      /** Installment configuration for payments. */
+      @SerializedName("installments")
+      Installments installments;
+
+      /** Installment configuration for payments. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        @SerializedName("plan")
+        Plan plan;
+
+        /**
+         * For more details about Plan, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Plan extends StripeObject {
+          /**
+           * For {@code fixed_count} installment plans, this is the number of installment payments
+           * your customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * For {@code fixed_count} installment plans, this is the interval between installment
+           * payments your customer will make to their credit card. One of {@code month}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /** Type of installment plan, one of {@code fixed_count}. */
+          @SerializedName("type")
+          String type;
+        }
+      }
     }
   }
 

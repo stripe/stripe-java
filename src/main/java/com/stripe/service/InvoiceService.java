@@ -721,9 +721,10 @@ public final class InvoiceService extends ApiService {
     return this.request(request, Invoice.class);
   }
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -746,9 +747,10 @@ public final class InvoiceService extends ApiService {
     return createPreview(params, (RequestOptions) null);
   }
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -771,9 +773,10 @@ public final class InvoiceService extends ApiService {
     return createPreview((InvoiceCreatePreviewParams) null, options);
   }
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -796,9 +799,10 @@ public final class InvoiceService extends ApiService {
     return createPreview((InvoiceCreatePreviewParams) null, (RequestOptions) null);
   }
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice

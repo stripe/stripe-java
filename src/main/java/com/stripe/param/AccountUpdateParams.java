@@ -1499,6 +1499,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("naver_pay_payments")
     NaverPayPayments naverPayPayments;
 
+    /** The nz_bank_account_becs_debit_payments capability. */
+    @SerializedName("nz_bank_account_becs_debit_payments")
+    NzBankAccountBecsDebitPayments nzBankAccountBecsDebitPayments;
+
     /** The oxxo_payments capability. */
     @SerializedName("oxxo_payments")
     OxxoPayments oxxoPayments;
@@ -1661,6 +1665,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         MultibancoPayments multibancoPayments,
         MxBankTransferPayments mxBankTransferPayments,
         NaverPayPayments naverPayPayments,
+        NzBankAccountBecsDebitPayments nzBankAccountBecsDebitPayments,
         OxxoPayments oxxoPayments,
         P24Payments p24Payments,
         PayByBankPayments payByBankPayments,
@@ -1732,6 +1737,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.multibancoPayments = multibancoPayments;
       this.mxBankTransferPayments = mxBankTransferPayments;
       this.naverPayPayments = naverPayPayments;
+      this.nzBankAccountBecsDebitPayments = nzBankAccountBecsDebitPayments;
       this.oxxoPayments = oxxoPayments;
       this.p24Payments = p24Payments;
       this.payByBankPayments = payByBankPayments;
@@ -1851,6 +1857,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private NaverPayPayments naverPayPayments;
 
+      private NzBankAccountBecsDebitPayments nzBankAccountBecsDebitPayments;
+
       private OxxoPayments oxxoPayments;
 
       private P24Payments p24Payments;
@@ -1955,6 +1963,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.multibancoPayments,
             this.mxBankTransferPayments,
             this.naverPayPayments,
+            this.nzBankAccountBecsDebitPayments,
             this.oxxoPayments,
             this.p24Payments,
             this.payByBankPayments,
@@ -2282,6 +2291,14 @@ public class AccountUpdateParams extends ApiRequestParams {
       public Builder setNaverPayPayments(
           AccountUpdateParams.Capabilities.NaverPayPayments naverPayPayments) {
         this.naverPayPayments = naverPayPayments;
+        return this;
+      }
+
+      /** The nz_bank_account_becs_debit_payments capability. */
+      public Builder setNzBankAccountBecsDebitPayments(
+          AccountUpdateParams.Capabilities.NzBankAccountBecsDebitPayments
+              nzBankAccountBecsDebitPayments) {
+        this.nzBankAccountBecsDebitPayments = nzBankAccountBecsDebitPayments;
         return this;
       }
 
@@ -5664,6 +5681,88 @@ public class AccountUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountUpdateParams.Capabilities.NaverPayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NzBankAccountBecsDebitPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private NzBankAccountBecsDebitPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Capabilities.NzBankAccountBecsDebitPayments build() {
+          return new AccountUpdateParams.Capabilities.NzBankAccountBecsDebitPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountUpdateParams.Capabilities.NzBankAccountBecsDebitPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountUpdateParams.Capabilities.NzBankAccountBecsDebitPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

@@ -556,18 +556,23 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** <strong>Required.</strong> The unique identifier for this choice */
+        @SerializedName("id")
+        String id;
+
         /** The style of the button which will be shown for this choice. */
         @SerializedName("style")
         Style style;
 
         /** <strong>Required.</strong> The text which will be shown on the button for this choice */
-        @SerializedName("value")
-        String value;
+        @SerializedName("text")
+        String text;
 
-        private Choice(Map<String, Object> extraParams, Style style, String value) {
+        private Choice(Map<String, Object> extraParams, String id, Style style, String text) {
           this.extraParams = extraParams;
+          this.id = id;
           this.style = style;
-          this.value = value;
+          this.text = text;
         }
 
         public static Builder builder() {
@@ -577,14 +582,16 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private String id;
+
           private Style style;
 
-          private String value;
+          private String text;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ReaderCollectInputsParams.Input.Selection.Choice build() {
             return new ReaderCollectInputsParams.Input.Selection.Choice(
-                this.extraParams, this.style, this.value);
+                this.extraParams, this.id, this.style, this.text);
           }
 
           /**
@@ -615,6 +622,12 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
             return this;
           }
 
+          /** <strong>Required.</strong> The unique identifier for this choice */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
+
           /** The style of the button which will be shown for this choice. */
           public Builder setStyle(ReaderCollectInputsParams.Input.Selection.Choice.Style style) {
             this.style = style;
@@ -624,8 +637,8 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
           /**
            * <strong>Required.</strong> The text which will be shown on the button for this choice
            */
-          public Builder setValue(String value) {
-            this.value = value;
+          public Builder setText(String text) {
+            this.text = text;
             return this;
           }
         }
