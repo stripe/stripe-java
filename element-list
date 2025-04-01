@@ -1,4 +1,6 @@
 com.stripe
+com.stripe.events
+com.stripe.examples
 com.stripe.exception
 com.stripe.exception.oauth
 com.stripe.model
@@ -20,6 +22,8 @@ com.stripe.model.tax
 com.stripe.model.terminal
 com.stripe.model.testhelpers
 com.stripe.model.treasury
+com.stripe.model.v2
+com.stripe.model.v2.billing
 com.stripe.net
 com.stripe.param
 com.stripe.param.apps
@@ -40,6 +44,8 @@ com.stripe.param.tax
 com.stripe.param.terminal
 com.stripe.param.testhelpers
 com.stripe.param.treasury
+com.stripe.param.v2.billing
+com.stripe.param.v2.core
 com.stripe.service
 com.stripe.service.apps
 com.stripe.service.billing
@@ -61,4 +67,8 @@ com.stripe.service.testhelpers.issuing
 com.stripe.service.testhelpers.terminal
 com.stripe.service.testhelpers.treasury
 com.stripe.service.treasury
+com.stripe.service.v2
+com.stripe.service.v2.billing
+com.stripe.service.v2.core
 com.stripe.util
+com.stripe.v2
