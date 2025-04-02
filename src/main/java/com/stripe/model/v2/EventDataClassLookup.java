@@ -86,18 +86,19 @@ public final class EventDataClassLookup {
 
     eventClassLookup.put(
         "v2.core.account[requirements].updated",
-        com.stripe.events.V2CoreAccountRequirementsUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingRequirementsUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account_link.completed", com.stripe.events.V2CoreAccountLinkCompletedEvent.class);
     eventClassLookup.put(
         "v2.core.account[configuration.customer].capability_status_updated",
-        com.stripe.events.V2CoreAccountConfigurationCustomerCapabilityStatusUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingConfigurationCustomerCapabilityStatusUpdatedEvent
+            .class);
     eventClassLookup.put(
         "v2.core.account[configuration.customer].updated",
-        com.stripe.events.V2CoreAccountConfigurationCustomerUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingConfigurationCustomerUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account[identity].updated",
-        com.stripe.events.V2CoreAccountIdentityUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingIdentityUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account_person.created", com.stripe.events.V2CoreAccountPersonCreatedEvent.class);
     eventClassLookup.put(
@@ -106,16 +107,18 @@ public final class EventDataClassLookup {
         "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account[configuration.merchant].capability_status_updated",
-        com.stripe.events.V2CoreAccountConfigurationMerchantCapabilityStatusUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEvent
+            .class);
     eventClassLookup.put(
         "v2.core.account[configuration.merchant].updated",
-        com.stripe.events.V2CoreAccountConfigurationMerchantUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingConfigurationMerchantUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account[configuration.recipient].capability_status_updated",
-        com.stripe.events.V2CoreAccountConfigurationRecipientCapabilityStatusUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent
+            .class);
     eventClassLookup.put(
         "v2.core.account[configuration.recipient].updated",
-        com.stripe.events.V2CoreAccountConfigurationRecipientUpdatedEvent.class);
+        com.stripe.events.V2CoreAccountIncludingConfigurationRecipientUpdatedEvent.class);
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
         com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
