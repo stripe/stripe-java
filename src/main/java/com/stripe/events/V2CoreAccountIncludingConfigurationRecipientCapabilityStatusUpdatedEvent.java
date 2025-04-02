@@ -2,15 +2,18 @@
 package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.exception.StripeException;
 import com.stripe.model.v2.Event;
+import com.stripe.model.v2.core.Account;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public final class V2CoreAccountConfigurationRecipientCapabilityStatusUpdatedEvent extends Event {
+public final class V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent
+    extends Event {
   /** Data for the v2.core.account[configuration.recipient].capability_status_updated event. */
   @SerializedName("data")
-  V2CoreAccountConfigurationRecipientCapabilityStatusUpdatedEvent.EventData data;
+  V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent.EventData data;
 
   @Getter
   @Setter
@@ -24,5 +27,15 @@ public final class V2CoreAccountConfigurationRecipientCapabilityStatusUpdatedEve
      */
     @SerializedName("updated_capability")
     String updatedCapability;
+  }
+
+  @SerializedName("related_object")
+
+  /** Object containing the reference to API resource relevant to the event. */
+  RelatedObject relatedObject;
+
+  /** Retrieves the related object from the API. Make an API request on every call. */
+  public Account fetchRelatedObject() throws StripeException {
+    return (Account) super.fetchRelatedObject(this.relatedObject);
   }
 }

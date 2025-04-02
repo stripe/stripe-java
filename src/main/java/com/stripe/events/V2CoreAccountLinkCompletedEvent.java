@@ -2,9 +2,7 @@
 package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.exception.StripeException;
 import com.stripe.model.v2.Event;
-import com.stripe.model.v2.core.AccountLink;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,15 +29,5 @@ public final class V2CoreAccountLinkCompletedEvent extends Event {
      */
     @SerializedName("use_case")
     String useCase;
-  }
-
-  @SerializedName("related_object")
-
-  /** Object containing the reference to API resource relevant to the event. */
-  RelatedObject relatedObject;
-
-  /** Retrieves the related object from the API. Make an API request on every call. */
-  public AccountLink fetchRelatedObject() throws StripeException {
-    return (AccountLink) super.fetchRelatedObject(this.relatedObject);
   }
 }
