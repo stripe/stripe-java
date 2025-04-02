@@ -1,8 +1,171 @@
 # Changelog
 
+## 29.1.0-beta.1 - 2025-04-02
+* [#1966](https://github.com/stripe/stripe-java/pull/1966), [#1965](https://github.com/stripe/stripe-java/pull/1965) Update generated code for beta
+
+This release changes the pinned API version to `2025-03-31.preview`
+
+### Breaking Changes
+  * Remove support for `amountOverpaid` on `InvoicePayment`
+  * Remove support for `interchangeFees`, `netTotal`, `networkFees`, and `transactionVolume` on `Issuing.Settlement`
+  * Remove support for `Value` on `Terminal.Reader.action.collect_inputs.inputs[].selection.choices[]`, `Terminal.Reader.action.collect_inputs.inputs[].selection`, and `terminal.ReaderCollectInputsParams.inputs[].selection.choices[]`
+  * Remove support for value `variable` from enum `CouponCreateParams.duration`
+  * Remove support for `applicationFeeAmount`, `discount`, `paidOutOfBand`, `paid`, `paymentIntent`, `quote`, `subscriptionDetails`, `subscriptionProrationDate`, `tax`, `totalTaxAmounts`, and `transferData` on `QuotePreviewInvoice`
+  * Remove support for `billingThresholds` on `QuotePreviewSubscriptionSchedule.default_settings`, `QuotePreviewSubscriptionSchedule.phases[].items[]`, and `QuotePreviewSubscriptionSchedule.phases[]`
+  * Remove support for `coupon` on `QuotePreviewSubscriptionSchedule.phases[]`
+  * Change `OrderCreateParams.payment.settings.payment_method_options.wechat_pay.client` and `OrderUpdateParams.payment.settings.payment_method_options.wechat_pay.client` to be optional
+  * Change type of `PaymentAttemptRecord.payment_method_details.type` and `PaymentRecord.payment_method_details.type` from `literal('custom')` to `string`
+  * Change type of `PaymentAttemptRecord.payment_record` from `string` to `nullable(string)`
+  * Change `PaymentAttemptRecord.PaymentMethodDetail.custom` and `PaymentRecord.PaymentMethodDetail.custom` to be optional
+
+### Additions
+  * Add support for `paymentMethodOptions` on `ConfirmationTokenCreateParams`
+  * Add support for `installments` on `ConfirmationToken.payment_method_options.card`
+  * Add support for `billie` on `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_options`, and `PaymentIntentUpdateParams.payment_method_options`
+  * Add support for `id` and `text` on `Terminal.Reader.action.collect_inputs.inputs[].selection.choices[]`, `Terminal.Reader.action.collect_inputs.inputs[].selection`, and `terminal.ReaderCollectInputsParams.inputs[].selection.choices[]`
+  * Add support for new resources `BalanceSettings`
+  * Add support for `retrieve` and `update` methods on resource `BalanceSettings`
+  * Add support for `create`, `delete`, `list`, `retrieve`, and `update` methods on a new `ExternalAccountService` class to access cards and bank accounts made available in the new path `v1/external_accounts`. Access this via `StripeClient.externalAccounts`
+  * Add support for `stripeBalancePayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `customerAccount` on `Billing.CreditBalanceSummary`, `Billing.CreditGrant`, `BillingPortal.Session`, `Checkout.Session`, `ConfirmationToken.payment_method_preview`, `CreditNoteListParams`, `CreditNote`, `CustomerBalanceTransaction`, `CustomerCashBalanceTransaction`, `CustomerCashBalance`, `CustomerPaymentMethod`, `CustomerSessionCreateParams`, `CustomerSession`, `CustomerTaxId.owner`, `CustomerTaxId`, `Customer`, `Discount`, `FinancialConnections.Account.account_holder`, `FinancialConnections.Session.account_holder`, `InvoiceCreateParams`, `InvoiceCreatePreviewParams`, `InvoiceItemCreateParams`, `InvoiceItemListParams`, `InvoiceItem`, `InvoiceListParams`, `Invoice`, `PaymentIntentCreateParams`, `PaymentIntentListParams`, `PaymentIntentUpdateParams`, `PaymentIntent`, `PaymentMethodAttachParams`, `PaymentMethod`, `PromotionCodeCreateParams`, `PromotionCodeListParams`, `PromotionCode`, `QuoteCreateParams`, `QuoteListParams`, `QuotePreviewInvoice`, `QuotePreviewSubscriptionSchedule`, `QuoteUpdateParams`, `Quote`, `SetupAttempt`, `SetupIntentCreateParams`, `SetupIntentListParams`, `SetupIntentUpdateParams`, `SetupIntent`, `SubscriptionCreateParams`, `SubscriptionListParams`, `SubscriptionScheduleCreateParams`, `SubscriptionScheduleListParams`, `SubscriptionSchedule`, `Subscription`, `TaxId.owner`, `TaxIdCreateParams.owner`, `TaxIdListParams.owner`, `TaxId`, `billing.CreditBalanceSummaryRetrieveParams`, `billing.CreditBalanceTransactionListParams`, `billing.CreditGrantCreateParams`, `billing.CreditGrantListParams`, `billingportal.SessionCreateParams`, `checkout.SessionCreateParams`, `checkout.SessionListParams`, `financialconnections.AccountListParams.account_holder`, and `financialconnections.SessionCreateParams.account_holder`
+  * Add support for `stripeBalance` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `CustomerPaymentMethod`, `PaymentAttemptRecord.payment_method_details`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodCreateParams`, `PaymentMethod`, `PaymentRecord.payment_method_details`, `SetupAttempt.payment_method_details`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Add support for `updateLineItems` and `updateShippingDetails` on `Checkout.Session.permissions` and `checkout.SessionCreateParams.permissions`
+  * Add support for `provider` on `Checkout.Session.automatic_tax`, `Invoice.automatic_tax`, `Quote.automatic_tax`, and `QuotePreviewInvoice.automatic_tax`
+  * Add support for `taxCalculationReference` on `CreditNoteLineItem`, `CreditNotePreviewLines`, `InvoiceLineItem`, `LineItem`, `PaymentLinkLineItem`, `QuoteComputedUpfrontLineItems`, `QuoteLineItem`, and `SessionLineItem`
+  * Add support for `context` on `Event`
+  * Add support for `relatedCustomerAccount` on `Identity.VerificationSession`, `identity.VerificationSessionCreateParams`, and `identity.VerificationSessionListParams`
+  * Add support for `networkData` on `Issuing.DisputeSettlementDetail`
+  * Add support for `interchangeFeesAmount`, `netTotalAmount`, `networkFeesAmount`, `otherFeesAmount`, `otherFeesCount`, and `transactionAmount` on `Issuing.Settlement`
+  * Add support for `reportedBy` on `PaymentAttemptRecord`
+  * Add support for `achCreditTransfer`, `achDebit`, `acssDebit`, `affirm`, `afterpayClearpay`, `alipay`, `alma`, `amazonPay`, `auBecsDebit`, `bacsDebit`, `bancontact`, `billie`, `blik`, `boleto`, `cardPresent`, `card`, `cashapp`, `customerBalance`, `eps`, `fpx`, `giropay`, `gopay`, `grabpay`, `idBankTransfer`, `ideal`, `interacPresent`, `kakaoPay`, `klarna`, `konbini`, `krCard`, `link`, `mbWay`, `mobilepay`, `multibanco`, `naverPay`, `nzBankAccount`, `oxxo`, `p24`, `payByBank`, `payco`, `paynow`, `paypal`, `payto`, `pix`, `promptpay`, `qris`, `rechnung`, `revolutPay`, `samsungPay`, `satispay`, `sepaCreditTransfer`, `sepaDebit`, `shopeepay`, `sofort`, `stripeAccount`, `swish`, `twint`, `usBankAccount`, `wechatPay`, `wechat`, and `zip` on `PaymentAttemptRecord.payment_method_details` and `PaymentRecord.payment_method_details`
+  * Add support for `PayoutMethod` on `PayoutCreateParams` and `Payout`
+  * Add support for `confirmationSecret`, `parent`, and `totalTaxes` on `QuotePreviewInvoice`
+  * Add support for `Id` and `Text` on `TerminalReaderActionCollectInputsInputsSelectionChoices`, `TerminalReaderActionCollectInputsInputsSelection`, and `TerminalReaderInputsSelectionChoicesOptions`
+
+  #### New APIs for Money CardManagement
+
+  * Add support for new resources `V2.FinancialAddressCreditSimulation`, `V2.FinancialAddressGeneratedMicrodeposits`, `V2.MoneyManagement.Adjustment`, `V2.MoneyManagement.FinancialAccount`, `V2.MoneyManagement.FinancialAddress`, `V2.MoneyManagement.InboundTransfer`, `V2.MoneyManagement.OutboundPaymentQuote`, `V2.MoneyManagement.OutboundPayment`, `V2.MoneyManagement.OutboundSetupIntent`, `V2.MoneyManagement.OutboundTransfer`, `V2.MoneyManagement.PayoutMethod`, `V2.MoneyManagement.PayoutMethodsBankAccountSpec`, `V2.MoneyManagement.ReceivedCredit`, `V2.MoneyManagement.ReceivedDebit`, `V2.MoneyManagement.TransactionEntry`, and `V2.MoneyManagement.Transaction`
+  * Add support for `create` method on resource `V2.MoneyManagement.OutboundPaymentQuote`
+  * Add support for `list` and `retrieve` methods on resources `V2.MoneyManagement.Adjustment`, `V2.MoneyManagement.FinancialAccount`, `V2.MoneyManagement.ReceivedCredit`, `V2.MoneyManagement.ReceivedDebit`, `V2.MoneyManagement.TransactionEntry`, and `V2.MoneyManagement.Transaction`
+  * Add support for `create`, `list`, and `retrieve` methods on resources `V2.MoneyManagement.FinancialAddress` and `V2.MoneyManagement.InboundTransfer`
+  * Add support for `cancel`, `create`, `list`, and `retrieve` methods on resources `V2.MoneyManagement.OutboundPayment` and `V2.MoneyManagement.OutboundTransfer`
+  * Add support for `archive`, `list`, `retrieve`, and `unarchive` methods on resource `V2.MoneyManagement.PayoutMethod`
+  * Add support for `cancel`, `create`, `list`, `retrieve`, and `update` methods on resource `V2.MoneyManagement.OutboundSetupIntent`
+  * Add support for `retrieve` method on resource `V2.MoneyManagement.PayoutMethodsBankAccountSpec`
+  * Add support for new values `account_number`, `fedwire_routing_number`, and `routing_number` on enum `invalid_payment_method.invalidParam`
+  * Add support for new thin event `V2MoneyManagementFinancialAccountCreatedEvent` with related object `V2.MoneyManagement.FinancialAccount`
+  * Add support for new thin events `V2MoneyManagementFinancialAddressActivatedEvent` and `V2MoneyManagementFinancialAddressFailedEvent` with related object `V2.MoneyManagement.FinancialAddress`
+  * Add support for new thin events `V2MoneyManagementInboundTransferAvailableEvent`, `V2MoneyManagementInboundTransferBankDebitFailedEvent`, `V2MoneyManagementInboundTransferBankDebitProcessingEvent`, `V2MoneyManagementInboundTransferBankDebitQueuedEvent`, `V2MoneyManagementInboundTransferBankDebitReturnedEvent`, and `V2MoneyManagementInboundTransferBankDebitSucceededEvent` with related object `V2.MoneyManagement.InboundTransfer`
+  * Add support for new thin events `V2MoneyManagementOutboundPaymentCanceledEvent`, `V2MoneyManagementOutboundPaymentCreatedEvent`, `V2MoneyManagementOutboundPaymentFailedEvent`, `V2MoneyManagementOutboundPaymentPostedEvent`, and `V2MoneyManagementOutboundPaymentReturnedEvent` with related object `V2.MoneyManagement.OutboundPayment`
+  * Add support for new thin events `V2MoneyManagementOutboundTransferCanceledEvent`, `V2MoneyManagementOutboundTransferCreatedEvent`, `V2MoneyManagementOutboundTransferFailedEvent`, `V2MoneyManagementOutboundTransferPostedEvent`, and `V2MoneyManagementOutboundTransferReturnedEvent` with related object `V2.MoneyManagement.OutboundTransfer`
+  * Add support for new thin events `V2MoneyManagementReceivedCreditAvailableEvent`, `V2MoneyManagementReceivedCreditFailedEvent`, `V2MoneyManagementReceivedCreditReturnedEvent`, and `V2MoneyManagementReceivedCreditSucceededEvent` with related object `V2.MoneyManagement.ReceivedCredit`
+  * Add support for new thin events `V2MoneyManagementReceivedDebitCanceledEvent`, `V2MoneyManagementReceivedDebitFailedEvent`, `V2MoneyManagementReceivedDebitPendingEvent`, `V2MoneyManagementReceivedDebitSucceededEvent`, and `V2MoneyManagementReceivedDebitUpdatedEvent` with related object `V2.MoneyManagement.ReceivedDebit`
+  * Add support for new error types `AlreadyCanceledException`, `BlockedByStripeException`, `ControlledByDashboardException`, `FeatureNotEnabledException`, `FinancialAccountNotOpenException`, `InsufficientFundsException`, `InvalidPayoutMethodException`, `NotCancelableException`, and `RecipientNotNotifiableException`
+
+
+  #### New APIs for Accounts v2 in private preview
+  See [SaaS platform payments with subscription billing using Accounts v2](https://docs.stripe.com/connect/accounts-v2/saas-platform-payments-billing)
+
+  * Add support for new resources `V2.Core.AccountLink`, `V2.Core.Account`, `V2.Core.Person`, `V2.Core.Vault.GbBankAccount`, `V2.Core.Vault.UsBankAccount`
+  * Add support for `close`, `create`, `list`, `retrieve`, and `update` methods on resource `V2.Core.Account`
+  * Add support for `create` method on resources `V2.Core.AccountLink` and `V2.MoneyManagement.OutboundPaymentQuote`
+  * Add support for `acknowledge_confirmation_of_payee`, `archive`, `create`, `initiate_confirmation_of_payee`, and `retrieve` methods on resource `V2.Core.Vault.GbBankAccount`
+  * Add support for `archive`, `create`, `retrieve`, and `update` methods on resource `V2.Core.Vault.UsBankAccount`
+  * Add support for new thin events `V2CoreAccountIncludingConfigurationCustomerCapabilityStatusUpdatedEvent`, `V2CoreAccountIncludingConfigurationCustomerUpdatedEvent`, `V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEvent`, `V2CoreAccountIncludingConfigurationMerchantUpdatedEvent`, `V2CoreAccountIncludingConfigurationRecipientCapabilityStatusUpdatedEvent`, `V2CoreAccountIncludingConfigurationRecipientUpdatedEvent`, `V2CoreAccountIncludingIdentityUpdatedEvent`, and `V2CoreAccountIncludingRequirementsUpdatedEvent`
+  * Add support for new thin event `V2CoreAccountLinkCompletedEvent` with related object `V2.Core.AccountLink`
+  * Add support for new thin events `V2CoreAccountPersonCreatedEvent`, `V2CoreAccountPersonDeletedEvent`, and `V2CoreAccountPersonUpdatedEvent` with related object `V2.Core.Person`
+
+### Changes
+  * Change `PaymentRecordReportPaymentParams.paymentReference` to be optional
+  * Change type of `PaymentAttemptRecord.payment_method_details.custom` and `PaymentRecord.payment_method_details.custom` from `nullable(PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCustomDetails)` to `PaymentsPrimitivesPaymentRecordsResourcePaymentMethodCustomDetails`
+
+* [#1959](https://github.com/stripe/stripe-java/pull/1959) Update AddBetaVersion behavior
+  * `Stripe.AddBetaVersion` will use the highest version number used for a beta feature instead of throwing an `Exception` on a conflict as it had done previously.
+
+## 29.0.0 - 2025-04-01
+* [#1950](https://github.com/stripe/stripe-java/pull/1950) Support for APIs in the new API version 2025-03-31.basil
+
+  This release changes the pinned API version to `2025-03-31.basil`.
+
+  ### ⚠️ Breaking changes  due to changes in the Stripe API
+
+  Please review details for the breaking changes and alternatives in the [Stripe API changelog](https://docs.stripe.com/changelog/basil) before upgrading.
+
+  * Remove support for resources `SubscriptionItemUsageRecordSummary` and `SubscriptionItemUsageRecord`
+  * Remove support for `create` method on resource `SubscriptionItemUsageRecord`
+  * Remove support for `list` method on resource `SubscriptionItemUsageRecordSummary`
+  * Remove support for `upcomingLines` and `upcoming` methods on resource `Invoice`
+  * Remove support for `invoice` on `Charge` and `PaymentIntent`
+  * Remove support for `shippingDetails` on `Checkout.Session`
+  * Remove support for `carrier`, `phone`, and `trackingNumber` on `Checkout.Session.collected_information.shipping_details`
+  * Remove support for `refund` on `CreditNoteCreateParams`, `CreditNotePreviewLinesListParams`, `CreditNotePreviewParams`, and `CreditNote`
+  * Remove support for `taxAmounts` on `CreditNoteLineItem`, `CreditNote`, and `InvoiceLineItem`
+  * Remove support for `amountExcludingTax` and `unitAmountExcludingTax` on `CreditNoteLineItem` and `InvoiceLineItem`
+  * Remove support for `coupon` on `CustomerCreateParams`, `CustomerUpdateParams`, `InvoiceCreatePreviewParams.schedule_details.phases[]`, `InvoiceCreatePreviewParams`, `SubscriptionCreateParams`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.phases[]`, and `SubscriptionUpdateParams`
+  * Remove support for `promotionCode` on `CustomerCreateParams`, `CustomerUpdateParams`, `SubscriptionCreateParams`, and `SubscriptionUpdateParams`
+  * Remove support for `price` on `InvoiceAddLinesParams.lines[]`, `InvoiceItemCreateParams`, `InvoiceItemUpdateParams`, `InvoiceItem`, `InvoiceLineItemUpdateParams`, `InvoiceLineItem`, and `InvoiceUpdateLinesParams.lines[]`
+  * Remove support for `billingThresholds` on `InvoiceCreatePreviewParams.schedule_details.phases[].items[]`, `InvoiceCreatePreviewParams.schedule_details.phases[]`, `InvoiceCreatePreviewParams.subscription_details.items[]`, `SubscriptionCreateParams.items[]`, `SubscriptionCreateParams`, `SubscriptionItemCreateParams`, `SubscriptionItemUpdateParams`, `SubscriptionItem`, `SubscriptionSchedule.default_settings`, `SubscriptionSchedule.phases[].items[]`, `SubscriptionSchedule.phases[]`, `SubscriptionScheduleCreateParams.default_settings`, `SubscriptionScheduleCreateParams.phases[].items[]`, `SubscriptionScheduleCreateParams.phases[]`, `SubscriptionScheduleUpdateParams.default_settings`, `SubscriptionScheduleUpdateParams.phases[].items[]`, `SubscriptionScheduleUpdateParams.phases[]`, `SubscriptionUpdateParams.items[]`, `SubscriptionUpdateParams`, and `Subscription`
+  * Remove support for `applicationFeeAmount`, `charge`, `paidOutOfBand`, `paid`, `paymentIntent`, `quote`, `subscription`, `subscriptionDetails`, `subscriptionProrationDate`, `tax`, `totalTaxAmounts`, and `transferData` on `Invoice`
+  * Remove support for `discount` on `Invoice` and `Subscription`
+  * Remove support for `invoiceItem`, `prorationDetails`, `proration`, `taxRates`, and `type` on `InvoiceLineItem`
+  * Remove support for `plan` and `subscriptionItem` on `InvoiceItem` and `InvoiceLineItem`
+  * Remove support for `unitAmount` on `InvoiceItemCreateParams`, `InvoiceItemUpdateParams`, and `InvoiceItem`
+  * Remove support for `subscription` and `unitAmountDecimal` on `InvoiceItem`
+  * Remove support for `naverPay` on `PaymentMethodUpdateParams`
+  * Remove support for `aggregateUsage` on `PlanCreateParams`, `Plan`, `Price.recurring`, and `PriceCreateParams.recurring`
+  * Remove support for `currentPeriodEnd` and `currentPeriodStart` on `Subscription`
+  * Remove support for page on `V2.EventDestinationListParams` and `V2.EventListParams`
+
+  ### Changes to the Stripe API
+
+  * Change `PaymentIntentConfirmParams.payment_method_options.wechat_pay.client`, `PaymentIntentCreateParams.payment_method_options.wechat_pay.client`, and `PaymentIntentUpdateParams.payment_method_options.wechat_pay.client` to be optional
+  * Change `politicalExposure` on `AccountPersonUpdateParams`, `AccountPersonCreateParams` from `string` to `PoliticalExposure` enum.
+
+  ### Additions to the Stripe API
+
+  * Add support for new resource `InvoicePayment`
+  * Add support for `list` and `retrieve` methods on resource `InvoicePayment`
+  * Add support for `billiePayments`, `nzBankAccountBecsDebitPayments`, and `satispayPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `hostedPaymentMethodSave` on `Account.settings.invoices` and `AccountUpdateParams.settings.invoices`
+  * Add support for `invoices` on `AccountCreateParams.settings`
+  * Add support for new value `last` on enum `billing.MeterCreateParams.default_aggregation.formula`
+  * Add support for `presentmentDetails` on `Charge`, `Checkout.Session`, `PaymentIntent`, and `Refund`
+  * Add support for `billie` and `satispay` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `CustomerPaymentMethod`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, `PaymentMethodConfiguration`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Add support for `nzBankAccount` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `CustomerPaymentMethod`, `Mandate.payment_method_details`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodConfigurationCreateParams`, `PaymentMethodConfigurationUpdateParams`, `PaymentMethodConfiguration`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupAttempt.payment_method_details`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Add support for `optionalItems` on `Checkout.Session`, `PaymentLinkCreateParams`, `PaymentLink`, and `checkout.SessionCreateParams`
+  * Add support for `permissions` on `Checkout.Session` and `checkout.SessionCreateParams`
+  * Add support for new values `billie` and `satispay` on enum `checkout.SessionCreateParams.paymentMethodTypes`
+  * Add support for new value `custom` on enum `checkout.SessionCreateParams.uiMode`
+  * Add support for `shippingOptions` on `checkout.SessionUpdateParams`
+  * Add support for new values `billie`, `nz_bank_account`, and `satispay` on enums `ConfirmationTokenCreateParams.payment_method_data.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for `buyerId` on `ConfirmationToken.payment_method_preview.naver_pay`, `CustomerPaymentMethod.naver_pay`, and `PaymentMethod.naver_pay`
+  * Add support for `refunds` on `CreditNoteCreateParams`, `CreditNotePreviewLinesListParams`, `CreditNotePreviewParams`, and `CreditNote`
+  * Add support for `totalTaxes` on `CreditNote` and `Invoice`
+  * Add support for `taxes` on `CreditNoteLineItem` and `InvoiceLineItem`
+  * Add support for `taxabilityReason` on `InvoiceAddLinesParams.lines[].tax_amounts[]`, `InvoiceLineItemUpdateParams.tax_amounts[]`, and `InvoiceUpdateLinesParams.lines[].tax_amounts[]`
+  * Add support for `jurisdictionLevel` on `InvoiceAddLinesParams.lines[].tax_amounts[].tax_rate_data`, `InvoiceLineItemUpdateParams.tax_amounts[].tax_rate_data`, and `InvoiceUpdateLinesParams.lines[].tax_amounts[].tax_rate_data`
+  * Add support for `amountOverpaid`, `confirmationSecret`, and `payments` on `Invoice`
+  * Add support for `parent` on `InvoiceItem`, `InvoiceLineItem`, and `Invoice`
+  * Add support for new values `klarna` and `nz_bank_account` on enums `InvoiceCreateParams.payment_settings.paymentMethodTypes`, `InvoiceUpdateParams.payment_settings.paymentMethodTypes`, `SubscriptionCreateParams.payment_settings.paymentMethodTypes`, and `SubscriptionUpdateParams.payment_settings.paymentMethodTypes`
+  * Add support for `pricing` on `InvoiceAddLinesParams.lines[]`, `InvoiceItemCreateParams`, `InvoiceItemUpdateParams`, `InvoiceItem`, `InvoiceLineItemUpdateParams`, `InvoiceLineItem`, and `InvoiceUpdateLinesParams.lines[]`
+  * Add support for `taxabilityReason` on `InvoiceAddLinesParams.lines[].tax_amounts[]`, `InvoiceLineItemUpdateParams.tax_amounts[]`, and `InvoiceUpdateLinesParams.lines[].tax_amounts[]`
+  * Add support for `defaultValue` on `PaymentLink.custom_fields[].dropdown`, `PaymentLink.custom_fields[].numeric`, `PaymentLink.custom_fields[].text`, `PaymentLinkCreateParams.custom_fields[].dropdown`, `PaymentLinkCreateParams.custom_fields[].numeric`, `PaymentLinkCreateParams.custom_fields[].text`, `PaymentLinkUpdateParams.custom_fields[].dropdown`, `PaymentLinkUpdateParams.custom_fields[].numeric`, and `PaymentLinkUpdateParams.custom_fields[].text`
+  * Add support for new values `billie` and `satispay` on enums `PaymentLinkCreateParams.paymentMethodTypes` and `PaymentLinkUpdateParams.paymentMethodTypes`
+  * Add support for `nzBankTransfer` on `Refund.destination_details`
+  * Add support for `currentPeriodEnd` and `currentPeriodStart` on `SubscriptionItem`
+  * Add support for `wifi` on `Terminal.Configuration`, `terminal.ConfigurationCreateParams`, and `terminal.ConfigurationUpdateParams`
+  * Add support for new value `invoice.overpaid` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
+  * Add support for new values `2025-03-01.dashboard` and `2025-03-31.basil` on enum `WebhookEndpointCreateParams.apiVersion`
+
+* [#1958](https://github.com/stripe/stripe-java/pull/1958) Support for StripeAccount in StripeClient, and StripeContext on V1
+  * ⚠️ Adds `getStripeAccount` to `StripeResponseGetterOptions`.  If you have a class that extends `StripeResponseGetterOptions` you will need to implement this method.
+  * Adds `setStripeAccount` to StripeClientBuilder, so you can specify the Stripe-Account header at the client (instead of the individual request) level.
+* [#1955](https://github.com/stripe/stripe-java/pull/1955) Add @EqualsAndHashCode annotations
+  - Adds `@EqualsAndHashCode(callSuper = false)` to all Params objects which is useful for unit test assertions and caching scenarios.
+
 ## 28.5.0-beta.1 - 2025-03-18
 * [#1956](https://github.com/stripe/stripe-java/pull/1956) Beta SDK updates between Open API versions 1473 and 1505
-  
+
   * Add support for `succeed_input_collection` and `timeout_input_collection` test helper methods on resource `Terminal.Reader`
   * Add support for `target_date` on `Order.payment.settings.payment_method_options.acss_debit`, `Order.payment.settings.payment_method_options.sepa_debit`, `OrderCreateParams.payment.settings.payment_method_options.acss_debit`, `OrderCreateParams.payment.settings.payment_method_options.sepa_debit`, `OrderUpdateParams.payment.settings.payment_method_options.acss_debit`, and `OrderUpdateParams.payment.settings.payment_method_options.sepa_debit`
 
