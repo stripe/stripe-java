@@ -13,6 +13,7 @@ import com.stripe.net.ApiResource;
 import java.io.IOException;
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class EventDataObjectDeserializerTest extends BaseStripeTest {
   private static final String OLD_EVENT_VERSION = "2013-08-15";
@@ -233,6 +234,13 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     assertEquals(event.getData().object.toString(), rawJson);
   }
 
+  private EventDataObjectDeserializer stubIntegrationApiVersion(
+      EventDataObjectDeserializer data, String stripeVersion) {
+    EventDataObjectDeserializer dataSpy = Mockito.spy(data);
+    Mockito.doReturn(stripeVersion).when(dataSpy).getIntegrationApiVersion();
+    return dataSpy;
+  }
+
   @Test
   public void testDeserializeSetsResponseGetter() throws Exception {
     final String data = getCurrentEventStringFixture();
@@ -243,5 +251,38 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
 
     assertTrue(deserializer.getObject().isPresent());
     verifyDeserializedStripeObject(deserializer.getObject().get());
+  }
+
+  @Test
+  public void testGetDataObjectWithPreviewVersionMatch() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+
+    final String ApiVersion = "2025-04-01.preview";
+
+    // the SDK is on a preview version that is different from the preview version of the event
+    event.setApiVersion(ApiVersion);
+
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), ApiVersion);
+
+    assertTrue(deserializer.getObject().isPresent());
+  }
+
+  @Test
+  public void testGetDataObjectWithPreviewVersionMismatch() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+
+    final String eventApiVersion = "2025-04-01.preview";
+    final String sdkApiVersion = "2025-05-01.preview";
+
+    // the SDK is on a preview version that is different from the preview version of the event
+    event.setApiVersion(eventApiVersion);
+
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), sdkApiVersion);
+
+    assertFalse(deserializer.getObject().isPresent());
   }
 }
