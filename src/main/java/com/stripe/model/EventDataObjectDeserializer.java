@@ -6,7 +6,6 @@ import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
 import com.stripe.net.ApiMode;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.util.StringUtils;
 import java.util.Map;
 import java.util.Optional;
 import lombok.EqualsAndHashCode;
@@ -199,22 +198,35 @@ public class EventDataObjectDeserializer {
 
   private boolean apiVersionMatch() {
 
-    String eventApiVersion = StringUtils.trimApiVersion(this.apiVersion);
-    if (!Stripe.API_VERSION.contains(".")) {
-      return eventApiVersion.equals(Stripe.API_VERSION);
+    // Preserved for testing; we have tests that hook getIntegrationApiVersion
+    // to test with other api versions.
+    String currentApiVersion = getIntegrationApiVersion();
+    if (!currentApiVersion.contains(".")) {
+      return this.apiVersion.equals(currentApiVersion);
     }
 
     // If the event api version is from before we started adding
     // a major release identifier, there's no way its compatible with this
     // version
-    if (!eventApiVersion.contains(".")) {
+    if (!this.apiVersion.contains(".")) {
       return false;
     }
 
     // versions are yyyy-MM-dd.releaseIdentifier
-    String eventReleaseTrain = eventApiVersion.split("\\.", 2)[1];
-    String currentReleaseTrain = Stripe.API_VERSION.split("\\.", 2)[1];
+    String currentReleaseTrain = getIntegrationApiVersion().split("\\.", 2)[1];
+
+    // beta SDKs have to match their API version exactly
+    if (currentReleaseTrain.equals("preview")) {
+      return this.apiVersion.equals(currentApiVersion);
+    }
+
+    String eventReleaseTrain = this.apiVersion.split("\\.", 2)[1];
     return eventReleaseTrain.equals(currentReleaseTrain);
+  }
+
+  /** Internal method to allow for testing with different Stripe version. */
+  String getIntegrationApiVersion() {
+    return Stripe.API_VERSION;
   }
 
   /**
