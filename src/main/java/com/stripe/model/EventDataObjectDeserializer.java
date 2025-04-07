@@ -203,9 +203,9 @@ public class EventDataObjectDeserializer {
 
     // Preserved for testing; we have tests that hook getIntegrationApiVersion
     // to test with other api versions.
-    String currentApiVersion = getIntegrationApiVersion();
-    if (!currentApiVersion.contains(".")) {
-      return eventApiVersion.equals(currentApiVersion);
+    String sdkApiVersion = getIntegrationApiVersion();
+    if (!sdkApiVersion.contains(".")) {
+      return eventApiVersion.equals(sdkApiVersion);
     }
 
     // If the event api version is from before we started adding
@@ -216,15 +216,15 @@ public class EventDataObjectDeserializer {
     }
 
     // versions are yyyy-MM-dd.releaseIdentifier
-    String currentReleaseTrain = getIntegrationApiVersion().split("\\.", 2)[1];
+    String sdkReleaseTrain = sdkApiVersion.split("\\.", 2)[1];
 
     // beta SDKs have to match their API version exactly
-    if (currentReleaseTrain.equals("preview")) {
-      return eventApiVersion.equals(currentApiVersion);
+    if (sdkReleaseTrain.equals("preview")) {
+      return eventApiVersion.equals(sdkApiVersion);
     }
 
     String eventReleaseTrain = eventApiVersion.split("\\.", 2)[1];
-    return eventReleaseTrain.equals(currentReleaseTrain);
+    return eventReleaseTrain.equals(sdkReleaseTrain);
   }
 
   /** Internal method to allow for testing with different Stripe version. */
