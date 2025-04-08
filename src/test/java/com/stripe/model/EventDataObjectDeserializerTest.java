@@ -260,11 +260,11 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
 
     final String ApiVersion = "2025-04-01.basil";
 
-    // the SDK is on a preview version that is different from the preview version of the event
+    // the SDK is on a GA version that matches the event version exactly
     event.setApiVersion(ApiVersion);
 
     EventDataObjectDeserializer deserializer =
-        stubIntegrationApiVersion(event.getDataObjectDeserializer(), "2025-04-01.basil");
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), ApiVersion);
 
     assertTrue(deserializer.getObject().isPresent());
   }
@@ -276,7 +276,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
 
     final String ApiVersion = "2025-04-01.preview";
 
-    // the SDK is on a preview version that is different from the preview version of the event
+    // the SDK is on a preview version that matches the event version exactly
     event.setApiVersion(ApiVersion);
 
     EventDataObjectDeserializer deserializer =
@@ -291,6 +291,40 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
     final String eventApiVersion = "2025-04-01.preview";
+    final String sdkApiVersion = "2025-05-01.preview";
+
+    // the SDK is on a preview version that is different from the preview version of the event
+    event.setApiVersion(eventApiVersion);
+
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), sdkApiVersion);
+
+    assertFalse(deserializer.getObject().isPresent());
+  }
+
+  @Test
+  public void testGetDataObjectWithGaVersionMismatch() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+
+    final String eventApiVersion = "2025-04-01.preview";
+    final String sdkApiVersion = "2025-05-01.basil";
+
+    // the SDK is on a preview version that is different from the preview version of the event
+    event.setApiVersion(eventApiVersion);
+
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), sdkApiVersion);
+
+    assertFalse(deserializer.getObject().isPresent());
+  }
+
+  @Test
+  public void testGetDataObjectWithGaPreviewVersionMismatch() throws Exception {
+    final String data = getCurrentEventStringFixture();
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
+
+    final String eventApiVersion = "2025-04-01.basil";
     final String sdkApiVersion = "2025-05-01.preview";
 
     // the SDK is on a preview version that is different from the preview version of the event
