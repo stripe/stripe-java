@@ -197,10 +197,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("description")
   String description;
 
-  /** The FX Quote used for the PaymentIntent. */
-  @SerializedName("fx_quote")
-  String fxQuote;
-
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

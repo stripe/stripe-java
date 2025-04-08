@@ -54,8 +54,6 @@ file:
 Please see the [Java API docs][api-docs] for the most
 up-to-date documentation.
 
-See [video demonstrations][youtube-playlist] covering how to use the library.
-
 You can also refer to the [online Javadoc][javadoc].
 
 ## Usage
