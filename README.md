@@ -361,7 +361,6 @@ facilitate development.
 [spotless]: https://github.com/diffplug/spotless
 [stripe]: https://stripe.com
 [stripe-mock]: https://github.com/stripe/stripe-mock
-[youtube-playlist]: https://www.youtube.com/playlist?list=PLy1nL-pvL2M5TnSGVjEHTTMgdnnHi-KPg
 
 <!--
 # vim: set tw=79:
