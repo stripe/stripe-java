@@ -19,7 +19,8 @@
   "java.configuration.updateBuildConfiguration": "automatic",
   // LSP was ooming and it recommended this change
   // (jar) added -Xss8m so lombok would run without stack overflowing
-  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx4G -Xms100m -Xlog:disable -Xss8m",
+  // (xavdid) added -Xmx8G so LSP would be happy
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx8G -Xms100m -Xlog:disable -Xss8m",
   "java.test.config": {
     "vmargs": ["-Dstripe.disallowGlobalResponseGetterFallback=true"]
   }
