@@ -70,6 +70,13 @@ public class EventTest extends BaseStripeTest {
   @Test
   public void testGetDataObjectWithNewApiVersionInSameReleaseTrain() throws StripeException {
     String expectedReleaseTrain = Stripe.API_VERSION.split("\\.")[1];
+
+    // this test only makes sense on GA versions- the exact version for preview versions doesn't
+    // work this way and we can't mock private methods from this test class.
+    if (expectedReleaseTrain.equals("preview")) {
+      return;
+    }
+
     final Event event = Event.retrieve(EVENT_ID);
     // Suppose event has a different API version within the same release train as the
     // library's pinned version
