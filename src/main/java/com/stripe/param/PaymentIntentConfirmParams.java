@@ -64,6 +64,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * The FX rate in the quote is validated and used to convert the presentment amount to the
+   * settlement amount.
+   */
+  @SerializedName("fx_quote")
+  String fxQuote;
+
   /** ID of the mandate that's used for this payment. */
   @SerializedName("mandate")
   String mandate;
@@ -181,6 +188,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
+      String fxQuote,
       String mandate,
       Object mandateData,
       Object offSession,
@@ -202,6 +210,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fxQuote = fxQuote;
     this.mandate = mandate;
     this.mandateData = mandateData;
     this.offSession = offSession;
@@ -236,6 +245,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private String fxQuote;
 
     private String mandate;
 
@@ -275,6 +286,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
+          this.fxQuote,
           this.mandate,
           this.mandateData,
           this.offSession,
@@ -400,6 +412,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the presentment amount to the
+     * settlement amount.
+     */
+    public Builder setFxQuote(String fxQuote) {
+      this.fxQuote = fxQuote;
       return this;
     }
 
@@ -5419,7 +5440,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Bancontact bancontact;
 
     /**
-     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
      * payment method.
      */
     @SerializedName("billie")
@@ -5688,7 +5709,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Rechnung rechnung;
 
     /**
-     * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the Revolut
+     * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the Revolut
      * Pay payment method.
      */
     @SerializedName("revolut_pay")
@@ -5702,7 +5723,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
-     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
      * payment method.
      */
     @SerializedName("satispay")
@@ -6192,7 +6213,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
        * payment method.
        */
       public Builder setBillie(PaymentIntentConfirmParams.PaymentMethodData.Billie billie) {
@@ -6580,7 +6601,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the
+       * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the
        * Revolut Pay payment method.
        */
       public Builder setRevolutPay(
@@ -6600,7 +6621,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
        * payment method.
        */
       public Builder setSatispay(PaymentIntentConfirmParams.PaymentMethodData.Satispay satispay) {

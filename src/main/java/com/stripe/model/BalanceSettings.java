@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** &quot;Options for customizing account balances within Stripe.&quot;. */
+/** Options for customizing account balances within Stripe. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

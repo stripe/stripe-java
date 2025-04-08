@@ -150,6 +150,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * The FX rate in the quote is validated and used to convert the presentment amount to the
+   * settlement amount.
+   */
+  @SerializedName("fx_quote")
+  String fxQuote;
+
+  /**
    * ID of the mandate that's used for this payment. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
@@ -356,6 +363,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
+      String fxQuote,
       String mandate,
       Object mandateData,
       Map<String, String> metadata,
@@ -393,6 +401,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fxQuote = fxQuote;
     this.mandate = mandate;
     this.mandateData = mandateData;
     this.metadata = metadata;
@@ -451,6 +460,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private String fxQuote;
 
     private String mandate;
 
@@ -514,6 +525,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
+          this.fxQuote,
           this.mandate,
           this.mandateData,
           this.metadata,
@@ -738,6 +750,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the presentment amount to the
+     * settlement amount.
+     */
+    public Builder setFxQuote(String fxQuote) {
+      this.fxQuote = fxQuote;
       return this;
     }
 
@@ -5956,7 +5977,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Bancontact bancontact;
 
     /**
-     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
      * payment method.
      */
     @SerializedName("billie")
@@ -6225,7 +6246,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Rechnung rechnung;
 
     /**
-     * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the Revolut
+     * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the Revolut
      * Pay payment method.
      */
     @SerializedName("revolut_pay")
@@ -6239,7 +6260,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
-     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
      * payment method.
      */
     @SerializedName("satispay")
@@ -6726,7 +6747,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
        * payment method.
        */
       public Builder setBillie(PaymentIntentCreateParams.PaymentMethodData.Billie billie) {
@@ -7111,7 +7132,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the
+       * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the
        * Revolut Pay payment method.
        */
       public Builder setRevolutPay(
@@ -7131,7 +7152,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
        * payment method.
        */
       public Builder setSatispay(PaymentIntentCreateParams.PaymentMethodData.Satispay satispay) {

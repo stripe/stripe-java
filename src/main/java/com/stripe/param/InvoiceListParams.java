@@ -28,6 +28,7 @@ public class InvoiceListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** Only return invoices for the account specified by this account ID. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -184,6 +185,7 @@ public class InvoiceListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Only return invoices for the account specified by this account ID. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

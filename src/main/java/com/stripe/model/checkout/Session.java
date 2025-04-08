@@ -336,7 +336,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    * CheckoutSession object.
    *
    * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
-   * permissions.update.shipping_details}.
+   * permissions.update_shipping_details}.
    */
   @SerializedName("permissions")
   Permissions permissions;
@@ -454,6 +454,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("url")
   String url;
+
+  /** Wallet-specific configuration for this Checkout Session. */
+  @SerializedName("wallet_options")
+  WalletOptions walletOptions;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -4042,6 +4046,35 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about WalletOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class WalletOptions extends StripeObject {
+    @SerializedName("link")
+    Link link;
+
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Link extends StripeObject {
+      /**
+       * Describes whether Checkout should display Link. Defaults to {@code auto}.
+       *
+       * <p>One of {@code auto}, or {@code never}.
+       */
+      @SerializedName("display")
+      String display;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -4072,5 +4105,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
+    trySetResponseGetter(walletOptions, responseGetter);
   }
 }

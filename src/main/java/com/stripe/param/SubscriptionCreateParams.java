@@ -103,6 +103,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The identifier of the account to subscribe. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -632,6 +633,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The identifier of the account to subscribe. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

@@ -40,6 +40,7 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of the account whose subscriptions will be retrieved. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -262,6 +263,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
+    /** The ID of the account whose subscriptions will be retrieved. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

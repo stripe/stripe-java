@@ -284,7 +284,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     Bancontact bancontact;
 
     /**
-     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
      * payment method.
      */
     @SerializedName("billie")
@@ -553,7 +553,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     Rechnung rechnung;
 
     /**
-     * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the Revolut
+     * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the Revolut
      * Pay payment method.
      */
     @SerializedName("revolut_pay")
@@ -567,7 +567,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
-     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
      * payment method.
      */
     @SerializedName("satispay")
@@ -1057,7 +1057,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
        * payment method.
        */
       public Builder setBillie(ConfirmationTokenCreateParams.PaymentMethodData.Billie billie) {
@@ -1448,7 +1448,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the
+       * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the
        * Revolut Pay payment method.
        */
       public Builder setRevolutPay(
@@ -1468,7 +1468,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
        * payment method.
        */
       public Builder setSatispay(

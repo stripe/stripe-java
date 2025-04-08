@@ -127,7 +127,7 @@ public class FinancingOffer extends ApiResource implements HasId {
    * See <a
    * href="https://stripe.com/docs/api/capital/connect_financing_object#financing_offer_object-financing_type">financing_type</a>.
    *
-   * <p>One of {@code cash_advance}, or {@code flex_loan}.
+   * <p>One of {@code cash_advance}, {@code fixed_term_loan}, or {@code flex_loan}.
    */
   @SerializedName("type")
   String type;

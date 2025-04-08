@@ -48,6 +48,7 @@ public final class EventDataClassLookup {
     classLookup.put("file", File.class);
     classLookup.put("file_link", FileLink.class);
     classLookup.put("funding_instructions", FundingInstructions.class);
+    classLookup.put("fx_quote", FxQuote.class);
     classLookup.put("invoice", Invoice.class);
     classLookup.put("invoice_payment", InvoicePayment.class);
     classLookup.put("invoice_rendering_template", InvoiceRenderingTemplate.class);
@@ -186,6 +187,14 @@ public final class EventDataClassLookup {
     classLookup.put("issuing.settlement", com.stripe.model.issuing.Settlement.class);
     classLookup.put("issuing.token", com.stripe.model.issuing.Token.class);
     classLookup.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
+
+    classLookup.put("privacy.redaction_job", com.stripe.model.privacy.RedactionJob.class);
+    classLookup.put(
+        "privacy.redaction_job_root_objects",
+        com.stripe.model.privacy.RedactionJobRootObjects.class);
+    classLookup.put(
+        "privacy.redaction_job_validation_error",
+        com.stripe.model.privacy.RedactionJobValidationError.class);
 
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);

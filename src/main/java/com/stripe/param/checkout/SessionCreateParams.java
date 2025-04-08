@@ -292,7 +292,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * CheckoutSession object.
    *
    * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
-   * permissions.update.shipping_details}.
+   * permissions.update_shipping_details}.
    */
   @SerializedName("permissions")
   Permissions permissions;
@@ -382,6 +382,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("ui_mode")
   UiMode uiMode;
 
+  /** Wallet-specific configuration. */
+  @SerializedName("wallet_options")
+  WalletOptions walletOptions;
+
   private SessionCreateParams(
       AdaptivePricing adaptivePricing,
       AfterExpiration afterExpiration,
@@ -427,7 +431,8 @@ public class SessionCreateParams extends ApiRequestParams {
       SubscriptionData subscriptionData,
       String successUrl,
       TaxIdCollection taxIdCollection,
-      UiMode uiMode) {
+      UiMode uiMode,
+      WalletOptions walletOptions) {
     this.adaptivePricing = adaptivePricing;
     this.afterExpiration = afterExpiration;
     this.allowPromotionCodes = allowPromotionCodes;
@@ -473,6 +478,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.successUrl = successUrl;
     this.taxIdCollection = taxIdCollection;
     this.uiMode = uiMode;
+    this.walletOptions = walletOptions;
   }
 
   public static Builder builder() {
@@ -570,6 +576,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private UiMode uiMode;
 
+    private WalletOptions walletOptions;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
@@ -617,7 +625,8 @@ public class SessionCreateParams extends ApiRequestParams {
           this.subscriptionData,
           this.successUrl,
           this.taxIdCollection,
-          this.uiMode);
+          this.uiMode,
+          this.walletOptions);
     }
 
     /**
@@ -1071,7 +1080,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * CheckoutSession object.
      *
      * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
-     * permissions.update.shipping_details}.
+     * permissions.update_shipping_details}.
      */
     public Builder setPermissions(SessionCreateParams.Permissions permissions) {
       this.permissions = permissions;
@@ -1208,6 +1217,12 @@ public class SessionCreateParams extends ApiRequestParams {
     /** The UI mode of the Session. Defaults to {@code hosted}. */
     public Builder setUiMode(SessionCreateParams.UiMode uiMode) {
       this.uiMode = uiMode;
+      return this;
+    }
+
+    /** Wallet-specific configuration. */
+    public Builder setWalletOptions(SessionCreateParams.WalletOptions walletOptions) {
+      this.walletOptions = walletOptions;
       return this;
     }
   }
@@ -17498,6 +17513,169 @@ public class SessionCreateParams extends ApiRequestParams {
 
       Required(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class WalletOptions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** contains details about the Link wallet options. */
+    @SerializedName("link")
+    Link link;
+
+    private WalletOptions(Map<String, Object> extraParams, Link link) {
+      this.extraParams = extraParams;
+      this.link = link;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Link link;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.WalletOptions build() {
+        return new SessionCreateParams.WalletOptions(this.extraParams, this.link);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.WalletOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.WalletOptions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** contains details about the Link wallet options. */
+      public Builder setLink(SessionCreateParams.WalletOptions.Link link) {
+        this.link = link;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Link {
+      /**
+       * Specifies whether Checkout should display Link as a payment option. By default, Checkout
+       * will display all the supported wallets that the Checkout Session was created with. This is
+       * the {@code auto} behavior, and it is the default choice.
+       */
+      @SerializedName("display")
+      Display display;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Link(Display display, Map<String, Object> extraParams) {
+        this.display = display;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Display display;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.WalletOptions.Link build() {
+          return new SessionCreateParams.WalletOptions.Link(this.display, this.extraParams);
+        }
+
+        /**
+         * Specifies whether Checkout should display Link as a payment option. By default, Checkout
+         * will display all the supported wallets that the Checkout Session was created with. This
+         * is the {@code auto} behavior, and it is the default choice.
+         */
+        public Builder setDisplay(SessionCreateParams.WalletOptions.Link.Display display) {
+          this.display = display;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.WalletOptions.Link#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.WalletOptions.Link#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum Display implements ApiRequestParams.EnumParam {
+        @SerializedName("auto")
+        AUTO("auto"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Display(String value) {
+          this.value = value;
+        }
       }
     }
   }

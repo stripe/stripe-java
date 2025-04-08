@@ -84,7 +84,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Bancontact bancontact;
 
   /**
-   * If this is a {@code billie} PaymentMethod, this hash contains details about the billie payment
+   * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie payment
    * method.
    */
   @SerializedName("billie")
@@ -375,7 +375,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Rechnung rechnung;
 
   /**
-   * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the Revolut
+   * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the Revolut
    * Pay payment method.
    */
   @SerializedName("revolut_pay")
@@ -389,7 +389,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   SamsungPay samsungPay;
 
   /**
-   * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+   * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
    * payment method.
    */
   @SerializedName("satispay")
@@ -892,7 +892,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
      * payment method.
      */
     public Builder setBillie(PaymentMethodCreateParams.Billie billie) {
@@ -1331,7 +1331,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the Revolut
+     * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the Revolut
      * Pay payment method.
      */
     public Builder setRevolutPay(PaymentMethodCreateParams.RevolutPay revolutPay) {
@@ -1349,7 +1349,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
      * payment method.
      */
     public Builder setSatispay(PaymentMethodCreateParams.Satispay satispay) {
