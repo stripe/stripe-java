@@ -1166,6 +1166,21 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("price.updated")
     PRICE__UPDATED("price.updated"),
 
+    @SerializedName("privacy.redaction_job.canceled")
+    PRIVACY__REDACTION_JOB__CANCELED("privacy.redaction_job.canceled"),
+
+    @SerializedName("privacy.redaction_job.created")
+    PRIVACY__REDACTION_JOB__CREATED("privacy.redaction_job.created"),
+
+    @SerializedName("privacy.redaction_job.ready")
+    PRIVACY__REDACTION_JOB__READY("privacy.redaction_job.ready"),
+
+    @SerializedName("privacy.redaction_job.succeeded")
+    PRIVACY__REDACTION_JOB__SUCCEEDED("privacy.redaction_job.succeeded"),
+
+    @SerializedName("privacy.redaction_job.validation_error")
+    PRIVACY__REDACTION_JOB__VALIDATION_ERROR("privacy.redaction_job.validation_error"),
+
     @SerializedName("product.created")
     PRODUCT__CREATED("product.created"),
 

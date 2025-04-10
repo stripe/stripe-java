@@ -187,6 +187,14 @@ public final class EventDataClassLookup {
     classLookup.put("issuing.token", com.stripe.model.issuing.Token.class);
     classLookup.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
 
+    classLookup.put("privacy.redaction_job", com.stripe.model.privacy.RedactionJob.class);
+    classLookup.put(
+        "privacy.redaction_job_root_objects",
+        com.stripe.model.privacy.RedactionJobRootObjects.class);
+    classLookup.put(
+        "privacy.redaction_job_validation_error",
+        com.stripe.model.privacy.RedactionJobValidationError.class);
+
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);
     classLookup.put("radar.value_list_item", com.stripe.model.radar.ValueListItem.class);

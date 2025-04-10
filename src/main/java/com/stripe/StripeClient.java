@@ -321,6 +321,10 @@ public class StripeClient {
     return new com.stripe.service.PriceService(this.getResponseGetter());
   }
 
+  public com.stripe.service.PrivacyService privacy() {
+    return new com.stripe.service.PrivacyService(this.getResponseGetter());
+  }
+
   public com.stripe.service.ProductService products() {
     return new com.stripe.service.ProductService(this.getResponseGetter());
   }

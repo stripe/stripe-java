@@ -117,6 +117,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account who owns the subscription. */
   @SerializedName("customer_account")
   String customerAccount;
 

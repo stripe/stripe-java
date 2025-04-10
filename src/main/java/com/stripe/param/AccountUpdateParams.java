@@ -614,6 +614,11 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("mcc")
     Object mcc;
 
+    /** Whether the business is a minority-owned, women-owned, and/or LGBTQI+-owned business. */
+    @SerializedName("minority_owned_business_designation")
+    List<AccountUpdateParams.BusinessProfile.MinorityOwnedBusinessDesignation>
+        minorityOwnedBusinessDesignation;
+
     /**
      * An estimate of the monthly revenue of the business. Only accepted for accounts in Brazil and
      * India.
@@ -657,6 +662,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         Long estimatedWorkerCount,
         Map<String, Object> extraParams,
         Object mcc,
+        List<AccountUpdateParams.BusinessProfile.MinorityOwnedBusinessDesignation>
+            minorityOwnedBusinessDesignation,
         MonthlyEstimatedRevenue monthlyEstimatedRevenue,
         Object name,
         Object productDescription,
@@ -669,6 +676,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.estimatedWorkerCount = estimatedWorkerCount;
       this.extraParams = extraParams;
       this.mcc = mcc;
+      this.minorityOwnedBusinessDesignation = minorityOwnedBusinessDesignation;
       this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
       this.name = name;
       this.productDescription = productDescription;
@@ -691,6 +699,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       private Object mcc;
+
+      private List<AccountUpdateParams.BusinessProfile.MinorityOwnedBusinessDesignation>
+          minorityOwnedBusinessDesignation;
 
       private MonthlyEstimatedRevenue monthlyEstimatedRevenue;
 
@@ -715,6 +726,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.estimatedWorkerCount,
             this.extraParams,
             this.mcc,
+            this.minorityOwnedBusinessDesignation,
             this.monthlyEstimatedRevenue,
             this.name,
             this.productDescription,
@@ -784,6 +796,36 @@ public class AccountUpdateParams extends ApiRequestParams {
        */
       public Builder setMcc(EmptyParam mcc) {
         this.mcc = mcc;
+        return this;
+      }
+
+      /**
+       * Add an element to `minorityOwnedBusinessDesignation` list. A list is initialized for the
+       * first `add/addAll` call, and subsequent calls adds additional elements to the original
+       * list. See {@link AccountUpdateParams.BusinessProfile#minorityOwnedBusinessDesignation} for
+       * the field documentation.
+       */
+      public Builder addMinorityOwnedBusinessDesignation(
+          AccountUpdateParams.BusinessProfile.MinorityOwnedBusinessDesignation element) {
+        if (this.minorityOwnedBusinessDesignation == null) {
+          this.minorityOwnedBusinessDesignation = new ArrayList<>();
+        }
+        this.minorityOwnedBusinessDesignation.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `minorityOwnedBusinessDesignation` list. A list is initialized for the
+       * first `add/addAll` call, and subsequent calls adds additional elements to the original
+       * list. See {@link AccountUpdateParams.BusinessProfile#minorityOwnedBusinessDesignation} for
+       * the field documentation.
+       */
+      public Builder addAllMinorityOwnedBusinessDesignation(
+          List<AccountUpdateParams.BusinessProfile.MinorityOwnedBusinessDesignation> elements) {
+        if (this.minorityOwnedBusinessDesignation == null) {
+          this.minorityOwnedBusinessDesignation = new ArrayList<>();
+        }
+        this.minorityOwnedBusinessDesignation.addAll(elements);
         return this;
       }
 
@@ -1323,6 +1365,30 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.state = state;
           return this;
         }
+      }
+    }
+
+    public enum MinorityOwnedBusinessDesignation implements ApiRequestParams.EnumParam {
+      @SerializedName("lgbtqi_owned_business")
+      LGBTQI_OWNED_BUSINESS("lgbtqi_owned_business"),
+
+      @SerializedName("minority_owned_business")
+      MINORITY_OWNED_BUSINESS("minority_owned_business"),
+
+      @SerializedName("none_of_these_apply")
+      NONE_OF_THESE_APPLY("none_of_these_apply"),
+
+      @SerializedName("prefer_not_to_answer")
+      PREFER_NOT_TO_ANSWER("prefer_not_to_answer"),
+
+      @SerializedName("women_owned_business")
+      WOMEN_OWNED_BUSINESS("women_owned_business");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      MinorityOwnedBusinessDesignation(String value) {
+        this.value = value;
       }
     }
   }

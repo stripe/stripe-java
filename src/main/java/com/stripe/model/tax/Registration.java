@@ -366,6 +366,9 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("ie")
     Ie ie;
 
+    @SerializedName("in")
+    In in;
+
     @SerializedName("is")
     Is is;
 
@@ -1459,6 +1462,23 @@ public class Registration extends ApiResource implements HasId {
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
       }
+    }
+
+    /**
+     * For more details about In, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class In extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
     }
 
     /**

@@ -54,8 +54,6 @@ file:
 Please see the [Java API docs][api-docs] for the most
 up-to-date documentation.
 
-See [video demonstrations][youtube-playlist] covering how to use the library.
-
 You can also refer to the [online Javadoc][javadoc].
 
 ## Usage
@@ -95,6 +93,12 @@ public class StripeExample {
 ```
 
 See the project's [functional tests][functional-tests] for more examples.
+
+### StripeClient vs legacy pattern
+
+We introduced the `StripeClient` class in v23 of the Java SDK. The legacy pattern used prior to that version is still available to use but will be marked as deprecated soon. Review the [migration guide to use StripeClient](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23#stripeclient) to move from the legacy pattern.
+
+Once the legacy pattern is deprecated, new API endpoints will only be accessible in the StripeClient. While there are no current plans to remove the legacy pattern for existing API endpoints, this may change in the future.
 
 ### Per-request Configuration
 

@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentRecordReportPaymentParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The amount you intend to collect for this payment. */
+  /** <strong>Required.</strong> The amount you initially requested for this payment. */
   @SerializedName("amount_requested")
   AmountRequested amountRequested;
 
@@ -168,7 +168,7 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
           this.shippingDetails);
     }
 
-    /** <strong>Required.</strong> The amount you intend to collect for this payment. */
+    /** <strong>Required.</strong> The amount you initially requested for this payment. */
     public Builder setAmountRequested(
         PaymentRecordReportPaymentParams.AmountRequested amountRequested) {
       this.amountRequested = amountRequested;
@@ -346,8 +346,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> A positive integer representing the amount in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> e.g., 100
-     * cents for $1.00 or 100 for ¥100, a zero-decimal currency).
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
+     * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
      */
     @SerializedName("value")
     Long value;
@@ -414,8 +414,8 @@ public class PaymentRecordReportPaymentParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> A positive integer representing the amount in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> e.g., 100
-       * cents for $1.00 or 100 for ¥100, a zero-decimal currency).
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
+       * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
        */
       public Builder setValue(Long value) {
         this.value = value;
