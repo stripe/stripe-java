@@ -292,7 +292,10 @@ public class FinancingOffer extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AcceptedTerms extends StripeObject {
-    /** Amount of financing offered, in minor units. */
+    /**
+     * Amount of financing offered, in minor units. For example, $1,000 USD will be represented as
+     * 100000.
+     */
     @SerializedName("advance_amount")
     Long advanceAmount;
 
@@ -300,7 +303,7 @@ public class FinancingOffer extends ApiResource implements HasId {
     @SerializedName("currency")
     String currency;
 
-    /** Fixed fee amount, in minor units. */
+    /** Fixed fee amount, in minor units. For example, $100 USD will be represented as 10000. */
     @SerializedName("fee_amount")
     Long feeAmount;
 
@@ -324,7 +327,10 @@ public class FinancingOffer extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OfferedTerms extends StripeObject {
-    /** Amount of financing offered, in minor units. */
+    /**
+     * Amount of financing offered, in minor units. For example, $1,000 USD will be represented as
+     * 100000.
+     */
     @SerializedName("advance_amount")
     Long advanceAmount;
 
@@ -341,7 +347,7 @@ public class FinancingOffer extends ApiResource implements HasId {
     @SerializedName("currency")
     String currency;
 
-    /** Fixed fee amount, in minor units. */
+    /** Fixed fee amount, in minor units. For example, $100 USD will be represented as 10000. */
     @SerializedName("fee_amount")
     Long feeAmount;
 
