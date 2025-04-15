@@ -51,7 +51,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # We test Stripe SDK against Java LTS versions and currently supported non-LTS versions.
+        # We test Stripe SDK against Java LTS versions(8, 11, 17, 21) and currently supported non-LTS versions.
         # https://www.oracle.com/java/technologies/java-se-support-roadmap.html
         java-version:
           - "1.8"
