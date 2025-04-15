@@ -687,7 +687,7 @@ public class SessionUpdateParams extends ApiRequestParams {
 
     /** The quantity of the line item being purchased. */
     @SerializedName("quantity")
-    Long quantity;
+    Object quantity;
 
     /**
      * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
@@ -702,7 +702,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         Object id,
         Object metadata,
         Object price,
-        Long quantity,
+        Object quantity,
         Object taxRates) {
       this.adjustableQuantity = adjustableQuantity;
       this.extraParams = extraParams;
@@ -728,7 +728,7 @@ public class SessionUpdateParams extends ApiRequestParams {
 
       private Object price;
 
-      private Long quantity;
+      private Object quantity;
 
       private Object taxRates;
 
@@ -856,6 +856,12 @@ public class SessionUpdateParams extends ApiRequestParams {
 
       /** The quantity of the line item being purchased. */
       public Builder setQuantity(Long quantity) {
+        this.quantity = quantity;
+        return this;
+      }
+
+      /** The quantity of the line item being purchased. */
+      public Builder setQuantity(EmptyParam quantity) {
         this.quantity = quantity;
         return this;
       }
