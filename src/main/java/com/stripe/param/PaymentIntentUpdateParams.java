@@ -102,6 +102,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * The FX rate in the quote is validated and used to convert the presentment amount to the
+   * settlement amount.
+   */
+  @SerializedName("fx_quote")
+  Object fxQuote;
+
   /** This hash contains details about the Mandate to create. */
   @SerializedName("mandate_data")
   MandateData mandateData;
@@ -237,6 +244,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object fxQuote,
       MandateData mandateData,
       Object metadata,
       Object paymentDetails,
@@ -262,6 +270,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fxQuote = fxQuote;
     this.mandateData = mandateData;
     this.metadata = metadata;
     this.paymentDetails = paymentDetails;
@@ -303,6 +312,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Object fxQuote;
 
     private MandateData mandateData;
 
@@ -347,6 +358,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.description,
           this.expand,
           this.extraParams,
+          this.fxQuote,
           this.mandateData,
           this.metadata,
           this.paymentDetails,
@@ -571,6 +583,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the presentment amount to the
+     * settlement amount.
+     */
+    public Builder setFxQuote(String fxQuote) {
+      this.fxQuote = fxQuote;
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the presentment amount to the
+     * settlement amount.
+     */
+    public Builder setFxQuote(EmptyParam fxQuote) {
+      this.fxQuote = fxQuote;
       return this;
     }
 

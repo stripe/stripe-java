@@ -150,6 +150,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * The FX rate in the quote is validated and used to convert the presentment amount to the
+   * settlement amount.
+   */
+  @SerializedName("fx_quote")
+  String fxQuote;
+
+  /**
    * ID of the mandate that's used for this payment. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
@@ -356,6 +363,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
+      String fxQuote,
       String mandate,
       Object mandateData,
       Map<String, String> metadata,
@@ -393,6 +401,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fxQuote = fxQuote;
     this.mandate = mandate;
     this.mandateData = mandateData;
     this.metadata = metadata;
@@ -451,6 +460,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private String fxQuote;
 
     private String mandate;
 
@@ -514,6 +525,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
+          this.fxQuote,
           this.mandate,
           this.mandateData,
           this.metadata,
@@ -738,6 +750,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the presentment amount to the
+     * settlement amount.
+     */
+    public Builder setFxQuote(String fxQuote) {
+      this.fxQuote = fxQuote;
       return this;
     }
 

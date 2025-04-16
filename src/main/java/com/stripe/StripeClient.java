@@ -245,6 +245,10 @@ public class StripeClient {
     return new com.stripe.service.ForwardingService(this.getResponseGetter());
   }
 
+  public com.stripe.service.FxQuoteService fxQuotes() {
+    return new com.stripe.service.FxQuoteService(this.getResponseGetter());
+  }
+
   public com.stripe.service.GiftCardsService giftCards() {
     return new com.stripe.service.GiftCardsService(this.getResponseGetter());
   }
