@@ -923,6 +923,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     /** Billing phone number (including extension). */
     @SerializedName("phone")
     String phone;
+
+    /** Taxpayer identification number. */
+    @SerializedName("tax_id")
+    String taxId;
   }
 
   /**

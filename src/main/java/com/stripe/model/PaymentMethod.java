@@ -902,6 +902,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** Billing phone number (including extension). */
     @SerializedName("phone")
     String phone;
+
+    /** Taxpayer identification number. */
+    @SerializedName("tax_id")
+    String taxId;
   }
 
   /**

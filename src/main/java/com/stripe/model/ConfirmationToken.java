@@ -666,6 +666,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
       /** Billing phone number (including extension). */
       @SerializedName("phone")
       String phone;
+
+      /** Taxpayer identification number. */
+      @SerializedName("tax_id")
+      String taxId;
     }
 
     /**

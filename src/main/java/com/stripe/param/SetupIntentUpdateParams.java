@@ -2568,17 +2568,23 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       @SerializedName("phone")
       Object phone;
 
+      /** Taxpayer identification number. */
+      @SerializedName("tax_id")
+      Object taxId;
+
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
           Object name,
-          Object phone) {
+          Object phone,
+          Object taxId) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
         this.name = name;
         this.phone = phone;
+        this.taxId = taxId;
       }
 
       public static Builder builder() {
@@ -2596,10 +2602,12 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
         private Object phone;
 
+        private Object taxId;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentUpdateParams.PaymentMethodData.BillingDetails build() {
           return new SetupIntentUpdateParams.PaymentMethodData.BillingDetails(
-              this.address, this.email, this.extraParams, this.name, this.phone);
+              this.address, this.email, this.extraParams, this.name, this.phone, this.taxId);
         }
 
         /** Billing address. */
@@ -2676,6 +2684,18 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         /** Billing phone number (including extension). */
         public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
+          return this;
+        }
+
+        /** Taxpayer identification number. */
+        public Builder setTaxId(String taxId) {
+          this.taxId = taxId;
+          return this;
+        }
+
+        /** Taxpayer identification number. */
+        public Builder setTaxId(EmptyParam taxId) {
+          this.taxId = taxId;
           return this;
         }
       }
