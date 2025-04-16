@@ -221,6 +221,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("ssn_last_4_provided")
   Boolean ssnLast4Provided;
 
+  /** Demographic data related to the person. */
+  @SerializedName("us_cfpb_data")
+  UsCfpbData usCfpbData;
+
   @SerializedName("verification")
   Verification verification;
 
@@ -831,6 +835,61 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   }
 
   /**
+   * For more details about UsCfpbData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UsCfpbData extends StripeObject {
+    /** The persons ethnicity details. */
+    @SerializedName("ethnicity_details")
+    EthnicityDetails ethnicityDetails;
+
+    /** The persons race details. */
+    @SerializedName("race_details")
+    RaceDetails raceDetails;
+
+    /** The persons self-identified gender. */
+    @SerializedName("self_identified_gender")
+    String selfIdentifiedGender;
+
+    /**
+     * For more details about EthnicityDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EthnicityDetails extends StripeObject {
+      /** The persons ethnicity. */
+      @SerializedName("ethnicity")
+      List<String> ethnicity;
+
+      /** Please specify your origin, when other is selected. */
+      @SerializedName("ethnicity_other")
+      String ethnicityOther;
+    }
+
+    /**
+     * For more details about RaceDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RaceDetails extends StripeObject {
+      /** The persons race. */
+      @SerializedName("race")
+      List<String> race;
+
+      /** Please specify your race, when other is selected. */
+      @SerializedName("race_other")
+      String raceOther;
+    }
+  }
+
+  /**
    * For more details about Verification, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1053,6 +1112,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     trySetResponseGetter(registeredAddress, responseGetter);
     trySetResponseGetter(relationship, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
+    trySetResponseGetter(usCfpbData, responseGetter);
     trySetResponseGetter(verification, responseGetter);
   }
 }
