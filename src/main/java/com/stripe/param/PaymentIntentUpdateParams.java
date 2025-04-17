@@ -8136,7 +8136,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("phone")
       Object phone;
 
-      /** Taxpayer identification number. */
+      /**
+       * Taxpayer identification number. Used only for transactions between LATAM buyers and
+       * non-LATAM sellers.
+       */
       @SerializedName("tax_id")
       Object taxId;
 
@@ -8255,13 +8258,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Taxpayer identification number. */
+        /**
+         * Taxpayer identification number. Used only for transactions between LATAM buyers and
+         * non-LATAM sellers.
+         */
         public Builder setTaxId(String taxId) {
           this.taxId = taxId;
           return this;
         }
 
-        /** Taxpayer identification number. */
+        /**
+         * Taxpayer identification number. Used only for transactions between LATAM buyers and
+         * non-LATAM sellers.
+         */
         public Builder setTaxId(EmptyParam taxId) {
           this.taxId = taxId;
           return this;

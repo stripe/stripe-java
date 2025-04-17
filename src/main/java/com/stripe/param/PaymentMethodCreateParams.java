@@ -2132,7 +2132,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("phone")
     Object phone;
 
-    /** Taxpayer identification number. */
+    /**
+     * Taxpayer identification number. Used only for transactions between LATAM buyers and non-LATAM
+     * sellers.
+     */
     @SerializedName("tax_id")
     String taxId;
 
@@ -2249,7 +2252,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Taxpayer identification number. */
+      /**
+       * Taxpayer identification number. Used only for transactions between LATAM buyers and
+       * non-LATAM sellers.
+       */
       public Builder setTaxId(String taxId) {
         this.taxId = taxId;
         return this;
