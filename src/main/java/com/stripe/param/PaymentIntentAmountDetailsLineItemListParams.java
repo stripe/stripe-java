@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class InvoicePaymentListParams extends ApiRequestParams {
+public class PaymentIntentAmountDetailsLineItemListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -51,7 +51,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private InvoicePaymentListParams(
+  private PaymentIntentAmountDetailsLineItemListParams(
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -80,8 +80,8 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public InvoicePaymentListParams build() {
-      return new InvoicePaymentListParams(
+    public PaymentIntentAmountDetailsLineItemListParams build() {
+      return new PaymentIntentAmountDetailsLineItemListParams(
           this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
     }
 
@@ -99,7 +99,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InvoicePaymentListParams#expand} for the field documentation.
+     * PaymentIntentAmountDetailsLineItemListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -112,7 +112,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InvoicePaymentListParams#expand} for the field documentation.
+     * PaymentIntentAmountDetailsLineItemListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -125,7 +125,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InvoicePaymentListParams#extraParams} for the field documentation.
+     * PaymentIntentAmountDetailsLineItemListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -138,7 +138,8 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InvoicePaymentListParams#extraParams} for the field documentation.
+     * See {@link PaymentIntentAmountDetailsLineItemListParams#extraParams} for the field
+     * documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {

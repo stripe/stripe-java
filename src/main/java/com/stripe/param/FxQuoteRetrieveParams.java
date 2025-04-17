@@ -12,14 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class InvoiceAttachPaymentIntentParams extends ApiRequestParams {
-  /**
-   * The portion of the PaymentIntent’s {@code amount} that should be applied to thisinvoice.
-   * Defaults to the entire amount.
-   */
-  @SerializedName("amount_requested")
-  Long amountRequested;
-
+public class FxQuoteRetrieveParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -33,19 +26,9 @@ public class InvoiceAttachPaymentIntentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The ID of the PaymentIntent to attach to the invoice. */
-  @SerializedName("payment_intent")
-  String paymentIntent;
-
-  private InvoiceAttachPaymentIntentParams(
-      Long amountRequested,
-      List<String> expand,
-      Map<String, Object> extraParams,
-      String paymentIntent) {
-    this.amountRequested = amountRequested;
+  private FxQuoteRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.paymentIntent = paymentIntent;
   }
 
   public static Builder builder() {
@@ -53,33 +36,19 @@ public class InvoiceAttachPaymentIntentParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Long amountRequested;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String paymentIntent;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public InvoiceAttachPaymentIntentParams build() {
-      return new InvoiceAttachPaymentIntentParams(
-          this.amountRequested, this.expand, this.extraParams, this.paymentIntent);
-    }
-
-    /**
-     * The portion of the PaymentIntent’s {@code amount} that should be applied to thisinvoice.
-     * Defaults to the entire amount.
-     */
-    public Builder setAmountRequested(Long amountRequested) {
-      this.amountRequested = amountRequested;
-      return this;
+    public FxQuoteRetrieveParams build() {
+      return new FxQuoteRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceAttachPaymentIntentParams#expand} for the field documentation.
+     * FxQuoteRetrieveParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -92,7 +61,7 @@ public class InvoiceAttachPaymentIntentParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceAttachPaymentIntentParams#expand} for the field documentation.
+     * FxQuoteRetrieveParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -105,7 +74,7 @@ public class InvoiceAttachPaymentIntentParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InvoiceAttachPaymentIntentParams#extraParams} for the field documentation.
+     * FxQuoteRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -118,19 +87,13 @@ public class InvoiceAttachPaymentIntentParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InvoiceAttachPaymentIntentParams#extraParams} for the field documentation.
+     * See {@link FxQuoteRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** <strong>Required.</strong> The ID of the PaymentIntent to attach to the invoice. */
-    public Builder setPaymentIntent(String paymentIntent) {
-      this.paymentIntent = paymentIntent;
       return this;
     }
   }

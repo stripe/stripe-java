@@ -289,7 +289,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * This property is used to set up permissions for various actions (e.g., update) on the
-   * CheckoutSession object.
+   * CheckoutSession object. Can only be set when creating {@code embedded} or {@code custom}
+   * sessions.
    *
    * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
    * permissions.update_shipping_details}.
@@ -1077,7 +1078,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * This property is used to set up permissions for various actions (e.g., update) on the
-     * CheckoutSession object.
+     * CheckoutSession object. Can only be set when creating {@code embedded} or {@code custom}
+     * sessions.
      *
      * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
      * permissions.update_shipping_details}.

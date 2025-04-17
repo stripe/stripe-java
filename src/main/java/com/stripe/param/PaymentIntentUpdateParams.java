@@ -102,6 +102,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * The FX rate in the quote is validated and used to convert the presentment amount to the
+   * settlement amount.
+   */
+  @SerializedName("fx_quote")
+  Object fxQuote;
+
   /** This hash contains details about the Mandate to create. */
   @SerializedName("mandate_data")
   MandateData mandateData;
@@ -237,6 +244,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Object description,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object fxQuote,
       MandateData mandateData,
       Object metadata,
       Object paymentDetails,
@@ -262,6 +270,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fxQuote = fxQuote;
     this.mandateData = mandateData;
     this.metadata = metadata;
     this.paymentDetails = paymentDetails;
@@ -303,6 +312,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Object fxQuote;
 
     private MandateData mandateData;
 
@@ -347,6 +358,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.description,
           this.expand,
           this.extraParams,
+          this.fxQuote,
           this.mandateData,
           this.metadata,
           this.paymentDetails,
@@ -571,6 +583,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the presentment amount to the
+     * settlement amount.
+     */
+    public Builder setFxQuote(String fxQuote) {
+      this.fxQuote = fxQuote;
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the presentment amount to the
+     * settlement amount.
+     */
+    public Builder setFxQuote(EmptyParam fxQuote) {
+      this.fxQuote = fxQuote;
       return this;
     }
 
@@ -1413,6 +1443,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("car_rental")
     CarRental carRental;
 
+    /**
+     * Some customers might be required by their company or organization to provide this
+     * information. If so, provide this value. Otherwise you can ignore this field.
+     */
+    @SerializedName("customer_reference")
+    Object customerReference;
+
     /** Event details for this PaymentIntent. */
     @SerializedName("event_details")
     EventDetails eventDetails;
@@ -1434,22 +1471,30 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("lodging")
     Lodging lodging;
 
+    /** A unique value assigned by the business to identify the transaction. */
+    @SerializedName("order_reference")
+    Object orderReference;
+
     /** Subscription details for this PaymentIntent. */
     @SerializedName("subscription")
     Subscription subscription;
 
     private PaymentDetails(
         CarRental carRental,
+        Object customerReference,
         EventDetails eventDetails,
         Map<String, Object> extraParams,
         Flight flight,
         Lodging lodging,
+        Object orderReference,
         Subscription subscription) {
       this.carRental = carRental;
+      this.customerReference = customerReference;
       this.eventDetails = eventDetails;
       this.extraParams = extraParams;
       this.flight = flight;
       this.lodging = lodging;
+      this.orderReference = orderReference;
       this.subscription = subscription;
     }
 
@@ -1460,6 +1505,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     public static class Builder {
       private CarRental carRental;
 
+      private Object customerReference;
+
       private EventDetails eventDetails;
 
       private Map<String, Object> extraParams;
@@ -1468,22 +1515,44 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Lodging lodging;
 
+      private Object orderReference;
+
       private Subscription subscription;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentUpdateParams.PaymentDetails build() {
         return new PaymentIntentUpdateParams.PaymentDetails(
             this.carRental,
+            this.customerReference,
             this.eventDetails,
             this.extraParams,
             this.flight,
             this.lodging,
+            this.orderReference,
             this.subscription);
       }
 
       /** Car rental details for this PaymentIntent. */
       public Builder setCarRental(PaymentIntentUpdateParams.PaymentDetails.CarRental carRental) {
         this.carRental = carRental;
+        return this;
+      }
+
+      /**
+       * Some customers might be required by their company or organization to provide this
+       * information. If so, provide this value. Otherwise you can ignore this field.
+       */
+      public Builder setCustomerReference(String customerReference) {
+        this.customerReference = customerReference;
+        return this;
+      }
+
+      /**
+       * Some customers might be required by their company or organization to provide this
+       * information. If so, provide this value. Otherwise you can ignore this field.
+       */
+      public Builder setCustomerReference(EmptyParam customerReference) {
+        this.customerReference = customerReference;
         return this;
       }
 
@@ -1530,6 +1599,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       /** Lodging reservation details for this PaymentIntent. */
       public Builder setLodging(PaymentIntentUpdateParams.PaymentDetails.Lodging lodging) {
         this.lodging = lodging;
+        return this;
+      }
+
+      /** A unique value assigned by the business to identify the transaction. */
+      public Builder setOrderReference(String orderReference) {
+        this.orderReference = orderReference;
+        return this;
+      }
+
+      /** A unique value assigned by the business to identify the transaction. */
+      public Builder setOrderReference(EmptyParam orderReference) {
+        this.orderReference = orderReference;
         return this;
       }
 
@@ -8055,17 +8136,26 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("phone")
       Object phone;
 
+      /**
+       * Taxpayer identification number. Used only for transactions between LATAM buyers and
+       * non-LATAM sellers.
+       */
+      @SerializedName("tax_id")
+      Object taxId;
+
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
           Object name,
-          Object phone) {
+          Object phone,
+          Object taxId) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
         this.name = name;
         this.phone = phone;
+        this.taxId = taxId;
       }
 
       public static Builder builder() {
@@ -8083,10 +8173,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Object phone;
 
+        private Object taxId;
+
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodData.BillingDetails build() {
           return new PaymentIntentUpdateParams.PaymentMethodData.BillingDetails(
-              this.address, this.email, this.extraParams, this.name, this.phone);
+              this.address, this.email, this.extraParams, this.name, this.phone, this.taxId);
         }
 
         /** Billing address. */
@@ -8163,6 +8255,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** Billing phone number (including extension). */
         public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
+          return this;
+        }
+
+        /**
+         * Taxpayer identification number. Used only for transactions between LATAM buyers and
+         * non-LATAM sellers.
+         */
+        public Builder setTaxId(String taxId) {
+          this.taxId = taxId;
+          return this;
+        }
+
+        /**
+         * Taxpayer identification number. Used only for transactions between LATAM buyers and
+         * non-LATAM sellers.
+         */
+        public Builder setTaxId(EmptyParam taxId) {
+          this.taxId = taxId;
           return this;
         }
       }

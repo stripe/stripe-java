@@ -159,22 +159,22 @@ public class Event extends ApiResource implements HasId {
    * financial_connections.account.refreshed_inferred_balances}, {@code
    * financial_connections.account.refreshed_ownership}, {@code
    * financial_connections.account.refreshed_transactions}, {@code
-   * financial_connections.session.updated}, {@code identity.verification_session.canceled}, {@code
-   * identity.verification_session.created}, {@code identity.verification_session.processing},
-   * {@code identity.verification_session.redacted}, {@code
-   * identity.verification_session.requires_input}, {@code identity.verification_session.verified},
-   * {@code invoice.created}, {@code invoice.deleted}, {@code invoice.finalization_failed}, {@code
-   * invoice.finalized}, {@code invoice.marked_uncollectible}, {@code invoice.overdue}, {@code
-   * invoice.overpaid}, {@code invoice.paid}, {@code invoice.payment.overpaid}, {@code
-   * invoice.payment_action_required}, {@code invoice.payment_attempt_required}, {@code
-   * invoice.payment_failed}, {@code invoice.payment_succeeded}, {@code invoice.sent}, {@code
-   * invoice.upcoming}, {@code invoice.updated}, {@code invoice.voided}, {@code
-   * invoice.will_be_due}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code
-   * issuing_authorization.created}, {@code issuing_authorization.request}, {@code
-   * issuing_authorization.updated}, {@code issuing_card.created}, {@code issuing_card.updated},
-   * {@code issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code
-   * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
-   * issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
+   * financial_connections.session.updated}, {@code fx_quote.expired}, {@code
+   * identity.verification_session.canceled}, {@code identity.verification_session.created}, {@code
+   * identity.verification_session.processing}, {@code identity.verification_session.redacted},
+   * {@code identity.verification_session.requires_input}, {@code
+   * identity.verification_session.verified}, {@code invoice.created}, {@code invoice.deleted},
+   * {@code invoice.finalization_failed}, {@code invoice.finalized}, {@code
+   * invoice.marked_uncollectible}, {@code invoice.overdue}, {@code invoice.overpaid}, {@code
+   * invoice.paid}, {@code invoice.payment.overpaid}, {@code invoice.payment_action_required},
+   * {@code invoice.payment_attempt_required}, {@code invoice.payment_failed}, {@code
+   * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
+   * invoice.updated}, {@code invoice.voided}, {@code invoice.will_be_due}, {@code
+   * invoiceitem.created}, {@code invoiceitem.deleted}, {@code issuing_authorization.created},
+   * {@code issuing_authorization.request}, {@code issuing_authorization.updated}, {@code
+   * issuing_card.created}, {@code issuing_card.updated}, {@code issuing_cardholder.created}, {@code
+   * issuing_cardholder.updated}, {@code issuing_dispute.closed}, {@code issuing_dispute.created},
+   * {@code issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
    * issuing_dispute.submitted}, {@code issuing_dispute.updated}, {@code
    * issuing_dispute_settlement_detail.created}, {@code issuing_dispute_settlement_detail.updated},
    * {@code issuing_fraud_liability_debit.created}, {@code

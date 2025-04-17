@@ -556,6 +556,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("financial_connections.session.updated")
     FINANCIAL_CONNECTIONS__SESSION__UPDATED("financial_connections.session.updated"),
 
+    @SerializedName("fx_quote.expired")
+    FX_QUOTE__EXPIRED("fx_quote.expired"),
+
     @SerializedName("identity.verification_session.canceled")
     IDENTITY__VERIFICATION_SESSION__CANCELED("identity.verification_session.canceled"),
 

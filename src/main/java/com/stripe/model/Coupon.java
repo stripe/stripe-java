@@ -134,9 +134,24 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   @SerializedName("redeem_by")
   Long redeemBy;
 
+  /**
+   * Configuration of the <a
+   * href="https://docs.stripe.com/billing/subscriptions/script-coupons">script</a> used to
+   * calculate the discount.
+   */
+  @SerializedName("script")
+  Script script;
+
   /** Number of times this coupon has been applied to a customer. */
   @SerializedName("times_redeemed")
   Long timesRedeemed;
+
+  /**
+   * One of {@code amount_off}, {@code percent_off}, or {@code script}. Describes the type of coupon
+   * logic used to calculate the discount.
+   */
+  @SerializedName("type")
+  String type;
 
   /**
    * Taking account of the above properties, whether this coupon can still be applied to a customer.
@@ -404,9 +419,35 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     Long amountOff;
   }
 
+  /**
+   * For more details about Script, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Script extends StripeObject implements HasId {
+    /**
+     * The configuration values of the script. The keys and values are specific to the script
+     * implementation.
+     */
+    @SerializedName("configuration")
+    Map<String, Object> configuration;
+
+    /** The name of the script used to calculate the discount. */
+    @SerializedName("display_name")
+    String displayName;
+
+    /** The script implementation ID for this coupon. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(appliesTo, responseGetter);
+    trySetResponseGetter(script, responseGetter);
   }
 }

@@ -1610,6 +1610,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("phone")
     String phone;
 
+    @SerializedName("registration_date")
+    RegistrationDate registrationDate;
+
     /**
      * The category identifying the legal structure of the company or legal entity. Also available
      * for accounts where <a
@@ -1772,6 +1775,27 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /** The user-agent string from the browser where the beneficial owner attestation was made. */
       @SerializedName("user_agent")
       String userAgent;
+    }
+
+    /**
+     * For more details about RegistrationDate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RegistrationDate extends StripeObject {
+      /** The day of registration, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /** The month of registration, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The four-digit year of registration. */
+      @SerializedName("year")
+      Long year;
     }
 
     /**

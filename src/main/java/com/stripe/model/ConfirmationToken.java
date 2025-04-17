@@ -666,6 +666,13 @@ public class ConfirmationToken extends ApiResource implements HasId {
       /** Billing phone number (including extension). */
       @SerializedName("phone")
       String phone;
+
+      /**
+       * Taxpayer identification number. Used only for transactions between LATAM buyers and
+       * non-LATAM sellers.
+       */
+      @SerializedName("tax_id")
+      String taxId;
     }
 
     /**
