@@ -926,7 +926,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
     /**
      * The state of verification for the person. Possible values are {@code unverified}, {@code
-     * pending}, or {@code verified}.
+     * pending}, or {@code verified}. Please refer <a
+     * href="https://stripe.com/docs/connect/handling-api-verification">guide</a> to handle
+     * verification updates.
      */
     @SerializedName("status")
     String status;
