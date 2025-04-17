@@ -476,6 +476,9 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
+      @SerializedName("registration_date")
+      Object registrationDate;
+
       /**
        * The identification number given to a company when it is registered or incorporated, if
        * distinct from the identification number used for filing taxes. (Examples are the CIN for
@@ -533,6 +536,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Boolean ownershipDeclarationShownAndSigned,
           ApiRequestParams.EnumParam ownershipExemptionReason,
           String phone,
+          Object registrationDate,
           String registrationNumber,
           ApiRequestParams.EnumParam structure,
           String taxId,
@@ -556,6 +560,7 @@ public class TokenCreateParams extends ApiRequestParams {
         this.ownershipDeclarationShownAndSigned = ownershipDeclarationShownAndSigned;
         this.ownershipExemptionReason = ownershipExemptionReason;
         this.phone = phone;
+        this.registrationDate = registrationDate;
         this.registrationNumber = registrationNumber;
         this.structure = structure;
         this.taxId = taxId;
@@ -603,6 +608,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
         private String phone;
 
+        private Object registrationDate;
+
         private String registrationNumber;
 
         private ApiRequestParams.EnumParam structure;
@@ -635,6 +642,7 @@ public class TokenCreateParams extends ApiRequestParams {
               this.ownershipDeclarationShownAndSigned,
               this.ownershipExemptionReason,
               this.phone,
+              this.registrationDate,
               this.registrationNumber,
               this.structure,
               this.taxId,
@@ -817,6 +825,17 @@ public class TokenCreateParams extends ApiRequestParams {
         /** The company's phone number (used for verification). */
         public Builder setPhone(String phone) {
           this.phone = phone;
+          return this;
+        }
+
+        public Builder setRegistrationDate(
+            TokenCreateParams.Account.Company.RegistrationDate registrationDate) {
+          this.registrationDate = registrationDate;
+          return this;
+        }
+
+        public Builder setRegistrationDate(EmptyParam registrationDate) {
+          this.registrationDate = registrationDate;
           return this;
         }
 
@@ -1586,6 +1605,105 @@ public class TokenCreateParams extends ApiRequestParams {
           /** The user agent of the browser from which the beneficial owner attestation was made. */
           public Builder setUserAgent(String userAgent) {
             this.userAgent = userAgent;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RegistrationDate {
+        /** <strong>Required.</strong> The day of registration, between 1 and 31. */
+        @SerializedName("day")
+        Long day;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The month of registration, between 1 and 12. */
+        @SerializedName("month")
+        Long month;
+
+        /** <strong>Required.</strong> The four-digit year of registration. */
+        @SerializedName("year")
+        Long year;
+
+        private RegistrationDate(Long day, Map<String, Object> extraParams, Long month, Long year) {
+          this.day = day;
+          this.extraParams = extraParams;
+          this.month = month;
+          this.year = year;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long day;
+
+          private Map<String, Object> extraParams;
+
+          private Long month;
+
+          private Long year;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public TokenCreateParams.Account.Company.RegistrationDate build() {
+            return new TokenCreateParams.Account.Company.RegistrationDate(
+                this.day, this.extraParams, this.month, this.year);
+          }
+
+          /** <strong>Required.</strong> The day of registration, between 1 and 31. */
+          public Builder setDay(Long day) {
+            this.day = day;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.RegistrationDate#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link TokenCreateParams.Account.Company.RegistrationDate#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The month of registration, between 1 and 12. */
+          public Builder setMonth(Long month) {
+            this.month = month;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The four-digit year of registration. */
+          public Builder setYear(Long year) {
+            this.year = year;
             return this;
           }
         }
