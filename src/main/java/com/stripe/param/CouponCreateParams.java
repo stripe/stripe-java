@@ -115,6 +115,14 @@ public class CouponCreateParams extends ApiRequestParams {
   @SerializedName("redeem_by")
   Long redeemBy;
 
+  /**
+   * Configuration of the <a
+   * href="https://docs.stripe.com/billing/subscriptions/script-coupons">script</a> used to
+   * calculate the discount.
+   */
+  @SerializedName("script")
+  Script script;
+
   private CouponCreateParams(
       Long amountOff,
       AppliesTo appliesTo,
@@ -129,7 +137,8 @@ public class CouponCreateParams extends ApiRequestParams {
       Object metadata,
       String name,
       BigDecimal percentOff,
-      Long redeemBy) {
+      Long redeemBy,
+      Script script) {
     this.amountOff = amountOff;
     this.appliesTo = appliesTo;
     this.currency = currency;
@@ -144,6 +153,7 @@ public class CouponCreateParams extends ApiRequestParams {
     this.name = name;
     this.percentOff = percentOff;
     this.redeemBy = redeemBy;
+    this.script = script;
   }
 
   public static Builder builder() {
@@ -179,6 +189,8 @@ public class CouponCreateParams extends ApiRequestParams {
 
     private Long redeemBy;
 
+    private Script script;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CouponCreateParams build() {
       return new CouponCreateParams(
@@ -195,7 +207,8 @@ public class CouponCreateParams extends ApiRequestParams {
           this.metadata,
           this.name,
           this.percentOff,
-          this.redeemBy);
+          this.redeemBy,
+          this.script);
     }
 
     /**
@@ -414,6 +427,16 @@ public class CouponCreateParams extends ApiRequestParams {
       this.redeemBy = redeemBy;
       return this;
     }
+
+    /**
+     * Configuration of the <a
+     * href="https://docs.stripe.com/billing/subscriptions/script-coupons">script</a> used to
+     * calculate the discount.
+     */
+    public Builder setScript(CouponCreateParams.Script script) {
+      this.script = script;
+      return this;
+    }
   }
 
   @Getter
@@ -575,6 +598,111 @@ public class CouponCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Script {
+    /**
+     * <strong>Required.</strong> The configuration values of the script. The keys and values are
+     * specific to the script implementation.
+     */
+    @SerializedName("configuration")
+    Map<String, Object> configuration;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The script implementation ID for this coupon. */
+    @SerializedName("id")
+    String id;
+
+    private Script(Map<String, Object> configuration, Map<String, Object> extraParams, String id) {
+      this.configuration = configuration;
+      this.extraParams = extraParams;
+      this.id = id;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> configuration;
+
+      private Map<String, Object> extraParams;
+
+      private String id;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CouponCreateParams.Script build() {
+        return new CouponCreateParams.Script(this.configuration, this.extraParams, this.id);
+      }
+
+      /**
+       * Add a key/value pair to `configuration` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.Script#configuration} for the field documentation.
+       */
+      public Builder putConfiguration(String key, Object value) {
+        if (this.configuration == null) {
+          this.configuration = new HashMap<>();
+        }
+        this.configuration.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `configuration` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.Script#configuration} for the field documentation.
+       */
+      public Builder putAllConfiguration(Map<String, Object> map) {
+        if (this.configuration == null) {
+          this.configuration = new HashMap<>();
+        }
+        this.configuration.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CouponCreateParams.Script#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.Script#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The script implementation ID for this coupon. */
+      public Builder setId(String id) {
+        this.id = id;
         return this;
       }
     }
