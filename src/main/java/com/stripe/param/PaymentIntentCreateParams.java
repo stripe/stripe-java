@@ -1802,6 +1802,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("car_rental")
     CarRental carRental;
 
+    /**
+     * Some customers might be required by their company or organization to provide this
+     * information. If so, provide this value. Otherwise you can ignore this field.
+     */
+    @SerializedName("customer_reference")
+    Object customerReference;
+
     /** Event details for this PaymentIntent. */
     @SerializedName("event_details")
     EventDetails eventDetails;
@@ -1823,22 +1830,30 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("lodging")
     Lodging lodging;
 
+    /** A unique value assigned by the business to identify the transaction. */
+    @SerializedName("order_reference")
+    Object orderReference;
+
     /** Subscription details for this PaymentIntent. */
     @SerializedName("subscription")
     Subscription subscription;
 
     private PaymentDetails(
         CarRental carRental,
+        Object customerReference,
         EventDetails eventDetails,
         Map<String, Object> extraParams,
         Flight flight,
         Lodging lodging,
+        Object orderReference,
         Subscription subscription) {
       this.carRental = carRental;
+      this.customerReference = customerReference;
       this.eventDetails = eventDetails;
       this.extraParams = extraParams;
       this.flight = flight;
       this.lodging = lodging;
+      this.orderReference = orderReference;
       this.subscription = subscription;
     }
 
@@ -1849,6 +1864,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public static class Builder {
       private CarRental carRental;
 
+      private Object customerReference;
+
       private EventDetails eventDetails;
 
       private Map<String, Object> extraParams;
@@ -1857,22 +1874,44 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Lodging lodging;
 
+      private Object orderReference;
+
       private Subscription subscription;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentCreateParams.PaymentDetails build() {
         return new PaymentIntentCreateParams.PaymentDetails(
             this.carRental,
+            this.customerReference,
             this.eventDetails,
             this.extraParams,
             this.flight,
             this.lodging,
+            this.orderReference,
             this.subscription);
       }
 
       /** Car rental details for this PaymentIntent. */
       public Builder setCarRental(PaymentIntentCreateParams.PaymentDetails.CarRental carRental) {
         this.carRental = carRental;
+        return this;
+      }
+
+      /**
+       * Some customers might be required by their company or organization to provide this
+       * information. If so, provide this value. Otherwise you can ignore this field.
+       */
+      public Builder setCustomerReference(String customerReference) {
+        this.customerReference = customerReference;
+        return this;
+      }
+
+      /**
+       * Some customers might be required by their company or organization to provide this
+       * information. If so, provide this value. Otherwise you can ignore this field.
+       */
+      public Builder setCustomerReference(EmptyParam customerReference) {
+        this.customerReference = customerReference;
         return this;
       }
 
@@ -1919,6 +1958,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       /** Lodging reservation details for this PaymentIntent. */
       public Builder setLodging(PaymentIntentCreateParams.PaymentDetails.Lodging lodging) {
         this.lodging = lodging;
+        return this;
+      }
+
+      /** A unique value assigned by the business to identify the transaction. */
+      public Builder setOrderReference(String orderReference) {
+        this.orderReference = orderReference;
+        return this;
+      }
+
+      /** A unique value assigned by the business to identify the transaction. */
+      public Builder setOrderReference(EmptyParam orderReference) {
+        this.orderReference = orderReference;
         return this;
       }
 

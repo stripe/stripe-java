@@ -719,4 +719,9 @@ public final class PaymentIntentService extends ApiService {
             options);
     return this.request(request, PaymentIntent.class);
   }
+
+  public com.stripe.service.PaymentIntentAmountDetailsLineItemService amountDetailsLineItems() {
+    return new com.stripe.service.PaymentIntentAmountDetailsLineItemService(
+        this.getResponseGetter());
+  }
 }
