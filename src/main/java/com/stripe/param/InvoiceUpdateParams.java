@@ -4213,6 +4213,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       @SerializedName("acss_debit")
       ACSS_DEBIT("acss_debit"),
 
+      @SerializedName("affirm")
+      AFFIRM("affirm"),
+
       @SerializedName("amazon_pay")
       AMAZON_PAY("amazon_pay"),
 
