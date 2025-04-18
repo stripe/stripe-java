@@ -508,6 +508,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AcssDebit extends StripeObject {
+      /** Account number of the bank account. */
+      @SerializedName("account_number")
+      String accountNumber;
+
       /** Name of the bank associated with the bank account. */
       @SerializedName("bank_name")
       String bankName;
