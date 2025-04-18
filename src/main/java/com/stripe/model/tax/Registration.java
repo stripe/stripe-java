@@ -291,6 +291,9 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("be")
     Be be;
 
+    @SerializedName("bf")
+    Bf bf;
+
     @SerializedName("bg")
     Bg bg;
 
@@ -318,11 +321,17 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("cl")
     Cl cl;
 
+    @SerializedName("cm")
+    Cm cm;
+
     @SerializedName("co")
     Co co;
 
     @SerializedName("cr")
     Cr cr;
+
+    @SerializedName("cv")
+    Cv cv;
 
     @SerializedName("cy")
     Cy cy;
@@ -785,6 +794,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Bf, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bf extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code standard}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Bg, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -977,6 +1003,23 @@ public class Registration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Cm, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cm extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Co, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1001,6 +1044,23 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cr extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Cv, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cv extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
