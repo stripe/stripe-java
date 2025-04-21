@@ -6478,6 +6478,14 @@ public class QuoteCreateParams extends ApiRequestParams {
     ApiRequestParams.EnumParam billingCycleAnchor;
 
     /**
+     * The billing mode to create the quote with. Once a quote that creates a subscription or
+     * subscription schedule is accepted,all future operations on the subscription or subscription
+     * schedule will be processed based on this billing_mode.
+     */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
+
+    /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
      * optionally store an explanation of the subscription for rendering in Stripe surfaces and
      * certain local payment methods UIs.
@@ -6565,6 +6573,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         BillOnAcceptance billOnAcceptance,
         BillingBehavior billingBehavior,
         ApiRequestParams.EnumParam billingCycleAnchor,
+        BillingMode billingMode,
         String description,
         Object effectiveDate,
         EndBehavior endBehavior,
@@ -6577,6 +6586,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       this.billOnAcceptance = billOnAcceptance;
       this.billingBehavior = billingBehavior;
       this.billingCycleAnchor = billingCycleAnchor;
+      this.billingMode = billingMode;
       this.description = description;
       this.effectiveDate = effectiveDate;
       this.endBehavior = endBehavior;
@@ -6598,6 +6608,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       private BillingBehavior billingBehavior;
 
       private ApiRequestParams.EnumParam billingCycleAnchor;
+
+      private BillingMode billingMode;
 
       private String description;
 
@@ -6623,6 +6635,7 @@ public class QuoteCreateParams extends ApiRequestParams {
             this.billOnAcceptance,
             this.billingBehavior,
             this.billingCycleAnchor,
+            this.billingMode,
             this.description,
             this.effectiveDate,
             this.endBehavior,
@@ -6670,6 +6683,16 @@ public class QuoteCreateParams extends ApiRequestParams {
        */
       public Builder setBillingCycleAnchor(EmptyParam billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * The billing mode to create the quote with. Once a quote that creates a subscription or
+       * subscription schedule is accepted,all future operations on the subscription or subscription
+       * schedule will be processed based on this billing_mode.
+       */
+      public Builder setBillingMode(QuoteCreateParams.SubscriptionData.BillingMode billingMode) {
+        this.billingMode = billingMode;
         return this;
       }
 
@@ -7635,6 +7658,21 @@ public class QuoteCreateParams extends ApiRequestParams {
       private final String value;
 
       BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum BillingMode implements ApiRequestParams.EnumParam {
+      @SerializedName("credits_attributed_to_debits")
+      CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+
+      @SerializedName("legacy_prorations")
+      LEGACY_PRORATIONS("legacy_prorations");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingMode(String value) {
         this.value = value;
       }
     }

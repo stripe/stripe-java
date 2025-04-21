@@ -25,6 +25,14 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   @SerializedName("billing_behavior")
   BillingBehavior billingBehavior;
 
+  /**
+   * The billing mode that will be used to create the subscription schedule. When the schedule
+   * creates a subscription, the subscription's {@code billing_mode} will be set to the same value
+   * as the schedule's {@code billing_mode}.
+   */
+  @SerializedName("billing_mode")
+  BillingMode billingMode;
+
   /** The identifier of the customer to create the subscription schedule for. */
   @SerializedName("customer")
   String customer;
@@ -100,6 +108,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
   private SubscriptionScheduleCreateParams(
       BillingBehavior billingBehavior,
+      BillingMode billingMode,
       String customer,
       String customerAccount,
       DefaultSettings defaultSettings,
@@ -112,6 +121,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Prebilling prebilling,
       Object startDate) {
     this.billingBehavior = billingBehavior;
+    this.billingMode = billingMode;
     this.customer = customer;
     this.customerAccount = customerAccount;
     this.defaultSettings = defaultSettings;
@@ -131,6 +141,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private BillingBehavior billingBehavior;
+
+    private BillingMode billingMode;
 
     private String customer;
 
@@ -158,6 +170,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public SubscriptionScheduleCreateParams build() {
       return new SubscriptionScheduleCreateParams(
           this.billingBehavior,
+          this.billingMode,
           this.customer,
           this.customerAccount,
           this.defaultSettings,
@@ -181,6 +194,16 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public Builder setBillingBehavior(
         SubscriptionScheduleCreateParams.BillingBehavior billingBehavior) {
       this.billingBehavior = billingBehavior;
+      return this;
+    }
+
+    /**
+     * The billing mode that will be used to create the subscription schedule. When the schedule
+     * creates a subscription, the subscription's {@code billing_mode} will be set to the same value
+     * as the schedule's {@code billing_mode}.
+     */
+    public Builder setBillingMode(SubscriptionScheduleCreateParams.BillingMode billingMode) {
+      this.billingMode = billingMode;
       return this;
     }
 
@@ -5327,6 +5350,21 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     private final String value;
 
     BillingBehavior(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum BillingMode implements ApiRequestParams.EnumParam {
+    @SerializedName("credits_attributed_to_debits")
+    CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+
+    @SerializedName("legacy_prorations")
+    LEGACY_PRORATIONS("legacy_prorations");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    BillingMode(String value) {
       this.value = value;
     }
   }

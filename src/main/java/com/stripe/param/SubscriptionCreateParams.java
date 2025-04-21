@@ -67,6 +67,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
   /**
+   * The billing mode to create the subscription with. Once a subscription has been created with a
+   * billing_mode, all future operations on the subscription will be processed based on the
+   * billing_mode unless the subscription is migrated to a different version.
+   */
+  @SerializedName("billing_mode")
+  BillingMode billingMode;
+
+  /**
    * A timestamp at which the subscription should cancel. If set to a date before the current period
    * ends, this will cause a proration if prorations have been enabled using {@code
    * proration_behavior}. If set during a future period, this will always cause a proration for that
@@ -310,6 +318,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long backdateStartDate,
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
+      BillingMode billingMode,
       Long cancelAt,
       Boolean cancelAtPeriodEnd,
       CollectionMethod collectionMethod,
@@ -345,6 +354,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.backdateStartDate = backdateStartDate;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+    this.billingMode = billingMode;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.collectionMethod = collectionMethod;
@@ -392,6 +402,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Long billingCycleAnchor;
 
     private BillingCycleAnchorConfig billingCycleAnchorConfig;
+
+    private BillingMode billingMode;
 
     private Long cancelAt;
 
@@ -460,6 +472,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.backdateStartDate,
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
+          this.billingMode,
           this.cancelAt,
           this.cancelAtPeriodEnd,
           this.collectionMethod,
@@ -582,6 +595,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     public Builder setBillingCycleAnchorConfig(
         SubscriptionCreateParams.BillingCycleAnchorConfig billingCycleAnchorConfig) {
       this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+      return this;
+    }
+
+    /**
+     * The billing mode to create the subscription with. Once a subscription has been created with a
+     * billing_mode, all future operations on the subscription will be processed based on the
+     * billing_mode unless the subscription is migrated to a different version.
+     */
+    public Builder setBillingMode(SubscriptionCreateParams.BillingMode billingMode) {
+      this.billingMode = billingMode;
       return this;
     }
 
@@ -6668,6 +6691,21 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.value = value;
         }
       }
+    }
+  }
+
+  public enum BillingMode implements ApiRequestParams.EnumParam {
+    @SerializedName("credits_attributed_to_debits")
+    CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+
+    @SerializedName("legacy_prorations")
+    LEGACY_PRORATIONS("legacy_prorations");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    BillingMode(String value) {
+      this.value = value;
     }
   }
 
