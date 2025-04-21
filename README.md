@@ -34,10 +34,20 @@ Add this dependency to your project's POM:
 
 ### Others
 
-You'll need to manually install the following JARs:
+If you are not using Gradle or Maven, you will need to manually install the following JARs:
 
-- [The Stripe JAR](https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/29.0.0/stripe-java-29.0.0.jar)
-- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar>.
+1. The Stripe JAR:
+   - Download the latest release version from [Maven Central](https://repo1.maven.org/maven2/com/stripe/stripe-java/29.0.0/stripe-java-29.0.0.jar)
+   - Current release version: 29.0.0
+
+2. Google Gson:
+   - The Stripe JAR builds and tests with Gson version 2.10.1
+   - Download from [Maven Central](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)
+   - We recommend using the same version of Gson if possible to guarantee compatibility, but you should be able to use any stable version of Gson that is 2.10.1 or newer
+
+To use these JARs:
+1. Download the JARs from the links provided above
+2. Add the JARs to your project's classpath
 
 ### [ProGuard][proguard]
 
