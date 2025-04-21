@@ -700,7 +700,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Bancontact bancontact;
 
     /**
-     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
      * payment method.
      */
     @SerializedName("billie")
@@ -928,7 +928,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     RadarOptions radarOptions;
 
     /**
-     * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the Revolut
+     * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the Revolut
      * Pay payment method.
      */
     @SerializedName("revolut_pay")
@@ -942,7 +942,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
-     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
      * payment method.
      */
     @SerializedName("satispay")
@@ -1378,7 +1378,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
        * payment method.
        */
       public Builder setBillie(SetupIntentConfirmParams.PaymentMethodData.Billie billie) {
@@ -1708,7 +1708,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the
+       * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the
        * Revolut Pay payment method.
        */
       public Builder setRevolutPay(
@@ -1728,7 +1728,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
        * payment method.
        */
       public Builder setSatispay(SetupIntentConfirmParams.PaymentMethodData.Satispay satispay) {
@@ -2517,17 +2517,26 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("phone")
       Object phone;
 
+      /**
+       * Taxpayer identification number. Used only for transactions between LATAM buyers and
+       * non-LATAM sellers.
+       */
+      @SerializedName("tax_id")
+      String taxId;
+
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
           Object name,
-          Object phone) {
+          Object phone,
+          String taxId) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
         this.name = name;
         this.phone = phone;
+        this.taxId = taxId;
       }
 
       public static Builder builder() {
@@ -2545,10 +2554,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private Object phone;
 
+        private String taxId;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentConfirmParams.PaymentMethodData.BillingDetails build() {
           return new SetupIntentConfirmParams.PaymentMethodData.BillingDetails(
-              this.address, this.email, this.extraParams, this.name, this.phone);
+              this.address, this.email, this.extraParams, this.name, this.phone, this.taxId);
         }
 
         /** Billing address. */
@@ -2625,6 +2636,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         /** Billing phone number (including extension). */
         public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
+          return this;
+        }
+
+        /**
+         * Taxpayer identification number. Used only for transactions between LATAM buyers and
+         * non-LATAM sellers.
+         */
+        public Builder setTaxId(String taxId) {
+          this.taxId = taxId;
           return this;
         }
       }

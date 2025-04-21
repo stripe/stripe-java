@@ -602,8 +602,9 @@ public class BankAccount extends ApiResource
        * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
        * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_failed_tax_id_not_issued}, {@code
+       * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
+       * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
        * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
@@ -729,8 +730,9 @@ public class BankAccount extends ApiResource
        * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
        * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_failed_tax_id_not_issued}, {@code
+       * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
+       * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
        * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code

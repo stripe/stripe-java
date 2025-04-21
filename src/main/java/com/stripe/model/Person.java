@@ -221,6 +221,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("ssn_last_4_provided")
   Boolean ssnLast4Provided;
 
+  /** Demographic data related to the person. */
+  @SerializedName("us_cfpb_data")
+  UsCfpbData usCfpbData;
+
   @SerializedName("verification")
   Verification verification;
 
@@ -587,8 +591,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
        * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_failed_tax_id_not_issued}, {@code
+       * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
+       * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
        * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
@@ -802,8 +807,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
        * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_failed_tax_id_not_issued}, {@code
+       * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
+       * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
        * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
@@ -825,6 +831,61 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
        */
       @SerializedName("requirement")
       String requirement;
+    }
+  }
+
+  /**
+   * For more details about UsCfpbData, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UsCfpbData extends StripeObject {
+    /** The persons ethnicity details. */
+    @SerializedName("ethnicity_details")
+    EthnicityDetails ethnicityDetails;
+
+    /** The persons race details. */
+    @SerializedName("race_details")
+    RaceDetails raceDetails;
+
+    /** The persons self-identified gender. */
+    @SerializedName("self_identified_gender")
+    String selfIdentifiedGender;
+
+    /**
+     * For more details about EthnicityDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EthnicityDetails extends StripeObject {
+      /** The persons ethnicity. */
+      @SerializedName("ethnicity")
+      List<String> ethnicity;
+
+      /** Please specify your origin, when other is selected. */
+      @SerializedName("ethnicity_other")
+      String ethnicityOther;
+    }
+
+    /**
+     * For more details about RaceDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RaceDetails extends StripeObject {
+      /** The persons race. */
+      @SerializedName("race")
+      List<String> race;
+
+      /** Please specify your race, when other is selected. */
+      @SerializedName("race_other")
+      String raceOther;
     }
   }
 
@@ -865,7 +926,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
     /**
      * The state of verification for the person. Possible values are {@code unverified}, {@code
-     * pending}, or {@code verified}.
+     * pending}, or {@code verified}. Please refer <a
+     * href="https://stripe.com/docs/connect/handling-api-verification">guide</a> to handle
+     * verification updates.
      */
     @SerializedName("status")
     String status;
@@ -1051,6 +1114,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     trySetResponseGetter(registeredAddress, responseGetter);
     trySetResponseGetter(relationship, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
+    trySetResponseGetter(usCfpbData, responseGetter);
     trySetResponseGetter(verification, responseGetter);
   }
 }

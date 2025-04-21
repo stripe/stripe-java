@@ -14,7 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class SessionUpdateParams extends ApiRequestParams {
-  /** Information about the customer collected within the Checkout Session. */
+  /**
+   * Information about the customer collected within the Checkout Session. Can only be set when
+   * updating {@code embedded} or {@code custom} sessions.
+   */
   @SerializedName("collected_information")
   CollectedInformation collectedInformation;
 
@@ -82,7 +85,10 @@ public class SessionUpdateParams extends ApiRequestParams {
           this.shippingOptions);
     }
 
-    /** Information about the customer collected within the Checkout Session. */
+    /**
+     * Information about the customer collected within the Checkout Session. Can only be set when
+     * updating {@code embedded} or {@code custom} sessions.
+     */
     public Builder setCollectedInformation(
         SessionUpdateParams.CollectedInformation collectedInformation) {
       this.collectedInformation = collectedInformation;

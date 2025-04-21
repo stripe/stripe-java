@@ -604,6 +604,11 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("mcc")
     String mcc;
 
+    /** Whether the business is a minority-owned, women-owned, and/or LGBTQI+-owned business. */
+    @SerializedName("minority_owned_business_designation")
+    List<AccountCreateParams.BusinessProfile.MinorityOwnedBusinessDesignation>
+        minorityOwnedBusinessDesignation;
+
     /**
      * An estimate of the monthly revenue of the business. Only accepted for accounts in Brazil and
      * India.
@@ -647,6 +652,8 @@ public class AccountCreateParams extends ApiRequestParams {
         Long estimatedWorkerCount,
         Map<String, Object> extraParams,
         String mcc,
+        List<AccountCreateParams.BusinessProfile.MinorityOwnedBusinessDesignation>
+            minorityOwnedBusinessDesignation,
         MonthlyEstimatedRevenue monthlyEstimatedRevenue,
         String name,
         String productDescription,
@@ -659,6 +666,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.estimatedWorkerCount = estimatedWorkerCount;
       this.extraParams = extraParams;
       this.mcc = mcc;
+      this.minorityOwnedBusinessDesignation = minorityOwnedBusinessDesignation;
       this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
       this.name = name;
       this.productDescription = productDescription;
@@ -681,6 +689,9 @@ public class AccountCreateParams extends ApiRequestParams {
       private Map<String, Object> extraParams;
 
       private String mcc;
+
+      private List<AccountCreateParams.BusinessProfile.MinorityOwnedBusinessDesignation>
+          minorityOwnedBusinessDesignation;
 
       private MonthlyEstimatedRevenue monthlyEstimatedRevenue;
 
@@ -705,6 +716,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.estimatedWorkerCount,
             this.extraParams,
             this.mcc,
+            this.minorityOwnedBusinessDesignation,
             this.monthlyEstimatedRevenue,
             this.name,
             this.productDescription,
@@ -764,6 +776,36 @@ public class AccountCreateParams extends ApiRequestParams {
        */
       public Builder setMcc(String mcc) {
         this.mcc = mcc;
+        return this;
+      }
+
+      /**
+       * Add an element to `minorityOwnedBusinessDesignation` list. A list is initialized for the
+       * first `add/addAll` call, and subsequent calls adds additional elements to the original
+       * list. See {@link AccountCreateParams.BusinessProfile#minorityOwnedBusinessDesignation} for
+       * the field documentation.
+       */
+      public Builder addMinorityOwnedBusinessDesignation(
+          AccountCreateParams.BusinessProfile.MinorityOwnedBusinessDesignation element) {
+        if (this.minorityOwnedBusinessDesignation == null) {
+          this.minorityOwnedBusinessDesignation = new ArrayList<>();
+        }
+        this.minorityOwnedBusinessDesignation.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `minorityOwnedBusinessDesignation` list. A list is initialized for the
+       * first `add/addAll` call, and subsequent calls adds additional elements to the original
+       * list. See {@link AccountCreateParams.BusinessProfile#minorityOwnedBusinessDesignation} for
+       * the field documentation.
+       */
+      public Builder addAllMinorityOwnedBusinessDesignation(
+          List<AccountCreateParams.BusinessProfile.MinorityOwnedBusinessDesignation> elements) {
+        if (this.minorityOwnedBusinessDesignation == null) {
+          this.minorityOwnedBusinessDesignation = new ArrayList<>();
+        }
+        this.minorityOwnedBusinessDesignation.addAll(elements);
         return this;
       }
 
@@ -1202,6 +1244,30 @@ public class AccountCreateParams extends ApiRequestParams {
           this.state = state;
           return this;
         }
+      }
+    }
+
+    public enum MinorityOwnedBusinessDesignation implements ApiRequestParams.EnumParam {
+      @SerializedName("lgbtqi_owned_business")
+      LGBTQI_OWNED_BUSINESS("lgbtqi_owned_business"),
+
+      @SerializedName("minority_owned_business")
+      MINORITY_OWNED_BUSINESS("minority_owned_business"),
+
+      @SerializedName("none_of_these_apply")
+      NONE_OF_THESE_APPLY("none_of_these_apply"),
+
+      @SerializedName("prefer_not_to_answer")
+      PREFER_NOT_TO_ANSWER("prefer_not_to_answer"),
+
+      @SerializedName("women_owned_business")
+      WOMEN_OWNED_BUSINESS("women_owned_business");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      MinorityOwnedBusinessDesignation(String value) {
+        this.value = value;
       }
     }
   }
@@ -6820,6 +6886,9 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("phone")
     String phone;
 
+    @SerializedName("registration_date")
+    Object registrationDate;
+
     /**
      * The identification number given to a company when it is registered or incorporated, if
      * distinct from the identification number used for filing taxes. (Examples are the CIN for
@@ -6876,6 +6945,7 @@ public class AccountCreateParams extends ApiRequestParams {
         OwnershipDeclaration ownershipDeclaration,
         ApiRequestParams.EnumParam ownershipExemptionReason,
         String phone,
+        Object registrationDate,
         String registrationNumber,
         ApiRequestParams.EnumParam structure,
         String taxId,
@@ -6898,6 +6968,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.ownershipDeclaration = ownershipDeclaration;
       this.ownershipExemptionReason = ownershipExemptionReason;
       this.phone = phone;
+      this.registrationDate = registrationDate;
       this.registrationNumber = registrationNumber;
       this.structure = structure;
       this.taxId = taxId;
@@ -6943,6 +7014,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String phone;
 
+      private Object registrationDate;
+
       private String registrationNumber;
 
       private ApiRequestParams.EnumParam structure;
@@ -6974,6 +7047,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.ownershipDeclaration,
             this.ownershipExemptionReason,
             this.phone,
+            this.registrationDate,
             this.registrationNumber,
             this.structure,
             this.taxId,
@@ -7141,6 +7215,17 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The company's phone number (used for verification). */
       public Builder setPhone(String phone) {
         this.phone = phone;
+        return this;
+      }
+
+      public Builder setRegistrationDate(
+          AccountCreateParams.Company.RegistrationDate registrationDate) {
+        this.registrationDate = registrationDate;
+        return this;
+      }
+
+      public Builder setRegistrationDate(EmptyParam registrationDate) {
+        this.registrationDate = registrationDate;
         return this;
       }
 
@@ -7902,6 +7987,104 @@ public class AccountCreateParams extends ApiRequestParams {
         /** The user agent of the browser from which the beneficial owner attestation was made. */
         public Builder setUserAgent(String userAgent) {
           this.userAgent = userAgent;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RegistrationDate {
+      /** <strong>Required.</strong> The day of registration, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The month of registration, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** <strong>Required.</strong> The four-digit year of registration. */
+      @SerializedName("year")
+      Long year;
+
+      private RegistrationDate(Long day, Map<String, Object> extraParams, Long month, Long year) {
+        this.day = day;
+        this.extraParams = extraParams;
+        this.month = month;
+        this.year = year;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long day;
+
+        private Map<String, Object> extraParams;
+
+        private Long month;
+
+        private Long year;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Company.RegistrationDate build() {
+          return new AccountCreateParams.Company.RegistrationDate(
+              this.day, this.extraParams, this.month, this.year);
+        }
+
+        /** <strong>Required.</strong> The day of registration, between 1 and 31. */
+        public Builder setDay(Long day) {
+          this.day = day;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Company.RegistrationDate#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Company.RegistrationDate#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The month of registration, between 1 and 12. */
+        public Builder setMonth(Long month) {
+          this.month = month;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The four-digit year of registration. */
+        public Builder setYear(Long year) {
+          this.year = year;
           return this;
         }
       }
