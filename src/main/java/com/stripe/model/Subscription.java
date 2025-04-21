@@ -65,6 +65,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_cycle_anchor_config")
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
+  /**
+   * Configure billing_mode in each subscription to opt in improved credit proration behavior.
+   *
+   * <p>One of {@code credits_attributed_to_debits}, or {@code legacy_prorations}.
+   */
+  @SerializedName("billing_mode")
+  String billingMode;
+
   /** A date in the future at which the subscription will automatically get canceled. */
   @SerializedName("cancel_at")
   Long cancelAt;

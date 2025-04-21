@@ -3493,6 +3493,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     BillingBehavior billingBehavior;
 
     /**
+     * The billing mode that will be used to create the subscription schedule. When the schedule
+     * creates a subscription, the subscription's {@code billing_mode} will be set to the same value
+     * as the schedule's {@code billing_mode}.
+     */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
+
+    /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
      * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
      * release} will end the subscription schedule and keep the underlying subscription running.
@@ -3532,6 +3540,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     private ScheduleDetails(
         List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment> amendments,
         BillingBehavior billingBehavior,
+        BillingMode billingMode,
         EndBehavior endBehavior,
         Map<String, Object> extraParams,
         List<InvoiceCreatePreviewParams.ScheduleDetails.Phase> phases,
@@ -3539,6 +3548,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         ProrationBehavior prorationBehavior) {
       this.amendments = amendments;
       this.billingBehavior = billingBehavior;
+      this.billingMode = billingMode;
       this.endBehavior = endBehavior;
       this.extraParams = extraParams;
       this.phases = phases;
@@ -3555,6 +3565,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private BillingBehavior billingBehavior;
 
+      private BillingMode billingMode;
+
       private EndBehavior endBehavior;
 
       private Map<String, Object> extraParams;
@@ -3570,6 +3582,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return new InvoiceCreatePreviewParams.ScheduleDetails(
             this.amendments,
             this.billingBehavior,
+            this.billingMode,
             this.endBehavior,
             this.extraParams,
             this.phases,
@@ -3614,6 +3627,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public Builder setBillingBehavior(
           InvoiceCreatePreviewParams.ScheduleDetails.BillingBehavior billingBehavior) {
         this.billingBehavior = billingBehavior;
+        return this;
+      }
+
+      /**
+       * The billing mode that will be used to create the subscription schedule. When the schedule
+       * creates a subscription, the subscription's {@code billing_mode} will be set to the same
+       * value as the schedule's {@code billing_mode}.
+       */
+      public Builder setBillingMode(
+          InvoiceCreatePreviewParams.ScheduleDetails.BillingMode billingMode) {
+        this.billingMode = billingMode;
         return this;
       }
 
@@ -12406,6 +12430,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
     }
 
+    public enum BillingMode implements ApiRequestParams.EnumParam {
+      @SerializedName("credits_attributed_to_debits")
+      CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+
+      @SerializedName("legacy_prorations")
+      LEGACY_PRORATIONS("legacy_prorations");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingMode(String value) {
+        this.value = value;
+      }
+    }
+
     public enum EndBehavior implements ApiRequestParams.EnumParam {
       @SerializedName("cancel")
       CANCEL("cancel"),
@@ -12452,6 +12491,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
      */
     @SerializedName("billing_cycle_anchor")
     Object billingCycleAnchor;
+
+    /**
+     * The billing mode to create the subscription with. Once a subscription has been created with a
+     * billing_mode, all future operations on the subscription will be processed based on the
+     * billing_mode.
+     */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
 
     /**
      * A timestamp at which the subscription should cancel. If set to a date before the current
@@ -12541,6 +12588,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     private SubscriptionDetails(
         Object billingCycleAnchor,
+        BillingMode billingMode,
         Object cancelAt,
         Boolean cancelAtPeriodEnd,
         Boolean cancelNow,
@@ -12554,6 +12602,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Long startDate,
         Object trialEnd) {
       this.billingCycleAnchor = billingCycleAnchor;
+      this.billingMode = billingMode;
       this.cancelAt = cancelAt;
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
       this.cancelNow = cancelNow;
@@ -12574,6 +12623,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     public static class Builder {
       private Object billingCycleAnchor;
+
+      private BillingMode billingMode;
 
       private Object cancelAt;
 
@@ -12603,6 +12654,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public InvoiceCreatePreviewParams.SubscriptionDetails build() {
         return new InvoiceCreatePreviewParams.SubscriptionDetails(
             this.billingCycleAnchor,
+            this.billingMode,
             this.cancelAt,
             this.cancelAtPeriodEnd,
             this.cancelNow,
@@ -12639,6 +12691,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        */
       public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * The billing mode to create the subscription with. Once a subscription has been created with
+       * a billing_mode, all future operations on the subscription will be processed based on the
+       * billing_mode.
+       */
+      public Builder setBillingMode(
+          InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode billingMode) {
+        this.billingMode = billingMode;
         return this;
       }
 
@@ -14050,6 +14113,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       private final String value;
 
       BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum BillingMode implements ApiRequestParams.EnumParam {
+      @SerializedName("credits_attributed_to_debits")
+      CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+
+      @SerializedName("legacy_prorations")
+      LEGACY_PRORATIONS("legacy_prorations");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingMode(String value) {
         this.value = value;
       }
     }

@@ -57,6 +57,16 @@ public class SubscriptionSchedule extends ApiResource
   String billingBehavior;
 
   /**
+   * The <a
+   * href="https://stripe.com/api/subscriptions/create#create_subscription-billing_mode">billing
+   * mode</a> that will be used to process all future operations for the subscription schedule.
+   *
+   * <p>One of {@code credits_attributed_to_debits}, or {@code legacy_prorations}.
+   */
+  @SerializedName("billing_mode")
+  String billingMode;
+
+  /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
    */
   @SerializedName("canceled_at")
