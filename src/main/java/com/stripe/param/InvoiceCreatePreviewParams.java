@@ -3493,9 +3493,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     BillingBehavior billingBehavior;
 
     /**
-     * The billing mode that will be used to create the subscription schedule. When the schedule
-     * creates a subscription, the subscription's {@code billing_mode} will be set to the same value
-     * as the schedule's {@code billing_mode}.
+     * Configure billing_mode to opt in improved credit proration behavior.When the schedule creates
+     * a subscription, the subscription's {@code billing_mode} will be set to the same value as the
+     * schedule's {@code billing_mode}.
      */
     @SerializedName("billing_mode")
     BillingMode billingMode;
@@ -3631,7 +3631,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * The billing mode that will be used to create the subscription schedule. When the schedule
+       * Configure billing_mode to opt in improved credit proration behavior.When the schedule
        * creates a subscription, the subscription's {@code billing_mode} will be set to the same
        * value as the schedule's {@code billing_mode}.
        */
@@ -12492,11 +12492,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     Object billingCycleAnchor;
 
-    /**
-     * The billing mode to create the subscription with. Once a subscription has been created with a
-     * billing_mode, all future operations on the subscription will be processed based on the
-     * billing_mode.
-     */
+    /** Configure billing_mode in each subscription to opt in improved credit proration behavior. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
@@ -12695,9 +12691,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * The billing mode to create the subscription with. Once a subscription has been created with
-       * a billing_mode, all future operations on the subscription will be processed based on the
-       * billing_mode.
+       * Configure billing_mode in each subscription to opt in improved credit proration behavior.
        */
       public Builder setBillingMode(
           InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode billingMode) {

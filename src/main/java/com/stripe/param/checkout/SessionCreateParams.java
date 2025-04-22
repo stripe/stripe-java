@@ -16623,11 +16623,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
 
-    /**
-     * The billing mode to create the subscription with. Once a subscription has been created with a
-     * billing_mode, all future operations on the subscription will be processed based on the
-     * billing_mode.
-     */
+    /** Configure billing_mode in each subscription to opt in improved credit proration behavior. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
@@ -16808,9 +16804,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The billing mode to create the subscription with. Once a subscription has been created with
-       * a billing_mode, all future operations on the subscription will be processed based on the
-       * billing_mode.
+       * Configure billing_mode in each subscription to opt in improved credit proration behavior.
        */
       public Builder setBillingMode(SessionCreateParams.SubscriptionData.BillingMode billingMode) {
         this.billingMode = billingMode;
