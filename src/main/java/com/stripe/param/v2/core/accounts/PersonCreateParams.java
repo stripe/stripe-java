@@ -3861,6 +3861,10 @@ public class PersonCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Relationship {
+    /** Whether the individual is an authorizer of the Account’s legal entity. */
+    @SerializedName("authorizer")
+    Boolean authorizer;
+
     /** Indicates whether the person is a director of the associated legal entity. */
     @SerializedName("director")
     Boolean director;
@@ -3899,6 +3903,7 @@ public class PersonCreateParams extends ApiRequestParams {
     String title;
 
     private Relationship(
+        Boolean authorizer,
         Boolean director,
         Boolean executive,
         Map<String, Object> extraParams,
@@ -3907,6 +3912,7 @@ public class PersonCreateParams extends ApiRequestParams {
         String percentOwnership,
         Boolean representative,
         String title) {
+      this.authorizer = authorizer;
       this.director = director;
       this.executive = executive;
       this.extraParams = extraParams;
@@ -3922,6 +3928,8 @@ public class PersonCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean authorizer;
+
       private Boolean director;
 
       private Boolean executive;
@@ -3941,6 +3949,7 @@ public class PersonCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PersonCreateParams.Relationship build() {
         return new PersonCreateParams.Relationship(
+            this.authorizer,
             this.director,
             this.executive,
             this.extraParams,
@@ -3949,6 +3958,12 @@ public class PersonCreateParams extends ApiRequestParams {
             this.percentOwnership,
             this.representative,
             this.title);
+      }
+
+      /** Whether the individual is an authorizer of the Account’s legal entity. */
+      public Builder setAuthorizer(Boolean authorizer) {
+        this.authorizer = authorizer;
+        return this;
       }
 
       /** Indicates whether the person is a director of the associated legal entity. */

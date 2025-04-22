@@ -18,6 +18,13 @@ public class FinancialAddressGeneratedMicrodeposits extends StripeObject {
   List<Amount> amounts;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *

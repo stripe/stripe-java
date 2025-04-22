@@ -22,6 +22,13 @@ public class OutboundSetupIntent extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
+  /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
   /** Specifies which actions needs to be taken next to continue setup of the credential. */
   @SerializedName("next_action")
   NextAction nextAction;

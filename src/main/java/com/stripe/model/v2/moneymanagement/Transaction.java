@@ -56,6 +56,13 @@ public class Transaction extends StripeObject implements HasId {
   String id;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
@@ -141,9 +148,9 @@ public class Transaction extends StripeObject implements HasId {
      * Open Enum. Type of the flow that created the Transaction. The field matching this value will
      * contain the ID of the flow.
      *
-     * <p>One of {@code adjustment}, {@code currency_conversion}, {@code fee_transaction}, {@code
-     * inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code
-     * received_credit}, or {@code received_debit}.
+     * <p>One of {@code adjustment}, {@code fee_transaction}, {@code inbound_transfer}, {@code
+     * outbound_payment}, {@code outbound_transfer}, {@code received_credit}, or {@code
+     * received_debit}.
      */
     @SerializedName("type")
     String type;

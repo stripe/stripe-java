@@ -57,6 +57,13 @@ public class OutboundTransfer extends StripeObject implements HasId {
   String id;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
@@ -73,8 +80,9 @@ public class OutboundTransfer extends StripeObject implements HasId {
   String object;
 
   /**
-   * A hosted transaction receipt URL that is provided when money movement is considered regulated
-   * under Stripe's money transmission licenses.
+   * A link to the Stripe-hosted receipt for this OutboundTransfer. The receipt link remains active
+   * for 60 days from the OutboundTransfer creation date. After this period, the link will expire
+   * and the receipt url value will be null.
    */
   @SerializedName("receipt_url")
   String receiptUrl;

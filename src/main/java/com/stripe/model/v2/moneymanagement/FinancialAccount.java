@@ -77,6 +77,13 @@ public class FinancialAccount extends StripeObject implements HasId {
   String id;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
@@ -93,9 +100,10 @@ public class FinancialAccount extends StripeObject implements HasId {
   Other other;
 
   /**
-   * An enum value that specifies which state the FinancialAccount is in.
+   * Closed Enum. An enum representing the status of the FinancialAccount. This indicates whether or
+   * not the FinancialAccount can be used for any money movement flows.
    *
-   * <p>One of {@code closed}, or {@code open}.
+   * <p>One of {@code closed}, {@code open}, or {@code pending}.
    */
   @SerializedName("status")
   String status;
