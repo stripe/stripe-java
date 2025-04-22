@@ -4073,7 +4073,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Category category;
 
       /**
-       * <strong>Required.</strong> Loding check-in time. Measured in seconds since the Unix epoch.
+       * <strong>Required.</strong> Lodging check-in time. Measured in seconds since the Unix epoch.
        */
       @SerializedName("checkin_at")
       Long checkinAt;
@@ -4310,7 +4310,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> Loding check-in time. Measured in seconds since the Unix
+         * <strong>Required.</strong> Lodging check-in time. Measured in seconds since the Unix
          * epoch.
          */
         public Builder setCheckinAt(Long checkinAt) {
