@@ -26,9 +26,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   BillingBehavior billingBehavior;
 
   /**
-   * The billing mode that will be used to create the subscription schedule. When the schedule
-   * creates a subscription, the subscription's {@code billing_mode} will be set to the same value
-   * as the schedule's {@code billing_mode}.
+   * Configure billing_mode to opt in improved credit proration behavior.When the schedule creates a
+   * subscription, the subscription's {@code billing_mode} will be set to the same value as the
+   * schedule's {@code billing_mode}.
    */
   @SerializedName("billing_mode")
   BillingMode billingMode;
@@ -198,9 +198,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The billing mode that will be used to create the subscription schedule. When the schedule
-     * creates a subscription, the subscription's {@code billing_mode} will be set to the same value
-     * as the schedule's {@code billing_mode}.
+     * Configure billing_mode to opt in improved credit proration behavior.When the schedule creates
+     * a subscription, the subscription's {@code billing_mode} will be set to the same value as the
+     * schedule's {@code billing_mode}.
      */
     public Builder setBillingMode(SubscriptionScheduleCreateParams.BillingMode billingMode) {
       this.billingMode = billingMode;

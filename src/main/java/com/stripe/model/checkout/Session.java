@@ -417,7 +417,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("submit_type")
   String submitType;
 
-  /** The ID of the subscription for Checkout Sessions in {@code subscription} mode. */
+  /**
+   * The ID of the <a href="https://stripe.com/docs/api/subscriptions">Subscription</a> for Checkout
+   * Sessions in {@code subscription} mode.
+   */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
