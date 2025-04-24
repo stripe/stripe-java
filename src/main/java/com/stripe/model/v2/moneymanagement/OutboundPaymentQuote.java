@@ -49,6 +49,13 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
   String id;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
@@ -93,7 +100,8 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     /**
      * The fee type.
      *
-     * <p>One of {@code cross_border_fee}, {@code fx_fee}, or {@code payout_fee}.
+     * <p>One of {@code cross_border_payout_fee}, {@code foreign_exchange_fee}, {@code
+     * instant_payout_fee}, {@code standard_payout_fee}, or {@code wire_payout_fee}.
      */
     @SerializedName("type")
     String type;
@@ -124,6 +132,28 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class FxQuote extends StripeObject {
+    /**
+     * The duration the exchange rate lock remains valid from creation time. Allowed value is
+     * five_minutes.
+     *
+     * <p>Equal to {@code five_minutes}.
+     */
+    @SerializedName("lock_duration")
+    String lockDuration;
+
+    /** Time at which the rate lock will expire, measured in seconds since the Unix epoch. */
+    @SerializedName("lock_expires_at")
+    Instant lockExpiresAt;
+
+    /**
+     * Lock status of the quote. Transitions from active to expired once past the lock_expires_at
+     * timestamp. Value can be active or expired.
+     *
+     * <p>One of {@code active}, or {@code expired}.
+     */
+    @SerializedName("lock_status")
+    String lockStatus;
+
     /** Key pair: from currency Value: exchange rate going from_currency -&gt; to_currency. */
     @SerializedName("rates")
     Map<String, OutboundPaymentQuote.FxQuote.Rate> rates;

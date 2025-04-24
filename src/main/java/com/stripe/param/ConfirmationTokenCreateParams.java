@@ -35,6 +35,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
 
+  /** Payment-method-specific configuration for this ConfirmationToken. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
@@ -175,6 +176,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Payment-method-specific configuration for this ConfirmationToken. */
     public Builder setPaymentMethodOptions(
         ConfirmationTokenCreateParams.PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
@@ -6562,6 +6564,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions {
+    /** Configuration for any card payments confirmed using this ConfirmationToken. */
     @SerializedName("card")
     Card card;
 
@@ -6593,6 +6596,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         return new ConfirmationTokenCreateParams.PaymentMethodOptions(this.card, this.extraParams);
       }
 
+      /** Configuration for any card payments confirmed using this ConfirmationToken. */
       public Builder setCard(ConfirmationTokenCreateParams.PaymentMethodOptions.Card card) {
         this.card = card;
         return this;
@@ -6639,7 +6643,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Installment configuration for payments attempted on this PaymentIntent. */
+      /** Installment configuration for payments confirmed using this ConfirmationToken. */
       @SerializedName("installments")
       Installments installments;
 
@@ -6691,7 +6695,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Installment configuration for payments attempted on this PaymentIntent. */
+        /** Installment configuration for payments confirmed using this ConfirmationToken. */
         public Builder setInstallments(
             ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments installments) {
           this.installments = installments;

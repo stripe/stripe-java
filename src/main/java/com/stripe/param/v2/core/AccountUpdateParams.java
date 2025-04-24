@@ -593,7 +593,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object ipAddress;
 
         /**
-         * The data source used by Stripe Tax to identify the customer's location - defaults to
+         * The data source used to identify the customer's tax location - defaults to
          * 'identity_address'. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          */
@@ -688,7 +688,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The data source used by Stripe Tax to identify the customer's location - defaults to
+           * The data source used to identify the customer's tax location - defaults to
            * 'identity_address'. Will only be used for automatic tax calculation on the customer's
            * Invoices and Subscriptions.
            */
@@ -8898,10 +8898,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * Capabilities that enable the recipient to receive money into their Stripe Balance
-         * (/v1/balance).
-         */
+        /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
 
@@ -8978,8 +8975,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Capabilities that enable the recipient to receive money into their Stripe Balance
-           * (/v1/balance).
+           * Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance).
            */
           public Builder setStripeBalance(
               AccountUpdateParams.Configuration.Recipient.Capabilities.StripeBalance
@@ -9346,7 +9342,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Allows the recipient to receive /v1/transfers into their Stripe Balance (/v1/balance).
+           * Allows the account to receive /v1/transfers into their Stripe Balance (/v1/balance).
            */
           @SerializedName("stripe_transfers")
           StripeTransfers stripeTransfers;
@@ -9402,8 +9398,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Allows the recipient to receive /v1/transfers into their Stripe Balance
-             * (/v1/balance).
+             * Allows the account to receive /v1/transfers into their Stripe Balance (/v1/balance).
              */
             public Builder setStripeTransfers(
                 AccountUpdateParams.Configuration.Recipient.Capabilities.StripeBalance
@@ -10232,6 +10227,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       @SerializedName("usd")
       USD("usd"),
+
+      @SerializedName("usdb")
+      USDB("usdb"),
 
       @SerializedName("usdc")
       USDC("usdc"),

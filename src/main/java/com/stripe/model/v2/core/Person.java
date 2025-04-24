@@ -77,6 +77,13 @@ public class Person extends StripeObject implements HasId {
   String legalGender;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
@@ -625,6 +632,10 @@ public class Person extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Relationship extends StripeObject {
+    /** Whether the individual is an authorizer of the Account’s legal entity. */
+    @SerializedName("authorizer")
+    Boolean authorizer;
+
     /**
      * Whether the individual is a director of the Account’s legal entity. Directors are typically
      * members of the governing board of the company, or responsible for ensuring the company meets

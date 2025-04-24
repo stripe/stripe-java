@@ -1968,6 +1968,16 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     String billingCycleAnchor;
 
     /**
+     * The <a
+     * href="https://stripe.com/api/subscriptions/create#create_subscription-billing_mode">billing
+     * mode</a> that will be set on the subscription once the quote is accepted.
+     *
+     * <p>One of {@code credits_attributed_to_debits}, or {@code legacy_prorations}.
+     */
+    @SerializedName("billing_mode")
+    String billingMode;
+
+    /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
      * optionally store an explanation of the subscription for rendering in Stripe surfaces and
      * certain local payment methods UIs.

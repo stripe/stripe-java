@@ -16623,6 +16623,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
 
+    /** Configure billing_mode in each subscription to opt in improved credit proration behavior. */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
+
     /**
      * The tax rates that will apply to any subscription item that does not have {@code tax_rates}
      * set. Invoices created will have their {@code default_tax_rates} populated from the
@@ -16700,6 +16704,7 @@ public class SessionCreateParams extends ApiRequestParams {
     private SubscriptionData(
         BigDecimal applicationFeePercent,
         Long billingCycleAnchor,
+        BillingMode billingMode,
         List<String> defaultTaxRates,
         String description,
         Map<String, Object> extraParams,
@@ -16713,6 +16718,7 @@ public class SessionCreateParams extends ApiRequestParams {
         TrialSettings trialSettings) {
       this.applicationFeePercent = applicationFeePercent;
       this.billingCycleAnchor = billingCycleAnchor;
+      this.billingMode = billingMode;
       this.defaultTaxRates = defaultTaxRates;
       this.description = description;
       this.extraParams = extraParams;
@@ -16734,6 +16740,8 @@ public class SessionCreateParams extends ApiRequestParams {
       private BigDecimal applicationFeePercent;
 
       private Long billingCycleAnchor;
+
+      private BillingMode billingMode;
 
       private List<String> defaultTaxRates;
 
@@ -16762,6 +16770,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return new SessionCreateParams.SubscriptionData(
             this.applicationFeePercent,
             this.billingCycleAnchor,
+            this.billingMode,
             this.defaultTaxRates,
             this.description,
             this.extraParams,
@@ -16791,6 +16800,14 @@ public class SessionCreateParams extends ApiRequestParams {
       /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
       public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * Configure billing_mode in each subscription to opt in improved credit proration behavior.
+       */
+      public Builder setBillingMode(SessionCreateParams.SubscriptionData.BillingMode billingMode) {
+        this.billingMode = billingMode;
         return this;
       }
 
@@ -17396,6 +17413,21 @@ public class SessionCreateParams extends ApiRequestParams {
             this.value = value;
           }
         }
+      }
+    }
+
+    public enum BillingMode implements ApiRequestParams.EnumParam {
+      @SerializedName("credits_attributed_to_debits")
+      CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+
+      @SerializedName("legacy_prorations")
+      LEGACY_PRORATIONS("legacy_prorations");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BillingMode(String value) {
+        this.value = value;
       }
     }
 

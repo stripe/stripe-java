@@ -249,6 +249,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
     @SerializedName("be")
     Be be;
 
+    /** Options for the registration in BF. */
+    @SerializedName("bf")
+    Bf bf;
+
     /** Options for the registration in BG. */
     @SerializedName("bg")
     Bg bg;
@@ -285,6 +289,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
     @SerializedName("cl")
     Cl cl;
 
+    /** Options for the registration in CM. */
+    @SerializedName("cm")
+    Cm cm;
+
     /** Options for the registration in CO. */
     @SerializedName("co")
     Co co;
@@ -292,6 +300,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
     /** Options for the registration in CR. */
     @SerializedName("cr")
     Cr cr;
+
+    /** Options for the registration in CV. */
+    @SerializedName("cv")
+    Cv cv;
 
     /** Options for the registration in CY. */
     @SerializedName("cy")
@@ -603,6 +615,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
         Bb bb,
         Bd bd,
         Be be,
+        Bf bf,
         Bg bg,
         Bh bh,
         Bj bj,
@@ -612,8 +625,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
         Cd cd,
         Ch ch,
         Cl cl,
+        Cm cm,
         Co co,
         Cr cr,
+        Cv cv,
         Cy cy,
         Cz cz,
         De de,
@@ -699,6 +714,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
       this.bb = bb;
       this.bd = bd;
       this.be = be;
+      this.bf = bf;
       this.bg = bg;
       this.bh = bh;
       this.bj = bj;
@@ -708,8 +724,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
       this.cd = cd;
       this.ch = ch;
       this.cl = cl;
+      this.cm = cm;
       this.co = co;
       this.cr = cr;
+      this.cv = cv;
       this.cy = cy;
       this.cz = cz;
       this.de = de;
@@ -814,6 +832,8 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       private Be be;
 
+      private Bf bf;
+
       private Bg bg;
 
       private Bh bh;
@@ -832,9 +852,13 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
       private Cl cl;
 
+      private Cm cm;
+
       private Co co;
 
       private Cr cr;
+
+      private Cv cv;
 
       private Cy cy;
 
@@ -997,6 +1021,7 @@ public class RegistrationCreateParams extends ApiRequestParams {
             this.bb,
             this.bd,
             this.be,
+            this.bf,
             this.bg,
             this.bh,
             this.bj,
@@ -1006,8 +1031,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
             this.cd,
             this.ch,
             this.cl,
+            this.cm,
             this.co,
             this.cr,
+            this.cv,
             this.cy,
             this.cz,
             this.de,
@@ -1155,6 +1182,12 @@ public class RegistrationCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Options for the registration in BF. */
+      public Builder setBf(RegistrationCreateParams.CountryOptions.Bf bf) {
+        this.bf = bf;
+        return this;
+      }
+
       /** Options for the registration in BG. */
       public Builder setBg(RegistrationCreateParams.CountryOptions.Bg bg) {
         this.bg = bg;
@@ -1209,6 +1242,12 @@ public class RegistrationCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Options for the registration in CM. */
+      public Builder setCm(RegistrationCreateParams.CountryOptions.Cm cm) {
+        this.cm = cm;
+        return this;
+      }
+
       /** Options for the registration in CO. */
       public Builder setCo(RegistrationCreateParams.CountryOptions.Co co) {
         this.co = co;
@@ -1218,6 +1257,12 @@ public class RegistrationCreateParams extends ApiRequestParams {
       /** Options for the registration in CR. */
       public Builder setCr(RegistrationCreateParams.CountryOptions.Cr cr) {
         this.cr = cr;
+        return this;
+      }
+
+      /** Options for the registration in CV. */
+      public Builder setCv(RegistrationCreateParams.CountryOptions.Cv cv) {
+        this.cv = cv;
         return this;
       }
 
@@ -2913,6 +2958,89 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Bf {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
+      @SerializedName("type")
+      Type type;
+
+      private Bf(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RegistrationCreateParams.CountryOptions.Bf build() {
+          return new RegistrationCreateParams.CountryOptions.Bf(this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RegistrationCreateParams.CountryOptions.Bf#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RegistrationCreateParams.CountryOptions.Bf#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
+        public Builder setType(RegistrationCreateParams.CountryOptions.Bf.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("standard")
+        STANDARD("standard");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Bg {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3879,6 +4007,89 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Cm {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
+      @SerializedName("type")
+      Type type;
+
+      private Cm(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RegistrationCreateParams.CountryOptions.Cm build() {
+          return new RegistrationCreateParams.CountryOptions.Cm(this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RegistrationCreateParams.CountryOptions.Cm#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RegistrationCreateParams.CountryOptions.Cm#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
+        public Builder setType(RegistrationCreateParams.CountryOptions.Cm.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("simplified")
+        SIMPLIFIED("simplified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Co {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -4025,6 +4236,89 @@ public class RegistrationCreateParams extends ApiRequestParams {
 
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Cr.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("simplified")
+        SIMPLIFIED("simplified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cv {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
+      @SerializedName("type")
+      Type type;
+
+      private Cv(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public RegistrationCreateParams.CountryOptions.Cv build() {
+          return new RegistrationCreateParams.CountryOptions.Cv(this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RegistrationCreateParams.CountryOptions.Cv#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link RegistrationCreateParams.CountryOptions.Cv#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
+        public Builder setType(RegistrationCreateParams.CountryOptions.Cv.Type type) {
           this.type = type;
           return this;
         }

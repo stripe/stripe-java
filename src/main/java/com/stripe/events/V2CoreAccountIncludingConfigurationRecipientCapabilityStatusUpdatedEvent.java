@@ -22,7 +22,8 @@ public final class V2CoreAccountIncludingConfigurationRecipientCapabilityStatusU
      * Open Enum. The capability which had its status updated.
      *
      * <p>One of {@code bank_accounts.local}, {@code bank_accounts.wire}, {@code cards}, {@code
-     * stripe_balance.stripe_transfers}, or {@code stripe.transfers}.
+     * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, or {@code
+     * stripe.transfers}.
      */
     @SerializedName("updated_capability")
     String updatedCapability;

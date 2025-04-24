@@ -40,6 +40,13 @@ public class PayoutMethod extends StripeObject implements HasId {
   String latestOutboundSetupIntent;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value of the
    * object field.
    *
@@ -147,7 +154,7 @@ public class PayoutMethod extends StripeObject implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class UsageStatus extends StripeObject {
     /**
-     * Payments status.
+     * Payments status - used when sending OutboundPayments (sending funds to recipients).
      *
      * <p>One of {@code eligible}, {@code invalid}, or {@code requires_action}.
      */
@@ -155,7 +162,7 @@ public class PayoutMethod extends StripeObject implements HasId {
     String payments;
 
     /**
-     * Transfers status.
+     * Transfers status - used when making an OutboundTransfer (sending funds to yourself).
      *
      * <p>One of {@code eligible}, {@code invalid}, or {@code requires_action}.
      */

@@ -302,6 +302,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
 
+    @SerializedName("balance_settings.updated")
+    BALANCE_SETTINGS__UPDATED("balance_settings.updated"),
+
     @SerializedName("billing.alert.triggered")
     BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
 
@@ -1137,10 +1140,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     BILLING__METER__REACTIVATED("billing.meter.reactivated"),
 
     @SerializedName("billing.meter.updated")
-    BILLING__METER__UPDATED("billing.meter.updated"),
-
-    @SerializedName("balance_settings.updated")
-    BALANCE_SETTINGS__UPDATED("balance_settings.updated");
+    BILLING__METER__UPDATED("billing.meter.updated");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

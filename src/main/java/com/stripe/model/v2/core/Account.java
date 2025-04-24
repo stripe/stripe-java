@@ -74,6 +74,13 @@ public class Account extends StripeObject implements HasId {
   Identity identity;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
@@ -183,15 +190,14 @@ public class Account extends StripeObject implements HasId {
         String ipAddress;
 
         /**
-         * The customer’s location as identified by Stripe Tax - uses {@code location_source}. Will
-         * only be rendered if the {@code automatic_indirect_tax} feature is requested and {@code
-         * active}.
+         * The customer’s identified tax location - uses {@code location_source}. Will only be
+         * rendered if the {@code automatic_indirect_tax} feature is requested and {@code active}.
          */
         @SerializedName("location")
         Location location;
 
         /**
-         * The data source used by Stripe Tax to identify the customer's location - defaults to
+         * The data source used to identify the customer's tax location - defaults to
          * 'identity_address'. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          *
@@ -209,7 +215,7 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class Location extends StripeObject {
           /**
-           * The customer's country as identified by Stripe Tax.
+           * The identified tax country of the customer.
            *
            * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
            * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
@@ -251,7 +257,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("country")
           String country;
 
-          /** The customer's state, county, province, or region as identified by Stripe Tax. */
+          /** The identified tax state, county, province, or region of the customer. */
           @SerializedName("state")
           String state;
         }
@@ -786,6 +792,10 @@ public class Account extends StripeObject implements HasId {
         /** Allow the merchant to process SEPA Direct Debit payments. */
         @SerializedName("sepa_debit_payments")
         SepaDebitPayments sepaDebitPayments;
+
+        /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
+        @SerializedName("stripe_balance")
+        StripeBalance stripeBalance;
 
         /** Allow the merchant to process Swish payments. */
         @SerializedName("swish_payments")
@@ -3075,6 +3085,77 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
+         * For more details about StripeBalance, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class StripeBalance extends StripeObject {
+          /** Allows the account to do payouts using their Stripe Balance (/v1/balance). */
+          @SerializedName("payouts")
+          Payouts payouts;
+
+          /**
+           * For more details about Payouts, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Payouts extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Merchant.Capabilities.StripeBalance.Payouts.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, or {@code unsupported_country}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+        }
+
+        /**
          * For more details about SwishPayments, please refer to the <a
          * href="https://docs.stripe.com/api">API Reference.</a>
          */
@@ -3525,10 +3606,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("cards")
         Cards cards;
 
-        /**
-         * Capabilities that enable the recipient to receive money into their Stripe Balance
-         * (/v1/balance).
-         */
+        /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
 
@@ -3732,11 +3810,73 @@ public class Account extends StripeObject implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class StripeBalance extends StripeObject {
+          /** Allows the account to do payouts using their Stripe Balance (/v1/balance). */
+          @SerializedName("payouts")
+          Payouts payouts;
+
           /**
-           * Allows the recipient to receive /v1/transfers into their Stripe Balance (/v1/balance).
+           * Allows the account to receive /v1/transfers into their Stripe Balance (/v1/balance).
            */
           @SerializedName("stripe_transfers")
           StripeTransfers stripeTransfers;
+
+          /**
+           * For more details about Payouts, please refer to the <a
+           * href="https://docs.stripe.com/api">API Reference.</a>
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Payouts extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.StripeBalance.Payouts.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, or {@code unsupported_country}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
 
           /**
            * For more details about StripeTransfers, please refer to the <a
@@ -3819,23 +3959,23 @@ public class Account extends StripeObject implements HasId {
          * <p>One of {@code at_bank_account}, {@code au_bank_account}, {@code ba_bank_account},
          * {@code be_bank_account}, {@code bg_bank_account}, {@code bj_bank_account}, {@code
          * bs_bank_account}, {@code card}, {@code ca_bank_account}, {@code ch_bank_account}, {@code
-         * ci_bank_account}, {@code cy_bank_account}, {@code cz_bank_account}, {@code
-         * de_bank_account}, {@code dk_bank_account}, {@code ec_bank_account}, {@code
-         * ee_bank_account}, {@code es_bank_account}, {@code et_bank_account}, {@code
-         * fi_bank_account}, {@code fr_bank_account}, {@code gb_bank_account}, {@code
-         * gr_bank_account}, {@code hr_bank_account}, {@code hu_bank_account}, {@code
-         * id_bank_account}, {@code ie_bank_account}, {@code il_bank_account}, {@code
-         * in_bank_account}, {@code is_bank_account}, {@code it_bank_account}, {@code
-         * ke_bank_account}, {@code li_bank_account}, {@code lt_bank_account}, {@code
-         * lu_bank_account}, {@code lv_bank_account}, {@code mn_bank_account}, {@code
-         * mt_bank_account}, {@code mu_bank_account}, {@code mx_bank_account}, {@code
-         * na_bank_account}, {@code nl_bank_account}, {@code no_bank_account}, {@code
-         * nz_bank_account}, {@code pa_bank_account}, {@code ph_bank_account}, {@code
-         * pl_bank_account}, {@code pt_bank_account}, {@code ro_bank_account}, {@code
-         * rs_bank_account}, {@code se_bank_account}, {@code sg_bank_account}, {@code
-         * si_bank_account}, {@code sk_bank_account}, {@code sn_bank_account}, {@code
-         * sv_bank_account}, {@code tn_bank_account}, {@code tr_bank_account}, {@code
-         * us_bank_account}, or {@code za_bank_account}.
+         * ci_bank_account}, {@code crypto_wallet}, {@code cy_bank_account}, {@code
+         * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
+         * ec_bank_account}, {@code ee_bank_account}, {@code es_bank_account}, {@code
+         * et_bank_account}, {@code fi_bank_account}, {@code fr_bank_account}, {@code
+         * gb_bank_account}, {@code gr_bank_account}, {@code hr_bank_account}, {@code
+         * hu_bank_account}, {@code id_bank_account}, {@code ie_bank_account}, {@code
+         * il_bank_account}, {@code in_bank_account}, {@code is_bank_account}, {@code
+         * it_bank_account}, {@code ke_bank_account}, {@code li_bank_account}, {@code
+         * lt_bank_account}, {@code lu_bank_account}, {@code lv_bank_account}, {@code
+         * mn_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
+         * mx_bank_account}, {@code na_bank_account}, {@code nl_bank_account}, {@code
+         * no_bank_account}, {@code nz_bank_account}, {@code pa_bank_account}, {@code
+         * ph_bank_account}, {@code pl_bank_account}, {@code pt_bank_account}, {@code
+         * ro_bank_account}, {@code rs_bank_account}, {@code se_bank_account}, {@code
+         * sg_bank_account}, {@code si_bank_account}, {@code sk_bank_account}, {@code
+         * sn_bank_account}, {@code sv_bank_account}, {@code tn_bank_account}, {@code
+         * tr_bank_account}, {@code us_bank_account}, or {@code za_bank_account}.
          */
         @SerializedName("type")
         String type;
@@ -3878,10 +4018,10 @@ public class Account extends StripeObject implements HasId {
      * {@code sek}, {@code sgd}, {@code shp}, {@code sle}, {@code sll}, {@code sos}, {@code srd},
      * {@code ssp}, {@code std}, {@code stn}, {@code svc}, {@code syp}, {@code szl}, {@code thb},
      * {@code tjs}, {@code tmt}, {@code tnd}, {@code top}, {@code try}, {@code ttd}, {@code twd},
-     * {@code tzs}, {@code uah}, {@code ugx}, {@code usd}, {@code usdc}, {@code usn}, {@code uyi},
-     * {@code uyu}, {@code uzs}, {@code vef}, {@code ves}, {@code vnd}, {@code vuv}, {@code wst},
-     * {@code xaf}, {@code xcd}, {@code xcg}, {@code xof}, {@code xpf}, {@code yer}, {@code zar},
-     * {@code zmk}, {@code zmw}, {@code zwd}, {@code zwg}, or {@code zwl}.
+     * {@code tzs}, {@code uah}, {@code ugx}, {@code usd}, {@code usdb}, {@code usdc}, {@code usn},
+     * {@code uyi}, {@code uyu}, {@code uzs}, {@code vef}, {@code ves}, {@code vnd}, {@code vuv},
+     * {@code wst}, {@code xaf}, {@code xcd}, {@code xcg}, {@code xof}, {@code xpf}, {@code yer},
+     * {@code zar}, {@code zmk}, {@code zmw}, {@code zwd}, {@code zwg}, or {@code zwl}.
      */
     @SerializedName("currency")
     String currency;
@@ -5543,6 +5683,10 @@ public class Account extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Relationship extends StripeObject {
+        /** Whether the individual is an authorizer of the Account’s legal entity. */
+        @SerializedName("authorizer")
+        Boolean authorizer;
+
         /**
          * Whether the individual is a director of the Account’s legal entity. Directors are
          * typically members of the governing board of the company, or responsible for ensuring the
@@ -5975,13 +6119,6 @@ public class Account extends StripeObject implements HasId {
         List<Account.Requirements.Entry.Impact.RestrictsCapability> restrictsCapabilities;
 
         /**
-         * Details about payouts restrictions that will be enforced if the requirement is not
-         * collected and satisfactory to Stripe.
-         */
-        @SerializedName("restricts_payouts")
-        RestrictsPayouts restrictsPayouts;
-
-        /**
          * For more details about RestrictsCapability, please refer to the <a
          * href="https://docs.stripe.com/api">API Reference.</a>
          */
@@ -6007,8 +6144,9 @@ public class Account extends StripeObject implements HasId {
            * p24_payments}, {@code payco_payments}, {@code paynow_payments}, {@code
            * pay_by_bank_payments}, {@code promptpay_payments}, {@code revolut_pay_payments}, {@code
            * samsung_pay_payments}, {@code sepa_bank_transfer_payments}, {@code
-           * sepa_debit_payments}, {@code stripe_balance.stripe_transfers}, {@code swish_payments},
-           * {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code zip_payments}.
+           * sepa_debit_payments}, {@code stripe_balance.payouts}, {@code
+           * stripe_balance.stripe_transfers}, {@code swish_payments}, {@code twint_payments},
+           * {@code us_bank_transfer_payments}, or {@code zip_payments}.
            */
           @SerializedName("capability")
           String capability;
@@ -6024,39 +6162,6 @@ public class Account extends StripeObject implements HasId {
           /**
            * Details about when in the account lifecycle the requirement must be collected by the
            * avoid the Capability restriction.
-           */
-          @SerializedName("deadline")
-          Deadline deadline;
-
-          /**
-           * For more details about Deadline, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
-          @Getter
-          @Setter
-          @EqualsAndHashCode(callSuper = false)
-          public static class Deadline extends StripeObject {
-            /**
-             * The current status of the requirement's impact.
-             *
-             * <p>One of {@code currently_due}, {@code eventually_due}, or {@code past_due}.
-             */
-            @SerializedName("status")
-            String status;
-          }
-        }
-
-        /**
-         * For more details about RestrictsPayouts, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
-        @Getter
-        @Setter
-        @EqualsAndHashCode(callSuper = false)
-        public static class RestrictsPayouts extends StripeObject {
-          /**
-           * Details about when in the Account's lifecycle the requirement must be collected by the
-           * avoid the earliest specified impact.
            */
           @SerializedName("deadline")
           Deadline deadline;
