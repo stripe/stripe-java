@@ -20,11 +20,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("delivery_options")
   DeliveryOptions deliveryOptions;
 
-  /**
-   * An arbitrary string attached to the OutboundTransfer. Often useful for displaying to users. The
-   * description can not be longer than 100 characters and can only contain basic Latin characters
-   * and spaces. The following special characters are not allowed: '&quot;* .
-   */
+  /** An arbitrary string attached to the OutboundTransfer. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
 
@@ -115,8 +111,6 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     /**
      * An arbitrary string attached to the OutboundTransfer. Often useful for displaying to users.
-     * The description can not be longer than 100 characters and can only contain basic Latin
-     * characters and spaces. The following special characters are not allowed: '&quot;* .
      */
     public Builder setDescription(String description) {
       this.description = description;

@@ -600,15 +600,24 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("location_source")
         LocationSource locationSource;
 
+        /**
+         * A per-request flag that indicates when Stripe should validate the customer tax location -
+         * defaults to 'auto'.
+         */
+        @SerializedName("validate_location")
+        ValidateLocation validateLocation;
+
         private AutomaticIndirectTax(
             Exempt exempt,
             Map<String, Object> extraParams,
             Object ipAddress,
-            LocationSource locationSource) {
+            LocationSource locationSource,
+            ValidateLocation validateLocation) {
           this.exempt = exempt;
           this.extraParams = extraParams;
           this.ipAddress = ipAddress;
           this.locationSource = locationSource;
+          this.validateLocation = validateLocation;
         }
 
         public static Builder builder() {
@@ -624,10 +633,16 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private LocationSource locationSource;
 
+          private ValidateLocation validateLocation;
+
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Configuration.Customer.AutomaticIndirectTax build() {
             return new AccountUpdateParams.Configuration.Customer.AutomaticIndirectTax(
-                this.exempt, this.extraParams, this.ipAddress, this.locationSource);
+                this.exempt,
+                this.extraParams,
+                this.ipAddress,
+                this.locationSource,
+                this.validateLocation);
           }
 
           /**
@@ -698,6 +713,17 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.locationSource = locationSource;
             return this;
           }
+
+          /**
+           * A per-request flag that indicates when Stripe should validate the customer tax location
+           * - defaults to 'auto'.
+           */
+          public Builder setValidateLocation(
+              AccountUpdateParams.Configuration.Customer.AutomaticIndirectTax.ValidateLocation
+                  validateLocation) {
+            this.validateLocation = validateLocation;
+            return this;
+          }
         }
 
         public enum Exempt implements ApiRequestParams.EnumParam {
@@ -732,6 +758,24 @@ public class AccountUpdateParams extends ApiRequestParams {
           private final String value;
 
           LocationSource(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum ValidateLocation implements ApiRequestParams.EnumParam {
+          @SerializedName("auto")
+          AUTO("auto"),
+
+          @SerializedName("deferred")
+          DEFERRED("deferred"),
+
+          @SerializedName("immediately")
+          IMMEDIATELY("immediately");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ValidateLocation(String value) {
             this.value = value;
           }
         }
@@ -17319,6 +17363,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public enum Structure implements ApiRequestParams.EnumParam {
+        @SerializedName("cooperative")
+        COOPERATIVE("cooperative"),
+
         @SerializedName("free_zone_establishment")
         FREE_ZONE_ESTABLISHMENT("free_zone_establishment"),
 
@@ -17331,11 +17378,17 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("government_instrumentality")
         GOVERNMENT_INSTRUMENTALITY("government_instrumentality"),
 
+        @SerializedName("incorporated_association")
+        INCORPORATED_ASSOCIATION("incorporated_association"),
+
         @SerializedName("incorporated_non_profit")
         INCORPORATED_NON_PROFIT("incorporated_non_profit"),
 
         @SerializedName("incorporated_partnership")
         INCORPORATED_PARTNERSHIP("incorporated_partnership"),
+
+        @SerializedName("limited_liability_partnership")
+        LIMITED_LIABILITY_PARTNERSHIP("limited_liability_partnership"),
 
         @SerializedName("llc")
         LLC("llc"),
@@ -17358,6 +17411,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("public_corporation")
         PUBLIC_CORPORATION("public_corporation"),
 
+        @SerializedName("public_listed_corporation")
+        PUBLIC_LISTED_CORPORATION("public_listed_corporation"),
+
         @SerializedName("public_partnership")
         PUBLIC_PARTNERSHIP("public_partnership"),
 
@@ -17375,6 +17431,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         @SerializedName("tax_exempt_government_instrumentality")
         TAX_EXEMPT_GOVERNMENT_INSTRUMENTALITY("tax_exempt_government_instrumentality"),
+
+        @SerializedName("trust")
+        TRUST("trust"),
 
         @SerializedName("unincorporated_association")
         UNINCORPORATED_ASSOCIATION("unincorporated_association"),

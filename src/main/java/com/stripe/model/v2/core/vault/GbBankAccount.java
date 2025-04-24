@@ -46,7 +46,7 @@ public class GbBankAccount extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The ID of the GbBankAccount object. */
+  /** The ID of the GBBankAccount object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;

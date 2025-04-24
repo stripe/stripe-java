@@ -190,14 +190,15 @@ public class Account extends StripeObject implements HasId {
         String ipAddress;
 
         /**
-         * The customer’s identified tax location - uses {@code location_source}. Will only be
-         * rendered if the {@code automatic_indirect_tax} feature is requested and {@code active}.
+         * The customer’s location as identified by Stripe Tax - uses {@code location_source}. Will
+         * only be rendered if the {@code automatic_indirect_tax} feature is requested and {@code
+         * active}.
          */
         @SerializedName("location")
         Location location;
 
         /**
-         * The data source used to identify the customer's tax location - defaults to
+         * The data source used by Stripe Tax to identify the customer's location - defaults to
          * 'identity_address'. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          *
@@ -215,7 +216,7 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class Location extends StripeObject {
           /**
-           * The identified tax country of the customer.
+           * The customer's country as identified by Stripe Tax.
            *
            * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
            * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
@@ -257,7 +258,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("country")
           String country;
 
-          /** The identified tax state, county, province, or region of the customer. */
+          /** The customer's state, county, province, or region as identified by Stripe Tax. */
           @SerializedName("state")
           String state;
         }
@@ -3959,23 +3960,23 @@ public class Account extends StripeObject implements HasId {
          * <p>One of {@code at_bank_account}, {@code au_bank_account}, {@code ba_bank_account},
          * {@code be_bank_account}, {@code bg_bank_account}, {@code bj_bank_account}, {@code
          * bs_bank_account}, {@code card}, {@code ca_bank_account}, {@code ch_bank_account}, {@code
-         * ci_bank_account}, {@code crypto_wallet}, {@code cy_bank_account}, {@code
-         * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
-         * ec_bank_account}, {@code ee_bank_account}, {@code es_bank_account}, {@code
-         * et_bank_account}, {@code fi_bank_account}, {@code fr_bank_account}, {@code
-         * gb_bank_account}, {@code gr_bank_account}, {@code hr_bank_account}, {@code
-         * hu_bank_account}, {@code id_bank_account}, {@code ie_bank_account}, {@code
-         * il_bank_account}, {@code in_bank_account}, {@code is_bank_account}, {@code
-         * it_bank_account}, {@code ke_bank_account}, {@code li_bank_account}, {@code
-         * lt_bank_account}, {@code lu_bank_account}, {@code lv_bank_account}, {@code
-         * mn_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
-         * mx_bank_account}, {@code na_bank_account}, {@code nl_bank_account}, {@code
-         * no_bank_account}, {@code nz_bank_account}, {@code pa_bank_account}, {@code
-         * ph_bank_account}, {@code pl_bank_account}, {@code pt_bank_account}, {@code
-         * ro_bank_account}, {@code rs_bank_account}, {@code se_bank_account}, {@code
-         * sg_bank_account}, {@code si_bank_account}, {@code sk_bank_account}, {@code
-         * sn_bank_account}, {@code sv_bank_account}, {@code tn_bank_account}, {@code
-         * tr_bank_account}, {@code us_bank_account}, or {@code za_bank_account}.
+         * ci_bank_account}, {@code cy_bank_account}, {@code cz_bank_account}, {@code
+         * de_bank_account}, {@code dk_bank_account}, {@code ec_bank_account}, {@code
+         * ee_bank_account}, {@code es_bank_account}, {@code et_bank_account}, {@code
+         * fi_bank_account}, {@code fr_bank_account}, {@code gb_bank_account}, {@code
+         * gr_bank_account}, {@code hr_bank_account}, {@code hu_bank_account}, {@code
+         * id_bank_account}, {@code ie_bank_account}, {@code il_bank_account}, {@code
+         * in_bank_account}, {@code is_bank_account}, {@code it_bank_account}, {@code
+         * ke_bank_account}, {@code li_bank_account}, {@code lt_bank_account}, {@code
+         * lu_bank_account}, {@code lv_bank_account}, {@code mn_bank_account}, {@code
+         * mt_bank_account}, {@code mu_bank_account}, {@code mx_bank_account}, {@code
+         * na_bank_account}, {@code nl_bank_account}, {@code no_bank_account}, {@code
+         * nz_bank_account}, {@code pa_bank_account}, {@code ph_bank_account}, {@code
+         * pl_bank_account}, {@code pt_bank_account}, {@code ro_bank_account}, {@code
+         * rs_bank_account}, {@code se_bank_account}, {@code sg_bank_account}, {@code
+         * si_bank_account}, {@code sk_bank_account}, {@code sn_bank_account}, {@code
+         * sv_bank_account}, {@code tn_bank_account}, {@code tr_bank_account}, {@code
+         * us_bank_account}, or {@code za_bank_account}.
          */
         @SerializedName("type")
         String type;
@@ -4371,15 +4372,16 @@ public class Account extends StripeObject implements HasId {
       /**
        * The category identifying the legal structure of the business.
        *
-       * <p>One of {@code free_zone_establishment}, {@code free_zone_llc}, {@code
-       * governmental_unit}, {@code government_instrumentality}, {@code incorporated_non_profit},
-       * {@code incorporated_partnership}, {@code llc}, {@code multi_member_llc}, {@code
-       * private_company}, {@code private_corporation}, {@code private_partnership}, {@code
-       * public_company}, {@code public_corporation}, {@code public_partnership}, {@code
-       * registered_charity}, {@code single_member_llc}, {@code sole_establishment}, {@code
-       * sole_proprietorship}, {@code tax_exempt_government_instrumentality}, {@code
-       * unincorporated_association}, {@code unincorporated_non_profit}, or {@code
-       * unincorporated_partnership}.
+       * <p>One of {@code cooperative}, {@code free_zone_establishment}, {@code free_zone_llc},
+       * {@code governmental_unit}, {@code government_instrumentality}, {@code
+       * incorporated_association}, {@code incorporated_non_profit}, {@code
+       * incorporated_partnership}, {@code limited_liability_partnership}, {@code llc}, {@code
+       * multi_member_llc}, {@code private_company}, {@code private_corporation}, {@code
+       * private_partnership}, {@code public_company}, {@code public_corporation}, {@code
+       * public_listed_corporation}, {@code public_partnership}, {@code registered_charity}, {@code
+       * single_member_llc}, {@code sole_establishment}, {@code sole_proprietorship}, {@code
+       * tax_exempt_government_instrumentality}, {@code trust}, {@code unincorporated_association},
+       * {@code unincorporated_non_profit}, or {@code unincorporated_partnership}.
        */
       @SerializedName("structure")
       String structure;

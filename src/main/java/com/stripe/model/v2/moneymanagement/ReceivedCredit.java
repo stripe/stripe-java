@@ -33,18 +33,18 @@ public class ReceivedCredit extends StripeObject implements HasId {
   BankTransfer bankTransfer;
 
   /**
+   * This object stores details about the originating issuing card spend that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code card_spend}.
+   */
+  @SerializedName("card_spend")
+  CardSpend cardSpend;
+
+  /**
    * Time at which the ReceivedCredit was created. Represented as a RFC 3339 date &amp; time UTC
    * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
    */
   @SerializedName("created")
   Instant created;
-
-  /**
-   * This object stores details about the originating crypto transaction that resulted in the
-   * ReceivedCredit. Present if {@code type} field value is {@code crypto_wallet_transfer}.
-   */
-  @SerializedName("crypto_wallet_transfer")
-  CryptoWalletTransfer cryptoWalletTransfer;
 
   /** Freeform string set by originator of the ReceivedCredit. */
   @SerializedName("description")
@@ -104,8 +104,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
   /**
    * Open Enum. The type of flow that caused the ReceivedCredit.
    *
-   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code crypto_wallet_transfer}, or
-   * {@code external_credit}.
+   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code card_spend}, or {@code
+   * external_credit}.
    */
   @SerializedName("type")
   String type;
@@ -118,26 +118,14 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BalanceTransfer extends StripeObject {
-    /** The ID of the account that owns the source object originated the ReceivedCredit. */
-    @SerializedName("from_account")
-    String fromAccount;
-
-    /** The ID of the outbound payment object that originated the ReceivedCredit. */
-    @SerializedName("outbound_payment")
-    String outboundPayment;
-
-    /** The ID of the outbound transfer object that originated the ReceivedCredit. */
-    @SerializedName("outbound_transfer")
-    String outboundTransfer;
-
-    /** The ID of the payout object that originated the ReceivedCredit. */
+    /** The ID of the Stripe Money Movement that originated the ReceivedCredit. */
     @SerializedName("payout_v1")
     String payoutV1;
 
     /**
      * Open Enum. The type of Stripe Money Movement that originated the ReceivedCredit.
      *
-     * <p>One of {@code outbound_payment}, {@code outbound_transfer}, or {@code payout_v1}.
+     * <p>Equal to {@code payout_v1}.
      */
     @SerializedName("type")
     String type;
@@ -151,13 +139,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BankTransfer extends StripeObject {
-    /**
-     * Hash containing the transaction bank details. Present if {@code payment_method_type} field
-     * value is {@code eu_bank_account}.
-     */
-    @SerializedName("eu_bank_account")
-    EuBankAccount euBankAccount;
-
     /** Financial Address on which funds for ReceivedCredit were received. */
     @SerializedName("financial_address")
     String financialAddress;
@@ -172,8 +153,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
     /**
      * Open Enum. Indicates the type of source via from which external funds originated.
      *
-     * <p>One of {@code crypto_wallet}, {@code eu_bank_account}, {@code gb_bank_account}, or {@code
-     * us_bank_account}.
+     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("payment_method_type")
     String paymentMethodType;
@@ -188,39 +168,6 @@ public class ReceivedCredit extends StripeObject implements HasId {
      */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
-
-    /**
-     * For more details about EuBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class EuBankAccount extends StripeObject {
-      /** The account holder name of the bank account the transfer was received from. */
-      @SerializedName("account_holder_name")
-      String accountHolderName;
-
-      /** The bank name the transfer was received from. */
-      @SerializedName("bank_name")
-      String bankName;
-
-      /** The bic of the account that originated the transfer. */
-      @SerializedName("bic")
-      String bic;
-
-      /** The last 4 digits of the account number that originated the transfer. */
-      @SerializedName("last4")
-      String last4;
-
-      /**
-       * Open Enum. The money transmission network used to send funds for this ReceivedCredit.
-       *
-       * <p>Equal to {@code sepa}.
-       */
-      @SerializedName("network")
-      String network;
-    }
 
     /**
      * For more details about GbBankAccount, please refer to the <a
@@ -286,58 +233,49 @@ public class ReceivedCredit extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about CryptoWalletTransfer, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * For more details about CardSpend, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CryptoWalletTransfer extends StripeObject {
-    /** Hash containing the transaction crypto wallet details. */
-    @SerializedName("crypto_wallet")
-    CryptoWallet cryptoWallet;
+  public static class CardSpend extends StripeObject {
+    /** The reference to the issuing card object. */
+    @SerializedName("card_v1_id")
+    String cardV1Id;
 
-    /** Financial Address on which funds for ReceivedCredit were received. */
-    @SerializedName("financial_address")
-    String financialAddress;
+    /** Hash containing information about the Dispute that triggered this credit. */
+    @SerializedName("dispute")
+    Dispute dispute;
 
-    /**
-     * Open Enum. Indicates the type of source via from which external funds originated.
-     *
-     * <p>One of {@code crypto_wallet}, {@code eu_bank_account}, {@code gb_bank_account}, or {@code
-     * us_bank_account}.
-     */
-    @SerializedName("payment_method_type")
-    String paymentMethodType;
-
-    /** Freeform string set by originator of the external ReceivedCredit. */
-    @SerializedName("statement_descriptor")
-    String statementDescriptor;
+    /** Hash containing information about the Refund that triggered this credit. */
+    @SerializedName("refund")
+    Refund refund;
 
     /**
-     * For more details about CryptoWallet, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * For more details about Dispute, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class CryptoWallet extends StripeObject {
-      /** The address of the wallet the crypto was received from. */
-      @SerializedName("address")
-      String address;
+    public static class Dispute extends StripeObject {
+      /** The reference to the v1 issuing dispute ID. */
+      @SerializedName("issuing_dispute_v1")
+      String issuingDisputeV1;
+    }
 
-      /** A memo also for identifying the recipient for memo-based blockchains (e.g., Stellar),. */
-      @SerializedName("memo")
-      String memo;
-
-      /**
-       * The network the crypto was received from.
-       *
-       * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum},
-       * {@code optimism}, {@code polygon}, {@code solana}, or {@code stellar}.
-       */
-      @SerializedName("network")
-      String network;
+    /**
+     * For more details about Refund, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Refund extends StripeObject {
+      /** The reference to the v1 issuing transaction ID. */
+      @SerializedName("issuing_transaction_v1")
+      String issuingTransactionV1;
     }
   }
 
