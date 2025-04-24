@@ -164,6 +164,10 @@ public class AccountPersonCreateParams extends ApiRequestParams {
   @SerializedName("ssn_last_4")
   String ssnLast4;
 
+  /** Demographic data related to the person. */
+  @SerializedName("us_cfpb_data")
+  UsCfpbData usCfpbData;
+
   /** The person's verification status. */
   @SerializedName("verification")
   Verification verification;
@@ -197,6 +201,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
       RegisteredAddress registeredAddress,
       Relationship relationship,
       String ssnLast4,
+      UsCfpbData usCfpbData,
       Verification verification) {
     this.additionalTosAcceptances = additionalTosAcceptances;
     this.address = address;
@@ -226,6 +231,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
     this.registeredAddress = registeredAddress;
     this.relationship = relationship;
     this.ssnLast4 = ssnLast4;
+    this.usCfpbData = usCfpbData;
     this.verification = verification;
   }
 
@@ -290,6 +296,8 @@ public class AccountPersonCreateParams extends ApiRequestParams {
 
     private String ssnLast4;
 
+    private UsCfpbData usCfpbData;
+
     private Verification verification;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -323,6 +331,7 @@ public class AccountPersonCreateParams extends ApiRequestParams {
           this.registeredAddress,
           this.relationship,
           this.ssnLast4,
+          this.usCfpbData,
           this.verification);
     }
 
@@ -645,6 +654,12 @@ public class AccountPersonCreateParams extends ApiRequestParams {
     /** The last four digits of the person's Social Security number (U.S. only). */
     public Builder setSsnLast4(String ssnLast4) {
       this.ssnLast4 = ssnLast4;
+      return this;
+    }
+
+    /** Demographic data related to the person. */
+    public Builder setUsCfpbData(AccountPersonCreateParams.UsCfpbData usCfpbData) {
+      this.usCfpbData = usCfpbData;
       return this;
     }
 
@@ -2195,6 +2210,439 @@ public class AccountPersonCreateParams extends ApiRequestParams {
       public Builder setTitle(String title) {
         this.title = title;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UsCfpbData {
+    /** The persons ethnicity details. */
+    @SerializedName("ethnicity_details")
+    EthnicityDetails ethnicityDetails;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The persons race details. */
+    @SerializedName("race_details")
+    RaceDetails raceDetails;
+
+    /** The persons self-identified gender. */
+    @SerializedName("self_identified_gender")
+    String selfIdentifiedGender;
+
+    private UsCfpbData(
+        EthnicityDetails ethnicityDetails,
+        Map<String, Object> extraParams,
+        RaceDetails raceDetails,
+        String selfIdentifiedGender) {
+      this.ethnicityDetails = ethnicityDetails;
+      this.extraParams = extraParams;
+      this.raceDetails = raceDetails;
+      this.selfIdentifiedGender = selfIdentifiedGender;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private EthnicityDetails ethnicityDetails;
+
+      private Map<String, Object> extraParams;
+
+      private RaceDetails raceDetails;
+
+      private String selfIdentifiedGender;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountPersonCreateParams.UsCfpbData build() {
+        return new AccountPersonCreateParams.UsCfpbData(
+            this.ethnicityDetails, this.extraParams, this.raceDetails, this.selfIdentifiedGender);
+      }
+
+      /** The persons ethnicity details. */
+      public Builder setEthnicityDetails(
+          AccountPersonCreateParams.UsCfpbData.EthnicityDetails ethnicityDetails) {
+        this.ethnicityDetails = ethnicityDetails;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountPersonCreateParams.UsCfpbData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountPersonCreateParams.UsCfpbData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The persons race details. */
+      public Builder setRaceDetails(AccountPersonCreateParams.UsCfpbData.RaceDetails raceDetails) {
+        this.raceDetails = raceDetails;
+        return this;
+      }
+
+      /** The persons self-identified gender. */
+      public Builder setSelfIdentifiedGender(String selfIdentifiedGender) {
+        this.selfIdentifiedGender = selfIdentifiedGender;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EthnicityDetails {
+      /** The persons ethnicity. */
+      @SerializedName("ethnicity")
+      List<AccountPersonCreateParams.UsCfpbData.EthnicityDetails.Ethnicity> ethnicity;
+
+      /** Please specify your origin, when other is selected. */
+      @SerializedName("ethnicity_other")
+      String ethnicityOther;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private EthnicityDetails(
+          List<AccountPersonCreateParams.UsCfpbData.EthnicityDetails.Ethnicity> ethnicity,
+          String ethnicityOther,
+          Map<String, Object> extraParams) {
+        this.ethnicity = ethnicity;
+        this.ethnicityOther = ethnicityOther;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private List<AccountPersonCreateParams.UsCfpbData.EthnicityDetails.Ethnicity> ethnicity;
+
+        private String ethnicityOther;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountPersonCreateParams.UsCfpbData.EthnicityDetails build() {
+          return new AccountPersonCreateParams.UsCfpbData.EthnicityDetails(
+              this.ethnicity, this.ethnicityOther, this.extraParams);
+        }
+
+        /**
+         * Add an element to `ethnicity` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * AccountPersonCreateParams.UsCfpbData.EthnicityDetails#ethnicity} for the field
+         * documentation.
+         */
+        public Builder addEthnicity(
+            AccountPersonCreateParams.UsCfpbData.EthnicityDetails.Ethnicity element) {
+          if (this.ethnicity == null) {
+            this.ethnicity = new ArrayList<>();
+          }
+          this.ethnicity.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `ethnicity` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * AccountPersonCreateParams.UsCfpbData.EthnicityDetails#ethnicity} for the field
+         * documentation.
+         */
+        public Builder addAllEthnicity(
+            List<AccountPersonCreateParams.UsCfpbData.EthnicityDetails.Ethnicity> elements) {
+          if (this.ethnicity == null) {
+            this.ethnicity = new ArrayList<>();
+          }
+          this.ethnicity.addAll(elements);
+          return this;
+        }
+
+        /** Please specify your origin, when other is selected. */
+        public Builder setEthnicityOther(String ethnicityOther) {
+          this.ethnicityOther = ethnicityOther;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountPersonCreateParams.UsCfpbData.EthnicityDetails#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountPersonCreateParams.UsCfpbData.EthnicityDetails#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum Ethnicity implements ApiRequestParams.EnumParam {
+        @SerializedName("cuban")
+        CUBAN("cuban"),
+
+        @SerializedName("hispanic_or_latino")
+        HISPANIC_OR_LATINO("hispanic_or_latino"),
+
+        @SerializedName("mexican")
+        MEXICAN("mexican"),
+
+        @SerializedName("not_hispanic_or_latino")
+        NOT_HISPANIC_OR_LATINO("not_hispanic_or_latino"),
+
+        @SerializedName("other_hispanic_or_latino")
+        OTHER_HISPANIC_OR_LATINO("other_hispanic_or_latino"),
+
+        @SerializedName("prefer_not_to_answer")
+        PREFER_NOT_TO_ANSWER("prefer_not_to_answer"),
+
+        @SerializedName("puerto_rican")
+        PUERTO_RICAN("puerto_rican");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Ethnicity(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RaceDetails {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The persons race. */
+      @SerializedName("race")
+      List<AccountPersonCreateParams.UsCfpbData.RaceDetails.Race> race;
+
+      /** Please specify your race, when other is selected. */
+      @SerializedName("race_other")
+      String raceOther;
+
+      private RaceDetails(
+          Map<String, Object> extraParams,
+          List<AccountPersonCreateParams.UsCfpbData.RaceDetails.Race> race,
+          String raceOther) {
+        this.extraParams = extraParams;
+        this.race = race;
+        this.raceOther = raceOther;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<AccountPersonCreateParams.UsCfpbData.RaceDetails.Race> race;
+
+        private String raceOther;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountPersonCreateParams.UsCfpbData.RaceDetails build() {
+          return new AccountPersonCreateParams.UsCfpbData.RaceDetails(
+              this.extraParams, this.race, this.raceOther);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountPersonCreateParams.UsCfpbData.RaceDetails#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountPersonCreateParams.UsCfpbData.RaceDetails#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `race` list. A list is initialized for the first `add/addAll` call, and
+         * subsequent calls adds additional elements to the original list. See {@link
+         * AccountPersonCreateParams.UsCfpbData.RaceDetails#race} for the field documentation.
+         */
+        public Builder addRace(AccountPersonCreateParams.UsCfpbData.RaceDetails.Race element) {
+          if (this.race == null) {
+            this.race = new ArrayList<>();
+          }
+          this.race.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `race` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountPersonCreateParams.UsCfpbData.RaceDetails#race} for the field documentation.
+         */
+        public Builder addAllRace(
+            List<AccountPersonCreateParams.UsCfpbData.RaceDetails.Race> elements) {
+          if (this.race == null) {
+            this.race = new ArrayList<>();
+          }
+          this.race.addAll(elements);
+          return this;
+        }
+
+        /** Please specify your race, when other is selected. */
+        public Builder setRaceOther(String raceOther) {
+          this.raceOther = raceOther;
+          return this;
+        }
+      }
+
+      public enum Race implements ApiRequestParams.EnumParam {
+        @SerializedName("african_american")
+        AFRICAN_AMERICAN("african_american"),
+
+        @SerializedName("american_indian_or_alaska_native")
+        AMERICAN_INDIAN_OR_ALASKA_NATIVE("american_indian_or_alaska_native"),
+
+        @SerializedName("asian")
+        ASIAN("asian"),
+
+        @SerializedName("asian_indian")
+        ASIAN_INDIAN("asian_indian"),
+
+        @SerializedName("black_or_african_american")
+        BLACK_OR_AFRICAN_AMERICAN("black_or_african_american"),
+
+        @SerializedName("chinese")
+        CHINESE("chinese"),
+
+        @SerializedName("ethiopian")
+        ETHIOPIAN("ethiopian"),
+
+        @SerializedName("filipino")
+        FILIPINO("filipino"),
+
+        @SerializedName("guamanian_or_chamorro")
+        GUAMANIAN_OR_CHAMORRO("guamanian_or_chamorro"),
+
+        @SerializedName("haitian")
+        HAITIAN("haitian"),
+
+        @SerializedName("jamaican")
+        JAMAICAN("jamaican"),
+
+        @SerializedName("japanese")
+        JAPANESE("japanese"),
+
+        @SerializedName("korean")
+        KOREAN("korean"),
+
+        @SerializedName("native_hawaiian")
+        NATIVE_HAWAIIAN("native_hawaiian"),
+
+        @SerializedName("native_hawaiian_or_other_pacific_islander")
+        NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER("native_hawaiian_or_other_pacific_islander"),
+
+        @SerializedName("nigerian")
+        NIGERIAN("nigerian"),
+
+        @SerializedName("other_asian")
+        OTHER_ASIAN("other_asian"),
+
+        @SerializedName("other_black_or_african_american")
+        OTHER_BLACK_OR_AFRICAN_AMERICAN("other_black_or_african_american"),
+
+        @SerializedName("other_pacific_islander")
+        OTHER_PACIFIC_ISLANDER("other_pacific_islander"),
+
+        @SerializedName("prefer_not_to_answer")
+        PREFER_NOT_TO_ANSWER("prefer_not_to_answer"),
+
+        @SerializedName("samoan")
+        SAMOAN("samoan"),
+
+        @SerializedName("somali")
+        SOMALI("somali"),
+
+        @SerializedName("vietnamese")
+        VIETNAMESE("vietnamese"),
+
+        @SerializedName("white")
+        WHITE("white");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Race(String value) {
+          this.value = value;
+        }
       }
     }
   }

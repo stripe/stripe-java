@@ -16,8 +16,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
   /**
    * This field indicates whether this payment method can be shown again to its customer in a
    * checkout flow. Stripe products such as Checkout and Elements use this field to determine
-   * whether a payment method can be shown as a saved payment method in a checkout flow. The field
-   * defaults to {@code unspecified}.
+   * whether a payment method can be shown as a saved payment method in a checkout flow.
    */
   @SerializedName("allow_redisplay")
   AllowRedisplay allowRedisplay;
@@ -119,8 +118,7 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     /**
      * This field indicates whether this payment method can be shown again to its customer in a
      * checkout flow. Stripe products such as Checkout and Elements use this field to determine
-     * whether a payment method can be shown as a saved payment method in a checkout flow. The field
-     * defaults to {@code unspecified}.
+     * whether a payment method can be shown as a saved payment method in a checkout flow.
      */
     public Builder setAllowRedisplay(
         CustomerListPaymentMethodsParams.AllowRedisplay allowRedisplay) {

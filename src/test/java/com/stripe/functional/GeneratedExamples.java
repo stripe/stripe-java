@@ -2006,7 +2006,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.Event.class,
-        "{\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\"}");
+        "{\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.Event event = client.v2().core().events().retrieve("ll_123");
@@ -15609,7 +15609,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.MeterEventSession.class,
-        "{\"authentication_token\":\"authentication_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.billing.meter_event_session\"}");
+        "{\"authentication_token\":\"authentication_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"object\":\"v2.billing.meter_event_session\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.MeterEventSession meterEventSession =
@@ -15632,7 +15632,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.MeterEventAdjustment.class,
-        "{\"cancel\":{\"identifier\":\"identifier\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.billing.meter_event_adjustment\",\"status\":\"complete\",\"type\":\"cancel\"}");
+        "{\"cancel\":{\"identifier\":\"identifier\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"id\":\"obj_123\",\"object\":\"v2.billing.meter_event_adjustment\",\"status\":\"complete\",\"type\":\"cancel\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.MeterEventAdjustmentCreateParams params =
@@ -15697,7 +15697,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.MeterEvent.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"livemode\":true,\"object\":\"v2.billing.meter_event\",\"payload\":{\"undefined\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\"}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"object\":\"v2.billing.meter_event\",\"payload\":{\"undefined\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.MeterEventCreateParams params =
@@ -15726,7 +15726,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"livemode\":true,\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventDestinationCreateParams params =
@@ -15758,7 +15758,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"livemode\":true,\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.EventDestination eventDestination =
@@ -15781,7 +15781,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"livemode\":true,\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.EventDestination eventDestination =
@@ -15804,7 +15804,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"livemode\":true,\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.EventDestination eventDestination =
@@ -15829,7 +15829,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.EventDestination>>() {}.getType(),
-        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"livemode\":true,\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"amazon_eventbridge\":null,\"webhook_endpoint\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventDestinationListParams params =
@@ -15855,7 +15855,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.Event.class,
-        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\"}");
+        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.Event event = client.v2().core().eventDestinations().ping("id_123");
@@ -15877,7 +15877,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"livemode\":true,\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventDestinationRetrieveParams params =
@@ -15903,7 +15903,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"livemode\":true,\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventDestinationUpdateParams params =
@@ -15930,11 +15930,11 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         new TypeToken<
             com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event>>() {}.getType(),
-        "{\"data\":[{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventListParams params =
-        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
+        com.stripe.param.v2.core.EventListParams.builder().build();
 
     com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
         client.v2().core().events().list(params);
@@ -15952,7 +15952,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.Event.class,
-        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\"}");
+        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.Event event = client.v2().core().events().retrieve("id_123");

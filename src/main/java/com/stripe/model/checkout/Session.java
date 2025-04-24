@@ -110,7 +110,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
   /**
    * The client secret of your Checkout Session. Applies to Checkout Sessions with {@code ui_mode:
-   * embedded}. Client secret to be used when initializing Stripe.js embedded checkout.
+   * embedded} or {@code ui_mode: custom}. For {@code ui_mode: embedded}, the client secret is to be
+   * used when initializing Stripe.js embedded checkout. For {@code ui_mode: custom}, use the client
+   * secret with <a href="https://stripe.com/docs/js/custom_checkout/init">initCheckout</a> on your
+   * front end.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -329,7 +332,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    * CheckoutSession object.
    *
    * <p>For specific permissions, please refer to their dedicated subsections, such as {@code
-   * permissions.update.shipping_details}.
+   * permissions.update_shipping_details}.
    */
   @SerializedName("permissions")
   Permissions permissions;
@@ -355,8 +358,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String redirectOnCompletion;
 
   /**
-   * Applies to Checkout Sessions with {@code ui_mode: embedded}. The URL to redirect your customer
-   * back to after they authenticate or cancel their payment on the payment method's app or site.
+   * Applies to Checkout Sessions with {@code ui_mode: embedded} or {@code ui_mode: custom}. The URL
+   * to redirect your customer back to after they authenticate or cancel their payment on the
+   * payment method's app or site.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -446,6 +450,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("url")
   String url;
+
+  /** Wallet-specific configuration for this Checkout Session. */
+  @SerializedName("wallet_options")
+  WalletOptions walletOptions;
 
   /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
@@ -909,6 +917,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("liability")
     Liability liability;
+
+    /** The tax provider powering automatic tax. */
+    @SerializedName("provider")
+    String provider;
 
     /**
      * The status of the most recent automated tax calculation for this session.
@@ -1406,7 +1418,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * md_vat}, {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin},
        * {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code
        * gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan},
-       * {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, or {@code unknown}.
+       * {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin}, {@code
+       * az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin},
+       * {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, or {@code unknown}.
        */
       @SerializedName("type")
       String type;
@@ -3771,6 +3785,35 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
   }
 
+  /**
+   * For more details about WalletOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class WalletOptions extends StripeObject {
+    @SerializedName("link")
+    Link link;
+
+    /**
+     * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Link extends StripeObject {
+      /**
+       * Describes whether Checkout should display Link. Defaults to {@code auto}.
+       *
+       * <p>One of {@code auto}, or {@code never}.
+       */
+      @SerializedName("display")
+      String display;
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -3801,5 +3844,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(taxIdCollection, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
+    trySetResponseGetter(walletOptions, responseGetter);
   }
 }

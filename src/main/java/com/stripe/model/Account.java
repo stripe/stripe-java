@@ -755,6 +755,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("mcc")
     String mcc;
 
+    /** Whether the business is a minority-owned, women-owned, and/or LGBTQI+-owned business. */
+    @SerializedName("minority_owned_business_designation")
+    List<String> minorityOwnedBusinessDesignation;
+
     @SerializedName("monthly_estimated_revenue")
     MonthlyEstimatedRevenue monthlyEstimatedRevenue;
 
@@ -1482,6 +1486,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("phone")
     String phone;
 
+    @SerializedName("registration_date")
+    RegistrationDate registrationDate;
+
     /**
      * The category identifying the legal structure of the company or legal entity. Also available
      * for accounts where <a
@@ -1644,6 +1651,27 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /** The user-agent string from the browser where the beneficial owner attestation was made. */
       @SerializedName("user_agent")
       String userAgent;
+    }
+
+    /**
+     * For more details about RegistrationDate, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RegistrationDate extends StripeObject {
+      /** The day of registration, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /** The month of registration, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The four-digit year of registration. */
+      @SerializedName("year")
+      Long year;
     }
 
     /**
@@ -1999,8 +2027,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
        * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_failed_tax_id_not_issued}, {@code
+       * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
+       * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
        * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code
@@ -2200,8 +2229,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
        * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
-       * verification_failed_tax_id_not_issued}, {@code verification_missing_directors}, {@code
-       * verification_missing_executives}, {@code verification_missing_owners}, {@code
+       * verification_failed_tax_id_not_issued}, {@code
+       * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
+       * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
        * verification_rejected_ownership_exemption_reason}, {@code
        * verification_requires_additional_memorandum_of_associations}, {@code
        * verification_requires_additional_proof_of_registration}, or {@code

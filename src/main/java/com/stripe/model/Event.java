@@ -62,6 +62,9 @@ public class Event extends ApiResource implements HasId {
   @SerializedName("api_version")
   String apiVersion;
 
+  @SerializedName("context")
+  String context;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
