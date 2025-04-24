@@ -16556,6 +16556,9 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       public enum Structure implements ApiRequestParams.EnumParam {
+        @SerializedName("cooperative")
+        COOPERATIVE("cooperative"),
+
         @SerializedName("free_zone_establishment")
         FREE_ZONE_ESTABLISHMENT("free_zone_establishment"),
 
@@ -16568,11 +16571,17 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("government_instrumentality")
         GOVERNMENT_INSTRUMENTALITY("government_instrumentality"),
 
+        @SerializedName("incorporated_association")
+        INCORPORATED_ASSOCIATION("incorporated_association"),
+
         @SerializedName("incorporated_non_profit")
         INCORPORATED_NON_PROFIT("incorporated_non_profit"),
 
         @SerializedName("incorporated_partnership")
         INCORPORATED_PARTNERSHIP("incorporated_partnership"),
+
+        @SerializedName("limited_liability_partnership")
+        LIMITED_LIABILITY_PARTNERSHIP("limited_liability_partnership"),
 
         @SerializedName("llc")
         LLC("llc"),
@@ -16595,6 +16604,9 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("public_corporation")
         PUBLIC_CORPORATION("public_corporation"),
 
+        @SerializedName("public_listed_corporation")
+        PUBLIC_LISTED_CORPORATION("public_listed_corporation"),
+
         @SerializedName("public_partnership")
         PUBLIC_PARTNERSHIP("public_partnership"),
 
@@ -16612,6 +16624,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
         @SerializedName("tax_exempt_government_instrumentality")
         TAX_EXEMPT_GOVERNMENT_INSTRUMENTALITY("tax_exempt_government_instrumentality"),
+
+        @SerializedName("trust")
+        TRUST("trust"),
 
         @SerializedName("unincorporated_association")
         UNINCORPORATED_ASSOCIATION("unincorporated_association"),

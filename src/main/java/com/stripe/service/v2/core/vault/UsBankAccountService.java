@@ -23,16 +23,16 @@ public final class UsBankAccountService extends ApiService {
   }
 
   /**
-   * Archive a UsBankAccount object. UsBankAccount objects will not be automatically archived by
-   * Stripe. Archived UsBankAccount objects cannot be used as outbound destinations and will not
+   * Archive a USBankAccount object. USBankAccount objects will not be automatically archived by
+   * Stripe. Archived USBankAccount objects cannot be used as outbound destinations and will not
    * appear in the outbound destination list.
    */
   public UsBankAccount archive(String id) throws StripeException, ControlledByDashboardException {
     return archive(id, (RequestOptions) null);
   }
   /**
-   * Archive a UsBankAccount object. UsBankAccount objects will not be automatically archived by
-   * Stripe. Archived UsBankAccount objects cannot be used as outbound destinations and will not
+   * Archive a USBankAccount object. USBankAccount objects will not be automatically archived by
+   * Stripe. Archived USBankAccount objects cannot be used as outbound destinations and will not
    * appear in the outbound destination list.
    */
   public UsBankAccount archive(String id, RequestOptions options)
@@ -43,13 +43,13 @@ public final class UsBankAccountService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, UsBankAccount.class);
   }
-  /** Create a UsBankAccount object. */
+  /** Create a USBankAccount object. */
   public UsBankAccount create(UsBankAccountCreateParams params)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
           QuotaExceededException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a UsBankAccount object. */
+  /** Create a USBankAccount object. */
   public UsBankAccount create(UsBankAccountCreateParams params, RequestOptions options)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
           QuotaExceededException {
@@ -63,11 +63,11 @@ public final class UsBankAccountService extends ApiService {
             options);
     return this.request(request, UsBankAccount.class);
   }
-  /** Retrieve a UsBankAccount object. */
+  /** Retrieve a USBankAccount object. */
   public UsBankAccount retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve a UsBankAccount object. */
+  /** Retrieve a USBankAccount object. */
   public UsBankAccount retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/core/vault/us_bank_accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
@@ -75,7 +75,7 @@ public final class UsBankAccountService extends ApiService {
     return this.request(request, UsBankAccount.class);
   }
   /**
-   * Update a UsBankAccount object. This is limited to supplying a previously empty routing_number
+   * Update a USBankAccount object. This is limited to supplying a previously empty routing_number
    * field.
    */
   public UsBankAccount update(String id, UsBankAccountUpdateParams params)
@@ -84,7 +84,7 @@ public final class UsBankAccountService extends ApiService {
     return update(id, params, (RequestOptions) null);
   }
   /**
-   * Update a UsBankAccount object. This is limited to supplying a previously empty routing_number
+   * Update a USBankAccount object. This is limited to supplying a previously empty routing_number
    * field.
    */
   public UsBankAccount update(String id, RequestOptions options)
@@ -93,7 +93,7 @@ public final class UsBankAccountService extends ApiService {
     return update(id, (UsBankAccountUpdateParams) null, options);
   }
   /**
-   * Update a UsBankAccount object. This is limited to supplying a previously empty routing_number
+   * Update a USBankAccount object. This is limited to supplying a previously empty routing_number
    * field.
    */
   public UsBankAccount update(String id)
@@ -102,7 +102,7 @@ public final class UsBankAccountService extends ApiService {
     return update(id, (UsBankAccountUpdateParams) null, (RequestOptions) null);
   }
   /**
-   * Update a UsBankAccount object. This is limited to supplying a previously empty routing_number
+   * Update a USBankAccount object. This is limited to supplying a previously empty routing_number
    * field.
    */
   public UsBankAccount update(String id, UsBankAccountUpdateParams params, RequestOptions options)

@@ -16150,7 +16150,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventListParams params =
-        com.stripe.param.v2.core.EventListParams.builder().build();
+        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
 
     com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
         client.v2().core().events().list(params);
@@ -16513,7 +16513,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAddress.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"credentials\":null,\"currency\":\"stn\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_address\",\"settlement_currency\":null,\"status\":\"failed\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"credentials\":null,\"currency\":\"stn\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_address\",\"status\":\"failed\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams params =
@@ -16545,7 +16545,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.FinancialAddress>>() {}.getType(),
-        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"credentials\":null,\"currency\":\"stn\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_address\",\"settlement_currency\":null,\"status\":\"failed\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"credentials\":null,\"currency\":\"stn\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_address\",\"status\":\"failed\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAddressListParams params =
@@ -16571,7 +16571,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAddress.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"credentials\":null,\"currency\":\"stn\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_address\",\"settlement_currency\":null,\"status\":\"failed\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"credentials\":null,\"currency\":\"stn\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_address\",\"status\":\"failed\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAddressRetrieveParams params =
@@ -17226,7 +17226,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.ReceivedCredit>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"receipt_url\":null,\"status\":\"returned\",\"status_details\":null,\"status_transitions\":null,\"type\":\"crypto_wallet_transfer\",\"livemode\":true,\"balance_transfer\":null,\"bank_transfer\":null,\"crypto_wallet_transfer\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"receipt_url\":null,\"status\":\"returned\",\"status_details\":null,\"status_transitions\":null,\"type\":\"card_spend\",\"livemode\":true,\"balance_transfer\":null,\"bank_transfer\":null,\"card_spend\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.ReceivedCreditListParams params =
@@ -17252,7 +17252,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.ReceivedCredit.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"receipt_url\":null,\"status\":\"returned\",\"status_details\":null,\"status_transitions\":null,\"type\":\"crypto_wallet_transfer\",\"livemode\":true,\"balance_transfer\":null,\"bank_transfer\":null,\"crypto_wallet_transfer\":null}");
+        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"receipt_url\":null,\"status\":\"returned\",\"status_details\":null,\"status_transitions\":null,\"type\":\"card_spend\",\"livemode\":true,\"balance_transfer\":null,\"bank_transfer\":null,\"card_spend\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.ReceivedCredit receivedCredit =
@@ -17277,7 +17277,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.ReceivedDebit>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"receipt_url\":null,\"status\":\"canceled\",\"status_details\":null,\"status_transitions\":null,\"type\":\"bank_transfer\",\"livemode\":true,\"bank_transfer\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"receipt_url\":null,\"status\":\"canceled\",\"status_details\":null,\"status_transitions\":null,\"type\":\"bank_transfer\",\"livemode\":true,\"bank_transfer\":null,\"card_spend\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.ReceivedDebitListParams params =
@@ -17303,7 +17303,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.ReceivedDebit.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"receipt_url\":null,\"status\":\"canceled\",\"status_details\":null,\"status_transitions\":null,\"type\":\"bank_transfer\",\"livemode\":true,\"bank_transfer\":null}");
+        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":null,\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"receipt_url\":null,\"status\":\"canceled\",\"status_details\":null,\"status_transitions\":null,\"type\":\"bank_transfer\",\"livemode\":true,\"bank_transfer\":null,\"card_spend\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.ReceivedDebit receivedDebit =

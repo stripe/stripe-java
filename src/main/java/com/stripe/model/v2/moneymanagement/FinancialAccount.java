@@ -103,7 +103,7 @@ public class FinancialAccount extends StripeObject implements HasId {
    * Closed Enum. An enum representing the status of the FinancialAccount. This indicates whether or
    * not the FinancialAccount can be used for any money movement flows.
    *
-   * <p>One of {@code closed}, {@code open}, or {@code pending}.
+   * <p>One of {@code closed}, or {@code open}.
    */
   @SerializedName("status")
   String status;

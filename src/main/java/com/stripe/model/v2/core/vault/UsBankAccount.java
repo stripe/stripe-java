@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class UsBankAccount extends StripeObject implements HasId {
-  /** Whether this UsBankAccount object was archived. */
+  /** Whether this USBankAccount object was archived. */
   @SerializedName("archived")
   Boolean archived;
 
@@ -40,7 +40,7 @@ public class UsBankAccount extends StripeObject implements HasId {
   @SerializedName("fedwire_routing_number")
   String fedwireRoutingNumber;
 
-  /** The ID of the UsBankAccount object. */
+  /** The ID of the USBankAccount object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;

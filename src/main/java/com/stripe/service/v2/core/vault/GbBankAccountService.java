@@ -46,14 +46,14 @@ public final class GbBankAccountService extends ApiService {
     return this.request(request, GbBankAccount.class);
   }
   /**
-   * Archive a GbBankAccount object. Archived GbBankAccount objects cannot be used as outbound
+   * Archive a GBBankAccount object. Archived GBBankAccount objects cannot be used as outbound
    * destinations and will not appear in the outbound destination list.
    */
   public GbBankAccount archive(String id) throws StripeException {
     return archive(id, (RequestOptions) null);
   }
   /**
-   * Archive a GbBankAccount object. Archived GbBankAccount objects cannot be used as outbound
+   * Archive a GBBankAccount object. Archived GBBankAccount objects cannot be used as outbound
    * destinations and will not appear in the outbound destination list.
    */
   public GbBankAccount archive(String id, RequestOptions options) throws StripeException {
