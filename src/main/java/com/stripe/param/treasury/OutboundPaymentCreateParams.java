@@ -543,26 +543,17 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       Object phone;
 
-      /**
-       * Taxpayer identification number. Used only for transactions between LATAM buyers and
-       * non-LATAM sellers.
-       */
-      @SerializedName("tax_id")
-      String taxId;
-
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
           Object name,
-          Object phone,
-          String taxId) {
+          Object phone) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
         this.name = name;
         this.phone = phone;
-        this.taxId = taxId;
       }
 
       public static Builder builder() {
@@ -580,12 +571,10 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
         private Object phone;
 
-        private String taxId;
-
         /** Finalize and obtain parameter instance from this builder. */
         public OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails build() {
           return new OutboundPaymentCreateParams.DestinationPaymentMethodData.BillingDetails(
-              this.address, this.email, this.extraParams, this.name, this.phone, this.taxId);
+              this.address, this.email, this.extraParams, this.name, this.phone);
         }
 
         /** Billing address. */
@@ -665,15 +654,6 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         /** Billing phone number (including extension). */
         public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
-          return this;
-        }
-
-        /**
-         * Taxpayer identification number. Used only for transactions between LATAM buyers and
-         * non-LATAM sellers.
-         */
-        public Builder setTaxId(String taxId) {
-          this.taxId = taxId;
           return this;
         }
       }
