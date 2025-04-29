@@ -12431,11 +12431,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     public enum BillingMode implements ApiRequestParams.EnumParam {
-      @SerializedName("credits_attributed_to_debits")
-      CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+      @SerializedName("classic")
+      CLASSIC("classic"),
 
-      @SerializedName("legacy_prorations")
-      LEGACY_PRORATIONS("legacy_prorations");
+      @SerializedName("flexible")
+      FLEXIBLE("flexible");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -14112,11 +14112,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     public enum BillingMode implements ApiRequestParams.EnumParam {
-      @SerializedName("credits_attributed_to_debits")
-      CREDITS_ATTRIBUTED_TO_DEBITS("credits_attributed_to_debits"),
+      @SerializedName("classic")
+      CLASSIC("classic"),
 
-      @SerializedName("legacy_prorations")
-      LEGACY_PRORATIONS("legacy_prorations");
+      @SerializedName("flexible")
+      FLEXIBLE("flexible");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

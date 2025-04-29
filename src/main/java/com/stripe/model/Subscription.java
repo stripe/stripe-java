@@ -68,7 +68,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   /**
    * Configure billing_mode in each subscription to opt in improved credit proration behavior.
    *
-   * <p>One of {@code credits_attributed_to_debits}, or {@code legacy_prorations}.
+   * <p>One of {@code classic}, or {@code flexible}.
    */
   @SerializedName("billing_mode")
   String billingMode;
