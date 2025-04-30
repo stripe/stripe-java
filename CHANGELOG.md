@@ -1,5 +1,14 @@
 # Changelog
 
+## 29.2.0-beta.1 - 2025-04-30
+* [#1988](https://github.com/stripe/stripe-java/pull/1988) Update generated code for beta
+  This release changes the pinned API version to `2025-04-30.preview`.
+
+  * Add support for `billingMode` on `InvoiceCreatePreviewParams.schedule_details`, `InvoiceCreatePreviewParams.subscription_details`, `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, `QuotePreviewSubscriptionSchedule`, `SubscriptionCreateParams`, `SubscriptionScheduleCreateParams`, `SubscriptionSchedule`, `Subscription`, and `checkout.SessionCreateParams.subscription_data`
+  * Add support for `accountNumber` on `ConfirmationToken.payment_method_preview.acss_debit` and `PaymentMethod.acss_debit`
+  * Add support for new values `aw_tin`, `az_tin`, `bd_bin`, `bf_ifu`, `bj_ifu`, `cm_niu`, `cv_nif`, `et_tin`, `kg_tin`, and `la_tin` on enums `OrderCreateParams.tax_details.tax_ids[].type` and `OrderUpdateParams.tax_details.tax_ids[].type`
+  * Add support for new value `balance_settings.updated` on enums `WebhookEndpointUpdateParams.enabledEvents`
+
 ## 29.1.0-beta.3 - 2025-04-17
 * [#1985](https://github.com/stripe/stripe-java/pull/1985) Update generated code for beta
   * Add support for new resources `FxQuote` and `PaymentIntentAmountDetailsLineItem`
