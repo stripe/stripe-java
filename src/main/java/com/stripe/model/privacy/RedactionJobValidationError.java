@@ -10,7 +10,6 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.privacy.RedactionJobValidationErrorListParams;
-import com.stripe.param.privacy.RedactionJobValidationErrorRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -82,52 +81,5 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, RedactionJobValidationErrorCollection.class);
-  }
-
-  /** Retrieve validation error method. */
-  public static RedactionJobValidationError retrieve(String job, String error)
-      throws StripeException {
-    return retrieve(job, error, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieve validation error method. */
-  public static RedactionJobValidationError retrieve(
-      String job, String error, RequestOptions options) throws StripeException {
-    return retrieve(job, error, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieve validation error method. */
-  public static RedactionJobValidationError retrieve(
-      String job, String error, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/privacy/redaction_jobs/%s/validation_errors/%s",
-            ApiResource.urlEncodeId(job), ApiResource.urlEncodeId(error));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getGlobalResponseGetter().request(request, RedactionJobValidationError.class);
-  }
-
-  /** Retrieve validation error method. */
-  public static RedactionJobValidationError retrieve(
-      String job,
-      String error,
-      RedactionJobValidationErrorRetrieveParams params,
-      RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/privacy/redaction_jobs/%s/validation_errors/%s",
-            ApiResource.urlEncodeId(job), ApiResource.urlEncodeId(error));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getGlobalResponseGetter().request(request, RedactionJobValidationError.class);
   }
 }

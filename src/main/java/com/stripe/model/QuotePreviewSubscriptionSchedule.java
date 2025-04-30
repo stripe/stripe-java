@@ -49,7 +49,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
    * href="https://stripe.com/api/subscriptions/create#create_subscription-billing_mode">billing
    * mode</a> that will be used to process all future operations for the subscription schedule.
    *
-   * <p>One of {@code credits_attributed_to_debits}, or {@code legacy_prorations}.
+   * <p>One of {@code classic}, or {@code flexible}.
    */
   @SerializedName("billing_mode")
   String billingMode;
