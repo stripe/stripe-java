@@ -13,7 +13,6 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.privacy.RedactionJobValidationErrorListParams;
-import com.stripe.param.privacy.RedactionJobValidationErrorRetrieveParams;
 
 public final class RedactionJobValidationErrorService extends ApiService {
   public RedactionJobValidationErrorService(StripeResponseGetter responseGetter) {
@@ -50,41 +49,5 @@ public final class RedactionJobValidationErrorService extends ApiService {
             options);
     return this.request(
         request, new TypeToken<StripeCollection<RedactionJobValidationError>>() {}.getType());
-  }
-  /** Retrieve validation error method. */
-  public RedactionJobValidationError retrieve(
-      String job, String error, RedactionJobValidationErrorRetrieveParams params)
-      throws StripeException {
-    return retrieve(job, error, params, (RequestOptions) null);
-  }
-  /** Retrieve validation error method. */
-  public RedactionJobValidationError retrieve(String job, String error, RequestOptions options)
-      throws StripeException {
-    return retrieve(job, error, (RedactionJobValidationErrorRetrieveParams) null, options);
-  }
-  /** Retrieve validation error method. */
-  public RedactionJobValidationError retrieve(String job, String error) throws StripeException {
-    return retrieve(
-        job, error, (RedactionJobValidationErrorRetrieveParams) null, (RequestOptions) null);
-  }
-  /** Retrieve validation error method. */
-  public RedactionJobValidationError retrieve(
-      String job,
-      String error,
-      RedactionJobValidationErrorRetrieveParams params,
-      RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/privacy/redaction_jobs/%s/validation_errors/%s",
-            ApiResource.urlEncodeId(job), ApiResource.urlEncodeId(error));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, RedactionJobValidationError.class);
   }
 }

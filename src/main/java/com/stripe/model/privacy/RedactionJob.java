@@ -4,6 +4,7 @@ package com.stripe.model.privacy;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -17,6 +18,7 @@ import com.stripe.param.privacy.RedactionJobRetrieveParams;
 import com.stripe.param.privacy.RedactionJobRunParams;
 import com.stripe.param.privacy.RedactionJobUpdateParams;
 import com.stripe.param.privacy.RedactionJobValidateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,7 +51,7 @@ public class RedactionJob extends ApiResource implements HasId {
 
   /** The objects at the root level that are subject to redaction. */
   @SerializedName("objects")
-  RedactionJobRootObjects objects;
+  Objects objects;
 
   /**
    * The status field represents the current state of the redaction job. It can take on any of the
@@ -346,6 +348,42 @@ public class RedactionJob extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, RedactionJob.class);
+  }
+
+  /**
+   * The objects to redact, grouped by type. All redactable objects associated with these objects
+   * will be redacted as well.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Objects extends StripeObject {
+    @SerializedName("charges")
+    List<String> charges;
+
+    @SerializedName("checkout_sessions")
+    List<String> checkoutSessions;
+
+    @SerializedName("customers")
+    List<String> customers;
+
+    @SerializedName("identity_verification_sessions")
+    List<String> identityVerificationSessions;
+
+    @SerializedName("invoices")
+    List<String> invoices;
+
+    @SerializedName("issuing_cardholders")
+    List<String> issuingCardholders;
+
+    @SerializedName("payment_intents")
+    List<String> paymentIntents;
+
+    @SerializedName("radar_value_list_items")
+    List<String> radarValueListItems;
+
+    @SerializedName("setup_intents")
+    List<String> setupIntents;
   }
 
   @Override
