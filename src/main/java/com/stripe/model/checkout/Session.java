@@ -810,13 +810,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   @Override
   public Session update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   @Override
   public Session update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
@@ -825,12 +835,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(SessionUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(SessionUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);

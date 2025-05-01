@@ -50,8 +50,7 @@ public class StripeError extends StripeObject {
    * financial_connections_no_successful_transaction_refresh}, {@code forwarding_api_inactive},
    * {@code forwarding_api_invalid_parameter}, {@code forwarding_api_retryable_upstream_error},
    * {@code forwarding_api_upstream_connection_error}, {@code
-   * forwarding_api_upstream_connection_timeout}, {@code gift_card_balance_insufficient}, {@code
-   * gift_card_code_exists}, {@code gift_card_inactive}, {@code idempotency_key_in_use}, {@code
+   * forwarding_api_upstream_connection_timeout}, {@code idempotency_key_in_use}, {@code
    * incorrect_address}, {@code incorrect_cvc}, {@code incorrect_number}, {@code incorrect_zip},
    * {@code instant_payouts_config_disabled}, {@code instant_payouts_currency_disabled}, {@code
    * instant_payouts_limit_exceeded}, {@code instant_payouts_unsupported}, {@code

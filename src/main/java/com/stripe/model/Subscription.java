@@ -66,7 +66,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
   /**
-   * Configure billing_mode in each subscription to opt in improved credit proration behavior.
+   * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
    *
    * <p>One of {@code classic}, or {@code flexible}.
    */

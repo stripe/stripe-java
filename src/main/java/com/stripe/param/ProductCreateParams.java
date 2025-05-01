@@ -81,10 +81,6 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
-  /** Provisioning configuration for this product. */
-  @SerializedName("provisioning")
-  Provisioning provisioning;
-
   /** Whether this product is shipped (i.e., physical goods). */
   @SerializedName("shippable")
   Boolean shippable;
@@ -138,7 +134,6 @@ public class ProductCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String name,
       PackageDimensions packageDimensions,
-      Provisioning provisioning,
       Boolean shippable,
       String statementDescriptor,
       String taxCode,
@@ -156,7 +151,6 @@ public class ProductCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.name = name;
     this.packageDimensions = packageDimensions;
-    this.provisioning = provisioning;
     this.shippable = shippable;
     this.statementDescriptor = statementDescriptor;
     this.taxCode = taxCode;
@@ -192,8 +186,6 @@ public class ProductCreateParams extends ApiRequestParams {
 
     private PackageDimensions packageDimensions;
 
-    private Provisioning provisioning;
-
     private Boolean shippable;
 
     private String statementDescriptor;
@@ -220,7 +212,6 @@ public class ProductCreateParams extends ApiRequestParams {
           this.metadata,
           this.name,
           this.packageDimensions,
-          this.provisioning,
           this.shippable,
           this.statementDescriptor,
           this.taxCode,
@@ -402,12 +393,6 @@ public class ProductCreateParams extends ApiRequestParams {
     /** The dimensions of this product for shipping purposes. */
     public Builder setPackageDimensions(ProductCreateParams.PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
-      return this;
-    }
-
-    /** Provisioning configuration for this product. */
-    public Builder setProvisioning(ProductCreateParams.Provisioning provisioning) {
-      this.provisioning = provisioning;
       return this;
     }
 
@@ -1722,298 +1707,6 @@ public class ProductCreateParams extends ApiRequestParams {
       public Builder setWidth(BigDecimal width) {
         this.width = width;
         return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Provisioning {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    @SerializedName("gift_card")
-    GiftCard giftCard;
-
-    /**
-     * <strong>Required.</strong> The type of provisioning, only {@code gift_card} currently
-     * supported.
-     */
-    @SerializedName("type")
-    Type type;
-
-    private Provisioning(Map<String, Object> extraParams, GiftCard giftCard, Type type) {
-      this.extraParams = extraParams;
-      this.giftCard = giftCard;
-      this.type = type;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private GiftCard giftCard;
-
-      private Type type;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public ProductCreateParams.Provisioning build() {
-        return new ProductCreateParams.Provisioning(this.extraParams, this.giftCard, this.type);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * ProductCreateParams.Provisioning#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link ProductCreateParams.Provisioning#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      public Builder setGiftCard(ProductCreateParams.Provisioning.GiftCard giftCard) {
-        this.giftCard = giftCard;
-        return this;
-      }
-
-      /**
-       * <strong>Required.</strong> The type of provisioning, only {@code gift_card} currently
-       * supported.
-       */
-      public Builder setType(ProductCreateParams.Provisioning.Type type) {
-        this.type = type;
-        return this;
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class GiftCard {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      @SerializedName("fixed_amount")
-      FixedAmount fixedAmount;
-
-      /**
-       * <strong>Required.</strong> The specific type of gift_card provisioning, only {@code
-       * fixed_amount} currently supported.
-       */
-      @SerializedName("type")
-      Type type;
-
-      private GiftCard(Map<String, Object> extraParams, FixedAmount fixedAmount, Type type) {
-        this.extraParams = extraParams;
-        this.fixedAmount = fixedAmount;
-        this.type = type;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private FixedAmount fixedAmount;
-
-        private Type type;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public ProductCreateParams.Provisioning.GiftCard build() {
-          return new ProductCreateParams.Provisioning.GiftCard(
-              this.extraParams, this.fixedAmount, this.type);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ProductCreateParams.Provisioning.GiftCard#extraParams} for the field
-         * documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link ProductCreateParams.Provisioning.GiftCard#extraParams} for the field
-         * documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        public Builder setFixedAmount(
-            ProductCreateParams.Provisioning.GiftCard.FixedAmount fixedAmount) {
-          this.fixedAmount = fixedAmount;
-          return this;
-        }
-
-        /**
-         * <strong>Required.</strong> The specific type of gift_card provisioning, only {@code
-         * fixed_amount} currently supported.
-         */
-        public Builder setType(ProductCreateParams.Provisioning.GiftCard.Type type) {
-          this.type = type;
-          return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class FixedAmount {
-        /**
-         * <strong>Required.</strong> The initial amount with which the provisioned gift card will
-         * be created.
-         */
-        @SerializedName("amount")
-        Long amount;
-
-        /** <strong>Required.</strong> */
-        @SerializedName("currency")
-        String currency;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        private FixedAmount(Long amount, String currency, Map<String, Object> extraParams) {
-          this.amount = amount;
-          this.currency = currency;
-          this.extraParams = extraParams;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Long amount;
-
-          private String currency;
-
-          private Map<String, Object> extraParams;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public ProductCreateParams.Provisioning.GiftCard.FixedAmount build() {
-            return new ProductCreateParams.Provisioning.GiftCard.FixedAmount(
-                this.amount, this.currency, this.extraParams);
-          }
-
-          /**
-           * <strong>Required.</strong> The initial amount with which the provisioned gift card will
-           * be created.
-           */
-          public Builder setAmount(Long amount) {
-            this.amount = amount;
-            return this;
-          }
-
-          /** <strong>Required.</strong> */
-          public Builder setCurrency(String currency) {
-            this.currency = currency;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link ProductCreateParams.Provisioning.GiftCard.FixedAmount#extraParams} for
-           * the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link ProductCreateParams.Provisioning.GiftCard.FixedAmount#extraParams} for
-           * the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-        }
-      }
-
-      public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("fixed_amount")
-        FIXED_AMOUNT("fixed_amount");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        Type(String value) {
-          this.value = value;
-        }
-      }
-    }
-
-    public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("gift_card")
-      GIFT_CARD("gift_card");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Type(String value) {
-        this.value = value;
       }
     }
   }

@@ -3492,11 +3492,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_behavior")
     BillingBehavior billingBehavior;
 
-    /**
-     * Configure billing_mode to opt in improved credit proration behavior.When the schedule creates
-     * a subscription, the subscription's {@code billing_mode} will be set to the same value as the
-     * schedule's {@code billing_mode}.
-     */
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
@@ -3630,11 +3626,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configure billing_mode to opt in improved credit proration behavior.When the schedule
-       * creates a subscription, the subscription's {@code billing_mode} will be set to the same
-       * value as the schedule's {@code billing_mode}.
-       */
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
       public Builder setBillingMode(
           InvoiceCreatePreviewParams.ScheduleDetails.BillingMode billingMode) {
         this.billingMode = billingMode;
@@ -12492,7 +12484,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     Object billingCycleAnchor;
 
-    /** Configure billing_mode in each subscription to opt in improved credit proration behavior. */
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
@@ -12690,9 +12682,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configure billing_mode in each subscription to opt in improved credit proration behavior.
-       */
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
       public Builder setBillingMode(
           InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode billingMode) {
         this.billingMode = billingMode;

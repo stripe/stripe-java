@@ -116,10 +116,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
-  /** Provisioning configuration for this product. */
-  @SerializedName("provisioning")
-  Provisioning provisioning;
-
   /** Whether this product is shipped (i.e., physical goods). */
   @SerializedName("shippable")
   Boolean shippable;
@@ -514,73 +510,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
     BigDecimal width;
   }
 
-  /**
-   * For more details about Provisioning, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Provisioning extends StripeObject {
-    @SerializedName("gift_card")
-    GiftCard giftCard;
-
-    /**
-     * The type of provisioning, only {@code gift_card} currently supported.
-     *
-     * <p>Equal to {@code gift_card}.
-     */
-    @SerializedName("type")
-    String type;
-
-    /**
-     * For more details about GiftCard, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class GiftCard extends StripeObject {
-      @SerializedName("fixed_amount")
-      FixedAmount fixedAmount;
-
-      /**
-       * The specific type of gift_card provisioning, only {@code fixed_amount} currently supported.
-       *
-       * <p>Equal to {@code fixed_amount}.
-       */
-      @SerializedName("type")
-      String type;
-
-      /**
-       * For more details about FixedAmount, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class FixedAmount extends StripeObject {
-        /** The initial amount with which the provisioned gift card will be created. */
-        @SerializedName("amount")
-        Long amount;
-
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-      }
-    }
-  }
-
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(defaultPrice, responseGetter);
     trySetResponseGetter(packageDimensions, responseGetter);
-    trySetResponseGetter(provisioning, responseGetter);
     trySetResponseGetter(taxCode, responseGetter);
   }
 }

@@ -211,7 +211,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
    * with {@code confirm=true}, {@code source} automatically populates with {@code
    * customer.default_source} to improve migration for users of the Charges API. We recommend that
-   * you explicitly provide the {@code payment_method} moving forward.
+   * you explicitly provide the {@code payment_method} moving forward. If the payment method is
+   * attached to a Customer, you must also provide the ID of that Customer as the <a
+   * href="https://stripe.com/docs/api#create_payment_intent-customer">customer</a> parameter of
+   * this PaymentIntent. end
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -870,7 +873,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
      * with {@code confirm=true}, {@code source} automatically populates with {@code
      * customer.default_source} to improve migration for users of the Charges API. We recommend that
-     * you explicitly provide the {@code payment_method} moving forward.
+     * you explicitly provide the {@code payment_method} moving forward. If the payment method is
+     * attached to a Customer, you must also provide the ID of that Customer as the <a
+     * href="https://stripe.com/docs/api#create_payment_intent-customer">customer</a> parameter of
+     * this PaymentIntent. end
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -12407,7 +12413,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object giropay;
 
     /**
-     * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the GoPay
+     * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the Gopay
      * payment method options.
      */
     @SerializedName("gopay")
@@ -13335,7 +13341,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the GoPay
+       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the Gopay
        * payment method options.
        */
       public Builder setGopay(PaymentIntentCreateParams.PaymentMethodOptions.Gopay gopay) {
@@ -13344,7 +13350,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the GoPay
+       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the Gopay
        * payment method options.
        */
       public Builder setGopay(EmptyParam gopay) {

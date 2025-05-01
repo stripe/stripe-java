@@ -249,10 +249,6 @@ public class StripeClient {
     return new com.stripe.service.FxQuoteService(this.getResponseGetter());
   }
 
-  public com.stripe.service.GiftCardsService giftCards() {
-    return new com.stripe.service.GiftCardsService(this.getResponseGetter());
-  }
-
   public com.stripe.service.IdentityService identity() {
     return new com.stripe.service.IdentityService(this.getResponseGetter());
   }
