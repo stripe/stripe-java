@@ -339,9 +339,9 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   FromInvoice fromInvoice;
 
   /**
-   * Unique identifier for the object. This property is always present unless the invoice is an
-   * upcoming invoice. See <a href="https://stripe.com/docs/api/invoices/upcoming">Retrieve an
-   * upcoming invoice</a> for more details.
+   * Unique identifier for the object. For preview invoices created using the <a
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint, this id
+   * will be prefixed with {@code upcoming_in}.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

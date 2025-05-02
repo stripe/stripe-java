@@ -376,9 +376,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   String hostedInvoiceUrl;
 
   /**
-   * Unique identifier for the object. This property is always present unless the invoice is an
-   * upcoming invoice. See <a href="https://stripe.com/docs/api/invoices/upcoming">Retrieve an
-   * upcoming invoice</a> for more details.
+   * Unique identifier for the object. For preview invoices created using the <a
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint, this id
+   * will be prefixed with {@code upcoming_in}.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -1117,18 +1117,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update. The
+   * recommended way to get only the prorations being previewed is to consider only proration line
+   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
+   * value passed in the request.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -1144,18 +1145,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update. The
+   * recommended way to get only the prorations being previewed is to consider only proration line
+   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
+   * value passed in the request.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -1171,18 +1173,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update. The
+   * recommended way to get only the prorations being previewed is to consider only proration line
+   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
+   * value passed in the request.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -1198,18 +1201,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update. The
+   * recommended way to get only the prorations being previewed is to consider only proration line
+   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
+   * value passed in the request.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -1229,18 +1233,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update. The
+   * recommended way to get only the prorations being previewed is to consider only proration line
+   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
+   * value passed in the request.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -1256,18 +1261,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update. The
+   * recommended way to get only the prorations being previewed is to consider only proration line
+   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
+   * value passed in the request.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a

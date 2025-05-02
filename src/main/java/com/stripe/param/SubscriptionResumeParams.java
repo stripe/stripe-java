@@ -45,9 +45,9 @@ public class SubscriptionResumeParams extends ApiRequestParams {
   ProrationBehavior prorationBehavior;
 
   /**
-   * If set, the proration will be calculated as though the subscription was resumed at the given
-   * time. This can be used to apply exactly the same proration that was previewed with <a
-   * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
+   * If set, prorations will be calculated as though the subscription was resumed at the given time.
+   * This can be used to apply exactly the same prorations that were previewed with the <a
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
    */
   @SerializedName("proration_date")
   Long prorationDate;
@@ -167,9 +167,9 @@ public class SubscriptionResumeParams extends ApiRequestParams {
     }
 
     /**
-     * If set, the proration will be calculated as though the subscription was resumed at the given
-     * time. This can be used to apply exactly the same proration that was previewed with <a
-     * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
+     * If set, prorations will be calculated as though the subscription was resumed at the given
+     * time. This can be used to apply exactly the same prorations that were previewed with the <a
+     * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
      */
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;
