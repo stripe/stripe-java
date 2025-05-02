@@ -40,6 +40,14 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("available_on")
   Long availableOn;
 
+  /**
+   * The balance that this transaction impacts.
+   *
+   * <p>One of {@code issuing}, {@code payments}, or {@code refund_and_dispute_prefunding}.
+   */
+  @SerializedName("balance_type")
+  String balanceType;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
