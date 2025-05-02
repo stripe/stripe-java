@@ -3248,6 +3248,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("samsung_pay")
     SamsungPay samsungPay;
 
+    @SerializedName("satispay")
+    Satispay satispay;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -5532,6 +5535,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SamsungPay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
+     * For more details about Satispay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay extends StripeObject {
       /**
        * Controls when the funds will be captured from the customer's account.
        *
