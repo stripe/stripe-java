@@ -38,6 +38,10 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * The new financial account ID the card will be associated with. This field allows a card to be
+   * reassigned to a different financial account.
+   */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -253,6 +257,10 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The new financial account ID the card will be associated with. This field allows a card to be
+     * reassigned to a different financial account.
+     */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
       return this;
