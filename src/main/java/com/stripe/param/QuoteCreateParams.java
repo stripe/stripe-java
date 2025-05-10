@@ -6477,11 +6477,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     ApiRequestParams.EnumParam billingCycleAnchor;
 
-    /**
-     * Configure billing_mode to opt in improved credit proration behavior.Once a quote that creates
-     * a subscription or subscription schedule is accepted,all future operations on the subscription
-     * or subscription schedule will be processed based on this billing_mode.
-     */
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
@@ -6686,11 +6682,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configure billing_mode to opt in improved credit proration behavior.Once a quote that
-       * creates a subscription or subscription schedule is accepted,all future operations on the
-       * subscription or subscription schedule will be processed based on this billing_mode.
-       */
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
       public Builder setBillingMode(QuoteCreateParams.SubscriptionData.BillingMode billingMode) {
         this.billingMode = billingMode;
         return this;

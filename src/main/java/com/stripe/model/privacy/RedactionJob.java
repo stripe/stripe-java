@@ -42,6 +42,13 @@ public class RedactionJob extends ApiResource implements HasId {
   String id;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code privacy.redaction_job}.
@@ -56,6 +63,9 @@ public class RedactionJob extends ApiResource implements HasId {
   /**
    * The status field represents the current state of the redaction job. It can take on any of the
    * following values: VALIDATING, READY, REDACTING, SUCCEEDED, CANCELED, FAILED.
+   *
+   * <p>One of {@code canceled}, {@code canceling}, {@code created}, {@code failed}, {@code ready},
+   * {@code redacting}, {@code succeeded}, or {@code validating}.
    */
   @SerializedName("status")
   String status;
@@ -65,6 +75,8 @@ public class RedactionJob extends ApiResource implements HasId {
    * are redactable in the 1st traversal, otherwise error. If &quot;fix&quot;, where possible, we
    * will auto-fix any validation errors (e.g. by auto-transitioning objects to a terminal state,
    * etc.) in the 2nd traversal before redacting
+   *
+   * <p>One of {@code error}, or {@code fix}.
    */
   @SerializedName("validation_behavior")
   String validationBehavior;

@@ -45,7 +45,8 @@ public class SessionUpdateParams extends ApiRequestParams {
    * <p>To update an existing line item, specify its {@code id} along with the new values of the
    * fields to update.
    *
-   * <p>To add a new line item, specify a {@code price} and {@code quantity}.
+   * <p>To add a new line item, specify one of {@code price} or {@code price_data} and {@code
+   * quantity}.
    *
    * <p>To remove an existing line item, omit the line item's ID from the retransmitted array.
    *
@@ -696,7 +697,10 @@ public class SessionUpdateParams extends ApiRequestParams {
     @SerializedName("price_data")
     PriceData priceData;
 
-    /** The quantity of the line item being purchased. */
+    /**
+     * The quantity of the line item being purchased. Quantity should not be defined when {@code
+     * recurring.usage_type=metered}.
+     */
     @SerializedName("quantity")
     Object quantity;
 
@@ -886,13 +890,19 @@ public class SessionUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The quantity of the line item being purchased. */
+      /**
+       * The quantity of the line item being purchased. Quantity should not be defined when {@code
+       * recurring.usage_type=metered}.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
       }
 
-      /** The quantity of the line item being purchased. */
+      /**
+       * The quantity of the line item being purchased. Quantity should not be defined when {@code
+       * recurring.usage_type=metered}.
+       */
       public Builder setQuantity(EmptyParam quantity) {
         this.quantity = quantity;
         return this;

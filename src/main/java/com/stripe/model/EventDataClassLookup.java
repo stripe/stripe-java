@@ -112,7 +112,6 @@ public final class EventDataClassLookup {
         com.stripe.model.billing.CreditBalanceTransaction.class);
     classLookup.put("billing.credit_grant", com.stripe.model.billing.CreditGrant.class);
     classLookup.put("billing.meter", com.stripe.model.billing.Meter.class);
-    classLookup.put("billing.meter_error_report", com.stripe.model.billing.MeterErrorReport.class);
     classLookup.put("billing.meter_event", com.stripe.model.billing.MeterEvent.class);
     classLookup.put(
         "billing.meter_event_adjustment", com.stripe.model.billing.MeterEventAdjustment.class);
@@ -162,9 +161,6 @@ public final class EventDataClassLookup {
         com.stripe.model.financialconnections.Transaction.class);
 
     classLookup.put("forwarding.request", com.stripe.model.forwarding.Request.class);
-
-    classLookup.put("gift_cards.card", com.stripe.model.giftcards.Card.class);
-    classLookup.put("gift_cards.transaction", com.stripe.model.giftcards.Transaction.class);
 
     classLookup.put(
         "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
