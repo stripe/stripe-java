@@ -2802,9 +2802,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("delivery")
       Delivery delivery;
 
-      @SerializedName("distance")
-      Distance distance;
-
       /** The details of the drivers associated with the trip. */
       @SerializedName("drivers")
       List<PaymentIntent.PaymentDetails.CarRental.Driver> drivers;
@@ -2823,10 +2820,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Car pick-up time. Measured in seconds since the Unix epoch. */
       @SerializedName("pickup_at")
       Long pickupAt;
-
-      /** Name of the pickup location. */
-      @SerializedName("pickup_location_name")
-      String pickupLocationName;
 
       /** Rental rate. */
       @SerializedName("rate_amount")
@@ -2850,17 +2843,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("return_at")
       Long returnAt;
 
-      /** Name of the return location. */
-      @SerializedName("return_location_name")
-      String returnLocationName;
-
       /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
       @SerializedName("tax_exempt")
       Boolean taxExempt;
-
-      /** The vehicle identification number of the car. */
-      @SerializedName("vehicle_identification_number")
-      String vehicleIdentificationNumber;
 
       /**
        * For more details about Affiliate, please refer to the <a
@@ -2917,25 +2902,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
 
       /**
-       * For more details about Distance, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Distance extends StripeObject {
-        /** Distance traveled. */
-        @SerializedName("amount")
-        Long amount;
-
-        /**
-         * Unit of measurement for the distance traveled. One of {@code miles} or {@code kilometers}
-         */
-        @SerializedName("unit")
-        String unit;
-      }
-
-      /**
        * For more details about Driver, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -2943,14 +2909,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Driver extends StripeObject {
-        /** Driver's identification number. */
-        @SerializedName("driver_identification_number")
-        String driverIdentificationNumber;
-
-        /** Driver's tax number. */
-        @SerializedName("driver_tax_number")
-        String driverTaxNumber;
-
         /** Full name of the driver on the reservation. */
         @SerializedName("name")
         String name;
