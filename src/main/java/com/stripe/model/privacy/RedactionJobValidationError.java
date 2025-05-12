@@ -15,14 +15,27 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Validation errors. */
+/**
+ * The Redaction Job validation error object contains information about errors that affect the
+ * ability to redact a specific object in a redaction job.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class RedactionJobValidationError extends ApiResource implements HasId {
+  /**
+   * A code indicating the reason for the error.
+   *
+   * <p>One of {@code invalid_cascading_source}, {@code invalid_file_purpose}, {@code
+   * invalid_state}, {@code locked_by_other_job}, or {@code too_many_objects}.
+   */
   @SerializedName("code")
   String code;
 
+  /**
+   * If the error is related to a specific object, this field will include the object's identifier
+   * in {@code id} and object type in {@code object}.
+   */
   @SerializedName("erroring_object")
   Map<String, String> erroringObject;
 
@@ -31,6 +44,7 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  /** A human-readable message providing more details about the error. */
   @SerializedName("message")
   String message;
 
@@ -42,13 +56,13 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public static RedactionJobValidationErrorCollection list(String job, Map<String, Object> params)
       throws StripeException {
     return list(job, params, (RequestOptions) null);
   }
 
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public static RedactionJobValidationErrorCollection list(
       String job, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path =
@@ -59,13 +73,13 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, RedactionJobValidationErrorCollection.class);
   }
 
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public static RedactionJobValidationErrorCollection list(
       String job, RedactionJobValidationErrorListParams params) throws StripeException {
     return list(job, params, (RequestOptions) null);
   }
 
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public static RedactionJobValidationErrorCollection list(
       String job, RedactionJobValidationErrorListParams params, RequestOptions options)
       throws StripeException {

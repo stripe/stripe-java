@@ -19,21 +19,21 @@ public final class RedactionJobValidationErrorService extends ApiService {
     super(responseGetter);
   }
 
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public StripeCollection<RedactionJobValidationError> list(
       String job, RedactionJobValidationErrorListParams params) throws StripeException {
     return list(job, params, (RequestOptions) null);
   }
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public StripeCollection<RedactionJobValidationError> list(String job, RequestOptions options)
       throws StripeException {
     return list(job, (RedactionJobValidationErrorListParams) null, options);
   }
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public StripeCollection<RedactionJobValidationError> list(String job) throws StripeException {
     return list(job, (RedactionJobValidationErrorListParams) null, (RequestOptions) null);
   }
-  /** List validation errors method. */
+  /** Returns a list of validation errors for the specified redaction job. */
   public StripeCollection<RedactionJobValidationError> list(
       String job, RedactionJobValidationErrorListParams params, RequestOptions options)
       throws StripeException {
