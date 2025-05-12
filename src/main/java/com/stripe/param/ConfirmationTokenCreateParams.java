@@ -35,6 +35,10 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_data")
   PaymentMethodData paymentMethodData;
 
+  /** Payment-method-specific configuration for this ConfirmationToken. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /** Return URL used to confirm the Intent. */
   @SerializedName("return_url")
   String returnUrl;
@@ -59,6 +63,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String paymentMethod,
       PaymentMethodData paymentMethodData,
+      PaymentMethodOptions paymentMethodOptions,
       String returnUrl,
       SetupFutureUsage setupFutureUsage,
       Shipping shipping) {
@@ -66,6 +71,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.paymentMethod = paymentMethod;
     this.paymentMethodData = paymentMethodData;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.returnUrl = returnUrl;
     this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
@@ -84,6 +90,8 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
     private PaymentMethodData paymentMethodData;
 
+    private PaymentMethodOptions paymentMethodOptions;
+
     private String returnUrl;
 
     private SetupFutureUsage setupFutureUsage;
@@ -97,6 +105,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
           this.extraParams,
           this.paymentMethod,
           this.paymentMethodData,
+          this.paymentMethodOptions,
           this.returnUrl,
           this.setupFutureUsage,
           this.shipping);
@@ -164,6 +173,13 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     public Builder setPaymentMethodData(
         ConfirmationTokenCreateParams.PaymentMethodData paymentMethodData) {
       this.paymentMethodData = paymentMethodData;
+      return this;
+    }
+
+    /** Payment-method-specific configuration for this ConfirmationToken. */
+    public Builder setPaymentMethodOptions(
+        ConfirmationTokenCreateParams.PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
       return this;
     }
 
@@ -270,7 +286,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     Bancontact bancontact;
 
     /**
-     * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+     * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
      * payment method.
      */
     @SerializedName("billie")
@@ -498,7 +514,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     RadarOptions radarOptions;
 
     /**
-     * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the Revolut
+     * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the Revolut
      * Pay payment method.
      */
     @SerializedName("revolut_pay")
@@ -512,7 +528,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     SamsungPay samsungPay;
 
     /**
-     * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+     * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
      * payment method.
      */
     @SerializedName("satispay")
@@ -951,7 +967,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code billie} PaymentMethod, this hash contains details about the billie
+       * If this is a {@code billie} PaymentMethod, this hash contains details about the Billie
        * payment method.
        */
       public Builder setBillie(ConfirmationTokenCreateParams.PaymentMethodData.Billie billie) {
@@ -1286,7 +1302,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code Revolut Pay} PaymentMethod, this hash contains details about the
+       * If this is a {@code revolut_pay} PaymentMethod, this hash contains details about the
        * Revolut Pay payment method.
        */
       public Builder setRevolutPay(
@@ -1306,7 +1322,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code satispay} PaymentMethod, this hash contains details about the satispay
+       * If this is a {@code satispay} PaymentMethod, this hash contains details about the Satispay
        * payment method.
        */
       public Builder setSatispay(
@@ -2101,17 +2117,26 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       Object phone;
 
+      /**
+       * Taxpayer identification number. Used only for transactions between LATAM buyers and
+       * non-LATAM sellers.
+       */
+      @SerializedName("tax_id")
+      String taxId;
+
       private BillingDetails(
           Object address,
           Object email,
           Map<String, Object> extraParams,
           Object name,
-          Object phone) {
+          Object phone,
+          String taxId) {
         this.address = address;
         this.email = email;
         this.extraParams = extraParams;
         this.name = name;
         this.phone = phone;
+        this.taxId = taxId;
       }
 
       public static Builder builder() {
@@ -2129,10 +2154,12 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
         private Object phone;
 
+        private String taxId;
+
         /** Finalize and obtain parameter instance from this builder. */
         public ConfirmationTokenCreateParams.PaymentMethodData.BillingDetails build() {
           return new ConfirmationTokenCreateParams.PaymentMethodData.BillingDetails(
-              this.address, this.email, this.extraParams, this.name, this.phone);
+              this.address, this.email, this.extraParams, this.name, this.phone, this.taxId);
         }
 
         /** Billing address. */
@@ -2211,6 +2238,15 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         /** Billing phone number (including extension). */
         public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
+          return this;
+        }
+
+        /**
+         * Taxpayer identification number. Used only for transactions between LATAM buyers and
+         * non-LATAM sellers.
+         */
+        public Builder setTaxId(String taxId) {
+          this.taxId = taxId;
           return this;
         }
       }
@@ -5614,6 +5650,376 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
       Type(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions {
+    /** Configuration for any card payments confirmed using this ConfirmationToken. */
+    @SerializedName("card")
+    Card card;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentMethodOptions(Card card, Map<String, Object> extraParams) {
+      this.card = card;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Card card;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfirmationTokenCreateParams.PaymentMethodOptions build() {
+        return new ConfirmationTokenCreateParams.PaymentMethodOptions(this.card, this.extraParams);
+      }
+
+      /** Configuration for any card payments confirmed using this ConfirmationToken. */
+      public Builder setCard(ConfirmationTokenCreateParams.PaymentMethodOptions.Card card) {
+        this.card = card;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfirmationTokenCreateParams.PaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfirmationTokenCreateParams.PaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Installment configuration for payments confirmed using this ConfirmationToken. */
+      @SerializedName("installments")
+      Installments installments;
+
+      private Card(Map<String, Object> extraParams, Installments installments) {
+        this.extraParams = extraParams;
+        this.installments = installments;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Installments installments;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfirmationTokenCreateParams.PaymentMethodOptions.Card build() {
+          return new ConfirmationTokenCreateParams.PaymentMethodOptions.Card(
+              this.extraParams, this.installments);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodOptions.Card#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfirmationTokenCreateParams.PaymentMethodOptions.Card#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Installment configuration for payments confirmed using this ConfirmationToken. */
+        public Builder setInstallments(
+            ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments installments) {
+          this.installments = installments;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> The selected installment plan to use for this payment attempt.
+         * This parameter can only be provided during confirmation.
+         */
+        @SerializedName("plan")
+        Plan plan;
+
+        private Installments(Map<String, Object> extraParams, Plan plan) {
+          this.extraParams = extraParams;
+          this.plan = plan;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Plan plan;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments build() {
+            return new ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments(
+                this.extraParams, this.plan);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The selected installment plan to use for this payment
+           * attempt. This parameter can only be provided during confirmation.
+           */
+          public Builder setPlan(
+              ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments.Plan plan) {
+            this.plan = plan;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Plan {
+          /**
+           * For {@code fixed_count} installment plans, this is required. It represents the number
+           * of installment payments your customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * For {@code fixed_count} installment plans, this is required. It represents the interval
+           * between installment payments your customer will make to their credit card. One of
+           * {@code month}.
+           */
+          @SerializedName("interval")
+          Interval interval;
+
+          /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
+          @SerializedName("type")
+          Type type;
+
+          private Plan(Long count, Map<String, Object> extraParams, Interval interval, Type type) {
+            this.count = count;
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.type = type;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long count;
+
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Type type;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments.Plan
+                build() {
+              return new ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments.Plan(
+                  this.count, this.extraParams, this.interval, this.type);
+            }
+
+            /**
+             * For {@code fixed_count} installment plans, this is required. It represents the number
+             * of installment payments your customer will make to their credit card.
+             */
+            public Builder setCount(Long count) {
+              this.count = count;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments.Plan#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments.Plan#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * For {@code fixed_count} installment plans, this is required. It represents the
+             * interval between installment payments your customer will make to their credit card.
+             * One of {@code month}.
+             */
+            public Builder setInterval(
+                ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments.Plan.Interval
+                    interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
+            public Builder setType(
+                ConfirmationTokenCreateParams.PaymentMethodOptions.Card.Installments.Plan.Type
+                    type) {
+              this.type = type;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("month")
+            MONTH("month");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("fixed_count")
+            FIXED_COUNT("fixed_count");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Type(String value) {
+              this.value = value;
+            }
+          }
+        }
       }
     }
   }

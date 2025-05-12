@@ -897,9 +897,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -923,9 +924,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -949,9 +951,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -975,9 +978,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1005,9 +1009,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1031,9 +1036,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
-   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
-   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
-   * will also show you any discounts that are applicable to the invoice.
+   * At any time, you can preview the upcoming invoice for a subscription or subscription schedule.
+   * This will show you all the charges that are pending, including subscription renewal charges,
+   * invoice item charges, etc. It will also show you any discounts that are applicable to the
+   * invoice.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1857,6 +1863,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @SerializedName("liability")
     Liability liability;
 
+    /** The tax provider powering automatic tax. */
+    @SerializedName("provider")
+    String provider;
+
     /**
      * The status of the most recent automated tax calculation for this invoice.
      *
@@ -1971,7 +1981,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      * {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin}, {@code cd_nif}, {@code
      * mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif}, {@code mk_vat},
      * {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code tj_tin}, {@code
-     * ug_tin}, {@code zm_tin}, {@code kh_tin}, or {@code unknown}.
+     * ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin}, {@code az_tin}, {@code bd_bin},
+     * {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code cm_niu}, {@code
+     * cv_nif}, {@code bf_ifu}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;

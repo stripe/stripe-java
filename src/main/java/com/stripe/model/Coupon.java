@@ -69,7 +69,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   Boolean deleted;
 
   /**
-   * One of {@code forever}, {@code once}, and {@code repeating}. Describes how long a customer who
+   * One of {@code forever}, {@code once}, or {@code repeating}. Describes how long a customer who
    * applies this coupon will get the discount.
    */
   @SerializedName("duration")

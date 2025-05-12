@@ -1,6 +1,6 @@
 # Stripe Java client library
 
-[![Maven Central](https://img.shields.io/badge/maven--central-v29.0.0-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
+[![Maven Central](https://img.shields.io/badge/maven--central-v29.1.0-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
 
@@ -17,7 +17,7 @@ The official [Stripe][stripe] Java client library.
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:29.0.0"
+implementation "com.stripe:stripe-java:29.1.0"
 ```
 
 ### Maven users
@@ -28,16 +28,26 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>29.0.0</version>
+  <version>29.1.0</version>
 </dependency>
 ```
 
 ### Others
 
-You'll need to manually install the following JARs:
+If you are not using Gradle or Maven, you will need to manually install the following JARs:
 
-- [The Stripe JAR](https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/29.0.0/stripe-java-29.0.0.jar)
-- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar>.
+1. The Stripe JAR:
+   - Download the latest release version from [Maven Central](https://repo1.maven.org/maven2/com/stripe/stripe-java/29.0.0/stripe-java-29.0.0.jar)
+   - Current release version: 29.0.0
+
+2. Google Gson:
+   - The Stripe JAR builds and tests with Gson version 2.10.1
+   - Download from [Maven Central](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.10.1/gson-2.10.1.jar)
+   - We recommend using the same version of Gson if possible to guarantee compatibility, but you should be able to use any stable version of Gson that is 2.10.1 or newer
+
+To use these JARs:
+1. Download the JARs from the links provided above
+2. Add the JARs to your project's classpath
 
 ### [ProGuard][proguard]
 
@@ -245,21 +255,17 @@ You can disable this behavior if you prefer:
 Stripe.enableTelemetry = false;
 ```
 
-### Beta SDKs
+### Public Preview SDKs
 
-Stripe has features in the beta phase that can be accessed via the beta version of this package.
-We would love for you to try these and share feedback with us before these features reach the stable phase.
-To install a beta version of stripe-java follow steps [installation steps above](#installation) using the beta library version.
+Stripe has features in the [public preview phase](https://docs.stripe.com/release-phases) that can be accessed via versions of this package that have the `-beta.X` suffix like `25.2.0-beta.2`.
+We would love for you to try these as we incrementally release new features and improve them based on your feedback.
 
-> **Note**
-> There can be breaking changes between beta versions. Therefore we recommend pinning the package version to a specific version. This way you can install the same version each time without breaking changes unless you are intentionally looking for the latest beta version.
-
-We highly recommend keeping an eye on when the beta feature you are interested in goes from beta to stable so that you can move from using a beta version of the SDK to the stable version.
-
-If your beta feature requires a `Stripe-Version` header to be sent, set the `Stripe.stripeVersion` field by calling `Stripe.addBetaVersion`:
+ To install, choose the version that includes support for the preview feature you are interested in by reviewing the [releases page](https://github.com/stripe/stripe-java/releases/) and then use it [installation steps above](#installation).
 
 > **Note**
-> Beta version headers can only be set in beta versions of the library.
+> There can be breaking changes between two versions of the public preview SDKs without a bump in the major version. Therefore we recommend pinning the package version to a specific version. This way you can install the same version each time without breaking changes unless you are intentionally looking for the latest public preview SDK.
+
+Some preview features require a name and version to be set in the `Stripe-Version` header like `feature_beta=v3`. If your preview feature has this requirement, use the `Stripe.addBetaVersion` function (available only in the public preview SDKs):
 
 ```java
 Stripe.addBetaVersion("feature_beta", "v3");

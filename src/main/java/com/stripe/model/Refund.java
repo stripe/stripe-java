@@ -122,6 +122,15 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentIntent> paymentIntent;
 
+  /**
+   * Provides the reason for why the refund is pending. Possible values are: {@code processing},
+   * {@code insufficient_funds}, or {@code charge_pending}.
+   *
+   * <p>One of {@code charge_pending}, {@code insufficient_funds}, or {@code processing}.
+   */
+  @SerializedName("pending_reason")
+  String pendingReason;
+
   @SerializedName("presentment_details")
   PresentmentDetails presentmentDetails;
 

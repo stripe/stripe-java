@@ -65,6 +65,10 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   String id;
 
   /** Indicates the status of a specific payment method on a payment method domain. */
+  @SerializedName("klarna")
+  Klarna klarna;
+
+  /** Indicates the status of a specific payment method on a payment method domain. */
   @SerializedName("link")
   Link link;
 
@@ -468,6 +472,40 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Klarna extends StripeObject {
+    /**
+     * The status of the payment method on the domain.
+     *
+     * <p>One of {@code active}, or {@code inactive}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /**
+     * Contains additional details about the status of a payment method for a specific payment
+     * method domain.
+     */
+    @SerializedName("status_details")
+    StatusDetails statusDetails;
+
+    /**
+     * Contains additional details about the status of a payment method for a specific payment
+     * method domain.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StatusDetails extends StripeObject {
+      /** The error message associated with the status of the payment method on the domain. */
+      @SerializedName("error_message")
+      String errorMessage;
+    }
+  }
+
+  /** Indicates the status of a specific payment method on a payment method domain. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Link extends StripeObject {
     /**
      * The status of the payment method on the domain.
@@ -538,6 +576,7 @@ public class PaymentMethodDomain extends ApiResource implements HasId {
     trySetResponseGetter(amazonPay, responseGetter);
     trySetResponseGetter(applePay, responseGetter);
     trySetResponseGetter(googlePay, responseGetter);
+    trySetResponseGetter(klarna, responseGetter);
     trySetResponseGetter(link, responseGetter);
     trySetResponseGetter(paypal, responseGetter);
   }
