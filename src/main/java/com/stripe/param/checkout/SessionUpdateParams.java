@@ -702,7 +702,7 @@ public class SessionUpdateParams extends ApiRequestParams {
      * recurring.usage_type=metered}.
      */
     @SerializedName("quantity")
-    Object quantity;
+    Long quantity;
 
     /**
      * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
@@ -718,7 +718,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         Object metadata,
         Object price,
         PriceData priceData,
-        Object quantity,
+        Long quantity,
         Object taxRates) {
       this.adjustableQuantity = adjustableQuantity;
       this.extraParams = extraParams;
@@ -747,7 +747,7 @@ public class SessionUpdateParams extends ApiRequestParams {
 
       private PriceData priceData;
 
-      private Object quantity;
+      private Long quantity;
 
       private Object taxRates;
 
@@ -895,15 +895,6 @@ public class SessionUpdateParams extends ApiRequestParams {
        * recurring.usage_type=metered}.
        */
       public Builder setQuantity(Long quantity) {
-        this.quantity = quantity;
-        return this;
-      }
-
-      /**
-       * The quantity of the line item being purchased. Quantity should not be defined when {@code
-       * recurring.usage_type=metered}.
-       */
-      public Builder setQuantity(EmptyParam quantity) {
         this.quantity = quantity;
         return this;
       }
