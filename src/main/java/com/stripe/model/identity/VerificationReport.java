@@ -233,6 +233,14 @@ public class VerificationReport extends ApiResource implements HasId {
     String number;
 
     /**
+     * Sex of the person in the document.
+     *
+     * <p>One of {@code [redacted]}, {@code female}, {@code male}, or {@code unknown}.
+     */
+    @SerializedName("sex")
+    String sex;
+
+    /**
      * Status of this {@code document} check.
      *
      * <p>One of {@code unverified}, or {@code verified}.
@@ -247,6 +255,14 @@ public class VerificationReport extends ApiResource implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    /** Place of birth as it appears in the document. */
+    @SerializedName("unparsed_place_of_birth")
+    String unparsedPlaceOfBirth;
+
+    /** Sex as it appears in the document. */
+    @SerializedName("unparsed_sex")
+    String unparsedSex;
 
     /** Point in Time. */
     @Getter
