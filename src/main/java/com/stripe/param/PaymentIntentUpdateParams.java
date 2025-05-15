@@ -1661,6 +1661,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("delivery")
       Delivery delivery;
 
+      /** The details of the distance traveled during the rental period. */
+      @SerializedName("distance")
+      Distance distance;
+
       /** The details of the passengers in the travel reservation. */
       @SerializedName("drivers")
       List<PaymentIntentUpdateParams.PaymentDetails.CarRental.Driver> drivers;
@@ -1690,6 +1694,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("pickup_at")
       Long pickupAt;
 
+      /** Name of the pickup location. */
+      @SerializedName("pickup_location_name")
+      Object pickupLocationName;
+
       /** Rental rate. */
       @SerializedName("rate_amount")
       Long rateAmount;
@@ -1713,9 +1721,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("return_at")
       Long returnAt;
 
+      /** Name of the return location. */
+      @SerializedName("return_location_name")
+      Object returnLocationName;
+
       /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
       @SerializedName("tax_exempt")
       Boolean taxExempt;
+
+      /** The vehicle identification number. */
+      @SerializedName("vehicle_identification_number")
+      Object vehicleIdentificationNumber;
 
       private CarRental(
           Affiliate affiliate,
@@ -1727,18 +1743,22 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           Object customerServicePhoneNumber,
           Long daysRented,
           Delivery delivery,
+          Distance distance,
           List<PaymentIntentUpdateParams.PaymentDetails.CarRental.Driver> drivers,
           List<PaymentIntentUpdateParams.PaymentDetails.CarRental.ExtraCharge> extraCharges,
           Map<String, Object> extraParams,
           Boolean noShow,
           PickupAddress pickupAddress,
           Long pickupAt,
+          Object pickupLocationName,
           Long rateAmount,
           RateInterval rateInterval,
           Object renterName,
           ReturnAddress returnAddress,
           Long returnAt,
-          Boolean taxExempt) {
+          Object returnLocationName,
+          Boolean taxExempt,
+          Object vehicleIdentificationNumber) {
         this.affiliate = affiliate;
         this.bookingNumber = bookingNumber;
         this.carClassCode = carClassCode;
@@ -1748,18 +1768,22 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.customerServicePhoneNumber = customerServicePhoneNumber;
         this.daysRented = daysRented;
         this.delivery = delivery;
+        this.distance = distance;
         this.drivers = drivers;
         this.extraCharges = extraCharges;
         this.extraParams = extraParams;
         this.noShow = noShow;
         this.pickupAddress = pickupAddress;
         this.pickupAt = pickupAt;
+        this.pickupLocationName = pickupLocationName;
         this.rateAmount = rateAmount;
         this.rateInterval = rateInterval;
         this.renterName = renterName;
         this.returnAddress = returnAddress;
         this.returnAt = returnAt;
+        this.returnLocationName = returnLocationName;
         this.taxExempt = taxExempt;
+        this.vehicleIdentificationNumber = vehicleIdentificationNumber;
       }
 
       public static Builder builder() {
@@ -1785,6 +1809,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Delivery delivery;
 
+        private Distance distance;
+
         private List<PaymentIntentUpdateParams.PaymentDetails.CarRental.Driver> drivers;
 
         private List<PaymentIntentUpdateParams.PaymentDetails.CarRental.ExtraCharge> extraCharges;
@@ -1797,6 +1823,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Long pickupAt;
 
+        private Object pickupLocationName;
+
         private Long rateAmount;
 
         private RateInterval rateInterval;
@@ -1807,7 +1835,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private Long returnAt;
 
+        private Object returnLocationName;
+
         private Boolean taxExempt;
+
+        private Object vehicleIdentificationNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentDetails.CarRental build() {
@@ -1821,18 +1853,22 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               this.customerServicePhoneNumber,
               this.daysRented,
               this.delivery,
+              this.distance,
               this.drivers,
               this.extraCharges,
               this.extraParams,
               this.noShow,
               this.pickupAddress,
               this.pickupAt,
+              this.pickupLocationName,
               this.rateAmount,
               this.rateInterval,
               this.renterName,
               this.returnAddress,
               this.returnAt,
-              this.taxExempt);
+              this.returnLocationName,
+              this.taxExempt,
+              this.vehicleIdentificationNumber);
         }
 
         /** Affiliate details for this purchase. */
@@ -1924,6 +1960,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         public Builder setDelivery(
             PaymentIntentUpdateParams.PaymentDetails.CarRental.Delivery delivery) {
           this.delivery = delivery;
+          return this;
+        }
+
+        /** The details of the distance traveled during the rental period. */
+        public Builder setDistance(
+            PaymentIntentUpdateParams.PaymentDetails.CarRental.Distance distance) {
+          this.distance = distance;
           return this;
         }
 
@@ -2034,6 +2077,18 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Name of the pickup location. */
+        public Builder setPickupLocationName(String pickupLocationName) {
+          this.pickupLocationName = pickupLocationName;
+          return this;
+        }
+
+        /** Name of the pickup location. */
+        public Builder setPickupLocationName(EmptyParam pickupLocationName) {
+          this.pickupLocationName = pickupLocationName;
+          return this;
+        }
+
         /** Rental rate. */
         public Builder setRateAmount(Long rateAmount) {
           this.rateAmount = rateAmount;
@@ -2075,9 +2130,33 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Name of the return location. */
+        public Builder setReturnLocationName(String returnLocationName) {
+          this.returnLocationName = returnLocationName;
+          return this;
+        }
+
+        /** Name of the return location. */
+        public Builder setReturnLocationName(EmptyParam returnLocationName) {
+          this.returnLocationName = returnLocationName;
+          return this;
+        }
+
         /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
         public Builder setTaxExempt(Boolean taxExempt) {
           this.taxExempt = taxExempt;
+          return this;
+        }
+
+        /** The vehicle identification number. */
+        public Builder setVehicleIdentificationNumber(String vehicleIdentificationNumber) {
+          this.vehicleIdentificationNumber = vehicleIdentificationNumber;
+          return this;
+        }
+
+        /** The vehicle identification number. */
+        public Builder setVehicleIdentificationNumber(EmptyParam vehicleIdentificationNumber) {
+          this.vehicleIdentificationNumber = vehicleIdentificationNumber;
           return this;
         }
       }
@@ -2396,7 +2475,125 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class Distance {
+        /** Distance traveled. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Unit of measurement for the distance traveled. One of {@code miles} or {@code
+         * kilometers}.
+         */
+        @SerializedName("unit")
+        Unit unit;
+
+        private Distance(Long amount, Map<String, Object> extraParams, Unit unit) {
+          this.amount = amount;
+          this.extraParams = extraParams;
+          this.unit = unit;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private Map<String, Object> extraParams;
+
+          private Unit unit;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentUpdateParams.PaymentDetails.CarRental.Distance build() {
+            return new PaymentIntentUpdateParams.PaymentDetails.CarRental.Distance(
+                this.amount, this.extraParams, this.unit);
+          }
+
+          /** Distance traveled. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentDetails.CarRental.Distance#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentUpdateParams.PaymentDetails.CarRental.Distance#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Unit of measurement for the distance traveled. One of {@code miles} or {@code
+           * kilometers}.
+           */
+          public Builder setUnit(
+              PaymentIntentUpdateParams.PaymentDetails.CarRental.Distance.Unit unit) {
+            this.unit = unit;
+            return this;
+          }
+        }
+
+        public enum Unit implements ApiRequestParams.EnumParam {
+          @SerializedName("kilometers")
+          KILOMETERS("kilometers"),
+
+          @SerializedName("miles")
+          MILES("miles");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Unit(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Driver {
+        /** Driver's identification number. */
+        @SerializedName("driver_identification_number")
+        Object driverIdentificationNumber;
+
+        /** Driver's tax number. */
+        @SerializedName("driver_tax_number")
+        Object driverTaxNumber;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2411,7 +2608,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("name")
         Object name;
 
-        private Driver(Map<String, Object> extraParams, Object name) {
+        private Driver(
+            Object driverIdentificationNumber,
+            Object driverTaxNumber,
+            Map<String, Object> extraParams,
+            Object name) {
+          this.driverIdentificationNumber = driverIdentificationNumber;
+          this.driverTaxNumber = driverTaxNumber;
           this.extraParams = extraParams;
           this.name = name;
         }
@@ -2421,6 +2624,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object driverIdentificationNumber;
+
+          private Object driverTaxNumber;
+
           private Map<String, Object> extraParams;
 
           private Object name;
@@ -2428,7 +2635,31 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentUpdateParams.PaymentDetails.CarRental.Driver build() {
             return new PaymentIntentUpdateParams.PaymentDetails.CarRental.Driver(
-                this.extraParams, this.name);
+                this.driverIdentificationNumber, this.driverTaxNumber, this.extraParams, this.name);
+          }
+
+          /** Driver's identification number. */
+          public Builder setDriverIdentificationNumber(String driverIdentificationNumber) {
+            this.driverIdentificationNumber = driverIdentificationNumber;
+            return this;
+          }
+
+          /** Driver's identification number. */
+          public Builder setDriverIdentificationNumber(EmptyParam driverIdentificationNumber) {
+            this.driverIdentificationNumber = driverIdentificationNumber;
+            return this;
+          }
+
+          /** Driver's tax number. */
+          public Builder setDriverTaxNumber(String driverTaxNumber) {
+            this.driverTaxNumber = driverTaxNumber;
+            return this;
+          }
+
+          /** Driver's tax number. */
+          public Builder setDriverTaxNumber(EmptyParam driverTaxNumber) {
+            this.driverTaxNumber = driverTaxNumber;
+            return this;
           }
 
           /**
