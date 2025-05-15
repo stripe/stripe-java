@@ -1118,15 +1118,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("treasury.received_debit.created")
     TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
 
-    @SerializedName("billing.credit_balance_transaction.created")
-    BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),
-
-    @SerializedName("billing.credit_grant.created")
-    BILLING__CREDIT_GRANT__CREATED("billing.credit_grant.created"),
-
-    @SerializedName("billing.credit_grant.updated")
-    BILLING__CREDIT_GRANT__UPDATED("billing.credit_grant.updated"),
-
     @SerializedName("billing.meter.created")
     BILLING__METER__CREATED("billing.meter.created"),
 
