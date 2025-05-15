@@ -13,6 +13,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
+  /** Configuration overrides. */
+  @SerializedName("confirm_config")
+  ConfirmConfig confirmConfig;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -31,7 +35,11 @@ public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
   String paymentIntent;
 
   private ReaderConfirmPaymentIntentParams(
-      List<String> expand, Map<String, Object> extraParams, String paymentIntent) {
+      ConfirmConfig confirmConfig,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      String paymentIntent) {
+    this.confirmConfig = confirmConfig;
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentIntent = paymentIntent;
@@ -42,6 +50,8 @@ public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private ConfirmConfig confirmConfig;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -51,7 +61,13 @@ public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderConfirmPaymentIntentParams build() {
       return new ReaderConfirmPaymentIntentParams(
-          this.expand, this.extraParams, this.paymentIntent);
+          this.confirmConfig, this.expand, this.extraParams, this.paymentIntent);
+    }
+
+    /** Configuration overrides. */
+    public Builder setConfirmConfig(ReaderConfirmPaymentIntentParams.ConfirmConfig confirmConfig) {
+      this.confirmConfig = confirmConfig;
+      return this;
     }
 
     /**
@@ -110,6 +126,84 @@ public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ConfirmConfig {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * The URL to redirect your customer back to after they authenticate or cancel their payment on
+     * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
+     * can alternatively supply an application URI scheme.
+     */
+    @SerializedName("return_url")
+    String returnUrl;
+
+    private ConfirmConfig(Map<String, Object> extraParams, String returnUrl) {
+      this.extraParams = extraParams;
+      this.returnUrl = returnUrl;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String returnUrl;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ReaderConfirmPaymentIntentParams.ConfirmConfig build() {
+        return new ReaderConfirmPaymentIntentParams.ConfirmConfig(this.extraParams, this.returnUrl);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ReaderConfirmPaymentIntentParams.ConfirmConfig#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ReaderConfirmPaymentIntentParams.ConfirmConfig#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The URL to redirect your customer back to after they authenticate or cancel their payment
+       * on the payment method's app or site. If you'd prefer to redirect to a mobile application,
+       * you can alternatively supply an application URI scheme.
+       */
+      public Builder setReturnUrl(String returnUrl) {
+        this.returnUrl = returnUrl;
+        return this;
+      }
     }
   }
 }

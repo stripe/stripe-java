@@ -1029,6 +1029,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @SerializedName("account")
       String account;
 
+      /** Represents a per-transaction override of a reader configuration. */
+      @SerializedName("confirm_config")
+      ConfirmConfig confirmConfig;
+
       /** Most recent PaymentIntent processed by the reader. */
       @SerializedName("payment_intent")
       @Getter(lombok.AccessLevel.NONE)
@@ -1052,6 +1056,19 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       public void setPaymentIntentObject(PaymentIntent expandableObject) {
         this.paymentIntent =
             new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Represents a per-transaction override of a reader configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ConfirmConfig extends StripeObject {
+        /**
+         * If the customer does not abandon authenticating the payment, they will be redirected to
+         * this specified URL after completion.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
       }
     }
 
@@ -1101,6 +1118,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /** Enable customer initiated cancellation when processing this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
+
+        /**
+         * If the customer does not abandon authenticating the payment, they will be redirected to
+         * this specified URL after completion.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
 
         /** Override showing a tipping selection screen on this transaction. */
         @SerializedName("skip_tipping")
