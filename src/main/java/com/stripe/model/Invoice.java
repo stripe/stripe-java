@@ -913,10 +913,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -924,8 +920,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment() throws StripeException {
     return attachPayment((Map<String, Object>) null, (RequestOptions) null);
@@ -935,10 +931,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -946,8 +938,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(RequestOptions options) throws StripeException {
     return attachPayment((Map<String, Object>) null, options);
@@ -957,10 +949,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -968,8 +956,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(Map<String, Object> params) throws StripeException {
     return attachPayment(params, (RequestOptions) null);
@@ -979,10 +967,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -990,8 +974,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1006,10 +990,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -1017,8 +997,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(InvoiceAttachPaymentParams params) throws StripeException {
     return attachPayment(params, (RequestOptions) null);
@@ -1028,10 +1008,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -1039,8 +1015,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(InvoiceAttachPaymentParams params, RequestOptions options)
       throws StripeException {

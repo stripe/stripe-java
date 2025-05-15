@@ -278,10 +278,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -289,8 +285,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(String invoice, InvoiceAttachPaymentParams params)
       throws StripeException {
@@ -300,10 +296,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -311,8 +303,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(String invoice, RequestOptions options) throws StripeException {
     return attachPayment(invoice, (InvoiceAttachPaymentParams) null, options);
@@ -321,10 +313,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -332,8 +320,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(String invoice) throws StripeException {
     return attachPayment(invoice, (InvoiceAttachPaymentParams) null, (RequestOptions) null);
@@ -342,10 +330,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -353,8 +337,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(
       String invoice, InvoiceAttachPaymentParams params, RequestOptions options)
