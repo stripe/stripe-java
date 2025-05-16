@@ -17,6 +17,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
+import com.stripe.param.SubscriptionMigrateParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -530,6 +531,26 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
+  }
+  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  public Subscription migrate(String subscription, SubscriptionMigrateParams params)
+      throws StripeException {
+    return migrate(subscription, params, (RequestOptions) null);
+  }
+  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  public Subscription migrate(
+      String subscription, SubscriptionMigrateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(subscription));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Subscription.class);
   }
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor

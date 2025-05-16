@@ -13,6 +13,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
+import com.stripe.param.SubscriptionMigrateParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -860,6 +861,42 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, SubscriptionCollection.class);
+  }
+
+  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  public Subscription migrate(Map<String, Object> params) throws StripeException {
+    return migrate(params, (RequestOptions) null);
+  }
+
+  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  public Subscription migrate(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Subscription.class);
+  }
+
+  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  public Subscription migrate(SubscriptionMigrateParams params) throws StripeException {
+    return migrate(params, (RequestOptions) null);
+  }
+
+  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  public Subscription migrate(SubscriptionMigrateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Subscription.class);
   }
 
   /**
