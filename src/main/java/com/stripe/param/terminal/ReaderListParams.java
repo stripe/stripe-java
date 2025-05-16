@@ -246,6 +246,9 @@ public class ReaderListParams extends ApiRequestParams {
     @SerializedName("mobile_phone_reader")
     MOBILE_PHONE_READER("mobile_phone_reader"),
 
+    @SerializedName("simulated_stripe_s700")
+    SIMULATED_STRIPE_S700("simulated_stripe_s700"),
+
     @SerializedName("simulated_wisepos_e")
     SIMULATED_WISEPOS_E("simulated_wisepos_e"),
 

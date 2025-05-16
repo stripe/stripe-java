@@ -13,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.ReaderCancelActionParams;
+import com.stripe.param.terminal.ReaderCollectInputsParams;
 import com.stripe.param.terminal.ReaderCreateParams;
 import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderProcessPaymentIntentParams;
@@ -159,6 +160,26 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(reader));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Reader.class);
+  }
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(String reader, ReaderCollectInputsParams params)
+      throws StripeException {
+    return collectInputs(reader, params, (RequestOptions) null);
+  }
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(
+      String reader, ReaderCollectInputsParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(reader));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

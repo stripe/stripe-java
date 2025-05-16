@@ -875,6 +875,22 @@ public class VerificationSession extends ApiResource
     @SerializedName("phone")
     String phone;
 
+    /**
+     * The user's verified sex.
+     *
+     * <p>One of {@code [redacted]}, {@code female}, {@code male}, or {@code unknown}.
+     */
+    @SerializedName("sex")
+    String sex;
+
+    /** The user's verified place of birth as it appears in the document. */
+    @SerializedName("unparsed_place_of_birth")
+    String unparsedPlaceOfBirth;
+
+    /** The user's verified sex as it appears in the document. */
+    @SerializedName("unparsed_sex")
+    String unparsedSex;
+
     /** Point in Time. */
     @Getter
     @Setter
