@@ -4,11 +4,13 @@ package com.stripe.model.privacy;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.privacy.RedactionJobValidationErrorListParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -33,11 +35,11 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
   String code;
 
   /**
-   * If the error is related to a specific object, this field will include the object's identifier
-   * in {@code id} and object type in {@code object}.
+   * If the error is related to a specific object, this field includes the object's identifier and
+   * object type.
    */
   @SerializedName("erroring_object")
-  Map<String, String> erroringObject;
+  ErroringObject erroringObject;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -95,5 +97,29 @@ public class RedactionJobValidationError extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, RedactionJobValidationErrorCollection.class);
+  }
+
+  /**
+   * If a Redaction Job Validation Error occurred because of a specific object, this will contain
+   * its identifier and object type.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ErroringObject extends StripeObject implements HasId {
+    /** Unique identifier for the object. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /** Erroring object type. */
+    @SerializedName("object_type")
+    String objectType;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(erroringObject, responseGetter);
   }
 }
