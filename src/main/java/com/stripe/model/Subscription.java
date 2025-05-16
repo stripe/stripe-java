@@ -74,6 +74,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_mode")
   String billingMode;
 
+  /** Details about when the current billing_mode was updated. */
+  @SerializedName("billing_mode_details")
+  BillingModeDetails billingModeDetails;
+
   /** A date in the future at which the subscription will automatically get canceled. */
   @SerializedName("cancel_at")
   Long cancelAt;
@@ -863,12 +867,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return getGlobalResponseGetter().request(request, SubscriptionCollection.class);
   }
 
-  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(Map<String, Object> params) throws StripeException {
     return migrate(params, (RequestOptions) null);
   }
 
-  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -878,12 +882,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return getResponseGetter().request(request, Subscription.class);
   }
 
-  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(SubscriptionMigrateParams params) throws StripeException {
     return migrate(params, (RequestOptions) null);
   }
 
-  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(SubscriptionMigrateParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -1404,6 +1408,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /** The second of the minute of the billing_cycle_anchor. */
     @SerializedName("second")
     Long second;
+  }
+
+  /** When billing_mode was last updated. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingModeDetails extends StripeObject {
+    /** Details on when the current billing_mode was adopted. */
+    @SerializedName("updated_at")
+    Long updatedAt;
   }
 
   /**
@@ -2168,6 +2182,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(billingCycleAnchorConfig, responseGetter);
+    trySetResponseGetter(billingModeDetails, responseGetter);
     trySetResponseGetter(cancellationDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);

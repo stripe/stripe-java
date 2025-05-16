@@ -532,12 +532,12 @@ public final class SubscriptionService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
   }
-  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(String subscription, SubscriptionMigrateParams params)
       throws StripeException {
     return migrate(subscription, params, (RequestOptions) null);
   }
-  /** This endpoint allows merchants to upgrade the billing_mode on their existing subscriptions. */
+  /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(
       String subscription, SubscriptionMigrateParams params, RequestOptions options)
       throws StripeException {
