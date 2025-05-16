@@ -153,6 +153,14 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * The URL to redirect your customer back to after they authenticate or cancel their payment on
+     * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
+     * can alternatively supply an application URI scheme.
+     */
+    @SerializedName("return_url")
+    String returnUrl;
+
     /** Override showing a tipping selection screen on this transaction. */
     @SerializedName("skip_tipping")
     Boolean skipTipping;
@@ -165,11 +173,13 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
         AllowRedisplay allowRedisplay,
         Boolean enableCustomerCancellation,
         Map<String, Object> extraParams,
+        String returnUrl,
         Boolean skipTipping,
         Tipping tipping) {
       this.allowRedisplay = allowRedisplay;
       this.enableCustomerCancellation = enableCustomerCancellation;
       this.extraParams = extraParams;
+      this.returnUrl = returnUrl;
       this.skipTipping = skipTipping;
       this.tipping = tipping;
     }
@@ -185,6 +195,8 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String returnUrl;
+
       private Boolean skipTipping;
 
       private Tipping tipping;
@@ -195,6 +207,7 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
             this.allowRedisplay,
             this.enableCustomerCancellation,
             this.extraParams,
+            this.returnUrl,
             this.skipTipping,
             this.tipping);
       }
@@ -240,6 +253,16 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The URL to redirect your customer back to after they authenticate or cancel their payment
+       * on the payment method's app or site. If you'd prefer to redirect to a mobile application,
+       * you can alternatively supply an application URI scheme.
+       */
+      public Builder setReturnUrl(String returnUrl) {
+        this.returnUrl = returnUrl;
         return this;
       }
 

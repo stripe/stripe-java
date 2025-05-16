@@ -3,6 +3,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,13 +35,10 @@ public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestP
   Map<String, Object> extraParams;
 
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   private PaymentRecordReportPaymentAttemptCanceledParams(
-      Long canceledAt,
-      List<String> expand,
-      Map<String, Object> extraParams,
-      Map<String, String> metadata) {
+      Long canceledAt, List<String> expand, Map<String, Object> extraParams, Object metadata) {
     this.canceledAt = canceledAt;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -58,7 +56,7 @@ public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestP
 
     private Map<String, Object> extraParams;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentRecordReportPaymentAttemptCanceledParams build() {
@@ -133,11 +131,12 @@ public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestP
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * PaymentRecordReportPaymentAttemptCanceledParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -147,11 +146,22 @@ public class PaymentRecordReportPaymentAttemptCanceledParams extends ApiRequestP
      * See {@link PaymentRecordReportPaymentAttemptCanceledParams#metadata} for the field
      * documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
   }

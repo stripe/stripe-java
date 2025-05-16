@@ -66,7 +66,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("billing_cycle_anchor_config")
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
-  /** Configure billing_mode in each subscription to opt in improved credit proration behavior. */
+  /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
   @SerializedName("billing_mode")
   BillingMode billingMode;
 
@@ -77,11 +77,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * period.
    */
   @SerializedName("cancel_at")
-  Long cancelAt;
+  Object cancelAt;
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}.
+   * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
+   * version. Please use {@code cancel_at} instead.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -315,7 +316,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
       BillingMode billingMode,
-      Long cancelAt,
+      Object cancelAt,
       Boolean cancelAtPeriodEnd,
       CollectionMethod collectionMethod,
       String currency,
@@ -401,7 +402,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private BillingMode billingMode;
 
-    private Long cancelAt;
+    private Object cancelAt;
 
     private Boolean cancelAtPeriodEnd;
 
@@ -594,7 +595,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Configure billing_mode in each subscription to opt in improved credit proration behavior. */
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     public Builder setBillingMode(SubscriptionCreateParams.BillingMode billingMode) {
       this.billingMode = billingMode;
       return this;
@@ -612,8 +613,20 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
+     */
+    public Builder setCancelAt(SubscriptionCreateParams.CancelAt cancelAt) {
+      this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
+     * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
+     * version. Please use {@code cancel_at} instead.
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -6697,6 +6710,21 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private final String value;
 
     BillingMode(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("max_period_end")
+    MAX_PERIOD_END("max_period_end"),
+
+    @SerializedName("min_period_end")
+    MIN_PERIOD_END("min_period_end");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CancelAt(String value) {
       this.value = value;
     }
   }

@@ -308,9 +308,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("billing.alert.triggered")
     BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
 
-    @SerializedName("billing.meter_error_report.triggered")
-    BILLING__METER_ERROR_REPORT__TRIGGERED("billing.meter_error_report.triggered"),
-
     @SerializedName("billing_portal.configuration.created")
     BILLING_PORTAL__CONFIGURATION__CREATED("billing_portal.configuration.created"),
 
@@ -606,6 +603,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("invoice.payment.overpaid")
     INVOICE__PAYMENT__OVERPAID("invoice.payment.overpaid"),
+
+    @SerializedName("invoice.payment.paid")
+    INVOICE__PAYMENT__PAID("invoice.payment.paid"),
 
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),

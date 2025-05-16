@@ -828,6 +828,20 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
+
       /** The Affirm transaction ID associated with this payment. */
       @SerializedName("transaction_id")
       String transactionId;
@@ -3054,6 +3068,20 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("fingerprint")
       String fingerprint;
+
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /** Transaction ID of this particular WeChat Pay transaction. */
       @SerializedName("transaction_id")

@@ -853,8 +853,8 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     PauseCollection pauseCollection;
 
     /**
-     * If the subscription schedule will prorate when transitioning to this phase. Possible values
-     * are {@code create_prorations} and {@code none}.
+     * When transitioning phases, controls how prorations are handled (if any). Possible values are
+     * {@code create_prorations}, {@code none}, and {@code always_invoice}.
      *
      * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
      */

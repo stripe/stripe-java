@@ -13,6 +13,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
+import com.stripe.param.SubscriptionMigrateParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -66,12 +67,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
   /**
-   * Configure billing_mode in each subscription to opt in improved credit proration behavior.
+   * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
    *
    * <p>One of {@code classic}, or {@code flexible}.
    */
   @SerializedName("billing_mode")
   String billingMode;
+
+  /** Details about when the current billing_mode was updated. */
+  @SerializedName("billing_mode_details")
+  BillingModeDetails billingModeDetails;
 
   /** A date in the future at which the subscription will automatically get canceled. */
   @SerializedName("cancel_at")
@@ -79,7 +84,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Whether this subscription will (if {@code status=active}) or did (if {@code status=canceled})
-   * cancel at the end of the current billing period.
+   * cancel at the end of the current billing period. This field will be removed in a future API
+   * version. Please use {@code cancel_at} instead.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -861,6 +867,42 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return getGlobalResponseGetter().request(request, SubscriptionCollection.class);
   }
 
+  /** Upgrade the billing_mode of an existing subscription. */
+  public Subscription migrate(Map<String, Object> params) throws StripeException {
+    return migrate(params, (RequestOptions) null);
+  }
+
+  /** Upgrade the billing_mode of an existing subscription. */
+  public Subscription migrate(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Subscription.class);
+  }
+
+  /** Upgrade the billing_mode of an existing subscription. */
+  public Subscription migrate(SubscriptionMigrateParams params) throws StripeException {
+    return migrate(params, (RequestOptions) null);
+  }
+
+  /** Upgrade the billing_mode of an existing subscription. */
+  public Subscription migrate(SubscriptionMigrateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Subscription.class);
+  }
+
   /**
    * Initiates resumption of a paused subscription, optionally resetting the billing cycle anchor
    * and creating prorations. If a resumption invoice is generated, it must be paid or marked
@@ -1366,6 +1408,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /** The second of the minute of the billing_cycle_anchor. */
     @SerializedName("second")
     Long second;
+  }
+
+  /** When billing_mode was last updated. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingModeDetails extends StripeObject {
+    /** Details on when the current billing_mode was adopted. */
+    @SerializedName("updated_at")
+    Long updatedAt;
   }
 
   /**
@@ -2130,6 +2182,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(billingCycleAnchorConfig, responseGetter);
+    trySetResponseGetter(billingModeDetails, responseGetter);
     trySetResponseGetter(cancellationDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultPaymentMethod, responseGetter);

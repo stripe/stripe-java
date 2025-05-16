@@ -3492,11 +3492,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_behavior")
     BillingBehavior billingBehavior;
 
-    /**
-     * Configure billing_mode to opt in improved credit proration behavior.When the schedule creates
-     * a subscription, the subscription's {@code billing_mode} will be set to the same value as the
-     * schedule's {@code billing_mode}.
-     */
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
@@ -3630,11 +3626,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configure billing_mode to opt in improved credit proration behavior.When the schedule
-       * creates a subscription, the subscription's {@code billing_mode} will be set to the same
-       * value as the schedule's {@code billing_mode}.
-       */
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
       public Builder setBillingMode(
           InvoiceCreatePreviewParams.ScheduleDetails.BillingMode billingMode) {
         this.billingMode = billingMode;
@@ -7997,14 +7989,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       PauseCollection pauseCollection;
 
       /**
-       * Whether the subscription schedule will create <a
+       * Controls whether the subscription schedule should create <a
        * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
-       * transitioning to this phase. The default value is {@code create_prorations}. This setting
-       * controls prorations when a phase is started asynchronously and it is persisted as a field
-       * on the phase. It's different from the request-level <a
+       * transitioning to this phase if there is a difference in billing configuration. It's
+       * different from the request-level <a
        * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
        * parameter which controls what happens if the update request affects the billing
-       * configuration of the current phase.
+       * configuration (item price, quantity, etc.) of the current phase.
        */
       @SerializedName("proration_behavior")
       ProrationBehavior prorationBehavior;
@@ -8552,14 +8543,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Whether the subscription schedule will create <a
+         * Controls whether the subscription schedule should create <a
          * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
-         * transitioning to this phase. The default value is {@code create_prorations}. This setting
-         * controls prorations when a phase is started asynchronously and it is persisted as a field
-         * on the phase. It's different from the request-level <a
+         * transitioning to this phase if there is a difference in billing configuration. It's
+         * different from the request-level <a
          * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
          * parameter which controls what happens if the update request affects the billing
-         * configuration of the current phase.
+         * configuration (item price, quantity, etc.) of the current phase.
          */
         public Builder setProrationBehavior(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.ProrationBehavior prorationBehavior) {
@@ -12492,7 +12482,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     Object billingCycleAnchor;
 
-    /** Configure billing_mode in each subscription to opt in improved credit proration behavior. */
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
@@ -12507,7 +12497,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
+     * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
+     * version. Please use {@code cancel_at} instead.
      */
     @SerializedName("cancel_at_period_end")
     Boolean cancelAtPeriodEnd;
@@ -12690,9 +12681,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configure billing_mode in each subscription to opt in improved credit proration behavior.
-       */
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
       public Builder setBillingMode(
           InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode billingMode) {
         this.billingMode = billingMode;
@@ -12716,6 +12705,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * proration_behavior}. If set during a future period, this will always cause a proration for
        * that period.
        */
+      public Builder setCancelAt(InvoiceCreatePreviewParams.SubscriptionDetails.CancelAt cancelAt) {
+        this.cancelAt = cancelAt;
+        return this;
+      }
+
+      /**
+       * A timestamp at which the subscription should cancel. If set to a date before the current
+       * period ends, this will cause a proration if prorations have been enabled using {@code
+       * proration_behavior}. If set during a future period, this will always cause a proration for
+       * that period.
+       */
       public Builder setCancelAt(EmptyParam cancelAt) {
         this.cancelAt = cancelAt;
         return this;
@@ -12723,7 +12723,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * Indicate whether this subscription should cancel at the end of the current period ({@code
-       * current_period_end}). Defaults to {@code false}.
+       * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
+       * version. Please use {@code cancel_at} instead.
        */
       public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
         this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -14122,6 +14123,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       private final String value;
 
       BillingMode(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum CancelAt implements ApiRequestParams.EnumParam {
+      @SerializedName("max_period_end")
+      MAX_PERIOD_END("max_period_end"),
+
+      @SerializedName("min_period_end")
+      MIN_PERIOD_END("min_period_end");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CancelAt(String value) {
         this.value = value;
       }
     }

@@ -26,16 +26,14 @@ public class RedactionJobCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The objects at the root level that are subject to redaction. */
+  /**
+   * <strong>Required.</strong> The objects to redact. These root objects and their related ones
+   * will be validated for redaction.
+   */
   @SerializedName("objects")
   Objects objects;
 
-  /**
-   * Default is &quot;error&quot;. If &quot;error&quot;, we will make sure all objects in the graph
-   * are redactable in the 1st traversal, otherwise error. If &quot;fix&quot;, where possible, we
-   * will auto-fix any validation errors (e.g. by auto-transitioning objects to a terminal state,
-   * etc.) in the 2nd traversal before redacting
-   */
+  /** Determines the validation behavior of the job. Default is {@code error}. */
   @SerializedName("validation_behavior")
   ValidationBehavior validationBehavior;
 
@@ -121,18 +119,16 @@ public class RedactionJobCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The objects at the root level that are subject to redaction. */
+    /**
+     * <strong>Required.</strong> The objects to redact. These root objects and their related ones
+     * will be validated for redaction.
+     */
     public Builder setObjects(RedactionJobCreateParams.Objects objects) {
       this.objects = objects;
       return this;
     }
 
-    /**
-     * Default is &quot;error&quot;. If &quot;error&quot;, we will make sure all objects in the
-     * graph are redactable in the 1st traversal, otherwise error. If &quot;fix&quot;, where
-     * possible, we will auto-fix any validation errors (e.g. by auto-transitioning objects to a
-     * terminal state, etc.) in the 2nd traversal before redacting
-     */
+    /** Determines the validation behavior of the job. Default is {@code error}. */
     public Builder setValidationBehavior(
         RedactionJobCreateParams.ValidationBehavior validationBehavior) {
       this.validationBehavior = validationBehavior;
