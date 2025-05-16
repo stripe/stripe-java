@@ -85,9 +85,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  @SerializedName("async_workflows")
-  AsyncWorkflows asyncWorkflows;
-
   /**
    * Settings to configure compatible payment methods from the <a
    * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard.</a>
@@ -200,6 +197,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /** The FX Quote used for the PaymentIntent. */
   @SerializedName("fx_quote")
   String fxQuote;
+
+  @SerializedName("hooks")
+  Hooks hooks;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -1732,13 +1732,40 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * For more details about AsyncWorkflows, please refer to the <a
+   * For more details about AutomaticPaymentMethods, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AsyncWorkflows extends StripeObject {
+  public static class AutomaticPaymentMethods extends StripeObject {
+    /**
+     * Controls whether this PaymentIntent will accept redirect-based payment methods.
+     *
+     * <p>Redirect-based payment methods may require your customer to be redirected to a payment
+     * method's app or site for authentication or additional steps. To <a
+     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent,
+     * you may be required to provide a {@code return_url} to redirect customers back to your site
+     * after they authenticate or complete the payment.
+     *
+     * <p>One of {@code always}, or {@code never}.
+     */
+    @SerializedName("allow_redirects")
+    String allowRedirects;
+
+    /** Automatically calculates compatible payment methods. */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
+   * For more details about Hooks, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Hooks extends StripeObject {
     @SerializedName("inputs")
     Inputs inputs;
 
@@ -1766,33 +1793,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String calculation;
       }
     }
-  }
-
-  /**
-   * For more details about AutomaticPaymentMethods, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticPaymentMethods extends StripeObject {
-    /**
-     * Controls whether this PaymentIntent will accept redirect-based payment methods.
-     *
-     * <p>Redirect-based payment methods may require your customer to be redirected to a payment
-     * method's app or site for authentication or additional steps. To <a
-     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent,
-     * you may be required to provide a {@code return_url} to redirect customers back to your site
-     * after they authenticate or complete the payment.
-     *
-     * <p>One of {@code always}, or {@code never}.
-     */
-    @SerializedName("allow_redirects")
-    String allowRedirects;
-
-    /** Automatically calculates compatible payment methods. */
-    @SerializedName("enabled")
-    Boolean enabled;
   }
 
   /**
@@ -6200,9 +6200,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(asyncWorkflows, responseGetter);
     trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(hooks, responseGetter);
     trySetResponseGetter(lastPaymentError, responseGetter);
     trySetResponseGetter(latestCharge, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);

@@ -31,10 +31,6 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  /** Automations to be run during the PaymentIntent lifecycle. */
-  @SerializedName("async_workflows")
-  AsyncWorkflows asyncWorkflows;
-
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -51,6 +47,10 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /** Automations to be run during the PaymentIntent lifecycle. */
+  @SerializedName("hooks")
+  Hooks hooks;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -86,20 +86,20 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   private PaymentIntentIncrementAuthorizationParams(
       Long amount,
       Long applicationFeeAmount,
-      AsyncWorkflows asyncWorkflows,
       String description,
       List<String> expand,
       Map<String, Object> extraParams,
+      Hooks hooks,
       Map<String, String> metadata,
       PaymentMethodOptions paymentMethodOptions,
       String statementDescriptor,
       TransferData transferData) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
-    this.asyncWorkflows = asyncWorkflows;
     this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.hooks = hooks;
     this.metadata = metadata;
     this.paymentMethodOptions = paymentMethodOptions;
     this.statementDescriptor = statementDescriptor;
@@ -115,13 +115,13 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
     private Long applicationFeeAmount;
 
-    private AsyncWorkflows asyncWorkflows;
-
     private String description;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Hooks hooks;
 
     private Map<String, String> metadata;
 
@@ -136,10 +136,10 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       return new PaymentIntentIncrementAuthorizationParams(
           this.amount,
           this.applicationFeeAmount,
-          this.asyncWorkflows,
           this.description,
           this.expand,
           this.extraParams,
+          this.hooks,
           this.metadata,
           this.paymentMethodOptions,
           this.statementDescriptor,
@@ -164,13 +164,6 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
-      return this;
-    }
-
-    /** Automations to be run during the PaymentIntent lifecycle. */
-    public Builder setAsyncWorkflows(
-        PaymentIntentIncrementAuthorizationParams.AsyncWorkflows asyncWorkflows) {
-      this.asyncWorkflows = asyncWorkflows;
       return this;
     }
 
@@ -233,6 +226,12 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       return this;
     }
 
+    /** Automations to be run during the PaymentIntent lifecycle. */
+    public Builder setHooks(PaymentIntentIncrementAuthorizationParams.Hooks hooks) {
+      this.hooks = hooks;
+      return this;
+    }
+
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
@@ -292,7 +291,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class AsyncWorkflows {
+  public static class Hooks {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -306,7 +305,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     @SerializedName("inputs")
     Inputs inputs;
 
-    private AsyncWorkflows(Map<String, Object> extraParams, Inputs inputs) {
+    private Hooks(Map<String, Object> extraParams, Inputs inputs) {
       this.extraParams = extraParams;
       this.inputs = inputs;
     }
@@ -321,16 +320,14 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       private Inputs inputs;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentIntentIncrementAuthorizationParams.AsyncWorkflows build() {
-        return new PaymentIntentIncrementAuthorizationParams.AsyncWorkflows(
-            this.extraParams, this.inputs);
+      public PaymentIntentIncrementAuthorizationParams.Hooks build() {
+        return new PaymentIntentIncrementAuthorizationParams.Hooks(this.extraParams, this.inputs);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentIntentIncrementAuthorizationParams.AsyncWorkflows#extraParams} for the field
-       * documentation.
+       * PaymentIntentIncrementAuthorizationParams.Hooks#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -343,8 +340,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentIntentIncrementAuthorizationParams.AsyncWorkflows#extraParams} for the
-       * field documentation.
+       * See {@link PaymentIntentIncrementAuthorizationParams.Hooks#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -355,8 +352,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       }
 
       /** Arguments passed in automations. */
-      public Builder setInputs(
-          PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs inputs) {
+      public Builder setInputs(PaymentIntentIncrementAuthorizationParams.Hooks.Inputs inputs) {
         this.inputs = inputs;
         return this;
       }
@@ -393,17 +389,16 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
         private Tax tax;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs build() {
-          return new PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs(
+        public PaymentIntentIncrementAuthorizationParams.Hooks.Inputs build() {
+          return new PaymentIntentIncrementAuthorizationParams.Hooks.Inputs(
               this.extraParams, this.tax);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs#extraParams} for the
-         * field documentation.
+         * map. See {@link PaymentIntentIncrementAuthorizationParams.Hooks.Inputs#extraParams} for
+         * the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -416,9 +411,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link
-         * PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs#extraParams} for the
-         * field documentation.
+         * map. See {@link PaymentIntentIncrementAuthorizationParams.Hooks.Inputs#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -429,8 +423,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
         }
 
         /** Tax arguments for automations. */
-        public Builder setTax(
-            PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs.Tax tax) {
+        public Builder setTax(PaymentIntentIncrementAuthorizationParams.Hooks.Inputs.Tax tax) {
           this.tax = tax;
           return this;
         }
@@ -471,8 +464,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs.Tax build() {
-            return new PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs.Tax(
+          public PaymentIntentIncrementAuthorizationParams.Hooks.Inputs.Tax build() {
+            return new PaymentIntentIncrementAuthorizationParams.Hooks.Inputs.Tax(
                 this.calculation, this.extraParams);
           }
 
@@ -497,9 +490,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
           /**
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs.Tax#extraParams} for
-           * the field documentation.
+           * map. See {@link PaymentIntentIncrementAuthorizationParams.Hooks.Inputs.Tax#extraParams}
+           * for the field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -512,9 +504,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
           /**
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link
-           * PaymentIntentIncrementAuthorizationParams.AsyncWorkflows.Inputs.Tax#extraParams} for
-           * the field documentation.
+           * map. See {@link PaymentIntentIncrementAuthorizationParams.Hooks.Inputs.Tax#extraParams}
+           * for the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {

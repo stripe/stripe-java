@@ -24,10 +24,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("application_fee_amount")
   Object applicationFeeAmount;
 
-  /** Automations to be run during the PaymentIntent lifecycle. */
-  @SerializedName("async_workflows")
-  AsyncWorkflows asyncWorkflows;
-
   /** Controls when the funds will be captured from the customer's account. */
   @SerializedName("capture_method")
   CaptureMethod captureMethod;
@@ -70,6 +66,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    */
   @SerializedName("fx_quote")
   String fxQuote;
+
+  /** Automations to be run during the PaymentIntent lifecycle. */
+  @SerializedName("hooks")
+  Hooks hooks;
 
   /** ID of the mandate that's used for this payment. */
   @SerializedName("mandate")
@@ -185,13 +185,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   private PaymentIntentConfirmParams(
       Object applicationFeeAmount,
-      AsyncWorkflows asyncWorkflows,
       CaptureMethod captureMethod,
       String confirmationToken,
       Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
       String fxQuote,
+      Hooks hooks,
       String mandate,
       Object mandateData,
       Object offSession,
@@ -207,13 +207,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object shipping,
       Boolean useStripeSdk) {
     this.applicationFeeAmount = applicationFeeAmount;
-    this.asyncWorkflows = asyncWorkflows;
     this.captureMethod = captureMethod;
     this.confirmationToken = confirmationToken;
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
     this.fxQuote = fxQuote;
+    this.hooks = hooks;
     this.mandate = mandate;
     this.mandateData = mandateData;
     this.offSession = offSession;
@@ -237,8 +237,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   public static class Builder {
     private Object applicationFeeAmount;
 
-    private AsyncWorkflows asyncWorkflows;
-
     private CaptureMethod captureMethod;
 
     private String confirmationToken;
@@ -250,6 +248,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     private String fxQuote;
+
+    private Hooks hooks;
 
     private String mandate;
 
@@ -283,13 +283,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
           this.applicationFeeAmount,
-          this.asyncWorkflows,
           this.captureMethod,
           this.confirmationToken,
           this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
           this.fxQuote,
+          this.hooks,
           this.mandate,
           this.mandateData,
           this.offSession,
@@ -327,12 +327,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      */
     public Builder setApplicationFeeAmount(EmptyParam applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
-      return this;
-    }
-
-    /** Automations to be run during the PaymentIntent lifecycle. */
-    public Builder setAsyncWorkflows(PaymentIntentConfirmParams.AsyncWorkflows asyncWorkflows) {
-      this.asyncWorkflows = asyncWorkflows;
       return this;
     }
 
@@ -424,6 +418,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      */
     public Builder setFxQuote(String fxQuote) {
       this.fxQuote = fxQuote;
+      return this;
+    }
+
+    /** Automations to be run during the PaymentIntent lifecycle. */
+    public Builder setHooks(PaymentIntentConfirmParams.Hooks hooks) {
+      this.hooks = hooks;
       return this;
     }
 
@@ -656,7 +656,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class AsyncWorkflows {
+  public static class Hooks {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -670,7 +670,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @SerializedName("inputs")
     Inputs inputs;
 
-    private AsyncWorkflows(Map<String, Object> extraParams, Inputs inputs) {
+    private Hooks(Map<String, Object> extraParams, Inputs inputs) {
       this.extraParams = extraParams;
       this.inputs = inputs;
     }
@@ -685,14 +685,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       private Inputs inputs;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public PaymentIntentConfirmParams.AsyncWorkflows build() {
-        return new PaymentIntentConfirmParams.AsyncWorkflows(this.extraParams, this.inputs);
+      public PaymentIntentConfirmParams.Hooks build() {
+        return new PaymentIntentConfirmParams.Hooks(this.extraParams, this.inputs);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentIntentConfirmParams.AsyncWorkflows#extraParams} for the field documentation.
+       * PaymentIntentConfirmParams.Hooks#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -705,8 +705,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentIntentConfirmParams.AsyncWorkflows#extraParams} for the field
-       * documentation.
+       * See {@link PaymentIntentConfirmParams.Hooks#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -717,7 +716,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       /** Arguments passed in automations. */
-      public Builder setInputs(PaymentIntentConfirmParams.AsyncWorkflows.Inputs inputs) {
+      public Builder setInputs(PaymentIntentConfirmParams.Hooks.Inputs inputs) {
         this.inputs = inputs;
         return this;
       }
@@ -754,15 +753,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private Tax tax;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public PaymentIntentConfirmParams.AsyncWorkflows.Inputs build() {
-          return new PaymentIntentConfirmParams.AsyncWorkflows.Inputs(this.extraParams, this.tax);
+        public PaymentIntentConfirmParams.Hooks.Inputs build() {
+          return new PaymentIntentConfirmParams.Hooks.Inputs(this.extraParams, this.tax);
         }
 
         /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentIntentConfirmParams.AsyncWorkflows.Inputs#extraParams} for the
-         * field documentation.
+         * map. See {@link PaymentIntentConfirmParams.Hooks.Inputs#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -775,8 +774,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentIntentConfirmParams.AsyncWorkflows.Inputs#extraParams} for the
-         * field documentation.
+         * map. See {@link PaymentIntentConfirmParams.Hooks.Inputs#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -787,7 +786,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /** Tax arguments for automations. */
-        public Builder setTax(PaymentIntentConfirmParams.AsyncWorkflows.Inputs.Tax tax) {
+        public Builder setTax(PaymentIntentConfirmParams.Hooks.Inputs.Tax tax) {
           this.tax = tax;
           return this;
         }
@@ -828,8 +827,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           private Map<String, Object> extraParams;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public PaymentIntentConfirmParams.AsyncWorkflows.Inputs.Tax build() {
-            return new PaymentIntentConfirmParams.AsyncWorkflows.Inputs.Tax(
+          public PaymentIntentConfirmParams.Hooks.Inputs.Tax build() {
+            return new PaymentIntentConfirmParams.Hooks.Inputs.Tax(
                 this.calculation, this.extraParams);
           }
 
@@ -854,8 +853,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           /**
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link PaymentIntentConfirmParams.AsyncWorkflows.Inputs.Tax#extraParams} for
-           * the field documentation.
+           * map. See {@link PaymentIntentConfirmParams.Hooks.Inputs.Tax#extraParams} for the field
+           * documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -868,8 +867,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           /**
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link PaymentIntentConfirmParams.AsyncWorkflows.Inputs.Tax#extraParams} for
-           * the field documentation.
+           * map. See {@link PaymentIntentConfirmParams.Hooks.Inputs.Tax#extraParams} for the field
+           * documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
