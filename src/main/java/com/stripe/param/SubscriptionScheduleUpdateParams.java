@@ -60,8 +60,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   List<SubscriptionScheduleUpdateParams.Phase> phases;
 
   /**
-   * If the update changes the current phase, indicates whether the changes should be prorated. The
-   * default value is {@code create_prorations}.
+   * If the update changes the billing configuration (item price, quantity, etc.) of the current
+   * phase, indicates how prorations from this change should be handled. The default value is {@code
+   * create_prorations}.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -261,8 +262,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If the update changes the current phase, indicates whether the changes should be prorated.
-     * The default value is {@code create_prorations}.
+     * If the update changes the billing configuration (item price, quantity, etc.) of the current
+     * phase, indicates how prorations from this change should be handled. The default value is
+     * {@code create_prorations}.
      */
     public Builder setProrationBehavior(
         SubscriptionScheduleUpdateParams.ProrationBehavior prorationBehavior) {
@@ -1329,14 +1331,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Object onBehalfOf;
 
     /**
-     * Whether the subscription schedule will create <a
+     * Controls whether the subscription schedule should create <a
      * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
-     * transitioning to this phase. The default value is {@code create_prorations}. This setting
-     * controls prorations when a phase is started asynchronously and it is persisted as a field on
-     * the phase. It's different from the request-level <a
+     * transitioning to this phase if there is a difference in billing configuration. It's different
+     * from the request-level <a
      * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
      * parameter which controls what happens if the update request affects the billing configuration
-     * of the current phase.
+     * (item price, quantity, etc.) of the current phase.
      */
     @SerializedName("proration_behavior")
     ProrationBehavior prorationBehavior;
@@ -1861,14 +1862,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Whether the subscription schedule will create <a
+       * Controls whether the subscription schedule should create <a
        * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
-       * transitioning to this phase. The default value is {@code create_prorations}. This setting
-       * controls prorations when a phase is started asynchronously and it is persisted as a field
-       * on the phase. It's different from the request-level <a
+       * transitioning to this phase if there is a difference in billing configuration. It's
+       * different from the request-level <a
        * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
        * parameter which controls what happens if the update request affects the billing
-       * configuration of the current phase.
+       * configuration (item price, quantity, etc.) of the current phase.
        */
       public Builder setProrationBehavior(
           SubscriptionScheduleUpdateParams.Phase.ProrationBehavior prorationBehavior) {

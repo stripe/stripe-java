@@ -13734,6 +13734,13 @@ public class SessionCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Enable customers to choose if they wish to remove their saved payment methods. Disabled by
+     * default.
+     */
+    @SerializedName("payment_method_remove")
+    PaymentMethodRemove paymentMethodRemove;
+
+    /**
      * Enable customers to choose if they wish to save their payment method for future use. Disabled
      * by default.
      */
@@ -13744,9 +13751,11 @@ public class SessionCreateParams extends ApiRequestParams {
         List<SessionCreateParams.SavedPaymentMethodOptions.AllowRedisplayFilter>
             allowRedisplayFilters,
         Map<String, Object> extraParams,
+        PaymentMethodRemove paymentMethodRemove,
         PaymentMethodSave paymentMethodSave) {
       this.allowRedisplayFilters = allowRedisplayFilters;
       this.extraParams = extraParams;
+      this.paymentMethodRemove = paymentMethodRemove;
       this.paymentMethodSave = paymentMethodSave;
     }
 
@@ -13760,12 +13769,17 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private PaymentMethodRemove paymentMethodRemove;
+
       private PaymentMethodSave paymentMethodSave;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.SavedPaymentMethodOptions build() {
         return new SessionCreateParams.SavedPaymentMethodOptions(
-            this.allowRedisplayFilters, this.extraParams, this.paymentMethodSave);
+            this.allowRedisplayFilters,
+            this.extraParams,
+            this.paymentMethodRemove,
+            this.paymentMethodSave);
       }
 
       /**
@@ -13826,6 +13840,16 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Enable customers to choose if they wish to remove their saved payment methods. Disabled by
+       * default.
+       */
+      public Builder setPaymentMethodRemove(
+          SessionCreateParams.SavedPaymentMethodOptions.PaymentMethodRemove paymentMethodRemove) {
+        this.paymentMethodRemove = paymentMethodRemove;
+        return this;
+      }
+
+      /**
        * Enable customers to choose if they wish to save their payment method for future use.
        * Disabled by default.
        */
@@ -13850,6 +13874,21 @@ public class SessionCreateParams extends ApiRequestParams {
       private final String value;
 
       AllowRedisplayFilter(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum PaymentMethodRemove implements ApiRequestParams.EnumParam {
+      @SerializedName("disabled")
+      DISABLED("disabled"),
+
+      @SerializedName("enabled")
+      ENABLED("enabled");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      PaymentMethodRemove(String value) {
         this.value = value;
       }
     }

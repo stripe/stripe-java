@@ -167,8 +167,8 @@ public class AlertCreateParams extends ApiRequestParams {
     Long gte;
 
     /**
-     * The <a href="https://stripe.com/api/billing/meter">Billing Meter</a> ID whose usage is
-     * monitored.
+     * <strong>Required.</strong> The <a href="https://stripe.com/api/billing/meter">Billing
+     * Meter</a> ID whose usage is monitored.
      */
     @SerializedName("meter")
     String meter;
@@ -273,8 +273,8 @@ public class AlertCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The <a href="https://stripe.com/api/billing/meter">Billing Meter</a> ID whose usage is
-       * monitored.
+       * <strong>Required.</strong> The <a href="https://stripe.com/api/billing/meter">Billing
+       * Meter</a> ID whose usage is monitored.
        */
       public Builder setMeter(String meter) {
         this.meter = meter;

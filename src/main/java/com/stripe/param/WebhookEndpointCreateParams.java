@@ -615,7 +615,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_03_31_BASIL("2025-03-31.basil"),
 
     @SerializedName("2025-04-30.basil")
-    VERSION_2025_04_30_BASIL("2025-04-30.basil");
+    VERSION_2025_04_30_BASIL("2025-04-30.basil"),
+
+    @SerializedName("2025-05-28.basil")
+    VERSION_2025_05_28_BASIL("2025-05-28.basil");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -905,6 +908,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),
+
+    @SerializedName("invoice.payment.paid")
+    INVOICE__PAYMENT__PAID("invoice.payment.paid"),
 
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),

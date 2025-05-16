@@ -97,7 +97,7 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("object")
   String object;
 
-  /** The parent that generated this invoice. */
+  /** The parent that generated this line item. */
   @SerializedName("parent")
   Parent parent;
 
