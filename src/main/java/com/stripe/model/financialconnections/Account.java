@@ -74,6 +74,15 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("inferred_balances_refresh")
   InferredBalancesRefresh inferredBalancesRefresh;
 
+  /**
+   * The ID of the Financial Connections Institution this account belongs to. Note that this
+   * relationship may sometimes change in rare circumstances (e.g. institution mergers).
+   */
+  @SerializedName("institution")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Institution> institution;
+
   /** The name of the institution that holds this account. */
   @SerializedName("institution_name")
   String institutionName;
@@ -148,6 +157,24 @@ public class Account extends ApiResource implements HasId {
   /** The state of the most recent attempt to refresh the account transactions. */
   @SerializedName("transaction_refresh")
   TransactionRefresh transactionRefresh;
+
+  /** Get ID of expandable {@code institution} object. */
+  public String getInstitution() {
+    return (this.institution != null) ? this.institution.getId() : null;
+  }
+
+  public void setInstitution(String id) {
+    this.institution = ApiResource.setExpandableFieldId(id, this.institution);
+  }
+
+  /** Get expanded {@code institution}. */
+  public Institution getInstitutionObject() {
+    return (this.institution != null) ? this.institution.getExpanded() : null;
+  }
+
+  public void setInstitutionObject(Institution expandableObject) {
+    this.institution = new ExpandableField<Institution>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code ownership} object. */
   public String getOwnership() {
@@ -807,6 +834,7 @@ public class Account extends ApiResource implements HasId {
     trySetResponseGetter(balance, responseGetter);
     trySetResponseGetter(balanceRefresh, responseGetter);
     trySetResponseGetter(inferredBalancesRefresh, responseGetter);
+    trySetResponseGetter(institution, responseGetter);
     trySetResponseGetter(ownership, responseGetter);
     trySetResponseGetter(ownershipRefresh, responseGetter);
     trySetResponseGetter(transactionRefresh, responseGetter);

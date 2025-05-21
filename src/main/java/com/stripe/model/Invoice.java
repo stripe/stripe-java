@@ -1096,10 +1096,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>You can also preview the effects of creating or updating a subscription or subscription
    * schedule, including a preview of any prorations that will take place. To ensure that the actual
    * proration is calculated exactly the same as the previewed proration, you should pass the {@code
-   * subscription_details.proration_date} parameter when doing the actual subscription update. The
-   * recommended way to get only the prorations being previewed is to consider only proration line
-   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
-   * value passed in the request.
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1124,10 +1124,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>You can also preview the effects of creating or updating a subscription or subscription
    * schedule, including a preview of any prorations that will take place. To ensure that the actual
    * proration is calculated exactly the same as the previewed proration, you should pass the {@code
-   * subscription_details.proration_date} parameter when doing the actual subscription update. The
-   * recommended way to get only the prorations being previewed is to consider only proration line
-   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
-   * value passed in the request.
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1152,10 +1152,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>You can also preview the effects of creating or updating a subscription or subscription
    * schedule, including a preview of any prorations that will take place. To ensure that the actual
    * proration is calculated exactly the same as the previewed proration, you should pass the {@code
-   * subscription_details.proration_date} parameter when doing the actual subscription update. The
-   * recommended way to get only the prorations being previewed is to consider only proration line
-   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
-   * value passed in the request.
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1180,10 +1180,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>You can also preview the effects of creating or updating a subscription or subscription
    * schedule, including a preview of any prorations that will take place. To ensure that the actual
    * proration is calculated exactly the same as the previewed proration, you should pass the {@code
-   * subscription_details.proration_date} parameter when doing the actual subscription update. The
-   * recommended way to get only the prorations being previewed is to consider only proration line
-   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
-   * value passed in the request.
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1212,10 +1212,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>You can also preview the effects of creating or updating a subscription or subscription
    * schedule, including a preview of any prorations that will take place. To ensure that the actual
    * proration is calculated exactly the same as the previewed proration, you should pass the {@code
-   * subscription_details.proration_date} parameter when doing the actual subscription update. The
-   * recommended way to get only the prorations being previewed is to consider only proration line
-   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
-   * value passed in the request.
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
@@ -1240,10 +1240,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <p>You can also preview the effects of creating or updating a subscription or subscription
    * schedule, including a preview of any prorations that will take place. To ensure that the actual
    * proration is calculated exactly the same as the previewed proration, you should pass the {@code
-   * subscription_details.proration_date} parameter when doing the actual subscription update. The
-   * recommended way to get only the prorations being previewed is to consider only proration line
-   * items where {@code period[start]} is equal to the {@code subscription_details.proration_date}
-   * value passed in the request.
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
    *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
