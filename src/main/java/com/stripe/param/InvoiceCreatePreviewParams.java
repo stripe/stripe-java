@@ -3105,6 +3105,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       BillingCycleAnchor billingCycleAnchor;
 
       /**
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+       * billing period. Pass an empty string to remove previously-defined thresholds.
+       */
+      @SerializedName("billing_thresholds")
+      Object billingThresholds;
+
+      /**
        * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
        * Stripe will attempt to pay the underlying subscription at the end of each billing cycle
        * using the default source attached to the customer. When sending an invoice, Stripe will
@@ -3257,6 +3264,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           BigDecimal applicationFeePercent,
           AutomaticTax automaticTax,
           BillingCycleAnchor billingCycleAnchor,
+          Object billingThresholds,
           CollectionMethod collectionMethod,
           String currency,
           String defaultPaymentMethod,
@@ -3279,6 +3287,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         this.applicationFeePercent = applicationFeePercent;
         this.automaticTax = automaticTax;
         this.billingCycleAnchor = billingCycleAnchor;
+        this.billingThresholds = billingThresholds;
         this.collectionMethod = collectionMethod;
         this.currency = currency;
         this.defaultPaymentMethod = defaultPaymentMethod;
@@ -3312,6 +3321,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         private AutomaticTax automaticTax;
 
         private BillingCycleAnchor billingCycleAnchor;
+
+        private Object billingThresholds;
 
         private CollectionMethod collectionMethod;
 
@@ -3356,6 +3367,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               this.applicationFeePercent,
               this.automaticTax,
               this.billingCycleAnchor,
+              this.billingThresholds,
               this.collectionMethod,
               this.currency,
               this.defaultPaymentMethod,
@@ -3436,6 +3448,25 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingCycleAnchor
                 billingCycleAnchor) {
           this.billingCycleAnchor = billingCycleAnchor;
+          return this;
+        }
+
+        /**
+         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+         * new billing period. Pass an empty string to remove previously-defined thresholds.
+         */
+        public Builder setBillingThresholds(
+            InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds billingThresholds) {
+          this.billingThresholds = billingThresholds;
+          return this;
+        }
+
+        /**
+         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+         * new billing period. Pass an empty string to remove previously-defined thresholds.
+         */
+        public Builder setBillingThresholds(EmptyParam billingThresholds) {
+          this.billingThresholds = billingThresholds;
           return this;
         }
 
@@ -4545,6 +4576,105 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class BillingThresholds {
+        /** Monetary threshold that triggers the subscription to advance to a new billing period. */
+        @SerializedName("amount_gte")
+        Long amountGte;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is
+         * reached. If true, {@code billing_cycle_anchor} will be updated to the date/time the
+         * threshold was last reached; otherwise, the value will remain unchanged.
+         */
+        @SerializedName("reset_billing_cycle_anchor")
+        Boolean resetBillingCycleAnchor;
+
+        private BillingThresholds(
+            Long amountGte, Map<String, Object> extraParams, Boolean resetBillingCycleAnchor) {
+          this.amountGte = amountGte;
+          this.extraParams = extraParams;
+          this.resetBillingCycleAnchor = resetBillingCycleAnchor;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amountGte;
+
+          private Map<String, Object> extraParams;
+
+          private Boolean resetBillingCycleAnchor;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds build() {
+            return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds(
+                this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
+          }
+
+          /**
+           * Monetary threshold that triggers the subscription to advance to a new billing period.
+           */
+          public Builder setAmountGte(Long amountGte) {
+            this.amountGte = amountGte;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingThresholds#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is
+           * reached. If true, {@code billing_cycle_anchor} will be updated to the date/time the
+           * threshold was last reached; otherwise, the value will remain unchanged.
+           */
+          public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
+            this.resetBillingCycleAnchor = resetBillingCycleAnchor;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Discount {
         /** ID of the coupon to create a new discount for. */
         @SerializedName("coupon")
@@ -4917,6 +5047,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Item {
+        /**
+         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+         * new billing period. Pass an empty string to remove previously-defined thresholds.
+         */
+        @SerializedName("billing_thresholds")
+        Object billingThresholds;
+
         /** The coupons to redeem into discounts for the subscription item. */
         @SerializedName("discounts")
         Object discounts;
@@ -4980,6 +5117,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Object taxRates;
 
         private Item(
+            Object billingThresholds,
             Object discounts,
             Map<String, Object> extraParams,
             Map<String, String> metadata,
@@ -4988,6 +5126,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             PriceData priceData,
             Long quantity,
             Object taxRates) {
+          this.billingThresholds = billingThresholds;
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -5003,6 +5142,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Object billingThresholds;
+
           private Object discounts;
 
           private Map<String, Object> extraParams;
@@ -5022,6 +5163,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item build() {
             return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item(
+                this.billingThresholds,
                 this.discounts,
                 this.extraParams,
                 this.metadata,
@@ -5030,6 +5172,26 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                 this.priceData,
                 this.quantity,
                 this.taxRates);
+          }
+
+          /**
+           * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+           * new billing period. Pass an empty string to remove previously-defined thresholds.
+           */
+          public Builder setBillingThresholds(
+              InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds
+                  billingThresholds) {
+            this.billingThresholds = billingThresholds;
+            return this;
+          }
+
+          /**
+           * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+           * new billing period. Pass an empty string to remove previously-defined thresholds.
+           */
+          public Builder setBillingThresholds(EmptyParam billingThresholds) {
+            this.billingThresholds = billingThresholds;
+            return this;
           }
 
           /**
@@ -5223,6 +5385,92 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           public Builder setTaxRates(List<String> taxRates) {
             this.taxRates = taxRates;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BillingThresholds {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> Number of units that meets the billing threshold to advance
+           * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
+           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+           * threshold</a>)
+           */
+          @SerializedName("usage_gte")
+          Long usageGte;
+
+          private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
+            this.extraParams = extraParams;
+            this.usageGte = usageGte;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long usageGte;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds(
+                  this.extraParams, this.usageGte);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Number of units that meets the billing threshold to
+             * advance the subscription to a new billing period (e.g., it takes 10 $5 units to meet
+             * a $50 <a
+             * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+             * threshold</a>)
+             */
+            public Builder setUsageGte(Long usageGte) {
+              this.usageGte = usageGte;
+              return this;
+            }
           }
         }
 
@@ -6306,6 +6554,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Item {
       /**
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+       * billing period. Pass an empty string to remove previously-defined thresholds.
+       */
+      @SerializedName("billing_thresholds")
+      Object billingThresholds;
+
+      /**
        * Delete all usage for a given subscription item. You must pass this when deleting a usage
        * records subscription item. {@code clear_usage} has no effect if the plan has a billing
        * meter attached.
@@ -6377,6 +6632,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       Object taxRates;
 
       private Item(
+          Object billingThresholds,
           Boolean clearUsage,
           Boolean deleted,
           Object discounts,
@@ -6388,6 +6644,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           PriceData priceData,
           Long quantity,
           Object taxRates) {
+        this.billingThresholds = billingThresholds;
         this.clearUsage = clearUsage;
         this.deleted = deleted;
         this.discounts = discounts;
@@ -6406,6 +6663,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Object billingThresholds;
+
         private Boolean clearUsage;
 
         private Boolean deleted;
@@ -6431,6 +6690,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceCreatePreviewParams.SubscriptionDetails.Item build() {
           return new InvoiceCreatePreviewParams.SubscriptionDetails.Item(
+              this.billingThresholds,
               this.clearUsage,
               this.deleted,
               this.discounts,
@@ -6442,6 +6702,26 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               this.priceData,
               this.quantity,
               this.taxRates);
+        }
+
+        /**
+         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+         * new billing period. Pass an empty string to remove previously-defined thresholds.
+         */
+        public Builder setBillingThresholds(
+            InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds
+                billingThresholds) {
+          this.billingThresholds = billingThresholds;
+          return this;
+        }
+
+        /**
+         * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+         * new billing period. Pass an empty string to remove previously-defined thresholds.
+         */
+        public Builder setBillingThresholds(EmptyParam billingThresholds) {
+          this.billingThresholds = billingThresholds;
+          return this;
         }
 
         /**
@@ -6679,6 +6959,91 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         public Builder setTaxRates(List<String> taxRates) {
           this.taxRates = taxRates;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillingThresholds {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> Number of units that meets the billing threshold to advance
+         * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
+         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+         * threshold</a>)
+         */
+        @SerializedName("usage_gte")
+        Long usageGte;
+
+        private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
+          this.extraParams = extraParams;
+          this.usageGte = usageGte;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long usageGte;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds build() {
+            return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds(
+                this.extraParams, this.usageGte);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.BillingThresholds#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Number of units that meets the billing threshold to advance
+           * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
+           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+           * threshold</a>)
+           */
+          public Builder setUsageGte(Long usageGte) {
+            this.usageGte = usageGte;
+            return this;
+          }
         }
       }
 
