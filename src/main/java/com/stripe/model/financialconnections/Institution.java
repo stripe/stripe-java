@@ -27,6 +27,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Institution extends ApiResource implements HasId {
+  /** The list of countries supported by this institution, formatted as ISO country codes. */
+  @SerializedName("countries")
+  List<String> countries;
+
   @SerializedName("features")
   Features features;
 

@@ -81,6 +81,9 @@ public class Balance extends ApiResource {
   @SerializedName("pending")
   List<Balance.Pending> pending;
 
+  @SerializedName("refund_and_dispute_prefunding")
+  RefundAndDisputePrefunding refundAndDisputePrefunding;
+
   /**
    * Retrieves the current account balance, based on the authentication that was used to make the
    * request. For a sample request, see <a
@@ -472,9 +475,135 @@ public class Balance extends ApiResource {
     }
   }
 
+  /**
+   * For more details about RefundAndDisputePrefunding, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RefundAndDisputePrefunding extends StripeObject {
+    /** Funds that are available for use. */
+    @SerializedName("available")
+    List<Balance.RefundAndDisputePrefunding.Available> available;
+
+    /** Funds that are pending. */
+    @SerializedName("pending")
+    List<Balance.RefundAndDisputePrefunding.Pending> pending;
+
+    /**
+     * For more details about Available, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Available extends StripeObject {
+      /** Balance amount. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      @SerializedName("source_types")
+      SourceTypes sourceTypes;
+
+      /**
+       * For more details about SourceTypes, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SourceTypes extends StripeObject {
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+         * payments</a>.
+         */
+        @SerializedName("bank_account")
+        Long bankAccount;
+
+        /**
+         * Amount coming from most payment methods, including cards as well as <a
+         * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+         */
+        @SerializedName("card")
+        Long card;
+
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+         * payment method.
+         */
+        @SerializedName("fpx")
+        Long fpx;
+      }
+    }
+
+    /**
+     * For more details about Pending, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pending extends StripeObject {
+      /** Balance amount. */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      @SerializedName("source_types")
+      SourceTypes sourceTypes;
+
+      /**
+       * For more details about SourceTypes, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SourceTypes extends StripeObject {
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/ach-deprecated">legacy US ACH
+         * payments</a>.
+         */
+        @SerializedName("bank_account")
+        Long bankAccount;
+
+        /**
+         * Amount coming from most payment methods, including cards as well as <a
+         * href="https://docs.stripe.com/payments/bank-debits">non-legacy bank debits</a>.
+         */
+        @SerializedName("card")
+        Long card;
+
+        /**
+         * Amount coming from <a href="https://docs.stripe.com/payments/fpx">FPX</a>, a Malaysian
+         * payment method.
+         */
+        @SerializedName("fpx")
+        Long fpx;
+      }
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(issuing, responseGetter);
+    trySetResponseGetter(refundAndDisputePrefunding, responseGetter);
   }
 }

@@ -85,9 +85,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  @SerializedName("async_workflows")
-  AsyncWorkflows asyncWorkflows;
-
   /**
    * Settings to configure compatible payment methods from the <a
    * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard.</a>
@@ -200,6 +197,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /** The FX Quote used for the PaymentIntent. */
   @SerializedName("fx_quote")
   String fxQuote;
+
+  @SerializedName("hooks")
+  Hooks hooks;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -1732,13 +1732,40 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * For more details about AsyncWorkflows, please refer to the <a
+   * For more details about AutomaticPaymentMethods, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AsyncWorkflows extends StripeObject {
+  public static class AutomaticPaymentMethods extends StripeObject {
+    /**
+     * Controls whether this PaymentIntent will accept redirect-based payment methods.
+     *
+     * <p>Redirect-based payment methods may require your customer to be redirected to a payment
+     * method's app or site for authentication or additional steps. To <a
+     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent,
+     * you may be required to provide a {@code return_url} to redirect customers back to your site
+     * after they authenticate or complete the payment.
+     *
+     * <p>One of {@code always}, or {@code never}.
+     */
+    @SerializedName("allow_redirects")
+    String allowRedirects;
+
+    /** Automatically calculates compatible payment methods. */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
+   * For more details about Hooks, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Hooks extends StripeObject {
     @SerializedName("inputs")
     Inputs inputs;
 
@@ -1766,33 +1793,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String calculation;
       }
     }
-  }
-
-  /**
-   * For more details about AutomaticPaymentMethods, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class AutomaticPaymentMethods extends StripeObject {
-    /**
-     * Controls whether this PaymentIntent will accept redirect-based payment methods.
-     *
-     * <p>Redirect-based payment methods may require your customer to be redirected to a payment
-     * method's app or site for authentication or additional steps. To <a
-     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent,
-     * you may be required to provide a {@code return_url} to redirect customers back to your site
-     * after they authenticate or complete the payment.
-     *
-     * <p>One of {@code always}, or {@code never}.
-     */
-    @SerializedName("allow_redirects")
-    String allowRedirects;
-
-    /** Automatically calculates compatible payment methods. */
-    @SerializedName("enabled")
-    Boolean enabled;
   }
 
   /**
@@ -1843,8 +1843,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     SwishHandleRedirectOrDisplayQrCode swishHandleRedirectOrDisplayQrCode;
 
     /**
-     * Type of the next action to perform, one of {@code redirect_to_url}, {@code use_stripe_sdk},
-     * {@code alipay_handle_redirect}, {@code oxxo_display_details}, or {@code
+     * Type of the next action to perform. Refer to the other child attributes under {@code
+     * next_action} for available values. Examples include: {@code redirect_to_url}, {@code
+     * use_stripe_sdk}, {@code alipay_handle_redirect}, {@code oxxo_display_details}, or {@code
      * verify_with_microdeposits}.
      */
     @SerializedName("type")
@@ -2801,6 +2802,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("delivery")
       Delivery delivery;
 
+      @SerializedName("distance")
+      Distance distance;
+
       /** The details of the drivers associated with the trip. */
       @SerializedName("drivers")
       List<PaymentIntent.PaymentDetails.CarRental.Driver> drivers;
@@ -2819,6 +2823,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** Car pick-up time. Measured in seconds since the Unix epoch. */
       @SerializedName("pickup_at")
       Long pickupAt;
+
+      /** Name of the pickup location. */
+      @SerializedName("pickup_location_name")
+      String pickupLocationName;
 
       /** Rental rate. */
       @SerializedName("rate_amount")
@@ -2842,9 +2850,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("return_at")
       Long returnAt;
 
+      /** Name of the return location. */
+      @SerializedName("return_location_name")
+      String returnLocationName;
+
       /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
       @SerializedName("tax_exempt")
       Boolean taxExempt;
+
+      /** The vehicle identification number of the car. */
+      @SerializedName("vehicle_identification_number")
+      String vehicleIdentificationNumber;
 
       /**
        * For more details about Affiliate, please refer to the <a
@@ -2901,6 +2917,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       }
 
       /**
+       * For more details about Distance, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Distance extends StripeObject {
+        /** Distance traveled. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Unit of measurement for the distance traveled. One of {@code miles} or {@code kilometers}
+         */
+        @SerializedName("unit")
+        String unit;
+      }
+
+      /**
        * For more details about Driver, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -2908,6 +2943,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Driver extends StripeObject {
+        /** Driver's identification number. */
+        @SerializedName("driver_identification_number")
+        String driverIdentificationNumber;
+
+        /** Driver's tax number. */
+        @SerializedName("driver_tax_number")
+        String driverTaxNumber;
+
         /** Full name of the driver on the reservation. */
         @SerializedName("name")
         String name;
@@ -3246,6 +3289,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("samsung_pay")
     SamsungPay samsungPay;
+
+    @SerializedName("satispay")
+    Satispay satispay;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -3697,7 +3743,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Billie extends StripeObject {}
+    public static class Billie extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -5541,6 +5595,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     }
 
     /**
+     * For more details about Satispay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
      * For more details about SepaDebit, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -6129,9 +6200,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(application, responseGetter);
-    trySetResponseGetter(asyncWorkflows, responseGetter);
     trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(hooks, responseGetter);
     trySetResponseGetter(lastPaymentError, responseGetter);
     trySetResponseGetter(latestCharge, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);

@@ -144,6 +144,9 @@ public class AccountSession extends ApiResource {
     @SerializedName("capital_financing_promotion")
     CapitalFinancingPromotion capitalFinancingPromotion;
 
+    @SerializedName("disputes_list")
+    DisputesList disputesList;
+
     @SerializedName("documents")
     Documents documents;
 
@@ -164,6 +167,9 @@ public class AccountSession extends ApiResource {
 
     @SerializedName("payment_details")
     PaymentDetails paymentDetails;
+
+    @SerializedName("payment_disputes")
+    PaymentDisputes paymentDisputes;
 
     @SerializedName("payments")
     Payments payments;
@@ -409,6 +415,56 @@ public class AccountSession extends ApiResource {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about DisputesList, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisputesList extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether to allow capturing and cancelling payment intents. This is {@code true} by
+         * default.
+         */
+        @SerializedName("capture_payments")
+        Boolean capturePayments;
+
+        /**
+         * Whether to allow connected accounts to manage destination charges that are created on
+         * behalf of them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
+
+        /**
+         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * disputes. This is {@code true} by default.
+         */
+        @SerializedName("dispute_management")
+        Boolean disputeManagement;
+
+        /** Whether to allow sending refunds. This is {@code true} by default. */
+        @SerializedName("refund_management")
+        Boolean refundManagement;
+      }
     }
 
     /**
@@ -677,6 +733,49 @@ public class AccountSession extends ApiResource {
         @SerializedName("capture_payments")
         Boolean capturePayments;
 
+        /**
+         * Whether to allow connected accounts to manage destination charges that are created on
+         * behalf of them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
+
+        /**
+         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * disputes. This is {@code true} by default.
+         */
+        @SerializedName("dispute_management")
+        Boolean disputeManagement;
+
+        /** Whether to allow sending refunds. This is {@code true} by default. */
+        @SerializedName("refund_management")
+        Boolean refundManagement;
+      }
+    }
+
+    /**
+     * For more details about PaymentDisputes, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentDisputes extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
         /**
          * Whether to allow connected accounts to manage destination charges that are created on
          * behalf of them. This is {@code false} by default.

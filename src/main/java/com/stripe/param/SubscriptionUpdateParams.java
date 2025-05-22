@@ -50,6 +50,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   BillingCycleAnchor billingCycleAnchor;
 
   /**
+   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+   * billing period. When updating, pass an empty string to remove previously-defined thresholds.
+   */
+  @SerializedName("billing_thresholds")
+  Object billingThresholds;
+
+  /**
    * A timestamp at which the subscription should cancel. If set to a date before the current period
    * ends, this will cause a proration if prorations have been enabled using {@code
    * proration_behavior}. If set during a future period, this will always cause a proration for that
@@ -60,7 +67,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}.
+   * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
+   * version. Please use {@code cancel_at} instead.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -240,11 +248,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   ProrationBehavior prorationBehavior;
 
   /**
-   * If set, the proration will be calculated as though the subscription was updated at the given
-   * time. This can be used to apply exactly the same proration that was previewed with <a
-   * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint. It can also
-   * be used to implement custom proration logic, such as prorating by day instead of by second, by
-   * providing the time that you wish to use for proration calculations.
+   * If set, prorations will be calculated as though the subscription was updated at the given time.
+   * This can be used to apply exactly the same prorations that were previewed with the <a
+   * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint. {@code
+   * proration_date} can also be used to implement custom proration logic, such as prorating by day
+   * instead of by second, by providing the time that you wish to use for proration calculations.
    */
   @SerializedName("proration_date")
   Long prorationDate;
@@ -260,9 +268,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * Unix timestamp representing the end of the trial period the customer will get before being
    * charged for the first time. This will always overwrite any trials that might apply via a
-   * subscribed plan. If set, trial_end will override the default trial period of the plan the
-   * customer is being subscribed to. The special value {@code now} can be provided to end the
-   * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
+   * subscribed plan. If set, {@code trial_end} will override the default trial period of the plan
+   * the customer is being subscribed to. The {@code billing_cycle_anchor} will be updated to the
+   * {@code trial_end} value. The special value {@code now} can be provided to end the customer's
+   * trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
    */
   @SerializedName("trial_end")
   Object trialEnd;
@@ -286,6 +295,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object applicationFeePercent,
       AutomaticTax automaticTax,
       BillingCycleAnchor billingCycleAnchor,
+      Object billingThresholds,
       Object cancelAt,
       Boolean cancelAtPeriodEnd,
       CancellationDetails cancellationDetails,
@@ -318,6 +328,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.applicationFeePercent = applicationFeePercent;
     this.automaticTax = automaticTax;
     this.billingCycleAnchor = billingCycleAnchor;
+    this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.cancellationDetails = cancellationDetails;
@@ -360,6 +371,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private BillingCycleAnchor billingCycleAnchor;
+
+    private Object billingThresholds;
 
     private Object cancelAt;
 
@@ -424,6 +437,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.applicationFeePercent,
           this.automaticTax,
           this.billingCycleAnchor,
+          this.billingThresholds,
           this.cancelAt,
           this.cancelAtPeriodEnd,
           this.cancellationDetails,
@@ -528,12 +542,42 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+     * billing period. When updating, pass an empty string to remove previously-defined thresholds.
+     */
+    public Builder setBillingThresholds(
+        SubscriptionUpdateParams.BillingThresholds billingThresholds) {
+      this.billingThresholds = billingThresholds;
+      return this;
+    }
+
+    /**
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+     * billing period. When updating, pass an empty string to remove previously-defined thresholds.
+     */
+    public Builder setBillingThresholds(EmptyParam billingThresholds) {
+      this.billingThresholds = billingThresholds;
+      return this;
+    }
+
+    /**
      * A timestamp at which the subscription should cancel. If set to a date before the current
      * period ends, this will cause a proration if prorations have been enabled using {@code
      * proration_behavior}. If set during a future period, this will always cause a proration for
      * that period.
      */
     public Builder setCancelAt(Long cancelAt) {
+      this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
+     */
+    public Builder setCancelAt(SubscriptionUpdateParams.CancelAt cancelAt) {
       this.cancelAt = cancelAt;
       return this;
     }
@@ -551,7 +595,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}.
+     * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
+     * version. Please use {@code cancel_at} instead.
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -1011,11 +1056,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If set, the proration will be calculated as though the subscription was updated at the given
-     * time. This can be used to apply exactly the same proration that was previewed with <a
-     * href="https://stripe.com/docs/api#upcoming_invoice">upcoming invoice</a> endpoint. It can
-     * also be used to implement custom proration logic, such as prorating by day instead of by
-     * second, by providing the time that you wish to use for proration calculations.
+     * If set, prorations will be calculated as though the subscription was updated at the given
+     * time. This can be used to apply exactly the same prorations that were previewed with the <a
+     * href="https://stripe.com/docs/api/invoices/create_preview">create preview</a> endpoint.
+     * {@code proration_date} can also be used to implement custom proration logic, such as
+     * prorating by day instead of by second, by providing the time that you wish to use for
+     * proration calculations.
      */
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;
@@ -1045,9 +1091,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * Unix timestamp representing the end of the trial period the customer will get before being
      * charged for the first time. This will always overwrite any trials that might apply via a
-     * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
+     * subscribed plan. If set, {@code trial_end} will override the default trial period of the plan
+     * the customer is being subscribed to. The {@code billing_cycle_anchor} will be updated to the
+     * {@code trial_end} value. The special value {@code now} can be provided to end the customer's
+     * trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
      */
     public Builder setTrialEnd(SubscriptionUpdateParams.TrialEnd trialEnd) {
       this.trialEnd = trialEnd;
@@ -1057,9 +1104,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * Unix timestamp representing the end of the trial period the customer will get before being
      * charged for the first time. This will always overwrite any trials that might apply via a
-     * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value {@code now} can be provided to end the
-     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
+     * subscribed plan. If set, {@code trial_end} will override the default trial period of the plan
+     * the customer is being subscribed to. The {@code billing_cycle_anchor} will be updated to the
+     * {@code trial_end} value. The special value {@code now} can be provided to end the customer's
+     * trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
      */
     public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
@@ -2112,6 +2160,99 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class BillingThresholds {
+    /** Monetary threshold that triggers the subscription to advance to a new billing period. */
+    @SerializedName("amount_gte")
+    Long amountGte;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached. If
+     * true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was last
+     * reached; otherwise, the value will remain unchanged.
+     */
+    @SerializedName("reset_billing_cycle_anchor")
+    Boolean resetBillingCycleAnchor;
+
+    private BillingThresholds(
+        Long amountGte, Map<String, Object> extraParams, Boolean resetBillingCycleAnchor) {
+      this.amountGte = amountGte;
+      this.extraParams = extraParams;
+      this.resetBillingCycleAnchor = resetBillingCycleAnchor;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amountGte;
+
+      private Map<String, Object> extraParams;
+
+      private Boolean resetBillingCycleAnchor;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionUpdateParams.BillingThresholds build() {
+        return new SubscriptionUpdateParams.BillingThresholds(
+            this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
+      }
+
+      /** Monetary threshold that triggers the subscription to advance to a new billing period. */
+      public Builder setAmountGte(Long amountGte) {
+        this.amountGte = amountGte;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.BillingThresholds#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.BillingThresholds#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached.
+       * If true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was
+       * last reached; otherwise, the value will remain unchanged.
+       */
+      public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
+        this.resetBillingCycleAnchor = resetBillingCycleAnchor;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class CancellationDetails {
     /**
      * Additional comments about why the user canceled the subscription, if the subscription was
@@ -2874,6 +3015,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Item {
     /**
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+     * billing period. Pass an empty string to remove previously-defined thresholds.
+     */
+    @SerializedName("billing_thresholds")
+    Object billingThresholds;
+
+    /**
      * Delete all usage for a given subscription item. You must pass this when deleting a usage
      * records subscription item. {@code clear_usage} has no effect if the plan has a billing meter
      * attached.
@@ -2945,6 +3093,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object taxRates;
 
     private Item(
+        Object billingThresholds,
         Boolean clearUsage,
         Boolean deleted,
         Object discounts,
@@ -2956,6 +3105,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         PriceData priceData,
         Long quantity,
         Object taxRates) {
+      this.billingThresholds = billingThresholds;
       this.clearUsage = clearUsage;
       this.deleted = deleted;
       this.discounts = discounts;
@@ -2974,6 +3124,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Object billingThresholds;
+
       private Boolean clearUsage;
 
       private Boolean deleted;
@@ -2999,6 +3151,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionUpdateParams.Item build() {
         return new SubscriptionUpdateParams.Item(
+            this.billingThresholds,
             this.clearUsage,
             this.deleted,
             this.discounts,
@@ -3010,6 +3163,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             this.priceData,
             this.quantity,
             this.taxRates);
+      }
+
+      /**
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+       * billing period. Pass an empty string to remove previously-defined thresholds.
+       */
+      public Builder setBillingThresholds(
+          SubscriptionUpdateParams.Item.BillingThresholds billingThresholds) {
+        this.billingThresholds = billingThresholds;
+        return this;
+      }
+
+      /**
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+       * billing period. Pass an empty string to remove previously-defined thresholds.
+       */
+      public Builder setBillingThresholds(EmptyParam billingThresholds) {
+        this.billingThresholds = billingThresholds;
+        return this;
       }
 
       /**
@@ -3253,6 +3425,88 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingThresholds {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
+       * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
+       * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+       * threshold</a>)
+       */
+      @SerializedName("usage_gte")
+      Long usageGte;
+
+      private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
+        this.extraParams = extraParams;
+        this.usageGte = usageGte;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long usageGte;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionUpdateParams.Item.BillingThresholds build() {
+          return new SubscriptionUpdateParams.Item.BillingThresholds(
+              this.extraParams, this.usageGte);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.BillingThresholds#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.BillingThresholds#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Number of units that meets the billing threshold to advance
+         * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
+         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+         * threshold</a>)
+         */
+        public Builder setUsageGte(Long usageGte) {
+          this.usageGte = usageGte;
+          return this;
+        }
       }
     }
 
@@ -6955,6 +7209,21 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private final String value;
 
     BillingCycleAnchor(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("max_period_end")
+    MAX_PERIOD_END("max_period_end"),
+
+    @SerializedName("min_period_end")
+    MIN_PERIOD_END("min_period_end");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CancelAt(String value) {
       this.value = value;
     }
   }

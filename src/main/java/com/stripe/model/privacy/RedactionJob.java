@@ -25,8 +25,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Redaction Jobs store the status of a redaction request. They are created when a redaction request
- * is made and track the redaction validation and execution.
+ * The Redaction Job object redacts Stripe objects. You can use it to coordinate the removal of
+ * personal information from selected objects, making them permanently inaccessible in the Stripe
+ * Dashboard and API.
  */
 @Getter
 @Setter
@@ -42,6 +43,13 @@ public class RedactionJob extends ApiResource implements HasId {
   String id;
 
   /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code privacy.redaction_job}.
@@ -49,42 +57,68 @@ public class RedactionJob extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The objects at the root level that are subject to redaction. */
+  /** The objects to redact in this job. */
   @SerializedName("objects")
   Objects objects;
 
   /**
-   * The status field represents the current state of the redaction job. It can take on any of the
-   * following values: VALIDATING, READY, REDACTING, SUCCEEDED, CANCELED, FAILED.
+   * The status of the job.
+   *
+   * <p>One of {@code canceled}, {@code canceling}, {@code created}, {@code failed}, {@code ready},
+   * {@code redacting}, {@code succeeded}, or {@code validating}.
    */
   @SerializedName("status")
   String status;
 
   /**
-   * Default is &quot;error&quot;. If &quot;error&quot;, we will make sure all objects in the graph
-   * are redactable in the 1st traversal, otherwise error. If &quot;fix&quot;, where possible, we
-   * will auto-fix any validation errors (e.g. by auto-transitioning objects to a terminal state,
-   * etc.) in the 2nd traversal before redacting
+   * Validation behavior determines how a job validates objects for redaction eligibility. Default
+   * is {@code error}.
+   *
+   * <p>One of {@code error}, or {@code fix}.
    */
   @SerializedName("validation_behavior")
   String validationBehavior;
 
-  /** Cancel redaction job method. */
+  /**
+   * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
+   * failed}.
+   *
+   * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
+   * canceled job cannot be used again.
+   */
   public RedactionJob cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Cancel redaction job method. */
+  /**
+   * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
+   * failed}.
+   *
+   * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
+   * canceled job cannot be used again.
+   */
   public RedactionJob cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
   }
 
-  /** Cancel redaction job method. */
+  /**
+   * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
+   * failed}.
+   *
+   * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
+   * canceled job cannot be used again.
+   */
   public RedactionJob cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
-  /** Cancel redaction job method. */
+  /**
+   * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
+   * failed}.
+   *
+   * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
+   * canceled job cannot be used again.
+   */
   public RedactionJob cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -95,12 +129,24 @@ public class RedactionJob extends ApiResource implements HasId {
     return getResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Cancel redaction job method. */
+  /**
+   * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
+   * failed}.
+   *
+   * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
+   * canceled job cannot be used again.
+   */
   public RedactionJob cancel(RedactionJobCancelParams params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
-  /** Cancel redaction job method. */
+  /**
+   * You can cancel a redaction job when it’s in one of these statuses: {@code ready}, {@code
+   * failed}.
+   *
+   * <p>Canceling the redaction job will abandon its attempt to redact the configured objects. A
+   * canceled job cannot be used again.
+   */
   public RedactionJob cancel(RedactionJobCancelParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -117,12 +163,12 @@ public class RedactionJob extends ApiResource implements HasId {
     return getResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Create redaction job method. */
+  /** Creates a redaction job. When a job is created, it will start to validate. */
   public static RedactionJob create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create redaction job method. */
+  /** Creates a redaction job. When a job is created, it will start to validate. */
   public static RedactionJob create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/privacy/redaction_jobs";
@@ -131,12 +177,12 @@ public class RedactionJob extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Create redaction job method. */
+  /** Creates a redaction job. When a job is created, it will start to validate. */
   public static RedactionJob create(RedactionJobCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Create redaction job method. */
+  /** Creates a redaction job. When a job is created, it will start to validate. */
   public static RedactionJob create(RedactionJobCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/privacy/redaction_jobs";
@@ -151,12 +197,12 @@ public class RedactionJob extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** List redaction jobs method... */
+  /** Returns a list of redaction jobs. */
   public static RedactionJobCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List redaction jobs method... */
+  /** Returns a list of redaction jobs. */
   public static RedactionJobCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/privacy/redaction_jobs";
@@ -165,12 +211,12 @@ public class RedactionJob extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, RedactionJobCollection.class);
   }
 
-  /** List redaction jobs method... */
+  /** Returns a list of redaction jobs. */
   public static RedactionJobCollection list(RedactionJobListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** List redaction jobs method... */
+  /** Returns a list of redaction jobs. */
   public static RedactionJobCollection list(RedactionJobListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/privacy/redaction_jobs";
@@ -185,17 +231,17 @@ public class RedactionJob extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, RedactionJobCollection.class);
   }
 
-  /** Retrieve redaction job method. */
+  /** Retrieves the details of a previously created redaction job. */
   public static RedactionJob retrieve(String job) throws StripeException {
     return retrieve(job, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve redaction job method. */
+  /** Retrieves the details of a previously created redaction job. */
   public static RedactionJob retrieve(String job, RequestOptions options) throws StripeException {
     return retrieve(job, (Map<String, Object>) null, options);
   }
 
-  /** Retrieve redaction job method. */
+  /** Retrieves the details of a previously created redaction job. */
   public static RedactionJob retrieve(
       String job, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/privacy/redaction_jobs/%s", ApiResource.urlEncodeId(job));
@@ -204,7 +250,7 @@ public class RedactionJob extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Retrieve redaction job method. */
+  /** Retrieves the details of a previously created redaction job. */
   public static RedactionJob retrieve(
       String job, RedactionJobRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -220,22 +266,58 @@ public class RedactionJob extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Run redaction job method. */
+  /**
+   * Run a redaction job in a {@code ready} status.
+   *
+   * <p>When you run a job, the configured objects will be redacted asynchronously. This action is
+   * irreversible and cannot be canceled once started.
+   *
+   * <p>The status of the job will move to {@code redacting}. Once all of the objects are redacted,
+   * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
+   * {@code fix}, the automatic fixes will be applied to objects at this step.
+   */
   public RedactionJob run() throws StripeException {
     return run((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Run redaction job method. */
+  /**
+   * Run a redaction job in a {@code ready} status.
+   *
+   * <p>When you run a job, the configured objects will be redacted asynchronously. This action is
+   * irreversible and cannot be canceled once started.
+   *
+   * <p>The status of the job will move to {@code redacting}. Once all of the objects are redacted,
+   * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
+   * {@code fix}, the automatic fixes will be applied to objects at this step.
+   */
   public RedactionJob run(RequestOptions options) throws StripeException {
     return run((Map<String, Object>) null, options);
   }
 
-  /** Run redaction job method. */
+  /**
+   * Run a redaction job in a {@code ready} status.
+   *
+   * <p>When you run a job, the configured objects will be redacted asynchronously. This action is
+   * irreversible and cannot be canceled once started.
+   *
+   * <p>The status of the job will move to {@code redacting}. Once all of the objects are redacted,
+   * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
+   * {@code fix}, the automatic fixes will be applied to objects at this step.
+   */
   public RedactionJob run(Map<String, Object> params) throws StripeException {
     return run(params, (RequestOptions) null);
   }
 
-  /** Run redaction job method. */
+  /**
+   * Run a redaction job in a {@code ready} status.
+   *
+   * <p>When you run a job, the configured objects will be redacted asynchronously. This action is
+   * irreversible and cannot be canceled once started.
+   *
+   * <p>The status of the job will move to {@code redacting}. Once all of the objects are redacted,
+   * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
+   * {@code fix}, the automatic fixes will be applied to objects at this step.
+   */
   public RedactionJob run(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -245,12 +327,30 @@ public class RedactionJob extends ApiResource implements HasId {
     return getResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Run redaction job method. */
+  /**
+   * Run a redaction job in a {@code ready} status.
+   *
+   * <p>When you run a job, the configured objects will be redacted asynchronously. This action is
+   * irreversible and cannot be canceled once started.
+   *
+   * <p>The status of the job will move to {@code redacting}. Once all of the objects are redacted,
+   * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
+   * {@code fix}, the automatic fixes will be applied to objects at this step.
+   */
   public RedactionJob run(RedactionJobRunParams params) throws StripeException {
     return run(params, (RequestOptions) null);
   }
 
-  /** Run redaction job method. */
+  /**
+   * Run a redaction job in a {@code ready} status.
+   *
+   * <p>When you run a job, the configured objects will be redacted asynchronously. This action is
+   * irreversible and cannot be canceled once started.
+   *
+   * <p>The status of the job will move to {@code redacting}. Once all of the objects are redacted,
+   * the status will become {@code succeeded}. If the job’s {@code validation_behavior} is set to
+   * {@code fix}, the automatic fixes will be applied to objects at this step.
+   */
   public RedactionJob run(RedactionJobRunParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -266,12 +366,22 @@ public class RedactionJob extends ApiResource implements HasId {
     return getResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Update redaction job method. */
+  /**
+   * Updates the properties of a redaction job without running or canceling the job.
+   *
+   * <p>If the job to update is in a {@code failed} status, it will not automatically start to
+   * validate. Once you applied all of the changes, use the validate API to start validation again.
+   */
   public RedactionJob update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Update redaction job method. */
+  /**
+   * Updates the properties of a redaction job without running or canceling the job.
+   *
+   * <p>If the job to update is in a {@code failed} status, it will not automatically start to
+   * validate. Once you applied all of the changes, use the validate API to start validation again.
+   */
   public RedactionJob update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -281,12 +391,22 @@ public class RedactionJob extends ApiResource implements HasId {
     return getResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Update redaction job method. */
+  /**
+   * Updates the properties of a redaction job without running or canceling the job.
+   *
+   * <p>If the job to update is in a {@code failed} status, it will not automatically start to
+   * validate. Once you applied all of the changes, use the validate API to start validation again.
+   */
   public RedactionJob update(RedactionJobUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Update redaction job method. */
+  /**
+   * Updates the properties of a redaction job without running or canceling the job.
+   *
+   * <p>If the job to update is in a {@code failed} status, it will not automatically start to
+   * validate. Once you applied all of the changes, use the validate API to start validation again.
+   */
   public RedactionJob update(RedactionJobUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -302,22 +422,62 @@ public class RedactionJob extends ApiResource implements HasId {
     return getResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Validate redaction job method. */
+  /**
+   * Validate a redaction job when it is in a {@code failed} status.
+   *
+   * <p>When a job is created, it automatically begins to validate on the configured objects’
+   * eligibility for redaction. Use this to validate the job again after its validation errors are
+   * resolved or the job’s {@code validation_behavior} is changed.
+   *
+   * <p>The status of the job will move to {@code validating}. Once all of the objects are
+   * validated, the status of the job will become {@code ready}. If there are any validation errors
+   * preventing the job from running, the status will become {@code failed}.
+   */
   public RedactionJob validate() throws StripeException {
     return validate((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Validate redaction job method. */
+  /**
+   * Validate a redaction job when it is in a {@code failed} status.
+   *
+   * <p>When a job is created, it automatically begins to validate on the configured objects’
+   * eligibility for redaction. Use this to validate the job again after its validation errors are
+   * resolved or the job’s {@code validation_behavior} is changed.
+   *
+   * <p>The status of the job will move to {@code validating}. Once all of the objects are
+   * validated, the status of the job will become {@code ready}. If there are any validation errors
+   * preventing the job from running, the status will become {@code failed}.
+   */
   public RedactionJob validate(RequestOptions options) throws StripeException {
     return validate((Map<String, Object>) null, options);
   }
 
-  /** Validate redaction job method. */
+  /**
+   * Validate a redaction job when it is in a {@code failed} status.
+   *
+   * <p>When a job is created, it automatically begins to validate on the configured objects’
+   * eligibility for redaction. Use this to validate the job again after its validation errors are
+   * resolved or the job’s {@code validation_behavior} is changed.
+   *
+   * <p>The status of the job will move to {@code validating}. Once all of the objects are
+   * validated, the status of the job will become {@code ready}. If there are any validation errors
+   * preventing the job from running, the status will become {@code failed}.
+   */
   public RedactionJob validate(Map<String, Object> params) throws StripeException {
     return validate(params, (RequestOptions) null);
   }
 
-  /** Validate redaction job method. */
+  /**
+   * Validate a redaction job when it is in a {@code failed} status.
+   *
+   * <p>When a job is created, it automatically begins to validate on the configured objects’
+   * eligibility for redaction. Use this to validate the job again after its validation errors are
+   * resolved or the job’s {@code validation_behavior} is changed.
+   *
+   * <p>The status of the job will move to {@code validating}. Once all of the objects are
+   * validated, the status of the job will become {@code ready}. If there are any validation errors
+   * preventing the job from running, the status will become {@code failed}.
+   */
   public RedactionJob validate(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -328,12 +488,32 @@ public class RedactionJob extends ApiResource implements HasId {
     return getResponseGetter().request(request, RedactionJob.class);
   }
 
-  /** Validate redaction job method. */
+  /**
+   * Validate a redaction job when it is in a {@code failed} status.
+   *
+   * <p>When a job is created, it automatically begins to validate on the configured objects’
+   * eligibility for redaction. Use this to validate the job again after its validation errors are
+   * resolved or the job’s {@code validation_behavior} is changed.
+   *
+   * <p>The status of the job will move to {@code validating}. Once all of the objects are
+   * validated, the status of the job will become {@code ready}. If there are any validation errors
+   * preventing the job from running, the status will become {@code failed}.
+   */
   public RedactionJob validate(RedactionJobValidateParams params) throws StripeException {
     return validate(params, (RequestOptions) null);
   }
 
-  /** Validate redaction job method. */
+  /**
+   * Validate a redaction job when it is in a {@code failed} status.
+   *
+   * <p>When a job is created, it automatically begins to validate on the configured objects’
+   * eligibility for redaction. Use this to validate the job again after its validation errors are
+   * resolved or the job’s {@code validation_behavior} is changed.
+   *
+   * <p>The status of the job will move to {@code validating}. Once all of the objects are
+   * validated, the status of the job will become {@code ready}. If there are any validation errors
+   * preventing the job from running, the status will become {@code failed}.
+   */
   public RedactionJob validate(RedactionJobValidateParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -358,30 +538,39 @@ public class RedactionJob extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Objects extends StripeObject {
+    /** Charge object identifiers usually starting with {@code ch_}. */
     @SerializedName("charges")
     List<String> charges;
 
+    /** CheckoutSession object identifiers starting with {@code cs_}. */
     @SerializedName("checkout_sessions")
     List<String> checkoutSessions;
 
+    /** Customer object identifiers starting with {@code cus_}. */
     @SerializedName("customers")
     List<String> customers;
 
+    /** Identity VerificationSessions object identifiers starting with {@code vs_}. */
     @SerializedName("identity_verification_sessions")
     List<String> identityVerificationSessions;
 
+    /** Invoice object identifiers starting with {@code in_}. */
     @SerializedName("invoices")
     List<String> invoices;
 
+    /** Issuing Cardholder object identifiers starting with {@code ich_}. */
     @SerializedName("issuing_cardholders")
     List<String> issuingCardholders;
 
+    /** PaymentIntent object identifiers starting with {@code pi_}. */
     @SerializedName("payment_intents")
     List<String> paymentIntents;
 
+    /** Fraud ValueListItem object identifiers starting with {@code rsli_}. */
     @SerializedName("radar_value_list_items")
     List<String> radarValueListItems;
 
+    /** SetupIntent object identifiers starting with {@code seti_}. */
     @SerializedName("setup_intents")
     List<String> setupIntents;
   }

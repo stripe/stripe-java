@@ -118,6 +118,9 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
     @SerializedName("card")
     Card card;
 
+    @SerializedName("card_present")
+    CardPresent cardPresent;
+
     @SerializedName("klarna")
     Klarna klarna;
 
@@ -132,6 +135,18 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      @SerializedName("commodity_code")
+      String commodityCode;
+    }
+
+    /**
+     * For more details about CardPresent, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardPresent extends StripeObject {
       @SerializedName("commodity_code")
       String commodityCode;
     }

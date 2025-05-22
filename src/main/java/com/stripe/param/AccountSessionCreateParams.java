@@ -174,6 +174,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName("capital_overview")
     CapitalOverview capitalOverview;
 
+    /** Configuration for the disputes list embedded component. */
+    @SerializedName("disputes_list")
+    DisputesList disputesList;
+
     /** Configuration for the documents embedded component. */
     @SerializedName("documents")
     Documents documents;
@@ -269,6 +273,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         CapitalFinancingApplication capitalFinancingApplication,
         CapitalFinancingPromotion capitalFinancingPromotion,
         CapitalOverview capitalOverview,
+        DisputesList disputesList,
         Documents documents,
         ExportTaxTransactions exportTaxTransactions,
         Map<String, Object> extraParams,
@@ -298,6 +303,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.capitalFinancingApplication = capitalFinancingApplication;
       this.capitalFinancingPromotion = capitalFinancingPromotion;
       this.capitalOverview = capitalOverview;
+      this.disputesList = disputesList;
       this.documents = documents;
       this.exportTaxTransactions = exportTaxTransactions;
       this.extraParams = extraParams;
@@ -342,6 +348,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       private CapitalFinancingPromotion capitalFinancingPromotion;
 
       private CapitalOverview capitalOverview;
+
+      private DisputesList disputesList;
 
       private Documents documents;
 
@@ -395,6 +403,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.capitalFinancingApplication,
             this.capitalFinancingPromotion,
             this.capitalOverview,
+            this.disputesList,
             this.documents,
             this.exportTaxTransactions,
             this.extraParams,
@@ -476,6 +485,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       public Builder setCapitalOverview(
           AccountSessionCreateParams.Components.CapitalOverview capitalOverview) {
         this.capitalOverview = capitalOverview;
+        return this;
+      }
+
+      /** Configuration for the disputes list embedded component. */
+      public Builder setDisputesList(
+          AccountSessionCreateParams.Components.DisputesList disputesList) {
+        this.disputesList = disputesList;
         return this;
       }
 
@@ -2295,6 +2311,234 @@ public class AccountSessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisputesList {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private DisputesList(Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.DisputesList build() {
+          return new AccountSessionCreateParams.Components.DisputesList(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.DisputesList#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.DisputesList#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.DisputesList.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features {
+        /**
+         * Whether to allow capturing and cancelling payment intents. This is {@code true} by
+         * default.
+         */
+        @SerializedName("capture_payments")
+        Boolean capturePayments;
+
+        /**
+         * Whether to allow connected accounts to manage destination charges that are created on
+         * behalf of them. This is {@code false} by default.
+         */
+        @SerializedName("destination_on_behalf_of_charge_management")
+        Boolean destinationOnBehalfOfChargeManagement;
+
+        /**
+         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * disputes. This is {@code true} by default.
+         */
+        @SerializedName("dispute_management")
+        Boolean disputeManagement;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Whether to allow sending refunds. This is {@code true} by default. */
+        @SerializedName("refund_management")
+        Boolean refundManagement;
+
+        private Features(
+            Boolean capturePayments,
+            Boolean destinationOnBehalfOfChargeManagement,
+            Boolean disputeManagement,
+            Map<String, Object> extraParams,
+            Boolean refundManagement) {
+          this.capturePayments = capturePayments;
+          this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
+          this.disputeManagement = disputeManagement;
+          this.extraParams = extraParams;
+          this.refundManagement = refundManagement;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean capturePayments;
+
+          private Boolean destinationOnBehalfOfChargeManagement;
+
+          private Boolean disputeManagement;
+
+          private Map<String, Object> extraParams;
+
+          private Boolean refundManagement;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.DisputesList.Features build() {
+            return new AccountSessionCreateParams.Components.DisputesList.Features(
+                this.capturePayments,
+                this.destinationOnBehalfOfChargeManagement,
+                this.disputeManagement,
+                this.extraParams,
+                this.refundManagement);
+          }
+
+          /**
+           * Whether to allow capturing and cancelling payment intents. This is {@code true} by
+           * default.
+           */
+          public Builder setCapturePayments(Boolean capturePayments) {
+            this.capturePayments = capturePayments;
+            return this;
+          }
+
+          /**
+           * Whether to allow connected accounts to manage destination charges that are created on
+           * behalf of them. This is {@code false} by default.
+           */
+          public Builder setDestinationOnBehalfOfChargeManagement(
+              Boolean destinationOnBehalfOfChargeManagement) {
+            this.destinationOnBehalfOfChargeManagement = destinationOnBehalfOfChargeManagement;
+            return this;
+          }
+
+          /**
+           * Whether to allow responding to disputes, including submitting evidence and accepting
+           * disputes. This is {@code true} by default.
+           */
+          public Builder setDisputeManagement(Boolean disputeManagement) {
+            this.disputeManagement = disputeManagement;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.DisputesList.Features#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.DisputesList.Features#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Whether to allow sending refunds. This is {@code true} by default. */
+          public Builder setRefundManagement(Boolean refundManagement) {
+            this.refundManagement = refundManagement;
             return this;
           }
         }

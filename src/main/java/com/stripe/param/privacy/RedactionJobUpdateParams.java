@@ -26,6 +26,7 @@ public class RedactionJobUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Determines the validation behavior of the job. Default is {@code error}. */
   @SerializedName("validation_behavior")
   ValidationBehavior validationBehavior;
 
@@ -104,6 +105,7 @@ public class RedactionJobUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Determines the validation behavior of the job. Default is {@code error}. */
     public Builder setValidationBehavior(
         RedactionJobUpdateParams.ValidationBehavior validationBehavior) {
       this.validationBehavior = validationBehavior;

@@ -190,15 +190,14 @@ public class Account extends StripeObject implements HasId {
         String ipAddress;
 
         /**
-         * The customer’s location as identified by Stripe Tax - uses {@code location_source}. Will
-         * only be rendered if the {@code automatic_indirect_tax} feature is requested and {@code
-         * active}.
+         * The customer’s identified tax location - uses {@code location_source}. Will only be
+         * rendered if the {@code automatic_indirect_tax} feature is requested and {@code active}.
          */
         @SerializedName("location")
         Location location;
 
         /**
-         * The data source used by Stripe Tax to identify the customer's location - defaults to
+         * The data source used to identify the customer's tax location - defaults to
          * 'identity_address'. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          *
@@ -216,7 +215,7 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class Location extends StripeObject {
           /**
-           * The customer's country as identified by Stripe Tax.
+           * The identified tax country of the customer.
            *
            * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
            * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
@@ -258,7 +257,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("country")
           String country;
 
-          /** The customer's state, county, province, or region as identified by Stripe Tax. */
+          /** The identified tax state, county, province, or region of the customer. */
           @SerializedName("state")
           String state;
         }
@@ -794,7 +793,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("sepa_debit_payments")
         SepaDebitPayments sepaDebitPayments;
 
-        /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
+        /** Capabilities that enable the merchant to manage their Stripe Balance (/v1/balance). */
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
 
