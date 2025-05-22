@@ -36,10 +36,10 @@ public class SubscriptionResumeParams extends ApiRequestParams {
 
   /**
    * Determines how to handle <a
-   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the billing
-   * cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now}, or
-   * starting a trial), or if an item's {@code quantity} changes. The default value is {@code
-   * create_prorations}.
+   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
+   * the {@code billing_cycle_anchor} being {@code unchanged}. When the {@code billing_cycle_anchor}
+   * is set to {@code now} (default value), no prorations are generated. If no value is passed, the
+   * default is {@code create_prorations}.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -155,10 +155,10 @@ public class SubscriptionResumeParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
-     * billing cycle changes (e.g., when switching plans, resetting {@code
-     * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
-     * The default value is {@code create_prorations}.
+     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
+     * the {@code billing_cycle_anchor} being {@code unchanged}. When the {@code
+     * billing_cycle_anchor} is set to {@code now} (default value), no prorations are generated. If
+     * no value is passed, the default is {@code create_prorations}.
      */
     public Builder setProrationBehavior(
         SubscriptionResumeParams.ProrationBehavior prorationBehavior) {

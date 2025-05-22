@@ -167,11 +167,11 @@ public class Event extends ApiResource implements HasId {
    * identity.verification_session.verified}, {@code invoice.created}, {@code invoice.deleted},
    * {@code invoice.finalization_failed}, {@code invoice.finalized}, {@code
    * invoice.marked_uncollectible}, {@code invoice.overdue}, {@code invoice.overpaid}, {@code
-   * invoice.paid}, {@code invoice.payment.overpaid}, {@code invoice.payment.paid}, {@code
-   * invoice.payment_action_required}, {@code invoice.payment_attempt_required}, {@code
-   * invoice.payment_failed}, {@code invoice.payment_succeeded}, {@code invoice.sent}, {@code
-   * invoice.upcoming}, {@code invoice.updated}, {@code invoice.voided}, {@code
-   * invoice.will_be_due}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code
+   * invoice.paid}, {@code invoice.payment.overpaid}, {@code invoice.payment_action_required},
+   * {@code invoice.payment_attempt_required}, {@code invoice.payment_failed}, {@code
+   * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
+   * invoice.updated}, {@code invoice.voided}, {@code invoice.will_be_due}, {@code
+   * invoice_payment.paid}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code
    * issuing_authorization.created}, {@code issuing_authorization.request}, {@code
    * issuing_authorization.updated}, {@code issuing_card.created}, {@code issuing_card.updated},
    * {@code issuing_cardholder.created}, {@code issuing_cardholder.updated}, {@code

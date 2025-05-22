@@ -970,9 +970,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoice.payment.overpaid")
     INVOICE__PAYMENT__OVERPAID("invoice.payment.overpaid"),
 
-    @SerializedName("invoice.payment.paid")
-    INVOICE__PAYMENT__PAID("invoice.payment.paid"),
-
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
 
@@ -999,6 +996,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("invoice.will_be_due")
     INVOICE__WILL_BE_DUE("invoice.will_be_due"),
+
+    @SerializedName("invoice_payment.paid")
+    INVOICE_PAYMENT__PAID("invoice_payment.paid"),
 
     @SerializedName("invoiceitem.created")
     INVOICEITEM__CREATED("invoiceitem.created"),
