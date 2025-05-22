@@ -1226,6 +1226,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String paynowPayments;
 
     /**
+     * The status of the pix payments capability of the account, or whether the account can directly
+     * process pix charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("pix_payments")
+    String pixPayments;
+
+    /**
      * The status of the promptpay payments capability of the account, or whether the account can
      * directly process promptpay charges.
      *
