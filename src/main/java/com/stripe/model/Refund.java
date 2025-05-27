@@ -1054,7 +1054,14 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypal extends StripeObject {}
+    public static class Paypal extends StripeObject {
+      /**
+       * For refunds declined by the network, a decline code provided by the network which indicates
+       * the reason the refund failed.
+       */
+      @SerializedName("network_decline_code")
+      String networkDeclineCode;
+    }
 
     /**
      * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API

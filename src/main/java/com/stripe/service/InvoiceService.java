@@ -278,10 +278,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -289,8 +285,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(String invoice, InvoiceAttachPaymentParams params)
       throws StripeException {
@@ -300,10 +296,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -311,8 +303,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(String invoice, RequestOptions options) throws StripeException {
     return attachPayment(invoice, (InvoiceAttachPaymentParams) null, options);
@@ -321,10 +313,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -332,8 +320,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(String invoice) throws StripeException {
     return attachPayment(invoice, (InvoiceAttachPaymentParams) null, (RequestOptions) null);
@@ -342,10 +330,6 @@ public final class InvoiceService extends ApiService {
    * Attaches a PaymentIntent or an Out of Band Payment to the invoice, adding it to the list of
    * {@code payments}.
    *
-   * <p>For Out of Band Payment, the payment is credited to the invoice immediately, increasing the
-   * {@code amount_paid} of the invoice and subsequently transitioning the status of the invoice to
-   * {@code paid} if necessary.
-   *
    * <p>For the PaymentIntent, when the PaymentIntent’s status changes to {@code succeeded}, the
    * payment is credited to the invoice, increasing its {@code amount_paid}. When the invoice is
    * fully paid, the invoice’s status becomes {@code paid}.
@@ -353,8 +337,8 @@ public final class InvoiceService extends ApiService {
    * <p>If the PaymentIntent’s status is already {@code succeeded} when it’s attached, it’s credited
    * to the invoice immediately.
    *
-   * <p>See: <a href="https://stripe.com/docs/invoicing/payments/create">Create an invoice
-   * payment</a> to learn more.
+   * <p>See: <a href="https://stripe.com/docs/invoicing/partial-payments">Partial payments</a> to
+   * learn more.
    */
   public Invoice attachPayment(
       String invoice, InvoiceAttachPaymentParams params, RequestOptions options)
@@ -683,18 +667,19 @@ public final class InvoiceService extends ApiService {
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -709,18 +694,19 @@ public final class InvoiceService extends ApiService {
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -735,18 +721,19 @@ public final class InvoiceService extends ApiService {
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a
@@ -761,18 +748,19 @@ public final class InvoiceService extends ApiService {
    * invoice item charges, etc. It will also show you any discounts that are applicable to the
    * invoice.
    *
+   * <p>You can also preview the effects of creating or updating a subscription or subscription
+   * schedule, including a preview of any prorations that will take place. To ensure that the actual
+   * proration is calculated exactly the same as the previewed proration, you should pass the {@code
+   * subscription_details.proration_date} parameter when doing the actual subscription update.
+   *
+   * <p>The recommended way to get only the prorations being previewed on the invoice is to consider
+   * line items where {@code parent.subscription_item_details.proration} is {@code true}.
+   *
    * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
    * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
    * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
    * amount that your customer will be billed, you can add, remove, or update pending invoice items,
    * or update the customer’s discount.
-   *
-   * <p>You can preview the effects of updating a subscription, including a preview of what
-   * proration will take place. To ensure that the actual proration is calculated exactly the same
-   * as the previewed proration, you should pass the {@code subscription_details.proration_date}
-   * parameter when doing the actual subscription update. The recommended way to get only the
-   * prorations being previewed is to consider only proration line items where {@code period[start]}
-   * is equal to the {@code subscription_details.proration_date} value passed in the request.
    *
    * <p>Note: Currency conversion calculations use the latest exchange rates. Exchange rates may
    * vary between the time of the preview and the time of the actual invoice creation. <a

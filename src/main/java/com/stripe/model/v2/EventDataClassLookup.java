@@ -84,6 +84,9 @@ public final class EventDataClassLookup {
         "v2.money_management.transaction_entry",
         com.stripe.model.v2.moneymanagement.TransactionEntry.class);
 
+    classLookup.put(
+        "v2.payments.off_session_payment", com.stripe.model.v2.payments.OffSessionPayment.class);
+
     eventClassLookup.put(
         "v2.core.account[requirements].updated",
         com.stripe.events.V2CoreAccountIncludingRequirementsUpdatedEvent.class);
@@ -168,6 +171,27 @@ public final class EventDataClassLookup {
         com.stripe.events.V2MoneyManagementInboundTransferBankDebitSucceededEvent.class);
     eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
+    eventClassLookup.put(
+        "v2.off_session_payment.requires_capture",
+        com.stripe.events.V2OffSessionPaymentRequiresCaptureEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.authorization_attempt_failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.authorization_attempt_started",
+        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.canceled",
+        com.stripe.events.V2PaymentsOffSessionPaymentCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.created",
+        com.stripe.events.V2PaymentsOffSessionPaymentCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentFailedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.succeeded",
+        com.stripe.events.V2PaymentsOffSessionPaymentSucceededEvent.class);
     eventClassLookup.put(
         "v2.money_management.outbound_payment.canceled",
         com.stripe.events.V2MoneyManagementOutboundPaymentCanceledEvent.class);

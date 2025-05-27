@@ -67,7 +67,7 @@ public final class FinancialAddressService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<FinancialAddress>>() {}.getType());
   }
   /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in it's
+   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
    * unexpanded state, revealing only the last 4 digits of the account number.
    */
   public FinancialAddress retrieve(String id, FinancialAddressRetrieveParams params)
@@ -75,21 +75,21 @@ public final class FinancialAddressService extends ApiService {
     return retrieve(id, params, (RequestOptions) null);
   }
   /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in it's
+   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
    * unexpanded state, revealing only the last 4 digits of the account number.
    */
   public FinancialAddress retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (FinancialAddressRetrieveParams) null, options);
   }
   /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in it's
+   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
    * unexpanded state, revealing only the last 4 digits of the account number.
    */
   public FinancialAddress retrieve(String id) throws StripeException {
     return retrieve(id, (FinancialAddressRetrieveParams) null, (RequestOptions) null);
   }
   /**
-   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in it's
+   * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its
    * unexpanded state, revealing only the last 4 digits of the account number.
    */
   public FinancialAddress retrieve(

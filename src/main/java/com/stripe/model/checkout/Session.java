@@ -810,13 +810,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getGlobalResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   @Override
   public Session update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   @Override
   public Session update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
@@ -825,12 +835,22 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     return getResponseGetter().request(request, Session.class);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(SessionUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(SessionUpdateParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
@@ -3041,6 +3061,30 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("capture_method")
       String captureMethod;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     /**

@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.giftcards;
+package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,7 +12,14 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class CardRetrieveParams extends ApiRequestParams {
+public class SubscriptionMigrateParams extends ApiRequestParams {
+  /**
+   * <strong>Required.</strong> Controls how prorations and invoices for subscriptions are
+   * calculated and orchestrated.
+   */
+  @SerializedName("billing_mode")
+  BillingMode billingMode;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -26,7 +33,9 @@ public class CardRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private CardRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
+  private SubscriptionMigrateParams(
+      BillingMode billingMode, List<String> expand, Map<String, Object> extraParams) {
+    this.billingMode = billingMode;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -36,19 +45,30 @@ public class CardRetrieveParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private BillingMode billingMode;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public CardRetrieveParams build() {
-      return new CardRetrieveParams(this.expand, this.extraParams);
+    public SubscriptionMigrateParams build() {
+      return new SubscriptionMigrateParams(this.billingMode, this.expand, this.extraParams);
+    }
+
+    /**
+     * <strong>Required.</strong> Controls how prorations and invoices for subscriptions are
+     * calculated and orchestrated.
+     */
+    public Builder setBillingMode(SubscriptionMigrateParams.BillingMode billingMode) {
+      this.billingMode = billingMode;
+      return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardRetrieveParams#expand} for the field documentation.
+     * SubscriptionMigrateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -61,7 +81,7 @@ public class CardRetrieveParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * CardRetrieveParams#expand} for the field documentation.
+     * SubscriptionMigrateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -74,7 +94,7 @@ public class CardRetrieveParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardRetrieveParams#extraParams} for the field documentation.
+     * SubscriptionMigrateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -87,7 +107,7 @@ public class CardRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardRetrieveParams#extraParams} for the field documentation.
+     * See {@link SubscriptionMigrateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -95,6 +115,18 @@ public class CardRetrieveParams extends ApiRequestParams {
       }
       this.extraParams.putAll(map);
       return this;
+    }
+  }
+
+  public enum BillingMode implements ApiRequestParams.EnumParam {
+    @SerializedName("flexible")
+    FLEXIBLE("flexible");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    BillingMode(String value) {
+      this.value = value;
     }
   }
 }

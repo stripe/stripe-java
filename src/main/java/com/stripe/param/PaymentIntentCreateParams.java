@@ -37,10 +37,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  /** Automations to be run during the PaymentIntent lifecycle. */
-  @SerializedName("async_workflows")
-  AsyncWorkflows asyncWorkflows;
-
   /**
    * When you enable this parameter, this PaymentIntent accepts payment methods that you enable in
    * the Dashboard and that are compatible with this PaymentIntent's other parameters.
@@ -156,6 +152,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("fx_quote")
   String fxQuote;
 
+  /** Automations to be run during the PaymentIntent lifecycle. */
+  @SerializedName("hooks")
+  Hooks hooks;
+
   /**
    * ID of the mandate that's used for this payment. This parameter can only be used with <a
    * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
@@ -211,7 +211,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
    * with {@code confirm=true}, {@code source} automatically populates with {@code
    * customer.default_source} to improve migration for users of the Charges API. We recommend that
-   * you explicitly provide the {@code payment_method} moving forward.
+   * you explicitly provide the {@code payment_method} moving forward. If the payment method is
+   * attached to a Customer, you must also provide the ID of that Customer as the <a
+   * href="https://stripe.com/docs/api#create_payment_intent-customer">customer</a> parameter of
+   * this PaymentIntent. end
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -350,7 +353,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   private PaymentIntentCreateParams(
       Long amount,
       Long applicationFeeAmount,
-      AsyncWorkflows asyncWorkflows,
       AutomaticPaymentMethods automaticPaymentMethods,
       CaptureMethod captureMethod,
       Boolean confirm,
@@ -364,6 +366,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String fxQuote,
+      Hooks hooks,
       String mandate,
       Object mandateData,
       Map<String, String> metadata,
@@ -388,7 +391,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Boolean useStripeSdk) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
-    this.asyncWorkflows = asyncWorkflows;
     this.automaticPaymentMethods = automaticPaymentMethods;
     this.captureMethod = captureMethod;
     this.confirm = confirm;
@@ -402,6 +404,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.fxQuote = fxQuote;
+    this.hooks = hooks;
     this.mandate = mandate;
     this.mandateData = mandateData;
     this.metadata = metadata;
@@ -435,8 +438,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private Long applicationFeeAmount;
 
-    private AsyncWorkflows asyncWorkflows;
-
     private AutomaticPaymentMethods automaticPaymentMethods;
 
     private CaptureMethod captureMethod;
@@ -462,6 +463,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     private String fxQuote;
+
+    private Hooks hooks;
 
     private String mandate;
 
@@ -512,7 +515,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return new PaymentIntentCreateParams(
           this.amount,
           this.applicationFeeAmount,
-          this.asyncWorkflows,
           this.automaticPaymentMethods,
           this.captureMethod,
           this.confirm,
@@ -526,6 +528,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.fxQuote,
+          this.hooks,
           this.mandate,
           this.mandateData,
           this.metadata,
@@ -574,12 +577,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
-      return this;
-    }
-
-    /** Automations to be run during the PaymentIntent lifecycle. */
-    public Builder setAsyncWorkflows(PaymentIntentCreateParams.AsyncWorkflows asyncWorkflows) {
-      this.asyncWorkflows = asyncWorkflows;
       return this;
     }
 
@@ -762,6 +759,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Automations to be run during the PaymentIntent lifecycle. */
+    public Builder setHooks(PaymentIntentCreateParams.Hooks hooks) {
+      this.hooks = hooks;
+      return this;
+    }
+
     /**
      * ID of the mandate that's used for this payment. This parameter can only be used with <a
      * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
@@ -870,7 +873,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
      * with {@code confirm=true}, {@code source} automatically populates with {@code
      * customer.default_source} to improve migration for users of the Charges API. We recommend that
-     * you explicitly provide the {@code payment_method} moving forward.
+     * you explicitly provide the {@code payment_method} moving forward. If the payment method is
+     * attached to a Customer, you must also provide the ID of that Customer as the <a
+     * href="https://stripe.com/docs/api#create_payment_intent-customer">customer</a> parameter of
+     * this PaymentIntent. end
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -1062,235 +1068,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class AsyncWorkflows {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** Arguments passed in automations. */
-    @SerializedName("inputs")
-    Inputs inputs;
-
-    private AsyncWorkflows(Map<String, Object> extraParams, Inputs inputs) {
-      this.extraParams = extraParams;
-      this.inputs = inputs;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Inputs inputs;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PaymentIntentCreateParams.AsyncWorkflows build() {
-        return new PaymentIntentCreateParams.AsyncWorkflows(this.extraParams, this.inputs);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentIntentCreateParams.AsyncWorkflows#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentIntentCreateParams.AsyncWorkflows#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** Arguments passed in automations. */
-      public Builder setInputs(PaymentIntentCreateParams.AsyncWorkflows.Inputs inputs) {
-        this.inputs = inputs;
-        return this;
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Inputs {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Tax arguments for automations. */
-      @SerializedName("tax")
-      Tax tax;
-
-      private Inputs(Map<String, Object> extraParams, Tax tax) {
-        this.extraParams = extraParams;
-        this.tax = tax;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private Tax tax;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public PaymentIntentCreateParams.AsyncWorkflows.Inputs build() {
-          return new PaymentIntentCreateParams.AsyncWorkflows.Inputs(this.extraParams, this.tax);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentIntentCreateParams.AsyncWorkflows.Inputs#extraParams} for the
-         * field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link PaymentIntentCreateParams.AsyncWorkflows.Inputs#extraParams} for the
-         * field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Tax arguments for automations. */
-        public Builder setTax(PaymentIntentCreateParams.AsyncWorkflows.Inputs.Tax tax) {
-          this.tax = tax;
-          return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Tax {
-        /**
-         * <strong>Required.</strong> The <a
-         * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
-         */
-        @SerializedName("calculation")
-        Object calculation;
-
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        private Tax(Object calculation, Map<String, Object> extraParams) {
-          this.calculation = calculation;
-          this.extraParams = extraParams;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Object calculation;
-
-          private Map<String, Object> extraParams;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public PaymentIntentCreateParams.AsyncWorkflows.Inputs.Tax build() {
-            return new PaymentIntentCreateParams.AsyncWorkflows.Inputs.Tax(
-                this.calculation, this.extraParams);
-          }
-
-          /**
-           * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
-           */
-          public Builder setCalculation(String calculation) {
-            this.calculation = calculation;
-            return this;
-          }
-
-          /**
-           * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
-           */
-          public Builder setCalculation(EmptyParam calculation) {
-            this.calculation = calculation;
-            return this;
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link PaymentIntentCreateParams.AsyncWorkflows.Inputs.Tax#extraParams} for
-           * the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link PaymentIntentCreateParams.AsyncWorkflows.Inputs.Tax#extraParams} for
-           * the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-        }
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
   public static class AutomaticPaymentMethods {
     /**
      * Controls whether this PaymentIntent will accept redirect-based payment methods.
@@ -1402,6 +1179,234 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       AllowRedirects(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Hooks {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Arguments passed in automations. */
+    @SerializedName("inputs")
+    Inputs inputs;
+
+    private Hooks(Map<String, Object> extraParams, Inputs inputs) {
+      this.extraParams = extraParams;
+      this.inputs = inputs;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Inputs inputs;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentIntentCreateParams.Hooks build() {
+        return new PaymentIntentCreateParams.Hooks(this.extraParams, this.inputs);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentCreateParams.Hooks#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentCreateParams.Hooks#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Arguments passed in automations. */
+      public Builder setInputs(PaymentIntentCreateParams.Hooks.Inputs inputs) {
+        this.inputs = inputs;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Inputs {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Tax arguments for automations. */
+      @SerializedName("tax")
+      Tax tax;
+
+      private Inputs(Map<String, Object> extraParams, Tax tax) {
+        this.extraParams = extraParams;
+        this.tax = tax;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Tax tax;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.Hooks.Inputs build() {
+          return new PaymentIntentCreateParams.Hooks.Inputs(this.extraParams, this.tax);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.Hooks.Inputs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.Hooks.Inputs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Tax arguments for automations. */
+        public Builder setTax(PaymentIntentCreateParams.Hooks.Inputs.Tax tax) {
+          this.tax = tax;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax {
+        /**
+         * <strong>Required.</strong> The <a
+         * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+         */
+        @SerializedName("calculation")
+        Object calculation;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Tax(Object calculation, Map<String, Object> extraParams) {
+          this.calculation = calculation;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object calculation;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentCreateParams.Hooks.Inputs.Tax build() {
+            return new PaymentIntentCreateParams.Hooks.Inputs.Tax(
+                this.calculation, this.extraParams);
+          }
+
+          /**
+           * <strong>Required.</strong> The <a
+           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           */
+          public Builder setCalculation(String calculation) {
+            this.calculation = calculation;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The <a
+           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           */
+          public Builder setCalculation(EmptyParam calculation) {
+            this.calculation = calculation;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentIntentCreateParams.Hooks.Inputs.Tax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentIntentCreateParams.Hooks.Inputs.Tax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
       }
     }
   }
@@ -2020,6 +2025,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("delivery")
       Delivery delivery;
 
+      /** The details of the distance traveled during the rental period. */
+      @SerializedName("distance")
+      Distance distance;
+
       /** The details of the passengers in the travel reservation. */
       @SerializedName("drivers")
       List<PaymentIntentCreateParams.PaymentDetails.CarRental.Driver> drivers;
@@ -2049,6 +2058,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("pickup_at")
       Long pickupAt;
 
+      /** Name of the pickup location. */
+      @SerializedName("pickup_location_name")
+      String pickupLocationName;
+
       /** Rental rate. */
       @SerializedName("rate_amount")
       Long rateAmount;
@@ -2072,9 +2085,17 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("return_at")
       Long returnAt;
 
+      /** Name of the return location. */
+      @SerializedName("return_location_name")
+      String returnLocationName;
+
       /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
       @SerializedName("tax_exempt")
       Boolean taxExempt;
+
+      /** The vehicle identification number. */
+      @SerializedName("vehicle_identification_number")
+      String vehicleIdentificationNumber;
 
       private CarRental(
           Affiliate affiliate,
@@ -2086,18 +2107,22 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           String customerServicePhoneNumber,
           Long daysRented,
           Delivery delivery,
+          Distance distance,
           List<PaymentIntentCreateParams.PaymentDetails.CarRental.Driver> drivers,
           List<PaymentIntentCreateParams.PaymentDetails.CarRental.ExtraCharge> extraCharges,
           Map<String, Object> extraParams,
           Boolean noShow,
           PickupAddress pickupAddress,
           Long pickupAt,
+          String pickupLocationName,
           Long rateAmount,
           RateInterval rateInterval,
           String renterName,
           ReturnAddress returnAddress,
           Long returnAt,
-          Boolean taxExempt) {
+          String returnLocationName,
+          Boolean taxExempt,
+          String vehicleIdentificationNumber) {
         this.affiliate = affiliate;
         this.bookingNumber = bookingNumber;
         this.carClassCode = carClassCode;
@@ -2107,18 +2132,22 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.customerServicePhoneNumber = customerServicePhoneNumber;
         this.daysRented = daysRented;
         this.delivery = delivery;
+        this.distance = distance;
         this.drivers = drivers;
         this.extraCharges = extraCharges;
         this.extraParams = extraParams;
         this.noShow = noShow;
         this.pickupAddress = pickupAddress;
         this.pickupAt = pickupAt;
+        this.pickupLocationName = pickupLocationName;
         this.rateAmount = rateAmount;
         this.rateInterval = rateInterval;
         this.renterName = renterName;
         this.returnAddress = returnAddress;
         this.returnAt = returnAt;
+        this.returnLocationName = returnLocationName;
         this.taxExempt = taxExempt;
+        this.vehicleIdentificationNumber = vehicleIdentificationNumber;
       }
 
       public static Builder builder() {
@@ -2144,6 +2173,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Delivery delivery;
 
+        private Distance distance;
+
         private List<PaymentIntentCreateParams.PaymentDetails.CarRental.Driver> drivers;
 
         private List<PaymentIntentCreateParams.PaymentDetails.CarRental.ExtraCharge> extraCharges;
@@ -2156,6 +2187,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Long pickupAt;
 
+        private String pickupLocationName;
+
         private Long rateAmount;
 
         private RateInterval rateInterval;
@@ -2166,7 +2199,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Long returnAt;
 
+        private String returnLocationName;
+
         private Boolean taxExempt;
+
+        private String vehicleIdentificationNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentDetails.CarRental build() {
@@ -2180,18 +2217,22 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.customerServicePhoneNumber,
               this.daysRented,
               this.delivery,
+              this.distance,
               this.drivers,
               this.extraCharges,
               this.extraParams,
               this.noShow,
               this.pickupAddress,
               this.pickupAt,
+              this.pickupLocationName,
               this.rateAmount,
               this.rateInterval,
               this.renterName,
               this.returnAddress,
               this.returnAt,
-              this.taxExempt);
+              this.returnLocationName,
+              this.taxExempt,
+              this.vehicleIdentificationNumber);
         }
 
         /** Affiliate details for this purchase. */
@@ -2247,6 +2288,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public Builder setDelivery(
             PaymentIntentCreateParams.PaymentDetails.CarRental.Delivery delivery) {
           this.delivery = delivery;
+          return this;
+        }
+
+        /** The details of the distance traveled during the rental period. */
+        public Builder setDistance(
+            PaymentIntentCreateParams.PaymentDetails.CarRental.Distance distance) {
+          this.distance = distance;
           return this;
         }
 
@@ -2357,6 +2405,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Name of the pickup location. */
+        public Builder setPickupLocationName(String pickupLocationName) {
+          this.pickupLocationName = pickupLocationName;
+          return this;
+        }
+
         /** Rental rate. */
         public Builder setRateAmount(Long rateAmount) {
           this.rateAmount = rateAmount;
@@ -2392,9 +2446,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Name of the return location. */
+        public Builder setReturnLocationName(String returnLocationName) {
+          this.returnLocationName = returnLocationName;
+          return this;
+        }
+
         /** Indicates whether the goods or services are tax-exempt or tax is not collected. */
         public Builder setTaxExempt(Boolean taxExempt) {
           this.taxExempt = taxExempt;
+          return this;
+        }
+
+        /** The vehicle identification number. */
+        public Builder setVehicleIdentificationNumber(String vehicleIdentificationNumber) {
+          this.vehicleIdentificationNumber = vehicleIdentificationNumber;
           return this;
         }
       }
@@ -2689,7 +2755,125 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class Distance {
+        /** Distance traveled. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Unit of measurement for the distance traveled. One of {@code miles} or {@code
+         * kilometers}.
+         */
+        @SerializedName("unit")
+        Unit unit;
+
+        private Distance(Long amount, Map<String, Object> extraParams, Unit unit) {
+          this.amount = amount;
+          this.extraParams = extraParams;
+          this.unit = unit;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private Map<String, Object> extraParams;
+
+          private Unit unit;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentCreateParams.PaymentDetails.CarRental.Distance build() {
+            return new PaymentIntentCreateParams.PaymentDetails.CarRental.Distance(
+                this.amount, this.extraParams, this.unit);
+          }
+
+          /** Distance traveled. */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentDetails.CarRental.Distance#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentDetails.CarRental.Distance#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Unit of measurement for the distance traveled. One of {@code miles} or {@code
+           * kilometers}.
+           */
+          public Builder setUnit(
+              PaymentIntentCreateParams.PaymentDetails.CarRental.Distance.Unit unit) {
+            this.unit = unit;
+            return this;
+          }
+        }
+
+        public enum Unit implements ApiRequestParams.EnumParam {
+          @SerializedName("kilometers")
+          KILOMETERS("kilometers"),
+
+          @SerializedName("miles")
+          MILES("miles");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Unit(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class Driver {
+        /** Driver's identification number. */
+        @SerializedName("driver_identification_number")
+        String driverIdentificationNumber;
+
+        /** Driver's tax number. */
+        @SerializedName("driver_tax_number")
+        String driverTaxNumber;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2704,7 +2888,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("name")
         String name;
 
-        private Driver(Map<String, Object> extraParams, String name) {
+        private Driver(
+            String driverIdentificationNumber,
+            String driverTaxNumber,
+            Map<String, Object> extraParams,
+            String name) {
+          this.driverIdentificationNumber = driverIdentificationNumber;
+          this.driverTaxNumber = driverTaxNumber;
           this.extraParams = extraParams;
           this.name = name;
         }
@@ -2714,6 +2904,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private String driverIdentificationNumber;
+
+          private String driverTaxNumber;
+
           private Map<String, Object> extraParams;
 
           private String name;
@@ -2721,7 +2915,19 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentIntentCreateParams.PaymentDetails.CarRental.Driver build() {
             return new PaymentIntentCreateParams.PaymentDetails.CarRental.Driver(
-                this.extraParams, this.name);
+                this.driverIdentificationNumber, this.driverTaxNumber, this.extraParams, this.name);
+          }
+
+          /** Driver's identification number. */
+          public Builder setDriverIdentificationNumber(String driverIdentificationNumber) {
+            this.driverIdentificationNumber = driverIdentificationNumber;
+            return this;
+          }
+
+          /** Driver's tax number. */
+          public Builder setDriverTaxNumber(String driverTaxNumber) {
+            this.driverTaxNumber = driverTaxNumber;
+            return this;
           }
 
           /**
@@ -12407,7 +12613,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object giropay;
 
     /**
-     * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the GoPay
+     * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the Gopay
      * payment method options.
      */
     @SerializedName("gopay")
@@ -12603,6 +12809,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object samsungPay;
 
     /**
+     * If this is a {@code satispay} PaymentMethod, this sub-hash contains details about the
+     * Satispay payment method options.
+     */
+    @SerializedName("satispay")
+    Object satispay;
+
+    /**
      * If this is a {@code sepa_debit} PaymentIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
@@ -12714,6 +12927,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object rechnung,
         Object revolutPay,
         Object samsungPay,
+        Object satispay,
         Object sepaDebit,
         Object shopeepay,
         Object sofort,
@@ -12771,6 +12985,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.rechnung = rechnung;
       this.revolutPay = revolutPay;
       this.samsungPay = samsungPay;
+      this.satispay = satispay;
       this.sepaDebit = sepaDebit;
       this.shopeepay = shopeepay;
       this.sofort = sofort;
@@ -12883,6 +13098,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Object samsungPay;
 
+      private Object satispay;
+
       private Object sepaDebit;
 
       private Object shopeepay;
@@ -12952,6 +13169,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.rechnung,
             this.revolutPay,
             this.samsungPay,
+            this.satispay,
             this.sepaDebit,
             this.shopeepay,
             this.sofort,
@@ -13335,7 +13553,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the GoPay
+       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the Gopay
        * payment method options.
        */
       public Builder setGopay(PaymentIntentCreateParams.PaymentMethodOptions.Gopay gopay) {
@@ -13344,7 +13562,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the GoPay
+       * If this is a {@code gopay} PaymentMethod, this sub-hash contains details about the Gopay
        * payment method options.
        */
       public Builder setGopay(EmptyParam gopay) {
@@ -13844,6 +14062,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setSamsungPay(EmptyParam samsungPay) {
         this.samsungPay = samsungPay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code satispay} PaymentMethod, this sub-hash contains details about the
+       * Satispay payment method options.
+       */
+      public Builder setSatispay(PaymentIntentCreateParams.PaymentMethodOptions.Satispay satispay) {
+        this.satispay = satispay;
+        return this;
+      }
+
+      /**
+       * If this is a {@code satispay} PaymentMethod, this sub-hash contains details about the
+       * Satispay payment method options.
+       */
+      public Builder setSatispay(EmptyParam satispay) {
+        this.satispay = satispay;
         return this;
       }
 
@@ -25541,6 +25777,124 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.SamsungPay#extraParams}
          * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay {
+      /**
+       * Controls when the funds are captured from the customer's account.
+       *
+       * <p>If provided, this parameter overrides the behavior of the top-level <a
+       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+       * for this payment method type when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter unsets the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      ApiRequestParams.EnumParam captureMethod;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Satispay(ApiRequestParams.EnumParam captureMethod, Map<String, Object> extraParams) {
+        this.captureMethod = captureMethod;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private ApiRequestParams.EnumParam captureMethod;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodOptions.Satispay build() {
+          return new PaymentIntentCreateParams.PaymentMethodOptions.Satispay(
+              this.captureMethod, this.extraParams);
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentCreateParams.PaymentMethodOptions.Satispay.CaptureMethod captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(EmptyParam captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Satispay#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Satispay#extraParams} for
+         * the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
