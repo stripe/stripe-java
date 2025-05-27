@@ -661,6 +661,12 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /** Retrieves a PaymentMethod object for a given Customer. */
+  public PaymentMethod retrievePaymentMethod(String paymentMethod, RequestOptions options)
+      throws StripeException {
+    return retrievePaymentMethod(paymentMethod, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a PaymentMethod object for a given Customer. */
   public PaymentMethod retrievePaymentMethod(String paymentMethod, Map<String, Object> params)
       throws StripeException {
     return retrievePaymentMethod(paymentMethod, params, (RequestOptions) null);
