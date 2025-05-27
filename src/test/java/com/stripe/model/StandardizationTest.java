@@ -87,13 +87,6 @@ public class StandardizationTest {
           continue;
         }
 
-        // Skip `public static Foo retrieve(String id) {...` helper methods
-        if (String.class.equals(finalParamType)
-            && parameters.size() == 1
-            && method.getName().startsWith("retrieve")) {
-          continue;
-        }
-
         // Skip the `public static Card createCard(String id) {...` helper method on Customer.
         if (String.class.equals(finalParamType)
             && parameters.size() == 1
