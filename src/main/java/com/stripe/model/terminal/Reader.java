@@ -18,6 +18,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.ReaderCancelActionParams;
+import com.stripe.param.terminal.ReaderCollectInputsParams;
 import com.stripe.param.terminal.ReaderCreateParams;
 import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderPresentPaymentMethodParams;
@@ -26,6 +27,8 @@ import com.stripe.param.terminal.ReaderProcessSetupIntentParams;
 import com.stripe.param.terminal.ReaderRefundPaymentParams;
 import com.stripe.param.terminal.ReaderRetrieveParams;
 import com.stripe.param.terminal.ReaderSetReaderDisplayParams;
+import com.stripe.param.terminal.ReaderSucceedInputCollectionParams;
+import com.stripe.param.terminal.ReaderTimeoutInputCollectionParams;
 import com.stripe.param.terminal.ReaderUpdateParams;
 import java.util.List;
 import java.util.Map;
@@ -56,9 +59,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   String deviceSwVersion;
 
   /**
-   * Type of reader, one of {@code bbpos_wisepad3}, {@code stripe_m2}, {@code stripe_s700}, {@code
-   * bbpos_chipper2x}, {@code bbpos_wisepos_e}, {@code verifone_P400}, {@code simulated_wisepos_e},
-   * or {@code mobile_phone_reader}.
+   * Device type of the reader.
+   *
+   * <p>One of {@code bbpos_chipper2x}, {@code bbpos_wisepad3}, {@code bbpos_wisepos_e}, {@code
+   * mobile_phone_reader}, {@code simulated_stripe_s700}, {@code simulated_wisepos_e}, {@code
+   * stripe_m2}, {@code stripe_s700}, or {@code verifone_P400}.
    */
   @SerializedName("device_type")
   String deviceType;
@@ -174,6 +179,44 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/cancel_action", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(Map<String, Object> params) throws StripeException {
+    return collectInputs(params, (RequestOptions) null);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(ReaderCollectInputsParams params) throws StripeException {
+    return collectInputs(params, (RequestOptions) null);
+  }
+
+  /** Initiates an input collection flow on a Reader. */
+  public Reader collectInputs(ReaderCollectInputsParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -526,6 +569,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Action extends StripeObject {
+    /** Represents a reader action to collect customer inputs. */
+    @SerializedName("collect_inputs")
+    CollectInputs collectInputs;
+
     /** Failure code, only set if status is {@code failed}. */
     @SerializedName("failure_code")
     String failureCode;
@@ -561,11 +608,228 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     /**
      * Type of action performed by the reader.
      *
-     * <p>One of {@code process_payment_intent}, {@code process_setup_intent}, {@code
-     * refund_payment}, or {@code set_reader_display}.
+     * <p>One of {@code collect_inputs}, {@code process_payment_intent}, {@code
+     * process_setup_intent}, {@code refund_payment}, or {@code set_reader_display}.
      */
     @SerializedName("type")
     String type;
+
+    /** Represents a reader action to collect customer inputs. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CollectInputs extends StripeObject {
+      /** List of inputs to be collected. */
+      @SerializedName("inputs")
+      List<Reader.Action.CollectInputs.Input> inputs;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** Represents an input to be collected using the reader. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Input extends StripeObject {
+        /** Default text of input being collected. */
+        @SerializedName("custom_text")
+        CustomText customText;
+
+        /** Information about a email being collected using a reader. */
+        @SerializedName("email")
+        Email email;
+
+        /** Information about a number being collected using a reader. */
+        @SerializedName("numeric")
+        Numeric numeric;
+
+        /** Information about a phone number being collected using a reader. */
+        @SerializedName("phone")
+        Phone phone;
+
+        /** Indicate that this input is required, disabling the skip button. */
+        @SerializedName("required")
+        Boolean required;
+
+        /** Information about a selection being collected using a reader. */
+        @SerializedName("selection")
+        Selection selection;
+
+        /** Information about a signature being collected using a reader. */
+        @SerializedName("signature")
+        Signature signature;
+
+        /** Indicate that this input was skipped by the user. */
+        @SerializedName("skipped")
+        Boolean skipped;
+
+        /** Information about text being collected using a reader. */
+        @SerializedName("text")
+        Text text;
+
+        /** List of toggles being collected. Values are present if collection is complete. */
+        @SerializedName("toggles")
+        List<Reader.Action.CollectInputs.Input.Toggle> toggles;
+
+        /**
+         * Type of input being collected.
+         *
+         * <p>One of {@code email}, {@code numeric}, {@code phone}, {@code selection}, {@code
+         * signature}, or {@code text}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** Represents custom text to be displayed when collecting the input using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomText extends StripeObject {
+          /** Customize the default description for this input. */
+          @SerializedName("description")
+          String description;
+
+          /** Customize the default label for this input's skip button. */
+          @SerializedName("skip_button")
+          String skipButton;
+
+          /** Customize the default label for this input's submit button. */
+          @SerializedName("submit_button")
+          String submitButton;
+
+          /** Customize the default title for this input. */
+          @SerializedName("title")
+          String title;
+        }
+
+        /** Information about a email being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Email extends StripeObject {
+          /** The collected email address. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about a number being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Numeric extends StripeObject {
+          /** The collected number. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about a phone number being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Phone extends StripeObject {
+          /** The collected phone number. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about a selection being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Selection extends StripeObject implements HasId {
+          /** List of possible choices to be selected. */
+          @SerializedName("choices")
+          List<Reader.Action.CollectInputs.Input.Selection.Choice> choices;
+
+          /** The id of the selected choice. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+
+          /** The text of the selected choice. */
+          @SerializedName("text")
+          String text;
+
+          /** Choice to be selected on a Reader. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Choice extends StripeObject implements HasId {
+            /** The id to be selected. */
+            @Getter(onMethod_ = {@Override})
+            @SerializedName("id")
+            String id;
+
+            /**
+             * The button style for the choice
+             *
+             * <p>One of {@code primary}, or {@code secondary}.
+             */
+            @SerializedName("style")
+            String style;
+
+            /** The text to be selected. */
+            @SerializedName("text")
+            String text;
+          }
+        }
+
+        /** Information about a signature being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Signature extends StripeObject {
+          /** The File ID of a collected signature image. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about text being collected using a reader. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Text extends StripeObject {
+          /** The collected text value. */
+          @SerializedName("value")
+          String value;
+        }
+
+        /** Information about an input's toggle. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Toggle extends StripeObject {
+          /**
+           * The toggle's default value
+           *
+           * <p>One of {@code disabled}, or {@code enabled}.
+           */
+          @SerializedName("default_value")
+          String defaultValue;
+
+          /** The toggle's description text. */
+          @SerializedName("description")
+          String description;
+
+          /** The toggle's title text. */
+          @SerializedName("title")
+          String title;
+
+          /**
+           * The toggle's collected value
+           *
+           * <p>One of {@code disabled}, or {@code enabled}.
+           */
+          @SerializedName("value")
+          String value;
+        }
+      }
+    }
 
     /** Represents a reader action to process a payment intent. */
     @Getter
@@ -609,6 +873,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         /** Enable customer initiated cancellation when processing this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
+
+        /**
+         * If the customer does not abandon authenticating the payment, they will be redirected to
+         * this specified URL after completion.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
 
         /** Override showing a tipping selection screen on this transaction. */
         @SerializedName("skip_tipping")
@@ -959,6 +1230,120 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       String path =
           String.format(
               "/v1/test_helpers/terminal/readers/%s/present_payment_method",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, Reader.class);
+    }
+
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
+    public Reader succeedInputCollection() throws StripeException {
+      return succeedInputCollection((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
+    public Reader succeedInputCollection(RequestOptions options) throws StripeException {
+      return succeedInputCollection((Map<String, Object>) null, options);
+    }
+
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
+    public Reader succeedInputCollection(Map<String, Object> params) throws StripeException {
+      return succeedInputCollection(params, (RequestOptions) null);
+    }
+
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
+    public Reader succeedInputCollection(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/terminal/readers/%s/succeed_input_collection",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, Reader.class);
+    }
+
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
+    public Reader succeedInputCollection(ReaderSucceedInputCollectionParams params)
+        throws StripeException {
+      return succeedInputCollection(params, (RequestOptions) null);
+    }
+
+    /** Use this endpoint to trigger a successful input collection on a simulated reader. */
+    public Reader succeedInputCollection(
+        ReaderSucceedInputCollectionParams params, RequestOptions options) throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/terminal/readers/%s/succeed_input_collection",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, Reader.class);
+    }
+
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
+    public Reader timeoutInputCollection() throws StripeException {
+      return timeoutInputCollection((Map<String, Object>) null, (RequestOptions) null);
+    }
+
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
+    public Reader timeoutInputCollection(RequestOptions options) throws StripeException {
+      return timeoutInputCollection((Map<String, Object>) null, options);
+    }
+
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
+    public Reader timeoutInputCollection(Map<String, Object> params) throws StripeException {
+      return timeoutInputCollection(params, (RequestOptions) null);
+    }
+
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
+    public Reader timeoutInputCollection(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/terminal/readers/%s/timeout_input_collection",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, Reader.class);
+    }
+
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
+    public Reader timeoutInputCollection(ReaderTimeoutInputCollectionParams params)
+        throws StripeException {
+      return timeoutInputCollection(params, (RequestOptions) null);
+    }
+
+    /**
+     * Use this endpoint to complete an input collection with a timeout error on a simulated reader.
+     */
+    public Reader timeoutInputCollection(
+        ReaderTimeoutInputCollectionParams params, RequestOptions options) throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/terminal/readers/%s/timeout_input_collection",
               ApiResource.urlEncodeId(this.resource.getId()));
       ApiResource.checkNullTypedParams(path, params);
       ApiRequest request =

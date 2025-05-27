@@ -30,6 +30,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class SubscriptionItem extends ApiResource
     implements HasId, MetadataStore<SubscriptionItem> {
+  /**
+   * Define thresholds at which an invoice will be sent, and the related subscription advanced to a
+   * new billing period.
+   */
+  @SerializedName("billing_thresholds")
+  BillingThresholds billingThresholds;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -380,9 +387,23 @@ public class SubscriptionItem extends ApiResource
     return getResponseGetter().request(request, SubscriptionItem.class);
   }
 
+  /**
+   * For more details about BillingThresholds, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingThresholds extends StripeObject {
+    /** Usage threshold that triggers the subscription to create an invoice. */
+    @SerializedName("usage_gte")
+    Long usageGte;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(billingThresholds, responseGetter);
     trySetResponseGetter(plan, responseGetter);
     trySetResponseGetter(price, responseGetter);
   }
