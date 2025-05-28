@@ -1453,6 +1453,28 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
+   * For more details about BillingThresholds, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingThresholds extends StripeObject {
+    /** Monetary threshold that triggers the subscription to create an invoice. */
+    @SerializedName("amount_gte")
+    Long amountGte;
+
+    /**
+     * Indicates if the {@code billing_cycle_anchor} should be reset when a threshold is reached. If
+     * true, {@code billing_cycle_anchor} will be updated to the date/time the threshold was last
+     * reached; otherwise, the value will remain unchanged. This value may not be {@code true} if
+     * the subscription contains items with plans that have {@code aggregate_usage=last_ever}.
+     */
+    @SerializedName("reset_billing_cycle_anchor")
+    Boolean resetBillingCycleAnchor;
+  }
+
+  /**
    * For more details about CancellationDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */

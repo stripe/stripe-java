@@ -10578,6 +10578,26 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           /**
+           * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+           * new billing period. Pass an empty string to remove previously-defined thresholds.
+           */
+          public Builder setBillingThresholds(
+              InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds
+                  billingThresholds) {
+            this.billingThresholds = billingThresholds;
+            return this;
+          }
+
+          /**
+           * Define thresholds at which an invoice will be sent, and the subscription advanced to a
+           * new billing period. Pass an empty string to remove previously-defined thresholds.
+           */
+          public Builder setBillingThresholds(EmptyParam billingThresholds) {
+            this.billingThresholds = billingThresholds;
+            return this;
+          }
+
+          /**
            * Add an element to `discounts` list. A list is initialized for the first `add/addAll`
            * call, and subsequent calls adds additional elements to the original list. See {@link
            * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item#discounts} for the field
@@ -10775,6 +10795,92 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Trial trial) {
             this.trial = trial;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class BillingThresholds {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> Number of units that meets the billing threshold to advance
+           * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
+           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+           * threshold</a>)
+           */
+          @SerializedName("usage_gte")
+          Long usageGte;
+
+          private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
+            this.extraParams = extraParams;
+            this.usageGte = usageGte;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long usageGte;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds(
+                  this.extraParams, this.usageGte);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.BillingThresholds#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Number of units that meets the billing threshold to
+             * advance the subscription to a new billing period (e.g., it takes 10 $5 units to meet
+             * a $50 <a
+             * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+             * threshold</a>)
+             */
+            public Builder setUsageGte(Long usageGte) {
+              this.usageGte = usageGte;
+              return this;
+            }
           }
         }
 
