@@ -59,6 +59,10 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("related_customer_account")
   String relatedCustomerAccount;
 
+  /** Tokens referencing a Person resource and it's associated account. */
+  @SerializedName("related_person")
+  RelatedPerson relatedPerson;
+
   /** The URL that the user will be redirected to upon completing the verification flow. */
   @SerializedName("return_url")
   String returnUrl;
@@ -87,6 +91,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       ProvidedDetails providedDetails,
       String relatedCustomer,
       String relatedCustomerAccount,
+      RelatedPerson relatedPerson,
       String returnUrl,
       Type type,
       String verificationFlow) {
@@ -98,6 +103,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     this.providedDetails = providedDetails;
     this.relatedCustomer = relatedCustomer;
     this.relatedCustomerAccount = relatedCustomerAccount;
+    this.relatedPerson = relatedPerson;
     this.returnUrl = returnUrl;
     this.type = type;
     this.verificationFlow = verificationFlow;
@@ -124,6 +130,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
     private String relatedCustomerAccount;
 
+    private RelatedPerson relatedPerson;
+
     private String returnUrl;
 
     private Type type;
@@ -141,6 +149,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
           this.providedDetails,
           this.relatedCustomer,
           this.relatedCustomerAccount,
+          this.relatedPerson,
           this.returnUrl,
           this.type,
           this.verificationFlow);
@@ -255,6 +264,12 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     /** Token referencing a Customer Account resource. */
     public Builder setRelatedCustomerAccount(String relatedCustomerAccount) {
       this.relatedCustomerAccount = relatedCustomerAccount;
+      return this;
+    }
+
+    /** Tokens referencing a Person resource and it's associated account. */
+    public Builder setRelatedPerson(VerificationSessionCreateParams.RelatedPerson relatedPerson) {
+      this.relatedPerson = relatedPerson;
       return this;
     }
 
@@ -640,6 +655,102 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       /** Phone number of user being verified. */
       public Builder setPhone(String phone) {
         this.phone = phone;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RelatedPerson {
+    /**
+     * <strong>Required.</strong> A token representing a connected account. If provided, the person
+     * parameter is also required and must be associated with the account.
+     */
+    @SerializedName("account")
+    String account;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> A token referencing a Person resource that this verification is
+     * being used to verify.
+     */
+    @SerializedName("person")
+    String person;
+
+    private RelatedPerson(String account, Map<String, Object> extraParams, String person) {
+      this.account = account;
+      this.extraParams = extraParams;
+      this.person = person;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String account;
+
+      private Map<String, Object> extraParams;
+
+      private String person;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public VerificationSessionCreateParams.RelatedPerson build() {
+        return new VerificationSessionCreateParams.RelatedPerson(
+            this.account, this.extraParams, this.person);
+      }
+
+      /**
+       * <strong>Required.</strong> A token representing a connected account. If provided, the
+       * person parameter is also required and must be associated with the account.
+       */
+      public Builder setAccount(String account) {
+        this.account = account;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * VerificationSessionCreateParams.RelatedPerson#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link VerificationSessionCreateParams.RelatedPerson#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> A token referencing a Person resource that this verification is
+       * being used to verify.
+       */
+      public Builder setPerson(String person) {
+        this.person = person;
         return this;
       }
     }
