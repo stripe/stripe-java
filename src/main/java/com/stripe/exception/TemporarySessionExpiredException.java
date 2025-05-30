@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** The temporary session token has expired. */
+/** Information about the error that occurred. */
 public final class TemporarySessionExpiredException extends ApiException {
   private static final long serialVersionUID = 2L;
 
