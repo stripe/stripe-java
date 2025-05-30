@@ -39,7 +39,7 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
 
   /** Metadata. */
   @SerializedName("metadata")
-  Map<String, Object> metadata;
+  Map<String, String> metadata;
 
   /** Event destination name. */
   @SerializedName("name")
@@ -54,7 +54,7 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
       List<String> enabledEvents,
       Map<String, Object> extraParams,
       List<EventDestinationUpdateParams.Include> include,
-      Map<String, Object> metadata,
+      Map<String, String> metadata,
       Object name,
       WebhookEndpoint webhookEndpoint) {
     this.description = description;
@@ -79,7 +79,7 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
 
     private List<EventDestinationUpdateParams.Include> include;
 
-    private Map<String, Object> metadata;
+    private Map<String, String> metadata;
 
     private Object name;
 
@@ -201,29 +201,11 @@ public class EventDestinationUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * EventDestinationUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, EmptyParam value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * Add all map key/value pairs to `metadata` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * Map values can only be one of the following types: `String`, `EmptyParam`. See {@link
-     * EventDestinationUpdateParams#metadata} for the field documentation.
+     * See {@link EventDestinationUpdateParams#metadata} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, Object> map) {
-      if (!map.values().stream().allMatch(v -> v instanceof String || v instanceof EmptyParam)) {
-        throw new IllegalArgumentException(
-            "All map values must one of the following types: String, EmptyParam");
-      }
+    public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
         this.metadata = new HashMap<>();
       }
