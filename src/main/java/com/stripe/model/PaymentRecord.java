@@ -706,6 +706,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("type")
     String type;
 
+    /** Details of the US Bank Account used for this payment attempt. */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
@@ -2973,29 +2974,20 @@ public class PaymentRecord extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Twint extends StripeObject {}
 
-    /**
-     * For more details about UsBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Details of the US Bank Account used for this payment attempt. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
-      /**
-       * Account holder type: individual or company.
-       *
-       * <p>One of {@code company}, or {@code individual}.
-       */
       @SerializedName("account_holder_type")
       String accountHolderType;
 
-      /**
-       * Account type: checkings or savings. Defaults to checking if omitted.
-       *
-       * <p>One of {@code checking}, or {@code savings}.
-       */
       @SerializedName("account_type")
       String accountType;
+
+      /** Amount of the ACH return to the bank account. */
+      @SerializedName("ach_return_amount")
+      AchReturnAmount achReturnAmount;
 
       /** Name of the bank associated with the bank account. */
       @SerializedName("bank_name")
@@ -3018,7 +3010,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Setter(lombok.AccessLevel.NONE)
       ExpandableField<Mandate> mandate;
 
-      /** Reference number to locate ACH payments with customer's bank. */
+      /** Reference number to locate ACH payments with customer’s bank. */
       @SerializedName("payment_reference")
       String paymentReference;
 
@@ -3042,6 +3034,28 @@ public class PaymentRecord extends ApiResource implements HasId {
 
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
+      }
+
+      /** A representation of an amount of money, consisting of an amount and a currency. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AchReturnAmount extends StripeObject {
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * A positive integer representing the amount in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
+         * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
+         */
+        @SerializedName("value")
+        Long value;
       }
     }
 

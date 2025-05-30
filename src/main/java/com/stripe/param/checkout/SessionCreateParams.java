@@ -180,7 +180,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * A list of items the customer is purchasing. Use this parameter to pass one-time or recurring <a
-   * href="https://stripe.com/docs/api/prices">Prices</a>.
+   * href="https://stripe.com/docs/api/prices">Prices</a>. The parameter is required for {@code
+   * payment} and {@code subscription} mode.
    *
    * <p>For {@code payment} mode, there is a maximum of 100 line items, however it is recommended to
    * consolidate line items if there are more than a few dozen.

@@ -33,10 +33,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_percent")
   Object applicationFeePercent;
 
-  /**
-   * Automatic tax settings for this subscription. We recommend you only include this parameter when
-   * the existing value is being changed.
-   */
+  /** Automatic tax settings for this subscription. */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
@@ -88,8 +85,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-   * version. Please use {@code cancel_at} instead.
+   * current_period_end}). Defaults to {@code false}.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -565,10 +561,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Automatic tax settings for this subscription. We recommend you only include this parameter
-     * when the existing value is being changed.
-     */
+    /** Automatic tax settings for this subscription. */
     public Builder setAutomaticTax(SubscriptionCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
@@ -656,8 +649,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-     * version. Please use {@code cancel_at} instead.
+     * current_period_end}). Defaults to {@code false}.
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;

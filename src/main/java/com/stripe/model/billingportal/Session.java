@@ -330,10 +330,7 @@ public class Session extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionUpdateConfirm extends StripeObject {
-      /**
-       * The coupon or promotion code to apply to this subscription update. Currently, only up to
-       * one may be specified.
-       */
+      /** The coupon or promotion code to apply to this subscription update. */
       @SerializedName("discounts")
       List<Session.Flow.SubscriptionUpdateConfirm.Discount> discounts;
 
