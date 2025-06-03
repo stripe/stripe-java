@@ -1142,6 +1142,14 @@ public class CalculationCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
      * If provided, the product's {@code tax_code} will be used as the line item's {@code tax_code}.
      */
     @SerializedName("product")
@@ -1179,6 +1187,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     private LineItem(
         Long amount,
         Map<String, Object> extraParams,
+        Map<String, String> metadata,
         String product,
         Long quantity,
         String reference,
@@ -1186,6 +1195,7 @@ public class CalculationCreateParams extends ApiRequestParams {
         String taxCode) {
       this.amount = amount;
       this.extraParams = extraParams;
+      this.metadata = metadata;
       this.product = product;
       this.quantity = quantity;
       this.reference = reference;
@@ -1202,6 +1212,8 @@ public class CalculationCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Map<String, String> metadata;
+
       private String product;
 
       private Long quantity;
@@ -1217,6 +1229,7 @@ public class CalculationCreateParams extends ApiRequestParams {
         return new CalculationCreateParams.LineItem(
             this.amount,
             this.extraParams,
+            this.metadata,
             this.product,
             this.quantity,
             this.reference,
@@ -1258,6 +1271,32 @@ public class CalculationCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CalculationCreateParams.LineItem#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CalculationCreateParams.LineItem#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 

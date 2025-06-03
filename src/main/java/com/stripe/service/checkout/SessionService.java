@@ -97,19 +97,39 @@ public final class SessionService extends ApiService {
             options);
     return this.request(request, Session.class);
   }
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(String session, SessionUpdateParams params) throws StripeException {
     return update(session, params, (RequestOptions) null);
   }
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(String session, RequestOptions options) throws StripeException {
     return update(session, (SessionUpdateParams) null, options);
   }
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(String session) throws StripeException {
     return update(session, (SessionUpdateParams) null, (RequestOptions) null);
   }
-  /** Updates a Checkout Session object. */
+  /**
+   * Updates a Checkout Session object.
+   *
+   * <p>Related guide: <a href="https://stripe.com/payments/checkout/dynamic-updates">Dynamically
+   * update Checkout</a>.
+   */
   public Session update(String session, SessionUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session));
