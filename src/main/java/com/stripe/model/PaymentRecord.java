@@ -2985,10 +2985,6 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("account_type")
       String accountType;
 
-      /** Amount of the ACH return to the bank account. */
-      @SerializedName("ach_return_amount")
-      AchReturnAmount achReturnAmount;
-
       /** Name of the bank associated with the bank account. */
       @SerializedName("bank_name")
       String bankName;
@@ -3034,28 +3030,6 @@ public class PaymentRecord extends ApiResource implements HasId {
 
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
-      }
-
-      /** A representation of an amount of money, consisting of an amount and a currency. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class AchReturnAmount extends StripeObject {
-        /**
-         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-         * currency</a>.
-         */
-        @SerializedName("currency")
-        String currency;
-
-        /**
-         * A positive integer representing the amount in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
-         * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
-         */
-        @SerializedName("value")
-        Long value;
       }
     }
 
