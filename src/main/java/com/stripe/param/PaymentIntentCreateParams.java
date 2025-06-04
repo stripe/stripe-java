@@ -242,7 +242,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * The list of payment method types (for example, a card) that this PaymentIntent can use. If you
    * don't provide this, Stripe will dynamically show relevant payment methods from your <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>.
+   * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a>. A
+   * list of valid payment method types can be found <a
+   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;

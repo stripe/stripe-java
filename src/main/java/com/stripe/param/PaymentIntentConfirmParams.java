@@ -118,7 +118,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   /**
    * The list of payment method types (for example, a card) that this PaymentIntent can use. Use
    * {@code automatic_payment_methods} to manage payment methods from the <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
+   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>. A list of
+   * valid payment method types can be found <a
+   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
