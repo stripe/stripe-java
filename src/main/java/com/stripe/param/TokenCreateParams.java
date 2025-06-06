@@ -476,6 +476,7 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
+      /** When the business was incorporated or registered. */
       @SerializedName("registration_date")
       Object registrationDate;
 
@@ -828,12 +829,14 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** When the business was incorporated or registered. */
         public Builder setRegistrationDate(
             TokenCreateParams.Account.Company.RegistrationDate registrationDate) {
           this.registrationDate = registrationDate;
           return this;
         }
 
+        /** When the business was incorporated or registered. */
         public Builder setRegistrationDate(EmptyParam registrationDate) {
           this.registrationDate = registrationDate;
           return this;

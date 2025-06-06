@@ -214,7 +214,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
-  /** The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. */
+  /**
+   * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. A list
+   * of valid payment method types can be found <a
+   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
+   */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
