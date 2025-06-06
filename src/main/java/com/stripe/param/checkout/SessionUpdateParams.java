@@ -68,28 +68,19 @@ public class SessionUpdateParams extends ApiRequestParams {
   @SerializedName("shipping_options")
   Object shippingOptions;
 
-  /**
-   * A subset of parameters to be passed to subscription creation for Checkout Sessions in {@code
-   * subscription} mode.
-   */
-  @SerializedName("subscription_data")
-  SubscriptionData subscriptionData;
-
   private SessionUpdateParams(
       CollectedInformation collectedInformation,
       List<String> expand,
       Map<String, Object> extraParams,
       List<SessionUpdateParams.LineItem> lineItems,
       Object metadata,
-      Object shippingOptions,
-      SubscriptionData subscriptionData) {
+      Object shippingOptions) {
     this.collectedInformation = collectedInformation;
     this.expand = expand;
     this.extraParams = extraParams;
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.shippingOptions = shippingOptions;
-    this.subscriptionData = subscriptionData;
   }
 
   public static Builder builder() {
@@ -109,8 +100,6 @@ public class SessionUpdateParams extends ApiRequestParams {
 
     private Object shippingOptions;
 
-    private SubscriptionData subscriptionData;
-
     /** Finalize and obtain parameter instance from this builder. */
     public SessionUpdateParams build() {
       return new SessionUpdateParams(
@@ -119,8 +108,7 @@ public class SessionUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.lineItems,
           this.metadata,
-          this.shippingOptions,
-          this.subscriptionData);
+          this.shippingOptions);
     }
 
     /**
@@ -298,15 +286,6 @@ public class SessionUpdateParams extends ApiRequestParams {
     /** The shipping rate options to apply to this Session. Up to a maximum of 5. */
     public Builder setShippingOptions(List<SessionUpdateParams.ShippingOption> shippingOptions) {
       this.shippingOptions = shippingOptions;
-      return this;
-    }
-
-    /**
-     * A subset of parameters to be passed to subscription creation for Checkout Sessions in {@code
-     * subscription} mode.
-     */
-    public Builder setSubscriptionData(SessionUpdateParams.SubscriptionData subscriptionData) {
-      this.subscriptionData = subscriptionData;
       return this;
     }
   }
@@ -2684,101 +2663,6 @@ public class SessionUpdateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SubscriptionData {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * Unix timestamp representing the end of the trial period the customer will get before being
-     * charged for the first time. Has to be at least 48 hours in the future.
-     */
-    @SerializedName("trial_end")
-    Long trialEnd;
-
-    /**
-     * Integer representing the number of trial period days before the customer is charged for the
-     * first time. Has to be at least 1.
-     */
-    @SerializedName("trial_period_days")
-    Long trialPeriodDays;
-
-    private SubscriptionData(Map<String, Object> extraParams, Long trialEnd, Long trialPeriodDays) {
-      this.extraParams = extraParams;
-      this.trialEnd = trialEnd;
-      this.trialPeriodDays = trialPeriodDays;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Long trialEnd;
-
-      private Long trialPeriodDays;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public SessionUpdateParams.SubscriptionData build() {
-        return new SessionUpdateParams.SubscriptionData(
-            this.extraParams, this.trialEnd, this.trialPeriodDays);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SessionUpdateParams.SubscriptionData#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SessionUpdateParams.SubscriptionData#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Unix timestamp representing the end of the trial period the customer will get before being
-       * charged for the first time. Has to be at least 48 hours in the future.
-       */
-      public Builder setTrialEnd(Long trialEnd) {
-        this.trialEnd = trialEnd;
-        return this;
-      }
-
-      /**
-       * Integer representing the number of trial period days before the customer is charged for the
-       * first time. Has to be at least 1.
-       */
-      public Builder setTrialPeriodDays(Long trialPeriodDays) {
-        this.trialPeriodDays = trialPeriodDays;
-        return this;
       }
     }
   }
