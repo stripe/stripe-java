@@ -93,7 +93,7 @@ public class StripeExample {
                 .build();
 
         try {
-            Customer customer = client.v1().customers().create(params);
+            Customer customer = client.customers().create(params);
             System.out.println(customer);
         } catch (StripeException e) {
             e.printStackTrace();
@@ -112,7 +112,7 @@ Once the legacy pattern is deprecated, new API endpoints will only be accessible
 
 ### Per-request Configuration
 
-All the request methods accept an optional `RequestOptions` object. This is
+All of the request methods accept an optional `RequestOptions` object. This is
 used if you want to set an [idempotency key][idempotency-keys], if you are
 using [Stripe Connect][connect-auth], or if you want to pass the secret API
 key on each method.
@@ -124,9 +124,9 @@ RequestOptions requestOptions = RequestOptions.builder()
     .setStripeAccount("acct_...")
     .build();
 
-client.v1().customers().list(requestOptions);
+client.customers().list(requestOptions);
 
-client.v1().customers().retrieve("cus_123456789", requestOptions);
+client.customers().retrieve("cus_123456789", requestOptions);
 ```
 
 ### Configuring automatic retries
@@ -147,7 +147,7 @@ Or on a finer grain level using `RequestOptions`:
 RequestOptions options = RequestOptions.builder()
     .setMaxNetworkRetries(2)
     .build();
-client.v1().customers().create(params, options);
+client.customers().create(params, options);
 ```
 
 [Idempotency keys][idempotency-keys] are added to requests to guarantee that
@@ -171,7 +171,7 @@ RequestOptions options = RequestOptions.builder()
     .setConnectTimeout(30 * 1000) // in milliseconds
     .setReadTimeout(80 * 1000)
     .build();
-client.v1().customers().create(params, options);
+client.customers().create(params, options);
 ```
 
 Please take care to set conservative read timeouts. Some API requests can take
@@ -207,7 +207,7 @@ CustomerCreateParams params =
     .putExtraParam("secret_parameter[secondary]", "secondary value")
     .build();
 
-client.v1().customers().create(params);
+client.customers().create(params);
 ```
 
 #### Properties
@@ -215,7 +215,7 @@ client.v1().customers().create(params);
 To retrieve undocumented properties from Stripe using Java you can use an option in the library to return the raw JSON object and return the property as a native type. An example of this is shown below:
 
 ```java
-final Customer customer = client.v1().customers().retrieve("cus_1234");
+final Customer customer = client.customers().retrieve("cus_1234");
 Boolean featureEnabled =
   customer.getRawJsonObject()
     .getAsJsonPrimitive("secret_feature_enabled")
