@@ -1166,7 +1166,7 @@ public class Dispute extends ApiResource
        * The type of dispute opened. Different case types may have varying fees and financial
        * impact.
        *
-       * <p>One of {@code chargeback}, or {@code inquiry}.
+       * <p>One of {@code chargeback}, {@code compliance}, or {@code inquiry}.
        */
       @SerializedName("case_type")
       String caseType;
