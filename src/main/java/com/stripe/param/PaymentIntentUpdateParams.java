@@ -17948,7 +17948,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           @SerializedName("interval")
           Interval interval;
 
-          /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
+          /**
+           * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}, {@code
+           * bonus}, or {@code revolving}.
+           */
           @SerializedName("type")
           Type type;
 
@@ -18029,7 +18032,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
+            /**
+             * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count},
+             * {@code bonus}, or {@code revolving}.
+             */
             public Builder setType(
                 PaymentIntentUpdateParams.PaymentMethodOptions.Card.Installments.Plan.Type type) {
               this.type = type;
@@ -18050,8 +18056,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
 
           public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("bonus")
+            BONUS("bonus"),
+
             @SerializedName("fixed_count")
-            FIXED_COUNT("fixed_count");
+            FIXED_COUNT("fixed_count"),
+
+            @SerializedName("revolving")
+            REVOLVING("revolving");
 
             @Getter(onMethod_ = {@Override})
             private final String value;

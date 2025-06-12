@@ -251,7 +251,10 @@ public class ConfirmationToken extends ApiResource implements HasId {
           @SerializedName("interval")
           String interval;
 
-          /** Type of installment plan, one of {@code fixed_count}. */
+          /**
+           * Type of installment plan, one of {@code fixed_count}, {@code bonus}, or {@code
+           * revolving}.
+           */
           @SerializedName("type")
           String type;
         }
