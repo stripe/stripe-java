@@ -8346,6 +8346,7 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("phone")
     String phone;
 
+    /** When the business was incorporated or registered. */
     @SerializedName("registration_date")
     Object registrationDate;
 
@@ -8678,12 +8679,14 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** When the business was incorporated or registered. */
       public Builder setRegistrationDate(
           AccountCreateParams.Company.RegistrationDate registrationDate) {
         this.registrationDate = registrationDate;
         return this;
       }
 
+      /** When the business was incorporated or registered. */
       public Builder setRegistrationDate(EmptyParam registrationDate) {
         this.registrationDate = registrationDate;
         return this;
@@ -10542,6 +10545,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** One or more documents that demonstrate proof of address. */
+    @SerializedName("proof_of_address")
+    ProofOfAddress proofOfAddress;
+
     /**
      * One or more documents showing the company’s proof of registration with the national business
      * registry.
@@ -10561,6 +10568,7 @@ public class AccountCreateParams extends ApiRequestParams {
         CompanyRegistrationVerification companyRegistrationVerification,
         CompanyTaxIdVerification companyTaxIdVerification,
         Map<String, Object> extraParams,
+        ProofOfAddress proofOfAddress,
         ProofOfRegistration proofOfRegistration,
         ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership) {
       this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
@@ -10570,6 +10578,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.companyRegistrationVerification = companyRegistrationVerification;
       this.companyTaxIdVerification = companyTaxIdVerification;
       this.extraParams = extraParams;
+      this.proofOfAddress = proofOfAddress;
       this.proofOfRegistration = proofOfRegistration;
       this.proofOfUltimateBeneficialOwnership = proofOfUltimateBeneficialOwnership;
     }
@@ -10593,6 +10602,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private ProofOfAddress proofOfAddress;
+
       private ProofOfRegistration proofOfRegistration;
 
       private ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
@@ -10607,6 +10618,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.companyRegistrationVerification,
             this.companyTaxIdVerification,
             this.extraParams,
+            this.proofOfAddress,
             this.proofOfRegistration,
             this.proofOfUltimateBeneficialOwnership);
       }
@@ -10691,6 +10703,13 @@ public class AccountCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** One or more documents that demonstrate proof of address. */
+      public Builder setProofOfAddress(
+          AccountCreateParams.Documents.ProofOfAddress proofOfAddress) {
+        this.proofOfAddress = proofOfAddress;
         return this;
       }
 
@@ -11292,6 +11311,101 @@ public class AccountCreateParams extends ApiRequestParams {
          * and subsequent calls adds additional elements to the original list. See {@link
          * AccountCreateParams.Documents.CompanyTaxIdVerification#files} for the field
          * documentation.
+         */
+        public Builder addAllFile(List<String> elements) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.addAll(elements);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ProofOfAddress {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * One or more document ids returned by a <a
+       * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose} value
+       * of {@code account_requirement}.
+       */
+      @SerializedName("files")
+      List<String> files;
+
+      private ProofOfAddress(Map<String, Object> extraParams, List<String> files) {
+        this.extraParams = extraParams;
+        this.files = files;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<String> files;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Documents.ProofOfAddress build() {
+          return new AccountCreateParams.Documents.ProofOfAddress(this.extraParams, this.files);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Documents.ProofOfAddress#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Documents.ProofOfAddress#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountCreateParams.Documents.ProofOfAddress#files} for the field documentation.
+         */
+        public Builder addFile(String element) {
+          if (this.files == null) {
+            this.files = new ArrayList<>();
+          }
+          this.files.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `files` list. A list is initialized for the first `add/addAll` call,
+         * and subsequent calls adds additional elements to the original list. See {@link
+         * AccountCreateParams.Documents.ProofOfAddress#files} for the field documentation.
          */
         public Builder addAllFile(List<String> elements) {
           if (this.files == null) {

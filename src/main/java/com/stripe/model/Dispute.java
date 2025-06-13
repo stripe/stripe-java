@@ -1044,6 +1044,9 @@ public class Dispute extends ApiResource
     @SerializedName("submission_count")
     Long submissionCount;
 
+    @SerializedName("submission_method")
+    String submissionMethod;
+
     /**
      * For more details about EnhancedEligibility, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
@@ -1166,7 +1169,7 @@ public class Dispute extends ApiResource
        * The type of dispute opened. Different case types may have varying fees and financial
        * impact.
        *
-       * <p>One of {@code chargeback}, or {@code inquiry}.
+       * <p>One of {@code chargeback}, {@code compliance}, or {@code inquiry}.
        */
       @SerializedName("case_type")
       String caseType;

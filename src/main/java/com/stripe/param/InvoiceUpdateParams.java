@@ -3042,7 +3042,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             @SerializedName("interval")
             Interval interval;
 
-            /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
+            /**
+             * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count},
+             * {@code bonus}, or {@code revolving}.
+             */
             @SerializedName("type")
             Type type;
 
@@ -3127,7 +3130,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}.
+               * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count},
+               * {@code bonus}, or {@code revolving}.
                */
               public Builder setType(
                   InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Card.Installments.Plan
@@ -3151,8 +3155,14 @@ public class InvoiceUpdateParams extends ApiRequestParams {
             }
 
             public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("bonus")
+              BONUS("bonus"),
+
               @SerializedName("fixed_count")
-              FIXED_COUNT("fixed_count");
+              FIXED_COUNT("fixed_count"),
+
+              @SerializedName("revolving")
+              REVOLVING("revolving");
 
               @Getter(onMethod_ = {@Override})
               private final String value;

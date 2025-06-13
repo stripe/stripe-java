@@ -152,7 +152,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * The list of payment method types (for example, card) that this PaymentIntent can use. Use
    * {@code automatic_payment_methods} to manage payment methods from the <a
-   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
+   * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>. A list of
+   * valid payment method types can be found <a
+   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -17946,7 +17948,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           @SerializedName("interval")
           Interval interval;
 
-          /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
+          /**
+           * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}, {@code
+           * bonus}, or {@code revolving}.
+           */
           @SerializedName("type")
           Type type;
 
@@ -18027,7 +18032,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** <strong>Required.</strong> Type of installment plan, one of {@code fixed_count}. */
+            /**
+             * <strong>Required.</strong> Type of installment plan, one of {@code fixed_count},
+             * {@code bonus}, or {@code revolving}.
+             */
             public Builder setType(
                 PaymentIntentUpdateParams.PaymentMethodOptions.Card.Installments.Plan.Type type) {
               this.type = type;
@@ -18048,8 +18056,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           }
 
           public enum Type implements ApiRequestParams.EnumParam {
+            @SerializedName("bonus")
+            BONUS("bonus"),
+
             @SerializedName("fixed_count")
-            FIXED_COUNT("fixed_count");
+            FIXED_COUNT("fixed_count"),
+
+            @SerializedName("revolving")
+            REVOLVING("revolving");
 
             @Getter(onMethod_ = {@Override})
             private final String value;
@@ -20955,7 +20969,10 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

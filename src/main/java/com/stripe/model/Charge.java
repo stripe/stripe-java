@@ -1895,7 +1895,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       IncrementalAuthorization incrementalAuthorization;
 
       /**
-       * Installment details for this payment (Mexico only).
+       * Installment details for this payment.
        *
        * <p>For more information, see the <a
        * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
@@ -2088,7 +2088,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
           @SerializedName("interval")
           String interval;
 
-          /** Type of installment plan, one of {@code fixed_count}. */
+          /**
+           * Type of installment plan, one of {@code fixed_count}, {@code bonus}, or {@code
+           * revolving}.
+           */
           @SerializedName("type")
           String type;
         }
