@@ -1044,6 +1044,9 @@ public class Dispute extends ApiResource
     @SerializedName("submission_count")
     Long submissionCount;
 
+    @SerializedName("submission_method")
+    String submissionMethod;
+
     /**
      * For more details about EnhancedEligibility, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
