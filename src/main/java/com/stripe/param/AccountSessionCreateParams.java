@@ -138,51 +138,99 @@ public class AccountSessionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Components {
-    /** Configuration for the account management embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/account-management/">account
+     * management</a> embedded component.
+     */
     @SerializedName("account_management")
     AccountManagement accountManagement;
 
-    /** Configuration for the account onboarding embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/account-onboarding/">account
+     * onboarding</a> embedded component.
+     */
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
-    /** Configuration for the app install component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/app-install/">app install</a>
+     * embedded component.
+     */
     @SerializedName("app_install")
     AppInstall appInstall;
 
-    /** Configuration for the app viewport component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/app-viewport/">app
+     * viewport</a> embedded component.
+     */
     @SerializedName("app_viewport")
     AppViewport appViewport;
 
-    /** Configuration for the balances embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/balances/">balances</a>
+     * embedded component.
+     */
     @SerializedName("balances")
     Balances balances;
 
-    /** Configuration for the capital financing embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/capital-financing/">Capital
+     * financing</a> embedded component.
+     */
     @SerializedName("capital_financing")
     CapitalFinancing capitalFinancing;
 
-    /** Configuration for the capital financing application embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/capital-financing-application/">Capital
+     * financing application</a> embedded component.
+     */
     @SerializedName("capital_financing_application")
     CapitalFinancingApplication capitalFinancingApplication;
 
-    /** Configuration for the capital financing promotion embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/capital-financing-promotion/">Capital
+     * financing promotion</a> embedded component.
+     */
     @SerializedName("capital_financing_promotion")
     CapitalFinancingPromotion capitalFinancingPromotion;
 
-    /** Configuration for the capital overview embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/capital-overview/">Capital
+     * overview</a> embedded component.
+     */
     @SerializedName("capital_overview")
     CapitalOverview capitalOverview;
 
-    /** Configuration for the disputes list embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/disputes-list/">disputes
+     * list</a> embedded component.
+     */
     @SerializedName("disputes_list")
     DisputesList disputesList;
 
-    /** Configuration for the documents embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/documents/">documents</a>
+     * embedded component.
+     */
     @SerializedName("documents")
     Documents documents;
 
-    /** Configuration for the export tax transactions embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/export-tax-transactions/">export
+     * tax transactions</a> embedded component.
+     */
     @SerializedName("export_tax_transactions")
     ExportTaxTransactions exportTaxTransactions;
 
@@ -195,71 +243,139 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Configuration for the financial account embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/financial-account/">financial
+     * account</a> embedded component.
+     */
     @SerializedName("financial_account")
     FinancialAccount financialAccount;
 
-    /** Configuration for the financial account transactions embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/financial-account-transactions/">financial
+     * account transactions</a> embedded component.
+     */
     @SerializedName("financial_account_transactions")
     FinancialAccountTransactions financialAccountTransactions;
 
-    /** Configuration for the issuing card embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/issuing-card/">issuing
+     * card</a> embedded component.
+     */
     @SerializedName("issuing_card")
     IssuingCard issuingCard;
 
-    /** Configuration for the issuing cards list embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/issuing-cards-list/">issuing
+     * cards list</a> embedded component.
+     */
     @SerializedName("issuing_cards_list")
     IssuingCardsList issuingCardsList;
 
-    /** Configuration for the notification banner embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/notification-banner/">notification
+     * banner</a> embedded component.
+     */
     @SerializedName("notification_banner")
     NotificationBanner notificationBanner;
 
-    /** Configuration for the payment details embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/payment-details/">payment
+     * details</a> embedded component.
+     */
     @SerializedName("payment_details")
     PaymentDetails paymentDetails;
 
-    /** Configuration for the payment disputes embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/payment-disputes/">payment
+     * disputes</a> embedded component.
+     */
     @SerializedName("payment_disputes")
     PaymentDisputes paymentDisputes;
 
-    /** Configuration for the payment method settings embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/payment-method-settings/">payment
+     * method settings</a> embedded component.
+     */
     @SerializedName("payment_method_settings")
     PaymentMethodSettings paymentMethodSettings;
 
-    /** Configuration for the payments embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/payments/">payments</a>
+     * embedded component.
+     */
     @SerializedName("payments")
     Payments payments;
 
-    /** Configuration for the payouts embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/payouts/">payouts</a> embedded
+     * component.
+     */
     @SerializedName("payouts")
     Payouts payouts;
 
-    /** Configuration for the payouts list embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/payouts-list/">payouts
+     * list</a> embedded component.
+     */
     @SerializedName("payouts_list")
     PayoutsList payoutsList;
 
-    /** Configuration for the product tax code selector embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/product-tax-code-selector/">product
+     * tax code selector</a> embedded component.
+     */
     @SerializedName("product_tax_code_selector")
     ProductTaxCodeSelector productTaxCodeSelector;
 
-    /** Configuration for the recipients component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/recipients/">recipients</a>
+     * embedded component.
+     */
     @SerializedName("recipients")
     Recipients recipients;
 
-    /** Configuration for the reporting chart embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/reporting-chart/">reporting
+     * chart</a> embedded component.
+     */
     @SerializedName("reporting_chart")
     ReportingChart reportingChart;
 
-    /** Configuration for the tax registrations embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/tax-registrations/">tax
+     * registrations</a> embedded component.
+     */
     @SerializedName("tax_registrations")
     TaxRegistrations taxRegistrations;
 
-    /** Configuration for the tax settings embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/tax-settings/">tax
+     * settings</a> embedded component.
+     */
     @SerializedName("tax_settings")
     TaxSettings taxSettings;
 
-    /** Configuration for the tax threshold monitoring embedded component. */
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/tax-threshold-monitoring/">tax
+     * threshold monitoring</a> embedded component.
+     */
     @SerializedName("tax_threshold_monitoring")
     TaxThresholdMonitoring taxThresholdMonitoring;
 
@@ -426,46 +542,74 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.taxThresholdMonitoring);
       }
 
-      /** Configuration for the account management embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/account-management/">account
+       * management</a> embedded component.
+       */
       public Builder setAccountManagement(
           AccountSessionCreateParams.Components.AccountManagement accountManagement) {
         this.accountManagement = accountManagement;
         return this;
       }
 
-      /** Configuration for the account onboarding embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/account-onboarding/">account
+       * onboarding</a> embedded component.
+       */
       public Builder setAccountOnboarding(
           AccountSessionCreateParams.Components.AccountOnboarding accountOnboarding) {
         this.accountOnboarding = accountOnboarding;
         return this;
       }
 
-      /** Configuration for the app install component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/app-install/">app
+       * install</a> embedded component.
+       */
       public Builder setAppInstall(AccountSessionCreateParams.Components.AppInstall appInstall) {
         this.appInstall = appInstall;
         return this;
       }
 
-      /** Configuration for the app viewport component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/app-viewport/">app
+       * viewport</a> embedded component.
+       */
       public Builder setAppViewport(AccountSessionCreateParams.Components.AppViewport appViewport) {
         this.appViewport = appViewport;
         return this;
       }
 
-      /** Configuration for the balances embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/balances/">balances</a>
+       * embedded component.
+       */
       public Builder setBalances(AccountSessionCreateParams.Components.Balances balances) {
         this.balances = balances;
         return this;
       }
 
-      /** Configuration for the capital financing embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/capital-financing/">Capital
+       * financing</a> embedded component.
+       */
       public Builder setCapitalFinancing(
           AccountSessionCreateParams.Components.CapitalFinancing capitalFinancing) {
         this.capitalFinancing = capitalFinancing;
         return this;
       }
 
-      /** Configuration for the capital financing application embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/capital-financing-application/">Capital
+       * financing application</a> embedded component.
+       */
       public Builder setCapitalFinancingApplication(
           AccountSessionCreateParams.Components.CapitalFinancingApplication
               capitalFinancingApplication) {
@@ -473,7 +617,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Configuration for the capital financing promotion embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/capital-financing-promotion/">Capital
+       * financing promotion</a> embedded component.
+       */
       public Builder setCapitalFinancingPromotion(
           AccountSessionCreateParams.Components.CapitalFinancingPromotion
               capitalFinancingPromotion) {
@@ -481,27 +629,43 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Configuration for the capital overview embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/capital-overview/">Capital
+       * overview</a> embedded component.
+       */
       public Builder setCapitalOverview(
           AccountSessionCreateParams.Components.CapitalOverview capitalOverview) {
         this.capitalOverview = capitalOverview;
         return this;
       }
 
-      /** Configuration for the disputes list embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/disputes-list/">disputes
+       * list</a> embedded component.
+       */
       public Builder setDisputesList(
           AccountSessionCreateParams.Components.DisputesList disputesList) {
         this.disputesList = disputesList;
         return this;
       }
 
-      /** Configuration for the documents embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/documents/">documents</a>
+       * embedded component.
+       */
       public Builder setDocuments(AccountSessionCreateParams.Components.Documents documents) {
         this.documents = documents;
         return this;
       }
 
-      /** Configuration for the export tax transactions embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/export-tax-transactions/">export
+       * tax transactions</a> embedded component.
+       */
       public Builder setExportTaxTransactions(
           AccountSessionCreateParams.Components.ExportTaxTransactions exportTaxTransactions) {
         this.exportTaxTransactions = exportTaxTransactions;
@@ -534,14 +698,22 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Configuration for the financial account embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/financial-account/">financial
+       * account</a> embedded component.
+       */
       public Builder setFinancialAccount(
           AccountSessionCreateParams.Components.FinancialAccount financialAccount) {
         this.financialAccount = financialAccount;
         return this;
       }
 
-      /** Configuration for the financial account transactions embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/financial-account-transactions/">financial
+       * account transactions</a> embedded component.
+       */
       public Builder setFinancialAccountTransactions(
           AccountSessionCreateParams.Components.FinancialAccountTransactions
               financialAccountTransactions) {
@@ -549,99 +721,159 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Configuration for the issuing card embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/issuing-card/">issuing
+       * card</a> embedded component.
+       */
       public Builder setIssuingCard(AccountSessionCreateParams.Components.IssuingCard issuingCard) {
         this.issuingCard = issuingCard;
         return this;
       }
 
-      /** Configuration for the issuing cards list embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/issuing-cards-list/">issuing
+       * cards list</a> embedded component.
+       */
       public Builder setIssuingCardsList(
           AccountSessionCreateParams.Components.IssuingCardsList issuingCardsList) {
         this.issuingCardsList = issuingCardsList;
         return this;
       }
 
-      /** Configuration for the notification banner embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/notification-banner/">notification
+       * banner</a> embedded component.
+       */
       public Builder setNotificationBanner(
           AccountSessionCreateParams.Components.NotificationBanner notificationBanner) {
         this.notificationBanner = notificationBanner;
         return this;
       }
 
-      /** Configuration for the payment details embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/payment-details/">payment
+       * details</a> embedded component.
+       */
       public Builder setPaymentDetails(
           AccountSessionCreateParams.Components.PaymentDetails paymentDetails) {
         this.paymentDetails = paymentDetails;
         return this;
       }
 
-      /** Configuration for the payment disputes embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/payment-disputes/">payment
+       * disputes</a> embedded component.
+       */
       public Builder setPaymentDisputes(
           AccountSessionCreateParams.Components.PaymentDisputes paymentDisputes) {
         this.paymentDisputes = paymentDisputes;
         return this;
       }
 
-      /** Configuration for the payment method settings embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/payment-method-settings/">payment
+       * method settings</a> embedded component.
+       */
       public Builder setPaymentMethodSettings(
           AccountSessionCreateParams.Components.PaymentMethodSettings paymentMethodSettings) {
         this.paymentMethodSettings = paymentMethodSettings;
         return this;
       }
 
-      /** Configuration for the payments embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/payments/">payments</a>
+       * embedded component.
+       */
       public Builder setPayments(AccountSessionCreateParams.Components.Payments payments) {
         this.payments = payments;
         return this;
       }
 
-      /** Configuration for the payouts embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/payouts/">payouts</a>
+       * embedded component.
+       */
       public Builder setPayouts(AccountSessionCreateParams.Components.Payouts payouts) {
         this.payouts = payouts;
         return this;
       }
 
-      /** Configuration for the payouts list embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/payouts-list/">payouts
+       * list</a> embedded component.
+       */
       public Builder setPayoutsList(AccountSessionCreateParams.Components.PayoutsList payoutsList) {
         this.payoutsList = payoutsList;
         return this;
       }
 
-      /** Configuration for the product tax code selector embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/product-tax-code-selector/">product
+       * tax code selector</a> embedded component.
+       */
       public Builder setProductTaxCodeSelector(
           AccountSessionCreateParams.Components.ProductTaxCodeSelector productTaxCodeSelector) {
         this.productTaxCodeSelector = productTaxCodeSelector;
         return this;
       }
 
-      /** Configuration for the recipients component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/recipients/">recipients</a>
+       * embedded component.
+       */
       public Builder setRecipients(AccountSessionCreateParams.Components.Recipients recipients) {
         this.recipients = recipients;
         return this;
       }
 
-      /** Configuration for the reporting chart embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/reporting-chart/">reporting
+       * chart</a> embedded component.
+       */
       public Builder setReportingChart(
           AccountSessionCreateParams.Components.ReportingChart reportingChart) {
         this.reportingChart = reportingChart;
         return this;
       }
 
-      /** Configuration for the tax registrations embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/tax-registrations/">tax
+       * registrations</a> embedded component.
+       */
       public Builder setTaxRegistrations(
           AccountSessionCreateParams.Components.TaxRegistrations taxRegistrations) {
         this.taxRegistrations = taxRegistrations;
         return this;
       }
 
-      /** Configuration for the tax settings embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/tax-settings/">tax
+       * settings</a> embedded component.
+       */
       public Builder setTaxSettings(AccountSessionCreateParams.Components.TaxSettings taxSettings) {
         this.taxSettings = taxSettings;
         return this;
       }
 
-      /** Configuration for the tax threshold monitoring embedded component. */
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/tax-threshold-monitoring/">tax
+       * threshold monitoring</a> embedded component.
+       */
       public Builder setTaxThresholdMonitoring(
           AccountSessionCreateParams.Components.TaxThresholdMonitoring taxThresholdMonitoring) {
         this.taxThresholdMonitoring = taxThresholdMonitoring;
@@ -739,21 +971,20 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -797,12 +1028,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This value can only be
-           * true for accounts where {@code controller.requirement_collection} is {@code
-           * application}. The default value is the opposite of the {@code
-           * external_account_collection} value. For example, if you don’t set {@code
-           * external_account_collection}, it defaults to true and {@code
-           * disable_stripe_user_authentication} defaults to false.
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -811,11 +1042,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for accounts where you’re responsible for
-           * collecting updated information when requirements are due or change, like custom
-           * accounts. Otherwise, bank account collection is determined by compliance requirements.
-           * The default value for this feature is {@code true}.
+           * Whether external account collection is enabled. This feature can only be {@code false}
+           * for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like Custom accounts. The default value for this
+           * feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -945,21 +1175,20 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -1003,12 +1232,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This value can only be
-           * true for accounts where {@code controller.requirement_collection} is {@code
-           * application}. The default value is the opposite of the {@code
-           * external_account_collection} value. For example, if you don’t set {@code
-           * external_account_collection}, it defaults to true and {@code
-           * disable_stripe_user_authentication} defaults to false.
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -1017,11 +1246,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for accounts where you’re responsible for
-           * collecting updated information when requirements are due or change, like custom
-           * accounts. Otherwise, bank account collection is determined by compliance requirements.
-           * The default value for this feature is {@code true}.
+           * Whether external account collection is enabled. This feature can only be {@code false}
+           * for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like Custom accounts. The default value for this
+           * feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -1149,7 +1377,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
-        /** List of apps allowed to be enabled for this account session. */
+        /** The list of apps allowed to be enabled in the embedded component. */
         @SerializedName("allowed_apps")
         Object allowedApps;
 
@@ -1213,13 +1441,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** List of apps allowed to be enabled for this account session. */
+          /** The list of apps allowed to be enabled in the embedded component. */
           public Builder setAllowedApps(EmptyParam allowedApps) {
             this.allowedApps = allowedApps;
             return this;
           }
 
-          /** List of apps allowed to be enabled for this account session. */
+          /** The list of apps allowed to be enabled in the embedded component. */
           public Builder setAllowedApps(List<String> allowedApps) {
             this.allowedApps = allowedApps;
             return this;
@@ -1344,7 +1572,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
-        /** List of apps allowed to be enabled for this account session. */
+        /** The list of apps allowed to be enabled in the embedded component. */
         @SerializedName("allowed_apps")
         Object allowedApps;
 
@@ -1408,13 +1636,13 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** List of apps allowed to be enabled for this account session. */
+          /** The list of apps allowed to be enabled in the embedded component. */
           public Builder setAllowedApps(EmptyParam allowedApps) {
             this.allowedApps = allowedApps;
             return this;
           }
 
-          /** List of apps allowed to be enabled for this account session. */
+          /** The list of apps allowed to be enabled in the embedded component. */
           public Builder setAllowedApps(List<String> allowedApps) {
             this.allowedApps = allowedApps;
             return this;
@@ -1540,28 +1768,28 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
-         * Loss Liability, default {@code false} otherwise.
+         * Whether to allow payout schedule to be changed. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("edit_payout_schedule")
         Boolean editPayoutSchedule;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -1577,15 +1805,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
 
         /**
-         * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of standard payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("standard_payouts")
         Boolean standardPayouts;
@@ -1634,12 +1864,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This value can only be
-           * true for accounts where {@code controller.requirement_collection} is {@code
-           * application}. The default value is the opposite of the {@code
-           * external_account_collection} value. For example, if you don’t set {@code
-           * external_account_collection}, it defaults to true and {@code
-           * disable_stripe_user_authentication} defaults to false.
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -1648,8 +1878,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
-           * Loss Liability, default {@code false} otherwise.
+           * Whether to allow payout schedule to be changed. Defaults to {@code true} when {@code
+           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+           * false}.
            */
           public Builder setEditPayoutSchedule(Boolean editPayoutSchedule) {
             this.editPayoutSchedule = editPayoutSchedule;
@@ -1657,11 +1888,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for accounts where you’re responsible for
-           * collecting updated information when requirements are due or change, like custom
-           * accounts. Otherwise, bank account collection is determined by compliance requirements.
-           * The default value for this feature is {@code true}.
+           * Whether external account collection is enabled. This feature can only be {@code false}
+           * for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like Custom accounts. The default value for this
+           * feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -1697,8 +1927,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns
-           * Loss Liability, default {@code false} otherwise.
+           * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+           * false}.
            */
           public Builder setInstantPayouts(Boolean instantPayouts) {
             this.instantPayouts = instantPayouts;
@@ -1706,8 +1937,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns
-           * Loss Liability, default {@code false} otherwise.
+           * Whether to allow creation of standard payouts. Defaults to {@code true} when {@code
+           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+           * false}.
            */
           public Builder setStandardPayouts(Boolean standardPayouts) {
             this.standardPayouts = standardPayouts;
@@ -2413,14 +2645,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean capturePayments;
 
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
@@ -2436,7 +2668,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
 
@@ -2488,8 +2720,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow connected accounts to manage destination charges that are created on
-           * behalf of them. This is {@code false} by default.
+           * Whether connected accounts can manage destination charges that are created on behalf of
+           * them. This is {@code false} by default.
            */
           public Builder setDestinationOnBehalfOfChargeManagement(
               Boolean destinationOnBehalfOfChargeManagement) {
@@ -2498,7 +2730,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow responding to disputes, including submitting evidence and accepting
+           * Whether responding to disputes is enabled, including submitting evidence and accepting
            * disputes. This is {@code true} by default.
            */
           public Builder setDisputeManagement(Boolean disputeManagement) {
@@ -2536,7 +2768,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether to allow sending refunds. This is {@code true} by default. */
+          /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
             return this;
@@ -2929,16 +3161,21 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
-        /** Whether to allow external accounts to be linked for money transfer. */
+        /**
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
+         */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
 
@@ -2999,12 +3236,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This value can only be
-           * true for accounts where {@code controller.requirement_collection} is {@code
-           * application}. The default value is the opposite of the {@code
-           * external_account_collection} value. For example, if you don’t set {@code
-           * external_account_collection}, it defaults to true and {@code
-           * disable_stripe_user_authentication} defaults to false.
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -3012,7 +3249,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether to allow external accounts to be linked for money transfer. */
+          /**
+           * Whether external account collection is enabled. This feature can only be {@code false}
+           * for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like Custom accounts. The default value for this
+           * feature is {@code true}.
+           */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
             return this;
@@ -3537,9 +3779,11 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean cardholderManagement;
 
         /**
-         * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -3620,9 +3864,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This feature can only
-           * be false for accounts where you’re responsible for collecting updated information when
-           * requirements are due or change, like custom accounts.
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -3759,21 +4006,20 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -3817,12 +4063,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This value can only be
-           * true for accounts where {@code controller.requirement_collection} is {@code
-           * application}. The default value is the opposite of the {@code
-           * external_account_collection} value. For example, if you don’t set {@code
-           * external_account_collection}, it defaults to true and {@code
-           * disable_stripe_user_authentication} defaults to false.
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -3831,11 +4077,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for accounts where you’re responsible for
-           * collecting updated information when requirements are due or change, like custom
-           * accounts. Otherwise, bank account collection is determined by compliance requirements.
-           * The default value for this feature is {@code true}.
+           * Whether external account collection is enabled. This feature can only be {@code false}
+           * for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like Custom accounts. The default value for this
+           * feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -3971,14 +4216,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean capturePayments;
 
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
@@ -3994,7 +4239,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
 
@@ -4046,8 +4291,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow connected accounts to manage destination charges that are created on
-           * behalf of them. This is {@code false} by default.
+           * Whether connected accounts can manage destination charges that are created on behalf of
+           * them. This is {@code false} by default.
            */
           public Builder setDestinationOnBehalfOfChargeManagement(
               Boolean destinationOnBehalfOfChargeManagement) {
@@ -4056,7 +4301,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow responding to disputes, including submitting evidence and accepting
+           * Whether responding to disputes is enabled, including submitting evidence and accepting
            * disputes. This is {@code true} by default.
            */
           public Builder setDisputeManagement(Boolean disputeManagement) {
@@ -4094,7 +4339,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether to allow sending refunds. This is {@code true} by default. */
+          /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
             return this;
@@ -4192,14 +4437,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
@@ -4215,7 +4460,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
 
@@ -4253,8 +4498,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow connected accounts to manage destination charges that are created on
-           * behalf of them. This is {@code false} by default.
+           * Whether connected accounts can manage destination charges that are created on behalf of
+           * them. This is {@code false} by default.
            */
           public Builder setDestinationOnBehalfOfChargeManagement(
               Boolean destinationOnBehalfOfChargeManagement) {
@@ -4263,7 +4508,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow responding to disputes, including submitting evidence and accepting
+           * Whether responding to disputes is enabled, including submitting evidence and accepting
            * disputes. This is {@code true} by default.
            */
           public Builder setDisputeManagement(Boolean disputeManagement) {
@@ -4301,7 +4546,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether to allow sending refunds. This is {@code true} by default. */
+          /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
             return this;
@@ -4555,14 +4800,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Boolean capturePayments;
 
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
@@ -4578,7 +4823,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
 
@@ -4630,8 +4875,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow connected accounts to manage destination charges that are created on
-           * behalf of them. This is {@code false} by default.
+           * Whether connected accounts can manage destination charges that are created on behalf of
+           * them. This is {@code false} by default.
            */
           public Builder setDestinationOnBehalfOfChargeManagement(
               Boolean destinationOnBehalfOfChargeManagement) {
@@ -4640,7 +4885,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow responding to disputes, including submitting evidence and accepting
+           * Whether responding to disputes is enabled, including submitting evidence and accepting
            * disputes. This is {@code true} by default.
            */
           public Builder setDisputeManagement(Boolean disputeManagement) {
@@ -4676,7 +4921,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether to allow sending refunds. This is {@code true} by default. */
+          /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
             return this;
@@ -4774,28 +5019,28 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Features {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
-         * Loss Liability, default {@code false} otherwise.
+         * Whether to allow payout schedule to be changed. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("edit_payout_schedule")
         Boolean editPayoutSchedule;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -4811,15 +5056,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
 
         /**
-         * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of standard payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("standard_payouts")
         Boolean standardPayouts;
@@ -4868,12 +5115,12 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Disables Stripe user authentication for this embedded component. This value can only be
-           * true for accounts where {@code controller.requirement_collection} is {@code
-           * application}. The default value is the opposite of the {@code
-           * external_account_collection} value. For example, if you don’t set {@code
-           * external_account_collection}, it defaults to true and {@code
-           * disable_stripe_user_authentication} defaults to false.
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
            */
           public Builder setDisableStripeUserAuthentication(
               Boolean disableStripeUserAuthentication) {
@@ -4882,8 +5129,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
-           * Loss Liability, default {@code false} otherwise.
+           * Whether to allow payout schedule to be changed. Defaults to {@code true} when {@code
+           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+           * false}.
            */
           public Builder setEditPayoutSchedule(Boolean editPayoutSchedule) {
             this.editPayoutSchedule = editPayoutSchedule;
@@ -4891,11 +5139,10 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow platforms to control bank account collection for their connected
-           * accounts. This feature can only be false for accounts where you’re responsible for
-           * collecting updated information when requirements are due or change, like custom
-           * accounts. Otherwise, bank account collection is determined by compliance requirements.
-           * The default value for this feature is {@code true}.
+           * Whether external account collection is enabled. This feature can only be {@code false}
+           * for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like Custom accounts. The default value for this
+           * feature is {@code true}.
            */
           public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
             this.externalAccountCollection = externalAccountCollection;
@@ -4931,8 +5178,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns
-           * Loss Liability, default {@code false} otherwise.
+           * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+           * false}.
            */
           public Builder setInstantPayouts(Boolean instantPayouts) {
             this.instantPayouts = instantPayouts;
@@ -4940,8 +5188,9 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns
-           * Loss Liability, default {@code false} otherwise.
+           * Whether to allow creation of standard payouts. Defaults to {@code true} when {@code
+           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+           * false}.
            */
           public Builder setStandardPayouts(Boolean standardPayouts) {
             this.standardPayouts = standardPayouts;
