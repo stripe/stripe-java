@@ -378,10 +378,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("trial_settings")
   TrialSettings trialSettings;
 
-  /**
-   * If the subscription has a trial, the beginning of that trial. For subsequent trials, this date
-   * remains as the start of the first ever trial on the subscription.
-   */
+  /** If the subscription has a trial, the beginning of that trial. */
   @SerializedName("trial_start")
   Long trialStart;
 
