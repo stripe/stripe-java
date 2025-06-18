@@ -44,15 +44,9 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   @SerializedName("billing_behavior")
   String billingBehavior;
 
-  /**
-   * The <a
-   * href="https://stripe.com/api/subscriptions/create#create_subscription-billing_mode">billing
-   * mode</a> that will be used to process all future operations for the subscription schedule.
-   *
-   * <p>One of {@code classic}, or {@code flexible}.
-   */
+  /** The billing mode of the subscription. */
   @SerializedName("billing_mode")
-  String billingMode;
+  BillingMode billingMode;
 
   /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
@@ -319,6 +313,24 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
      */
     @SerializedName("type")
     String type;
+  }
+
+  /** The billing mode of the subscription. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingMode extends StripeObject {
+    /**
+     * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+     *
+     * <p>One of {@code classic}, or {@code flexible}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Details on when the current billing_mode was adopted. */
+    @SerializedName("updated_at")
+    Long updatedAt;
   }
 
   /**
@@ -1810,6 +1822,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(appliesTo, responseGetter);
+    trySetResponseGetter(billingMode, responseGetter);
     trySetResponseGetter(currentPhase, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);

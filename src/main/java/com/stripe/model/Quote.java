@@ -1973,15 +1973,9 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @SerializedName("billing_cycle_anchor")
     String billingCycleAnchor;
 
-    /**
-     * The <a
-     * href="https://stripe.com/api/subscriptions/create#create_subscription-billing_mode">billing
-     * mode</a> that will be set on the subscription once the quote is accepted.
-     *
-     * <p>One of {@code classic}, or {@code flexible}.
-     */
+    /** The billing mode of the quote. */
     @SerializedName("billing_mode")
-    String billingMode;
+    BillingMode billingMode;
 
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
@@ -2200,6 +2194,20 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
           String id;
         }
       }
+    }
+
+    /** The billing mode of the quote. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingMode extends StripeObject {
+      /**
+       * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+       *
+       * <p>One of {@code classic}, or {@code flexible}.
+       */
+      @SerializedName("type")
+      String type;
     }
 
     /**

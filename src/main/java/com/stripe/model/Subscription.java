@@ -66,17 +66,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_cycle_anchor_config")
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
-  /**
-   * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
-   *
-   * <p>One of {@code classic}, or {@code flexible}.
-   */
+  /** The billing mode of the subscription. */
   @SerializedName("billing_mode")
-  String billingMode;
-
-  /** Details about when the current billing_mode was updated. */
-  @SerializedName("billing_mode_details")
-  BillingModeDetails billingModeDetails;
+  BillingMode billingMode;
 
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -1419,11 +1411,19 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     Long second;
   }
 
-  /** When billing_mode was last updated. */
+  /** The billing mode of the subscription. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class BillingModeDetails extends StripeObject {
+  public static class BillingMode extends StripeObject {
+    /**
+     * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+     *
+     * <p>One of {@code classic}, or {@code flexible}.
+     */
+    @SerializedName("type")
+    String type;
+
     /** Details on when the current billing_mode was adopted. */
     @SerializedName("updated_at")
     Long updatedAt;
@@ -2213,7 +2213,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
     trySetResponseGetter(billingCycleAnchorConfig, responseGetter);
-    trySetResponseGetter(billingModeDetails, responseGetter);
+    trySetResponseGetter(billingMode, responseGetter);
     trySetResponseGetter(billingThresholds, responseGetter);
     trySetResponseGetter(cancellationDetails, responseGetter);
     trySetResponseGetter(customer, responseGetter);
