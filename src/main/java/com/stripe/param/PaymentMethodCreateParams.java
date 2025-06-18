@@ -3572,6 +3572,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       @SerializedName("bunq")
       BUNQ("bunq"),
 
+      @SerializedName("buut")
+      BUUT("buut"),
+
       @SerializedName("handelsbanken")
       HANDELSBANKEN("handelsbanken"),
 
