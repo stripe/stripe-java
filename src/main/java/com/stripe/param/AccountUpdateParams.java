@@ -15458,6 +15458,15 @@ public class AccountUpdateParams extends ApiRequestParams {
         Long monthlyAnchor;
 
         /**
+         * The days of the month when available funds are paid out, specified as an array of numbers
+         * between 1--31. Payouts nominally scheduled between the 29th and 31st of the month are
+         * instead sent on the last day of a shorter month. Required and applicable only if {@code
+         * interval} is {@code monthly} and {@code monthly_anchor} is not set.
+         */
+        @SerializedName("monthly_payout_days")
+        List<Long> monthlyPayoutDays;
+
+        /**
          * The day of the week when available funds are paid out, specified as {@code monday},
          * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
          * weekly}.)
@@ -15465,17 +15474,29 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("weekly_anchor")
         WeeklyAnchor weeklyAnchor;
 
+        /**
+         * The days of the week when available funds are paid out, specified as an array, e.g.,
+         * [{@code monday}, {@code tuesday}]. (required and applicable only if {@code interval} is
+         * {@code weekly} and {@code weekly_anchor} is not set.)
+         */
+        @SerializedName("weekly_payout_days")
+        List<AccountUpdateParams.Settings.Payouts.Schedule.WeeklyPayoutDay> weeklyPayoutDays;
+
         private Schedule(
             Object delayDays,
             Map<String, Object> extraParams,
             Interval interval,
             Long monthlyAnchor,
-            WeeklyAnchor weeklyAnchor) {
+            List<Long> monthlyPayoutDays,
+            WeeklyAnchor weeklyAnchor,
+            List<AccountUpdateParams.Settings.Payouts.Schedule.WeeklyPayoutDay> weeklyPayoutDays) {
           this.delayDays = delayDays;
           this.extraParams = extraParams;
           this.interval = interval;
           this.monthlyAnchor = monthlyAnchor;
+          this.monthlyPayoutDays = monthlyPayoutDays;
           this.weeklyAnchor = weeklyAnchor;
+          this.weeklyPayoutDays = weeklyPayoutDays;
         }
 
         public static Builder builder() {
@@ -15491,7 +15512,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Long monthlyAnchor;
 
+          private List<Long> monthlyPayoutDays;
+
           private WeeklyAnchor weeklyAnchor;
+
+          private List<AccountUpdateParams.Settings.Payouts.Schedule.WeeklyPayoutDay>
+              weeklyPayoutDays;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Settings.Payouts.Schedule build() {
@@ -15500,7 +15526,9 @@ public class AccountUpdateParams extends ApiRequestParams {
                 this.extraParams,
                 this.interval,
                 this.monthlyAnchor,
-                this.weeklyAnchor);
+                this.monthlyPayoutDays,
+                this.weeklyAnchor,
+                this.weeklyPayoutDays);
           }
 
           /**
@@ -15580,6 +15608,34 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
+           * Add an element to `monthlyPayoutDays` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link AccountUpdateParams.Settings.Payouts.Schedule#monthlyPayoutDays} for the
+           * field documentation.
+           */
+          public Builder addMonthlyPayoutDay(Long element) {
+            if (this.monthlyPayoutDays == null) {
+              this.monthlyPayoutDays = new ArrayList<>();
+            }
+            this.monthlyPayoutDays.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `monthlyPayoutDays` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link AccountUpdateParams.Settings.Payouts.Schedule#monthlyPayoutDays} for the
+           * field documentation.
+           */
+          public Builder addAllMonthlyPayoutDay(List<Long> elements) {
+            if (this.monthlyPayoutDays == null) {
+              this.monthlyPayoutDays = new ArrayList<>();
+            }
+            this.monthlyPayoutDays.addAll(elements);
+            return this;
+          }
+
+          /**
            * The day of the week when available funds are paid out, specified as {@code monday},
            * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
            * weekly}.)
@@ -15587,6 +15643,36 @@ public class AccountUpdateParams extends ApiRequestParams {
           public Builder setWeeklyAnchor(
               AccountUpdateParams.Settings.Payouts.Schedule.WeeklyAnchor weeklyAnchor) {
             this.weeklyAnchor = weeklyAnchor;
+            return this;
+          }
+
+          /**
+           * Add an element to `weeklyPayoutDays` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link AccountUpdateParams.Settings.Payouts.Schedule#weeklyPayoutDays} for the
+           * field documentation.
+           */
+          public Builder addWeeklyPayoutDay(
+              AccountUpdateParams.Settings.Payouts.Schedule.WeeklyPayoutDay element) {
+            if (this.weeklyPayoutDays == null) {
+              this.weeklyPayoutDays = new ArrayList<>();
+            }
+            this.weeklyPayoutDays.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `weeklyPayoutDays` list. A list is initialized for the first
+           * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+           * See {@link AccountUpdateParams.Settings.Payouts.Schedule#weeklyPayoutDays} for the
+           * field documentation.
+           */
+          public Builder addAllWeeklyPayoutDay(
+              List<AccountUpdateParams.Settings.Payouts.Schedule.WeeklyPayoutDay> elements) {
+            if (this.weeklyPayoutDays == null) {
+              this.weeklyPayoutDays = new ArrayList<>();
+            }
+            this.weeklyPayoutDays.addAll(elements);
             return this;
           }
         }
@@ -15650,6 +15736,36 @@ public class AccountUpdateParams extends ApiRequestParams {
           private final String value;
 
           WeeklyAnchor(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum WeeklyPayoutDay implements ApiRequestParams.EnumParam {
+          @SerializedName("friday")
+          FRIDAY("friday"),
+
+          @SerializedName("monday")
+          MONDAY("monday"),
+
+          @SerializedName("saturday")
+          SATURDAY("saturday"),
+
+          @SerializedName("sunday")
+          SUNDAY("sunday"),
+
+          @SerializedName("thursday")
+          THURSDAY("thursday"),
+
+          @SerializedName("tuesday")
+          TUESDAY("tuesday"),
+
+          @SerializedName("wednesday")
+          WEDNESDAY("wednesday");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          WeeklyPayoutDay(String value) {
             this.value = value;
           }
         }
