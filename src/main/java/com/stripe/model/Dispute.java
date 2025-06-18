@@ -1044,6 +1044,11 @@ public class Dispute extends ApiResource
     @SerializedName("submission_count")
     Long submissionCount;
 
+    /**
+     * Whether the dispute was submitted manually, with Smart Disputes, or not submitted.
+     *
+     * <p>One of {@code manual}, {@code not_submitted}, or {@code smart_disputes}.
+     */
     @SerializedName("submission_method")
     String submissionMethod;
 
