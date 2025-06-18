@@ -30,7 +30,7 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> PaymentIntent ID */
+  /** <strong>Required.</strong> PaymentIntent ID. */
   @SerializedName("payment_intent")
   String paymentIntent;
 
@@ -122,7 +122,7 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> PaymentIntent ID */
+    /** <strong>Required.</strong> PaymentIntent ID. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
