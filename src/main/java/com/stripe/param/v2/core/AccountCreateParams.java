@@ -2319,6 +2319,9 @@ public class AccountCreateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -8441,6 +8444,9 @@ public class AccountCreateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -12310,6 +12316,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("ws")
           WS("ws"),
 
+          @SerializedName("xx")
+          XX("xx"),
+
           @SerializedName("ye")
           YE("ye"),
 
@@ -15357,6 +15366,9 @@ public class AccountCreateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -16291,6 +16303,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
             @SerializedName("ws")
             WS("ws"),
+
+            @SerializedName("xx")
+            XX("xx"),
 
             @SerializedName("ye")
             YE("ye"),
@@ -18014,6 +18029,9 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("ws")
           WS("ws"),
 
+          @SerializedName("xx")
+          XX("xx"),
+
           @SerializedName("ye")
           YE("ye"),
 
@@ -19090,6 +19108,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("ws")
           WS("ws"),
+
+          @SerializedName("xx")
+          XX("xx"),
 
           @SerializedName("ye")
           YE("ye"),
@@ -21536,6 +21557,9 @@ public class AccountCreateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -22469,6 +22493,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
             @SerializedName("ws")
             WS("ws"),
+
+            @SerializedName("xx")
+            XX("xx"),
 
             @SerializedName("ye")
             YE("ye"),
@@ -23508,6 +23535,9 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("ws")
         WS("ws"),
 
+        @SerializedName("xx")
+        XX("xx"),
+
         @SerializedName("ye")
         YE("ye"),
 
@@ -24282,6 +24312,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
       @SerializedName("ws")
       WS("ws"),
+
+      @SerializedName("xx")
+      XX("xx"),
 
       @SerializedName("ye")
       YE("ye"),

@@ -2528,6 +2528,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -8786,6 +8789,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -12883,6 +12889,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ws")
           WS("ws"),
 
+          @SerializedName("xx")
+          XX("xx"),
+
           @SerializedName("ye")
           YE("ye"),
 
@@ -16095,6 +16104,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -17074,6 +17086,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
             @SerializedName("ws")
             WS("ws"),
+
+            @SerializedName("xx")
+            XX("xx"),
 
             @SerializedName("ye")
             YE("ye"),
@@ -19015,6 +19030,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ws")
           WS("ws"),
 
+          @SerializedName("xx")
+          XX("xx"),
+
           @SerializedName("ye")
           YE("ye"),
 
@@ -20154,6 +20172,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           @SerializedName("ws")
           WS("ws"),
+
+          @SerializedName("xx")
+          XX("xx"),
 
           @SerializedName("ye")
           YE("ye"),
@@ -22763,6 +22784,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             @SerializedName("ws")
             WS("ws"),
 
+            @SerializedName("xx")
+            XX("xx"),
+
             @SerializedName("ye")
             YE("ye"),
 
@@ -23741,6 +23765,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
             @SerializedName("ws")
             WS("ws"),
+
+            @SerializedName("xx")
+            XX("xx"),
 
             @SerializedName("ye")
             YE("ye"),
@@ -24816,6 +24843,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("ws")
         WS("ws"),
 
+        @SerializedName("xx")
+        XX("xx"),
+
         @SerializedName("ye")
         YE("ye"),
 
@@ -25590,6 +25620,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       @SerializedName("ws")
       WS("ws"),
+
+      @SerializedName("xx")
+      XX("xx"),
 
       @SerializedName("ye")
       YE("ye"),

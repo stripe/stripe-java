@@ -58,8 +58,8 @@ public class FinancialAccount extends StripeObject implements HasId {
    * {@code td}, {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
    * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
    * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve},
-   * {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code ye}, {@code yt},
-   * {@code za}, {@code zm}, or {@code zw}.
+   * {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code ye},
+   * {@code yt}, {@code za}, {@code zm}, or {@code zw}.
    */
   @SerializedName("country")
   String country;
@@ -67,9 +67,6 @@ public class FinancialAccount extends StripeObject implements HasId {
   /** Time at which the object was created. */
   @SerializedName("created")
   Instant created;
-
-  @SerializedName("description")
-  String description;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -82,6 +79,10 @@ public class FinancialAccount extends StripeObject implements HasId {
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  /** Metadata associated with the FinancialAccount. */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /**
    * String representing the object's type. Objects of the same type share the same value of the
@@ -103,10 +104,13 @@ public class FinancialAccount extends StripeObject implements HasId {
    * Closed Enum. An enum representing the status of the FinancialAccount. This indicates whether or
    * not the FinancialAccount can be used for any money movement flows.
    *
-   * <p>One of {@code closed}, or {@code open}.
+   * <p>One of {@code closed}, {@code open}, or {@code pending}.
    */
   @SerializedName("status")
   String status;
+
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
 
   /**
    * If this is a {@code storage} FinancialAccount, this hash includes details specific to {@code
@@ -160,6 +164,30 @@ public class FinancialAccount extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("closed")
+    Closed closed;
+
+    /**
+     * For more details about Closed, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Closed extends StripeObject {
+      @SerializedName("reason")
+      String reason;
+    }
   }
 
   /**

@@ -346,7 +346,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
-    /** <strong>Required.</strong> Amount in minor units that you want to transfer. */
+    /** Amount in minor units that you want to transfer. */
     @SerializedName("amount")
     Integer amount;
 
@@ -386,7 +386,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
             this.amount, this.destination, this.extraParams);
       }
 
-      /** <strong>Required.</strong> Amount in minor units that you want to transfer. */
+      /** Amount in minor units that you want to transfer. */
       public Builder setAmount(Integer amount) {
         this.amount = amount;
         return this;

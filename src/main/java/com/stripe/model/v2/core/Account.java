@@ -252,7 +252,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -506,7 +506,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -3543,7 +3543,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -4115,8 +4115,8 @@ public class Account extends StripeObject implements HasId {
      * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn}, {@code
      * to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua}, {@code ug},
      * {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve}, {@code
-     * vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code ye}, {@code yt},
-     * {@code za}, {@code zm}, or {@code zw}.
+     * vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code ye},
+     * {@code yt}, {@code za}, {@code zm}, or {@code zw}.
      */
     @SerializedName("country")
     String country;
@@ -4440,7 +4440,7 @@ public class Account extends StripeObject implements HasId {
          * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
          * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
          * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -4909,7 +4909,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -4986,7 +4986,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -5229,7 +5229,7 @@ public class Account extends StripeObject implements HasId {
          * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
          * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
          * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -5386,7 +5386,7 @@ public class Account extends StripeObject implements HasId {
          * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
          * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
          * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -5797,7 +5797,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -5874,7 +5874,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
