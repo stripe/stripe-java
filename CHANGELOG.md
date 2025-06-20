@@ -301,7 +301,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 27.0.0 - 2024-10-01
 * [#1880](https://github.com/stripe/stripe-java/pull/1880) Support for APIs in the new API version 2024-09-30.acacia
 
-  This release changes the pinned API version to `2024-09-30.acacia`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-09-30.acacia) and carefully review the API changes before upgrading.
+  This release changes the pinned API version to `2024-09-30.acacia`. Please read the [API Changelog](https://docs.stripe.com/changelog/acacia#2024-09-30.acacia) and carefully review the API changes before upgrading.
 
   ### ⚠️ Breaking changes due to changes in the API
 
@@ -437,7 +437,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 26.0.0 - 2024-06-24
 * [#1825](https://github.com/stripe/stripe-java/pull/1825)
 
-  This release changes the pinned API version to 2024-06-20. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-06-20) and carefully review the API changes before upgrading.
+  This release changes the pinned API version to 2024-06-20. Please read the [API Changelog](https://docs.stripe.com/changelog/2024-06-20) and carefully review the API changes before upgrading.
 
   ### ⚠️ Breaking changes
 
@@ -585,7 +585,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 25.0.0 - 2024-04-10
 * [#1776](https://github.com/stripe/stripe-java/pull/1776)
 
-  * This release changes the pinned API version to `2024-04-10`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-04-10) and carefully review the API changes before upgrading.
+  * This release changes the pinned API version to `2024-04-10`. Please read the [API Changelog](https://docs.stripe.com/changelog/2024-04-10) and carefully review the API changes before upgrading.
 
   * Add a new `TaxIdService` for operations on `/v1/tax_ids` endpoints.
 
@@ -902,7 +902,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `unreconciled_customer_funds` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
 
 ## 24.0.0 - 2023-10-16
-* This release changes the pinned API version to `2023-10-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
+* This release changes the pinned API version to `2023-10-16`. Please read the [API Changelog](https://docs.stripe.com/changelog/2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
 * [#1672](https://github.com/stripe/stripe-java/pull/1672) Update generated code
   * Add support for `legal_guardian` on `AccountPersonsParams.relationship` and `TokenCreateParams.person.relationship`
   * Add support for `additional_tos_acceptances` on `TokenCreateParams.person`
@@ -992,7 +992,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `flat_amount` on `tax.TransactionCreateReversalParams`
 
 ## 23.0.0 - 2023-08-16
-* This release changes the pinned API version to `2023-08-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
+* This release changes the pinned API version to `2023-08-16`. Please read the [API Changelog](https://docs.stripe.com/changelog/2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
 * More information is available in the [stripe-java v23 migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23)
 
 "⚠️" symbol highlights breaking changes.
@@ -1286,7 +1286,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 22.0.0 - 2022-11-16
 * [#1471](https://github.com/stripe/stripe-java/pull/1471) Next major release changes
 
-Breaking changes that arose during code generation of the library that we postponed for the next major version. For changes to the Stripe products, read more at https://stripe.com/docs/upgrades#2022-11-15.
+Breaking changes that arose during code generation of the library that we postponed for the next major version. For changes to the Stripe products, read more at https://docs.stripe.com/changelog/2022-11-15.
 
 "⚠️" symbol highlights breaking changes.
 
@@ -1435,7 +1435,7 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
 
 This release includes breaking changes resulting from:
 
-* Moving to use the new API version "2022-08-01". To learn more about these changes to Stripe products, see https://stripe.com/docs/upgrades#2022-08-01
+* Moving to use the new API version "2022-08-01". To learn more about these changes to Stripe products, see https://docs.stripe.com/changelog/2022-08-01
 * Cleaning up the SDK to remove deprecated/unused APIs and rename classes/methods/properties to sync with product APIs. Read more detailed description at https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v21.
 
 "⚠️" symbol highlights breaking changes.
@@ -2893,7 +2893,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * The above are technically breaking changes and should have been released with 14.0.0.
 
 ## 14.0.0 - 2019-10-18
-* [#863](https://github.com/stripe/stripe-java/pull/863) Upgrade to new API version [`2019-10-17`](https://stripe.com/docs/upgrades#2019-10-17)
+* [#863](https://github.com/stripe/stripe-java/pull/863) Upgrade to new API version [`2019-10-17`](https://docs.stripe.com/changelog/2019-10-17)
   * Pin to API version `2019-10-17`
   * Remove `account_balance` from Customer model and parameter classes
   * Remove `billing` from Invoice, Subscription and Subscription Schedule model and parameter classes
@@ -2920,7 +2920,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Add support for `deviceType` on `ReaderListParams`
 
 ## 13.0.0 - 2019-10-08
-* [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://stripe.com/docs/upgrades#2019-10-08)
+* [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://docs.stripe.com/changelog/2019-10-08)
 
 ## 12.2.0 - 2019-10-08
 * [#852](https://github.com/stripe/stripe-java/pull/852) Setters for string properties in update params now all accept `EmptyParam`
@@ -2989,7 +2989,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#826](https://github.com/stripe/stripe-java/pull/826) Add support for `executive` on `Person` create, update and list
 
 ## 11.0.0 - 2019-08-14
-* [#825](https://github.com/stripe/stripe-java/pull/825) Move to API version [`2019-08-14`](https://stripe.com/docs/upgrades#2019-08-14)
+* [#825](https://github.com/stripe/stripe-java/pull/825) Move to API version [`2019-08-14`](https://docs.stripe.com/changelog/2019-08-14)
   * Rename `platform_payments` to `transfers` in `Account`
   * Introduce `executive` as a relationship on `Person`
 
@@ -3185,7 +3185,7 @@ Pull requests included in this release:
 * [#701](https://github.com/stripe/stripe-java/pull/701) Fix java doc on deprecated `EventData#getObject` and `Event#getDataObjectDeserializer`
 
 ## 8.0.0 - 2019-03-19
-* [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://stripe.com/docs/upgrades#2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
+* [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://docs.stripe.com/changelog/2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
 
 ## 7.63.1 - 2020-17-11
 * Identical to 7.29.0
@@ -3323,7 +3323,7 @@ Pull requests included in this release:
 * [#581](https://github.com/stripe/stripe-java/pull/581) Add `Topup.cancel()` overload with no arguments
 
 ## 6.8.0 - 2018-08-28
-* [#577](https://github.com/stripe/stripe-java/pull/577) Update `Customer` and `Plan` models for API version [2018-08-23](https://stripe.com/docs/upgrades#2018-08-23)
+* [#577](https://github.com/stripe/stripe-java/pull/577) Update `Customer` and `Plan` models for API version [2018-08-23](https://docs.stripe.com/changelog/2018-08-23)
 * [#579](https://github.com/stripe/stripe-java/pull/579) Add `authorizationCode` to `Charge`
 
 ## 6.7.0 - 2018-08-27
@@ -3562,7 +3562,7 @@ Pull requests included in this release:
 * Add support for `available_payout_methods` to `Card` model
 
 ## 4.2.0 - 2017-04-06
-* Add support for payouts; see: https://stripe.com/docs/upgrades#2017-04-06
+* Add support for payouts; see: https://docs.stripe.com/changelog/2017-04-06
 
 ## 4.1.0 - 2017-04-04
 * Make `rule` under `ChargeOutcome` expandable
@@ -3790,7 +3790,7 @@ Pull requests included in this release:
 
 ## 1.23.0 - 2014-12-08
 * Java 1.5 support dropped. We strongly suggest using newer versions of Java due to runtime, VM, language, and syntax improvements
-* Dispute Evidence has been updated to reflect the new version of Dispute evidence format introduced as part of api version 2014-12-08. See https://stripe.com/docs/upgrades#2014-12-08 for details
+* Dispute Evidence has been updated to reflect the new version of Dispute evidence format introduced as part of api version 2014-12-08. See https://docs.stripe.com/changelog/2014-12-08 for details
 
 ## 1.22.0 - 2014-12-03
 * Convention is to call methods with a RequestOptions object, instead of an API Key directly
@@ -3820,7 +3820,7 @@ Pull requests included in this release:
 * A few non-breaking general cleanups
 
 ## 1.18.0 - 2014-08-25
-* Added isChargeRefundable and balanceTransactions to Dispute https://stripe.com/docs/upgrades#2014-08-20
+* Added isChargeRefundable and balanceTransactions to Dispute https://docs.stripe.com/changelog/2014-08-20
 
 ## 1.17.0 - 2014-08-19
 * Added metadata to Coupons
@@ -3947,7 +3947,7 @@ Pull requests included in this release:
 
 ## 1.2.5 - 2013-07-15
 * Add support for new cards API.
-    * You will probably need to upgrade the Stripe API version on your account to 2013-07-05 or explicitly specify an API version with com.stripe.Stripe.apiVersion when you switch to this release of the bindings. More information about the relevant changes can be found at https://stripe.com/docs/upgrades#2013-07-05 and http://bit.ly/13miHM8
+    * You will probably need to upgrade the Stripe API version on your account to 2013-07-05 or explicitly specify an API version with com.stripe.Stripe.apiVersion when you switch to this release of the bindings. More information about the relevant changes can be found at https://docs.stripe.com/changelog/2013-07-05 and http://bit.ly/13miHM8
 * Add a StripeRawJsonObject type for deserializing webhook events we don't recognize
 * Add a Money class for representing account balances in individual currencies
 
