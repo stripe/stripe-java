@@ -525,6 +525,9 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("tz")
     Tz tz;
 
+    @SerializedName("ua")
+    Ua ua;
+
     @SerializedName("ug")
     Ug ug;
 
@@ -2629,6 +2632,23 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Tz extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Ua, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ua extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *
