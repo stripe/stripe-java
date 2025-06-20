@@ -4218,6 +4218,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
 
+      @SerializedName("crypto")
+      CRYPTO("crypto"),
+
       @SerializedName("custom")
       CUSTOM("custom"),
 

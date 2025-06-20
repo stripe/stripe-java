@@ -1013,6 +1013,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String cashappPayments;
 
     /**
+     * The status of the Crypto capability of the account, or whether the account can directly
+     * process Crypto payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("crypto_payments")
+    String cryptoPayments;
+
+    /**
      * The status of the EPS payments capability of the account, or whether the account can directly
      * process EPS charges.
      *

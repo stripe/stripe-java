@@ -1366,6 +1366,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("cashapp_payments")
     CashappPayments cashappPayments;
 
+    /** The crypto_payments capability. */
+    @SerializedName("crypto_payments")
+    CryptoPayments cryptoPayments;
+
     /** The eps_payments capability. */
     @SerializedName("eps_payments")
     EpsPayments epsPayments;
@@ -1613,6 +1617,7 @@ public class AccountCreateParams extends ApiRequestParams {
         CardPayments cardPayments,
         CartesBancairesPayments cartesBancairesPayments,
         CashappPayments cashappPayments,
+        CryptoPayments cryptoPayments,
         EpsPayments epsPayments,
         Map<String, Object> extraParams,
         FpxPayments fpxPayments,
@@ -1686,6 +1691,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.cardPayments = cardPayments;
       this.cartesBancairesPayments = cartesBancairesPayments;
       this.cashappPayments = cashappPayments;
+      this.cryptoPayments = cryptoPayments;
       this.epsPayments = epsPayments;
       this.extraParams = extraParams;
       this.fpxPayments = fpxPayments;
@@ -1782,6 +1788,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private CartesBancairesPayments cartesBancairesPayments;
 
       private CashappPayments cashappPayments;
+
+      private CryptoPayments cryptoPayments;
 
       private EpsPayments epsPayments;
 
@@ -1915,6 +1923,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.cardPayments,
             this.cartesBancairesPayments,
             this.cashappPayments,
+            this.cryptoPayments,
             this.epsPayments,
             this.extraParams,
             this.fpxPayments,
@@ -2085,6 +2094,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setCashappPayments(
           AccountCreateParams.Capabilities.CashappPayments cashappPayments) {
         this.cashappPayments = cashappPayments;
+        return this;
+      }
+
+      /** The crypto_payments capability. */
+      public Builder setCryptoPayments(
+          AccountCreateParams.Capabilities.CryptoPayments cryptoPayments) {
+        this.cryptoPayments = cryptoPayments;
         return this;
       }
 
@@ -3827,6 +3843,86 @@ public class AccountCreateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link AccountCreateParams.Capabilities.CashappPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private CryptoPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.CryptoPayments build() {
+          return new AccountCreateParams.Capabilities.CryptoPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.CryptoPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.CryptoPayments#extraParams} for the
          * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {

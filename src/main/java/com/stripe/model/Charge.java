@@ -1200,6 +1200,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    @SerializedName("crypto")
+    Crypto crypto;
+
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
 
@@ -2712,6 +2715,39 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** A public identifier for buyers using Cash App. */
       @SerializedName("cashtag")
       String cashtag;
+    }
+
+    /**
+     * For more details about Crypto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Crypto extends StripeObject {
+      /** The wallet address of the customer. */
+      @SerializedName("buyer_address")
+      String buyerAddress;
+
+      /**
+       * The blockchain network that the transaction was sent on.
+       *
+       * <p>One of {@code base}, {@code ethereum}, or {@code polygon}.
+       */
+      @SerializedName("network")
+      String network;
+
+      /**
+       * The token currency that the transaction was sent with.
+       *
+       * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+       */
+      @SerializedName("token_currency")
+      String tokenCurrency;
+
+      /** The blockchain transaction hash of the crypto payment. */
+      @SerializedName("transaction_hash")
+      String transactionHash;
     }
 
     /**

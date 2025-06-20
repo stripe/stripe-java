@@ -6398,6 +6398,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
 
+      @SerializedName("crypto")
+      CRYPTO("crypto"),
+
       @SerializedName("custom")
       CUSTOM("custom"),
 

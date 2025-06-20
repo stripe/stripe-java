@@ -129,6 +129,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   @SerializedName("cashapp")
   Cashapp cashapp;
 
+  /**
+   * If this is a Crypto PaymentMethod, this hash contains details about the Crypto payment method.
+   */
+  @SerializedName("crypto")
+  Crypto crypto;
+
   /** The {@code Customer} to whom the original PaymentMethod is attached. */
   @SerializedName("customer")
   String customer;
@@ -478,6 +484,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       Boleto boleto,
       Object card,
       Cashapp cashapp,
+      Crypto crypto,
       String customer,
       CustomerBalance customerBalance,
       Eps eps,
@@ -543,6 +550,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.boleto = boleto;
     this.card = card;
     this.cashapp = cashapp;
+    this.crypto = crypto;
     this.customer = customer;
     this.customerBalance = customerBalance;
     this.eps = eps;
@@ -630,6 +638,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     private Object card;
 
     private Cashapp cashapp;
+
+    private Crypto crypto;
 
     private String customer;
 
@@ -748,6 +758,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.boleto,
           this.card,
           this.cashapp,
+          this.crypto,
           this.customer,
           this.customerBalance,
           this.eps,
@@ -959,6 +970,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      */
     public Builder setCashapp(PaymentMethodCreateParams.Cashapp cashapp) {
       this.cashapp = cashapp;
+      return this;
+    }
+
+    /**
+     * If this is a Crypto PaymentMethod, this hash contains details about the Crypto payment
+     * method.
+     */
+    public Builder setCrypto(PaymentMethodCreateParams.Crypto crypto) {
+      this.crypto = crypto;
       return this;
     }
 
@@ -2822,6 +2842,62 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link PaymentMethodCreateParams.Cashapp#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Crypto {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Crypto(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodCreateParams.Crypto build() {
+        return new PaymentMethodCreateParams.Crypto(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Crypto#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Crypto#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -6459,6 +6535,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("cashapp")
     CASHAPP("cashapp"),
+
+    @SerializedName("crypto")
+    CRYPTO("crypto"),
 
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
