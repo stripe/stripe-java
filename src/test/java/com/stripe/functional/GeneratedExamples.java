@@ -16464,7 +16464,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.FinancialAccount>>() {}.getType(),
-        "{\"data\":[{\"balance\":{\"available\":{\"undefined\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"af\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.money_management.financial_account\",\"other\":null,\"status\":\"closed\",\"status_details\":null,\"storage\":null,\"type\":\"other\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"balance\":{\"available\":{\"undefined\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"af\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.money_management.financial_account\",\"other\":null,\"status\":\"closed\",\"storage\":null,\"type\":\"other\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAccountListParams params =
@@ -16490,7 +16490,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAccount.class,
-        "{\"balance\":{\"available\":{\"undefined\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"af\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.money_management.financial_account\",\"other\":null,\"status\":\"closed\",\"status_details\":null,\"storage\":null,\"type\":\"other\",\"livemode\":true}");
+        "{\"balance\":{\"available\":{\"undefined\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"undefined\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"af\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.money_management.financial_account\",\"other\":null,\"status\":\"closed\",\"storage\":null,\"type\":\"other\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.FinancialAccount financialAccount =
@@ -17765,6 +17765,39 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testFeatureNotEnabledErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_addresses",
+        null,
+        null,
+        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"storer_capability_missing\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams params =
+        com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.builder()
+            .setCurrency(
+                com.stripe.param.v2.moneymanagement.FinancialAddressCreateParams.Currency.STN)
+            .setFinancialAccount("financial_account")
+            .build();
+
+    try {
+      client.v2().moneyManagement().financialAddresses().create(params);
+    } catch (FeatureNotEnabledException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_addresses",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testBlockedByStripeErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,
@@ -17947,46 +17980,6 @@ class GeneratedExamples extends BaseStripeTest {
     try {
       client.v2().moneyManagement().outboundPayments().create(params);
     } catch (RecipientNotNotifiableException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testFeatureNotEnabledErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments",
-        null,
-        null,
-        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"recipient_feature_not_active\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams params =
-        com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
-            .setFrom(
-                com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.From.builder()
-                    .setCurrency("currency")
-                    .setFinancialAccount("financial_account")
-                    .build())
-            .setTo(
-                com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.To.builder()
-                    .setRecipient("recipient")
-                    .build())
-            .build();
-
-    try {
-      client.v2().moneyManagement().outboundPayments().create(params);
-    } catch (FeatureNotEnabledException e) {
 
     }
     ;

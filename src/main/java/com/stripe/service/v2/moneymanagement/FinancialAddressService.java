@@ -2,6 +2,7 @@
 package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.FinancialAccountNotOpenException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
@@ -24,12 +25,12 @@ public final class FinancialAddressService extends ApiService {
 
   /** Create a new FinancialAddress for a FinancialAccount. */
   public FinancialAddress create(FinancialAddressCreateParams params)
-      throws StripeException, FinancialAccountNotOpenException {
+      throws StripeException, FinancialAccountNotOpenException, FeatureNotEnabledException {
     return create(params, (RequestOptions) null);
   }
   /** Create a new FinancialAddress for a FinancialAccount. */
   public FinancialAddress create(FinancialAddressCreateParams params, RequestOptions options)
-      throws StripeException, FinancialAccountNotOpenException {
+      throws StripeException, FinancialAccountNotOpenException, FeatureNotEnabledException {
     String path = "/v2/money_management/financial_addresses";
     ApiRequest request =
         new ApiRequest(

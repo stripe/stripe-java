@@ -109,9 +109,6 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  @SerializedName("status_details")
-  StatusDetails statusDetails;
-
   /**
    * If this is a {@code storage} FinancialAccount, this hash includes details specific to {@code
    * storage} FinancialAccounts.
@@ -141,7 +138,7 @@ public class FinancialAccount extends StripeObject implements HasId {
     @SerializedName("available")
     Map<String, Amount> available;
 
-    /** Balance of inbound funds that will later transition to the {@code cash} balance. */
+    /** Balance of inbound funds that will later transition to the {@code available} balance. */
     @SerializedName("inbound_pending")
     Map<String, Amount> inboundPending;
 
@@ -164,30 +161,6 @@ public class FinancialAccount extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
-  }
-
-  /**
-   * For more details about StatusDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class StatusDetails extends StripeObject {
-    @SerializedName("closed")
-    Closed closed;
-
-    /**
-     * For more details about Closed, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Closed extends StripeObject {
-      @SerializedName("reason")
-      String reason;
-    }
   }
 
   /**
