@@ -8,6 +8,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.PaymentIntent;
+import com.stripe.model.PaymentMethod;
 import com.stripe.model.Refund;
 import com.stripe.model.SetupIntent;
 import com.stripe.model.StripeObject;
@@ -19,6 +20,8 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.ReaderCancelActionParams;
 import com.stripe.param.terminal.ReaderCollectInputsParams;
+import com.stripe.param.terminal.ReaderCollectPaymentMethodParams;
+import com.stripe.param.terminal.ReaderConfirmPaymentIntentParams;
 import com.stripe.param.terminal.ReaderCreateParams;
 import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderPresentPaymentMethodParams;
@@ -217,6 +220,100 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     String path =
         String.format(
             "/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /**
+   * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
+   * manual confirmation.
+   */
+  public Reader collectPaymentMethod(Map<String, Object> params) throws StripeException {
+    return collectPaymentMethod(params, (RequestOptions) null);
+  }
+
+  /**
+   * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
+   * manual confirmation.
+   */
+  public Reader collectPaymentMethod(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/collect_payment_method",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /**
+   * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
+   * manual confirmation.
+   */
+  public Reader collectPaymentMethod(ReaderCollectPaymentMethodParams params)
+      throws StripeException {
+    return collectPaymentMethod(params, (RequestOptions) null);
+  }
+
+  /**
+   * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
+   * manual confirmation.
+   */
+  public Reader collectPaymentMethod(
+      ReaderCollectPaymentMethodParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/collect_payment_method",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Finalizes a payment on a Reader. */
+  public Reader confirmPaymentIntent(Map<String, Object> params) throws StripeException {
+    return confirmPaymentIntent(params, (RequestOptions) null);
+  }
+
+  /** Finalizes a payment on a Reader. */
+  public Reader confirmPaymentIntent(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/confirm_payment_intent",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Reader.class);
+  }
+
+  /** Finalizes a payment on a Reader. */
+  public Reader confirmPaymentIntent(ReaderConfirmPaymentIntentParams params)
+      throws StripeException {
+    return confirmPaymentIntent(params, (RequestOptions) null);
+  }
+
+  /** Finalizes a payment on a Reader. */
+  public Reader confirmPaymentIntent(
+      ReaderConfirmPaymentIntentParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/confirm_payment_intent",
+            ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -573,6 +670,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @SerializedName("collect_inputs")
     CollectInputs collectInputs;
 
+    /** Represents a reader action to collect a payment method. */
+    @SerializedName("collect_payment_method")
+    CollectPaymentMethod collectPaymentMethod;
+
+    /** Represents a reader action to confirm a payment. */
+    @SerializedName("confirm_payment_intent")
+    ConfirmPaymentIntent confirmPaymentIntent;
+
     /** Failure code, only set if status is {@code failed}. */
     @SerializedName("failure_code")
     String failureCode;
@@ -608,8 +713,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     /**
      * Type of action performed by the reader.
      *
-     * <p>One of {@code collect_inputs}, {@code process_payment_intent}, {@code
-     * process_setup_intent}, {@code refund_payment}, or {@code set_reader_display}.
+     * <p>One of {@code collect_inputs}, {@code collect_payment_method}, {@code
+     * confirm_payment_intent}, {@code process_payment_intent}, {@code process_setup_intent}, {@code
+     * refund_payment}, or {@code set_reader_display}.
      */
     @SerializedName("type")
     String type;
@@ -831,6 +937,133 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       }
     }
 
+    /** Represents a reader action to collect a payment method. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CollectPaymentMethod extends StripeObject {
+      /** Represents a per-transaction override of a reader configuration. */
+      @SerializedName("collect_config")
+      CollectConfig collectConfig;
+
+      /** Most recent PaymentIntent processed by the reader. */
+      @SerializedName("payment_intent")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<PaymentIntent> paymentIntent;
+
+      /**
+       * PaymentMethod objects represent your customer's payment instruments. You can use them with
+       * <a href="https://stripe.com/docs/payments/payment-intents">PaymentIntents</a> to collect
+       * payments or save them to Customer objects to store instrument details for future payments.
+       *
+       * <p>Related guides: <a href="https://stripe.com/docs/payments/payment-methods">Payment
+       * Methods</a> and <a href="https://stripe.com/docs/payments/more-payment-scenarios">More
+       * Payment Scenarios</a>.
+       */
+      @SerializedName("payment_method")
+      PaymentMethod paymentMethod;
+
+      /** Get ID of expandable {@code paymentIntent} object. */
+      public String getPaymentIntent() {
+        return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+      }
+
+      public void setPaymentIntent(String id) {
+        this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+      }
+
+      /** Get expanded {@code paymentIntent}. */
+      public PaymentIntent getPaymentIntentObject() {
+        return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+      }
+
+      public void setPaymentIntentObject(PaymentIntent expandableObject) {
+        this.paymentIntent =
+            new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Represents a per-transaction override of a reader configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CollectConfig extends StripeObject {
+        /** Enable customer-initiated cancellation when processing this payment. */
+        @SerializedName("enable_customer_cancellation")
+        Boolean enableCustomerCancellation;
+
+        /** Override showing a tipping selection screen on this transaction. */
+        @SerializedName("skip_tipping")
+        Boolean skipTipping;
+
+        /** Represents a per-transaction tipping configuration. */
+        @SerializedName("tipping")
+        Tipping tipping;
+
+        /** Represents a per-transaction tipping configuration. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Tipping extends StripeObject {
+          /**
+           * Amount used to calculate tip suggestions on tipping selection screen for this
+           * transaction. Must be a positive integer in the smallest currency unit (e.g., 100 cents
+           * to represent $1.00 or 100 to represent ¥100, a zero-decimal currency).
+           */
+          @SerializedName("amount_eligible")
+          Long amountEligible;
+        }
+      }
+    }
+
+    /** Represents a reader action to confirm a payment. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ConfirmPaymentIntent extends StripeObject {
+      /** Represents a per-transaction override of a reader configuration. */
+      @SerializedName("confirm_config")
+      ConfirmConfig confirmConfig;
+
+      /** Most recent PaymentIntent processed by the reader. */
+      @SerializedName("payment_intent")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<PaymentIntent> paymentIntent;
+
+      /** Get ID of expandable {@code paymentIntent} object. */
+      public String getPaymentIntent() {
+        return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+      }
+
+      public void setPaymentIntent(String id) {
+        this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+      }
+
+      /** Get expanded {@code paymentIntent}. */
+      public PaymentIntent getPaymentIntentObject() {
+        return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+      }
+
+      public void setPaymentIntentObject(PaymentIntent expandableObject) {
+        this.paymentIntent =
+            new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+      }
+
+      /** Represents a per-transaction override of a reader configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ConfirmConfig extends StripeObject {
+        /**
+         * If the customer doesn't abandon authenticating the payment, they're redirected to this
+         * URL after completion.
+         */
+        @SerializedName("return_url")
+        String returnUrl;
+      }
+    }
+
     /** Represents a reader action to process a payment intent. */
     @Getter
     @Setter
@@ -870,13 +1103,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ProcessConfig extends StripeObject {
-        /** Enable customer initiated cancellation when processing this payment. */
+        /** Enable customer-initiated cancellation when processing this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
 
         /**
-         * If the customer does not abandon authenticating the payment, they will be redirected to
-         * this specified URL after completion.
+         * If the customer doesn't abandon authenticating the payment, they're redirected to this
+         * URL after completion.
          */
         @SerializedName("return_url")
         String returnUrl;
@@ -952,7 +1185,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ProcessConfig extends StripeObject {
-        /** Enable customer initiated cancellation when processing this SetupIntent. */
+        /** Enable customer-initiated cancellation when processing this SetupIntent. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }
@@ -1084,7 +1317,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class RefundPaymentConfig extends StripeObject {
-        /** Enable customer initiated cancellation when refunding this payment. */
+        /** Enable customer-initiated cancellation when refunding this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }
