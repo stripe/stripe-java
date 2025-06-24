@@ -3,6 +3,7 @@ package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.AlreadyCanceledException;
+import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.InsufficientFundsException;
 import com.stripe.exception.NotCancelableException;
 import com.stripe.exception.StripeException;
@@ -40,12 +41,12 @@ public final class OutboundTransferService extends ApiService {
   }
   /** Creates an OutboundTransfer. */
   public OutboundTransfer create(OutboundTransferCreateParams params)
-      throws StripeException, InsufficientFundsException {
+      throws StripeException, InsufficientFundsException, FeatureNotEnabledException {
     return create(params, (RequestOptions) null);
   }
   /** Creates an OutboundTransfer. */
   public OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
-      throws StripeException, InsufficientFundsException {
+      throws StripeException, InsufficientFundsException, FeatureNotEnabledException {
     String path = "/v2/money_management/outbound_transfers";
     ApiRequest request =
         new ApiRequest(
