@@ -21,6 +21,33 @@ public final class PersonService extends ApiService {
     super(responseGetter);
   }
 
+  /** Returns a list of Persons associated with an Account. */
+  public StripeCollection<Person> list(String accountId, PersonListParams params)
+      throws StripeException {
+    return list(accountId, params, (RequestOptions) null);
+  }
+  /** Returns a list of Persons associated with an Account. */
+  public StripeCollection<Person> list(String accountId, RequestOptions options)
+      throws StripeException {
+    return list(accountId, (PersonListParams) null, options);
+  }
+  /** Returns a list of Persons associated with an Account. */
+  public StripeCollection<Person> list(String accountId) throws StripeException {
+    return list(accountId, (PersonListParams) null, (RequestOptions) null);
+  }
+  /** Returns a list of Persons associated with an Account. */
+  public StripeCollection<Person> list(
+      String accountId, PersonListParams params, RequestOptions options) throws StripeException {
+    String path = String.format("/v2/core/accounts/%s/persons", ApiResource.urlEncodeId(accountId));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
+  }
   /** Create a Person associated with an Account. */
   public Person create(String accountId, PersonCreateParams params) throws StripeException {
     return create(accountId, params, (RequestOptions) null);
@@ -59,33 +86,6 @@ public final class PersonService extends ApiService {
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, Person.class);
-  }
-  /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(String accountId, PersonListParams params)
-      throws StripeException {
-    return list(accountId, params, (RequestOptions) null);
-  }
-  /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(String accountId, RequestOptions options)
-      throws StripeException {
-    return list(accountId, (PersonListParams) null, options);
-  }
-  /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(String accountId) throws StripeException {
-    return list(accountId, (PersonListParams) null, (RequestOptions) null);
-  }
-  /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(
-      String accountId, PersonListParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v2/core/accounts/%s/persons", ApiResource.urlEncodeId(accountId));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
   }
   /** Retrieves a Person associated with an Account. */
   public Person retrieve(String accountId, String id) throws StripeException {
