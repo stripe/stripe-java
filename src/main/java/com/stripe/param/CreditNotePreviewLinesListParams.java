@@ -17,7 +17,7 @@ import lombok.Getter;
 public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   /**
    * The integer amount in cents (or local equivalent) representing the total amount of the credit
-   * note.
+   * note. One of {@code amount}, {@code lines}, or {@code shipping_cost} must be provided.
    */
   @SerializedName("amount")
   Long amount;
@@ -77,7 +77,10 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** Line items that make up the credit note. */
+  /**
+   * Line items that make up the credit note. One of {@code amount}, {@code lines}, or {@code
+   * shipping_cost} must be provided.
+   */
   @SerializedName("lines")
   List<CreditNotePreviewLinesListParams.Line> lines;
 
@@ -121,7 +124,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
   /**
    * When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is included
-   * in the credit note.
+   * in the credit note. One of {@code amount}, {@code lines}, or {@code shipping_cost} must be
+   * provided.
    */
   @SerializedName("shipping_cost")
   ShippingCost shippingCost;
@@ -240,7 +244,7 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
     /**
      * The integer amount in cents (or local equivalent) representing the total amount of the credit
-     * note.
+     * note. One of {@code amount}, {@code lines}, or {@code shipping_cost} must be provided.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -466,7 +470,8 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
 
     /**
      * When shipping_cost contains the shipping_rate from the invoice, the shipping_cost is included
-     * in the credit note.
+     * in the credit note. One of {@code amount}, {@code lines}, or {@code shipping_cost} must be
+     * provided.
      */
     public Builder setShippingCost(CreditNotePreviewLinesListParams.ShippingCost shippingCost) {
       this.shippingCost = shippingCost;

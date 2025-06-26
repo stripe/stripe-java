@@ -20,35 +20,6 @@ public final class OffSessionPaymentService extends ApiService {
     super(responseGetter);
   }
 
-  /** Cancel OSP. */
-  public OffSessionPayment cancel(String id) throws StripeException {
-    return cancel(id, (RequestOptions) null);
-  }
-  /** Cancel OSP. */
-  public OffSessionPayment cancel(String id, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v2/payments/off_session_payments/%s/cancel", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, OffSessionPayment.class);
-  }
-  /** Create OSP. */
-  public OffSessionPayment create(OffSessionPaymentCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Create OSP. */
-  public OffSessionPayment create(OffSessionPaymentCreateParams params, RequestOptions options)
-      throws StripeException {
-    String path = "/v2/payments/off_session_payments";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, OffSessionPayment.class);
-  }
   /** List OSPs matching filter. */
   public StripeCollection<OffSessionPayment> list(OffSessionPaymentListParams params)
       throws StripeException {
@@ -75,6 +46,23 @@ public final class OffSessionPaymentService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<OffSessionPayment>>() {}.getType());
   }
+  /** Create OSP. */
+  public OffSessionPayment create(OffSessionPaymentCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Create OSP. */
+  public OffSessionPayment create(OffSessionPaymentCreateParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v2/payments/off_session_payments";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, OffSessionPayment.class);
+  }
   /** Retrieve OSP by ID. */
   public OffSessionPayment retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
@@ -85,6 +73,18 @@ public final class OffSessionPaymentService extends ApiService {
         String.format("/v2/payments/off_session_payments/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, OffSessionPayment.class);
+  }
+  /** Cancel OSP. */
+  public OffSessionPayment cancel(String id) throws StripeException {
+    return cancel(id, (RequestOptions) null);
+  }
+  /** Cancel OSP. */
+  public OffSessionPayment cancel(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v2/payments/off_session_payments/%s/cancel", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, OffSessionPayment.class);
   }
 }

@@ -1367,6 +1367,9 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("ws")
       WS("ws"),
 
+      @SerializedName("xx")
+      XX("xx"),
+
       @SerializedName("ye")
       YE("ye"),
 
@@ -2623,6 +2626,9 @@ public class PersonCreateParams extends ApiRequestParams {
 
       @SerializedName("ws")
       WS("ws"),
+
+      @SerializedName("xx")
+      XX("xx"),
 
       @SerializedName("ye")
       YE("ye"),
@@ -5023,6 +5029,9 @@ public class PersonCreateParams extends ApiRequestParams {
         @SerializedName("ws")
         WS("ws"),
 
+        @SerializedName("xx")
+        XX("xx"),
+
         @SerializedName("ye")
         YE("ye"),
 
@@ -5952,6 +5961,9 @@ public class PersonCreateParams extends ApiRequestParams {
 
         @SerializedName("ws")
         WS("ws"),
+
+        @SerializedName("xx")
+        XX("xx"),
 
         @SerializedName("ye")
         YE("ye"),
@@ -6980,6 +6992,9 @@ public class PersonCreateParams extends ApiRequestParams {
 
     @SerializedName("ws")
     WS("ws"),
+
+    @SerializedName("xx")
+    XX("xx"),
 
     @SerializedName("ye")
     YE("ye"),

@@ -1274,7 +1274,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
            * comply with regional legislation and network rules, such as <a
            * href="https://stripe.com/strong-customer-authentication">SCA</a>.
            *
-           * <p>Equal to {@code none}.
+           * <p>One of {@code none}, {@code off_session}, or {@code on_session}.
            */
           @SerializedName("setup_future_usage")
           String setupFutureUsage;

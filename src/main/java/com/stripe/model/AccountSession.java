@@ -210,21 +210,20 @@ public class AccountSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -255,21 +254,20 @@ public class AccountSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -300,42 +298,44 @@ public class AccountSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
-         * Loss Liability, default {@code false} otherwise.
+         * Whether to allow payout schedule to be changed. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("edit_payout_schedule")
         Boolean editPayoutSchedule;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
 
         /**
-         * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of standard payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("standard_payouts")
         Boolean standardPayouts;
@@ -448,20 +448,20 @@ public class AccountSession extends ApiResource {
         Boolean capturePayments;
 
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
         Boolean disputeManagement;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
       }
@@ -516,16 +516,21 @@ public class AccountSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
-        /** Whether to allow external accounts to be linked for money transfer. */
+        /**
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
+         */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
 
@@ -645,9 +650,11 @@ public class AccountSession extends ApiResource {
         Boolean cardholderManagement;
 
         /**
-         * Disables Stripe user authentication for this embedded component. This feature can only be
-         * false for accounts where you’re responsible for collecting updated information when
-         * requirements are due or change, like custom accounts.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
@@ -682,21 +689,20 @@ public class AccountSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
@@ -734,20 +740,20 @@ public class AccountSession extends ApiResource {
         Boolean capturePayments;
 
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
         Boolean disputeManagement;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
       }
@@ -777,20 +783,20 @@ public class AccountSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
         Boolean disputeManagement;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
       }
@@ -827,20 +833,20 @@ public class AccountSession extends ApiResource {
         Boolean capturePayments;
 
         /**
-         * Whether to allow connected accounts to manage destination charges that are created on
-         * behalf of them. This is {@code false} by default.
+         * Whether connected accounts can manage destination charges that are created on behalf of
+         * them. This is {@code false} by default.
          */
         @SerializedName("destination_on_behalf_of_charge_management")
         Boolean destinationOnBehalfOfChargeManagement;
 
         /**
-         * Whether to allow responding to disputes, including submitting evidence and accepting
+         * Whether responding to disputes is enabled, including submitting evidence and accepting
          * disputes. This is {@code true} by default.
          */
         @SerializedName("dispute_management")
         Boolean disputeManagement;
 
-        /** Whether to allow sending refunds. This is {@code true} by default. */
+        /** Whether sending refunds is enabled. This is {@code true} by default. */
         @SerializedName("refund_management")
         Boolean refundManagement;
       }
@@ -870,42 +876,44 @@ public class AccountSession extends ApiResource {
       @EqualsAndHashCode(callSuper = false)
       public static class Features extends StripeObject {
         /**
-         * Disables Stripe user authentication for this embedded component. This value can only be
-         * true for accounts where {@code controller.requirement_collection} is {@code application}.
-         * The default value is the opposite of the {@code external_account_collection} value. For
-         * example, if you don’t set {@code external_account_collection}, it defaults to true and
-         * {@code disable_stripe_user_authentication} defaults to false.
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
          */
         @SerializedName("disable_stripe_user_authentication")
         Boolean disableStripeUserAuthentication;
 
         /**
-         * Whether to allow payout schedule to be changed. Default {@code true} when Stripe owns
-         * Loss Liability, default {@code false} otherwise.
+         * Whether to allow payout schedule to be changed. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("edit_payout_schedule")
         Boolean editPayoutSchedule;
 
         /**
-         * Whether to allow platforms to control bank account collection for their connected
-         * accounts. This feature can only be false for accounts where you’re responsible for
-         * collecting updated information when requirements are due or change, like custom accounts.
-         * Otherwise, bank account collection is determined by compliance requirements. The default
-         * value for this feature is {@code true}.
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
          */
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
 
         /**
-         * Whether to allow creation of standard payouts. Default {@code true} when Stripe owns Loss
-         * Liability, default {@code false} otherwise.
+         * Whether to allow creation of standard payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
          */
         @SerializedName("standard_payouts")
         Boolean standardPayouts;

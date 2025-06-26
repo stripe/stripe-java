@@ -100,7 +100,8 @@ public class OutboundPayment extends StripeObject implements HasId {
 
   /**
    * The description that appears on the receiving end for an OutboundPayment (for example, bank
-   * statement for external bank transfer).
+   * statement for external bank transfer). It will default to {@code STRIPE} if not set on the
+   * account settings.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;

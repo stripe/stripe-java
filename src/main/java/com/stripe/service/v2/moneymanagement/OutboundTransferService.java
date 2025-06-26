@@ -3,6 +3,7 @@ package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.AlreadyCanceledException;
+import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.InsufficientFundsException;
 import com.stripe.exception.NotCancelableException;
 import com.stripe.exception.StripeException;
@@ -23,39 +24,6 @@ public final class OutboundTransferService extends ApiService {
     super(responseGetter);
   }
 
-  /** Cancels an OutboundTransfer. Only processing OutboundTransfers can be canceled. */
-  public OutboundTransfer cancel(String id)
-      throws StripeException, AlreadyCanceledException, NotCancelableException {
-    return cancel(id, (RequestOptions) null);
-  }
-  /** Cancels an OutboundTransfer. Only processing OutboundTransfers can be canceled. */
-  public OutboundTransfer cancel(String id, RequestOptions options)
-      throws StripeException, AlreadyCanceledException, NotCancelableException {
-    String path =
-        String.format(
-            "/v2/money_management/outbound_transfers/%s/cancel", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, OutboundTransfer.class);
-  }
-  /** Creates an OutboundTransfer. */
-  public OutboundTransfer create(OutboundTransferCreateParams params)
-      throws StripeException, InsufficientFundsException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates an OutboundTransfer. */
-  public OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
-      throws StripeException, InsufficientFundsException {
-    String path = "/v2/money_management/outbound_transfers";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, OutboundTransfer.class);
-  }
   /** Returns a list of OutboundTransfers that match the provided filters. */
   public StripeCollection<OutboundTransfer> list(OutboundTransferListParams params)
       throws StripeException {
@@ -82,6 +50,24 @@ public final class OutboundTransferService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<OutboundTransfer>>() {}.getType());
   }
+  /** Creates an OutboundTransfer. */
+  public OutboundTransfer create(OutboundTransferCreateParams params)
+      throws StripeException, InsufficientFundsException, FeatureNotEnabledException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates an OutboundTransfer. */
+  public OutboundTransfer create(OutboundTransferCreateParams params, RequestOptions options)
+      throws StripeException, InsufficientFundsException, FeatureNotEnabledException {
+    String path = "/v2/money_management/outbound_transfers";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, OutboundTransfer.class);
+  }
   /**
    * Retrieves the details of an existing OutboundTransfer by passing the unique OutboundTransfer ID
    * from either the OutboundPayment create or list response.
@@ -98,6 +84,21 @@ public final class OutboundTransferService extends ApiService {
         String.format("/v2/money_management/outbound_transfers/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, OutboundTransfer.class);
+  }
+  /** Cancels an OutboundTransfer. Only processing OutboundTransfers can be canceled. */
+  public OutboundTransfer cancel(String id)
+      throws StripeException, AlreadyCanceledException, NotCancelableException {
+    return cancel(id, (RequestOptions) null);
+  }
+  /** Cancels an OutboundTransfer. Only processing OutboundTransfers can be canceled. */
+  public OutboundTransfer cancel(String id, RequestOptions options)
+      throws StripeException, AlreadyCanceledException, NotCancelableException {
+    String path =
+        String.format(
+            "/v2/money_management/outbound_transfers/%s/cancel", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, OutboundTransfer.class);
   }
 }

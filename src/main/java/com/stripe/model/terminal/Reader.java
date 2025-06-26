@@ -992,7 +992,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class CollectConfig extends StripeObject {
-        /** Enable customer initiated cancellation when processing this payment. */
+        /** Enable customer-initiated cancellation when processing this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
 
@@ -1064,8 +1064,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @EqualsAndHashCode(callSuper = false)
       public static class ConfirmConfig extends StripeObject {
         /**
-         * If the customer does not abandon authenticating the payment, they will be redirected to
-         * this specified URL after completion.
+         * If the customer doesn't abandon authenticating the payment, they're redirected to this
+         * URL after completion.
          */
         @SerializedName("return_url")
         String returnUrl;
@@ -1115,13 +1115,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ProcessConfig extends StripeObject {
-        /** Enable customer initiated cancellation when processing this payment. */
+        /** Enable customer-initiated cancellation when processing this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
 
         /**
-         * If the customer does not abandon authenticating the payment, they will be redirected to
-         * this specified URL after completion.
+         * If the customer doesn't abandon authenticating the payment, they're redirected to this
+         * URL after completion.
          */
         @SerializedName("return_url")
         String returnUrl;
@@ -1197,7 +1197,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ProcessConfig extends StripeObject {
-        /** Enable customer initiated cancellation when processing this SetupIntent. */
+        /** Enable customer-initiated cancellation when processing this SetupIntent. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }
@@ -1333,7 +1333,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class RefundPaymentConfig extends StripeObject {
-        /** Enable customer initiated cancellation when refunding this payment. */
+        /** Enable customer-initiated cancellation when refunding this payment. */
         @SerializedName("enable_customer_cancellation")
         Boolean enableCustomerCancellation;
       }

@@ -116,6 +116,9 @@ public abstract class StripeException extends Exception {
       case "financial_account_not_open":
         return com.stripe.exception.FinancialAccountNotOpenException.parse(
             body, statusCode, requestId, responseGetter);
+      case "feature_not_enabled":
+        return com.stripe.exception.FeatureNotEnabledException.parse(
+            body, statusCode, requestId, responseGetter);
       case "blocked_by_stripe":
         return com.stripe.exception.BlockedByStripeException.parse(
             body, statusCode, requestId, responseGetter);
@@ -133,9 +136,6 @@ public abstract class StripeException extends Exception {
             body, statusCode, requestId, responseGetter);
       case "recipient_not_notifiable":
         return com.stripe.exception.RecipientNotNotifiableException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "feature_not_enabled":
-        return com.stripe.exception.FeatureNotEnabledException.parse(
             body, statusCode, requestId, responseGetter);
       case "invalid_payout_method":
         return com.stripe.exception.InvalidPayoutMethodException.parse(

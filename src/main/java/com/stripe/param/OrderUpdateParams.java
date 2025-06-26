@@ -4981,6 +4981,10 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
+          /** On-demand details if setting up or charging an on-demand payment. */
+          @SerializedName("on_demand")
+          OnDemand onDemand;
+
           /**
            * Preferred language of the Klarna authorization page that the customer is redirected to.
            */
@@ -5014,15 +5018,23 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName("setup_future_usage")
           SetupFutureUsage setupFutureUsage;
 
+          /** Subscription details if setting up or charging a subscription. */
+          @SerializedName("subscriptions")
+          Object subscriptions;
+
           private Klarna(
               ApiRequestParams.EnumParam captureMethod,
               Map<String, Object> extraParams,
+              OnDemand onDemand,
               PreferredLocale preferredLocale,
-              SetupFutureUsage setupFutureUsage) {
+              SetupFutureUsage setupFutureUsage,
+              Object subscriptions) {
             this.captureMethod = captureMethod;
             this.extraParams = extraParams;
+            this.onDemand = onDemand;
             this.preferredLocale = preferredLocale;
             this.setupFutureUsage = setupFutureUsage;
+            this.subscriptions = subscriptions;
           }
 
           public static Builder builder() {
@@ -5034,17 +5046,23 @@ public class OrderUpdateParams extends ApiRequestParams {
 
             private Map<String, Object> extraParams;
 
+            private OnDemand onDemand;
+
             private PreferredLocale preferredLocale;
 
             private SetupFutureUsage setupFutureUsage;
+
+            private Object subscriptions;
 
             /** Finalize and obtain parameter instance from this builder. */
             public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna build() {
               return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna(
                   this.captureMethod,
                   this.extraParams,
+                  this.onDemand,
                   this.preferredLocale,
-                  this.setupFutureUsage);
+                  this.setupFutureUsage,
+                  this.subscriptions);
             }
 
             /**
@@ -5111,6 +5129,13 @@ public class OrderUpdateParams extends ApiRequestParams {
               return this;
             }
 
+            /** On-demand details if setting up or charging an on-demand payment. */
+            public Builder setOnDemand(
+                OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.OnDemand onDemand) {
+              this.onDemand = onDemand;
+              return this;
+            }
+
             /**
              * Preferred language of the Klarna authorization page that the customer is redirected
              * to.
@@ -5151,6 +5176,552 @@ public class OrderUpdateParams extends ApiRequestParams {
                     setupFutureUsage) {
               this.setupFutureUsage = setupFutureUsage;
               return this;
+            }
+
+            /**
+             * Add an element to `subscriptions` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna#subscriptions} for the
+             * field documentation.
+             */
+            @SuppressWarnings("unchecked")
+            public Builder addSubscription(
+                OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription
+                    element) {
+              if (this.subscriptions == null || this.subscriptions instanceof EmptyParam) {
+                this.subscriptions =
+                    new ArrayList<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .Subscription>();
+              }
+              ((List<OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription>)
+                      this.subscriptions)
+                  .add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `subscriptions` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna#subscriptions} for the
+             * field documentation.
+             */
+            @SuppressWarnings("unchecked")
+            public Builder addAllSubscription(
+                List<OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription>
+                    elements) {
+              if (this.subscriptions == null || this.subscriptions instanceof EmptyParam) {
+                this.subscriptions =
+                    new ArrayList<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .Subscription>();
+              }
+              ((List<OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription>)
+                      this.subscriptions)
+                  .addAll(elements);
+              return this;
+            }
+
+            /** Subscription details if setting up or charging a subscription. */
+            public Builder setSubscriptions(EmptyParam subscriptions) {
+              this.subscriptions = subscriptions;
+              return this;
+            }
+
+            /** Subscription details if setting up or charging a subscription. */
+            public Builder setSubscriptions(
+                List<OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription>
+                    subscriptions) {
+              this.subscriptions = subscriptions;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class OnDemand {
+            /**
+             * Your average amount value. You can use a value across your customer base, or segment
+             * based on customer type, country, etc.
+             */
+            @SerializedName("average_amount")
+            Long averageAmount;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * The maximum value you may charge a customer per purchase. You can use a value across
+             * your customer base, or segment based on customer type, country, etc.
+             */
+            @SerializedName("maximum_amount")
+            Long maximumAmount;
+
+            /**
+             * The lowest or minimum value you may charge a customer per purchase. You can use a
+             * value across your customer base, or segment based on customer type, country, etc.
+             */
+            @SerializedName("minimum_amount")
+            Long minimumAmount;
+
+            /** Interval at which the customer is making purchases. */
+            @SerializedName("purchase_interval")
+            PurchaseInterval purchaseInterval;
+
+            /** The number of {@code purchase_interval} between charges. */
+            @SerializedName("purchase_interval_count")
+            Long purchaseIntervalCount;
+
+            private OnDemand(
+                Long averageAmount,
+                Map<String, Object> extraParams,
+                Long maximumAmount,
+                Long minimumAmount,
+                PurchaseInterval purchaseInterval,
+                Long purchaseIntervalCount) {
+              this.averageAmount = averageAmount;
+              this.extraParams = extraParams;
+              this.maximumAmount = maximumAmount;
+              this.minimumAmount = minimumAmount;
+              this.purchaseInterval = purchaseInterval;
+              this.purchaseIntervalCount = purchaseIntervalCount;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Long averageAmount;
+
+              private Map<String, Object> extraParams;
+
+              private Long maximumAmount;
+
+              private Long minimumAmount;
+
+              private PurchaseInterval purchaseInterval;
+
+              private Long purchaseIntervalCount;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.OnDemand
+                  build() {
+                return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.OnDemand(
+                    this.averageAmount,
+                    this.extraParams,
+                    this.maximumAmount,
+                    this.minimumAmount,
+                    this.purchaseInterval,
+                    this.purchaseIntervalCount);
+              }
+
+              /**
+               * Your average amount value. You can use a value across your customer base, or
+               * segment based on customer type, country, etc.
+               */
+              public Builder setAverageAmount(Long averageAmount) {
+                this.averageAmount = averageAmount;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.OnDemand#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.OnDemand#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * The maximum value you may charge a customer per purchase. You can use a value
+               * across your customer base, or segment based on customer type, country, etc.
+               */
+              public Builder setMaximumAmount(Long maximumAmount) {
+                this.maximumAmount = maximumAmount;
+                return this;
+              }
+
+              /**
+               * The lowest or minimum value you may charge a customer per purchase. You can use a
+               * value across your customer base, or segment based on customer type, country, etc.
+               */
+              public Builder setMinimumAmount(Long minimumAmount) {
+                this.minimumAmount = minimumAmount;
+                return this;
+              }
+
+              /** Interval at which the customer is making purchases. */
+              public Builder setPurchaseInterval(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.OnDemand
+                          .PurchaseInterval
+                      purchaseInterval) {
+                this.purchaseInterval = purchaseInterval;
+                return this;
+              }
+
+              /** The number of {@code purchase_interval} between charges. */
+              public Builder setPurchaseIntervalCount(Long purchaseIntervalCount) {
+                this.purchaseIntervalCount = purchaseIntervalCount;
+                return this;
+              }
+            }
+
+            public enum PurchaseInterval implements ApiRequestParams.EnumParam {
+              @SerializedName("day")
+              DAY("day"),
+
+              @SerializedName("month")
+              MONTH("month"),
+
+              @SerializedName("week")
+              WEEK("week"),
+
+              @SerializedName("year")
+              YEAR("year");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              PurchaseInterval(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Subscription {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> Unit of time between subscription charges. */
+            @SerializedName("interval")
+            Interval interval;
+
+            /**
+             * The number of intervals (specified in the {@code interval} attribute) between
+             * subscription charges. For example, {@code interval=month} and {@code
+             * interval_count=3} charges every 3 months.
+             */
+            @SerializedName("interval_count")
+            Long intervalCount;
+
+            /** Name for subscription. */
+            @SerializedName("name")
+            Object name;
+
+            /** Describes the upcoming charge for this subscription. */
+            @SerializedName("next_billing")
+            NextBilling nextBilling;
+
+            /**
+             * <strong>Required.</strong> A non-customer-facing reference to correlate subscription
+             * charges in the Klarna app. Use a value that persists across subscription charges.
+             */
+            @SerializedName("reference")
+            Object reference;
+
+            private Subscription(
+                Map<String, Object> extraParams,
+                Interval interval,
+                Long intervalCount,
+                Object name,
+                NextBilling nextBilling,
+                Object reference) {
+              this.extraParams = extraParams;
+              this.interval = interval;
+              this.intervalCount = intervalCount;
+              this.name = name;
+              this.nextBilling = nextBilling;
+              this.reference = reference;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Interval interval;
+
+              private Long intervalCount;
+
+              private Object name;
+
+              private NextBilling nextBilling;
+
+              private Object reference;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription
+                  build() {
+                return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                    .Subscription(
+                    this.extraParams,
+                    this.interval,
+                    this.intervalCount,
+                    this.name,
+                    this.nextBilling,
+                    this.reference);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> Unit of time between subscription charges. */
+              public Builder setInterval(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription
+                          .Interval
+                      interval) {
+                this.interval = interval;
+                return this;
+              }
+
+              /**
+               * The number of intervals (specified in the {@code interval} attribute) between
+               * subscription charges. For example, {@code interval=month} and {@code
+               * interval_count=3} charges every 3 months.
+               */
+              public Builder setIntervalCount(Long intervalCount) {
+                this.intervalCount = intervalCount;
+                return this;
+              }
+
+              /** Name for subscription. */
+              public Builder setName(String name) {
+                this.name = name;
+                return this;
+              }
+
+              /** Name for subscription. */
+              public Builder setName(EmptyParam name) {
+                this.name = name;
+                return this;
+              }
+
+              /** Describes the upcoming charge for this subscription. */
+              public Builder setNextBilling(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription
+                          .NextBilling
+                      nextBilling) {
+                this.nextBilling = nextBilling;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> A non-customer-facing reference to correlate
+               * subscription charges in the Klarna app. Use a value that persists across
+               * subscription charges.
+               */
+              public Builder setReference(String reference) {
+                this.reference = reference;
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> A non-customer-facing reference to correlate
+               * subscription charges in the Klarna app. Use a value that persists across
+               * subscription charges.
+               */
+              public Builder setReference(EmptyParam reference) {
+                this.reference = reference;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class NextBilling {
+              /** <strong>Required.</strong> The amount of the next charge for the subscription. */
+              @SerializedName("amount")
+              Long amount;
+
+              /**
+               * <strong>Required.</strong> The date of the next charge for the subscription in
+               * YYYY-MM-DD format.
+               */
+              @SerializedName("date")
+              Object date;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              private NextBilling(Long amount, Object date, Map<String, Object> extraParams) {
+                this.amount = amount;
+                this.date = date;
+                this.extraParams = extraParams;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Long amount;
+
+                private Object date;
+
+                private Map<String, Object> extraParams;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription
+                        .NextBilling
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .Subscription.NextBilling(this.amount, this.date, this.extraParams);
+                }
+
+                /**
+                 * <strong>Required.</strong> The amount of the next charge for the subscription.
+                 */
+                public Builder setAmount(Long amount) {
+                  this.amount = amount;
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> The date of the next charge for the subscription in
+                 * YYYY-MM-DD format.
+                 */
+                public Builder setDate(String date) {
+                  this.date = date;
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> The date of the next charge for the subscription in
+                 * YYYY-MM-DD format.
+                 */
+                public Builder setDate(EmptyParam date) {
+                  this.date = date;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription.NextBilling#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription.NextBilling#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+              }
+            }
+
+            public enum Interval implements ApiRequestParams.EnumParam {
+              @SerializedName("day")
+              DAY("day"),
+
+              @SerializedName("month")
+              MONTH("month"),
+
+              @SerializedName("week")
+              WEEK("week"),
+
+              @SerializedName("year")
+              YEAR("year");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Interval(String value) {
+                this.value = value;
+              }
             }
           }
 
@@ -5315,7 +5886,13 @@ public class OrderUpdateParams extends ApiRequestParams {
 
           public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
             @SerializedName("none")
-            NONE("none");
+            NONE("none"),
+
+            @SerializedName("off_session")
+            OFF_SESSION("off_session"),
+
+            @SerializedName("on_session")
+            ON_SESSION("on_session");
 
             @Getter(onMethod_ = {@Override})
             private final String value;

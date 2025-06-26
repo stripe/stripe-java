@@ -23,6 +23,32 @@ public final class EventDestinationService extends ApiService {
     super(responseGetter);
   }
 
+  /** Lists all event destinations. */
+  public StripeCollection<EventDestination> list(EventDestinationListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Lists all event destinations. */
+  public StripeCollection<EventDestination> list(RequestOptions options) throws StripeException {
+    return list((EventDestinationListParams) null, options);
+  }
+  /** Lists all event destinations. */
+  public StripeCollection<EventDestination> list() throws StripeException {
+    return list((EventDestinationListParams) null, (RequestOptions) null);
+  }
+  /** Lists all event destinations. */
+  public StripeCollection<EventDestination> list(
+      EventDestinationListParams params, RequestOptions options) throws StripeException {
+    String path = "/v2/core/event_destinations";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<EventDestination>>() {}.getType());
+  }
   /** Create a new event destination. */
   public EventDestination create(EventDestinationCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -50,67 +76,6 @@ public final class EventDestinationService extends ApiService {
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
     return this.request(request, EventDestination.class);
-  }
-  /** Disable an event destination. */
-  public EventDestination disable(String id) throws StripeException {
-    return disable(id, (RequestOptions) null);
-  }
-  /** Disable an event destination. */
-  public EventDestination disable(String id, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v2/core/event_destinations/%s/disable", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, EventDestination.class);
-  }
-  /** Enable an event destination. */
-  public EventDestination enable(String id) throws StripeException {
-    return enable(id, (RequestOptions) null);
-  }
-  /** Enable an event destination. */
-  public EventDestination enable(String id, RequestOptions options) throws StripeException {
-    String path =
-        String.format("/v2/core/event_destinations/%s/enable", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, EventDestination.class);
-  }
-  /** Lists all event destinations. */
-  public StripeCollection<EventDestination> list(EventDestinationListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** Lists all event destinations. */
-  public StripeCollection<EventDestination> list(RequestOptions options) throws StripeException {
-    return list((EventDestinationListParams) null, options);
-  }
-  /** Lists all event destinations. */
-  public StripeCollection<EventDestination> list() throws StripeException {
-    return list((EventDestinationListParams) null, (RequestOptions) null);
-  }
-  /** Lists all event destinations. */
-  public StripeCollection<EventDestination> list(
-      EventDestinationListParams params, RequestOptions options) throws StripeException {
-    String path = "/v2/core/event_destinations";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, new TypeToken<StripeCollection<EventDestination>>() {}.getType());
-  }
-  /** Send a {@code ping} event to an event destination. */
-  public Event ping(String id) throws StripeException {
-    return ping(id, (RequestOptions) null);
-  }
-  /** Send a {@code ping} event to an event destination. */
-  public Event ping(String id, RequestOptions options) throws StripeException {
-    String path = String.format("/v2/core/event_destinations/%s/ping", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, Event.class);
   }
   /** Retrieves the details of an event destination. */
   public EventDestination retrieve(String id, EventDestinationRetrieveParams params)
@@ -165,5 +130,40 @@ public final class EventDestinationService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, EventDestination.class);
+  }
+  /** Disable an event destination. */
+  public EventDestination disable(String id) throws StripeException {
+    return disable(id, (RequestOptions) null);
+  }
+  /** Disable an event destination. */
+  public EventDestination disable(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v2/core/event_destinations/%s/disable", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, EventDestination.class);
+  }
+  /** Enable an event destination. */
+  public EventDestination enable(String id) throws StripeException {
+    return enable(id, (RequestOptions) null);
+  }
+  /** Enable an event destination. */
+  public EventDestination enable(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format("/v2/core/event_destinations/%s/enable", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, EventDestination.class);
+  }
+  /** Send a {@code ping} event to an event destination. */
+  public Event ping(String id) throws StripeException {
+    return ping(id, (RequestOptions) null);
+  }
+  /** Send a {@code ping} event to an event destination. */
+  public Event ping(String id, RequestOptions options) throws StripeException {
+    String path = String.format("/v2/core/event_destinations/%s/ping", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, Event.class);
   }
 }

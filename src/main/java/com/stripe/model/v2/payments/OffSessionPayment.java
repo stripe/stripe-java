@@ -19,10 +19,6 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("amount_requested")
   Amount amountRequested;
 
-  /** Number of authorization attempts. */
-  @SerializedName("attempts")
-  Integer attempts;
-
   /**
    * The frequency of the underlying payment that this OSP represents.
    *

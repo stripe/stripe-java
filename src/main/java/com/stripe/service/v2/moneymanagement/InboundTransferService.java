@@ -21,24 +21,6 @@ public final class InboundTransferService extends ApiService {
     super(responseGetter);
   }
 
-  /** InboundTransfers APIs are used to create, retrieve or list InboundTransfers. */
-  public InboundTransfer create(InboundTransferCreateParams params)
-      throws StripeException, BlockedByStripeException {
-    return create(params, (RequestOptions) null);
-  }
-  /** InboundTransfers APIs are used to create, retrieve or list InboundTransfers. */
-  public InboundTransfer create(InboundTransferCreateParams params, RequestOptions options)
-      throws StripeException, BlockedByStripeException {
-    String path = "/v2/money_management/inbound_transfers";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, InboundTransfer.class);
-  }
   /** Retrieves a list of InboundTransfers. */
   public StripeCollection<InboundTransfer> list(InboundTransferListParams params)
       throws StripeException {
@@ -64,6 +46,24 @@ public final class InboundTransferService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeCollection<InboundTransfer>>() {}.getType());
+  }
+  /** InboundTransfers APIs are used to create, retrieve or list InboundTransfers. */
+  public InboundTransfer create(InboundTransferCreateParams params)
+      throws StripeException, BlockedByStripeException {
+    return create(params, (RequestOptions) null);
+  }
+  /** InboundTransfers APIs are used to create, retrieve or list InboundTransfers. */
+  public InboundTransfer create(InboundTransferCreateParams params, RequestOptions options)
+      throws StripeException, BlockedByStripeException {
+    String path = "/v2/money_management/inbound_transfers";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, InboundTransfer.class);
   }
   /** Retrieve an InboundTransfer by ID. */
   public InboundTransfer retrieve(String id) throws StripeException {

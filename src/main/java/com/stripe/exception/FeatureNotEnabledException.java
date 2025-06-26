@@ -6,10 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/**
- * Error returned when recipient does not have the active features required to receive funds from
- * this OutboundPayment request.
- */
+/** The required storer capabilities are missing. */
 public final class FeatureNotEnabledException extends ApiException {
   private static final long serialVersionUID = 2L;
 

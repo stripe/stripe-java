@@ -1467,6 +1467,9 @@ public class PersonUpdateParams extends ApiRequestParams {
       @SerializedName("ws")
       WS("ws"),
 
+      @SerializedName("xx")
+      XX("xx"),
+
       @SerializedName("ye")
       YE("ye"),
 
@@ -2795,6 +2798,9 @@ public class PersonUpdateParams extends ApiRequestParams {
 
       @SerializedName("ws")
       WS("ws"),
+
+      @SerializedName("xx")
+      XX("xx"),
 
       @SerializedName("ye")
       YE("ye"),
@@ -5331,6 +5337,9 @@ public class PersonUpdateParams extends ApiRequestParams {
         @SerializedName("ws")
         WS("ws"),
 
+        @SerializedName("xx")
+        XX("xx"),
+
         @SerializedName("ye")
         YE("ye"),
 
@@ -6305,6 +6314,9 @@ public class PersonUpdateParams extends ApiRequestParams {
 
         @SerializedName("ws")
         WS("ws"),
+
+        @SerializedName("xx")
+        XX("xx"),
 
         @SerializedName("ye")
         YE("ye"),
@@ -7369,6 +7381,9 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     @SerializedName("ws")
     WS("ws"),
+
+    @SerializedName("xx")
+    XX("xx"),
 
     @SerializedName("ye")
     YE("ye"),

@@ -110,14 +110,26 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BalanceTransfer extends StripeObject {
-    /** The ID of the Stripe Money Movement that originated the ReceivedCredit. */
+    /** The ID of the account that owns the source object originated the ReceivedCredit. */
+    @SerializedName("from_account")
+    String fromAccount;
+
+    /** The ID of the outbound payment object that originated the ReceivedCredit. */
+    @SerializedName("outbound_payment")
+    String outboundPayment;
+
+    /** The ID of the outbound transfer object that originated the ReceivedCredit. */
+    @SerializedName("outbound_transfer")
+    String outboundTransfer;
+
+    /** The ID of the payout object that originated the ReceivedCredit. */
     @SerializedName("payout_v1")
     String payoutV1;
 
     /**
      * Open Enum. The type of Stripe Money Movement that originated the ReceivedCredit.
      *
-     * <p>Equal to {@code payout_v1}.
+     * <p>One of {@code outbound_payment}, {@code outbound_transfer}, or {@code payout_v1}.
      */
     @SerializedName("type")
     String type;

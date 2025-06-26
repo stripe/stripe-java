@@ -24,18 +24,32 @@ public final class OutboundSetupIntentService extends ApiService {
     super(responseGetter);
   }
 
-  /** Cancel an OutboundSetupIntent object. */
-  public OutboundSetupIntent cancel(String id) throws StripeException {
-    return cancel(id, (RequestOptions) null);
+  /** List the OutboundSetupIntent objects. */
+  public StripeCollection<OutboundSetupIntent> list(OutboundSetupIntentListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
   }
-  /** Cancel an OutboundSetupIntent object. */
-  public OutboundSetupIntent cancel(String id, RequestOptions options) throws StripeException {
-    String path =
-        String.format(
-            "/v2/money_management/outbound_setup_intents/%s/cancel", ApiResource.urlEncodeId(id));
+  /** List the OutboundSetupIntent objects. */
+  public StripeCollection<OutboundSetupIntent> list(RequestOptions options) throws StripeException {
+    return list((OutboundSetupIntentListParams) null, options);
+  }
+  /** List the OutboundSetupIntent objects. */
+  public StripeCollection<OutboundSetupIntent> list() throws StripeException {
+    return list((OutboundSetupIntentListParams) null, (RequestOptions) null);
+  }
+  /** List the OutboundSetupIntent objects. */
+  public StripeCollection<OutboundSetupIntent> list(
+      OutboundSetupIntentListParams params, RequestOptions options) throws StripeException {
+    String path = "/v2/money_management/outbound_setup_intents";
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, OutboundSetupIntent.class);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(
+        request, new TypeToken<StripeCollection<OutboundSetupIntent>>() {}.getType());
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create(OutboundSetupIntentCreateParams params)
@@ -68,33 +82,6 @@ public final class OutboundSetupIntentService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, OutboundSetupIntent.class);
-  }
-  /** List the OutboundSetupIntent objects. */
-  public StripeCollection<OutboundSetupIntent> list(OutboundSetupIntentListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-  /** List the OutboundSetupIntent objects. */
-  public StripeCollection<OutboundSetupIntent> list(RequestOptions options) throws StripeException {
-    return list((OutboundSetupIntentListParams) null, options);
-  }
-  /** List the OutboundSetupIntent objects. */
-  public StripeCollection<OutboundSetupIntent> list() throws StripeException {
-    return list((OutboundSetupIntentListParams) null, (RequestOptions) null);
-  }
-  /** List the OutboundSetupIntent objects. */
-  public StripeCollection<OutboundSetupIntent> list(
-      OutboundSetupIntentListParams params, RequestOptions options) throws StripeException {
-    String path = "/v2/money_management/outbound_setup_intents";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(
-        request, new TypeToken<StripeCollection<OutboundSetupIntent>>() {}.getType());
   }
   /** Retrieve an OutboundSetupIntent object. */
   public OutboundSetupIntent retrieve(String id) throws StripeException {
@@ -142,6 +129,19 @@ public final class OutboundSetupIntentService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
+    return this.request(request, OutboundSetupIntent.class);
+  }
+  /** Cancel an OutboundSetupIntent object. */
+  public OutboundSetupIntent cancel(String id) throws StripeException {
+    return cancel(id, (RequestOptions) null);
+  }
+  /** Cancel an OutboundSetupIntent object. */
+  public OutboundSetupIntent cancel(String id, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v2/money_management/outbound_setup_intents/%s/cancel", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, OutboundSetupIntent.class);
   }
 }

@@ -1045,6 +1045,14 @@ public class Dispute extends ApiResource
     Long submissionCount;
 
     /**
+     * Whether the dispute was submitted manually, with Smart Disputes, or not submitted.
+     *
+     * <p>One of {@code manual}, {@code not_submitted}, or {@code smart_disputes}.
+     */
+    @SerializedName("submission_method")
+    String submissionMethod;
+
+    /**
      * For more details about EnhancedEligibility, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1166,7 +1174,7 @@ public class Dispute extends ApiResource
        * The type of dispute opened. Different case types may have varying fees and financial
        * impact.
        *
-       * <p>One of {@code chargeback}, or {@code inquiry}.
+       * <p>One of {@code chargeback}, {@code compliance}, or {@code inquiry}.
        */
       @SerializedName("case_type")
       String caseType;

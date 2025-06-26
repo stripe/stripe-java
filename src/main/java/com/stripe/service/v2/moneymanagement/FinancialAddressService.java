@@ -2,6 +2,7 @@
 package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.FinancialAccountNotOpenException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
@@ -22,24 +23,6 @@ public final class FinancialAddressService extends ApiService {
     super(responseGetter);
   }
 
-  /** Create a new FinancialAddress for a FinancialAccount. */
-  public FinancialAddress create(FinancialAddressCreateParams params)
-      throws StripeException, FinancialAccountNotOpenException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Create a new FinancialAddress for a FinancialAccount. */
-  public FinancialAddress create(FinancialAddressCreateParams params, RequestOptions options)
-      throws StripeException, FinancialAccountNotOpenException {
-    String path = "/v2/money_management/financial_addresses";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, FinancialAddress.class);
-  }
   /** List all FinancialAddresses for a FinancialAccount. */
   public StripeCollection<FinancialAddress> list(FinancialAddressListParams params)
       throws StripeException {
@@ -65,6 +48,24 @@ public final class FinancialAddressService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeCollection<FinancialAddress>>() {}.getType());
+  }
+  /** Create a new FinancialAddress for a FinancialAccount. */
+  public FinancialAddress create(FinancialAddressCreateParams params)
+      throws StripeException, FinancialAccountNotOpenException, FeatureNotEnabledException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Create a new FinancialAddress for a FinancialAccount. */
+  public FinancialAddress create(FinancialAddressCreateParams params, RequestOptions options)
+      throws StripeException, FinancialAccountNotOpenException, FeatureNotEnabledException {
+    String path = "/v2/money_management/financial_addresses";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, FinancialAddress.class);
   }
   /**
    * Retrieve a FinancialAddress. By default, the FinancialAddress will be returned in its

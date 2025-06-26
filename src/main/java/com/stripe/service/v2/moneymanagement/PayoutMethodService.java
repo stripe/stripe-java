@@ -21,27 +21,6 @@ public final class PayoutMethodService extends ApiService {
     super(responseGetter);
   }
 
-  /**
-   * Archive a PayoutMethod object. Archived objects cannot be used as payout methods and will not
-   * appear in the payout method list.
-   */
-  public PayoutMethod archive(String id)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
-    return archive(id, (RequestOptions) null);
-  }
-  /**
-   * Archive a PayoutMethod object. Archived objects cannot be used as payout methods and will not
-   * appear in the payout method list.
-   */
-  public PayoutMethod archive(String id, RequestOptions options)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
-    String path =
-        String.format(
-            "/v2/money_management/payout_methods/%s/archive", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, PayoutMethod.class);
-  }
   /** List objects that adhere to the PayoutMethod interface. */
   public StripeCollection<PayoutMethod> list(PayoutMethodListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -78,6 +57,27 @@ public final class PayoutMethodService extends ApiService {
         String.format("/v2/money_management/payout_methods/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, PayoutMethod.class);
+  }
+  /**
+   * Archive a PayoutMethod object. Archived objects cannot be used as payout methods and will not
+   * appear in the payout method list.
+   */
+  public PayoutMethod archive(String id)
+      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
+    return archive(id, (RequestOptions) null);
+  }
+  /**
+   * Archive a PayoutMethod object. Archived objects cannot be used as payout methods and will not
+   * appear in the payout method list.
+   */
+  public PayoutMethod archive(String id, RequestOptions options)
+      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
+    String path =
+        String.format(
+            "/v2/money_management/payout_methods/%s/archive", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, PayoutMethod.class);
   }
   /** Unarchive an PayoutMethod object. */
