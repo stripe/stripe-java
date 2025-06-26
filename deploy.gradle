@@ -20,7 +20,7 @@ def getReleaseRepositoryUrl() {
 
 def getSnapshotRepositoryUrl() {
     return hasProperty("SNAPSHOT_REPOSITORY_URL") ? SNAPSHOT_REPOSITORY_URL
-            : "https://ossrh-staging-api.central.sonatype.com/content/repositories/snapshots/"
+            : "https://central.sonatype.com/repository/maven-snapshots/"
 }
 
 def getRepositoryUsername() {
