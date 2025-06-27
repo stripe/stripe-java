@@ -37,6 +37,9 @@ nexusPublishing {
 
     repositories {
         sonatype {
+            // The default nexusUrl is the sunsetted endpoint "https://oss.sonatype.org/service/local/"
+            // This URL comes from https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/.
+            nexusUrl = uri("https://ossrh-staging-api.central.sonatype.com/service/local/")
             username = getRepositoryUsername()
             password = getRepositoryPassword()
         }
