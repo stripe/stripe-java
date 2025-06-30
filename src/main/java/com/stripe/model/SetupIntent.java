@@ -205,7 +205,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
-  /** The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. */
+  /**
+   * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. A list
+   * of valid payment method types can be found <a
+   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">here</a>.
+   */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
@@ -1018,6 +1022,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("card_present")
     CardPresent cardPresent;
 
+    @SerializedName("klarna")
+    Klarna klarna;
+
     @SerializedName("link")
     Link link;
 
@@ -1254,6 +1261,23 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {}
+
+    /**
+     * For more details about Klarna, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna extends StripeObject {
+      /** The currency of the setup intent. Three letter ISO currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /** Preferred locale of the Klarna checkout page that the customer is redirected to. */
+      @SerializedName("preferred_locale")
+      String preferredLocale;
+    }
 
     /**
      * For more details about Link, please refer to the <a href="https://docs.stripe.com/api">API

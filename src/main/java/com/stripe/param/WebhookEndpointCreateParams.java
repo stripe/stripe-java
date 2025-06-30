@@ -618,7 +618,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_04_30_BASIL("2025-04-30.basil"),
 
     @SerializedName("2025-05-28.basil")
-    VERSION_2025_05_28_BASIL("2025-05-28.basil");
+    VERSION_2025_05_28_BASIL("2025-05-28.basil"),
+
+    @SerializedName("2025-06-30.basil")
+    VERSION_2025_06_30_BASIL("2025-06-30.basil");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -1230,6 +1233,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("terminal.reader.action_succeeded")
     TERMINAL__READER__ACTION_SUCCEEDED("terminal.reader.action_succeeded"),
+
+    @SerializedName("terminal.reader.action_updated")
+    TERMINAL__READER__ACTION_UPDATED("terminal.reader.action_updated"),
 
     @SerializedName("test_helpers.test_clock.advancing")
     TEST_HELPERS__TEST_CLOCK__ADVANCING("test_helpers.test_clock.advancing"),

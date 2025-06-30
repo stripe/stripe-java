@@ -1889,6 +1889,10 @@ public class QuoteCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData {
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
+
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
      * optionally store an explanation of the subscription for rendering in Stripe surfaces and
@@ -1899,10 +1903,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * When creating a new subscription, the date of which the subscription schedule will start
-     * after the quote is accepted. When updating a subscription, the date of which the subscription
-     * will be updated using a subscription schedule. The special value {@code current_period_end}
-     * can be provided to update a subscription at the end of its current period. The {@code
-     * effective_date} is ignored if it is in the past when the quote is accepted.
+     * after the quote is accepted. The {@code effective_date} is ignored if it is in the past when
+     * the quote is accepted.
      */
     @SerializedName("effective_date")
     Object effectiveDate;
@@ -1936,11 +1938,13 @@ public class QuoteCreateParams extends ApiRequestParams {
     Object trialPeriodDays;
 
     private SubscriptionData(
+        BillingMode billingMode,
         String description,
         Object effectiveDate,
         Map<String, Object> extraParams,
         Map<String, String> metadata,
         Object trialPeriodDays) {
+      this.billingMode = billingMode;
       this.description = description;
       this.effectiveDate = effectiveDate;
       this.extraParams = extraParams;
@@ -1953,6 +1957,8 @@ public class QuoteCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BillingMode billingMode;
+
       private String description;
 
       private Object effectiveDate;
@@ -1966,11 +1972,18 @@ public class QuoteCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public QuoteCreateParams.SubscriptionData build() {
         return new QuoteCreateParams.SubscriptionData(
+            this.billingMode,
             this.description,
             this.effectiveDate,
             this.extraParams,
             this.metadata,
             this.trialPeriodDays);
+      }
+
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+      public Builder setBillingMode(QuoteCreateParams.SubscriptionData.BillingMode billingMode) {
+        this.billingMode = billingMode;
+        return this;
       }
 
       /**
@@ -1985,11 +1998,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * When creating a new subscription, the date of which the subscription schedule will start
-       * after the quote is accepted. When updating a subscription, the date of which the
-       * subscription will be updated using a subscription schedule. The special value {@code
-       * current_period_end} can be provided to update a subscription at the end of its current
-       * period. The {@code effective_date} is ignored if it is in the past when the quote is
-       * accepted.
+       * after the quote is accepted. The {@code effective_date} is ignored if it is in the past
+       * when the quote is accepted.
        */
       public Builder setEffectiveDate(
           QuoteCreateParams.SubscriptionData.EffectiveDate effectiveDate) {
@@ -1999,11 +2009,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * When creating a new subscription, the date of which the subscription schedule will start
-       * after the quote is accepted. When updating a subscription, the date of which the
-       * subscription will be updated using a subscription schedule. The special value {@code
-       * current_period_end} can be provided to update a subscription at the end of its current
-       * period. The {@code effective_date} is ignored if it is in the past when the quote is
-       * accepted.
+       * after the quote is accepted. The {@code effective_date} is ignored if it is in the past
+       * when the quote is accepted.
        */
       public Builder setEffectiveDate(Long effectiveDate) {
         this.effectiveDate = effectiveDate;
@@ -2012,11 +2019,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * When creating a new subscription, the date of which the subscription schedule will start
-       * after the quote is accepted. When updating a subscription, the date of which the
-       * subscription will be updated using a subscription schedule. The special value {@code
-       * current_period_end} can be provided to update a subscription at the end of its current
-       * period. The {@code effective_date} is ignored if it is in the past when the quote is
-       * accepted.
+       * after the quote is accepted. The {@code effective_date} is ignored if it is in the past
+       * when the quote is accepted.
        */
       public Builder setEffectiveDate(EmptyParam effectiveDate) {
         this.effectiveDate = effectiveDate;
@@ -2091,6 +2095,92 @@ public class QuoteCreateParams extends ApiRequestParams {
       public Builder setTrialPeriodDays(EmptyParam trialPeriodDays) {
         this.trialPeriodDays = trialPeriodDays;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingMode {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> */
+      @SerializedName("type")
+      Type type;
+
+      private BillingMode(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public QuoteCreateParams.SubscriptionData.BillingMode build() {
+          return new QuoteCreateParams.SubscriptionData.BillingMode(this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.SubscriptionData.BillingMode#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link QuoteCreateParams.SubscriptionData.BillingMode#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> */
+        public Builder setType(QuoteCreateParams.SubscriptionData.BillingMode.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("classic")
+        CLASSIC("classic"),
+
+        @SerializedName("flexible")
+        FLEXIBLE("flexible");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 

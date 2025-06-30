@@ -33,17 +33,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_percent")
   Object applicationFeePercent;
 
-  /**
-   * Automatic tax settings for this subscription. We recommend you only include this parameter when
-   * the existing value is being changed.
-   */
+  /** Automatic tax settings for this subscription. */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
   /**
-   * For new subscriptions, a past timestamp to backdate the subscription's start date to. If set,
-   * the first invoice will contain a proration for the timespan between the start date and the
-   * current time. Can be combined with trials and the billing cycle anchor.
+   * A past timestamp to backdate the subscription's start date to. If set, the first invoice will
+   * contain line items for the timespan between the start date and the current time. Can be
+   * combined with trials and the billing cycle anchor.
    */
   @SerializedName("backdate_start_date")
   Long backdateStartDate;
@@ -66,6 +63,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("billing_cycle_anchor_config")
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
+  /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+  @SerializedName("billing_mode")
+  BillingMode billingMode;
+
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period. When updating, pass an empty string to remove previously-defined thresholds.
@@ -84,8 +85,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-   * version. Please use {@code cancel_at} instead.
+   * current_period_end}). Defaults to {@code false}.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -310,6 +310,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long backdateStartDate,
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
+      BillingMode billingMode,
       Object billingThresholds,
       Long cancelAt,
       Boolean cancelAtPeriodEnd,
@@ -344,6 +345,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.backdateStartDate = backdateStartDate;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+    this.billingMode = billingMode;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -390,6 +392,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Long billingCycleAnchor;
 
     private BillingCycleAnchorConfig billingCycleAnchorConfig;
+
+    private BillingMode billingMode;
 
     private Object billingThresholds;
 
@@ -456,6 +460,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.backdateStartDate,
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
+          this.billingMode,
           this.billingThresholds,
           this.cancelAt,
           this.cancelAtPeriodEnd,
@@ -538,19 +543,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Automatic tax settings for this subscription. We recommend you only include this parameter
-     * when the existing value is being changed.
-     */
+    /** Automatic tax settings for this subscription. */
     public Builder setAutomaticTax(SubscriptionCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
 
     /**
-     * For new subscriptions, a past timestamp to backdate the subscription's start date to. If set,
-     * the first invoice will contain a proration for the timespan between the start date and the
-     * current time. Can be combined with trials and the billing cycle anchor.
+     * A past timestamp to backdate the subscription's start date to. If set, the first invoice will
+     * contain line items for the timespan between the start date and the current time. Can be
+     * combined with trials and the billing cycle anchor.
      */
     public Builder setBackdateStartDate(Long backdateStartDate) {
       this.backdateStartDate = backdateStartDate;
@@ -577,6 +579,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     public Builder setBillingCycleAnchorConfig(
         SubscriptionCreateParams.BillingCycleAnchorConfig billingCycleAnchorConfig) {
       this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+      return this;
+    }
+
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+    public Builder setBillingMode(SubscriptionCreateParams.BillingMode billingMode) {
+      this.billingMode = billingMode;
       return this;
     }
 
@@ -612,8 +620,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-     * version. Please use {@code cancel_at} instead.
+     * current_period_end}). Defaults to {@code false}.
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -1917,6 +1924,90 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       public Builder setSecond(Long second) {
         this.second = second;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingMode {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> */
+    @SerializedName("type")
+    Type type;
+
+    private BillingMode(Map<String, Object> extraParams, Type type) {
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionCreateParams.BillingMode build() {
+        return new SubscriptionCreateParams.BillingMode(this.extraParams, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.BillingMode#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.BillingMode#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setType(SubscriptionCreateParams.BillingMode.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("classic")
+      CLASSIC("classic"),
+
+      @SerializedName("flexible")
+      FLEXIBLE("flexible");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }
@@ -5229,6 +5320,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
+
+      @SerializedName("crypto")
+      CRYPTO("crypto"),
 
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),

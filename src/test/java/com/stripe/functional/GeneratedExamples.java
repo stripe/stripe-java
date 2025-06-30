@@ -15601,29 +15601,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2BillingMeterEventSessionPostServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_event_session",
-        null,
-        null,
-        com.stripe.model.v2.billing.MeterEventSession.class,
-        "{\"authentication_token\":\"authentication_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"object\":\"v2.billing.meter_event_session\",\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.billing.MeterEventSession meterEventSession =
-        client.v2().billing().meterEventSession().create();
-    assertNotNull(meterEventSession);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_event_session",
-        null,
-        null);
-  }
-
-  @Test
   public void testV2BillingMeterEventAdjustmentPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -15653,6 +15630,29 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/billing/meter_event_adjustments",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2BillingMeterEventSessionPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/billing/meter_event_session",
+        null,
+        null,
+        com.stripe.model.v2.billing.MeterEventSession.class,
+        "{\"authentication_token\":\"authentication_token\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"object\":\"v2.billing.meter_event_session\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.billing.MeterEventSession meterEventSession =
+        client.v2().billing().meterEventSession().create();
+    assertNotNull(meterEventSession);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/billing/meter_event_session",
+        null,
         null);
   }
 
@@ -15718,6 +15718,34 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreEventDestinationGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/event_destinations",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.EventDestination>>() {}.getType(),
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.EventDestinationListParams params =
+        com.stripe.param.v2.core.EventDestinationListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.EventDestination> stripeCollection =
+        client.v2().core().eventDestinations().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/event_destinations",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2CoreEventDestinationPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -15773,102 +15801,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2CoreEventDestinationPost2Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/event_destinations/id_123/disable",
-        null,
-        null,
-        com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.EventDestination eventDestination =
-        client.v2().core().eventDestinations().disable("id_123");
-    assertNotNull(eventDestination);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/event_destinations/id_123/disable",
-        null,
-        null);
-  }
-
-  @Test
-  public void testV2CoreEventDestinationPost3Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/event_destinations/id_123/enable",
-        null,
-        null,
-        com.stripe.model.v2.EventDestination.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.EventDestination eventDestination =
-        client.v2().core().eventDestinations().enable("id_123");
-    assertNotNull(eventDestination);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/event_destinations/id_123/enable",
-        null,
-        null);
-  }
-
-  @Test
-  public void testV2CoreEventDestinationGetServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/event_destinations",
-        null,
-        null,
-        new TypeToken<
-            com.stripe.model.v2.StripeCollection<
-                com.stripe.model.v2.EventDestination>>() {}.getType(),
-        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}],\"next_page_url\":null,\"previous_page_url\":null}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.EventDestinationListParams params =
-        com.stripe.param.v2.core.EventDestinationListParams.builder().build();
-
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.EventDestination> stripeCollection =
-        client.v2().core().eventDestinations().list(params);
-    assertNotNull(stripeCollection);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/event_destinations",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2CoreEventDestinationPost4Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/event_destinations/id_123/ping",
-        null,
-        null,
-        com.stripe.model.v2.Event.class,
-        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.Event event = client.v2().core().eventDestinations().ping("id_123");
-    assertNotNull(event);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/event_destinations/id_123/ping",
-        null,
-        null);
-  }
-
-  @Test
   public void testV2CoreEventDestinationGet2Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -15895,7 +15827,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2CoreEventDestinationPost5Services() throws StripeException {
+  public void testV2CoreEventDestinationPost2Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
@@ -15917,6 +15849,74 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/core/event_destinations/id_123",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreEventDestinationPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/event_destinations/id_123/disable",
+        null,
+        null,
+        com.stripe.model.v2.EventDestination.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.EventDestination eventDestination =
+        client.v2().core().eventDestinations().disable("id_123");
+    assertNotNull(eventDestination);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/event_destinations/id_123/disable",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2CoreEventDestinationPost4Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/event_destinations/id_123/enable",
+        null,
+        null,
+        com.stripe.model.v2.EventDestination.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"events_from\":null,\"id\":\"obj_123\",\"metadata\":null,\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"snapshot_api_version\":null,\"status\":\"disabled\",\"status_details\":null,\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true,\"amazon_eventbridge\":null,\"webhook_endpoint\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.EventDestination eventDestination =
+        client.v2().core().eventDestinations().enable("id_123");
+    assertNotNull(eventDestination);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/event_destinations/id_123/enable",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2CoreEventDestinationPost5Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/event_destinations/id_123/ping",
+        null,
+        null,
+        com.stripe.model.v2.Event.class,
+        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.Event event = client.v2().core().eventDestinations().ping("id_123");
+    assertNotNull(event);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/event_destinations/id_123/ping",
+        null,
         null);
   }
 

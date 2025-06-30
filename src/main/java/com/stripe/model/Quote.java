@@ -1422,6 +1422,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SubscriptionData extends StripeObject {
+    /** The billing mode of the quote. */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
+
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
      * optionally store an explanation of the subscription for rendering in Stripe surfaces and
@@ -1456,6 +1460,20 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
+
+    /** The billing mode of the quote. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingMode extends StripeObject {
+      /**
+       * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+       *
+       * <p>One of {@code classic}, or {@code flexible}.
+       */
+      @SerializedName("type")
+      String type;
+    }
   }
 
   /**

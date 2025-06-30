@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.treasury;
+package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,14 +12,10 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class FinancialAccountListParams extends ApiRequestParams {
-  /** Only return FinancialAccounts that were created during the given date interval. */
-  @SerializedName("created")
-  Object created;
-
-  /** An object ID cursor for use in pagination. */
-  @SerializedName("ending_before")
-  String endingBefore;
+public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
+  /** Configuration overrides. */
+  @SerializedName("confirm_config")
+  ConfirmConfig confirmConfig;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -34,33 +30,19 @@ public class FinancialAccountListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A limit ranging from 1 to 100 (defaults to 10). */
-  @SerializedName("limit")
-  Long limit;
+  /** <strong>Required.</strong> PaymentIntent ID. */
+  @SerializedName("payment_intent")
+  String paymentIntent;
 
-  /** An object ID cursor for use in pagination. */
-  @SerializedName("starting_after")
-  String startingAfter;
-
-  /** Only return FinancialAccounts that have the given status: {@code open} or {@code closed}. */
-  @SerializedName("status")
-  Status status;
-
-  private FinancialAccountListParams(
-      Object created,
-      String endingBefore,
+  private ReaderConfirmPaymentIntentParams(
+      ConfirmConfig confirmConfig,
       List<String> expand,
       Map<String, Object> extraParams,
-      Long limit,
-      String startingAfter,
-      Status status) {
-    this.created = created;
-    this.endingBefore = endingBefore;
+      String paymentIntent) {
+    this.confirmConfig = confirmConfig;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.limit = limit;
-    this.startingAfter = startingAfter;
-    this.status = status;
+    this.paymentIntent = paymentIntent;
   }
 
   public static Builder builder() {
@@ -68,54 +50,30 @@ public class FinancialAccountListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Object created;
-
-    private String endingBefore;
+    private ConfirmConfig confirmConfig;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private Long limit;
-
-    private String startingAfter;
-
-    private Status status;
+    private String paymentIntent;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public FinancialAccountListParams build() {
-      return new FinancialAccountListParams(
-          this.created,
-          this.endingBefore,
-          this.expand,
-          this.extraParams,
-          this.limit,
-          this.startingAfter,
-          this.status);
+    public ReaderConfirmPaymentIntentParams build() {
+      return new ReaderConfirmPaymentIntentParams(
+          this.confirmConfig, this.expand, this.extraParams, this.paymentIntent);
     }
 
-    /** Only return FinancialAccounts that were created during the given date interval. */
-    public Builder setCreated(FinancialAccountListParams.Created created) {
-      this.created = created;
-      return this;
-    }
-
-    /** Only return FinancialAccounts that were created during the given date interval. */
-    public Builder setCreated(Long created) {
-      this.created = created;
-      return this;
-    }
-
-    /** An object ID cursor for use in pagination. */
-    public Builder setEndingBefore(String endingBefore) {
-      this.endingBefore = endingBefore;
+    /** Configuration overrides. */
+    public Builder setConfirmConfig(ReaderConfirmPaymentIntentParams.ConfirmConfig confirmConfig) {
+      this.confirmConfig = confirmConfig;
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * FinancialAccountListParams#expand} for the field documentation.
+     * ReaderConfirmPaymentIntentParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -128,7 +86,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * FinancialAccountListParams#expand} for the field documentation.
+     * ReaderConfirmPaymentIntentParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -141,7 +99,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * FinancialAccountListParams#extraParams} for the field documentation.
+     * ReaderConfirmPaymentIntentParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -154,7 +112,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link FinancialAccountListParams#extraParams} for the field documentation.
+     * See {@link ReaderConfirmPaymentIntentParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -164,28 +122,16 @@ public class FinancialAccountListParams extends ApiRequestParams {
       return this;
     }
 
-    /** A limit ranging from 1 to 100 (defaults to 10). */
-    public Builder setLimit(Long limit) {
-      this.limit = limit;
-      return this;
-    }
-
-    /** An object ID cursor for use in pagination. */
-    public Builder setStartingAfter(String startingAfter) {
-      this.startingAfter = startingAfter;
-      return this;
-    }
-
-    /** Only return FinancialAccounts that have the given status: {@code open} or {@code closed}. */
-    public Builder setStatus(FinancialAccountListParams.Status status) {
-      this.status = status;
+    /** <strong>Required.</strong> PaymentIntent ID. */
+    public Builder setPaymentIntent(String paymentIntent) {
+      this.paymentIntent = paymentIntent;
       return this;
     }
   }
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class Created {
+  public static class ConfirmConfig {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -195,28 +141,17 @@ public class FinancialAccountListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
+    /**
+     * The URL to redirect your customer back to after they authenticate or cancel their payment on
+     * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
+     * can alternatively supply an application URI scheme.
+     */
+    @SerializedName("return_url")
+    String returnUrl;
 
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
-
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+    private ConfirmConfig(Map<String, Object> extraParams, String returnUrl) {
       this.extraParams = extraParams;
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
+      this.returnUrl = returnUrl;
     }
 
     public static Builder builder() {
@@ -226,24 +161,17 @@ public class FinancialAccountListParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private Long gt;
-
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
+      private String returnUrl;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public FinancialAccountListParams.Created build() {
-        return new FinancialAccountListParams.Created(
-            this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      public ReaderConfirmPaymentIntentParams.ConfirmConfig build() {
+        return new ReaderConfirmPaymentIntentParams.ConfirmConfig(this.extraParams, this.returnUrl);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * FinancialAccountListParams.Created#extraParams} for the field documentation.
+       * ReaderConfirmPaymentIntentParams.ConfirmConfig#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -256,7 +184,8 @@ public class FinancialAccountListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link FinancialAccountListParams.Created#extraParams} for the field documentation.
+       * See {@link ReaderConfirmPaymentIntentParams.ConfirmConfig#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -266,44 +195,15 @@ public class FinancialAccountListParams extends ApiRequestParams {
         return this;
       }
 
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
+      /**
+       * The URL to redirect your customer back to after they authenticate or cancel their payment
+       * on the payment method's app or site. If you'd prefer to redirect to a mobile application,
+       * you can alternatively supply an application URI scheme.
+       */
+      public Builder setReturnUrl(String returnUrl) {
+        this.returnUrl = returnUrl;
         return this;
       }
-
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
-
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
-        return this;
-      }
-    }
-  }
-
-  public enum Status implements ApiRequestParams.EnumParam {
-    @SerializedName("closed")
-    CLOSED("closed"),
-
-    @SerializedName("open")
-    OPEN("open");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Status(String value) {
-      this.value = value;
     }
   }
 }

@@ -1002,6 +1002,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String cashappPayments;
 
     /**
+     * The status of the Crypto capability of the account, or whether the account can directly
+     * process Crypto payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("crypto_payments")
+    String cryptoPayments;
+
+    /**
      * The status of the EPS payments capability of the account, or whether the account can directly
      * process EPS charges.
      *
@@ -2710,11 +2719,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         Long monthlyAnchor;
 
         /**
+         * The days of the month funds will be paid out. Only shown if {@code interval} is monthly.
+         * Payouts scheduled between the 29th and 31st of the month are sent on the last day of
+         * shorter months.
+         */
+        @SerializedName("monthly_payout_days")
+        List<Long> monthlyPayoutDays;
+
+        /**
          * The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only
          * shown if {@code interval} is weekly.
          */
         @SerializedName("weekly_anchor")
         String weeklyAnchor;
+
+        /**
+         * The days of the week when available funds are paid out, specified as an array, for
+         * example, [{@code monday}, {@code tuesday}]. Only shown if {@code interval} is weekly.
+         */
+        @SerializedName("weekly_payout_days")
+        List<String> weeklyPayoutDays;
       }
     }
 

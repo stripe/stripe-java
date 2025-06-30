@@ -14,6 +14,8 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.terminal.ReaderCancelActionParams;
 import com.stripe.param.terminal.ReaderCollectInputsParams;
+import com.stripe.param.terminal.ReaderCollectPaymentMethodParams;
+import com.stripe.param.terminal.ReaderConfirmPaymentIntentParams;
 import com.stripe.param.terminal.ReaderCreateParams;
 import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderProcessPaymentIntentParams;
@@ -180,6 +182,54 @@ public final class ReaderService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/terminal/readers/%s/collect_inputs", ApiResource.urlEncodeId(reader));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Reader.class);
+  }
+  /**
+   * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
+   * manual confirmation.
+   */
+  public Reader collectPaymentMethod(String reader, ReaderCollectPaymentMethodParams params)
+      throws StripeException {
+    return collectPaymentMethod(reader, params, (RequestOptions) null);
+  }
+  /**
+   * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
+   * manual confirmation.
+   */
+  public Reader collectPaymentMethod(
+      String reader, ReaderCollectPaymentMethodParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/collect_payment_method", ApiResource.urlEncodeId(reader));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Reader.class);
+  }
+  /** Finalizes a payment on a Reader. */
+  public Reader confirmPaymentIntent(String reader, ReaderConfirmPaymentIntentParams params)
+      throws StripeException {
+    return confirmPaymentIntent(reader, params, (RequestOptions) null);
+  }
+  /** Finalizes a payment on a Reader. */
+  public Reader confirmPaymentIntent(
+      String reader, ReaderConfirmPaymentIntentParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/terminal/readers/%s/confirm_payment_intent", ApiResource.urlEncodeId(reader));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,
