@@ -1,5 +1,14 @@
 # Changelog
 
+## 29.3.0-beta.3 - 2025-06-26
+No changes in this release
+
+## 29.3.0-beta.2 - 2025-06-26
+* [#2021](https://github.com/stripe/stripe-java/pull/2021) Pull in OffSessionPayment changes for the May release
+    * Remove support for attempts on V2.Payments.OffSessionPayment
+    * Change V2.Payments.OffSessionPaymentCreateParams.transfer_data.amount to be optional
+* [#2006](https://github.com/stripe/stripe-java/pull/2006) Set OPENAPI_VERSION (beta)
+
 ## 29.3.0-beta.1 - 2025-05-29
 This release changes the pinned API version to 2025-05-28.preview.
 
