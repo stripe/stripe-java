@@ -988,10 +988,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionUpdateConfirm {
-      /**
-       * The coupon or promotion code to apply to this subscription update. Currently, only up to
-       * one may be specified.
-       */
+      /** The coupon or promotion code to apply to this subscription update. */
       @SerializedName("discounts")
       List<SessionCreateParams.FlowData.SubscriptionUpdateConfirm.Discount> discounts;
 

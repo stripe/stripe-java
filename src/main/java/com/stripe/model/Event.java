@@ -56,8 +56,9 @@ public class Event extends ApiResource implements HasId {
   String account;
 
   /**
-   * The Stripe API version used to render {@code data}. This property is populated only for events
-   * on or after October 31, 2014.
+   * The Stripe API version used to render {@code data} when the event was created. The contents of
+   * {@code data} never change, so this value remains static regardless of the API version currently
+   * in use. This property is populated only for events created on or after October 31, 2014.
    */
   @SerializedName("api_version")
   String apiVersion;
@@ -191,13 +192,13 @@ public class Event extends ApiResource implements HasId {
    * subscription_schedule.expiring}, {@code subscription_schedule.released}, {@code
    * subscription_schedule.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
    * tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
-   * terminal.reader.action_succeeded}, {@code test_helpers.test_clock.advancing}, {@code
-   * test_helpers.test_clock.created}, {@code test_helpers.test_clock.deleted}, {@code
-   * test_helpers.test_clock.internal_failure}, {@code test_helpers.test_clock.ready}, {@code
-   * topup.canceled}, {@code topup.created}, {@code topup.failed}, {@code topup.reversed}, {@code
-   * topup.succeeded}, {@code transfer.created}, {@code transfer.reversed}, {@code
-   * transfer.updated}, {@code treasury.credit_reversal.created}, {@code
-   * treasury.credit_reversal.posted}, {@code treasury.debit_reversal.completed}, {@code
+   * terminal.reader.action_succeeded}, {@code terminal.reader.action_updated}, {@code
+   * test_helpers.test_clock.advancing}, {@code test_helpers.test_clock.created}, {@code
+   * test_helpers.test_clock.deleted}, {@code test_helpers.test_clock.internal_failure}, {@code
+   * test_helpers.test_clock.ready}, {@code topup.canceled}, {@code topup.created}, {@code
+   * topup.failed}, {@code topup.reversed}, {@code topup.succeeded}, {@code transfer.created},
+   * {@code transfer.reversed}, {@code transfer.updated}, {@code treasury.credit_reversal.created},
+   * {@code treasury.credit_reversal.posted}, {@code treasury.debit_reversal.completed}, {@code
    * treasury.debit_reversal.created}, {@code treasury.debit_reversal.initial_credit_granted},
    * {@code treasury.financial_account.closed}, {@code treasury.financial_account.created}, {@code
    * treasury.financial_account.features_status_updated}, {@code

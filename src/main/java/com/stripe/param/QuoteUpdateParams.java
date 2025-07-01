@@ -1851,10 +1851,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
     /**
      * When creating a new subscription, the date of which the subscription schedule will start
-     * after the quote is accepted. When updating a subscription, the date of which the subscription
-     * will be updated using a subscription schedule. The special value {@code current_period_end}
-     * can be provided to update a subscription at the end of its current period. The {@code
-     * effective_date} is ignored if it is in the past when the quote is accepted.
+     * after the quote is accepted. The {@code effective_date} is ignored if it is in the past when
+     * the quote is accepted.
      */
     @SerializedName("effective_date")
     Object effectiveDate;
@@ -1947,11 +1945,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * When creating a new subscription, the date of which the subscription schedule will start
-       * after the quote is accepted. When updating a subscription, the date of which the
-       * subscription will be updated using a subscription schedule. The special value {@code
-       * current_period_end} can be provided to update a subscription at the end of its current
-       * period. The {@code effective_date} is ignored if it is in the past when the quote is
-       * accepted.
+       * after the quote is accepted. The {@code effective_date} is ignored if it is in the past
+       * when the quote is accepted.
        */
       public Builder setEffectiveDate(
           QuoteUpdateParams.SubscriptionData.EffectiveDate effectiveDate) {
@@ -1961,11 +1956,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * When creating a new subscription, the date of which the subscription schedule will start
-       * after the quote is accepted. When updating a subscription, the date of which the
-       * subscription will be updated using a subscription schedule. The special value {@code
-       * current_period_end} can be provided to update a subscription at the end of its current
-       * period. The {@code effective_date} is ignored if it is in the past when the quote is
-       * accepted.
+       * after the quote is accepted. The {@code effective_date} is ignored if it is in the past
+       * when the quote is accepted.
        */
       public Builder setEffectiveDate(Long effectiveDate) {
         this.effectiveDate = effectiveDate;
@@ -1974,11 +1966,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * When creating a new subscription, the date of which the subscription schedule will start
-       * after the quote is accepted. When updating a subscription, the date of which the
-       * subscription will be updated using a subscription schedule. The special value {@code
-       * current_period_end} can be provided to update a subscription at the end of its current
-       * period. The {@code effective_date} is ignored if it is in the past when the quote is
-       * accepted.
+       * after the quote is accepted. The {@code effective_date} is ignored if it is in the past
+       * when the quote is accepted.
        */
       public Builder setEffectiveDate(EmptyParam effectiveDate) {
         this.effectiveDate = effectiveDate;

@@ -2931,6 +2931,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class ScheduleDetails {
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
+
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
      * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
@@ -2965,10 +2969,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     ProrationBehavior prorationBehavior;
 
     private ScheduleDetails(
+        BillingMode billingMode,
         EndBehavior endBehavior,
         Map<String, Object> extraParams,
         List<InvoiceCreatePreviewParams.ScheduleDetails.Phase> phases,
         ProrationBehavior prorationBehavior) {
+      this.billingMode = billingMode;
       this.endBehavior = endBehavior;
       this.extraParams = extraParams;
       this.phases = phases;
@@ -2980,6 +2986,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BillingMode billingMode;
+
       private EndBehavior endBehavior;
 
       private Map<String, Object> extraParams;
@@ -2991,7 +2999,18 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceCreatePreviewParams.ScheduleDetails build() {
         return new InvoiceCreatePreviewParams.ScheduleDetails(
-            this.endBehavior, this.extraParams, this.phases, this.prorationBehavior);
+            this.billingMode,
+            this.endBehavior,
+            this.extraParams,
+            this.phases,
+            this.prorationBehavior);
+      }
+
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+      public Builder setBillingMode(
+          InvoiceCreatePreviewParams.ScheduleDetails.BillingMode billingMode) {
+        this.billingMode = billingMode;
+        return this;
       }
 
       /**
@@ -3067,6 +3086,93 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           InvoiceCreatePreviewParams.ScheduleDetails.ProrationBehavior prorationBehavior) {
         this.prorationBehavior = prorationBehavior;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingMode {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> */
+      @SerializedName("type")
+      Type type;
+
+      private BillingMode(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.ScheduleDetails.BillingMode build() {
+          return new InvoiceCreatePreviewParams.ScheduleDetails.BillingMode(
+              this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.BillingMode#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.BillingMode#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> */
+        public Builder setType(InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("classic")
+        CLASSIC("classic"),
+
+        @SerializedName("flexible")
+        FLEXIBLE("flexible");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 
@@ -6164,6 +6270,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     Object billingCycleAnchor;
 
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+    @SerializedName("billing_mode")
+    BillingMode billingMode;
+
     /**
      * A timestamp at which the subscription should cancel. If set to a date before the current
      * period ends, this will cause a proration if prorations have been enabled using {@code
@@ -6175,8 +6285,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-     * version. Please use {@code cancel_at} instead.
+     * current_period_end}). Defaults to {@code false}.
      */
     @SerializedName("cancel_at_period_end")
     Boolean cancelAtPeriodEnd;
@@ -6249,6 +6358,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     private SubscriptionDetails(
         Object billingCycleAnchor,
+        BillingMode billingMode,
         Object cancelAt,
         Boolean cancelAtPeriodEnd,
         Boolean cancelNow,
@@ -6261,6 +6371,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Long startDate,
         Object trialEnd) {
       this.billingCycleAnchor = billingCycleAnchor;
+      this.billingMode = billingMode;
       this.cancelAt = cancelAt;
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
       this.cancelNow = cancelNow;
@@ -6280,6 +6391,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     public static class Builder {
       private Object billingCycleAnchor;
+
+      private BillingMode billingMode;
 
       private Object cancelAt;
 
@@ -6307,6 +6420,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public InvoiceCreatePreviewParams.SubscriptionDetails build() {
         return new InvoiceCreatePreviewParams.SubscriptionDetails(
             this.billingCycleAnchor,
+            this.billingMode,
             this.cancelAt,
             this.cancelAtPeriodEnd,
             this.cancelNow,
@@ -6345,6 +6459,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
+      /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+      public Builder setBillingMode(
+          InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode billingMode) {
+        this.billingMode = billingMode;
+        return this;
+      }
+
       /**
        * A timestamp at which the subscription should cancel. If set to a date before the current
        * period ends, this will cause a proration if prorations have been enabled using {@code
@@ -6369,8 +6490,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * Indicate whether this subscription should cancel at the end of the current period ({@code
-       * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-       * version. Please use {@code cancel_at} instead.
+       * current_period_end}). Defaults to {@code false}.
        */
       public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
         this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -6547,6 +6667,94 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingMode {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> */
+      @SerializedName("type")
+      Type type;
+
+      private BillingMode(Map<String, Object> extraParams, Type type) {
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode build() {
+          return new InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode(
+              this.extraParams, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> */
+        public Builder setType(
+            InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("classic")
+        CLASSIC("classic"),
+
+        @SerializedName("flexible")
+        FLEXIBLE("flexible");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 

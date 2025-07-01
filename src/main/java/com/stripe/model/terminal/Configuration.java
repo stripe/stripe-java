@@ -23,7 +23,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A Configurations object represents how features should be configured for terminal readers. */
+/**
+ * A Configurations object represents how features should be configured for terminal readers. For
+ * information about how to use it, see the <a
+ * href="https://docs.stripe.com/terminal/fleet/configurations-overview">Terminal configurations
+ * documentation</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

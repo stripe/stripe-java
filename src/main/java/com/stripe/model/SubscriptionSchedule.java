@@ -43,6 +43,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
 
+  /** The billing mode of the subscription. */
+  @SerializedName("billing_mode")
+  BillingMode billingMode;
+
   /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
    */
@@ -553,6 +557,24 @@ public class SubscriptionSchedule extends ApiResource
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, SubscriptionSchedule.class);
+  }
+
+  /** The billing mode of the subscription. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingMode extends StripeObject {
+    /**
+     * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+     *
+     * <p>One of {@code classic}, or {@code flexible}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Details on when the current billing_mode was adopted. */
+    @SerializedName("updated_at")
+    Long updatedAt;
   }
 
   /**
@@ -1788,6 +1810,7 @@ public class SubscriptionSchedule extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(billingMode, responseGetter);
     trySetResponseGetter(currentPhase, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);
