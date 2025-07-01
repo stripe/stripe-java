@@ -16750,12 +16750,12 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setFrom(
                 com.stripe.param.v2.moneymanagement.InboundTransferCreateParams.From.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setPaymentMethod("payment_method")
                     .build())
             .setTo(
                 com.stripe.param.v2.moneymanagement.InboundTransferCreateParams.To.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setFinancialAccount("financial_account")
                     .build())
             .build();
@@ -16803,7 +16803,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"undefined\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"to_currency\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
+        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"undefined\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams params =
@@ -16811,12 +16811,12 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.From.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setFinancialAccount("financial_account")
                     .build())
             .setTo(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.To.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setPayoutMethod("payout_method")
                     .setRecipient("recipient")
                     .build())
@@ -16842,7 +16842,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"undefined\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"to_currency\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
+        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"undefined\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundPaymentQuote outboundPaymentQuote =
@@ -16901,12 +16901,12 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.From.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setFinancialAccount("financial_account")
                     .build())
             .setTo(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.To.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setPayoutMethod("payout_method")
                     .setRecipient("recipient")
                     .build())
@@ -17140,12 +17140,12 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.From.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setFinancialAccount("financial_account")
                     .build())
             .setTo(
                 com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.To.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setPayoutMethod("payout_method")
                     .build())
             .build();
@@ -17897,7 +17897,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.From.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setFinancialAccount("financial_account")
                     .build())
             .setTo(
@@ -17968,7 +17968,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setAmount(new com.stripe.v2.Amount(96, "USD"))
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.From.builder()
-                    .setCurrency("currency")
+                    .setCurrency("usd")
                     .setFinancialAccount("financial_account")
                     .build())
             .setTo(
