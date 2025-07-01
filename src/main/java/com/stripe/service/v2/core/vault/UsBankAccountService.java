@@ -22,27 +22,6 @@ public final class UsBankAccountService extends ApiService {
     super(responseGetter);
   }
 
-  /**
-   * Archive a USBankAccount object. USBankAccount objects will not be automatically archived by
-   * Stripe. Archived USBankAccount objects cannot be used as outbound destinations and will not
-   * appear in the outbound destination list.
-   */
-  public UsBankAccount archive(String id) throws StripeException, ControlledByDashboardException {
-    return archive(id, (RequestOptions) null);
-  }
-  /**
-   * Archive a USBankAccount object. USBankAccount objects will not be automatically archived by
-   * Stripe. Archived USBankAccount objects cannot be used as outbound destinations and will not
-   * appear in the outbound destination list.
-   */
-  public UsBankAccount archive(String id, RequestOptions options)
-      throws StripeException, ControlledByDashboardException {
-    String path =
-        String.format("/v2/core/vault/us_bank_accounts/%s/archive", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, UsBankAccount.class);
-  }
   /** Create a USBankAccount object. */
   public UsBankAccount create(UsBankAccountCreateParams params)
       throws StripeException, BlockedByStripeException, InvalidPaymentMethodException,
@@ -116,6 +95,27 @@ public final class UsBankAccountService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
+    return this.request(request, UsBankAccount.class);
+  }
+  /**
+   * Archive a USBankAccount object. USBankAccount objects will not be automatically archived by
+   * Stripe. Archived USBankAccount objects cannot be used as outbound destinations and will not
+   * appear in the outbound destination list.
+   */
+  public UsBankAccount archive(String id) throws StripeException, ControlledByDashboardException {
+    return archive(id, (RequestOptions) null);
+  }
+  /**
+   * Archive a USBankAccount object. USBankAccount objects will not be automatically archived by
+   * Stripe. Archived USBankAccount objects cannot be used as outbound destinations and will not
+   * appear in the outbound destination list.
+   */
+  public UsBankAccount archive(String id, RequestOptions options)
+      throws StripeException, ControlledByDashboardException {
+    String path =
+        String.format("/v2/core/vault/us_bank_accounts/%s/archive", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, UsBankAccount.class);
   }
 }

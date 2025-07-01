@@ -42,19 +42,25 @@ public class FinancialAccountListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /** Only return FinancialAccounts that have the given status: {@code open} or {@code closed}. */
+  @SerializedName("status")
+  Status status;
+
   private FinancialAccountListParams(
       Object created,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String startingAfter) {
+      String startingAfter,
+      Status status) {
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -74,6 +80,8 @@ public class FinancialAccountListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private Status status;
+
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountListParams build() {
       return new FinancialAccountListParams(
@@ -82,7 +90,8 @@ public class FinancialAccountListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
-          this.startingAfter);
+          this.startingAfter,
+          this.status);
     }
 
     /** Only return FinancialAccounts that were created during the given date interval. */
@@ -164,6 +173,12 @@ public class FinancialAccountListParams extends ApiRequestParams {
     /** An object ID cursor for use in pagination. */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
+      return this;
+    }
+
+    /** Only return FinancialAccounts that have the given status: {@code open} or {@code closed}. */
+    public Builder setStatus(FinancialAccountListParams.Status status) {
+      this.status = status;
       return this;
     }
   }
@@ -274,6 +289,21 @@ public class FinancialAccountListParams extends ApiRequestParams {
         this.lte = lte;
         return this;
       }
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("closed")
+    CLOSED("closed"),
+
+    @SerializedName("open")
+    OPEN("open");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 }

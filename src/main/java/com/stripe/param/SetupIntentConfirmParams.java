@@ -735,6 +735,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Cashapp cashapp;
 
     /**
+     * If this is a Crypto PaymentMethod, this hash contains details about the Crypto payment
+     * method.
+     */
+    @SerializedName("crypto")
+    Crypto crypto;
+
+    /**
      * If this is a {@code customer_balance} PaymentMethod, this hash contains details about the
      * CustomerBalance payment method.
      */
@@ -1072,6 +1079,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Blik blik,
         Boleto boleto,
         Cashapp cashapp,
+        Crypto crypto,
         CustomerBalance customerBalance,
         Eps eps,
         Map<String, Object> extraParams,
@@ -1133,6 +1141,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.blik = blik;
       this.boleto = boleto;
       this.cashapp = cashapp;
+      this.crypto = crypto;
       this.customerBalance = customerBalance;
       this.eps = eps;
       this.extraParams = extraParams;
@@ -1215,6 +1224,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       private Boleto boleto;
 
       private Cashapp cashapp;
+
+      private Crypto crypto;
 
       private CustomerBalance customerBalance;
 
@@ -1326,6 +1337,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.blik,
             this.boleto,
             this.cashapp,
+            this.crypto,
             this.customerBalance,
             this.eps,
             this.extraParams,
@@ -1512,6 +1524,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
        */
       public Builder setCashapp(SetupIntentConfirmParams.PaymentMethodData.Cashapp cashapp) {
         this.cashapp = cashapp;
+        return this;
+      }
+
+      /**
+       * If this is a Crypto PaymentMethod, this hash contains details about the Crypto payment
+       * method.
+       */
+      public Builder setCrypto(SetupIntentConfirmParams.PaymentMethodData.Crypto crypto) {
+        this.crypto = crypto;
         return this;
       }
 
@@ -3168,6 +3189,64 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Crypto {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Crypto(Map<String, Object> extraParams) {
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodData.Crypto build() {
+          return new SetupIntentConfirmParams.PaymentMethodData.Crypto(this.extraParams);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Crypto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodData.Crypto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class CustomerBalance {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3920,6 +3999,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         @SerializedName("bunq")
         BUNQ("bunq"),
+
+        @SerializedName("buut")
+        BUUT("buut"),
 
         @SerializedName("handelsbanken")
         HANDELSBANKEN("handelsbanken"),
@@ -6804,6 +6886,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
 
+      @SerializedName("crypto")
+      CRYPTO("crypto"),
+
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),
 
@@ -6981,6 +7066,13 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
+     * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
+     * payment method options.
+     */
+    @SerializedName("klarna")
+    Klarna klarna;
+
+    /**
      * If this is a {@code link} PaymentMethod, this sub-hash contains details about the Link
      * payment method options.
      */
@@ -7022,6 +7114,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         Card card,
         CardPresent cardPresent,
         Map<String, Object> extraParams,
+        Klarna klarna,
         Link link,
         Paypal paypal,
         Payto payto,
@@ -7033,6 +7126,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       this.card = card;
       this.cardPresent = cardPresent;
       this.extraParams = extraParams;
+      this.klarna = klarna;
       this.link = link;
       this.paypal = paypal;
       this.payto = payto;
@@ -7057,6 +7151,8 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Klarna klarna;
+
       private Link link;
 
       private Paypal paypal;
@@ -7076,6 +7172,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
             this.card,
             this.cardPresent,
             this.extraParams,
+            this.klarna,
             this.link,
             this.paypal,
             this.payto,
@@ -7153,6 +7250,15 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * If this is a {@code klarna} PaymentMethod, this hash contains details about the Klarna
+       * payment method options.
+       */
+      public Builder setKlarna(SetupIntentConfirmParams.PaymentMethodOptions.Klarna klarna) {
+        this.klarna = klarna;
         return this;
       }
 
@@ -8999,6 +9105,772 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Klarna {
+      /** The currency of the SetupIntent. Three letter ISO currency code. */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** On-demand details if setting up a payment method for on-demand payments. */
+      @SerializedName("on_demand")
+      OnDemand onDemand;
+
+      /** Preferred language of the Klarna authorization page that the customer is redirected to. */
+      @SerializedName("preferred_locale")
+      PreferredLocale preferredLocale;
+
+      /** Subscription details if setting up or charging a subscription. */
+      @SerializedName("subscriptions")
+      Object subscriptions;
+
+      private Klarna(
+          String currency,
+          Map<String, Object> extraParams,
+          OnDemand onDemand,
+          PreferredLocale preferredLocale,
+          Object subscriptions) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.onDemand = onDemand;
+        this.preferredLocale = preferredLocale;
+        this.subscriptions = subscriptions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String currency;
+
+        private Map<String, Object> extraParams;
+
+        private OnDemand onDemand;
+
+        private PreferredLocale preferredLocale;
+
+        private Object subscriptions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentConfirmParams.PaymentMethodOptions.Klarna build() {
+          return new SetupIntentConfirmParams.PaymentMethodOptions.Klarna(
+              this.currency,
+              this.extraParams,
+              this.onDemand,
+              this.preferredLocale,
+              this.subscriptions);
+        }
+
+        /** The currency of the SetupIntent. Three letter ISO currency code. */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.Klarna#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentConfirmParams.PaymentMethodOptions.Klarna#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** On-demand details if setting up a payment method for on-demand payments. */
+        public Builder setOnDemand(
+            SetupIntentConfirmParams.PaymentMethodOptions.Klarna.OnDemand onDemand) {
+          this.onDemand = onDemand;
+          return this;
+        }
+
+        /**
+         * Preferred language of the Klarna authorization page that the customer is redirected to.
+         */
+        public Builder setPreferredLocale(
+            SetupIntentConfirmParams.PaymentMethodOptions.Klarna.PreferredLocale preferredLocale) {
+          this.preferredLocale = preferredLocale;
+          return this;
+        }
+
+        /**
+         * Add an element to `subscriptions` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SetupIntentConfirmParams.PaymentMethodOptions.Klarna#subscriptions} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addSubscription(
+            SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription element) {
+          if (this.subscriptions == null || this.subscriptions instanceof EmptyParam) {
+            this.subscriptions =
+                new ArrayList<SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription>();
+          }
+          ((List<SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription>)
+                  this.subscriptions)
+              .add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `subscriptions` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link SetupIntentConfirmParams.PaymentMethodOptions.Klarna#subscriptions} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder addAllSubscription(
+            List<SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription> elements) {
+          if (this.subscriptions == null || this.subscriptions instanceof EmptyParam) {
+            this.subscriptions =
+                new ArrayList<SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription>();
+          }
+          ((List<SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription>)
+                  this.subscriptions)
+              .addAll(elements);
+          return this;
+        }
+
+        /** Subscription details if setting up or charging a subscription. */
+        public Builder setSubscriptions(EmptyParam subscriptions) {
+          this.subscriptions = subscriptions;
+          return this;
+        }
+
+        /** Subscription details if setting up or charging a subscription. */
+        public Builder setSubscriptions(
+            List<SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription> subscriptions) {
+          this.subscriptions = subscriptions;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class OnDemand {
+        /**
+         * Your average amount value. You can use a value across your customer base, or segment
+         * based on customer type, country, etc.
+         */
+        @SerializedName("average_amount")
+        Long averageAmount;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The maximum value you may charge a customer per purchase. You can use a value across your
+         * customer base, or segment based on customer type, country, etc.
+         */
+        @SerializedName("maximum_amount")
+        Long maximumAmount;
+
+        /**
+         * The lowest or minimum value you may charge a customer per purchase. You can use a value
+         * across your customer base, or segment based on customer type, country, etc.
+         */
+        @SerializedName("minimum_amount")
+        Long minimumAmount;
+
+        /** Interval at which the customer is making purchases. */
+        @SerializedName("purchase_interval")
+        PurchaseInterval purchaseInterval;
+
+        /** The number of {@code purchase_interval} between charges. */
+        @SerializedName("purchase_interval_count")
+        Long purchaseIntervalCount;
+
+        private OnDemand(
+            Long averageAmount,
+            Map<String, Object> extraParams,
+            Long maximumAmount,
+            Long minimumAmount,
+            PurchaseInterval purchaseInterval,
+            Long purchaseIntervalCount) {
+          this.averageAmount = averageAmount;
+          this.extraParams = extraParams;
+          this.maximumAmount = maximumAmount;
+          this.minimumAmount = minimumAmount;
+          this.purchaseInterval = purchaseInterval;
+          this.purchaseIntervalCount = purchaseIntervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long averageAmount;
+
+          private Map<String, Object> extraParams;
+
+          private Long maximumAmount;
+
+          private Long minimumAmount;
+
+          private PurchaseInterval purchaseInterval;
+
+          private Long purchaseIntervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentConfirmParams.PaymentMethodOptions.Klarna.OnDemand build() {
+            return new SetupIntentConfirmParams.PaymentMethodOptions.Klarna.OnDemand(
+                this.averageAmount,
+                this.extraParams,
+                this.maximumAmount,
+                this.minimumAmount,
+                this.purchaseInterval,
+                this.purchaseIntervalCount);
+          }
+
+          /**
+           * Your average amount value. You can use a value across your customer base, or segment
+           * based on customer type, country, etc.
+           */
+          public Builder setAverageAmount(Long averageAmount) {
+            this.averageAmount = averageAmount;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.Klarna.OnDemand#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.Klarna.OnDemand#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The maximum value you may charge a customer per purchase. You can use a value across
+           * your customer base, or segment based on customer type, country, etc.
+           */
+          public Builder setMaximumAmount(Long maximumAmount) {
+            this.maximumAmount = maximumAmount;
+            return this;
+          }
+
+          /**
+           * The lowest or minimum value you may charge a customer per purchase. You can use a value
+           * across your customer base, or segment based on customer type, country, etc.
+           */
+          public Builder setMinimumAmount(Long minimumAmount) {
+            this.minimumAmount = minimumAmount;
+            return this;
+          }
+
+          /** Interval at which the customer is making purchases. */
+          public Builder setPurchaseInterval(
+              SetupIntentConfirmParams.PaymentMethodOptions.Klarna.OnDemand.PurchaseInterval
+                  purchaseInterval) {
+            this.purchaseInterval = purchaseInterval;
+            return this;
+          }
+
+          /** The number of {@code purchase_interval} between charges. */
+          public Builder setPurchaseIntervalCount(Long purchaseIntervalCount) {
+            this.purchaseIntervalCount = purchaseIntervalCount;
+            return this;
+          }
+        }
+
+        public enum PurchaseInterval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PurchaseInterval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Subscription {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> Unit of time between subscription charges. */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals (specified in the {@code interval} attribute) between
+         * subscription charges. For example, {@code interval=month} and {@code interval_count=3}
+         * charges every 3 months.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        /** Name for subscription. */
+        @SerializedName("name")
+        String name;
+
+        /** <strong>Required.</strong> Describes the upcoming charge for this subscription. */
+        @SerializedName("next_billing")
+        NextBilling nextBilling;
+
+        /**
+         * <strong>Required.</strong> A non-customer-facing reference to correlate subscription
+         * charges in the Klarna app. Use a value that persists across subscription charges.
+         */
+        @SerializedName("reference")
+        String reference;
+
+        private Subscription(
+            Map<String, Object> extraParams,
+            Interval interval,
+            Long intervalCount,
+            String name,
+            NextBilling nextBilling,
+            String reference) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+          this.name = name;
+          this.nextBilling = nextBilling;
+          this.reference = reference;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          private String name;
+
+          private NextBilling nextBilling;
+
+          private String reference;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription build() {
+            return new SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription(
+                this.extraParams,
+                this.interval,
+                this.intervalCount,
+                this.name,
+                this.nextBilling,
+                this.reference);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> Unit of time between subscription charges. */
+          public Builder setInterval(
+              SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription.Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals (specified in the {@code interval} attribute) between
+           * subscription charges. For example, {@code interval=month} and {@code interval_count=3}
+           * charges every 3 months.
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+
+          /** Name for subscription. */
+          public Builder setName(String name) {
+            this.name = name;
+            return this;
+          }
+
+          /** <strong>Required.</strong> Describes the upcoming charge for this subscription. */
+          public Builder setNextBilling(
+              SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription.NextBilling
+                  nextBilling) {
+            this.nextBilling = nextBilling;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A non-customer-facing reference to correlate subscription
+           * charges in the Klarna app. Use a value that persists across subscription charges.
+           */
+          public Builder setReference(String reference) {
+            this.reference = reference;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class NextBilling {
+          /** <strong>Required.</strong> The amount of the next charge for the subscription. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * <strong>Required.</strong> The date of the next charge for the subscription in
+           * YYYY-MM-DD format.
+           */
+          @SerializedName("date")
+          String date;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private NextBilling(Long amount, String date, Map<String, Object> extraParams) {
+            this.amount = amount;
+            this.date = date;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private String date;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription.NextBilling
+                build() {
+              return new SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription
+                  .NextBilling(this.amount, this.date, this.extraParams);
+            }
+
+            /** <strong>Required.</strong> The amount of the next charge for the subscription. */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The date of the next charge for the subscription in
+             * YYYY-MM-DD format.
+             */
+            public Builder setDate(String date) {
+              this.date = date;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription.NextBilling#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SetupIntentConfirmParams.PaymentMethodOptions.Klarna.Subscription.NextBilling#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum PreferredLocale implements ApiRequestParams.EnumParam {
+        @SerializedName("cs-CZ")
+        CS_CZ("cs-CZ"),
+
+        @SerializedName("da-DK")
+        DA_DK("da-DK"),
+
+        @SerializedName("de-AT")
+        DE_AT("de-AT"),
+
+        @SerializedName("de-CH")
+        DE_CH("de-CH"),
+
+        @SerializedName("de-DE")
+        DE_DE("de-DE"),
+
+        @SerializedName("el-GR")
+        EL_GR("el-GR"),
+
+        @SerializedName("en-AT")
+        EN_AT("en-AT"),
+
+        @SerializedName("en-AU")
+        EN_AU("en-AU"),
+
+        @SerializedName("en-BE")
+        EN_BE("en-BE"),
+
+        @SerializedName("en-CA")
+        EN_CA("en-CA"),
+
+        @SerializedName("en-CH")
+        EN_CH("en-CH"),
+
+        @SerializedName("en-CZ")
+        EN_CZ("en-CZ"),
+
+        @SerializedName("en-DE")
+        EN_DE("en-DE"),
+
+        @SerializedName("en-DK")
+        EN_DK("en-DK"),
+
+        @SerializedName("en-ES")
+        EN_ES("en-ES"),
+
+        @SerializedName("en-FI")
+        EN_FI("en-FI"),
+
+        @SerializedName("en-FR")
+        EN_FR("en-FR"),
+
+        @SerializedName("en-GB")
+        EN_GB("en-GB"),
+
+        @SerializedName("en-GR")
+        EN_GR("en-GR"),
+
+        @SerializedName("en-IE")
+        EN_IE("en-IE"),
+
+        @SerializedName("en-IT")
+        EN_IT("en-IT"),
+
+        @SerializedName("en-NL")
+        EN_NL("en-NL"),
+
+        @SerializedName("en-NO")
+        EN_NO("en-NO"),
+
+        @SerializedName("en-NZ")
+        EN_NZ("en-NZ"),
+
+        @SerializedName("en-PL")
+        EN_PL("en-PL"),
+
+        @SerializedName("en-PT")
+        EN_PT("en-PT"),
+
+        @SerializedName("en-RO")
+        EN_RO("en-RO"),
+
+        @SerializedName("en-SE")
+        EN_SE("en-SE"),
+
+        @SerializedName("en-US")
+        EN_US("en-US"),
+
+        @SerializedName("es-ES")
+        ES_ES("es-ES"),
+
+        @SerializedName("es-US")
+        ES_US("es-US"),
+
+        @SerializedName("fi-FI")
+        FI_FI("fi-FI"),
+
+        @SerializedName("fr-BE")
+        FR_BE("fr-BE"),
+
+        @SerializedName("fr-CA")
+        FR_CA("fr-CA"),
+
+        @SerializedName("fr-CH")
+        FR_CH("fr-CH"),
+
+        @SerializedName("fr-FR")
+        FR_FR("fr-FR"),
+
+        @SerializedName("it-CH")
+        IT_CH("it-CH"),
+
+        @SerializedName("it-IT")
+        IT_IT("it-IT"),
+
+        @SerializedName("nb-NO")
+        NB_NO("nb-NO"),
+
+        @SerializedName("nl-BE")
+        NL_BE("nl-BE"),
+
+        @SerializedName("nl-NL")
+        NL_NL("nl-NL"),
+
+        @SerializedName("pl-PL")
+        PL_PL("pl-PL"),
+
+        @SerializedName("pt-PT")
+        PT_PT("pt-PT"),
+
+        @SerializedName("ro-RO")
+        RO_RO("ro-RO"),
+
+        @SerializedName("sv-FI")
+        SV_FI("sv-FI"),
+
+        @SerializedName("sv-SE")
+        SV_SE("sv-SE");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PreferredLocale(String value) {
+          this.value = value;
         }
       }
     }

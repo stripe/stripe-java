@@ -26,41 +26,6 @@ public final class OutboundPaymentService extends ApiService {
     super(responseGetter);
   }
 
-  /** Cancels an OutboundPayment. Only processing OutboundPayments can be canceled. */
-  public OutboundPayment cancel(String id)
-      throws StripeException, AlreadyCanceledException, NotCancelableException {
-    return cancel(id, (RequestOptions) null);
-  }
-  /** Cancels an OutboundPayment. Only processing OutboundPayments can be canceled. */
-  public OutboundPayment cancel(String id, RequestOptions options)
-      throws StripeException, AlreadyCanceledException, NotCancelableException {
-    String path =
-        String.format(
-            "/v2/money_management/outbound_payments/%s/cancel", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
-    return this.request(request, OutboundPayment.class);
-  }
-  /** Creates an OutboundPayment. */
-  public OutboundPayment create(OutboundPaymentCreateParams params)
-      throws StripeException, InsufficientFundsException, QuotaExceededException,
-          RecipientNotNotifiableException, FeatureNotEnabledException {
-    return create(params, (RequestOptions) null);
-  }
-  /** Creates an OutboundPayment. */
-  public OutboundPayment create(OutboundPaymentCreateParams params, RequestOptions options)
-      throws StripeException, InsufficientFundsException, QuotaExceededException,
-          RecipientNotNotifiableException, FeatureNotEnabledException {
-    String path = "/v2/money_management/outbound_payments";
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, OutboundPayment.class);
-  }
   /** Returns a list of OutboundPayments that match the provided filters. */
   public StripeCollection<OutboundPayment> list(OutboundPaymentListParams params)
       throws StripeException {
@@ -87,6 +52,26 @@ public final class OutboundPaymentService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<OutboundPayment>>() {}.getType());
   }
+  /** Creates an OutboundPayment. */
+  public OutboundPayment create(OutboundPaymentCreateParams params)
+      throws StripeException, InsufficientFundsException, QuotaExceededException,
+          RecipientNotNotifiableException, FeatureNotEnabledException {
+    return create(params, (RequestOptions) null);
+  }
+  /** Creates an OutboundPayment. */
+  public OutboundPayment create(OutboundPaymentCreateParams params, RequestOptions options)
+      throws StripeException, InsufficientFundsException, QuotaExceededException,
+          RecipientNotNotifiableException, FeatureNotEnabledException {
+    String path = "/v2/money_management/outbound_payments";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, OutboundPayment.class);
+  }
   /**
    * Retrieves the details of an existing OutboundPayment by passing the unique OutboundPayment ID
    * from either the OutboundPayment create or list response.
@@ -103,6 +88,21 @@ public final class OutboundPaymentService extends ApiService {
         String.format("/v2/money_management/outbound_payments/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, OutboundPayment.class);
+  }
+  /** Cancels an OutboundPayment. Only processing OutboundPayments can be canceled. */
+  public OutboundPayment cancel(String id)
+      throws StripeException, AlreadyCanceledException, NotCancelableException {
+    return cancel(id, (RequestOptions) null);
+  }
+  /** Cancels an OutboundPayment. Only processing OutboundPayments can be canceled. */
+  public OutboundPayment cancel(String id, RequestOptions options)
+      throws StripeException, AlreadyCanceledException, NotCancelableException {
+    String path =
+        String.format(
+            "/v2/money_management/outbound_payments/%s/cancel", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, OutboundPayment.class);
   }
 }

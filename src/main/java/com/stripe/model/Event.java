@@ -56,8 +56,9 @@ public class Event extends ApiResource implements HasId {
   String account;
 
   /**
-   * The Stripe API version used to render {@code data}. This property is populated only for events
-   * on or after October 31, 2014.
+   * The Stripe API version used to render {@code data} when the event was created. The contents of
+   * {@code data} never change, so this value remains static regardless of the API version currently
+   * in use. This property is populated only for events created on or after October 31, 2014.
    */
   @SerializedName("api_version")
   String apiVersion;

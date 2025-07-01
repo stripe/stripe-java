@@ -20,7 +20,7 @@ def getReleaseRepositoryUrl() {
 
 def getSnapshotRepositoryUrl() {
     return hasProperty("SNAPSHOT_REPOSITORY_URL") ? SNAPSHOT_REPOSITORY_URL
-            : "https://ossrh-staging-api.central.sonatype.com/content/repositories/snapshots/"
+            : "https://central.sonatype.com/repository/maven-snapshots/"
 }
 
 def getRepositoryUsername() {
@@ -37,6 +37,9 @@ nexusPublishing {
 
     repositories {
         sonatype {
+            // The default nexusUrl is the sunsetted endpoint "https://oss.sonatype.org/service/local/"
+            // This URL comes from https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/.
+            nexusUrl = uri("https://ossrh-staging-api.central.sonatype.com/service/local/")
             username = getRepositoryUsername()
             password = getRepositoryPassword()
         }

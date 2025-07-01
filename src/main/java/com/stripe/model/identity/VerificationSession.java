@@ -137,6 +137,9 @@ public class VerificationSession extends ApiResource
   @SerializedName("related_customer_account")
   String relatedCustomerAccount;
 
+  @SerializedName("related_person")
+  RelatedPerson relatedPerson;
+
   /**
    * Status of this VerificationSession. <a
    * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
@@ -721,6 +724,9 @@ public class VerificationSession extends ApiResource
     @SerializedName("id_number")
     IdNumber idNumber;
 
+    @SerializedName("matching")
+    Matching matching;
+
     @SerializedName("phone")
     Phone phone;
 
@@ -788,6 +794,31 @@ public class VerificationSession extends ApiResource
     public static class IdNumber extends StripeObject {}
 
     /**
+     * For more details about Matching, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Matching extends StripeObject {
+      /**
+       * Strictness of the DOB matching policy to apply.
+       *
+       * <p>One of {@code none}, or {@code similar}.
+       */
+      @SerializedName("dob")
+      String dob;
+
+      /**
+       * Strictness of the name matching policy to apply.
+       *
+       * <p>One of {@code none}, or {@code similar}.
+       */
+      @SerializedName("name")
+      String name;
+    }
+
+    /**
      * For more details about Phone, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -833,6 +864,23 @@ public class VerificationSession extends ApiResource
      */
     @SerializedName("status")
     String status;
+  }
+
+  /**
+   * For more details about RelatedPerson, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RelatedPerson extends StripeObject {
+    /** Token referencing the associated Account of the related Person resource. */
+    @SerializedName("account")
+    String account;
+
+    /** Token referencing the related Person resource. */
+    @SerializedName("person")
+    String person;
   }
 
   /**
@@ -922,6 +970,7 @@ public class VerificationSession extends ApiResource
     trySetResponseGetter(options, responseGetter);
     trySetResponseGetter(providedDetails, responseGetter);
     trySetResponseGetter(redaction, responseGetter);
+    trySetResponseGetter(relatedPerson, responseGetter);
     trySetResponseGetter(verifiedOutputs, responseGetter);
   }
 }

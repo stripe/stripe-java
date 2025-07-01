@@ -252,7 +252,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -419,7 +419,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -506,7 +507,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -855,7 +856,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -912,7 +914,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -969,7 +972,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1026,7 +1030,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1082,7 +1087,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1139,7 +1145,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1196,7 +1203,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1253,7 +1261,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1310,7 +1319,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1366,7 +1376,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1423,7 +1434,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1479,7 +1491,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1536,7 +1549,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1593,7 +1607,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1649,7 +1664,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1705,7 +1721,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1762,7 +1779,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1819,7 +1837,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1876,7 +1895,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1932,7 +1952,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -1989,7 +2010,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2046,7 +2068,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2103,7 +2126,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2160,7 +2184,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2217,7 +2242,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2273,7 +2299,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2330,7 +2357,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2387,7 +2415,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2444,7 +2473,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2501,7 +2531,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2557,7 +2588,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2613,7 +2645,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2670,7 +2703,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2727,7 +2761,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2784,7 +2819,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2841,7 +2877,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2898,7 +2935,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -2955,7 +2993,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3012,7 +3051,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3069,7 +3109,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3139,7 +3180,8 @@ public class Account extends StripeObject implements HasId {
                *
                * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
                * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, or {@code unsupported_country}.
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -3197,7 +3239,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3254,7 +3297,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3311,7 +3355,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3367,7 +3412,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3543,7 +3589,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -3672,7 +3718,8 @@ public class Account extends StripeObject implements HasId {
                *
                * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
                * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, or {@code unsupported_country}.
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -3730,7 +3777,8 @@ public class Account extends StripeObject implements HasId {
                *
                * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
                * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, or {@code unsupported_country}.
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -3787,7 +3835,8 @@ public class Account extends StripeObject implements HasId {
              *
              * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
              * requirements_pending_verification}, {@code restricted_other}, {@code
-             * unsupported_business}, or {@code unsupported_country}.
+             * unsupported_business}, {@code unsupported_country}, or {@code
+             * unsupported_entity_type}.
              */
             @SerializedName("code")
             String code;
@@ -3863,7 +3912,8 @@ public class Account extends StripeObject implements HasId {
                *
                * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
                * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, or {@code unsupported_country}.
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -3923,7 +3973,8 @@ public class Account extends StripeObject implements HasId {
                *
                * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
                * requirements_pending_verification}, {@code restricted_other}, {@code
-               * unsupported_business}, or {@code unsupported_country}.
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
                */
               @SerializedName("code")
               String code;
@@ -4115,8 +4166,8 @@ public class Account extends StripeObject implements HasId {
      * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn}, {@code
      * to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua}, {@code ug},
      * {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve}, {@code
-     * vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code ye}, {@code yt},
-     * {@code za}, {@code zm}, or {@code zw}.
+     * vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code ye},
+     * {@code yt}, {@code za}, {@code zm}, or {@code zw}.
      */
     @SerializedName("country")
     String country;
@@ -4440,7 +4491,7 @@ public class Account extends StripeObject implements HasId {
          * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
          * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
          * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -4531,6 +4582,10 @@ public class Account extends StripeObject implements HasId {
         /** A document verifying the business. */
         @SerializedName("primary_verification")
         PrimaryVerification primaryVerification;
+
+        /** One or more documents that demonstrate proof of address. */
+        @SerializedName("proof_of_address")
+        ProofOfAddress proofOfAddress;
 
         /**
          * One or more documents showing the company’s proof of registration with the national
@@ -4747,6 +4802,31 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
+         * For more details about ProofOfAddress, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ProofOfAddress extends StripeObject {
+          /**
+           * One or more document IDs returned by a <a
+           * href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> with a
+           * purpose value of {@code account_requirement}.
+           */
+          @SerializedName("files")
+          List<String> files;
+
+          /**
+           * The format of the document. Currently supports {@code files} only.
+           *
+           * <p>Equal to {@code files}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /**
          * For more details about ProofOfRegistration, please refer to the <a
          * href="https://docs.stripe.com/api">API Reference.</a>
          */
@@ -4909,7 +4989,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -4986,7 +5066,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -5229,7 +5309,7 @@ public class Account extends StripeObject implements HasId {
          * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
          * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
          * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -5386,7 +5466,7 @@ public class Account extends StripeObject implements HasId {
          * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
          * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
          * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -5797,7 +5877,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -5874,7 +5954,7 @@ public class Account extends StripeObject implements HasId {
            * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
            * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
            * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
+           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
