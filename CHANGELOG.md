@@ -1,5 +1,26 @@
 # Changelog
 
+## 29.4.0-beta.1 - 2025-07-01
+* [#2009](https://github.com/stripe/stripe-java/pull/2009) Update generated code for beta
+  * Change type of `InvoiceCreatePreviewParams.schedule_details.billingMode`, `InvoiceCreatePreviewParams.subscription_details.billingMode`, `Quote.subscription_data.billingMode`, `QuoteCreateParams.subscription_data.billingMode`, `SubscriptionCreateParams.billingMode`, `SubscriptionScheduleCreateParams.billingMode`, and `checkout.SessionCreateParams.subscription_data.billingMode` from `enum('classic'|'flexible')` to `billing_mode`
+  * Add support for `submissionMethod` on `Dispute.evidence_details`
+  * Add support for `onDemand` and `subscriptions` on `OrderCreateParams.payment.settings.payment_method_options.klarna` and `OrderUpdateParams.payment.settings.payment_method_options.klarna`
+  * Change type of `Order.payment.settings.payment_method_options.klarna.setupFutureUsage`, `OrderCreateParams.payment.settings.payment_method_options.klarna.setupFutureUsage`, and `OrderUpdateParams.payment.settings.payment_method_options.klarna.setupFutureUsage` from `literal('none')` to `enum('none'|'off_session'|'on_session')`
+  * Add support for `crypto` on `PaymentAttemptRecord.payment_method_details` and `PaymentRecord.payment_method_details`
+  * Change type of `PaymentIntent.payment_method_options.gopay.setupFutureUsage`, `PaymentIntentConfirmParams.payment_method_options.gopay.setupFutureUsage`, `PaymentIntentCreateParams.payment_method_options.gopay.setupFutureUsage`, and `PaymentIntentUpdateParams.payment_method_options.gopay.setupFutureUsage` from `literal('none')` to `enum('none'|'off_session')`
+  * Change type of `QuotePreviewSubscriptionSchedule.billingMode`, `Subscription.billingMode`, and `SubscriptionSchedule.billingMode` from `enum('classic'|'flexible')` to `SubscriptionsResourceBillingMode`
+  * Change type of `SubscriptionMigrateParams.billingMode` from `literal('flexible')` to `billing_mode_migrate`
+  * Remove support for `billingModeDetails` on `Subscription`
+  * Add support for `proofOfAddress` on `v2.core.Account.identity.business_details.documents`, `v2.core.AccountCreateParams.identity.business_details.documents`, and `v2.core.AccountUpdateParams.identity.business_details.documents`
+  * Add support for `metadata` on `v2.moneymanagement.FinancialAccount`
+  * Remove support for `description` on `v2.moneymanagement.FinancialAccount`
+  * Remove support for `attempts` on `v2.payments.OffSessionPayment`
+  * Add support for `fromAccount`, `outboundPayment`, and `outboundTransfer` on `v2.moneymanagement.ReceivedCredit.balance_transfer`
+  * Change type of `v2.moneymanagement.ReceivedCredit.balance_transfer.type` from `literal('payout_v1')` to `enum('outbound_payment'|'outbound_transfer'|'payout_v1')`
+  * Change `v2.payments.OffSessionPaymentCreateParams.transfer_data.amount` to be optional
+  * Add support for new value `xx` on enums `v2.core.AccountCreateParams.configuration.customer.shipping.address.country`, `v2.core.AccountCreateParams.configuration.merchant.support.address.country`, `v2.core.AccountCreateParams.identity.business_details.address.country`, `v2.core.AccountCreateParams.identity.business_details.script_addresses.kana.country`, `v2.core.AccountCreateParams.identity.business_details.script_addresses.kanji.country`, `v2.core.AccountCreateParams.identity.country`, `v2.core.AccountCreateParams.identity.individual.additional_addresses[].country`, `v2.core.AccountCreateParams.identity.individual.address.country`, `v2.core.AccountCreateParams.identity.individual.script_addresses.kana.country`, `v2.core.AccountCreateParams.identity.individual.script_addresses.kanji.country`, `v2.core.AccountUpdateParams.configuration.customer.shipping.address.country`, `v2.core.AccountUpdateParams.configuration.merchant.support.address.country`, `v2.core.AccountUpdateParams.identity.business_details.address.country`, `v2.core.AccountUpdateParams.identity.business_details.script_addresses.kana.country`, `v2.core.AccountUpdateParams.identity.business_details.script_addresses.kanji.country`, `v2.core.AccountUpdateParams.identity.country`, `v2.core.AccountUpdateParams.identity.individual.additional_addresses[].country`, `v2.core.AccountUpdateParams.identity.individual.address.country`, `v2.core.AccountUpdateParams.identity.individual.script_addresses.kana.country`, `v2.core.AccountUpdateParams.identity.individual.script_addresses.kanji.country`, `v2.core.PersonCreateParams.additional_addresses[].country`, `v2.core.PersonCreateParams.address.country`, `v2.core.PersonCreateParams.script_addresses.kana.country`, `v2.core.PersonCreateParams.script_addresses.kanji.country`, `v2.core.PersonUpdateParams.additional_addresses[].country`, `v2.core.PersonUpdateParams.address.country`, `v2.core.PersonUpdateParams.script_addresses.kana.country`, and `v2.core.PersonUpdateParams.script_addresses.kanji.country`
+  * Add support for new value `xx` on enums `v2.core.AccountCreateParams.identity.individual.nationalities`, `v2.core.AccountUpdateParams.identity.individual.nationalities`, `v2.core.PersonCreateParams.nationalities`, and `v2.core.PersonUpdateParams.nationalities`
+
 ## 29.3.0-beta.3 - 2025-06-26
 No changes in this release
 
