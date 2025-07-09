@@ -109,6 +109,9 @@ public class AccountRetrieveParams extends ApiRequestParams {
     @SerializedName("configuration.recipient")
     CONFIGURATION__RECIPIENT("configuration.recipient"),
 
+    @SerializedName("configuration.storer")
+    CONFIGURATION__STORER("configuration.storer"),
+
     @SerializedName("defaults")
     DEFAULTS("defaults"),
 

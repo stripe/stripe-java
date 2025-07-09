@@ -24,9 +24,18 @@ public class FinancialAccountListParams extends ApiRequestParams {
   @SerializedName("limit")
   Integer limit;
 
-  private FinancialAccountListParams(Map<String, Object> extraParams, Integer limit) {
+  /**
+   * The status of the FinancialAccount to filter by. By default, closed FinancialAccounts are not
+   * returned.
+   */
+  @SerializedName("status")
+  Status status;
+
+  private FinancialAccountListParams(
+      Map<String, Object> extraParams, Integer limit, Status status) {
     this.extraParams = extraParams;
     this.limit = limit;
+    this.status = status;
   }
 
   public static Builder builder() {
@@ -38,9 +47,11 @@ public class FinancialAccountListParams extends ApiRequestParams {
 
     private Integer limit;
 
+    private Status status;
+
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountListParams build() {
-      return new FinancialAccountListParams(this.extraParams, this.limit);
+      return new FinancialAccountListParams(this.extraParams, this.limit, this.status);
     }
 
     /**
@@ -73,6 +84,33 @@ public class FinancialAccountListParams extends ApiRequestParams {
     public Builder setLimit(Integer limit) {
       this.limit = limit;
       return this;
+    }
+
+    /**
+     * The status of the FinancialAccount to filter by. By default, closed FinancialAccounts are not
+     * returned.
+     */
+    public Builder setStatus(FinancialAccountListParams.Status status) {
+      this.status = status;
+      return this;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("closed")
+    CLOSED("closed"),
+
+    @SerializedName("open")
+    OPEN("open"),
+
+    @SerializedName("pending")
+    PENDING("pending");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
     }
   }
 }

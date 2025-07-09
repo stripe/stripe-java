@@ -112,7 +112,10 @@ public class AccountCloseParams extends ApiRequestParams {
     MERCHANT("merchant"),
 
     @SerializedName("recipient")
-    RECIPIENT("recipient");
+    RECIPIENT("recipient"),
+
+    @SerializedName("storer")
+    STORER("storer");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
