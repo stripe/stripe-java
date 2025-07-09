@@ -1,5 +1,16 @@
 # Changelog
 
+## 29.4.0-beta.2 - 2025-07-09
+* [#2026](https://github.com/stripe/stripe-java/pull/2026) Pull in V2 FinancialAccount changes for June release
+  * Add support for `close` and `create` methods on resource `v2.moneymanagement.FinancialAccount`
+  * Add support for `storer` on `v2.core.Account.configuration`, `v2.core.AccountCreateParams.configuration`, and `v2.core.AccountUpdateParams.configuration`
+  * Add support for `statusDetails` on `v2.moneymanagement.FinancialAccount`
+  * Add support for `status` on `v2.moneymanagement.FinancialAccountListParams`
+  * Add support for new value `configuration.storer` on enums `v2.core.AccountCreateParams.include`, `v2.core.AccountRetrieveParams.include`, and `v2.core.AccountUpdateParams.include`
+  * Add support for new value `storer` on enum `v2.core.AccountCloseParams.appliedConfigurations`
+  * Add support for thin events `V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEvent` and `V2CoreAccountIncludingConfigurationStorerUpdatedEvent` with related object `v2.core.Account`
+  * Add support for error types `AlreadyExistsException` and `NonZeroBalanceException`
+
 ## 29.4.0-beta.1 - 2025-07-01
 * [#2009](https://github.com/stripe/stripe-java/pull/2009) Update generated code for beta
   * Change type of `InvoiceCreatePreviewParams.schedule_details.billingMode`, `InvoiceCreatePreviewParams.subscription_details.billingMode`, `Quote.subscription_data.billingMode`, `QuoteCreateParams.subscription_data.billingMode`, `SubscriptionCreateParams.billingMode`, `SubscriptionScheduleCreateParams.billingMode`, and `checkout.SessionCreateParams.subscription_data.billingMode` from `enum('classic'|'flexible')` to `billing_mode`
