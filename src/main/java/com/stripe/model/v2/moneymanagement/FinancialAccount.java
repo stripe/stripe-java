@@ -109,6 +109,9 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
+
   /**
    * If this is a {@code storage} FinancialAccount, this hash includes details specific to {@code
    * storage} FinancialAccounts.
@@ -161,6 +164,50 @@ public class FinancialAccount extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("closed")
+    Closed closed;
+
+    /**
+     * For more details about Closed, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Closed extends StripeObject {
+      @SerializedName("forwarding_settings")
+      ForwardingSettings forwardingSettings;
+
+      @SerializedName("reason")
+      String reason;
+
+      /**
+       * For more details about ForwardingSettings, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ForwardingSettings extends StripeObject {
+        /** The address to send forwarded payments to. */
+        @SerializedName("payment_method")
+        String paymentMethod;
+
+        /** The address to send forwarded payouts to. */
+        @SerializedName("payout_method")
+        String payoutMethod;
+      }
+    }
   }
 
   /**

@@ -132,6 +132,13 @@ public final class EventDataClassLookup {
         "v2.core.account[configuration.recipient].updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationRecipientUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.core.account[configuration.storer].capability_status_updated",
+        com.stripe.events.V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEvent
+            .class);
+    eventClassLookup.put(
+        "v2.core.account[configuration.storer].updated",
+        com.stripe.events.V2CoreAccountIncludingConfigurationStorerUpdatedEvent.class);
+    eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEvent.class);
     eventClassLookup.put(

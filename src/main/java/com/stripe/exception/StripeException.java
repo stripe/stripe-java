@@ -113,11 +113,17 @@ public abstract class StripeException extends Exception {
       case "temporary_session_expired":
         return com.stripe.exception.TemporarySessionExpiredException.parse(
             body, statusCode, requestId, responseGetter);
-      case "financial_account_not_open":
-        return com.stripe.exception.FinancialAccountNotOpenException.parse(
+      case "non_zero_balance":
+        return com.stripe.exception.NonZeroBalanceException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "already_exists":
+        return com.stripe.exception.AlreadyExistsException.parse(
             body, statusCode, requestId, responseGetter);
       case "feature_not_enabled":
         return com.stripe.exception.FeatureNotEnabledException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "financial_account_not_open":
+        return com.stripe.exception.FinancialAccountNotOpenException.parse(
             body, statusCode, requestId, responseGetter);
       case "blocked_by_stripe":
         return com.stripe.exception.BlockedByStripeException.parse(
