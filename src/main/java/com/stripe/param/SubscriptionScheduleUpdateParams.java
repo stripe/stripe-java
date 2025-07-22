@@ -1410,6 +1410,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     @SerializedName("discounts")
     Object discounts;
 
+    /** The number of intervals the phase should last. If set, {@code end_date} must not be set. */
+    @SerializedName("duration")
+    Duration duration;
+
     /**
      * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
      * must not be set.
@@ -1441,7 +1445,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * Integer representing the multiplier applied to the price interval. For example, {@code
      * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
      * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date} must
-     * not be set.
+     * not be set. This parameter is deprecated and will be removed in a future version. Use {@code
+     * duration} instead.
      */
     @SerializedName("iterations")
     Long iterations;
@@ -1516,6 +1521,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Object defaultTaxRates,
         Object description,
         Object discounts,
+        Duration duration,
         Object endDate,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
@@ -1539,6 +1545,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.defaultTaxRates = defaultTaxRates;
       this.description = description;
       this.discounts = discounts;
+      this.duration = duration;
       this.endDate = endDate;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
@@ -1580,6 +1587,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private Object discounts;
 
+      private Duration duration;
+
       private Object endDate;
 
       private Map<String, Object> extraParams;
@@ -1618,6 +1627,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.defaultTaxRates,
             this.description,
             this.discounts,
+            this.duration,
             this.endDate,
             this.extraParams,
             this.invoiceSettings,
@@ -1888,6 +1898,14 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * The number of intervals the phase should last. If set, {@code end_date} must not be set.
+       */
+      public Builder setDuration(SubscriptionScheduleUpdateParams.Phase.Duration duration) {
+        this.duration = duration;
+        return this;
+      }
+
+      /**
        * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
        * must not be set.
        */
@@ -1968,7 +1986,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * Integer representing the multiplier applied to the price interval. For example, {@code
        * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
        * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
-       * must not be set.
+       * must not be set. This parameter is deprecated and will be removed in a future version. Use
+       * {@code duration} instead.
        */
       public Builder setIterations(Long iterations) {
         this.iterations = iterations;
@@ -3080,6 +3099,119 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         public Builder setPromotionCode(EmptyParam promotionCode) {
           this.promotionCode = promotionCode;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Duration {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> Specifies phase duration. Either {@code day}, {@code week},
+       * {@code month} or {@code year}.
+       */
+      @SerializedName("interval")
+      Interval interval;
+
+      /** The multiplier applied to the interval. */
+      @SerializedName("interval_count")
+      Long intervalCount;
+
+      private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+        this.extraParams = extraParams;
+        this.interval = interval;
+        this.intervalCount = intervalCount;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Interval interval;
+
+        private Long intervalCount;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleUpdateParams.Phase.Duration build() {
+          return new SubscriptionScheduleUpdateParams.Phase.Duration(
+              this.extraParams, this.interval, this.intervalCount);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.Duration#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.Duration#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Specifies phase duration. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
+         */
+        public Builder setInterval(
+            SubscriptionScheduleUpdateParams.Phase.Duration.Interval interval) {
+          this.interval = interval;
+          return this;
+        }
+
+        /** The multiplier applied to the interval. */
+        public Builder setIntervalCount(Long intervalCount) {
+          this.intervalCount = intervalCount;
+          return this;
+        }
+      }
+
+      public enum Interval implements ApiRequestParams.EnumParam {
+        @SerializedName("day")
+        DAY("day"),
+
+        @SerializedName("month")
+        MONTH("month"),
+
+        @SerializedName("week")
+        WEEK("week"),
+
+        @SerializedName("year")
+        YEAR("year");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Interval(String value) {
+          this.value = value;
         }
       }
     }

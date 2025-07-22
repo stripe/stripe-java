@@ -604,7 +604,7 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("mcc")
     String mcc;
 
-    /** Whether the business is a minority-owned, women-owned, and/or LGBTQI+-owned business. */
+    /** Whether the business is a minority-owned, women-owned, and/or LGBTQI+ -owned business. */
     @SerializedName("minority_owned_business_designation")
     List<AccountCreateParams.BusinessProfile.MinorityOwnedBusinessDesignation>
         minorityOwnedBusinessDesignation;

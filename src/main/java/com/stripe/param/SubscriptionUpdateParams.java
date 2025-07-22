@@ -215,7 +215,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * authentication due to SCA regulation and further user action is needed, this parameter does not
    * update the subscription and returns an error instead. This was the default behavior for API
    * versions prior to 2019-03-14. See the <a
-   * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
+   * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -557,6 +557,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * that period.
      */
     public Builder setCancelAt(Long cancelAt) {
+      this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
+     */
+    public Builder setCancelAt(SubscriptionUpdateParams.CancelAt cancelAt) {
       this.cancelAt = cancelAt;
       return this;
     }
@@ -980,7 +991,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * authentication due to SCA regulation and further user action is needed, this parameter does
      * not update the subscription and returns an error instead. This was the default behavior for
      * API versions prior to 2019-03-14. See the <a
-     * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
+     * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
      */
     public Builder setPaymentBehavior(SubscriptionUpdateParams.PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
@@ -6160,6 +6171,21 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private final String value;
 
     BillingCycleAnchor(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("max_period_end")
+    MAX_PERIOD_END("max_period_end"),
+
+    @SerializedName("min_period_end")
+    MIN_PERIOD_END("min_period_end");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CancelAt(String value) {
       this.value = value;
     }
   }

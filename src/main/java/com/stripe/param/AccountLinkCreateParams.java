@@ -57,8 +57,15 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * <strong>Required.</strong> The type of account link the user is requesting. Possible values are
-   * {@code account_onboarding} or {@code account_update}.
+   * <strong>Required.</strong> The type of account link the user is requesting.
+   *
+   * <p>You can create Account Links of type {@code account_update} only for connected accounts
+   * where your platform is responsible for collecting requirements, including Custom accounts. You
+   * can't create them for accounts that have access to a Stripe-hosted Dashboard. If you use <a
+   * href="https://stripe.com/connect/get-started-connect-embedded-components">Connect embedded
+   * components</a>, you can include components that allow your connected accounts to update their
+   * own information. For an account without Stripe-hosted Dashboard access where Stripe is liable
+   * for negative balances, you must use embedded components.
    */
   @SerializedName("type")
   Type type;
@@ -210,8 +217,15 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The type of account link the user is requesting. Possible values
-     * are {@code account_onboarding} or {@code account_update}.
+     * <strong>Required.</strong> The type of account link the user is requesting.
+     *
+     * <p>You can create Account Links of type {@code account_update} only for connected accounts
+     * where your platform is responsible for collecting requirements, including Custom accounts.
+     * You can't create them for accounts that have access to a Stripe-hosted Dashboard. If you use
+     * <a href="https://stripe.com/connect/get-started-connect-embedded-components">Connect embedded
+     * components</a>, you can include components that allow your connected accounts to update their
+     * own information. For an account without Stripe-hosted Dashboard access where Stripe is liable
+     * for negative balances, you must use embedded components.
      */
     public Builder setType(AccountLinkCreateParams.Type type) {
       this.type = type;

@@ -41,9 +41,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
-   * this time if it is still in draft state. To turn off automatic finalization, set {@code
-   * auto_advance} to false.
+   * The time when this invoice should be scheduled to finalize (up to 5 years in the future). The
+   * invoice is finalized at this time if it's still in draft state. To turn off automatic
+   * finalization, set {@code auto_advance} to false.
    */
   @SerializedName("automatically_finalizes_at")
   Long automaticallyFinalizesAt;
@@ -443,9 +443,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
-     * this time if it is still in draft state. To turn off automatic finalization, set {@code
-     * auto_advance} to false.
+     * The time when this invoice should be scheduled to finalize (up to 5 years in the future). The
+     * invoice is finalized at this time if it's still in draft state. To turn off automatic
+     * finalization, set {@code auto_advance} to false.
      */
     public Builder setAutomaticallyFinalizesAt(Long automaticallyFinalizesAt) {
       this.automaticallyFinalizesAt = automaticallyFinalizesAt;
@@ -2270,7 +2270,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Installment configuration for payments attempted on this invoice (Mexico Only).
+         * Installment configuration for payments attempted on this invoice.
          *
          * <p>For more information, see the <a
          * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
@@ -2348,7 +2348,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Installment configuration for payments attempted on this invoice (Mexico Only).
+           * Installment configuration for payments attempted on this invoice.
            *
            * <p>For more information, see the <a
            * href="https://stripe.com/docs/payments/installments">installments integration
