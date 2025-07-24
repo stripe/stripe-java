@@ -63,7 +63,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * period.
    */
   @SerializedName("cancel_at")
-  Long cancelAt;
+  Object cancelAt;
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
@@ -291,7 +291,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       BillingCycleAnchor billingCycleAnchor,
       Object billingThresholds,
-      Long cancelAt,
+      Object cancelAt,
       Boolean cancelAtPeriodEnd,
       CancellationDetails cancellationDetails,
       CollectionMethod collectionMethod,
@@ -367,7 +367,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Object billingThresholds;
 
-    private Long cancelAt;
+    private Object cancelAt;
 
     private Boolean cancelAtPeriodEnd;
 
@@ -557,6 +557,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * that period.
      */
     public Builder setCancelAt(Long cancelAt) {
+      this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
+     */
+    public Builder setCancelAt(EmptyParam cancelAt) {
       this.cancelAt = cancelAt;
       return this;
     }
