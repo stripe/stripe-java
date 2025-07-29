@@ -22,6 +22,10 @@ public class SessionUpdateParams extends ApiRequestParams {
   @SerializedName("collected_information")
   CollectedInformation collectedInformation;
 
+  /** List of coupons and promotion codes attached to the Checkout Session. */
+  @SerializedName("discounts")
+  Object discounts;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -68,19 +72,30 @@ public class SessionUpdateParams extends ApiRequestParams {
   @SerializedName("shipping_options")
   Object shippingOptions;
 
+  /**
+   * A subset of parameters to be passed to subscription creation for Checkout Sessions in {@code
+   * subscription} mode.
+   */
+  @SerializedName("subscription_data")
+  SubscriptionData subscriptionData;
+
   private SessionUpdateParams(
       CollectedInformation collectedInformation,
+      Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
       List<SessionUpdateParams.LineItem> lineItems,
       Object metadata,
-      Object shippingOptions) {
+      Object shippingOptions,
+      SubscriptionData subscriptionData) {
     this.collectedInformation = collectedInformation;
+    this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
     this.lineItems = lineItems;
     this.metadata = metadata;
     this.shippingOptions = shippingOptions;
+    this.subscriptionData = subscriptionData;
   }
 
   public static Builder builder() {
@@ -89,6 +104,8 @@ public class SessionUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private CollectedInformation collectedInformation;
+
+    private Object discounts;
 
     private List<String> expand;
 
@@ -100,15 +117,19 @@ public class SessionUpdateParams extends ApiRequestParams {
 
     private Object shippingOptions;
 
+    private SubscriptionData subscriptionData;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SessionUpdateParams build() {
       return new SessionUpdateParams(
           this.collectedInformation,
+          this.discounts,
           this.expand,
           this.extraParams,
           this.lineItems,
           this.metadata,
-          this.shippingOptions);
+          this.shippingOptions,
+          this.subscriptionData);
     }
 
     /**
@@ -118,6 +139,46 @@ public class SessionUpdateParams extends ApiRequestParams {
     public Builder setCollectedInformation(
         SessionUpdateParams.CollectedInformation collectedInformation) {
       this.collectedInformation = collectedInformation;
+      return this;
+    }
+
+    /**
+     * Add an element to `discounts` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionUpdateParams#discounts} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addDiscount(SessionUpdateParams.Discount element) {
+      if (this.discounts == null || this.discounts instanceof EmptyParam) {
+        this.discounts = new ArrayList<SessionUpdateParams.Discount>();
+      }
+      ((List<SessionUpdateParams.Discount>) this.discounts).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `discounts` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionUpdateParams#discounts} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllDiscount(List<SessionUpdateParams.Discount> elements) {
+      if (this.discounts == null || this.discounts instanceof EmptyParam) {
+        this.discounts = new ArrayList<SessionUpdateParams.Discount>();
+      }
+      ((List<SessionUpdateParams.Discount>) this.discounts).addAll(elements);
+      return this;
+    }
+
+    /** List of coupons and promotion codes attached to the Checkout Session. */
+    public Builder setDiscounts(EmptyParam discounts) {
+      this.discounts = discounts;
+      return this;
+    }
+
+    /** List of coupons and promotion codes attached to the Checkout Session. */
+    public Builder setDiscounts(List<SessionUpdateParams.Discount> discounts) {
+      this.discounts = discounts;
       return this;
     }
 
@@ -286,6 +347,15 @@ public class SessionUpdateParams extends ApiRequestParams {
     /** The shipping rate options to apply to this Session. Up to a maximum of 5. */
     public Builder setShippingOptions(List<SessionUpdateParams.ShippingOption> shippingOptions) {
       this.shippingOptions = shippingOptions;
+      return this;
+    }
+
+    /**
+     * A subset of parameters to be passed to subscription creation for Checkout Sessions in {@code
+     * subscription} mode.
+     */
+    public Builder setSubscriptionData(SessionUpdateParams.SubscriptionData subscriptionData) {
+      this.subscriptionData = subscriptionData;
       return this;
     }
   }
@@ -646,6 +716,375 @@ public class SessionUpdateParams extends ApiRequestParams {
             this.state = state;
             return this;
           }
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Discount {
+    /**
+     * The ID of the <a href="https://stripe.com/docs/api/coupons">Coupon</a> to apply to this
+     * Session. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
+     */
+    @SerializedName("coupon")
+    Object coupon;
+
+    /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/coupon">Coupon</a> object
+     * inline. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
+     */
+    @SerializedName("coupon_data")
+    CouponData couponData;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Discount(Object coupon, CouponData couponData, Map<String, Object> extraParams) {
+      this.coupon = coupon;
+      this.couponData = couponData;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object coupon;
+
+      private CouponData couponData;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionUpdateParams.Discount build() {
+        return new SessionUpdateParams.Discount(this.coupon, this.couponData, this.extraParams);
+      }
+
+      /**
+       * The ID of the <a href="https://stripe.com/docs/api/coupons">Coupon</a> to apply to this
+       * Session. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
+       */
+      public Builder setCoupon(String coupon) {
+        this.coupon = coupon;
+        return this;
+      }
+
+      /**
+       * The ID of the <a href="https://stripe.com/docs/api/coupons">Coupon</a> to apply to this
+       * Session. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
+       */
+      public Builder setCoupon(EmptyParam coupon) {
+        this.coupon = coupon;
+        return this;
+      }
+
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/coupon">Coupon</a> object
+       * inline. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
+       */
+      public Builder setCouponData(SessionUpdateParams.Discount.CouponData couponData) {
+        this.couponData = couponData;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionUpdateParams.Discount#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionUpdateParams.Discount#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CouponData {
+      /**
+       * A positive integer representing the amount to subtract from an invoice total (required if
+       * {@code percent_off} is not passed).
+       */
+      @SerializedName("amount_off")
+      Long amountOff;
+
+      /**
+       * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> of
+       * the {@code amount_off} parameter (required if {@code amount_off} is passed).
+       */
+      @SerializedName("currency")
+      Object currency;
+
+      /**
+       * Specifies how long the discount will be in effect if used on a subscription. Defaults to
+       * {@code once}.
+       */
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Object metadata;
+
+      /**
+       * Name of the coupon displayed to customers on, for instance invoices, or receipts. By
+       * default the {@code id} is shown if {@code name} is not set.
+       */
+      @SerializedName("name")
+      Object name;
+
+      /**
+       * A positive float larger than 0, and smaller or equal to 100, that represents the discount
+       * the coupon will apply (required if {@code amount_off} is not passed).
+       */
+      @SerializedName("percent_off")
+      BigDecimal percentOff;
+
+      private CouponData(
+          Long amountOff,
+          Object currency,
+          Duration duration,
+          Map<String, Object> extraParams,
+          Object metadata,
+          Object name,
+          BigDecimal percentOff) {
+        this.amountOff = amountOff;
+        this.currency = currency;
+        this.duration = duration;
+        this.extraParams = extraParams;
+        this.metadata = metadata;
+        this.name = name;
+        this.percentOff = percentOff;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amountOff;
+
+        private Object currency;
+
+        private Duration duration;
+
+        private Map<String, Object> extraParams;
+
+        private Object metadata;
+
+        private Object name;
+
+        private BigDecimal percentOff;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionUpdateParams.Discount.CouponData build() {
+          return new SessionUpdateParams.Discount.CouponData(
+              this.amountOff,
+              this.currency,
+              this.duration,
+              this.extraParams,
+              this.metadata,
+              this.name,
+              this.percentOff);
+        }
+
+        /**
+         * A positive integer representing the amount to subtract from an invoice total (required if
+         * {@code percent_off} is not passed).
+         */
+        public Builder setAmountOff(Long amountOff) {
+          this.amountOff = amountOff;
+          return this;
+        }
+
+        /**
+         * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a>
+         * of the {@code amount_off} parameter (required if {@code amount_off} is passed).
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a>
+         * of the {@code amount_off} parameter (required if {@code amount_off} is passed).
+         */
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Specifies how long the discount will be in effect if used on a subscription. Defaults to
+         * {@code once}.
+         */
+        public Builder setDuration(SessionUpdateParams.Discount.CouponData.Duration duration) {
+          this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionUpdateParams.Discount.CouponData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionUpdateParams.Discount.CouponData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SessionUpdateParams.Discount.CouponData#metadata} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null || this.metadata instanceof EmptyParam) {
+            this.metadata = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.metadata).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionUpdateParams.Discount.CouponData#metadata} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null || this.metadata instanceof EmptyParam) {
+            this.metadata = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.metadata).putAll(map);
+          return this;
+        }
+
+        /**
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format. Individual keys can be unset by posting an empty value to
+         * them. All keys can be unset by posting an empty value to {@code metadata}.
+         */
+        public Builder setMetadata(EmptyParam metadata) {
+          this.metadata = metadata;
+          return this;
+        }
+
+        /**
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format. Individual keys can be unset by posting an empty value to
+         * them. All keys can be unset by posting an empty value to {@code metadata}.
+         */
+        public Builder setMetadata(Map<String, String> metadata) {
+          this.metadata = metadata;
+          return this;
+        }
+
+        /**
+         * Name of the coupon displayed to customers on, for instance invoices, or receipts. By
+         * default the {@code id} is shown if {@code name} is not set.
+         */
+        public Builder setName(String name) {
+          this.name = name;
+          return this;
+        }
+
+        /**
+         * Name of the coupon displayed to customers on, for instance invoices, or receipts. By
+         * default the {@code id} is shown if {@code name} is not set.
+         */
+        public Builder setName(EmptyParam name) {
+          this.name = name;
+          return this;
+        }
+
+        /**
+         * A positive float larger than 0, and smaller or equal to 100, that represents the discount
+         * the coupon will apply (required if {@code amount_off} is not passed).
+         */
+        public Builder setPercentOff(BigDecimal percentOff) {
+          this.percentOff = percentOff;
+          return this;
+        }
+      }
+
+      public enum Duration implements ApiRequestParams.EnumParam {
+        @SerializedName("forever")
+        FOREVER("forever"),
+
+        @SerializedName("once")
+        ONCE("once"),
+
+        @SerializedName("repeating")
+        REPEATING("repeating");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Duration(String value) {
+          this.value = value;
         }
       }
     }
@@ -2663,6 +3102,111 @@ public class SessionUpdateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SubscriptionData {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Unix timestamp representing the end of the trial period the customer will get before being
+     * charged for the first time. Has to be at least 48 hours in the future.
+     */
+    @SerializedName("trial_end")
+    Long trialEnd;
+
+    /**
+     * Integer representing the number of trial period days before the customer is charged for the
+     * first time. Has to be at least 1.
+     */
+    @SerializedName("trial_period_days")
+    Object trialPeriodDays;
+
+    private SubscriptionData(
+        Map<String, Object> extraParams, Long trialEnd, Object trialPeriodDays) {
+      this.extraParams = extraParams;
+      this.trialEnd = trialEnd;
+      this.trialPeriodDays = trialPeriodDays;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Long trialEnd;
+
+      private Object trialPeriodDays;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionUpdateParams.SubscriptionData build() {
+        return new SessionUpdateParams.SubscriptionData(
+            this.extraParams, this.trialEnd, this.trialPeriodDays);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionUpdateParams.SubscriptionData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionUpdateParams.SubscriptionData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Unix timestamp representing the end of the trial period the customer will get before being
+       * charged for the first time. Has to be at least 48 hours in the future.
+       */
+      public Builder setTrialEnd(Long trialEnd) {
+        this.trialEnd = trialEnd;
+        return this;
+      }
+
+      /**
+       * Integer representing the number of trial period days before the customer is charged for the
+       * first time. Has to be at least 1.
+       */
+      public Builder setTrialPeriodDays(Long trialPeriodDays) {
+        this.trialPeriodDays = trialPeriodDays;
+        return this;
+      }
+
+      /**
+       * Integer representing the number of trial period days before the customer is charged for the
+       * first time. Has to be at least 1.
+       */
+      public Builder setTrialPeriodDays(EmptyParam trialPeriodDays) {
+        this.trialPeriodDays = trialPeriodDays;
+        return this;
       }
     }
   }

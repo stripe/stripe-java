@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.testhelpers;
 
+import com.stripe.exception.FeatureNotEnabledException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.FinancialAddressCreditSimulation;
 import com.stripe.model.v2.FinancialAddressGeneratedMicrodeposits;
@@ -23,7 +24,7 @@ public final class FinancialAddressService extends ApiService {
    * funds and increase your balance for testing.
    */
   public FinancialAddressCreditSimulation credit(String id, FinancialAddressCreditParams params)
-      throws StripeException {
+      throws StripeException, FeatureNotEnabledException {
     return credit(id, params, (RequestOptions) null);
   }
   /**
@@ -32,7 +33,7 @@ public final class FinancialAddressService extends ApiService {
    */
   public FinancialAddressCreditSimulation credit(
       String id, FinancialAddressCreditParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, FeatureNotEnabledException {
     String path =
         String.format(
             "/v2/test_helpers/financial_addresses/%s/credit", ApiResource.urlEncodeId(id));
@@ -47,12 +48,12 @@ public final class FinancialAddressService extends ApiService {
   }
   /** Generates microdeposits for a FinancialAddress in a Sandbox environment. */
   public FinancialAddressGeneratedMicrodeposits generateMicrodeposits(String id)
-      throws StripeException {
+      throws StripeException, FeatureNotEnabledException {
     return generateMicrodeposits(id, (RequestOptions) null);
   }
   /** Generates microdeposits for a FinancialAddress in a Sandbox environment. */
   public FinancialAddressGeneratedMicrodeposits generateMicrodeposits(
-      String id, RequestOptions options) throws StripeException {
+      String id, RequestOptions options) throws StripeException, FeatureNotEnabledException {
     String path =
         String.format(
             "/v2/test_helpers/financial_addresses/%s/generate_microdeposits",

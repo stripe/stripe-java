@@ -20,7 +20,7 @@ public class OffSessionPaymentListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The page size limit, if not provided the default is 20. */
+  /** The page size limit. If not provided, the default is 20. */
   @SerializedName("limit")
   Integer limit;
 
@@ -69,7 +69,7 @@ public class OffSessionPaymentListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The page size limit, if not provided the default is 20. */
+    /** The page size limit. If not provided, the default is 20. */
     public Builder setLimit(Integer limit) {
       this.limit = limit;
       return this;

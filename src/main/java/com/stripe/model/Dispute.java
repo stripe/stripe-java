@@ -133,6 +133,9 @@ public class Dispute extends ApiResource
   @SerializedName("reason")
   String reason;
 
+  @SerializedName("smart_disputes")
+  SmartDisputes smartDisputes;
+
   /**
    * Current status of dispute. Possible values are {@code warning_needs_response}, {@code
    * warning_under_review}, {@code warning_closed}, {@code needs_response}, {@code under_review},
@@ -1163,9 +1166,9 @@ public class Dispute extends ApiResource
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
-       * unknown}.
+       * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+       * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+       * unionpay}, {@code visa} or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -1220,6 +1223,28 @@ public class Dispute extends ApiResource
     }
   }
 
+  /**
+   * For more details about SmartDisputes, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SmartDisputes extends StripeObject {
+    /** Evidence that could be provided to improve the SmartDisputes packet. */
+    @SerializedName("recommended_evidence")
+    List<String> recommendedEvidence;
+
+    /**
+     * Smart Disputes auto representment packet availability status.
+     *
+     * <p>One of {@code available}, {@code processing}, {@code requires_evidence}, or {@code
+     * unavailable}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -1228,5 +1253,6 @@ public class Dispute extends ApiResource
     trySetResponseGetter(evidenceDetails, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(smartDisputes, responseGetter);
   }
 }

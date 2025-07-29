@@ -156,6 +156,9 @@ public class AccountSession extends ApiResource {
     @SerializedName("financial_account_transactions")
     FinancialAccountTransactions financialAccountTransactions;
 
+    @SerializedName("instant_payouts_promotion")
+    InstantPayoutsPromotion instantPayoutsPromotion;
+
     @SerializedName("issuing_card")
     IssuingCard issuingCard;
 
@@ -570,6 +573,58 @@ public class AccountSession extends ApiResource {
         /** Whether to allow card spend dispute management features. */
         @SerializedName("card_spend_dispute_management")
         Boolean cardSpendDisputeManagement;
+      }
+    }
+
+    /**
+     * For more details about InstantPayoutsPromotion, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InstantPayoutsPromotion extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /**
+         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
+         */
+        @SerializedName("instant_payouts")
+        Boolean instantPayouts;
       }
     }
 

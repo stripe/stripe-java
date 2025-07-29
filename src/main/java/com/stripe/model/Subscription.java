@@ -1739,6 +1739,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       SepaDebit sepaDebit;
 
       /**
+       * This sub-hash contains details about the UPI payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("upi")
+      Upi upi;
+
+      /**
        * This sub-hash contains details about the ACH direct debit payment method options to pass to
        * invoices created by the subscription.
        */
@@ -1947,6 +1954,53 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit extends StripeObject {}
+
+      /**
+       * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Upi extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          @SerializedName("amount_type")
+          String amountType;
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          @SerializedName("description")
+          String description;
+
+          /**
+           * End date of the mandate or subscription. If not provided, the mandate will be active
+           * until canceled. If provided, end date should be after start date.
+           */
+          @SerializedName("end_date")
+          Long endDate;
+        }
+      }
 
       /**
        * For more details about UsBankAccount, please refer to the <a

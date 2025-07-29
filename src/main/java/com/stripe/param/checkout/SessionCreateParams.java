@@ -234,6 +234,15 @@ public class SessionCreateParams extends ApiRequestParams {
   List<SessionCreateParams.OptionalItem> optionalItems;
 
   /**
+   * Where the user is coming from. This informs the optimizations that are applied to the session.
+   * For example, a session originating from a mobile app may behave more like a native app,
+   * depending on the platform. This parameter is currently not allowed if {@code ui_mode} is {@code
+   * custom}.
+   */
+  @SerializedName("origin_context")
+  OriginContext originContext;
+
+  /**
    * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
    * payment} mode.
    */
@@ -415,6 +424,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Mode mode,
       List<SessionCreateParams.OptionalItem> optionalItems,
+      OriginContext originContext,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       String paymentMethodConfiguration,
@@ -461,6 +471,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.mode = mode;
     this.optionalItems = optionalItems;
+    this.originContext = originContext;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodConfiguration = paymentMethodConfiguration;
@@ -540,6 +551,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private List<SessionCreateParams.OptionalItem> optionalItems;
 
+    private OriginContext originContext;
+
     private PaymentIntentData paymentIntentData;
 
     private PaymentMethodCollection paymentMethodCollection;
@@ -609,6 +622,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.metadata,
           this.mode,
           this.optionalItems,
+          this.originContext,
           this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodConfiguration,
@@ -999,6 +1013,17 @@ public class SessionCreateParams extends ApiRequestParams {
         this.optionalItems = new ArrayList<>();
       }
       this.optionalItems.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Where the user is coming from. This informs the optimizations that are applied to the
+     * session. For example, a session originating from a mobile app may behave more like a native
+     * app, depending on the platform. This parameter is currently not allowed if {@code ui_mode} is
+     * {@code custom}.
+     */
+    public Builder setOriginContext(SessionCreateParams.OriginContext originContext) {
+      this.originContext = originContext;
       return this;
     }
 
@@ -3931,10 +3956,17 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** ID of the invoice rendering template to use for this invoice. */
+        @SerializedName("template")
+        String template;
+
         private RenderingOptions(
-            ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+            ApiRequestParams.EnumParam amountTaxDisplay,
+            Map<String, Object> extraParams,
+            String template) {
           this.amountTaxDisplay = amountTaxDisplay;
           this.extraParams = extraParams;
+          this.template = template;
         }
 
         public static Builder builder() {
@@ -3946,10 +3978,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private String template;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions build() {
             return new SessionCreateParams.InvoiceCreation.InvoiceData.RenderingOptions(
-                this.amountTaxDisplay, this.extraParams);
+                this.amountTaxDisplay, this.extraParams, this.template);
           }
 
           /**
@@ -4005,6 +4039,12 @@ public class SessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** ID of the invoice rendering template to use for this invoice. */
+          public Builder setTemplate(String template) {
+            this.template = template;
             return this;
           }
         }
@@ -13157,9 +13197,35 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Pix(Long expiresAfterSeconds, Map<String, Object> extraParams) {
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Pix(
+          Long expiresAfterSeconds,
+          Map<String, Object> extraParams,
+          SetupFutureUsage setupFutureUsage) {
         this.expiresAfterSeconds = expiresAfterSeconds;
         this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
       }
 
       public static Builder builder() {
@@ -13171,10 +13237,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private SetupFutureUsage setupFutureUsage;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Pix build() {
           return new SessionCreateParams.PaymentMethodOptions.Pix(
-              this.expiresAfterSeconds, this.extraParams);
+              this.expiresAfterSeconds, this.extraParams, this.setupFutureUsage);
         }
 
         /**
@@ -13212,6 +13280,44 @@ public class SessionCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Pix.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
         }
       }
     }
@@ -14487,6 +14593,16 @@ public class SessionCreateParams extends ApiRequestParams {
     Update update;
 
     /**
+     * Determines which entity is allowed to update the discounts (coupons or promotion codes) that
+     * apply to this session.
+     *
+     * <p>Default is {@code client_only}. Stripe Checkout client will automatically handle discount
+     * updates. If set to {@code server_only}, only your server is allowed to update discounts.
+     */
+    @SerializedName("update_discounts")
+    UpdateDiscounts updateDiscounts;
+
+    /**
      * Determines which entity is allowed to update the line items.
      *
      * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the line
@@ -14516,10 +14632,12 @@ public class SessionCreateParams extends ApiRequestParams {
     private Permissions(
         Map<String, Object> extraParams,
         Update update,
+        UpdateDiscounts updateDiscounts,
         UpdateLineItems updateLineItems,
         UpdateShippingDetails updateShippingDetails) {
       this.extraParams = extraParams;
       this.update = update;
+      this.updateDiscounts = updateDiscounts;
       this.updateLineItems = updateLineItems;
       this.updateShippingDetails = updateShippingDetails;
     }
@@ -14533,6 +14651,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Update update;
 
+      private UpdateDiscounts updateDiscounts;
+
       private UpdateLineItems updateLineItems;
 
       private UpdateShippingDetails updateShippingDetails;
@@ -14540,7 +14660,11 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Permissions build() {
         return new SessionCreateParams.Permissions(
-            this.extraParams, this.update, this.updateLineItems, this.updateShippingDetails);
+            this.extraParams,
+            this.update,
+            this.updateDiscounts,
+            this.updateLineItems,
+            this.updateShippingDetails);
       }
 
       /**
@@ -14572,6 +14696,20 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Permissions for updating the Checkout Session. */
       public Builder setUpdate(SessionCreateParams.Permissions.Update update) {
         this.update = update;
+        return this;
+      }
+
+      /**
+       * Determines which entity is allowed to update the discounts (coupons or promotion codes)
+       * that apply to this session.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically handle
+       * discount updates. If set to {@code server_only}, only your server is allowed to update
+       * discounts.
+       */
+      public Builder setUpdateDiscounts(
+          SessionCreateParams.Permissions.UpdateDiscounts updateDiscounts) {
+        this.updateDiscounts = updateDiscounts;
         return this;
       }
 
@@ -14764,6 +14902,21 @@ public class SessionCreateParams extends ApiRequestParams {
         ShippingDetails(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum UpdateDiscounts implements ApiRequestParams.EnumParam {
+      @SerializedName("client_only")
+      CLIENT_ONLY("client_only"),
+
+      @SerializedName("server_only")
+      SERVER_ONLY("server_only");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      UpdateDiscounts(String value) {
+        this.value = value;
       }
     }
 
@@ -17338,7 +17491,10 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
+       * invoices for subscriptions.
+       */
       @SerializedName("type")
       Type type;
 
@@ -17389,7 +17545,10 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> */
+        /**
+         * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
+         * invoices for subscriptions.
+         */
         public Builder setType(SessionCreateParams.SubscriptionData.BillingMode.Type type) {
           this.type = type;
           return this;
@@ -18333,6 +18492,21 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  public enum OriginContext implements ApiRequestParams.EnumParam {
+    @SerializedName("mobile_app")
+    MOBILE_APP("mobile_app"),
+
+    @SerializedName("web")
+    WEB("web");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    OriginContext(String value) {
+      this.value = value;
+    }
+  }
+
   public enum PaymentMethodCollection implements ApiRequestParams.EnumParam {
     @SerializedName("always")
     ALWAYS("always"),
@@ -18441,6 +18615,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("naver_pay")
     NAVER_PAY("naver_pay"),
+
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
 
     @SerializedName("oxxo")
     OXXO("oxxo"),

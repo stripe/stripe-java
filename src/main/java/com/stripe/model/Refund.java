@@ -1233,7 +1233,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PresentmentDetails extends StripeObject {
-    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    /**
+     * Amount intended to be collected by this payment, denominated in {@code presentment_currency}.
+     */
     @SerializedName("presentment_amount")
     Long presentmentAmount;
 

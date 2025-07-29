@@ -317,7 +317,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     Monetary monetary;
 
     /**
-     * <strong>Required.</strong> Specify the type of this amount. We currently only support {@code
+     * <strong>Required.</strong> The type of this amount. We currently only support {@code
      * monetary} billing credits.
      */
     @SerializedName("type")
@@ -378,8 +378,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> Specify the type of this amount. We currently only support
-       * {@code monetary} billing credits.
+       * <strong>Required.</strong> The type of this amount. We currently only support {@code
+       * monetary} billing credits.
        */
       public Builder setType(CreditGrantCreateParams.Amount.Type type) {
         this.type = type;

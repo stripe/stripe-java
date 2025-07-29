@@ -507,9 +507,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
-       * unknown}.
+       * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+       * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+       * unionpay}, {@code visa} or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;

@@ -82,9 +82,16 @@ public class AccountLink extends StripeObject {
     @EqualsAndHashCode(callSuper = false)
     public static class AccountOnboarding extends StripeObject {
       /**
-       * Open Enum. A v2/account can be configured to enable certain functionality. The
-       * configuration param targets the v2/account_link to collect information for the specified
-       * v2/account configuration/s.
+       * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+       * flow.
+       */
+      @SerializedName("collection_options")
+      CollectionOptions collectionOptions;
+
+      /**
+       * Open Enum. A v2/core/account can be configured to enable certain functionality. The
+       * configuration param targets the v2/core/account_link to collect information for the
+       * specified v2/core/account configuration/s.
        */
       @SerializedName("configurations")
       List<String> configurations;
@@ -104,6 +111,35 @@ public class AccountLink extends StripeObject {
       /** The URL that the user will be redirected to upon completing the linked flow. */
       @SerializedName("return_url")
       String returnUrl;
+
+      /**
+       * For more details about CollectionOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CollectionOptions extends StripeObject {
+        /**
+         * Specifies whether the platform collects only currently_due requirements ({@code
+         * currently_due}) or both currently_due and eventually_due requirements ({@code
+         * eventually_due}). If you don’t specify collection_options, the default value is
+         * currently_due.
+         *
+         * <p>One of {@code currently_due}, or {@code eventually_due}.
+         */
+        @SerializedName("fields")
+        String fields;
+
+        /**
+         * Specifies whether the platform collects future_requirements in addition to requirements
+         * in Connect Onboarding. The default value is {@code omit}.
+         *
+         * <p>One of {@code include}, or {@code omit}.
+         */
+        @SerializedName("future_requirements")
+        String futureRequirements;
+      }
     }
 
     /**
@@ -115,6 +151,13 @@ public class AccountLink extends StripeObject {
     @EqualsAndHashCode(callSuper = false)
     public static class AccountUpdate extends StripeObject {
       /**
+       * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+       * flow.
+       */
+      @SerializedName("collection_options")
+      CollectionOptions collectionOptions;
+
+      /**
        * Open Enum. A v2/account can be configured to enable certain functionality. The
        * configuration param targets the v2/account_link to collect information for the specified
        * v2/account configuration/s.
@@ -137,6 +180,35 @@ public class AccountLink extends StripeObject {
       /** The URL that the user will be redirected to upon completing the linked flow. */
       @SerializedName("return_url")
       String returnUrl;
+
+      /**
+       * For more details about CollectionOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CollectionOptions extends StripeObject {
+        /**
+         * Specifies whether the platform collects only currently_due requirements ({@code
+         * currently_due}) or both currently_due and eventually_due requirements ({@code
+         * eventually_due}). If you don’t specify collection_options, the default value is
+         * currently_due.
+         *
+         * <p>One of {@code currently_due}, or {@code eventually_due}.
+         */
+        @SerializedName("fields")
+        String fields;
+
+        /**
+         * Specifies whether the platform collects future_requirements in addition to requirements
+         * in Connect Onboarding. The default value is {@code omit}.
+         *
+         * <p>One of {@code include}, or {@code omit}.
+         */
+        @SerializedName("future_requirements")
+        String futureRequirements;
+      }
     }
   }
 }

@@ -11,6 +11,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.BalanceSettingsRetrieveParams;
 import com.stripe.param.BalanceSettingsUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -198,18 +199,15 @@ public class BalanceSettings extends ApiResource {
        * Payouts scheduled between the 29th and 31st of the month are sent on the last day of
        * shorter months.
        */
-      @SerializedName("monthly_anchor")
-      Long monthlyAnchor;
+      @SerializedName("monthly_payout_days")
+      List<Long> monthlyPayoutDays;
 
       /**
-       * The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only
-       * shown if {@code interval} is weekly.
-       *
-       * <p>One of {@code friday}, {@code monday}, {@code thursday}, {@code tuesday}, or {@code
-       * wednesday}.
+       * The days of the week when available funds are paid out, specified as an array, for example,
+       * [{@code monday}, {@code tuesday}]. Only shown if {@code interval} is weekly.
        */
-      @SerializedName("weekly_anchor")
-      String weeklyAnchor;
+      @SerializedName("weekly_payout_days")
+      List<String> weeklyPayoutDays;
     }
   }
 

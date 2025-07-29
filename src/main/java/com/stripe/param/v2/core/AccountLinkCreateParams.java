@@ -196,9 +196,16 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class AccountOnboarding {
       /**
-       * <strong>Required.</strong> Open Enum. A v2/account can be configured to enable certain
-       * functionality. The configuration param targets the v2/account_link to collect information
-       * for the specified v2/account configuration/s.
+       * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+       * flow.
+       */
+      @SerializedName("collection_options")
+      CollectionOptions collectionOptions;
+
+      /**
+       * <strong>Required.</strong> Open Enum. A v2/core/account can be configured to enable certain
+       * functionality. The configuration param targets the v2/core/account_link to collect
+       * information for the specified v2/core/account configuration/s.
        */
       @SerializedName("configurations")
       List<AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration> configurations;
@@ -229,10 +236,12 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       String returnUrl;
 
       private AccountOnboarding(
+          CollectionOptions collectionOptions,
           List<AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration> configurations,
           Map<String, Object> extraParams,
           String refreshUrl,
           String returnUrl) {
+        this.collectionOptions = collectionOptions;
         this.configurations = configurations;
         this.extraParams = extraParams;
         this.refreshUrl = refreshUrl;
@@ -244,6 +253,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CollectionOptions collectionOptions;
+
         private List<AccountLinkCreateParams.UseCase.AccountOnboarding.Configuration>
             configurations;
 
@@ -256,7 +267,21 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountLinkCreateParams.UseCase.AccountOnboarding build() {
           return new AccountLinkCreateParams.UseCase.AccountOnboarding(
-              this.configurations, this.extraParams, this.refreshUrl, this.returnUrl);
+              this.collectionOptions,
+              this.configurations,
+              this.extraParams,
+              this.refreshUrl,
+              this.returnUrl);
+        }
+
+        /**
+         * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+         * flow.
+         */
+        public Builder setCollectionOptions(
+            AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions collectionOptions) {
+          this.collectionOptions = collectionOptions;
+          return this;
         }
 
         /**
@@ -338,9 +363,156 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CollectionOptions {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies whether the platform collects only currently_due requirements ({@code
+         * currently_due}) or both currently_due and eventually_due requirements ({@code
+         * eventually_due}). If you don’t specify collection_options, the default value is
+         * currently_due.
+         */
+        @SerializedName("fields")
+        Fields fields;
+
+        /**
+         * Specifies whether the platform collects future_requirements in addition to requirements
+         * in Connect Onboarding. The default value is {@code omit}.
+         */
+        @SerializedName("future_requirements")
+        FutureRequirements futureRequirements;
+
+        private CollectionOptions(
+            Map<String, Object> extraParams, Fields fields, FutureRequirements futureRequirements) {
+          this.extraParams = extraParams;
+          this.fields = fields;
+          this.futureRequirements = futureRequirements;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Fields fields;
+
+          private FutureRequirements futureRequirements;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions build() {
+            return new AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions(
+                this.extraParams, this.fields, this.futureRequirements);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies whether the platform collects only currently_due requirements ({@code
+           * currently_due}) or both currently_due and eventually_due requirements ({@code
+           * eventually_due}). If you don’t specify collection_options, the default value is
+           * currently_due.
+           */
+          public Builder setFields(
+              AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions.Fields fields) {
+            this.fields = fields;
+            return this;
+          }
+
+          /**
+           * Specifies whether the platform collects future_requirements in addition to requirements
+           * in Connect Onboarding. The default value is {@code omit}.
+           */
+          public Builder setFutureRequirements(
+              AccountLinkCreateParams.UseCase.AccountOnboarding.CollectionOptions.FutureRequirements
+                  futureRequirements) {
+            this.futureRequirements = futureRequirements;
+            return this;
+          }
+        }
+
+        public enum Fields implements ApiRequestParams.EnumParam {
+          @SerializedName("currently_due")
+          CURRENTLY_DUE("currently_due"),
+
+          @SerializedName("eventually_due")
+          EVENTUALLY_DUE("eventually_due");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Fields(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum FutureRequirements implements ApiRequestParams.EnumParam {
+          @SerializedName("include")
+          INCLUDE("include"),
+
+          @SerializedName("omit")
+          OMIT("omit");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          FutureRequirements(String value) {
+            this.value = value;
+          }
+        }
+      }
+
       public enum Configuration implements ApiRequestParams.EnumParam {
+        @SerializedName("customer")
+        CUSTOMER("customer"),
+
+        @SerializedName("merchant")
+        MERCHANT("merchant"),
+
         @SerializedName("recipient")
-        RECIPIENT("recipient");
+        RECIPIENT("recipient"),
+
+        @SerializedName("storer")
+        STORER("storer");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -354,6 +526,13 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class AccountUpdate {
+      /**
+       * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+       * flow.
+       */
+      @SerializedName("collection_options")
+      CollectionOptions collectionOptions;
+
       /**
        * <strong>Required.</strong> Open Enum. A v2/account can be configured to enable certain
        * functionality. The configuration param targets the v2/account_link to collect information
@@ -388,10 +567,12 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       String returnUrl;
 
       private AccountUpdate(
+          CollectionOptions collectionOptions,
           List<AccountLinkCreateParams.UseCase.AccountUpdate.Configuration> configurations,
           Map<String, Object> extraParams,
           String refreshUrl,
           String returnUrl) {
+        this.collectionOptions = collectionOptions;
         this.configurations = configurations;
         this.extraParams = extraParams;
         this.refreshUrl = refreshUrl;
@@ -403,6 +584,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CollectionOptions collectionOptions;
+
         private List<AccountLinkCreateParams.UseCase.AccountUpdate.Configuration> configurations;
 
         private Map<String, Object> extraParams;
@@ -414,7 +597,21 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountLinkCreateParams.UseCase.AccountUpdate build() {
           return new AccountLinkCreateParams.UseCase.AccountUpdate(
-              this.configurations, this.extraParams, this.refreshUrl, this.returnUrl);
+              this.collectionOptions,
+              this.configurations,
+              this.extraParams,
+              this.refreshUrl,
+              this.returnUrl);
+        }
+
+        /**
+         * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+         * flow.
+         */
+        public Builder setCollectionOptions(
+            AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions collectionOptions) {
+          this.collectionOptions = collectionOptions;
+          return this;
         }
 
         /**
@@ -496,9 +693,156 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CollectionOptions {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Specifies whether the platform collects only currently_due requirements ({@code
+         * currently_due}) or both currently_due and eventually_due requirements ({@code
+         * eventually_due}). If you don’t specify collection_options, the default value is
+         * currently_due.
+         */
+        @SerializedName("fields")
+        Fields fields;
+
+        /**
+         * Specifies whether the platform collects future_requirements in addition to requirements
+         * in Connect Onboarding. The default value is {@code omit}.
+         */
+        @SerializedName("future_requirements")
+        FutureRequirements futureRequirements;
+
+        private CollectionOptions(
+            Map<String, Object> extraParams, Fields fields, FutureRequirements futureRequirements) {
+          this.extraParams = extraParams;
+          this.fields = fields;
+          this.futureRequirements = futureRequirements;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Fields fields;
+
+          private FutureRequirements futureRequirements;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions build() {
+            return new AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions(
+                this.extraParams, this.fields, this.futureRequirements);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Specifies whether the platform collects only currently_due requirements ({@code
+           * currently_due}) or both currently_due and eventually_due requirements ({@code
+           * eventually_due}). If you don’t specify collection_options, the default value is
+           * currently_due.
+           */
+          public Builder setFields(
+              AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions.Fields fields) {
+            this.fields = fields;
+            return this;
+          }
+
+          /**
+           * Specifies whether the platform collects future_requirements in addition to requirements
+           * in Connect Onboarding. The default value is {@code omit}.
+           */
+          public Builder setFutureRequirements(
+              AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions.FutureRequirements
+                  futureRequirements) {
+            this.futureRequirements = futureRequirements;
+            return this;
+          }
+        }
+
+        public enum Fields implements ApiRequestParams.EnumParam {
+          @SerializedName("currently_due")
+          CURRENTLY_DUE("currently_due"),
+
+          @SerializedName("eventually_due")
+          EVENTUALLY_DUE("eventually_due");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Fields(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum FutureRequirements implements ApiRequestParams.EnumParam {
+          @SerializedName("include")
+          INCLUDE("include"),
+
+          @SerializedName("omit")
+          OMIT("omit");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          FutureRequirements(String value) {
+            this.value = value;
+          }
+        }
+      }
+
       public enum Configuration implements ApiRequestParams.EnumParam {
+        @SerializedName("customer")
+        CUSTOMER("customer"),
+
+        @SerializedName("merchant")
+        MERCHANT("merchant"),
+
         @SerializedName("recipient")
-        RECIPIENT("recipient");
+        RECIPIENT("recipient"),
+
+        @SerializedName("storer")
+        STORER("storer");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

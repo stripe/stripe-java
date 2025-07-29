@@ -91,7 +91,7 @@ public final class EventDataClassLookup {
         "v2.core.account[requirements].updated",
         com.stripe.events.V2CoreAccountIncludingRequirementsUpdatedEvent.class);
     eventClassLookup.put(
-        "v2.core.account_link.completed", com.stripe.events.V2CoreAccountLinkCompletedEvent.class);
+        "v2.core.account_link.returned", com.stripe.events.V2CoreAccountLinkReturnedEvent.class);
     eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEvent.class);
     eventClassLookup.put(
@@ -179,9 +179,6 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
     eventClassLookup.put(
-        "v2.off_session_payment.requires_capture",
-        com.stripe.events.V2OffSessionPaymentRequiresCaptureEvent.class);
-    eventClassLookup.put(
         "v2.payments.off_session_payment.authorization_attempt_failed",
         com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEvent.class);
     eventClassLookup.put(
@@ -235,6 +232,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.money_management.payout_method.updated",
+        com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEvent.class);
     eventClassLookup.put(
         "v2.money_management.received_credit.available",
         com.stripe.events.V2MoneyManagementReceivedCreditAvailableEvent.class);

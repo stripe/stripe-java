@@ -15774,18 +15774,41 @@ class GeneratedExamples extends BaseStripeTest {
                     .setAccountOnboarding(
                         com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.AccountOnboarding
                             .builder()
+                            .setCollectionOptions(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .AccountOnboarding.CollectionOptions.builder()
+                                    .setFields(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountOnboarding.CollectionOptions.Fields
+                                            .EVENTUALLY_DUE)
+                                    .setFutureRequirements(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountOnboarding.CollectionOptions.FutureRequirements
+                                            .INCLUDE)
+                                    .build())
                             .addConfiguration(
                                 com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountOnboarding.Configuration.RECIPIENT)
+                                    .AccountOnboarding.Configuration.STORER)
                             .setRefreshUrl("refresh_url")
                             .setReturnUrl("return_url")
                             .build())
                     .setAccountUpdate(
                         com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.AccountUpdate
                             .builder()
+                            .setCollectionOptions(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .AccountUpdate.CollectionOptions.builder()
+                                    .setFields(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountUpdate.CollectionOptions.Fields.EVENTUALLY_DUE)
+                                    .setFutureRequirements(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountUpdate.CollectionOptions.FutureRequirements
+                                            .INCLUDE)
+                                    .build())
                             .addConfiguration(
                                 com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountUpdate.Configuration.RECIPIENT)
+                                    .AccountUpdate.Configuration.STORER)
                             .setRefreshUrl("refresh_url")
                             .setReturnUrl("return_url")
                             .build())
