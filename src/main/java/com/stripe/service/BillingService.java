@@ -33,6 +33,10 @@ public final class BillingService extends ApiService {
     return new com.stripe.service.billing.MeterEventService(this.getResponseGetter());
   }
 
+  public com.stripe.service.billing.MeterUsageService meterUsage() {
+    return new com.stripe.service.billing.MeterUsageService(this.getResponseGetter());
+  }
+
   public com.stripe.service.billing.MeterService meters() {
     return new com.stripe.service.billing.MeterService(this.getResponseGetter());
   }

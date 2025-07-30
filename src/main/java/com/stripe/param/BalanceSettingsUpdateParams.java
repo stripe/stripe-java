@@ -286,30 +286,31 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       Interval interval;
 
       /**
-       * The day of the month when available funds are paid out, specified as a number between
-       * 1--31. Payouts nominally scheduled between the 29th and 31st of the month are instead sent
-       * on the last day of a shorter month. Required and applicable only if {@code interval} is
-       * {@code monthly}.
+       * The days of the month when available funds are paid out, specified as an array of numbers
+       * between 1--31. Payouts nominally scheduled between the 29th and 31st of the month are
+       * instead sent on the last day of a shorter month. Required and applicable only if {@code
+       * interval} is {@code monthly}.
        */
-      @SerializedName("monthly_anchor")
-      Long monthlyAnchor;
+      @SerializedName("monthly_payout_days")
+      List<Long> monthlyPayoutDays;
 
       /**
-       * The day of the week when available funds are paid out (required and applicable only if
-       * {@code interval} is {@code weekly}.).
+       * The days of the week when available funds are paid out, specified as an array, e.g.,
+       * [{@code monday}, {@code tuesday}]. (required and applicable only if {@code interval} is
+       * {@code weekly}.)
        */
-      @SerializedName("weekly_anchor")
-      WeeklyAnchor weeklyAnchor;
+      @SerializedName("weekly_payout_days")
+      List<BalanceSettingsUpdateParams.Payouts.Schedule.WeeklyPayoutDay> weeklyPayoutDays;
 
       private Schedule(
           Map<String, Object> extraParams,
           Interval interval,
-          Long monthlyAnchor,
-          WeeklyAnchor weeklyAnchor) {
+          List<Long> monthlyPayoutDays,
+          List<BalanceSettingsUpdateParams.Payouts.Schedule.WeeklyPayoutDay> weeklyPayoutDays) {
         this.extraParams = extraParams;
         this.interval = interval;
-        this.monthlyAnchor = monthlyAnchor;
-        this.weeklyAnchor = weeklyAnchor;
+        this.monthlyPayoutDays = monthlyPayoutDays;
+        this.weeklyPayoutDays = weeklyPayoutDays;
       }
 
       public static Builder builder() {
@@ -321,14 +322,14 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
 
         private Interval interval;
 
-        private Long monthlyAnchor;
+        private List<Long> monthlyPayoutDays;
 
-        private WeeklyAnchor weeklyAnchor;
+        private List<BalanceSettingsUpdateParams.Payouts.Schedule.WeeklyPayoutDay> weeklyPayoutDays;
 
         /** Finalize and obtain parameter instance from this builder. */
         public BalanceSettingsUpdateParams.Payouts.Schedule build() {
           return new BalanceSettingsUpdateParams.Payouts.Schedule(
-              this.extraParams, this.interval, this.monthlyAnchor, this.weeklyAnchor);
+              this.extraParams, this.interval, this.monthlyPayoutDays, this.weeklyPayoutDays);
         }
 
         /**
@@ -369,23 +370,60 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The day of the month when available funds are paid out, specified as a number between
-         * 1--31. Payouts nominally scheduled between the 29th and 31st of the month are instead
-         * sent on the last day of a shorter month. Required and applicable only if {@code interval}
-         * is {@code monthly}.
+         * Add an element to `monthlyPayoutDays` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link BalanceSettingsUpdateParams.Payouts.Schedule#monthlyPayoutDays} for the field
+         * documentation.
          */
-        public Builder setMonthlyAnchor(Long monthlyAnchor) {
-          this.monthlyAnchor = monthlyAnchor;
+        public Builder addMonthlyPayoutDay(Long element) {
+          if (this.monthlyPayoutDays == null) {
+            this.monthlyPayoutDays = new ArrayList<>();
+          }
+          this.monthlyPayoutDays.add(element);
           return this;
         }
 
         /**
-         * The day of the week when available funds are paid out (required and applicable only if
-         * {@code interval} is {@code weekly}.).
+         * Add all elements to `monthlyPayoutDays` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link BalanceSettingsUpdateParams.Payouts.Schedule#monthlyPayoutDays} for the field
+         * documentation.
          */
-        public Builder setWeeklyAnchor(
-            BalanceSettingsUpdateParams.Payouts.Schedule.WeeklyAnchor weeklyAnchor) {
-          this.weeklyAnchor = weeklyAnchor;
+        public Builder addAllMonthlyPayoutDay(List<Long> elements) {
+          if (this.monthlyPayoutDays == null) {
+            this.monthlyPayoutDays = new ArrayList<>();
+          }
+          this.monthlyPayoutDays.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add an element to `weeklyPayoutDays` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link BalanceSettingsUpdateParams.Payouts.Schedule#weeklyPayoutDays} for the field
+         * documentation.
+         */
+        public Builder addWeeklyPayoutDay(
+            BalanceSettingsUpdateParams.Payouts.Schedule.WeeklyPayoutDay element) {
+          if (this.weeklyPayoutDays == null) {
+            this.weeklyPayoutDays = new ArrayList<>();
+          }
+          this.weeklyPayoutDays.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `weeklyPayoutDays` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link BalanceSettingsUpdateParams.Payouts.Schedule#weeklyPayoutDays} for the field
+         * documentation.
+         */
+        public Builder addAllWeeklyPayoutDay(
+            List<BalanceSettingsUpdateParams.Payouts.Schedule.WeeklyPayoutDay> elements) {
+          if (this.weeklyPayoutDays == null) {
+            this.weeklyPayoutDays = new ArrayList<>();
+          }
+          this.weeklyPayoutDays.addAll(elements);
           return this;
         }
       }
@@ -411,12 +449,18 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         }
       }
 
-      public enum WeeklyAnchor implements ApiRequestParams.EnumParam {
+      public enum WeeklyPayoutDay implements ApiRequestParams.EnumParam {
         @SerializedName("friday")
         FRIDAY("friday"),
 
         @SerializedName("monday")
         MONDAY("monday"),
+
+        @SerializedName("saturday")
+        SATURDAY("saturday"),
+
+        @SerializedName("sunday")
+        SUNDAY("sunday"),
 
         @SerializedName("thursday")
         THURSDAY("thursday"),
@@ -430,7 +474,7 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         @Getter(onMethod_ = {@Override})
         private final String value;
 
-        WeeklyAnchor(String value) {
+        WeeklyPayoutDay(String value) {
           this.value = value;
         }
       }
@@ -448,8 +492,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
      * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling payout
      * delay days</a>.
      */
-    @SerializedName("delay_days")
-    Long delayDays;
+    @SerializedName("delay_days_override")
+    Long delayDaysOverride;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -460,8 +504,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private SettlementTiming(Long delayDays, Map<String, Object> extraParams) {
-      this.delayDays = delayDays;
+    private SettlementTiming(Long delayDaysOverride, Map<String, Object> extraParams) {
+      this.delayDaysOverride = delayDaysOverride;
       this.extraParams = extraParams;
     }
 
@@ -470,13 +514,14 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Long delayDays;
+      private Long delayDaysOverride;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public BalanceSettingsUpdateParams.SettlementTiming build() {
-        return new BalanceSettingsUpdateParams.SettlementTiming(this.delayDays, this.extraParams);
+        return new BalanceSettingsUpdateParams.SettlementTiming(
+            this.delayDaysOverride, this.extraParams);
       }
 
       /**
@@ -487,8 +532,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
        * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
        * payout delay days</a>.
        */
-      public Builder setDelayDays(Long delayDays) {
-        this.delayDays = delayDays;
+      public Builder setDelayDaysOverride(Long delayDaysOverride) {
+        this.delayDaysOverride = delayDaysOverride;
         return this;
       }
 

@@ -775,6 +775,9 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("America/Costa_Rica")
       AMERICA_COSTA_RICA("America/Costa_Rica"),
 
+      @SerializedName("America/Coyhaique")
+      AMERICA_COYHAIQUE("America/Coyhaique"),
+
       @SerializedName("America/Creston")
       AMERICA_CRESTON("America/Creston"),
 

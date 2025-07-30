@@ -48,9 +48,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
-   * this time if it is still in draft state. To turn off automatic finalization, set {@code
-   * auto_advance} to false.
+   * The time when this invoice should be scheduled to finalize (up to 5 years in the future). The
+   * invoice is finalized at this time if it's still in draft state. To turn off automatic
+   * finalization, set {@code auto_advance} to false.
    */
   @SerializedName("automatically_finalizes_at")
   Long automaticallyFinalizesAt;
@@ -512,9 +512,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The time when this invoice should be scheduled to finalize. The invoice will be finalized at
-     * this time if it is still in draft state. To turn off automatic finalization, set {@code
-     * auto_advance} to false.
+     * The time when this invoice should be scheduled to finalize (up to 5 years in the future). The
+     * invoice is finalized at this time if it's still in draft state. To turn off automatic
+     * finalization, set {@code auto_advance} to false.
      */
     public Builder setAutomaticallyFinalizesAt(Long automaticallyFinalizesAt) {
       this.automaticallyFinalizesAt = automaticallyFinalizesAt;
@@ -2232,6 +2232,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object sepaDebit;
 
       /**
+       * If paying by {@code upi}, this sub-hash contains details about the UPI payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("upi")
+      Object upi;
+
+      /**
        * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
        * debit payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -2247,6 +2254,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           Object idBankTransfer,
           Object konbini,
           Object sepaDebit,
+          Object upi,
           Object usBankAccount) {
         this.acssDebit = acssDebit;
         this.bancontact = bancontact;
@@ -2256,6 +2264,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         this.idBankTransfer = idBankTransfer;
         this.konbini = konbini;
         this.sepaDebit = sepaDebit;
+        this.upi = upi;
         this.usBankAccount = usBankAccount;
       }
 
@@ -2280,6 +2289,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
         private Object sepaDebit;
 
+        private Object upi;
+
         private Object usBankAccount;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -2293,6 +2304,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
               this.idBankTransfer,
               this.konbini,
               this.sepaDebit,
+              this.upi,
               this.usBankAccount);
         }
 
@@ -2455,6 +2467,24 @@ public class InvoiceUpdateParams extends ApiRequestParams {
          */
         public Builder setSepaDebit(EmptyParam sepaDebit) {
           this.sepaDebit = sepaDebit;
+          return this;
+        }
+
+        /**
+         * If paying by {@code upi}, this sub-hash contains details about the UPI payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setUpi(InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi upi) {
+          this.upi = upi;
+          return this;
+        }
+
+        /**
+         * If paying by {@code upi}, this sub-hash contains details about the UPI payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setUpi(EmptyParam upi) {
+          this.upi = upi;
           return this;
         }
 
@@ -2803,7 +2833,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Installment configuration for payments attempted on this invoice (Mexico Only).
+         * Installment configuration for payments attempted on this invoice.
          *
          * <p>For more information, see the <a
          * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
@@ -2881,7 +2911,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Installment configuration for payments attempted on this invoice (Mexico Only).
+           * Installment configuration for payments attempted on this invoice.
            *
            * <p>For more information, see the <a
            * href="https://stripe.com/docs/payments/installments">installments integration
@@ -3700,6 +3730,251 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class Upi {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Configuration options for setting up an eMandate. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Upi(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi build() {
+            return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Configuration options for setting up an eMandate. */
+          public Builder setMandateOptions(
+              InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          @SerializedName("amount_type")
+          AmountType amountType;
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          @SerializedName("description")
+          Object description;
+
+          /**
+           * End date of the mandate or subscription. If not provided, the mandate will be active
+           * until canceled. If provided, end date should be after start date.
+           */
+          @SerializedName("end_date")
+          Long endDate;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MandateOptions(
+              Long amount,
+              AmountType amountType,
+              Object description,
+              Long endDate,
+              Map<String, Object> extraParams) {
+            this.amount = amount;
+            this.amountType = amountType;
+            this.description = description;
+            this.endDate = endDate;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private AmountType amountType;
+
+            private Object description;
+
+            private Long endDate;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions
+                build() {
+              return new InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi
+                  .MandateOptions(
+                  this.amount, this.amountType, this.description, this.endDate, this.extraParams);
+            }
+
+            /** Amount to be charged for future payments. */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+             * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+             * amount charged can be up to the value passed for the {@code amount} param.
+             */
+            public Builder setAmountType(
+                InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions
+                        .AmountType
+                    amountType) {
+              this.amountType = amountType;
+              return this;
+            }
+
+            /**
+             * A description of the mandate or subscription that is meant to be displayed to the
+             * customer.
+             */
+            public Builder setDescription(String description) {
+              this.description = description;
+              return this;
+            }
+
+            /**
+             * A description of the mandate or subscription that is meant to be displayed to the
+             * customer.
+             */
+            public Builder setDescription(EmptyParam description) {
+              this.description = description;
+              return this;
+            }
+
+            /**
+             * End date of the mandate or subscription. If not provided, the mandate will be active
+             * until canceled. If provided, end date should be after start date.
+             */
+            public Builder setEndDate(Long endDate) {
+              this.endDate = endDate;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceUpdateParams.PaymentSettings.PaymentMethodOptions.Upi.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          public enum AmountType implements ApiRequestParams.EnumParam {
+            @SerializedName("fixed")
+            FIXED("fixed"),
+
+            @SerializedName("maximum")
+            MAXIMUM("maximum");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            AmountType(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class UsBankAccount {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4333,6 +4608,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       @SerializedName("swish")
       SWISH("swish"),
+
+      @SerializedName("upi")
+      UPI("upi"),
 
       @SerializedName("us_bank_account")
       US_BANK_ACCOUNT("us_bank_account"),

@@ -8,10 +8,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public final class V2CoreAccountLinkCompletedEvent extends Event {
-  /** Data for the v2.core.account_link.completed event. */
+public final class V2CoreAccountLinkReturnedEvent extends Event {
+  /** Data for the v2.core.account_link.returned event. */
   @SerializedName("data")
-  V2CoreAccountLinkCompletedEvent.EventData data;
+  V2CoreAccountLinkReturnedEvent.EventData data;
 
   @Getter
   @Setter

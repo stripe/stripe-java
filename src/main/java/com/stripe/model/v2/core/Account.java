@@ -4945,6 +4945,10 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("account")
         InnerAccount account;
 
+        /** Details on the Account's acceptance of Treasury-specific terms of service. */
+        @SerializedName("storer")
+        Storer storer;
+
         /**
          * For more details about InnerAccount, please refer to the <a
          * href="https://docs.stripe.com/api">API Reference.</a>
@@ -4953,6 +4957,36 @@ public class Account extends StripeObject implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class InnerAccount extends StripeObject {
+          /**
+           * The time when the Account's representative accepted the terms of service. Represented
+           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          Instant date;
+
+          /**
+           * The IP address from which the Account's representative accepted the terms of service.
+           */
+          @SerializedName("ip")
+          String ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          String userAgent;
+        }
+
+        /**
+         * For more details about Storer, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Storer extends StripeObject {
           /**
            * The time when the Account's representative accepted the terms of service. Represented
            * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:

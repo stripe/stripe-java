@@ -12,15 +12,15 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class OffSessionPaymentCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> Amount you want to collect. */
+  /** <strong>Required.</strong> The “presentment amount” to be collected from the customer. */
   @SerializedName("amount")
   Amount amount;
 
-  /** <strong>Required.</strong> The frequency of the OSP. */
+  /** <strong>Required.</strong> The frequency of the underlying payment. */
   @SerializedName("cadence")
   Cadence cadence;
 
-  /** <strong>Required.</strong> Customer that owns the provided payment method. */
+  /** <strong>Required.</strong> ID of the Customer to which this OffSessionPayment belongs. */
   @SerializedName("customer")
   String customer;
 
@@ -33,38 +33,56 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> Any of your internal data you want to track here. */
+  /**
+   * <strong>Required.</strong> Set of <a href="https://docs.corp.stripe.com/api/metadata">key-value
+   * pairs</a> that you can attach to an object. This can be useful for storing additional
+   * information about the object in a structured format. Learn more about <a
+   * href="https://docs.corp.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
+   * information in metadata</a>.
+   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The OBO merchant you want to use. */
+  /** The account (if any) for which the funds of the OffSessionPayment are intended. */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
-  /**
-   * <strong>Required.</strong> Payment method you want to debit. Must be attached to a customer and
-   * set up for off-session usage.
-   */
+  /** <strong>Required.</strong> ID of the payment method used in this OffSessionPayment. */
   @SerializedName("payment_method")
   String paymentMethod;
 
-  /** How you want stripe to retry the OSP. */
+  /** Details about the OffSessionPayment retries. */
   @SerializedName("retry_details")
   RetryDetails retryDetails;
 
-  /** String you want to appear on your customer's statement. */
+  /**
+   * Text that appears on the customer’s statement as the statement descriptor for a non-card
+   * charge. This value overrides the account’s default statement descriptor. For information about
+   * requirements, including the 22-character limit, see the <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors">Statement Descriptor
+   * docs</a>.
+   */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
-  /** Suffix appended to your account level descriptor. */
+  /**
+   * Provides information about a card charge. Concatenated to the account’s <a
+   * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
+   * descriptor prefix</a> to form the complete statement descriptor that appears on the customer’s
+   * statement.
+   */
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
 
-  /** Test clock to be used for testing your retry handling. Only usable in a sandbox. */
+  /** Test clock that can be used to advance the retry attempts in a sandbox. */
   @SerializedName("test_clock")
   String testClock;
 
-  /** How you want to transfer the funds to your connected accounts. */
+  /**
+   * The data that automatically creates a Transfer after the payment finalizes. Learn more about
+   * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+   * accounts</a>.
+   */
   @SerializedName("transfer_data")
   TransferData transferData;
 
@@ -141,19 +159,19 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
           this.transferData);
     }
 
-    /** <strong>Required.</strong> Amount you want to collect. */
+    /** <strong>Required.</strong> The “presentment amount” to be collected from the customer. */
     public Builder setAmount(Amount amount) {
       this.amount = amount;
       return this;
     }
 
-    /** <strong>Required.</strong> The frequency of the OSP. */
+    /** <strong>Required.</strong> The frequency of the underlying payment. */
     public Builder setCadence(OffSessionPaymentCreateParams.Cadence cadence) {
       this.cadence = cadence;
       return this;
     }
 
-    /** <strong>Required.</strong> Customer that owns the provided payment method. */
+    /** <strong>Required.</strong> ID of the Customer to which this OffSessionPayment belongs. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -211,46 +229,58 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The OBO merchant you want to use. */
+    /** The account (if any) for which the funds of the OffSessionPayment are intended. */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
       return this;
     }
 
-    /**
-     * <strong>Required.</strong> Payment method you want to debit. Must be attached to a customer
-     * and set up for off-session usage.
-     */
+    /** <strong>Required.</strong> ID of the payment method used in this OffSessionPayment. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;
     }
 
-    /** How you want stripe to retry the OSP. */
+    /** Details about the OffSessionPayment retries. */
     public Builder setRetryDetails(OffSessionPaymentCreateParams.RetryDetails retryDetails) {
       this.retryDetails = retryDetails;
       return this;
     }
 
-    /** String you want to appear on your customer's statement. */
+    /**
+     * Text that appears on the customer’s statement as the statement descriptor for a non-card
+     * charge. This value overrides the account’s default statement descriptor. For information
+     * about requirements, including the 22-character limit, see the <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors">Statement Descriptor
+     * docs</a>.
+     */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
       return this;
     }
 
-    /** Suffix appended to your account level descriptor. */
+    /**
+     * Provides information about a card charge. Concatenated to the account’s <a
+     * href="https://docs.stripe.com/get-started/account/statement-descriptors#static">statement
+     * descriptor prefix</a> to form the complete statement descriptor that appears on the
+     * customer’s statement.
+     */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;
       return this;
     }
 
-    /** Test clock to be used for testing your retry handling. Only usable in a sandbox. */
+    /** Test clock that can be used to advance the retry attempts in a sandbox. */
     public Builder setTestClock(String testClock) {
       this.testClock = testClock;
       return this;
     }
 
-    /** How you want to transfer the funds to your connected accounts. */
+    /**
+     * The data that automatically creates a Transfer after the payment finalizes. Learn more about
+     * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+     * accounts</a>.
+     */
     public Builder setTransferData(OffSessionPaymentCreateParams.TransferData transferData) {
       this.transferData = transferData;
       return this;
@@ -269,7 +299,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> How you want Stripe to retry the payment. */
+    /**
+     * <strong>Required.</strong> Indicates the strategy for how you want Stripe to retry the
+     * payment.
+     */
     @SerializedName("retry_strategy")
     RetryStrategy retryStrategy;
 
@@ -319,7 +352,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> How you want Stripe to retry the payment. */
+      /**
+       * <strong>Required.</strong> Indicates the strategy for how you want Stripe to retry the
+       * payment.
+       */
       public Builder setRetryStrategy(
           OffSessionPaymentCreateParams.RetryDetails.RetryStrategy retryStrategy) {
         this.retryStrategy = retryStrategy;
@@ -346,11 +382,21 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData {
-    /** Amount in minor units that you want to transfer. */
+    /**
+     * The amount transferred to the destination account. This transfer will occur automatically
+     * after the payment succeeds. If no amount is specified, by default the entire payment amount
+     * is transferred to the destination account. The amount must be less than or equal to the <a
+     * href="https://docs.corp.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
+     * and must be a positive integer representing how much to transfer in the smallest currency
+     * unit (e.g., 100 cents to charge $1.00).
+     */
     @SerializedName("amount")
     Integer amount;
 
-    /** <strong>Required.</strong> ID of the connected account where you want money to go. */
+    /**
+     * <strong>Required.</strong> The account (if any) that the payment is attributed to for tax
+     * reporting, and where funds from the payment are transferred to after payment success.
+     */
     @SerializedName("destination")
     String destination;
 
@@ -386,13 +432,23 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
             this.amount, this.destination, this.extraParams);
       }
 
-      /** Amount in minor units that you want to transfer. */
+      /**
+       * The amount transferred to the destination account. This transfer will occur automatically
+       * after the payment succeeds. If no amount is specified, by default the entire payment amount
+       * is transferred to the destination account. The amount must be less than or equal to the <a
+       * href="https://docs.corp.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
+       * and must be a positive integer representing how much to transfer in the smallest currency
+       * unit (e.g., 100 cents to charge $1.00).
+       */
       public Builder setAmount(Integer amount) {
         this.amount = amount;
         return this;
       }
 
-      /** <strong>Required.</strong> ID of the connected account where you want money to go. */
+      /**
+       * <strong>Required.</strong> The account (if any) that the payment is attributed to for tax
+       * reporting, and where funds from the payment are transferred to after payment success.
+       */
       public Builder setDestination(String destination) {
         this.destination = destination;
         return this;

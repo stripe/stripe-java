@@ -40,8 +40,8 @@ public class Review extends ApiResource implements HasId {
 
   /**
    * The reason the review was closed, or null if it has not yet been closed. One of {@code
-   * approved}, {@code refunded}, {@code refunded_as_fraud}, {@code disputed}, {@code redacted}, or
-   * {@code canceled}.
+   * approved}, {@code refunded}, {@code refunded_as_fraud}, {@code disputed}, {@code redacted},
+   * {@code canceled}, {@code payment_never_settled}, or {@code acknowledged}.
    */
   @SerializedName("closed_reason")
   String closedReason;
@@ -98,8 +98,8 @@ public class Review extends ApiResource implements HasId {
 
   /**
    * The reason the review is currently open or closed. One of {@code rule}, {@code manual}, {@code
-   * approved}, {@code refunded}, {@code refunded_as_fraud}, {@code disputed}, {@code redacted}, or
-   * {@code canceled}.
+   * approved}, {@code refunded}, {@code refunded_as_fraud}, {@code disputed}, {@code redacted},
+   * {@code canceled}, {@code payment_never_settled}, or {@code acknowledged}.
    */
   @SerializedName("reason")
   String reason;

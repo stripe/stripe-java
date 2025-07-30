@@ -73,10 +73,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * The ID of an existing invoice to add this invoice item to. When left blank, the invoice item
-   * will be added to the next upcoming scheduled invoice. This is useful when adding invoice items
-   * in response to an invoice.created webhook. You can only add invoice items to draft invoices and
-   * there is a maximum of 250 items per invoice.
+   * The ID of an existing invoice to add this invoice item to. For subscription invoices, when left
+   * blank, the invoice item will be added to the next upcoming scheduled invoice. For standalone
+   * invoices, the invoice item won't be automatically added unless you pass {@code
+   * pending_invoice_item_behavior: 'include'} when creating the invoice. This is useful when adding
+   * invoice items in response to an invoice.created webhook. You can only add invoice items to
+   * draft invoices and there is a maximum of 250 items per invoice.
    */
   @SerializedName("invoice")
   String invoice;
@@ -430,10 +432,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of an existing invoice to add this invoice item to. When left blank, the invoice item
-     * will be added to the next upcoming scheduled invoice. This is useful when adding invoice
-     * items in response to an invoice.created webhook. You can only add invoice items to draft
-     * invoices and there is a maximum of 250 items per invoice.
+     * The ID of an existing invoice to add this invoice item to. For subscription invoices, when
+     * left blank, the invoice item will be added to the next upcoming scheduled invoice. For
+     * standalone invoices, the invoice item won't be automatically added unless you pass {@code
+     * pending_invoice_item_behavior: 'include'} when creating the invoice. This is useful when
+     * adding invoice items in response to an invoice.created webhook. You can only add invoice
+     * items to draft invoices and there is a maximum of 250 items per invoice.
      */
     public Builder setInvoice(String invoice) {
       this.invoice = invoice;

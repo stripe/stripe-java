@@ -117,6 +117,8 @@ public final class EventDataClassLookup {
         "billing.meter_event_adjustment", com.stripe.model.billing.MeterEventAdjustment.class);
     classLookup.put(
         "billing.meter_event_summary", com.stripe.model.billing.MeterEventSummary.class);
+    classLookup.put("billing.meter_usage", com.stripe.model.billing.MeterUsage.class);
+    classLookup.put("billing.meter_usage_row", com.stripe.model.billing.MeterUsageRow.class);
 
     classLookup.put(
         "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
@@ -212,6 +214,7 @@ public final class EventDataClassLookup {
     classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
+    classLookup.put("terminal.onboarding_link", com.stripe.model.terminal.OnboardingLink.class);
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);
     classLookup.put(
         "terminal.reader_collected_data", com.stripe.model.terminal.ReaderCollectedData.class);

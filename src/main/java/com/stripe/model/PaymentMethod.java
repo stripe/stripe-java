@@ -703,13 +703,17 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return getGlobalResponseGetter().request(request, PaymentMethod.class);
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   @Override
   public PaymentMethod update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   @Override
   public PaymentMethod update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -719,12 +723,16 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PaymentMethod.class);
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   public PaymentMethod update(PaymentMethodUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   public PaymentMethod update(PaymentMethodUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId()));
@@ -949,8 +957,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Card extends StripeObject {
     /**
-     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
-     * jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+     * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code discover},
+     * {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
+     * visa} or {@code unknown}.
      */
     @SerializedName("brand")
     String brand;
@@ -1153,9 +1162,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
           Long amountAuthorized;
 
           /**
-           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
-           * {@code unknown}.
+           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+           * unionpay}, {@code visa} or {@code unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -1637,8 +1646,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class CardPresent extends StripeObject {
     /**
-     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code
-     * jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
+     * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code discover},
+     * {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
+     * visa} or {@code unknown}.
      */
     @SerializedName("brand")
     String brand;
