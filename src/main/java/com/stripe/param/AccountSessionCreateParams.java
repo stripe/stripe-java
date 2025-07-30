@@ -204,6 +204,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
     /**
      * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/instant-payouts-promotion/">instant
+     * payouts promotion</a> embedded component.
+     */
+    @SerializedName("instant_payouts_promotion")
+    InstantPayoutsPromotion instantPayoutsPromotion;
+
+    /**
+     * Configuration for the <a
      * href="https://stripe.com/connect/supported-embedded-components/issuing-card/">issuing
      * card</a> embedded component.
      */
@@ -291,6 +299,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         FinancialAccount financialAccount,
         FinancialAccountTransactions financialAccountTransactions,
+        InstantPayoutsPromotion instantPayoutsPromotion,
         IssuingCard issuingCard,
         IssuingCardsList issuingCardsList,
         NotificationBanner notificationBanner,
@@ -309,6 +318,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.financialAccount = financialAccount;
       this.financialAccountTransactions = financialAccountTransactions;
+      this.instantPayoutsPromotion = instantPayoutsPromotion;
       this.issuingCard = issuingCard;
       this.issuingCardsList = issuingCardsList;
       this.notificationBanner = notificationBanner;
@@ -342,6 +352,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       private FinancialAccountTransactions financialAccountTransactions;
 
+      private InstantPayoutsPromotion instantPayoutsPromotion;
+
       private IssuingCard issuingCard;
 
       private IssuingCardsList issuingCardsList;
@@ -373,6 +385,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.extraParams,
             this.financialAccount,
             this.financialAccountTransactions,
+            this.instantPayoutsPromotion,
             this.issuingCard,
             this.issuingCardsList,
             this.notificationBanner,
@@ -484,6 +497,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           AccountSessionCreateParams.Components.FinancialAccountTransactions
               financialAccountTransactions) {
         this.financialAccountTransactions = financialAccountTransactions;
+        return this;
+      }
+
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/instant-payouts-promotion/">instant
+       * payouts promotion</a> embedded component.
+       */
+      public Builder setInstantPayoutsPromotion(
+          AccountSessionCreateParams.Components.InstantPayoutsPromotion instantPayoutsPromotion) {
+        this.instantPayoutsPromotion = instantPayoutsPromotion;
         return this;
       }
 
@@ -2037,6 +2061,235 @@ public class AccountSessionCreateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InstantPayoutsPromotion {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The list of features enabled in the embedded component. */
+      @SerializedName("features")
+      Features features;
+
+      private InstantPayoutsPromotion(
+          Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.InstantPayoutsPromotion build() {
+          return new AccountSessionCreateParams.Components.InstantPayoutsPromotion(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountSessionCreateParams.Components.InstantPayoutsPromotion#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountSessionCreateParams.Components.InstantPayoutsPromotion#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The list of features enabled in the embedded component. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.InstantPayoutsPromotion.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features {
+        /**
+         * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+         * accounts where {@code controller.requirement_collection} is {@code application} for the
+         * account. The default value is the opposite of the {@code external_account_collection}
+         * value. For example, if you don't set {@code external_account_collection}, it defaults to
+         * {@code true} and {@code disable_stripe_user_authentication} defaults to {@code false}.
+         */
+        @SerializedName("disable_stripe_user_authentication")
+        Boolean disableStripeUserAuthentication;
+
+        /**
+         * Whether external account collection is enabled. This feature can only be {@code false}
+         * for accounts where you’re responsible for collecting updated information when
+         * requirements are due or change, like Custom accounts. The default value for this feature
+         * is {@code true}.
+         */
+        @SerializedName("external_account_collection")
+        Boolean externalAccountCollection;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+         * false}.
+         */
+        @SerializedName("instant_payouts")
+        Boolean instantPayouts;
+
+        private Features(
+            Boolean disableStripeUserAuthentication,
+            Boolean externalAccountCollection,
+            Map<String, Object> extraParams,
+            Boolean instantPayouts) {
+          this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+          this.externalAccountCollection = externalAccountCollection;
+          this.extraParams = extraParams;
+          this.instantPayouts = instantPayouts;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Boolean disableStripeUserAuthentication;
+
+          private Boolean externalAccountCollection;
+
+          private Map<String, Object> extraParams;
+
+          private Boolean instantPayouts;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.InstantPayoutsPromotion.Features build() {
+            return new AccountSessionCreateParams.Components.InstantPayoutsPromotion.Features(
+                this.disableStripeUserAuthentication,
+                this.externalAccountCollection,
+                this.extraParams,
+                this.instantPayouts);
+          }
+
+          /**
+           * Whether Stripe user authentication is disabled. This value can only be {@code true} for
+           * accounts where {@code controller.requirement_collection} is {@code application} for the
+           * account. The default value is the opposite of the {@code external_account_collection}
+           * value. For example, if you don't set {@code external_account_collection}, it defaults
+           * to {@code true} and {@code disable_stripe_user_authentication} defaults to {@code
+           * false}.
+           */
+          public Builder setDisableStripeUserAuthentication(
+              Boolean disableStripeUserAuthentication) {
+            this.disableStripeUserAuthentication = disableStripeUserAuthentication;
+            return this;
+          }
+
+          /**
+           * Whether external account collection is enabled. This feature can only be {@code false}
+           * for accounts where you’re responsible for collecting updated information when
+           * requirements are due or change, like Custom accounts. The default value for this
+           * feature is {@code true}.
+           */
+          public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+            this.externalAccountCollection = externalAccountCollection;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.InstantPayoutsPromotion.Features#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.InstantPayoutsPromotion.Features#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
+           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
+           * false}.
+           */
+          public Builder setInstantPayouts(Boolean instantPayouts) {
+            this.instantPayouts = instantPayouts;
             return this;
           }
         }

@@ -1940,7 +1940,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
+     * invoices for subscriptions.
+     */
     @SerializedName("type")
     Type type;
 
@@ -1989,7 +1992,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
+       * invoices for subscriptions.
+       */
       public Builder setType(SubscriptionCreateParams.BillingMode.Type type) {
         this.type = type;
         return this;

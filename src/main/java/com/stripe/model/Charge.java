@@ -1545,9 +1545,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
-           * {@code unknown}.
+           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+           * unionpay}, {@code visa} or {@code unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -1786,9 +1786,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String authorizationCode;
 
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
-       * unknown}.
+       * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+       * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+       * unionpay}, {@code visa} or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -2351,9 +2351,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       Long amountAuthorized;
 
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
-       * unknown}.
+       * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+       * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+       * unionpay}, {@code visa} or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -2637,6 +2637,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** A public identifier for buyers using Cash App. */
       @SerializedName("cashtag")
       String cashtag;
+
+      /** A unique and immutable identifier of payments assigned by Cash App. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -3559,9 +3563,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
-           * {@code unknown}.
+           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+           * unionpay}, {@code visa} or {@code unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -3953,7 +3957,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PresentmentDetails extends StripeObject {
-    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    /**
+     * Amount intended to be collected by this payment, denominated in {@code presentment_currency}.
+     */
     @SerializedName("presentment_amount")
     Long presentmentAmount;
 

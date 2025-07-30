@@ -1753,12 +1753,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Ae(Map<String, Object> extraParams, Type type) {
+      private Ae(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -1769,11 +1774,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Ae build() {
-          return new RegistrationCreateParams.CountryOptions.Ae(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Ae(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -1804,10 +1812,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Ae.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Ae.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Ae.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Ae.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ae.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ae.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Ae.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -1836,12 +1940,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Al(Map<String, Object> extraParams, Type type) {
+      private Al(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -1852,11 +1961,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Al build() {
-          return new RegistrationCreateParams.CountryOptions.Al(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Al(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -1887,10 +1999,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Al.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Al.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Al.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Al.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Al.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Al.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Al.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -2002,12 +2210,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Ao(Map<String, Object> extraParams, Type type) {
+      private Ao(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -2018,11 +2231,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Ao build() {
-          return new RegistrationCreateParams.CountryOptions.Ao(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Ao(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -2053,10 +2269,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Ao.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Ao.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Ao.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Ao.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ao.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ao.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Ao.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -2236,6 +2548,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -2285,12 +2600,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Au(Map<String, Object> extraParams, Type type) {
+      private Au(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -2301,11 +2621,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Au build() {
-          return new RegistrationCreateParams.CountryOptions.Au(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Au(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -2336,10 +2659,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Au.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Au.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Au.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Au.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Au.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Au.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Au.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -2368,12 +2787,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Aw(Map<String, Object> extraParams, Type type) {
+      private Aw(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -2384,11 +2808,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Aw build() {
-          return new RegistrationCreateParams.CountryOptions.Aw(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Aw(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -2419,10 +2846,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Aw.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Aw.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Aw.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Aw.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Aw.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Aw.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Aw.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -2534,12 +3057,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Ba(Map<String, Object> extraParams, Type type) {
+      private Ba(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -2550,11 +3078,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Ba build() {
-          return new RegistrationCreateParams.CountryOptions.Ba(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Ba(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -2585,10 +3116,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Ba.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Ba.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Ba.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Ba.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ba.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ba.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Ba.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -2617,12 +3244,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Bb(Map<String, Object> extraParams, Type type) {
+      private Bb(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -2633,11 +3265,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Bb build() {
-          return new RegistrationCreateParams.CountryOptions.Bb(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Bb(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -2668,10 +3303,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Bb.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Bb.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Bb.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Bb.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bb.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bb.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Bb.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -2700,12 +3431,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Bd(Map<String, Object> extraParams, Type type) {
+      private Bd(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -2716,11 +3452,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Bd build() {
-          return new RegistrationCreateParams.CountryOptions.Bd(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Bd(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -2751,10 +3490,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Bd.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Bd.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Bd.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Bd.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bd.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bd.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Bd.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -2934,6 +3769,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -2983,12 +3821,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Bf(Map<String, Object> extraParams, Type type) {
+      private Bf(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -2999,11 +3842,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Bf build() {
-          return new RegistrationCreateParams.CountryOptions.Bf(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Bf(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -3034,10 +3880,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Bf.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Bf.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Bf.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Bf.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bf.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bf.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Bf.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -3217,6 +4159,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -3266,12 +4211,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Bh(Map<String, Object> extraParams, Type type) {
+      private Bh(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -3282,11 +4232,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Bh build() {
-          return new RegistrationCreateParams.CountryOptions.Bh(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Bh(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -3317,10 +4270,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Bh.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Bh.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Bh.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Bh.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bh.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bh.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Bh.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -3432,12 +4481,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Bs(Map<String, Object> extraParams, Type type) {
+      private Bs(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -3448,11 +4502,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Bs build() {
-          return new RegistrationCreateParams.CountryOptions.Bs(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Bs(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -3483,10 +4540,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Bs.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Bs.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Bs.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Bs.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bs.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Bs.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Bs.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -3783,12 +4936,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Cd(Map<String, Object> extraParams, Type type) {
+      private Cd(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -3799,11 +4957,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Cd build() {
-          return new RegistrationCreateParams.CountryOptions.Cd(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Cd(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -3834,10 +4995,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Cd.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Cd.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Cd.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Cd.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Cd.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Cd.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Cd.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -3866,12 +5123,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Ch(Map<String, Object> extraParams, Type type) {
+      private Ch(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -3882,11 +5144,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Ch build() {
-          return new RegistrationCreateParams.CountryOptions.Ch(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Ch(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -3917,10 +5182,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Ch.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Ch.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Ch.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Ch.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ch.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Ch.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Ch.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -4515,6 +5876,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -4715,6 +6079,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -4915,6 +6282,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -5115,6 +6485,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -5398,6 +6771,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -5681,6 +7057,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -5730,12 +7109,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Et(Map<String, Object> extraParams, Type type) {
+      private Et(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -5746,11 +7130,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Et build() {
-          return new RegistrationCreateParams.CountryOptions.Et(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Et(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -5781,10 +7168,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Et.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Et.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Et.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Et.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Et.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Et.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Et.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -5964,6 +7447,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -6164,6 +7650,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -6213,12 +7702,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Gb(Map<String, Object> extraParams, Type type) {
+      private Gb(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -6229,11 +7723,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Gb build() {
-          return new RegistrationCreateParams.CountryOptions.Gb(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Gb(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -6264,10 +7761,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Gb.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Gb.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Gb.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Gb.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Gb.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Gb.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Gb.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -6379,12 +7972,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Gn(Map<String, Object> extraParams, Type type) {
+      private Gn(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -6395,11 +7993,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Gn build() {
-          return new RegistrationCreateParams.CountryOptions.Gn(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Gn(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -6430,10 +8031,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Gn.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Gn.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Gn.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Gn.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Gn.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Gn.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Gn.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -6613,6 +8310,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -6813,6 +8513,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -7013,6 +8716,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -7296,6 +9002,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -7428,12 +9137,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Is(Map<String, Object> extraParams, Type type) {
+      private Is(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -7444,11 +9158,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Is build() {
-          return new RegistrationCreateParams.CountryOptions.Is(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Is(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -7479,10 +9196,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Is.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Is.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Is.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Is.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Is.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Is.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Is.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -7662,6 +9475,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -7711,12 +9527,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Jp(Map<String, Object> extraParams, Type type) {
+      private Jp(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -7727,11 +9548,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Jp build() {
-          return new RegistrationCreateParams.CountryOptions.Jp(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Jp(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -7762,10 +9586,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Jp.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Jp.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Jp.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Jp.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Jp.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Jp.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Jp.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -8443,6 +10363,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -8643,6 +10566,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -8843,6 +10769,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -9058,12 +10987,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Me(Map<String, Object> extraParams, Type type) {
+      private Me(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -9074,11 +11008,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Me build() {
-          return new RegistrationCreateParams.CountryOptions.Me(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Me(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -9109,10 +11046,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Me.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Me.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Me.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Me.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Me.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Me.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Me.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -9141,12 +11174,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Mk(Map<String, Object> extraParams, Type type) {
+      private Mk(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -9157,11 +11195,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Mk build() {
-          return new RegistrationCreateParams.CountryOptions.Mk(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Mk(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -9192,10 +11233,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Mk.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Mk.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Mk.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Mk.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Mk.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Mk.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Mk.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -9224,12 +11361,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Mr(Map<String, Object> extraParams, Type type) {
+      private Mr(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -9240,11 +11382,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Mr build() {
-          return new RegistrationCreateParams.CountryOptions.Mr(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Mr(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -9275,10 +11420,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Mr.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Mr.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Mr.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Mr.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Mr.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Mr.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Mr.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -9458,6 +11699,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -9907,6 +12151,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -9956,12 +12203,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private No(Map<String, Object> extraParams, Type type) {
+      private No(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -9972,11 +12224,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.No build() {
-          return new RegistrationCreateParams.CountryOptions.No(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.No(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -10007,10 +12262,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.No.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.No.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.No.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.No.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.No.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.No.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.No.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -10122,12 +12473,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Nz(Map<String, Object> extraParams, Type type) {
+      private Nz(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -10138,11 +12494,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Nz build() {
-          return new RegistrationCreateParams.CountryOptions.Nz(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Nz(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -10173,10 +12532,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Nz.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Nz.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Nz.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Nz.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Nz.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Nz.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Nz.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -10205,12 +12660,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Om(Map<String, Object> extraParams, Type type) {
+      private Om(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -10221,11 +12681,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Om build() {
-          return new RegistrationCreateParams.CountryOptions.Om(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Om(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -10256,10 +12719,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Om.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Om.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Om.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Om.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Om.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Om.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Om.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -10605,6 +13164,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -10805,6 +13367,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -11005,6 +13570,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -11054,12 +13622,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Rs(Map<String, Object> extraParams, Type type) {
+      private Rs(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -11070,11 +13643,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Rs build() {
-          return new RegistrationCreateParams.CountryOptions.Rs(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Rs(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -11105,10 +13681,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Rs.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Rs.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Rs.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Rs.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Rs.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Rs.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Rs.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -11454,6 +14126,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -11503,12 +14178,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Sg(Map<String, Object> extraParams, Type type) {
+      private Sg(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -11519,11 +14199,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Sg build() {
-          return new RegistrationCreateParams.CountryOptions.Sg(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Sg(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -11554,10 +14237,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Sg.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Sg.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Sg.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Sg.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Sg.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Sg.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Sg.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -11737,6 +14516,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -11937,6 +14719,9 @@ public class RegistrationCreateParams extends ApiRequestParams {
         }
 
         public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
           @SerializedName("small_seller")
           SMALL_SELLER("small_seller"),
 
@@ -12069,12 +14854,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Sr(Map<String, Object> extraParams, Type type) {
+      private Sr(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -12085,11 +14875,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Sr build() {
-          return new RegistrationCreateParams.CountryOptions.Sr(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Sr(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -12120,10 +14913,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Sr.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Sr.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Sr.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Sr.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Sr.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Sr.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Sr.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -13208,12 +16097,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Uy(Map<String, Object> extraParams, Type type) {
+      private Uy(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -13224,11 +16118,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Uy build() {
-          return new RegistrationCreateParams.CountryOptions.Uy(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Uy(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -13259,10 +16156,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Uy.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Uy.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Uy.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Uy.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Uy.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Uy.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Uy.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -13457,12 +16450,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Za(Map<String, Object> extraParams, Type type) {
+      private Za(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -13473,11 +16471,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Za build() {
-          return new RegistrationCreateParams.CountryOptions.Za(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Za(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -13508,10 +16509,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Za.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Za.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Za.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Za.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Za.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Za.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Za.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -13623,12 +16720,17 @@ public class RegistrationCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Options for the standard registration. */
+      @SerializedName("standard")
+      Standard standard;
+
       /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
       @SerializedName("type")
       Type type;
 
-      private Zw(Map<String, Object> extraParams, Type type) {
+      private Zw(Map<String, Object> extraParams, Standard standard, Type type) {
         this.extraParams = extraParams;
+        this.standard = standard;
         this.type = type;
       }
 
@@ -13639,11 +16741,14 @@ public class RegistrationCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Standard standard;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public RegistrationCreateParams.CountryOptions.Zw build() {
-          return new RegistrationCreateParams.CountryOptions.Zw(this.extraParams, this.type);
+          return new RegistrationCreateParams.CountryOptions.Zw(
+              this.extraParams, this.standard, this.type);
         }
 
         /**
@@ -13674,10 +16779,106 @@ public class RegistrationCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Options for the standard registration. */
+        public Builder setStandard(RegistrationCreateParams.CountryOptions.Zw.Standard standard) {
+          this.standard = standard;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of registration to be created in {@code country}. */
         public Builder setType(RegistrationCreateParams.CountryOptions.Zw.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Place of supply scheme used in an standard registration. */
+        @SerializedName("place_of_supply_scheme")
+        PlaceOfSupplyScheme placeOfSupplyScheme;
+
+        private Standard(Map<String, Object> extraParams, PlaceOfSupplyScheme placeOfSupplyScheme) {
+          this.extraParams = extraParams;
+          this.placeOfSupplyScheme = placeOfSupplyScheme;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private PlaceOfSupplyScheme placeOfSupplyScheme;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RegistrationCreateParams.CountryOptions.Zw.Standard build() {
+            return new RegistrationCreateParams.CountryOptions.Zw.Standard(
+                this.extraParams, this.placeOfSupplyScheme);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Zw.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link RegistrationCreateParams.CountryOptions.Zw.Standard#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Place of supply scheme used in an standard registration. */
+          public Builder setPlaceOfSupplyScheme(
+              RegistrationCreateParams.CountryOptions.Zw.Standard.PlaceOfSupplyScheme
+                  placeOfSupplyScheme) {
+            this.placeOfSupplyScheme = placeOfSupplyScheme;
+            return this;
+          }
+        }
+
+        public enum PlaceOfSupplyScheme implements ApiRequestParams.EnumParam {
+          @SerializedName("inbound_goods")
+          INBOUND_GOODS("inbound_goods"),
+
+          @SerializedName("standard")
+          STANDARD("standard");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PlaceOfSupplyScheme(String value) {
+            this.value = value;
+          }
         }
       }
 

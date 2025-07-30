@@ -10588,7 +10588,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Installment configuration for payments attempted on this PaymentIntent (Mexico Only).
+       * Installment configuration for payments attempted on this PaymentIntent.
        *
        * <p>For more information, see the <a
        * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
@@ -10887,7 +10887,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         }
 
         /**
-         * Installment configuration for payments attempted on this PaymentIntent (Mexico Only).
+         * Installment configuration for payments attempted on this PaymentIntent.
          *
          * <p>For more information, see the <a
          * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.

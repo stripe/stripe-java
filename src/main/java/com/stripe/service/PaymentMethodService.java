@@ -183,20 +183,28 @@ public final class PaymentMethodService extends ApiService {
             options);
     return this.request(request, PaymentMethod.class);
   }
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   public PaymentMethod update(String paymentMethod, PaymentMethodUpdateParams params)
       throws StripeException {
     return update(paymentMethod, params, (RequestOptions) null);
   }
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   public PaymentMethod update(String paymentMethod, RequestOptions options) throws StripeException {
     return update(paymentMethod, (PaymentMethodUpdateParams) null, options);
   }
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   public PaymentMethod update(String paymentMethod) throws StripeException {
     return update(paymentMethod, (PaymentMethodUpdateParams) null, (RequestOptions) null);
   }
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * Updates a PaymentMethod object. A PaymentMethod must be attached to a customer to be updated.
+   */
   public PaymentMethod update(
       String paymentMethod, PaymentMethodUpdateParams params, RequestOptions options)
       throws StripeException {

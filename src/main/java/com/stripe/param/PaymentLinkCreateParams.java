@@ -3292,10 +3292,17 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** ID of the invoice rendering template to use for this invoice. */
+        @SerializedName("template")
+        String template;
+
         private RenderingOptions(
-            ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+            ApiRequestParams.EnumParam amountTaxDisplay,
+            Map<String, Object> extraParams,
+            String template) {
           this.amountTaxDisplay = amountTaxDisplay;
           this.extraParams = extraParams;
+          this.template = template;
         }
 
         public static Builder builder() {
@@ -3307,10 +3314,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private String template;
+
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentLinkCreateParams.InvoiceCreation.InvoiceData.RenderingOptions build() {
             return new PaymentLinkCreateParams.InvoiceCreation.InvoiceData.RenderingOptions(
-                this.amountTaxDisplay, this.extraParams);
+                this.amountTaxDisplay, this.extraParams, this.template);
           }
 
           /**
@@ -3368,6 +3377,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
             this.extraParams.putAll(map);
             return this;
           }
+
+          /** ID of the invoice rendering template to use for this invoice. */
+          public Builder setTemplate(String template) {
+            this.template = template;
+            return this;
+          }
         }
 
         public enum AmountTaxDisplay implements ApiRequestParams.EnumParam {
@@ -3408,12 +3423,18 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> The ID of the <a
-     * href="https://stripe.com/docs/api/prices">Price</a> or <a
+     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
      * href="https://stripe.com/docs/api/plans">Plan</a> object.
      */
     @SerializedName("price")
     String price;
+
+    /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * inline. One of {@code price} or {@code price_data} is required.
+     */
+    @SerializedName("price_data")
+    PriceData priceData;
 
     /** <strong>Required.</strong> The quantity of the line item being purchased. */
     @SerializedName("quantity")
@@ -3423,10 +3444,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         AdjustableQuantity adjustableQuantity,
         Map<String, Object> extraParams,
         String price,
+        PriceData priceData,
         Long quantity) {
       this.adjustableQuantity = adjustableQuantity;
       this.extraParams = extraParams;
       this.price = price;
+      this.priceData = priceData;
       this.quantity = quantity;
     }
 
@@ -3441,12 +3464,14 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       private String price;
 
+      private PriceData priceData;
+
       private Long quantity;
 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentLinkCreateParams.LineItem build() {
         return new PaymentLinkCreateParams.LineItem(
-            this.adjustableQuantity, this.extraParams, this.price, this.quantity);
+            this.adjustableQuantity, this.extraParams, this.price, this.priceData, this.quantity);
       }
 
       /**
@@ -3486,12 +3511,20 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The ID of the <a
-       * href="https://stripe.com/docs/api/prices">Price</a> or <a
+       * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
        * href="https://stripe.com/docs/api/plans">Plan</a> object.
        */
       public Builder setPrice(String price) {
         this.price = price;
+        return this;
+      }
+
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * inline. One of {@code price} or {@code price_data} is required.
+       */
+      public Builder setPriceData(PaymentLinkCreateParams.LineItem.PriceData priceData) {
+        this.priceData = priceData;
         return this;
       }
 
@@ -3523,7 +3556,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * The maximum quantity the customer can purchase. By default this value is 99. You can
-       * specify a value up to 999.
+       * specify a value up to 999999.
        */
       @SerializedName("maximum")
       Long maximum;
@@ -3601,7 +3634,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
         /**
          * The maximum quantity the customer can purchase. By default this value is 99. You can
-         * specify a value up to 999.
+         * specify a value up to 999999.
          */
         public Builder setMaximum(Long maximum) {
           this.maximum = maximum;
@@ -3615,6 +3648,568 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         public Builder setMinimum(Long minimum) {
           this.minimum = minimum;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PriceData {
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+       * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code product}
+       * or {@code product_data} is required.
+       */
+      @SerializedName("product")
+      String product;
+
+      /**
+       * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+       * object inline. One of {@code product} or {@code product_data} is required.
+       */
+      @SerializedName("product_data")
+      ProductData productData;
+
+      /**
+       * The recurring components of a price such as {@code interval} and {@code interval_count}.
+       */
+      @SerializedName("recurring")
+      Recurring recurring;
+
+      /**
+       * Only required if a <a
+       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+       * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+       * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+       * exclusive}, it cannot be changed.
+       */
+      @SerializedName("tax_behavior")
+      TaxBehavior taxBehavior;
+
+      /**
+       * A non-negative integer in cents (or local equivalent) representing how much to charge. One
+       * of {@code unit_amount} or {@code unit_amount_decimal} is required.
+       */
+      @SerializedName("unit_amount")
+      Long unitAmount;
+
+      /**
+       * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+       * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+       * unit_amount_decimal} can be set.
+       */
+      @SerializedName("unit_amount_decimal")
+      BigDecimal unitAmountDecimal;
+
+      private PriceData(
+          String currency,
+          Map<String, Object> extraParams,
+          String product,
+          ProductData productData,
+          Recurring recurring,
+          TaxBehavior taxBehavior,
+          Long unitAmount,
+          BigDecimal unitAmountDecimal) {
+        this.currency = currency;
+        this.extraParams = extraParams;
+        this.product = product;
+        this.productData = productData;
+        this.recurring = recurring;
+        this.taxBehavior = taxBehavior;
+        this.unitAmount = unitAmount;
+        this.unitAmountDecimal = unitAmountDecimal;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String currency;
+
+        private Map<String, Object> extraParams;
+
+        private String product;
+
+        private ProductData productData;
+
+        private Recurring recurring;
+
+        private TaxBehavior taxBehavior;
+
+        private Long unitAmount;
+
+        private BigDecimal unitAmountDecimal;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkCreateParams.LineItem.PriceData build() {
+          return new PaymentLinkCreateParams.LineItem.PriceData(
+              this.currency,
+              this.extraParams,
+              this.product,
+              this.productData,
+              this.recurring,
+              this.taxBehavior,
+              this.unitAmount,
+              this.unitAmountDecimal);
+        }
+
+        /**
+         * <strong>Required.</strong> Three-letter <a
+         * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+         * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.LineItem.PriceData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkCreateParams.LineItem.PriceData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The ID of the <a href="https://docs.stripe.com/api/products">Product</a> that this <a
+         * href="https://docs.stripe.com/api/prices">Price</a> will belong to. One of {@code
+         * product} or {@code product_data} is required.
+         */
+        public Builder setProduct(String product) {
+          this.product = product;
+          return this;
+        }
+
+        /**
+         * Data used to generate a new <a href="https://docs.stripe.com/api/products">Product</a>
+         * object inline. One of {@code product} or {@code product_data} is required.
+         */
+        public Builder setProductData(
+            PaymentLinkCreateParams.LineItem.PriceData.ProductData productData) {
+          this.productData = productData;
+          return this;
+        }
+
+        /**
+         * The recurring components of a price such as {@code interval} and {@code interval_count}.
+         */
+        public Builder setRecurring(
+            PaymentLinkCreateParams.LineItem.PriceData.Recurring recurring) {
+          this.recurring = recurring;
+          return this;
+        }
+
+        /**
+         * Only required if a <a
+         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
+         * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
+         * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
+         * exclusive}, it cannot be changed.
+         */
+        public Builder setTaxBehavior(
+            PaymentLinkCreateParams.LineItem.PriceData.TaxBehavior taxBehavior) {
+          this.taxBehavior = taxBehavior;
+          return this;
+        }
+
+        /**
+         * A non-negative integer in cents (or local equivalent) representing how much to charge.
+         * One of {@code unit_amount} or {@code unit_amount_decimal} is required.
+         */
+        public Builder setUnitAmount(Long unitAmount) {
+          this.unitAmount = unitAmount;
+          return this;
+        }
+
+        /**
+         * Same as {@code unit_amount}, but accepts a decimal value in cents (or local equivalent)
+         * with at most 12 decimal places. Only one of {@code unit_amount} and {@code
+         * unit_amount_decimal} can be set.
+         */
+        public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+          this.unitAmountDecimal = unitAmountDecimal;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ProductData {
+        /**
+         * The product's description, meant to be displayable to the customer. Use this field to
+         * optionally store a long form explanation of the product being sold for your own rendering
+         * purposes.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * A list of up to 8 URLs of images for this product, meant to be displayable to the
+         * customer.
+         */
+        @SerializedName("images")
+        List<String> images;
+
+        /**
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format. Individual keys can be unset by posting an empty value to
+         * them. All keys can be unset by posting an empty value to {@code metadata}.
+         */
+        @SerializedName("metadata")
+        Map<String, String> metadata;
+
+        /**
+         * <strong>Required.</strong> The product's name, meant to be displayable to the customer.
+         */
+        @SerializedName("name")
+        String name;
+
+        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+        @SerializedName("tax_code")
+        String taxCode;
+
+        private ProductData(
+            String description,
+            Map<String, Object> extraParams,
+            List<String> images,
+            Map<String, String> metadata,
+            String name,
+            String taxCode) {
+          this.description = description;
+          this.extraParams = extraParams;
+          this.images = images;
+          this.metadata = metadata;
+          this.name = name;
+          this.taxCode = taxCode;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String description;
+
+          private Map<String, Object> extraParams;
+
+          private List<String> images;
+
+          private Map<String, String> metadata;
+
+          private String name;
+
+          private String taxCode;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentLinkCreateParams.LineItem.PriceData.ProductData build() {
+            return new PaymentLinkCreateParams.LineItem.PriceData.ProductData(
+                this.description,
+                this.extraParams,
+                this.images,
+                this.metadata,
+                this.name,
+                this.taxCode);
+          }
+
+          /**
+           * The product's description, meant to be displayable to the customer. Use this field to
+           * optionally store a long form explanation of the product being sold for your own
+           * rendering purposes.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentLinkCreateParams.LineItem.PriceData.ProductData#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentLinkCreateParams.LineItem.PriceData.ProductData#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `images` list. A list is initialized for the first `add/addAll` call,
+           * and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentLinkCreateParams.LineItem.PriceData.ProductData#images} for the field
+           * documentation.
+           */
+          public Builder addImage(String element) {
+            if (this.images == null) {
+              this.images = new ArrayList<>();
+            }
+            this.images.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `images` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * PaymentLinkCreateParams.LineItem.PriceData.ProductData#images} for the field
+           * documentation.
+           */
+          public Builder addAllImage(List<String> elements) {
+            if (this.images == null) {
+              this.images = new ArrayList<>();
+            }
+            this.images.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+           * call, and subsequent calls add additional key/value pairs to the original map. See
+           * {@link PaymentLinkCreateParams.LineItem.PriceData.ProductData#metadata} for the field
+           * documentation.
+           */
+          public Builder putMetadata(String key, String value) {
+            if (this.metadata == null) {
+              this.metadata = new HashMap<>();
+            }
+            this.metadata.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentLinkCreateParams.LineItem.PriceData.ProductData#metadata} for
+           * the field documentation.
+           */
+          public Builder putAllMetadata(Map<String, String> map) {
+            if (this.metadata == null) {
+              this.metadata = new HashMap<>();
+            }
+            this.metadata.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The product's name, meant to be displayable to the customer.
+           */
+          public Builder setName(String name) {
+            this.name = name;
+            return this;
+          }
+
+          /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+          public Builder setTaxCode(String taxCode) {
+            this.taxCode = taxCode;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Recurring {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * The number of intervals between subscription billings. For example, {@code
+         * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of three years
+         * interval allowed (3 years, 36 months, or 156 weeks).
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        private Recurring(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentLinkCreateParams.LineItem.PriceData.Recurring build() {
+            return new PaymentLinkCreateParams.LineItem.PriceData.Recurring(
+                this.extraParams, this.interval, this.intervalCount);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentLinkCreateParams.LineItem.PriceData.Recurring#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentLinkCreateParams.LineItem.PriceData.Recurring#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Specifies billing frequency. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
+           */
+          public Builder setInterval(
+              PaymentLinkCreateParams.LineItem.PriceData.Recurring.Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * The number of intervals between subscription billings. For example, {@code
+           * interval=month} and {@code interval_count=3} bills every 3 months. Maximum of three
+           * years interval allowed (3 years, 36 months, or 156 weeks).
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum TaxBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("exclusive")
+        EXCLUSIVE("exclusive"),
+
+        @SerializedName("inclusive")
+        INCLUSIVE("inclusive"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TaxBehavior(String value) {
+          this.value = value;
         }
       }
     }

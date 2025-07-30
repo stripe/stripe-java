@@ -74,7 +74,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
    * authentication due to SCA regulation and further user action is needed, this parameter does not
    * update the subscription and returns an error instead. This was the default behavior for API
    * versions prior to 2019-03-14. See the <a
-   * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
+   * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
    */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
@@ -376,7 +376,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * authentication due to SCA regulation and further user action is needed, this parameter does
      * not update the subscription and returns an error instead. This was the default behavior for
      * API versions prior to 2019-03-14. See the <a
-     * href="https://stripe.com/docs/upgrades#2019-03-14">changelog</a> to learn more.
+     * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
      */
     public Builder setPaymentBehavior(
         SubscriptionItemCreateParams.PaymentBehavior paymentBehavior) {
