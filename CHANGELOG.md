@@ -1,7 +1,7 @@
 # Changelog
 
 ## 29.5.0-beta.1 - 2025-07-30
-This release changes the pinned API version to `2025-07-30.basil`.
+This release changes the pinned API version to `2025-07-30.preview`.
 
 * [#2025](https://github.com/stripe/stripe-java/pull/2025) Update generated code for beta
   * Add support for new resources `billing.MeterUsageRow`, `billing.MeterUsage`, and `terminal.OnboardingLink`
@@ -40,7 +40,7 @@ This release changes the pinned API version to `2025-07-30.basil`.
   * Add support for error types `AlreadyExistsException` and `NonZeroBalanceException`
 
 ## 29.4.0-beta.1 - 2025-07-01
-This release changes the pinned API version to `2025-06-30.basil`.
+This release changes the pinned API version to `2025-06-30.preview`.
 
 * [#2009](https://github.com/stripe/stripe-java/pull/2009) Update generated code for beta
   * Change type of `InvoiceCreatePreviewParams.schedule_details.billingMode`, `InvoiceCreatePreviewParams.subscription_details.billingMode`, `Quote.subscription_data.billingMode`, `QuoteCreateParams.subscription_data.billingMode`, `SubscriptionCreateParams.billingMode`, `SubscriptionScheduleCreateParams.billingMode`, and `checkout.SessionCreateParams.subscription_data.billingMode` from `enum('classic'|'flexible')` to `billing_mode`
