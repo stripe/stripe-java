@@ -15674,7 +15674,7 @@ class GeneratedExamples extends BaseStripeTest {
                 com.stripe.param.v2.billing.MeterEventStreamCreateParams.Event.builder()
                     .setEventName("event_name")
                     .setIdentifier("identifier")
-                    .putPayload("undefined", "payload")
+                    .putPayload("key", "payload")
                     .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
                     .build())
             .build();
@@ -15697,13 +15697,13 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.MeterEvent.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"object\":\"v2.billing.meter_event\",\"payload\":{\"undefined\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"object\":\"v2.billing.meter_event\",\"payload\":{\"key\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.MeterEventCreateParams params =
         com.stripe.param.v2.billing.MeterEventCreateParams.builder()
             .setEventName("event_name")
-            .putPayload("undefined", "payload")
+            .putPayload("key", "payload")
             .build();
 
     com.stripe.model.v2.billing.MeterEvent meterEvent =
@@ -15978,7 +15978,7 @@ class GeneratedExamples extends BaseStripeTest {
             .addEvent(
                 com.stripe.param.v2.billing.MeterEventStreamCreateParams.Event.builder()
                     .setEventName("event_name")
-                    .putPayload("undefined", "payload")
+                    .putPayload("key", "payload")
                     .build())
             .build();
 
