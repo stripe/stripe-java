@@ -880,7 +880,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing extends StripeObject {
-    /** Whether Adaptive Pricing is enabled. */
+    /**
+     * If enabled, Adaptive Pricing is available on <a
+     * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+     * sessions</a>.
+     */
     @SerializedName("enabled")
     Boolean enabled;
   }

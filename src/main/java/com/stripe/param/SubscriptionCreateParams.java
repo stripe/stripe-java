@@ -2104,8 +2104,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class BillingCycleAnchorConfig {
     /**
-     * <strong>Required.</strong> The day of the month the billing_cycle_anchor should be. Ranges
-     * from 1 to 31.
+     * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1 to 31.
      */
     @SerializedName("day_of_month")
     Long dayOfMonth;
@@ -2119,19 +2118,19 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The hour of the day the billing_cycle_anchor should be. Ranges from 0 to 23. */
+    /** The hour of the day the anchor should be. Ranges from 0 to 23. */
     @SerializedName("hour")
     Long hour;
 
-    /** The minute of the hour the billing_cycle_anchor should be. Ranges from 0 to 59. */
+    /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
     @SerializedName("minute")
     Long minute;
 
-    /** The month to start full cycle billing periods. Ranges from 1 to 12. */
+    /** The month to start full cycle periods. Ranges from 1 to 12. */
     @SerializedName("month")
     Long month;
 
-    /** The second of the minute the billing_cycle_anchor should be. Ranges from 0 to 59. */
+    /** The second of the minute the anchor should be. Ranges from 0 to 59. */
     @SerializedName("second")
     Long second;
 
@@ -2174,8 +2173,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The day of the month the billing_cycle_anchor should be. Ranges
-       * from 1 to 31.
+       * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1 to 31.
        */
       public Builder setDayOfMonth(Long dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
@@ -2209,25 +2207,25 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The hour of the day the billing_cycle_anchor should be. Ranges from 0 to 23. */
+      /** The hour of the day the anchor should be. Ranges from 0 to 23. */
       public Builder setHour(Long hour) {
         this.hour = hour;
         return this;
       }
 
-      /** The minute of the hour the billing_cycle_anchor should be. Ranges from 0 to 59. */
+      /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
       public Builder setMinute(Long minute) {
         this.minute = minute;
         return this;
       }
 
-      /** The month to start full cycle billing periods. Ranges from 1 to 12. */
+      /** The month to start full cycle periods. Ranges from 1 to 12. */
       public Builder setMonth(Long month) {
         this.month = month;
         return this;
       }
 
-      /** The second of the minute the billing_cycle_anchor should be. Ranges from 0 to 59. */
+      /** The second of the minute the anchor should be. Ranges from 0 to 59. */
       public Builder setSecond(Long second) {
         this.second = second;
         return this;

@@ -9,6 +9,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.MandateListParams;
 import com.stripe.param.MandateRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +100,40 @@ public class Mandate extends ApiResource implements HasId {
   public void setPaymentMethodObject(PaymentMethod expandableObject) {
     this.paymentMethod =
         new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Retrieves a list of Mandates for a given PaymentMethod. */
+  public static MandateCollection list(Map<String, Object> params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a list of Mandates for a given PaymentMethod. */
+  public static MandateCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/mandates";
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
+    return getGlobalResponseGetter().request(request, MandateCollection.class);
+  }
+
+  /** Retrieves a list of Mandates for a given PaymentMethod. */
+  public static MandateCollection list(MandateListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a list of Mandates for a given PaymentMethod. */
+  public static MandateCollection list(MandateListParams params, RequestOptions options)
+      throws StripeException {
+    String path = "/v1/mandates";
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getGlobalResponseGetter().request(request, MandateCollection.class);
   }
 
   /** Retrieves a Mandate object. */

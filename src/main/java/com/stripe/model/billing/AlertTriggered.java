@@ -3,6 +3,7 @@ package com.stripe.model.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,5 +45,5 @@ public class AlertTriggered extends StripeObject {
 
   /** The value triggering the alert. */
   @SerializedName("value")
-  Long value;
+  BigDecimal value;
 }

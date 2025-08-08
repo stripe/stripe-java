@@ -235,9 +235,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * Where the user is coming from. This informs the optimizations that are applied to the session.
-   * For example, a session originating from a mobile app may behave more like a native app,
-   * depending on the platform. This parameter is currently not allowed if {@code ui_mode} is {@code
-   * custom}.
    */
   @SerializedName("origin_context")
   OriginContext originContext;
@@ -1018,9 +1015,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Where the user is coming from. This informs the optimizations that are applied to the
-     * session. For example, a session originating from a mobile app may behave more like a native
-     * app, depending on the platform. This parameter is currently not allowed if {@code ui_mode} is
-     * {@code custom}.
+     * session.
      */
     public Builder setOriginContext(SessionCreateParams.OriginContext originContext) {
       this.originContext = originContext;
@@ -1259,10 +1254,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing {
     /**
-     * Set to {@code true} to enable <a
-     * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
-     * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
-     * setting</a>.
+     * If set to {@code true}, Adaptive Pricing is available on <a
+     * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+     * sessions</a>. Defaults to your <a
+     * href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard setting</a>.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -1296,10 +1291,10 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set to {@code true} to enable <a
-       * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
-       * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
-       * setting</a>.
+       * If set to {@code true}, Adaptive Pricing is available on <a
+       * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+       * sessions</a>. Defaults to your <a
+       * href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard setting</a>.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -3294,6 +3289,13 @@ public class SessionCreateParams extends ApiRequestParams {
     String coupon;
 
     /**
+     * Data used to generate a new <a href="https://stripe.com/docs/api/coupon">Coupon</a> object
+     * inline. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
+     */
+    @SerializedName("coupon_data")
+    CouponData couponData;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -3306,8 +3308,13 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("promotion_code")
     String promotionCode;
 
-    private Discount(String coupon, Map<String, Object> extraParams, String promotionCode) {
+    private Discount(
+        String coupon,
+        CouponData couponData,
+        Map<String, Object> extraParams,
+        String promotionCode) {
       this.coupon = coupon;
+      this.couponData = couponData;
       this.extraParams = extraParams;
       this.promotionCode = promotionCode;
     }
@@ -3319,18 +3326,30 @@ public class SessionCreateParams extends ApiRequestParams {
     public static class Builder {
       private String coupon;
 
+      private CouponData couponData;
+
       private Map<String, Object> extraParams;
 
       private String promotionCode;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Discount build() {
-        return new SessionCreateParams.Discount(this.coupon, this.extraParams, this.promotionCode);
+        return new SessionCreateParams.Discount(
+            this.coupon, this.couponData, this.extraParams, this.promotionCode);
       }
 
       /** The ID of the coupon to apply to this Session. */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
+        return this;
+      }
+
+      /**
+       * Data used to generate a new <a href="https://stripe.com/docs/api/coupon">Coupon</a> object
+       * inline. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
+       */
+      public Builder setCouponData(SessionCreateParams.Discount.CouponData couponData) {
+        this.couponData = couponData;
         return this;
       }
 
@@ -3364,6 +3383,254 @@ public class SessionCreateParams extends ApiRequestParams {
       public Builder setPromotionCode(String promotionCode) {
         this.promotionCode = promotionCode;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CouponData {
+      /**
+       * A positive integer representing the amount to subtract from an invoice total (required if
+       * {@code percent_off} is not passed).
+       */
+      @SerializedName("amount_off")
+      Long amountOff;
+
+      /**
+       * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> of
+       * the {@code amount_off} parameter (required if {@code amount_off} is passed).
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * Specifies how long the discount will be in effect if used on a subscription. Defaults to
+       * {@code once}.
+       */
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format. Individual keys can be unset by posting an empty value to them. All
+       * keys can be unset by posting an empty value to {@code metadata}.
+       */
+      @SerializedName("metadata")
+      Object metadata;
+
+      /**
+       * Name of the coupon displayed to customers on, for instance invoices, or receipts. By
+       * default the {@code id} is shown if {@code name} is not set.
+       */
+      @SerializedName("name")
+      String name;
+
+      /**
+       * A positive float larger than 0, and smaller or equal to 100, that represents the discount
+       * the coupon will apply (required if {@code amount_off} is not passed).
+       */
+      @SerializedName("percent_off")
+      BigDecimal percentOff;
+
+      private CouponData(
+          Long amountOff,
+          String currency,
+          Duration duration,
+          Map<String, Object> extraParams,
+          Object metadata,
+          String name,
+          BigDecimal percentOff) {
+        this.amountOff = amountOff;
+        this.currency = currency;
+        this.duration = duration;
+        this.extraParams = extraParams;
+        this.metadata = metadata;
+        this.name = name;
+        this.percentOff = percentOff;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long amountOff;
+
+        private String currency;
+
+        private Duration duration;
+
+        private Map<String, Object> extraParams;
+
+        private Object metadata;
+
+        private String name;
+
+        private BigDecimal percentOff;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.Discount.CouponData build() {
+          return new SessionCreateParams.Discount.CouponData(
+              this.amountOff,
+              this.currency,
+              this.duration,
+              this.extraParams,
+              this.metadata,
+              this.name,
+              this.percentOff);
+        }
+
+        /**
+         * A positive integer representing the amount to subtract from an invoice total (required if
+         * {@code percent_off} is not passed).
+         */
+        public Builder setAmountOff(Long amountOff) {
+          this.amountOff = amountOff;
+          return this;
+        }
+
+        /**
+         * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a>
+         * of the {@code amount_off} parameter (required if {@code amount_off} is passed).
+         */
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        /**
+         * Specifies how long the discount will be in effect if used on a subscription. Defaults to
+         * {@code once}.
+         */
+        public Builder setDuration(SessionCreateParams.Discount.CouponData.Duration duration) {
+          this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Discount.CouponData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Discount.CouponData#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SessionCreateParams.Discount.CouponData#metadata} for the field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null || this.metadata instanceof EmptyParam) {
+            this.metadata = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.metadata).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.Discount.CouponData#metadata} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null || this.metadata instanceof EmptyParam) {
+            this.metadata = new HashMap<String, String>();
+          }
+          ((Map<String, String>) this.metadata).putAll(map);
+          return this;
+        }
+
+        /**
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format. Individual keys can be unset by posting an empty value to
+         * them. All keys can be unset by posting an empty value to {@code metadata}.
+         */
+        public Builder setMetadata(EmptyParam metadata) {
+          this.metadata = metadata;
+          return this;
+        }
+
+        /**
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format. Individual keys can be unset by posting an empty value to
+         * them. All keys can be unset by posting an empty value to {@code metadata}.
+         */
+        public Builder setMetadata(Map<String, String> metadata) {
+          this.metadata = metadata;
+          return this;
+        }
+
+        /**
+         * Name of the coupon displayed to customers on, for instance invoices, or receipts. By
+         * default the {@code id} is shown if {@code name} is not set.
+         */
+        public Builder setName(String name) {
+          this.name = name;
+          return this;
+        }
+
+        /**
+         * A positive float larger than 0, and smaller or equal to 100, that represents the discount
+         * the coupon will apply (required if {@code amount_off} is not passed).
+         */
+        public Builder setPercentOff(BigDecimal percentOff) {
+          this.percentOff = percentOff;
+          return this;
+        }
+      }
+
+      public enum Duration implements ApiRequestParams.EnumParam {
+        @SerializedName("forever")
+        FOREVER("forever"),
+
+        @SerializedName("once")
+        ONCE("once"),
+
+        @SerializedName("repeating")
+        REPEATING("repeating");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Duration(String value) {
+          this.value = value;
+        }
       }
     }
   }
