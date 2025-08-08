@@ -181,7 +181,8 @@ public class FileCreateParams extends ApiRequestParams {
      * created file. Creating a link is only possible when the file's {@code purpose} is one of the
      * following: {@code business_icon}, {@code business_logo}, {@code customer_signature}, {@code
      * dispute_evidence}, {@code issuing_regulatory_reporting}, {@code pci_document}, {@code
-     * tax_document_user_upload}, or {@code terminal_reader_splashscreen}.
+     * tax_document_user_upload}, {@code terminal_android_apk}, or {@code
+     * terminal_reader_splashscreen}.
      */
     @SerializedName("create")
     Boolean create;
@@ -240,7 +241,8 @@ public class FileCreateParams extends ApiRequestParams {
        * created file. Creating a link is only possible when the file's {@code purpose} is one of
        * the following: {@code business_icon}, {@code business_logo}, {@code customer_signature},
        * {@code dispute_evidence}, {@code issuing_regulatory_reporting}, {@code pci_document},
-       * {@code tax_document_user_upload}, or {@code terminal_reader_splashscreen}.
+       * {@code tax_document_user_upload}, {@code terminal_android_apk}, or {@code
+       * terminal_reader_splashscreen}.
        */
       public Builder setCreate(Boolean create) {
         this.create = create;
@@ -361,6 +363,9 @@ public class FileCreateParams extends ApiRequestParams {
 
     @SerializedName("tax_document_user_upload")
     TAX_DOCUMENT_USER_UPLOAD("tax_document_user_upload"),
+
+    @SerializedName("terminal_android_apk")
+    TERMINAL_ANDROID_APK("terminal_android_apk"),
 
     @SerializedName("terminal_reader_splashscreen")
     TERMINAL_READER_SPLASHSCREEN("terminal_reader_splashscreen");

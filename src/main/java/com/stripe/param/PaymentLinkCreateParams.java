@@ -3424,7 +3424,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
-     * href="https://stripe.com/docs/api/plans">Plan</a> object.
+     * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price} or {@code
+     * price_data} is required.
      */
     @SerializedName("price")
     String price;
@@ -3512,7 +3513,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
-       * href="https://stripe.com/docs/api/plans">Plan</a> object.
+       * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price} or {@code
+       * price_data} is required.
        */
       public Builder setPrice(String price) {
         this.price = price;

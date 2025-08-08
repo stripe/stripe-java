@@ -155,6 +155,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("kr_card")
   KrCard krCard;
 
+  /**
+   * The Mandate object of the most recently created Mandate associated with this payment method.
+   */
+  @SerializedName("latest_active_mandate")
+  Mandate latestActiveMandate;
+
   @SerializedName("link")
   Link link;
 
@@ -2831,6 +2837,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(klarna, responseGetter);
     trySetResponseGetter(konbini, responseGetter);
     trySetResponseGetter(krCard, responseGetter);
+    trySetResponseGetter(latestActiveMandate, responseGetter);
     trySetResponseGetter(link, responseGetter);
     trySetResponseGetter(mbWay, responseGetter);
     trySetResponseGetter(mobilepay, responseGetter);

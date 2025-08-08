@@ -1838,7 +1838,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         /**
          * The back of a document returned by a <a
          * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code additional_verification}.
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -1864,7 +1865,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         /**
          * The front of a document returned by a <a
          * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code additional_verification}.
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)

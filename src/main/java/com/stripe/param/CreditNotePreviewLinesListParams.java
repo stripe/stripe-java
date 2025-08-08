@@ -956,7 +956,10 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** ID of an existing refund to link this credit note to. */
+    /**
+     * ID of an existing refund to link this credit note to. Required when {@code type} is {@code
+     * refund}.
+     */
     @SerializedName("refund")
     String refund;
 
@@ -1019,7 +1022,10 @@ public class CreditNotePreviewLinesListParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of an existing refund to link this credit note to. */
+      /**
+       * ID of an existing refund to link this credit note to. Required when {@code type} is {@code
+       * refund}.
+       */
       public Builder setRefund(String refund) {
         this.refund = refund;
         return this;

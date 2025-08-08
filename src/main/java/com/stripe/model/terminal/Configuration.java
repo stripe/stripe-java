@@ -401,6 +401,9 @@ public class Configuration extends ApiResource implements HasId {
     @SerializedName("jpy")
     Jpy jpy;
 
+    @SerializedName("mxn")
+    Mxn mxn;
+
     @SerializedName("myr")
     Myr myr;
 
@@ -697,6 +700,30 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Jpy extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
+     * For more details about Mxn, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mxn extends StripeObject {
       /** Fixed amounts displayed when collecting a tip. */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;

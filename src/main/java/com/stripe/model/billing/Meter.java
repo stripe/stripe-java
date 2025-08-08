@@ -57,7 +57,7 @@ public class Meter extends ApiResource implements HasId {
   String eventName;
 
   /**
-   * The time window to pre-aggregate meter events for, if any.
+   * The time window which meter events have been pre-aggregated for, if any.
    *
    * <p>One of {@code day}, or {@code hour}.
    */

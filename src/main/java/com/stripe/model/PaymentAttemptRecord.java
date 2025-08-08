@@ -702,7 +702,27 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Alma extends StripeObject {}
+    public static class Alma extends StripeObject {
+      @SerializedName("installments")
+      Installments installments;
+
+      /** The Alma transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+
+      /**
+       * For more details about Installments, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        /** The number of installments. */
+        @SerializedName("count")
+        Long count;
+      }
+    }
 
     /**
      * For more details about AmazonPay, please refer to the <a
@@ -714,6 +734,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     public static class AmazonPay extends StripeObject {
       @SerializedName("funding")
       Funding funding;
+
+      /** The Amazon Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
 
       /**
        * For more details about Funding, please refer to the <a
@@ -2005,6 +2029,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Kakao Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2128,6 +2156,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** The last four digits of the card. This may not be present for American Express cards. */
       @SerializedName("last4")
       String last4;
+
+      /** The Korean Card transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2225,6 +2257,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Naver Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2330,6 +2366,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Payco transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2522,6 +2562,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("funding")
       Funding funding;
 
+      /** The Revolut Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+
       /**
        * For more details about Funding, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -2605,6 +2649,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Samsung Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
