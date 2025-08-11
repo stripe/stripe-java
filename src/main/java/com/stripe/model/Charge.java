@@ -1032,8 +1032,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     String networkAdviceCode;
 
     /**
-     * For charges declined by the network, a brand specific alphanumeric code which indicates the
-     * reason the authorization failed.
+     * For charges declined by the network, an alphanumeric code which indicates the reason the
+     * charge failed.
      */
     @SerializedName("network_decline_code")
     String networkDeclineCode;
