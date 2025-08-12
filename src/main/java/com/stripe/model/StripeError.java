@@ -52,18 +52,19 @@ public class StripeError extends StripeObject {
    * {@code forwarding_api_upstream_connection_error}, {@code
    * forwarding_api_upstream_connection_timeout}, {@code forwarding_api_upstream_error}, {@code
    * idempotency_key_in_use}, {@code incorrect_address}, {@code incorrect_cvc}, {@code
-   * incorrect_number}, {@code incorrect_zip}, {@code instant_payouts_config_disabled}, {@code
-   * instant_payouts_currency_disabled}, {@code instant_payouts_limit_exceeded}, {@code
-   * instant_payouts_unsupported}, {@code insufficient_funds}, {@code intent_invalid_state}, {@code
-   * intent_verification_method_missing}, {@code invalid_card_type}, {@code invalid_characters},
-   * {@code invalid_charge_amount}, {@code invalid_cvc}, {@code invalid_expiry_month}, {@code
-   * invalid_expiry_year}, {@code invalid_mandate_reference_prefix_format}, {@code invalid_number},
-   * {@code invalid_source_usage}, {@code invalid_tax_location}, {@code
-   * invoice_no_customer_line_items}, {@code invoice_no_payment_method_types}, {@code
-   * invoice_no_subscription_line_items}, {@code invoice_not_editable}, {@code
-   * invoice_on_behalf_of_not_editable}, {@code invoice_payment_intent_requires_action}, {@code
-   * invoice_upcoming_none}, {@code livemode_mismatch}, {@code lock_timeout}, {@code missing},
-   * {@code no_account}, {@code not_allowed_on_standard_account}, {@code out_of_inventory}, {@code
+   * incorrect_number}, {@code incorrect_zip}, {@code india_recurring_payment_mandate_canceled},
+   * {@code instant_payouts_config_disabled}, {@code instant_payouts_currency_disabled}, {@code
+   * instant_payouts_limit_exceeded}, {@code instant_payouts_unsupported}, {@code
+   * insufficient_funds}, {@code intent_invalid_state}, {@code intent_verification_method_missing},
+   * {@code invalid_card_type}, {@code invalid_characters}, {@code invalid_charge_amount}, {@code
+   * invalid_cvc}, {@code invalid_expiry_month}, {@code invalid_expiry_year}, {@code
+   * invalid_mandate_reference_prefix_format}, {@code invalid_number}, {@code invalid_source_usage},
+   * {@code invalid_tax_location}, {@code invoice_no_customer_line_items}, {@code
+   * invoice_no_payment_method_types}, {@code invoice_no_subscription_line_items}, {@code
+   * invoice_not_editable}, {@code invoice_on_behalf_of_not_editable}, {@code
+   * invoice_payment_intent_requires_action}, {@code invoice_upcoming_none}, {@code
+   * livemode_mismatch}, {@code lock_timeout}, {@code missing}, {@code no_account}, {@code
+   * not_allowed_on_standard_account}, {@code out_of_inventory}, {@code
    * ownership_declaration_not_allowed}, {@code parameter_invalid_empty}, {@code
    * parameter_invalid_integer}, {@code parameter_invalid_string_blank}, {@code
    * parameter_invalid_string_empty}, {@code parameter_missing}, {@code parameter_unknown}, {@code

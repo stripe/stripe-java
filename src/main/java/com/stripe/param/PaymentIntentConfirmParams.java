@@ -26470,6 +26470,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix {
+      /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+      @SerializedName("amount_includes_iof")
+      AmountIncludesIof amountIncludesIof;
+
       /**
        * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
        * Defaults to 86400 seconds.
@@ -26520,10 +26524,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private Pix(
+          AmountIncludesIof amountIncludesIof,
           Long expiresAfterSeconds,
           Long expiresAt,
           Map<String, Object> extraParams,
           SetupFutureUsage setupFutureUsage) {
+        this.amountIncludesIof = amountIncludesIof;
         this.expiresAfterSeconds = expiresAfterSeconds;
         this.expiresAt = expiresAt;
         this.extraParams = extraParams;
@@ -26535,6 +26541,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AmountIncludesIof amountIncludesIof;
+
         private Long expiresAfterSeconds;
 
         private Long expiresAt;
@@ -26546,7 +26554,19 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentConfirmParams.PaymentMethodOptions.Pix build() {
           return new PaymentIntentConfirmParams.PaymentMethodOptions.Pix(
-              this.expiresAfterSeconds, this.expiresAt, this.extraParams, this.setupFutureUsage);
+              this.amountIncludesIof,
+              this.expiresAfterSeconds,
+              this.expiresAt,
+              this.extraParams,
+              this.setupFutureUsage);
+        }
+
+        /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+        public Builder setAmountIncludesIof(
+            PaymentIntentConfirmParams.PaymentMethodOptions.Pix.AmountIncludesIof
+                amountIncludesIof) {
+          this.amountIncludesIof = amountIncludesIof;
+          return this;
         }
 
         /**
@@ -26623,6 +26643,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             PaymentIntentConfirmParams.PaymentMethodOptions.Pix.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+        @SerializedName("always")
+        ALWAYS("always"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        AmountIncludesIof(String value) {
+          this.value = value;
         }
       }
 
