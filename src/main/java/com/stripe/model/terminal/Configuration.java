@@ -71,6 +71,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("offline")
   Offline offline;
 
+  @SerializedName("reader_security")
+  ReaderSecurity readerSecurity;
+
   @SerializedName("reboot_window")
   RebootWindow rebootWindow;
 
@@ -302,6 +305,19 @@ public class Configuration extends ApiResource implements HasId {
      */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  /**
+   * For more details about ReaderSecurity, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReaderSecurity extends StripeObject {
+    /** Passcode used to access a reader's admin menu. */
+    @SerializedName("admin_menu_passcode")
+    String adminMenuPasscode;
   }
 
   /**
@@ -1069,6 +1085,7 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
     trySetResponseGetter(offline, responseGetter);
+    trySetResponseGetter(readerSecurity, responseGetter);
     trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(tipping, responseGetter);
