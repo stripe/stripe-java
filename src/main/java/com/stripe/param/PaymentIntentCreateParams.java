@@ -26994,6 +26994,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * Additional fields for mandate creation. Only applicable when {@code
+       * setup_future_usage=off_session}.
+       */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -27024,11 +27031,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Long expiresAfterSeconds,
           Long expiresAt,
           Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
           SetupFutureUsage setupFutureUsage) {
         this.amountIncludesIof = amountIncludesIof;
         this.expiresAfterSeconds = expiresAfterSeconds;
         this.expiresAt = expiresAt;
         this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
         this.setupFutureUsage = setupFutureUsage;
       }
 
@@ -27045,6 +27054,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private MandateOptions mandateOptions;
+
         private SetupFutureUsage setupFutureUsage;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -27054,6 +27065,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.expiresAfterSeconds,
               this.expiresAt,
               this.extraParams,
+              this.mandateOptions,
               this.setupFutureUsage);
         }
 
@@ -27112,6 +27124,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         /**
+         * Additional fields for mandate creation. Only applicable when {@code
+         * setup_future_usage=off_session}.
+         */
+        public Builder setMandateOptions(
+            PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        /**
          * Indicates that you intend to make future payments with this PaymentIntent's payment
          * method.
          *
@@ -27142,6 +27164,281 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /**
+         * Amount to be charged for future payments. Required when {@code amount_type=fixed}. If not
+         * provided for {@code amount_type=maximum}, defaults to 250 BRL.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+        @SerializedName("amount_includes_iof")
+        AmountIncludesIof amountIncludesIof;
+
+        /** Type of amount. Defaults to {@code maximum}. */
+        @SerializedName("amount_type")
+        AmountType amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Only {@code brl} is supported currently.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Date when the mandate expires and no further payments will be charged, in {@code
+         * YYYY-MM-DD}. If not provided, the mandate will be active until canceled. If provided, end
+         * date should be after start date.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Schedule at which the future payments will be charged. Defaults to {@code weekly}. */
+        @SerializedName("payment_schedule")
+        PaymentSchedule paymentSchedule;
+
+        /**
+         * Subscription name displayed to buyers in their bank app. Defaults to the displayable
+         * business name.
+         */
+        @SerializedName("reference")
+        String reference;
+
+        /**
+         * Start date of the mandate, in {@code YYYY-MM-DD}. Start date should be at least 3 days in
+         * the future. Defaults to 3 days after the current date.
+         */
+        @SerializedName("start_date")
+        String startDate;
+
+        private MandateOptions(
+            Long amount,
+            AmountIncludesIof amountIncludesIof,
+            AmountType amountType,
+            String currency,
+            String endDate,
+            Map<String, Object> extraParams,
+            PaymentSchedule paymentSchedule,
+            String reference,
+            String startDate) {
+          this.amount = amount;
+          this.amountIncludesIof = amountIncludesIof;
+          this.amountType = amountType;
+          this.currency = currency;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+          this.paymentSchedule = paymentSchedule;
+          this.reference = reference;
+          this.startDate = startDate;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private AmountIncludesIof amountIncludesIof;
+
+          private AmountType amountType;
+
+          private String currency;
+
+          private String endDate;
+
+          private Map<String, Object> extraParams;
+
+          private PaymentSchedule paymentSchedule;
+
+          private String reference;
+
+          private String startDate;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions build() {
+            return new PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions(
+                this.amount,
+                this.amountIncludesIof,
+                this.amountType,
+                this.currency,
+                this.endDate,
+                this.extraParams,
+                this.paymentSchedule,
+                this.reference,
+                this.startDate);
+          }
+
+          /**
+           * Amount to be charged for future payments. Required when {@code amount_type=fixed}. If
+           * not provided for {@code amount_type=maximum}, defaults to 250 BRL.
+           */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+          public Builder setAmountIncludesIof(
+              PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions.AmountIncludesIof
+                  amountIncludesIof) {
+            this.amountIncludesIof = amountIncludesIof;
+            return this;
+          }
+
+          /** Type of amount. Defaults to {@code maximum}. */
+          public Builder setAmountType(
+              PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions.AmountType
+                  amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Only {@code brl} is supported currently.
+           */
+          public Builder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Date when the mandate expires and no further payments will be charged, in {@code
+           * YYYY-MM-DD}. If not provided, the mandate will be active until canceled. If provided,
+           * end date should be after start date.
+           */
+          public Builder setEndDate(String endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Schedule at which the future payments will be charged. Defaults to {@code weekly}. */
+          public Builder setPaymentSchedule(
+              PaymentIntentCreateParams.PaymentMethodOptions.Pix.MandateOptions.PaymentSchedule
+                  paymentSchedule) {
+            this.paymentSchedule = paymentSchedule;
+            return this;
+          }
+
+          /**
+           * Subscription name displayed to buyers in their bank app. Defaults to the displayable
+           * business name.
+           */
+          public Builder setReference(String reference) {
+            this.reference = reference;
+            return this;
+          }
+
+          /**
+           * Start date of the mandate, in {@code YYYY-MM-DD}. Start date should be at least 3 days
+           * in the future. Defaults to 3 days after the current date.
+           */
+          public Builder setStartDate(String startDate) {
+            this.startDate = startDate;
+            return this;
+          }
+        }
+
+        public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+          @SerializedName("always")
+          ALWAYS("always"),
+
+          @SerializedName("never")
+          NEVER("never");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountIncludesIof(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentSchedule implements ApiRequestParams.EnumParam {
+          @SerializedName("halfyearly")
+          HALFYEARLY("halfyearly"),
+
+          @SerializedName("monthly")
+          MONTHLY("monthly"),
+
+          @SerializedName("quarterly")
+          QUARTERLY("quarterly"),
+
+          @SerializedName("weekly")
+          WEEKLY("weekly"),
+
+          @SerializedName("yearly")
+          YEARLY("yearly");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentSchedule(String value) {
+            this.value = value;
+          }
+        }
+      }
+
       public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
         @SerializedName("always")
         ALWAYS("always"),
@@ -27159,7 +27456,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
         @SerializedName("none")
-        NONE("none");
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

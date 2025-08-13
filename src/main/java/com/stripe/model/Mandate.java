@@ -231,7 +231,15 @@ public class Mandate extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class MultiUse extends StripeObject {}
+  public static class MultiUse extends StripeObject {
+    /** The amount of the payment on a multi use mandate. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The currency of the payment on a multi use mandate. */
+    @SerializedName("currency")
+    String currency;
+  }
 
   /**
    * For more details about PaymentMethodDetails, please refer to the <a
@@ -282,6 +290,9 @@ public class Mandate extends ApiResource implements HasId {
 
     @SerializedName("payto")
     Payto payto;
+
+    @SerializedName("pix")
+    Pix pix;
 
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
@@ -561,6 +572,55 @@ public class Mandate extends ApiResource implements HasId {
        * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to confirmation
        * time.
        */
+      @SerializedName("start_date")
+      String startDate;
+    }
+
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {
+      /**
+       * Determines if the amount includes the IOF tax.
+       *
+       * <p>One of {@code always}, or {@code never}.
+       */
+      @SerializedName("amount_includes_iof")
+      String amountIncludesIof;
+
+      /**
+       * Type of amount.
+       *
+       * <p>One of {@code fixed}, or {@code maximum}.
+       */
+      @SerializedName("amount_type")
+      String amountType;
+
+      /**
+       * Date when the mandate expires and no further payments will be charged, in {@code
+       * YYYY-MM-DD}.
+       */
+      @SerializedName("end_date")
+      String endDate;
+
+      /**
+       * Schedule at which the future payments will be charged.
+       *
+       * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or {@code
+       * yearly}.
+       */
+      @SerializedName("payment_schedule")
+      String paymentSchedule;
+
+      /** Subscription name displayed to buyers in their bank app. */
+      @SerializedName("reference")
+      String reference;
+
+      /** Start date of the mandate, in {@code YYYY-MM-DD}. */
       @SerializedName("start_date")
       String startDate;
     }

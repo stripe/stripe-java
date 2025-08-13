@@ -234,6 +234,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     @SerializedName("payment_intent")
     String paymentIntent;
 
+    /** Only return invoice payments associated by this payment record ID. */
     @SerializedName("payment_record")
     String paymentRecord;
 
@@ -300,6 +301,7 @@ public class InvoicePaymentListParams extends ApiRequestParams {
         return this;
       }
 
+      /** Only return invoice payments associated by this payment record ID. */
       public Builder setPaymentRecord(String paymentRecord) {
         this.paymentRecord = paymentRecord;
         return this;
