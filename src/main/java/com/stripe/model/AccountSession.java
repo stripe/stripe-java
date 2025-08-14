@@ -177,6 +177,9 @@ public class AccountSession extends ApiResource {
     @SerializedName("payments")
     Payments payments;
 
+    @SerializedName("payout_details")
+    PayoutDetails payoutDetails;
+
     @SerializedName("payouts")
     Payouts payouts;
 
@@ -905,6 +908,31 @@ public class AccountSession extends ApiResource {
         @SerializedName("refund_management")
         Boolean refundManagement;
       }
+    }
+
+    /**
+     * For more details about PayoutDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutDetails extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     /**

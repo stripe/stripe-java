@@ -325,6 +325,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
     /**
      * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/payout-details/">payout
+     * details</a> embedded component.
+     */
+    @SerializedName("payout_details")
+    PayoutDetails payoutDetails;
+
+    /**
+     * Configuration for the <a
      * href="https://stripe.com/connect/supported-embedded-components/payouts/">payouts</a> embedded
      * component.
      */
@@ -411,6 +419,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         PaymentDisputes paymentDisputes,
         PaymentMethodSettings paymentMethodSettings,
         Payments payments,
+        PayoutDetails payoutDetails,
         Payouts payouts,
         PayoutsList payoutsList,
         ProductTaxCodeSelector productTaxCodeSelector,
@@ -442,6 +451,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.paymentDisputes = paymentDisputes;
       this.paymentMethodSettings = paymentMethodSettings;
       this.payments = payments;
+      this.payoutDetails = payoutDetails;
       this.payouts = payouts;
       this.payoutsList = payoutsList;
       this.productTaxCodeSelector = productTaxCodeSelector;
@@ -503,6 +513,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
       private Payments payments;
 
+      private PayoutDetails payoutDetails;
+
       private Payouts payouts;
 
       private PayoutsList payoutsList;
@@ -545,6 +557,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.paymentDisputes,
             this.paymentMethodSettings,
             this.payments,
+            this.payoutDetails,
             this.payouts,
             this.payoutsList,
             this.productTaxCodeSelector,
@@ -817,6 +830,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
        */
       public Builder setPayments(AccountSessionCreateParams.Components.Payments payments) {
         this.payments = payments;
+        return this;
+      }
+
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/payout-details/">payout
+       * details</a> embedded component.
+       */
+      public Builder setPayoutDetails(
+          AccountSessionCreateParams.Components.PayoutDetails payoutDetails) {
+        this.payoutDetails = payoutDetails;
         return this;
       }
 
@@ -5177,6 +5201,154 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           /** Whether sending refunds is enabled. This is {@code true} by default. */
           public Builder setRefundManagement(Boolean refundManagement) {
             this.refundManagement = refundManagement;
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PayoutDetails {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** An empty list, because this embedded component has no features. */
+      @SerializedName("features")
+      Features features;
+
+      private PayoutDetails(Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.PayoutDetails build() {
+          return new AccountSessionCreateParams.Components.PayoutDetails(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.PayoutDetails#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.PayoutDetails#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** An empty list, because this embedded component has no features. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.PayoutDetails.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.PayoutDetails.Features build() {
+            return new AccountSessionCreateParams.Components.PayoutDetails.Features(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.PayoutDetails.Features#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.PayoutDetails.Features#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
             return this;
           }
         }
