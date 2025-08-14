@@ -1,22 +1,16 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class InvoicePaymentRetrieveParams extends ApiRequestParams {
-  /** Specifies which fields in the response should be expanded. */
-  @SerializedName("expand")
-  List<String> expand;
-
+public class IntentListParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -26,9 +20,13 @@ public class InvoicePaymentRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private InvoicePaymentRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
-    this.expand = expand;
+  /** Optionally set the maximum number of results per page. Defaults to 10. */
+  @SerializedName("limit")
+  Integer limit;
+
+  private IntentListParams(Map<String, Object> extraParams, Integer limit) {
     this.extraParams = extraParams;
+    this.limit = limit;
   }
 
   public static Builder builder() {
@@ -36,45 +34,19 @@ public class InvoicePaymentRetrieveParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private List<String> expand;
-
     private Map<String, Object> extraParams;
 
+    private Integer limit;
+
     /** Finalize and obtain parameter instance from this builder. */
-    public InvoicePaymentRetrieveParams build() {
-      return new InvoicePaymentRetrieveParams(this.expand, this.extraParams);
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoicePaymentRetrieveParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoicePaymentRetrieveParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
+    public IntentListParams build() {
+      return new IntentListParams(this.extraParams, this.limit);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InvoicePaymentRetrieveParams#extraParams} for the field documentation.
+     * IntentListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -87,13 +59,19 @@ public class InvoicePaymentRetrieveParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InvoicePaymentRetrieveParams#extraParams} for the field documentation.
+     * See {@link IntentListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Optionally set the maximum number of results per page. Defaults to 10. */
+    public Builder setLimit(Integer limit) {
+      this.limit = limit;
       return this;
     }
   }

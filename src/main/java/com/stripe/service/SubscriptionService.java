@@ -14,6 +14,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.SubscriptionAttachCadenceParams;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
@@ -531,6 +532,32 @@ public final class SubscriptionService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
+  }
+  /**
+   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
+   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   */
+  public Subscription attachCadence(String subscription, SubscriptionAttachCadenceParams params)
+      throws StripeException {
+    return attachCadence(subscription, params, (RequestOptions) null);
+  }
+  /**
+   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
+   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   */
+  public Subscription attachCadence(
+      String subscription, SubscriptionAttachCadenceParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(subscription));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Subscription.class);
   }
   /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(String subscription, SubscriptionMigrateParams params)

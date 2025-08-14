@@ -16,6 +16,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.billing.CreditBalanceTransactionListParams;
 import com.stripe.param.billing.CreditBalanceTransactionRetrieveParams;
+import java.math.BigDecimal;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -229,6 +230,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Amount extends StripeObject {
+      /** The custom pricing unit amount. */
+      @SerializedName("custom_pricing_unit")
+      CustomPricingUnit customPricingUnit;
+
       /** The monetary amount. */
       @SerializedName("monetary")
       Monetary monetary;
@@ -236,10 +241,28 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       /**
        * The type of this amount. We currently only support {@code monetary} billing credits.
        *
-       * <p>Equal to {@code monetary}.
+       * <p>One of {@code custom_pricing_unit}, or {@code monetary}.
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about CustomPricingUnit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /** A positive integer representing the amount. */
+        @SerializedName("value")
+        BigDecimal value;
+      }
 
       /**
        * For more details about Monetary, please refer to the <a
@@ -335,6 +358,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Amount extends StripeObject {
+      /** The custom pricing unit amount. */
+      @SerializedName("custom_pricing_unit")
+      CustomPricingUnit customPricingUnit;
+
       /** The monetary amount. */
       @SerializedName("monetary")
       Monetary monetary;
@@ -342,10 +369,28 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       /**
        * The type of this amount. We currently only support {@code monetary} billing credits.
        *
-       * <p>Equal to {@code monetary}.
+       * <p>One of {@code custom_pricing_unit}, or {@code monetary}.
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about CustomPricingUnit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /** A positive integer representing the amount. */
+        @SerializedName("value")
+        BigDecimal value;
+      }
 
       /**
        * For more details about Monetary, please refer to the <a

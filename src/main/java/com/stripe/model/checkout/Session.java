@@ -101,6 +101,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("cancel_url")
   String cancelUrl;
 
+  @SerializedName("checkout_items")
+  List<Session.CheckoutItem> checkoutItems;
+
   /**
    * A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or
    * similar, and can be used to reconcile the Session with your internal systems.
@@ -880,7 +883,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing extends StripeObject {
-    /** Whether Adaptive Pricing is enabled. */
+    /**
+     * If enabled, Adaptive Pricing is available on <a
+     * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+     * sessions</a>.
+     */
     @SerializedName("enabled")
     Boolean enabled;
   }
@@ -1004,6 +1011,48 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       public void setAccountObject(Account expandableObject) {
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
+    }
+  }
+
+  /**
+   * For more details about CheckoutItem, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CheckoutItem extends StripeObject {
+    @SerializedName("key")
+    String key;
+
+    @SerializedName("rate_card_subscription_item")
+    RateCardSubscriptionItem rateCardSubscriptionItem;
+
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about RateCardSubscriptionItem, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RateCardSubscriptionItem extends StripeObject {
+      @SerializedName("billing_cadence")
+      String billingCadence;
+
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      @SerializedName("rate_card")
+      String rateCard;
+
+      @SerializedName("rate_card_subscription")
+      String rateCardSubscription;
+
+      @SerializedName("rate_card_version")
+      String rateCardVersion;
     }
   }
 

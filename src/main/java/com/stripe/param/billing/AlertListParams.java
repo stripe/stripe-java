@@ -17,6 +17,10 @@ public class AlertListParams extends ApiRequestParams {
   @SerializedName("alert_type")
   AlertType alertType;
 
+  /** Filter results to only include alerts for the given customer. */
+  @SerializedName("customer")
+  String customer;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -61,6 +65,7 @@ public class AlertListParams extends ApiRequestParams {
 
   private AlertListParams(
       AlertType alertType,
+      String customer,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -68,6 +73,7 @@ public class AlertListParams extends ApiRequestParams {
       String meter,
       String startingAfter) {
     this.alertType = alertType;
+    this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -82,6 +88,8 @@ public class AlertListParams extends ApiRequestParams {
 
   public static class Builder {
     private AlertType alertType;
+
+    private String customer;
 
     private String endingBefore;
 
@@ -99,6 +107,7 @@ public class AlertListParams extends ApiRequestParams {
     public AlertListParams build() {
       return new AlertListParams(
           this.alertType,
+          this.customer,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -110,6 +119,12 @@ public class AlertListParams extends ApiRequestParams {
     /** Filter results to only include this type of alert. */
     public Builder setAlertType(AlertListParams.AlertType alertType) {
       this.alertType = alertType;
+      return this;
+    }
+
+    /** Filter results to only include alerts for the given customer. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
       return this;
     }
 
@@ -204,6 +219,9 @@ public class AlertListParams extends ApiRequestParams {
   }
 
   public enum AlertType implements ApiRequestParams.EnumParam {
+    @SerializedName("credit_balance_threshold")
+    CREDIT_BALANCE_THRESHOLD("credit_balance_threshold"),
+
     @SerializedName("usage_threshold")
     USAGE_THRESHOLD("usage_threshold");
 

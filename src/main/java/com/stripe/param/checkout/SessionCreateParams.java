@@ -52,6 +52,9 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("cancel_url")
   String cancelUrl;
 
+  @SerializedName("checkout_items")
+  List<SessionCreateParams.CheckoutItem> checkoutItems;
+
   /**
    * A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or
    * similar, and can be used to reconcile the session with your internal systems.
@@ -404,6 +407,7 @@ public class SessionCreateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
       String cancelUrl,
+      List<SessionCreateParams.CheckoutItem> checkoutItems,
       String clientReferenceId,
       ConsentCollection consentCollection,
       String currency,
@@ -451,6 +455,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
     this.cancelUrl = cancelUrl;
+    this.checkoutItems = checkoutItems;
     this.clientReferenceId = clientReferenceId;
     this.consentCollection = consentCollection;
     this.currency = currency;
@@ -510,6 +515,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private BillingAddressCollection billingAddressCollection;
 
     private String cancelUrl;
+
+    private List<SessionCreateParams.CheckoutItem> checkoutItems;
 
     private String clientReferenceId;
 
@@ -602,6 +609,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.automaticTax,
           this.billingAddressCollection,
           this.cancelUrl,
+          this.checkoutItems,
           this.clientReferenceId,
           this.consentCollection,
           this.currency,
@@ -692,6 +700,32 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setCancelUrl(String cancelUrl) {
       this.cancelUrl = cancelUrl;
+      return this;
+    }
+
+    /**
+     * Add an element to `checkoutItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#checkoutItems} for the field documentation.
+     */
+    public Builder addCheckoutItem(SessionCreateParams.CheckoutItem element) {
+      if (this.checkoutItems == null) {
+        this.checkoutItems = new ArrayList<>();
+      }
+      this.checkoutItems.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `checkoutItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#checkoutItems} for the field documentation.
+     */
+    public Builder addAllCheckoutItem(List<SessionCreateParams.CheckoutItem> elements) {
+      if (this.checkoutItems == null) {
+        this.checkoutItems = new ArrayList<>();
+      }
+      this.checkoutItems.addAll(elements);
       return this;
     }
 
@@ -1259,10 +1293,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing {
     /**
-     * Set to {@code true} to enable <a
-     * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
-     * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
-     * setting</a>.
+     * If set to {@code true}, Adaptive Pricing is available on <a
+     * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+     * sessions</a>. Defaults to your <a
+     * href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard setting</a>.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -1296,10 +1330,10 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set to {@code true} to enable <a
-       * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
-       * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
-       * setting</a>.
+       * If set to {@code true}, Adaptive Pricing is available on <a
+       * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+       * sessions</a>. Defaults to your <a
+       * href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard setting</a>.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -1703,6 +1737,238 @@ public class SessionCreateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CheckoutItem {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> */
+    @SerializedName("key")
+    String key;
+
+    @SerializedName("rate_card_subscription_item")
+    RateCardSubscriptionItem rateCardSubscriptionItem;
+
+    /** <strong>Required.</strong> */
+    @SerializedName("type")
+    Type type;
+
+    private CheckoutItem(
+        Map<String, Object> extraParams,
+        String key,
+        RateCardSubscriptionItem rateCardSubscriptionItem,
+        Type type) {
+      this.extraParams = extraParams;
+      this.key = key;
+      this.rateCardSubscriptionItem = rateCardSubscriptionItem;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String key;
+
+      private RateCardSubscriptionItem rateCardSubscriptionItem;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.CheckoutItem build() {
+        return new SessionCreateParams.CheckoutItem(
+            this.extraParams, this.key, this.rateCardSubscriptionItem, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.CheckoutItem#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.CheckoutItem#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setKey(String key) {
+        this.key = key;
+        return this;
+      }
+
+      public Builder setRateCardSubscriptionItem(
+          SessionCreateParams.CheckoutItem.RateCardSubscriptionItem rateCardSubscriptionItem) {
+        this.rateCardSubscriptionItem = rateCardSubscriptionItem;
+        return this;
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setType(SessionCreateParams.CheckoutItem.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RateCardSubscriptionItem {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      /** <strong>Required.</strong> */
+      @SerializedName("rate_card")
+      String rateCard;
+
+      @SerializedName("rate_card_version")
+      String rateCardVersion;
+
+      private RateCardSubscriptionItem(
+          Map<String, Object> extraParams,
+          Map<String, String> metadata,
+          String rateCard,
+          String rateCardVersion) {
+        this.extraParams = extraParams;
+        this.metadata = metadata;
+        this.rateCard = rateCard;
+        this.rateCardVersion = rateCardVersion;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Map<String, String> metadata;
+
+        private String rateCard;
+
+        private String rateCardVersion;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.CheckoutItem.RateCardSubscriptionItem build() {
+          return new SessionCreateParams.CheckoutItem.RateCardSubscriptionItem(
+              this.extraParams, this.metadata, this.rateCard, this.rateCardVersion);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CheckoutItem.RateCardSubscriptionItem#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CheckoutItem.RateCardSubscriptionItem#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+         * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+         * SessionCreateParams.CheckoutItem.RateCardSubscriptionItem#metadata} for the field
+         * documentation.
+         */
+        public Builder putMetadata(String key, String value) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.CheckoutItem.RateCardSubscriptionItem#metadata} for
+         * the field documentation.
+         */
+        public Builder putAllMetadata(Map<String, String> map) {
+          if (this.metadata == null) {
+            this.metadata = new HashMap<>();
+          }
+          this.metadata.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> */
+        public Builder setRateCard(String rateCard) {
+          this.rateCard = rateCard;
+          return this;
+        }
+
+        public Builder setRateCardVersion(String rateCardVersion) {
+          this.rateCardVersion = rateCardVersion;
+          return this;
+        }
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("checkout_item")
+      CHECKOUT_ITEM("checkout_item");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }

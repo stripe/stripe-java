@@ -2,16 +2,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.exception.StripeException;
-import com.stripe.net.ApiRequest;
-import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
-import com.stripe.net.BaseAddress;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.InvoicePaymentListParams;
-import com.stripe.param.InvoicePaymentRetrieveParams;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InvoicePayment extends ApiResource implements HasId {
+public class InvoicePayment extends StripeObject implements HasId {
   /**
    * Amount that was actually paid for this invoice, in cents (or local equivalent). This field is
    * null until the payment is {@code paid}. This amount can be less than the {@code
@@ -114,94 +105,6 @@ public class InvoicePayment extends ApiResource implements HasId {
 
   public void setInvoiceObject(Invoice expandableObject) {
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
-  }
-
-  /**
-   * When retrieving an invoice, there is an includable payments property containing the first
-   * handful of those items. There is also a URL where you can retrieve the full (paginated) list of
-   * payments.
-   */
-  public static InvoicePaymentCollection list(Map<String, Object> params) throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an invoice, there is an includable payments property containing the first
-   * handful of those items. There is also a URL where you can retrieve the full (paginated) list of
-   * payments.
-   */
-  public static InvoicePaymentCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = "/v1/invoice_payments";
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getGlobalResponseGetter().request(request, InvoicePaymentCollection.class);
-  }
-
-  /**
-   * When retrieving an invoice, there is an includable payments property containing the first
-   * handful of those items. There is also a URL where you can retrieve the full (paginated) list of
-   * payments.
-   */
-  public static InvoicePaymentCollection list(InvoicePaymentListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an invoice, there is an includable payments property containing the first
-   * handful of those items. There is also a URL where you can retrieve the full (paginated) list of
-   * payments.
-   */
-  public static InvoicePaymentCollection list(
-      InvoicePaymentListParams params, RequestOptions options) throws StripeException {
-    String path = "/v1/invoice_payments";
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getGlobalResponseGetter().request(request, InvoicePaymentCollection.class);
-  }
-
-  /** Retrieves the invoice payment with the given ID. */
-  public static InvoicePayment retrieve(String invoicePayment) throws StripeException {
-    return retrieve(invoicePayment, (Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the invoice payment with the given ID. */
-  public static InvoicePayment retrieve(String invoicePayment, RequestOptions options)
-      throws StripeException {
-    return retrieve(invoicePayment, (Map<String, Object>) null, options);
-  }
-
-  /** Retrieves the invoice payment with the given ID. */
-  public static InvoicePayment retrieve(
-      String invoicePayment, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(invoicePayment));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getGlobalResponseGetter().request(request, InvoicePayment.class);
-  }
-
-  /** Retrieves the invoice payment with the given ID. */
-  public static InvoicePayment retrieve(
-      String invoicePayment, InvoicePaymentRetrieveParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/invoice_payments/%s", ApiResource.urlEncodeId(invoicePayment));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getGlobalResponseGetter().request(request, InvoicePayment.class);
   }
 
   /**
@@ -321,13 +224,5 @@ public class InvoicePayment extends ApiResource implements HasId {
     /** The time that the payment succeeded. */
     @SerializedName("paid_at")
     Long paidAt;
-  }
-
-  @Override
-  public void setResponseGetter(StripeResponseGetter responseGetter) {
-    super.setResponseGetter(responseGetter);
-    trySetResponseGetter(invoice, responseGetter);
-    trySetResponseGetter(payment, responseGetter);
-    trySetResponseGetter(statusTransitions, responseGetter);
   }
 }

@@ -1989,7 +1989,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -2051,7 +2051,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.CapitalFinancing.Features features) {
           this.features = features;
@@ -2138,7 +2138,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -2202,7 +2202,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.CapitalFinancingApplication.Features features) {
           this.features = features;
@@ -2290,7 +2290,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -2354,7 +2354,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.CapitalFinancingPromotion.Features features) {
           this.features = features;
@@ -2441,7 +2441,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -2502,7 +2502,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.CapitalOverview.Features features) {
           this.features = features;
@@ -2817,7 +2817,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -2878,7 +2878,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.Documents.Features features) {
           this.features = features;
@@ -2962,7 +2962,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -3024,7 +3024,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.ExportTaxTransactions.Features features) {
           this.features = features;
@@ -4824,7 +4824,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -4886,7 +4886,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.PaymentMethodSettings.Features features) {
           this.features = features;
@@ -5469,7 +5469,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -5530,7 +5530,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.PayoutsList.Features features) {
           this.features = features;
@@ -5614,7 +5614,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -5676,7 +5676,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.ProductTaxCodeSelector.Features features) {
           this.features = features;
@@ -5920,7 +5920,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -5981,7 +5981,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.ReportingChart.Features features) {
           this.features = features;
@@ -6068,7 +6068,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -6130,7 +6130,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.TaxRegistrations.Features features) {
           this.features = features;
@@ -6217,7 +6217,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -6278,7 +6278,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.TaxSettings.Features features) {
           this.features = features;
@@ -6362,7 +6362,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The list of features enabled in the embedded component. */
+      /** An empty list, because this embedded component has no features. */
       @SerializedName("features")
       Features features;
 
@@ -6424,7 +6424,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The list of features enabled in the embedded component. */
+        /** An empty list, because this embedded component has no features. */
         public Builder setFeatures(
             AccountSessionCreateParams.Components.TaxThresholdMonitoring.Features features) {
           this.features = features;

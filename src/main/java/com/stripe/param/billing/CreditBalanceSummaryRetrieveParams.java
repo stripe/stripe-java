@@ -248,6 +248,14 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class ApplicabilityScope {
       /**
+       * A list of billable items that the credit grant can apply to. We currently only support
+       * metered billable items. Cannot be used in combination with {@code price_type} or {@code
+       * prices}.
+       */
+      @SerializedName("billable_items")
+      List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem> billableItems;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -271,9 +279,12 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
       List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.Price> prices;
 
       private ApplicabilityScope(
+          List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem>
+              billableItems,
           Map<String, Object> extraParams,
           PriceType priceType,
           List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.Price> prices) {
+        this.billableItems = billableItems;
         this.extraParams = extraParams;
         this.priceType = priceType;
         this.prices = prices;
@@ -284,6 +295,9 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem>
+            billableItems;
+
         private Map<String, Object> extraParams;
 
         private PriceType priceType;
@@ -293,7 +307,38 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope build() {
           return new CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope(
-              this.extraParams, this.priceType, this.prices);
+              this.billableItems, this.extraParams, this.priceType, this.prices);
+        }
+
+        /**
+         * Add an element to `billableItems` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope#billableItems} for the field
+         * documentation.
+         */
+        public Builder addBillableItem(
+            CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem element) {
+          if (this.billableItems == null) {
+            this.billableItems = new ArrayList<>();
+          }
+          this.billableItems.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `billableItems` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope#billableItems}
+         * for the field documentation.
+         */
+        public Builder addAllBillableItem(
+            List<CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem>
+                elements) {
+          if (this.billableItems == null) {
+            this.billableItems = new ArrayList<>();
+          }
+          this.billableItems.addAll(elements);
+          return this;
         }
 
         /**
@@ -362,6 +407,81 @@ public class CreditBalanceSummaryRetrieveParams extends ApiRequestParams {
           }
           this.prices.addAll(elements);
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillableItem {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The billable item ID this credit grant should apply to. */
+        @SerializedName("id")
+        String id;
+
+        private BillableItem(Map<String, Object> extraParams, String id) {
+          this.extraParams = extraParams;
+          this.id = id;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem build() {
+            return new CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem(
+                this.extraParams, this.id);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CreditBalanceSummaryRetrieveParams.Filter.ApplicabilityScope.BillableItem#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The billable item ID this credit grant should apply to. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
         }
       }
 

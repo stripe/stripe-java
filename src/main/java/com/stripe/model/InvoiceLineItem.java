@@ -395,6 +395,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @SerializedName("invoice_item_details")
     InvoiceItemDetails invoiceItemDetails;
 
+    @SerializedName("rate_card_subscription_details")
+    RateCardSubscriptionDetails rateCardSubscriptionDetails;
+
     /** Details about the subscription item that generated this line item. */
     @SerializedName("subscription_item_details")
     SubscriptionItemDetails subscriptionItemDetails;
@@ -402,7 +405,8 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     /**
      * The type of parent that generated this line item
      *
-     * <p>One of {@code invoice_item_details}, or {@code subscription_item_details}.
+     * <p>One of {@code invoice_item_details}, {@code subscription_item_details}, or {@code
+     * rate_card_subscription_details}.
      */
     @SerializedName("type")
     String type;
@@ -463,6 +467,24 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
           List<String> invoiceLineItems;
         }
       }
+    }
+
+    /**
+     * For more details about RateCardSubscriptionDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RateCardSubscriptionDetails extends StripeObject {
+      @SerializedName("invoice_item")
+      String invoiceItem;
+
+      @SerializedName("rate_card_subscription")
+      String rateCardSubscription;
+
+      @SerializedName("rate_card_version")
+      String rateCardVersion;
     }
 
     /**
@@ -656,10 +678,13 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @SerializedName("price_details")
     PriceDetails priceDetails;
 
+    @SerializedName("rate_card_rate_details")
+    RateCardRateDetails rateCardRateDetails;
+
     /**
      * The type of the pricing details.
      *
-     * <p>Equal to {@code price_details}.
+     * <p>One of {@code price_details}, or {@code rate_card_rate_details}.
      */
     @SerializedName("type")
     String type;
@@ -686,6 +711,24 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
       /** The ID of the product this item is associated with. */
       @SerializedName("product")
       String product;
+    }
+
+    /**
+     * For more details about RateCardRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RateCardRateDetails extends StripeObject {
+      @SerializedName("metered_item")
+      String meteredItem;
+
+      @SerializedName("rate_card")
+      String rateCard;
+
+      @SerializedName("rate_card_rate")
+      String rateCardRate;
     }
   }
 

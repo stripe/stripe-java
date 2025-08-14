@@ -13,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import java.time.Instant;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Event extends StripeObject implements HasId, StripeActiveObject {
+  /** Before and after changes for the primary related object. */
+  @SerializedName("changes")
+  Map<String, Object> changes;
+
   /** Authentication context needed to fetch the event or related object. */
   @SerializedName("context")
   String context;

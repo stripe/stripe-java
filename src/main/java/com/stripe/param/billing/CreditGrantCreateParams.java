@@ -3,6 +3,7 @@ package com.stripe.param.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -303,6 +304,10 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Amount {
+    /** The custom pricing unit amount. */
+    @SerializedName("custom_pricing_unit")
+    CustomPricingUnit customPricingUnit;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -323,7 +328,12 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     @SerializedName("type")
     Type type;
 
-    private Amount(Map<String, Object> extraParams, Monetary monetary, Type type) {
+    private Amount(
+        CustomPricingUnit customPricingUnit,
+        Map<String, Object> extraParams,
+        Monetary monetary,
+        Type type) {
+      this.customPricingUnit = customPricingUnit;
       this.extraParams = extraParams;
       this.monetary = monetary;
       this.type = type;
@@ -334,6 +344,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private CustomPricingUnit customPricingUnit;
+
       private Map<String, Object> extraParams;
 
       private Monetary monetary;
@@ -342,7 +354,15 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public CreditGrantCreateParams.Amount build() {
-        return new CreditGrantCreateParams.Amount(this.extraParams, this.monetary, this.type);
+        return new CreditGrantCreateParams.Amount(
+            this.customPricingUnit, this.extraParams, this.monetary, this.type);
+      }
+
+      /** The custom pricing unit amount. */
+      public Builder setCustomPricingUnit(
+          CreditGrantCreateParams.Amount.CustomPricingUnit customPricingUnit) {
+        this.customPricingUnit = customPricingUnit;
+        return this;
       }
 
       /**
@@ -384,6 +404,96 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       public Builder setType(CreditGrantCreateParams.Amount.Type type) {
         this.type = type;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomPricingUnit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The ID of the custom pricing unit. */
+      @SerializedName("id")
+      String id;
+
+      /**
+       * <strong>Required.</strong> A positive integer representing the amount of the credit grant.
+       */
+      @SerializedName("value")
+      BigDecimal value;
+
+      private CustomPricingUnit(Map<String, Object> extraParams, String id, BigDecimal value) {
+        this.extraParams = extraParams;
+        this.id = id;
+        this.value = value;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String id;
+
+        private BigDecimal value;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CreditGrantCreateParams.Amount.CustomPricingUnit build() {
+          return new CreditGrantCreateParams.Amount.CustomPricingUnit(
+              this.extraParams, this.id, this.value);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CreditGrantCreateParams.Amount.CustomPricingUnit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CreditGrantCreateParams.Amount.CustomPricingUnit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The ID of the custom pricing unit. */
+        public Builder setId(String id) {
+          this.id = id;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> A positive integer representing the amount of the credit
+         * grant.
+         */
+        public Builder setValue(BigDecimal value) {
+          this.value = value;
+          return this;
+        }
       }
     }
 
@@ -484,6 +594,9 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     }
 
     public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("custom_pricing_unit")
+      CUSTOM_PRICING_UNIT("custom_pricing_unit"),
+
       @SerializedName("monetary")
       MONETARY("monetary");
 
@@ -569,6 +682,14 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Scope {
       /**
+       * A list of billable items that the credit grant can apply to. We currently only support
+       * metered billable items. Cannot be used in combination with {@code price_type} or {@code
+       * prices}.
+       */
+      @SerializedName("billable_items")
+      List<CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem> billableItems;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -592,9 +713,11 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices;
 
       private Scope(
+          List<CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem> billableItems,
           Map<String, Object> extraParams,
           PriceType priceType,
           List<CreditGrantCreateParams.ApplicabilityConfig.Scope.Price> prices) {
+        this.billableItems = billableItems;
         this.extraParams = extraParams;
         this.priceType = priceType;
         this.prices = prices;
@@ -605,6 +728,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private List<CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem> billableItems;
+
         private Map<String, Object> extraParams;
 
         private PriceType priceType;
@@ -614,7 +739,37 @@ public class CreditGrantCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public CreditGrantCreateParams.ApplicabilityConfig.Scope build() {
           return new CreditGrantCreateParams.ApplicabilityConfig.Scope(
-              this.extraParams, this.priceType, this.prices);
+              this.billableItems, this.extraParams, this.priceType, this.prices);
+        }
+
+        /**
+         * Add an element to `billableItems` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * CreditGrantCreateParams.ApplicabilityConfig.Scope#billableItems} for the field
+         * documentation.
+         */
+        public Builder addBillableItem(
+            CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem element) {
+          if (this.billableItems == null) {
+            this.billableItems = new ArrayList<>();
+          }
+          this.billableItems.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `billableItems` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link CreditGrantCreateParams.ApplicabilityConfig.Scope#billableItems} for the field
+         * documentation.
+         */
+        public Builder addAllBillableItem(
+            List<CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem> elements) {
+          if (this.billableItems == null) {
+            this.billableItems = new ArrayList<>();
+          }
+          this.billableItems.addAll(elements);
+          return this;
         }
 
         /**
@@ -680,6 +835,81 @@ public class CreditGrantCreateParams extends ApiRequestParams {
           }
           this.prices.addAll(elements);
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillableItem {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The billable item ID this credit grant should apply to. */
+        @SerializedName("id")
+        String id;
+
+        private BillableItem(Map<String, Object> extraParams, String id) {
+          this.extraParams = extraParams;
+          this.id = id;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem build() {
+            return new CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem(
+                this.extraParams, this.id);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CreditGrantCreateParams.ApplicabilityConfig.Scope.BillableItem#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The billable item ID this credit grant should apply to. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
         }
       }
 

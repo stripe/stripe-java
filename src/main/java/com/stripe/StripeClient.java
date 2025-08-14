@@ -257,10 +257,6 @@ public class StripeClient {
     return new com.stripe.service.InvoiceItemService(this.getResponseGetter());
   }
 
-  public com.stripe.service.InvoicePaymentService invoicePayments() {
-    return new com.stripe.service.InvoicePaymentService(this.getResponseGetter());
-  }
-
   public com.stripe.service.InvoiceRenderingTemplateService invoiceRenderingTemplates() {
     return new com.stripe.service.InvoiceRenderingTemplateService(this.getResponseGetter());
   }

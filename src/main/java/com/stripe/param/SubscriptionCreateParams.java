@@ -46,6 +46,15 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Long backdateStartDate;
 
   /**
+   * The Billing Cadence which controls the timing of recurring invoice generation for this
+   * subscription. If unset, the subscription will bill according to its own configured schedule and
+   * create its own invoices. If set, this subscription will be billed by the cadence instead,
+   * potentially sharing invoices with the other subscriptions linked to that Cadence.
+   */
+  @SerializedName("billing_cadence")
+  String billingCadence;
+
+  /**
    * A future timestamp in UTC format to anchor the subscription's <a
    * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. The anchor is the
    * reference point that aligns future billing cycle dates. It sets the day of week for {@code
@@ -316,6 +325,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Object applicationFeePercent,
       AutomaticTax automaticTax,
       Long backdateStartDate,
+      String billingCadence,
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
       BillingMode billingMode,
@@ -353,6 +363,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.applicationFeePercent = applicationFeePercent;
     this.automaticTax = automaticTax;
     this.backdateStartDate = backdateStartDate;
+    this.billingCadence = billingCadence;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
     this.billingMode = billingMode;
@@ -400,6 +411,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private Long backdateStartDate;
+
+    private String billingCadence;
 
     private Long billingCycleAnchor;
 
@@ -474,6 +487,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.applicationFeePercent,
           this.automaticTax,
           this.backdateStartDate,
+          this.billingCadence,
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
           this.billingMode,
@@ -574,6 +588,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setBackdateStartDate(Long backdateStartDate) {
       this.backdateStartDate = backdateStartDate;
+      return this;
+    }
+
+    /**
+     * The Billing Cadence which controls the timing of recurring invoice generation for this
+     * subscription. If unset, the subscription will bill according to its own configured schedule
+     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
+     * potentially sharing invoices with the other subscriptions linked to that Cadence.
+     */
+    public Builder setBillingCadence(String billingCadence) {
+      this.billingCadence = billingCadence;
       return this;
     }
 

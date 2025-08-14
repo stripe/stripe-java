@@ -19,6 +19,7 @@ import com.stripe.param.billing.AlertCreateParams;
 import com.stripe.param.billing.AlertDeactivateParams;
 import com.stripe.param.billing.AlertListParams;
 import com.stripe.param.billing.AlertRetrieveParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -37,10 +38,14 @@ public class Alert extends ApiResource implements HasId {
   /**
    * Defines the type of the alert.
    *
-   * <p>Equal to {@code usage_threshold}.
+   * <p>One of {@code credit_balance_threshold}, or {@code usage_threshold}.
    */
   @SerializedName("alert_type")
   String alertType;
+
+  /** Encapsulates configuration of the alert to monitor billing credit balance. */
+  @SerializedName("credit_balance_threshold")
+  CreditBalanceThreshold creditBalanceThreshold;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -318,6 +323,133 @@ public class Alert extends ApiResource implements HasId {
   }
 
   /**
+   * The credit balance threshold alert configuration enables setting up alerts for when a
+   * customer's billing credit balance drops below a certain value.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CreditBalanceThreshold extends StripeObject {
+    /**
+     * The filters allow limiting the scope of this credit balance alert. You must specify only a
+     * customer filter at this time.
+     */
+    @SerializedName("filters")
+    List<Alert.CreditBalanceThreshold.Filter> filters;
+
+    @SerializedName("lte")
+    Lte lte;
+
+    /**
+     * Defines how the alert will behave.
+     *
+     * <p>Equal to {@code one_time}.
+     */
+    @SerializedName("recurrence")
+    String recurrence;
+
+    /**
+     * For more details about Filter, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Filter extends StripeObject {
+      /** Limit the scope of the alert to this customer ID. */
+      @SerializedName("customer")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Customer> customer;
+
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code customer} object. */
+      public String getCustomer() {
+        return (this.customer != null) ? this.customer.getId() : null;
+      }
+
+      public void setCustomer(String id) {
+        this.customer = ApiResource.setExpandableFieldId(id, this.customer);
+      }
+
+      /** Get expanded {@code customer}. */
+      public Customer getCustomerObject() {
+        return (this.customer != null) ? this.customer.getExpanded() : null;
+      }
+
+      public void setCustomerObject(Customer expandableObject) {
+        this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    /**
+     * For more details about Lte, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Lte extends StripeObject {
+      /**
+       * The type of this balance. We currently only support {@code monetary} amounts.
+       *
+       * <p>One of {@code custom_pricing_unit}, or {@code monetary}.
+       */
+      @SerializedName("balance_type")
+      String balanceType;
+
+      /** The custom pricing unit amount. */
+      @SerializedName("custom_pricing_unit")
+      CustomPricingUnit customPricingUnit;
+
+      /** The monetary amount. */
+      @SerializedName("monetary")
+      Monetary monetary;
+
+      /**
+       * For more details about CustomPricingUnit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /** A positive decimal string representing the amount. */
+        @SerializedName("value")
+        BigDecimal value;
+      }
+
+      /**
+       * For more details about Monetary, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Monetary extends StripeObject {
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /** A positive integer representing the amount. */
+        @SerializedName("value")
+        Long value;
+      }
+    }
+  }
+
+  /**
    * The usage threshold alert configuration enables setting up alerts for when a certain usage
    * threshold on a specific meter is crossed.
    */
@@ -411,6 +543,7 @@ public class Alert extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(creditBalanceThreshold, responseGetter);
     trySetResponseGetter(usageThreshold, responseGetter);
   }
 }

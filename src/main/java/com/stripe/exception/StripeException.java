@@ -152,6 +152,9 @@ public abstract class StripeException extends Exception {
       case "invalid_payment_method":
         return com.stripe.exception.InvalidPaymentMethodException.parse(
             body, statusCode, requestId, responseGetter);
+      case "rate_limit":
+        return com.stripe.exception.RateLimitException.parse(
+            body, statusCode, requestId, responseGetter);
         // The end of the section generated from our OpenAPI spec
     }
     return null;

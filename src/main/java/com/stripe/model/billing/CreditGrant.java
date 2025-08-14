@@ -21,6 +21,7 @@ import com.stripe.param.billing.CreditGrantListParams;
 import com.stripe.param.billing.CreditGrantRetrieveParams;
 import com.stripe.param.billing.CreditGrantUpdateParams;
 import com.stripe.param.billing.CreditGrantVoidGrantParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -408,6 +409,10 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Amount extends StripeObject {
+    /** The custom pricing unit amount. */
+    @SerializedName("custom_pricing_unit")
+    CustomPricingUnit customPricingUnit;
+
     /** The monetary amount. */
     @SerializedName("monetary")
     Monetary monetary;
@@ -415,10 +420,28 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     /**
      * The type of this amount. We currently only support {@code monetary} billing credits.
      *
-     * <p>Equal to {@code monetary}.
+     * <p>One of {@code custom_pricing_unit}, or {@code monetary}.
      */
     @SerializedName("type")
     String type;
+
+    /**
+     * For more details about CustomPricingUnit, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CustomPricingUnit extends StripeObject implements HasId {
+      /** Unique identifier for the object. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /** A positive integer representing the amount. */
+      @SerializedName("value")
+      BigDecimal value;
+    }
 
     /**
      * For more details about Monetary, please refer to the <a
@@ -462,6 +485,13 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
     @EqualsAndHashCode(callSuper = false)
     public static class Scope extends StripeObject {
       /**
+       * The billable items that credit grants can apply to. We currently only support metered
+       * billable items. Cannot be used in combination with {@code price_type} or {@code prices}.
+       */
+      @SerializedName("billable_items")
+      List<CreditGrant.ApplicabilityConfig.Scope.BillableItem> billableItems;
+
+      /**
        * The price type that credit grants can apply to. We currently only support the {@code
        * metered} price type. This refers to prices that have a <a
        * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a> attached to them. Cannot
@@ -480,6 +510,20 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
        */
       @SerializedName("prices")
       List<CreditGrant.ApplicabilityConfig.Scope.Price> prices;
+
+      /**
+       * For more details about BillableItem, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillableItem extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+      }
 
       /**
        * For more details about Price, please refer to the <a href="https://docs.stripe.com/api">API
