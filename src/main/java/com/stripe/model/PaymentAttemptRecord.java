@@ -1047,7 +1047,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Billie extends StripeObject {}
+    public static class Billie extends StripeObject {
+      /** The Billie transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /** Billing details used by the customer for this payment. */
     @Getter
@@ -2745,7 +2749,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Satispay extends StripeObject {}
+    public static class Satispay extends StripeObject {
+      /** The Satispay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /**
      * For more details about SepaCreditTransfer, please refer to the <a

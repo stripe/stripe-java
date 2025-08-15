@@ -1795,7 +1795,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Billie extends StripeObject {}
+    public static class Billie extends StripeObject {
+      /** The Billie transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -3885,7 +3889,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Satispay extends StripeObject {}
+    public static class Satispay extends StripeObject {
+      /** The Satispay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /**
      * For more details about SepaCreditTransfer, please refer to the <a
