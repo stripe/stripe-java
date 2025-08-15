@@ -194,6 +194,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("description")
   String description;
 
+  /** The list of payment method types to exclude from use with this payment. */
+  @SerializedName("excluded_payment_method_types")
+  List<String> excludedPaymentMethodTypes;
+
   /** The FX Quote used for the PaymentIntent. */
   @SerializedName("fx_quote")
   String fxQuote;
