@@ -68,6 +68,13 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
+  /**
+   * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
+   * in the Stripe Dashboard and embedded components.
+   */
+  @SerializedName("display_name")
+  String displayName;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

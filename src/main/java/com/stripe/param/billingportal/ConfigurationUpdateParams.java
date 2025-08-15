@@ -65,6 +65,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /** The name of the configuration. */
+  @SerializedName("name")
+  Object name;
+
   private ConfigurationUpdateParams(
       Boolean active,
       BusinessProfile businessProfile,
@@ -73,7 +77,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Features features,
       LoginPage loginPage,
-      Object metadata) {
+      Object metadata,
+      Object name) {
     this.active = active;
     this.businessProfile = businessProfile;
     this.defaultReturnUrl = defaultReturnUrl;
@@ -82,6 +87,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     this.features = features;
     this.loginPage = loginPage;
     this.metadata = metadata;
+    this.name = name;
   }
 
   public static Builder builder() {
@@ -105,6 +111,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Object name;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ConfigurationUpdateParams build() {
       return new ConfigurationUpdateParams(
@@ -115,7 +123,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.features,
           this.loginPage,
-          this.metadata);
+          this.metadata,
+          this.name);
     }
 
     /** Whether the configuration is active and can be used to create portal sessions. */
@@ -268,6 +277,18 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /** The name of the configuration. */
+    public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /** The name of the configuration. */
+    public Builder setName(EmptyParam name) {
+      this.name = name;
       return this;
     }
   }

@@ -372,6 +372,9 @@ public class FileListParams extends ApiRequestParams {
     @SerializedName("tax_document_user_upload")
     TAX_DOCUMENT_USER_UPLOAD("tax_document_user_upload"),
 
+    @SerializedName("terminal_android_apk")
+    TERMINAL_ANDROID_APK("terminal_android_apk"),
+
     @SerializedName("terminal_reader_splashscreen")
     TERMINAL_READER_SPLASHSCREEN("terminal_reader_splashscreen");
 

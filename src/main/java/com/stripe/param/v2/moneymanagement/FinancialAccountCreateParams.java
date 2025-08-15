@@ -14,6 +14,13 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAccountCreateParams extends ApiRequestParams {
   /**
+   * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
+   * in the Stripe Dashboard and embedded components.
+   */
+  @SerializedName("display_name")
+  String displayName;
+
+  /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
    * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -35,7 +42,12 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   Type type;
 
   private FinancialAccountCreateParams(
-      Map<String, Object> extraParams, Map<String, String> metadata, Storage storage, Type type) {
+      String displayName,
+      Map<String, Object> extraParams,
+      Map<String, String> metadata,
+      Storage storage,
+      Type type) {
+    this.displayName = displayName;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.storage = storage;
@@ -47,6 +59,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String displayName;
+
     private Map<String, Object> extraParams;
 
     private Map<String, String> metadata;
@@ -58,7 +72,16 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountCreateParams build() {
       return new FinancialAccountCreateParams(
-          this.extraParams, this.metadata, this.storage, this.type);
+          this.displayName, this.extraParams, this.metadata, this.storage, this.type);
+    }
+
+    /**
+     * A descriptive name for the FinancialAccount, up to 50 characters long. This name will be used
+     * in the Stripe Dashboard and embedded components.
+     */
+    public Builder setDisplayName(String displayName) {
+      this.displayName = displayName;
+      return this;
     }
 
     /**

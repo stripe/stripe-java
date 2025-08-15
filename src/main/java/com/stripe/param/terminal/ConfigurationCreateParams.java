@@ -39,6 +39,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("offline")
   Object offline;
 
+  /** Configurations for reader security settings. */
+  @SerializedName("reader_security")
+  Object readerSecurity;
+
   /** Reboot time settings for readers that support customized reboot time configuration. */
   @SerializedName("reboot_window")
   RebootWindow rebootWindow;
@@ -65,6 +69,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       String name,
       Object offline,
+      Object readerSecurity,
       RebootWindow rebootWindow,
       StripeS700 stripeS700,
       Object tipping,
@@ -75,6 +80,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.name = name;
     this.offline = offline;
+    this.readerSecurity = readerSecurity;
     this.rebootWindow = rebootWindow;
     this.stripeS700 = stripeS700;
     this.tipping = tipping;
@@ -97,6 +103,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private Object offline;
 
+    private Object readerSecurity;
+
     private RebootWindow rebootWindow;
 
     private StripeS700 stripeS700;
@@ -115,6 +123,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.extraParams,
           this.name,
           this.offline,
+          this.readerSecurity,
           this.rebootWindow,
           this.stripeS700,
           this.tipping,
@@ -195,6 +204,18 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /** Configurations for collecting transactions offline. */
     public Builder setOffline(EmptyParam offline) {
       this.offline = offline;
+      return this;
+    }
+
+    /** Configurations for reader security settings. */
+    public Builder setReaderSecurity(ConfigurationCreateParams.ReaderSecurity readerSecurity) {
+      this.readerSecurity = readerSecurity;
+      return this;
+    }
+
+    /** Configurations for reader security settings. */
+    public Builder setReaderSecurity(EmptyParam readerSecurity) {
+      this.readerSecurity = readerSecurity;
       return this;
     }
 
@@ -381,6 +402,83 @@ public class ConfigurationCreateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link ConfigurationCreateParams.Offline#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReaderSecurity {
+    /** Passcode used to access a reader's admin menu. */
+    @SerializedName("admin_menu_passcode")
+    Object adminMenuPasscode;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ReaderSecurity(Object adminMenuPasscode, Map<String, Object> extraParams) {
+      this.adminMenuPasscode = adminMenuPasscode;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object adminMenuPasscode;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.ReaderSecurity build() {
+        return new ConfigurationCreateParams.ReaderSecurity(
+            this.adminMenuPasscode, this.extraParams);
+      }
+
+      /** Passcode used to access a reader's admin menu. */
+      public Builder setAdminMenuPasscode(String adminMenuPasscode) {
+        this.adminMenuPasscode = adminMenuPasscode;
+        return this;
+      }
+
+      /** Passcode used to access a reader's admin menu. */
+      public Builder setAdminMenuPasscode(EmptyParam adminMenuPasscode) {
+        this.adminMenuPasscode = adminMenuPasscode;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.ReaderSecurity#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.ReaderSecurity#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -622,6 +720,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @SerializedName("jpy")
     Jpy jpy;
 
+    /** Tipping configuration for MXN. */
+    @SerializedName("mxn")
+    Mxn mxn;
+
     /** Tipping configuration for MYR. */
     @SerializedName("myr")
     Myr myr;
@@ -668,6 +770,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         Hkd hkd,
         Huf huf,
         Jpy jpy,
+        Mxn mxn,
         Myr myr,
         Nok nok,
         Nzd nzd,
@@ -689,6 +792,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       this.hkd = hkd;
       this.huf = huf;
       this.jpy = jpy;
+      this.mxn = mxn;
       this.myr = myr;
       this.nok = nok;
       this.nzd = nzd;
@@ -730,6 +834,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
       private Jpy jpy;
 
+      private Mxn mxn;
+
       private Myr myr;
 
       private Nok nok;
@@ -762,6 +868,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
             this.hkd,
             this.huf,
             this.jpy,
+            this.mxn,
             this.myr,
             this.nok,
             this.nzd,
@@ -867,6 +974,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       /** Tipping configuration for JPY. */
       public Builder setJpy(ConfigurationCreateParams.Tipping.Jpy jpy) {
         this.jpy = jpy;
+        return this;
+      }
+
+      /** Tipping configuration for MXN. */
+      public Builder setMxn(ConfigurationCreateParams.Tipping.Mxn mxn) {
+        this.mxn = mxn;
         return this;
       }
 
@@ -2675,6 +2788,154 @@ public class ConfigurationCreateParams extends ApiRequestParams {
          * Add all elements to `percentages` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * ConfigurationCreateParams.Tipping.Jpy#percentages} for the field documentation.
+         */
+        public Builder addAllPercentage(List<Long> elements) {
+          if (this.percentages == null) {
+            this.percentages = new ArrayList<>();
+          }
+          this.percentages.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Below this amount, fixed amounts will be displayed; above it, percentages will be
+         * displayed.
+         */
+        public Builder setSmartTipThreshold(Long smartTipThreshold) {
+          this.smartTipThreshold = smartTipThreshold;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mxn {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+
+      private Mxn(
+          Map<String, Object> extraParams,
+          List<Long> fixedAmounts,
+          List<Long> percentages,
+          Long smartTipThreshold) {
+        this.extraParams = extraParams;
+        this.fixedAmounts = fixedAmounts;
+        this.percentages = percentages;
+        this.smartTipThreshold = smartTipThreshold;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private List<Long> fixedAmounts;
+
+        private List<Long> percentages;
+
+        private Long smartTipThreshold;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public ConfigurationCreateParams.Tipping.Mxn build() {
+          return new ConfigurationCreateParams.Tipping.Mxn(
+              this.extraParams, this.fixedAmounts, this.percentages, this.smartTipThreshold);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Tipping.Mxn#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ConfigurationCreateParams.Tipping.Mxn#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `fixedAmounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * ConfigurationCreateParams.Tipping.Mxn#fixedAmounts} for the field documentation.
+         */
+        public Builder addFixedAmount(Long element) {
+          if (this.fixedAmounts == null) {
+            this.fixedAmounts = new ArrayList<>();
+          }
+          this.fixedAmounts.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `fixedAmounts` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * ConfigurationCreateParams.Tipping.Mxn#fixedAmounts} for the field documentation.
+         */
+        public Builder addAllFixedAmount(List<Long> elements) {
+          if (this.fixedAmounts == null) {
+            this.fixedAmounts = new ArrayList<>();
+          }
+          this.fixedAmounts.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add an element to `percentages` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * ConfigurationCreateParams.Tipping.Mxn#percentages} for the field documentation.
+         */
+        public Builder addPercentage(Long element) {
+          if (this.percentages == null) {
+            this.percentages = new ArrayList<>();
+          }
+          this.percentages.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `percentages` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * ConfigurationCreateParams.Tipping.Mxn#percentages} for the field documentation.
          */
         public Builder addAllPercentage(List<Long> elements) {
           if (this.percentages == null) {

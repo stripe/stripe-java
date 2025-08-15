@@ -28,6 +28,14 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class PaymentAttemptRecord extends ApiResource implements HasId {
   /** A representation of an amount of money, consisting of an amount and a currency. */
+  @SerializedName("amount")
+  Amount amount;
+
+  /** A representation of an amount of money, consisting of an amount and a currency. */
+  @SerializedName("amount_authorized")
+  AmountAuthorized amountAuthorized;
+
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_canceled")
   AmountCanceled amountCanceled;
 
@@ -40,8 +48,16 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   AmountGuaranteed amountGuaranteed;
 
   /** A representation of an amount of money, consisting of an amount and a currency. */
+  @SerializedName("amount_refunded")
+  AmountRefunded amountRefunded;
+
+  /** A representation of an amount of money, consisting of an amount and a currency. */
   @SerializedName("amount_requested")
   AmountRequested amountRequested;
+
+  /** ID of the Connect application that created the PaymentAttemptRecord. */
+  @SerializedName("application")
+  String application;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -99,12 +115,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   @SerializedName("payment_record")
   String paymentRecord;
 
-  /**
-   * An opaque string for manual reconciliation of this payment, for example a check number or a
-   * payment processor ID.
-   */
-  @SerializedName("payment_reference")
-  String paymentReference;
+  /** Processor information associated with this payment. */
+  @SerializedName("processor_details")
+  ProcessorDetails processorDetails;
 
   /**
    * Indicates who reported the payment.
@@ -194,6 +207,50 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Amount extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A positive integer representing the amount in the currency's <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * 100} can represent 1 USD or 100 JPY.
+     */
+    @SerializedName("value")
+    Long value;
+  }
+
+  /** A representation of an amount of money, consisting of an amount and a currency. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountAuthorized extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A positive integer representing the amount in the currency's <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * 100} can represent 1 USD or 100 JPY.
+     */
+    @SerializedName("value")
+    Long value;
+  }
+
+  /** A representation of an amount of money, consisting of an amount and a currency. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class AmountCanceled extends StripeObject {
     /**
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
@@ -204,9 +261,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     String currency;
 
     /**
-     * A positive integer representing the amount in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
-     * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
+     * A positive integer representing the amount in the currency's <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
     Long value;
@@ -226,9 +283,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     String currency;
 
     /**
-     * A positive integer representing the amount in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
-     * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
+     * A positive integer representing the amount in the currency's <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
     Long value;
@@ -248,9 +305,31 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     String currency;
 
     /**
-     * A positive integer representing the amount in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
-     * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
+     * A positive integer representing the amount in the currency's <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * 100} can represent 1 USD or 100 JPY.
+     */
+    @SerializedName("value")
+    Long value;
+  }
+
+  /** A representation of an amount of money, consisting of an amount and a currency. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountRefunded extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A positive integer representing the amount in the currency's <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
     Long value;
@@ -270,9 +349,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     String currency;
 
     /**
-     * A positive integer representing the amount in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> for
-     * example, 100 cents for 1 USD or 100 for 100 JPY, a zero-decimal currency.
+     * A positive integer representing the amount in the currency's <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
     Long value;
@@ -702,7 +781,27 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Alma extends StripeObject {}
+    public static class Alma extends StripeObject {
+      @SerializedName("installments")
+      Installments installments;
+
+      /** The Alma transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+
+      /**
+       * For more details about Installments, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        /** The number of installments. */
+        @SerializedName("count")
+        Long count;
+      }
+    }
 
     /**
      * For more details about AmazonPay, please refer to the <a
@@ -714,6 +813,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     public static class AmazonPay extends StripeObject {
       @SerializedName("funding")
       Funding funding;
+
+      /** The Amazon Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
 
       /**
        * For more details about Funding, please refer to the <a
@@ -944,7 +1047,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Billie extends StripeObject {}
+    public static class Billie extends StripeObject {
+      /** The Billie transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /** Billing details used by the customer for this payment. */
     @Getter
@@ -2005,6 +2112,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Kakao Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2128,6 +2239,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** The last four digits of the card. This may not be present for American Express cards. */
       @SerializedName("last4")
       String last4;
+
+      /** The Korean Card transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2225,6 +2340,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Naver Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2330,6 +2449,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Payco transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2478,6 +2601,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** Unique transaction id generated by BCB. */
       @SerializedName("bank_transaction_id")
       String bankTransactionId;
+
+      /** ID of the multi use Mandate generated by the PaymentIntent. */
+      @SerializedName("mandate")
+      String mandate;
     }
 
     /**
@@ -2521,6 +2648,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     public static class RevolutPay extends StripeObject {
       @SerializedName("funding")
       Funding funding;
+
+      /** The Revolut Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
 
       /**
        * For more details about Funding, please refer to the <a
@@ -2605,6 +2736,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Samsung Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -2614,7 +2749,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Satispay extends StripeObject {}
+    public static class Satispay extends StripeObject {
+      /** The Satispay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /**
      * For more details about SepaCreditTransfer, please refer to the <a
@@ -2963,6 +3102,43 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     public static class Zip extends StripeObject {}
   }
 
+  /** Processor information associated with this payment. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProcessorDetails extends StripeObject {
+    /**
+     * Custom processors represent payment processors not modeled directly in the Stripe API. This
+     * resource consists of details about the custom processor used for this payment attempt.
+     */
+    @SerializedName("custom")
+    Custom custom;
+
+    /**
+     * The processor used for this payment attempt.
+     *
+     * <p>Equal to {@code custom}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * Custom processors represent payment processors not modeled directly in the Stripe API. This
+     * resource consists of details about the custom processor used for this payment attempt.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Custom extends StripeObject {
+      /**
+       * An opaque string for manual reconciliation of this payment, for example a check number or a
+       * payment processor ID.
+       */
+      @SerializedName("payment_reference")
+      String paymentReference;
+    }
+  }
+
   /** The customer's shipping information associated with this payment. */
   @Getter
   @Setter
@@ -3017,12 +3193,16 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(amount, responseGetter);
+    trySetResponseGetter(amountAuthorized, responseGetter);
     trySetResponseGetter(amountCanceled, responseGetter);
     trySetResponseGetter(amountFailed, responseGetter);
     trySetResponseGetter(amountGuaranteed, responseGetter);
+    trySetResponseGetter(amountRefunded, responseGetter);
     trySetResponseGetter(amountRequested, responseGetter);
     trySetResponseGetter(customerDetails, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(processorDetails, responseGetter);
     trySetResponseGetter(shippingDetails, responseGetter);
   }
 }

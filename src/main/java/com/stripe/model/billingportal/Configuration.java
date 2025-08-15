@@ -90,6 +90,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The name of the configuration. */
+  @SerializedName("name")
+  String name;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *

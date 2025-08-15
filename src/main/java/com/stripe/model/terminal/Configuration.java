@@ -71,6 +71,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("offline")
   Offline offline;
 
+  @SerializedName("reader_security")
+  ReaderSecurity readerSecurity;
+
   @SerializedName("reboot_window")
   RebootWindow rebootWindow;
 
@@ -305,6 +308,19 @@ public class Configuration extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about ReaderSecurity, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReaderSecurity extends StripeObject {
+    /** Passcode used to access a reader's admin menu. */
+    @SerializedName("admin_menu_passcode")
+    String adminMenuPasscode;
+  }
+
+  /**
    * For more details about RebootWindow, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -400,6 +416,9 @@ public class Configuration extends ApiResource implements HasId {
 
     @SerializedName("jpy")
     Jpy jpy;
+
+    @SerializedName("mxn")
+    Mxn mxn;
 
     @SerializedName("myr")
     Myr myr;
@@ -697,6 +716,30 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Jpy extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
+     * For more details about Mxn, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mxn extends StripeObject {
       /** Fixed amounts displayed when collecting a tip. */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
@@ -1042,6 +1085,7 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
     trySetResponseGetter(offline, responseGetter);
+    trySetResponseGetter(readerSecurity, responseGetter);
     trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);
     trySetResponseGetter(tipping, responseGetter);

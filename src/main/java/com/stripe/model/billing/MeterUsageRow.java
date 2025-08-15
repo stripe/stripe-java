@@ -35,7 +35,10 @@ public class MeterUsageRow extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
-  /** The unique identifier for the meter. */
+  /**
+   * The unique identifier for the meter. Null if no meters were provided and usage was aggregated
+   * across all meters.
+   */
   @SerializedName("meter_id")
   String meterId;
 

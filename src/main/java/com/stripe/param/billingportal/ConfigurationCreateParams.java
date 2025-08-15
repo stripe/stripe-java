@@ -61,6 +61,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The name of the configuration. */
+  @SerializedName("name")
+  Object name;
+
   private ConfigurationCreateParams(
       BusinessProfile businessProfile,
       Object defaultReturnUrl,
@@ -68,7 +72,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Features features,
       LoginPage loginPage,
-      Map<String, String> metadata) {
+      Map<String, String> metadata,
+      Object name) {
     this.businessProfile = businessProfile;
     this.defaultReturnUrl = defaultReturnUrl;
     this.expand = expand;
@@ -76,6 +81,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     this.features = features;
     this.loginPage = loginPage;
     this.metadata = metadata;
+    this.name = name;
   }
 
   public static Builder builder() {
@@ -97,6 +103,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Object name;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ConfigurationCreateParams build() {
       return new ConfigurationCreateParams(
@@ -106,7 +114,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.extraParams,
           this.features,
           this.loginPage,
-          this.metadata);
+          this.metadata,
+          this.name);
     }
 
     /** The business information shown to customers in the portal. */
@@ -229,6 +238,18 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The name of the configuration. */
+    public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /** The name of the configuration. */
+    public Builder setName(EmptyParam name) {
+      this.name = name;
       return this;
     }
   }

@@ -873,6 +873,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("cashapp_handle_redirect_or_display_qr_code")
     CashappHandleRedirectOrDisplayQrCode cashappHandleRedirectOrDisplayQrCode;
 
+    @SerializedName("pix_display_qr_code")
+    PixDisplayQrCode pixDisplayQrCode;
+
     @SerializedName("redirect_to_url")
     RedirectToUrl redirectToUrl;
 
@@ -938,6 +941,41 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("image_url_svg")
         String imageUrlSvg;
       }
+    }
+
+    /**
+     * For more details about PixDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PixDisplayQrCode extends StripeObject {
+      /**
+       * The raw data string used to generate QR code, it should be used together with QR code
+       * library.
+       */
+      @SerializedName("data")
+      String data;
+
+      /** The date (unix timestamp) when the PIX expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * The URL to the hosted pix instructions page, which allows customers to view the pix QR
+       * code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /** The image_url_png string used to render png QR code. */
+      @SerializedName("image_url_png")
+      String imageUrlPng;
+
+      /** The image_url_svg string used to render svg QR code. */
+      @SerializedName("image_url_svg")
+      String imageUrlSvg;
     }
 
     /**
@@ -1042,6 +1080,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
     @SerializedName("payto")
     Payto payto;
+
+    @SerializedName("pix")
+    Pix pix;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -1410,6 +1451,78 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
          * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
          * confirmation time.
          */
+        @SerializedName("start_date")
+        String startDate;
+      }
+    }
+
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Determines if the amount includes the IOF tax.
+         *
+         * <p>One of {@code always}, or {@code never}.
+         */
+        @SerializedName("amount_includes_iof")
+        String amountIncludesIof;
+
+        /**
+         * Type of amount.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Date when the mandate expires and no further payments will be charged, in {@code
+         * YYYY-MM-DD}.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * Schedule at which the future payments will be charged.
+         *
+         * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or
+         * {@code yearly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /** Subscription name displayed to buyers in their bank app. */
+        @SerializedName("reference")
+        String reference;
+
+        /** Start date of the mandate, in {@code YYYY-MM-DD}. */
         @SerializedName("start_date")
         String startDate;
       }
