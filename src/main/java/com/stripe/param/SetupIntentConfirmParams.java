@@ -10548,7 +10548,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       public static class MandateOptions {
         /**
          * Amount to be charged for future payments. Required when {@code amount_type=fixed}. If not
-         * provided for {@code amount_type=maximum}, defaults to 250 BRL.
+         * provided for {@code amount_type=maximum}, defaults to 40000.
          */
         @SerializedName("amount")
         Long amount;
@@ -10664,7 +10664,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
           /**
            * Amount to be charged for future payments. Required when {@code amount_type=fixed}. If
-           * not provided for {@code amount_type=maximum}, defaults to 250 BRL.
+           * not provided for {@code amount_type=maximum}, defaults to 40000.
            */
           public Builder setAmount(Long amount) {
             this.amount = amount;
