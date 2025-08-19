@@ -2463,6 +2463,20 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paynow extends StripeObject {
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
+
       /** Reference number associated with this PayNow payment. */
       @SerializedName("reference")
       String reference;
