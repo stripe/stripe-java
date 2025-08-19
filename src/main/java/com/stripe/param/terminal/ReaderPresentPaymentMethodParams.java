@@ -181,7 +181,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Card {
-    /** <strong>Required.</strong> Card security code. */
+    /** Card security code. */
     @SerializedName("cvc")
     String cvc;
 
@@ -238,7 +238,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
             this.cvc, this.expMonth, this.expYear, this.extraParams, this.number);
       }
 
-      /** <strong>Required.</strong> Card security code. */
+      /** Card security code. */
       public Builder setCvc(String cvc) {
         this.cvc = cvc;
         return this;
