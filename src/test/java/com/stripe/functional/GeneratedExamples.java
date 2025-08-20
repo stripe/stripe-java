@@ -17774,66 +17774,28 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testTemporarySessionExpiredErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.METER_EVENTS,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_event_stream",
-        null,
-        null,
-        "{\"error\":{\"type\":\"temporary_session_expired\",\"code\":\"billing_meter_event_session_expired\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.billing.MeterEventStreamCreateParams params =
-        com.stripe.param.v2.billing.MeterEventStreamCreateParams.builder()
-            .addEvent(
-                com.stripe.param.v2.billing.MeterEventStreamCreateParams.Event.builder()
-                    .setEventName("event_name")
-                    .putPayload("key", "payload")
-                    .build())
-            .build();
-
-    try {
-      client.v2().billing().meterEventStream().create(params);
-    } catch (TemporarySessionExpiredException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.METER_EVENTS,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_event_stream",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testNonZeroBalanceErrorServices() throws StripeException {
+  public void testAlreadyCanceledErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/financial_accounts/id_123/close",
+        "/v2/money_management/outbound_payments/id_123/cancel",
         null,
         null,
-        "{\"error\":{\"type\":\"non_zero_balance\",\"code\":\"closing_financial_account_with_non_zero_balances\"}}",
+        "{\"error\":{\"type\":\"already_canceled\",\"code\":\"outbound_payment_already_canceled\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.moneymanagement.FinancialAccountCloseParams params =
-        com.stripe.param.v2.moneymanagement.FinancialAccountCloseParams.builder().build();
-
     try {
-      client.v2().moneyManagement().financialAccounts().close("id_123", params);
-    } catch (NonZeroBalanceException e) {
+      client.v2().moneyManagement().outboundPayments().cancel("id_123");
+    } catch (AlreadyCanceledException e) {
 
     }
     ;
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/financial_accounts/id_123/close",
-        params.toMap(),
+        "/v2/money_management/outbound_payments/id_123/cancel",
+        null,
         null);
   }
 
@@ -17865,6 +17827,63 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/money_management/financial_accounts",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testBlockedByStripeErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts",
+        null,
+        null,
+        "{\"error\":{\"type\":\"blocked_by_stripe\",\"code\":\"inbound_transfer_not_allowed\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.UsBankAccountCreateParams params =
+        com.stripe.param.v2.core.vault.UsBankAccountCreateParams.builder()
+            .setAccountNumber("account_number")
+            .build();
+
+    try {
+      client.v2().core().vault().usBankAccounts().create(params);
+    } catch (BlockedByStripeException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testControlledByDashboardErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/archive",
+        null,
+        null,
+        "{\"error\":{\"type\":\"controlled_by_dashboard\",\"code\":\"bank_account_cannot_be_archived\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    try {
+      client.v2().core().vault().usBankAccounts().archive("id_123");
+    } catch (ControlledByDashboardException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/archive",
+        null,
         null);
   }
 
@@ -17933,89 +17952,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testBlockedByStripeErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts",
-        null,
-        null,
-        "{\"error\":{\"type\":\"blocked_by_stripe\",\"code\":\"inbound_transfer_not_allowed\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.vault.UsBankAccountCreateParams params =
-        com.stripe.param.v2.core.vault.UsBankAccountCreateParams.builder()
-            .setAccountNumber("account_number")
-            .build();
-
-    try {
-      client.v2().core().vault().usBankAccounts().create(params);
-    } catch (BlockedByStripeException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testAlreadyCanceledErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments/id_123/cancel",
-        null,
-        null,
-        "{\"error\":{\"type\":\"already_canceled\",\"code\":\"outbound_payment_already_canceled\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    try {
-      client.v2().moneyManagement().outboundPayments().cancel("id_123");
-    } catch (AlreadyCanceledException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments/id_123/cancel",
-        null,
-        null);
-  }
-
-  @Test
-  public void testNotCancelableErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments/id_123/cancel",
-        null,
-        null,
-        "{\"error\":{\"type\":\"not_cancelable\",\"code\":\"outbound_payment_not_cancelable\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    try {
-      client.v2().moneyManagement().outboundPayments().cancel("id_123");
-    } catch (NotCancelableException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payments/id_123/cancel",
-        null,
-        null);
-  }
-
-  @Test
   public void testInsufficientFundsErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,
@@ -18052,6 +17988,121 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/money_management/outbound_payments",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testInvalidPaymentMethodErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts",
+        null,
+        null,
+        "{\"error\":{\"type\":\"invalid_payment_method\",\"code\":\"invalid_us_bank_account\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.UsBankAccountCreateParams params =
+        com.stripe.param.v2.core.vault.UsBankAccountCreateParams.builder()
+            .setAccountNumber("account_number")
+            .build();
+
+    try {
+      client.v2().core().vault().usBankAccounts().create(params);
+    } catch (InvalidPaymentMethodException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testInvalidPayoutMethodErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/outbound_setup_intents",
+        null,
+        null,
+        "{\"error\":{\"type\":\"invalid_payout_method\",\"code\":\"invalid_payout_method\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams params =
+        com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams.builder().build();
+
+    try {
+      client.v2().moneyManagement().outboundSetupIntents().create(params);
+    } catch (InvalidPayoutMethodException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/outbound_setup_intents",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testNonZeroBalanceErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_accounts/id_123/close",
+        null,
+        null,
+        "{\"error\":{\"type\":\"non_zero_balance\",\"code\":\"closing_financial_account_with_non_zero_balances\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FinancialAccountCloseParams params =
+        com.stripe.param.v2.moneymanagement.FinancialAccountCloseParams.builder().build();
+
+    try {
+      client.v2().moneyManagement().financialAccounts().close("id_123", params);
+    } catch (NonZeroBalanceException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_accounts/id_123/close",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testNotCancelableErrorServices() throws StripeException {
+    stubRequestReturnError(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/outbound_payments/id_123/cancel",
+        null,
+        null,
+        "{\"error\":{\"type\":\"not_cancelable\",\"code\":\"outbound_payment_not_cancelable\"}}",
+        400);
+    StripeClient client = new StripeClient(networkSpy);
+
+    try {
+      client.v2().moneyManagement().outboundPayments().cancel("id_123");
+    } catch (NotCancelableException e) {
+
+    }
+    ;
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/outbound_payments/id_123/cancel",
+        null,
         null);
   }
 
@@ -18127,87 +18178,36 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testInvalidPayoutMethodErrorServices() throws StripeException {
+  public void testTemporarySessionExpiredErrorServices() throws StripeException {
     stubRequestReturnError(
-        BaseAddress.API,
+        BaseAddress.METER_EVENTS,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_setup_intents",
+        "/v2/billing/meter_event_stream",
         null,
         null,
-        "{\"error\":{\"type\":\"invalid_payout_method\",\"code\":\"invalid_payout_method\"}}",
+        "{\"error\":{\"type\":\"temporary_session_expired\",\"code\":\"billing_meter_event_session_expired\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams params =
-        com.stripe.param.v2.moneymanagement.OutboundSetupIntentCreateParams.builder().build();
-
-    try {
-      client.v2().moneyManagement().outboundSetupIntents().create(params);
-    } catch (InvalidPayoutMethodException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_setup_intents",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testControlledByDashboardErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts/id_123/archive",
-        null,
-        null,
-        "{\"error\":{\"type\":\"controlled_by_dashboard\",\"code\":\"bank_account_cannot_be_archived\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    try {
-      client.v2().core().vault().usBankAccounts().archive("id_123");
-    } catch (ControlledByDashboardException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts/id_123/archive",
-        null,
-        null);
-  }
-
-  @Test
-  public void testInvalidPaymentMethodErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts",
-        null,
-        null,
-        "{\"error\":{\"type\":\"invalid_payment_method\",\"code\":\"invalid_us_bank_account\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.vault.UsBankAccountCreateParams params =
-        com.stripe.param.v2.core.vault.UsBankAccountCreateParams.builder()
-            .setAccountNumber("account_number")
+    com.stripe.param.v2.billing.MeterEventStreamCreateParams params =
+        com.stripe.param.v2.billing.MeterEventStreamCreateParams.builder()
+            .addEvent(
+                com.stripe.param.v2.billing.MeterEventStreamCreateParams.Event.builder()
+                    .setEventName("event_name")
+                    .putPayload("key", "payload")
+                    .build())
             .build();
 
     try {
-      client.v2().core().vault().usBankAccounts().create(params);
-    } catch (InvalidPaymentMethodException e) {
+      client.v2().billing().meterEventStream().create(params);
+    } catch (TemporarySessionExpiredException e) {
 
     }
     ;
     verifyRequest(
-        BaseAddress.API,
+        BaseAddress.METER_EVENTS,
         ApiResource.RequestMethod.POST,
-        "/v2/core/vault/us_bank_accounts",
+        "/v2/billing/meter_event_stream",
         params.toMap(),
         null);
   }

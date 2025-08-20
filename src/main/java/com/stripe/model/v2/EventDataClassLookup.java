@@ -88,10 +88,10 @@ public final class EventDataClassLookup {
         "v2.payments.off_session_payment", com.stripe.model.v2.payments.OffSessionPayment.class);
 
     eventClassLookup.put(
-        "v2.core.account[requirements].updated",
-        com.stripe.events.V2CoreAccountIncludingRequirementsUpdatedEvent.class);
+        "v1.billing.meter.error_report_triggered",
+        com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
     eventClassLookup.put(
-        "v2.core.account_link.returned", com.stripe.events.V2CoreAccountLinkReturnedEvent.class);
+        "v1.billing.meter.no_meter_found", com.stripe.events.V1BillingMeterNoMeterFoundEvent.class);
     eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEvent.class);
     eventClassLookup.put(
@@ -99,24 +99,12 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.account.updated", com.stripe.events.V2CoreAccountUpdatedEvent.class);
     eventClassLookup.put(
-        "v2.core.account[defaults].updated",
-        com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEvent.class);
-    eventClassLookup.put(
         "v2.core.account[configuration.customer].capability_status_updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationCustomerCapabilityStatusUpdatedEvent
             .class);
     eventClassLookup.put(
         "v2.core.account[configuration.customer].updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationCustomerUpdatedEvent.class);
-    eventClassLookup.put(
-        "v2.core.account[identity].updated",
-        com.stripe.events.V2CoreAccountIncludingIdentityUpdatedEvent.class);
-    eventClassLookup.put(
-        "v2.core.account_person.created", com.stripe.events.V2CoreAccountPersonCreatedEvent.class);
-    eventClassLookup.put(
-        "v2.core.account_person.deleted", com.stripe.events.V2CoreAccountPersonDeletedEvent.class);
-    eventClassLookup.put(
-        "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account[configuration.merchant].capability_status_updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationMerchantCapabilityStatusUpdatedEvent
@@ -139,13 +127,27 @@ public final class EventDataClassLookup {
         "v2.core.account[configuration.storer].updated",
         com.stripe.events.V2CoreAccountIncludingConfigurationStorerUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.core.account[defaults].updated",
+        com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account[identity].updated",
+        com.stripe.events.V2CoreAccountIncludingIdentityUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account[requirements].updated",
+        com.stripe.events.V2CoreAccountIncludingRequirementsUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account_link.returned", com.stripe.events.V2CoreAccountLinkReturnedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account_person.created", com.stripe.events.V2CoreAccountPersonCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account_person.deleted", com.stripe.events.V2CoreAccountPersonDeletedEvent.class);
+    eventClassLookup.put(
+        "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
+    eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEvent.class);
-    eventClassLookup.put(
-        "v1.billing.meter.error_report_triggered",
-        com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
-    eventClassLookup.put(
-        "v1.billing.meter.no_meter_found", com.stripe.events.V1BillingMeterNoMeterFoundEvent.class);
     eventClassLookup.put(
         "v2.money_management.financial_account.created",
         com.stripe.events.V2MoneyManagementFinancialAccountCreatedEvent.class);
@@ -176,26 +178,6 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.inbound_transfer.bank_debit_succeeded",
         com.stripe.events.V2MoneyManagementInboundTransferBankDebitSucceededEvent.class);
-    eventClassLookup.put(
-        "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.authorization_attempt_failed",
-        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEvent.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.authorization_attempt_started",
-        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEvent.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.canceled",
-        com.stripe.events.V2PaymentsOffSessionPaymentCanceledEvent.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.created",
-        com.stripe.events.V2PaymentsOffSessionPaymentCreatedEvent.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.failed",
-        com.stripe.events.V2PaymentsOffSessionPaymentFailedEvent.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.succeeded",
-        com.stripe.events.V2PaymentsOffSessionPaymentSucceededEvent.class);
     eventClassLookup.put(
         "v2.money_management.outbound_payment.canceled",
         com.stripe.events.V2MoneyManagementOutboundPaymentCanceledEvent.class);
@@ -268,5 +250,23 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.money_management.transaction.updated",
         com.stripe.events.V2MoneyManagementTransactionUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.authorization_attempt_failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.authorization_attempt_started",
+        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.canceled",
+        com.stripe.events.V2PaymentsOffSessionPaymentCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.created",
+        com.stripe.events.V2PaymentsOffSessionPaymentCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentFailedEvent.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.succeeded",
+        com.stripe.events.V2PaymentsOffSessionPaymentSucceededEvent.class);
   }
 }
