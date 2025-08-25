@@ -876,7 +876,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing extends StripeObject {
-    /** Whether Adaptive Pricing is enabled. */
+    /**
+     * If enabled, Adaptive Pricing is available on <a
+     * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+     * sessions</a>.
+     */
     @SerializedName("enabled")
     Boolean enabled;
   }
@@ -3213,6 +3217,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix extends StripeObject {
+      /**
+       * Determines if the amount includes the IOF tax.
+       *
+       * <p>One of {@code always}, or {@code never}.
+       */
+      @SerializedName("amount_includes_iof")
+      String amountIncludesIof;
+
       /** The number of seconds after which Pix payment will expire. */
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;

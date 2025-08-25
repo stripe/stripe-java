@@ -67,6 +67,10 @@ public class PayoutCreateParams extends ApiRequestParams {
   @SerializedName("method")
   Method method;
 
+  /** The ID of a v2 FinancialAccount to send funds to. */
+  @SerializedName("payout_method")
+  String payoutMethod;
+
   /**
    * The balance type of your Stripe balance to draw this payout from. Balances for different
    * payment sources are kept separately. You can find the amounts with the Balances API. One of
@@ -93,6 +97,7 @@ public class PayoutCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       Method method,
+      String payoutMethod,
       SourceType sourceType,
       String statementDescriptor) {
     this.amount = amount;
@@ -103,6 +108,7 @@ public class PayoutCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.method = method;
+    this.payoutMethod = payoutMethod;
     this.sourceType = sourceType;
     this.statementDescriptor = statementDescriptor;
   }
@@ -128,6 +134,8 @@ public class PayoutCreateParams extends ApiRequestParams {
 
     private Method method;
 
+    private String payoutMethod;
+
     private SourceType sourceType;
 
     private String statementDescriptor;
@@ -143,6 +151,7 @@ public class PayoutCreateParams extends ApiRequestParams {
           this.extraParams,
           this.metadata,
           this.method,
+          this.payoutMethod,
           this.sourceType,
           this.statementDescriptor);
     }
@@ -264,6 +273,12 @@ public class PayoutCreateParams extends ApiRequestParams {
      */
     public Builder setMethod(PayoutCreateParams.Method method) {
       this.method = method;
+      return this;
+    }
+
+    /** The ID of a v2 FinancialAccount to send funds to. */
+    public Builder setPayoutMethod(String payoutMethod) {
+      this.payoutMethod = payoutMethod;
       return this;
     }
 

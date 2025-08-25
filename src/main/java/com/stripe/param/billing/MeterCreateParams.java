@@ -32,7 +32,7 @@ public class MeterCreateParams extends ApiRequestParams {
   @SerializedName("event_name")
   String eventName;
 
-  /** The time window to pre-aggregate meter events for, if any. */
+  /** The time window which meter events have been pre-aggregated for, if any. */
   @SerializedName("event_time_window")
   EventTimeWindow eventTimeWindow;
 
@@ -133,7 +133,7 @@ public class MeterCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The time window to pre-aggregate meter events for, if any. */
+    /** The time window which meter events have been pre-aggregated for, if any. */
     public Builder setEventTimeWindow(MeterCreateParams.EventTimeWindow eventTimeWindow) {
       this.eventTimeWindow = eventTimeWindow;
       return this;

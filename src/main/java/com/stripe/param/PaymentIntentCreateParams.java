@@ -115,6 +115,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("error_on_requires_action")
   Boolean errorOnRequiresAction;
 
+  /** The list of payment method types to exclude from use with this payment. */
+  @SerializedName("excluded_payment_method_types")
+  List<PaymentIntentCreateParams.ExcludedPaymentMethodType> excludedPaymentMethodTypes;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -325,6 +329,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String customer,
       String description,
       Boolean errorOnRequiresAction,
+      List<PaymentIntentCreateParams.ExcludedPaymentMethodType> excludedPaymentMethodTypes,
       List<String> expand,
       Map<String, Object> extraParams,
       String mandate,
@@ -358,6 +363,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.customer = customer;
     this.description = description;
     this.errorOnRequiresAction = errorOnRequiresAction;
+    this.excludedPaymentMethodTypes = excludedPaymentMethodTypes;
     this.expand = expand;
     this.extraParams = extraParams;
     this.mandate = mandate;
@@ -408,6 +414,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private String description;
 
     private Boolean errorOnRequiresAction;
+
+    private List<PaymentIntentCreateParams.ExcludedPaymentMethodType> excludedPaymentMethodTypes;
 
     private List<String> expand;
 
@@ -467,6 +475,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.customer,
           this.description,
           this.errorOnRequiresAction,
+          this.excludedPaymentMethodTypes,
           this.expand,
           this.extraParams,
           this.mandate,
@@ -614,6 +623,34 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setErrorOnRequiresAction(Boolean errorOnRequiresAction) {
       this.errorOnRequiresAction = errorOnRequiresAction;
+      return this;
+    }
+
+    /**
+     * Add an element to `excludedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentIntentCreateParams#excludedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addExcludedPaymentMethodType(
+        PaymentIntentCreateParams.ExcludedPaymentMethodType element) {
+      if (this.excludedPaymentMethodTypes == null) {
+        this.excludedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.excludedPaymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `excludedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentIntentCreateParams#excludedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllExcludedPaymentMethodType(
+        List<PaymentIntentCreateParams.ExcludedPaymentMethodType> elements) {
+      if (this.excludedPaymentMethodTypes == null) {
+        this.excludedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.excludedPaymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -18257,6 +18294,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix {
+      /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+      @SerializedName("amount_includes_iof")
+      AmountIncludesIof amountIncludesIof;
+
       /**
        * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
        * Defaults to 86400 seconds.
@@ -18307,10 +18348,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private Pix(
+          AmountIncludesIof amountIncludesIof,
           Long expiresAfterSeconds,
           Long expiresAt,
           Map<String, Object> extraParams,
           SetupFutureUsage setupFutureUsage) {
+        this.amountIncludesIof = amountIncludesIof;
         this.expiresAfterSeconds = expiresAfterSeconds;
         this.expiresAt = expiresAt;
         this.extraParams = extraParams;
@@ -18322,6 +18365,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AmountIncludesIof amountIncludesIof;
+
         private Long expiresAfterSeconds;
 
         private Long expiresAt;
@@ -18333,7 +18378,19 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentCreateParams.PaymentMethodOptions.Pix build() {
           return new PaymentIntentCreateParams.PaymentMethodOptions.Pix(
-              this.expiresAfterSeconds, this.expiresAt, this.extraParams, this.setupFutureUsage);
+              this.amountIncludesIof,
+              this.expiresAfterSeconds,
+              this.expiresAt,
+              this.extraParams,
+              this.setupFutureUsage);
+        }
+
+        /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+        public Builder setAmountIncludesIof(
+            PaymentIntentCreateParams.PaymentMethodOptions.Pix.AmountIncludesIof
+                amountIncludesIof) {
+          this.amountIncludesIof = amountIncludesIof;
+          return this;
         }
 
         /**
@@ -18410,6 +18467,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             PaymentIntentCreateParams.PaymentMethodOptions.Pix.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+        @SerializedName("always")
+        ALWAYS("always"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        AmountIncludesIof(String value) {
+          this.value = value;
         }
       }
 
@@ -21554,6 +21626,156 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private final String value;
 
     ConfirmationMethod(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum ExcludedPaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
+    @SerializedName("alma")
+    ALMA("alma"),
+
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
+    @SerializedName("billie")
+    BILLIE("billie"),
+
+    @SerializedName("blik")
+    BLIK("blik"),
+
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
+    @SerializedName("card")
+    CARD("card"),
+
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
+    @SerializedName("crypto")
+    CRYPTO("crypto"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("eps")
+    EPS("eps"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
+
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
+    @SerializedName("grabpay")
+    GRABPAY("grabpay"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("kakao_pay")
+    KAKAO_PAY("kakao_pay"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
+    @SerializedName("kr_card")
+    KR_CARD("kr_card"),
+
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
+    @SerializedName("naver_pay")
+    NAVER_PAY("naver_pay"),
+
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
+    @SerializedName("p24")
+    P24("p24"),
+
+    @SerializedName("pay_by_bank")
+    PAY_BY_BANK("pay_by_bank"),
+
+    @SerializedName("payco")
+    PAYCO("payco"),
+
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("pix")
+    PIX("pix"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
+
+    @SerializedName("samsung_pay")
+    SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort"),
+
+    @SerializedName("swish")
+    SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ExcludedPaymentMethodType(String value) {
       this.value = value;
     }
   }

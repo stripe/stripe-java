@@ -24362,6 +24362,35 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2BillingMeterEventPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/billing/meter_events",
+        null,
+        null,
+        com.stripe.model.v2.billing.MeterEvent.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"object\":\"v2.billing.meter_event\",\"payload\":{\"key\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.billing.MeterEventCreateParams params =
+        com.stripe.param.v2.billing.MeterEventCreateParams.builder()
+            .setEventName("event_name")
+            .putPayload("key", "payload")
+            .build();
+
+    com.stripe.model.v2.billing.MeterEvent meterEvent =
+        client.v2().billing().meterEvents().create(params);
+    assertNotNull(meterEvent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/billing/meter_events",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2BillingMeterEventAdjustmentPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -24450,32 +24479,44 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2BillingMeterEventPostServices() throws StripeException {
+  public void testV2CoreEventGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_events",
+        ApiResource.RequestMethod.GET,
+        "/v2/core/events",
         null,
         null,
-        com.stripe.model.v2.billing.MeterEvent.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"object\":\"v2.billing.meter_event\",\"payload\":{\"key\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\",\"livemode\":true}");
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event>>() {}.getType(),
+        "{\"data\":[{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.billing.MeterEventCreateParams params =
-        com.stripe.param.v2.billing.MeterEventCreateParams.builder()
-            .setEventName("event_name")
-            .putPayload("key", "payload")
-            .build();
+    com.stripe.param.v2.core.EventListParams params =
+        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
 
-    com.stripe.model.v2.billing.MeterEvent meterEvent =
-        client.v2().billing().meterEvents().create(params);
-    assertNotNull(meterEvent);
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
+        client.v2().core().events().list(params);
+    assertNotNull(stripeCollection);
     verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events", params.toMap(), null);
+  }
+
+  @Test
+  public void testV2CoreEventGet2Services() throws StripeException {
+    stubRequest(
         BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_events",
-        params.toMap(),
-        null);
+        ApiResource.RequestMethod.GET,
+        "/v2/core/events/id_123",
+        null,
+        null,
+        com.stripe.model.v2.Event.class,
+        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.Event event = client.v2().core().events().retrieve("id_123");
+    assertNotNull(event);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events/id_123", null, null);
   }
 
   @Test
@@ -24679,47 +24720,6 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations/id_123/ping",
         null,
         null);
-  }
-
-  @Test
-  public void testV2CoreEventGetServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/events",
-        null,
-        null,
-        new TypeToken<
-            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event>>() {}.getType(),
-        "{\"data\":[{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.EventListParams params =
-        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
-
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
-        client.v2().core().events().list(params);
-    assertNotNull(stripeCollection);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events", params.toMap(), null);
-  }
-
-  @Test
-  public void testV2CoreEventGet2Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/events/id_123",
-        null,
-        null,
-        com.stripe.model.v2.Event.class,
-        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.Event event = client.v2().core().events().retrieve("id_123");
-    assertNotNull(event);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events/id_123", null, null);
   }
 
   @Test

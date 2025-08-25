@@ -231,9 +231,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * Where the user is coming from. This informs the optimizations that are applied to the session.
-   * For example, a session originating from a mobile app may behave more like a native app,
-   * depending on the platform. This parameter is currently not allowed if {@code ui_mode} is {@code
-   * custom}.
    */
   @SerializedName("origin_context")
   OriginContext originContext;
@@ -1003,9 +1000,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Where the user is coming from. This informs the optimizations that are applied to the
-     * session. For example, a session originating from a mobile app may behave more like a native
-     * app, depending on the platform. This parameter is currently not allowed if {@code ui_mode} is
-     * {@code custom}.
+     * session.
      */
     public Builder setOriginContext(SessionCreateParams.OriginContext originContext) {
       this.originContext = originContext;
@@ -1244,10 +1239,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing {
     /**
-     * Set to {@code true} to enable <a
-     * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
-     * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
-     * setting</a>.
+     * If set to {@code true}, Adaptive Pricing is available on <a
+     * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+     * sessions</a>. Defaults to your <a
+     * href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard setting</a>.
      */
     @SerializedName("enabled")
     Boolean enabled;
@@ -1281,10 +1276,10 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set to {@code true} to enable <a
-       * href="https://docs.stripe.com/payments/checkout/adaptive-pricing">Adaptive Pricing</a>.
-       * Defaults to your <a href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard
-       * setting</a>.
+       * If set to {@code true}, Adaptive Pricing is available on <a
+       * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+       * sessions</a>. Defaults to your <a
+       * href="https://dashboard.stripe.com/settings/adaptive-pricing">dashboard setting</a>.
        */
       public Builder setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -12574,6 +12569,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix {
+      /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+      @SerializedName("amount_includes_iof")
+      AmountIncludesIof amountIncludesIof;
+
       /**
        * The number of seconds (between 10 and 1209600) after which Pix payment will expire.
        * Defaults to 86400 seconds.
@@ -12613,9 +12612,11 @@ public class SessionCreateParams extends ApiRequestParams {
       SetupFutureUsage setupFutureUsage;
 
       private Pix(
+          AmountIncludesIof amountIncludesIof,
           Long expiresAfterSeconds,
           Map<String, Object> extraParams,
           SetupFutureUsage setupFutureUsage) {
+        this.amountIncludesIof = amountIncludesIof;
         this.expiresAfterSeconds = expiresAfterSeconds;
         this.extraParams = extraParams;
         this.setupFutureUsage = setupFutureUsage;
@@ -12626,6 +12627,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AmountIncludesIof amountIncludesIof;
+
         private Long expiresAfterSeconds;
 
         private Map<String, Object> extraParams;
@@ -12635,7 +12638,17 @@ public class SessionCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public SessionCreateParams.PaymentMethodOptions.Pix build() {
           return new SessionCreateParams.PaymentMethodOptions.Pix(
-              this.expiresAfterSeconds, this.extraParams, this.setupFutureUsage);
+              this.amountIncludesIof,
+              this.expiresAfterSeconds,
+              this.extraParams,
+              this.setupFutureUsage);
+        }
+
+        /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+        public Builder setAmountIncludesIof(
+            SessionCreateParams.PaymentMethodOptions.Pix.AmountIncludesIof amountIncludesIof) {
+          this.amountIncludesIof = amountIncludesIof;
+          return this;
         }
 
         /**
@@ -12699,6 +12712,21 @@ public class SessionCreateParams extends ApiRequestParams {
             SessionCreateParams.PaymentMethodOptions.Pix.SetupFutureUsage setupFutureUsage) {
           this.setupFutureUsage = setupFutureUsage;
           return this;
+        }
+      }
+
+      public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+        @SerializedName("always")
+        ALWAYS("always"),
+
+        @SerializedName("never")
+        NEVER("never");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        AmountIncludesIof(String value) {
+          this.value = value;
         }
       }
 
