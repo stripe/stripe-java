@@ -24413,6 +24413,35 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2BillingMeterEventPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/billing/meter_events",
+        null,
+        null,
+        com.stripe.model.v2.billing.MeterEvent.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"object\":\"v2.billing.meter_event\",\"payload\":{\"key\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.billing.MeterEventCreateParams params =
+        com.stripe.param.v2.billing.MeterEventCreateParams.builder()
+            .setEventName("event_name")
+            .putPayload("key", "payload")
+            .build();
+
+    com.stripe.model.v2.billing.MeterEvent meterEvent =
+        client.v2().billing().meterEvents().create(params);
+    assertNotNull(meterEvent);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/billing/meter_events",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2BillingMeterEventAdjustmentPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -24496,110 +24525,6 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.METER_EVENTS,
         ApiResource.RequestMethod.POST,
         "/v2/billing/meter_event_stream",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2BillingMeterEventPostServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_events",
-        null,
-        null,
-        com.stripe.model.v2.billing.MeterEvent.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"event_name\":\"event_name\",\"identifier\":\"identifier\",\"object\":\"v2.billing.meter_event\",\"payload\":{\"key\":\"payload\"},\"timestamp\":\"1970-01-01T15:18:46.294Z\",\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.billing.MeterEventCreateParams params =
-        com.stripe.param.v2.billing.MeterEventCreateParams.builder()
-            .setEventName("event_name")
-            .putPayload("key", "payload")
-            .build();
-
-    com.stripe.model.v2.billing.MeterEvent meterEvent =
-        client.v2().billing().meterEvents().create(params);
-    assertNotNull(meterEvent);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/billing/meter_events",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2CoreAccountLinkPostServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/account_links",
-        null,
-        null,
-        com.stripe.model.v2.core.AccountLink.class,
-        "{\"account\":\"account\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"object\":\"v2.core.account_link\",\"url\":\"url\",\"use_case\":{\"type\":\"account_onboarding\",\"account_onboarding\":null,\"account_update\":null},\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.AccountLinkCreateParams params =
-        com.stripe.param.v2.core.AccountLinkCreateParams.builder()
-            .setAccount("account")
-            .setUseCase(
-                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.builder()
-                    .setType(
-                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.Type
-                            .ACCOUNT_ONBOARDING)
-                    .setAccountOnboarding(
-                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.AccountOnboarding
-                            .builder()
-                            .setCollectionOptions(
-                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountOnboarding.CollectionOptions.builder()
-                                    .setFields(
-                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                            .AccountOnboarding.CollectionOptions.Fields
-                                            .EVENTUALLY_DUE)
-                                    .setFutureRequirements(
-                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                            .AccountOnboarding.CollectionOptions.FutureRequirements
-                                            .INCLUDE)
-                                    .build())
-                            .addConfiguration(
-                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountOnboarding.Configuration.STORER)
-                            .setRefreshUrl("refresh_url")
-                            .setReturnUrl("return_url")
-                            .build())
-                    .setAccountUpdate(
-                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.AccountUpdate
-                            .builder()
-                            .setCollectionOptions(
-                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountUpdate.CollectionOptions.builder()
-                                    .setFields(
-                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                            .AccountUpdate.CollectionOptions.Fields.EVENTUALLY_DUE)
-                                    .setFutureRequirements(
-                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                            .AccountUpdate.CollectionOptions.FutureRequirements
-                                            .INCLUDE)
-                                    .build())
-                            .addConfiguration(
-                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
-                                    .AccountUpdate.Configuration.STORER)
-                            .setRefreshUrl("refresh_url")
-                            .setReturnUrl("return_url")
-                            .build())
-                    .build())
-            .build();
-
-    com.stripe.model.v2.core.AccountLink accountLink =
-        client.v2().core().accountLinks().create(params);
-    assertNotNull(accountLink);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/core/account_links",
         params.toMap(),
         null);
   }
@@ -24852,6 +24777,122 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreAccountLinkPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_links",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountLink.class,
+        "{\"account\":\"account\",\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"object\":\"v2.core.account_link\",\"url\":\"url\",\"use_case\":{\"type\":\"account_onboarding\",\"account_onboarding\":null,\"account_update\":null},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.AccountLinkCreateParams params =
+        com.stripe.param.v2.core.AccountLinkCreateParams.builder()
+            .setAccount("account")
+            .setUseCase(
+                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.builder()
+                    .setType(
+                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.Type
+                            .ACCOUNT_ONBOARDING)
+                    .setAccountOnboarding(
+                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.AccountOnboarding
+                            .builder()
+                            .setCollectionOptions(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .AccountOnboarding.CollectionOptions.builder()
+                                    .setFields(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountOnboarding.CollectionOptions.Fields
+                                            .EVENTUALLY_DUE)
+                                    .setFutureRequirements(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountOnboarding.CollectionOptions.FutureRequirements
+                                            .INCLUDE)
+                                    .build())
+                            .addConfiguration(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .AccountOnboarding.Configuration.STORER)
+                            .setRefreshUrl("refresh_url")
+                            .setReturnUrl("return_url")
+                            .build())
+                    .setAccountUpdate(
+                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase.AccountUpdate
+                            .builder()
+                            .setCollectionOptions(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .AccountUpdate.CollectionOptions.builder()
+                                    .setFields(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountUpdate.CollectionOptions.Fields.EVENTUALLY_DUE)
+                                    .setFutureRequirements(
+                                        com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                            .AccountUpdate.CollectionOptions.FutureRequirements
+                                            .INCLUDE)
+                                    .build())
+                            .addConfiguration(
+                                com.stripe.param.v2.core.AccountLinkCreateParams.UseCase
+                                    .AccountUpdate.Configuration.STORER)
+                            .setRefreshUrl("refresh_url")
+                            .setReturnUrl("return_url")
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.v2.core.AccountLink accountLink =
+        client.v2().core().accountLinks().create(params);
+    assertNotNull(accountLink);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_links",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreEventGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/events",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event>>() {}.getType(),
+        "{\"data\":[{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.EventListParams params =
+        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
+        client.v2().core().events().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events", params.toMap(), null);
+  }
+
+  @Test
+  public void testV2CoreEventGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/events/id_123",
+        null,
+        null,
+        com.stripe.model.v2.Event.class,
+        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.Event event = client.v2().core().events().retrieve("id_123");
+    assertNotNull(event);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events/id_123", null, null);
+  }
+
+  @Test
   public void testV2CoreEventDestinationGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -25052,47 +25093,6 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations/id_123/ping",
         null,
         null);
-  }
-
-  @Test
-  public void testV2CoreEventGetServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/events",
-        null,
-        null,
-        new TypeToken<
-            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event>>() {}.getType(),
-        "{\"data\":[{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.EventListParams params =
-        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
-
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
-        client.v2().core().events().list(params);
-    assertNotNull(stripeCollection);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events", params.toMap(), null);
-  }
-
-  @Test
-  public void testV2CoreEventGet2Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/events/id_123",
-        null,
-        null,
-        com.stripe.model.v2.Event.class,
-        "{\"context\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":null,\"type\":\"type\",\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.Event event = client.v2().core().events().retrieve("id_123");
-    assertNotNull(event);
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events/id_123", null, null);
   }
 
   @Test
@@ -25650,68 +25650,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2MoneyManagementOutboundPaymentQuotePostServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payment_quotes",
-        null,
-        null,
-        com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams params =
-        com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
-            .setFrom(
-                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.From.builder()
-                    .setCurrency("usd")
-                    .setFinancialAccount("financial_account")
-                    .build())
-            .setTo(
-                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.To.builder()
-                    .setCurrency("usd")
-                    .setPayoutMethod("payout_method")
-                    .setRecipient("recipient")
-                    .build())
-            .build();
-
-    com.stripe.model.v2.moneymanagement.OutboundPaymentQuote outboundPaymentQuote =
-        client.v2().moneyManagement().outboundPaymentQuotes().create(params);
-    assertNotNull(outboundPaymentQuote);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/money_management/outbound_payment_quotes",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2MoneyManagementOutboundPaymentQuoteGetServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/money_management/outbound_payment_quotes/id_123",
-        null,
-        null,
-        com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.moneymanagement.OutboundPaymentQuote outboundPaymentQuote =
-        client.v2().moneyManagement().outboundPaymentQuotes().retrieve("id_123");
-    assertNotNull(outboundPaymentQuote);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/money_management/outbound_payment_quotes/id_123",
-        null,
-        null);
-  }
-
-  @Test
   public void testV2MoneyManagementOutboundPaymentGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -25820,6 +25758,68 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v2/money_management/outbound_payments/id_123/cancel",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementOutboundPaymentQuotePostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/outbound_payment_quotes",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
+        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams params =
+        com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.builder()
+            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setFrom(
+                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.From.builder()
+                    .setCurrency("usd")
+                    .setFinancialAccount("financial_account")
+                    .build())
+            .setTo(
+                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.To.builder()
+                    .setCurrency("usd")
+                    .setPayoutMethod("payout_method")
+                    .setRecipient("recipient")
+                    .build())
+            .build();
+
+    com.stripe.model.v2.moneymanagement.OutboundPaymentQuote outboundPaymentQuote =
+        client.v2().moneyManagement().outboundPaymentQuotes().create(params);
+    assertNotNull(outboundPaymentQuote);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/outbound_payment_quotes",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementOutboundPaymentQuoteGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/outbound_payment_quotes/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
+        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"delivery_options\":null,\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_expires_at\":\"1970-01-18T15:15:29.586Z\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.OutboundPaymentQuote outboundPaymentQuote =
+        client.v2().moneyManagement().outboundPaymentQuotes().retrieve("id_123");
+    assertNotNull(outboundPaymentQuote);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/outbound_payment_quotes/id_123",
         null,
         null);
   }
@@ -26290,57 +26290,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2MoneyManagementTransactionEntryGetServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/money_management/transaction_entries",
-        null,
-        null,
-        new TypeToken<
-            com.stripe.model.v2.StripeCollection<
-                com.stripe.model.v2.moneymanagement.TransactionEntry>>() {}.getType(),
-        "{\"data\":[{\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\",\"adjustment\":null,\"currency_conversion\":null,\"fee_transaction\":null,\"inbound_transfer\":null,\"outbound_payment\":null,\"outbound_transfer\":null,\"received_credit\":null,\"received_debit\":null}},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.moneymanagement.TransactionEntryListParams params =
-        com.stripe.param.v2.moneymanagement.TransactionEntryListParams.builder().build();
-
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.TransactionEntry>
-        stripeCollection = client.v2().moneyManagement().transactionEntries().list(params);
-    assertNotNull(stripeCollection);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/money_management/transaction_entries",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2MoneyManagementTransactionEntryGet2Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/money_management/transaction_entries/id_123",
-        null,
-        null,
-        com.stripe.model.v2.moneymanagement.TransactionEntry.class,
-        "{\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\",\"adjustment\":null,\"currency_conversion\":null,\"fee_transaction\":null,\"inbound_transfer\":null,\"outbound_payment\":null,\"outbound_transfer\":null,\"received_credit\":null,\"received_debit\":null}},\"livemode\":true}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.moneymanagement.TransactionEntry transactionEntry =
-        client.v2().moneyManagement().transactionEntries().retrieve("id_123");
-    assertNotNull(transactionEntry);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/money_management/transaction_entries/id_123",
-        null,
-        null);
-  }
-
-  @Test
   public void testV2MoneyManagementTransactionGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -26387,6 +26336,57 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/money_management/transactions/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementTransactionEntryGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/transaction_entries",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.TransactionEntry>>() {}.getType(),
+        "{\"data\":[{\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\",\"adjustment\":null,\"currency_conversion\":null,\"fee_transaction\":null,\"inbound_transfer\":null,\"outbound_payment\":null,\"outbound_transfer\":null,\"received_credit\":null,\"received_debit\":null}},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.TransactionEntryListParams params =
+        com.stripe.param.v2.moneymanagement.TransactionEntryListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.TransactionEntry>
+        stripeCollection = client.v2().moneyManagement().transactionEntries().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/transaction_entries",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementTransactionEntryGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/transaction_entries/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.TransactionEntry.class,
+        "{\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\",\"adjustment\":null,\"currency_conversion\":null,\"fee_transaction\":null,\"inbound_transfer\":null,\"outbound_payment\":null,\"outbound_transfer\":null,\"received_credit\":null,\"received_debit\":null}},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.TransactionEntry transactionEntry =
+        client.v2().moneyManagement().transactionEntries().retrieve("id_123");
+    assertNotNull(transactionEntry);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/transaction_entries/id_123",
         null,
         null);
   }
