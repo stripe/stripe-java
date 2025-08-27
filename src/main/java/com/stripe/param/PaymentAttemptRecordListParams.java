@@ -26,14 +26,22 @@ public class PaymentAttemptRecordListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 10.
+   */
+  @SerializedName("limit")
+  Long limit;
+
   /** <strong>Required.</strong> The ID of the Payment Record. */
   @SerializedName("payment_record")
   String paymentRecord;
 
   private PaymentAttemptRecordListParams(
-      List<String> expand, Map<String, Object> extraParams, String paymentRecord) {
+      List<String> expand, Map<String, Object> extraParams, Long limit, String paymentRecord) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.limit = limit;
     this.paymentRecord = paymentRecord;
   }
 
@@ -46,11 +54,14 @@ public class PaymentAttemptRecordListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Long limit;
+
     private String paymentRecord;
 
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentAttemptRecordListParams build() {
-      return new PaymentAttemptRecordListParams(this.expand, this.extraParams, this.paymentRecord);
+      return new PaymentAttemptRecordListParams(
+          this.expand, this.extraParams, this.limit, this.paymentRecord);
     }
 
     /**
@@ -102,6 +113,15 @@ public class PaymentAttemptRecordListParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+     * default is 10.
+     */
+    public Builder setLimit(Long limit) {
+      this.limit = limit;
       return this;
     }
 

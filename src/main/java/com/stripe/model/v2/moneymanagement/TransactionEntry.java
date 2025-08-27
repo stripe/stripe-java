@@ -91,9 +91,9 @@ public class TransactionEntry extends StripeObject implements HasId {
      * Closed Enum for now, and will be turned into an Open Enum soon. A descriptive category used
      * to classify the Transaction.
      *
-     * <p>One of {@code adjustment}, {@code inbound_transfer}, {@code outbound_payment}, {@code
-     * outbound_transfer}, {@code received_credit}, {@code received_debit}, {@code return}, or
-     * {@code stripe_fee}.
+     * <p>One of {@code adjustment}, {@code currency_conversion}, {@code inbound_transfer}, {@code
+     * outbound_payment}, {@code outbound_transfer}, {@code received_credit}, {@code
+     * received_debit}, {@code return}, or {@code stripe_fee}.
      */
     @SerializedName("category")
     String category;
@@ -117,6 +117,13 @@ public class TransactionEntry extends StripeObject implements HasId {
       /** If applicable, the ID of the Adjustment that created this Transaction. */
       @SerializedName("adjustment")
       String adjustment;
+
+      /**
+       * In the future, this will be the ID of the currency conversion that created this
+       * Transaction. For now, this field is always null.
+       */
+      @SerializedName("currency_conversion")
+      String currencyConversion;
 
       /** If applicable, the ID of the FeeTransaction that created this Transaction. */
       @SerializedName("fee_transaction")
@@ -146,9 +153,9 @@ public class TransactionEntry extends StripeObject implements HasId {
        * Open Enum. Type of the flow that created the Transaction. The field matching this value
        * will contain the ID of the flow.
        *
-       * <p>One of {@code adjustment}, {@code fee_transaction}, {@code inbound_transfer}, {@code
-       * outbound_payment}, {@code outbound_transfer}, {@code received_credit}, or {@code
-       * received_debit}.
+       * <p>One of {@code adjustment}, {@code currency_conversion}, {@code fee_transaction}, {@code
+       * inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code
+       * received_credit}, or {@code received_debit}.
        */
       @SerializedName("type")
       String type;

@@ -1301,6 +1301,17 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("discounts")
       List<SubscriptionSchedule.Phase.AddInvoiceItem.Discount> discounts;
 
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      @SerializedName("period")
+      Period period;
+
       /** ID of the price used to generate the invoice item. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -1439,6 +1450,69 @@ public class SubscriptionSchedule extends ApiResource
            * The discount end type.
            *
            * <p>Equal to {@code timestamp}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+      }
+
+      /**
+       * For more details about Period, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Period extends StripeObject {
+        @SerializedName("end")
+        End end;
+
+        @SerializedName("start")
+        Start start;
+
+        /**
+         * For more details about End, please refer to the <a href="https://docs.stripe.com/api">API
+         * Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class End extends StripeObject {
+          /**
+           * A precise Unix timestamp for the end of the invoice item period. Must be greater than
+           * or equal to {@code period.start}.
+           */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * Select how to calculate the end of the invoice item period.
+           *
+           * <p>One of {@code min_item_period_end}, {@code phase_end}, or {@code timestamp}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /**
+         * For more details about Start, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Start extends StripeObject {
+          /**
+           * A precise Unix timestamp for the start of the invoice item period. Must be less than or
+           * equal to {@code period.end}.
+           */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * Select how to calculate the start of the invoice item period.
+           *
+           * <p>One of {@code max_item_period_start}, {@code phase_start}, or {@code timestamp}.
            */
           @SerializedName("type")
           String type;
