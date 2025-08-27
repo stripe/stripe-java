@@ -229,7 +229,6 @@ public class EventDataObjectDeserializer {
 
   /** Internal method to allow for testing with different Stripe version. */
   String getIntegrationApiVersion() {
-    System.out.println("Stripe API version: " + Stripe.API_VERSION);
     return Stripe.API_VERSION;
   }
 
