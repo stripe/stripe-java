@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CustomPricingUnit extends StripeObject implements HasId {
-  /** Whether the CustomPricingUnit is active. */
+  /** Whether the custom pricing unit is active. */
   @SerializedName("active")
   Boolean active;
 
@@ -23,12 +23,12 @@ public class CustomPricingUnit extends StripeObject implements HasId {
   Instant created;
 
   /**
-   * Description that customers will see in the invoice line item. Maximum length of 250 characters.
+   * Description that customers will see in the invoice line item. Maximum length of 10 characters.
    */
   @SerializedName("display_name")
   String displayName;
 
-  /** The ID of the custom pricing unit. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -41,15 +41,16 @@ public class CustomPricingUnit extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * An internal key you can use to search for a particular CustomPricingUnit item. Maximum length
-   * of 200 characters.
+   * An internal key you can use to search for a particular Custom Pricing Unit. Maximum length of
+   * 200 characters.
    */
   @SerializedName("lookup_key")
   String lookupKey;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;

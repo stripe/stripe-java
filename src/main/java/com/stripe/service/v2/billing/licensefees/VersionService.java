@@ -19,21 +19,21 @@ public final class VersionService extends ApiService {
     super(responseGetter);
   }
 
-  /** List all versions of a LicenseFee objects. */
+  /** List all versions of a License Fee object. */
   public StripeCollection<LicenseFeeVersion> list(String licenseFeeId, VersionListParams params)
       throws StripeException {
     return list(licenseFeeId, params, (RequestOptions) null);
   }
-  /** List all versions of a LicenseFee objects. */
+  /** List all versions of a License Fee object. */
   public StripeCollection<LicenseFeeVersion> list(String licenseFeeId, RequestOptions options)
       throws StripeException {
     return list(licenseFeeId, (VersionListParams) null, options);
   }
-  /** List all versions of a LicenseFee objects. */
+  /** List all versions of a License Fee object. */
   public StripeCollection<LicenseFeeVersion> list(String licenseFeeId) throws StripeException {
     return list(licenseFeeId, (VersionListParams) null, (RequestOptions) null);
   }
-  /** List all versions of a LicenseFee objects. */
+  /** List all versions of a License Fee object. */
   public StripeCollection<LicenseFeeVersion> list(
       String licenseFeeId, VersionListParams params, RequestOptions options)
       throws StripeException {
@@ -49,11 +49,11 @@ public final class VersionService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<LicenseFeeVersion>>() {}.getType());
   }
-  /** Retrieve a LicenseFeeVersion object. */
+  /** Retrieve a License Fee Version object. */
   public LicenseFeeVersion retrieve(String licenseFeeId, String id) throws StripeException {
     return retrieve(licenseFeeId, id, (RequestOptions) null);
   }
-  /** Retrieve a LicenseFeeVersion object. */
+  /** Retrieve a License Fee Version object. */
   public LicenseFeeVersion retrieve(String licenseFeeId, String id, RequestOptions options)
       throws StripeException {
     String path =

@@ -17,7 +17,7 @@ public class RateCardVersion extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The ID of the RateCardVersion. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -38,7 +38,7 @@ public class RateCardVersion extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the RateCard that this version belongs to. */
+  /** The ID of the Rate Card that this version belongs to. */
   @SerializedName("rate_card_id")
   String rateCardId;
 }

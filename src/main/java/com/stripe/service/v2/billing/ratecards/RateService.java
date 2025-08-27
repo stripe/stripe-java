@@ -21,31 +21,35 @@ public final class RateService extends ApiService {
   }
 
   /**
-   * List all Rates associated with a RateCard for a specific version (defaults to latest). Rates
-   * remain active for all subsequent versions until a new Rate is created for the same MeteredItem.
+   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * remain active for all subsequent versions until a new rate is created for the same Metered
+   * Item.
    */
   public StripeCollection<RateCardRate> list(String rateCardId, RateListParams params)
       throws StripeException {
     return list(rateCardId, params, (RequestOptions) null);
   }
   /**
-   * List all Rates associated with a RateCard for a specific version (defaults to latest). Rates
-   * remain active for all subsequent versions until a new Rate is created for the same MeteredItem.
+   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * remain active for all subsequent versions until a new rate is created for the same Metered
+   * Item.
    */
   public StripeCollection<RateCardRate> list(String rateCardId, RequestOptions options)
       throws StripeException {
     return list(rateCardId, (RateListParams) null, options);
   }
   /**
-   * List all Rates associated with a RateCard for a specific version (defaults to latest). Rates
-   * remain active for all subsequent versions until a new Rate is created for the same MeteredItem.
+   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * remain active for all subsequent versions until a new rate is created for the same Metered
+   * Item.
    */
   public StripeCollection<RateCardRate> list(String rateCardId) throws StripeException {
     return list(rateCardId, (RateListParams) null, (RequestOptions) null);
   }
   /**
-   * List all Rates associated with a RateCard for a specific version (defaults to latest). Rates
-   * remain active for all subsequent versions until a new Rate is created for the same MeteredItem.
+   * List all Rates associated with a Rate Card for a specific version (defaults to latest). Rates
+   * remain active for all subsequent versions until a new rate is created for the same Metered
+   * Item.
    */
   public StripeCollection<RateCardRate> list(
       String rateCardId, RateListParams params, RequestOptions options) throws StripeException {
@@ -61,29 +65,29 @@ public final class RateService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<RateCardRate>>() {}.getType());
   }
   /**
-   * Set the rate for a MeteredItem on the latest version of a RateCard object. This will create a
-   * new RateCard version if the MeteredItem already has a rate on the RateCard.
+   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
+   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
    */
   public RateCardRate create(String rateCardId, RateCreateParams params) throws StripeException {
     return create(rateCardId, params, (RequestOptions) null);
   }
   /**
-   * Set the rate for a MeteredItem on the latest version of a RateCard object. This will create a
-   * new RateCard version if the MeteredItem already has a rate on the RateCard.
+   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
+   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
    */
   public RateCardRate create(String rateCardId, RequestOptions options) throws StripeException {
     return create(rateCardId, (RateCreateParams) null, options);
   }
   /**
-   * Set the rate for a MeteredItem on the latest version of a RateCard object. This will create a
-   * new RateCard version if the MeteredItem already has a rate on the RateCard.
+   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
+   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
    */
   public RateCardRate create(String rateCardId) throws StripeException {
     return create(rateCardId, (RateCreateParams) null, (RequestOptions) null);
   }
   /**
-   * Set the rate for a MeteredItem on the latest version of a RateCard object. This will create a
-   * new RateCard version if the MeteredItem already has a rate on the RateCard.
+   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
+   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
    */
   public RateCardRate create(String rateCardId, RateCreateParams params, RequestOptions options)
       throws StripeException {
@@ -99,15 +103,15 @@ public final class RateService extends ApiService {
     return this.request(request, RateCardRate.class);
   }
   /**
-   * Remove an existing Rate from a RateCard. This will create a new RateCard version without that
-   * rate.
+   * Remove an existing Rate from a Rate Card. This will create a new Rate Card Version without that
+   * Rate.
    */
   public RateCardRate delete(String rateCardId, String id) throws StripeException {
     return delete(rateCardId, id, (RequestOptions) null);
   }
   /**
-   * Remove an existing Rate from a RateCard. This will create a new RateCard version without that
-   * rate.
+   * Remove an existing Rate from a Rate Card. This will create a new Rate Card Version without that
+   * Rate.
    */
   public RateCardRate delete(String rateCardId, String id, RequestOptions options)
       throws StripeException {

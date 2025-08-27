@@ -34,8 +34,9 @@ public class CadenceCreateParams extends ApiRequestParams {
   List<CadenceCreateParams.Include> include;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -449,16 +450,25 @@ public class CadenceCreateParams extends ApiRequestParams {
         Integer hour;
 
         /**
-         * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-         * inclusive. Will default to the minute the cadence was created in UTC timezone.
+         * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
         Integer minute;
 
-        private Time(Map<String, Object> extraParams, Integer hour, Integer minute) {
+        /**
+         * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
+
+        private Time(
+            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
+          this.second = second;
         }
 
         public static Builder builder() {
@@ -472,10 +482,12 @@ public class CadenceCreateParams extends ApiRequestParams {
 
           private Integer minute;
 
+          private Integer second;
+
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Day.Time build() {
             return new CadenceCreateParams.BillingCycle.Day.Time(
-                this.extraParams, this.hour, this.minute);
+                this.extraParams, this.hour, this.minute, this.second);
           }
 
           /**
@@ -516,11 +528,20 @@ public class CadenceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive. Will default to the minute the cadence was created in UTC timezone.
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
            */
           public Builder setMinute(Integer minute) {
             this.minute = minute;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          public Builder setSecond(Integer second) {
+            this.second = second;
             return this;
           }
         }
@@ -648,16 +669,25 @@ public class CadenceCreateParams extends ApiRequestParams {
         Integer hour;
 
         /**
-         * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-         * inclusive. Will default to the minute the cadence was created in UTC timezone.
+         * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
         Integer minute;
 
-        private Time(Map<String, Object> extraParams, Integer hour, Integer minute) {
+        /**
+         * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
+
+        private Time(
+            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
+          this.second = second;
         }
 
         public static Builder builder() {
@@ -671,10 +701,12 @@ public class CadenceCreateParams extends ApiRequestParams {
 
           private Integer minute;
 
+          private Integer second;
+
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Month.Time build() {
             return new CadenceCreateParams.BillingCycle.Month.Time(
-                this.extraParams, this.hour, this.minute);
+                this.extraParams, this.hour, this.minute, this.second);
           }
 
           /**
@@ -715,11 +747,20 @@ public class CadenceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive. Will default to the minute the cadence was created in UTC timezone.
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
            */
           public Builder setMinute(Integer minute) {
             this.minute = minute;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          public Builder setSecond(Integer second) {
+            this.second = second;
             return this;
           }
         }
@@ -845,16 +886,25 @@ public class CadenceCreateParams extends ApiRequestParams {
         Integer hour;
 
         /**
-         * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-         * inclusive. Will default to the minute the cadence was created in UTC timezone.
+         * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
         Integer minute;
 
-        private Time(Map<String, Object> extraParams, Integer hour, Integer minute) {
+        /**
+         * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
+
+        private Time(
+            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
+          this.second = second;
         }
 
         public static Builder builder() {
@@ -868,10 +918,12 @@ public class CadenceCreateParams extends ApiRequestParams {
 
           private Integer minute;
 
+          private Integer second;
+
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Week.Time build() {
             return new CadenceCreateParams.BillingCycle.Week.Time(
-                this.extraParams, this.hour, this.minute);
+                this.extraParams, this.hour, this.minute, this.second);
           }
 
           /**
@@ -912,11 +964,20 @@ public class CadenceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive. Will default to the minute the cadence was created in UTC timezone.
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
            */
           public Builder setMinute(Integer minute) {
             this.minute = minute;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          public Builder setSecond(Integer second) {
+            this.second = second;
             return this;
           }
         }
@@ -1064,16 +1125,25 @@ public class CadenceCreateParams extends ApiRequestParams {
         Integer hour;
 
         /**
-         * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-         * inclusive. Will default to the minute the cadence was created in UTC timezone.
+         * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
         Integer minute;
 
-        private Time(Map<String, Object> extraParams, Integer hour, Integer minute) {
+        /**
+         * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
+         * between 0 and 59, inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
+
+        private Time(
+            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
+          this.second = second;
         }
 
         public static Builder builder() {
@@ -1087,10 +1157,12 @@ public class CadenceCreateParams extends ApiRequestParams {
 
           private Integer minute;
 
+          private Integer second;
+
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Year.Time build() {
             return new CadenceCreateParams.BillingCycle.Year.Time(
-                this.extraParams, this.hour, this.minute);
+                this.extraParams, this.hour, this.minute, this.second);
           }
 
           /**
@@ -1131,11 +1203,20 @@ public class CadenceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
-           * inclusive. Will default to the minute the cadence was created in UTC timezone.
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
            */
           public Builder setMinute(Integer minute) {
             this.minute = minute;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          public Builder setSecond(Integer second) {
+            this.second = second;
             return this;
           }
         }
@@ -1399,7 +1480,7 @@ public class CadenceCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The ID of the referenced Settings object. */
+      /** <strong>Required.</strong> The ID of the referenced settings object. */
       @SerializedName("id")
       String id;
 
@@ -1460,7 +1541,7 @@ public class CadenceCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The ID of the referenced Settings object. */
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
         public Builder setId(String id) {
           this.id = id;
           return this;
@@ -1489,7 +1570,7 @@ public class CadenceCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The ID of the referenced Settings object. */
+      /** <strong>Required.</strong> The ID of the referenced settings object. */
       @SerializedName("id")
       String id;
 
@@ -1551,7 +1632,7 @@ public class CadenceCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The ID of the referenced Settings object. */
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
         public Builder setId(String id) {
           this.id = id;
           return this;

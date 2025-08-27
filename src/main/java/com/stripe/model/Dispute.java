@@ -137,9 +137,9 @@ public class Dispute extends ApiResource
   SmartDisputes smartDisputes;
 
   /**
-   * Current status of dispute. Possible values are {@code warning_needs_response}, {@code
+   * The current status of a dispute. Possible values include:{@code warning_needs_response}, {@code
    * warning_under_review}, {@code warning_closed}, {@code needs_response}, {@code under_review},
-   * {@code won}, or {@code lost}.
+   * {@code won}, {@code lost}, or {@code prevented}.
    *
    * <p>One of {@code lost}, {@code needs_response}, {@code under_review}, {@code warning_closed},
    * {@code warning_needs_response}, {@code warning_under_review}, or {@code won}.
@@ -1177,7 +1177,8 @@ public class Dispute extends ApiResource
        * The type of dispute opened. Different case types may have varying fees and financial
        * impact.
        *
-       * <p>One of {@code chargeback}, {@code compliance}, or {@code inquiry}.
+       * <p>One of {@code block}, {@code chargeback}, {@code compliance}, {@code inquiry}, or {@code
+       * resolution}.
        */
       @SerializedName("case_type")
       String caseType;

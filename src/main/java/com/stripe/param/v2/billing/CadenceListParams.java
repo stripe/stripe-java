@@ -31,14 +31,14 @@ public class CadenceListParams extends ApiRequestParams {
   Integer limit;
 
   /**
-   * If provided, only Cadences that specifically reference the payer will be returned. Mutually
+   * If provided, only cadences that specifically reference the payer will be returned. Mutually
    * exclusive with {@code test_clock}.
    */
   @SerializedName("payer")
   Payer payer;
 
   /**
-   * If provided, only Cadences that specifically reference the provided test clock ID (via the
+   * If provided, only cadences that specifically reference the provided test clock ID (via the
    * customer's test clock) will be returned. Mutually exclusive with {@code payer}.
    */
   @SerializedName("test_clock")
@@ -137,7 +137,7 @@ public class CadenceListParams extends ApiRequestParams {
     }
 
     /**
-     * If provided, only Cadences that specifically reference the payer will be returned. Mutually
+     * If provided, only cadences that specifically reference the payer will be returned. Mutually
      * exclusive with {@code test_clock}.
      */
     public Builder setPayer(CadenceListParams.Payer payer) {
@@ -146,7 +146,7 @@ public class CadenceListParams extends ApiRequestParams {
     }
 
     /**
-     * If provided, only Cadences that specifically reference the provided test clock ID (via the
+     * If provided, only cadences that specifically reference the provided test clock ID (via the
      * customer's test clock) will be returned. Mutually exclusive with {@code payer}.
      */
     public Builder setTestClock(String testClock) {
@@ -159,7 +159,7 @@ public class CadenceListParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Payer {
     /**
-     * The ID of the Customer object. If provided, only Cadences that specifically reference the
+     * The ID of the Customer object. If provided, only cadences that specifically reference the
      * provided customer ID will be returned.
      */
     @SerializedName("customer")
@@ -204,7 +204,7 @@ public class CadenceListParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the Customer object. If provided, only Cadences that specifically reference the
+       * The ID of the Customer object. If provided, only cadences that specifically reference the
        * provided customer ID will be returned.
        */
       public Builder setCustomer(String customer) {

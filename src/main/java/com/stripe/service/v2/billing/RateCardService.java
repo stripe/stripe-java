@@ -21,19 +21,19 @@ public final class RateCardService extends ApiService {
     super(responseGetter);
   }
 
-  /** List all RateCard objects. */
+  /** List all Rate Card objects. */
   public StripeCollection<RateCard> list(RateCardListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List all RateCard objects. */
+  /** List all Rate Card objects. */
   public StripeCollection<RateCard> list(RequestOptions options) throws StripeException {
     return list((RateCardListParams) null, options);
   }
-  /** List all RateCard objects. */
+  /** List all Rate Card objects. */
   public StripeCollection<RateCard> list() throws StripeException {
     return list((RateCardListParams) null, (RequestOptions) null);
   }
-  /** List all RateCard objects. */
+  /** List all Rate Card objects. */
   public StripeCollection<RateCard> list(RateCardListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/rate_cards";
@@ -46,11 +46,11 @@ public final class RateCardService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<RateCard>>() {}.getType());
   }
-  /** Create a RateCard object. */
+  /** Create a Rate Card object. */
   public RateCard create(RateCardCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a RateCard object. */
+  /** Create a Rate Card object. */
   public RateCard create(RateCardCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/rate_cards";
@@ -63,30 +63,30 @@ public final class RateCardService extends ApiService {
             options);
     return this.request(request, RateCard.class);
   }
-  /** Retrieve the latest version of a RateCard object. */
+  /** Retrieve the latest version of a Rate Card object. */
   public RateCard retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve the latest version of a RateCard object. */
+  /** Retrieve the latest version of a Rate Card object. */
   public RateCard retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/rate_cards/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, RateCard.class);
   }
-  /** Update a RateCard object. */
+  /** Update a Rate Card object. */
   public RateCard update(String id, RateCardUpdateParams params) throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Update a RateCard object. */
+  /** Update a Rate Card object. */
   public RateCard update(String id, RequestOptions options) throws StripeException {
     return update(id, (RateCardUpdateParams) null, options);
   }
-  /** Update a RateCard object. */
+  /** Update a Rate Card object. */
   public RateCard update(String id) throws StripeException {
     return update(id, (RateCardUpdateParams) null, (RequestOptions) null);
   }
-  /** Update a RateCard object. */
+  /** Update a Rate Card object. */
   public RateCard update(String id, RateCardUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/rate_cards/%s", ApiResource.urlEncodeId(id));

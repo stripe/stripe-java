@@ -19,21 +19,21 @@ public final class PricingPlanSubscriptionService extends ApiService {
     super(responseGetter);
   }
 
-  /** List all PricingPlanSubscription objects. */
+  /** List all Pricing Plan Subscription objects. */
   public StripeCollection<PricingPlanSubscription> list(PricingPlanSubscriptionListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List all PricingPlanSubscription objects. */
+  /** List all Pricing Plan Subscription objects. */
   public StripeCollection<PricingPlanSubscription> list(RequestOptions options)
       throws StripeException {
     return list((PricingPlanSubscriptionListParams) null, options);
   }
-  /** List all PricingPlanSubscription objects. */
+  /** List all Pricing Plan Subscription objects. */
   public StripeCollection<PricingPlanSubscription> list() throws StripeException {
     return list((PricingPlanSubscriptionListParams) null, (RequestOptions) null);
   }
-  /** List all PricingPlanSubscription objects. */
+  /** List all Pricing Plan Subscription objects. */
   public StripeCollection<PricingPlanSubscription> list(
       PricingPlanSubscriptionListParams params, RequestOptions options) throws StripeException {
     String path = "/v2/billing/pricing_plan_subscriptions";
@@ -47,11 +47,11 @@ public final class PricingPlanSubscriptionService extends ApiService {
     return this.request(
         request, new TypeToken<StripeCollection<PricingPlanSubscription>>() {}.getType());
   }
-  /** Retrieve a PricingPlanSubscription object. */
+  /** Retrieve a Pricing Plan Subscription object. */
   public PricingPlanSubscription retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve a PricingPlanSubscription object. */
+  /** Retrieve a Pricing Plan Subscription object. */
   public PricingPlanSubscription retrieve(String id, RequestOptions options)
       throws StripeException {
     String path =

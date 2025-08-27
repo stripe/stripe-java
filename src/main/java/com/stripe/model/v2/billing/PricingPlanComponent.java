@@ -18,12 +18,12 @@ public class PricingPlanComponent extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** Unique identifier for the PricingPlanComponent. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** Details if this component is a LicenseFee. */
+  /** Details if this component is a License Fee. */
   @SerializedName("license_fee")
   LicenseFee licenseFee;
 
@@ -38,7 +38,11 @@ public class PricingPlanComponent extends StripeObject implements HasId {
   @SerializedName("lookup_key")
   String lookupKey;
 
-  /** Set of key-value pairs that you can attach to an object. */
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
+   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -51,19 +55,19 @@ public class PricingPlanComponent extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the PricingPlan this component belongs to. */
+  /** The ID of the Pricing Plan this component belongs to. */
   @SerializedName("pricing_plan")
   String pricingPlan;
 
-  /** The ID of the PricingPlanVersion this component belongs to. */
+  /** The ID of the Pricing Plan Version this component belongs to. */
   @SerializedName("pricing_plan_version")
   String pricingPlanVersion;
 
-  /** Details if this component is a RateCard. */
+  /** Details if this component is a Rate Card. */
   @SerializedName("rate_card")
   RateCard rateCard;
 
-  /** Details if this component is a ServiceAction. */
+  /** Details if this component is a Service Action. */
   @SerializedName("service_action")
   ServiceAction serviceAction;
 
@@ -83,12 +87,12 @@ public class PricingPlanComponent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class LicenseFee extends StripeObject implements HasId {
-    /** The ID of the LicenseFee. */
+    /** The ID of the License Fee. */
     @Getter(onMethod_ = {@Override})
     @SerializedName("id")
     String id;
 
-    /** The version of the LicenseFee. */
+    /** The version of the LicenseFee. Defaults to 'latest', if not specified. */
     @SerializedName("version")
     String version;
   }
@@ -101,12 +105,12 @@ public class PricingPlanComponent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class RateCard extends StripeObject implements HasId {
-    /** The ID of the RateCard. */
+    /** The ID of the Rate Card. */
     @Getter(onMethod_ = {@Override})
     @SerializedName("id")
     String id;
 
-    /** The version of the RateCard. */
+    /** The version of the RateCard. Defaults to 'latest', if not specified. */
     @SerializedName("version")
     String version;
   }
@@ -119,13 +123,9 @@ public class PricingPlanComponent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class ServiceAction extends StripeObject implements HasId {
-    /** The ID of the ServiceAction. */
+    /** The ID of the service action. */
     @Getter(onMethod_ = {@Override})
     @SerializedName("id")
     String id;
-
-    /** The version of the ServiceAction. */
-    @SerializedName("version")
-    String version;
   }
 }

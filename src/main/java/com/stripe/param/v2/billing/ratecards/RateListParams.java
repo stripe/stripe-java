@@ -24,7 +24,7 @@ public class RateListParams extends ApiRequestParams {
   @SerializedName("limit")
   Integer limit;
 
-  /** Optionally filter by a MeteredItem. */
+  /** Optionally filter by a Metered Item. */
   @SerializedName("metered_item")
   String meteredItem;
 
@@ -91,7 +91,7 @@ public class RateListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Optionally filter by a MeteredItem. */
+    /** Optionally filter by a Metered Item. */
     public Builder setMeteredItem(String meteredItem) {
       this.meteredItem = meteredItem;
       return this;

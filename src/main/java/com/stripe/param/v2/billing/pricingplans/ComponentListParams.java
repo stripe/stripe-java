@@ -34,7 +34,7 @@ public class ComponentListParams extends ApiRequestParams {
   List<String> lookupKeys;
 
   /**
-   * The ID of the PricingPlanVersion to list components for. Will use the latest version if not
+   * The ID of the Pricing Plan Version to list components for. Will use the latest version if not
    * provided. Mutually exclusive with {@code lookup_keys}.
    */
   @SerializedName("pricing_plan_version")
@@ -129,7 +129,7 @@ public class ComponentListParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the PricingPlanVersion to list components for. Will use the latest version if not
+     * The ID of the Pricing Plan Version to list components for. Will use the latest version if not
      * provided. Mutually exclusive with {@code lookup_keys}.
      */
     public Builder setPricingPlanVersion(String pricingPlanVersion) {

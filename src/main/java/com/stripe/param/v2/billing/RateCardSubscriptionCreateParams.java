@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class RateCardSubscriptionCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The ID of the billing Cadence. */
+  /** <strong>Required.</strong> The ID of the Billing Cadence. */
   @SerializedName("billing_cadence")
   String billingCadence;
 
@@ -25,19 +25,20 @@ public class RateCardSubscriptionCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** <strong>Required.</strong> The ID of the RateCard. */
+  /** <strong>Required.</strong> The ID of the Rate Card. */
   @SerializedName("rate_card")
   String rateCard;
 
   /**
-   * The ID of the RateCardVersion. If not specified, defaults to the &quot;live_version&quot; of
-   * the RateCard at the time of creation.
+   * The ID of the Rate Card Version. If not specified, defaults to the &quot;live_version&quot; of
+   * the Rate Card at the time of creation.
    */
   @SerializedName("rate_card_version")
   String rateCardVersion;
@@ -80,7 +81,7 @@ public class RateCardSubscriptionCreateParams extends ApiRequestParams {
           this.rateCardVersion);
     }
 
-    /** <strong>Required.</strong> The ID of the billing Cadence. */
+    /** <strong>Required.</strong> The ID of the Billing Cadence. */
     public Builder setBillingCadence(String billingCadence) {
       this.billingCadence = billingCadence;
       return this;
@@ -138,15 +139,15 @@ public class RateCardSubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of the RateCard. */
+    /** <strong>Required.</strong> The ID of the Rate Card. */
     public Builder setRateCard(String rateCard) {
       this.rateCard = rateCard;
       return this;
     }
 
     /**
-     * The ID of the RateCardVersion. If not specified, defaults to the &quot;live_version&quot; of
-     * the RateCard at the time of creation.
+     * The ID of the Rate Card Version. If not specified, defaults to the &quot;live_version&quot;
+     * of the Rate Card at the time of creation.
      */
     public Builder setRateCardVersion(String rateCardVersion) {
       this.rateCardVersion = rateCardVersion;

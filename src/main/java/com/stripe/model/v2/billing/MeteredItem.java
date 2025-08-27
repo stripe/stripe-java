@@ -25,7 +25,7 @@ public class MeteredItem extends StripeObject implements HasId {
   @SerializedName("display_name")
   String displayName;
 
-  /** The ID of the MeteredItem. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -49,13 +49,14 @@ public class MeteredItem extends StripeObject implements HasId {
   String lookupKey;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** ID of the Meter that measures usage for this MeteredItem. */
+  /** ID of the Meter that measures usage for this Metered Item. */
   @SerializedName("meter")
   String meter;
 
@@ -97,7 +98,7 @@ public class MeteredItem extends StripeObject implements HasId {
     @SerializedName("dimension")
     String dimension;
 
-    /** To count usage towards this MeteredItem, the dimension must have this value. */
+    /** To count usage towards this metered item, the dimension must have this value. */
     @SerializedName("value")
     String value;
   }

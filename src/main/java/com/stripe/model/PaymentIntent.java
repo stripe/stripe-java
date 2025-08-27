@@ -194,6 +194,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("description")
   String description;
 
+  /** The list of payment method types to exclude from use with this payment. */
+  @SerializedName("excluded_payment_method_types")
+  List<String> excludedPaymentMethodTypes;
+
   /** The FX Quote used for the PaymentIntent. */
   @SerializedName("fx_quote")
   String fxQuote;
@@ -5512,6 +5516,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix extends StripeObject {
+      /**
+       * Determines if the amount includes the IOF tax.
+       *
+       * <p>One of {@code always}, or {@code never}.
+       */
+      @SerializedName("amount_includes_iof")
+      String amountIncludesIof;
+
       /** The number of seconds (between 10 and 1209600) after which Pix payment will expire. */
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;
@@ -5519,6 +5531,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       /** The timestamp at which the Pix expires. */
       @SerializedName("expires_at")
       Long expiresAt;
+
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
@@ -5539,10 +5554,70 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>Equal to {@code none}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Determines if the amount includes the IOF tax.
+         *
+         * <p>One of {@code always}, or {@code never}.
+         */
+        @SerializedName("amount_includes_iof")
+        String amountIncludesIof;
+
+        /**
+         * Type of amount.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Date when the mandate expires and no further payments will be charged, in {@code
+         * YYYY-MM-DD}.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * Schedule at which the future payments will be charged.
+         *
+         * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or
+         * {@code yearly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /** Subscription name displayed to buyers in their bank app. */
+        @SerializedName("reference")
+        String reference;
+
+        /** Start date of the mandate, in {@code YYYY-MM-DD}. */
+        @SerializedName("start_date")
+        String startDate;
+      }
     }
 
     /**

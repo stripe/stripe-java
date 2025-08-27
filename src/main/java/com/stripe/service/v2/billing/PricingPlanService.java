@@ -21,19 +21,19 @@ public final class PricingPlanService extends ApiService {
     super(responseGetter);
   }
 
-  /** List all PricingPlan objects. */
+  /** List all Pricing Plan objects. */
   public StripeCollection<PricingPlan> list(PricingPlanListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List all PricingPlan objects. */
+  /** List all Pricing Plan objects. */
   public StripeCollection<PricingPlan> list(RequestOptions options) throws StripeException {
     return list((PricingPlanListParams) null, options);
   }
-  /** List all PricingPlan objects. */
+  /** List all Pricing Plan objects. */
   public StripeCollection<PricingPlan> list() throws StripeException {
     return list((PricingPlanListParams) null, (RequestOptions) null);
   }
-  /** List all PricingPlan objects. */
+  /** List all Pricing Plan objects. */
   public StripeCollection<PricingPlan> list(PricingPlanListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/pricing_plans";
@@ -46,11 +46,11 @@ public final class PricingPlanService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<PricingPlan>>() {}.getType());
   }
-  /** Create a PricingPlan object. */
+  /** Create a Pricing Plan object. */
   public PricingPlan create(PricingPlanCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a PricingPlan object. */
+  /** Create a Pricing Plan object. */
   public PricingPlan create(PricingPlanCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/pricing_plans";
@@ -63,30 +63,30 @@ public final class PricingPlanService extends ApiService {
             options);
     return this.request(request, PricingPlan.class);
   }
-  /** Retrieve a PricingPlan object. */
+  /** Retrieve a Pricing Plan object. */
   public PricingPlan retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve a PricingPlan object. */
+  /** Retrieve a Pricing Plan object. */
   public PricingPlan retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/pricing_plans/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, PricingPlan.class);
   }
-  /** Update a PricingPlan object. */
+  /** Update a Pricing Plan object. */
   public PricingPlan update(String id, PricingPlanUpdateParams params) throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Update a PricingPlan object. */
+  /** Update a Pricing Plan object. */
   public PricingPlan update(String id, RequestOptions options) throws StripeException {
     return update(id, (PricingPlanUpdateParams) null, options);
   }
-  /** Update a PricingPlan object. */
+  /** Update a Pricing Plan object. */
   public PricingPlan update(String id) throws StripeException {
     return update(id, (PricingPlanUpdateParams) null, (RequestOptions) null);
   }
-  /** Update a PricingPlan object. */
+  /** Update a Pricing Plan object. */
   public PricingPlan update(String id, PricingPlanUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/pricing_plans/%s", ApiResource.urlEncodeId(id));

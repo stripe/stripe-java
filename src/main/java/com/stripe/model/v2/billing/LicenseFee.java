@@ -16,8 +16,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class LicenseFee extends StripeObject implements HasId {
   /**
-   * Whether this LicenseFee is active. Inactive LicenseFees cannot be used in new activations or be
-   * modified.
+   * Whether this License Fee is active. Inactive License Fees cannot be used in new activations or
+   * be modified.
    */
   @SerializedName("active")
   Boolean active;
@@ -26,34 +26,34 @@ public class LicenseFee extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The currency of this LicenseFee. */
+  /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
   @SerializedName("currency")
   String currency;
 
   /**
-   * A customer-facing name for the LicenseFee. This name is used in Stripe-hosted products like the
-   * Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
+   * A customer-facing name for the license fee. This name is used in Stripe-hosted products like
+   * the Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
    * characters.
    */
   @SerializedName("display_name")
   String displayName;
 
-  /** The ID of the LicenseFee. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** The ID of the LicenseFee's most recently created version. */
+  /** The ID of the license fee's most recently created version. */
   @SerializedName("latest_version")
   String latestVersion;
 
-  /** The LicensedItem that this license fee binds to. */
+  /** The Licensed Item that this License Fee binds to. */
   @SerializedName("licensed_item")
   LicensedItem licensedItem;
 
   /**
-   * The ID of the version that will be used by all Subscriptions when no specific version is
-   * specified.
+   * The ID of the License Fee Version that will be used by all subscriptions when no specific
+   * version is specified.
    */
   @SerializedName("live_version")
   String liveVersion;
@@ -66,15 +66,16 @@ public class LicenseFee extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * An internal key you can use to search for a particular LicenseFee. Maximum length of 200
+   * An internal key you can use to search for a particular License Fee. Maximum length of 200
    * characters.
    */
   @SerializedName("lookup_key")
   String lookupKey;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;

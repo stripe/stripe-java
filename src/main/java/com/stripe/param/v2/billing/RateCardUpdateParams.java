@@ -44,8 +44,16 @@ public class RateCardUpdateParams extends ApiRequestParams {
   Object liveVersion;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * An internal key you can use to search for a particular RateCard. Maximum length of 200
+   * characters.
+   */
+  @SerializedName("lookup_key")
+  Object lookupKey;
+
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, Object> metadata;
@@ -55,11 +63,13 @@ public class RateCardUpdateParams extends ApiRequestParams {
       Object displayName,
       Map<String, Object> extraParams,
       Object liveVersion,
+      Object lookupKey,
       Map<String, Object> metadata) {
     this.active = active;
     this.displayName = displayName;
     this.extraParams = extraParams;
     this.liveVersion = liveVersion;
+    this.lookupKey = lookupKey;
     this.metadata = metadata;
   }
 
@@ -76,12 +86,19 @@ public class RateCardUpdateParams extends ApiRequestParams {
 
     private Object liveVersion;
 
+    private Object lookupKey;
+
     private Map<String, Object> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public RateCardUpdateParams build() {
       return new RateCardUpdateParams(
-          this.active, this.displayName, this.extraParams, this.liveVersion, this.metadata);
+          this.active,
+          this.displayName,
+          this.extraParams,
+          this.liveVersion,
+          this.lookupKey,
+          this.metadata);
     }
 
     /**
@@ -154,6 +171,24 @@ public class RateCardUpdateParams extends ApiRequestParams {
      */
     public Builder setLiveVersion(EmptyParam liveVersion) {
       this.liveVersion = liveVersion;
+      return this;
+    }
+
+    /**
+     * An internal key you can use to search for a particular RateCard. Maximum length of 200
+     * characters.
+     */
+    public Builder setLookupKey(String lookupKey) {
+      this.lookupKey = lookupKey;
+      return this;
+    }
+
+    /**
+     * An internal key you can use to search for a particular RateCard. Maximum length of 200
+     * characters.
+     */
+    public Builder setLookupKey(EmptyParam lookupKey) {
+      this.lookupKey = lookupKey;
       return this;
     }
 

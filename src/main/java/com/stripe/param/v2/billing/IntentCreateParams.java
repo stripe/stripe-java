@@ -3,6 +3,7 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class IntentCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> Actions to be performed by this BillingIntent. */
+  /** <strong>Required.</strong> Actions to be performed by this Billing Intent. */
   @SerializedName("actions")
   List<IntentCreateParams.Action> actions;
 
@@ -21,13 +22,12 @@ public class IntentCreateParams extends ApiRequestParams {
   @SerializedName("cadence")
   String cadence;
 
-  /** <strong>Required.</strong> Three-letter ISO currency code, in lowercase. */
+  /**
+   * <strong>Required.</strong> Three-letter ISO currency code, in lowercase. Must be a supported
+   * currency.
+   */
   @SerializedName("currency")
   String currency;
-
-  /** <strong>Required.</strong> When the BillingIntent will take effect. */
-  @SerializedName("effective_at")
-  EffectiveAt effectiveAt;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -42,12 +42,10 @@ public class IntentCreateParams extends ApiRequestParams {
       List<IntentCreateParams.Action> actions,
       String cadence,
       String currency,
-      EffectiveAt effectiveAt,
       Map<String, Object> extraParams) {
     this.actions = actions;
     this.cadence = cadence;
     this.currency = currency;
-    this.effectiveAt = effectiveAt;
     this.extraParams = extraParams;
   }
 
@@ -62,14 +60,11 @@ public class IntentCreateParams extends ApiRequestParams {
 
     private String currency;
 
-    private EffectiveAt effectiveAt;
-
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
     public IntentCreateParams build() {
-      return new IntentCreateParams(
-          this.actions, this.cadence, this.currency, this.effectiveAt, this.extraParams);
+      return new IntentCreateParams(this.actions, this.cadence, this.currency, this.extraParams);
     }
 
     /**
@@ -104,15 +99,12 @@ public class IntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Three-letter ISO currency code, in lowercase. */
+    /**
+     * <strong>Required.</strong> Three-letter ISO currency code, in lowercase. Must be a supported
+     * currency.
+     */
     public Builder setCurrency(String currency) {
       this.currency = currency;
-      return this;
-    }
-
-    /** <strong>Required.</strong> When the BillingIntent will take effect. */
-    public Builder setEffectiveAt(IntentCreateParams.EffectiveAt effectiveAt) {
-      this.effectiveAt = effectiveAt;
       return this;
     }
 
@@ -175,7 +167,7 @@ public class IntentCreateParams extends ApiRequestParams {
     @SerializedName("subscribe")
     Subscribe subscribe;
 
-    /** <strong>Required.</strong> Type of the BillingIntentAction. */
+    /** <strong>Required.</strong> Type of the Billing Intent action. */
     @SerializedName("type")
     Type type;
 
@@ -283,7 +275,7 @@ public class IntentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Type of the BillingIntentAction. */
+      /** <strong>Required.</strong> Type of the Billing Intent action. */
       public Builder setType(IntentCreateParams.Action.Type type) {
         this.type = type;
         return this;
@@ -722,6 +714,17 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Deactivate {
+      /** Configuration for the billing details. */
+      @SerializedName("billing_details")
+      BillingDetails billingDetails;
+
+      /**
+       * When the deactivate action will take effect. If not specified, the default behavior is
+       * on_reserve.
+       */
+      @SerializedName("effective_at")
+      EffectiveAt effectiveAt;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -735,22 +738,20 @@ public class IntentCreateParams extends ApiRequestParams {
       @SerializedName("pricing_plan_subscription_details")
       PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails;
 
-      /** <strong>Required.</strong> Behavior for handling prorations. */
-      @SerializedName("proration_behavior")
-      ProrationBehavior prorationBehavior;
-
       /** <strong>Required.</strong> Type of the action details. */
       @SerializedName("type")
       Type type;
 
       private Deactivate(
+          BillingDetails billingDetails,
+          EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails,
-          ProrationBehavior prorationBehavior,
           Type type) {
+        this.billingDetails = billingDetails;
+        this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.pricingPlanSubscriptionDetails = pricingPlanSubscriptionDetails;
-        this.prorationBehavior = prorationBehavior;
         this.type = type;
       }
 
@@ -759,21 +760,41 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private BillingDetails billingDetails;
+
+        private EffectiveAt effectiveAt;
+
         private Map<String, Object> extraParams;
 
         private PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails;
-
-        private ProrationBehavior prorationBehavior;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Deactivate build() {
           return new IntentCreateParams.Action.Deactivate(
+              this.billingDetails,
+              this.effectiveAt,
               this.extraParams,
               this.pricingPlanSubscriptionDetails,
-              this.prorationBehavior,
               this.type);
+        }
+
+        /** Configuration for the billing details. */
+        public Builder setBillingDetails(
+            IntentCreateParams.Action.Deactivate.BillingDetails billingDetails) {
+          this.billingDetails = billingDetails;
+          return this;
+        }
+
+        /**
+         * When the deactivate action will take effect. If not specified, the default behavior is
+         * on_reserve.
+         */
+        public Builder setEffectiveAt(
+            IntentCreateParams.Action.Deactivate.EffectiveAt effectiveAt) {
+          this.effectiveAt = effectiveAt;
+          return this;
         }
 
         /**
@@ -812,17 +833,211 @@ public class IntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Behavior for handling prorations. */
-        public Builder setProrationBehavior(
-            IntentCreateParams.Action.Deactivate.ProrationBehavior prorationBehavior) {
-          this.prorationBehavior = prorationBehavior;
-          return this;
-        }
-
         /** <strong>Required.</strong> Type of the action details. */
         public Builder setType(IntentCreateParams.Action.Deactivate.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillingDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** This controls the proration adjustment for the partial servicing period. */
+        @SerializedName("proration_behavior")
+        ProrationBehavior prorationBehavior;
+
+        private BillingDetails(
+            Map<String, Object> extraParams, ProrationBehavior prorationBehavior) {
+          this.extraParams = extraParams;
+          this.prorationBehavior = prorationBehavior;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrationBehavior prorationBehavior;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Deactivate.BillingDetails build() {
+            return new IntentCreateParams.Action.Deactivate.BillingDetails(
+                this.extraParams, this.prorationBehavior);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Deactivate.BillingDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Deactivate.BillingDetails#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** This controls the proration adjustment for the partial servicing period. */
+          public Builder setProrationBehavior(
+              IntentCreateParams.Action.Deactivate.BillingDetails.ProrationBehavior
+                  prorationBehavior) {
+            this.prorationBehavior = prorationBehavior;
+            return this;
+          }
+        }
+
+        public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+          @SerializedName("no_adjustment")
+          NO_ADJUSTMENT("no_adjustment"),
+
+          @SerializedName("prorated_adjustment")
+          PRORATED_ADJUSTMENT("prorated_adjustment");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrationBehavior(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EffectiveAt {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The timestamp at which the deactivate action will take effect. Only present if type is
+         * timestamp.
+         */
+        @SerializedName("timestamp")
+        Instant timestamp;
+
+        /** <strong>Required.</strong> When the deactivate action will take effect. */
+        @SerializedName("type")
+        Type type;
+
+        private EffectiveAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Instant timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Deactivate.EffectiveAt build() {
+            return new IntentCreateParams.Action.Deactivate.EffectiveAt(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Deactivate.EffectiveAt#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Deactivate.EffectiveAt#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The timestamp at which the deactivate action will take effect. Only present if type is
+           * timestamp.
+           */
+          public Builder setTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /** <strong>Required.</strong> When the deactivate action will take effect. */
+          public Builder setType(IntentCreateParams.Action.Deactivate.EffectiveAt.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("current_billing_period_start")
+          CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
+
+          @SerializedName("on_reserve")
+          ON_RESERVE("on_reserve"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -902,24 +1117,12 @@ public class IntentCreateParams extends ApiRequestParams {
         }
       }
 
-      public enum ProrationBehavior implements ApiRequestParams.EnumParam {
-        @SerializedName("always_invoice")
-        ALWAYS_INVOICE("always_invoice"),
-
-        @SerializedName("none")
-        NONE("none");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        ProrationBehavior(String value) {
-          this.value = value;
-        }
-      }
-
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("pricing_plan_subscription_details")
-        PRICING_PLAN_SUBSCRIPTION_DETAILS("pricing_plan_subscription_details");
+        PRICING_PLAN_SUBSCRIPTION_DETAILS("pricing_plan_subscription_details"),
+
+        @SerializedName("v1_subscription_details")
+        V1_SUBSCRIPTION_DETAILS("v1_subscription_details");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -933,6 +1136,17 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Modify {
+      /** Configuration for the billing details. */
+      @SerializedName("billing_details")
+      BillingDetails billingDetails;
+
+      /**
+       * When the modify action will take effect. If not specified, the default behavior is
+       * on_reserve.
+       */
+      @SerializedName("effective_at")
+      EffectiveAt effectiveAt;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -946,22 +1160,20 @@ public class IntentCreateParams extends ApiRequestParams {
       @SerializedName("pricing_plan_subscription_details")
       PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails;
 
-      /** <strong>Required.</strong> Behavior for handling prorations. */
-      @SerializedName("proration_behavior")
-      ProrationBehavior prorationBehavior;
-
       /** <strong>Required.</strong> Type of the action details. */
       @SerializedName("type")
       Type type;
 
       private Modify(
+          BillingDetails billingDetails,
+          EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails,
-          ProrationBehavior prorationBehavior,
           Type type) {
+        this.billingDetails = billingDetails;
+        this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.pricingPlanSubscriptionDetails = pricingPlanSubscriptionDetails;
-        this.prorationBehavior = prorationBehavior;
         this.type = type;
       }
 
@@ -970,21 +1182,40 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private BillingDetails billingDetails;
+
+        private EffectiveAt effectiveAt;
+
         private Map<String, Object> extraParams;
 
         private PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails;
-
-        private ProrationBehavior prorationBehavior;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Modify build() {
           return new IntentCreateParams.Action.Modify(
+              this.billingDetails,
+              this.effectiveAt,
               this.extraParams,
               this.pricingPlanSubscriptionDetails,
-              this.prorationBehavior,
               this.type);
+        }
+
+        /** Configuration for the billing details. */
+        public Builder setBillingDetails(
+            IntentCreateParams.Action.Modify.BillingDetails billingDetails) {
+          this.billingDetails = billingDetails;
+          return this;
+        }
+
+        /**
+         * When the modify action will take effect. If not specified, the default behavior is
+         * on_reserve.
+         */
+        public Builder setEffectiveAt(IntentCreateParams.Action.Modify.EffectiveAt effectiveAt) {
+          this.effectiveAt = effectiveAt;
+          return this;
         }
 
         /**
@@ -1023,17 +1254,210 @@ public class IntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Behavior for handling prorations. */
-        public Builder setProrationBehavior(
-            IntentCreateParams.Action.Modify.ProrationBehavior prorationBehavior) {
-          this.prorationBehavior = prorationBehavior;
-          return this;
-        }
-
         /** <strong>Required.</strong> Type of the action details. */
         public Builder setType(IntentCreateParams.Action.Modify.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillingDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** This controls the proration adjustment for the partial servicing period. */
+        @SerializedName("proration_behavior")
+        ProrationBehavior prorationBehavior;
+
+        private BillingDetails(
+            Map<String, Object> extraParams, ProrationBehavior prorationBehavior) {
+          this.extraParams = extraParams;
+          this.prorationBehavior = prorationBehavior;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrationBehavior prorationBehavior;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Modify.BillingDetails build() {
+            return new IntentCreateParams.Action.Modify.BillingDetails(
+                this.extraParams, this.prorationBehavior);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Modify.BillingDetails#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Modify.BillingDetails#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** This controls the proration adjustment for the partial servicing period. */
+          public Builder setProrationBehavior(
+              IntentCreateParams.Action.Modify.BillingDetails.ProrationBehavior prorationBehavior) {
+            this.prorationBehavior = prorationBehavior;
+            return this;
+          }
+        }
+
+        public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+          @SerializedName("no_adjustment")
+          NO_ADJUSTMENT("no_adjustment"),
+
+          @SerializedName("prorated_adjustment")
+          PRORATED_ADJUSTMENT("prorated_adjustment");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrationBehavior(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EffectiveAt {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The timestamp at which the modify action will take effect. Only present if type is
+         * timestamp.
+         */
+        @SerializedName("timestamp")
+        Instant timestamp;
+
+        /** <strong>Required.</strong> When the modify action will take effect. */
+        @SerializedName("type")
+        Type type;
+
+        private EffectiveAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Instant timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Modify.EffectiveAt build() {
+            return new IntentCreateParams.Action.Modify.EffectiveAt(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Modify.EffectiveAt#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Modify.EffectiveAt#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The timestamp at which the modify action will take effect. Only present if type is
+           * timestamp.
+           */
+          public Builder setTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /** <strong>Required.</strong> When the modify action will take effect. */
+          public Builder setType(IntentCreateParams.Action.Modify.EffectiveAt.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("current_billing_period_start")
+          CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
+
+          @SerializedName("on_reserve")
+          ON_RESERVE("on_reserve"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -1055,15 +1479,15 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** ID of the new pricing plan, if changing plans. */
+        /** The ID of the new Pricing Plan, if changing plans. */
         @SerializedName("new_pricing_plan")
         String newPricingPlan;
 
-        /** Version of the pricing plan to use. */
+        /** The ID of the new Pricing Plan Version to use. */
         @SerializedName("new_pricing_plan_version")
         String newPricingPlanVersion;
 
-        /** <strong>Required.</strong> ID of the pricing plan subscription to modify. */
+        /** <strong>Required.</strong> The ID of the Pricing Plan Subscription to modify. */
         @SerializedName("pricing_plan_subscription")
         String pricingPlanSubscription;
 
@@ -1177,19 +1601,19 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** ID of the new pricing plan, if changing plans. */
+          /** The ID of the new Pricing Plan, if changing plans. */
           public Builder setNewPricingPlan(String newPricingPlan) {
             this.newPricingPlan = newPricingPlan;
             return this;
           }
 
-          /** Version of the pricing plan to use. */
+          /** The ID of the new Pricing Plan Version to use. */
           public Builder setNewPricingPlanVersion(String newPricingPlanVersion) {
             this.newPricingPlanVersion = newPricingPlanVersion;
             return this;
           }
 
-          /** <strong>Required.</strong> ID of the pricing plan subscription to modify. */
+          /** <strong>Required.</strong> The ID of the Pricing Plan Subscription to modify. */
           public Builder setPricingPlanSubscription(String pricingPlanSubscription) {
             this.pricingPlanSubscription = pricingPlanSubscription;
             return this;
@@ -1305,24 +1729,12 @@ public class IntentCreateParams extends ApiRequestParams {
         }
       }
 
-      public enum ProrationBehavior implements ApiRequestParams.EnumParam {
-        @SerializedName("always_invoice")
-        ALWAYS_INVOICE("always_invoice"),
-
-        @SerializedName("none")
-        NONE("none");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        ProrationBehavior(String value) {
-          this.value = value;
-        }
-      }
-
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("pricing_plan_subscription_details")
-        PRICING_PLAN_SUBSCRIPTION_DETAILS("pricing_plan_subscription_details");
+        PRICING_PLAN_SUBSCRIPTION_DETAILS("pricing_plan_subscription_details"),
+
+        @SerializedName("v1_subscription_details")
+        V1_SUBSCRIPTION_DETAILS("v1_subscription_details");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -1434,6 +1846,20 @@ public class IntentCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Subscribe {
       /**
+       * Configuration for the billing details. If not specified, see the default behavior for
+       * individual attributes.
+       */
+      @SerializedName("billing_details")
+      BillingDetails billingDetails;
+
+      /**
+       * When the subscribe action will take effect. If not specified, the default behavior is
+       * on_reserve.
+       */
+      @SerializedName("effective_at")
+      EffectiveAt effectiveAt;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -1446,23 +1872,27 @@ public class IntentCreateParams extends ApiRequestParams {
       @SerializedName("pricing_plan_subscription_details")
       PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails;
 
-      /** <strong>Required.</strong> Behavior for handling prorations. */
-      @SerializedName("proration_behavior")
-      ProrationBehavior prorationBehavior;
-
       /** <strong>Required.</strong> Type of the action details. */
       @SerializedName("type")
       Type type;
 
+      /** Details for subscribing to a v1 subscription. */
+      @SerializedName("v1_subscription_details")
+      V1SubscriptionDetails v1SubscriptionDetails;
+
       private Subscribe(
+          BillingDetails billingDetails,
+          EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails,
-          ProrationBehavior prorationBehavior,
-          Type type) {
+          Type type,
+          V1SubscriptionDetails v1SubscriptionDetails) {
+        this.billingDetails = billingDetails;
+        this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.pricingPlanSubscriptionDetails = pricingPlanSubscriptionDetails;
-        this.prorationBehavior = prorationBehavior;
         this.type = type;
+        this.v1SubscriptionDetails = v1SubscriptionDetails;
       }
 
       public static Builder builder() {
@@ -1470,21 +1900,46 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private BillingDetails billingDetails;
+
+        private EffectiveAt effectiveAt;
+
         private Map<String, Object> extraParams;
 
         private PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails;
 
-        private ProrationBehavior prorationBehavior;
-
         private Type type;
+
+        private V1SubscriptionDetails v1SubscriptionDetails;
 
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Subscribe build() {
           return new IntentCreateParams.Action.Subscribe(
+              this.billingDetails,
+              this.effectiveAt,
               this.extraParams,
               this.pricingPlanSubscriptionDetails,
-              this.prorationBehavior,
-              this.type);
+              this.type,
+              this.v1SubscriptionDetails);
+        }
+
+        /**
+         * Configuration for the billing details. If not specified, see the default behavior for
+         * individual attributes.
+         */
+        public Builder setBillingDetails(
+            IntentCreateParams.Action.Subscribe.BillingDetails billingDetails) {
+          this.billingDetails = billingDetails;
+          return this;
+        }
+
+        /**
+         * When the subscribe action will take effect. If not specified, the default behavior is
+         * on_reserve.
+         */
+        public Builder setEffectiveAt(IntentCreateParams.Action.Subscribe.EffectiveAt effectiveAt) {
+          this.effectiveAt = effectiveAt;
+          return this;
         }
 
         /**
@@ -1523,17 +1978,218 @@ public class IntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Behavior for handling prorations. */
-        public Builder setProrationBehavior(
-            IntentCreateParams.Action.Subscribe.ProrationBehavior prorationBehavior) {
-          this.prorationBehavior = prorationBehavior;
-          return this;
-        }
-
         /** <strong>Required.</strong> Type of the action details. */
         public Builder setType(IntentCreateParams.Action.Subscribe.Type type) {
           this.type = type;
           return this;
+        }
+
+        /** Details for subscribing to a v1 subscription. */
+        public Builder setV1SubscriptionDetails(
+            IntentCreateParams.Action.Subscribe.V1SubscriptionDetails v1SubscriptionDetails) {
+          this.v1SubscriptionDetails = v1SubscriptionDetails;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillingDetails {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** This controls the proration adjustment for the partial servicing period. */
+        @SerializedName("proration_behavior")
+        ProrationBehavior prorationBehavior;
+
+        private BillingDetails(
+            Map<String, Object> extraParams, ProrationBehavior prorationBehavior) {
+          this.extraParams = extraParams;
+          this.prorationBehavior = prorationBehavior;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrationBehavior prorationBehavior;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Subscribe.BillingDetails build() {
+            return new IntentCreateParams.Action.Subscribe.BillingDetails(
+                this.extraParams, this.prorationBehavior);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Subscribe.BillingDetails#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Subscribe.BillingDetails#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** This controls the proration adjustment for the partial servicing period. */
+          public Builder setProrationBehavior(
+              IntentCreateParams.Action.Subscribe.BillingDetails.ProrationBehavior
+                  prorationBehavior) {
+            this.prorationBehavior = prorationBehavior;
+            return this;
+          }
+        }
+
+        public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+          @SerializedName("no_adjustment")
+          NO_ADJUSTMENT("no_adjustment"),
+
+          @SerializedName("prorated_adjustment")
+          PRORATED_ADJUSTMENT("prorated_adjustment");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrationBehavior(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EffectiveAt {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The timestamp at which the subscribe action will take effect. Only present if type is
+         * timestamp.
+         */
+        @SerializedName("timestamp")
+        Instant timestamp;
+
+        /** <strong>Required.</strong> When the subscribe action will take effect. */
+        @SerializedName("type")
+        Type type;
+
+        private EffectiveAt(Map<String, Object> extraParams, Instant timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Instant timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Subscribe.EffectiveAt build() {
+            return new IntentCreateParams.Action.Subscribe.EffectiveAt(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Subscribe.EffectiveAt#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Subscribe.EffectiveAt#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The timestamp at which the subscribe action will take effect. Only present if type is
+           * timestamp.
+           */
+          public Builder setTimestamp(Instant timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /** <strong>Required.</strong> When the subscribe action will take effect. */
+          public Builder setType(IntentCreateParams.Action.Subscribe.EffectiveAt.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("current_billing_period_start")
+          CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
+
+          @SerializedName("on_reserve")
+          ON_RESERVE("on_reserve"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -1558,17 +2214,18 @@ public class IntentCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Set of key-value pairs that you can attach to an object. This can be useful for storing
-         * additional information about the object in a structured format.
+         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * attach to an object. This can be useful for storing additional information about the
+         * object in a structured format.
          */
         @SerializedName("metadata")
         Map<String, String> metadata;
 
-        /** <strong>Required.</strong> ID of the pricing plan to subscribe to. */
+        /** <strong>Required.</strong> ID of the Pricing Plan to subscribe to. */
         @SerializedName("pricing_plan")
         String pricingPlan;
 
-        /** <strong>Required.</strong> Version of the pricing plan to use. */
+        /** <strong>Required.</strong> Version of the Pricing Plan to use. */
         @SerializedName("pricing_plan_version")
         String pricingPlanVersion;
 
@@ -1712,13 +2369,13 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> ID of the pricing plan to subscribe to. */
+          /** <strong>Required.</strong> ID of the Pricing Plan to subscribe to. */
           public Builder setPricingPlan(String pricingPlan) {
             this.pricingPlan = pricingPlan;
             return this;
           }
 
-          /** <strong>Required.</strong> Version of the pricing plan to use. */
+          /** <strong>Required.</strong> Version of the Pricing Plan to use. */
           public Builder setPricingPlanVersion(String pricingPlanVersion) {
             this.pricingPlanVersion = pricingPlanVersion;
             return this;
@@ -1834,24 +2491,307 @@ public class IntentCreateParams extends ApiRequestParams {
         }
       }
 
-      public enum ProrationBehavior implements ApiRequestParams.EnumParam {
-        @SerializedName("always_invoice")
-        ALWAYS_INVOICE("always_invoice"),
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class V1SubscriptionDetails {
+        /**
+         * The subscription’s description, meant to be displayable to the customer. Use this field
+         * to optionally store an explanation of the subscription for rendering in Stripe surfaces
+         * and certain local payment methods UIs.
+         */
+        @SerializedName("description")
+        String description;
 
-        @SerializedName("none")
-        NONE("none");
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
 
-        @Getter(onMethod_ = {@Override})
-        private final String value;
+        /**
+         * <strong>Required.</strong> A list of up to 20 subscription items, each with an attached
+         * price.
+         */
+        @SerializedName("items")
+        List<IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item> items;
 
-        ProrationBehavior(String value) {
-          this.value = value;
+        /**
+         * Set of key-value pairs that you can attach to an object. This can be useful for storing
+         * additional information about the object in a structured format.
+         */
+        @SerializedName("metadata")
+        Map<String, String> metadata;
+
+        private V1SubscriptionDetails(
+            String description,
+            Map<String, Object> extraParams,
+            List<IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item> items,
+            Map<String, String> metadata) {
+          this.description = description;
+          this.extraParams = extraParams;
+          this.items = items;
+          this.metadata = metadata;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String description;
+
+          private Map<String, Object> extraParams;
+
+          private List<IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item> items;
+
+          private Map<String, String> metadata;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Subscribe.V1SubscriptionDetails build() {
+            return new IntentCreateParams.Action.Subscribe.V1SubscriptionDetails(
+                this.description, this.extraParams, this.items, this.metadata);
+          }
+
+          /**
+           * The subscription’s description, meant to be displayable to the customer. Use this field
+           * to optionally store an explanation of the subscription for rendering in Stripe surfaces
+           * and certain local payment methods UIs.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Subscribe.V1SubscriptionDetails#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Subscribe.V1SubscriptionDetails#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Add an element to `items` list. A list is initialized for the first `add/addAll` call,
+           * and subsequent calls adds additional elements to the original list. See {@link
+           * IntentCreateParams.Action.Subscribe.V1SubscriptionDetails#items} for the field
+           * documentation.
+           */
+          public Builder addItem(
+              IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item element) {
+            if (this.items == null) {
+              this.items = new ArrayList<>();
+            }
+            this.items.add(element);
+            return this;
+          }
+
+          /**
+           * Add all elements to `items` list. A list is initialized for the first `add/addAll`
+           * call, and subsequent calls adds additional elements to the original list. See {@link
+           * IntentCreateParams.Action.Subscribe.V1SubscriptionDetails#items} for the field
+           * documentation.
+           */
+          public Builder addAllItem(
+              List<IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item> elements) {
+            if (this.items == null) {
+              this.items = new ArrayList<>();
+            }
+            this.items.addAll(elements);
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+           * call, and subsequent calls add additional key/value pairs to the original map. See
+           * {@link IntentCreateParams.Action.Subscribe.V1SubscriptionDetails#metadata} for the
+           * field documentation.
+           */
+          public Builder putMetadata(String key, String value) {
+            if (this.metadata == null) {
+              this.metadata = new HashMap<>();
+            }
+            this.metadata.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Subscribe.V1SubscriptionDetails#metadata} for
+           * the field documentation.
+           */
+          public Builder putAllMetadata(Map<String, String> map) {
+            if (this.metadata == null) {
+              this.metadata = new HashMap<>();
+            }
+            this.metadata.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Item {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Set of key-value pairs that you can attach to an object. This can be useful for storing
+           * additional information about the object in a structured format.
+           */
+          @SerializedName("metadata")
+          Map<String, String> metadata;
+
+          /** <strong>Required.</strong> The ID of the price object. */
+          @SerializedName("price")
+          String price;
+
+          /** Quantity for this item. If not provided, will default to 1. */
+          @SerializedName("quantity")
+          Integer quantity;
+
+          private Item(
+              Map<String, Object> extraParams,
+              Map<String, String> metadata,
+              String price,
+              Integer quantity) {
+            this.extraParams = extraParams;
+            this.metadata = metadata;
+            this.price = price;
+            this.quantity = quantity;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Map<String, String> metadata;
+
+            private String price;
+
+            private Integer quantity;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item build() {
+              return new IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item(
+                  this.extraParams, this.metadata, this.price, this.quantity);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item#extraParams} for the
+             * field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item#extraParams} for the
+             * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `metadata` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item#metadata} for the
+             * field documentation.
+             */
+            public Builder putMetadata(String key, String value) {
+              if (this.metadata == null) {
+                this.metadata = new HashMap<>();
+              }
+              this.metadata.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item#metadata} for the
+             * field documentation.
+             */
+            public Builder putAllMetadata(Map<String, String> map) {
+              if (this.metadata == null) {
+                this.metadata = new HashMap<>();
+              }
+              this.metadata.putAll(map);
+              return this;
+            }
+
+            /** <strong>Required.</strong> The ID of the price object. */
+            public Builder setPrice(String price) {
+              this.price = price;
+              return this;
+            }
+
+            /** Quantity for this item. If not provided, will default to 1. */
+            public Builder setQuantity(Integer quantity) {
+              this.quantity = quantity;
+              return this;
+            }
+          }
         }
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("pricing_plan_subscription_details")
-        PRICING_PLAN_SUBSCRIPTION_DETAILS("pricing_plan_subscription_details");
+        PRICING_PLAN_SUBSCRIPTION_DETAILS("pricing_plan_subscription_details"),
+
+        @SerializedName("v1_subscription_details")
+        V1_SUBSCRIPTION_DETAILS("v1_subscription_details");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -1884,24 +2824,6 @@ public class IntentCreateParams extends ApiRequestParams {
       Type(String value) {
         this.value = value;
       }
-    }
-  }
-
-  public enum EffectiveAt implements ApiRequestParams.EnumParam {
-    @SerializedName("current_billing_period_start")
-    CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
-
-    @SerializedName("on_commit")
-    ON_COMMIT("on_commit"),
-
-    @SerializedName("on_reserve")
-    ON_RESERVE("on_reserve");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    EffectiveAt(String value) {
-      this.value = value;
     }
   }
 }

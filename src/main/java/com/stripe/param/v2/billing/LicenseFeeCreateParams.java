@@ -13,12 +13,15 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class LicenseFeeCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The currency of this LicenseFee. */
+  /**
+   * <strong>Required.</strong> Three-letter ISO currency code, in lowercase. Must be a supported
+   * currency.
+   */
   @SerializedName("currency")
   String currency;
 
   /**
-   * <strong>Required.</strong> A customer-facing name for the LicenseFee. This name is used in
+   * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
    * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on Invoices.
    * Maximum length of 250 characters.
    */
@@ -34,31 +37,32 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> The LicensedItem that this rate binds to. */
+  /** <strong>Required.</strong> The Licensed Item that this License Fee binds to. */
   @SerializedName("licensed_item")
   String licensedItem;
 
   /**
-   * An internal key you can use to search for a particular LicenseFee. Maximum length of 200
+   * An internal key you can use to search for a particular license fee. Maximum length of 200
    * characters.
    */
   @SerializedName("lookup_key")
   String lookupKey;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * <strong>Required.</strong> The interval for assessing service. For example, a monthly
-   * LicenseFee with a rate of $1 for the first 10 &quot;workloads&quot; and $2 thereafter means
-   * &quot;$1 per workload up to 10 workloads during a month of service.&quot; This is similar to
-   * but distinct from billing interval; the service interval deals with the rate at which the
-   * customer accumulates fees, while the billing interval in Cadence deals with the rate the
-   * customer is billed.
+   * <strong>Required.</strong> The interval for assessing service. For example, a monthly license
+   * fee with a rate of $1 for the first 10 &quot;workloads&quot; and $2 thereafter means &quot;$1
+   * per workload up to 10 workloads during a month of service.&quot; This is similar to but
+   * distinct from billing interval; the service interval deals with the rate at which the customer
+   * accumulates fees, while the billing interval in Cadence deals with the rate the customer is
+   * billed.
    */
   @SerializedName("service_interval")
   ServiceInterval serviceInterval;
@@ -182,14 +186,17 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
           this.unitAmount);
     }
 
-    /** <strong>Required.</strong> The currency of this LicenseFee. */
+    /**
+     * <strong>Required.</strong> Three-letter ISO currency code, in lowercase. Must be a supported
+     * currency.
+     */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
     }
 
     /**
-     * <strong>Required.</strong> A customer-facing name for the LicenseFee. This name is used in
+     * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
      * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on
      * Invoices. Maximum length of 250 characters.
      */
@@ -224,14 +231,14 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The LicensedItem that this rate binds to. */
+    /** <strong>Required.</strong> The Licensed Item that this License Fee binds to. */
     public Builder setLicensedItem(String licensedItem) {
       this.licensedItem = licensedItem;
       return this;
     }
 
     /**
-     * An internal key you can use to search for a particular LicenseFee. Maximum length of 200
+     * An internal key you can use to search for a particular license fee. Maximum length of 200
      * characters.
      */
     public Builder setLookupKey(String lookupKey) {
@@ -266,10 +273,10 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The interval for assessing service. For example, a monthly
-     * LicenseFee with a rate of $1 for the first 10 &quot;workloads&quot; and $2 thereafter means
-     * &quot;$1 per workload up to 10 workloads during a month of service.&quot; This is similar to
-     * but distinct from billing interval; the service interval deals with the rate at which the
+     * <strong>Required.</strong> The interval for assessing service. For example, a monthly license
+     * fee with a rate of $1 for the first 10 &quot;workloads&quot; and $2 thereafter means &quot;$1
+     * per workload up to 10 workloads during a month of service.&quot; This is similar to but
+     * distinct from billing interval; the service interval deals with the rate at which the
      * customer accumulates fees, while the billing interval in Cadence deals with the rate the
      * customer is billed.
      */

@@ -18,12 +18,12 @@ public class LicenseFeeVersion extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The ID of the LicenseFeeVersion. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** The ID of the parent LicenseFee. */
+  /** The ID of the parent License Fee. */
   @SerializedName("license_fee_id")
   String licenseFeeId;
 

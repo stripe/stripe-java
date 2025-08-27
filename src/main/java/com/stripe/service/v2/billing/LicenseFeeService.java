@@ -21,11 +21,11 @@ public final class LicenseFeeService extends ApiService {
     super(responseGetter);
   }
 
-  /** List all LicenseFee objects. */
+  /** List all License Fee objects. */
   public StripeCollection<LicenseFee> list(LicenseFeeListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List all LicenseFee objects. */
+  /** List all License Fee objects. */
   public StripeCollection<LicenseFee> list(LicenseFeeListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/license_fees";
@@ -38,11 +38,11 @@ public final class LicenseFeeService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<LicenseFee>>() {}.getType());
   }
-  /** Create a LicenseFee object. */
+  /** Create a License Fee object. */
   public LicenseFee create(LicenseFeeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a LicenseFee object. */
+  /** Create a License Fee object. */
   public LicenseFee create(LicenseFeeCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/license_fees";
@@ -55,22 +55,22 @@ public final class LicenseFeeService extends ApiService {
             options);
     return this.request(request, LicenseFee.class);
   }
-  /** Retrieve a LicenseFee object. */
+  /** Retrieve a License Fee object. */
   public LicenseFee retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve a LicenseFee object. */
+  /** Retrieve a License Fee object. */
   public LicenseFee retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/license_fees/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, LicenseFee.class);
   }
-  /** Update a LicenseFee object. */
+  /** Update a License Fee object. */
   public LicenseFee update(String id, LicenseFeeUpdateParams params) throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Update a LicenseFee object. */
+  /** Update a License Fee object. */
   public LicenseFee update(String id, LicenseFeeUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/license_fees/%s", ApiResource.urlEncodeId(id));

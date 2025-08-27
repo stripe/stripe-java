@@ -15,7 +15,7 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class LicenseFeeUpdateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> A customer-facing name for the LicenseFee. This name is used in
+   * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
    * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on Invoices.
    * Maximum length of 250 characters.
    */
@@ -32,22 +32,23 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Changes the version that new LicenseFee will use. Providing {@code live_version = "latest"}
-   * will set the LicenseFee's {@code live_version} to its latest version.
+   * Changes the version that new license fee will use. Providing {@code live_version = "latest"}
+   * will set the license fee's {@code live_version} to its latest version.
    */
   @SerializedName("live_version")
   Object liveVersion;
 
   /**
-   * An internal key you can use to search for a particular LicenseFee. Maximum length of 200
+   * An internal key you can use to search for a particular license fee. Maximum length of 200
    * characters.
    */
   @SerializedName("lookup_key")
   Object lookupKey;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, Object> metadata;
@@ -137,7 +138,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A customer-facing name for the LicenseFee. This name is used in
+     * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
      * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on
      * Invoices. Maximum length of 250 characters.
      */
@@ -147,7 +148,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A customer-facing name for the LicenseFee. This name is used in
+     * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
      * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on
      * Invoices. Maximum length of 250 characters.
      */
@@ -183,8 +184,8 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Changes the version that new LicenseFee will use. Providing {@code live_version = "latest"}
-     * will set the LicenseFee's {@code live_version} to its latest version.
+     * Changes the version that new license fee will use. Providing {@code live_version = "latest"}
+     * will set the license fee's {@code live_version} to its latest version.
      */
     public Builder setLiveVersion(String liveVersion) {
       this.liveVersion = liveVersion;
@@ -192,8 +193,8 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Changes the version that new LicenseFee will use. Providing {@code live_version = "latest"}
-     * will set the LicenseFee's {@code live_version} to its latest version.
+     * Changes the version that new license fee will use. Providing {@code live_version = "latest"}
+     * will set the license fee's {@code live_version} to its latest version.
      */
     public Builder setLiveVersion(EmptyParam liveVersion) {
       this.liveVersion = liveVersion;
@@ -201,7 +202,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An internal key you can use to search for a particular LicenseFee. Maximum length of 200
+     * An internal key you can use to search for a particular license fee. Maximum length of 200
      * characters.
      */
     public Builder setLookupKey(String lookupKey) {
@@ -210,7 +211,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An internal key you can use to search for a particular LicenseFee. Maximum length of 200
+     * An internal key you can use to search for a particular license fee. Maximum length of 200
      * characters.
      */
     public Builder setLookupKey(EmptyParam lookupKey) {

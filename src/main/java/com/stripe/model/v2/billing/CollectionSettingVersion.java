@@ -29,6 +29,10 @@ public class CollectionSettingVersion extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
+  /** Email delivery settings. */
+  @SerializedName("email_delivery")
+  EmailDelivery emailDelivery;
+
   /** The ID of the CollectionSettingVersion object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -60,6 +64,42 @@ public class CollectionSettingVersion extends StripeObject implements HasId {
   /** Payment Method specific configuration stored on the object. */
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
+
+  /**
+   * For more details about EmailDelivery, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EmailDelivery extends StripeObject {
+    /**
+     * Controls emails for when the payment is due. For example after the invoice is finilized and
+     * transition to Open state.
+     */
+    @SerializedName("payment_due")
+    PaymentDue paymentDue;
+
+    /**
+     * For more details about PaymentDue, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentDue extends StripeObject {
+      /** If true an email for the invoice would be generated and sent out. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * If true the payment link to hosted invocie page would be included in email and PDF of the
+       * invoice.
+       */
+      @SerializedName("include_payment_link")
+      Boolean includePaymentLink;
+    }
+  }
 
   /**
    * For more details about PaymentMethodOptions, please refer to the <a

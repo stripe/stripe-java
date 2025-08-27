@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PricingPlanSubscription extends StripeObject implements HasId {
-  /** The ID of the Cadence this subscription is billed on. */
+  /** The ID of the Billing Cadence this subscription is billed on. */
   @SerializedName("billing_cadence")
   String billingCadence;
 
@@ -35,7 +35,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** Unique identifier for the PricingPlanSubscription. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -47,7 +47,11 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** Set of key-value pairs that you can attach to an object. */
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
+   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -60,11 +64,11 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the PricingPlan for this subscription. */
+  /** The ID of the Pricing Plan for this subscription. */
   @SerializedName("pricing_plan")
   String pricingPlan;
 
-  /** The ID of the PricingPlanVersion for this subscription. */
+  /** The ID of the Pricing Plan Version for this subscription. */
   @SerializedName("pricing_plan_version")
   String pricingPlanVersion;
 
@@ -80,7 +84,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   @SerializedName("servicing_status_transitions")
   ServicingStatusTransitions servicingStatusTransitions;
 
-  /** The ID of the TestClock of the associated Cadence, if any. */
+  /** The ID of the Test Clock of the associated Billing Cadence, if any. */
   @SerializedName("test_clock")
   String testClock;
 

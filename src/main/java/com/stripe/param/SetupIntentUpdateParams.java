@@ -7134,6 +7134,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Payto payto;
 
     /**
+     * If this is a {@code pix} SetupIntent, this sub-hash contains details about the Pix payment
+     * method options.
+     */
+    @SerializedName("pix")
+    Pix pix;
+
+    /**
      * If this is a {@code sepa_debit} SetupIntent, this sub-hash contains details about the SEPA
      * Debit payment method options.
      */
@@ -7158,6 +7165,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Link link,
         Paypal paypal,
         Payto payto,
+        Pix pix,
         SepaDebit sepaDebit,
         UsBankAccount usBankAccount) {
       this.acssDebit = acssDebit;
@@ -7170,6 +7178,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.link = link;
       this.paypal = paypal;
       this.payto = payto;
+      this.pix = pix;
       this.sepaDebit = sepaDebit;
       this.usBankAccount = usBankAccount;
     }
@@ -7199,6 +7208,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Payto payto;
 
+      private Pix pix;
+
       private SepaDebit sepaDebit;
 
       private UsBankAccount usBankAccount;
@@ -7216,6 +7227,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.link,
             this.paypal,
             this.payto,
+            this.pix,
             this.sepaDebit,
             this.usBankAccount);
       }
@@ -7326,6 +7338,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setPayto(SetupIntentUpdateParams.PaymentMethodOptions.Payto payto) {
         this.payto = payto;
+        return this;
+      }
+
+      /**
+       * If this is a {@code pix} SetupIntent, this sub-hash contains details about the Pix payment
+       * method options.
+       */
+      public Builder setPix(SetupIntentUpdateParams.PaymentMethodOptions.Pix pix) {
+        this.pix = pix;
         return this;
       }
 
@@ -10625,6 +10646,391 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           private final String value;
 
           Purpose(String value) {
+            this.value = value;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Additional fields for mandate creation. */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      private Pix(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentUpdateParams.PaymentMethodOptions.Pix build() {
+          return new SetupIntentUpdateParams.PaymentMethodOptions.Pix(
+              this.extraParams, this.mandateOptions);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Pix#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentUpdateParams.PaymentMethodOptions.Pix#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Additional fields for mandate creation. */
+        public Builder setMandateOptions(
+            SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /**
+         * Amount to be charged for future payments. Required when {@code amount_type=fixed}. If not
+         * provided for {@code amount_type=maximum}, defaults to 40000.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+        @SerializedName("amount_includes_iof")
+        AmountIncludesIof amountIncludesIof;
+
+        /** Type of amount. Defaults to {@code maximum}. */
+        @SerializedName("amount_type")
+        AmountType amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Only {@code brl} is supported currently.
+         */
+        @SerializedName("currency")
+        Object currency;
+
+        /**
+         * Date when the mandate expires and no further payments will be charged, in {@code
+         * YYYY-MM-DD}. If not provided, the mandate will be active until canceled. If provided, end
+         * date should be after start date.
+         */
+        @SerializedName("end_date")
+        Object endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Schedule at which the future payments will be charged. Defaults to {@code weekly}. */
+        @SerializedName("payment_schedule")
+        PaymentSchedule paymentSchedule;
+
+        /**
+         * Subscription name displayed to buyers in their bank app. Defaults to the displayable
+         * business name.
+         */
+        @SerializedName("reference")
+        Object reference;
+
+        /**
+         * Start date of the mandate, in {@code YYYY-MM-DD}. Start date should be at least 3 days in
+         * the future. Defaults to 3 days after the current date.
+         */
+        @SerializedName("start_date")
+        Object startDate;
+
+        private MandateOptions(
+            Long amount,
+            AmountIncludesIof amountIncludesIof,
+            AmountType amountType,
+            Object currency,
+            Object endDate,
+            Map<String, Object> extraParams,
+            PaymentSchedule paymentSchedule,
+            Object reference,
+            Object startDate) {
+          this.amount = amount;
+          this.amountIncludesIof = amountIncludesIof;
+          this.amountType = amountType;
+          this.currency = currency;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+          this.paymentSchedule = paymentSchedule;
+          this.reference = reference;
+          this.startDate = startDate;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long amount;
+
+          private AmountIncludesIof amountIncludesIof;
+
+          private AmountType amountType;
+
+          private Object currency;
+
+          private Object endDate;
+
+          private Map<String, Object> extraParams;
+
+          private PaymentSchedule paymentSchedule;
+
+          private Object reference;
+
+          private Object startDate;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions build() {
+            return new SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions(
+                this.amount,
+                this.amountIncludesIof,
+                this.amountType,
+                this.currency,
+                this.endDate,
+                this.extraParams,
+                this.paymentSchedule,
+                this.reference,
+                this.startDate);
+          }
+
+          /**
+           * Amount to be charged for future payments. Required when {@code amount_type=fixed}. If
+           * not provided for {@code amount_type=maximum}, defaults to 40000.
+           */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+          public Builder setAmountIncludesIof(
+              SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions.AmountIncludesIof
+                  amountIncludesIof) {
+            this.amountIncludesIof = amountIncludesIof;
+            return this;
+          }
+
+          /** Type of amount. Defaults to {@code maximum}. */
+          public Builder setAmountType(
+              SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions.AmountType
+                  amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Only {@code brl} is supported currently.
+           */
+          public Builder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Only {@code brl} is supported currently.
+           */
+          public Builder setCurrency(EmptyParam currency) {
+            this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Date when the mandate expires and no further payments will be charged, in {@code
+           * YYYY-MM-DD}. If not provided, the mandate will be active until canceled. If provided,
+           * end date should be after start date.
+           */
+          public Builder setEndDate(String endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Date when the mandate expires and no further payments will be charged, in {@code
+           * YYYY-MM-DD}. If not provided, the mandate will be active until canceled. If provided,
+           * end date should be after start date.
+           */
+          public Builder setEndDate(EmptyParam endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Schedule at which the future payments will be charged. Defaults to {@code weekly}. */
+          public Builder setPaymentSchedule(
+              SetupIntentUpdateParams.PaymentMethodOptions.Pix.MandateOptions.PaymentSchedule
+                  paymentSchedule) {
+            this.paymentSchedule = paymentSchedule;
+            return this;
+          }
+
+          /**
+           * Subscription name displayed to buyers in their bank app. Defaults to the displayable
+           * business name.
+           */
+          public Builder setReference(String reference) {
+            this.reference = reference;
+            return this;
+          }
+
+          /**
+           * Subscription name displayed to buyers in their bank app. Defaults to the displayable
+           * business name.
+           */
+          public Builder setReference(EmptyParam reference) {
+            this.reference = reference;
+            return this;
+          }
+
+          /**
+           * Start date of the mandate, in {@code YYYY-MM-DD}. Start date should be at least 3 days
+           * in the future. Defaults to 3 days after the current date.
+           */
+          public Builder setStartDate(String startDate) {
+            this.startDate = startDate;
+            return this;
+          }
+
+          /**
+           * Start date of the mandate, in {@code YYYY-MM-DD}. Start date should be at least 3 days
+           * in the future. Defaults to 3 days after the current date.
+           */
+          public Builder setStartDate(EmptyParam startDate) {
+            this.startDate = startDate;
+            return this;
+          }
+        }
+
+        public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+          @SerializedName("always")
+          ALWAYS("always"),
+
+          @SerializedName("never")
+          NEVER("never");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountIncludesIof(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentSchedule implements ApiRequestParams.EnumParam {
+          @SerializedName("halfyearly")
+          HALFYEARLY("halfyearly"),
+
+          @SerializedName("monthly")
+          MONTHLY("monthly"),
+
+          @SerializedName("quarterly")
+          QUARTERLY("quarterly"),
+
+          @SerializedName("weekly")
+          WEEKLY("weekly"),
+
+          @SerializedName("yearly")
+          YEARLY("yearly");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentSchedule(String value) {
             this.value = value;
           }
         }

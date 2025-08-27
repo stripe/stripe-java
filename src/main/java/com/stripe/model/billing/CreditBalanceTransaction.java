@@ -254,6 +254,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** The custom pricing unit object. */
+        @SerializedName("custom_pricing_unit_details")
+        CustomPricingUnitDetails customPricingUnitDetails;
+
         /** Unique identifier for the object. */
         @Getter(onMethod_ = {@Override})
         @SerializedName("id")
@@ -262,6 +266,44 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
         /** A positive integer representing the amount. */
         @SerializedName("value")
         BigDecimal value;
+
+        /**
+         * For more details about CustomPricingUnitDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomPricingUnitDetails extends StripeObject implements HasId {
+          /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+          @SerializedName("created")
+          Long created;
+
+          /** The name of the custom pricing unit. */
+          @SerializedName("display_name")
+          String displayName;
+
+          /** Unique identifier for the object. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+
+          /** A lookup key for the custom pricing unit. */
+          @SerializedName("lookup_key")
+          String lookupKey;
+
+          /**
+           * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+           * attach to an object. This can be useful for storing additional information about the
+           * object in a structured format.
+           */
+          @SerializedName("metadata")
+          Map<String, String> metadata;
+
+          /** The status of the custom pricing unit. */
+          @SerializedName("status")
+          String status;
+        }
       }
 
       /**
@@ -382,6 +424,10 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** The custom pricing unit object. */
+        @SerializedName("custom_pricing_unit_details")
+        CustomPricingUnitDetails customPricingUnitDetails;
+
         /** Unique identifier for the object. */
         @Getter(onMethod_ = {@Override})
         @SerializedName("id")
@@ -390,6 +436,44 @@ public class CreditBalanceTransaction extends ApiResource implements HasId {
         /** A positive integer representing the amount. */
         @SerializedName("value")
         BigDecimal value;
+
+        /**
+         * For more details about CustomPricingUnitDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomPricingUnitDetails extends StripeObject implements HasId {
+          /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+          @SerializedName("created")
+          Long created;
+
+          /** The name of the custom pricing unit. */
+          @SerializedName("display_name")
+          String displayName;
+
+          /** Unique identifier for the object. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+
+          /** A lookup key for the custom pricing unit. */
+          @SerializedName("lookup_key")
+          String lookupKey;
+
+          /**
+           * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+           * attach to an object. This can be useful for storing additional information about the
+           * object in a structured format.
+           */
+          @SerializedName("metadata")
+          Map<String, String> metadata;
+
+          /** The status of the custom pricing unit. */
+          @SerializedName("status")
+          String status;
+        }
       }
 
       /**

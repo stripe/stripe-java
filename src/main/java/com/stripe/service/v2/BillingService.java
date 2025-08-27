@@ -29,6 +29,11 @@ public final class BillingService extends ApiService {
     return new com.stripe.service.v2.billing.IntentService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.billing.LicenseFeeSubscriptionService licenseFeeSubscriptions() {
+    return new com.stripe.service.v2.billing.LicenseFeeSubscriptionService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.billing.LicenseFeeService licenseFees() {
     return new com.stripe.service.v2.billing.LicenseFeeService(this.getResponseGetter());
   }

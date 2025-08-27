@@ -4052,14 +4052,47 @@ public class PersonUpdateParams extends ApiRequestParams {
       @SerializedName("ae_eid")
       AE_EID("ae_eid"),
 
+      @SerializedName("ao_nif")
+      AO_NIF("ao_nif"),
+
+      @SerializedName("az_tin")
+      AZ_TIN("az_tin"),
+
+      @SerializedName("bd_brc")
+      BD_BRC("bd_brc"),
+
+      @SerializedName("bd_etin")
+      BD_ETIN("bd_etin"),
+
+      @SerializedName("bd_nid")
+      BD_NID("bd_nid"),
+
       @SerializedName("br_cpf")
       BR_CPF("br_cpf"),
+
+      @SerializedName("cr_cpf")
+      CR_CPF("cr_cpf"),
+
+      @SerializedName("cr_dimex")
+      CR_DIMEX("cr_dimex"),
+
+      @SerializedName("cr_nite")
+      CR_NITE("cr_nite"),
 
       @SerializedName("de_stn")
       DE_STN("de_stn"),
 
+      @SerializedName("do_rcn")
+      DO_RCN("do_rcn"),
+
+      @SerializedName("gt_nit")
+      GT_NIT("gt_nit"),
+
       @SerializedName("hk_id")
       HK_ID("hk_id"),
+
+      @SerializedName("kz_iin")
+      KZ_IIN("kz_iin"),
 
       @SerializedName("mx_rfc")
       MX_RFC("mx_rfc"),
@@ -4067,8 +4100,23 @@ public class PersonUpdateParams extends ApiRequestParams {
       @SerializedName("my_nric")
       MY_NRIC("my_nric"),
 
+      @SerializedName("mz_nuit")
+      MZ_NUIT("mz_nuit"),
+
       @SerializedName("nl_bsn")
       NL_BSN("nl_bsn"),
+
+      @SerializedName("pe_dni")
+      PE_DNI("pe_dni"),
+
+      @SerializedName("pk_cnic")
+      PK_CNIC("pk_cnic"),
+
+      @SerializedName("pk_snic")
+      PK_SNIC("pk_snic"),
+
+      @SerializedName("sa_tin")
+      SA_TIN("sa_tin"),
 
       @SerializedName("sg_fin")
       SG_FIN("sg_fin"),

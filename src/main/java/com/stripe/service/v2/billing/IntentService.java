@@ -21,19 +21,19 @@ public final class IntentService extends ApiService {
     super(responseGetter);
   }
 
-  /** List BillingIntents. */
+  /** List Billing Intents. */
   public StripeCollection<Intent> list(IntentListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List BillingIntents. */
+  /** List Billing Intents. */
   public StripeCollection<Intent> list(RequestOptions options) throws StripeException {
     return list((IntentListParams) null, options);
   }
-  /** List BillingIntents. */
+  /** List Billing Intents. */
   public StripeCollection<Intent> list() throws StripeException {
     return list((IntentListParams) null, (RequestOptions) null);
   }
-  /** List BillingIntents. */
+  /** List Billing Intents. */
   public StripeCollection<Intent> list(IntentListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/intents";
@@ -46,11 +46,11 @@ public final class IntentService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Intent>>() {}.getType());
   }
-  /** Create a BillingIntent. */
+  /** Create a Billing Intent. */
   public Intent create(IntentCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a BillingIntent. */
+  /** Create a Billing Intent. */
   public Intent create(IntentCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v2/billing/intents";
     ApiRequest request =
@@ -62,41 +62,41 @@ public final class IntentService extends ApiService {
             options);
     return this.request(request, Intent.class);
   }
-  /** Retrieve a BillingIntent. */
+  /** Retrieve a Billing Intent. */
   public Intent retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve a BillingIntent. */
+  /** Retrieve a Billing Intent. */
   public Intent retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/intents/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, Intent.class);
   }
-  /** Cancel a BillingIntent. */
+  /** Cancel a Billing Intent. */
   public Intent cancel(String id) throws StripeException {
     return cancel(id, (RequestOptions) null);
   }
-  /** Cancel a BillingIntent. */
+  /** Cancel a Billing Intent. */
   public Intent cancel(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/intents/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, Intent.class);
   }
-  /** Commit a BillingIntent. */
+  /** Commit a Billing Intent. */
   public Intent commit(String id, IntentCommitParams params) throws StripeException {
     return commit(id, params, (RequestOptions) null);
   }
-  /** Commit a BillingIntent. */
+  /** Commit a Billing Intent. */
   public Intent commit(String id, RequestOptions options) throws StripeException {
     return commit(id, (IntentCommitParams) null, options);
   }
-  /** Commit a BillingIntent. */
+  /** Commit a Billing Intent. */
   public Intent commit(String id) throws StripeException {
     return commit(id, (IntentCommitParams) null, (RequestOptions) null);
   }
-  /** Commit a BillingIntent. */
+  /** Commit a Billing Intent. */
   public Intent commit(String id, IntentCommitParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/intents/%s/commit", ApiResource.urlEncodeId(id));
@@ -109,11 +109,11 @@ public final class IntentService extends ApiService {
             options);
     return this.request(request, Intent.class);
   }
-  /** Release a BillingIntent. */
+  /** Release a Billing Intent. */
   public Intent releaseReservation(String id) throws StripeException {
     return releaseReservation(id, (RequestOptions) null);
   }
-  /** Release a BillingIntent. */
+  /** Release a Billing Intent. */
   public Intent releaseReservation(String id, RequestOptions options) throws StripeException {
     String path =
         String.format("/v2/billing/intents/%s/release_reservation", ApiResource.urlEncodeId(id));
@@ -121,15 +121,19 @@ public final class IntentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, Intent.class);
   }
-  /** Reserve a BillingIntent. */
+  /** Reserve a Billing Intent. */
   public Intent reserve(String id) throws StripeException {
     return reserve(id, (RequestOptions) null);
   }
-  /** Reserve a BillingIntent. */
+  /** Reserve a Billing Intent. */
   public Intent reserve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/intents/%s/reserve", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, Intent.class);
+  }
+
+  public com.stripe.service.v2.billing.intents.ActionService actions() {
+    return new com.stripe.service.v2.billing.intents.ActionService(this.getResponseGetter());
   }
 }

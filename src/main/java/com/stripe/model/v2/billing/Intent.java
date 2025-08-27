@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Intent extends StripeObject implements HasId {
-  /** Breakdown of the amount for this BillingIntent. */
+  /** Breakdown of the amount for this Billing Intent. */
   @SerializedName("amount_details")
   AmountDetails amountDetails;
 
@@ -25,19 +25,11 @@ public class Intent extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** Three-letter ISO currency code, in lowercase. */
+  /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
   @SerializedName("currency")
   String currency;
 
-  /**
-   * When the BillingIntent will take effect.
-   *
-   * <p>One of {@code current_billing_period_start}, {@code on_commit}, or {@code on_reserve}.
-   */
-  @SerializedName("effective_at")
-  String effectiveAt;
-
-  /** Unique identifier for the BillingIntent. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -59,14 +51,14 @@ public class Intent extends StripeObject implements HasId {
   String object;
 
   /**
-   * Current status of the BillingIntent.
+   * Current status of the Billing Intent.
    *
    * <p>One of {@code canceled}, {@code committed}, {@code draft}, or {@code reserved}.
    */
   @SerializedName("status")
   String status;
 
-  /** Timestamps for status transitions of the BillingIntent. */
+  /** Timestamps for status transitions of the Billing Intent. */
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
@@ -78,7 +70,7 @@ public class Intent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails extends StripeObject {
-    /** Three-letter ISO currency code, in lowercase. */
+    /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
     @SerializedName("currency")
     String currency;
 
@@ -98,7 +90,7 @@ public class Intent extends StripeObject implements HasId {
     @SerializedName("tax")
     String tax;
 
-    /** Total amount for the BillingIntent. */
+    /** Total amount for the Billing Intent. */
     @SerializedName("total")
     String total;
   }
@@ -111,19 +103,19 @@ public class Intent extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
-    /** Time at which the BillingIntent was canceled. */
+    /** Time at which the Billing Intent was canceled. */
     @SerializedName("canceled_at")
     Instant canceledAt;
 
-    /** Time at which the BillingIntent was committed. */
+    /** Time at which the Billing Intent was committed. */
     @SerializedName("committed_at")
     Instant committedAt;
 
-    /** Time at which the BillingIntent was drafted. */
+    /** Time at which the Billing Intent was drafted. */
     @SerializedName("drafted_at")
     Instant draftedAt;
 
-    /** Time at which the BillingIntent was reserved. */
+    /** Time at which the Billing Intent was reserved. */
     @SerializedName("reserved_at")
     Instant reservedAt;
   }
