@@ -1,5 +1,84 @@
 # Changelog
 
+## 29.6.0-alpha.1 - 2025-08-27
+* [#2033](https://github.com/stripe/stripe-java/pull/2033) Update generated code for private-preview
+  * Add support for `attach_cadence` method on resource `Subscription`
+  * Add support for `currency` and `externalCustomerId` on `billing.AlertTriggered`
+  * Add support for `customPricingUnit` on `billing.AlertTriggered`, `billing.CreditBalanceSummary.balances[].available_balance`, `billing.CreditBalanceSummary.balances[].ledger_balance`, `billing.CreditBalanceTransaction.credit.amount`, `billing.CreditBalanceTransaction.debit.amount`, `billing.CreditGrant.amount`, and `billing.CreditGrantCreateParams.amount`
+  * Add support for `customer` on `billing.AlertListParams`
+  * Change type of `billing.Alert.alertType`, `billing.AlertCreateParams.alertType`, and `billing.AlertListParams.alertType` from `literal('usage_threshold')` to `enum('credit_balance_threshold'|'usage_threshold')`
+  * Add support for `creditBalanceThreshold` on `billing.AlertCreateParams` and `billing.Alert`
+  * Add support for `billableItems` on `billing.CreditBalanceSummaryRetrieveParams.filter.applicability_scope`, `billing.CreditGrant.applicability_config.scope`, and `billing.CreditGrantCreateParams.applicability_config.scope`
+  * Change type of `billing.CreditBalanceSummary.balances[].available_balance.type`, `billing.CreditBalanceSummary.balances[].ledger_balance.type`, `billing.CreditBalanceTransaction.credit.amount.type`, `billing.CreditBalanceTransaction.debit.amount.type`, `billing.CreditGrant.amount.type`, and `billing.CreditGrantCreateParams.amount.type` from `literal('monetary')` to `enum('custom_pricing_unit'|'monetary')`
+  * Add support for `licenseFeeSubscriptionDetails` and `rateCardSubscriptionDetails` on `InvoiceItem.parent` and `InvoiceLineItem.parent`
+  * Change type of `InvoiceItem.parent.type` from `literal('subscription_details')` to `enum('license_fee_subscription_details'|'rate_card_subscription_details'|'subscription_details')`
+  * Add support for `licenseFeeDetails` and `rateCardRateDetails` on `InvoiceItem.pricing` and `InvoiceLineItem.pricing`
+  * Change type of `InvoiceItem.pricing.type` and `InvoiceLineItem.pricing.type` from `literal('price_details')` to `enum('license_fee_details'|'price_details'|'rate_card_rate_details')`
+  * Add support for `billingCadence` on `InvoiceCreatePreviewParams`, `SubscriptionCreateParams`, and `Subscription`
+  * Add support for `billingCadenceDetails` on `Invoice.parent` and `QuotePreviewInvoice.parent`
+  * Add support for new resources `v2.billing.BillSettingVersion`, `v2.billing.BillSetting`, `v2.billing.Cadence`, `v2.billing.CollectionSettingVersion`, `v2.billing.CollectionSetting`, `v2.billing.CustomPricingUnit`, `v2.billing.IntentAction`, `v2.billing.Intent`, `v2.billing.LicenseFeeSubscription`, `v2.billing.LicenseFeeVersion`, `v2.billing.LicenseFee`, `v2.billing.LicensedItem`, `v2.billing.MeteredItem`, `v2.billing.PricingPlanComponent`, `v2.billing.PricingPlanSubscription`, `v2.billing.PricingPlanVersion`, `v2.billing.PricingPlan`, `v2.billing.Profile`, `v2.billing.RateCardRate`, `v2.billing.RateCardSubscription`, `v2.billing.RateCardVersion`, `v2.billing.RateCard`, `v2.billing.ServiceAction`, `v2.core.ClaimableSandbox`, `v2.reporting.ReportRun`, `v2.reporting.Report`, and `v2.tax.AutomaticRule`
+  * Add support for `create`, `deactivate`, `find`, `retrieve`, and `update` methods on resource `v2.tax.AutomaticRule`
+  * Add support for `create` and `retrieve` methods on resources `v2.billing.ServiceAction` and `v2.reporting.ReportRun`
+  * Add support for `retrieve` method on resources `v2.billing.LicenseFeeSubscription` and `v2.reporting.Report`
+  * Add support for `create` method on resources `v2.core.ClaimableSandbox`
+  * Add support for `cancel`, `create`, `list`, `retrieve`, and `update` methods on resources `v2.billing.Cadence` and `v2.billing.RateCardSubscription`
+  * Add support for `create`, `list`, `retrieve`, and `update` methods on resources `v2.billing.BillSetting`, `v2.billing.CollectionSetting`, `v2.billing.CustomPricingUnit`, `v2.billing.LicenseFee`, `v2.billing.LicensedItem`, `v2.billing.MeteredItem`, `v2.billing.PricingPlan`, `v2.billing.Profile`, and `v2.billing.RateCard`
+  * Add support for `list` and `retrieve` methods on resources `v2.billing.BillSettingVersion`, `v2.billing.CollectionSettingVersion`, `v2.billing.IntentAction`, `v2.billing.LicenseFeeVersion`, `v2.billing.PricingPlanSubscription`, `v2.billing.PricingPlanVersion`, and `v2.billing.RateCardVersion`
+  * Add support for `create`, `delete`, `list`, and `retrieve` methods on resource `v2.billing.RateCardRate`
+  * Add support for `create`, `delete`, `list`, `retrieve`, and `update` methods on resource `v2.billing.PricingPlanComponent`
+  * Add support for `cancel`, `commit`, `create`, `list`, `release_reservation`, `reserve`, and `retrieve` methods on resource `v2.billing.Intent`
+  * Add support for `changes` on `v2.Event`
+  * Add support for thin events `V2BillingCadenceBilledEvent`, `V2BillingCadenceCanceledEvent`, `V2BillingCadenceCreatedEvent`, and `V2BillingCadenceErroredEvent` with related object `v2.billing.Cadence`
+  * Add support for thin events `V2BillingLicenseFeeCreatedEvent` and `V2BillingLicenseFeeUpdatedEvent` with related object `v2.billing.LicenseFee`
+  * Add support for thin event `V2BillingLicenseFeeVersionCreatedEvent` with related object `v2.billing.LicenseFeeVersion`
+  * Add support for thin events `V2BillingLicensedItemCreatedEvent` and `V2BillingLicensedItemUpdatedEvent` with related object `v2.billing.LicensedItem`
+  * Add support for thin events `V2BillingMeteredItemCreatedEvent` and `V2BillingMeteredItemUpdatedEvent` with related object `v2.billing.MeteredItem`
+  * Add support for thin events `V2BillingPricingPlanCreatedEvent` and `V2BillingPricingPlanUpdatedEvent` with related object `v2.billing.PricingPlan`
+  * Add support for thin events `V2BillingPricingPlanComponentCreatedEvent` and `V2BillingPricingPlanComponentUpdatedEvent` with related object `v2.billing.PricingPlanComponent`
+  * Add support for thin events `V2BillingPricingPlanSubscriptionCollectionAwaitingCustomerActionEvent`, `V2BillingPricingPlanSubscriptionCollectionCurrentEvent`, `V2BillingPricingPlanSubscriptionCollectionPastDueEvent`, `V2BillingPricingPlanSubscriptionCollectionPausedEvent`, `V2BillingPricingPlanSubscriptionCollectionUnpaidEvent`, `V2BillingPricingPlanSubscriptionServicingActivatedEvent`, `V2BillingPricingPlanSubscriptionServicingCanceledEvent`, and `V2BillingPricingPlanSubscriptionServicingPausedEvent` with related object `v2.billing.PricingPlanSubscription`
+  * Add support for thin event `V2BillingPricingPlanVersionCreatedEvent` with related object `v2.billing.PricingPlanVersion`
+  * Add support for thin events `V2BillingRateCardCreatedEvent` and `V2BillingRateCardUpdatedEvent` with related object `v2.billing.RateCard`
+  * Add support for thin event `V2BillingRateCardRateCreatedEvent` with related object `v2.billing.RateCardRate`
+  * Add support for thin events `V2BillingRateCardSubscriptionActivatedEvent`, `V2BillingRateCardSubscriptionCanceledEvent`, `V2BillingRateCardSubscriptionCollectionAwaitingCustomerActionEvent`, `V2BillingRateCardSubscriptionCollectionCurrentEvent`, `V2BillingRateCardSubscriptionCollectionPastDueEvent`, `V2BillingRateCardSubscriptionCollectionPausedEvent`, `V2BillingRateCardSubscriptionCollectionUnpaidEvent`, `V2BillingRateCardSubscriptionServicingActivatedEvent`, `V2BillingRateCardSubscriptionServicingCanceledEvent`, and `V2BillingRateCardSubscriptionServicingPausedEvent` with related object `v2.billing.RateCardSubscription`
+  * Add support for thin event `V2BillingRateCardVersionCreatedEvent` with related object `v2.billing.RateCardVersion`
+  * Add support for thin events `V2CoreHealthApiErrorFiringEvent`, `V2CoreHealthApiErrorResolvedEvent`, `V2CoreHealthApiLatencyFiringEvent`, `V2CoreHealthApiLatencyResolvedEvent`, `V2CoreHealthAuthorizationRateDropFiringEvent`, `V2CoreHealthAuthorizationRateDropResolvedEvent`, `V2CoreHealthEventGenerationFailureResolvedEvent`, `V2CoreHealthFraudRateIncreasedEvent`, `V2CoreHealthIssuingAuthorizationRequestTimeoutFiringEvent`, `V2CoreHealthIssuingAuthorizationRequestTimeoutResolvedEvent`, `V2CoreHealthPaymentMethodErrorFiringEvent`, `V2CoreHealthPaymentMethodErrorResolvedEvent`, `V2CoreHealthTrafficVolumeDropFiringEvent`, `V2CoreHealthTrafficVolumeDropResolvedEvent`, `V2CoreHealthWebhookLatencyFiringEvent`, and `V2CoreHealthWebhookLatencyResolvedEvent`
+  * Add support for thin events `V2ReportingReportRunCreatedEvent`, `V2ReportingReportRunFailedEvent`, `V2ReportingReportRunSucceededEvent`, and `V2ReportingReportRunUpdatedEvent` with related object `v2.reporting.ReportRun`
+  * Add support for error type `RateLimitException`
+  * ⚠️ The base class of `RateLimitException` has been changed from `InvalidRequestException` to `ApiException`.  There is no change to the public interface for the `RateLimitException` class.
+
+## 29.6.0-beta.1 - 2025-08-27
+This release changes the pinned API version to `2025-08-27.preview`.
+
+* [#2029](https://github.com/stripe/stripe-java/pull/2029) Update generated code for beta
+  * Add support for `list` and `retrieve` methods on resource `InvoicePayment`
+  * Add support for `list` method on resource `Mandate`
+  * Add support for `applied` on `v2.core.Account.configuration.customer`, `v2.core.Account.configuration.merchant`, `v2.core.Account.configuration.recipient`, `v2.core.Account.configuration.storer`, `v2.core.AccountUpdateParams.configuration.customer`, `v2.core.AccountUpdateParams.configuration.merchant`, `v2.core.AccountUpdateParams.configuration.recipient`, and `v2.core.AccountUpdateParams.configuration.storer`
+  * Change type of `billing.AlertTriggered.value` from `longInteger` to `decimal_string`
+  * Add support for `displayName` on `v2.moneymanagement.FinancialAccountCreateParams` and `v2.moneymanagement.FinancialAccount`
+  * Add support for `currencyConversion` on `v2.moneymanagement.Transaction.flow` and `v2.moneymanagement.TransactionEntry.transaction_details.flow`
+  * Add support for `payments` on `BalanceSettingsUpdateParams` and `BalanceSettings`
+  * Remove support for `debitNegativeBalances`, `payouts`, and `settlementTiming` on `BalanceSettingsUpdateParams` and `BalanceSettings`
+  * Add support for `mandate` on `Charge.payment_method_details.pix`, `PaymentAttemptRecord.payment_method_details.pix`, and `PaymentRecord.payment_method_details.pix`
+  * Add support for `couponData` on `checkout.SessionCreateParams.discounts[]`
+  * Add support for `mandateOptions` on `PaymentIntent.payment_method_options.pix`, `PaymentIntentConfirmParams.payment_method_options.pix`, `PaymentIntentCreateParams.payment_method_options.pix`, `PaymentIntentUpdateParams.payment_method_options.pix`, `checkout.Session.payment_method_options.pix`, and `checkout.SessionCreateParams.payment_method_options.pix`
+  * Change type of `PaymentIntent.payment_method_options.pix.setupFutureUsage`, `PaymentIntentConfirmParams.payment_method_options.pix.setupFutureUsage`, `PaymentIntentCreateParams.payment_method_options.pix.setupFutureUsage`, `PaymentIntentUpdateParams.payment_method_options.pix.setupFutureUsage`, `checkout.Session.payment_method_options.pix.setupFutureUsage`, and `checkout.SessionCreateParams.payment_method_options.pix.setupFutureUsage` from `literal('none')` to `enum('none'|'off_session')`
+  * Add support for `amount` on `Mandate.multi_use`, `PaymentAttemptRecord`, and `PaymentRecord`
+  * Add support for `currency` on `Mandate.multi_use`
+  * Add support for `pix` on `Mandate.payment_method_details`, `SetupAttempt.payment_method_details`, `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_options`, and `SetupIntentUpdateParams.payment_method_options`
+  * Add support for `limit` on `PaymentAttemptRecordListParams`
+  * Add support for `amountAuthorized`, `amountRefunded`, and `application` on `PaymentAttemptRecord` and `PaymentRecord`
+  * Add support for `processorDetails` on `PaymentAttemptRecord`, `PaymentRecordReportPaymentParams`, and `PaymentRecord`
+  * Remove support for `paymentReference` on `PaymentAttemptRecord`, `PaymentRecordReportPaymentParams`, and `PaymentRecord`
+  * Add support for `installments` on `PaymentAttemptRecord.payment_method_details.alma` and `PaymentRecord.payment_method_details.alma`
+  * Add support for `transactionId` on `PaymentAttemptRecord.payment_method_details.alma`, `PaymentAttemptRecord.payment_method_details.amazon_pay`, `PaymentAttemptRecord.payment_method_details.billie`, `PaymentAttemptRecord.payment_method_details.kakao_pay`, `PaymentAttemptRecord.payment_method_details.kr_card`, `PaymentAttemptRecord.payment_method_details.naver_pay`, `PaymentAttemptRecord.payment_method_details.payco`, `PaymentAttemptRecord.payment_method_details.revolut_pay`, `PaymentAttemptRecord.payment_method_details.samsung_pay`, `PaymentAttemptRecord.payment_method_details.satispay`, `PaymentRecord.payment_method_details.alma`, `PaymentRecord.payment_method_details.amazon_pay`, `PaymentRecord.payment_method_details.billie`, `PaymentRecord.payment_method_details.kakao_pay`, `PaymentRecord.payment_method_details.kr_card`, `PaymentRecord.payment_method_details.naver_pay`, `PaymentRecord.payment_method_details.payco`, `PaymentRecord.payment_method_details.revolut_pay`, `PaymentRecord.payment_method_details.samsung_pay`, and `PaymentRecord.payment_method_details.satispay`
+  * Add support for `location` and `reader` on `PaymentAttemptRecord.payment_method_details.paynow` and `PaymentRecord.payment_method_details.paynow`
+  * Add support for `latestActiveMandate` on `PaymentMethod`
+  * Add support for `metadata` and `period` on `QuotePreviewSubscriptionSchedule.phases[].add_invoice_items[]`
+  * Add support for `pixDisplayQrCode` on `SetupIntent.next_action`
+  * Add support for `readerSecurity` on `terminal.ConfigurationCreateParams`, `terminal.ConfigurationUpdateParams`, and `terminal.Configuration`
+  * Add support for new values `ao_nif`, `az_tin`, `bd_etin`, `cr_cpj`, `cr_nite`, `do_rcn`, `gt_nit`, `kz_bin`, `mz_nuit`, `pe_ruc`, `pk_ntn`, `sa_crn`, and `sa_tin` on enums `v2.core.AccountCreateParams.identity.business_details.id_numbers[].type` and `v2.core.AccountUpdateParams.identity.business_details.id_numbers[].type`
+  * Add support for new values `ao_nif`, `az_tin`, `bd_brc`, `bd_etin`, `bd_nid`, `cr_cpf`, `cr_dimex`, `cr_nite`, `do_rcn`, `gt_nit`, `kz_iin`, `mz_nuit`, `pe_dni`, `pk_cnic`, `pk_snic`, and `sa_tin` on enums `v2.core.AccountCreateParams.identity.individual.id_numbers[].type`, `v2.core.AccountUpdateParams.identity.individual.id_numbers[].type`, `v2.core.PersonCreateParams.id_numbers[].type`, and `v2.core.PersonUpdateParams.id_numbers[].type`
+
 ## 29.5.0 - 2025-08-27
 * [#2034](https://github.com/stripe/stripe-java/pull/2034) Add section on private preview SDKs in readme
 * [#2030](https://github.com/stripe/stripe-java/pull/2030) Update generated code. This release changes the pinned API version to `2025-08-27.basil`.
