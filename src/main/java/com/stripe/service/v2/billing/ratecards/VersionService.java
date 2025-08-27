@@ -20,31 +20,31 @@ public final class VersionService extends ApiService {
   }
 
   /**
-   * List the versions of a RateCard object. Results are sorted in reverse chronological order (most
-   * recent first).
+   * List the versions of a Rate Card object. Results are sorted in reverse chronological order
+   * (most recent first).
    */
   public StripeCollection<RateCardVersion> list(String rateCardId, VersionListParams params)
       throws StripeException {
     return list(rateCardId, params, (RequestOptions) null);
   }
   /**
-   * List the versions of a RateCard object. Results are sorted in reverse chronological order (most
-   * recent first).
+   * List the versions of a Rate Card object. Results are sorted in reverse chronological order
+   * (most recent first).
    */
   public StripeCollection<RateCardVersion> list(String rateCardId, RequestOptions options)
       throws StripeException {
     return list(rateCardId, (VersionListParams) null, options);
   }
   /**
-   * List the versions of a RateCard object. Results are sorted in reverse chronological order (most
-   * recent first).
+   * List the versions of a Rate Card object. Results are sorted in reverse chronological order
+   * (most recent first).
    */
   public StripeCollection<RateCardVersion> list(String rateCardId) throws StripeException {
     return list(rateCardId, (VersionListParams) null, (RequestOptions) null);
   }
   /**
-   * List the versions of a RateCard object. Results are sorted in reverse chronological order (most
-   * recent first).
+   * List the versions of a Rate Card object. Results are sorted in reverse chronological order
+   * (most recent first).
    */
   public StripeCollection<RateCardVersion> list(
       String rateCardId, VersionListParams params, RequestOptions options) throws StripeException {
@@ -59,11 +59,11 @@ public final class VersionService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<RateCardVersion>>() {}.getType());
   }
-  /** Retrieve a specific version of a RateCard object. */
+  /** Retrieve a specific version of a Rate Card object. */
   public RateCardVersion retrieve(String rateCardId, String id) throws StripeException {
     return retrieve(rateCardId, id, (RequestOptions) null);
   }
-  /** Retrieve a specific version of a RateCard object. */
+  /** Retrieve a specific version of a Rate Card object. */
   public RateCardVersion retrieve(String rateCardId, String id, RequestOptions options)
       throws StripeException {
     String path =

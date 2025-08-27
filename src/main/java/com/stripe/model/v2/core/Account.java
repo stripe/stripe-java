@@ -143,6 +143,13 @@ public class Account extends StripeObject implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Customer extends StripeObject {
       /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
+      /**
        * Automatic indirect tax settings to be used when automatic tax calculation is enabled on the
        * customer's invoices, subscriptions, checkout sessions, or payment links. Surfaces if
        * automatic tax calculation is possible given the current customer location information.
@@ -546,6 +553,13 @@ public class Account extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Merchant extends StripeObject {
+      /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
       /** Settings used for Bacs debit payments. */
       @SerializedName("bacs_debit_payments")
       BacsDebitPayments bacsDebitPayments;
@@ -3632,6 +3646,13 @@ public class Account extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Recipient extends StripeObject {
+      /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
       /** Capabilities that have been requested on the Recipient Configuration. */
       @SerializedName("capabilities")
       Capabilities capabilities;
@@ -4048,6 +4069,13 @@ public class Account extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Storer extends StripeObject {
+      /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
       /** Capabilities that have been requested on the Storer Configuration. */
       @SerializedName("capabilities")
       Capabilities capabilities;
@@ -5546,18 +5574,20 @@ public class Account extends StripeObject implements HasId {
         /**
          * Open Enum. The ID number type of a business entity.
          *
-         * <p>One of {@code ae_crn}, {@code ae_vat}, {@code at_fn}, {@code au_abn}, {@code au_acn},
-         * {@code au_in}, {@code be_cbe}, {@code bg_uic}, {@code br_cnpj}, {@code ca_cn}, {@code
-         * ca_crarr}, {@code ca_neq}, {@code ca_rid}, {@code ch_chid}, {@code ch_uid}, {@code
-         * cy_tic}, {@code cz_ico}, {@code de_hrn}, {@code de_vat}, {@code dk_cvr}, {@code ee_rk},
-         * {@code es_cif}, {@code fi_yt}, {@code fr_siren}, {@code fr_vat}, {@code gb_crn}, {@code
-         * gi_crn}, {@code gr_gemi}, {@code hk_br}, {@code hk_cr}, {@code hk_mbs}, {@code hu_cjs},
-         * {@code ie_crn}, {@code it_rea}, {@code it_vat}, {@code jp_cn}, {@code li_uid}, {@code
-         * lt_ccrn}, {@code lu_rcs}, {@code lv_urn}, {@code mt_crn}, {@code mx_rfc}, {@code my_brn},
-         * {@code my_coid}, {@code my_sst}, {@code nl_kvk}, {@code no_orgnr}, {@code nz_bn}, {@code
-         * pl_regon}, {@code pt_vat}, {@code ro_cui}, {@code se_orgnr}, {@code sg_uen}, {@code
-         * si_msp}, {@code sk_ico}, {@code th_crn}, {@code th_prn}, {@code th_tin}, or {@code
-         * us_ein}.
+         * <p>One of {@code ae_crn}, {@code ae_vat}, {@code ao_nif}, {@code at_fn}, {@code au_abn},
+         * {@code au_acn}, {@code au_in}, {@code az_tin}, {@code bd_etin}, {@code be_cbe}, {@code
+         * bg_uic}, {@code br_cnpj}, {@code ca_cn}, {@code ca_crarr}, {@code ca_neq}, {@code
+         * ca_rid}, {@code ch_chid}, {@code ch_uid}, {@code cr_cpj}, {@code cr_nite}, {@code
+         * cy_tic}, {@code cz_ico}, {@code de_hrn}, {@code de_vat}, {@code dk_cvr}, {@code do_rcn},
+         * {@code ee_rk}, {@code es_cif}, {@code fi_yt}, {@code fr_siren}, {@code fr_vat}, {@code
+         * gb_crn}, {@code gi_crn}, {@code gr_gemi}, {@code gt_nit}, {@code hk_br}, {@code hk_cr},
+         * {@code hk_mbs}, {@code hu_cjs}, {@code ie_crn}, {@code it_rea}, {@code it_vat}, {@code
+         * jp_cn}, {@code kz_bin}, {@code li_uid}, {@code lt_ccrn}, {@code lu_rcs}, {@code lv_urn},
+         * {@code mt_crn}, {@code mx_rfc}, {@code my_brn}, {@code my_coid}, {@code my_sst}, {@code
+         * mz_nuit}, {@code nl_kvk}, {@code no_orgnr}, {@code nz_bn}, {@code pe_ruc}, {@code
+         * pk_ntn}, {@code pl_regon}, {@code pt_vat}, {@code ro_cui}, {@code sa_crn}, {@code
+         * sa_tin}, {@code se_orgnr}, {@code sg_uen}, {@code si_msp}, {@code sk_ico}, {@code
+         * th_crn}, {@code th_prn}, {@code th_tin}, or {@code us_ein}.
          */
         @SerializedName("type")
         String type;
@@ -6401,10 +6431,13 @@ public class Account extends StripeObject implements HasId {
         /**
          * The ID number type of an individual.
          *
-         * <p>One of {@code ae_eid}, {@code br_cpf}, {@code de_stn}, {@code hk_id}, {@code mx_rfc},
-         * {@code my_nric}, {@code nl_bsn}, {@code sg_fin}, {@code sg_nric}, {@code th_lc}, {@code
-         * th_pin}, {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, or {@code
-         * us_ssn_last_4}.
+         * <p>One of {@code ae_eid}, {@code ao_nif}, {@code az_tin}, {@code bd_brc}, {@code
+         * bd_etin}, {@code bd_nid}, {@code br_cpf}, {@code cr_cpf}, {@code cr_dimex}, {@code
+         * cr_nite}, {@code de_stn}, {@code do_rcn}, {@code gt_nit}, {@code hk_id}, {@code kz_iin},
+         * {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code nl_bsn}, {@code pe_dni}, {@code
+         * pk_cnic}, {@code pk_snic}, {@code sa_tin}, {@code sg_fin}, {@code sg_nric}, {@code
+         * th_lc}, {@code th_pin}, {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, or
+         * {@code us_ssn_last_4}.
          */
         @SerializedName("type")
         String type;

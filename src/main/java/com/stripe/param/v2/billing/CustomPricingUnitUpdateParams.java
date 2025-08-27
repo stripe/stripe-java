@@ -12,9 +12,13 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class CustomPricingUnitUpdateParams extends ApiRequestParams {
-  /** Whether the CustomPricingUnit is active. */
+  /** Whether the Custom Pricing Unit is active. */
   @SerializedName("active")
   Boolean active;
+
+  /** Description that customers will see in the invoice line item. */
+  @SerializedName("display_name")
+  Object displayName;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -25,14 +29,24 @@ public class CustomPricingUnitUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** An internal key you can use to search for a particular CustomPricingUnit item. */
+  @SerializedName("lookup_key")
+  Object lookupKey;
+
   /** Set of key-value pairs that you can attach to an object. */
   @SerializedName("metadata")
   Map<String, Object> metadata;
 
   private CustomPricingUnitUpdateParams(
-      Boolean active, Map<String, Object> extraParams, Map<String, Object> metadata) {
+      Boolean active,
+      Object displayName,
+      Map<String, Object> extraParams,
+      Object lookupKey,
+      Map<String, Object> metadata) {
     this.active = active;
+    this.displayName = displayName;
     this.extraParams = extraParams;
+    this.lookupKey = lookupKey;
     this.metadata = metadata;
   }
 
@@ -43,18 +57,35 @@ public class CustomPricingUnitUpdateParams extends ApiRequestParams {
   public static class Builder {
     private Boolean active;
 
+    private Object displayName;
+
     private Map<String, Object> extraParams;
+
+    private Object lookupKey;
 
     private Map<String, Object> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CustomPricingUnitUpdateParams build() {
-      return new CustomPricingUnitUpdateParams(this.active, this.extraParams, this.metadata);
+      return new CustomPricingUnitUpdateParams(
+          this.active, this.displayName, this.extraParams, this.lookupKey, this.metadata);
     }
 
-    /** Whether the CustomPricingUnit is active. */
+    /** Whether the Custom Pricing Unit is active. */
     public Builder setActive(Boolean active) {
       this.active = active;
+      return this;
+    }
+
+    /** Description that customers will see in the invoice line item. */
+    public Builder setDisplayName(String displayName) {
+      this.displayName = displayName;
+      return this;
+    }
+
+    /** Description that customers will see in the invoice line item. */
+    public Builder setDisplayName(EmptyParam displayName) {
+      this.displayName = displayName;
       return this;
     }
 
@@ -81,6 +112,18 @@ public class CustomPricingUnitUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** An internal key you can use to search for a particular CustomPricingUnit item. */
+    public Builder setLookupKey(String lookupKey) {
+      this.lookupKey = lookupKey;
+      return this;
+    }
+
+    /** An internal key you can use to search for a particular CustomPricingUnit item. */
+    public Builder setLookupKey(EmptyParam lookupKey) {
+      this.lookupKey = lookupKey;
       return this;
     }
 

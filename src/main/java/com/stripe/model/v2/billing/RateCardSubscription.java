@@ -14,12 +14,12 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class RateCardSubscription extends StripeObject implements HasId {
-  /** The ID of the billing Cadence. */
+  /** The ID of the Billing Cadence. */
   @SerializedName("billing_cadence")
   String billingCadence;
 
   /**
-   * The payment status of a RateCardSubscription.
+   * The payment status of a Rate Card Subscription.
    *
    * <p>One of {@code awaiting_customer_action}, {@code current}, {@code past_due}, {@code paused},
    * or {@code unpaid}.
@@ -27,7 +27,7 @@ public class RateCardSubscription extends StripeObject implements HasId {
   @SerializedName("collection_status")
   String collectionStatus;
 
-  /** The collection status transitions of the RateCardSubscription. */
+  /** The collection status transitions of the Rate Card Subscription. */
   @SerializedName("collection_status_transitions")
   CollectionStatusTransitions collectionStatusTransitions;
 
@@ -35,7 +35,7 @@ public class RateCardSubscription extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The ID of the RateCardSubscription. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -48,8 +48,9 @@ public class RateCardSubscription extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -63,23 +64,23 @@ public class RateCardSubscription extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the RateCard. */
+  /** The ID of the Rate Card. */
   @SerializedName("rate_card")
   String rateCard;
 
-  /** The ID of the RateCardVersion. */
+  /** The ID of the Rate Card Version. */
   @SerializedName("rate_card_version")
   String rateCardVersion;
 
   /**
-   * The servicing status of a RateCardSubscription.
+   * The servicing status of a Rate Card Subscription.
    *
    * <p>One of {@code active}, {@code canceled}, {@code paused}, or {@code pending}.
    */
   @SerializedName("servicing_status")
   String servicingStatus;
 
-  /** The servicing status transitions of the RateCardSubscription. */
+  /** The servicing status transitions of the Rate Card Subscription. */
   @SerializedName("servicing_status_transitions")
   ServicingStatusTransitions servicingStatusTransitions;
 

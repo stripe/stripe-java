@@ -424,6 +424,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Customer {
       /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
+      /**
        * Automatic indirect tax settings to be used when automatic tax calculation is enabled on the
        * customer's invoices, subscriptions, checkout sessions, or payment links. Surfaces if
        * automatic tax calculation is possible given the current customer location information.
@@ -463,12 +470,14 @@ public class AccountUpdateParams extends ApiRequestParams {
       Object testClock;
 
       private Customer(
+          Boolean applied,
           AutomaticIndirectTax automaticIndirectTax,
           Billing billing,
           Capabilities capabilities,
           Map<String, Object> extraParams,
           Shipping shipping,
           Object testClock) {
+        this.applied = applied;
         this.automaticIndirectTax = automaticIndirectTax;
         this.billing = billing;
         this.capabilities = capabilities;
@@ -482,6 +491,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Boolean applied;
+
         private AutomaticIndirectTax automaticIndirectTax;
 
         private Billing billing;
@@ -497,12 +508,22 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Configuration.Customer build() {
           return new AccountUpdateParams.Configuration.Customer(
+              this.applied,
               this.automaticIndirectTax,
               this.billing,
               this.capabilities,
               this.extraParams,
               this.shipping,
               this.testClock);
+        }
+
+        /**
+         * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+         * configuration.
+         */
+        public Builder setApplied(Boolean applied) {
+          this.applied = applied;
+          return this;
         }
 
         /**
@@ -2580,6 +2601,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Merchant {
+      /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
       /** Settings used for Bacs debit payments. */
       @SerializedName("bacs_debit_payments")
       BacsDebitPayments bacsDebitPayments;
@@ -2624,6 +2652,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       Support support;
 
       private Merchant(
+          Boolean applied,
           BacsDebitPayments bacsDebitPayments,
           Branding branding,
           Capabilities capabilities,
@@ -2632,6 +2661,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           Object mcc,
           StatementDescriptor statementDescriptor,
           Support support) {
+        this.applied = applied;
         this.bacsDebitPayments = bacsDebitPayments;
         this.branding = branding;
         this.capabilities = capabilities;
@@ -2647,6 +2677,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Boolean applied;
+
         private BacsDebitPayments bacsDebitPayments;
 
         private Branding branding;
@@ -2666,6 +2698,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Configuration.Merchant build() {
           return new AccountUpdateParams.Configuration.Merchant(
+              this.applied,
               this.bacsDebitPayments,
               this.branding,
               this.capabilities,
@@ -2674,6 +2707,15 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.mcc,
               this.statementDescriptor,
               this.support);
+        }
+
+        /**
+         * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+         * configuration.
+         */
+        public Builder setApplied(Boolean applied) {
+          this.applied = applied;
+          return this;
         }
 
         /** Settings used for Bacs debit payments. */
@@ -8841,6 +8883,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Recipient {
+      /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
       /** Capabilities to request on the Recipient Configuration. */
       @SerializedName("capabilities")
       Capabilities capabilities;
@@ -8864,9 +8913,11 @@ public class AccountUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       private Recipient(
+          Boolean applied,
           Capabilities capabilities,
           Object defaultOutboundDestination,
           Map<String, Object> extraParams) {
+        this.applied = applied;
         this.capabilities = capabilities;
         this.defaultOutboundDestination = defaultOutboundDestination;
         this.extraParams = extraParams;
@@ -8877,6 +8928,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Boolean applied;
+
         private Capabilities capabilities;
 
         private Object defaultOutboundDestination;
@@ -8886,7 +8939,16 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Configuration.Recipient build() {
           return new AccountUpdateParams.Configuration.Recipient(
-              this.capabilities, this.defaultOutboundDestination, this.extraParams);
+              this.applied, this.capabilities, this.defaultOutboundDestination, this.extraParams);
+        }
+
+        /**
+         * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+         * configuration.
+         */
+        public Builder setApplied(Boolean applied) {
+          this.applied = applied;
+          return this;
         }
 
         /** Capabilities to request on the Recipient Configuration. */
@@ -9568,6 +9630,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Storer {
+      /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
       /** Capabilities to request on the Storer Configuration. */
       @SerializedName("capabilities")
       Capabilities capabilities;
@@ -9581,7 +9650,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Storer(Capabilities capabilities, Map<String, Object> extraParams) {
+      private Storer(Boolean applied, Capabilities capabilities, Map<String, Object> extraParams) {
+        this.applied = applied;
         this.capabilities = capabilities;
         this.extraParams = extraParams;
       }
@@ -9591,13 +9661,25 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Boolean applied;
+
         private Capabilities capabilities;
 
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Configuration.Storer build() {
-          return new AccountUpdateParams.Configuration.Storer(this.capabilities, this.extraParams);
+          return new AccountUpdateParams.Configuration.Storer(
+              this.applied, this.capabilities, this.extraParams);
+        }
+
+        /**
+         * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+         * configuration.
+         */
+        public Builder setApplied(Boolean applied) {
+          this.applied = applied;
+          return this;
         }
 
         /** Capabilities to request on the Storer Configuration. */
@@ -16454,6 +16536,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ae_vat")
           AE_VAT("ae_vat"),
 
+          @SerializedName("ao_nif")
+          AO_NIF("ao_nif"),
+
           @SerializedName("at_fn")
           AT_FN("at_fn"),
 
@@ -16465,6 +16550,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           @SerializedName("au_in")
           AU_IN("au_in"),
+
+          @SerializedName("az_tin")
+          AZ_TIN("az_tin"),
+
+          @SerializedName("bd_etin")
+          BD_ETIN("bd_etin"),
 
           @SerializedName("be_cbe")
           BE_CBE("be_cbe"),
@@ -16493,6 +16584,12 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ch_uid")
           CH_UID("ch_uid"),
 
+          @SerializedName("cr_cpj")
+          CR_CPJ("cr_cpj"),
+
+          @SerializedName("cr_nite")
+          CR_NITE("cr_nite"),
+
           @SerializedName("cy_tic")
           CY_TIC("cy_tic"),
 
@@ -16507,6 +16604,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           @SerializedName("dk_cvr")
           DK_CVR("dk_cvr"),
+
+          @SerializedName("do_rcn")
+          DO_RCN("do_rcn"),
 
           @SerializedName("ee_rk")
           EE_RK("ee_rk"),
@@ -16532,6 +16632,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("gr_gemi")
           GR_GEMI("gr_gemi"),
 
+          @SerializedName("gt_nit")
+          GT_NIT("gt_nit"),
+
           @SerializedName("hk_br")
           HK_BR("hk_br"),
 
@@ -16555,6 +16658,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           @SerializedName("jp_cn")
           JP_CN("jp_cn"),
+
+          @SerializedName("kz_bin")
+          KZ_BIN("kz_bin"),
 
           @SerializedName("li_uid")
           LI_UID("li_uid"),
@@ -16583,6 +16689,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("my_sst")
           MY_SST("my_sst"),
 
+          @SerializedName("mz_nuit")
+          MZ_NUIT("mz_nuit"),
+
           @SerializedName("nl_kvk")
           NL_KVK("nl_kvk"),
 
@@ -16592,6 +16701,12 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("nz_bn")
           NZ_BN("nz_bn"),
 
+          @SerializedName("pe_ruc")
+          PE_RUC("pe_ruc"),
+
+          @SerializedName("pk_ntn")
+          PK_NTN("pk_ntn"),
+
           @SerializedName("pl_regon")
           PL_REGON("pl_regon"),
 
@@ -16600,6 +16715,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           @SerializedName("ro_cui")
           RO_CUI("ro_cui"),
+
+          @SerializedName("sa_crn")
+          SA_CRN("sa_crn"),
+
+          @SerializedName("sa_tin")
+          SA_TIN("sa_tin"),
 
           @SerializedName("se_orgnr")
           SE_ORGNR("se_orgnr"),
@@ -23153,14 +23274,47 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ae_eid")
           AE_EID("ae_eid"),
 
+          @SerializedName("ao_nif")
+          AO_NIF("ao_nif"),
+
+          @SerializedName("az_tin")
+          AZ_TIN("az_tin"),
+
+          @SerializedName("bd_brc")
+          BD_BRC("bd_brc"),
+
+          @SerializedName("bd_etin")
+          BD_ETIN("bd_etin"),
+
+          @SerializedName("bd_nid")
+          BD_NID("bd_nid"),
+
           @SerializedName("br_cpf")
           BR_CPF("br_cpf"),
+
+          @SerializedName("cr_cpf")
+          CR_CPF("cr_cpf"),
+
+          @SerializedName("cr_dimex")
+          CR_DIMEX("cr_dimex"),
+
+          @SerializedName("cr_nite")
+          CR_NITE("cr_nite"),
 
           @SerializedName("de_stn")
           DE_STN("de_stn"),
 
+          @SerializedName("do_rcn")
+          DO_RCN("do_rcn"),
+
+          @SerializedName("gt_nit")
+          GT_NIT("gt_nit"),
+
           @SerializedName("hk_id")
           HK_ID("hk_id"),
+
+          @SerializedName("kz_iin")
+          KZ_IIN("kz_iin"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -23168,8 +23322,23 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("my_nric")
           MY_NRIC("my_nric"),
 
+          @SerializedName("mz_nuit")
+          MZ_NUIT("mz_nuit"),
+
           @SerializedName("nl_bsn")
           NL_BSN("nl_bsn"),
+
+          @SerializedName("pe_dni")
+          PE_DNI("pe_dni"),
+
+          @SerializedName("pk_cnic")
+          PK_CNIC("pk_cnic"),
+
+          @SerializedName("pk_snic")
+          PK_SNIC("pk_snic"),
+
+          @SerializedName("sa_tin")
+          SA_TIN("sa_tin"),
 
           @SerializedName("sg_fin")
           SG_FIN("sg_fin"),

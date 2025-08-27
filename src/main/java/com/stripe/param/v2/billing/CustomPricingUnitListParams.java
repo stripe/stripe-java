@@ -13,7 +13,9 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class CustomPricingUnitListParams extends ApiRequestParams {
-  /** Filter for active/inactive CustomPricingUnits. Mutually exclusive with {@code lookup_keys}. */
+  /**
+   * Filter for active/inactive custom pricing units. Mutually exclusive with {@code lookup_keys}.
+   */
   @SerializedName("active")
   Boolean active;
 
@@ -65,7 +67,7 @@ public class CustomPricingUnitListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter for active/inactive CustomPricingUnits. Mutually exclusive with {@code lookup_keys}.
+     * Filter for active/inactive custom pricing units. Mutually exclusive with {@code lookup_keys}.
      */
     public Builder setActive(Boolean active) {
       this.active = active;

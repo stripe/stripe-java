@@ -3,7 +3,9 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,10 +30,16 @@ public class RateCardListParams extends ApiRequestParams {
   @SerializedName("limit")
   Integer limit;
 
-  private RateCardListParams(Boolean active, Map<String, Object> extraParams, Integer limit) {
+  /** Filter by lookup keys. You can specify up to 10 lookup keys. */
+  @SerializedName("lookup_keys")
+  List<String> lookupKeys;
+
+  private RateCardListParams(
+      Boolean active, Map<String, Object> extraParams, Integer limit, List<String> lookupKeys) {
     this.active = active;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.lookupKeys = lookupKeys;
   }
 
   public static Builder builder() {
@@ -45,9 +53,11 @@ public class RateCardListParams extends ApiRequestParams {
 
     private Integer limit;
 
+    private List<String> lookupKeys;
+
     /** Finalize and obtain parameter instance from this builder. */
     public RateCardListParams build() {
-      return new RateCardListParams(this.active, this.extraParams, this.limit);
+      return new RateCardListParams(this.active, this.extraParams, this.limit, this.lookupKeys);
     }
 
     /** Optionally filter to active/inactive RateCards. */
@@ -85,6 +95,32 @@ public class RateCardListParams extends ApiRequestParams {
     /** Optionally set the maximum number of results per page. Defaults to 20. */
     public Builder setLimit(Integer limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Add an element to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * RateCardListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addLookupKey(String element) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * RateCardListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addAllLookupKey(List<String> elements) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.addAll(elements);
       return this;
     }
   }

@@ -28,8 +28,9 @@ public class CadenceUpdateParams extends ApiRequestParams {
   List<CadenceUpdateParams.Include> include;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, Object> metadata;
@@ -386,7 +387,7 @@ public class CadenceUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The ID of the referenced Settings object. */
+      /** <strong>Required.</strong> The ID of the referenced settings object. */
       @SerializedName("id")
       Object id;
 
@@ -449,13 +450,13 @@ public class CadenceUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The ID of the referenced Settings object. */
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
         public Builder setId(String id) {
           this.id = id;
           return this;
         }
 
-        /** <strong>Required.</strong> The ID of the referenced Settings object. */
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
         public Builder setId(EmptyParam id) {
           this.id = id;
           return this;
@@ -497,7 +498,7 @@ public class CadenceUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The ID of the referenced Settings object. */
+      /** <strong>Required.</strong> The ID of the referenced settings object. */
       @SerializedName("id")
       Object id;
 
@@ -561,13 +562,13 @@ public class CadenceUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The ID of the referenced Settings object. */
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
         public Builder setId(String id) {
           this.id = id;
           return this;
         }
 
-        /** <strong>Required.</strong> The ID of the referenced Settings object. */
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
         public Builder setId(EmptyParam id) {
           this.id = id;
           return this;

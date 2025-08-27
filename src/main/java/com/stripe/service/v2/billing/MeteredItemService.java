@@ -21,19 +21,19 @@ public final class MeteredItemService extends ApiService {
     super(responseGetter);
   }
 
-  /** List all MeteredItem objects in reverse chronological order of creation. */
+  /** List all Metered Item objects in reverse chronological order of creation. */
   public StripeCollection<MeteredItem> list(MeteredItemListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List all MeteredItem objects in reverse chronological order of creation. */
+  /** List all Metered Item objects in reverse chronological order of creation. */
   public StripeCollection<MeteredItem> list(RequestOptions options) throws StripeException {
     return list((MeteredItemListParams) null, options);
   }
-  /** List all MeteredItem objects in reverse chronological order of creation. */
+  /** List all Metered Item objects in reverse chronological order of creation. */
   public StripeCollection<MeteredItem> list() throws StripeException {
     return list((MeteredItemListParams) null, (RequestOptions) null);
   }
-  /** List all MeteredItem objects in reverse chronological order of creation. */
+  /** List all Metered Item objects in reverse chronological order of creation. */
   public StripeCollection<MeteredItem> list(MeteredItemListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/metered_items";
@@ -46,11 +46,11 @@ public final class MeteredItemService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<MeteredItem>>() {}.getType());
   }
-  /** Create a MeteredItem object. */
+  /** Create a Metered Item object. */
   public MeteredItem create(MeteredItemCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a MeteredItem object. */
+  /** Create a Metered Item object. */
   public MeteredItem create(MeteredItemCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/metered_items";
@@ -63,30 +63,30 @@ public final class MeteredItemService extends ApiService {
             options);
     return this.request(request, MeteredItem.class);
   }
-  /** Retrieve a MeteredItem object. */
+  /** Retrieve a Metered Item object. */
   public MeteredItem retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve a MeteredItem object. */
+  /** Retrieve a Metered Item object. */
   public MeteredItem retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/billing/metered_items/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, MeteredItem.class);
   }
-  /** Update a MeteredItem object. At least one of the fields is required. */
+  /** Update a Metered Item object. At least one of the fields is required. */
   public MeteredItem update(String id, MeteredItemUpdateParams params) throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Update a MeteredItem object. At least one of the fields is required. */
+  /** Update a Metered Item object. At least one of the fields is required. */
   public MeteredItem update(String id, RequestOptions options) throws StripeException {
     return update(id, (MeteredItemUpdateParams) null, options);
   }
-  /** Update a MeteredItem object. At least one of the fields is required. */
+  /** Update a Metered Item object. At least one of the fields is required. */
   public MeteredItem update(String id) throws StripeException {
     return update(id, (MeteredItemUpdateParams) null, (RequestOptions) null);
   }
-  /** Update a MeteredItem object. At least one of the fields is required. */
+  /** Update a Metered Item object. At least one of the fields is required. */
   public MeteredItem update(String id, MeteredItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/metered_items/%s", ApiResource.urlEncodeId(id));

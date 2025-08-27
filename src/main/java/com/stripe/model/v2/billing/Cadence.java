@@ -23,7 +23,7 @@ public class Cadence extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The ID of the billing Cadence object. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -40,8 +40,9 @@ public class Cadence extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -75,7 +76,7 @@ public class Cadence extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /** The ID of the TestClock. */
+  /** The ID of the Test Clock. */
   @SerializedName("test_clock")
   String testClock;
 
@@ -151,6 +152,13 @@ public class Cadence extends StripeObject implements HasId {
          */
         @SerializedName("minute")
         Integer minute;
+
+        /**
+         * The second at which the billing cycle ends. Must be an integer between 0 and 59,
+         * inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
       }
     }
 
@@ -195,6 +203,13 @@ public class Cadence extends StripeObject implements HasId {
          */
         @SerializedName("minute")
         Integer minute;
+
+        /**
+         * The second at which the billing cycle ends. Must be an integer between 0 and 59,
+         * inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
       }
     }
 
@@ -238,6 +253,13 @@ public class Cadence extends StripeObject implements HasId {
          */
         @SerializedName("minute")
         Integer minute;
+
+        /**
+         * The second at which the billing cycle ends. Must be an integer between 0 and 59,
+         * inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
       }
     }
 
@@ -289,6 +311,13 @@ public class Cadence extends StripeObject implements HasId {
          */
         @SerializedName("minute")
         Integer minute;
+
+        /**
+         * The second at which the billing cycle ends. Must be an integer between 0 and 59,
+         * inclusive.
+         */
+        @SerializedName("second")
+        Integer second;
       }
     }
   }
@@ -301,7 +330,7 @@ public class Cadence extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class InvoiceDiscountRule extends StripeObject implements HasId {
-    /** The ID of the inline discount applied to the cadence. */
+    /** Unique identifier for the object. */
     @Getter(onMethod_ = {@Override})
     @SerializedName("id")
     String id;
@@ -409,7 +438,7 @@ public class Cadence extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Bill extends StripeObject implements HasId {
-      /** The ID of the referenced Settings object. */
+      /** The ID of the referenced settings object. */
       @Getter(onMethod_ = {@Override})
       @SerializedName("id")
       String id;
@@ -427,7 +456,7 @@ public class Cadence extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Collection extends StripeObject implements HasId {
-      /** The ID of the referenced Settings object. */
+      /** The ID of the referenced settings object. */
       @Getter(onMethod_ = {@Override})
       @SerializedName("id")
       String id;

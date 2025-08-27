@@ -187,22 +187,13 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName("lte")
     Lte lte;
 
-    /**
-     * <strong>Required.</strong> Whether the alert should only fire only once, or once per billing
-     * cycle.
-     */
-    @SerializedName("recurrence")
-    Recurrence recurrence;
-
     private CreditBalanceThreshold(
         Map<String, Object> extraParams,
         List<AlertCreateParams.CreditBalanceThreshold.Filter> filters,
-        Lte lte,
-        Recurrence recurrence) {
+        Lte lte) {
       this.extraParams = extraParams;
       this.filters = filters;
       this.lte = lte;
-      this.recurrence = recurrence;
     }
 
     public static Builder builder() {
@@ -216,12 +207,10 @@ public class AlertCreateParams extends ApiRequestParams {
 
       private Lte lte;
 
-      private Recurrence recurrence;
-
       /** Finalize and obtain parameter instance from this builder. */
       public AlertCreateParams.CreditBalanceThreshold build() {
         return new AlertCreateParams.CreditBalanceThreshold(
-            this.extraParams, this.filters, this.lte, this.recurrence);
+            this.extraParams, this.filters, this.lte);
       }
 
       /**
@@ -280,15 +269,6 @@ public class AlertCreateParams extends ApiRequestParams {
       /** <strong>Required.</strong> Defines at which value the alert will fire. */
       public Builder setLte(AlertCreateParams.CreditBalanceThreshold.Lte lte) {
         this.lte = lte;
-        return this;
-      }
-
-      /**
-       * <strong>Required.</strong> Whether the alert should only fire only once, or once per
-       * billing cycle.
-       */
-      public Builder setRecurrence(AlertCreateParams.CreditBalanceThreshold.Recurrence recurrence) {
-        this.recurrence = recurrence;
         return this;
       }
     }
@@ -385,7 +365,10 @@ public class AlertCreateParams extends ApiRequestParams {
 
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("customer")
-        CUSTOMER("customer");
+        CUSTOMER("customer"),
+
+        @SerializedName("tenant")
+        TENANT("tenant");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -705,18 +688,6 @@ public class AlertCreateParams extends ApiRequestParams {
         BalanceType(String value) {
           this.value = value;
         }
-      }
-    }
-
-    public enum Recurrence implements ApiRequestParams.EnumParam {
-      @SerializedName("one_time")
-      ONE_TIME("one_time");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Recurrence(String value) {
-        this.value = value;
       }
     }
   }

@@ -12,8 +12,8 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   /**
-   * Filter by Cadence ID. Mutually exclusive with {@code payer}, {@code pricing_plan}, and {@code
-   * pricing_plan_version}.
+   * Filter by Billing Cadence ID. Mutually exclusive with {@code payer}, {@code pricing_plan}, and
+   * {@code pricing_plan_version}.
    */
   @SerializedName("billing_cadence")
   String billingCadence;
@@ -46,7 +46,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   String pricingPlan;
 
   /**
-   * Filter by PricingPlanVersion ID. Mutually exlcusive with {@code billing_cadence}, {@code
+   * Filter by Pricing Plan Version ID. Mutually exlcusive with {@code billing_cadence}, {@code
    * payer}, and {@code pricing_plan}.
    */
   @SerializedName("pricing_plan_version")
@@ -105,8 +105,8 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by Cadence ID. Mutually exclusive with {@code payer}, {@code pricing_plan}, and {@code
-     * pricing_plan_version}.
+     * Filter by Billing Cadence ID. Mutually exclusive with {@code payer}, {@code pricing_plan},
+     * and {@code pricing_plan_version}.
      */
     public Builder setBillingCadence(String billingCadence) {
       this.billingCadence = billingCadence;
@@ -164,7 +164,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Filter by PricingPlanVersion ID. Mutually exlcusive with {@code billing_cadence}, {@code
+     * Filter by Pricing Plan Version ID. Mutually exlcusive with {@code billing_cadence}, {@code
      * payer}, and {@code pricing_plan}.
      */
     public Builder setPricingPlanVersion(String pricingPlanVersion) {
@@ -184,8 +184,8 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Payer {
     /**
-     * The ID of the Customer object. If provided, only PricingPlanSubscriptions that are subscribed
-     * on the Cadences with the specified Payer will be returned.
+     * The ID of the Customer object. If provided, only Pricing Plan Subscriptions that are
+     * subscribed on the cadences with the specified payer will be returned.
      */
     @SerializedName("customer")
     String customer;
@@ -230,8 +230,8 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the Customer object. If provided, only PricingPlanSubscriptions that are
-       * subscribed on the Cadences with the specified Payer will be returned.
+       * The ID of the Customer object. If provided, only Pricing Plan Subscriptions that are
+       * subscribed on the cadences with the specified payer will be returned.
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;

@@ -31,16 +31,6 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class BalanceSettings extends ApiResource {
   /**
-   * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
-   * account. See <a href="https://stripe.com/connect/account-balances">Understanding Connect
-   * account balances</a> for details. The default value is {@code false} when <a
-   * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
-   * is {@code application}, which includes Custom accounts, otherwise {@code true}.
-   */
-  @SerializedName("debit_negative_balances")
-  Boolean debitNegativeBalances;
-
-  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code balance_settings}.
@@ -48,12 +38,8 @@ public class BalanceSettings extends ApiResource {
   @SerializedName("object")
   String object;
 
-  /** Settings specific to the account's payouts. */
-  @SerializedName("payouts")
-  Payouts payouts;
-
-  @SerializedName("settlement_timing")
-  SettlementTiming settlementTiming;
+  @SerializedName("payments")
+  Payments payments;
 
   /**
    * Retrieves balance settings for a given connected account. Related guide: <a
@@ -148,86 +134,111 @@ public class BalanceSettings extends ApiResource {
   }
 
   /**
-   * For more details about Payouts, please refer to the <a href="https://docs.stripe.com/api">API
+   * For more details about Payments, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Payouts extends StripeObject {
+  public static class Payments extends StripeObject {
     /**
-     * Details on when funds from charges are available, and when they are paid out to an external
-     * account. See our <a
-     * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
-     * Debit Card Payouts</a> documentation for details.
+     * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
+     * account. See <a href="https://stripe.com/connect/account-balances">Understanding Connect
+     * account balances</a> for details. The default value is {@code false} when <a
+     * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
+     * is {@code application}, which includes Custom accounts, otherwise {@code true}.
      */
-    @SerializedName("schedule")
-    Schedule schedule;
+    @SerializedName("debit_negative_balances")
+    Boolean debitNegativeBalances;
+
+    /** Settings specific to the account's payouts. */
+    @SerializedName("payouts")
+    Payouts payouts;
+
+    @SerializedName("settlement_timing")
+    SettlementTiming settlementTiming;
 
     /**
-     * The text that appears on the bank account statement for payouts. If not set, this defaults to
-     * the platform's bank descriptor as set in the Dashboard.
+     * For more details about Payouts, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
      */
-    @SerializedName("statement_descriptor")
-    String statementDescriptor;
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payouts extends StripeObject {
+      /**
+       * Details on when funds from charges are available, and when they are paid out to an external
+       * account. See our <a
+       * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
+       * Debit Card Payouts</a> documentation for details.
+       */
+      @SerializedName("schedule")
+      Schedule schedule;
+
+      /**
+       * The text that appears on the bank account statement for payouts. If not set, this defaults
+       * to the platform's bank descriptor as set in the Dashboard.
+       */
+      @SerializedName("statement_descriptor")
+      String statementDescriptor;
+
+      /**
+       * Whether the funds in this account can be paid out.
+       *
+       * <p>One of {@code disabled}, or {@code enabled}.
+       */
+      @SerializedName("status")
+      String status;
+
+      /**
+       * For more details about Schedule, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Schedule extends StripeObject {
+        /**
+         * How frequently funds will be paid out. One of {@code manual} (payouts only created via
+         * API call), {@code daily}, {@code weekly}, or {@code monthly}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /**
+         * The day of the month funds will be paid out. Only shown if {@code interval} is monthly.
+         * Payouts scheduled between the 29th and 31st of the month are sent on the last day of
+         * shorter months.
+         */
+        @SerializedName("monthly_payout_days")
+        List<Long> monthlyPayoutDays;
+
+        /**
+         * The days of the week when available funds are paid out, specified as an array, for
+         * example, [{@code monday}, {@code tuesday}]. Only shown if {@code interval} is weekly.
+         */
+        @SerializedName("weekly_payout_days")
+        List<String> weeklyPayoutDays;
+      }
+    }
 
     /**
-     * Whether the funds in this account can be paid out.
-     *
-     * <p>One of {@code disabled}, or {@code enabled}.
-     */
-    @SerializedName("status")
-    String status;
-
-    /**
-     * For more details about Schedule, please refer to the <a
+     * For more details about SettlementTiming, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Schedule extends StripeObject {
-      /**
-       * How frequently funds will be paid out. One of {@code manual} (payouts only created via API
-       * call), {@code daily}, {@code weekly}, or {@code monthly}.
-       */
-      @SerializedName("interval")
-      String interval;
-
-      /**
-       * The day of the month funds will be paid out. Only shown if {@code interval} is monthly.
-       * Payouts scheduled between the 29th and 31st of the month are sent on the last day of
-       * shorter months.
-       */
-      @SerializedName("monthly_payout_days")
-      List<Long> monthlyPayoutDays;
-
-      /**
-       * The days of the week when available funds are paid out, specified as an array, for example,
-       * [{@code monday}, {@code tuesday}]. Only shown if {@code interval} is weekly.
-       */
-      @SerializedName("weekly_payout_days")
-      List<String> weeklyPayoutDays;
+    public static class SettlementTiming extends StripeObject {
+      /** The number of days charge funds are held before becoming available. */
+      @SerializedName("delay_days")
+      Long delayDays;
     }
-  }
-
-  /**
-   * For more details about SettlementTiming, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SettlementTiming extends StripeObject {
-    /** The number of days charge funds are held before becoming available. */
-    @SerializedName("delay_days")
-    Long delayDays;
   }
 
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(payouts, responseGetter);
-    trySetResponseGetter(settlementTiming, responseGetter);
+    trySetResponseGetter(payments, responseGetter);
   }
 }

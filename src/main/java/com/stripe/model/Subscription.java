@@ -600,16 +600,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
-   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
+   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
+   * Billing Cadence.
    */
   public Subscription attachCadence(Map<String, Object> params) throws StripeException {
     return attachCadence(params, (RequestOptions) null);
   }
 
   /**
-   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
-   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
+   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
+   * Billing Cadence.
    */
   public Subscription attachCadence(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -621,16 +623,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
-   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
+   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
+   * Billing Cadence.
    */
   public Subscription attachCadence(SubscriptionAttachCadenceParams params) throws StripeException {
     return attachCadence(params, (RequestOptions) null);
   }
 
   /**
-   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
-   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
+   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
+   * Billing Cadence.
    */
   public Subscription attachCadence(SubscriptionAttachCadenceParams params, RequestOptions options)
       throws StripeException {

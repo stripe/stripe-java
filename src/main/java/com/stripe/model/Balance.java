@@ -20,15 +20,12 @@ import lombok.Setter;
  * This is an object representing your Stripe balance. You can retrieve it to see the balance
  * currently on your Stripe account.
  *
- * <p>You can also retrieve the balance history, which contains a list of <a
- * href="https://stripe.com/docs/reporting/balance-transaction-types">transactions</a> that
- * contributed to the balance (charges, payouts, and so forth).
+ * <p>The top-level {@code available} and {@code pending} comprise your &quot;payments
+ * balance.&quot;
  *
- * <p>The available and pending amounts for each currency are broken down further by payment source
- * types.
- *
- * <p>Related guide: <a href="https://stripe.com/docs/connect/account-balances">Understanding
- * Connect account balances</a>
+ * <p>Related guide: <a href="https://stripe.com/docs/payments/balances">Balances and settlement
+ * time</a>, <a href="https://stripe.com/docs/connect/account-balances">Understanding Connect
+ * account balances</a>
  */
 @Getter
 @Setter

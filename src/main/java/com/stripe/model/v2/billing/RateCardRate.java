@@ -23,7 +23,7 @@ public class RateCardRate extends StripeObject implements HasId {
   @SerializedName("custom_pricing_unit_amount")
   CustomPricingUnitAmount customPricingUnitAmount;
 
-  /** The ID of the RateCardRate. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -36,13 +36,14 @@ public class RateCardRate extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The MeteredItem that this rate binds to. */
+  /** The Metered Item that this rate binds to. */
   @SerializedName("metered_item")
   MeteredItem meteredItem;
 
@@ -55,11 +56,11 @@ public class RateCardRate extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the RateCard it belongs to. */
+  /** The ID of the Rate Card it belongs to. */
   @SerializedName("rate_card")
   String rateCard;
 
-  /** The ID of the RateCard version it was created on. */
+  /** The ID of the Rate Card Version it was created on. */
   @SerializedName("rate_card_version")
   String rateCardVersion;
 

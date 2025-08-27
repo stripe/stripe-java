@@ -395,6 +395,11 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @SerializedName("invoice_item_details")
     InvoiceItemDetails invoiceItemDetails;
 
+    /** Details about the license fee subscription that generated this line item. */
+    @SerializedName("license_fee_subscription_details")
+    LicenseFeeSubscriptionDetails licenseFeeSubscriptionDetails;
+
+    /** Details about the rate card subscription that generated this line item. */
     @SerializedName("rate_card_subscription_details")
     RateCardSubscriptionDetails rateCardSubscriptionDetails;
 
@@ -405,8 +410,8 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     /**
      * The type of parent that generated this line item
      *
-     * <p>One of {@code invoice_item_details}, {@code subscription_item_details}, or {@code
-     * rate_card_subscription_details}.
+     * <p>One of {@code invoice_item_details}, {@code license_fee_subscription_details}, {@code
+     * rate_card_subscription_details}, or {@code subscription_item_details}.
      */
     @SerializedName("type")
     String type;
@@ -470,6 +475,35 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
 
     /**
+     * For more details about LicenseFeeSubscriptionDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LicenseFeeSubscriptionDetails extends StripeObject {
+      /** The invoice item that generated this line item. */
+      @SerializedName("invoice_item")
+      String invoiceItem;
+
+      /** The license fee subscription that generated this line item. */
+      @SerializedName("license_fee_subscription")
+      String licenseFeeSubscription;
+
+      /** The license fee version at the time this line item was generated. */
+      @SerializedName("license_fee_version")
+      String licenseFeeVersion;
+
+      /** The pricing plan subscription that manages the license fee subscription. */
+      @SerializedName("pricing_plan_subscription")
+      String pricingPlanSubscription;
+
+      /** The pricing plan version at the time this line item was generated. */
+      @SerializedName("pricing_plan_version")
+      String pricingPlanVersion;
+    }
+
+    /**
      * For more details about RateCardSubscriptionDetails, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -477,12 +511,23 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RateCardSubscriptionDetails extends StripeObject {
+      /** The invoice item that generated this line item. */
       @SerializedName("invoice_item")
       String invoiceItem;
 
+      /** The pricing plan subscription that manages the rate card subscription. */
+      @SerializedName("pricing_plan_subscription")
+      String pricingPlanSubscription;
+
+      /** The pricing plan version at the time this line item was generated. */
+      @SerializedName("pricing_plan_version")
+      String pricingPlanVersion;
+
+      /** The rate card subscription that generated this line item. */
       @SerializedName("rate_card_subscription")
       String rateCardSubscription;
 
+      /** The rate card version at the time this line item was generated. */
       @SerializedName("rate_card_version")
       String rateCardVersion;
     }
@@ -675,6 +720,9 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Pricing extends StripeObject {
+    @SerializedName("license_fee_details")
+    LicenseFeeDetails licenseFeeDetails;
+
     @SerializedName("price_details")
     PriceDetails priceDetails;
 
@@ -684,7 +732,8 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     /**
      * The type of the pricing details.
      *
-     * <p>One of {@code price_details}, or {@code rate_card_rate_details}.
+     * <p>One of {@code license_fee_details}, {@code price_details}, or {@code
+     * rate_card_rate_details}.
      */
     @SerializedName("type")
     String type;
@@ -695,6 +744,27 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
+
+    /**
+     * For more details about LicenseFeeDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LicenseFeeDetails extends StripeObject {
+      /** The ID of the license fee this item is associated with. */
+      @SerializedName("license_fee")
+      String licenseFee;
+
+      /** The version of the license fee this item is associated with. */
+      @SerializedName("license_fee_version")
+      String licenseFeeVersion;
+
+      /** The ID of the licensed item this item is associated with. */
+      @SerializedName("licensed_item")
+      String licensedItem;
+    }
 
     /**
      * For more details about PriceDetails, please refer to the <a
@@ -721,12 +791,15 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RateCardRateDetails extends StripeObject {
+      /** The ID of billable item this item is associated with. */
       @SerializedName("metered_item")
       String meteredItem;
 
+      /** The ID of the rate card this item is associated with. */
       @SerializedName("rate_card")
       String rateCard;
 
+      /** The ID of the rate card rate this item is associated with. */
       @SerializedName("rate_card_rate")
       String rateCardRate;
     }

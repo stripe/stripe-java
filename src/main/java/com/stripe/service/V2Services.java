@@ -9,14 +9,6 @@ public final class V2Services extends ApiService {
     super(responseGetter);
   }
 
-  public com.stripe.service.v2.AccountLinkService accountLinks() {
-    return new com.stripe.service.v2.AccountLinkService(this.getResponseGetter());
-  }
-
-  public com.stripe.service.v2.AccountService accounts() {
-    return new com.stripe.service.v2.AccountService(this.getResponseGetter());
-  }
-
   public com.stripe.service.v2.BillingService billing() {
     return new com.stripe.service.v2.BillingService(this.getResponseGetter());
   }

@@ -534,16 +534,18 @@ public final class SubscriptionService extends ApiService {
     return this.request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
   }
   /**
-   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
-   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
+   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
+   * Billing Cadence.
    */
   public Subscription attachCadence(String subscription, SubscriptionAttachCadenceParams params)
       throws StripeException {
     return attachCadence(subscription, params, (RequestOptions) null);
   }
   /**
-   * Attach a Cadence to an existing subscription. Once attached, the subscription will be billed by
-   * the cadence, potentially sharing invoices with the other subscriptions linked to the Cadence.
+   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
+   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
+   * Billing Cadence.
    */
   public Subscription attachCadence(
       String subscription, SubscriptionAttachCadenceParams params, RequestOptions options)

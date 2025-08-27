@@ -25,30 +25,30 @@ public class RateCard extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
-  /** The currency of this RateCard. */
+  /** Three-letter ISO currency code, in lowercase. Must be a supported currency. */
   @SerializedName("currency")
   String currency;
 
   /**
-   * A customer-facing name for the RateCard. This name is used in Stripe-hosted products like the
+   * A customer-facing name for the Rate Card. This name is used in Stripe-hosted products like the
    * Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
    * characters.
    */
   @SerializedName("display_name")
   String displayName;
 
-  /** The ID of the RateCard. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** The ID of this RateCard's most recently created version. */
+  /** The ID of this rate card's most recently created version. */
   @SerializedName("latest_version")
   String latestVersion;
 
   /**
-   * The ID of the version that will be used by all Subscriptions when no specific version is
-   * specified.
+   * The ID of the Rate Card Version that will be used by all subscriptions when no specific version
+   * is specified.
    */
   @SerializedName("live_version")
   String liveVersion;
@@ -61,8 +61,16 @@ public class RateCard extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * An internal key you can use to search for a particular RateCard. Maximum length of 200
+   * characters.
+   */
+  @SerializedName("lookup_key")
+  String lookupKey;
+
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -77,7 +85,7 @@ public class RateCard extends StripeObject implements HasId {
   String object;
 
   /**
-   * The interval for assessing service. For example, a monthly RateCard with a rate of $1 for the
+   * The interval for assessing service. For example, a monthly Rate Card with a rate of $1 for the
    * first 10 &quot;workloads&quot; and $2 thereafter means &quot;$1 per workload up to 10 workloads
    * during a month of service.&quot; This is similar to but distinct from billing interval; the
    * service interval deals with the rate at which the customer accumulates fees, while the billing

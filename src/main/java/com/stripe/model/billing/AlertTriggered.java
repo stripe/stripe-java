@@ -3,6 +3,7 @@ package com.stripe.model.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +24,21 @@ public class AlertTriggered extends StripeObject {
   @SerializedName("created")
   Long created;
 
+  /** Currency for the threshold value. */
+  @SerializedName("currency")
+  String currency;
+
+  /** Custom pricing unit for the threshold value. */
+  @SerializedName("custom_pricing_unit")
+  String customPricingUnit;
+
   /** ID of customer for which the alert triggered. */
   @SerializedName("customer")
   String customer;
+
+  /** External customer ID for the customer for which the alert triggered. */
+  @SerializedName("external_customer_id")
+  String externalCustomerId;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -44,5 +57,5 @@ public class AlertTriggered extends StripeObject {
 
   /** The value triggering the alert. */
   @SerializedName("value")
-  Long value;
+  BigDecimal value;
 }

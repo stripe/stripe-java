@@ -20,7 +20,7 @@ public class ComponentCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Details if this component is a LicenseFee. */
+  /** Details if this component is a License Fee. */
   @SerializedName("license_fee")
   LicenseFee licenseFee;
 
@@ -28,15 +28,19 @@ public class ComponentCreateParams extends ApiRequestParams {
   @SerializedName("lookup_key")
   String lookupKey;
 
-  /** Set of key-value pairs that you can attach to an object. */
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
+   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Details if this component is a RateCard. */
+  /** Details if this component is a Rate Card. */
   @SerializedName("rate_card")
   RateCard rateCard;
 
-  /** Details if this component is a ServiceAction. */
+  /** Details if this component is a Service Action. */
   @SerializedName("service_action")
   ServiceAction serviceAction;
 
@@ -118,7 +122,7 @@ public class ComponentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Details if this component is a LicenseFee. */
+    /** Details if this component is a License Fee. */
     public Builder setLicenseFee(ComponentCreateParams.LicenseFee licenseFee) {
       this.licenseFee = licenseFee;
       return this;
@@ -156,13 +160,13 @@ public class ComponentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Details if this component is a RateCard. */
+    /** Details if this component is a Rate Card. */
     public Builder setRateCard(ComponentCreateParams.RateCard rateCard) {
       this.rateCard = rateCard;
       return this;
     }
 
-    /** Details if this component is a ServiceAction. */
+    /** Details if this component is a Service Action. */
     public Builder setServiceAction(ComponentCreateParams.ServiceAction serviceAction) {
       this.serviceAction = serviceAction;
       return this;
@@ -187,11 +191,11 @@ public class ComponentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The ID of the LicenseFee. */
+    /** <strong>Required.</strong> The ID of the License Fee. */
     @SerializedName("id")
     String id;
 
-    /** <strong>Required.</strong> The version of the LicenseFee. */
+    /** The version of the LicenseFee. Defaults to 'latest', if not specified. */
     @SerializedName("version")
     String version;
 
@@ -243,13 +247,13 @@ public class ComponentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the LicenseFee. */
+      /** <strong>Required.</strong> The ID of the License Fee. */
       public Builder setId(String id) {
         this.id = id;
         return this;
       }
 
-      /** <strong>Required.</strong> The version of the LicenseFee. */
+      /** The version of the LicenseFee. Defaults to 'latest', if not specified. */
       public Builder setVersion(String version) {
         this.version = version;
         return this;
@@ -269,11 +273,11 @@ public class ComponentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The ID of the RateCard. */
+    /** <strong>Required.</strong> The ID of the Rate Card. */
     @SerializedName("id")
     String id;
 
-    /** <strong>Required.</strong> The version of the RateCard. */
+    /** The version of the RateCard. Defaults to 'latest', if not specified. */
     @SerializedName("version")
     String version;
 
@@ -325,13 +329,13 @@ public class ComponentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the RateCard. */
+      /** <strong>Required.</strong> The ID of the Rate Card. */
       public Builder setId(String id) {
         this.id = id;
         return this;
       }
 
-      /** <strong>Required.</strong> The version of the RateCard. */
+      /** The version of the RateCard. Defaults to 'latest', if not specified. */
       public Builder setVersion(String version) {
         this.version = version;
         return this;
@@ -351,18 +355,13 @@ public class ComponentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> The ID of the ServiceAction. */
+    /** <strong>Required.</strong> The ID of the service action. */
     @SerializedName("id")
     String id;
 
-    /** <strong>Required.</strong> The version of the ServiceAction. */
-    @SerializedName("version")
-    String version;
-
-    private ServiceAction(Map<String, Object> extraParams, String id, String version) {
+    private ServiceAction(Map<String, Object> extraParams, String id) {
       this.extraParams = extraParams;
       this.id = id;
-      this.version = version;
     }
 
     public static Builder builder() {
@@ -374,11 +373,9 @@ public class ComponentCreateParams extends ApiRequestParams {
 
       private String id;
 
-      private String version;
-
       /** Finalize and obtain parameter instance from this builder. */
       public ComponentCreateParams.ServiceAction build() {
-        return new ComponentCreateParams.ServiceAction(this.extraParams, this.id, this.version);
+        return new ComponentCreateParams.ServiceAction(this.extraParams, this.id);
       }
 
       /**
@@ -407,15 +404,9 @@ public class ComponentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> The ID of the ServiceAction. */
+      /** <strong>Required.</strong> The ID of the service action. */
       public Builder setId(String id) {
         this.id = id;
-        return this;
-      }
-
-      /** <strong>Required.</strong> The version of the ServiceAction. */
-      public Builder setVersion(String version) {
-        this.version = version;
         return this;
       }
     }

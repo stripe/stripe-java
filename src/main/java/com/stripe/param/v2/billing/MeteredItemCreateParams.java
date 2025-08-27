@@ -41,13 +41,14 @@ public class MeteredItemCreateParams extends ApiRequestParams {
   String lookupKey;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** <strong>Required.</strong> ID of the Meter that measures usage for this MeteredItem. */
+  /** <strong>Required.</strong> ID of the Meter that measures usage for this Metered Item. */
   @SerializedName("meter")
   String meter;
 
@@ -222,7 +223,7 @@ public class MeteredItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> ID of the Meter that measures usage for this MeteredItem. */
+    /** <strong>Required.</strong> ID of the Meter that measures usage for this Metered Item. */
     public Builder setMeter(String meter) {
       this.meter = meter;
       return this;
@@ -290,7 +291,7 @@ public class MeteredItemCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> To count usage towards this MeteredItem, the dimension must have
+     * <strong>Required.</strong> To count usage towards this metered item, the dimension must have
      * this value.
      */
     @SerializedName("value")
@@ -353,8 +354,8 @@ public class MeteredItemCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> To count usage towards this MeteredItem, the dimension must have
-       * this value.
+       * <strong>Required.</strong> To count usage towards this metered item, the dimension must
+       * have this value.
        */
       public Builder setValue(String value) {
         this.value = value;

@@ -110,14 +110,17 @@ public abstract class StripeException extends Exception {
       StripeResponseGetter responseGetter) {
     switch (type) {
         // The beginning of the section generated from our OpenAPI spec
-      case "temporary_session_expired":
-        return com.stripe.exception.TemporarySessionExpiredException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "non_zero_balance":
-        return com.stripe.exception.NonZeroBalanceException.parse(
+      case "already_canceled":
+        return com.stripe.exception.AlreadyCanceledException.parse(
             body, statusCode, requestId, responseGetter);
       case "already_exists":
         return com.stripe.exception.AlreadyExistsException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "blocked_by_stripe":
+        return com.stripe.exception.BlockedByStripeException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "controlled_by_dashboard":
+        return com.stripe.exception.ControlledByDashboardException.parse(
             body, statusCode, requestId, responseGetter);
       case "feature_not_enabled":
         return com.stripe.exception.FeatureNotEnabledException.parse(
@@ -125,35 +128,32 @@ public abstract class StripeException extends Exception {
       case "financial_account_not_open":
         return com.stripe.exception.FinancialAccountNotOpenException.parse(
             body, statusCode, requestId, responseGetter);
-      case "blocked_by_stripe":
-        return com.stripe.exception.BlockedByStripeException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "already_canceled":
-        return com.stripe.exception.AlreadyCanceledException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "not_cancelable":
-        return com.stripe.exception.NotCancelableException.parse(
-            body, statusCode, requestId, responseGetter);
       case "insufficient_funds":
         return com.stripe.exception.InsufficientFundsException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "quota_exceeded":
-        return com.stripe.exception.QuotaExceededException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "recipient_not_notifiable":
-        return com.stripe.exception.RecipientNotNotifiableException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "invalid_payout_method":
-        return com.stripe.exception.InvalidPayoutMethodException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "controlled_by_dashboard":
-        return com.stripe.exception.ControlledByDashboardException.parse(
             body, statusCode, requestId, responseGetter);
       case "invalid_payment_method":
         return com.stripe.exception.InvalidPaymentMethodException.parse(
             body, statusCode, requestId, responseGetter);
+      case "invalid_payout_method":
+        return com.stripe.exception.InvalidPayoutMethodException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "non_zero_balance":
+        return com.stripe.exception.NonZeroBalanceException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "not_cancelable":
+        return com.stripe.exception.NotCancelableException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "quota_exceeded":
+        return com.stripe.exception.QuotaExceededException.parse(
+            body, statusCode, requestId, responseGetter);
       case "rate_limit":
         return com.stripe.exception.RateLimitException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "recipient_not_notifiable":
+        return com.stripe.exception.RecipientNotNotifiableException.parse(
+            body, statusCode, requestId, responseGetter);
+      case "temporary_session_expired":
+        return com.stripe.exception.TemporarySessionExpiredException.parse(
             body, statusCode, requestId, responseGetter);
         // The end of the section generated from our OpenAPI spec
     }

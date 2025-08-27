@@ -17,6 +17,10 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   @SerializedName("amount_tip")
   Long amountTip;
 
+  /** Simulated data for the card payment method. */
+  @SerializedName("card")
+  Card card;
+
   /** Simulated data for the card_present payment method. */
   @SerializedName("card_present")
   CardPresent cardPresent;
@@ -44,12 +48,14 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
 
   private ReaderPresentPaymentMethodParams(
       Long amountTip,
+      Card card,
       CardPresent cardPresent,
       List<String> expand,
       Map<String, Object> extraParams,
       InteracPresent interacPresent,
       Type type) {
     this.amountTip = amountTip;
+    this.card = card;
     this.cardPresent = cardPresent;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -63,6 +69,8 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
 
   public static class Builder {
     private Long amountTip;
+
+    private Card card;
 
     private CardPresent cardPresent;
 
@@ -78,6 +86,7 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     public ReaderPresentPaymentMethodParams build() {
       return new ReaderPresentPaymentMethodParams(
           this.amountTip,
+          this.card,
           this.cardPresent,
           this.expand,
           this.extraParams,
@@ -88,6 +97,12 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     /** Simulated on-reader tip amount. */
     public Builder setAmountTip(Long amountTip) {
       this.amountTip = amountTip;
+      return this;
+    }
+
+    /** Simulated data for the card payment method. */
+    public Builder setCard(ReaderPresentPaymentMethodParams.Card card) {
+      this.card = card;
       return this;
     }
 
@@ -160,6 +175,121 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
     public Builder setType(ReaderPresentPaymentMethodParams.Type type) {
       this.type = type;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Card {
+    /** Card security code. */
+    @SerializedName("cvc")
+    String cvc;
+
+    /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
+    @SerializedName("exp_month")
+    Long expMonth;
+
+    /**
+     * <strong>Required.</strong> Two- or four-digit number representing the card's expiration year.
+     */
+    @SerializedName("exp_year")
+    Long expYear;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The card number, as a string without any separators. */
+    @SerializedName("number")
+    String number;
+
+    private Card(
+        String cvc, Long expMonth, Long expYear, Map<String, Object> extraParams, String number) {
+      this.cvc = cvc;
+      this.expMonth = expMonth;
+      this.expYear = expYear;
+      this.extraParams = extraParams;
+      this.number = number;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String cvc;
+
+      private Long expMonth;
+
+      private Long expYear;
+
+      private Map<String, Object> extraParams;
+
+      private String number;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ReaderPresentPaymentMethodParams.Card build() {
+        return new ReaderPresentPaymentMethodParams.Card(
+            this.cvc, this.expMonth, this.expYear, this.extraParams, this.number);
+      }
+
+      /** Card security code. */
+      public Builder setCvc(String cvc) {
+        this.cvc = cvc;
+        return this;
+      }
+
+      /** <strong>Required.</strong> Two-digit number representing the card's expiration month. */
+      public Builder setExpMonth(Long expMonth) {
+        this.expMonth = expMonth;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Two- or four-digit number representing the card's expiration
+       * year.
+       */
+      public Builder setExpYear(Long expYear) {
+        this.expYear = expYear;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ReaderPresentPaymentMethodParams.Card#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ReaderPresentPaymentMethodParams.Card#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The card number, as a string without any separators. */
+      public Builder setNumber(String number) {
+        this.number = number;
+        return this;
+      }
     }
   }
 
@@ -304,6 +434,9 @@ public class ReaderPresentPaymentMethodParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("card")
+    CARD("card"),
+
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
 

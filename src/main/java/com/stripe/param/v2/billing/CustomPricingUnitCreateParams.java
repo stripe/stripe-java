@@ -13,7 +13,7 @@ import lombok.Getter;
 public class CustomPricingUnitCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Description that customers will see in the invoice line item.
-   * Maximum length of 250 characters.
+   * Maximum length of 10 characters.
    */
   @SerializedName("display_name")
   String displayName;
@@ -28,15 +28,16 @@ public class CustomPricingUnitCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * An internal key you can use to search for a particular CustomPricingUnit item. Must be unique
+   * An internal key you can use to search for a particular custom pricing unit item. Must be unique
    * among items. Maximum length of 200 characters.
    */
   @SerializedName("lookup_key")
   String lookupKey;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -73,7 +74,7 @@ public class CustomPricingUnitCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Description that customers will see in the invoice line item.
-     * Maximum length of 250 characters.
+     * Maximum length of 10 characters.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
@@ -107,8 +108,8 @@ public class CustomPricingUnitCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An internal key you can use to search for a particular CustomPricingUnit item. Must be unique
-     * among items. Maximum length of 200 characters.
+     * An internal key you can use to search for a particular custom pricing unit item. Must be
+     * unique among items. Maximum length of 200 characters.
      */
     public Builder setLookupKey(String lookupKey) {
       this.lookupKey = lookupKey;

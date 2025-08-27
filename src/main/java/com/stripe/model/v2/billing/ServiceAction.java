@@ -29,7 +29,7 @@ public class ServiceAction extends StripeObject implements HasId {
   @SerializedName("credit_grant_per_tenant")
   CreditGrantPerTenant creditGrantPerTenant;
 
-  /** Unique identifier for the ServiceAction. */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;

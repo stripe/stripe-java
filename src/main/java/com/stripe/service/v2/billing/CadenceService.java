@@ -23,19 +23,19 @@ public final class CadenceService extends ApiService {
     super(responseGetter);
   }
 
-  /** List all the billing Cadences. */
+  /** List Billing Cadences. */
   public StripeCollection<Cadence> list(CadenceListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** List all the billing Cadences. */
+  /** List Billing Cadences. */
   public StripeCollection<Cadence> list(RequestOptions options) throws StripeException {
     return list((CadenceListParams) null, options);
   }
-  /** List all the billing Cadences. */
+  /** List Billing Cadences. */
   public StripeCollection<Cadence> list() throws StripeException {
     return list((CadenceListParams) null, (RequestOptions) null);
   }
-  /** List all the billing Cadences. */
+  /** List Billing Cadences. */
   public StripeCollection<Cadence> list(CadenceListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/billing/cadences";
@@ -48,11 +48,11 @@ public final class CadenceService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<Cadence>>() {}.getType());
   }
-  /** Create a billing Cadence object. */
+  /** Create a Billing Cadence object. */
   public Cadence create(CadenceCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create a billing Cadence object. */
+  /** Create a Billing Cadence object. */
   public Cadence create(CadenceCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v2/billing/cadences";
     ApiRequest request =
@@ -64,19 +64,19 @@ public final class CadenceService extends ApiService {
             options);
     return this.request(request, Cadence.class);
   }
-  /** Retrieve a billing Cadence object. */
+  /** Retrieve a Billing Cadence object. */
   public Cadence retrieve(String id, CadenceRetrieveParams params) throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieve a billing Cadence object. */
+  /** Retrieve a Billing Cadence object. */
   public Cadence retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (CadenceRetrieveParams) null, options);
   }
-  /** Retrieve a billing Cadence object. */
+  /** Retrieve a Billing Cadence object. */
   public Cadence retrieve(String id) throws StripeException {
     return retrieve(id, (CadenceRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieve a billing Cadence object. */
+  /** Retrieve a Billing Cadence object. */
   public Cadence retrieve(String id, CadenceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/cadences/%s", ApiResource.urlEncodeId(id));
@@ -89,19 +89,19 @@ public final class CadenceService extends ApiService {
             options);
     return this.request(request, Cadence.class);
   }
-  /** Update a billing Cadence object. */
+  /** Update a Billing Cadence object. */
   public Cadence update(String id, CadenceUpdateParams params) throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Update a billing Cadence object. */
+  /** Update a Billing Cadence object. */
   public Cadence update(String id, RequestOptions options) throws StripeException {
     return update(id, (CadenceUpdateParams) null, options);
   }
-  /** Update a billing Cadence object. */
+  /** Update a Billing Cadence object. */
   public Cadence update(String id) throws StripeException {
     return update(id, (CadenceUpdateParams) null, (RequestOptions) null);
   }
-  /** Update a billing Cadence object. */
+  /** Update a Billing Cadence object. */
   public Cadence update(String id, CadenceUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/cadences/%s", ApiResource.urlEncodeId(id));
@@ -114,19 +114,19 @@ public final class CadenceService extends ApiService {
             options);
     return this.request(request, Cadence.class);
   }
-  /** Cancel the billing cadence. */
+  /** Cancel the Billing Cadence. */
   public Cadence cancel(String id, CadenceCancelParams params) throws StripeException {
     return cancel(id, params, (RequestOptions) null);
   }
-  /** Cancel the billing cadence. */
+  /** Cancel the Billing Cadence. */
   public Cadence cancel(String id, RequestOptions options) throws StripeException {
     return cancel(id, (CadenceCancelParams) null, options);
   }
-  /** Cancel the billing cadence. */
+  /** Cancel the Billing Cadence. */
   public Cadence cancel(String id) throws StripeException {
     return cancel(id, (CadenceCancelParams) null, (RequestOptions) null);
   }
-  /** Cancel the billing cadence. */
+  /** Cancel the Billing Cadence. */
   public Cadence cancel(String id, CadenceCancelParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/cadences/%s/cancel", ApiResource.urlEncodeId(id));

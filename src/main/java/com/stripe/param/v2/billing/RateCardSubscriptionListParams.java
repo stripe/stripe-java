@@ -32,9 +32,9 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   Integer limit;
 
   /**
-   * Optionally filter by the payer associated with Cadences which the RateCardSubscriptions are
-   * subscribed to. Mutually exclusive with {@code billing_cadence}, {@code rate_card}, and {@code
-   * rate_card_version}.
+   * Optionally filter by the payer associated with Billing Cadences which the Rate Card
+   * Subscriptions are subscribed to. Mutually exclusive with {@code billing_cadence}, {@code
+   * rate_card}, and {@code rate_card_version}.
    */
   @SerializedName("payer")
   Payer payer;
@@ -147,9 +147,9 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Optionally filter by the payer associated with Cadences which the RateCardSubscriptions are
-     * subscribed to. Mutually exclusive with {@code billing_cadence}, {@code rate_card}, and {@code
-     * rate_card_version}.
+     * Optionally filter by the payer associated with Billing Cadences which the Rate Card
+     * Subscriptions are subscribed to. Mutually exclusive with {@code billing_cadence}, {@code
+     * rate_card}, and {@code rate_card_version}.
      */
     public Builder setPayer(RateCardSubscriptionListParams.Payer payer) {
       this.payer = payer;
@@ -186,8 +186,8 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Payer {
     /**
-     * The ID of the Customer object. If provided, only RateCardSubscriptions that are subscribed on
-     * the Cadences with the specified Payer will be returned.
+     * The ID of the Customer object. If provided, only the Rate Card Subscriptions that are
+     * subscribed on the Billing Cadences with the specified payer will be returned.
      */
     @SerializedName("customer")
     String customer;
@@ -231,8 +231,8 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the Customer object. If provided, only RateCardSubscriptions that are subscribed
-       * on the Cadences with the specified Payer will be returned.
+       * The ID of the Customer object. If provided, only the Rate Card Subscriptions that are
+       * subscribed on the Billing Cadences with the specified payer will be returned.
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;

@@ -27,19 +27,20 @@ public class RateCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The MeteredItem that this rate binds to. */
+  /** The Metered Item that this rate binds to. */
   @SerializedName("metered_item")
   String meteredItem;
 
   /**
-   * The ID of the Price object to take price information from. The Price must have the same
-   * interval as the RateCard. Updates to the Price will not be reflected in the RateCard or its
+   * The ID of the price object to take price information from. The price must have the same
+   * interval as the rate card. Updates to the Price will not be reflected in the Rate Card or its
    * rates.
    */
   @SerializedName("price")
@@ -188,15 +189,15 @@ public class RateCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The MeteredItem that this rate binds to. */
+    /** The Metered Item that this rate binds to. */
     public Builder setMeteredItem(String meteredItem) {
       this.meteredItem = meteredItem;
       return this;
     }
 
     /**
-     * The ID of the Price object to take price information from. The Price must have the same
-     * interval as the RateCard. Updates to the Price will not be reflected in the RateCard or its
+     * The ID of the price object to take price information from. The price must have the same
+     * interval as the rate card. Updates to the Price will not be reflected in the Rate Card or its
      * rates.
      */
     public Builder setPrice(String price) {
