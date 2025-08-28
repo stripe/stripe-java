@@ -1,9 +1,12 @@
 package com.stripe;
 
+import com.google.gson.JsonObject;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
-import com.stripe.model.ThinEvent;
+import com.stripe.model.v2.EventDeliveryClassLookup;
+import com.stripe.model.v2.ThinEvent;
+import com.stripe.model.v2.UnknownEventDelivery;
 import com.stripe.net.*;
 import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;
@@ -74,7 +77,16 @@ public class StripeClient {
       throws SignatureVerificationException {
     Signature.verifyHeader(payload, sigHeader, secret, tolerance);
 
-    return ApiResource.GSON.fromJson(payload, ThinEvent.class);
+    // don't love the double json parse here, but i'm not
+    JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
+
+    Class<? extends ThinEvent> cls =
+        EventDeliveryClassLookup.eventClassLookup.get(jsonObject.get("type").getAsString());
+    if (cls == null) {
+      cls = UnknownEventDelivery.class;
+    }
+
+    return ApiResource.GSON.fromJson(payload, cls);
   }
 
   /**

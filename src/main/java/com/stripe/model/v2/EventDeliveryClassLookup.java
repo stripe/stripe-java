@@ -1,0 +1,27 @@
+// File generated from our OpenAPI spec
+package com.stripe.model.v2;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Event data class look up used in event deserialization. The key to look up is `object` string of
+ * the model.
+ *
+ * <p>For internal use by Stripe SDK only.
+ */
+public final class EventDeliveryClassLookup {
+  public static final Map<String, Class<? extends ThinEvent>> eventClassLookup = new HashMap<>();
+
+  static {
+    eventClassLookup.put(
+        "v1.billing.meter.error_report_triggered",
+        com.stripe.events.PushedV1BillingMeterErrorReportTriggeredEvent.class);
+    eventClassLookup.put(
+        "v1.billing.meter.no_meter_found",
+        com.stripe.events.PushedV1BillingMeterNoMeterFoundEvent.class);
+    eventClassLookup.put(
+        "v2.core.event_destination.ping",
+        com.stripe.events.PushedV2CoreEventDestinationPingEvent.class);
+  }
+}
