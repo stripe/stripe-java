@@ -96,7 +96,7 @@ jobs:
       - uses: stripe/openapi/actions/stripe-mock@master
         with:
           # Used to determine if stripe-mock runs in beta mode
-          base: ${{ github.base_ref == 'private-preview' && 'beta' || github.ref_name == 'private-preview' && 'beta' || github.base_ref || github.ref_name }}
+          base: ${{ github.base_ref == 'private-preview' && 'beta' || github.ref_name == 'private-preview' && 'beta' || contains(github.ref_name, '-alpha.') && 'beta' || github.base_ref || github.ref_name }}
       - name: Run test suite
         run: just test
 
