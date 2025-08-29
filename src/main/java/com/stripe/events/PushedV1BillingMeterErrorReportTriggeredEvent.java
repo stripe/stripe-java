@@ -19,4 +19,9 @@ public final class PushedV1BillingMeterErrorReportTriggeredEvent extends ThinEve
   public Meter fetchRelatedObject() throws StripeException {
     return (Meter) super.fetchRelatedObject(this.relatedObject);
   }
+  /** Retrieve the corresponding full event from the Stripe API. */
+  @Override
+  public V1BillingMeterErrorReportTriggeredEvent pull() throws StripeException {
+    return (V1BillingMeterErrorReportTriggeredEvent) super.pull();
+  }
 }

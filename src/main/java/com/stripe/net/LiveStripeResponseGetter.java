@@ -381,6 +381,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private void handleV2ApiError(StripeResponse response) throws StripeException {
     JsonObject body =
         ApiResource.GSON.fromJson(response.body(), JsonObject.class).getAsJsonObject("error");
+    System.out.println(body);
 
     JsonElement typeElement = body == null ? null : body.get("type");
     JsonElement codeElement = body == null ? null : body.get("code");

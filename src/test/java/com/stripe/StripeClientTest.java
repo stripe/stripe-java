@@ -12,12 +12,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.stripe.events.PushedV1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.events.PushedV1BillingMeterNoMeterFoundEvent;
+import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.billing.Meter;
 import com.stripe.model.terminal.Reader;
+import com.stripe.model.v2.Event;
 import com.stripe.model.v2.ThinEvent;
 import com.stripe.model.v2.UnknownEventDelivery;
 import com.stripe.net.*;
+import com.stripe.net.ApiResource.RequestMethod;
 import java.lang.reflect.Type;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -211,14 +215,14 @@ public class StripeClientTest extends BaseStripeTest {
     options.put("secret", secret);
 
     String signature = WebhookTest.generateSigHeader(options);
-    ThinEvent baseThinEvent =
+    ThinEvent eventDelivery =
         client.parseThinEvent(v2EventDeliveryWithoutRelatedObject, signature, secret);
-    assertNotNull(baseThinEvent);
-    assertEquals("evt_234", baseThinEvent.getId());
-    assertEquals("v1.billing.meter.no_meter_found", baseThinEvent.getType());
-    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), baseThinEvent.created);
-    assertNull(baseThinEvent.context);
-    assertInstanceOf(PushedV1BillingMeterNoMeterFoundEvent.class, baseThinEvent);
+    assertNotNull(eventDelivery);
+    assertEquals("evt_234", eventDelivery.getId());
+    assertEquals("v1.billing.meter.no_meter_found", eventDelivery.getType());
+    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventDelivery.created);
+    assertNull(eventDelivery.context);
+    assertInstanceOf(PushedV1BillingMeterNoMeterFoundEvent.class, eventDelivery);
   }
 
   @Test
@@ -234,17 +238,17 @@ public class StripeClientTest extends BaseStripeTest {
     options.put("secret", secret);
 
     String signature = WebhookTest.generateSigHeader(options);
-    ThinEvent baseThinEvent =
+    ThinEvent eventDelivery =
         client.parseThinEvent(v2EventDeliveryWithRelatedObject, signature, secret);
-    assertNotNull(baseThinEvent);
-    assertEquals("evt_234", baseThinEvent.getId());
-    assertEquals("v1.billing.meter.error_report_triggered", baseThinEvent.getType());
-    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), baseThinEvent.created);
-    assertEquals("context 123", baseThinEvent.context);
-    assertInstanceOf(PushedV1BillingMeterErrorReportTriggeredEvent.class, baseThinEvent);
+    assertNotNull(eventDelivery);
+    assertEquals("evt_234", eventDelivery.getId());
+    assertEquals("v1.billing.meter.error_report_triggered", eventDelivery.getType());
+    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventDelivery.created);
+    assertEquals("context 123", eventDelivery.context);
+    assertInstanceOf(PushedV1BillingMeterErrorReportTriggeredEvent.class, eventDelivery);
 
     PushedV1BillingMeterErrorReportTriggeredEvent e =
-        (PushedV1BillingMeterErrorReportTriggeredEvent) baseThinEvent;
+        (PushedV1BillingMeterErrorReportTriggeredEvent) eventDelivery;
 
     assertNotNull(e.getRelatedObject());
     assertEquals("fa_123", e.getRelatedObject().getId());
@@ -265,13 +269,13 @@ public class StripeClientTest extends BaseStripeTest {
     options.put("secret", secret);
 
     String signature = WebhookTest.generateSigHeader(options);
-    ThinEvent baseThinEvent = client.parseThinEvent(v2UnknownEventDelivery, signature, secret);
+    ThinEvent eventDelivery = client.parseThinEvent(v2UnknownEventDelivery, signature, secret);
 
-    assertNotNull(baseThinEvent);
-    assertEquals("evt_234", baseThinEvent.getId());
-    assertEquals("v1.imaginary_event", baseThinEvent.getType());
-    assertInstanceOf(UnknownEventDelivery.class, baseThinEvent);
-    UnknownEventDelivery e = (UnknownEventDelivery) baseThinEvent;
+    assertNotNull(eventDelivery);
+    assertEquals("evt_234", eventDelivery.getId());
+    assertEquals("v1.imaginary_event", eventDelivery.getType());
+    assertInstanceOf(UnknownEventDelivery.class, eventDelivery);
+    UnknownEventDelivery e = (UnknownEventDelivery) eventDelivery;
 
     assertNull(e.getRelatedObject());
   }
@@ -314,6 +318,44 @@ public class StripeClientTest extends BaseStripeTest {
     mockClient = new StripeClient(networkSpy);
 
     mockClient.customers().create();
+
+    verifyStripeRequest(
+        (stripeRequest) -> {
+          assert (stripeRequest.headers().firstValue("Stripe-Context").isPresent());
+          assertEquals("ctx", stripeRequest.headers().firstValue("Stripe-Context").get());
+        });
+  }
+
+  @Test
+  public void parseEventDeliveryAndPull()
+      throws StripeException, InvalidKeyException, NoSuchAlgorithmException {
+        stubRequest(
+          BaseAddress.API,
+            RequestMethod.GET,
+            "/v2/core/events/evt_234",
+            null,
+            RequestOptions.builder().build(),
+            Event.class,
+            "{\"id\": \"evt_234\", \"type\": \"v1.billing.meter.error_report_triggered\", \"data\": {}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    String secret = "whsec_test_secret";
+    Map<String, Object> signatureOptions = new HashMap<>();
+    signatureOptions.put("payload", v2EventDeliveryWithRelatedObject);
+    signatureOptions.put("secret", secret);
+    String signature = WebhookTest.generateSigHeader(signatureOptions);
+
+    ThinEvent eventDelivery =
+        client.parseThinEvent(v2EventDeliveryWithRelatedObject, signature, secret);
+
+    assertInstanceOf(PushedV1BillingMeterErrorReportTriggeredEvent.class, eventDelivery);
+
+    PushedV1BillingMeterErrorReportTriggeredEvent ed =
+        (PushedV1BillingMeterErrorReportTriggeredEvent) eventDelivery;
+
+
+    assertInstanceOf(V1BillingMeterErrorReportTriggeredEvent.class, ed.pull());
+    assertInstanceOf(Meter.class, ed.fetchRelatedObject());
 
     verifyStripeRequest(
         (stripeRequest) -> {

@@ -1,5 +1,6 @@
 package com.stripe.model.v2;
 
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.StripeClient;
 import com.stripe.exception.StripeException;
@@ -54,12 +55,21 @@ public abstract class ThinEvent {
    * directly) but useful in testing.
    */
   public static ThinEvent fromJson(String payload, StripeClient client) {
-    ThinEvent e = ApiResource.GSON.fromJson(payload, ThinEvent.class);
+    // don't love the double json parse here, but I don't think we can avoid it?
+    JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
+
+    Class<? extends ThinEvent> cls =
+        EventDeliveryClassLookup.eventClassLookup.get(jsonObject.get("type").getAsString());
+    if (cls == null) {
+      cls = UnknownEventDelivery.class;
+    }
+
+    ThinEvent e = ApiResource.GSON.fromJson(payload, cls);
     e.client = client;
     return e;
   }
 
-  private RawRequestOptions getOptions() {
+  private RawRequestOptions getRequestOptions() {
     if (context == null) {
       return null;
     }
@@ -70,7 +80,7 @@ public abstract class ThinEvent {
   protected StripeObject pull() throws StripeException {
     StripeResponse response =
         client.rawRequest(
-            RequestMethod.GET, String.format("/v2/core/events/%s", id), null, getOptions());
+            RequestMethod.GET, String.format("/v2/core/events/%s", id), null, getRequestOptions());
 
     return client.deserialize(response.body(), ApiMode.V2);
   }
@@ -78,14 +88,14 @@ public abstract class ThinEvent {
   /** Retrieves the object associated with the event. */
   protected StripeObject fetchRelatedObject(RelatedObject relatedObject) throws StripeException {
     if (relatedObject == null) {
-      // should ever hit this, because only events with related objects will get this method. But
-      // you never know!
+      // used by UnknownThinEvent, so be a little defensive
       return null;
     }
 
     String relativeUrl = relatedObject.getUrl();
 
-    StripeResponse response = client.rawRequest(RequestMethod.GET, relativeUrl, null, getOptions());
+    StripeResponse response =
+        client.rawRequest(RequestMethod.GET, relativeUrl, null, getRequestOptions());
 
     return client.deserialize(response.body(), ApiMode.getMode(relativeUrl));
   }

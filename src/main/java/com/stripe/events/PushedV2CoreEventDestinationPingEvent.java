@@ -19,4 +19,9 @@ public final class PushedV2CoreEventDestinationPingEvent extends ThinEvent {
   public EventDestination fetchRelatedObject() throws StripeException {
     return (EventDestination) super.fetchRelatedObject(this.relatedObject);
   }
+  /** Retrieve the corresponding full event from the Stripe API. */
+  @Override
+  public V2CoreEventDestinationPingEvent pull() throws StripeException {
+    return (V2CoreEventDestinationPingEvent) super.pull();
+  }
 }
