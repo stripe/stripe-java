@@ -185,7 +185,7 @@ public class BaseStripeTest {
    * Verifies that a request was made with the provided parameters.
    *
    * @param method HTTP method (GET, POST or DELETE)
-   * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
+   * @param path request path (e.g. "/v1/charges"). Can also be an absolute URL.
    * @param params map containing the parameters. If null, the parameters are not checked.
    * @param options request options. If null, the options are not checked.
    */
@@ -319,7 +319,7 @@ public class BaseStripeTest {
    * stripe-mock yet.
    *
    * @param method HTTP method (GET, POST or DELETE)
-   * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
+   * @param path request path (e.g. "/v1/charges"). Can also be an absolute URL.
    * @param params map containing the parameters. If null, the parameters are not checked.
    * @param options request options. If null, the options are not checked.
    * @param typeToken Class of the API resource that will be returned for the stubbed request.
@@ -355,7 +355,7 @@ public class BaseStripeTest {
    * stripe-mock yet.
    *
    * @param method HTTP method (GET, POST or DELETE)
-   * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
+   * @param path request path (e.g. "/v1/charges"). Can also be an absolute URL.
    * @param params map containing the parameters. If null, the parameters are not checked.
    * @param options request options. If null, the options are not checked.
    * @param typeToken Class of the API resource that will be returned for the stubbed request.

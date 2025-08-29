@@ -17,7 +17,6 @@ import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.terminal.Reader;
-import com.stripe.model.v2.Event;
 import com.stripe.model.v2.ThinEvent;
 import com.stripe.model.v2.UnknownEventDelivery;
 import com.stripe.net.*;
@@ -26,11 +25,13 @@ import java.lang.reflect.Type;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 
@@ -174,13 +175,12 @@ public class StripeClientTest extends BaseStripeTest {
           + "  \"object\": \"event\",\n"
           + "  \"type\": \"v1.billing.meter.error_report_triggered\",\n"
           + "  \"livemode\": false,\n"
+          + "  \"context\": \"org_123\",\n"
           + "  \"created\": \"2022-02-15T00:27:45.330Z\",\n"
-          + "  \"context\": \"context 123\",\n"
           + "  \"related_object\": {\n"
-          + "    \"id\": \"fa_123\",\n"
-          + "    \"type\": \"financial_account\",\n"
-          + "    \"url\": \"/v2/financial_accounts/fa_123\",\n"
-          + "    \"stripe_context\": \"acct_123\"\n"
+          + "    \"id\": \"meter_123\",\n"
+          + "    \"type\": \"billing.meter\",\n"
+          + "    \"url\": \"/v1/billing/meter/meter_123\""
           + "  }\n"
           + "}";
 
@@ -244,16 +244,16 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals("evt_234", eventDelivery.getId());
     assertEquals("v1.billing.meter.error_report_triggered", eventDelivery.getType());
     assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventDelivery.created);
-    assertEquals("context 123", eventDelivery.context);
+    assertEquals("org_123", eventDelivery.context);
     assertInstanceOf(PushedV1BillingMeterErrorReportTriggeredEvent.class, eventDelivery);
 
     PushedV1BillingMeterErrorReportTriggeredEvent e =
         (PushedV1BillingMeterErrorReportTriggeredEvent) eventDelivery;
 
     assertNotNull(e.getRelatedObject());
-    assertEquals("fa_123", e.getRelatedObject().getId());
-    assertEquals("financial_account", e.getRelatedObject().getType());
-    assertEquals("/v2/financial_accounts/fa_123", e.getRelatedObject().getUrl());
+    assertEquals("meter_123", e.getRelatedObject().getId());
+    assertEquals("billing.meter", e.getRelatedObject().getType());
+    assertEquals("/v1/billing/meter/meter_123", e.getRelatedObject().getUrl());
   }
 
   @Test
@@ -329,38 +329,51 @@ public class StripeClientTest extends BaseStripeTest {
   @Test
   public void parseEventDeliveryAndPull()
       throws StripeException, InvalidKeyException, NoSuchAlgorithmException {
-        stubRequest(
-          BaseAddress.API,
-            RequestMethod.GET,
-            "/v2/core/events/evt_234",
-            null,
-            RequestOptions.builder().build(),
-            Event.class,
-            "{\"id\": \"evt_234\", \"type\": \"v1.billing.meter.error_report_triggered\", \"data\": {}}");
     StripeClient client = new StripeClient(networkSpy);
 
-    String secret = "whsec_test_secret";
-    Map<String, Object> signatureOptions = new HashMap<>();
-    signatureOptions.put("payload", v2EventDeliveryWithRelatedObject);
-    signatureOptions.put("secret", secret);
-    String signature = WebhookTest.generateSigHeader(signatureOptions);
+    // the existing stubRequest doesn't support rawRequest, so we'll stub manually here
+    Mockito.doAnswer(
+            invocation -> {
+              RawApiRequest request = invocation.getArgument(0);
+              String path = request.getPath();
 
-    ThinEvent eventDelivery =
-        client.parseThinEvent(v2EventDeliveryWithRelatedObject, signature, secret);
+              if (request.getMethod() == RequestMethod.GET) {
+                if (path.equals("/v2/core/events/evt_234")) {
+                  return new StripeResponse(
+                      200,
+                      HttpHeaders.of(Collections.emptyMap()),
+                      "{\"id\": \"evt_234\", \"object\": \"v2.core.event\",\"type\": \"v1.billing.meter.error_report_triggered\",\"data\": {}}");
+                } else if (path.equals("/v1/billing/meter/meter_123")) {
+                  return new StripeResponse(
+                      200,
+                      HttpHeaders.of(Collections.emptyMap()),
+                      "{\"id\": \"meter_123\", \"object\": \"billing.meter\", \"display_name\": \"Test Meter\"}");
+                }
+              }
+              throw new Exception(
+                  String.format(
+                      "Unexpected rawRequest made: %s %s", request.getMethod(), request.getPath()));
+            })
+        .when(networkSpy)
+        .rawRequest(Mockito.any());
 
-    assertInstanceOf(PushedV1BillingMeterErrorReportTriggeredEvent.class, eventDelivery);
+    ThinEvent eventNotification = ThinEvent.fromJson(v2EventDeliveryWithRelatedObject, client);
+
+    assertInstanceOf(PushedV1BillingMeterErrorReportTriggeredEvent.class, eventNotification);
 
     PushedV1BillingMeterErrorReportTriggeredEvent ed =
-        (PushedV1BillingMeterErrorReportTriggeredEvent) eventDelivery;
-
+        (PushedV1BillingMeterErrorReportTriggeredEvent) eventNotification;
 
     assertInstanceOf(V1BillingMeterErrorReportTriggeredEvent.class, ed.pull());
     assertInstanceOf(Meter.class, ed.fetchRelatedObject());
 
-    verifyStripeRequest(
-        (stripeRequest) -> {
-          assert (stripeRequest.headers().firstValue("Stripe-Context").isPresent());
-          assertEquals("ctx", stripeRequest.headers().firstValue("Stripe-Context").get());
-        });
+    // we should have made 2 API requests
+    ArgumentCaptor<RawApiRequest> requestCaptor = ArgumentCaptor.forClass(RawApiRequest.class);
+    Mockito.verify(networkSpy, Mockito.times(2)).rawRequest(requestCaptor.capture());
+
+    // and we should have included 'Stripe-Context' in both
+    for (RawApiRequest v : requestCaptor.getAllValues()) {
+      assertEquals("org_123", v.getOptions().getStripeContext());
+    }
   }
 }

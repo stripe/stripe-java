@@ -73,7 +73,7 @@ public abstract class ThinEvent {
     if (context == null) {
       return null;
     }
-    return new RawRequestOptions.RawRequestOptionsBuilder().setStripeAccount(context).build();
+    return new RawRequestOptions.RawRequestOptionsBuilder().setStripeContext(context).build();
   }
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */
