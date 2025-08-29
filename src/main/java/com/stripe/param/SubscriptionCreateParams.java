@@ -1161,8 +1161,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
-     * The period associated with this invoice item. Defaults to the current period of the
-     * subscription.
+     * The period associated with this invoice item. If not set, {@code period.start.type} defaults
+     * to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+     * min_item_period_end}.
      */
     @SerializedName("period")
     Period period;
@@ -1323,8 +1324,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The period associated with this invoice item. Defaults to the current period of the
-       * subscription.
+       * The period associated with this invoice item. If not set, {@code period.start.type}
+       * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+       * min_item_period_end}.
        */
       public Builder setPeriod(SubscriptionCreateParams.AddInvoiceItem.Period period) {
         this.period = period;

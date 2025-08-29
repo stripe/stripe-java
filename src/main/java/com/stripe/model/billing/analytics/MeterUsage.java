@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.model.billing;
+package com.stripe.model.billing.analytics;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
@@ -8,7 +8,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
-import com.stripe.param.billing.MeterUsageRetrieveParams;
+import com.stripe.param.billing.analytics.MeterUsageRetrieveParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -41,7 +41,7 @@ public class MeterUsage extends ApiResource {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to {@code billing.meter_usage}.
+   * <p>Equal to {@code billing.analytics.meter_usage}.
    */
   @SerializedName("object")
   String object;

@@ -33,6 +33,36 @@ This release changes the pinned API version to `2025-08-27.preview`.
   * Add support for new values `ao_nif`, `az_tin`, `bd_etin`, `cr_cpj`, `cr_nite`, `do_rcn`, `gt_nit`, `kz_bin`, `mz_nuit`, `pe_ruc`, `pk_ntn`, `sa_crn`, and `sa_tin` on enums `v2.core.AccountCreateParams.identity.business_details.id_numbers[].type` and `v2.core.AccountUpdateParams.identity.business_details.id_numbers[].type`
   * Add support for new values `ao_nif`, `az_tin`, `bd_brc`, `bd_etin`, `bd_nid`, `cr_cpf`, `cr_dimex`, `cr_nite`, `do_rcn`, `gt_nit`, `kz_iin`, `mz_nuit`, `pe_dni`, `pk_cnic`, `pk_snic`, and `sa_tin` on enums `v2.core.AccountCreateParams.identity.individual.id_numbers[].type`, `v2.core.AccountUpdateParams.identity.individual.id_numbers[].type`, `v2.core.PersonCreateParams.id_numbers[].type`, and `v2.core.PersonUpdateParams.id_numbers[].type`
 
+## 29.5.0 - 2025-08-27
+* [#2034](https://github.com/stripe/stripe-java/pull/2034) Add section on private preview SDKs in readme
+* [#2030](https://github.com/stripe/stripe-java/pull/2030) Update generated code. This release changes the pinned API version to `2025-08-27.basil`.
+  * Add support for `balanceReport`, `payoutDetails`, and `payoutReconciliationReport` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `name` on `billingportal.ConfigurationCreateParams`, `billingportal.ConfigurationUpdateParams`, and `billingportal.Configuration`
+  * Add support for `installments` on `Charge.payment_method_details.alma`
+  * Add support for `transactionId` on `Charge.payment_method_details.alma`, `Charge.payment_method_details.amazon_pay`, `Charge.payment_method_details.billie`, `Charge.payment_method_details.kakao_pay`, `Charge.payment_method_details.kr_card`, `Charge.payment_method_details.naver_pay`, `Charge.payment_method_details.payco`, `Charge.payment_method_details.revolut_pay`, `Charge.payment_method_details.samsung_pay`, and `Charge.payment_method_details.satispay`
+  * Add support for `location` and `reader` on `Charge.payment_method_details.paynow`
+  * Add support for `amountIncludesIof` on `PaymentIntent.payment_method_options.pix`, `PaymentIntentConfirmParams.payment_method_options.pix`, `PaymentIntentCreateParams.payment_method_options.pix`, `PaymentIntentUpdateParams.payment_method_options.pix`, `checkout.Session.payment_method_options.pix`, and `checkout.SessionCreateParams.payment_method_options.pix`
+  * Add support for new value `terminal_android_apk` on enum `FileListParams.purpose`
+  * Add support for new value `terminal_android_apk` on enum `FileCreateParams.purpose`
+  * Add support for `metadata` and `period` on `InvoiceCreatePreviewParams.schedule_details.phases[].add_invoice_items[]`, `SubscriptionCreateParams.add_invoice_items[]`, `SubscriptionSchedule.phases[].add_invoice_items[]`, `SubscriptionScheduleCreateParams.phases[].add_invoice_items[]`, `SubscriptionScheduleUpdateParams.phases[].add_invoice_items[]`, and `SubscriptionUpdateParams.add_invoice_items[]`
+  * Add support for `expMonth` and `expYear` on `issuing.CardCreateParams`
+  * Add support for `excludedPaymentMethodTypes` on `PaymentIntentCreateParams` and `PaymentIntent`
+  * Add support for `payoutMethod` on `PayoutCreateParams` and `Payout`
+  * Add support for `mxn` on `terminal.Configuration.tipping`, `terminal.ConfigurationCreateParams.tipping`, and `terminal.ConfigurationUpdateParams.tipping`
+  * Add support for `card` on `terminal.ReaderPresentPaymentMethodParams`
+  * Add support for new value `card` on enum `terminal.ReaderPresentPaymentMethodParams.type`
+  * Add support for new value `2025-08-27.basil` on enum `WebhookEndpointCreateParams.apiVersion`
+* [#2032](https://github.com/stripe/stripe-java/pull/2032) Introduce V1 namespaces in StripeClient
+  - All the top level non-namespaced services under StripeClient services(eg. customers, products) are copied under the new V1 namespace. These top level non-namespaced services will be marked as deprecated in the next major release and will be removed in a future release. Eg.
+  ```diff
+  StripeClient client = new StripeClient("sk_test...")
+
+  # Accessing V1 Stripe services on a StripeClient should be through the V1 namespace
+  - client.customers().list()
+  + client.v1().customers().list()
+  ```
+  Refer to the [migration guide](https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient) for help upgrading.
+
 ## 29.5.0-beta.2 - 2025-08-08
 * [#2031](https://github.com/stripe/stripe-java/pull/2031) Bring back invoice payments APIs that were missing in the public preview SDKs
     * Add support for new resource `InvoicePayment`

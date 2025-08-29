@@ -370,8 +370,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
 
         /**
          * The days of the week when available funds are paid out, specified as an array, e.g.,
-         * [{@code monday}, {@code tuesday}]. (required and applicable only if {@code interval} is
-         * {@code weekly}.)
+         * [{@code monday}, {@code tuesday}]. Required and applicable only if {@code interval} is
+         * {@code weekly}.
          */
         @SerializedName("weekly_payout_days")
         List<BalanceSettingsUpdateParams.Payments.Payouts.Schedule.WeeklyPayoutDay>
@@ -564,12 +564,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class SettlementTiming {
       /**
-       * The number of days charge funds are held before becoming available. May also be set to
-       * {@code minimum}, representing the lowest available value for the account country. Default
-       * is {@code minimum}. The {@code delay_days} parameter remains at the last configured value
-       * if {@code payouts.schedule.interval} is {@code manual}. <a
-       * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
-       * payout delay days</a>.
+       * The number of days charge funds are held before becoming available. The default value is
+       * {@code minimum}, representing the lowest available value for the account. The maximum value
+       * is 31. The {@code delay_days} parameter remains at the last configured value if {@code
+       * payouts.schedule.interval} is {@code manual}. <a
+       * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling delay
+       * days</a>.
        */
       @SerializedName("delay_days_override")
       Long delayDaysOverride;
@@ -604,12 +604,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The number of days charge funds are held before becoming available. May also be set to
-         * {@code minimum}, representing the lowest available value for the account country. Default
-         * is {@code minimum}. The {@code delay_days} parameter remains at the last configured value
-         * if {@code payouts.schedule.interval} is {@code manual}. <a
+         * The number of days charge funds are held before becoming available. The default value is
+         * {@code minimum}, representing the lowest available value for the account. The maximum
+         * value is 31. The {@code delay_days} parameter remains at the last configured value if
+         * {@code payouts.schedule.interval} is {@code manual}. <a
          * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
-         * payout delay days</a>.
+         * delay days</a>.
          */
         public Builder setDelayDaysOverride(Long delayDaysOverride) {
           this.delayDaysOverride = delayDaysOverride;

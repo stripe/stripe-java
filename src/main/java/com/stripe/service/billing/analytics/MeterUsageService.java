@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec
-package com.stripe.service.billing;
+package com.stripe.service.billing.analytics;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.billing.MeterUsage;
+import com.stripe.model.billing.analytics.MeterUsage;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -10,7 +10,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.billing.MeterUsageRetrieveParams;
+import com.stripe.param.billing.analytics.MeterUsageRetrieveParams;
 
 public final class MeterUsageService extends ApiService {
   public MeterUsageService(StripeResponseGetter responseGetter) {

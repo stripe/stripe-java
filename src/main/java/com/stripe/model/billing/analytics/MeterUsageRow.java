@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.model.billing;
+package com.stripe.model.billing.analytics;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
@@ -45,7 +45,7 @@ public class MeterUsageRow extends StripeObject implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to {@code billing.meter_usage_row}.
+   * <p>Equal to {@code billing.analytics.meter_usage_row}.
    */
   @SerializedName("object")
   String object;
