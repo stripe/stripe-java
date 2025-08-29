@@ -16,12 +16,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 
 /**
- * ThinEvent represents the json that's delivered from an Event Destination. It's a basic class with
- * no additional methods or properties. Use it to check basic information about a delivered event.
- * If you want more details, use the `.pull()` to fetch the full event object.
+ * `EventNotification` represents the common properties for json that's delivered from an Event
+ * Destination. A concrete child of `EventNotification` will be returned from
+ * `StripeClient.parseEventNotificaion()`. You will likely want to cast that object to a more
+ * specific child of `EventNotification`, like `PushedV1BillingMeterErrorReportTriggeredEvent`
  */
 @Getter
-public abstract class ThinEvent {
+public abstract class EventNotification {
 
   /** Unique identifier for the event. */
   @SerializedName("id")
@@ -51,20 +52,20 @@ public abstract class ThinEvent {
   protected transient StripeClient client;
 
   /**
-   * Helper for constructing a ThinEvent. Not needed for production code (`StripeClient` calls it
-   * directly) but useful in testing.
+   * Helper for constructing an Event Notification. Not recommended for production code (because it
+   * lacks signature validation) but useful in testing. StripeClient uses it under the hood.
    */
-  public static ThinEvent fromJson(String payload, StripeClient client) {
+  public static EventNotification fromJson(String payload, StripeClient client) {
     // don't love the double json parse here, but I don't think we can avoid it?
     JsonObject jsonObject = ApiResource.GSON.fromJson(payload, JsonObject.class).getAsJsonObject();
 
-    Class<? extends ThinEvent> cls =
-        EventDeliveryClassLookup.eventClassLookup.get(jsonObject.get("type").getAsString());
+    Class<? extends EventNotification> cls =
+        EventNotificationClassLookup.eventClassLookup.get(jsonObject.get("type").getAsString());
     if (cls == null) {
       cls = UnknownEventDelivery.class;
     }
 
-    ThinEvent e = ApiResource.GSON.fromJson(payload, cls);
+    EventNotification e = ApiResource.GSON.fromJson(payload, cls);
     e.client = client;
     return e;
   }
@@ -88,7 +89,7 @@ public abstract class ThinEvent {
   /** Retrieves the object associated with the event. */
   protected StripeObject fetchRelatedObject(RelatedObject relatedObject) throws StripeException {
     if (relatedObject == null) {
-      // used by UnknownThinEvent, so be a little defensive
+      // used by UnknownEventNotification, so be a little defensive
       return null;
     }
 

@@ -11,7 +11,7 @@ import lombok.Getter;
  * property.
  */
 @Getter
-public class UnknownEventDelivery extends ThinEvent {
+public class UnknownEventDelivery extends EventNotification {
   /** [Optional] Object containing the reference to API resource relevant to the event. */
   @SerializedName("related_object")
   public RelatedObject relatedObject;

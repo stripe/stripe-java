@@ -10,18 +10,19 @@ import java.util.Map;
  *
  * <p>For internal use by Stripe SDK only.
  */
-public final class EventDeliveryClassLookup {
-  public static final Map<String, Class<? extends ThinEvent>> eventClassLookup = new HashMap<>();
+public final class EventNotificationClassLookup {
+  public static final Map<String, Class<? extends EventNotification>> eventClassLookup =
+      new HashMap<>();
 
   static {
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
-        com.stripe.events.PushedV1BillingMeterErrorReportTriggeredEvent.class);
+        com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification.class);
     eventClassLookup.put(
         "v1.billing.meter.no_meter_found",
-        com.stripe.events.PushedV1BillingMeterNoMeterFoundEvent.class);
+        com.stripe.events.V1BillingMeterNoMeterFoundEventNotification.class);
     eventClassLookup.put(
         "v2.core.event_destination.ping",
-        com.stripe.events.PushedV2CoreEventDestinationPingEvent.class);
+        com.stripe.events.V2CoreEventDestinationPingEventNotification.class);
   }
 }

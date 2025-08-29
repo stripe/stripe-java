@@ -5,7 +5,7 @@ import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.v2.Event;
-import com.stripe.model.v2.ThinEvent;
+import com.stripe.model.v2.EventNotification;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -65,7 +65,8 @@ public class ThinEventWebhookHandler {
         String sigHeader = exchange.getRequestHeaders().getFirst("Stripe-Signature");
 
         try {
-          ThinEvent thinEvent = client.parseThinEvent(webhookBody, sigHeader, WEBHOOK_SECRET);
+          EventNotification thinEvent =
+              client.parseEventNotification(webhookBody, sigHeader, WEBHOOK_SECRET);
 
           // Fetch the event data to understand the failure
           Event baseEvent = client.v2().core().events().retrieve(thinEvent.getId());
