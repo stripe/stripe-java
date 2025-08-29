@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.billing;
+package com.stripe.param.billing.analytics;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;

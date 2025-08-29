@@ -15392,16 +15392,15 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * The day of the week when available funds are paid out, specified as {@code monday},
-         * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
-         * weekly}.)
+         * {@code tuesday}, etc. Required and applicable only if {@code interval} is {@code weekly}.
          */
         @SerializedName("weekly_anchor")
         WeeklyAnchor weeklyAnchor;
 
         /**
          * The days of the week when available funds are paid out, specified as an array, e.g.,
-         * [{@code monday}, {@code tuesday}]. (required and applicable only if {@code interval} is
-         * {@code weekly} and {@code weekly_anchor} is not set.)
+         * [{@code monday}, {@code tuesday}]. Required and applicable only if {@code interval} is
+         * {@code weekly}.
          */
         @SerializedName("weekly_payout_days")
         List<AccountCreateParams.Settings.Payouts.Schedule.WeeklyPayoutDay> weeklyPayoutDays;
@@ -15561,8 +15560,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * The day of the week when available funds are paid out, specified as {@code monday},
-           * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
-           * weekly}.)
+           * {@code tuesday}, etc. Required and applicable only if {@code interval} is {@code
+           * weekly}.
            */
           public Builder setWeeklyAnchor(
               AccountCreateParams.Settings.Payouts.Schedule.WeeklyAnchor weeklyAnchor) {

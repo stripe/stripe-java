@@ -2236,8 +2236,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Map<String, String> metadata;
 
       /**
-       * The period associated with this invoice item. Defaults to the period of the underlying
-       * subscription that surrounds the start of the phase.
+       * The period associated with this invoice item. If not set, {@code period.start.type}
+       * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+       * min_item_period_end}.
        */
       @SerializedName("period")
       Period period;
@@ -2404,8 +2405,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The period associated with this invoice item. Defaults to the period of the underlying
-         * subscription that surrounds the start of the phase.
+         * The period associated with this invoice item. If not set, {@code period.start.type}
+         * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+         * min_item_period_end}.
          */
         public Builder setPeriod(
             SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Period period) {
