@@ -17,6 +17,7 @@ import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.terminal.Reader;
+import com.stripe.model.v2.Event;
 import com.stripe.model.v2.EventNotification;
 import com.stripe.model.v2.UnknownEventDelivery;
 import com.stripe.net.*;
@@ -260,17 +261,30 @@ public class StripeClientTest extends BaseStripeTest {
   public void parsesUnknownEventNotification()
       throws InvalidKeyException, NoSuchAlgorithmException, StripeException {
 
-    StripeClient client = new StripeClient("sk_123");
+    StripeClient client = new StripeClient(networkSpy);
 
-    String secret = "whsec_test_secret";
+    // the existing stubRequest doesn't support rawRequest, so we'll stub manually here
+    Mockito.doAnswer(
+            invocation -> {
+              RawApiRequest request = invocation.getArgument(0);
+              String path = request.getPath();
 
-    Map<String, Object> options = new HashMap<>();
-    options.put("payload", v2UnknownEventDelivery);
-    options.put("secret", secret);
+              if (request.getMethod() == RequestMethod.GET
+                  && path.equals("/v2/core/events/evt_234")) {
+                return new StripeResponse(
+                    200,
+                    HttpHeaders.of(Collections.emptyMap()),
+                    "{\"id\": \"evt_234\", \"object\": \"v2.core.event\",\"type\": \"v1.imaginary\",\"data\": {}}");
+              }
 
-    String signature = WebhookTest.generateSigHeader(options);
-    EventNotification eventDelivery =
-        client.parseEventNotification(v2UnknownEventDelivery, signature, secret);
+              throw new Exception(
+                  String.format(
+                      "Unexpected rawRequest made: %s %s", request.getMethod(), request.getPath()));
+            })
+        .when(networkSpy)
+        .rawRequest(Mockito.any());
+
+    EventNotification eventDelivery = EventNotification.fromJson(v2UnknownEventDelivery, client);
 
     assertNotNull(eventDelivery);
     assertEquals("evt_234", eventDelivery.getId());
@@ -279,7 +293,8 @@ public class StripeClientTest extends BaseStripeTest {
     UnknownEventDelivery e = (UnknownEventDelivery) eventDelivery;
 
     assertNull(e.getRelatedObject());
-    assertNull(e.fetchRelatedObject()); // doesn't throw
+    assertNull(e.fetchRelatedObject()); // doesn't work, but doesn't throw
+    assertInstanceOf(Event.class, e.fetchEvent());
   }
 
   @Test
@@ -367,7 +382,7 @@ public class StripeClientTest extends BaseStripeTest {
     V1BillingMeterErrorReportTriggeredEventNotification en =
         (V1BillingMeterErrorReportTriggeredEventNotification) eventNotification;
 
-    assertInstanceOf(V1BillingMeterErrorReportTriggeredEvent.class, en.pull());
+    assertInstanceOf(V1BillingMeterErrorReportTriggeredEvent.class, en.fetchEvent());
     assertInstanceOf(Meter.class, en.fetchRelatedObject());
 
     // we should have made 2 API requests

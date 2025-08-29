@@ -21,7 +21,7 @@ public final class V1BillingMeterErrorReportTriggeredEventNotification extends E
   }
   /** Retrieve the corresponding full event from the Stripe API. */
   @Override
-  public V1BillingMeterErrorReportTriggeredEvent pull() throws StripeException {
-    return (V1BillingMeterErrorReportTriggeredEvent) super.pull();
+  public V1BillingMeterErrorReportTriggeredEvent fetchEvent() throws StripeException {
+    return (V1BillingMeterErrorReportTriggeredEvent) super.fetchEvent();
   }
 }

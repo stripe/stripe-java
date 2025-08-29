@@ -23,4 +23,13 @@ public class UnknownEventDelivery extends EventNotification {
   public StripeObject fetchRelatedObject() throws StripeException {
     return super.fetchRelatedObject(this.relatedObject);
   }
+
+  /**
+   * Will make the API call to fetch a related object, if possible. The returned object will have
+   * the correct type at runtime, but type information about it isn't known at compile time.
+   */
+  @Override
+  public Event fetchEvent() throws StripeException {
+    return super.fetchEvent();
+  }
 }

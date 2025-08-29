@@ -21,7 +21,7 @@ public final class V2CoreEventDestinationPingEventNotification extends EventNoti
   }
   /** Retrieve the corresponding full event from the Stripe API. */
   @Override
-  public V2CoreEventDestinationPingEvent pull() throws StripeException {
-    return (V2CoreEventDestinationPingEvent) super.pull();
+  public V2CoreEventDestinationPingEvent fetchEvent() throws StripeException {
+    return (V2CoreEventDestinationPingEvent) super.fetchEvent();
   }
 }

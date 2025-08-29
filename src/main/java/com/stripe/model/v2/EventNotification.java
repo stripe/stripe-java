@@ -78,12 +78,12 @@ public abstract class EventNotification {
   }
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */
-  protected StripeObject pull() throws StripeException {
+  protected Event fetchEvent() throws StripeException {
     StripeResponse response =
         client.rawRequest(
             RequestMethod.GET, String.format("/v2/core/events/%s", id), null, getRequestOptions());
 
-    return client.deserialize(response.body(), ApiMode.V2);
+    return (Event) client.deserialize(response.body(), ApiMode.V2);
   }
 
   /** Retrieves the object associated with the event. */
