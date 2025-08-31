@@ -15842,12 +15842,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("monday")
           MONDAY("monday"),
 
-          @SerializedName("saturday")
-          SATURDAY("saturday"),
-
-          @SerializedName("sunday")
-          SUNDAY("sunday"),
-
           @SerializedName("thursday")
           THURSDAY("thursday"),
 
