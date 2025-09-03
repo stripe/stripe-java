@@ -1279,6 +1279,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("paypay")
+    Paypay paypay;
+
     @SerializedName("payto")
     Payto payto;
 
@@ -3718,6 +3721,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String status;
       }
     }
+
+    /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {}
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API

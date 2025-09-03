@@ -357,6 +357,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("paypal")
     PAYPAL("paypal"),
 
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
     @SerializedName("payto")
     PAYTO("payto"),
 
