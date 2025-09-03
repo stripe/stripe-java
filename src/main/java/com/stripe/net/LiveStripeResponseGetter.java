@@ -118,7 +118,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   @Override
   @SuppressWarnings({"TypeParameterUnusedInFormals", "unchecked"})
-  public <T extends StripeObjectInterface> T request(ApiRequest apiRequest, Type typeToken)
+  public <T extends StripeObject> T request(ApiRequest apiRequest, Type typeToken)
       throws StripeException {
 
     RequestOptions mergedOptions = RequestOptions.merge(this.options, apiRequest.getOptions());
@@ -230,7 +230,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   @Override
   @SuppressWarnings({"TypeParameterUnusedInFormals", "deprecation"})
-  public <T extends StripeObjectInterface> T request(
+  public <T extends StripeObject> T request(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,

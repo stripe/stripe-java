@@ -1,7 +1,7 @@
 package com.stripe.net;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.StripeObjectInterface;
+import com.stripe.model.StripeObject;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.util.Map;
@@ -10,7 +10,7 @@ public interface StripeResponseGetter {
   /** @deprecated Use {@link #request(ApiRequest, Type)} instead. */
   @SuppressWarnings("TypeParameterUnusedInFormals")
   @Deprecated
-  <T extends StripeObjectInterface> T request(
+  <T extends StripeObject> T request(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,
@@ -21,7 +21,7 @@ public interface StripeResponseGetter {
       throws StripeException;
 
   @SuppressWarnings("TypeParameterUnusedInFormals")
-  default <T extends StripeObjectInterface> T request(ApiRequest request, Type typeToken)
+  default <T extends StripeObject> T request(ApiRequest request, Type typeToken)
       throws StripeException {
     return request(
         request.getBaseAddress(),
