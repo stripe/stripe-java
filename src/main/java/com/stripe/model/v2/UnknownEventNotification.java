@@ -7,11 +7,11 @@ import com.stripe.model.v2.Event.RelatedObject;
 import lombok.Getter;
 
 /**
- * Represents a valid EventDelivery that the SDK doesn't have a type for. May have a `relatedObject`
- * property.
+ * Represents a valid EventNotification that the SDK doesn't have a type for. May have a
+ * `relatedObject` property.
  */
 @Getter
-public class UnknownEventDelivery extends EventNotification {
+public class UnknownEventNotification extends EventNotification {
   /** [Optional] Object containing the reference to API resource relevant to the event. */
   @SerializedName("related_object")
   public RelatedObject relatedObject;

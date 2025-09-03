@@ -19,7 +19,7 @@ import com.stripe.model.billing.Meter;
 import com.stripe.model.terminal.Reader;
 import com.stripe.model.v2.Event;
 import com.stripe.model.v2.EventNotification;
-import com.stripe.model.v2.UnknownEventDelivery;
+import com.stripe.model.v2.UnknownEventNotification;
 import com.stripe.net.*;
 import com.stripe.net.ApiResource.RequestMethod;
 import java.lang.reflect.Type;
@@ -170,7 +170,7 @@ public class StripeClientTest extends BaseStripeTest {
         });
   }
 
-  static final String v2EventDeliveryWithRelatedObject =
+  static final String v2EventNotificationWithRelatedObject =
       "{\n"
           + "  \"id\": \"evt_234\",\n"
           + "  \"object\": \"event\",\n"
@@ -185,7 +185,7 @@ public class StripeClientTest extends BaseStripeTest {
           + "  }\n"
           + "}";
 
-  static final String v2EventDeliveryWithoutRelatedObject =
+  static final String v2EventNotificationWithoutRelatedObject =
       "{\n"
           + "  \"id\": \"evt_234\",\n"
           + "  \"object\": \"event\",\n"
@@ -194,7 +194,7 @@ public class StripeClientTest extends BaseStripeTest {
           + "  \"created\": \"2022-02-15T00:27:45.330Z\"\n"
           + "}";
 
-  static final String v2UnknownEventDelivery =
+  static final String v2UnknownEventNotification =
       "{\n"
           + "  \"id\": \"evt_234\",\n"
           + "  \"object\": \"event\",\n"
@@ -212,18 +212,18 @@ public class StripeClientTest extends BaseStripeTest {
     String secret = "whsec_test_secret";
 
     Map<String, Object> options = new HashMap<>();
-    options.put("payload", v2EventDeliveryWithoutRelatedObject);
+    options.put("payload", v2EventNotificationWithoutRelatedObject);
     options.put("secret", secret);
 
     String signature = WebhookTest.generateSigHeader(options);
-    EventNotification eventDelivery =
-        client.parseEventNotification(v2EventDeliveryWithoutRelatedObject, signature, secret);
-    assertNotNull(eventDelivery);
-    assertEquals("evt_234", eventDelivery.getId());
-    assertEquals("v1.billing.meter.no_meter_found", eventDelivery.getType());
-    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventDelivery.created);
-    assertNull(eventDelivery.context);
-    assertInstanceOf(V1BillingMeterNoMeterFoundEventNotification.class, eventDelivery);
+    EventNotification eventNotification =
+        client.parseEventNotification(v2EventNotificationWithoutRelatedObject, signature, secret);
+    assertNotNull(eventNotification);
+    assertEquals("evt_234", eventNotification.getId());
+    assertEquals("v1.billing.meter.no_meter_found", eventNotification.getType());
+    assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventNotification.created);
+    assertNull(eventNotification.context);
+    assertInstanceOf(V1BillingMeterNoMeterFoundEventNotification.class, eventNotification);
   }
 
   @Test
@@ -235,12 +235,12 @@ public class StripeClientTest extends BaseStripeTest {
     String secret = "whsec_test_secret";
 
     Map<String, Object> options = new HashMap<>();
-    options.put("payload", v2EventDeliveryWithRelatedObject);
+    options.put("payload", v2EventNotificationWithRelatedObject);
     options.put("secret", secret);
 
     String signature = WebhookTest.generateSigHeader(options);
     EventNotification eventNotification =
-        client.parseEventNotification(v2EventDeliveryWithRelatedObject, signature, secret);
+        client.parseEventNotification(v2EventNotificationWithRelatedObject, signature, secret);
     assertNotNull(eventNotification);
     assertEquals("evt_234", eventNotification.getId());
     assertEquals("v1.billing.meter.error_report_triggered", eventNotification.getType());
@@ -284,13 +284,14 @@ public class StripeClientTest extends BaseStripeTest {
         .when(networkSpy)
         .rawRequest(Mockito.any());
 
-    EventNotification eventDelivery = EventNotification.fromJson(v2UnknownEventDelivery, client);
+    EventNotification eventNotification =
+        EventNotification.fromJson(v2UnknownEventNotification, client);
 
-    assertNotNull(eventDelivery);
-    assertEquals("evt_234", eventDelivery.getId());
-    assertEquals("v1.imaginary_event", eventDelivery.getType());
-    assertInstanceOf(UnknownEventDelivery.class, eventDelivery);
-    UnknownEventDelivery e = (UnknownEventDelivery) eventDelivery;
+    assertNotNull(eventNotification);
+    assertEquals("evt_234", eventNotification.getId());
+    assertEquals("v1.imaginary_event", eventNotification.getType());
+    assertInstanceOf(UnknownEventNotification.class, eventNotification);
+    UnknownEventNotification e = (UnknownEventNotification) eventNotification;
 
     assertNull(e.getRelatedObject());
     assertNull(e.fetchRelatedObject()); // doesn't work, but doesn't throw
@@ -344,7 +345,7 @@ public class StripeClientTest extends BaseStripeTest {
   }
 
   @Test
-  public void parseEventDeliveryAndPull()
+  public void parseEventNotificationAndPull()
       throws StripeException, InvalidKeyException, NoSuchAlgorithmException {
     StripeClient client = new StripeClient(networkSpy);
 
@@ -375,7 +376,7 @@ public class StripeClientTest extends BaseStripeTest {
         .rawRequest(Mockito.any());
 
     EventNotification eventNotification =
-        EventNotification.fromJson(v2EventDeliveryWithRelatedObject, client);
+        EventNotification.fromJson(v2EventNotificationWithRelatedObject, client);
 
     assertInstanceOf(V1BillingMeterErrorReportTriggeredEventNotification.class, eventNotification);
 

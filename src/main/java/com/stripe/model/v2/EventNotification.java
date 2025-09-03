@@ -62,7 +62,7 @@ public abstract class EventNotification {
     Class<? extends EventNotification> cls =
         EventNotificationClassLookup.eventClassLookup.get(jsonObject.get("type").getAsString());
     if (cls == null) {
-      cls = UnknownEventDelivery.class;
+      cls = UnknownEventNotification.class;
     }
 
     EventNotification e = ApiResource.GSON.fromJson(payload, cls);
