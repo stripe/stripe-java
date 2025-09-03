@@ -23,6 +23,35 @@ import lombok.Getter;
  */
 @Getter
 public abstract class EventNotification {
+  /**
+   * For more details about Request, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  public static class Request {
+    /** ID of the API request that caused the event. */
+    @SerializedName("id")
+    String id;
+
+    /** The idempotency key transmitted during the request. */
+    @SerializedName("idempotency_key")
+    String idempotencyKey;
+  }
+
+  @Getter
+  public static class Reason {
+    /** Information on the API request that instigated the event. */
+    @SerializedName("request")
+    Request request;
+
+    /**
+     * Event reason type.
+     *
+     * <p>Equal to {@code request}.
+     */
+    @SerializedName("type")
+    String type;
+  }
 
   /** Unique identifier for the event. */
   @SerializedName("id")
@@ -46,7 +75,7 @@ public abstract class EventNotification {
 
   /** [Optional] Reason for the event. */
   @SerializedName("reason")
-  public com.stripe.model.v2.Event.Reason reason;
+  public Reason reason;
 
   @Getter(AccessLevel.NONE)
   protected transient StripeClient client;

@@ -182,7 +182,10 @@ public class StripeClientTest extends BaseStripeTest {
           + "    \"id\": \"meter_123\",\n"
           + "    \"type\": \"billing.meter\",\n"
           + "    \"url\": \"/v1/billing/meter/meter_123\""
-          + "  }\n"
+          + "  },\n"
+          + "  \"reason\": { \"type\": \"request\", \"request\": {\n"
+          + "    \"id\": \"abc123\", \"idempotency_key\": \"qwer\"}\n"
+          + "  }"
           + "}";
 
   static final String v2EventNotificationWithoutRelatedObject =
@@ -247,6 +250,8 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventNotification.created);
     assertEquals("org_123", eventNotification.context);
     assertInstanceOf(V1BillingMeterErrorReportTriggeredEventNotification.class, eventNotification);
+    assertEquals("request", eventNotification.getReason().getType());
+    assertEquals("abc123", eventNotification.getReason().getRequest().getId());
 
     V1BillingMeterErrorReportTriggeredEventNotification e =
         (V1BillingMeterErrorReportTriggeredEventNotification) eventNotification;
