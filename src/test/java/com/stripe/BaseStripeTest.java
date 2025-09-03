@@ -216,8 +216,8 @@ public class BaseStripeTest {
   }
 
   @SuppressWarnings("AssertionFailureIgnored")
-  public static <T extends StripeObject> void verifyRequest(
-      Consumer<ApiRequest> assertOnApiRequest) throws StripeException {
+  public static <T extends StripeObject> void verifyRequest(Consumer<ApiRequest> assertOnApiRequest)
+      throws StripeException {
 
     ArgumentCaptor<ApiRequest> requestCaptor = ArgumentCaptor.forClass(ApiRequest.class);
     List<AssertionError> exceptions = new ArrayList<AssertionError>();
@@ -380,8 +380,8 @@ public class BaseStripeTest {
   }
 
   /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
-  public static <T extends StripeObject> void stubOAuthRequest(
-      Class<T> clazz, String response) throws StripeException {
+  public static <T extends StripeObject> void stubOAuthRequest(Class<T> clazz, String response)
+      throws StripeException {
     Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy)
         .request(Mockito.any(ApiRequest.class), Mockito.<Type>any());
