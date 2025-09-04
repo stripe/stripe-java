@@ -1,7 +1,7 @@
 package com.stripe.net;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.StripeObjectInterface;
+import com.stripe.model.StripeObject;
 import java.io.InputStream;
 import java.lang.reflect.Type;
 import lombok.AccessLevel;
@@ -17,7 +17,7 @@ public abstract class ApiService {
   }
 
   @SuppressWarnings("TypeParameterUnusedInFormals")
-  protected <T extends StripeObjectInterface> T request(ApiRequest request, Type typeToken)
+  protected <T extends StripeObject> T request(ApiRequest request, Type typeToken)
       throws StripeException {
     return this.getResponseGetter().request(request.addUsage("stripe_client"), typeToken);
   }
