@@ -2228,6 +2228,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Object konbini;
 
       /**
+       * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("pix")
+      Object pix;
+
+      /**
        * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct Debit
        * payment method options to pass to the invoice’s PaymentIntent.
        */
@@ -2256,6 +2263,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           Object idBankTransfer,
           Object konbini,
+          Object pix,
           Object sepaDebit,
           Object upi,
           Object usBankAccount) {
@@ -2266,6 +2274,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.idBankTransfer = idBankTransfer;
         this.konbini = konbini;
+        this.pix = pix;
         this.sepaDebit = sepaDebit;
         this.upi = upi;
         this.usBankAccount = usBankAccount;
@@ -2290,6 +2299,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
         private Object konbini;
 
+        private Object pix;
+
         private Object sepaDebit;
 
         private Object upi;
@@ -2306,6 +2317,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
               this.extraParams,
               this.idBankTransfer,
               this.konbini,
+              this.pix,
               this.sepaDebit,
               this.upi,
               this.usBankAccount);
@@ -2451,6 +2463,24 @@ public class InvoiceCreateParams extends ApiRequestParams {
          */
         public Builder setKonbini(EmptyParam konbini) {
           this.konbini = konbini;
+          return this;
+        }
+
+        /**
+         * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setPix(InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix pix) {
+          this.pix = pix;
+          return this;
+        }
+
+        /**
+         * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setPix(EmptyParam pix) {
+          this.pix = pix;
           return this;
         }
 
@@ -3642,6 +3672,98 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class Pix {
+        /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+        @SerializedName("amount_includes_iof")
+        AmountIncludesIof amountIncludesIof;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Pix(AmountIncludesIof amountIncludesIof, Map<String, Object> extraParams) {
+          this.amountIncludesIof = amountIncludesIof;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AmountIncludesIof amountIncludesIof;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix(
+                this.amountIncludesIof, this.extraParams);
+          }
+
+          /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+          public Builder setAmountIncludesIof(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix.AmountIncludesIof
+                  amountIncludesIof) {
+            this.amountIncludesIof = amountIncludesIof;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Pix#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+          @SerializedName("always")
+          ALWAYS("always"),
+
+          @SerializedName("never")
+          NEVER("never");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountIncludesIof(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -4546,6 +4668,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
       @SerializedName("paypal")
       PAYPAL("paypal"),
+
+      @SerializedName("pix")
+      PIX("pix"),
 
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),
