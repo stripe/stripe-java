@@ -1732,6 +1732,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Konbini konbini;
 
       /**
+       * This sub-hash contains details about the Pix payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("pix")
+      Pix pix;
+
+      /**
        * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
        * to invoices created by the subscription.
        */
@@ -1945,6 +1952,55 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
+
+      /**
+       * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pix extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Determines if the amount includes the IOF tax.
+           *
+           * <p>One of {@code always}, or {@code never}.
+           */
+          @SerializedName("amount_includes_iof")
+          String amountIncludesIof;
+
+          /**
+           * Date when the mandate expires and no further payments will be charged, in {@code
+           * YYYY-MM-DD}.
+           */
+          @SerializedName("end_date")
+          String endDate;
+
+          /**
+           * Schedule at which the future payments will be charged.
+           *
+           * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or
+           * {@code yearly}.
+           */
+          @SerializedName("payment_schedule")
+          String paymentSchedule;
+        }
+      }
 
       /**
        * For more details about SepaDebit, please refer to the <a

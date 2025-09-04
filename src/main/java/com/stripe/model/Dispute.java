@@ -1201,6 +1201,10 @@ public class Dispute extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
+      /** Chargeback loss reason mapped by Stripe from Klarna's chargeback loss reason. */
+      @SerializedName("chargeback_loss_reason_code")
+      String chargebackLossReasonCode;
+
       /** The reason for the dispute as defined by Klarna. */
       @SerializedName("reason_code")
       String reasonCode;

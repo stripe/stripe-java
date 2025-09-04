@@ -90,9 +90,9 @@ public class Card extends ApiResource
   List<String> availablePayoutMethods;
 
   /**
-   * Card brand. Can be {@code American Express}, {@code Diners Club}, {@code Discover}, {@code
-   * Eftpos Australia}, {@code Girocard}, {@code JCB}, {@code MasterCard}, {@code UnionPay}, {@code
-   * Visa}, or {@code Unknown}.
+   * Card brand. Can be {@code American Express}, {@code Cartes Bancaires}, {@code Diners Club},
+   * {@code Discover}, {@code Eftpos Australia}, {@code Girocard}, {@code JCB}, {@code MasterCard},
+   * {@code UnionPay}, {@code Visa}, or {@code Unknown}.
    */
   @SerializedName("brand")
   String brand;

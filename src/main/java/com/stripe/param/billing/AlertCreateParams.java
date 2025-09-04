@@ -173,10 +173,7 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName("meter")
     String meter;
 
-    /**
-     * <strong>Required.</strong> Whether the alert should only fire only once, or once per billing
-     * cycle.
-     */
+    /** <strong>Required.</strong> Defines how the alert will behave. */
     @SerializedName("recurrence")
     Recurrence recurrence;
 
@@ -281,10 +278,7 @@ public class AlertCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> Whether the alert should only fire only once, or once per
-       * billing cycle.
-       */
+      /** <strong>Required.</strong> Defines how the alert will behave. */
       public Builder setRecurrence(AlertCreateParams.UsageThreshold.Recurrence recurrence) {
         this.recurrence = recurrence;
         return this;
