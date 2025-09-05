@@ -3,6 +3,7 @@ package com.stripe.service.v2.core;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.DeletedObject;
 import com.stripe.model.v2.Event;
 import com.stripe.model.v2.EventDestination;
 import com.stripe.model.v2.StripeCollection;
@@ -67,15 +68,15 @@ public final class EventDestinationService extends ApiService {
     return this.request(request, EventDestination.class);
   }
   /** Delete an event destination. */
-  public EventDestination delete(String id) throws StripeException {
+  public DeletedObject delete(String id) throws StripeException {
     return delete(id, (RequestOptions) null);
   }
   /** Delete an event destination. */
-  public EventDestination delete(String id, RequestOptions options) throws StripeException {
+  public DeletedObject delete(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/core/event_destinations/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
-    return this.request(request, EventDestination.class);
+    return this.request(request, DeletedObject.class);
   }
   /** Retrieves the details of an event destination. */
   public EventDestination retrieve(String id, EventDestinationRetrieveParams params)
