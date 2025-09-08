@@ -30,12 +30,12 @@ public class EventDestinationListParams extends ApiRequestParams {
 
   /** The page size. */
   @SerializedName("limit")
-  Long limit;
+  Integer limit;
 
   private EventDestinationListParams(
       Map<String, Object> extraParams,
       List<EventDestinationListParams.Include> include,
-      Long limit) {
+      Integer limit) {
     this.extraParams = extraParams;
     this.include = include;
     this.limit = limit;
@@ -50,7 +50,7 @@ public class EventDestinationListParams extends ApiRequestParams {
 
     private List<EventDestinationListParams.Include> include;
 
-    private Long limit;
+    private Integer limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public EventDestinationListParams build() {
@@ -110,7 +110,7 @@ public class EventDestinationListParams extends ApiRequestParams {
     }
 
     /** The page size. */
-    public Builder setLimit(Long limit) {
+    public Builder setLimit(Integer limit) {
       this.limit = limit;
       return this;
     }

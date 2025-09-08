@@ -11,13 +11,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Set up an event destination to receive events from Stripe across multiple destination types,
- * including <a href="https://docs.stripe.com/webhooks">webhook endpoints</a> and <a
- * href="https://docs.stripe.com/event-destinations/eventbridge">Amazon EventBridge</a>. Event
- * destinations support receiving <a href="https://docs.stripe.com/api/v2/events">thin events</a>
- * and <a href="https://docs.stripe.com/api/events">snapshot events</a>.
- */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -111,7 +104,10 @@ public class EventDestination extends StripeObject implements HasId {
   @SerializedName("webhook_endpoint")
   WebhookEndpoint webhookEndpoint;
 
-  /** Amazon EventBridge configuration. */
+  /**
+   * For more details about AmazonEventbridge, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -133,7 +129,10 @@ public class EventDestination extends StripeObject implements HasId {
     String awsEventSourceStatus;
   }
 
-  /** Additional information about event destination status. */
+  /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -142,7 +141,10 @@ public class EventDestination extends StripeObject implements HasId {
     @SerializedName("disabled")
     Disabled disabled;
 
-    /** Details about why the event destination has been disabled. */
+    /**
+     * For more details about Disabled, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -157,7 +159,10 @@ public class EventDestination extends StripeObject implements HasId {
     }
   }
 
-  /** Webhook endpoint configuration. */
+  /**
+   * For more details about WebhookEndpoint, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

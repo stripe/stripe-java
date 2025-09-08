@@ -22,13 +22,13 @@ public class EventListParams extends ApiRequestParams {
 
   /** The page size. */
   @SerializedName("limit")
-  Long limit;
+  Integer limit;
 
   /** <strong>Required.</strong> Primary object ID used to retrieve related events. */
   @SerializedName("object_id")
   String objectId;
 
-  private EventListParams(Map<String, Object> extraParams, Long limit, String objectId) {
+  private EventListParams(Map<String, Object> extraParams, Integer limit, String objectId) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.objectId = objectId;
@@ -41,7 +41,7 @@ public class EventListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Long limit;
+    private Integer limit;
 
     private String objectId;
 
@@ -77,7 +77,7 @@ public class EventListParams extends ApiRequestParams {
     }
 
     /** The page size. */
-    public Builder setLimit(Long limit) {
+    public Builder setLimit(Integer limit) {
       this.limit = limit;
       return this;
     }
