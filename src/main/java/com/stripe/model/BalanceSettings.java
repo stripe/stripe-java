@@ -167,6 +167,15 @@ public class BalanceSettings extends ApiResource {
     @EqualsAndHashCode(callSuper = false)
     public static class Payouts extends StripeObject {
       /**
+       * The minimum balance amount to retain per currency after automatic payouts. Only funds that
+       * exceed these amounts are paid out. Learn more about the <a
+       * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+       * for automatic payouts</a>.
+       */
+      @SerializedName("minimum_balance_by_currency")
+      Map<String, Long> minimumBalanceByCurrency;
+
+      /**
        * Details on when funds from charges are available, and when they are paid out to an external
        * account. See our <a
        * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and

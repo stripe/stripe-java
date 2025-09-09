@@ -242,6 +242,15 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * The minimum balance amount to retain per currency after automatic payouts. Only funds that
+       * exceed these amounts are paid out. Learn more about the <a
+       * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+       * for automatic payouts</a>.
+       */
+      @SerializedName("minimum_balance_by_currency")
+      Object minimumBalanceByCurrency;
+
+      /**
        * Details on when funds from charges are available, and when they are paid out to an external
        * account. For details, see our <a
        * href="https://stripe.com/connect/bank-transfers#payout-information">Setting Bank and Debit
@@ -258,8 +267,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       Object statementDescriptor;
 
       private Payouts(
-          Map<String, Object> extraParams, Schedule schedule, Object statementDescriptor) {
+          Map<String, Object> extraParams,
+          Object minimumBalanceByCurrency,
+          Schedule schedule,
+          Object statementDescriptor) {
         this.extraParams = extraParams;
+        this.minimumBalanceByCurrency = minimumBalanceByCurrency;
         this.schedule = schedule;
         this.statementDescriptor = statementDescriptor;
       }
@@ -271,6 +284,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Object minimumBalanceByCurrency;
+
         private Schedule schedule;
 
         private Object statementDescriptor;
@@ -278,7 +293,10 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public BalanceSettingsUpdateParams.Payments.Payouts build() {
           return new BalanceSettingsUpdateParams.Payments.Payouts(
-              this.extraParams, this.schedule, this.statementDescriptor);
+              this.extraParams,
+              this.minimumBalanceByCurrency,
+              this.schedule,
+              this.statementDescriptor);
         }
 
         /**
@@ -306,6 +324,83 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `minimumBalanceByCurrency` map. A map is initialized for the
+         * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link
+         * BalanceSettingsUpdateParams.Payments.Payouts#minimumBalanceByCurrency} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putMinimumBalanceByCurrency(String key, Long value) {
+          if (this.minimumBalanceByCurrency == null
+              || this.minimumBalanceByCurrency instanceof EmptyParam) {
+            this.minimumBalanceByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.minimumBalanceByCurrency).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `minimumBalanceByCurrency` map. A map is initialized for the
+         * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link
+         * BalanceSettingsUpdateParams.Payments.Payouts#minimumBalanceByCurrency} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putMinimumBalanceByCurrency(String key, EmptyParam value) {
+          if (this.minimumBalanceByCurrency == null
+              || this.minimumBalanceByCurrency instanceof EmptyParam) {
+            this.minimumBalanceByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.minimumBalanceByCurrency).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `minimumBalanceByCurrency` map. A map is initialized for
+         * the first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. Map values can only be one of the following types: `Long`, `EmptyParam`.
+         * See {@link BalanceSettingsUpdateParams.Payments.Payouts#minimumBalanceByCurrency} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAllMinimumBalanceByCurrency(Map<String, Object> map) {
+          if (!map.values().stream().allMatch(v -> v instanceof Long || v instanceof EmptyParam)) {
+            throw new IllegalArgumentException(
+                "All map values must one of the following types: Long, EmptyParam");
+          }
+          if (this.minimumBalanceByCurrency == null
+              || this.minimumBalanceByCurrency instanceof EmptyParam) {
+            this.minimumBalanceByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.minimumBalanceByCurrency).putAll(map);
+          return this;
+        }
+
+        /**
+         * The minimum balance amount to retain per currency after automatic payouts. Only funds
+         * that exceed these amounts are paid out. Learn more about the <a
+         * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+         * for automatic payouts</a>.
+         */
+        public Builder setMinimumBalanceByCurrency(EmptyParam minimumBalanceByCurrency) {
+          this.minimumBalanceByCurrency = minimumBalanceByCurrency;
+          return this;
+        }
+
+        /**
+         * The minimum balance amount to retain per currency after automatic payouts. Only funds
+         * that exceed these amounts are paid out. Learn more about the <a
+         * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+         * for automatic payouts</a>.
+         */
+        public Builder setMinimumBalanceByCurrency(Map<String, Object> minimumBalanceByCurrency) {
+          this.minimumBalanceByCurrency = minimumBalanceByCurrency;
           return this;
         }
 
