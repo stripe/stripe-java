@@ -33,7 +33,7 @@ public final class V1BillingMeterNoMeterFoundEvent extends Event {
     public static final class Reason {
       /** The total error count within this window. */
       @SerializedName("error_count")
-      Integer errorCount;
+      Long errorCount;
       /** The error details. */
       @SerializedName("error_types")
       List<V1BillingMeterNoMeterFoundEvent.EventData.Reason.ErrorType> errorTypes;
@@ -51,7 +51,7 @@ public final class V1BillingMeterNoMeterFoundEvent extends Event {
         String code;
         /** The number of errors of this type. */
         @SerializedName("error_count")
-        Integer errorCount;
+        Long errorCount;
         /** A list of sample errors of this type. */
         @SerializedName("sample_errors")
         List<V1BillingMeterNoMeterFoundEvent.EventData.Reason.ErrorType.SampleError> sampleErrors;

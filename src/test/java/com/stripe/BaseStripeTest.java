@@ -7,7 +7,7 @@ import static org.mockito.Mockito.reset;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
-import com.stripe.model.StripeObjectInterface;
+import com.stripe.model.StripeObject;
 import com.stripe.net.*;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -173,7 +173,7 @@ public class BaseStripeTest {
     verifyRequest(method, path, params, null);
   }
 
-  public static <T extends StripeObjectInterface> void verifyRequest(
+  public static <T extends StripeObject> void verifyRequest(
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
@@ -190,7 +190,7 @@ public class BaseStripeTest {
    * @param options request options. If null, the options are not checked.
    */
   @SuppressWarnings("AssertionFailureIgnored")
-  public static <T extends StripeObjectInterface> void verifyRequest(
+  public static <T extends StripeObject> void verifyRequest(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,
@@ -216,8 +216,8 @@ public class BaseStripeTest {
   }
 
   @SuppressWarnings("AssertionFailureIgnored")
-  public static <T extends StripeObjectInterface> void verifyRequest(
-      Consumer<ApiRequest> assertOnApiRequest) throws StripeException {
+  public static <T extends StripeObject> void verifyRequest(Consumer<ApiRequest> assertOnApiRequest)
+      throws StripeException {
 
     ArgumentCaptor<ApiRequest> requestCaptor = ArgumentCaptor.forClass(ApiRequest.class);
     List<AssertionError> exceptions = new ArrayList<AssertionError>();
@@ -249,7 +249,7 @@ public class BaseStripeTest {
   }
 
   @SuppressWarnings("AssertionFailureIgnored")
-  public static <T extends StripeObjectInterface> void verifyStripeRequest(
+  public static <T extends StripeObject> void verifyStripeRequest(
       Consumer<StripeRequest> assertOnStripeRequest) throws StripeException {
 
     ArgumentCaptor<StripeRequest> requestCaptor = ArgumentCaptor.forClass(StripeRequest.class);
@@ -292,7 +292,7 @@ public class BaseStripeTest {
    * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map, RequestOptions, Class,
    *     String)
    */
-  public static <T extends StripeObjectInterface> void stubRequest(
+  public static <T extends StripeObject> void stubRequest(
       ApiResource.RequestMethod method, String path, Type typeToken, String response)
       throws StripeException {
     stubRequest(BaseAddress.API, method, path, null, null, typeToken, response);
@@ -304,7 +304,7 @@ public class BaseStripeTest {
    * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map, RequestOptions, Class,
    *     String)
    */
-  public static <T extends StripeObjectInterface> void stubRequest(
+  public static <T extends StripeObject> void stubRequest(
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
@@ -325,7 +325,7 @@ public class BaseStripeTest {
    * @param typeToken Class of the API resource that will be returned for the stubbed request.
    * @param response JSON payload of the API resource that will be returned for the stubbed request.
    */
-  public static <T extends StripeObjectInterface> void stubRequest(
+  public static <T extends StripeObject> void stubRequest(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,
@@ -361,7 +361,7 @@ public class BaseStripeTest {
    * @param typeToken Class of the API resource that will be returned for the stubbed request.
    * @param response JSON payload of the API resource that will be returned for the stubbed request.
    */
-  public static <T extends StripeObjectInterface> void stubRequestReturnError(
+  public static <T extends StripeObject> void stubRequestReturnError(
       BaseAddress baseAddress,
       ApiResource.RequestMethod method,
       String path,
@@ -380,8 +380,8 @@ public class BaseStripeTest {
   }
 
   /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
-  public static <T extends StripeObjectInterface> void stubOAuthRequest(
-      Class<T> clazz, String response) throws StripeException {
+  public static <T extends StripeObject> void stubOAuthRequest(Class<T> clazz, String response)
+      throws StripeException {
     Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy)
         .request(Mockito.any(ApiRequest.class), Mockito.<Type>any());
