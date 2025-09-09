@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Use the PayoutMethods API to list and interact with PayoutMethod objects. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -70,10 +71,7 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("usage_status")
   UsageStatus usageStatus;
 
-  /**
-   * For more details about BankAccount, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The PayoutMethodBankAccount object details. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -123,10 +121,7 @@ public class PayoutMethod extends StripeObject implements HasId {
     List<String> supportedCurrencies;
   }
 
-  /**
-   * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** The PayoutMethodCard object details. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -154,8 +149,8 @@ public class PayoutMethod extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about UsageStatus, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * Indicates whether the payout method has met the necessary requirements for outbound money
+   * movement.
    */
   @Getter
   @Setter

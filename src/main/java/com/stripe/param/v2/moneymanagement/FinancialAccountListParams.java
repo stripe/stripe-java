@@ -22,7 +22,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
 
   /** The page limit. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * The status of the FinancialAccount to filter by. By default, closed FinancialAccounts are not
@@ -31,8 +31,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
-  private FinancialAccountListParams(
-      Map<String, Object> extraParams, Integer limit, Status status) {
+  private FinancialAccountListParams(Map<String, Object> extraParams, Long limit, Status status) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.status = status;
@@ -45,7 +44,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private Status status;
 
@@ -81,7 +80,7 @@ public class FinancialAccountListParams extends ApiRequestParams {
     }
 
     /** The page limit. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

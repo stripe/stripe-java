@@ -22,9 +22,9 @@ public class ReceivedDebitListParams extends ApiRequestParams {
 
   /** The page limit. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
-  private ReceivedDebitListParams(Map<String, Object> extraParams, Integer limit) {
+  private ReceivedDebitListParams(Map<String, Object> extraParams, Long limit) {
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -36,7 +36,7 @@ public class ReceivedDebitListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ReceivedDebitListParams build() {
@@ -70,7 +70,7 @@ public class ReceivedDebitListParams extends ApiRequestParams {
     }
 
     /** The page limit. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

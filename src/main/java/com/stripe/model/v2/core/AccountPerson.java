@@ -4,6 +4,7 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -11,21 +12,22 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Person retrieval response schema. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Person extends StripeObject implements HasId {
+public class AccountPerson extends StripeObject implements HasId {
   /** The account ID which the individual belongs to. */
   @SerializedName("account")
   String account;
 
   /** Additional addresses associated with the person. */
   @SerializedName("additional_addresses")
-  List<Person.AdditionalAddress> additionalAddresses;
+  List<AccountPerson.AdditionalAddress> additionalAddresses;
 
   /** Additional names (e.g. aliases) associated with the person. */
   @SerializedName("additional_names")
-  List<Person.AdditionalName> additionalNames;
+  List<AccountPerson.AdditionalName> additionalNames;
 
   /** Attestations of accepted terms of service agreements. */
   @SerializedName("additional_terms_of_service")
@@ -65,7 +67,7 @@ public class Person extends StripeObject implements HasId {
 
   /** The identification numbers (e.g., SSN) associated with the person. */
   @SerializedName("id_numbers")
-  List<Person.IdNumber> idNumbers;
+  List<AccountPerson.IdNumber> idNumbers;
 
   /**
    * The person's gender (International regulations require either &quot;male&quot; or
@@ -156,41 +158,6 @@ public class Person extends StripeObject implements HasId {
     /**
      * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
      * 3166-1 alpha-2</a>).
-     *
-     * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code am},
-     * {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw}, {@code
-     * ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf}, {@code bg},
-     * {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn}, {@code bo}, {@code
-     * bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw}, {@code by}, {@code bz},
-     * {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg}, {@code ch}, {@code ci}, {@code
-     * ck}, {@code cl}, {@code cm}, {@code cn}, {@code co}, {@code cr}, {@code cu}, {@code cv},
-     * {@code cw}, {@code cx}, {@code cy}, {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code
-     * dm}, {@code do}, {@code dz}, {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er},
-     * {@code es}, {@code et}, {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code
-     * fr}, {@code ga}, {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh},
-     * {@code gi}, {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code
-     * gs}, {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-     * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im}, {@code
-     * in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code jm},
-     * {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km}, {@code
-     * kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la}, {@code lb},
-     * {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt}, {@code lu}, {@code
-     * lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me}, {@code mf}, {@code mg},
-     * {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn}, {@code mo}, {@code mp}, {@code
-     * mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu}, {@code mv}, {@code mw}, {@code mx},
-     * {@code my}, {@code mz}, {@code na}, {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code
-     * ni}, {@code nl}, {@code no}, {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om},
-     * {@code pa}, {@code pe}, {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code
-     * pm}, {@code pn}, {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa},
-     * {@code qz}, {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code
-     * sb}, {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-     * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss}, {@code
-     * st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code tf},
-     * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn}, {@code
-     * to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua}, {@code ug},
-     * {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve}, {@code
-     * vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code ye},
-     * {@code yt}, {@code za}, {@code zm}, or {@code zw}.
      */
     @SerializedName("country")
     String country;
@@ -253,10 +220,7 @@ public class Person extends StripeObject implements HasId {
     String surname;
   }
 
-  /**
-   * For more details about AdditionalTermsOfService, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Attestations of accepted terms of service agreements. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -265,10 +229,7 @@ public class Person extends StripeObject implements HasId {
     @SerializedName("account")
     Account account;
 
-    /**
-     * For more details about Account, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Stripe terms of service agreement. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -294,10 +255,7 @@ public class Person extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** The person's residential address. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -309,41 +267,6 @@ public class Person extends StripeObject implements HasId {
     /**
      * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
      * 3166-1 alpha-2</a>).
-     *
-     * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code am},
-     * {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw}, {@code
-     * ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf}, {@code bg},
-     * {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn}, {@code bo}, {@code
-     * bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw}, {@code by}, {@code bz},
-     * {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg}, {@code ch}, {@code ci}, {@code
-     * ck}, {@code cl}, {@code cm}, {@code cn}, {@code co}, {@code cr}, {@code cu}, {@code cv},
-     * {@code cw}, {@code cx}, {@code cy}, {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code
-     * dm}, {@code do}, {@code dz}, {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er},
-     * {@code es}, {@code et}, {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code
-     * fr}, {@code ga}, {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh},
-     * {@code gi}, {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code
-     * gs}, {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-     * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im}, {@code
-     * in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code jm},
-     * {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km}, {@code
-     * kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la}, {@code lb},
-     * {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt}, {@code lu}, {@code
-     * lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me}, {@code mf}, {@code mg},
-     * {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn}, {@code mo}, {@code mp}, {@code
-     * mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu}, {@code mv}, {@code mw}, {@code mx},
-     * {@code my}, {@code mz}, {@code na}, {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code
-     * ni}, {@code nl}, {@code no}, {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om},
-     * {@code pa}, {@code pe}, {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code
-     * pm}, {@code pn}, {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa},
-     * {@code qz}, {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code
-     * sb}, {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-     * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss}, {@code
-     * st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code tf},
-     * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn}, {@code
-     * to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua}, {@code ug},
-     * {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve}, {@code
-     * vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code ye},
-     * {@code yt}, {@code za}, {@code zm}, or {@code zw}.
      */
     @SerializedName("country")
     String country;
@@ -369,31 +292,25 @@ public class Person extends StripeObject implements HasId {
     String town;
   }
 
-  /**
-   * For more details about DateOfBirth, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The person's date of birth. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class DateOfBirth extends StripeObject {
     /** The day of birth, between 1 and 31. */
     @SerializedName("day")
-    Integer day;
+    Long day;
 
     /** The month of birth, between 1 and 12. */
     @SerializedName("month")
-    Integer month;
+    Long month;
 
     /** The four-digit year of birth. */
     @SerializedName("year")
-    Integer year;
+    Long year;
   }
 
-  /**
-   * For more details about Documents, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Documents that may be submitted to satisfy various informational requests. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -428,8 +345,8 @@ public class Person extends StripeObject implements HasId {
     Visa visa;
 
     /**
-     * For more details about CompanyAuthorization, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * One or more documents that demonstrate proof that this person is authorized to represent the
+     * company.
      */
     @Getter
     @Setter
@@ -452,10 +369,7 @@ public class Person extends StripeObject implements HasId {
       String type;
     }
 
-    /**
-     * For more details about Passport, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** One or more documents showing the person’s passport page with photo and personal data. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -477,10 +391,7 @@ public class Person extends StripeObject implements HasId {
       String type;
     }
 
-    /**
-     * For more details about PrimaryVerification, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** An identifying document showing the person's name, either a passport or local ID card. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -501,8 +412,8 @@ public class Person extends StripeObject implements HasId {
       String type;
 
       /**
-       * For more details about FrontBack, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
+       * for the front and back of the verification document.
        */
       @Getter
       @Setter
@@ -529,8 +440,8 @@ public class Person extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about SecondaryVerification, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * A document showing address, either a passport, local ID card, or utility bill from a
+     * well-known utility company.
      */
     @Getter
     @Setter
@@ -552,8 +463,8 @@ public class Person extends StripeObject implements HasId {
       String type;
 
       /**
-       * For more details about FrontBack, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a> tokens
+       * for the front and back of the verification document.
        */
       @Getter
       @Setter
@@ -580,8 +491,8 @@ public class Person extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about Visa, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * One or more documents showing the person’s visa required for living in the country where they
+     * are residing.
      */
     @Getter
     @Setter
@@ -627,10 +538,7 @@ public class Person extends StripeObject implements HasId {
     String type;
   }
 
-  /**
-   * For more details about Relationship, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The relationship that this person has with the Account's business or legal entity. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -664,7 +572,7 @@ public class Person extends StripeObject implements HasId {
 
     /** The percent owned by the individual of the Account’s legal entity. */
     @SerializedName("percent_ownership")
-    String percentOwnership;
+    BigDecimal percentOwnership;
 
     /**
      * Whether the individual is authorized as the primary representative of the Account. This is
@@ -681,10 +589,7 @@ public class Person extends StripeObject implements HasId {
     String title;
   }
 
-  /**
-   * For more details about ScriptAddresses, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The script addresses (e.g., non-Latin characters) associated with the person. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -697,10 +602,7 @@ public class Person extends StripeObject implements HasId {
     @SerializedName("kanji")
     Kanji kanji;
 
-    /**
-     * For more details about Kana, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Kana Address. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -712,41 +614,6 @@ public class Person extends StripeObject implements HasId {
       /**
        * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
        * 3166-1 alpha-2</a>).
-       *
-       * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code
-       * am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw},
-       * {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf}, {@code
-       * bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn}, {@code bo},
-       * {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw}, {@code by}, {@code
-       * bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg}, {@code ch}, {@code ci},
-       * {@code ck}, {@code cl}, {@code cm}, {@code cn}, {@code co}, {@code cr}, {@code cu}, {@code
-       * cv}, {@code cw}, {@code cx}, {@code cy}, {@code cz}, {@code de}, {@code dj}, {@code dk},
-       * {@code dm}, {@code do}, {@code dz}, {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code
-       * er}, {@code es}, {@code et}, {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo},
-       * {@code fr}, {@code ga}, {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code
-       * gh}, {@code gi}, {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr},
-       * {@code gs}, {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code
-       * hn}, {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-       * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code
-       * jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km},
-       * {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la}, {@code
-       * lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt}, {@code lu},
-       * {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me}, {@code mf}, {@code
-       * mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn}, {@code mo}, {@code mp},
-       * {@code mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu}, {@code mv}, {@code mw}, {@code
-       * mx}, {@code my}, {@code mz}, {@code na}, {@code nc}, {@code ne}, {@code nf}, {@code ng},
-       * {@code ni}, {@code nl}, {@code no}, {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code
-       * om}, {@code pa}, {@code pe}, {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl},
-       * {@code pm}, {@code pn}, {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code
-       * qa}, {@code qz}, {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa},
-       * {@code sb}, {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code
-       * sj}, {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-       * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code
-       * tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn},
-       * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua}, {@code
-       * ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve},
-       * {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code
-       * ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
        */
       @SerializedName("country")
       String country;
@@ -772,10 +639,7 @@ public class Person extends StripeObject implements HasId {
       String town;
     }
 
-    /**
-     * For more details about Kanji, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Kanji Address. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -787,41 +651,6 @@ public class Person extends StripeObject implements HasId {
       /**
        * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
        * 3166-1 alpha-2</a>).
-       *
-       * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code
-       * am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw},
-       * {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf}, {@code
-       * bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn}, {@code bo},
-       * {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw}, {@code by}, {@code
-       * bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg}, {@code ch}, {@code ci},
-       * {@code ck}, {@code cl}, {@code cm}, {@code cn}, {@code co}, {@code cr}, {@code cu}, {@code
-       * cv}, {@code cw}, {@code cx}, {@code cy}, {@code cz}, {@code de}, {@code dj}, {@code dk},
-       * {@code dm}, {@code do}, {@code dz}, {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code
-       * er}, {@code es}, {@code et}, {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo},
-       * {@code fr}, {@code ga}, {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code
-       * gh}, {@code gi}, {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr},
-       * {@code gs}, {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code
-       * hn}, {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-       * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code
-       * jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km},
-       * {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la}, {@code
-       * lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt}, {@code lu},
-       * {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me}, {@code mf}, {@code
-       * mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn}, {@code mo}, {@code mp},
-       * {@code mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu}, {@code mv}, {@code mw}, {@code
-       * mx}, {@code my}, {@code mz}, {@code na}, {@code nc}, {@code ne}, {@code nf}, {@code ng},
-       * {@code ni}, {@code nl}, {@code no}, {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code
-       * om}, {@code pa}, {@code pe}, {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl},
-       * {@code pm}, {@code pn}, {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code
-       * qa}, {@code qz}, {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa},
-       * {@code sb}, {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code
-       * sj}, {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-       * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code
-       * tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn},
-       * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua}, {@code
-       * ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve},
-       * {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code
-       * ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
        */
       @SerializedName("country")
       String country;
@@ -848,10 +677,7 @@ public class Person extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about ScriptNames, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The script names (e.g. non-Latin characters) associated with the person. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -864,10 +690,7 @@ public class Person extends StripeObject implements HasId {
     @SerializedName("kanji")
     Kanji kanji;
 
-    /**
-     * For more details about Kana, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Persons name in kana script. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -881,10 +704,7 @@ public class Person extends StripeObject implements HasId {
       String surname;
     }
 
-    /**
-     * For more details about Kanji, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Persons name in kanji script. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

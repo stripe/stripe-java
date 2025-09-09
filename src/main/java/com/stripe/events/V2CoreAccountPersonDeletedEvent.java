@@ -4,7 +4,7 @@ package com.stripe.events;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.Event;
-import com.stripe.model.v2.core.Person;
+import com.stripe.model.v2.core.AccountPerson;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,7 +28,7 @@ public final class V2CoreAccountPersonDeletedEvent extends Event {
   RelatedObject relatedObject;
 
   /** Retrieves the related object from the API. Make an API request on every call. */
-  public Person fetchRelatedObject() throws StripeException {
-    return (Person) super.fetchRelatedObject(this.relatedObject);
+  public AccountPerson fetchRelatedObject() throws StripeException {
+    return (AccountPerson) super.fetchRelatedObject(this.relatedObject);
   }
 }

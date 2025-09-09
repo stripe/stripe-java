@@ -22,9 +22,9 @@ public class OffSessionPaymentListParams extends ApiRequestParams {
 
   /** The page size limit. If not provided, the default is 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
-  private OffSessionPaymentListParams(Map<String, Object> extraParams, Integer limit) {
+  private OffSessionPaymentListParams(Map<String, Object> extraParams, Long limit) {
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -36,7 +36,7 @@ public class OffSessionPaymentListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public OffSessionPaymentListParams build() {
@@ -70,7 +70,7 @@ public class OffSessionPaymentListParams extends ApiRequestParams {
     }
 
     /** The page size limit. If not provided, the default is 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Adjustments represent Stripe-initiated credits or debits to a user balance. They might be used to
+ * amend balances due to technical or operational error.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -67,10 +71,7 @@ public class Adjustment extends StripeObject implements HasId {
   @SerializedName("receipt_url")
   String receiptUrl;
 
-  /**
-   * For more details about AdjustedFlow, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** If applicable, contains information about the original flow linked to this Adjustment. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

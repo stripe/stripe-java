@@ -6,10 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/**
- * Error returned when the recipient's recent total amount in outbound payments has exceeded its
- * limit.
- */
+/** Information about the error that occurred. */
 public final class QuotaExceededException extends ApiException {
   private static final long serialVersionUID = 2L;
 
