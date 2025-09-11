@@ -14,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ConfigurationCreateParams extends ApiRequestParams {
+  /** An object containing device type specific settings for BBPOS WisePad 3 readers. */
+  @SerializedName("bbpos_wisepad3")
+  BbposWisepad3 bbposWisepad3;
+
   /** An object containing device type specific settings for BBPOS WisePOS E readers. */
   @SerializedName("bbpos_wisepos_e")
   BbposWiseposE bbposWiseposE;
@@ -64,6 +68,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   Object wifi;
 
   private ConfigurationCreateParams(
+      BbposWisepad3 bbposWisepad3,
       BbposWiseposE bbposWiseposE,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -75,6 +80,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       Object tipping,
       VerifoneP400 verifoneP400,
       Object wifi) {
+    this.bbposWisepad3 = bbposWisepad3;
     this.bbposWiseposE = bbposWiseposE;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -93,6 +99,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private BbposWisepad3 bbposWisepad3;
+
     private BbposWiseposE bbposWiseposE;
 
     private List<String> expand;
@@ -118,6 +126,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ConfigurationCreateParams build() {
       return new ConfigurationCreateParams(
+          this.bbposWisepad3,
           this.bbposWiseposE,
           this.expand,
           this.extraParams,
@@ -129,6 +138,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.tipping,
           this.verifoneP400,
           this.wifi);
+    }
+
+    /** An object containing device type specific settings for BBPOS WisePad 3 readers. */
+    public Builder setBbposWisepad3(ConfigurationCreateParams.BbposWisepad3 bbposWisepad3) {
+      this.bbposWisepad3 = bbposWisepad3;
+      return this;
     }
 
     /** An object containing device type specific settings for BBPOS WisePOS E readers. */
@@ -259,6 +274,82 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     public Builder setWifi(EmptyParam wifi) {
       this.wifi = wifi;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BbposWisepad3 {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** A File ID representing an image you would like displayed on the reader. */
+    @SerializedName("splashscreen")
+    Object splashscreen;
+
+    private BbposWisepad3(Map<String, Object> extraParams, Object splashscreen) {
+      this.extraParams = extraParams;
+      this.splashscreen = splashscreen;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object splashscreen;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationCreateParams.BbposWisepad3 build() {
+        return new ConfigurationCreateParams.BbposWisepad3(this.extraParams, this.splashscreen);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationCreateParams.BbposWisepad3#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationCreateParams.BbposWisepad3#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** A File ID representing an image you would like displayed on the reader. */
+      public Builder setSplashscreen(String splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
+
+      /** A File ID representing an image you would like displayed on the reader. */
+      public Builder setSplashscreen(EmptyParam splashscreen) {
+        this.splashscreen = splashscreen;
+        return this;
+      }
     }
   }
 
