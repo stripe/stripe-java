@@ -1265,6 +1265,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class NetworkToken extends StripeObject {
+        /**
+         * Indicates if Stripe used a network token, either user provided or Stripe managed when
+         * processing the transaction.
+         */
         @SerializedName("used")
         Boolean used;
       }
