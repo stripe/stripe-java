@@ -144,8 +144,6 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.billing.cadence.created", com.stripe.events.V2BillingCadenceCreatedEvent.class);
     eventClassLookup.put(
-        "v2.billing.cadence.errored", com.stripe.events.V2BillingCadenceErroredEvent.class);
-    eventClassLookup.put(
         "v2.billing.license_fee.created", com.stripe.events.V2BillingLicenseFeeCreatedEvent.class);
     eventClassLookup.put(
         "v2.billing.license_fee.updated", com.stripe.events.V2BillingLicenseFeeUpdatedEvent.class);

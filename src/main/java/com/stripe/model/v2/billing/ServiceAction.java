@@ -90,6 +90,14 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
 
+    /**
+     * The category of the credit grant.
+     *
+     * <p>One of {@code paid}, or {@code promotional}.
+     */
+    @SerializedName("category")
+    String category;
+
     /** The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
     ExpiryConfig expiryConfig;
@@ -97,6 +105,13 @@ public class ServiceAction extends StripeObject implements HasId {
     /** A descriptive name shown in dashboard. */
     @SerializedName("name")
     String name;
+
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    @SerializedName("priority")
+    Integer priority;
 
     /**
      * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
@@ -215,6 +230,14 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
 
+    /**
+     * The category of the credit grant.
+     *
+     * <p>One of {@code paid}, or {@code promotional}.
+     */
+    @SerializedName("category")
+    String category;
+
     /** The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
     ExpiryConfig expiryConfig;
@@ -222,6 +245,13 @@ public class ServiceAction extends StripeObject implements HasId {
     /** Customer-facing name for the credit grant. */
     @SerializedName("name")
     String name;
+
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    @SerializedName("priority")
+    Integer priority;
 
     /**
      * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
