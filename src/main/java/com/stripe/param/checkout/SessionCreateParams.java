@@ -18086,7 +18086,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-       * invoices for subscriptions.
+       * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
        */
       @SerializedName("type")
       Type type;
@@ -18140,7 +18140,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-         * invoices for subscriptions.
+         * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
          */
         public Builder setType(SessionCreateParams.SubscriptionData.BillingMode.Type type) {
           this.type = type;

@@ -57,7 +57,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Mutually exclusive with billing_cycle_anchor and only valid with monthly and yearly price
-   * intervals. When provided, the billing_cycle_anchor is set to the next occurence of the
+   * intervals. When provided, the billing_cycle_anchor is set to the next occurrence of the
    * day_of_month at the hour, minute, and second UTC.
    */
   @SerializedName("billing_cycle_anchor_config")
@@ -591,7 +591,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Mutually exclusive with billing_cycle_anchor and only valid with monthly and yearly price
-     * intervals. When provided, the billing_cycle_anchor is set to the next occurence of the
+     * intervals. When provided, the billing_cycle_anchor is set to the next occurrence of the
      * day_of_month at the hour, minute, and second UTC.
      */
     public Builder setBillingCycleAnchorConfig(
@@ -2621,7 +2621,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-     * invoices for subscriptions.
+     * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
      */
     @SerializedName("type")
     Type type;
@@ -2673,7 +2673,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-       * invoices for subscriptions.
+       * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
        */
       public Builder setType(SubscriptionCreateParams.BillingMode.Type type) {
         this.type = type;

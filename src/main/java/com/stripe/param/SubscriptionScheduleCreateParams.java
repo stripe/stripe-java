@@ -410,7 +410,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-     * invoices for subscriptions.
+     * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
      */
     @SerializedName("type")
     Type type;
@@ -463,7 +463,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-       * invoices for subscriptions.
+       * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
        */
       public Builder setType(SubscriptionScheduleCreateParams.BillingMode.Type type) {
         this.type = type;
@@ -1628,16 +1628,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     List<SubscriptionScheduleCreateParams.Phase.Item> items;
 
     /**
-     * Integer representing the multiplier applied to the price interval. For example, {@code
-     * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
-     * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date} must
-     * not be set. This parameter is deprecated and will be removed in a future version. Use {@code
-     * duration} instead.
-     */
-    @SerializedName("iterations")
-    Long iterations;
-
-    /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to a phase. Metadata on a schedule's phase will update the underlying subscription's {@code
      * metadata} when the phase is entered, adding new keys and replacing existing keys in the
@@ -1722,7 +1712,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
         List<SubscriptionScheduleCreateParams.Phase.Item> items,
-        Long iterations,
         Map<String, String> metadata,
         String onBehalfOf,
         PauseCollection pauseCollection,
@@ -1748,7 +1737,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
       this.items = items;
-      this.iterations = iterations;
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
       this.pauseCollection = pauseCollection;
@@ -1797,8 +1785,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private List<SubscriptionScheduleCreateParams.Phase.Item> items;
 
-      private Long iterations;
-
       private Map<String, String> metadata;
 
       private String onBehalfOf;
@@ -1836,7 +1822,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.extraParams,
             this.invoiceSettings,
             this.items,
-            this.iterations,
             this.metadata,
             this.onBehalfOf,
             this.pauseCollection,
@@ -2156,18 +2141,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           this.items = new ArrayList<>();
         }
         this.items.addAll(elements);
-        return this;
-      }
-
-      /**
-       * Integer representing the multiplier applied to the price interval. For example, {@code
-       * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
-       * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
-       * must not be set. This parameter is deprecated and will be removed in a future version. Use
-       * {@code duration} instead.
-       */
-      public Builder setIterations(Long iterations) {
-        this.iterations = iterations;
         return this;
       }
 

@@ -16017,7 +16017,6 @@ class GeneratedExamples extends BaseStripeTest {
                             .setPrice("price_xxxxxxxxxxxxx")
                             .setQuantity(1L)
                             .build())
-                    .setIterations(12L)
                     .build())
             .build();
 
@@ -16047,7 +16046,6 @@ class GeneratedExamples extends BaseStripeTest {
                             .setPrice("price_xxxxxxxxxxxxx")
                             .setQuantity(1L)
                             .build())
-                    .setIterations(12L)
                     .build())
             .build();
 
@@ -16078,7 +16076,6 @@ class GeneratedExamples extends BaseStripeTest {
                             .setPrice("price_xxxxxxxxxxxxx")
                             .setQuantity(1L)
                             .build())
-                    .setIterations(12L)
                     .build())
             .build();
 

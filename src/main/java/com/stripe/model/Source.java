@@ -1191,8 +1191,8 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     /**
      * The status of the redirect, either {@code pending} (ready to be used by your customer to
-     * authenticate the transaction), {@code succeeded} (succesful authentication, cannot be reused)
-     * or {@code not_required} (redirect should not be used) or {@code failed} (failed
+     * authenticate the transaction), {@code succeeded} (successful authentication, cannot be
+     * reused) or {@code not_required} (redirect should not be used) or {@code failed} (failed
      * authentication, cannot be reused).
      */
     @SerializedName("status")

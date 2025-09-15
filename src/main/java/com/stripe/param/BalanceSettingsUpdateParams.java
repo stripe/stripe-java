@@ -28,8 +28,7 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> Settings that apply to the <a
-   * href="https://docs.stripe.com/api/balance">Payments Balance</a>.
+   * Settings that apply to the <a href="https://docs.stripe.com/api/balance">Payments Balance</a>.
    */
   @SerializedName("payments")
   Payments payments;
@@ -110,8 +109,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Settings that apply to the <a
-     * href="https://docs.stripe.com/api/balance">Payments Balance</a>.
+     * Settings that apply to the <a href="https://docs.stripe.com/api/balance">Payments
+     * Balance</a>.
      */
     public Builder setPayments(BalanceSettingsUpdateParams.Payments payments) {
       this.payments = payments;
@@ -653,15 +652,15 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class SettlementTiming {
       /**
-       * The number of days charge funds are held before becoming available. The default value is
-       * {@code minimum}, representing the lowest available value for the account. The maximum value
-       * is 31. The {@code delay_days} parameter remains at the last configured value if {@code
-       * payouts.schedule.interval} is {@code manual}. <a
+       * Change {@code delay_days} for this account, which determines the number of days charge
+       * funds are held before becoming available. The maximum value is 31. Passing an empty string
+       * to {@code delay_days_override} will return {@code delay_days} to the default, which is the
+       * lowest available value for the account. <a
        * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling delay
        * days</a>.
        */
       @SerializedName("delay_days_override")
-      Long delayDaysOverride;
+      Object delayDaysOverride;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -672,7 +671,7 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private SettlementTiming(Long delayDaysOverride, Map<String, Object> extraParams) {
+      private SettlementTiming(Object delayDaysOverride, Map<String, Object> extraParams) {
         this.delayDaysOverride = delayDaysOverride;
         this.extraParams = extraParams;
       }
@@ -682,7 +681,7 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Long delayDaysOverride;
+        private Object delayDaysOverride;
 
         private Map<String, Object> extraParams;
 
@@ -693,14 +692,27 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The number of days charge funds are held before becoming available. The default value is
-         * {@code minimum}, representing the lowest available value for the account. The maximum
-         * value is 31. The {@code delay_days} parameter remains at the last configured value if
-         * {@code payouts.schedule.interval} is {@code manual}. <a
+         * Change {@code delay_days} for this account, which determines the number of days charge
+         * funds are held before becoming available. The maximum value is 31. Passing an empty
+         * string to {@code delay_days_override} will return {@code delay_days} to the default,
+         * which is the lowest available value for the account. <a
          * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
          * delay days</a>.
          */
         public Builder setDelayDaysOverride(Long delayDaysOverride) {
+          this.delayDaysOverride = delayDaysOverride;
+          return this;
+        }
+
+        /**
+         * Change {@code delay_days} for this account, which determines the number of days charge
+         * funds are held before becoming available. The maximum value is 31. Passing an empty
+         * string to {@code delay_days_override} will return {@code delay_days} to the default,
+         * which is the lowest available value for the account. <a
+         * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
+         * delay days</a>.
+         */
+        public Builder setDelayDaysOverride(EmptyParam delayDaysOverride) {
           this.delayDaysOverride = delayDaysOverride;
           return this;
         }
