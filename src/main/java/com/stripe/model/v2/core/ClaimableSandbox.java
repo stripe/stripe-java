@@ -13,17 +13,30 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ClaimableSandbox extends StripeObject implements HasId {
-  /** Keys that can be used to set up an integration for this sandbox and operate on the account. */
-  @SerializedName("api_keys")
-  ApiKeys apiKeys;
-
-  /** URL for user to claim sandbox into their existing Stripe account. */
+  /**
+   * URL for user to claim sandbox into their existing Stripe account. The value will be null if the
+   * sandbox status is {@code claimed} or {@code expired}.
+   */
   @SerializedName("claim_url")
   String claimUrl;
+
+  /**
+   * The timestamp the sandbox was claimed. The value will be null if the sandbox status is not
+   * {@code claimed}.
+   */
+  @SerializedName("claimed_at")
+  Instant claimedAt;
 
   /** When the sandbox is created. */
   @SerializedName("created")
   Instant created;
+
+  /**
+   * The timestamp the sandbox will expire. The value will be null if the sandbox is {@code
+   * claimed}.
+   */
+  @SerializedName("expires_at")
+  Instant expiresAt;
 
   /** Unique identifier for the Claimable sandbox. */
   @Getter(onMethod_ = {@Override})
@@ -50,29 +63,13 @@ public class ClaimableSandbox extends StripeObject implements HasId {
   @SerializedName("prefill")
   Prefill prefill;
 
-  /**
-   * For more details about ApiKeys, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class ApiKeys extends StripeObject {
-    /**
-     * Used to communicate with <a href="https://docs.stripe.com/mcp">Stripe's MCP server</a>. This
-     * allows LLM agents to securely operate on a Stripe account.
-     */
-    @SerializedName("mcp")
-    String mcp;
+  /** Data about the Stripe sandbox object. */
+  @SerializedName("sandbox_details")
+  SandboxDetails sandboxDetails;
 
-    /** Publicly accessible in a web or mobile app client-side code. */
-    @SerializedName("publishable")
-    String publishable;
-
-    /** Should be stored securely in server-side code (such as an environment variable). */
-    @SerializedName("secret")
-    String secret;
-  }
+  /** Status of the sandbox. One of {@code unclaimed}, {@code expired}, {@code claimed}. */
+  @SerializedName("status")
+  String status;
 
   /**
    * For more details about Prefill, please refer to the <a href="https://docs.stripe.com/api">API
@@ -135,5 +132,55 @@ public class ClaimableSandbox extends StripeObject implements HasId {
     /** Name for the sandbox. */
     @SerializedName("name")
     String name;
+  }
+
+  /**
+   * For more details about SandboxDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SandboxDetails extends StripeObject {
+    /** The sandbox's Stripe account ID. */
+    @SerializedName("account")
+    String account;
+
+    /**
+     * Keys that can be used to set up an integration for this sandbox and operate on the account.
+     */
+    @SerializedName("api_keys")
+    ApiKeys apiKeys;
+
+    /**
+     * The livemode sandbox Stripe account ID. This field is only set if the user activates their
+     * sandbox and chooses to install your platform's Stripe App in their live account.
+     */
+    @SerializedName("owner_account")
+    String ownerAccount;
+
+    /**
+     * For more details about ApiKeys, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApiKeys extends StripeObject {
+      /**
+       * Used to communicate with <a href="https://docs.stripe.com/mcp">Stripe's MCP server</a>.
+       * This allows LLM agents to securely operate on a Stripe account.
+       */
+      @SerializedName("mcp")
+      String mcp;
+
+      /** Publicly accessible in a web or mobile app client-side code. */
+      @SerializedName("publishable")
+      String publishable;
+
+      /** Should be stored securely in server-side code (such as an environment variable). */
+      @SerializedName("secret")
+      String secret;
+    }
   }
 }

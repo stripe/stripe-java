@@ -27085,7 +27085,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.ClaimableSandbox.class,
-        "{\"api_keys\":{\"mcp\":null,\"publishable\":\"publishable\",\"secret\":\"secret\"},\"claim_url\":\"claim_url\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.claimable_sandbox\",\"prefill\":{\"country\":\"af\",\"email\":\"email\",\"name\":\"name\"},\"livemode\":true}");
+        "{\"claim_url\":null,\"claimed_at\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":null,\"id\":\"obj_123\",\"object\":\"v2.core.claimable_sandbox\",\"prefill\":{\"country\":\"af\",\"email\":\"email\",\"name\":\"name\"},\"sandbox_details\":{\"account\":\"account\",\"api_keys\":null,\"owner_account\":null},\"status\":\"claimed\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.ClaimableSandboxCreateParams params =
@@ -27108,6 +27108,29 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/core/claimable_sandboxes",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreClaimableSandboxGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/claimable_sandboxes/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.ClaimableSandbox.class,
+        "{\"claim_url\":null,\"claimed_at\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":null,\"id\":\"obj_123\",\"object\":\"v2.core.claimable_sandbox\",\"prefill\":{\"country\":\"af\",\"email\":\"email\",\"name\":\"name\"},\"sandbox_details\":{\"account\":\"account\",\"api_keys\":null,\"owner_account\":null},\"status\":\"claimed\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.ClaimableSandbox claimableSandbox =
+        client.v2().core().claimableSandboxes().retrieve("id_123");
+    assertNotNull(claimableSandbox);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/claimable_sandboxes/id_123",
+        null,
         null);
   }
 

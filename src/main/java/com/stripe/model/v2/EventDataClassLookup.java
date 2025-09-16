@@ -294,6 +294,18 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.core.claimable_sandbox.claimed",
+        com.stripe.events.V2CoreClaimableSandboxClaimedEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expired",
+        com.stripe.events.V2CoreClaimableSandboxExpiredEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.expiring",
+        com.stripe.events.V2CoreClaimableSandboxExpiringEvent.class);
+    eventClassLookup.put(
+        "v2.core.claimable_sandbox.sandbox_details_owner_account_updated",
+        com.stripe.events.V2CoreClaimableSandboxSandboxDetailsOwnerAccountUpdatedEvent.class);
+    eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
     eventClassLookup.put(
         "v2.core.health.api_error.firing", com.stripe.events.V2CoreHealthApiErrorFiringEvent.class);
