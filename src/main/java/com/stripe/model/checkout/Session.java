@@ -205,6 +205,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("discounts")
   List<Session.Discount> discounts;
 
+  /**
+   * A list of the types of payment methods (e.g., {@code card}) that should be excluded from this
+   * Checkout Session. This should only be used when payment methods for this Checkout Session are
+   * managed through the <a href="https://dashboard.stripe.com/settings/payment_methods">Stripe
+   * Dashboard</a>.
+   */
+  @SerializedName("excluded_payment_method_types")
+  List<String> excludedPaymentMethodTypes;
+
   /** The timestamp at which the Checkout Session will expire. */
   @SerializedName("expires_at")
   Long expiresAt;
