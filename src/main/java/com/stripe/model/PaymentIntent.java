@@ -1709,7 +1709,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails extends StripeObject {
-    /** The amount an item was discounted for. */
+    /** The total discount applied on the transaction. */
     @SerializedName("discount_amount")
     Long discountAmount;
 

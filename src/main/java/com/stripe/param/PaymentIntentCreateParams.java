@@ -1123,7 +1123,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails {
-    /** The amount an item was discounted for. */
+    /** The total discount applied on the transaction. */
     @SerializedName("discount_amount")
     Object discountAmount;
 
@@ -1185,13 +1185,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.discountAmount, this.extraParams, this.lineItems, this.shipping, this.tax);
       }
 
-      /** The amount an item was discounted for. */
+      /** The total discount applied on the transaction. */
       public Builder setDiscountAmount(Long discountAmount) {
         this.discountAmount = discountAmount;
         return this;
       }
 
-      /** The amount an item was discounted for. */
+      /** The total discount applied on the transaction. */
       public Builder setDiscountAmount(EmptyParam discountAmount) {
         this.discountAmount = discountAmount;
         return this;
