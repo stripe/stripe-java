@@ -27,6 +27,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("balance")
   Long balance;
 
+  /** The customer's business name. This may be up to <em>150 characters</em>. */
+  @SerializedName("business_name")
+  Object businessName;
+
   /** Balance information and default balance settings for this customer. */
   @SerializedName("cash_balance")
   CashBalance cashBalance;
@@ -57,6 +61,10 @@ public class CustomerCreateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /** The customer's full name. This may be up to <em>150 characters</em>. */
+  @SerializedName("individual_name")
+  Object individualName;
 
   /**
    * The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase
@@ -126,11 +134,13 @@ public class CustomerCreateParams extends ApiRequestParams {
   private CustomerCreateParams(
       Object address,
       Long balance,
+      Object businessName,
       CashBalance cashBalance,
       String description,
       String email,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object individualName,
       String invoicePrefix,
       InvoiceSettings invoiceSettings,
       Object metadata,
@@ -148,11 +158,13 @@ public class CustomerCreateParams extends ApiRequestParams {
       Boolean validate) {
     this.address = address;
     this.balance = balance;
+    this.businessName = businessName;
     this.cashBalance = cashBalance;
     this.description = description;
     this.email = email;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.individualName = individualName;
     this.invoicePrefix = invoicePrefix;
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
@@ -179,6 +191,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private Long balance;
 
+    private Object businessName;
+
     private CashBalance cashBalance;
 
     private String description;
@@ -188,6 +202,8 @@ public class CustomerCreateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Object individualName;
 
     private String invoicePrefix;
 
@@ -224,11 +240,13 @@ public class CustomerCreateParams extends ApiRequestParams {
       return new CustomerCreateParams(
           this.address,
           this.balance,
+          this.businessName,
           this.cashBalance,
           this.description,
           this.email,
           this.expand,
           this.extraParams,
+          this.individualName,
           this.invoicePrefix,
           this.invoiceSettings,
           this.metadata,
@@ -266,6 +284,18 @@ public class CustomerCreateParams extends ApiRequestParams {
      */
     public Builder setBalance(Long balance) {
       this.balance = balance;
+      return this;
+    }
+
+    /** The customer's business name. This may be up to <em>150 characters</em>. */
+    public Builder setBusinessName(String businessName) {
+      this.businessName = businessName;
+      return this;
+    }
+
+    /** The customer's business name. This may be up to <em>150 characters</em>. */
+    public Builder setBusinessName(EmptyParam businessName) {
+      this.businessName = businessName;
       return this;
     }
 
@@ -342,6 +372,18 @@ public class CustomerCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** The customer's full name. This may be up to <em>150 characters</em>. */
+    public Builder setIndividualName(String individualName) {
+      this.individualName = individualName;
+      return this;
+    }
+
+    /** The customer's full name. This may be up to <em>150 characters</em>. */
+    public Builder setIndividualName(EmptyParam individualName) {
+      this.individualName = individualName;
       return this;
     }
 
