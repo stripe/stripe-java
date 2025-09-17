@@ -15,9 +15,9 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class LicenseFeeUpdateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
-   * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on Invoices.
-   * Maximum length of 250 characters.
+   * A customer-facing name for the License Fee. This name is used in Stripe-hosted products like
+   * the Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
+   * characters.
    */
   @SerializedName("display_name")
   Object displayName;
@@ -138,9 +138,9 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
-     * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on
-     * Invoices. Maximum length of 250 characters.
+     * A customer-facing name for the License Fee. This name is used in Stripe-hosted products like
+     * the Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
+     * characters.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
@@ -148,9 +148,9 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
-     * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on
-     * Invoices. Maximum length of 250 characters.
+     * A customer-facing name for the License Fee. This name is used in Stripe-hosted products like
+     * the Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
+     * characters.
      */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;

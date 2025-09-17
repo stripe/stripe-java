@@ -24575,6 +24575,7 @@ class GeneratedExamples extends BaseStripeTest {
                     .setMonth(
                         com.stripe.param.v2.billing.CadenceCreateParams.BillingCycle.Month.builder()
                             .setDayOfMonth(1361669285)
+                            .setMonthOfYear(82933018)
                             .setTime(
                                 com.stripe.param.v2.billing.CadenceCreateParams.BillingCycle.Month
                                     .Time.builder()
@@ -25065,8 +25066,7 @@ class GeneratedExamples extends BaseStripeTest {
                                     .setTimestamp(Instant.parse("1970-01-01T15:18:46.294Z"))
                                     .setType(
                                         com.stripe.param.v2.billing.IntentCreateParams.Action
-                                            .Deactivate.EffectiveAt.Type
-                                            .CURRENT_BILLING_PERIOD_START)
+                                            .Deactivate.EffectiveAt.Type.ON_RESERVE)
                                     .build())
                             .setPricingPlanSubscriptionDetails(
                                 com.stripe.param.v2.billing.IntentCreateParams.Action.Deactivate
@@ -25448,9 +25448,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.LicenseFeeUpdateParams params =
-        com.stripe.param.v2.billing.LicenseFeeUpdateParams.builder()
-            .setDisplayName("display_name")
-            .build();
+        com.stripe.param.v2.billing.LicenseFeeUpdateParams.builder().build();
 
     com.stripe.model.v2.billing.LicenseFee licenseFee =
         client.v2().billing().licenseFees().update("id_123", params);
@@ -26172,7 +26170,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.billing.PricingPlanSubscription>>() {}.getType(),
-        "{\"data\":[{\"billing_cadence\":\"billing_cadence\",\"collection_status\":\"past_due\",\"collection_status_transitions\":{\"awaiting_customer_action_at\":null,\"current_at\":null,\"past_due_at\":null,\"paused_at\":null,\"unpaid_at\":null},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.billing.pricing_plan_subscription\",\"pricing_plan\":\"pricing_plan\",\"pricing_plan_version\":\"pricing_plan_version\",\"servicing_status\":\"pending\",\"servicing_status_transitions\":{\"activated_at\":null,\"canceled_at\":null,\"paused_at\":null},\"test_clock\":null,\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"billing_cadence\":\"billing_cadence\",\"collection_status\":\"past_due\",\"collection_status_transitions\":{\"awaiting_customer_action_at\":null,\"current_at\":null,\"past_due_at\":null,\"paused_at\":null,\"unpaid_at\":null},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.billing.pricing_plan_subscription\",\"pricing_plan\":\"pricing_plan\",\"pricing_plan_version\":\"pricing_plan_version\",\"servicing_status\":\"pending\",\"servicing_status_transitions\":{\"activated_at\":null,\"canceled_at\":null,\"paused_at\":null,\"will_activate_at\":null,\"will_cancel_at\":null},\"test_clock\":null,\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.billing.PricingPlanSubscriptionListParams params =
@@ -26198,7 +26196,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.billing.PricingPlanSubscription.class,
-        "{\"billing_cadence\":\"billing_cadence\",\"collection_status\":\"past_due\",\"collection_status_transitions\":{\"awaiting_customer_action_at\":null,\"current_at\":null,\"past_due_at\":null,\"paused_at\":null,\"unpaid_at\":null},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.billing.pricing_plan_subscription\",\"pricing_plan\":\"pricing_plan\",\"pricing_plan_version\":\"pricing_plan_version\",\"servicing_status\":\"pending\",\"servicing_status_transitions\":{\"activated_at\":null,\"canceled_at\":null,\"paused_at\":null},\"test_clock\":null,\"livemode\":true}");
+        "{\"billing_cadence\":\"billing_cadence\",\"collection_status\":\"past_due\",\"collection_status_transitions\":{\"awaiting_customer_action_at\":null,\"current_at\":null,\"past_due_at\":null,\"paused_at\":null,\"unpaid_at\":null},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"metadata\":null,\"object\":\"v2.billing.pricing_plan_subscription\",\"pricing_plan\":\"pricing_plan\",\"pricing_plan_version\":\"pricing_plan_version\",\"servicing_status\":\"pending\",\"servicing_status_transitions\":{\"activated_at\":null,\"canceled_at\":null,\"paused_at\":null,\"will_activate_at\":null,\"will_cancel_at\":null},\"test_clock\":null,\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.billing.PricingPlanSubscription pricingPlanSubscription =
@@ -27087,7 +27085,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.ClaimableSandbox.class,
-        "{\"api_keys\":{\"mcp\":null,\"publishable\":\"publishable\",\"secret\":\"secret\"},\"claim_url\":\"claim_url\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.claimable_sandbox\",\"prefill\":{\"country\":\"af\",\"email\":\"email\",\"name\":\"name\"},\"livemode\":true}");
+        "{\"claim_url\":null,\"claimed_at\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":null,\"id\":\"obj_123\",\"object\":\"v2.core.claimable_sandbox\",\"prefill\":{\"country\":\"af\",\"email\":\"email\",\"name\":\"name\"},\"sandbox_details\":{\"account\":\"account\",\"api_keys\":null,\"owner_account\":null},\"status\":\"claimed\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.ClaimableSandboxCreateParams params =
@@ -27110,6 +27108,29 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/core/claimable_sandboxes",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreClaimableSandboxGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/claimable_sandboxes/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.ClaimableSandbox.class,
+        "{\"claim_url\":null,\"claimed_at\":null,\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":null,\"id\":\"obj_123\",\"object\":\"v2.core.claimable_sandbox\",\"prefill\":{\"country\":\"af\",\"email\":\"email\",\"name\":\"name\"},\"sandbox_details\":{\"account\":\"account\",\"api_keys\":null,\"owner_account\":null},\"status\":\"claimed\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.ClaimableSandbox claimableSandbox =
+        client.v2().core().claimableSandboxes().retrieve("id_123");
+    assertNotNull(claimableSandbox);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/claimable_sandboxes/id_123",
+        null,
         null);
   }
 

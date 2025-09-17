@@ -178,6 +178,13 @@ public class Cadence extends StripeObject implements HasId {
       @SerializedName("day_of_month")
       Integer dayOfMonth;
 
+      /**
+       * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
+       * Occurrences are calculated from the month anchor.
+       */
+      @SerializedName("month_of_year")
+      Integer monthOfYear;
+
       /** The time at which the billing cycle ends. */
       @SerializedName("time")
       Time time;

@@ -229,7 +229,8 @@ public class IntentAction extends StripeObject implements HasId {
       /**
        * When the deactivate action will take effect.
        *
-       * <p>One of {@code current_billing_period_start}, {@code on_reserve}, or {@code timestamp}.
+       * <p>One of {@code current_billing_period_end}, {@code current_billing_period_start}, {@code
+       * on_reserve}, or {@code timestamp}.
        */
       @SerializedName("type")
       String type;

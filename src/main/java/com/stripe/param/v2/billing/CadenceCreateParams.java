@@ -570,15 +570,26 @@ public class CadenceCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12. If
+       * not provided, this will default to the month the cadence was created. This setting can only
+       * be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
+       * occurrences will be calculated from month provided.
+       */
+      @SerializedName("month_of_year")
+      Integer monthOfYear;
+
+      /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
        * will default to the time at which the cadence was created in UTC timezone.
        */
       @SerializedName("time")
       Time time;
 
-      private Month(Integer dayOfMonth, Map<String, Object> extraParams, Time time) {
+      private Month(
+          Integer dayOfMonth, Map<String, Object> extraParams, Integer monthOfYear, Time time) {
         this.dayOfMonth = dayOfMonth;
         this.extraParams = extraParams;
+        this.monthOfYear = monthOfYear;
         this.time = time;
       }
 
@@ -591,12 +602,14 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Integer monthOfYear;
+
         private Time time;
 
         /** Finalize and obtain parameter instance from this builder. */
         public CadenceCreateParams.BillingCycle.Month build() {
           return new CadenceCreateParams.BillingCycle.Month(
-              this.dayOfMonth, this.extraParams, this.time);
+              this.dayOfMonth, this.extraParams, this.monthOfYear, this.time);
         }
 
         /**
@@ -635,6 +648,17 @@ public class CadenceCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
+         * If not provided, this will default to the month the cadence was created. This setting can
+         * only be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
+         * occurrences will be calculated from month provided.
+         */
+        public Builder setMonthOfYear(Integer monthOfYear) {
+          this.monthOfYear = monthOfYear;
           return this;
         }
 
