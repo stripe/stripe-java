@@ -61,6 +61,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The name of the configuration. */
+  @SerializedName("name")
+  Object name;
+
   private ConfigurationCreateParams(
       BusinessProfile businessProfile,
       Object defaultReturnUrl,
@@ -68,7 +72,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Features features,
       LoginPage loginPage,
-      Map<String, String> metadata) {
+      Map<String, String> metadata,
+      Object name) {
     this.businessProfile = businessProfile;
     this.defaultReturnUrl = defaultReturnUrl;
     this.expand = expand;
@@ -76,6 +81,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     this.features = features;
     this.loginPage = loginPage;
     this.metadata = metadata;
+    this.name = name;
   }
 
   public static Builder builder() {
@@ -97,6 +103,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Object name;
+
     /** Finalize and obtain parameter instance from this builder. */
     public ConfigurationCreateParams build() {
       return new ConfigurationCreateParams(
@@ -106,7 +114,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           this.extraParams,
           this.features,
           this.loginPage,
-          this.metadata);
+          this.metadata,
+          this.name);
     }
 
     /** The business information shown to customers in the portal. */
@@ -229,6 +238,18 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The name of the configuration. */
+    public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /** The name of the configuration. */
+    public Builder setName(EmptyParam name) {
+      this.name = name;
       return this;
     }
   }
@@ -1399,6 +1420,10 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Product {
+        /** Control whether the quantity of the product can be adjusted. */
+        @SerializedName("adjustable_quantity")
+        AdjustableQuantity adjustableQuantity;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1420,7 +1445,12 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         @SerializedName("product")
         String product;
 
-        private Product(Map<String, Object> extraParams, List<String> prices, String product) {
+        private Product(
+            AdjustableQuantity adjustableQuantity,
+            Map<String, Object> extraParams,
+            List<String> prices,
+            String product) {
+          this.adjustableQuantity = adjustableQuantity;
           this.extraParams = extraParams;
           this.prices = prices;
           this.product = product;
@@ -1431,6 +1461,8 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private AdjustableQuantity adjustableQuantity;
+
           private Map<String, Object> extraParams;
 
           private List<String> prices;
@@ -1440,7 +1472,15 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public ConfigurationCreateParams.Features.SubscriptionUpdate.Product build() {
             return new ConfigurationCreateParams.Features.SubscriptionUpdate.Product(
-                this.extraParams, this.prices, this.product);
+                this.adjustableQuantity, this.extraParams, this.prices, this.product);
+          }
+
+          /** Control whether the quantity of the product can be adjusted. */
+          public Builder setAdjustableQuantity(
+              ConfigurationCreateParams.Features.SubscriptionUpdate.Product.AdjustableQuantity
+                  adjustableQuantity) {
+            this.adjustableQuantity = adjustableQuantity;
+            return this;
           }
 
           /**
@@ -1505,6 +1545,115 @@ public class ConfigurationCreateParams extends ApiRequestParams {
           public Builder setProduct(String product) {
             this.product = product;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AdjustableQuantity {
+          /**
+           * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+           * non-negative integer.
+           */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** The maximum quantity that can be set for the product. */
+          @SerializedName("maximum")
+          Long maximum;
+
+          /** The minimum quantity that can be set for the product. */
+          @SerializedName("minimum")
+          Long minimum;
+
+          private AdjustableQuantity(
+              Boolean enabled, Map<String, Object> extraParams, Long maximum, Long minimum) {
+            this.enabled = enabled;
+            this.extraParams = extraParams;
+            this.maximum = maximum;
+            this.minimum = minimum;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Boolean enabled;
+
+            private Map<String, Object> extraParams;
+
+            private Long maximum;
+
+            private Long minimum;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public ConfigurationCreateParams.Features.SubscriptionUpdate.Product.AdjustableQuantity
+                build() {
+              return new ConfigurationCreateParams.Features.SubscriptionUpdate.Product
+                  .AdjustableQuantity(this.enabled, this.extraParams, this.maximum, this.minimum);
+            }
+
+            /**
+             * <strong>Required.</strong> Set to true if the quantity can be adjusted to any
+             * non-negative integer.
+             */
+            public Builder setEnabled(Boolean enabled) {
+              this.enabled = enabled;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfigurationCreateParams.Features.SubscriptionUpdate.Product.AdjustableQuantity#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * ConfigurationCreateParams.Features.SubscriptionUpdate.Product.AdjustableQuantity#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** The maximum quantity that can be set for the product. */
+            public Builder setMaximum(Long maximum) {
+              this.maximum = maximum;
+              return this;
+            }
+
+            /** The minimum quantity that can be set for the product. */
+            public Builder setMinimum(Long minimum) {
+              this.minimum = minimum;
+              return this;
+            }
           }
         }
       }

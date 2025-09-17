@@ -1,5 +1,84 @@
 # Changelog
 
+## 29.5.0 - 2025-08-27
+* [#2034](https://github.com/stripe/stripe-java/pull/2034) Add section on private preview SDKs in readme
+* [#2030](https://github.com/stripe/stripe-java/pull/2030) Update generated code. This release changes the pinned API version to `2025-08-27.basil`.
+  * Add support for `balanceReport`, `payoutDetails`, and `payoutReconciliationReport` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `name` on `billingportal.ConfigurationCreateParams`, `billingportal.ConfigurationUpdateParams`, and `billingportal.Configuration`
+  * Add support for `installments` on `Charge.payment_method_details.alma`
+  * Add support for `transactionId` on `Charge.payment_method_details.alma`, `Charge.payment_method_details.amazon_pay`, `Charge.payment_method_details.billie`, `Charge.payment_method_details.kakao_pay`, `Charge.payment_method_details.kr_card`, `Charge.payment_method_details.naver_pay`, `Charge.payment_method_details.payco`, `Charge.payment_method_details.revolut_pay`, `Charge.payment_method_details.samsung_pay`, and `Charge.payment_method_details.satispay`
+  * Add support for `location` and `reader` on `Charge.payment_method_details.paynow`
+  * Add support for `amountIncludesIof` on `PaymentIntent.payment_method_options.pix`, `PaymentIntentConfirmParams.payment_method_options.pix`, `PaymentIntentCreateParams.payment_method_options.pix`, `PaymentIntentUpdateParams.payment_method_options.pix`, `checkout.Session.payment_method_options.pix`, and `checkout.SessionCreateParams.payment_method_options.pix`
+  * Add support for new value `terminal_android_apk` on enum `FileListParams.purpose`
+  * Add support for new value `terminal_android_apk` on enum `FileCreateParams.purpose`
+  * Add support for `metadata` and `period` on `InvoiceCreatePreviewParams.schedule_details.phases[].add_invoice_items[]`, `SubscriptionCreateParams.add_invoice_items[]`, `SubscriptionSchedule.phases[].add_invoice_items[]`, `SubscriptionScheduleCreateParams.phases[].add_invoice_items[]`, `SubscriptionScheduleUpdateParams.phases[].add_invoice_items[]`, and `SubscriptionUpdateParams.add_invoice_items[]`
+  * Add support for `expMonth` and `expYear` on `issuing.CardCreateParams`
+  * Add support for `excludedPaymentMethodTypes` on `PaymentIntentCreateParams` and `PaymentIntent`
+  * Add support for `payoutMethod` on `PayoutCreateParams` and `Payout`
+  * Add support for `mxn` on `terminal.Configuration.tipping`, `terminal.ConfigurationCreateParams.tipping`, and `terminal.ConfigurationUpdateParams.tipping`
+  * Add support for `card` on `terminal.ReaderPresentPaymentMethodParams`
+  * Add support for new value `card` on enum `terminal.ReaderPresentPaymentMethodParams.type`
+  * Add support for new value `2025-08-27.basil` on enum `WebhookEndpointCreateParams.apiVersion`
+* [#2032](https://github.com/stripe/stripe-java/pull/2032) Introduce V1 namespaces in StripeClient
+  - All the top level non-namespaced services under StripeClient services(eg. customers, products) are copied under the new V1 namespace. These top level non-namespaced services will be marked as deprecated in the next major release and will be removed in a future release. Eg.
+  ```diff
+  StripeClient client = new StripeClient("sk_test...")
+
+  # Accessing V1 Stripe services on a StripeClient should be through the V1 namespace
+  - client.customers().list()
+  + client.v1().customers().list()
+  ```
+  Refer to the [migration guide](https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient) for help upgrading.
+
+## 29.4.0 - 2025-07-30
+* [#2027](https://github.com/stripe/stripe-java/pull/2027) Update generated code. This release changes the pinned API version to `2025-07-30.basil`.
+  * Add support for `instantPayoutsPromotion` on `AccountSession.components` and `AccountSessionCreateParams.components`
+  * Add support for `adjustableQuantity` on `billingportal.Configuration.features.subscription_update.products[]`, `billingportal.ConfigurationCreateParams.features.subscription_update.products[]`, and `billingportal.ConfigurationUpdateParams.features.subscription_update.products[]`
+  * Add support for `transactionId` on `Charge.payment_method_details.cashapp`
+  * Add support for `originContext` on `checkout.SessionCreateParams` and `checkout.Session`
+  * Add support for `template` on `PaymentLink.invoice_creation.invoice_data.rendering_options`, `PaymentLinkCreateParams.invoice_creation.invoice_data.rendering_options`, `PaymentLinkUpdateParams.invoice_creation.invoice_data.rendering_options`, `checkout.Session.invoice_creation.invoice_data.rendering_options`, and `checkout.SessionCreateParams.invoice_creation.invoice_data.rendering_options`
+  * Add support for `setupFutureUsage` on `checkout.Session.payment_method_options.pix` and `checkout.SessionCreateParams.payment_method_options.pix`
+  * Add support for new value `nz_bank_account` on enum `checkout.SessionCreateParams.paymentMethodTypes`
+  * Add support for `duration` on `InvoiceCreatePreviewParams.schedule_details.phases[]`, `SubscriptionScheduleCreateParams.phases[]`, and `SubscriptionScheduleUpdateParams.phases[]`
+  * Add support for `priceData` on `PaymentLinkCreateParams.line_items[]`
+  * Change `PaymentLinkCreateParams.line_items[].price` to be optional
+  * Add support for new value `America/Coyhaique` on enum `reporting.ReportRunCreateParams.parameters.timezone`
+  * Add support for `standard` on `tax.Registration.country_options.ae`, `tax.Registration.country_options.au`, `tax.Registration.country_options.ch`, `tax.Registration.country_options.gb`, `tax.Registration.country_options.jp`, `tax.Registration.country_options.no`, `tax.Registration.country_options.nz`, `tax.Registration.country_options.sg`, `tax.RegistrationCreateParams.country_options.ae`, `tax.RegistrationCreateParams.country_options.al`, `tax.RegistrationCreateParams.country_options.ao`, `tax.RegistrationCreateParams.country_options.au`, `tax.RegistrationCreateParams.country_options.aw`, `tax.RegistrationCreateParams.country_options.ba`, `tax.RegistrationCreateParams.country_options.bb`, `tax.RegistrationCreateParams.country_options.bd`, `tax.RegistrationCreateParams.country_options.bf`, `tax.RegistrationCreateParams.country_options.bh`, `tax.RegistrationCreateParams.country_options.bs`, `tax.RegistrationCreateParams.country_options.cd`, `tax.RegistrationCreateParams.country_options.ch`, `tax.RegistrationCreateParams.country_options.et`, `tax.RegistrationCreateParams.country_options.gb`, `tax.RegistrationCreateParams.country_options.gn`, `tax.RegistrationCreateParams.country_options.is`, `tax.RegistrationCreateParams.country_options.jp`, `tax.RegistrationCreateParams.country_options.me`, `tax.RegistrationCreateParams.country_options.mk`, `tax.RegistrationCreateParams.country_options.mr`, `tax.RegistrationCreateParams.country_options.no`, `tax.RegistrationCreateParams.country_options.nz`, `tax.RegistrationCreateParams.country_options.om`, `tax.RegistrationCreateParams.country_options.rs`, `tax.RegistrationCreateParams.country_options.sg`, `tax.RegistrationCreateParams.country_options.sr`, `tax.RegistrationCreateParams.country_options.uy`, `tax.RegistrationCreateParams.country_options.za`, and `tax.RegistrationCreateParams.country_options.zw`
+  * Add support for new value `inbound_goods` on enums `tax.RegistrationCreateParams.country_options.at.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.be.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.bg.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.cy.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.cz.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.de.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.dk.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.ee.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.es.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.fi.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.fr.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.gr.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.hr.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.hu.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.ie.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.it.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.lt.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.lu.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.lv.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.mt.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.nl.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.pl.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.pt.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.ro.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.se.standard.placeOfSupplyScheme`, `tax.RegistrationCreateParams.country_options.si.standard.placeOfSupplyScheme`, and `tax.RegistrationCreateParams.country_options.sk.standard.placeOfSupplyScheme`
+  * Add support for `aed`, `bgn`, `huf`, and `ron` on `terminal.Configuration.tipping`, `terminal.ConfigurationCreateParams.tipping`, and `terminal.ConfigurationUpdateParams.tipping`
+  * Add support for new value `2025-07-30.basil` on enum `WebhookEndpointCreateParams.apiVersion`
+
+## 29.3.0 - 2025-07-01
+* [#2013](https://github.com/stripe/stripe-java/pull/2013) Update generated code. This release changes the pinned API version to `2025-06-30.basil`.
+  * Add support for `migrate` method on resource `Subscription`
+  * Add support for `collect_payment_method` and `confirm_payment_intent` methods on resource `terminal.Reader`
+  * Add support for `cryptoPayments` on `Account.capabilities`, `AccountCreateParams.capabilities`, and `AccountUpdateParams.capabilities`
+  * Add support for `proofOfAddress` on `AccountCreateParams.documents` and `AccountUpdateParams.documents`
+  * Add support for `monthlyPayoutDays` and `weeklyPayoutDays` on `Account.settings.payouts.schedule`, `AccountCreateParams.settings.payouts.schedule`, and `AccountUpdateParams.settings.payouts.schedule`
+  * Add support for `crypto` on `Charge.payment_method_details`, `ConfirmationToken.payment_method_preview`, `ConfirmationTokenCreateParams.payment_method_data`, `PaymentIntent.payment_method_options`, `PaymentIntentConfirmParams.payment_method_data`, `PaymentIntentConfirmParams.payment_method_options`, `PaymentIntentCreateParams.payment_method_data`, `PaymentIntentCreateParams.payment_method_options`, `PaymentIntentUpdateParams.payment_method_data`, `PaymentIntentUpdateParams.payment_method_options`, `PaymentMethodCreateParams`, `PaymentMethod`, `SetupIntentConfirmParams.payment_method_data`, `SetupIntentCreateParams.payment_method_data`, and `SetupIntentUpdateParams.payment_method_data`
+  * Change type of `Charge.payment_method_details.card.installments.plan.type`, `ConfirmationToken.payment_method_options.card.installments.plan.type`, `ConfirmationTokenCreateParams.payment_method_options.card.installments.plan.type`, `InvoiceCreateParams.payment_settings.payment_method_options.card.installments.plan.type`, `InvoiceUpdateParams.payment_settings.payment_method_options.card.installments.plan.type`, `PaymentIntent.payment_method_options.card.installments.available_plans[].type`, `PaymentIntent.payment_method_options.card.installments.plan.type`, `PaymentIntentConfirmParams.payment_method_options.card.installments.plan.type`, `PaymentIntentCreateParams.payment_method_options.card.installments.plan.type`, and `PaymentIntentUpdateParams.payment_method_options.card.installments.plan.type` from `literal('fixed_count')` to `enum('bonus'|'fixed_count'|'revolving')`
+  * Add support for `subscriptions` on `PaymentIntentConfirmParams.payment_method_options.klarna`, `PaymentIntentCreateParams.payment_method_options.klarna`, `PaymentIntentUpdateParams.payment_method_options.klarna`, and `checkout.SessionCreateParams.payment_method_options.klarna`
+  * Add support for new value `crypto` on enum `checkout.SessionCreateParams.paymentMethodTypes`
+  * Add support for `billingMode` on `InvoiceCreatePreviewParams.schedule_details`, `InvoiceCreatePreviewParams.subscription_details`, `Quote.subscription_data`, `QuoteCreateParams.subscription_data`, `SubscriptionCreateParams`, `SubscriptionScheduleCreateParams`, `SubscriptionSchedule`, `Subscription`, and `checkout.SessionCreateParams.subscription_data`
+  * Add support for new value `buut` on enums `ConfirmationTokenCreateParams.payment_method_data.ideal.bank`, `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for new value `crypto` on enums `ConfirmationTokenCreateParams.payment_method_data.type`, `PaymentIntentConfirmParams.payment_method_data.type`, `PaymentIntentCreateParams.payment_method_data.type`, `PaymentIntentUpdateParams.payment_method_data.type`, `SetupIntentConfirmParams.payment_method_data.type`, `SetupIntentCreateParams.payment_method_data.type`, and `SetupIntentUpdateParams.payment_method_data.type`
+  * Add support for new value `crypto` on enums `CustomerListPaymentMethodsParams.type`, `PaymentMethodCreateParams.type`, and `PaymentMethodListParams.type`
+  * Change type of `Dispute.enhancedEligibilityTypes` from `literal('visa_compelling_evidence_3')` to `enum('visa_compelling_evidence_3'|'visa_compliance')`
+  * Add support for `relatedPerson` on `identity.VerificationSessionCreateParams` and `identity.VerificationSession`
+  * Add support for `matching` on `identity.VerificationSession.options`
+  * Add support for new value `crypto` on enums `InvoiceCreateParams.payment_settings.paymentMethodTypes`, `InvoiceUpdateParams.payment_settings.paymentMethodTypes`, `SubscriptionCreateParams.payment_settings.paymentMethodTypes`, and `SubscriptionUpdateParams.payment_settings.paymentMethodTypes`
+  * Add support for `klarna` on `Mandate.payment_method_details`, `SetupIntent.payment_method_options`, `SetupIntentConfirmParams.payment_method_options`, `SetupIntentCreateParams.payment_method_options`, and `SetupIntentUpdateParams.payment_method_options`
+  * Add support for `onDemand` on `PaymentIntentConfirmParams.payment_method_options.klarna`, `PaymentIntentCreateParams.payment_method_options.klarna`, and `PaymentIntentUpdateParams.payment_method_options.klarna`
+  * Change type of `PaymentIntent.payment_method_options.klarna.setupFutureUsage`, `PaymentIntentConfirmParams.payment_method_options.klarna.setupFutureUsage`, `PaymentIntentCreateParams.payment_method_options.klarna.setupFutureUsage`, and `PaymentIntentUpdateParams.payment_method_options.klarna.setupFutureUsage` from `literal('none')` to `enum('none'|'off_session'|'on_session')`
+  * Add support for `ua` on `tax.Registration.country_options` and `tax.RegistrationCreateParams.country_options`
+  * Change type of `terminal.LocationUpdateParams.displayName` from `string` to `emptyable(string)`
+  * Add support for `collectPaymentMethod` and `confirmPaymentIntent` on `terminal.Reader.action`
+  * Add support for `status` on `treasury.FinancialAccountListParams`
+  * Add support for new value `terminal.reader.action_updated` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
+  * Add support for new value `2025-06-30.basil` on enum `WebhookEndpointCreateParams.apiVersion`
+  * Add support for snapshot event `terminal.reader.action_updated` with resource `terminal.Reader`
+* [#1987](https://github.com/stripe/stripe-java/pull/1987) Include Java versions 21, 22, 23, 24 in CI
+
 ## 29.2.0 - 2025-05-29
 
 * [#2000](https://github.com/stripe/stripe-java/pull/2000) Update generated code. This release changes the pinned API version to `2025-05-28.basil`.
@@ -301,7 +380,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 27.0.0 - 2024-10-01
 * [#1880](https://github.com/stripe/stripe-java/pull/1880) Support for APIs in the new API version 2024-09-30.acacia
 
-  This release changes the pinned API version to `2024-09-30.acacia`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-09-30.acacia) and carefully review the API changes before upgrading.
+  This release changes the pinned API version to `2024-09-30.acacia`. Please read the [API Changelog](https://docs.stripe.com/changelog/acacia#2024-09-30.acacia) and carefully review the API changes before upgrading.
 
   ### ⚠️ Breaking changes due to changes in the API
 
@@ -437,7 +516,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 26.0.0 - 2024-06-24
 * [#1825](https://github.com/stripe/stripe-java/pull/1825)
 
-  This release changes the pinned API version to 2024-06-20. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-06-20) and carefully review the API changes before upgrading.
+  This release changes the pinned API version to 2024-06-20. Please read the [API Changelog](https://docs.stripe.com/changelog/2024-06-20) and carefully review the API changes before upgrading.
 
   ### ⚠️ Breaking changes
 
@@ -585,7 +664,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 25.0.0 - 2024-04-10
 * [#1776](https://github.com/stripe/stripe-java/pull/1776)
 
-  * This release changes the pinned API version to `2024-04-10`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2024-04-10) and carefully review the API changes before upgrading.
+  * This release changes the pinned API version to `2024-04-10`. Please read the [API Changelog](https://docs.stripe.com/changelog/2024-04-10) and carefully review the API changes before upgrading.
 
   * Add a new `TaxIdService` for operations on `/v1/tax_ids` endpoints.
 
@@ -902,7 +981,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for new value `unreconciled_customer_funds` on enum `reporting.ReportRunCreateParams.parameters.reporting_category`
 
 ## 24.0.0 - 2023-10-16
-* This release changes the pinned API version to `2023-10-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
+* This release changes the pinned API version to `2023-10-16`. Please read the [API Changelog](https://docs.stripe.com/changelog/2023-10-16) and carefully review the API changes before upgrading `stripe-java`.
 * [#1672](https://github.com/stripe/stripe-java/pull/1672) Update generated code
   * Add support for `legal_guardian` on `AccountPersonsParams.relationship` and `TokenCreateParams.person.relationship`
   * Add support for `additional_tos_acceptances` on `TokenCreateParams.person`
@@ -992,7 +1071,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
   * Add support for `flat_amount` on `tax.TransactionCreateReversalParams`
 
 ## 23.0.0 - 2023-08-16
-* This release changes the pinned API version to `2023-08-16`. Please read the [API Upgrade Guide](https://stripe.com/docs/upgrades#2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
+* This release changes the pinned API version to `2023-08-16`. Please read the [API Changelog](https://docs.stripe.com/changelog/2023-08-16) and carefully review the API changes before upgrading `stripe-java`.
 * More information is available in the [stripe-java v23 migration guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v23)
 
 "⚠️" symbol highlights breaking changes.
@@ -1286,7 +1365,7 @@ However, [a bug](https://github.com/stripe/stripe-java/pull/1906) in the `27.x.y
 ## 22.0.0 - 2022-11-16
 * [#1471](https://github.com/stripe/stripe-java/pull/1471) Next major release changes
 
-Breaking changes that arose during code generation of the library that we postponed for the next major version. For changes to the Stripe products, read more at https://stripe.com/docs/upgrades#2022-11-15.
+Breaking changes that arose during code generation of the library that we postponed for the next major version. For changes to the Stripe products, read more at https://docs.stripe.com/changelog/2022-11-15.
 
 "⚠️" symbol highlights breaking changes.
 
@@ -1435,7 +1514,7 @@ RequestOptionsBuilder.unsafeSetStripeVersionOverride(builder, "2022-11-15");
 
 This release includes breaking changes resulting from:
 
-* Moving to use the new API version "2022-08-01". To learn more about these changes to Stripe products, see https://stripe.com/docs/upgrades#2022-08-01
+* Moving to use the new API version "2022-08-01". To learn more about these changes to Stripe products, see https://docs.stripe.com/changelog/2022-08-01
 * Cleaning up the SDK to remove deprecated/unused APIs and rename classes/methods/properties to sync with product APIs. Read more detailed description at https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v21.
 
 "⚠️" symbol highlights breaking changes.
@@ -2893,7 +2972,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * The above are technically breaking changes and should have been released with 14.0.0.
 
 ## 14.0.0 - 2019-10-18
-* [#863](https://github.com/stripe/stripe-java/pull/863) Upgrade to new API version [`2019-10-17`](https://stripe.com/docs/upgrades#2019-10-17)
+* [#863](https://github.com/stripe/stripe-java/pull/863) Upgrade to new API version [`2019-10-17`](https://docs.stripe.com/changelog/2019-10-17)
   * Pin to API version `2019-10-17`
   * Remove `account_balance` from Customer model and parameter classes
   * Remove `billing` from Invoice, Subscription and Subscription Schedule model and parameter classes
@@ -2920,7 +2999,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
   * Add support for `deviceType` on `ReaderListParams`
 
 ## 13.0.0 - 2019-10-08
-* [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://stripe.com/docs/upgrades#2019-10-08)
+* [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://docs.stripe.com/changelog/2019-10-08)
 
 ## 12.2.0 - 2019-10-08
 * [#852](https://github.com/stripe/stripe-java/pull/852) Setters for string properties in update params now all accept `EmptyParam`
@@ -2989,7 +3068,7 @@ Pull requests included in this release (cf. [#869](https://github.com/stripe/str
 * [#826](https://github.com/stripe/stripe-java/pull/826) Add support for `executive` on `Person` create, update and list
 
 ## 11.0.0 - 2019-08-14
-* [#825](https://github.com/stripe/stripe-java/pull/825) Move to API version [`2019-08-14`](https://stripe.com/docs/upgrades#2019-08-14)
+* [#825](https://github.com/stripe/stripe-java/pull/825) Move to API version [`2019-08-14`](https://docs.stripe.com/changelog/2019-08-14)
   * Rename `platform_payments` to `transfers` in `Account`
   * Introduce `executive` as a relationship on `Person`
 
@@ -3185,7 +3264,7 @@ Pull requests included in this release:
 * [#701](https://github.com/stripe/stripe-java/pull/701) Fix java doc on deprecated `EventData#getObject` and `Event#getDataObjectDeserializer`
 
 ## 8.0.0 - 2019-03-19
-* [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://stripe.com/docs/upgrades#2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
+* [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://docs.stripe.com/changelog/2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
 
 ## 7.63.1 - 2020-17-11
 * Identical to 7.29.0
@@ -3323,7 +3402,7 @@ Pull requests included in this release:
 * [#581](https://github.com/stripe/stripe-java/pull/581) Add `Topup.cancel()` overload with no arguments
 
 ## 6.8.0 - 2018-08-28
-* [#577](https://github.com/stripe/stripe-java/pull/577) Update `Customer` and `Plan` models for API version [2018-08-23](https://stripe.com/docs/upgrades#2018-08-23)
+* [#577](https://github.com/stripe/stripe-java/pull/577) Update `Customer` and `Plan` models for API version [2018-08-23](https://docs.stripe.com/changelog/2018-08-23)
 * [#579](https://github.com/stripe/stripe-java/pull/579) Add `authorizationCode` to `Charge`
 
 ## 6.7.0 - 2018-08-27
@@ -3562,7 +3641,7 @@ Pull requests included in this release:
 * Add support for `available_payout_methods` to `Card` model
 
 ## 4.2.0 - 2017-04-06
-* Add support for payouts; see: https://stripe.com/docs/upgrades#2017-04-06
+* Add support for payouts; see: https://docs.stripe.com/changelog/2017-04-06
 
 ## 4.1.0 - 2017-04-04
 * Make `rule` under `ChargeOutcome` expandable
@@ -3790,7 +3869,7 @@ Pull requests included in this release:
 
 ## 1.23.0 - 2014-12-08
 * Java 1.5 support dropped. We strongly suggest using newer versions of Java due to runtime, VM, language, and syntax improvements
-* Dispute Evidence has been updated to reflect the new version of Dispute evidence format introduced as part of api version 2014-12-08. See https://stripe.com/docs/upgrades#2014-12-08 for details
+* Dispute Evidence has been updated to reflect the new version of Dispute evidence format introduced as part of api version 2014-12-08. See https://docs.stripe.com/changelog/2014-12-08 for details
 
 ## 1.22.0 - 2014-12-03
 * Convention is to call methods with a RequestOptions object, instead of an API Key directly
@@ -3820,7 +3899,7 @@ Pull requests included in this release:
 * A few non-breaking general cleanups
 
 ## 1.18.0 - 2014-08-25
-* Added isChargeRefundable and balanceTransactions to Dispute https://stripe.com/docs/upgrades#2014-08-20
+* Added isChargeRefundable and balanceTransactions to Dispute https://docs.stripe.com/changelog/2014-08-20
 
 ## 1.17.0 - 2014-08-19
 * Added metadata to Coupons
@@ -3947,7 +4026,7 @@ Pull requests included in this release:
 
 ## 1.2.5 - 2013-07-15
 * Add support for new cards API.
-    * You will probably need to upgrade the Stripe API version on your account to 2013-07-05 or explicitly specify an API version with com.stripe.Stripe.apiVersion when you switch to this release of the bindings. More information about the relevant changes can be found at https://stripe.com/docs/upgrades#2013-07-05 and http://bit.ly/13miHM8
+    * You will probably need to upgrade the Stripe API version on your account to 2013-07-05 or explicitly specify an API version with com.stripe.Stripe.apiVersion when you switch to this release of the bindings. More information about the relevant changes can be found at https://docs.stripe.com/changelog/2013-07-05 and http://bit.ly/13miHM8
 * Add a StripeRawJsonObject type for deserializing webhook events we don't recognize
 * Add a Money class for representing account balances in individual currencies
 

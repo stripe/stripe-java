@@ -3047,10 +3047,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** ID of the invoice rendering template to use for this invoice. */
+        @SerializedName("template")
+        Object template;
+
         private RenderingOptions(
-            ApiRequestParams.EnumParam amountTaxDisplay, Map<String, Object> extraParams) {
+            ApiRequestParams.EnumParam amountTaxDisplay,
+            Map<String, Object> extraParams,
+            Object template) {
           this.amountTaxDisplay = amountTaxDisplay;
           this.extraParams = extraParams;
+          this.template = template;
         }
 
         public static Builder builder() {
@@ -3062,10 +3069,12 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          private Object template;
+
           /** Finalize and obtain parameter instance from this builder. */
           public PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions build() {
             return new PaymentLinkUpdateParams.InvoiceCreation.InvoiceData.RenderingOptions(
-                this.amountTaxDisplay, this.extraParams);
+                this.amountTaxDisplay, this.extraParams, this.template);
           }
 
           /**
@@ -3121,6 +3130,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
               this.extraParams = new HashMap<>();
             }
             this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** ID of the invoice rendering template to use for this invoice. */
+          public Builder setTemplate(String template) {
+            this.template = template;
+            return this;
+          }
+
+          /** ID of the invoice rendering template to use for this invoice. */
+          public Builder setTemplate(EmptyParam template) {
+            this.template = template;
             return this;
           }
         }
@@ -3276,7 +3297,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
       /**
        * The maximum quantity the customer can purchase. By default this value is 99. You can
-       * specify a value up to 999.
+       * specify a value up to 999999.
        */
       @SerializedName("maximum")
       Long maximum;
@@ -3354,7 +3375,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
         /**
          * The maximum quantity the customer can purchase. By default this value is 99. You can
-         * specify a value up to 999.
+         * specify a value up to 999999.
          */
         public Builder setMaximum(Long maximum) {
           this.maximum = maximum;

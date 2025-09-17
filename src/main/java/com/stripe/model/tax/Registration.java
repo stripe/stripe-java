@@ -525,6 +525,9 @@ public class Registration extends ApiResource implements HasId {
     @SerializedName("tz")
     Tz tz;
 
+    @SerializedName("ua")
+    Ua ua;
+
     @SerializedName("ug")
     Ug ug;
 
@@ -557,6 +560,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ae extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -564,6 +570,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -647,7 +670,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -662,6 +685,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Au extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -669,6 +695,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -786,7 +829,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -840,7 +883,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -976,6 +1019,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Ch extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -983,6 +1029,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -1100,7 +1163,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1137,7 +1200,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1174,7 +1237,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1211,7 +1274,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1265,7 +1328,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1319,7 +1382,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1373,7 +1436,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1410,7 +1473,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1425,6 +1488,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Gb extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -1432,6 +1498,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -1498,7 +1581,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1535,7 +1618,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1572,7 +1655,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1626,7 +1709,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1697,7 +1780,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1712,6 +1795,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Jp extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -1719,6 +1805,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -1853,7 +1956,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1890,7 +1993,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -1927,7 +2030,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2049,7 +2152,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2137,7 +2240,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2152,6 +2255,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class No extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -2159,6 +2265,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -2186,6 +2309,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Nz extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -2193,6 +2319,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -2276,7 +2419,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2313,7 +2456,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2350,7 +2493,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2438,7 +2581,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2453,6 +2596,9 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Sg extends StripeObject {
+      @SerializedName("standard")
+      Standard standard;
+
       /**
        * Type of registration in {@code country}.
        *
@@ -2460,6 +2606,23 @@ public class Registration extends ApiResource implements HasId {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Standard, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Standard extends StripeObject {
+        /**
+         * Place of supply scheme used in an Default standard registration.
+         *
+         * <p>One of {@code inbound_goods}, or {@code standard}.
+         */
+        @SerializedName("place_of_supply_scheme")
+        String placeOfSupplyScheme;
+      }
     }
 
     /**
@@ -2492,7 +2655,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2529,7 +2692,7 @@ public class Registration extends ApiResource implements HasId {
         /**
          * Place of supply scheme used in an EU standard registration.
          *
-         * <p>One of {@code small_seller}, or {@code standard}.
+         * <p>One of {@code inbound_goods}, {@code small_seller}, or {@code standard}.
          */
         @SerializedName("place_of_supply_scheme")
         String placeOfSupplyScheme;
@@ -2629,6 +2792,23 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Tz extends StripeObject {
+      /**
+       * Type of registration in {@code country}.
+       *
+       * <p>Equal to {@code simplified}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
+     * For more details about Ua, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ua extends StripeObject {
       /**
        * Type of registration in {@code country}.
        *

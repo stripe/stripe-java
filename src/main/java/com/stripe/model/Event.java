@@ -20,32 +20,24 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Events are our way of letting you know when something interesting happens in your account. When
- * an interesting event occurs, we create a new {@code Event} object. For example, when a charge
- * succeeds, we create a {@code charge.succeeded} event, and when an invoice payment attempt fails,
- * we create an {@code invoice.payment_failed} event. Certain API requests might create multiple
- * events. For example, if you create a new subscription for a customer, you receive both a {@code
+ * Snapshot events allow you to track and react to activity in your Stripe integration. When the
+ * state of another API resource changes, Stripe creates an {@code Event} object that contains all
+ * the relevant information associated with that action, including the affected API resource. For
+ * example, a successful payment triggers a {@code charge.succeeded} event, which contains the
+ * {@code Charge} in the event's data property. Some actions trigger multiple events. For example,
+ * if you create a new subscription for a customer, it triggers both a {@code
  * customer.subscription.created} event and a {@code charge.succeeded} event.
  *
- * <p>Events occur when the state of another API resource changes. The event's data field embeds the
- * resource's state at the time of the change. For example, a {@code charge.succeeded} event
- * contains a charge, and an {@code invoice.payment_failed} event contains an invoice.
+ * <p>Configure an event destination in your account to listen for events that represent actions
+ * your integration needs to respond to. Additionally, you can retrieve an individual event or a
+ * list of events from the API.
  *
- * <p>As with other API resources, you can use endpoints to retrieve an <a
- * href="https://stripe.com/docs/api#retrieve_event">individual event</a> or a <a
- * href="https://stripe.com/docs/api#list_events">list of events</a> from the API. We also have a
- * separate <a href="http://en.wikipedia.org/wiki/Webhook">webhooks</a> system for sending the
- * {@code Event} objects directly to an endpoint on your server. You can manage webhooks in your <a
- * href="https://dashboard.stripe.com/account/webhooks">account settings</a>. Learn how to <a
- * href="https://docs.stripe.com/webhooks">listen for events</a> so that your integration can
- * automatically trigger reactions.
+ * <p><a href="https://docs.stripe.com/connect">Connect</a> platforms can also receive event
+ * notifications that occur in their connected accounts. These events include an account attribute
+ * that identifies the relevant connected account.
  *
- * <p>When using <a href="https://docs.stripe.com/connect">Connect</a>, you can also receive event
- * notifications that occur in connected accounts. For these events, there's an additional {@code
- * account} attribute in the received {@code Event} object.
- *
- * <p>We only guarantee access to events through the <a
- * href="https://stripe.com/docs/api#retrieve_event">Retrieve Event API</a> for 30 days.
+ * <p>You can access events through the <a
+ * href="https://docs.stripe.com/api/events#retrieve_event">Retrieve Event API</a> for 30 days.
  */
 @Getter
 @Setter
@@ -56,8 +48,9 @@ public class Event extends ApiResource implements HasId {
   String account;
 
   /**
-   * The Stripe API version used to render {@code data}. This property is populated only for events
-   * on or after October 31, 2014.
+   * The Stripe API version used to render {@code data} when the event was created. The contents of
+   * {@code data} never change, so this value remains static regardless of the API version currently
+   * in use. This property is populated only for events created on or after October 31, 2014.
    */
   @SerializedName("api_version")
   String apiVersion;
@@ -191,13 +184,13 @@ public class Event extends ApiResource implements HasId {
    * subscription_schedule.expiring}, {@code subscription_schedule.released}, {@code
    * subscription_schedule.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
    * tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
-   * terminal.reader.action_succeeded}, {@code test_helpers.test_clock.advancing}, {@code
-   * test_helpers.test_clock.created}, {@code test_helpers.test_clock.deleted}, {@code
-   * test_helpers.test_clock.internal_failure}, {@code test_helpers.test_clock.ready}, {@code
-   * topup.canceled}, {@code topup.created}, {@code topup.failed}, {@code topup.reversed}, {@code
-   * topup.succeeded}, {@code transfer.created}, {@code transfer.reversed}, {@code
-   * transfer.updated}, {@code treasury.credit_reversal.created}, {@code
-   * treasury.credit_reversal.posted}, {@code treasury.debit_reversal.completed}, {@code
+   * terminal.reader.action_succeeded}, {@code terminal.reader.action_updated}, {@code
+   * test_helpers.test_clock.advancing}, {@code test_helpers.test_clock.created}, {@code
+   * test_helpers.test_clock.deleted}, {@code test_helpers.test_clock.internal_failure}, {@code
+   * test_helpers.test_clock.ready}, {@code topup.canceled}, {@code topup.created}, {@code
+   * topup.failed}, {@code topup.reversed}, {@code topup.succeeded}, {@code transfer.created},
+   * {@code transfer.reversed}, {@code transfer.updated}, {@code treasury.credit_reversal.created},
+   * {@code treasury.credit_reversal.posted}, {@code treasury.debit_reversal.completed}, {@code
    * treasury.debit_reversal.created}, {@code treasury.debit_reversal.initial_credit_granted},
    * {@code treasury.financial_account.closed}, {@code treasury.financial_account.created}, {@code
    * treasury.financial_account.features_status_updated}, {@code

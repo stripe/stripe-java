@@ -43,6 +43,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
 
+  /** The billing mode of the subscription. */
+  @SerializedName("billing_mode")
+  BillingMode billingMode;
+
   /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
    */
@@ -553,6 +557,24 @@ public class SubscriptionSchedule extends ApiResource
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, SubscriptionSchedule.class);
+  }
+
+  /** The billing mode of the subscription. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingMode extends StripeObject {
+    /**
+     * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
+     *
+     * <p>One of {@code classic}, or {@code flexible}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Details on when the current billing_mode was adopted. */
+    @SerializedName("updated_at")
+    Long updatedAt;
   }
 
   /**
@@ -1145,6 +1167,17 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("discounts")
       List<SubscriptionSchedule.Phase.AddInvoiceItem.Discount> discounts;
 
+      /**
+       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * attach to an object. This can be useful for storing additional information about the object
+       * in a structured format.
+       */
+      @SerializedName("metadata")
+      Map<String, String> metadata;
+
+      @SerializedName("period")
+      Period period;
+
       /** ID of the price used to generate the invoice item. */
       @SerializedName("price")
       @Getter(lombok.AccessLevel.NONE)
@@ -1261,6 +1294,69 @@ public class SubscriptionSchedule extends ApiResource
         public void setPromotionCodeObject(PromotionCode expandableObject) {
           this.promotionCode =
               new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+        }
+      }
+
+      /**
+       * For more details about Period, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Period extends StripeObject {
+        @SerializedName("end")
+        End end;
+
+        @SerializedName("start")
+        Start start;
+
+        /**
+         * For more details about End, please refer to the <a href="https://docs.stripe.com/api">API
+         * Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class End extends StripeObject {
+          /**
+           * A precise Unix timestamp for the end of the invoice item period. Must be greater than
+           * or equal to {@code period.start}.
+           */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * Select how to calculate the end of the invoice item period.
+           *
+           * <p>One of {@code min_item_period_end}, {@code phase_end}, or {@code timestamp}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /**
+         * For more details about Start, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Start extends StripeObject {
+          /**
+           * A precise Unix timestamp for the start of the invoice item period. Must be less than or
+           * equal to {@code period.end}.
+           */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * Select how to calculate the start of the invoice item period.
+           *
+           * <p>One of {@code max_item_period_start}, {@code phase_start}, or {@code timestamp}.
+           */
+          @SerializedName("type")
+          String type;
         }
       }
     }
@@ -1788,6 +1884,7 @@ public class SubscriptionSchedule extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(application, responseGetter);
+    trySetResponseGetter(billingMode, responseGetter);
     trySetResponseGetter(currentPhase, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);

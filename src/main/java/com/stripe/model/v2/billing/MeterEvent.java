@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Fix me empty_doc_string. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -33,17 +33,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_percent")
   Object applicationFeePercent;
 
-  /**
-   * Automatic tax settings for this subscription. We recommend you only include this parameter when
-   * the existing value is being changed.
-   */
+  /** Automatic tax settings for this subscription. */
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
   /**
-   * For new subscriptions, a past timestamp to backdate the subscription's start date to. If set,
-   * the first invoice will contain a proration for the timespan between the start date and the
-   * current time. Can be combined with trials and the billing cycle anchor.
+   * A past timestamp to backdate the subscription's start date to. If set, the first invoice will
+   * contain line items for the timespan between the start date and the current time. Can be
+   * combined with trials and the billing cycle anchor.
    */
   @SerializedName("backdate_start_date")
   Long backdateStartDate;
@@ -66,6 +63,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("billing_cycle_anchor_config")
   BillingCycleAnchorConfig billingCycleAnchorConfig;
 
+  /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+  @SerializedName("billing_mode")
+  BillingMode billingMode;
+
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period. When updating, pass an empty string to remove previously-defined thresholds.
@@ -84,8 +85,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Indicate whether this subscription should cancel at the end of the current period ({@code
-   * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-   * version. Please use {@code cancel_at} instead.
+   * current_period_end}). Defaults to {@code false}.
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
@@ -310,6 +310,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long backdateStartDate,
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
+      BillingMode billingMode,
       Object billingThresholds,
       Long cancelAt,
       Boolean cancelAtPeriodEnd,
@@ -344,6 +345,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.backdateStartDate = backdateStartDate;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+    this.billingMode = billingMode;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -390,6 +392,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private Long billingCycleAnchor;
 
     private BillingCycleAnchorConfig billingCycleAnchorConfig;
+
+    private BillingMode billingMode;
 
     private Object billingThresholds;
 
@@ -456,6 +460,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.backdateStartDate,
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
+          this.billingMode,
           this.billingThresholds,
           this.cancelAt,
           this.cancelAtPeriodEnd,
@@ -538,19 +543,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Automatic tax settings for this subscription. We recommend you only include this parameter
-     * when the existing value is being changed.
-     */
+    /** Automatic tax settings for this subscription. */
     public Builder setAutomaticTax(SubscriptionCreateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
       return this;
     }
 
     /**
-     * For new subscriptions, a past timestamp to backdate the subscription's start date to. If set,
-     * the first invoice will contain a proration for the timespan between the start date and the
-     * current time. Can be combined with trials and the billing cycle anchor.
+     * A past timestamp to backdate the subscription's start date to. If set, the first invoice will
+     * contain line items for the timespan between the start date and the current time. Can be
+     * combined with trials and the billing cycle anchor.
      */
     public Builder setBackdateStartDate(Long backdateStartDate) {
       this.backdateStartDate = backdateStartDate;
@@ -577,6 +579,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     public Builder setBillingCycleAnchorConfig(
         SubscriptionCreateParams.BillingCycleAnchorConfig billingCycleAnchorConfig) {
       this.billingCycleAnchorConfig = billingCycleAnchorConfig;
+      return this;
+    }
+
+    /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
+    public Builder setBillingMode(SubscriptionCreateParams.BillingMode billingMode) {
+      this.billingMode = billingMode;
       return this;
     }
 
@@ -612,8 +620,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Indicate whether this subscription should cancel at the end of the current period ({@code
-     * current_period_end}). Defaults to {@code false}. This param will be removed in a future API
-     * version. Please use {@code cancel_at} instead.
+     * current_period_end}). Defaults to {@code false}.
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -1103,6 +1110,22 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
+     * The period associated with this invoice item. Defaults to the current period of the
+     * subscription.
+     */
+    @SerializedName("period")
+    Period period;
+
     /** The ID of the price object. One of {@code price} or {@code price_data} is required. */
     @SerializedName("price")
     String price;
@@ -1128,12 +1151,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private AddInvoiceItem(
         List<SubscriptionCreateParams.AddInvoiceItem.Discount> discounts,
         Map<String, Object> extraParams,
+        Map<String, String> metadata,
+        Period period,
         String price,
         PriceData priceData,
         Long quantity,
         Object taxRates) {
       this.discounts = discounts;
       this.extraParams = extraParams;
+      this.metadata = metadata;
+      this.period = period;
       this.price = price;
       this.priceData = priceData;
       this.quantity = quantity;
@@ -1149,6 +1176,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Map<String, String> metadata;
+
+      private Period period;
+
       private String price;
 
       private PriceData priceData;
@@ -1162,6 +1193,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return new SubscriptionCreateParams.AddInvoiceItem(
             this.discounts,
             this.extraParams,
+            this.metadata,
+            this.period,
             this.price,
             this.priceData,
             this.quantity,
@@ -1219,6 +1252,41 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.AddInvoiceItem#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.AddInvoiceItem#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * The period associated with this invoice item. Defaults to the current period of the
+       * subscription.
+       */
+      public Builder setPeriod(SubscriptionCreateParams.AddInvoiceItem.Period period) {
+        this.period = period;
         return this;
       }
 
@@ -1385,6 +1453,317 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         public Builder setPromotionCode(String promotionCode) {
           this.promotionCode = promotionCode;
           return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Period {
+      /** <strong>Required.</strong> End of the invoice item period. */
+      @SerializedName("end")
+      End end;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Start of the invoice item period. */
+      @SerializedName("start")
+      Start start;
+
+      private Period(End end, Map<String, Object> extraParams, Start start) {
+        this.end = end;
+        this.extraParams = extraParams;
+        this.start = start;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private End end;
+
+        private Map<String, Object> extraParams;
+
+        private Start start;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.AddInvoiceItem.Period build() {
+          return new SubscriptionCreateParams.AddInvoiceItem.Period(
+              this.end, this.extraParams, this.start);
+        }
+
+        /** <strong>Required.</strong> End of the invoice item period. */
+        public Builder setEnd(SubscriptionCreateParams.AddInvoiceItem.Period.End end) {
+          this.end = end;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.AddInvoiceItem.Period#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.AddInvoiceItem.Period#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Start of the invoice item period. */
+        public Builder setStart(SubscriptionCreateParams.AddInvoiceItem.Period.Start start) {
+          this.start = start;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class End {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * A precise Unix timestamp for the end of the invoice item period. Must be greater than or
+         * equal to {@code period.start}.
+         */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * <strong>Required.</strong> Select how to calculate the end of the invoice item period.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private End(Map<String, Object> extraParams, Long timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.AddInvoiceItem.Period.End build() {
+            return new SubscriptionCreateParams.AddInvoiceItem.Period.End(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionCreateParams.AddInvoiceItem.Period.End#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionCreateParams.AddInvoiceItem.Period.End#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * A precise Unix timestamp for the end of the invoice item period. Must be greater than
+           * or equal to {@code period.start}.
+           */
+          public Builder setTimestamp(Long timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Select how to calculate the end of the invoice item period.
+           */
+          public Builder setType(SubscriptionCreateParams.AddInvoiceItem.Period.End.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("min_item_period_end")
+          MIN_ITEM_PERIOD_END("min_item_period_end"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Start {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * A precise Unix timestamp for the start of the invoice item period. Must be less than or
+         * equal to {@code period.end}.
+         */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * <strong>Required.</strong> Select how to calculate the start of the invoice item period.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private Start(Map<String, Object> extraParams, Long timestamp, Type type) {
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.AddInvoiceItem.Period.Start build() {
+            return new SubscriptionCreateParams.AddInvoiceItem.Period.Start(
+                this.extraParams, this.timestamp, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionCreateParams.AddInvoiceItem.Period.Start#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionCreateParams.AddInvoiceItem.Period.Start#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * A precise Unix timestamp for the start of the invoice item period. Must be less than or
+           * equal to {@code period.end}.
+           */
+          public Builder setTimestamp(Long timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Select how to calculate the start of the invoice item
+           * period.
+           */
+          public Builder setType(SubscriptionCreateParams.AddInvoiceItem.Period.Start.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("max_item_period_start")
+          MAX_ITEM_PERIOD_START("max_item_period_start"),
+
+          @SerializedName("now")
+          NOW("now"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
@@ -1790,8 +2169,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class BillingCycleAnchorConfig {
     /**
-     * <strong>Required.</strong> The day of the month the billing_cycle_anchor should be. Ranges
-     * from 1 to 31.
+     * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1 to 31.
      */
     @SerializedName("day_of_month")
     Long dayOfMonth;
@@ -1805,19 +2183,19 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The hour of the day the billing_cycle_anchor should be. Ranges from 0 to 23. */
+    /** The hour of the day the anchor should be. Ranges from 0 to 23. */
     @SerializedName("hour")
     Long hour;
 
-    /** The minute of the hour the billing_cycle_anchor should be. Ranges from 0 to 59. */
+    /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
     @SerializedName("minute")
     Long minute;
 
-    /** The month to start full cycle billing periods. Ranges from 1 to 12. */
+    /** The month to start full cycle periods. Ranges from 1 to 12. */
     @SerializedName("month")
     Long month;
 
-    /** The second of the minute the billing_cycle_anchor should be. Ranges from 0 to 59. */
+    /** The second of the minute the anchor should be. Ranges from 0 to 59. */
     @SerializedName("second")
     Long second;
 
@@ -1860,8 +2238,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * <strong>Required.</strong> The day of the month the billing_cycle_anchor should be. Ranges
-       * from 1 to 31.
+       * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1 to 31.
        */
       public Builder setDayOfMonth(Long dayOfMonth) {
         this.dayOfMonth = dayOfMonth;
@@ -1895,28 +2272,118 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The hour of the day the billing_cycle_anchor should be. Ranges from 0 to 23. */
+      /** The hour of the day the anchor should be. Ranges from 0 to 23. */
       public Builder setHour(Long hour) {
         this.hour = hour;
         return this;
       }
 
-      /** The minute of the hour the billing_cycle_anchor should be. Ranges from 0 to 59. */
+      /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
       public Builder setMinute(Long minute) {
         this.minute = minute;
         return this;
       }
 
-      /** The month to start full cycle billing periods. Ranges from 1 to 12. */
+      /** The month to start full cycle periods. Ranges from 1 to 12. */
       public Builder setMonth(Long month) {
         this.month = month;
         return this;
       }
 
-      /** The second of the minute the billing_cycle_anchor should be. Ranges from 0 to 59. */
+      /** The second of the minute the anchor should be. Ranges from 0 to 59. */
       public Builder setSecond(Long second) {
         this.second = second;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingMode {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
+     * invoices for subscriptions.
+     */
+    @SerializedName("type")
+    Type type;
+
+    private BillingMode(Map<String, Object> extraParams, Type type) {
+      this.extraParams = extraParams;
+      this.type = type;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Type type;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionCreateParams.BillingMode build() {
+        return new SubscriptionCreateParams.BillingMode(this.extraParams, this.type);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.BillingMode#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.BillingMode#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
+       * invoices for subscriptions.
+       */
+      public Builder setType(SubscriptionCreateParams.BillingMode.Type type) {
+        this.type = type;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("classic")
+      CLASSIC("classic"),
+
+      @SerializedName("flexible")
+      FLEXIBLE("flexible");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }
@@ -5229,6 +5696,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("cashapp")
       CASHAPP("cashapp"),
+
+      @SerializedName("crypto")
+      CRYPTO("crypto"),
 
       @SerializedName("customer_balance")
       CUSTOMER_BALANCE("customer_balance"),

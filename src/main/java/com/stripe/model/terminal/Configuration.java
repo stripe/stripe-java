@@ -23,7 +23,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A Configurations object represents how features should be configured for terminal readers. */
+/**
+ * A Configurations object represents how features should be configured for terminal readers. For
+ * information about how to use it, see the <a
+ * href="https://docs.stripe.com/terminal/fleet/configurations-overview">Terminal configurations
+ * documentation</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -360,8 +365,14 @@ public class Configuration extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Tipping extends StripeObject {
+    @SerializedName("aed")
+    Aed aed;
+
     @SerializedName("aud")
     Aud aud;
+
+    @SerializedName("bgn")
+    Bgn bgn;
 
     @SerializedName("cad")
     Cad cad;
@@ -384,8 +395,14 @@ public class Configuration extends ApiResource implements HasId {
     @SerializedName("hkd")
     Hkd hkd;
 
+    @SerializedName("huf")
+    Huf huf;
+
     @SerializedName("jpy")
     Jpy jpy;
+
+    @SerializedName("mxn")
+    Mxn mxn;
 
     @SerializedName("myr")
     Myr myr;
@@ -399,6 +416,9 @@ public class Configuration extends ApiResource implements HasId {
     @SerializedName("pln")
     Pln pln;
 
+    @SerializedName("ron")
+    Ron ron;
+
     @SerializedName("sek")
     Sek sek;
 
@@ -409,6 +429,30 @@ public class Configuration extends ApiResource implements HasId {
     Usd usd;
 
     /**
+     * For more details about Aed, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Aed extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
      * For more details about Aud, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -416,6 +460,30 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Aud extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
+     * For more details about Bgn, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bgn extends StripeObject {
       /** Fixed amounts displayed when collecting a tip. */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
@@ -601,6 +669,30 @@ public class Configuration extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Huf, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Huf extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
      * For more details about Jpy, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -608,6 +700,30 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Jpy extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
+     * For more details about Mxn, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Mxn extends StripeObject {
       /** Fixed amounts displayed when collecting a tip. */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;
@@ -704,6 +820,30 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pln extends StripeObject {
+      /** Fixed amounts displayed when collecting a tip. */
+      @SerializedName("fixed_amounts")
+      List<Long> fixedAmounts;
+
+      /** Percentages displayed when collecting a tip. */
+      @SerializedName("percentages")
+      List<Long> percentages;
+
+      /**
+       * Below this amount, fixed amounts will be displayed; above it, percentages will be
+       * displayed.
+       */
+      @SerializedName("smart_tip_threshold")
+      Long smartTipThreshold;
+    }
+
+    /**
+     * For more details about Ron, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ron extends StripeObject {
       /** Fixed amounts displayed when collecting a tip. */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;

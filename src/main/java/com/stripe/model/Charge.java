@@ -1032,8 +1032,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     String networkAdviceCode;
 
     /**
-     * For charges declined by the network, a brand specific 2, 3, or 4 digit code which indicates
-     * the reason the authorization failed.
+     * For charges declined by the network, an alphanumeric code which indicates the reason the
+     * charge failed.
      */
     @SerializedName("network_decline_code")
     String networkDeclineCode;
@@ -1052,9 +1052,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
      * An enumerated value providing a more detailed explanation of the outcome's {@code type}.
      * Charges blocked by Radar's default block rule have the value {@code highest_risk_level}.
      * Charges placed in review by Radar's default review rule have the value {@code
-     * elevated_risk_level}. Charges authorized, blocked, or placed in review by custom rules have
-     * the value {@code rule}. See <a href="https://stripe.com/docs/declines">understanding
-     * declines</a> for more details.
+     * elevated_risk_level}. Charges blocked because the payment is unlikely to be authorized have
+     * the value {@code low_probability_of_authorization}. Charges authorized, blocked, or placed in
+     * review by custom rules have the value {@code rule}. See <a
+     * href="https://stripe.com/docs/declines">understanding declines</a> for more details.
      */
     @SerializedName("reason")
     String reason;
@@ -1199,6 +1200,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("cashapp")
     Cashapp cashapp;
+
+    @SerializedName("crypto")
+    Crypto crypto;
 
     @SerializedName("customer_balance")
     CustomerBalance customerBalance;
@@ -1501,7 +1505,27 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Alma extends StripeObject {}
+    public static class Alma extends StripeObject {
+      @SerializedName("installments")
+      Installments installments;
+
+      /** The Alma transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+
+      /**
+       * For more details about Installments, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        /** The number of installments. */
+        @SerializedName("count")
+        Long count;
+      }
+    }
 
     /**
      * For more details about AmazonPay, please refer to the <a
@@ -1513,6 +1537,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public static class AmazonPay extends StripeObject {
       @SerializedName("funding")
       Funding funding;
+
+      /** The Amazon Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
 
       /**
        * For more details about Funding, please refer to the <a
@@ -1542,9 +1570,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
-           * {@code unknown}.
+           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+           * unionpay}, {@code visa} or {@code unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -1735,7 +1763,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Billie extends StripeObject {}
+    public static class Billie extends StripeObject {
+      /** The Billie transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /**
      * For more details about Blik, please refer to the <a href="https://docs.stripe.com/api">API
@@ -1783,9 +1815,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String authorizationCode;
 
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
-       * unknown}.
+       * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+       * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+       * unionpay}, {@code visa} or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -1856,7 +1888,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       IncrementalAuthorization incrementalAuthorization;
 
       /**
-       * Installment details for this payment (Mexico only).
+       * Installment details for this payment.
        *
        * <p>For more information, see the <a
        * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
@@ -2029,7 +2061,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
           @SerializedName("interval")
           String interval;
 
-          /** Type of installment plan, one of {@code fixed_count}. */
+          /**
+           * Type of installment plan, one of {@code fixed_count}, {@code bonus}, or {@code
+           * revolving}.
+           */
           @SerializedName("type")
           String type;
         }
@@ -2345,9 +2380,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       Long amountAuthorized;
 
       /**
-       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-       * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
-       * unknown}.
+       * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+       * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+       * unionpay}, {@code visa} or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -2482,7 +2517,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("overcapture_supported")
       Boolean overcaptureSupported;
 
-      /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+      /**
+       * The languages that the issuing bank recommends using for localizing any customer-facing
+       * text, as read from the card. Referenced from EMV tag 5F2D, data encoded on the card's chip.
+       */
       @SerializedName("preferred_locales")
       List<String> preferredLocales;
 
@@ -2542,11 +2580,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("account_type")
         String accountType;
 
-        /** EMV tag 9F26, cryptogram generated by the integrated circuit chip. */
+        /**
+         * The Application Cryptogram, a unique value generated by the card to authenticate the
+         * transaction with issuers.
+         */
         @SerializedName("application_cryptogram")
         String applicationCryptogram;
 
-        /** Mnenomic of the Application Identifier. */
+        /**
+         * The Application Identifier (AID) on the card used to determine which networks are
+         * eligible to process the transaction. Referenced from EMV tag 9F12, data encoded on the
+         * card's chip.
+         */
         @SerializedName("application_preferred_name")
         String applicationPreferredName;
 
@@ -2567,16 +2612,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String cardholderVerificationMethod;
 
         /**
-         * EMV tag 84. Similar to the application identifier stored on the integrated circuit chip.
+         * Similar to the application_preferred_name, identifying the applications (AIDs) available
+         * on the card. Referenced from EMV tag 84.
          */
         @SerializedName("dedicated_file_name")
         String dedicatedFileName;
 
-        /** The outcome of a series of EMV functions performed by the card reader. */
+        /**
+         * A 5-byte string that records the checks and validations that occur between the card and
+         * the terminal. These checks determine how the terminal processes the transaction and what
+         * risk tolerance is acceptable. Referenced from EMV Tag 95.
+         */
         @SerializedName("terminal_verification_results")
         String terminalVerificationResults;
 
-        /** An indication of various EMV functions performed during the transaction. */
+        /**
+         * An indication of which steps were completed during the card read process. Referenced from
+         * EMV Tag 9B.
+         */
         @SerializedName("transaction_status_information")
         String transactionStatusInformation;
       }
@@ -2613,6 +2666,43 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** A public identifier for buyers using Cash App. */
       @SerializedName("cashtag")
       String cashtag;
+
+      /** A unique and immutable identifier of payments assigned by Cash App. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
+
+    /**
+     * For more details about Crypto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Crypto extends StripeObject {
+      /** The wallet address of the customer. */
+      @SerializedName("buyer_address")
+      String buyerAddress;
+
+      /**
+       * The blockchain network that the transaction was sent on.
+       *
+       * <p>One of {@code base}, {@code ethereum}, or {@code polygon}.
+       */
+      @SerializedName("network")
+      String network;
+
+      /**
+       * The token currency that the transaction was sent with.
+       *
+       * <p>One of {@code usdc}, {@code usdg}, or {@code usdp}.
+       */
+      @SerializedName("token_currency")
+      String tokenCurrency;
+
+      /** The blockchain transaction hash of the crypto payment. */
+      @SerializedName("transaction_hash")
+      String transactionHash;
     }
 
     /**
@@ -2738,9 +2828,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     public static class Ideal extends StripeObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code n26}, {@code nn}, {@code
-       * rabobank}, {@code regiobank}, {@code revolut}, {@code sns_bank}, {@code triodos_bank},
-       * {@code van_lanschot}, or {@code yoursafe}.
+       * buut}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code n26},
+       * {@code nn}, {@code rabobank}, {@code regiobank}, {@code revolut}, {@code sns_bank}, {@code
+       * triodos_bank}, {@code van_lanschot}, or {@code yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -2749,9 +2839,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        * The Bank Identifier Code of the customer's bank.
        *
        * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
-       * FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code MOYONL21}, {@code
-       * NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code
-       * REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
+       * BUUTNL2A}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code
+       * MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code
+       * REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;
@@ -2935,7 +3025,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("network_transaction_id")
       String networkTransactionId;
 
-      /** EMV tag 5F2D. Preferred languages specified by the integrated circuit chip. */
+      /**
+       * The languages that the issuing bank recommends using for localizing any customer-facing
+       * text, as read from the card. Referenced from EMV tag 5F2D, data encoded on the card's chip.
+       */
       @SerializedName("preferred_locales")
       List<String> preferredLocales;
 
@@ -2971,11 +3064,18 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @SerializedName("account_type")
         String accountType;
 
-        /** EMV tag 9F26, cryptogram generated by the integrated circuit chip. */
+        /**
+         * The Application Cryptogram, a unique value generated by the card to authenticate the
+         * transaction with issuers.
+         */
         @SerializedName("application_cryptogram")
         String applicationCryptogram;
 
-        /** Mnenomic of the Application Identifier. */
+        /**
+         * The Application Identifier (AID) on the card used to determine which networks are
+         * eligible to process the transaction. Referenced from EMV tag 9F12, data encoded on the
+         * card's chip.
+         */
         @SerializedName("application_preferred_name")
         String applicationPreferredName;
 
@@ -2996,16 +3096,24 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String cardholderVerificationMethod;
 
         /**
-         * EMV tag 84. Similar to the application identifier stored on the integrated circuit chip.
+         * Similar to the application_preferred_name, identifying the applications (AIDs) available
+         * on the card. Referenced from EMV tag 84.
          */
         @SerializedName("dedicated_file_name")
         String dedicatedFileName;
 
-        /** The outcome of a series of EMV functions performed by the card reader. */
+        /**
+         * A 5-byte string that records the checks and validations that occur between the card and
+         * the terminal. These checks determine how the terminal processes the transaction and what
+         * risk tolerance is acceptable. Referenced from EMV Tag 95.
+         */
         @SerializedName("terminal_verification_results")
         String terminalVerificationResults;
 
-        /** An indication of various EMV functions performed during the transaction. */
+        /**
+         * An indication of which steps were completed during the card read process. Referenced from
+         * EMV Tag 9B.
+         */
         @SerializedName("transaction_status_information")
         String transactionStatusInformation;
       }
@@ -3022,6 +3130,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Kakao Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -3144,6 +3256,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** The last four digits of the card. This may not be present for American Express cards. */
       @SerializedName("last4")
       String last4;
+
+      /** The Korean Card transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -3232,6 +3348,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Naver Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -3337,6 +3457,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Payco transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -3347,6 +3471,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paynow extends StripeObject {
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
+
       /** Reference number associated with this PayNow payment. */
       @SerializedName("reference")
       String reference;
@@ -3456,6 +3594,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("funding")
       Funding funding;
 
+      /** The Revolut Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+
       /**
        * For more details about Funding, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -3484,9 +3626,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         @EqualsAndHashCode(callSuper = false)
         public static class Card extends StripeObject {
           /**
-           * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code eftpos_au},
-           * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or
-           * {@code unknown}.
+           * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
+           * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
+           * unionpay}, {@code visa} or {@code unknown}.
            */
           @SerializedName("brand")
           String brand;
@@ -3531,6 +3673,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** A unique identifier for the buyer as determined by the local payment processor. */
       @SerializedName("buyer_id")
       String buyerId;
+
+      /** The Samsung Pay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
     }
 
     /**
@@ -3540,7 +3686,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Satispay extends StripeObject {}
+    public static class Satispay extends StripeObject {
+      /** The Satispay transaction ID associated with this payment. */
+      @SerializedName("transaction_id")
+      String transactionId;
+    }
 
     /**
      * For more details about SepaCreditTransfer, please refer to the <a
@@ -3878,7 +4028,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PresentmentDetails extends StripeObject {
-    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    /**
+     * Amount intended to be collected by this payment, denominated in {@code presentment_currency}.
+     */
     @SerializedName("presentment_amount")
     Long presentmentAmount;
 

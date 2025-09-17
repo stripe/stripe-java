@@ -90,6 +90,10 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The name of the configuration. */
+  @SerializedName("name")
+  String name;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -453,6 +457,9 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Product extends StripeObject {
+        @SerializedName("adjustable_quantity")
+        AdjustableQuantity adjustableQuantity;
+
         /** The list of price IDs which, when subscribed to, a subscription can be updated. */
         @SerializedName("prices")
         List<String> prices;
@@ -460,6 +467,27 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
         /** The product ID. */
         @SerializedName("product")
         String product;
+
+        /**
+         * For more details about AdjustableQuantity, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AdjustableQuantity extends StripeObject {
+          /** If true, the quantity can be adjusted to any non-negative integer. */
+          @SerializedName("enabled")
+          Boolean enabled;
+
+          /** The maximum quantity that can be set for the product. */
+          @SerializedName("maximum")
+          Long maximum;
+
+          /** The minimum quantity that can be set for the product. */
+          @SerializedName("minimum")
+          Long minimum;
+        }
       }
 
       /**

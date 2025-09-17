@@ -63,10 +63,7 @@ public class MeterEventAdjustment extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
-  /**
-   * For more details about Cancel, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Specifies which event to cancel. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

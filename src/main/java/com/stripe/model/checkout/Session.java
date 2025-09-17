@@ -275,6 +275,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   List<Session.OptionalItem> optionalItems;
 
   /**
+   * Where the user is coming from. This informs the optimizations that are applied to the session.
+   *
+   * <p>One of {@code mobile_app}, or {@code web}.
+   */
+  @SerializedName("origin_context")
+  String originContext;
+
+  /**
    * The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. You can't confirm or
    * cancel the PaymentIntent for a Checkout Session. To cancel, <a
    * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>
@@ -868,7 +876,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AdaptivePricing extends StripeObject {
-    /** Whether Adaptive Pricing is enabled. */
+    /**
+     * If enabled, Adaptive Pricing is available on <a
+     * href="https://docs.stripe.com/payments/currencies/localize-prices/adaptive-pricing?payment-ui=stripe-hosted#restrictions">eligible
+     * sessions</a>.
+     */
     @SerializedName("enabled")
     Boolean enabled;
   }
@@ -1685,6 +1697,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
          */
         @SerializedName("amount_tax_display")
         String amountTaxDisplay;
+
+        /** ID of the invoice rendering template to be used for the generated invoice. */
+        @SerializedName("template")
+        String template;
       }
     }
   }
@@ -3201,9 +3217,41 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Pix extends StripeObject {
+      /**
+       * Determines if the amount includes the IOF tax.
+       *
+       * <p>One of {@code always}, or {@code never}.
+       */
+      @SerializedName("amount_includes_iof")
+      String amountIncludesIof;
+
       /** The number of seconds after which Pix payment will expire. */
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>Equal to {@code none}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
     }
 
     /**
@@ -3511,7 +3559,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PresentmentDetails extends StripeObject {
-    /** Amount intended to be collected by this payment, denominated in presentment_currency. */
+    /**
+     * Amount intended to be collected by this payment, denominated in {@code presentment_currency}.
+     */
     @SerializedName("presentment_amount")
     Long presentmentAmount;
 

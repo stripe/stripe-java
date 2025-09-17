@@ -312,10 +312,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>Test-mode accounts can be deleted at any time.
    *
-   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
-   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
-   * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
+   * <p>Live-mode accounts that have access to the standard dashboard and Stripe is responsible for
+   * negative account balances cannot be deleted, which includes Standard accounts. All other
+   * Live-mode accounts, can be deleted when all <a
+   * href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -330,10 +330,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>Test-mode accounts can be deleted at any time.
    *
-   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
-   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
-   * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
+   * <p>Live-mode accounts that have access to the standard dashboard and Stripe is responsible for
+   * negative account balances cannot be deleted, which includes Standard accounts. All other
+   * Live-mode accounts, can be deleted when all <a
+   * href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -348,10 +348,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>Test-mode accounts can be deleted at any time.
    *
-   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
-   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
-   * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
+   * <p>Live-mode accounts that have access to the standard dashboard and Stripe is responsible for
+   * negative account balances cannot be deleted, which includes Standard accounts. All other
+   * Live-mode accounts, can be deleted when all <a
+   * href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -366,10 +366,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    *
    * <p>Test-mode accounts can be deleted at any time.
    *
-   * <p>Live-mode accounts where Stripe is responsible for negative account balances cannot be
-   * deleted, which includes Standard accounts. Live-mode accounts where your platform is liable for
-   * negative account balances, which includes Custom and Express accounts, can be deleted when all
-   * <a href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
+   * <p>Live-mode accounts that have access to the standard dashboard and Stripe is responsible for
+   * negative account balances cannot be deleted, which includes Standard accounts. All other
+   * Live-mode accounts, can be deleted when all <a
+   * href="https://stripe.com/api/balance/balance_object">balances</a> are zero.
    *
    * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/settings/account">account information tab in your account
@@ -755,7 +755,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("mcc")
     String mcc;
 
-    /** Whether the business is a minority-owned, women-owned, and/or LGBTQI+-owned business. */
+    /** Whether the business is a minority-owned, women-owned, and/or LGBTQI+ -owned business. */
     @SerializedName("minority_owned_business_designation")
     List<String> minorityOwnedBusinessDesignation;
 
@@ -1000,6 +1000,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("cashapp_payments")
     String cashappPayments;
+
+    /**
+     * The status of the Crypto capability of the account, or whether the account can directly
+     * process Crypto payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("crypto_payments")
+    String cryptoPayments;
 
     /**
      * The status of the EPS payments capability of the account, or whether the account can directly
@@ -1705,7 +1714,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         /**
          * The back of a document returned by a <a
          * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code additional_verification}.
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -1731,7 +1741,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         /**
          * The front of a document returned by a <a
          * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code additional_verification}.
+         * value of {@code additional_verification}. Note that {@code additional_verification} files
+         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)
@@ -2710,11 +2721,26 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         Long monthlyAnchor;
 
         /**
+         * The days of the month funds will be paid out. Only shown if {@code interval} is monthly.
+         * Payouts scheduled between the 29th and 31st of the month are sent on the last day of
+         * shorter months.
+         */
+        @SerializedName("monthly_payout_days")
+        List<Long> monthlyPayoutDays;
+
+        /**
          * The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only
          * shown if {@code interval} is weekly.
          */
         @SerializedName("weekly_anchor")
         String weeklyAnchor;
+
+        /**
+         * The days of the week when available funds are paid out, specified as an array, for
+         * example, [{@code monday}, {@code tuesday}]. Only shown if {@code interval} is weekly.
+         */
+        @SerializedName("weekly_payout_days")
+        List<String> weeklyPayoutDays;
       }
     }
 
