@@ -38,10 +38,10 @@ public final class V2CoreHealthTrafficVolumeDropResolvedEvent extends Event {
     public static final class Impact {
       /** The total volume of payment requests within the latest observation time window. */
       @SerializedName("actual_traffic")
-      Integer actualTraffic;
+      Long actualTraffic;
       /** The expected volume of payment requests within the latest observation time window. */
       @SerializedName("expected_traffic")
-      Integer expectedTraffic;
+      Long expectedTraffic;
       /** The size of the observation time window. */
       @SerializedName("time_window")
       String timeWindow;

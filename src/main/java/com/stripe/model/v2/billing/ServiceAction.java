@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -64,7 +65,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
   /** The length of the interval for assessing service. */
   @SerializedName("service_interval_count")
-  Integer serviceIntervalCount;
+  Long serviceIntervalCount;
 
   /**
    * The type of the service action.
@@ -74,10 +75,7 @@ public class ServiceAction extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
-  /**
-   * For more details about CreditGrant, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Details for the credit grant. Provided only if {@code type} is &quot;credit_grant&quot;. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -90,14 +88,6 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
 
-    /**
-     * The category of the credit grant.
-     *
-     * <p>One of {@code paid}, or {@code promotional}.
-     */
-    @SerializedName("category")
-    String category;
-
     /** The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
     ExpiryConfig expiryConfig;
@@ -106,17 +96,7 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("name")
     String name;
 
-    /**
-     * The desired priority for applying this credit grant. If not specified, it will be set to the
-     * default value of 50. The highest priority is 0 and the lowest is 100.
-     */
-    @SerializedName("priority")
-    Integer priority;
-
-    /**
-     * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** The amount of the credit grant. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -142,8 +122,8 @@ public class ServiceAction extends StripeObject implements HasId {
       String type;
 
       /**
-       * For more details about CustomPricingUnit, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The custom pricing unit amount of the credit grant. Required if {@code type} is {@code
+       * custom_pricing_unit}.
        */
       @Getter
       @Setter
@@ -156,14 +136,11 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        String value;
+        BigDecimal value;
       }
     }
 
-    /**
-     * For more details about ApplicabilityConfig, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Defines the scope where the credit grant is applicable. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -172,10 +149,7 @@ public class ServiceAction extends StripeObject implements HasId {
       @SerializedName("scope")
       Scope scope;
 
-      /**
-       * For more details about Scope, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
+      /** The applicability scope of the credit grant. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -196,10 +170,7 @@ public class ServiceAction extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about ExpiryConfig, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The expiry configuration for the credit grant. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -215,8 +186,8 @@ public class ServiceAction extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about CreditGrantPerTenant, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * Details for the credit grant per tenant. Provided only if {@code type} is
+   * &quot;credit_grant_per_tenant&quot;.
    */
   @Getter
   @Setter
@@ -230,14 +201,6 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
 
-    /**
-     * The category of the credit grant.
-     *
-     * <p>One of {@code paid}, or {@code promotional}.
-     */
-    @SerializedName("category")
-    String category;
-
     /** The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
     ExpiryConfig expiryConfig;
@@ -246,17 +209,7 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("name")
     String name;
 
-    /**
-     * The desired priority for applying this credit grant. If not specified, it will be set to the
-     * default value of 50. The highest priority is 0 and the lowest is 100.
-     */
-    @SerializedName("priority")
-    Integer priority;
-
-    /**
-     * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** The amount of the credit grant. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -282,8 +235,8 @@ public class ServiceAction extends StripeObject implements HasId {
       String type;
 
       /**
-       * For more details about CustomPricingUnit, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The custom pricing unit amount of the credit grant. Required if {@code type} is {@code
+       * custom_pricing_unit}.
        */
       @Getter
       @Setter
@@ -296,14 +249,11 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        String value;
+        BigDecimal value;
       }
     }
 
-    /**
-     * For more details about ApplicabilityConfig, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Defines the scope where the credit grant is applicable. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -312,10 +262,7 @@ public class ServiceAction extends StripeObject implements HasId {
       @SerializedName("scope")
       Scope scope;
 
-      /**
-       * For more details about Scope, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
+      /** The applicability scope of the credit grant. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -336,10 +283,7 @@ public class ServiceAction extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about ExpiryConfig, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The expiry configuration for the credit grant. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

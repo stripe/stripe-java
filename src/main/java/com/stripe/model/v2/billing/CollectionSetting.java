@@ -6,10 +6,12 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Settings that configure and manage the behavior of collecting payments. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -90,10 +92,7 @@ public class CollectionSetting extends StripeObject implements HasId {
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
-  /**
-   * For more details about EmailDelivery, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Email delivery settings. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -106,8 +105,8 @@ public class CollectionSetting extends StripeObject implements HasId {
     PaymentDue paymentDue;
 
     /**
-     * For more details about PaymentDue, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * Controls emails for when the payment is due. For example after the invoice is finilized and
+     * transition to Open state.
      */
     @Getter
     @Setter
@@ -126,10 +125,7 @@ public class CollectionSetting extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about PaymentMethodOptions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Payment Method specific configuration stored on the object. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -155,19 +151,19 @@ public class CollectionSetting extends StripeObject implements HasId {
 
     /** This sub-hash contains details about the Konbini payment method options. */
     @SerializedName("konbini")
-    Konbini konbini;
+    Map<String, Object> konbini;
 
     /** This sub-hash contains details about the SEPA Direct Debit payment method options. */
     @SerializedName("sepa_debit")
-    SepaDebit sepaDebit;
+    Map<String, Object> sepaDebit;
 
     /** This sub-hash contains details about the ACH direct debit payment method options. */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
     /**
-     * For more details about AcssDebit, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * This sub-hash contains details about the Canadian pre-authorized debit payment method
+     * options.
      */
     @Getter
     @Setter
@@ -185,10 +181,7 @@ public class CollectionSetting extends StripeObject implements HasId {
       @SerializedName("verification_method")
       String verificationMethod;
 
-      /**
-       * For more details about MandateOptions, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Additional fields for Mandate creation. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -203,10 +196,7 @@ public class CollectionSetting extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about Bancontact, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** This sub-hash contains details about the Bancontact payment method. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -220,10 +210,7 @@ public class CollectionSetting extends StripeObject implements HasId {
       String preferredLanguage;
     }
 
-    /**
-     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** This sub-hash contains details about the Card payment method options. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -253,10 +240,7 @@ public class CollectionSetting extends StripeObject implements HasId {
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
 
-      /**
-       * For more details about MandateOptions, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Configuration options for setting up an eMandate for cards issued in India. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -275,10 +259,7 @@ public class CollectionSetting extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about CustomerBalance, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** This sub-hash contains details about the Bank transfer payment method options. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -300,8 +281,8 @@ public class CollectionSetting extends StripeObject implements HasId {
       String fundingType;
 
       /**
-       * For more details about BankTransfer, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * Configuration for the bank transfer funding type, if the {@code funding_type} is set to
+       * {@code bank_transfer}.
        */
       @Getter
       @Setter
@@ -324,8 +305,8 @@ public class CollectionSetting extends StripeObject implements HasId {
         String type;
 
         /**
-         * For more details about EuBankTransfer, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * Configuration for {@code eu_bank_transfer} funding type. Required if {@code type} is
+         * {@code eu_bank_transfer}.
          */
         @Getter
         @Setter
@@ -342,28 +323,7 @@ public class CollectionSetting extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about Konbini, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Konbini extends StripeObject {}
-
-    /**
-     * For more details about SepaDebit, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class SepaDebit extends StripeObject {}
-
-    /**
-     * For more details about UsBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** This sub-hash contains details about the ACH direct debit payment method options. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -380,10 +340,7 @@ public class CollectionSetting extends StripeObject implements HasId {
       @SerializedName("verification_method")
       String verificationMethod;
 
-      /**
-       * For more details about FinancialConnections, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Additional fields for Financial Connections Session creation. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -407,8 +364,8 @@ public class CollectionSetting extends StripeObject implements HasId {
         List<String> prefetch;
 
         /**
-         * For more details about Filters, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * Provide filters for the linked accounts that the customer can select for the payment
+         * method.
          */
         @Getter
         @Setter

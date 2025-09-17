@@ -3,6 +3,7 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +74,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
    * service.
    */
   @SerializedName("service_interval_count")
-  Integer serviceIntervalCount;
+  Long serviceIntervalCount;
 
   /**
    * <strong>Required.</strong> The Stripe Tax tax behavior - whether the license fee is inclusive
@@ -116,7 +117,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
       String lookupKey,
       Map<String, String> metadata,
       ServiceInterval serviceInterval,
-      Integer serviceIntervalCount,
+      Long serviceIntervalCount,
       TaxBehavior taxBehavior,
       TieringMode tieringMode,
       List<LicenseFeeCreateParams.Tier> tiers,
@@ -156,7 +157,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
 
     private ServiceInterval serviceInterval;
 
-    private Integer serviceIntervalCount;
+    private Long serviceIntervalCount;
 
     private TaxBehavior taxBehavior;
 
@@ -290,7 +291,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
      * this to 3 and {@code service_interval} to {@code "month"} in order to specify quarterly
      * service.
      */
-    public Builder setServiceIntervalCount(Integer serviceIntervalCount) {
+    public Builder setServiceIntervalCount(Long serviceIntervalCount) {
       this.serviceIntervalCount = serviceIntervalCount;
       return this;
     }
@@ -392,7 +393,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
      * up_to_decimal} and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
-    String upToDecimal;
+    BigDecimal upToDecimal;
 
     /**
      * No upper bound to this tier. Only one of {@code up_to_decimal} and {@code up_to_inf} may be
@@ -405,7 +406,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String flatAmount,
         String unitAmount,
-        String upToDecimal,
+        BigDecimal upToDecimal,
         UpToInf upToInf) {
       this.extraParams = extraParams;
       this.flatAmount = flatAmount;
@@ -425,7 +426,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
 
       private String unitAmount;
 
-      private String upToDecimal;
+      private BigDecimal upToDecimal;
 
       private UpToInf upToInf;
 
@@ -483,7 +484,7 @@ public class LicenseFeeCreateParams extends ApiRequestParams {
        * Up to and including this quantity will be contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
-      public Builder setUpToDecimal(String upToDecimal) {
+      public Builder setUpToDecimal(BigDecimal upToDecimal) {
         this.upToDecimal = upToDecimal;
         return this;
       }

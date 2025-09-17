@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -69,10 +70,7 @@ public class IntentAction extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
-  /**
-   * For more details about Apply, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details for an apply action. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -89,10 +87,7 @@ public class IntentAction extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about InvoiceDiscountRule, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Details for applying a discount rule to future invoices. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -124,10 +119,7 @@ public class IntentAction extends StripeObject implements HasId {
       @SerializedName("type")
       String type;
 
-      /**
-       * For more details about PercentOff, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Configuration for percentage off discount. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -141,12 +133,9 @@ public class IntentAction extends StripeObject implements HasId {
          * $100 amount $50 instead.
          */
         @SerializedName("percent_off")
-        String percentOff;
+        BigDecimal percentOff;
 
-        /**
-         * For more details about MaximumApplications, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** The maximum number of times this discount can be applied for this Billing Cadence. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -163,10 +152,7 @@ public class IntentAction extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about Deactivate, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Details for a deactivate action. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -194,10 +180,7 @@ public class IntentAction extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about BillingDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Configuration for the billing details. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -212,8 +195,8 @@ public class IntentAction extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about EffectiveAt, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * When the deactivate action will take effect. If not specified, the default behavior is
+     * on_reserve.
      */
     @Getter
     @Setter
@@ -229,17 +212,13 @@ public class IntentAction extends StripeObject implements HasId {
       /**
        * When the deactivate action will take effect.
        *
-       * <p>One of {@code current_billing_period_end}, {@code current_billing_period_start}, {@code
-       * on_reserve}, or {@code timestamp}.
+       * <p>One of {@code current_billing_period_start}, {@code on_reserve}, or {@code timestamp}.
        */
       @SerializedName("type")
       String type;
     }
 
-    /**
-     * For more details about PricingPlanSubscriptionDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Details for deactivating a Pricing Plan Subscription. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -250,10 +229,7 @@ public class IntentAction extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about Modify, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details for a modify action. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -281,10 +257,7 @@ public class IntentAction extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about BillingDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Configuration for the billing details. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -299,8 +272,8 @@ public class IntentAction extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about EffectiveAt, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * When the modify action will take effect. If not specified, the default behavior is
+     * on_reserve.
      */
     @Getter
     @Setter
@@ -322,10 +295,7 @@ public class IntentAction extends StripeObject implements HasId {
       String type;
     }
 
-    /**
-     * For more details about PricingPlanSubscriptionDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Details for modifying a Pricing Plan Subscription. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -365,15 +335,12 @@ public class IntentAction extends StripeObject implements HasId {
 
         /** Quantity of the component to be used. */
         @SerializedName("quantity")
-        Integer quantity;
+        Long quantity;
       }
     }
   }
 
-  /**
-   * For more details about Remove, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details for a remove action. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -391,10 +358,7 @@ public class IntentAction extends StripeObject implements HasId {
     String type;
   }
 
-  /**
-   * For more details about Subscribe, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details for a subscribe action. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -430,8 +394,8 @@ public class IntentAction extends StripeObject implements HasId {
     V1SubscriptionDetails v1SubscriptionDetails;
 
     /**
-     * For more details about BillingDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * Configuration for the billing details. If not specified, see the default behavior for
+     * individual attributes.
      */
     @Getter
     @Setter
@@ -447,8 +411,8 @@ public class IntentAction extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about EffectiveAt, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * When the subscribe action will take effect. If not specified, the default behavior is
+     * on_reserve.
      */
     @Getter
     @Setter
@@ -470,10 +434,7 @@ public class IntentAction extends StripeObject implements HasId {
       String type;
     }
 
-    /**
-     * For more details about PricingPlanSubscriptionDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Details for subscribing to a Pricing Plan. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -524,14 +485,11 @@ public class IntentAction extends StripeObject implements HasId {
 
         /** Quantity of the component to be used. */
         @SerializedName("quantity")
-        Integer quantity;
+        Long quantity;
       }
     }
 
-    /**
-     * For more details about V1SubscriptionDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Details for subscribing to a V1 subscription. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -576,7 +534,7 @@ public class IntentAction extends StripeObject implements HasId {
 
         /** Quantity for this item. If not provided, will default to 1. */
         @SerializedName("quantity")
-        Integer quantity;
+        Long quantity;
       }
     }
   }

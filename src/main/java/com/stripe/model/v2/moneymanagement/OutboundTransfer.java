@@ -11,6 +11,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * OutboundTransfer represents a single money movement from one FinancialAccount you own to a payout
+ * method you also own.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -128,10 +132,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
   @SerializedName("trace_id")
   TraceId traceId;
 
-  /**
-   * For more details about DeliveryOptions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Delivery options to be used to send the OutboundTransfer. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -145,10 +146,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
     String bankAccount;
   }
 
-  /**
-   * For more details about From, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** The FinancialAccount that funds were pulled from. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -162,10 +160,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
     String financialAccount;
   }
 
-  /**
-   * For more details about StatusDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Status details for an OutboundTransfer in a {@code failed} or {@code returned} state. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -178,10 +173,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
     @SerializedName("returned")
     Returned returned;
 
-    /**
-     * For more details about Failed, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** The {@code failed} status reason. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -197,10 +189,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
       String reason;
     }
 
-    /**
-     * For more details about Returned, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The {@code returned} status reason. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -219,10 +208,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about StatusTransitions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Hash containing timestamps of when the object transitioned to a particular status. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -260,10 +246,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
     Instant returnedAt;
   }
 
-  /**
-   * For more details about To, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** To which payout method the OutboundTransfer was sent. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -278,8 +261,8 @@ public class OutboundTransfer extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about TraceId, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
+   * A unique identifier that can be used to track this OutboundTransfer with recipient bank. Banks
+   * might call this a “reference number” or something similar.
    */
   @Getter
   @Setter

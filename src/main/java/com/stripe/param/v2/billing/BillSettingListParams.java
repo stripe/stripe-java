@@ -24,7 +24,7 @@ public class BillSettingListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * Only return the settings with these lookup_keys, if any exist. You can specify up to 10
@@ -34,7 +34,7 @@ public class BillSettingListParams extends ApiRequestParams {
   List<String> lookupKeys;
 
   private BillSettingListParams(
-      Map<String, Object> extraParams, Integer limit, List<String> lookupKeys) {
+      Map<String, Object> extraParams, Long limit, List<String> lookupKeys) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.lookupKeys = lookupKeys;
@@ -47,7 +47,7 @@ public class BillSettingListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private List<String> lookupKeys;
 
@@ -83,7 +83,7 @@ public class BillSettingListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

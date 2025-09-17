@@ -270,14 +270,14 @@ public class CadenceUpdateParams extends ApiRequestParams {
      * billing cadence.
      */
     @SerializedName("bill")
-    Object bill;
+    Bill bill;
 
     /**
      * Settings that configure and manage the behavior of collecting payments. If null is provided,
      * the current collection settings will be removed from the billing cadence.
      */
     @SerializedName("collection")
-    Object collection;
+    Collection collection;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -288,7 +288,7 @@ public class CadenceUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private Settings(Object bill, Object collection, Map<String, Object> extraParams) {
+    private Settings(Bill bill, Collection collection, Map<String, Object> extraParams) {
       this.bill = bill;
       this.collection = collection;
       this.extraParams = extraParams;
@@ -299,9 +299,9 @@ public class CadenceUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Object bill;
+      private Bill bill;
 
-      private Object collection;
+      private Collection collection;
 
       private Map<String, Object> extraParams;
 
@@ -321,29 +321,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Settings that configure bills generation, which includes calculating totals, tax, and
-       * presenting invoices. If null is provided, the current bill settings will be removed from
-       * the billing cadence.
-       */
-      public Builder setBill(EmptyParam bill) {
-        this.bill = bill;
-        return this;
-      }
-
-      /**
        * Settings that configure and manage the behavior of collecting payments. If null is
        * provided, the current collection settings will be removed from the billing cadence.
        */
       public Builder setCollection(CadenceUpdateParams.Settings.Collection collection) {
-        this.collection = collection;
-        return this;
-      }
-
-      /**
-       * Settings that configure and manage the behavior of collecting payments. If null is
-       * provided, the current collection settings will be removed from the billing cadence.
-       */
-      public Builder setCollection(EmptyParam collection) {
         this.collection = collection;
         return this;
       }

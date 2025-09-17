@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * TransactionEntries represent individual money movements across different states within a
+ * Transaction.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -58,10 +62,7 @@ public class TransactionEntry extends StripeObject implements HasId {
   @SerializedName("transaction_details")
   TransactionDetails transactionDetails;
 
-  /**
-   * For more details about BalanceImpact, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The delta to the FinancialAccount's balance. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -79,10 +80,7 @@ public class TransactionEntry extends StripeObject implements HasId {
     Amount outboundPending;
   }
 
-  /**
-   * For more details about TransactionDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Details copied from the transaction that this TransactionEntry belongs to. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -106,10 +104,7 @@ public class TransactionEntry extends StripeObject implements HasId {
     @SerializedName("flow")
     Flow flow;
 
-    /**
-     * For more details about Flow, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Details about the Flow object that created the Transaction. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

@@ -29,7 +29,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
 
   /** The page size limit, if not provided the default is 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * Optionally filter by the payer associated with Billing Cadences which the Rate Card
@@ -60,7 +60,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
   private RateCardSubscriptionListParams(
       String billingCadence,
       Map<String, Object> extraParams,
-      Integer limit,
+      Long limit,
       Payer payer,
       String rateCard,
       String rateCardVersion,
@@ -83,7 +83,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private Payer payer;
 
@@ -141,7 +141,7 @@ public class RateCardSubscriptionListParams extends ApiRequestParams {
     }
 
     /** The page size limit, if not provided the default is 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

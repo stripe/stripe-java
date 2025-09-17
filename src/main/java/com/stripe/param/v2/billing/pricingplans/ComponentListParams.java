@@ -24,7 +24,7 @@ public class ComponentListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * Filter by lookup keys. Mutually exclusive with {@code pricing_plan_version}. You can specify up
@@ -42,7 +42,7 @@ public class ComponentListParams extends ApiRequestParams {
 
   private ComponentListParams(
       Map<String, Object> extraParams,
-      Integer limit,
+      Long limit,
       List<String> lookupKeys,
       String pricingPlanVersion) {
     this.extraParams = extraParams;
@@ -58,7 +58,7 @@ public class ComponentListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private List<String> lookupKeys;
 
@@ -97,7 +97,7 @@ public class ComponentListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

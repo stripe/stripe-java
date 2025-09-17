@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** The Custom Pricing Unit object. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

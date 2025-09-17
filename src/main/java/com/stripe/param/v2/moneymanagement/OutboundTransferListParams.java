@@ -60,7 +60,7 @@ public class OutboundTransferListParams extends ApiRequestParams {
 
   /** The maximum number of results to return. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /** Closed Enum. Only return OutboundTransfers with this status. */
   @SerializedName("status")
@@ -73,7 +73,7 @@ public class OutboundTransferListParams extends ApiRequestParams {
       Instant createdLt,
       Instant createdLte,
       Map<String, Object> extraParams,
-      Integer limit,
+      Long limit,
       List<OutboundTransferListParams.Status> status) {
     this.created = created;
     this.createdGt = createdGt;
@@ -102,7 +102,7 @@ public class OutboundTransferListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private List<OutboundTransferListParams.Status> status;
 
@@ -191,7 +191,7 @@ public class OutboundTransferListParams extends ApiRequestParams {
     }
 
     /** The maximum number of results to return. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

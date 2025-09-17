@@ -62,7 +62,7 @@ public class AdjustmentListParams extends ApiRequestParams {
 
   /** The page limit. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   private AdjustmentListParams(
       String adjustedFlow,
@@ -72,7 +72,7 @@ public class AdjustmentListParams extends ApiRequestParams {
       Instant createdLt,
       Instant createdLte,
       Map<String, Object> extraParams,
-      Integer limit) {
+      Long limit) {
     this.adjustedFlow = adjustedFlow;
     this.created = created;
     this.createdGt = createdGt;
@@ -102,7 +102,7 @@ public class AdjustmentListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AdjustmentListParams build() {
@@ -195,7 +195,7 @@ public class AdjustmentListParams extends ApiRequestParams {
     }
 
     /** The page limit. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

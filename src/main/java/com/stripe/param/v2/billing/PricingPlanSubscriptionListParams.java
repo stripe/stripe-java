@@ -29,7 +29,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * Filter by payer. Mutually exclusive with {@code billing_cadence}, {@code pricing_plan}, and
@@ -59,7 +59,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
   private PricingPlanSubscriptionListParams(
       String billingCadence,
       Map<String, Object> extraParams,
-      Integer limit,
+      Long limit,
       Payer payer,
       String pricingPlan,
       String pricingPlanVersion,
@@ -82,7 +82,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private Payer payer;
 
@@ -140,7 +140,7 @@ public class PricingPlanSubscriptionListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

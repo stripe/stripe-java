@@ -88,10 +88,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   @SerializedName("test_clock")
   String testClock;
 
-  /**
-   * For more details about CollectionStatusTransitions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Timestamps for collection status transitions. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -117,10 +114,7 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
     String unpaidAt;
   }
 
-  /**
-   * For more details about ServicingStatusTransitions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Timestamps for servicing status transitions. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -136,13 +130,5 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
     /** When the servicing status transitioned to paused. */
     @SerializedName("paused_at")
     String pausedAt;
-
-    /** When the servicing is scheduled to transition to activate. */
-    @SerializedName("will_activate_at")
-    String willActivateAt;
-
-    /** When the servicing is scheduled to cancel. */
-    @SerializedName("will_cancel_at")
-    String willCancelAt;
   }
 }

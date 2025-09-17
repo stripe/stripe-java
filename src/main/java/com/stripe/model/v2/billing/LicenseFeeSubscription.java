@@ -60,7 +60,7 @@ public class LicenseFeeSubscription extends StripeObject implements HasId {
 
   /** Quantity of the License Fee subscribed to. */
   @SerializedName("quantity")
-  Integer quantity;
+  Long quantity;
 
   /** The ID of the Test Clock, if any. */
   @SerializedName("test_clock")

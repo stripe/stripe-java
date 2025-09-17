@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
 import com.stripe.v2.Amount;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -950,7 +951,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /** The sequence to be used on the customer's next invoice. Defaults to 1. */
           @SerializedName("next_sequence")
-          Integer nextSequence;
+          Long nextSequence;
 
           /**
            * The prefix for the customer used to generate unique invoice numbers. Must be 3–12
@@ -968,7 +969,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   customFields,
               Map<String, Object> extraParams,
               Object footer,
-              Integer nextSequence,
+              Long nextSequence,
               Object prefix,
               Rendering rendering) {
             this.customFields = customFields;
@@ -991,7 +992,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
             private Object footer;
 
-            private Integer nextSequence;
+            private Long nextSequence;
 
             private Object prefix;
 
@@ -1084,7 +1085,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /** The sequence to be used on the customer's next invoice. Defaults to 1. */
-            public Builder setNextSequence(Integer nextSequence) {
+            public Builder setNextSequence(Long nextSequence) {
               this.nextSequence = nextSequence;
               return this;
             }
@@ -1656,7 +1657,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3166-1 alpha-2</a>).
            */
           @SerializedName("country")
-          Country country;
+          Object country;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -1686,7 +1687,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Address(
               Object city,
-              Country country,
+              Object country,
               Map<String, Object> extraParams,
               Object line1,
               Object line2,
@@ -1708,7 +1709,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object city;
 
-            private Country country;
+            private Object country;
 
             private Map<String, Object> extraParams;
 
@@ -1748,8 +1749,16 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Two-letter country code (<a
              * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
              */
-            public Builder setCountry(
-                AccountUpdateParams.Configuration.Customer.Shipping.Address.Country country) {
+            public Builder setCountry(String country) {
+              this.country = country;
+              return this;
+            }
+
+            /**
+             * Two-letter country code (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
+             */
+            public Builder setCountry(EmptyParam country) {
               this.country = country;
               return this;
             }
@@ -1830,768 +1839,6 @@ public class AccountUpdateParams extends ApiRequestParams {
             public Builder setState(EmptyParam state) {
               this.state = state;
               return this;
-            }
-          }
-
-          public enum Country implements ApiRequestParams.EnumParam {
-            @SerializedName("ad")
-            AD("ad"),
-
-            @SerializedName("ae")
-            AE("ae"),
-
-            @SerializedName("af")
-            AF("af"),
-
-            @SerializedName("ag")
-            AG("ag"),
-
-            @SerializedName("ai")
-            AI("ai"),
-
-            @SerializedName("al")
-            AL("al"),
-
-            @SerializedName("am")
-            AM("am"),
-
-            @SerializedName("ao")
-            AO("ao"),
-
-            @SerializedName("aq")
-            AQ("aq"),
-
-            @SerializedName("ar")
-            AR("ar"),
-
-            @SerializedName("as")
-            AS("as"),
-
-            @SerializedName("at")
-            AT("at"),
-
-            @SerializedName("au")
-            AU("au"),
-
-            @SerializedName("aw")
-            AW("aw"),
-
-            @SerializedName("ax")
-            AX("ax"),
-
-            @SerializedName("az")
-            AZ("az"),
-
-            @SerializedName("ba")
-            BA("ba"),
-
-            @SerializedName("bb")
-            BB("bb"),
-
-            @SerializedName("bd")
-            BD("bd"),
-
-            @SerializedName("be")
-            BE("be"),
-
-            @SerializedName("bf")
-            BF("bf"),
-
-            @SerializedName("bg")
-            BG("bg"),
-
-            @SerializedName("bh")
-            BH("bh"),
-
-            @SerializedName("bi")
-            BI("bi"),
-
-            @SerializedName("bj")
-            BJ("bj"),
-
-            @SerializedName("bl")
-            BL("bl"),
-
-            @SerializedName("bm")
-            BM("bm"),
-
-            @SerializedName("bn")
-            BN("bn"),
-
-            @SerializedName("bo")
-            BO("bo"),
-
-            @SerializedName("bq")
-            BQ("bq"),
-
-            @SerializedName("br")
-            BR("br"),
-
-            @SerializedName("bs")
-            BS("bs"),
-
-            @SerializedName("bt")
-            BT("bt"),
-
-            @SerializedName("bv")
-            BV("bv"),
-
-            @SerializedName("bw")
-            BW("bw"),
-
-            @SerializedName("by")
-            BY("by"),
-
-            @SerializedName("bz")
-            BZ("bz"),
-
-            @SerializedName("ca")
-            CA("ca"),
-
-            @SerializedName("cc")
-            CC("cc"),
-
-            @SerializedName("cd")
-            CD("cd"),
-
-            @SerializedName("cf")
-            CF("cf"),
-
-            @SerializedName("cg")
-            CG("cg"),
-
-            @SerializedName("ch")
-            CH("ch"),
-
-            @SerializedName("ci")
-            CI("ci"),
-
-            @SerializedName("ck")
-            CK("ck"),
-
-            @SerializedName("cl")
-            CL("cl"),
-
-            @SerializedName("cm")
-            CM("cm"),
-
-            @SerializedName("cn")
-            CN("cn"),
-
-            @SerializedName("co")
-            CO("co"),
-
-            @SerializedName("cr")
-            CR("cr"),
-
-            @SerializedName("cu")
-            CU("cu"),
-
-            @SerializedName("cv")
-            CV("cv"),
-
-            @SerializedName("cw")
-            CW("cw"),
-
-            @SerializedName("cx")
-            CX("cx"),
-
-            @SerializedName("cy")
-            CY("cy"),
-
-            @SerializedName("cz")
-            CZ("cz"),
-
-            @SerializedName("de")
-            DE("de"),
-
-            @SerializedName("dj")
-            DJ("dj"),
-
-            @SerializedName("dk")
-            DK("dk"),
-
-            @SerializedName("dm")
-            DM("dm"),
-
-            @SerializedName("do")
-            DO("do"),
-
-            @SerializedName("dz")
-            DZ("dz"),
-
-            @SerializedName("ec")
-            EC("ec"),
-
-            @SerializedName("ee")
-            EE("ee"),
-
-            @SerializedName("eg")
-            EG("eg"),
-
-            @SerializedName("eh")
-            EH("eh"),
-
-            @SerializedName("er")
-            ER("er"),
-
-            @SerializedName("es")
-            ES("es"),
-
-            @SerializedName("et")
-            ET("et"),
-
-            @SerializedName("fi")
-            FI("fi"),
-
-            @SerializedName("fj")
-            FJ("fj"),
-
-            @SerializedName("fk")
-            FK("fk"),
-
-            @SerializedName("fm")
-            FM("fm"),
-
-            @SerializedName("fo")
-            FO("fo"),
-
-            @SerializedName("fr")
-            FR("fr"),
-
-            @SerializedName("ga")
-            GA("ga"),
-
-            @SerializedName("gb")
-            GB("gb"),
-
-            @SerializedName("gd")
-            GD("gd"),
-
-            @SerializedName("ge")
-            GE("ge"),
-
-            @SerializedName("gf")
-            GF("gf"),
-
-            @SerializedName("gg")
-            GG("gg"),
-
-            @SerializedName("gh")
-            GH("gh"),
-
-            @SerializedName("gi")
-            GI("gi"),
-
-            @SerializedName("gl")
-            GL("gl"),
-
-            @SerializedName("gm")
-            GM("gm"),
-
-            @SerializedName("gn")
-            GN("gn"),
-
-            @SerializedName("gp")
-            GP("gp"),
-
-            @SerializedName("gq")
-            GQ("gq"),
-
-            @SerializedName("gr")
-            GR("gr"),
-
-            @SerializedName("gs")
-            GS("gs"),
-
-            @SerializedName("gt")
-            GT("gt"),
-
-            @SerializedName("gu")
-            GU("gu"),
-
-            @SerializedName("gw")
-            GW("gw"),
-
-            @SerializedName("gy")
-            GY("gy"),
-
-            @SerializedName("hk")
-            HK("hk"),
-
-            @SerializedName("hm")
-            HM("hm"),
-
-            @SerializedName("hn")
-            HN("hn"),
-
-            @SerializedName("hr")
-            HR("hr"),
-
-            @SerializedName("ht")
-            HT("ht"),
-
-            @SerializedName("hu")
-            HU("hu"),
-
-            @SerializedName("id")
-            ID("id"),
-
-            @SerializedName("ie")
-            IE("ie"),
-
-            @SerializedName("il")
-            IL("il"),
-
-            @SerializedName("im")
-            IM("im"),
-
-            @SerializedName("in")
-            IN("in"),
-
-            @SerializedName("io")
-            IO("io"),
-
-            @SerializedName("iq")
-            IQ("iq"),
-
-            @SerializedName("ir")
-            IR("ir"),
-
-            @SerializedName("is")
-            IS("is"),
-
-            @SerializedName("it")
-            IT("it"),
-
-            @SerializedName("je")
-            JE("je"),
-
-            @SerializedName("jm")
-            JM("jm"),
-
-            @SerializedName("jo")
-            JO("jo"),
-
-            @SerializedName("jp")
-            JP("jp"),
-
-            @SerializedName("ke")
-            KE("ke"),
-
-            @SerializedName("kg")
-            KG("kg"),
-
-            @SerializedName("kh")
-            KH("kh"),
-
-            @SerializedName("ki")
-            KI("ki"),
-
-            @SerializedName("km")
-            KM("km"),
-
-            @SerializedName("kn")
-            KN("kn"),
-
-            @SerializedName("kp")
-            KP("kp"),
-
-            @SerializedName("kr")
-            KR("kr"),
-
-            @SerializedName("kw")
-            KW("kw"),
-
-            @SerializedName("ky")
-            KY("ky"),
-
-            @SerializedName("kz")
-            KZ("kz"),
-
-            @SerializedName("la")
-            LA("la"),
-
-            @SerializedName("lb")
-            LB("lb"),
-
-            @SerializedName("lc")
-            LC("lc"),
-
-            @SerializedName("li")
-            LI("li"),
-
-            @SerializedName("lk")
-            LK("lk"),
-
-            @SerializedName("lr")
-            LR("lr"),
-
-            @SerializedName("ls")
-            LS("ls"),
-
-            @SerializedName("lt")
-            LT("lt"),
-
-            @SerializedName("lu")
-            LU("lu"),
-
-            @SerializedName("lv")
-            LV("lv"),
-
-            @SerializedName("ly")
-            LY("ly"),
-
-            @SerializedName("ma")
-            MA("ma"),
-
-            @SerializedName("mc")
-            MC("mc"),
-
-            @SerializedName("md")
-            MD("md"),
-
-            @SerializedName("me")
-            ME("me"),
-
-            @SerializedName("mf")
-            MF("mf"),
-
-            @SerializedName("mg")
-            MG("mg"),
-
-            @SerializedName("mh")
-            MH("mh"),
-
-            @SerializedName("mk")
-            MK("mk"),
-
-            @SerializedName("ml")
-            ML("ml"),
-
-            @SerializedName("mm")
-            MM("mm"),
-
-            @SerializedName("mn")
-            MN("mn"),
-
-            @SerializedName("mo")
-            MO("mo"),
-
-            @SerializedName("mp")
-            MP("mp"),
-
-            @SerializedName("mq")
-            MQ("mq"),
-
-            @SerializedName("mr")
-            MR("mr"),
-
-            @SerializedName("ms")
-            MS("ms"),
-
-            @SerializedName("mt")
-            MT("mt"),
-
-            @SerializedName("mu")
-            MU("mu"),
-
-            @SerializedName("mv")
-            MV("mv"),
-
-            @SerializedName("mw")
-            MW("mw"),
-
-            @SerializedName("mx")
-            MX("mx"),
-
-            @SerializedName("my")
-            MY("my"),
-
-            @SerializedName("mz")
-            MZ("mz"),
-
-            @SerializedName("na")
-            NA("na"),
-
-            @SerializedName("nc")
-            NC("nc"),
-
-            @SerializedName("ne")
-            NE("ne"),
-
-            @SerializedName("nf")
-            NF("nf"),
-
-            @SerializedName("ng")
-            NG("ng"),
-
-            @SerializedName("ni")
-            NI("ni"),
-
-            @SerializedName("nl")
-            NL("nl"),
-
-            @SerializedName("no")
-            NO("no"),
-
-            @SerializedName("np")
-            NP("np"),
-
-            @SerializedName("nr")
-            NR("nr"),
-
-            @SerializedName("nu")
-            NU("nu"),
-
-            @SerializedName("nz")
-            NZ("nz"),
-
-            @SerializedName("om")
-            OM("om"),
-
-            @SerializedName("pa")
-            PA("pa"),
-
-            @SerializedName("pe")
-            PE("pe"),
-
-            @SerializedName("pf")
-            PF("pf"),
-
-            @SerializedName("pg")
-            PG("pg"),
-
-            @SerializedName("ph")
-            PH("ph"),
-
-            @SerializedName("pk")
-            PK("pk"),
-
-            @SerializedName("pl")
-            PL("pl"),
-
-            @SerializedName("pm")
-            PM("pm"),
-
-            @SerializedName("pn")
-            PN("pn"),
-
-            @SerializedName("pr")
-            PR("pr"),
-
-            @SerializedName("ps")
-            PS("ps"),
-
-            @SerializedName("pt")
-            PT("pt"),
-
-            @SerializedName("pw")
-            PW("pw"),
-
-            @SerializedName("py")
-            PY("py"),
-
-            @SerializedName("qa")
-            QA("qa"),
-
-            @SerializedName("qz")
-            QZ("qz"),
-
-            @SerializedName("re")
-            RE("re"),
-
-            @SerializedName("ro")
-            RO("ro"),
-
-            @SerializedName("rs")
-            RS("rs"),
-
-            @SerializedName("ru")
-            RU("ru"),
-
-            @SerializedName("rw")
-            RW("rw"),
-
-            @SerializedName("sa")
-            SA("sa"),
-
-            @SerializedName("sb")
-            SB("sb"),
-
-            @SerializedName("sc")
-            SC("sc"),
-
-            @SerializedName("sd")
-            SD("sd"),
-
-            @SerializedName("se")
-            SE("se"),
-
-            @SerializedName("sg")
-            SG("sg"),
-
-            @SerializedName("sh")
-            SH("sh"),
-
-            @SerializedName("si")
-            SI("si"),
-
-            @SerializedName("sj")
-            SJ("sj"),
-
-            @SerializedName("sk")
-            SK("sk"),
-
-            @SerializedName("sl")
-            SL("sl"),
-
-            @SerializedName("sm")
-            SM("sm"),
-
-            @SerializedName("sn")
-            SN("sn"),
-
-            @SerializedName("so")
-            SO("so"),
-
-            @SerializedName("sr")
-            SR("sr"),
-
-            @SerializedName("ss")
-            SS("ss"),
-
-            @SerializedName("st")
-            ST("st"),
-
-            @SerializedName("sv")
-            SV("sv"),
-
-            @SerializedName("sx")
-            SX("sx"),
-
-            @SerializedName("sy")
-            SY("sy"),
-
-            @SerializedName("sz")
-            SZ("sz"),
-
-            @SerializedName("tc")
-            TC("tc"),
-
-            @SerializedName("td")
-            TD("td"),
-
-            @SerializedName("tf")
-            TF("tf"),
-
-            @SerializedName("tg")
-            TG("tg"),
-
-            @SerializedName("th")
-            TH("th"),
-
-            @SerializedName("tj")
-            TJ("tj"),
-
-            @SerializedName("tk")
-            TK("tk"),
-
-            @SerializedName("tl")
-            TL("tl"),
-
-            @SerializedName("tm")
-            TM("tm"),
-
-            @SerializedName("tn")
-            TN("tn"),
-
-            @SerializedName("to")
-            TO("to"),
-
-            @SerializedName("tr")
-            TR("tr"),
-
-            @SerializedName("tt")
-            TT("tt"),
-
-            @SerializedName("tv")
-            TV("tv"),
-
-            @SerializedName("tw")
-            TW("tw"),
-
-            @SerializedName("tz")
-            TZ("tz"),
-
-            @SerializedName("ua")
-            UA("ua"),
-
-            @SerializedName("ug")
-            UG("ug"),
-
-            @SerializedName("um")
-            UM("um"),
-
-            @SerializedName("us")
-            US("us"),
-
-            @SerializedName("uy")
-            UY("uy"),
-
-            @SerializedName("uz")
-            UZ("uz"),
-
-            @SerializedName("va")
-            VA("va"),
-
-            @SerializedName("vc")
-            VC("vc"),
-
-            @SerializedName("ve")
-            VE("ve"),
-
-            @SerializedName("vg")
-            VG("vg"),
-
-            @SerializedName("vi")
-            VI("vi"),
-
-            @SerializedName("vn")
-            VN("vn"),
-
-            @SerializedName("vu")
-            VU("vu"),
-
-            @SerializedName("wf")
-            WF("wf"),
-
-            @SerializedName("ws")
-            WS("ws"),
-
-            @SerializedName("xx")
-            XX("xx"),
-
-            @SerializedName("ye")
-            YE("ye"),
-
-            @SerializedName("yt")
-            YT("yt"),
-
-            @SerializedName("za")
-            ZA("za"),
-
-            @SerializedName("zm")
-            ZM("zm"),
-
-            @SerializedName("zw")
-            ZW("zw");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            Country(String value) {
-              this.value = value;
             }
           }
         }
@@ -7908,7 +7155,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3166-1 alpha-2</a>).
            */
           @SerializedName("country")
-          ApiRequestParams.EnumParam country;
+          Object country;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -7942,7 +7189,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Address(
               Object city,
-              ApiRequestParams.EnumParam country,
+              Object country,
               Map<String, Object> extraParams,
               Object line1,
               Object line2,
@@ -7966,7 +7213,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object city;
 
-            private ApiRequestParams.EnumParam country;
+            private Object country;
 
             private Map<String, Object> extraParams;
 
@@ -8009,8 +7256,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Two-letter country code (<a
              * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
              */
-            public Builder setCountry(
-                AccountUpdateParams.Configuration.Merchant.Support.Address.Country country) {
+            public Builder setCountry(String country) {
               this.country = country;
               return this;
             }
@@ -8112,768 +7358,6 @@ public class AccountUpdateParams extends ApiRequestParams {
             public Builder setTown(EmptyParam town) {
               this.town = town;
               return this;
-            }
-          }
-
-          public enum Country implements ApiRequestParams.EnumParam {
-            @SerializedName("ad")
-            AD("ad"),
-
-            @SerializedName("ae")
-            AE("ae"),
-
-            @SerializedName("af")
-            AF("af"),
-
-            @SerializedName("ag")
-            AG("ag"),
-
-            @SerializedName("ai")
-            AI("ai"),
-
-            @SerializedName("al")
-            AL("al"),
-
-            @SerializedName("am")
-            AM("am"),
-
-            @SerializedName("ao")
-            AO("ao"),
-
-            @SerializedName("aq")
-            AQ("aq"),
-
-            @SerializedName("ar")
-            AR("ar"),
-
-            @SerializedName("as")
-            AS("as"),
-
-            @SerializedName("at")
-            AT("at"),
-
-            @SerializedName("au")
-            AU("au"),
-
-            @SerializedName("aw")
-            AW("aw"),
-
-            @SerializedName("ax")
-            AX("ax"),
-
-            @SerializedName("az")
-            AZ("az"),
-
-            @SerializedName("ba")
-            BA("ba"),
-
-            @SerializedName("bb")
-            BB("bb"),
-
-            @SerializedName("bd")
-            BD("bd"),
-
-            @SerializedName("be")
-            BE("be"),
-
-            @SerializedName("bf")
-            BF("bf"),
-
-            @SerializedName("bg")
-            BG("bg"),
-
-            @SerializedName("bh")
-            BH("bh"),
-
-            @SerializedName("bi")
-            BI("bi"),
-
-            @SerializedName("bj")
-            BJ("bj"),
-
-            @SerializedName("bl")
-            BL("bl"),
-
-            @SerializedName("bm")
-            BM("bm"),
-
-            @SerializedName("bn")
-            BN("bn"),
-
-            @SerializedName("bo")
-            BO("bo"),
-
-            @SerializedName("bq")
-            BQ("bq"),
-
-            @SerializedName("br")
-            BR("br"),
-
-            @SerializedName("bs")
-            BS("bs"),
-
-            @SerializedName("bt")
-            BT("bt"),
-
-            @SerializedName("bv")
-            BV("bv"),
-
-            @SerializedName("bw")
-            BW("bw"),
-
-            @SerializedName("by")
-            BY("by"),
-
-            @SerializedName("bz")
-            BZ("bz"),
-
-            @SerializedName("ca")
-            CA("ca"),
-
-            @SerializedName("cc")
-            CC("cc"),
-
-            @SerializedName("cd")
-            CD("cd"),
-
-            @SerializedName("cf")
-            CF("cf"),
-
-            @SerializedName("cg")
-            CG("cg"),
-
-            @SerializedName("ch")
-            CH("ch"),
-
-            @SerializedName("ci")
-            CI("ci"),
-
-            @SerializedName("ck")
-            CK("ck"),
-
-            @SerializedName("cl")
-            CL("cl"),
-
-            @SerializedName("cm")
-            CM("cm"),
-
-            @SerializedName("cn")
-            CN("cn"),
-
-            @SerializedName("co")
-            CO("co"),
-
-            @SerializedName("cr")
-            CR("cr"),
-
-            @SerializedName("cu")
-            CU("cu"),
-
-            @SerializedName("cv")
-            CV("cv"),
-
-            @SerializedName("cw")
-            CW("cw"),
-
-            @SerializedName("cx")
-            CX("cx"),
-
-            @SerializedName("cy")
-            CY("cy"),
-
-            @SerializedName("cz")
-            CZ("cz"),
-
-            @SerializedName("de")
-            DE("de"),
-
-            @SerializedName("dj")
-            DJ("dj"),
-
-            @SerializedName("dk")
-            DK("dk"),
-
-            @SerializedName("dm")
-            DM("dm"),
-
-            @SerializedName("do")
-            DO("do"),
-
-            @SerializedName("dz")
-            DZ("dz"),
-
-            @SerializedName("ec")
-            EC("ec"),
-
-            @SerializedName("ee")
-            EE("ee"),
-
-            @SerializedName("eg")
-            EG("eg"),
-
-            @SerializedName("eh")
-            EH("eh"),
-
-            @SerializedName("er")
-            ER("er"),
-
-            @SerializedName("es")
-            ES("es"),
-
-            @SerializedName("et")
-            ET("et"),
-
-            @SerializedName("fi")
-            FI("fi"),
-
-            @SerializedName("fj")
-            FJ("fj"),
-
-            @SerializedName("fk")
-            FK("fk"),
-
-            @SerializedName("fm")
-            FM("fm"),
-
-            @SerializedName("fo")
-            FO("fo"),
-
-            @SerializedName("fr")
-            FR("fr"),
-
-            @SerializedName("ga")
-            GA("ga"),
-
-            @SerializedName("gb")
-            GB("gb"),
-
-            @SerializedName("gd")
-            GD("gd"),
-
-            @SerializedName("ge")
-            GE("ge"),
-
-            @SerializedName("gf")
-            GF("gf"),
-
-            @SerializedName("gg")
-            GG("gg"),
-
-            @SerializedName("gh")
-            GH("gh"),
-
-            @SerializedName("gi")
-            GI("gi"),
-
-            @SerializedName("gl")
-            GL("gl"),
-
-            @SerializedName("gm")
-            GM("gm"),
-
-            @SerializedName("gn")
-            GN("gn"),
-
-            @SerializedName("gp")
-            GP("gp"),
-
-            @SerializedName("gq")
-            GQ("gq"),
-
-            @SerializedName("gr")
-            GR("gr"),
-
-            @SerializedName("gs")
-            GS("gs"),
-
-            @SerializedName("gt")
-            GT("gt"),
-
-            @SerializedName("gu")
-            GU("gu"),
-
-            @SerializedName("gw")
-            GW("gw"),
-
-            @SerializedName("gy")
-            GY("gy"),
-
-            @SerializedName("hk")
-            HK("hk"),
-
-            @SerializedName("hm")
-            HM("hm"),
-
-            @SerializedName("hn")
-            HN("hn"),
-
-            @SerializedName("hr")
-            HR("hr"),
-
-            @SerializedName("ht")
-            HT("ht"),
-
-            @SerializedName("hu")
-            HU("hu"),
-
-            @SerializedName("id")
-            ID("id"),
-
-            @SerializedName("ie")
-            IE("ie"),
-
-            @SerializedName("il")
-            IL("il"),
-
-            @SerializedName("im")
-            IM("im"),
-
-            @SerializedName("in")
-            IN("in"),
-
-            @SerializedName("io")
-            IO("io"),
-
-            @SerializedName("iq")
-            IQ("iq"),
-
-            @SerializedName("ir")
-            IR("ir"),
-
-            @SerializedName("is")
-            IS("is"),
-
-            @SerializedName("it")
-            IT("it"),
-
-            @SerializedName("je")
-            JE("je"),
-
-            @SerializedName("jm")
-            JM("jm"),
-
-            @SerializedName("jo")
-            JO("jo"),
-
-            @SerializedName("jp")
-            JP("jp"),
-
-            @SerializedName("ke")
-            KE("ke"),
-
-            @SerializedName("kg")
-            KG("kg"),
-
-            @SerializedName("kh")
-            KH("kh"),
-
-            @SerializedName("ki")
-            KI("ki"),
-
-            @SerializedName("km")
-            KM("km"),
-
-            @SerializedName("kn")
-            KN("kn"),
-
-            @SerializedName("kp")
-            KP("kp"),
-
-            @SerializedName("kr")
-            KR("kr"),
-
-            @SerializedName("kw")
-            KW("kw"),
-
-            @SerializedName("ky")
-            KY("ky"),
-
-            @SerializedName("kz")
-            KZ("kz"),
-
-            @SerializedName("la")
-            LA("la"),
-
-            @SerializedName("lb")
-            LB("lb"),
-
-            @SerializedName("lc")
-            LC("lc"),
-
-            @SerializedName("li")
-            LI("li"),
-
-            @SerializedName("lk")
-            LK("lk"),
-
-            @SerializedName("lr")
-            LR("lr"),
-
-            @SerializedName("ls")
-            LS("ls"),
-
-            @SerializedName("lt")
-            LT("lt"),
-
-            @SerializedName("lu")
-            LU("lu"),
-
-            @SerializedName("lv")
-            LV("lv"),
-
-            @SerializedName("ly")
-            LY("ly"),
-
-            @SerializedName("ma")
-            MA("ma"),
-
-            @SerializedName("mc")
-            MC("mc"),
-
-            @SerializedName("md")
-            MD("md"),
-
-            @SerializedName("me")
-            ME("me"),
-
-            @SerializedName("mf")
-            MF("mf"),
-
-            @SerializedName("mg")
-            MG("mg"),
-
-            @SerializedName("mh")
-            MH("mh"),
-
-            @SerializedName("mk")
-            MK("mk"),
-
-            @SerializedName("ml")
-            ML("ml"),
-
-            @SerializedName("mm")
-            MM("mm"),
-
-            @SerializedName("mn")
-            MN("mn"),
-
-            @SerializedName("mo")
-            MO("mo"),
-
-            @SerializedName("mp")
-            MP("mp"),
-
-            @SerializedName("mq")
-            MQ("mq"),
-
-            @SerializedName("mr")
-            MR("mr"),
-
-            @SerializedName("ms")
-            MS("ms"),
-
-            @SerializedName("mt")
-            MT("mt"),
-
-            @SerializedName("mu")
-            MU("mu"),
-
-            @SerializedName("mv")
-            MV("mv"),
-
-            @SerializedName("mw")
-            MW("mw"),
-
-            @SerializedName("mx")
-            MX("mx"),
-
-            @SerializedName("my")
-            MY("my"),
-
-            @SerializedName("mz")
-            MZ("mz"),
-
-            @SerializedName("na")
-            NA("na"),
-
-            @SerializedName("nc")
-            NC("nc"),
-
-            @SerializedName("ne")
-            NE("ne"),
-
-            @SerializedName("nf")
-            NF("nf"),
-
-            @SerializedName("ng")
-            NG("ng"),
-
-            @SerializedName("ni")
-            NI("ni"),
-
-            @SerializedName("nl")
-            NL("nl"),
-
-            @SerializedName("no")
-            NO("no"),
-
-            @SerializedName("np")
-            NP("np"),
-
-            @SerializedName("nr")
-            NR("nr"),
-
-            @SerializedName("nu")
-            NU("nu"),
-
-            @SerializedName("nz")
-            NZ("nz"),
-
-            @SerializedName("om")
-            OM("om"),
-
-            @SerializedName("pa")
-            PA("pa"),
-
-            @SerializedName("pe")
-            PE("pe"),
-
-            @SerializedName("pf")
-            PF("pf"),
-
-            @SerializedName("pg")
-            PG("pg"),
-
-            @SerializedName("ph")
-            PH("ph"),
-
-            @SerializedName("pk")
-            PK("pk"),
-
-            @SerializedName("pl")
-            PL("pl"),
-
-            @SerializedName("pm")
-            PM("pm"),
-
-            @SerializedName("pn")
-            PN("pn"),
-
-            @SerializedName("pr")
-            PR("pr"),
-
-            @SerializedName("ps")
-            PS("ps"),
-
-            @SerializedName("pt")
-            PT("pt"),
-
-            @SerializedName("pw")
-            PW("pw"),
-
-            @SerializedName("py")
-            PY("py"),
-
-            @SerializedName("qa")
-            QA("qa"),
-
-            @SerializedName("qz")
-            QZ("qz"),
-
-            @SerializedName("re")
-            RE("re"),
-
-            @SerializedName("ro")
-            RO("ro"),
-
-            @SerializedName("rs")
-            RS("rs"),
-
-            @SerializedName("ru")
-            RU("ru"),
-
-            @SerializedName("rw")
-            RW("rw"),
-
-            @SerializedName("sa")
-            SA("sa"),
-
-            @SerializedName("sb")
-            SB("sb"),
-
-            @SerializedName("sc")
-            SC("sc"),
-
-            @SerializedName("sd")
-            SD("sd"),
-
-            @SerializedName("se")
-            SE("se"),
-
-            @SerializedName("sg")
-            SG("sg"),
-
-            @SerializedName("sh")
-            SH("sh"),
-
-            @SerializedName("si")
-            SI("si"),
-
-            @SerializedName("sj")
-            SJ("sj"),
-
-            @SerializedName("sk")
-            SK("sk"),
-
-            @SerializedName("sl")
-            SL("sl"),
-
-            @SerializedName("sm")
-            SM("sm"),
-
-            @SerializedName("sn")
-            SN("sn"),
-
-            @SerializedName("so")
-            SO("so"),
-
-            @SerializedName("sr")
-            SR("sr"),
-
-            @SerializedName("ss")
-            SS("ss"),
-
-            @SerializedName("st")
-            ST("st"),
-
-            @SerializedName("sv")
-            SV("sv"),
-
-            @SerializedName("sx")
-            SX("sx"),
-
-            @SerializedName("sy")
-            SY("sy"),
-
-            @SerializedName("sz")
-            SZ("sz"),
-
-            @SerializedName("tc")
-            TC("tc"),
-
-            @SerializedName("td")
-            TD("td"),
-
-            @SerializedName("tf")
-            TF("tf"),
-
-            @SerializedName("tg")
-            TG("tg"),
-
-            @SerializedName("th")
-            TH("th"),
-
-            @SerializedName("tj")
-            TJ("tj"),
-
-            @SerializedName("tk")
-            TK("tk"),
-
-            @SerializedName("tl")
-            TL("tl"),
-
-            @SerializedName("tm")
-            TM("tm"),
-
-            @SerializedName("tn")
-            TN("tn"),
-
-            @SerializedName("to")
-            TO("to"),
-
-            @SerializedName("tr")
-            TR("tr"),
-
-            @SerializedName("tt")
-            TT("tt"),
-
-            @SerializedName("tv")
-            TV("tv"),
-
-            @SerializedName("tw")
-            TW("tw"),
-
-            @SerializedName("tz")
-            TZ("tz"),
-
-            @SerializedName("ua")
-            UA("ua"),
-
-            @SerializedName("ug")
-            UG("ug"),
-
-            @SerializedName("um")
-            UM("um"),
-
-            @SerializedName("us")
-            US("us"),
-
-            @SerializedName("uy")
-            UY("uy"),
-
-            @SerializedName("uz")
-            UZ("uz"),
-
-            @SerializedName("va")
-            VA("va"),
-
-            @SerializedName("vc")
-            VC("vc"),
-
-            @SerializedName("ve")
-            VE("ve"),
-
-            @SerializedName("vg")
-            VG("vg"),
-
-            @SerializedName("vi")
-            VI("vi"),
-
-            @SerializedName("vn")
-            VN("vn"),
-
-            @SerializedName("vu")
-            VU("vu"),
-
-            @SerializedName("wf")
-            WF("wf"),
-
-            @SerializedName("ws")
-            WS("ws"),
-
-            @SerializedName("xx")
-            XX("xx"),
-
-            @SerializedName("ye")
-            YE("ye"),
-
-            @SerializedName("yt")
-            YT("yt"),
-
-            @SerializedName("za")
-            ZA("za"),
-
-            @SerializedName("zm")
-            ZM("zm"),
-
-            @SerializedName("zw")
-            ZW("zw");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            Country(String value) {
-              this.value = value;
             }
           }
         }
@@ -10997,7 +9481,7 @@ public class AccountUpdateParams extends ApiRequestParams {
      * currency</a>.
      */
     @SerializedName("currency")
-    Currency currency;
+    Object currency;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -11017,7 +9501,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     Responsibilities responsibilities;
 
     private Defaults(
-        Currency currency,
+        Object currency,
         Map<String, Object> extraParams,
         List<AccountUpdateParams.Defaults.Locale> locales,
         Responsibilities responsibilities) {
@@ -11032,7 +9516,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Currency currency;
+      private Object currency;
 
       private Map<String, Object> extraParams;
 
@@ -11051,7 +9535,17 @@ public class AccountUpdateParams extends ApiRequestParams {
        * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
        * currency</a>.
        */
-      public Builder setCurrency(AccountUpdateParams.Defaults.Currency currency) {
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
         return this;
       }
@@ -11245,555 +9739,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         LossesCollector(String value) {
           this.value = value;
         }
-      }
-    }
-
-    public enum Currency implements ApiRequestParams.EnumParam {
-      @SerializedName("aed")
-      AED("aed"),
-
-      @SerializedName("afn")
-      AFN("afn"),
-
-      @SerializedName("all")
-      ALL("all"),
-
-      @SerializedName("amd")
-      AMD("amd"),
-
-      @SerializedName("ang")
-      ANG("ang"),
-
-      @SerializedName("aoa")
-      AOA("aoa"),
-
-      @SerializedName("ars")
-      ARS("ars"),
-
-      @SerializedName("aud")
-      AUD("aud"),
-
-      @SerializedName("awg")
-      AWG("awg"),
-
-      @SerializedName("azn")
-      AZN("azn"),
-
-      @SerializedName("bam")
-      BAM("bam"),
-
-      @SerializedName("bbd")
-      BBD("bbd"),
-
-      @SerializedName("bdt")
-      BDT("bdt"),
-
-      @SerializedName("bgn")
-      BGN("bgn"),
-
-      @SerializedName("bhd")
-      BHD("bhd"),
-
-      @SerializedName("bif")
-      BIF("bif"),
-
-      @SerializedName("bmd")
-      BMD("bmd"),
-
-      @SerializedName("bnd")
-      BND("bnd"),
-
-      @SerializedName("bob")
-      BOB("bob"),
-
-      @SerializedName("bov")
-      BOV("bov"),
-
-      @SerializedName("brl")
-      BRL("brl"),
-
-      @SerializedName("bsd")
-      BSD("bsd"),
-
-      @SerializedName("btn")
-      BTN("btn"),
-
-      @SerializedName("bwp")
-      BWP("bwp"),
-
-      @SerializedName("byn")
-      BYN("byn"),
-
-      @SerializedName("byr")
-      BYR("byr"),
-
-      @SerializedName("bzd")
-      BZD("bzd"),
-
-      @SerializedName("cad")
-      CAD("cad"),
-
-      @SerializedName("cdf")
-      CDF("cdf"),
-
-      @SerializedName("che")
-      CHE("che"),
-
-      @SerializedName("chf")
-      CHF("chf"),
-
-      @SerializedName("chw")
-      CHW("chw"),
-
-      @SerializedName("clf")
-      CLF("clf"),
-
-      @SerializedName("clp")
-      CLP("clp"),
-
-      @SerializedName("cny")
-      CNY("cny"),
-
-      @SerializedName("cop")
-      COP("cop"),
-
-      @SerializedName("cou")
-      COU("cou"),
-
-      @SerializedName("crc")
-      CRC("crc"),
-
-      @SerializedName("cuc")
-      CUC("cuc"),
-
-      @SerializedName("cup")
-      CUP("cup"),
-
-      @SerializedName("cve")
-      CVE("cve"),
-
-      @SerializedName("czk")
-      CZK("czk"),
-
-      @SerializedName("djf")
-      DJF("djf"),
-
-      @SerializedName("dkk")
-      DKK("dkk"),
-
-      @SerializedName("dop")
-      DOP("dop"),
-
-      @SerializedName("dzd")
-      DZD("dzd"),
-
-      @SerializedName("eek")
-      EEK("eek"),
-
-      @SerializedName("egp")
-      EGP("egp"),
-
-      @SerializedName("ern")
-      ERN("ern"),
-
-      @SerializedName("etb")
-      ETB("etb"),
-
-      @SerializedName("eur")
-      EUR("eur"),
-
-      @SerializedName("fjd")
-      FJD("fjd"),
-
-      @SerializedName("fkp")
-      FKP("fkp"),
-
-      @SerializedName("gbp")
-      GBP("gbp"),
-
-      @SerializedName("gel")
-      GEL("gel"),
-
-      @SerializedName("ghc")
-      GHC("ghc"),
-
-      @SerializedName("ghs")
-      GHS("ghs"),
-
-      @SerializedName("gip")
-      GIP("gip"),
-
-      @SerializedName("gmd")
-      GMD("gmd"),
-
-      @SerializedName("gnf")
-      GNF("gnf"),
-
-      @SerializedName("gtq")
-      GTQ("gtq"),
-
-      @SerializedName("gyd")
-      GYD("gyd"),
-
-      @SerializedName("hkd")
-      HKD("hkd"),
-
-      @SerializedName("hnl")
-      HNL("hnl"),
-
-      @SerializedName("hrk")
-      HRK("hrk"),
-
-      @SerializedName("htg")
-      HTG("htg"),
-
-      @SerializedName("huf")
-      HUF("huf"),
-
-      @SerializedName("idr")
-      IDR("idr"),
-
-      @SerializedName("ils")
-      ILS("ils"),
-
-      @SerializedName("inr")
-      INR("inr"),
-
-      @SerializedName("iqd")
-      IQD("iqd"),
-
-      @SerializedName("irr")
-      IRR("irr"),
-
-      @SerializedName("isk")
-      ISK("isk"),
-
-      @SerializedName("jmd")
-      JMD("jmd"),
-
-      @SerializedName("jod")
-      JOD("jod"),
-
-      @SerializedName("jpy")
-      JPY("jpy"),
-
-      @SerializedName("kes")
-      KES("kes"),
-
-      @SerializedName("kgs")
-      KGS("kgs"),
-
-      @SerializedName("khr")
-      KHR("khr"),
-
-      @SerializedName("kmf")
-      KMF("kmf"),
-
-      @SerializedName("kpw")
-      KPW("kpw"),
-
-      @SerializedName("krw")
-      KRW("krw"),
-
-      @SerializedName("kwd")
-      KWD("kwd"),
-
-      @SerializedName("kyd")
-      KYD("kyd"),
-
-      @SerializedName("kzt")
-      KZT("kzt"),
-
-      @SerializedName("lak")
-      LAK("lak"),
-
-      @SerializedName("lbp")
-      LBP("lbp"),
-
-      @SerializedName("lkr")
-      LKR("lkr"),
-
-      @SerializedName("lrd")
-      LRD("lrd"),
-
-      @SerializedName("lsl")
-      LSL("lsl"),
-
-      @SerializedName("ltl")
-      LTL("ltl"),
-
-      @SerializedName("lvl")
-      LVL("lvl"),
-
-      @SerializedName("lyd")
-      LYD("lyd"),
-
-      @SerializedName("mad")
-      MAD("mad"),
-
-      @SerializedName("mdl")
-      MDL("mdl"),
-
-      @SerializedName("mga")
-      MGA("mga"),
-
-      @SerializedName("mkd")
-      MKD("mkd"),
-
-      @SerializedName("mmk")
-      MMK("mmk"),
-
-      @SerializedName("mnt")
-      MNT("mnt"),
-
-      @SerializedName("mop")
-      MOP("mop"),
-
-      @SerializedName("mro")
-      MRO("mro"),
-
-      @SerializedName("mru")
-      MRU("mru"),
-
-      @SerializedName("mur")
-      MUR("mur"),
-
-      @SerializedName("mvr")
-      MVR("mvr"),
-
-      @SerializedName("mwk")
-      MWK("mwk"),
-
-      @SerializedName("mxn")
-      MXN("mxn"),
-
-      @SerializedName("mxv")
-      MXV("mxv"),
-
-      @SerializedName("myr")
-      MYR("myr"),
-
-      @SerializedName("mzn")
-      MZN("mzn"),
-
-      @SerializedName("nad")
-      NAD("nad"),
-
-      @SerializedName("ngn")
-      NGN("ngn"),
-
-      @SerializedName("nio")
-      NIO("nio"),
-
-      @SerializedName("nok")
-      NOK("nok"),
-
-      @SerializedName("npr")
-      NPR("npr"),
-
-      @SerializedName("nzd")
-      NZD("nzd"),
-
-      @SerializedName("omr")
-      OMR("omr"),
-
-      @SerializedName("pab")
-      PAB("pab"),
-
-      @SerializedName("pen")
-      PEN("pen"),
-
-      @SerializedName("pgk")
-      PGK("pgk"),
-
-      @SerializedName("php")
-      PHP("php"),
-
-      @SerializedName("pkr")
-      PKR("pkr"),
-
-      @SerializedName("pln")
-      PLN("pln"),
-
-      @SerializedName("pyg")
-      PYG("pyg"),
-
-      @SerializedName("qar")
-      QAR("qar"),
-
-      @SerializedName("ron")
-      RON("ron"),
-
-      @SerializedName("rsd")
-      RSD("rsd"),
-
-      @SerializedName("rub")
-      RUB("rub"),
-
-      @SerializedName("rwf")
-      RWF("rwf"),
-
-      @SerializedName("sar")
-      SAR("sar"),
-
-      @SerializedName("sbd")
-      SBD("sbd"),
-
-      @SerializedName("scr")
-      SCR("scr"),
-
-      @SerializedName("sdg")
-      SDG("sdg"),
-
-      @SerializedName("sek")
-      SEK("sek"),
-
-      @SerializedName("sgd")
-      SGD("sgd"),
-
-      @SerializedName("shp")
-      SHP("shp"),
-
-      @SerializedName("sle")
-      SLE("sle"),
-
-      @SerializedName("sll")
-      SLL("sll"),
-
-      @SerializedName("sos")
-      SOS("sos"),
-
-      @SerializedName("srd")
-      SRD("srd"),
-
-      @SerializedName("ssp")
-      SSP("ssp"),
-
-      @SerializedName("std")
-      STD("std"),
-
-      @SerializedName("stn")
-      STN("stn"),
-
-      @SerializedName("svc")
-      SVC("svc"),
-
-      @SerializedName("syp")
-      SYP("syp"),
-
-      @SerializedName("szl")
-      SZL("szl"),
-
-      @SerializedName("thb")
-      THB("thb"),
-
-      @SerializedName("tjs")
-      TJS("tjs"),
-
-      @SerializedName("tmt")
-      TMT("tmt"),
-
-      @SerializedName("tnd")
-      TND("tnd"),
-
-      @SerializedName("top")
-      TOP("top"),
-
-      @SerializedName("try")
-      TRY("try"),
-
-      @SerializedName("ttd")
-      TTD("ttd"),
-
-      @SerializedName("twd")
-      TWD("twd"),
-
-      @SerializedName("tzs")
-      TZS("tzs"),
-
-      @SerializedName("uah")
-      UAH("uah"),
-
-      @SerializedName("ugx")
-      UGX("ugx"),
-
-      @SerializedName("usd")
-      USD("usd"),
-
-      @SerializedName("usdb")
-      USDB("usdb"),
-
-      @SerializedName("usdc")
-      USDC("usdc"),
-
-      @SerializedName("usn")
-      USN("usn"),
-
-      @SerializedName("uyi")
-      UYI("uyi"),
-
-      @SerializedName("uyu")
-      UYU("uyu"),
-
-      @SerializedName("uzs")
-      UZS("uzs"),
-
-      @SerializedName("vef")
-      VEF("vef"),
-
-      @SerializedName("ves")
-      VES("ves"),
-
-      @SerializedName("vnd")
-      VND("vnd"),
-
-      @SerializedName("vuv")
-      VUV("vuv"),
-
-      @SerializedName("wst")
-      WST("wst"),
-
-      @SerializedName("xaf")
-      XAF("xaf"),
-
-      @SerializedName("xcd")
-      XCD("xcd"),
-
-      @SerializedName("xcg")
-      XCG("xcg"),
-
-      @SerializedName("xof")
-      XOF("xof"),
-
-      @SerializedName("xpf")
-      XPF("xpf"),
-
-      @SerializedName("yer")
-      YER("yer"),
-
-      @SerializedName("zar")
-      ZAR("zar"),
-
-      @SerializedName("zmk")
-      ZMK("zmk"),
-
-      @SerializedName("zmw")
-      ZMW("zmw"),
-
-      @SerializedName("zwd")
-      ZWD("zwd"),
-
-      @SerializedName("zwg")
-      ZWG("zwg"),
-
-      @SerializedName("zwl")
-      ZWL("zwl");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Currency(String value) {
-        this.value = value;
       }
     }
 
@@ -12076,7 +10021,7 @@ public class AccountUpdateParams extends ApiRequestParams {
      * 3166-1 alpha-2</a> country code.
      */
     @SerializedName("country")
-    Country country;
+    Object country;
 
     /** The entity type. */
     @SerializedName("entity_type")
@@ -12101,7 +10046,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     private Identity(
         Attestations attestations,
         BusinessDetails businessDetails,
-        Country country,
+        Object country,
         EntityType entityType,
         Map<String, Object> extraParams,
         Individual individual) {
@@ -12122,7 +10067,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private BusinessDetails businessDetails;
 
-      private Country country;
+      private Object country;
 
       private EntityType entityType;
 
@@ -12160,7 +10105,18 @@ public class AccountUpdateParams extends ApiRequestParams {
        * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> country
        * code.
        */
-      public Builder setCountry(AccountUpdateParams.Identity.Country country) {
+      public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * The country in which the account holder resides, or in which the business is legally
+       * established. This should be an <a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a> country
+       * code.
+       */
+      public Builder setCountry(EmptyParam country) {
         this.country = country;
         return this;
       }
@@ -13124,15 +11080,15 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class BusinessDetails {
       /** The business registration address of the business entity. */
       @SerializedName("address")
-      Object address;
+      Address address;
 
       /** The business gross annual revenue for its preceding fiscal year. */
       @SerializedName("annual_revenue")
-      Object annualRevenue;
+      AnnualRevenue annualRevenue;
 
       /** A document verifying the business. */
       @SerializedName("documents")
-      Object documents;
+      Documents documents;
 
       /** The name which is used by the business. */
       @SerializedName("doing_business_as")
@@ -13143,7 +11099,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * business.
        */
       @SerializedName("estimated_worker_count")
-      Object estimatedWorkerCount;
+      Long estimatedWorkerCount;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -13156,11 +11112,11 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** The ID numbers of a business entity. */
       @SerializedName("id_numbers")
-      Object idNumbers;
+      List<AccountUpdateParams.Identity.BusinessDetails.IdNumber> idNumbers;
 
       /** An estimate of the monthly revenue of the business. */
       @SerializedName("monthly_estimated_revenue")
-      Object monthlyEstimatedRevenue;
+      MonthlyEstimatedRevenue monthlyEstimatedRevenue;
 
       /** The phone number of the Business Entity. */
       @SerializedName("phone")
@@ -13179,35 +11135,35 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** The business registration address of the business entity in non latin script. */
       @SerializedName("script_addresses")
-      Object scriptAddresses;
+      ScriptAddresses scriptAddresses;
 
       /** The business legal name in non latin script. */
       @SerializedName("script_names")
-      Object scriptNames;
+      ScriptNames scriptNames;
 
       /** The category identifying the legal structure of the business. */
       @SerializedName("structure")
-      ApiRequestParams.EnumParam structure;
+      Structure structure;
 
       /** The business's publicly available website. */
       @SerializedName("url")
       Object url;
 
       private BusinessDetails(
-          Object address,
-          Object annualRevenue,
-          Object documents,
+          Address address,
+          AnnualRevenue annualRevenue,
+          Documents documents,
           Object doingBusinessAs,
-          Object estimatedWorkerCount,
+          Long estimatedWorkerCount,
           Map<String, Object> extraParams,
-          Object idNumbers,
-          Object monthlyEstimatedRevenue,
+          List<AccountUpdateParams.Identity.BusinessDetails.IdNumber> idNumbers,
+          MonthlyEstimatedRevenue monthlyEstimatedRevenue,
           Object phone,
           Object productDescription,
           Object registeredName,
-          Object scriptAddresses,
-          Object scriptNames,
-          ApiRequestParams.EnumParam structure,
+          ScriptAddresses scriptAddresses,
+          ScriptNames scriptNames,
+          Structure structure,
           Object url) {
         this.address = address;
         this.annualRevenue = annualRevenue;
@@ -13231,21 +11187,21 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Object address;
+        private Address address;
 
-        private Object annualRevenue;
+        private AnnualRevenue annualRevenue;
 
-        private Object documents;
+        private Documents documents;
 
         private Object doingBusinessAs;
 
-        private Object estimatedWorkerCount;
+        private Long estimatedWorkerCount;
 
         private Map<String, Object> extraParams;
 
-        private Object idNumbers;
+        private List<AccountUpdateParams.Identity.BusinessDetails.IdNumber> idNumbers;
 
-        private Object monthlyEstimatedRevenue;
+        private MonthlyEstimatedRevenue monthlyEstimatedRevenue;
 
         private Object phone;
 
@@ -13253,11 +11209,11 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Object registeredName;
 
-        private Object scriptAddresses;
+        private ScriptAddresses scriptAddresses;
 
-        private Object scriptNames;
+        private ScriptNames scriptNames;
 
-        private ApiRequestParams.EnumParam structure;
+        private Structure structure;
 
         private Object url;
 
@@ -13287,12 +11243,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The business registration address of the business entity. */
-        public Builder setAddress(EmptyParam address) {
-          this.address = address;
-          return this;
-        }
-
         /** The business gross annual revenue for its preceding fiscal year. */
         public Builder setAnnualRevenue(
             AccountUpdateParams.Identity.BusinessDetails.AnnualRevenue annualRevenue) {
@@ -13300,21 +11250,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The business gross annual revenue for its preceding fiscal year. */
-        public Builder setAnnualRevenue(EmptyParam annualRevenue) {
-          this.annualRevenue = annualRevenue;
-          return this;
-        }
-
         /** A document verifying the business. */
         public Builder setDocuments(
             AccountUpdateParams.Identity.BusinessDetails.Documents documents) {
-          this.documents = documents;
-          return this;
-        }
-
-        /** A document verifying the business. */
-        public Builder setDocuments(EmptyParam documents) {
           this.documents = documents;
           return this;
         }
@@ -13335,16 +11273,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * An estimated upper bound of employees, contractors, vendors, etc. currently working for
          * the business.
          */
-        public Builder setEstimatedWorkerCount(Integer estimatedWorkerCount) {
-          this.estimatedWorkerCount = estimatedWorkerCount;
-          return this;
-        }
-
-        /**
-         * An estimated upper bound of employees, contractors, vendors, etc. currently working for
-         * the business.
-         */
-        public Builder setEstimatedWorkerCount(EmptyParam estimatedWorkerCount) {
+        public Builder setEstimatedWorkerCount(Long estimatedWorkerCount) {
           this.estimatedWorkerCount = estimatedWorkerCount;
           return this;
         }
@@ -13382,13 +11311,11 @@ public class AccountUpdateParams extends ApiRequestParams {
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * AccountUpdateParams.Identity.BusinessDetails#idNumbers} for the field documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addIdNumber(AccountUpdateParams.Identity.BusinessDetails.IdNumber element) {
-          if (this.idNumbers == null || this.idNumbers instanceof EmptyParam) {
-            this.idNumbers = new ArrayList<AccountUpdateParams.Identity.BusinessDetails.IdNumber>();
+          if (this.idNumbers == null) {
+            this.idNumbers = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.BusinessDetails.IdNumber>) this.idNumbers)
-              .add(element);
+          this.idNumbers.add(element);
           return this;
         }
 
@@ -13397,27 +11324,12 @@ public class AccountUpdateParams extends ApiRequestParams {
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * AccountUpdateParams.Identity.BusinessDetails#idNumbers} for the field documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addAllIdNumber(
             List<AccountUpdateParams.Identity.BusinessDetails.IdNumber> elements) {
-          if (this.idNumbers == null || this.idNumbers instanceof EmptyParam) {
-            this.idNumbers = new ArrayList<AccountUpdateParams.Identity.BusinessDetails.IdNumber>();
+          if (this.idNumbers == null) {
+            this.idNumbers = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.BusinessDetails.IdNumber>) this.idNumbers)
-              .addAll(elements);
-          return this;
-        }
-
-        /** The ID numbers of a business entity. */
-        public Builder setIdNumbers(EmptyParam idNumbers) {
-          this.idNumbers = idNumbers;
-          return this;
-        }
-
-        /** The ID numbers of a business entity. */
-        public Builder setIdNumbers(
-            List<AccountUpdateParams.Identity.BusinessDetails.IdNumber> idNumbers) {
-          this.idNumbers = idNumbers;
+          this.idNumbers.addAll(elements);
           return this;
         }
 
@@ -13425,12 +11337,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         public Builder setMonthlyEstimatedRevenue(
             AccountUpdateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue
                 monthlyEstimatedRevenue) {
-          this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
-          return this;
-        }
-
-        /** An estimate of the monthly revenue of the business. */
-        public Builder setMonthlyEstimatedRevenue(EmptyParam monthlyEstimatedRevenue) {
           this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
           return this;
         }
@@ -13484,12 +11390,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The business registration address of the business entity in non latin script. */
-        public Builder setScriptAddresses(EmptyParam scriptAddresses) {
-          this.scriptAddresses = scriptAddresses;
-          return this;
-        }
-
         /** The business legal name in non latin script. */
         public Builder setScriptNames(
             AccountUpdateParams.Identity.BusinessDetails.ScriptNames scriptNames) {
@@ -13497,21 +11397,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The business legal name in non latin script. */
-        public Builder setScriptNames(EmptyParam scriptNames) {
-          this.scriptNames = scriptNames;
-          return this;
-        }
-
         /** The category identifying the legal structure of the business. */
         public Builder setStructure(
             AccountUpdateParams.Identity.BusinessDetails.Structure structure) {
-          this.structure = structure;
-          return this;
-        }
-
-        /** The category identifying the legal structure of the business. */
-        public Builder setStructure(EmptyParam structure) {
           this.structure = structure;
           return this;
         }
@@ -13541,7 +11429,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
-        ApiRequestParams.EnumParam country;
+        Object country;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -13575,7 +11463,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Address(
             Object city,
-            ApiRequestParams.EnumParam country,
+            Object country,
             Map<String, Object> extraParams,
             Object line1,
             Object line2,
@@ -13599,7 +11487,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Object city;
 
-          private ApiRequestParams.EnumParam country;
+          private Object country;
 
           private Map<String, Object> extraParams;
 
@@ -13642,8 +11530,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
            */
-          public Builder setCountry(
-              AccountUpdateParams.Identity.BusinessDetails.Address.Country country) {
+          public Builder setCountry(String country) {
             this.country = country;
             return this;
           }
@@ -13743,768 +11630,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           public Builder setTown(EmptyParam town) {
             this.town = town;
             return this;
-          }
-        }
-
-        public enum Country implements ApiRequestParams.EnumParam {
-          @SerializedName("ad")
-          AD("ad"),
-
-          @SerializedName("ae")
-          AE("ae"),
-
-          @SerializedName("af")
-          AF("af"),
-
-          @SerializedName("ag")
-          AG("ag"),
-
-          @SerializedName("ai")
-          AI("ai"),
-
-          @SerializedName("al")
-          AL("al"),
-
-          @SerializedName("am")
-          AM("am"),
-
-          @SerializedName("ao")
-          AO("ao"),
-
-          @SerializedName("aq")
-          AQ("aq"),
-
-          @SerializedName("ar")
-          AR("ar"),
-
-          @SerializedName("as")
-          AS("as"),
-
-          @SerializedName("at")
-          AT("at"),
-
-          @SerializedName("au")
-          AU("au"),
-
-          @SerializedName("aw")
-          AW("aw"),
-
-          @SerializedName("ax")
-          AX("ax"),
-
-          @SerializedName("az")
-          AZ("az"),
-
-          @SerializedName("ba")
-          BA("ba"),
-
-          @SerializedName("bb")
-          BB("bb"),
-
-          @SerializedName("bd")
-          BD("bd"),
-
-          @SerializedName("be")
-          BE("be"),
-
-          @SerializedName("bf")
-          BF("bf"),
-
-          @SerializedName("bg")
-          BG("bg"),
-
-          @SerializedName("bh")
-          BH("bh"),
-
-          @SerializedName("bi")
-          BI("bi"),
-
-          @SerializedName("bj")
-          BJ("bj"),
-
-          @SerializedName("bl")
-          BL("bl"),
-
-          @SerializedName("bm")
-          BM("bm"),
-
-          @SerializedName("bn")
-          BN("bn"),
-
-          @SerializedName("bo")
-          BO("bo"),
-
-          @SerializedName("bq")
-          BQ("bq"),
-
-          @SerializedName("br")
-          BR("br"),
-
-          @SerializedName("bs")
-          BS("bs"),
-
-          @SerializedName("bt")
-          BT("bt"),
-
-          @SerializedName("bv")
-          BV("bv"),
-
-          @SerializedName("bw")
-          BW("bw"),
-
-          @SerializedName("by")
-          BY("by"),
-
-          @SerializedName("bz")
-          BZ("bz"),
-
-          @SerializedName("ca")
-          CA("ca"),
-
-          @SerializedName("cc")
-          CC("cc"),
-
-          @SerializedName("cd")
-          CD("cd"),
-
-          @SerializedName("cf")
-          CF("cf"),
-
-          @SerializedName("cg")
-          CG("cg"),
-
-          @SerializedName("ch")
-          CH("ch"),
-
-          @SerializedName("ci")
-          CI("ci"),
-
-          @SerializedName("ck")
-          CK("ck"),
-
-          @SerializedName("cl")
-          CL("cl"),
-
-          @SerializedName("cm")
-          CM("cm"),
-
-          @SerializedName("cn")
-          CN("cn"),
-
-          @SerializedName("co")
-          CO("co"),
-
-          @SerializedName("cr")
-          CR("cr"),
-
-          @SerializedName("cu")
-          CU("cu"),
-
-          @SerializedName("cv")
-          CV("cv"),
-
-          @SerializedName("cw")
-          CW("cw"),
-
-          @SerializedName("cx")
-          CX("cx"),
-
-          @SerializedName("cy")
-          CY("cy"),
-
-          @SerializedName("cz")
-          CZ("cz"),
-
-          @SerializedName("de")
-          DE("de"),
-
-          @SerializedName("dj")
-          DJ("dj"),
-
-          @SerializedName("dk")
-          DK("dk"),
-
-          @SerializedName("dm")
-          DM("dm"),
-
-          @SerializedName("do")
-          DO("do"),
-
-          @SerializedName("dz")
-          DZ("dz"),
-
-          @SerializedName("ec")
-          EC("ec"),
-
-          @SerializedName("ee")
-          EE("ee"),
-
-          @SerializedName("eg")
-          EG("eg"),
-
-          @SerializedName("eh")
-          EH("eh"),
-
-          @SerializedName("er")
-          ER("er"),
-
-          @SerializedName("es")
-          ES("es"),
-
-          @SerializedName("et")
-          ET("et"),
-
-          @SerializedName("fi")
-          FI("fi"),
-
-          @SerializedName("fj")
-          FJ("fj"),
-
-          @SerializedName("fk")
-          FK("fk"),
-
-          @SerializedName("fm")
-          FM("fm"),
-
-          @SerializedName("fo")
-          FO("fo"),
-
-          @SerializedName("fr")
-          FR("fr"),
-
-          @SerializedName("ga")
-          GA("ga"),
-
-          @SerializedName("gb")
-          GB("gb"),
-
-          @SerializedName("gd")
-          GD("gd"),
-
-          @SerializedName("ge")
-          GE("ge"),
-
-          @SerializedName("gf")
-          GF("gf"),
-
-          @SerializedName("gg")
-          GG("gg"),
-
-          @SerializedName("gh")
-          GH("gh"),
-
-          @SerializedName("gi")
-          GI("gi"),
-
-          @SerializedName("gl")
-          GL("gl"),
-
-          @SerializedName("gm")
-          GM("gm"),
-
-          @SerializedName("gn")
-          GN("gn"),
-
-          @SerializedName("gp")
-          GP("gp"),
-
-          @SerializedName("gq")
-          GQ("gq"),
-
-          @SerializedName("gr")
-          GR("gr"),
-
-          @SerializedName("gs")
-          GS("gs"),
-
-          @SerializedName("gt")
-          GT("gt"),
-
-          @SerializedName("gu")
-          GU("gu"),
-
-          @SerializedName("gw")
-          GW("gw"),
-
-          @SerializedName("gy")
-          GY("gy"),
-
-          @SerializedName("hk")
-          HK("hk"),
-
-          @SerializedName("hm")
-          HM("hm"),
-
-          @SerializedName("hn")
-          HN("hn"),
-
-          @SerializedName("hr")
-          HR("hr"),
-
-          @SerializedName("ht")
-          HT("ht"),
-
-          @SerializedName("hu")
-          HU("hu"),
-
-          @SerializedName("id")
-          ID("id"),
-
-          @SerializedName("ie")
-          IE("ie"),
-
-          @SerializedName("il")
-          IL("il"),
-
-          @SerializedName("im")
-          IM("im"),
-
-          @SerializedName("in")
-          IN("in"),
-
-          @SerializedName("io")
-          IO("io"),
-
-          @SerializedName("iq")
-          IQ("iq"),
-
-          @SerializedName("ir")
-          IR("ir"),
-
-          @SerializedName("is")
-          IS("is"),
-
-          @SerializedName("it")
-          IT("it"),
-
-          @SerializedName("je")
-          JE("je"),
-
-          @SerializedName("jm")
-          JM("jm"),
-
-          @SerializedName("jo")
-          JO("jo"),
-
-          @SerializedName("jp")
-          JP("jp"),
-
-          @SerializedName("ke")
-          KE("ke"),
-
-          @SerializedName("kg")
-          KG("kg"),
-
-          @SerializedName("kh")
-          KH("kh"),
-
-          @SerializedName("ki")
-          KI("ki"),
-
-          @SerializedName("km")
-          KM("km"),
-
-          @SerializedName("kn")
-          KN("kn"),
-
-          @SerializedName("kp")
-          KP("kp"),
-
-          @SerializedName("kr")
-          KR("kr"),
-
-          @SerializedName("kw")
-          KW("kw"),
-
-          @SerializedName("ky")
-          KY("ky"),
-
-          @SerializedName("kz")
-          KZ("kz"),
-
-          @SerializedName("la")
-          LA("la"),
-
-          @SerializedName("lb")
-          LB("lb"),
-
-          @SerializedName("lc")
-          LC("lc"),
-
-          @SerializedName("li")
-          LI("li"),
-
-          @SerializedName("lk")
-          LK("lk"),
-
-          @SerializedName("lr")
-          LR("lr"),
-
-          @SerializedName("ls")
-          LS("ls"),
-
-          @SerializedName("lt")
-          LT("lt"),
-
-          @SerializedName("lu")
-          LU("lu"),
-
-          @SerializedName("lv")
-          LV("lv"),
-
-          @SerializedName("ly")
-          LY("ly"),
-
-          @SerializedName("ma")
-          MA("ma"),
-
-          @SerializedName("mc")
-          MC("mc"),
-
-          @SerializedName("md")
-          MD("md"),
-
-          @SerializedName("me")
-          ME("me"),
-
-          @SerializedName("mf")
-          MF("mf"),
-
-          @SerializedName("mg")
-          MG("mg"),
-
-          @SerializedName("mh")
-          MH("mh"),
-
-          @SerializedName("mk")
-          MK("mk"),
-
-          @SerializedName("ml")
-          ML("ml"),
-
-          @SerializedName("mm")
-          MM("mm"),
-
-          @SerializedName("mn")
-          MN("mn"),
-
-          @SerializedName("mo")
-          MO("mo"),
-
-          @SerializedName("mp")
-          MP("mp"),
-
-          @SerializedName("mq")
-          MQ("mq"),
-
-          @SerializedName("mr")
-          MR("mr"),
-
-          @SerializedName("ms")
-          MS("ms"),
-
-          @SerializedName("mt")
-          MT("mt"),
-
-          @SerializedName("mu")
-          MU("mu"),
-
-          @SerializedName("mv")
-          MV("mv"),
-
-          @SerializedName("mw")
-          MW("mw"),
-
-          @SerializedName("mx")
-          MX("mx"),
-
-          @SerializedName("my")
-          MY("my"),
-
-          @SerializedName("mz")
-          MZ("mz"),
-
-          @SerializedName("na")
-          NA("na"),
-
-          @SerializedName("nc")
-          NC("nc"),
-
-          @SerializedName("ne")
-          NE("ne"),
-
-          @SerializedName("nf")
-          NF("nf"),
-
-          @SerializedName("ng")
-          NG("ng"),
-
-          @SerializedName("ni")
-          NI("ni"),
-
-          @SerializedName("nl")
-          NL("nl"),
-
-          @SerializedName("no")
-          NO("no"),
-
-          @SerializedName("np")
-          NP("np"),
-
-          @SerializedName("nr")
-          NR("nr"),
-
-          @SerializedName("nu")
-          NU("nu"),
-
-          @SerializedName("nz")
-          NZ("nz"),
-
-          @SerializedName("om")
-          OM("om"),
-
-          @SerializedName("pa")
-          PA("pa"),
-
-          @SerializedName("pe")
-          PE("pe"),
-
-          @SerializedName("pf")
-          PF("pf"),
-
-          @SerializedName("pg")
-          PG("pg"),
-
-          @SerializedName("ph")
-          PH("ph"),
-
-          @SerializedName("pk")
-          PK("pk"),
-
-          @SerializedName("pl")
-          PL("pl"),
-
-          @SerializedName("pm")
-          PM("pm"),
-
-          @SerializedName("pn")
-          PN("pn"),
-
-          @SerializedName("pr")
-          PR("pr"),
-
-          @SerializedName("ps")
-          PS("ps"),
-
-          @SerializedName("pt")
-          PT("pt"),
-
-          @SerializedName("pw")
-          PW("pw"),
-
-          @SerializedName("py")
-          PY("py"),
-
-          @SerializedName("qa")
-          QA("qa"),
-
-          @SerializedName("qz")
-          QZ("qz"),
-
-          @SerializedName("re")
-          RE("re"),
-
-          @SerializedName("ro")
-          RO("ro"),
-
-          @SerializedName("rs")
-          RS("rs"),
-
-          @SerializedName("ru")
-          RU("ru"),
-
-          @SerializedName("rw")
-          RW("rw"),
-
-          @SerializedName("sa")
-          SA("sa"),
-
-          @SerializedName("sb")
-          SB("sb"),
-
-          @SerializedName("sc")
-          SC("sc"),
-
-          @SerializedName("sd")
-          SD("sd"),
-
-          @SerializedName("se")
-          SE("se"),
-
-          @SerializedName("sg")
-          SG("sg"),
-
-          @SerializedName("sh")
-          SH("sh"),
-
-          @SerializedName("si")
-          SI("si"),
-
-          @SerializedName("sj")
-          SJ("sj"),
-
-          @SerializedName("sk")
-          SK("sk"),
-
-          @SerializedName("sl")
-          SL("sl"),
-
-          @SerializedName("sm")
-          SM("sm"),
-
-          @SerializedName("sn")
-          SN("sn"),
-
-          @SerializedName("so")
-          SO("so"),
-
-          @SerializedName("sr")
-          SR("sr"),
-
-          @SerializedName("ss")
-          SS("ss"),
-
-          @SerializedName("st")
-          ST("st"),
-
-          @SerializedName("sv")
-          SV("sv"),
-
-          @SerializedName("sx")
-          SX("sx"),
-
-          @SerializedName("sy")
-          SY("sy"),
-
-          @SerializedName("sz")
-          SZ("sz"),
-
-          @SerializedName("tc")
-          TC("tc"),
-
-          @SerializedName("td")
-          TD("td"),
-
-          @SerializedName("tf")
-          TF("tf"),
-
-          @SerializedName("tg")
-          TG("tg"),
-
-          @SerializedName("th")
-          TH("th"),
-
-          @SerializedName("tj")
-          TJ("tj"),
-
-          @SerializedName("tk")
-          TK("tk"),
-
-          @SerializedName("tl")
-          TL("tl"),
-
-          @SerializedName("tm")
-          TM("tm"),
-
-          @SerializedName("tn")
-          TN("tn"),
-
-          @SerializedName("to")
-          TO("to"),
-
-          @SerializedName("tr")
-          TR("tr"),
-
-          @SerializedName("tt")
-          TT("tt"),
-
-          @SerializedName("tv")
-          TV("tv"),
-
-          @SerializedName("tw")
-          TW("tw"),
-
-          @SerializedName("tz")
-          TZ("tz"),
-
-          @SerializedName("ua")
-          UA("ua"),
-
-          @SerializedName("ug")
-          UG("ug"),
-
-          @SerializedName("um")
-          UM("um"),
-
-          @SerializedName("us")
-          US("us"),
-
-          @SerializedName("uy")
-          UY("uy"),
-
-          @SerializedName("uz")
-          UZ("uz"),
-
-          @SerializedName("va")
-          VA("va"),
-
-          @SerializedName("vc")
-          VC("vc"),
-
-          @SerializedName("ve")
-          VE("ve"),
-
-          @SerializedName("vg")
-          VG("vg"),
-
-          @SerializedName("vi")
-          VI("vi"),
-
-          @SerializedName("vn")
-          VN("vn"),
-
-          @SerializedName("vu")
-          VU("vu"),
-
-          @SerializedName("wf")
-          WF("wf"),
-
-          @SerializedName("ws")
-          WS("ws"),
-
-          @SerializedName("xx")
-          XX("xx"),
-
-          @SerializedName("ye")
-          YE("ye"),
-
-          @SerializedName("yt")
-          YT("yt"),
-
-          @SerializedName("za")
-          ZA("za"),
-
-          @SerializedName("zm")
-          ZM("zm"),
-
-          @SerializedName("zw")
-          ZW("zw");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          Country(String value) {
-            this.value = value;
           }
         }
       }
@@ -14620,33 +11745,33 @@ public class AccountUpdateParams extends ApiRequestParams {
          * displays the last 4 digits of the account number, either a statement or a check.
          */
         @SerializedName("bank_account_ownership_verification")
-        Object bankAccountOwnershipVerification;
+        BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
         /** One or more documents that demonstrate proof of a company’s license to operate. */
         @SerializedName("company_license")
-        Object companyLicense;
+        CompanyLicense companyLicense;
 
         /** One or more documents showing the company’s Memorandum of Association. */
         @SerializedName("company_memorandum_of_association")
-        Object companyMemorandumOfAssociation;
+        CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
 
         /**
          * Certain countries only: One or more documents showing the ministerial decree legalizing
          * the company’s establishment.
          */
         @SerializedName("company_ministerial_decree")
-        Object companyMinisterialDecree;
+        CompanyMinisterialDecree companyMinisterialDecree;
 
         /**
          * One or more documents that demonstrate proof of a company’s registration with the
          * appropriate local authorities.
          */
         @SerializedName("company_registration_verification")
-        Object companyRegistrationVerification;
+        CompanyRegistrationVerification companyRegistrationVerification;
 
         /** One or more documents that demonstrate proof of a company’s tax ID. */
         @SerializedName("company_tax_id_verification")
-        Object companyTaxIdVerification;
+        CompanyTaxIdVerification companyTaxIdVerification;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -14660,7 +11785,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /** A document verifying the business. */
         @SerializedName("primary_verification")
-        Object primaryVerification;
+        PrimaryVerification primaryVerification;
 
         /** One or more documents that demonstrate proof of address. */
         @SerializedName("proof_of_address")
@@ -14671,23 +11796,23 @@ public class AccountUpdateParams extends ApiRequestParams {
          * business registry.
          */
         @SerializedName("proof_of_registration")
-        Object proofOfRegistration;
+        ProofOfRegistration proofOfRegistration;
 
         /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
         @SerializedName("proof_of_ultimate_beneficial_ownership")
         ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
 
         private Documents(
-            Object bankAccountOwnershipVerification,
-            Object companyLicense,
-            Object companyMemorandumOfAssociation,
-            Object companyMinisterialDecree,
-            Object companyRegistrationVerification,
-            Object companyTaxIdVerification,
+            BankAccountOwnershipVerification bankAccountOwnershipVerification,
+            CompanyLicense companyLicense,
+            CompanyMemorandumOfAssociation companyMemorandumOfAssociation,
+            CompanyMinisterialDecree companyMinisterialDecree,
+            CompanyRegistrationVerification companyRegistrationVerification,
+            CompanyTaxIdVerification companyTaxIdVerification,
             Map<String, Object> extraParams,
-            Object primaryVerification,
+            PrimaryVerification primaryVerification,
             ProofOfAddress proofOfAddress,
-            Object proofOfRegistration,
+            ProofOfRegistration proofOfRegistration,
             ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership) {
           this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
           this.companyLicense = companyLicense;
@@ -14707,25 +11832,25 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Object bankAccountOwnershipVerification;
+          private BankAccountOwnershipVerification bankAccountOwnershipVerification;
 
-          private Object companyLicense;
+          private CompanyLicense companyLicense;
 
-          private Object companyMemorandumOfAssociation;
+          private CompanyMemorandumOfAssociation companyMemorandumOfAssociation;
 
-          private Object companyMinisterialDecree;
+          private CompanyMinisterialDecree companyMinisterialDecree;
 
-          private Object companyRegistrationVerification;
+          private CompanyRegistrationVerification companyRegistrationVerification;
 
-          private Object companyTaxIdVerification;
+          private CompanyTaxIdVerification companyTaxIdVerification;
 
           private Map<String, Object> extraParams;
 
-          private Object primaryVerification;
+          private PrimaryVerification primaryVerification;
 
           private ProofOfAddress proofOfAddress;
 
-          private Object proofOfRegistration;
+          private ProofOfRegistration proofOfRegistration;
 
           private ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
 
@@ -14758,17 +11883,6 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * One or more documents that support the bank account ownership verification requirement.
-           * Must be a document associated with the account’s primary active bank account that
-           * displays the last 4 digits of the account number, either a statement or a check.
-           */
-          public Builder setBankAccountOwnershipVerification(
-              EmptyParam bankAccountOwnershipVerification) {
-            this.bankAccountOwnershipVerification = bankAccountOwnershipVerification;
-            return this;
-          }
-
           /** One or more documents that demonstrate proof of a company’s license to operate. */
           public Builder setCompanyLicense(
               AccountUpdateParams.Identity.BusinessDetails.Documents.CompanyLicense
@@ -14777,23 +11891,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** One or more documents that demonstrate proof of a company’s license to operate. */
-          public Builder setCompanyLicense(EmptyParam companyLicense) {
-            this.companyLicense = companyLicense;
-            return this;
-          }
-
           /** One or more documents showing the company’s Memorandum of Association. */
           public Builder setCompanyMemorandumOfAssociation(
               AccountUpdateParams.Identity.BusinessDetails.Documents.CompanyMemorandumOfAssociation
                   companyMemorandumOfAssociation) {
-            this.companyMemorandumOfAssociation = companyMemorandumOfAssociation;
-            return this;
-          }
-
-          /** One or more documents showing the company’s Memorandum of Association. */
-          public Builder setCompanyMemorandumOfAssociation(
-              EmptyParam companyMemorandumOfAssociation) {
             this.companyMemorandumOfAssociation = companyMemorandumOfAssociation;
             return this;
           }
@@ -14810,15 +11911,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Certain countries only: One or more documents showing the ministerial decree legalizing
-           * the company’s establishment.
-           */
-          public Builder setCompanyMinisterialDecree(EmptyParam companyMinisterialDecree) {
-            this.companyMinisterialDecree = companyMinisterialDecree;
-            return this;
-          }
-
-          /**
            * One or more documents that demonstrate proof of a company’s registration with the
            * appropriate local authorities.
            */
@@ -14829,26 +11921,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * One or more documents that demonstrate proof of a company’s registration with the
-           * appropriate local authorities.
-           */
-          public Builder setCompanyRegistrationVerification(
-              EmptyParam companyRegistrationVerification) {
-            this.companyRegistrationVerification = companyRegistrationVerification;
-            return this;
-          }
-
           /** One or more documents that demonstrate proof of a company’s tax ID. */
           public Builder setCompanyTaxIdVerification(
               AccountUpdateParams.Identity.BusinessDetails.Documents.CompanyTaxIdVerification
                   companyTaxIdVerification) {
-            this.companyTaxIdVerification = companyTaxIdVerification;
-            return this;
-          }
-
-          /** One or more documents that demonstrate proof of a company’s tax ID. */
-          public Builder setCompanyTaxIdVerification(EmptyParam companyTaxIdVerification) {
             this.companyTaxIdVerification = companyTaxIdVerification;
             return this;
           }
@@ -14889,12 +11965,6 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** A document verifying the business. */
-          public Builder setPrimaryVerification(EmptyParam primaryVerification) {
-            this.primaryVerification = primaryVerification;
-            return this;
-          }
-
           /** One or more documents that demonstrate proof of address. */
           public Builder setProofOfAddress(
               AccountUpdateParams.Identity.BusinessDetails.Documents.ProofOfAddress
@@ -14910,15 +11980,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           public Builder setProofOfRegistration(
               AccountUpdateParams.Identity.BusinessDetails.Documents.ProofOfRegistration
                   proofOfRegistration) {
-            this.proofOfRegistration = proofOfRegistration;
-            return this;
-          }
-
-          /**
-           * One or more documents showing the company’s proof of registration with the national
-           * business registry.
-           */
-          public Builder setProofOfRegistration(EmptyParam proofOfRegistration) {
             this.proofOfRegistration = proofOfRegistration;
             return this;
           }
@@ -16845,13 +13906,13 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /** Kana Address. */
         @SerializedName("kana")
-        Object kana;
+        Kana kana;
 
         /** Kanji Address. */
         @SerializedName("kanji")
-        Object kanji;
+        Kanji kanji;
 
-        private ScriptAddresses(Map<String, Object> extraParams, Object kana, Object kanji) {
+        private ScriptAddresses(Map<String, Object> extraParams, Kana kana, Kanji kanji) {
           this.extraParams = extraParams;
           this.kana = kana;
           this.kanji = kanji;
@@ -16864,9 +13925,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Object kana;
+          private Kana kana;
 
-          private Object kanji;
+          private Kanji kanji;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Identity.BusinessDetails.ScriptAddresses build() {
@@ -16911,21 +13972,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Kana Address. */
-          public Builder setKana(EmptyParam kana) {
-            this.kana = kana;
-            return this;
-          }
-
           /** Kanji Address. */
           public Builder setKanji(
               AccountUpdateParams.Identity.BusinessDetails.ScriptAddresses.Kanji kanji) {
-            this.kanji = kanji;
-            return this;
-          }
-
-          /** Kanji Address. */
-          public Builder setKanji(EmptyParam kanji) {
             this.kanji = kanji;
             return this;
           }
@@ -16943,7 +13992,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3166-1 alpha-2</a>).
            */
           @SerializedName("country")
-          ApiRequestParams.EnumParam country;
+          Object country;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -16977,7 +14026,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Kana(
               Object city,
-              ApiRequestParams.EnumParam country,
+              Object country,
               Map<String, Object> extraParams,
               Object line1,
               Object line2,
@@ -17001,7 +14050,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object city;
 
-            private ApiRequestParams.EnumParam country;
+            private Object country;
 
             private Map<String, Object> extraParams;
 
@@ -17044,8 +14093,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Two-letter country code (<a
              * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
              */
-            public Builder setCountry(
-                AccountUpdateParams.Identity.BusinessDetails.ScriptAddresses.Kana.Country country) {
+            public Builder setCountry(String country) {
               this.country = country;
               return this;
             }
@@ -17149,768 +14197,6 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
           }
-
-          public enum Country implements ApiRequestParams.EnumParam {
-            @SerializedName("ad")
-            AD("ad"),
-
-            @SerializedName("ae")
-            AE("ae"),
-
-            @SerializedName("af")
-            AF("af"),
-
-            @SerializedName("ag")
-            AG("ag"),
-
-            @SerializedName("ai")
-            AI("ai"),
-
-            @SerializedName("al")
-            AL("al"),
-
-            @SerializedName("am")
-            AM("am"),
-
-            @SerializedName("ao")
-            AO("ao"),
-
-            @SerializedName("aq")
-            AQ("aq"),
-
-            @SerializedName("ar")
-            AR("ar"),
-
-            @SerializedName("as")
-            AS("as"),
-
-            @SerializedName("at")
-            AT("at"),
-
-            @SerializedName("au")
-            AU("au"),
-
-            @SerializedName("aw")
-            AW("aw"),
-
-            @SerializedName("ax")
-            AX("ax"),
-
-            @SerializedName("az")
-            AZ("az"),
-
-            @SerializedName("ba")
-            BA("ba"),
-
-            @SerializedName("bb")
-            BB("bb"),
-
-            @SerializedName("bd")
-            BD("bd"),
-
-            @SerializedName("be")
-            BE("be"),
-
-            @SerializedName("bf")
-            BF("bf"),
-
-            @SerializedName("bg")
-            BG("bg"),
-
-            @SerializedName("bh")
-            BH("bh"),
-
-            @SerializedName("bi")
-            BI("bi"),
-
-            @SerializedName("bj")
-            BJ("bj"),
-
-            @SerializedName("bl")
-            BL("bl"),
-
-            @SerializedName("bm")
-            BM("bm"),
-
-            @SerializedName("bn")
-            BN("bn"),
-
-            @SerializedName("bo")
-            BO("bo"),
-
-            @SerializedName("bq")
-            BQ("bq"),
-
-            @SerializedName("br")
-            BR("br"),
-
-            @SerializedName("bs")
-            BS("bs"),
-
-            @SerializedName("bt")
-            BT("bt"),
-
-            @SerializedName("bv")
-            BV("bv"),
-
-            @SerializedName("bw")
-            BW("bw"),
-
-            @SerializedName("by")
-            BY("by"),
-
-            @SerializedName("bz")
-            BZ("bz"),
-
-            @SerializedName("ca")
-            CA("ca"),
-
-            @SerializedName("cc")
-            CC("cc"),
-
-            @SerializedName("cd")
-            CD("cd"),
-
-            @SerializedName("cf")
-            CF("cf"),
-
-            @SerializedName("cg")
-            CG("cg"),
-
-            @SerializedName("ch")
-            CH("ch"),
-
-            @SerializedName("ci")
-            CI("ci"),
-
-            @SerializedName("ck")
-            CK("ck"),
-
-            @SerializedName("cl")
-            CL("cl"),
-
-            @SerializedName("cm")
-            CM("cm"),
-
-            @SerializedName("cn")
-            CN("cn"),
-
-            @SerializedName("co")
-            CO("co"),
-
-            @SerializedName("cr")
-            CR("cr"),
-
-            @SerializedName("cu")
-            CU("cu"),
-
-            @SerializedName("cv")
-            CV("cv"),
-
-            @SerializedName("cw")
-            CW("cw"),
-
-            @SerializedName("cx")
-            CX("cx"),
-
-            @SerializedName("cy")
-            CY("cy"),
-
-            @SerializedName("cz")
-            CZ("cz"),
-
-            @SerializedName("de")
-            DE("de"),
-
-            @SerializedName("dj")
-            DJ("dj"),
-
-            @SerializedName("dk")
-            DK("dk"),
-
-            @SerializedName("dm")
-            DM("dm"),
-
-            @SerializedName("do")
-            DO("do"),
-
-            @SerializedName("dz")
-            DZ("dz"),
-
-            @SerializedName("ec")
-            EC("ec"),
-
-            @SerializedName("ee")
-            EE("ee"),
-
-            @SerializedName("eg")
-            EG("eg"),
-
-            @SerializedName("eh")
-            EH("eh"),
-
-            @SerializedName("er")
-            ER("er"),
-
-            @SerializedName("es")
-            ES("es"),
-
-            @SerializedName("et")
-            ET("et"),
-
-            @SerializedName("fi")
-            FI("fi"),
-
-            @SerializedName("fj")
-            FJ("fj"),
-
-            @SerializedName("fk")
-            FK("fk"),
-
-            @SerializedName("fm")
-            FM("fm"),
-
-            @SerializedName("fo")
-            FO("fo"),
-
-            @SerializedName("fr")
-            FR("fr"),
-
-            @SerializedName("ga")
-            GA("ga"),
-
-            @SerializedName("gb")
-            GB("gb"),
-
-            @SerializedName("gd")
-            GD("gd"),
-
-            @SerializedName("ge")
-            GE("ge"),
-
-            @SerializedName("gf")
-            GF("gf"),
-
-            @SerializedName("gg")
-            GG("gg"),
-
-            @SerializedName("gh")
-            GH("gh"),
-
-            @SerializedName("gi")
-            GI("gi"),
-
-            @SerializedName("gl")
-            GL("gl"),
-
-            @SerializedName("gm")
-            GM("gm"),
-
-            @SerializedName("gn")
-            GN("gn"),
-
-            @SerializedName("gp")
-            GP("gp"),
-
-            @SerializedName("gq")
-            GQ("gq"),
-
-            @SerializedName("gr")
-            GR("gr"),
-
-            @SerializedName("gs")
-            GS("gs"),
-
-            @SerializedName("gt")
-            GT("gt"),
-
-            @SerializedName("gu")
-            GU("gu"),
-
-            @SerializedName("gw")
-            GW("gw"),
-
-            @SerializedName("gy")
-            GY("gy"),
-
-            @SerializedName("hk")
-            HK("hk"),
-
-            @SerializedName("hm")
-            HM("hm"),
-
-            @SerializedName("hn")
-            HN("hn"),
-
-            @SerializedName("hr")
-            HR("hr"),
-
-            @SerializedName("ht")
-            HT("ht"),
-
-            @SerializedName("hu")
-            HU("hu"),
-
-            @SerializedName("id")
-            ID("id"),
-
-            @SerializedName("ie")
-            IE("ie"),
-
-            @SerializedName("il")
-            IL("il"),
-
-            @SerializedName("im")
-            IM("im"),
-
-            @SerializedName("in")
-            IN("in"),
-
-            @SerializedName("io")
-            IO("io"),
-
-            @SerializedName("iq")
-            IQ("iq"),
-
-            @SerializedName("ir")
-            IR("ir"),
-
-            @SerializedName("is")
-            IS("is"),
-
-            @SerializedName("it")
-            IT("it"),
-
-            @SerializedName("je")
-            JE("je"),
-
-            @SerializedName("jm")
-            JM("jm"),
-
-            @SerializedName("jo")
-            JO("jo"),
-
-            @SerializedName("jp")
-            JP("jp"),
-
-            @SerializedName("ke")
-            KE("ke"),
-
-            @SerializedName("kg")
-            KG("kg"),
-
-            @SerializedName("kh")
-            KH("kh"),
-
-            @SerializedName("ki")
-            KI("ki"),
-
-            @SerializedName("km")
-            KM("km"),
-
-            @SerializedName("kn")
-            KN("kn"),
-
-            @SerializedName("kp")
-            KP("kp"),
-
-            @SerializedName("kr")
-            KR("kr"),
-
-            @SerializedName("kw")
-            KW("kw"),
-
-            @SerializedName("ky")
-            KY("ky"),
-
-            @SerializedName("kz")
-            KZ("kz"),
-
-            @SerializedName("la")
-            LA("la"),
-
-            @SerializedName("lb")
-            LB("lb"),
-
-            @SerializedName("lc")
-            LC("lc"),
-
-            @SerializedName("li")
-            LI("li"),
-
-            @SerializedName("lk")
-            LK("lk"),
-
-            @SerializedName("lr")
-            LR("lr"),
-
-            @SerializedName("ls")
-            LS("ls"),
-
-            @SerializedName("lt")
-            LT("lt"),
-
-            @SerializedName("lu")
-            LU("lu"),
-
-            @SerializedName("lv")
-            LV("lv"),
-
-            @SerializedName("ly")
-            LY("ly"),
-
-            @SerializedName("ma")
-            MA("ma"),
-
-            @SerializedName("mc")
-            MC("mc"),
-
-            @SerializedName("md")
-            MD("md"),
-
-            @SerializedName("me")
-            ME("me"),
-
-            @SerializedName("mf")
-            MF("mf"),
-
-            @SerializedName("mg")
-            MG("mg"),
-
-            @SerializedName("mh")
-            MH("mh"),
-
-            @SerializedName("mk")
-            MK("mk"),
-
-            @SerializedName("ml")
-            ML("ml"),
-
-            @SerializedName("mm")
-            MM("mm"),
-
-            @SerializedName("mn")
-            MN("mn"),
-
-            @SerializedName("mo")
-            MO("mo"),
-
-            @SerializedName("mp")
-            MP("mp"),
-
-            @SerializedName("mq")
-            MQ("mq"),
-
-            @SerializedName("mr")
-            MR("mr"),
-
-            @SerializedName("ms")
-            MS("ms"),
-
-            @SerializedName("mt")
-            MT("mt"),
-
-            @SerializedName("mu")
-            MU("mu"),
-
-            @SerializedName("mv")
-            MV("mv"),
-
-            @SerializedName("mw")
-            MW("mw"),
-
-            @SerializedName("mx")
-            MX("mx"),
-
-            @SerializedName("my")
-            MY("my"),
-
-            @SerializedName("mz")
-            MZ("mz"),
-
-            @SerializedName("na")
-            NA("na"),
-
-            @SerializedName("nc")
-            NC("nc"),
-
-            @SerializedName("ne")
-            NE("ne"),
-
-            @SerializedName("nf")
-            NF("nf"),
-
-            @SerializedName("ng")
-            NG("ng"),
-
-            @SerializedName("ni")
-            NI("ni"),
-
-            @SerializedName("nl")
-            NL("nl"),
-
-            @SerializedName("no")
-            NO("no"),
-
-            @SerializedName("np")
-            NP("np"),
-
-            @SerializedName("nr")
-            NR("nr"),
-
-            @SerializedName("nu")
-            NU("nu"),
-
-            @SerializedName("nz")
-            NZ("nz"),
-
-            @SerializedName("om")
-            OM("om"),
-
-            @SerializedName("pa")
-            PA("pa"),
-
-            @SerializedName("pe")
-            PE("pe"),
-
-            @SerializedName("pf")
-            PF("pf"),
-
-            @SerializedName("pg")
-            PG("pg"),
-
-            @SerializedName("ph")
-            PH("ph"),
-
-            @SerializedName("pk")
-            PK("pk"),
-
-            @SerializedName("pl")
-            PL("pl"),
-
-            @SerializedName("pm")
-            PM("pm"),
-
-            @SerializedName("pn")
-            PN("pn"),
-
-            @SerializedName("pr")
-            PR("pr"),
-
-            @SerializedName("ps")
-            PS("ps"),
-
-            @SerializedName("pt")
-            PT("pt"),
-
-            @SerializedName("pw")
-            PW("pw"),
-
-            @SerializedName("py")
-            PY("py"),
-
-            @SerializedName("qa")
-            QA("qa"),
-
-            @SerializedName("qz")
-            QZ("qz"),
-
-            @SerializedName("re")
-            RE("re"),
-
-            @SerializedName("ro")
-            RO("ro"),
-
-            @SerializedName("rs")
-            RS("rs"),
-
-            @SerializedName("ru")
-            RU("ru"),
-
-            @SerializedName("rw")
-            RW("rw"),
-
-            @SerializedName("sa")
-            SA("sa"),
-
-            @SerializedName("sb")
-            SB("sb"),
-
-            @SerializedName("sc")
-            SC("sc"),
-
-            @SerializedName("sd")
-            SD("sd"),
-
-            @SerializedName("se")
-            SE("se"),
-
-            @SerializedName("sg")
-            SG("sg"),
-
-            @SerializedName("sh")
-            SH("sh"),
-
-            @SerializedName("si")
-            SI("si"),
-
-            @SerializedName("sj")
-            SJ("sj"),
-
-            @SerializedName("sk")
-            SK("sk"),
-
-            @SerializedName("sl")
-            SL("sl"),
-
-            @SerializedName("sm")
-            SM("sm"),
-
-            @SerializedName("sn")
-            SN("sn"),
-
-            @SerializedName("so")
-            SO("so"),
-
-            @SerializedName("sr")
-            SR("sr"),
-
-            @SerializedName("ss")
-            SS("ss"),
-
-            @SerializedName("st")
-            ST("st"),
-
-            @SerializedName("sv")
-            SV("sv"),
-
-            @SerializedName("sx")
-            SX("sx"),
-
-            @SerializedName("sy")
-            SY("sy"),
-
-            @SerializedName("sz")
-            SZ("sz"),
-
-            @SerializedName("tc")
-            TC("tc"),
-
-            @SerializedName("td")
-            TD("td"),
-
-            @SerializedName("tf")
-            TF("tf"),
-
-            @SerializedName("tg")
-            TG("tg"),
-
-            @SerializedName("th")
-            TH("th"),
-
-            @SerializedName("tj")
-            TJ("tj"),
-
-            @SerializedName("tk")
-            TK("tk"),
-
-            @SerializedName("tl")
-            TL("tl"),
-
-            @SerializedName("tm")
-            TM("tm"),
-
-            @SerializedName("tn")
-            TN("tn"),
-
-            @SerializedName("to")
-            TO("to"),
-
-            @SerializedName("tr")
-            TR("tr"),
-
-            @SerializedName("tt")
-            TT("tt"),
-
-            @SerializedName("tv")
-            TV("tv"),
-
-            @SerializedName("tw")
-            TW("tw"),
-
-            @SerializedName("tz")
-            TZ("tz"),
-
-            @SerializedName("ua")
-            UA("ua"),
-
-            @SerializedName("ug")
-            UG("ug"),
-
-            @SerializedName("um")
-            UM("um"),
-
-            @SerializedName("us")
-            US("us"),
-
-            @SerializedName("uy")
-            UY("uy"),
-
-            @SerializedName("uz")
-            UZ("uz"),
-
-            @SerializedName("va")
-            VA("va"),
-
-            @SerializedName("vc")
-            VC("vc"),
-
-            @SerializedName("ve")
-            VE("ve"),
-
-            @SerializedName("vg")
-            VG("vg"),
-
-            @SerializedName("vi")
-            VI("vi"),
-
-            @SerializedName("vn")
-            VN("vn"),
-
-            @SerializedName("vu")
-            VU("vu"),
-
-            @SerializedName("wf")
-            WF("wf"),
-
-            @SerializedName("ws")
-            WS("ws"),
-
-            @SerializedName("xx")
-            XX("xx"),
-
-            @SerializedName("ye")
-            YE("ye"),
-
-            @SerializedName("yt")
-            YT("yt"),
-
-            @SerializedName("za")
-            ZA("za"),
-
-            @SerializedName("zm")
-            ZM("zm"),
-
-            @SerializedName("zw")
-            ZW("zw");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            Country(String value) {
-              this.value = value;
-            }
-          }
         }
 
         @Getter
@@ -17925,7 +14211,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3166-1 alpha-2</a>).
            */
           @SerializedName("country")
-          ApiRequestParams.EnumParam country;
+          Object country;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -17959,7 +14245,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Kanji(
               Object city,
-              ApiRequestParams.EnumParam country,
+              Object country,
               Map<String, Object> extraParams,
               Object line1,
               Object line2,
@@ -17983,7 +14269,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object city;
 
-            private ApiRequestParams.EnumParam country;
+            private Object country;
 
             private Map<String, Object> extraParams;
 
@@ -18026,9 +14312,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Two-letter country code (<a
              * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
              */
-            public Builder setCountry(
-                AccountUpdateParams.Identity.BusinessDetails.ScriptAddresses.Kanji.Country
-                    country) {
+            public Builder setCountry(String country) {
               this.country = country;
               return this;
             }
@@ -18132,768 +14416,6 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
           }
-
-          public enum Country implements ApiRequestParams.EnumParam {
-            @SerializedName("ad")
-            AD("ad"),
-
-            @SerializedName("ae")
-            AE("ae"),
-
-            @SerializedName("af")
-            AF("af"),
-
-            @SerializedName("ag")
-            AG("ag"),
-
-            @SerializedName("ai")
-            AI("ai"),
-
-            @SerializedName("al")
-            AL("al"),
-
-            @SerializedName("am")
-            AM("am"),
-
-            @SerializedName("ao")
-            AO("ao"),
-
-            @SerializedName("aq")
-            AQ("aq"),
-
-            @SerializedName("ar")
-            AR("ar"),
-
-            @SerializedName("as")
-            AS("as"),
-
-            @SerializedName("at")
-            AT("at"),
-
-            @SerializedName("au")
-            AU("au"),
-
-            @SerializedName("aw")
-            AW("aw"),
-
-            @SerializedName("ax")
-            AX("ax"),
-
-            @SerializedName("az")
-            AZ("az"),
-
-            @SerializedName("ba")
-            BA("ba"),
-
-            @SerializedName("bb")
-            BB("bb"),
-
-            @SerializedName("bd")
-            BD("bd"),
-
-            @SerializedName("be")
-            BE("be"),
-
-            @SerializedName("bf")
-            BF("bf"),
-
-            @SerializedName("bg")
-            BG("bg"),
-
-            @SerializedName("bh")
-            BH("bh"),
-
-            @SerializedName("bi")
-            BI("bi"),
-
-            @SerializedName("bj")
-            BJ("bj"),
-
-            @SerializedName("bl")
-            BL("bl"),
-
-            @SerializedName("bm")
-            BM("bm"),
-
-            @SerializedName("bn")
-            BN("bn"),
-
-            @SerializedName("bo")
-            BO("bo"),
-
-            @SerializedName("bq")
-            BQ("bq"),
-
-            @SerializedName("br")
-            BR("br"),
-
-            @SerializedName("bs")
-            BS("bs"),
-
-            @SerializedName("bt")
-            BT("bt"),
-
-            @SerializedName("bv")
-            BV("bv"),
-
-            @SerializedName("bw")
-            BW("bw"),
-
-            @SerializedName("by")
-            BY("by"),
-
-            @SerializedName("bz")
-            BZ("bz"),
-
-            @SerializedName("ca")
-            CA("ca"),
-
-            @SerializedName("cc")
-            CC("cc"),
-
-            @SerializedName("cd")
-            CD("cd"),
-
-            @SerializedName("cf")
-            CF("cf"),
-
-            @SerializedName("cg")
-            CG("cg"),
-
-            @SerializedName("ch")
-            CH("ch"),
-
-            @SerializedName("ci")
-            CI("ci"),
-
-            @SerializedName("ck")
-            CK("ck"),
-
-            @SerializedName("cl")
-            CL("cl"),
-
-            @SerializedName("cm")
-            CM("cm"),
-
-            @SerializedName("cn")
-            CN("cn"),
-
-            @SerializedName("co")
-            CO("co"),
-
-            @SerializedName("cr")
-            CR("cr"),
-
-            @SerializedName("cu")
-            CU("cu"),
-
-            @SerializedName("cv")
-            CV("cv"),
-
-            @SerializedName("cw")
-            CW("cw"),
-
-            @SerializedName("cx")
-            CX("cx"),
-
-            @SerializedName("cy")
-            CY("cy"),
-
-            @SerializedName("cz")
-            CZ("cz"),
-
-            @SerializedName("de")
-            DE("de"),
-
-            @SerializedName("dj")
-            DJ("dj"),
-
-            @SerializedName("dk")
-            DK("dk"),
-
-            @SerializedName("dm")
-            DM("dm"),
-
-            @SerializedName("do")
-            DO("do"),
-
-            @SerializedName("dz")
-            DZ("dz"),
-
-            @SerializedName("ec")
-            EC("ec"),
-
-            @SerializedName("ee")
-            EE("ee"),
-
-            @SerializedName("eg")
-            EG("eg"),
-
-            @SerializedName("eh")
-            EH("eh"),
-
-            @SerializedName("er")
-            ER("er"),
-
-            @SerializedName("es")
-            ES("es"),
-
-            @SerializedName("et")
-            ET("et"),
-
-            @SerializedName("fi")
-            FI("fi"),
-
-            @SerializedName("fj")
-            FJ("fj"),
-
-            @SerializedName("fk")
-            FK("fk"),
-
-            @SerializedName("fm")
-            FM("fm"),
-
-            @SerializedName("fo")
-            FO("fo"),
-
-            @SerializedName("fr")
-            FR("fr"),
-
-            @SerializedName("ga")
-            GA("ga"),
-
-            @SerializedName("gb")
-            GB("gb"),
-
-            @SerializedName("gd")
-            GD("gd"),
-
-            @SerializedName("ge")
-            GE("ge"),
-
-            @SerializedName("gf")
-            GF("gf"),
-
-            @SerializedName("gg")
-            GG("gg"),
-
-            @SerializedName("gh")
-            GH("gh"),
-
-            @SerializedName("gi")
-            GI("gi"),
-
-            @SerializedName("gl")
-            GL("gl"),
-
-            @SerializedName("gm")
-            GM("gm"),
-
-            @SerializedName("gn")
-            GN("gn"),
-
-            @SerializedName("gp")
-            GP("gp"),
-
-            @SerializedName("gq")
-            GQ("gq"),
-
-            @SerializedName("gr")
-            GR("gr"),
-
-            @SerializedName("gs")
-            GS("gs"),
-
-            @SerializedName("gt")
-            GT("gt"),
-
-            @SerializedName("gu")
-            GU("gu"),
-
-            @SerializedName("gw")
-            GW("gw"),
-
-            @SerializedName("gy")
-            GY("gy"),
-
-            @SerializedName("hk")
-            HK("hk"),
-
-            @SerializedName("hm")
-            HM("hm"),
-
-            @SerializedName("hn")
-            HN("hn"),
-
-            @SerializedName("hr")
-            HR("hr"),
-
-            @SerializedName("ht")
-            HT("ht"),
-
-            @SerializedName("hu")
-            HU("hu"),
-
-            @SerializedName("id")
-            ID("id"),
-
-            @SerializedName("ie")
-            IE("ie"),
-
-            @SerializedName("il")
-            IL("il"),
-
-            @SerializedName("im")
-            IM("im"),
-
-            @SerializedName("in")
-            IN("in"),
-
-            @SerializedName("io")
-            IO("io"),
-
-            @SerializedName("iq")
-            IQ("iq"),
-
-            @SerializedName("ir")
-            IR("ir"),
-
-            @SerializedName("is")
-            IS("is"),
-
-            @SerializedName("it")
-            IT("it"),
-
-            @SerializedName("je")
-            JE("je"),
-
-            @SerializedName("jm")
-            JM("jm"),
-
-            @SerializedName("jo")
-            JO("jo"),
-
-            @SerializedName("jp")
-            JP("jp"),
-
-            @SerializedName("ke")
-            KE("ke"),
-
-            @SerializedName("kg")
-            KG("kg"),
-
-            @SerializedName("kh")
-            KH("kh"),
-
-            @SerializedName("ki")
-            KI("ki"),
-
-            @SerializedName("km")
-            KM("km"),
-
-            @SerializedName("kn")
-            KN("kn"),
-
-            @SerializedName("kp")
-            KP("kp"),
-
-            @SerializedName("kr")
-            KR("kr"),
-
-            @SerializedName("kw")
-            KW("kw"),
-
-            @SerializedName("ky")
-            KY("ky"),
-
-            @SerializedName("kz")
-            KZ("kz"),
-
-            @SerializedName("la")
-            LA("la"),
-
-            @SerializedName("lb")
-            LB("lb"),
-
-            @SerializedName("lc")
-            LC("lc"),
-
-            @SerializedName("li")
-            LI("li"),
-
-            @SerializedName("lk")
-            LK("lk"),
-
-            @SerializedName("lr")
-            LR("lr"),
-
-            @SerializedName("ls")
-            LS("ls"),
-
-            @SerializedName("lt")
-            LT("lt"),
-
-            @SerializedName("lu")
-            LU("lu"),
-
-            @SerializedName("lv")
-            LV("lv"),
-
-            @SerializedName("ly")
-            LY("ly"),
-
-            @SerializedName("ma")
-            MA("ma"),
-
-            @SerializedName("mc")
-            MC("mc"),
-
-            @SerializedName("md")
-            MD("md"),
-
-            @SerializedName("me")
-            ME("me"),
-
-            @SerializedName("mf")
-            MF("mf"),
-
-            @SerializedName("mg")
-            MG("mg"),
-
-            @SerializedName("mh")
-            MH("mh"),
-
-            @SerializedName("mk")
-            MK("mk"),
-
-            @SerializedName("ml")
-            ML("ml"),
-
-            @SerializedName("mm")
-            MM("mm"),
-
-            @SerializedName("mn")
-            MN("mn"),
-
-            @SerializedName("mo")
-            MO("mo"),
-
-            @SerializedName("mp")
-            MP("mp"),
-
-            @SerializedName("mq")
-            MQ("mq"),
-
-            @SerializedName("mr")
-            MR("mr"),
-
-            @SerializedName("ms")
-            MS("ms"),
-
-            @SerializedName("mt")
-            MT("mt"),
-
-            @SerializedName("mu")
-            MU("mu"),
-
-            @SerializedName("mv")
-            MV("mv"),
-
-            @SerializedName("mw")
-            MW("mw"),
-
-            @SerializedName("mx")
-            MX("mx"),
-
-            @SerializedName("my")
-            MY("my"),
-
-            @SerializedName("mz")
-            MZ("mz"),
-
-            @SerializedName("na")
-            NA("na"),
-
-            @SerializedName("nc")
-            NC("nc"),
-
-            @SerializedName("ne")
-            NE("ne"),
-
-            @SerializedName("nf")
-            NF("nf"),
-
-            @SerializedName("ng")
-            NG("ng"),
-
-            @SerializedName("ni")
-            NI("ni"),
-
-            @SerializedName("nl")
-            NL("nl"),
-
-            @SerializedName("no")
-            NO("no"),
-
-            @SerializedName("np")
-            NP("np"),
-
-            @SerializedName("nr")
-            NR("nr"),
-
-            @SerializedName("nu")
-            NU("nu"),
-
-            @SerializedName("nz")
-            NZ("nz"),
-
-            @SerializedName("om")
-            OM("om"),
-
-            @SerializedName("pa")
-            PA("pa"),
-
-            @SerializedName("pe")
-            PE("pe"),
-
-            @SerializedName("pf")
-            PF("pf"),
-
-            @SerializedName("pg")
-            PG("pg"),
-
-            @SerializedName("ph")
-            PH("ph"),
-
-            @SerializedName("pk")
-            PK("pk"),
-
-            @SerializedName("pl")
-            PL("pl"),
-
-            @SerializedName("pm")
-            PM("pm"),
-
-            @SerializedName("pn")
-            PN("pn"),
-
-            @SerializedName("pr")
-            PR("pr"),
-
-            @SerializedName("ps")
-            PS("ps"),
-
-            @SerializedName("pt")
-            PT("pt"),
-
-            @SerializedName("pw")
-            PW("pw"),
-
-            @SerializedName("py")
-            PY("py"),
-
-            @SerializedName("qa")
-            QA("qa"),
-
-            @SerializedName("qz")
-            QZ("qz"),
-
-            @SerializedName("re")
-            RE("re"),
-
-            @SerializedName("ro")
-            RO("ro"),
-
-            @SerializedName("rs")
-            RS("rs"),
-
-            @SerializedName("ru")
-            RU("ru"),
-
-            @SerializedName("rw")
-            RW("rw"),
-
-            @SerializedName("sa")
-            SA("sa"),
-
-            @SerializedName("sb")
-            SB("sb"),
-
-            @SerializedName("sc")
-            SC("sc"),
-
-            @SerializedName("sd")
-            SD("sd"),
-
-            @SerializedName("se")
-            SE("se"),
-
-            @SerializedName("sg")
-            SG("sg"),
-
-            @SerializedName("sh")
-            SH("sh"),
-
-            @SerializedName("si")
-            SI("si"),
-
-            @SerializedName("sj")
-            SJ("sj"),
-
-            @SerializedName("sk")
-            SK("sk"),
-
-            @SerializedName("sl")
-            SL("sl"),
-
-            @SerializedName("sm")
-            SM("sm"),
-
-            @SerializedName("sn")
-            SN("sn"),
-
-            @SerializedName("so")
-            SO("so"),
-
-            @SerializedName("sr")
-            SR("sr"),
-
-            @SerializedName("ss")
-            SS("ss"),
-
-            @SerializedName("st")
-            ST("st"),
-
-            @SerializedName("sv")
-            SV("sv"),
-
-            @SerializedName("sx")
-            SX("sx"),
-
-            @SerializedName("sy")
-            SY("sy"),
-
-            @SerializedName("sz")
-            SZ("sz"),
-
-            @SerializedName("tc")
-            TC("tc"),
-
-            @SerializedName("td")
-            TD("td"),
-
-            @SerializedName("tf")
-            TF("tf"),
-
-            @SerializedName("tg")
-            TG("tg"),
-
-            @SerializedName("th")
-            TH("th"),
-
-            @SerializedName("tj")
-            TJ("tj"),
-
-            @SerializedName("tk")
-            TK("tk"),
-
-            @SerializedName("tl")
-            TL("tl"),
-
-            @SerializedName("tm")
-            TM("tm"),
-
-            @SerializedName("tn")
-            TN("tn"),
-
-            @SerializedName("to")
-            TO("to"),
-
-            @SerializedName("tr")
-            TR("tr"),
-
-            @SerializedName("tt")
-            TT("tt"),
-
-            @SerializedName("tv")
-            TV("tv"),
-
-            @SerializedName("tw")
-            TW("tw"),
-
-            @SerializedName("tz")
-            TZ("tz"),
-
-            @SerializedName("ua")
-            UA("ua"),
-
-            @SerializedName("ug")
-            UG("ug"),
-
-            @SerializedName("um")
-            UM("um"),
-
-            @SerializedName("us")
-            US("us"),
-
-            @SerializedName("uy")
-            UY("uy"),
-
-            @SerializedName("uz")
-            UZ("uz"),
-
-            @SerializedName("va")
-            VA("va"),
-
-            @SerializedName("vc")
-            VC("vc"),
-
-            @SerializedName("ve")
-            VE("ve"),
-
-            @SerializedName("vg")
-            VG("vg"),
-
-            @SerializedName("vi")
-            VI("vi"),
-
-            @SerializedName("vn")
-            VN("vn"),
-
-            @SerializedName("vu")
-            VU("vu"),
-
-            @SerializedName("wf")
-            WF("wf"),
-
-            @SerializedName("ws")
-            WS("ws"),
-
-            @SerializedName("xx")
-            XX("xx"),
-
-            @SerializedName("ye")
-            YE("ye"),
-
-            @SerializedName("yt")
-            YT("yt"),
-
-            @SerializedName("za")
-            ZA("za"),
-
-            @SerializedName("zm")
-            ZM("zm"),
-
-            @SerializedName("zw")
-            ZW("zw");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            Country(String value) {
-              this.value = value;
-            }
-          }
         }
       }
 
@@ -18912,13 +14434,13 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /** Kana name. */
         @SerializedName("kana")
-        Object kana;
+        Kana kana;
 
         /** Kanji name. */
         @SerializedName("kanji")
-        Object kanji;
+        Kanji kanji;
 
-        private ScriptNames(Map<String, Object> extraParams, Object kana, Object kanji) {
+        private ScriptNames(Map<String, Object> extraParams, Kana kana, Kanji kanji) {
           this.extraParams = extraParams;
           this.kana = kana;
           this.kanji = kanji;
@@ -18931,9 +14453,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Object kana;
+          private Kana kana;
 
-          private Object kanji;
+          private Kanji kanji;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Identity.BusinessDetails.ScriptNames build() {
@@ -18976,21 +14498,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Kana name. */
-          public Builder setKana(EmptyParam kana) {
-            this.kana = kana;
-            return this;
-          }
-
           /** Kanji name. */
           public Builder setKanji(
               AccountUpdateParams.Identity.BusinessDetails.ScriptNames.Kanji kanji) {
-            this.kanji = kanji;
-            return this;
-          }
-
-          /** Kanji name. */
-          public Builder setKanji(EmptyParam kanji) {
             this.kanji = kanji;
             return this;
           }
@@ -19255,23 +14765,23 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class Individual {
       /** Additional addresses associated with the individual. */
       @SerializedName("additional_addresses")
-      Object additionalAddresses;
+      List<AccountUpdateParams.Identity.Individual.AdditionalAddress> additionalAddresses;
 
       /** Additional names (e.g. aliases) associated with the individual. */
       @SerializedName("additional_names")
-      Object additionalNames;
+      List<AccountUpdateParams.Identity.Individual.AdditionalName> additionalNames;
 
       /** The individual's residential address. */
       @SerializedName("address")
-      Object address;
+      Address address;
 
       /** The individual's date of birth. */
       @SerializedName("date_of_birth")
-      Object dateOfBirth;
+      DateOfBirth dateOfBirth;
 
       /** Documents that may be submitted to satisfy various informational requests. */
       @SerializedName("documents")
-      Object documents;
+      Documents documents;
 
       /** The individual's email address. */
       @SerializedName("email")
@@ -19292,14 +14802,14 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** The identification numbers (e.g., SSN) associated with the individual. */
       @SerializedName("id_numbers")
-      Object idNumbers;
+      List<AccountUpdateParams.Identity.Individual.IdNumber> idNumbers;
 
       /**
        * The individual's gender (International regulations require either &quot;male&quot; or
        * &quot;female&quot;).
        */
       @SerializedName("legal_gender")
-      ApiRequestParams.EnumParam legalGender;
+      LegalGender legalGender;
 
       /**
        * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -19313,7 +14823,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
        */
       @SerializedName("nationalities")
-      List<AccountUpdateParams.Identity.Individual.Nationality> nationalities;
+      List<String> nationalities;
 
       /** The individual's phone number. */
       @SerializedName("phone")
@@ -19321,42 +14831,42 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** The individual's political exposure. */
       @SerializedName("political_exposure")
-      ApiRequestParams.EnumParam politicalExposure;
+      PoliticalExposure politicalExposure;
 
       /** The relationship that this individual has with the account's identity. */
       @SerializedName("relationship")
-      Object relationship;
+      Relationship relationship;
 
       /** The script addresses (e.g., non-Latin characters) associated with the individual. */
       @SerializedName("script_addresses")
-      Object scriptAddresses;
+      ScriptAddresses scriptAddresses;
 
       /** The individuals primary name in non latin script. */
       @SerializedName("script_names")
-      Object scriptNames;
+      ScriptNames scriptNames;
 
       /** The individual's last name. */
       @SerializedName("surname")
       Object surname;
 
       private Individual(
-          Object additionalAddresses,
-          Object additionalNames,
-          Object address,
-          Object dateOfBirth,
-          Object documents,
+          List<AccountUpdateParams.Identity.Individual.AdditionalAddress> additionalAddresses,
+          List<AccountUpdateParams.Identity.Individual.AdditionalName> additionalNames,
+          Address address,
+          DateOfBirth dateOfBirth,
+          Documents documents,
           Object email,
           Map<String, Object> extraParams,
           Object givenName,
-          Object idNumbers,
-          ApiRequestParams.EnumParam legalGender,
+          List<AccountUpdateParams.Identity.Individual.IdNumber> idNumbers,
+          LegalGender legalGender,
           Map<String, Object> metadata,
-          List<AccountUpdateParams.Identity.Individual.Nationality> nationalities,
+          List<String> nationalities,
           Object phone,
-          ApiRequestParams.EnumParam politicalExposure,
-          Object relationship,
-          Object scriptAddresses,
-          Object scriptNames,
+          PoliticalExposure politicalExposure,
+          Relationship relationship,
+          ScriptAddresses scriptAddresses,
+          ScriptNames scriptNames,
           Object surname) {
         this.additionalAddresses = additionalAddresses;
         this.additionalNames = additionalNames;
@@ -19383,15 +14893,15 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Object additionalAddresses;
+        private List<AccountUpdateParams.Identity.Individual.AdditionalAddress> additionalAddresses;
 
-        private Object additionalNames;
+        private List<AccountUpdateParams.Identity.Individual.AdditionalName> additionalNames;
 
-        private Object address;
+        private Address address;
 
-        private Object dateOfBirth;
+        private DateOfBirth dateOfBirth;
 
-        private Object documents;
+        private Documents documents;
 
         private Object email;
 
@@ -19399,23 +14909,23 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Object givenName;
 
-        private Object idNumbers;
+        private List<AccountUpdateParams.Identity.Individual.IdNumber> idNumbers;
 
-        private ApiRequestParams.EnumParam legalGender;
+        private LegalGender legalGender;
 
         private Map<String, Object> metadata;
 
-        private List<AccountUpdateParams.Identity.Individual.Nationality> nationalities;
+        private List<String> nationalities;
 
         private Object phone;
 
-        private ApiRequestParams.EnumParam politicalExposure;
+        private PoliticalExposure politicalExposure;
 
-        private Object relationship;
+        private Relationship relationship;
 
-        private Object scriptAddresses;
+        private ScriptAddresses scriptAddresses;
 
-        private Object scriptNames;
+        private ScriptNames scriptNames;
 
         private Object surname;
 
@@ -19448,16 +14958,12 @@ public class AccountUpdateParams extends ApiRequestParams {
          * See {@link AccountUpdateParams.Identity.Individual#additionalAddresses} for the field
          * documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addAdditionalAddress(
             AccountUpdateParams.Identity.Individual.AdditionalAddress element) {
-          if (this.additionalAddresses == null || this.additionalAddresses instanceof EmptyParam) {
-            this.additionalAddresses =
-                new ArrayList<AccountUpdateParams.Identity.Individual.AdditionalAddress>();
+          if (this.additionalAddresses == null) {
+            this.additionalAddresses = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.Individual.AdditionalAddress>)
-                  this.additionalAddresses)
-              .add(element);
+          this.additionalAddresses.add(element);
           return this;
         }
 
@@ -19467,29 +14973,12 @@ public class AccountUpdateParams extends ApiRequestParams {
          * See {@link AccountUpdateParams.Identity.Individual#additionalAddresses} for the field
          * documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addAllAdditionalAddress(
             List<AccountUpdateParams.Identity.Individual.AdditionalAddress> elements) {
-          if (this.additionalAddresses == null || this.additionalAddresses instanceof EmptyParam) {
-            this.additionalAddresses =
-                new ArrayList<AccountUpdateParams.Identity.Individual.AdditionalAddress>();
+          if (this.additionalAddresses == null) {
+            this.additionalAddresses = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.Individual.AdditionalAddress>)
-                  this.additionalAddresses)
-              .addAll(elements);
-          return this;
-        }
-
-        /** Additional addresses associated with the individual. */
-        public Builder setAdditionalAddresses(EmptyParam additionalAddresses) {
-          this.additionalAddresses = additionalAddresses;
-          return this;
-        }
-
-        /** Additional addresses associated with the individual. */
-        public Builder setAdditionalAddresses(
-            List<AccountUpdateParams.Identity.Individual.AdditionalAddress> additionalAddresses) {
-          this.additionalAddresses = additionalAddresses;
+          this.additionalAddresses.addAll(elements);
           return this;
         }
 
@@ -19499,15 +14988,12 @@ public class AccountUpdateParams extends ApiRequestParams {
          * See {@link AccountUpdateParams.Identity.Individual#additionalNames} for the field
          * documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addAdditionalName(
             AccountUpdateParams.Identity.Individual.AdditionalName element) {
-          if (this.additionalNames == null || this.additionalNames instanceof EmptyParam) {
-            this.additionalNames =
-                new ArrayList<AccountUpdateParams.Identity.Individual.AdditionalName>();
+          if (this.additionalNames == null) {
+            this.additionalNames = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.Individual.AdditionalName>) this.additionalNames)
-              .add(element);
+          this.additionalNames.add(element);
           return this;
         }
 
@@ -19517,39 +15003,17 @@ public class AccountUpdateParams extends ApiRequestParams {
          * See {@link AccountUpdateParams.Identity.Individual#additionalNames} for the field
          * documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addAllAdditionalName(
             List<AccountUpdateParams.Identity.Individual.AdditionalName> elements) {
-          if (this.additionalNames == null || this.additionalNames instanceof EmptyParam) {
-            this.additionalNames =
-                new ArrayList<AccountUpdateParams.Identity.Individual.AdditionalName>();
+          if (this.additionalNames == null) {
+            this.additionalNames = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.Individual.AdditionalName>) this.additionalNames)
-              .addAll(elements);
-          return this;
-        }
-
-        /** Additional names (e.g. aliases) associated with the individual. */
-        public Builder setAdditionalNames(EmptyParam additionalNames) {
-          this.additionalNames = additionalNames;
-          return this;
-        }
-
-        /** Additional names (e.g. aliases) associated with the individual. */
-        public Builder setAdditionalNames(
-            List<AccountUpdateParams.Identity.Individual.AdditionalName> additionalNames) {
-          this.additionalNames = additionalNames;
+          this.additionalNames.addAll(elements);
           return this;
         }
 
         /** The individual's residential address. */
         public Builder setAddress(AccountUpdateParams.Identity.Individual.Address address) {
-          this.address = address;
-          return this;
-        }
-
-        /** The individual's residential address. */
-        public Builder setAddress(EmptyParam address) {
           this.address = address;
           return this;
         }
@@ -19561,20 +15025,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The individual's date of birth. */
-        public Builder setDateOfBirth(EmptyParam dateOfBirth) {
-          this.dateOfBirth = dateOfBirth;
-          return this;
-        }
-
         /** Documents that may be submitted to satisfy various informational requests. */
         public Builder setDocuments(AccountUpdateParams.Identity.Individual.Documents documents) {
-          this.documents = documents;
-          return this;
-        }
-
-        /** Documents that may be submitted to satisfy various informational requests. */
-        public Builder setDocuments(EmptyParam documents) {
           this.documents = documents;
           return this;
         }
@@ -19636,12 +15088,11 @@ public class AccountUpdateParams extends ApiRequestParams {
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * AccountUpdateParams.Identity.Individual#idNumbers} for the field documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addIdNumber(AccountUpdateParams.Identity.Individual.IdNumber element) {
-          if (this.idNumbers == null || this.idNumbers instanceof EmptyParam) {
-            this.idNumbers = new ArrayList<AccountUpdateParams.Identity.Individual.IdNumber>();
+          if (this.idNumbers == null) {
+            this.idNumbers = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.Individual.IdNumber>) this.idNumbers).add(element);
+          this.idNumbers.add(element);
           return this;
         }
 
@@ -19650,27 +15101,12 @@ public class AccountUpdateParams extends ApiRequestParams {
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * AccountUpdateParams.Identity.Individual#idNumbers} for the field documentation.
          */
-        @SuppressWarnings("unchecked")
         public Builder addAllIdNumber(
             List<AccountUpdateParams.Identity.Individual.IdNumber> elements) {
-          if (this.idNumbers == null || this.idNumbers instanceof EmptyParam) {
-            this.idNumbers = new ArrayList<AccountUpdateParams.Identity.Individual.IdNumber>();
+          if (this.idNumbers == null) {
+            this.idNumbers = new ArrayList<>();
           }
-          ((List<AccountUpdateParams.Identity.Individual.IdNumber>) this.idNumbers)
-              .addAll(elements);
-          return this;
-        }
-
-        /** The identification numbers (e.g., SSN) associated with the individual. */
-        public Builder setIdNumbers(EmptyParam idNumbers) {
-          this.idNumbers = idNumbers;
-          return this;
-        }
-
-        /** The identification numbers (e.g., SSN) associated with the individual. */
-        public Builder setIdNumbers(
-            List<AccountUpdateParams.Identity.Individual.IdNumber> idNumbers) {
-          this.idNumbers = idNumbers;
+          this.idNumbers.addAll(elements);
           return this;
         }
 
@@ -19680,15 +15116,6 @@ public class AccountUpdateParams extends ApiRequestParams {
          */
         public Builder setLegalGender(
             AccountUpdateParams.Identity.Individual.LegalGender legalGender) {
-          this.legalGender = legalGender;
-          return this;
-        }
-
-        /**
-         * The individual's gender (International regulations require either &quot;male&quot; or
-         * &quot;female&quot;).
-         */
-        public Builder setLegalGender(EmptyParam legalGender) {
           this.legalGender = legalGender;
           return this;
         }
@@ -19743,7 +15170,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * call, and subsequent calls adds additional elements to the original list. See {@link
          * AccountUpdateParams.Identity.Individual#nationalities} for the field documentation.
          */
-        public Builder addNationality(AccountUpdateParams.Identity.Individual.Nationality element) {
+        public Builder addNationality(String element) {
           if (this.nationalities == null) {
             this.nationalities = new ArrayList<>();
           }
@@ -19757,8 +15184,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * See {@link AccountUpdateParams.Identity.Individual#nationalities} for the field
          * documentation.
          */
-        public Builder addAllNationality(
-            List<AccountUpdateParams.Identity.Individual.Nationality> elements) {
+        public Builder addAllNationality(List<String> elements) {
           if (this.nationalities == null) {
             this.nationalities = new ArrayList<>();
           }
@@ -19785,21 +15211,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The individual's political exposure. */
-        public Builder setPoliticalExposure(EmptyParam politicalExposure) {
-          this.politicalExposure = politicalExposure;
-          return this;
-        }
-
         /** The relationship that this individual has with the account's identity. */
         public Builder setRelationship(
             AccountUpdateParams.Identity.Individual.Relationship relationship) {
-          this.relationship = relationship;
-          return this;
-        }
-
-        /** The relationship that this individual has with the account's identity. */
-        public Builder setRelationship(EmptyParam relationship) {
           this.relationship = relationship;
           return this;
         }
@@ -19811,21 +15225,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** The script addresses (e.g., non-Latin characters) associated with the individual. */
-        public Builder setScriptAddresses(EmptyParam scriptAddresses) {
-          this.scriptAddresses = scriptAddresses;
-          return this;
-        }
-
         /** The individuals primary name in non latin script. */
         public Builder setScriptNames(
             AccountUpdateParams.Identity.Individual.ScriptNames scriptNames) {
-          this.scriptNames = scriptNames;
-          return this;
-        }
-
-        /** The individuals primary name in non latin script. */
-        public Builder setScriptNames(EmptyParam scriptNames) {
           this.scriptNames = scriptNames;
           return this;
         }
@@ -19855,7 +15257,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
-        ApiRequestParams.EnumParam country;
+        Object country;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -19893,7 +15295,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private AdditionalAddress(
             Object city,
-            ApiRequestParams.EnumParam country,
+            Object country,
             Map<String, Object> extraParams,
             Object line1,
             Object line2,
@@ -19919,7 +15321,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Object city;
 
-          private ApiRequestParams.EnumParam country;
+          private Object country;
 
           private Map<String, Object> extraParams;
 
@@ -19965,8 +15367,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
            */
-          public Builder setCountry(
-              AccountUpdateParams.Identity.Individual.AdditionalAddress.Country country) {
+          public Builder setCountry(String country) {
             this.country = country;
             return this;
           }
@@ -20073,768 +15474,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           public Builder setTown(EmptyParam town) {
             this.town = town;
             return this;
-          }
-        }
-
-        public enum Country implements ApiRequestParams.EnumParam {
-          @SerializedName("ad")
-          AD("ad"),
-
-          @SerializedName("ae")
-          AE("ae"),
-
-          @SerializedName("af")
-          AF("af"),
-
-          @SerializedName("ag")
-          AG("ag"),
-
-          @SerializedName("ai")
-          AI("ai"),
-
-          @SerializedName("al")
-          AL("al"),
-
-          @SerializedName("am")
-          AM("am"),
-
-          @SerializedName("ao")
-          AO("ao"),
-
-          @SerializedName("aq")
-          AQ("aq"),
-
-          @SerializedName("ar")
-          AR("ar"),
-
-          @SerializedName("as")
-          AS("as"),
-
-          @SerializedName("at")
-          AT("at"),
-
-          @SerializedName("au")
-          AU("au"),
-
-          @SerializedName("aw")
-          AW("aw"),
-
-          @SerializedName("ax")
-          AX("ax"),
-
-          @SerializedName("az")
-          AZ("az"),
-
-          @SerializedName("ba")
-          BA("ba"),
-
-          @SerializedName("bb")
-          BB("bb"),
-
-          @SerializedName("bd")
-          BD("bd"),
-
-          @SerializedName("be")
-          BE("be"),
-
-          @SerializedName("bf")
-          BF("bf"),
-
-          @SerializedName("bg")
-          BG("bg"),
-
-          @SerializedName("bh")
-          BH("bh"),
-
-          @SerializedName("bi")
-          BI("bi"),
-
-          @SerializedName("bj")
-          BJ("bj"),
-
-          @SerializedName("bl")
-          BL("bl"),
-
-          @SerializedName("bm")
-          BM("bm"),
-
-          @SerializedName("bn")
-          BN("bn"),
-
-          @SerializedName("bo")
-          BO("bo"),
-
-          @SerializedName("bq")
-          BQ("bq"),
-
-          @SerializedName("br")
-          BR("br"),
-
-          @SerializedName("bs")
-          BS("bs"),
-
-          @SerializedName("bt")
-          BT("bt"),
-
-          @SerializedName("bv")
-          BV("bv"),
-
-          @SerializedName("bw")
-          BW("bw"),
-
-          @SerializedName("by")
-          BY("by"),
-
-          @SerializedName("bz")
-          BZ("bz"),
-
-          @SerializedName("ca")
-          CA("ca"),
-
-          @SerializedName("cc")
-          CC("cc"),
-
-          @SerializedName("cd")
-          CD("cd"),
-
-          @SerializedName("cf")
-          CF("cf"),
-
-          @SerializedName("cg")
-          CG("cg"),
-
-          @SerializedName("ch")
-          CH("ch"),
-
-          @SerializedName("ci")
-          CI("ci"),
-
-          @SerializedName("ck")
-          CK("ck"),
-
-          @SerializedName("cl")
-          CL("cl"),
-
-          @SerializedName("cm")
-          CM("cm"),
-
-          @SerializedName("cn")
-          CN("cn"),
-
-          @SerializedName("co")
-          CO("co"),
-
-          @SerializedName("cr")
-          CR("cr"),
-
-          @SerializedName("cu")
-          CU("cu"),
-
-          @SerializedName("cv")
-          CV("cv"),
-
-          @SerializedName("cw")
-          CW("cw"),
-
-          @SerializedName("cx")
-          CX("cx"),
-
-          @SerializedName("cy")
-          CY("cy"),
-
-          @SerializedName("cz")
-          CZ("cz"),
-
-          @SerializedName("de")
-          DE("de"),
-
-          @SerializedName("dj")
-          DJ("dj"),
-
-          @SerializedName("dk")
-          DK("dk"),
-
-          @SerializedName("dm")
-          DM("dm"),
-
-          @SerializedName("do")
-          DO("do"),
-
-          @SerializedName("dz")
-          DZ("dz"),
-
-          @SerializedName("ec")
-          EC("ec"),
-
-          @SerializedName("ee")
-          EE("ee"),
-
-          @SerializedName("eg")
-          EG("eg"),
-
-          @SerializedName("eh")
-          EH("eh"),
-
-          @SerializedName("er")
-          ER("er"),
-
-          @SerializedName("es")
-          ES("es"),
-
-          @SerializedName("et")
-          ET("et"),
-
-          @SerializedName("fi")
-          FI("fi"),
-
-          @SerializedName("fj")
-          FJ("fj"),
-
-          @SerializedName("fk")
-          FK("fk"),
-
-          @SerializedName("fm")
-          FM("fm"),
-
-          @SerializedName("fo")
-          FO("fo"),
-
-          @SerializedName("fr")
-          FR("fr"),
-
-          @SerializedName("ga")
-          GA("ga"),
-
-          @SerializedName("gb")
-          GB("gb"),
-
-          @SerializedName("gd")
-          GD("gd"),
-
-          @SerializedName("ge")
-          GE("ge"),
-
-          @SerializedName("gf")
-          GF("gf"),
-
-          @SerializedName("gg")
-          GG("gg"),
-
-          @SerializedName("gh")
-          GH("gh"),
-
-          @SerializedName("gi")
-          GI("gi"),
-
-          @SerializedName("gl")
-          GL("gl"),
-
-          @SerializedName("gm")
-          GM("gm"),
-
-          @SerializedName("gn")
-          GN("gn"),
-
-          @SerializedName("gp")
-          GP("gp"),
-
-          @SerializedName("gq")
-          GQ("gq"),
-
-          @SerializedName("gr")
-          GR("gr"),
-
-          @SerializedName("gs")
-          GS("gs"),
-
-          @SerializedName("gt")
-          GT("gt"),
-
-          @SerializedName("gu")
-          GU("gu"),
-
-          @SerializedName("gw")
-          GW("gw"),
-
-          @SerializedName("gy")
-          GY("gy"),
-
-          @SerializedName("hk")
-          HK("hk"),
-
-          @SerializedName("hm")
-          HM("hm"),
-
-          @SerializedName("hn")
-          HN("hn"),
-
-          @SerializedName("hr")
-          HR("hr"),
-
-          @SerializedName("ht")
-          HT("ht"),
-
-          @SerializedName("hu")
-          HU("hu"),
-
-          @SerializedName("id")
-          ID("id"),
-
-          @SerializedName("ie")
-          IE("ie"),
-
-          @SerializedName("il")
-          IL("il"),
-
-          @SerializedName("im")
-          IM("im"),
-
-          @SerializedName("in")
-          IN("in"),
-
-          @SerializedName("io")
-          IO("io"),
-
-          @SerializedName("iq")
-          IQ("iq"),
-
-          @SerializedName("ir")
-          IR("ir"),
-
-          @SerializedName("is")
-          IS("is"),
-
-          @SerializedName("it")
-          IT("it"),
-
-          @SerializedName("je")
-          JE("je"),
-
-          @SerializedName("jm")
-          JM("jm"),
-
-          @SerializedName("jo")
-          JO("jo"),
-
-          @SerializedName("jp")
-          JP("jp"),
-
-          @SerializedName("ke")
-          KE("ke"),
-
-          @SerializedName("kg")
-          KG("kg"),
-
-          @SerializedName("kh")
-          KH("kh"),
-
-          @SerializedName("ki")
-          KI("ki"),
-
-          @SerializedName("km")
-          KM("km"),
-
-          @SerializedName("kn")
-          KN("kn"),
-
-          @SerializedName("kp")
-          KP("kp"),
-
-          @SerializedName("kr")
-          KR("kr"),
-
-          @SerializedName("kw")
-          KW("kw"),
-
-          @SerializedName("ky")
-          KY("ky"),
-
-          @SerializedName("kz")
-          KZ("kz"),
-
-          @SerializedName("la")
-          LA("la"),
-
-          @SerializedName("lb")
-          LB("lb"),
-
-          @SerializedName("lc")
-          LC("lc"),
-
-          @SerializedName("li")
-          LI("li"),
-
-          @SerializedName("lk")
-          LK("lk"),
-
-          @SerializedName("lr")
-          LR("lr"),
-
-          @SerializedName("ls")
-          LS("ls"),
-
-          @SerializedName("lt")
-          LT("lt"),
-
-          @SerializedName("lu")
-          LU("lu"),
-
-          @SerializedName("lv")
-          LV("lv"),
-
-          @SerializedName("ly")
-          LY("ly"),
-
-          @SerializedName("ma")
-          MA("ma"),
-
-          @SerializedName("mc")
-          MC("mc"),
-
-          @SerializedName("md")
-          MD("md"),
-
-          @SerializedName("me")
-          ME("me"),
-
-          @SerializedName("mf")
-          MF("mf"),
-
-          @SerializedName("mg")
-          MG("mg"),
-
-          @SerializedName("mh")
-          MH("mh"),
-
-          @SerializedName("mk")
-          MK("mk"),
-
-          @SerializedName("ml")
-          ML("ml"),
-
-          @SerializedName("mm")
-          MM("mm"),
-
-          @SerializedName("mn")
-          MN("mn"),
-
-          @SerializedName("mo")
-          MO("mo"),
-
-          @SerializedName("mp")
-          MP("mp"),
-
-          @SerializedName("mq")
-          MQ("mq"),
-
-          @SerializedName("mr")
-          MR("mr"),
-
-          @SerializedName("ms")
-          MS("ms"),
-
-          @SerializedName("mt")
-          MT("mt"),
-
-          @SerializedName("mu")
-          MU("mu"),
-
-          @SerializedName("mv")
-          MV("mv"),
-
-          @SerializedName("mw")
-          MW("mw"),
-
-          @SerializedName("mx")
-          MX("mx"),
-
-          @SerializedName("my")
-          MY("my"),
-
-          @SerializedName("mz")
-          MZ("mz"),
-
-          @SerializedName("na")
-          NA("na"),
-
-          @SerializedName("nc")
-          NC("nc"),
-
-          @SerializedName("ne")
-          NE("ne"),
-
-          @SerializedName("nf")
-          NF("nf"),
-
-          @SerializedName("ng")
-          NG("ng"),
-
-          @SerializedName("ni")
-          NI("ni"),
-
-          @SerializedName("nl")
-          NL("nl"),
-
-          @SerializedName("no")
-          NO("no"),
-
-          @SerializedName("np")
-          NP("np"),
-
-          @SerializedName("nr")
-          NR("nr"),
-
-          @SerializedName("nu")
-          NU("nu"),
-
-          @SerializedName("nz")
-          NZ("nz"),
-
-          @SerializedName("om")
-          OM("om"),
-
-          @SerializedName("pa")
-          PA("pa"),
-
-          @SerializedName("pe")
-          PE("pe"),
-
-          @SerializedName("pf")
-          PF("pf"),
-
-          @SerializedName("pg")
-          PG("pg"),
-
-          @SerializedName("ph")
-          PH("ph"),
-
-          @SerializedName("pk")
-          PK("pk"),
-
-          @SerializedName("pl")
-          PL("pl"),
-
-          @SerializedName("pm")
-          PM("pm"),
-
-          @SerializedName("pn")
-          PN("pn"),
-
-          @SerializedName("pr")
-          PR("pr"),
-
-          @SerializedName("ps")
-          PS("ps"),
-
-          @SerializedName("pt")
-          PT("pt"),
-
-          @SerializedName("pw")
-          PW("pw"),
-
-          @SerializedName("py")
-          PY("py"),
-
-          @SerializedName("qa")
-          QA("qa"),
-
-          @SerializedName("qz")
-          QZ("qz"),
-
-          @SerializedName("re")
-          RE("re"),
-
-          @SerializedName("ro")
-          RO("ro"),
-
-          @SerializedName("rs")
-          RS("rs"),
-
-          @SerializedName("ru")
-          RU("ru"),
-
-          @SerializedName("rw")
-          RW("rw"),
-
-          @SerializedName("sa")
-          SA("sa"),
-
-          @SerializedName("sb")
-          SB("sb"),
-
-          @SerializedName("sc")
-          SC("sc"),
-
-          @SerializedName("sd")
-          SD("sd"),
-
-          @SerializedName("se")
-          SE("se"),
-
-          @SerializedName("sg")
-          SG("sg"),
-
-          @SerializedName("sh")
-          SH("sh"),
-
-          @SerializedName("si")
-          SI("si"),
-
-          @SerializedName("sj")
-          SJ("sj"),
-
-          @SerializedName("sk")
-          SK("sk"),
-
-          @SerializedName("sl")
-          SL("sl"),
-
-          @SerializedName("sm")
-          SM("sm"),
-
-          @SerializedName("sn")
-          SN("sn"),
-
-          @SerializedName("so")
-          SO("so"),
-
-          @SerializedName("sr")
-          SR("sr"),
-
-          @SerializedName("ss")
-          SS("ss"),
-
-          @SerializedName("st")
-          ST("st"),
-
-          @SerializedName("sv")
-          SV("sv"),
-
-          @SerializedName("sx")
-          SX("sx"),
-
-          @SerializedName("sy")
-          SY("sy"),
-
-          @SerializedName("sz")
-          SZ("sz"),
-
-          @SerializedName("tc")
-          TC("tc"),
-
-          @SerializedName("td")
-          TD("td"),
-
-          @SerializedName("tf")
-          TF("tf"),
-
-          @SerializedName("tg")
-          TG("tg"),
-
-          @SerializedName("th")
-          TH("th"),
-
-          @SerializedName("tj")
-          TJ("tj"),
-
-          @SerializedName("tk")
-          TK("tk"),
-
-          @SerializedName("tl")
-          TL("tl"),
-
-          @SerializedName("tm")
-          TM("tm"),
-
-          @SerializedName("tn")
-          TN("tn"),
-
-          @SerializedName("to")
-          TO("to"),
-
-          @SerializedName("tr")
-          TR("tr"),
-
-          @SerializedName("tt")
-          TT("tt"),
-
-          @SerializedName("tv")
-          TV("tv"),
-
-          @SerializedName("tw")
-          TW("tw"),
-
-          @SerializedName("tz")
-          TZ("tz"),
-
-          @SerializedName("ua")
-          UA("ua"),
-
-          @SerializedName("ug")
-          UG("ug"),
-
-          @SerializedName("um")
-          UM("um"),
-
-          @SerializedName("us")
-          US("us"),
-
-          @SerializedName("uy")
-          UY("uy"),
-
-          @SerializedName("uz")
-          UZ("uz"),
-
-          @SerializedName("va")
-          VA("va"),
-
-          @SerializedName("vc")
-          VC("vc"),
-
-          @SerializedName("ve")
-          VE("ve"),
-
-          @SerializedName("vg")
-          VG("vg"),
-
-          @SerializedName("vi")
-          VI("vi"),
-
-          @SerializedName("vn")
-          VN("vn"),
-
-          @SerializedName("vu")
-          VU("vu"),
-
-          @SerializedName("wf")
-          WF("wf"),
-
-          @SerializedName("ws")
-          WS("ws"),
-
-          @SerializedName("xx")
-          XX("xx"),
-
-          @SerializedName("ye")
-          YE("ye"),
-
-          @SerializedName("yt")
-          YT("yt"),
-
-          @SerializedName("za")
-          ZA("za"),
-
-          @SerializedName("zm")
-          ZM("zm"),
-
-          @SerializedName("zw")
-          ZW("zw");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          Country(String value) {
-            this.value = value;
           }
         }
 
@@ -21014,7 +15653,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
-        ApiRequestParams.EnumParam country;
+        Object country;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -21048,7 +15687,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Address(
             Object city,
-            ApiRequestParams.EnumParam country,
+            Object country,
             Map<String, Object> extraParams,
             Object line1,
             Object line2,
@@ -21072,7 +15711,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Object city;
 
-          private ApiRequestParams.EnumParam country;
+          private Object country;
 
           private Map<String, Object> extraParams;
 
@@ -21115,8 +15754,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
            */
-          public Builder setCountry(
-              AccountUpdateParams.Identity.Individual.Address.Country country) {
+          public Builder setCountry(String country) {
             this.country = country;
             return this;
           }
@@ -21218,768 +15856,6 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
         }
-
-        public enum Country implements ApiRequestParams.EnumParam {
-          @SerializedName("ad")
-          AD("ad"),
-
-          @SerializedName("ae")
-          AE("ae"),
-
-          @SerializedName("af")
-          AF("af"),
-
-          @SerializedName("ag")
-          AG("ag"),
-
-          @SerializedName("ai")
-          AI("ai"),
-
-          @SerializedName("al")
-          AL("al"),
-
-          @SerializedName("am")
-          AM("am"),
-
-          @SerializedName("ao")
-          AO("ao"),
-
-          @SerializedName("aq")
-          AQ("aq"),
-
-          @SerializedName("ar")
-          AR("ar"),
-
-          @SerializedName("as")
-          AS("as"),
-
-          @SerializedName("at")
-          AT("at"),
-
-          @SerializedName("au")
-          AU("au"),
-
-          @SerializedName("aw")
-          AW("aw"),
-
-          @SerializedName("ax")
-          AX("ax"),
-
-          @SerializedName("az")
-          AZ("az"),
-
-          @SerializedName("ba")
-          BA("ba"),
-
-          @SerializedName("bb")
-          BB("bb"),
-
-          @SerializedName("bd")
-          BD("bd"),
-
-          @SerializedName("be")
-          BE("be"),
-
-          @SerializedName("bf")
-          BF("bf"),
-
-          @SerializedName("bg")
-          BG("bg"),
-
-          @SerializedName("bh")
-          BH("bh"),
-
-          @SerializedName("bi")
-          BI("bi"),
-
-          @SerializedName("bj")
-          BJ("bj"),
-
-          @SerializedName("bl")
-          BL("bl"),
-
-          @SerializedName("bm")
-          BM("bm"),
-
-          @SerializedName("bn")
-          BN("bn"),
-
-          @SerializedName("bo")
-          BO("bo"),
-
-          @SerializedName("bq")
-          BQ("bq"),
-
-          @SerializedName("br")
-          BR("br"),
-
-          @SerializedName("bs")
-          BS("bs"),
-
-          @SerializedName("bt")
-          BT("bt"),
-
-          @SerializedName("bv")
-          BV("bv"),
-
-          @SerializedName("bw")
-          BW("bw"),
-
-          @SerializedName("by")
-          BY("by"),
-
-          @SerializedName("bz")
-          BZ("bz"),
-
-          @SerializedName("ca")
-          CA("ca"),
-
-          @SerializedName("cc")
-          CC("cc"),
-
-          @SerializedName("cd")
-          CD("cd"),
-
-          @SerializedName("cf")
-          CF("cf"),
-
-          @SerializedName("cg")
-          CG("cg"),
-
-          @SerializedName("ch")
-          CH("ch"),
-
-          @SerializedName("ci")
-          CI("ci"),
-
-          @SerializedName("ck")
-          CK("ck"),
-
-          @SerializedName("cl")
-          CL("cl"),
-
-          @SerializedName("cm")
-          CM("cm"),
-
-          @SerializedName("cn")
-          CN("cn"),
-
-          @SerializedName("co")
-          CO("co"),
-
-          @SerializedName("cr")
-          CR("cr"),
-
-          @SerializedName("cu")
-          CU("cu"),
-
-          @SerializedName("cv")
-          CV("cv"),
-
-          @SerializedName("cw")
-          CW("cw"),
-
-          @SerializedName("cx")
-          CX("cx"),
-
-          @SerializedName("cy")
-          CY("cy"),
-
-          @SerializedName("cz")
-          CZ("cz"),
-
-          @SerializedName("de")
-          DE("de"),
-
-          @SerializedName("dj")
-          DJ("dj"),
-
-          @SerializedName("dk")
-          DK("dk"),
-
-          @SerializedName("dm")
-          DM("dm"),
-
-          @SerializedName("do")
-          DO("do"),
-
-          @SerializedName("dz")
-          DZ("dz"),
-
-          @SerializedName("ec")
-          EC("ec"),
-
-          @SerializedName("ee")
-          EE("ee"),
-
-          @SerializedName("eg")
-          EG("eg"),
-
-          @SerializedName("eh")
-          EH("eh"),
-
-          @SerializedName("er")
-          ER("er"),
-
-          @SerializedName("es")
-          ES("es"),
-
-          @SerializedName("et")
-          ET("et"),
-
-          @SerializedName("fi")
-          FI("fi"),
-
-          @SerializedName("fj")
-          FJ("fj"),
-
-          @SerializedName("fk")
-          FK("fk"),
-
-          @SerializedName("fm")
-          FM("fm"),
-
-          @SerializedName("fo")
-          FO("fo"),
-
-          @SerializedName("fr")
-          FR("fr"),
-
-          @SerializedName("ga")
-          GA("ga"),
-
-          @SerializedName("gb")
-          GB("gb"),
-
-          @SerializedName("gd")
-          GD("gd"),
-
-          @SerializedName("ge")
-          GE("ge"),
-
-          @SerializedName("gf")
-          GF("gf"),
-
-          @SerializedName("gg")
-          GG("gg"),
-
-          @SerializedName("gh")
-          GH("gh"),
-
-          @SerializedName("gi")
-          GI("gi"),
-
-          @SerializedName("gl")
-          GL("gl"),
-
-          @SerializedName("gm")
-          GM("gm"),
-
-          @SerializedName("gn")
-          GN("gn"),
-
-          @SerializedName("gp")
-          GP("gp"),
-
-          @SerializedName("gq")
-          GQ("gq"),
-
-          @SerializedName("gr")
-          GR("gr"),
-
-          @SerializedName("gs")
-          GS("gs"),
-
-          @SerializedName("gt")
-          GT("gt"),
-
-          @SerializedName("gu")
-          GU("gu"),
-
-          @SerializedName("gw")
-          GW("gw"),
-
-          @SerializedName("gy")
-          GY("gy"),
-
-          @SerializedName("hk")
-          HK("hk"),
-
-          @SerializedName("hm")
-          HM("hm"),
-
-          @SerializedName("hn")
-          HN("hn"),
-
-          @SerializedName("hr")
-          HR("hr"),
-
-          @SerializedName("ht")
-          HT("ht"),
-
-          @SerializedName("hu")
-          HU("hu"),
-
-          @SerializedName("id")
-          ID("id"),
-
-          @SerializedName("ie")
-          IE("ie"),
-
-          @SerializedName("il")
-          IL("il"),
-
-          @SerializedName("im")
-          IM("im"),
-
-          @SerializedName("in")
-          IN("in"),
-
-          @SerializedName("io")
-          IO("io"),
-
-          @SerializedName("iq")
-          IQ("iq"),
-
-          @SerializedName("ir")
-          IR("ir"),
-
-          @SerializedName("is")
-          IS("is"),
-
-          @SerializedName("it")
-          IT("it"),
-
-          @SerializedName("je")
-          JE("je"),
-
-          @SerializedName("jm")
-          JM("jm"),
-
-          @SerializedName("jo")
-          JO("jo"),
-
-          @SerializedName("jp")
-          JP("jp"),
-
-          @SerializedName("ke")
-          KE("ke"),
-
-          @SerializedName("kg")
-          KG("kg"),
-
-          @SerializedName("kh")
-          KH("kh"),
-
-          @SerializedName("ki")
-          KI("ki"),
-
-          @SerializedName("km")
-          KM("km"),
-
-          @SerializedName("kn")
-          KN("kn"),
-
-          @SerializedName("kp")
-          KP("kp"),
-
-          @SerializedName("kr")
-          KR("kr"),
-
-          @SerializedName("kw")
-          KW("kw"),
-
-          @SerializedName("ky")
-          KY("ky"),
-
-          @SerializedName("kz")
-          KZ("kz"),
-
-          @SerializedName("la")
-          LA("la"),
-
-          @SerializedName("lb")
-          LB("lb"),
-
-          @SerializedName("lc")
-          LC("lc"),
-
-          @SerializedName("li")
-          LI("li"),
-
-          @SerializedName("lk")
-          LK("lk"),
-
-          @SerializedName("lr")
-          LR("lr"),
-
-          @SerializedName("ls")
-          LS("ls"),
-
-          @SerializedName("lt")
-          LT("lt"),
-
-          @SerializedName("lu")
-          LU("lu"),
-
-          @SerializedName("lv")
-          LV("lv"),
-
-          @SerializedName("ly")
-          LY("ly"),
-
-          @SerializedName("ma")
-          MA("ma"),
-
-          @SerializedName("mc")
-          MC("mc"),
-
-          @SerializedName("md")
-          MD("md"),
-
-          @SerializedName("me")
-          ME("me"),
-
-          @SerializedName("mf")
-          MF("mf"),
-
-          @SerializedName("mg")
-          MG("mg"),
-
-          @SerializedName("mh")
-          MH("mh"),
-
-          @SerializedName("mk")
-          MK("mk"),
-
-          @SerializedName("ml")
-          ML("ml"),
-
-          @SerializedName("mm")
-          MM("mm"),
-
-          @SerializedName("mn")
-          MN("mn"),
-
-          @SerializedName("mo")
-          MO("mo"),
-
-          @SerializedName("mp")
-          MP("mp"),
-
-          @SerializedName("mq")
-          MQ("mq"),
-
-          @SerializedName("mr")
-          MR("mr"),
-
-          @SerializedName("ms")
-          MS("ms"),
-
-          @SerializedName("mt")
-          MT("mt"),
-
-          @SerializedName("mu")
-          MU("mu"),
-
-          @SerializedName("mv")
-          MV("mv"),
-
-          @SerializedName("mw")
-          MW("mw"),
-
-          @SerializedName("mx")
-          MX("mx"),
-
-          @SerializedName("my")
-          MY("my"),
-
-          @SerializedName("mz")
-          MZ("mz"),
-
-          @SerializedName("na")
-          NA("na"),
-
-          @SerializedName("nc")
-          NC("nc"),
-
-          @SerializedName("ne")
-          NE("ne"),
-
-          @SerializedName("nf")
-          NF("nf"),
-
-          @SerializedName("ng")
-          NG("ng"),
-
-          @SerializedName("ni")
-          NI("ni"),
-
-          @SerializedName("nl")
-          NL("nl"),
-
-          @SerializedName("no")
-          NO("no"),
-
-          @SerializedName("np")
-          NP("np"),
-
-          @SerializedName("nr")
-          NR("nr"),
-
-          @SerializedName("nu")
-          NU("nu"),
-
-          @SerializedName("nz")
-          NZ("nz"),
-
-          @SerializedName("om")
-          OM("om"),
-
-          @SerializedName("pa")
-          PA("pa"),
-
-          @SerializedName("pe")
-          PE("pe"),
-
-          @SerializedName("pf")
-          PF("pf"),
-
-          @SerializedName("pg")
-          PG("pg"),
-
-          @SerializedName("ph")
-          PH("ph"),
-
-          @SerializedName("pk")
-          PK("pk"),
-
-          @SerializedName("pl")
-          PL("pl"),
-
-          @SerializedName("pm")
-          PM("pm"),
-
-          @SerializedName("pn")
-          PN("pn"),
-
-          @SerializedName("pr")
-          PR("pr"),
-
-          @SerializedName("ps")
-          PS("ps"),
-
-          @SerializedName("pt")
-          PT("pt"),
-
-          @SerializedName("pw")
-          PW("pw"),
-
-          @SerializedName("py")
-          PY("py"),
-
-          @SerializedName("qa")
-          QA("qa"),
-
-          @SerializedName("qz")
-          QZ("qz"),
-
-          @SerializedName("re")
-          RE("re"),
-
-          @SerializedName("ro")
-          RO("ro"),
-
-          @SerializedName("rs")
-          RS("rs"),
-
-          @SerializedName("ru")
-          RU("ru"),
-
-          @SerializedName("rw")
-          RW("rw"),
-
-          @SerializedName("sa")
-          SA("sa"),
-
-          @SerializedName("sb")
-          SB("sb"),
-
-          @SerializedName("sc")
-          SC("sc"),
-
-          @SerializedName("sd")
-          SD("sd"),
-
-          @SerializedName("se")
-          SE("se"),
-
-          @SerializedName("sg")
-          SG("sg"),
-
-          @SerializedName("sh")
-          SH("sh"),
-
-          @SerializedName("si")
-          SI("si"),
-
-          @SerializedName("sj")
-          SJ("sj"),
-
-          @SerializedName("sk")
-          SK("sk"),
-
-          @SerializedName("sl")
-          SL("sl"),
-
-          @SerializedName("sm")
-          SM("sm"),
-
-          @SerializedName("sn")
-          SN("sn"),
-
-          @SerializedName("so")
-          SO("so"),
-
-          @SerializedName("sr")
-          SR("sr"),
-
-          @SerializedName("ss")
-          SS("ss"),
-
-          @SerializedName("st")
-          ST("st"),
-
-          @SerializedName("sv")
-          SV("sv"),
-
-          @SerializedName("sx")
-          SX("sx"),
-
-          @SerializedName("sy")
-          SY("sy"),
-
-          @SerializedName("sz")
-          SZ("sz"),
-
-          @SerializedName("tc")
-          TC("tc"),
-
-          @SerializedName("td")
-          TD("td"),
-
-          @SerializedName("tf")
-          TF("tf"),
-
-          @SerializedName("tg")
-          TG("tg"),
-
-          @SerializedName("th")
-          TH("th"),
-
-          @SerializedName("tj")
-          TJ("tj"),
-
-          @SerializedName("tk")
-          TK("tk"),
-
-          @SerializedName("tl")
-          TL("tl"),
-
-          @SerializedName("tm")
-          TM("tm"),
-
-          @SerializedName("tn")
-          TN("tn"),
-
-          @SerializedName("to")
-          TO("to"),
-
-          @SerializedName("tr")
-          TR("tr"),
-
-          @SerializedName("tt")
-          TT("tt"),
-
-          @SerializedName("tv")
-          TV("tv"),
-
-          @SerializedName("tw")
-          TW("tw"),
-
-          @SerializedName("tz")
-          TZ("tz"),
-
-          @SerializedName("ua")
-          UA("ua"),
-
-          @SerializedName("ug")
-          UG("ug"),
-
-          @SerializedName("um")
-          UM("um"),
-
-          @SerializedName("us")
-          US("us"),
-
-          @SerializedName("uy")
-          UY("uy"),
-
-          @SerializedName("uz")
-          UZ("uz"),
-
-          @SerializedName("va")
-          VA("va"),
-
-          @SerializedName("vc")
-          VC("vc"),
-
-          @SerializedName("ve")
-          VE("ve"),
-
-          @SerializedName("vg")
-          VG("vg"),
-
-          @SerializedName("vi")
-          VI("vi"),
-
-          @SerializedName("vn")
-          VN("vn"),
-
-          @SerializedName("vu")
-          VU("vu"),
-
-          @SerializedName("wf")
-          WF("wf"),
-
-          @SerializedName("ws")
-          WS("ws"),
-
-          @SerializedName("xx")
-          XX("xx"),
-
-          @SerializedName("ye")
-          YE("ye"),
-
-          @SerializedName("yt")
-          YT("yt"),
-
-          @SerializedName("za")
-          ZA("za"),
-
-          @SerializedName("zm")
-          ZM("zm"),
-
-          @SerializedName("zw")
-          ZW("zw");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          Country(String value) {
-            this.value = value;
-          }
-        }
       }
 
       @Getter
@@ -21987,7 +15863,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       public static class DateOfBirth {
         /** <strong>Required.</strong> The day of the birth. */
         @SerializedName("day")
-        Integer day;
+        Long day;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -22001,14 +15877,13 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /** <strong>Required.</strong> The month of birth. */
         @SerializedName("month")
-        Integer month;
+        Long month;
 
         /** <strong>Required.</strong> The year of birth. */
         @SerializedName("year")
-        Integer year;
+        Long year;
 
-        private DateOfBirth(
-            Integer day, Map<String, Object> extraParams, Integer month, Integer year) {
+        private DateOfBirth(Long day, Map<String, Object> extraParams, Long month, Long year) {
           this.day = day;
           this.extraParams = extraParams;
           this.month = month;
@@ -22020,13 +15895,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Integer day;
+          private Long day;
 
           private Map<String, Object> extraParams;
 
-          private Integer month;
+          private Long month;
 
-          private Integer year;
+          private Long year;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Identity.Individual.DateOfBirth build() {
@@ -22035,7 +15910,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /** <strong>Required.</strong> The day of the birth. */
-          public Builder setDay(Integer day) {
+          public Builder setDay(Long day) {
             this.day = day;
             return this;
           }
@@ -22069,13 +15944,13 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /** <strong>Required.</strong> The month of birth. */
-          public Builder setMonth(Integer month) {
+          public Builder setMonth(Long month) {
             this.month = month;
             return this;
           }
 
           /** <strong>Required.</strong> The year of birth. */
-          public Builder setYear(Integer year) {
+          public Builder setYear(Long year) {
             this.year = year;
             return this;
           }
@@ -22112,14 +15987,14 @@ public class AccountUpdateParams extends ApiRequestParams {
          * An identifying document showing the person's name, either a passport or local ID card.
          */
         @SerializedName("primary_verification")
-        Object primaryVerification;
+        PrimaryVerification primaryVerification;
 
         /**
          * A document showing address, either a passport, local ID card, or utility bill from a
          * well-known utility company.
          */
         @SerializedName("secondary_verification")
-        Object secondaryVerification;
+        SecondaryVerification secondaryVerification;
 
         /**
          * One or more documents showing the person’s visa required for living in the country where
@@ -22132,8 +16007,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             CompanyAuthorization companyAuthorization,
             Map<String, Object> extraParams,
             Passport passport,
-            Object primaryVerification,
-            Object secondaryVerification,
+            PrimaryVerification primaryVerification,
+            SecondaryVerification secondaryVerification,
             Visa visa) {
           this.companyAuthorization = companyAuthorization;
           this.extraParams = extraParams;
@@ -22154,9 +16029,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Passport passport;
 
-          private Object primaryVerification;
+          private PrimaryVerification primaryVerification;
 
-          private Object secondaryVerification;
+          private SecondaryVerification secondaryVerification;
 
           private Visa visa;
 
@@ -22230,29 +16105,12 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * An identifying document showing the person's name, either a passport or local ID card.
-           */
-          public Builder setPrimaryVerification(EmptyParam primaryVerification) {
-            this.primaryVerification = primaryVerification;
-            return this;
-          }
-
-          /**
            * A document showing address, either a passport, local ID card, or utility bill from a
            * well-known utility company.
            */
           public Builder setSecondaryVerification(
               AccountUpdateParams.Identity.Individual.Documents.SecondaryVerification
                   secondaryVerification) {
-            this.secondaryVerification = secondaryVerification;
-            return this;
-          }
-
-          /**
-           * A document showing address, either a passport, local ID card, or utility bill from a
-           * well-known utility company.
-           */
-          public Builder setSecondaryVerification(EmptyParam secondaryVerification) {
             this.secondaryVerification = secondaryVerification;
             return this;
           }
@@ -23382,14 +17240,14 @@ public class AccountUpdateParams extends ApiRequestParams {
          * meets its regulatory obligations.
          */
         @SerializedName("director")
-        Object director;
+        Boolean director;
 
         /**
          * Whether the person has significant responsibility to control, manage, or direct the
          * organization.
          */
         @SerializedName("executive")
-        Object executive;
+        Boolean executive;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -23403,7 +17261,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /** Whether the person is an owner of the account’s identity. */
         @SerializedName("owner")
-        Object owner;
+        Boolean owner;
 
         /** The percent owned by the person of the account's legal entity. */
         @SerializedName("percent_ownership")
@@ -23414,10 +17272,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object title;
 
         private Relationship(
-            Object director,
-            Object executive,
+            Boolean director,
+            Boolean executive,
             Map<String, Object> extraParams,
-            Object owner,
+            Boolean owner,
             Object percentOwnership,
             Object title) {
           this.director = director;
@@ -23433,13 +17291,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Object director;
+          private Boolean director;
 
-          private Object executive;
+          private Boolean executive;
 
           private Map<String, Object> extraParams;
 
-          private Object owner;
+          private Boolean owner;
 
           private Object percentOwnership;
 
@@ -23467,29 +17325,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Whether the person is a director of the account's identity. Directors are typically
-           * members of the governing board of the company, or responsible for ensuring the company
-           * meets its regulatory obligations.
-           */
-          public Builder setDirector(EmptyParam director) {
-            this.director = director;
-            return this;
-          }
-
-          /**
            * Whether the person has significant responsibility to control, manage, or direct the
            * organization.
            */
           public Builder setExecutive(Boolean executive) {
-            this.executive = executive;
-            return this;
-          }
-
-          /**
-           * Whether the person has significant responsibility to control, manage, or direct the
-           * organization.
-           */
-          public Builder setExecutive(EmptyParam executive) {
             this.executive = executive;
             return this;
           }
@@ -23528,14 +17367,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Whether the person is an owner of the account’s identity. */
-          public Builder setOwner(EmptyParam owner) {
-            this.owner = owner;
-            return this;
-          }
-
           /** The percent owned by the person of the account's legal entity. */
-          public Builder setPercentOwnership(String percentOwnership) {
+          public Builder setPercentOwnership(BigDecimal percentOwnership) {
             this.percentOwnership = percentOwnership;
             return this;
           }
@@ -23575,13 +17408,13 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /** Kana Address. */
         @SerializedName("kana")
-        Object kana;
+        Kana kana;
 
         /** Kanji Address. */
         @SerializedName("kanji")
-        Object kanji;
+        Kanji kanji;
 
-        private ScriptAddresses(Map<String, Object> extraParams, Object kana, Object kanji) {
+        private ScriptAddresses(Map<String, Object> extraParams, Kana kana, Kanji kanji) {
           this.extraParams = extraParams;
           this.kana = kana;
           this.kanji = kanji;
@@ -23594,9 +17427,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Object kana;
+          private Kana kana;
 
-          private Object kanji;
+          private Kanji kanji;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Identity.Individual.ScriptAddresses build() {
@@ -23639,21 +17472,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Kana Address. */
-          public Builder setKana(EmptyParam kana) {
-            this.kana = kana;
-            return this;
-          }
-
           /** Kanji Address. */
           public Builder setKanji(
               AccountUpdateParams.Identity.Individual.ScriptAddresses.Kanji kanji) {
-            this.kanji = kanji;
-            return this;
-          }
-
-          /** Kanji Address. */
-          public Builder setKanji(EmptyParam kanji) {
             this.kanji = kanji;
             return this;
           }
@@ -23671,7 +17492,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3166-1 alpha-2</a>).
            */
           @SerializedName("country")
-          ApiRequestParams.EnumParam country;
+          Object country;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -23705,7 +17526,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Kana(
               Object city,
-              ApiRequestParams.EnumParam country,
+              Object country,
               Map<String, Object> extraParams,
               Object line1,
               Object line2,
@@ -23729,7 +17550,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object city;
 
-            private ApiRequestParams.EnumParam country;
+            private Object country;
 
             private Map<String, Object> extraParams;
 
@@ -23772,8 +17593,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Two-letter country code (<a
              * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
              */
-            public Builder setCountry(
-                AccountUpdateParams.Identity.Individual.ScriptAddresses.Kana.Country country) {
+            public Builder setCountry(String country) {
               this.country = country;
               return this;
             }
@@ -23877,768 +17697,6 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
           }
-
-          public enum Country implements ApiRequestParams.EnumParam {
-            @SerializedName("ad")
-            AD("ad"),
-
-            @SerializedName("ae")
-            AE("ae"),
-
-            @SerializedName("af")
-            AF("af"),
-
-            @SerializedName("ag")
-            AG("ag"),
-
-            @SerializedName("ai")
-            AI("ai"),
-
-            @SerializedName("al")
-            AL("al"),
-
-            @SerializedName("am")
-            AM("am"),
-
-            @SerializedName("ao")
-            AO("ao"),
-
-            @SerializedName("aq")
-            AQ("aq"),
-
-            @SerializedName("ar")
-            AR("ar"),
-
-            @SerializedName("as")
-            AS("as"),
-
-            @SerializedName("at")
-            AT("at"),
-
-            @SerializedName("au")
-            AU("au"),
-
-            @SerializedName("aw")
-            AW("aw"),
-
-            @SerializedName("ax")
-            AX("ax"),
-
-            @SerializedName("az")
-            AZ("az"),
-
-            @SerializedName("ba")
-            BA("ba"),
-
-            @SerializedName("bb")
-            BB("bb"),
-
-            @SerializedName("bd")
-            BD("bd"),
-
-            @SerializedName("be")
-            BE("be"),
-
-            @SerializedName("bf")
-            BF("bf"),
-
-            @SerializedName("bg")
-            BG("bg"),
-
-            @SerializedName("bh")
-            BH("bh"),
-
-            @SerializedName("bi")
-            BI("bi"),
-
-            @SerializedName("bj")
-            BJ("bj"),
-
-            @SerializedName("bl")
-            BL("bl"),
-
-            @SerializedName("bm")
-            BM("bm"),
-
-            @SerializedName("bn")
-            BN("bn"),
-
-            @SerializedName("bo")
-            BO("bo"),
-
-            @SerializedName("bq")
-            BQ("bq"),
-
-            @SerializedName("br")
-            BR("br"),
-
-            @SerializedName("bs")
-            BS("bs"),
-
-            @SerializedName("bt")
-            BT("bt"),
-
-            @SerializedName("bv")
-            BV("bv"),
-
-            @SerializedName("bw")
-            BW("bw"),
-
-            @SerializedName("by")
-            BY("by"),
-
-            @SerializedName("bz")
-            BZ("bz"),
-
-            @SerializedName("ca")
-            CA("ca"),
-
-            @SerializedName("cc")
-            CC("cc"),
-
-            @SerializedName("cd")
-            CD("cd"),
-
-            @SerializedName("cf")
-            CF("cf"),
-
-            @SerializedName("cg")
-            CG("cg"),
-
-            @SerializedName("ch")
-            CH("ch"),
-
-            @SerializedName("ci")
-            CI("ci"),
-
-            @SerializedName("ck")
-            CK("ck"),
-
-            @SerializedName("cl")
-            CL("cl"),
-
-            @SerializedName("cm")
-            CM("cm"),
-
-            @SerializedName("cn")
-            CN("cn"),
-
-            @SerializedName("co")
-            CO("co"),
-
-            @SerializedName("cr")
-            CR("cr"),
-
-            @SerializedName("cu")
-            CU("cu"),
-
-            @SerializedName("cv")
-            CV("cv"),
-
-            @SerializedName("cw")
-            CW("cw"),
-
-            @SerializedName("cx")
-            CX("cx"),
-
-            @SerializedName("cy")
-            CY("cy"),
-
-            @SerializedName("cz")
-            CZ("cz"),
-
-            @SerializedName("de")
-            DE("de"),
-
-            @SerializedName("dj")
-            DJ("dj"),
-
-            @SerializedName("dk")
-            DK("dk"),
-
-            @SerializedName("dm")
-            DM("dm"),
-
-            @SerializedName("do")
-            DO("do"),
-
-            @SerializedName("dz")
-            DZ("dz"),
-
-            @SerializedName("ec")
-            EC("ec"),
-
-            @SerializedName("ee")
-            EE("ee"),
-
-            @SerializedName("eg")
-            EG("eg"),
-
-            @SerializedName("eh")
-            EH("eh"),
-
-            @SerializedName("er")
-            ER("er"),
-
-            @SerializedName("es")
-            ES("es"),
-
-            @SerializedName("et")
-            ET("et"),
-
-            @SerializedName("fi")
-            FI("fi"),
-
-            @SerializedName("fj")
-            FJ("fj"),
-
-            @SerializedName("fk")
-            FK("fk"),
-
-            @SerializedName("fm")
-            FM("fm"),
-
-            @SerializedName("fo")
-            FO("fo"),
-
-            @SerializedName("fr")
-            FR("fr"),
-
-            @SerializedName("ga")
-            GA("ga"),
-
-            @SerializedName("gb")
-            GB("gb"),
-
-            @SerializedName("gd")
-            GD("gd"),
-
-            @SerializedName("ge")
-            GE("ge"),
-
-            @SerializedName("gf")
-            GF("gf"),
-
-            @SerializedName("gg")
-            GG("gg"),
-
-            @SerializedName("gh")
-            GH("gh"),
-
-            @SerializedName("gi")
-            GI("gi"),
-
-            @SerializedName("gl")
-            GL("gl"),
-
-            @SerializedName("gm")
-            GM("gm"),
-
-            @SerializedName("gn")
-            GN("gn"),
-
-            @SerializedName("gp")
-            GP("gp"),
-
-            @SerializedName("gq")
-            GQ("gq"),
-
-            @SerializedName("gr")
-            GR("gr"),
-
-            @SerializedName("gs")
-            GS("gs"),
-
-            @SerializedName("gt")
-            GT("gt"),
-
-            @SerializedName("gu")
-            GU("gu"),
-
-            @SerializedName("gw")
-            GW("gw"),
-
-            @SerializedName("gy")
-            GY("gy"),
-
-            @SerializedName("hk")
-            HK("hk"),
-
-            @SerializedName("hm")
-            HM("hm"),
-
-            @SerializedName("hn")
-            HN("hn"),
-
-            @SerializedName("hr")
-            HR("hr"),
-
-            @SerializedName("ht")
-            HT("ht"),
-
-            @SerializedName("hu")
-            HU("hu"),
-
-            @SerializedName("id")
-            ID("id"),
-
-            @SerializedName("ie")
-            IE("ie"),
-
-            @SerializedName("il")
-            IL("il"),
-
-            @SerializedName("im")
-            IM("im"),
-
-            @SerializedName("in")
-            IN("in"),
-
-            @SerializedName("io")
-            IO("io"),
-
-            @SerializedName("iq")
-            IQ("iq"),
-
-            @SerializedName("ir")
-            IR("ir"),
-
-            @SerializedName("is")
-            IS("is"),
-
-            @SerializedName("it")
-            IT("it"),
-
-            @SerializedName("je")
-            JE("je"),
-
-            @SerializedName("jm")
-            JM("jm"),
-
-            @SerializedName("jo")
-            JO("jo"),
-
-            @SerializedName("jp")
-            JP("jp"),
-
-            @SerializedName("ke")
-            KE("ke"),
-
-            @SerializedName("kg")
-            KG("kg"),
-
-            @SerializedName("kh")
-            KH("kh"),
-
-            @SerializedName("ki")
-            KI("ki"),
-
-            @SerializedName("km")
-            KM("km"),
-
-            @SerializedName("kn")
-            KN("kn"),
-
-            @SerializedName("kp")
-            KP("kp"),
-
-            @SerializedName("kr")
-            KR("kr"),
-
-            @SerializedName("kw")
-            KW("kw"),
-
-            @SerializedName("ky")
-            KY("ky"),
-
-            @SerializedName("kz")
-            KZ("kz"),
-
-            @SerializedName("la")
-            LA("la"),
-
-            @SerializedName("lb")
-            LB("lb"),
-
-            @SerializedName("lc")
-            LC("lc"),
-
-            @SerializedName("li")
-            LI("li"),
-
-            @SerializedName("lk")
-            LK("lk"),
-
-            @SerializedName("lr")
-            LR("lr"),
-
-            @SerializedName("ls")
-            LS("ls"),
-
-            @SerializedName("lt")
-            LT("lt"),
-
-            @SerializedName("lu")
-            LU("lu"),
-
-            @SerializedName("lv")
-            LV("lv"),
-
-            @SerializedName("ly")
-            LY("ly"),
-
-            @SerializedName("ma")
-            MA("ma"),
-
-            @SerializedName("mc")
-            MC("mc"),
-
-            @SerializedName("md")
-            MD("md"),
-
-            @SerializedName("me")
-            ME("me"),
-
-            @SerializedName("mf")
-            MF("mf"),
-
-            @SerializedName("mg")
-            MG("mg"),
-
-            @SerializedName("mh")
-            MH("mh"),
-
-            @SerializedName("mk")
-            MK("mk"),
-
-            @SerializedName("ml")
-            ML("ml"),
-
-            @SerializedName("mm")
-            MM("mm"),
-
-            @SerializedName("mn")
-            MN("mn"),
-
-            @SerializedName("mo")
-            MO("mo"),
-
-            @SerializedName("mp")
-            MP("mp"),
-
-            @SerializedName("mq")
-            MQ("mq"),
-
-            @SerializedName("mr")
-            MR("mr"),
-
-            @SerializedName("ms")
-            MS("ms"),
-
-            @SerializedName("mt")
-            MT("mt"),
-
-            @SerializedName("mu")
-            MU("mu"),
-
-            @SerializedName("mv")
-            MV("mv"),
-
-            @SerializedName("mw")
-            MW("mw"),
-
-            @SerializedName("mx")
-            MX("mx"),
-
-            @SerializedName("my")
-            MY("my"),
-
-            @SerializedName("mz")
-            MZ("mz"),
-
-            @SerializedName("na")
-            NA("na"),
-
-            @SerializedName("nc")
-            NC("nc"),
-
-            @SerializedName("ne")
-            NE("ne"),
-
-            @SerializedName("nf")
-            NF("nf"),
-
-            @SerializedName("ng")
-            NG("ng"),
-
-            @SerializedName("ni")
-            NI("ni"),
-
-            @SerializedName("nl")
-            NL("nl"),
-
-            @SerializedName("no")
-            NO("no"),
-
-            @SerializedName("np")
-            NP("np"),
-
-            @SerializedName("nr")
-            NR("nr"),
-
-            @SerializedName("nu")
-            NU("nu"),
-
-            @SerializedName("nz")
-            NZ("nz"),
-
-            @SerializedName("om")
-            OM("om"),
-
-            @SerializedName("pa")
-            PA("pa"),
-
-            @SerializedName("pe")
-            PE("pe"),
-
-            @SerializedName("pf")
-            PF("pf"),
-
-            @SerializedName("pg")
-            PG("pg"),
-
-            @SerializedName("ph")
-            PH("ph"),
-
-            @SerializedName("pk")
-            PK("pk"),
-
-            @SerializedName("pl")
-            PL("pl"),
-
-            @SerializedName("pm")
-            PM("pm"),
-
-            @SerializedName("pn")
-            PN("pn"),
-
-            @SerializedName("pr")
-            PR("pr"),
-
-            @SerializedName("ps")
-            PS("ps"),
-
-            @SerializedName("pt")
-            PT("pt"),
-
-            @SerializedName("pw")
-            PW("pw"),
-
-            @SerializedName("py")
-            PY("py"),
-
-            @SerializedName("qa")
-            QA("qa"),
-
-            @SerializedName("qz")
-            QZ("qz"),
-
-            @SerializedName("re")
-            RE("re"),
-
-            @SerializedName("ro")
-            RO("ro"),
-
-            @SerializedName("rs")
-            RS("rs"),
-
-            @SerializedName("ru")
-            RU("ru"),
-
-            @SerializedName("rw")
-            RW("rw"),
-
-            @SerializedName("sa")
-            SA("sa"),
-
-            @SerializedName("sb")
-            SB("sb"),
-
-            @SerializedName("sc")
-            SC("sc"),
-
-            @SerializedName("sd")
-            SD("sd"),
-
-            @SerializedName("se")
-            SE("se"),
-
-            @SerializedName("sg")
-            SG("sg"),
-
-            @SerializedName("sh")
-            SH("sh"),
-
-            @SerializedName("si")
-            SI("si"),
-
-            @SerializedName("sj")
-            SJ("sj"),
-
-            @SerializedName("sk")
-            SK("sk"),
-
-            @SerializedName("sl")
-            SL("sl"),
-
-            @SerializedName("sm")
-            SM("sm"),
-
-            @SerializedName("sn")
-            SN("sn"),
-
-            @SerializedName("so")
-            SO("so"),
-
-            @SerializedName("sr")
-            SR("sr"),
-
-            @SerializedName("ss")
-            SS("ss"),
-
-            @SerializedName("st")
-            ST("st"),
-
-            @SerializedName("sv")
-            SV("sv"),
-
-            @SerializedName("sx")
-            SX("sx"),
-
-            @SerializedName("sy")
-            SY("sy"),
-
-            @SerializedName("sz")
-            SZ("sz"),
-
-            @SerializedName("tc")
-            TC("tc"),
-
-            @SerializedName("td")
-            TD("td"),
-
-            @SerializedName("tf")
-            TF("tf"),
-
-            @SerializedName("tg")
-            TG("tg"),
-
-            @SerializedName("th")
-            TH("th"),
-
-            @SerializedName("tj")
-            TJ("tj"),
-
-            @SerializedName("tk")
-            TK("tk"),
-
-            @SerializedName("tl")
-            TL("tl"),
-
-            @SerializedName("tm")
-            TM("tm"),
-
-            @SerializedName("tn")
-            TN("tn"),
-
-            @SerializedName("to")
-            TO("to"),
-
-            @SerializedName("tr")
-            TR("tr"),
-
-            @SerializedName("tt")
-            TT("tt"),
-
-            @SerializedName("tv")
-            TV("tv"),
-
-            @SerializedName("tw")
-            TW("tw"),
-
-            @SerializedName("tz")
-            TZ("tz"),
-
-            @SerializedName("ua")
-            UA("ua"),
-
-            @SerializedName("ug")
-            UG("ug"),
-
-            @SerializedName("um")
-            UM("um"),
-
-            @SerializedName("us")
-            US("us"),
-
-            @SerializedName("uy")
-            UY("uy"),
-
-            @SerializedName("uz")
-            UZ("uz"),
-
-            @SerializedName("va")
-            VA("va"),
-
-            @SerializedName("vc")
-            VC("vc"),
-
-            @SerializedName("ve")
-            VE("ve"),
-
-            @SerializedName("vg")
-            VG("vg"),
-
-            @SerializedName("vi")
-            VI("vi"),
-
-            @SerializedName("vn")
-            VN("vn"),
-
-            @SerializedName("vu")
-            VU("vu"),
-
-            @SerializedName("wf")
-            WF("wf"),
-
-            @SerializedName("ws")
-            WS("ws"),
-
-            @SerializedName("xx")
-            XX("xx"),
-
-            @SerializedName("ye")
-            YE("ye"),
-
-            @SerializedName("yt")
-            YT("yt"),
-
-            @SerializedName("za")
-            ZA("za"),
-
-            @SerializedName("zm")
-            ZM("zm"),
-
-            @SerializedName("zw")
-            ZW("zw");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            Country(String value) {
-              this.value = value;
-            }
-          }
         }
 
         @Getter
@@ -24653,7 +17711,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3166-1 alpha-2</a>).
            */
           @SerializedName("country")
-          ApiRequestParams.EnumParam country;
+          Object country;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -24687,7 +17745,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Kanji(
               Object city,
-              ApiRequestParams.EnumParam country,
+              Object country,
               Map<String, Object> extraParams,
               Object line1,
               Object line2,
@@ -24711,7 +17769,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Object city;
 
-            private ApiRequestParams.EnumParam country;
+            private Object country;
 
             private Map<String, Object> extraParams;
 
@@ -24754,8 +17812,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * Two-letter country code (<a
              * href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 alpha-2</a>).
              */
-            public Builder setCountry(
-                AccountUpdateParams.Identity.Individual.ScriptAddresses.Kanji.Country country) {
+            public Builder setCountry(String country) {
               this.country = country;
               return this;
             }
@@ -24859,768 +17916,6 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
           }
-
-          public enum Country implements ApiRequestParams.EnumParam {
-            @SerializedName("ad")
-            AD("ad"),
-
-            @SerializedName("ae")
-            AE("ae"),
-
-            @SerializedName("af")
-            AF("af"),
-
-            @SerializedName("ag")
-            AG("ag"),
-
-            @SerializedName("ai")
-            AI("ai"),
-
-            @SerializedName("al")
-            AL("al"),
-
-            @SerializedName("am")
-            AM("am"),
-
-            @SerializedName("ao")
-            AO("ao"),
-
-            @SerializedName("aq")
-            AQ("aq"),
-
-            @SerializedName("ar")
-            AR("ar"),
-
-            @SerializedName("as")
-            AS("as"),
-
-            @SerializedName("at")
-            AT("at"),
-
-            @SerializedName("au")
-            AU("au"),
-
-            @SerializedName("aw")
-            AW("aw"),
-
-            @SerializedName("ax")
-            AX("ax"),
-
-            @SerializedName("az")
-            AZ("az"),
-
-            @SerializedName("ba")
-            BA("ba"),
-
-            @SerializedName("bb")
-            BB("bb"),
-
-            @SerializedName("bd")
-            BD("bd"),
-
-            @SerializedName("be")
-            BE("be"),
-
-            @SerializedName("bf")
-            BF("bf"),
-
-            @SerializedName("bg")
-            BG("bg"),
-
-            @SerializedName("bh")
-            BH("bh"),
-
-            @SerializedName("bi")
-            BI("bi"),
-
-            @SerializedName("bj")
-            BJ("bj"),
-
-            @SerializedName("bl")
-            BL("bl"),
-
-            @SerializedName("bm")
-            BM("bm"),
-
-            @SerializedName("bn")
-            BN("bn"),
-
-            @SerializedName("bo")
-            BO("bo"),
-
-            @SerializedName("bq")
-            BQ("bq"),
-
-            @SerializedName("br")
-            BR("br"),
-
-            @SerializedName("bs")
-            BS("bs"),
-
-            @SerializedName("bt")
-            BT("bt"),
-
-            @SerializedName("bv")
-            BV("bv"),
-
-            @SerializedName("bw")
-            BW("bw"),
-
-            @SerializedName("by")
-            BY("by"),
-
-            @SerializedName("bz")
-            BZ("bz"),
-
-            @SerializedName("ca")
-            CA("ca"),
-
-            @SerializedName("cc")
-            CC("cc"),
-
-            @SerializedName("cd")
-            CD("cd"),
-
-            @SerializedName("cf")
-            CF("cf"),
-
-            @SerializedName("cg")
-            CG("cg"),
-
-            @SerializedName("ch")
-            CH("ch"),
-
-            @SerializedName("ci")
-            CI("ci"),
-
-            @SerializedName("ck")
-            CK("ck"),
-
-            @SerializedName("cl")
-            CL("cl"),
-
-            @SerializedName("cm")
-            CM("cm"),
-
-            @SerializedName("cn")
-            CN("cn"),
-
-            @SerializedName("co")
-            CO("co"),
-
-            @SerializedName("cr")
-            CR("cr"),
-
-            @SerializedName("cu")
-            CU("cu"),
-
-            @SerializedName("cv")
-            CV("cv"),
-
-            @SerializedName("cw")
-            CW("cw"),
-
-            @SerializedName("cx")
-            CX("cx"),
-
-            @SerializedName("cy")
-            CY("cy"),
-
-            @SerializedName("cz")
-            CZ("cz"),
-
-            @SerializedName("de")
-            DE("de"),
-
-            @SerializedName("dj")
-            DJ("dj"),
-
-            @SerializedName("dk")
-            DK("dk"),
-
-            @SerializedName("dm")
-            DM("dm"),
-
-            @SerializedName("do")
-            DO("do"),
-
-            @SerializedName("dz")
-            DZ("dz"),
-
-            @SerializedName("ec")
-            EC("ec"),
-
-            @SerializedName("ee")
-            EE("ee"),
-
-            @SerializedName("eg")
-            EG("eg"),
-
-            @SerializedName("eh")
-            EH("eh"),
-
-            @SerializedName("er")
-            ER("er"),
-
-            @SerializedName("es")
-            ES("es"),
-
-            @SerializedName("et")
-            ET("et"),
-
-            @SerializedName("fi")
-            FI("fi"),
-
-            @SerializedName("fj")
-            FJ("fj"),
-
-            @SerializedName("fk")
-            FK("fk"),
-
-            @SerializedName("fm")
-            FM("fm"),
-
-            @SerializedName("fo")
-            FO("fo"),
-
-            @SerializedName("fr")
-            FR("fr"),
-
-            @SerializedName("ga")
-            GA("ga"),
-
-            @SerializedName("gb")
-            GB("gb"),
-
-            @SerializedName("gd")
-            GD("gd"),
-
-            @SerializedName("ge")
-            GE("ge"),
-
-            @SerializedName("gf")
-            GF("gf"),
-
-            @SerializedName("gg")
-            GG("gg"),
-
-            @SerializedName("gh")
-            GH("gh"),
-
-            @SerializedName("gi")
-            GI("gi"),
-
-            @SerializedName("gl")
-            GL("gl"),
-
-            @SerializedName("gm")
-            GM("gm"),
-
-            @SerializedName("gn")
-            GN("gn"),
-
-            @SerializedName("gp")
-            GP("gp"),
-
-            @SerializedName("gq")
-            GQ("gq"),
-
-            @SerializedName("gr")
-            GR("gr"),
-
-            @SerializedName("gs")
-            GS("gs"),
-
-            @SerializedName("gt")
-            GT("gt"),
-
-            @SerializedName("gu")
-            GU("gu"),
-
-            @SerializedName("gw")
-            GW("gw"),
-
-            @SerializedName("gy")
-            GY("gy"),
-
-            @SerializedName("hk")
-            HK("hk"),
-
-            @SerializedName("hm")
-            HM("hm"),
-
-            @SerializedName("hn")
-            HN("hn"),
-
-            @SerializedName("hr")
-            HR("hr"),
-
-            @SerializedName("ht")
-            HT("ht"),
-
-            @SerializedName("hu")
-            HU("hu"),
-
-            @SerializedName("id")
-            ID("id"),
-
-            @SerializedName("ie")
-            IE("ie"),
-
-            @SerializedName("il")
-            IL("il"),
-
-            @SerializedName("im")
-            IM("im"),
-
-            @SerializedName("in")
-            IN("in"),
-
-            @SerializedName("io")
-            IO("io"),
-
-            @SerializedName("iq")
-            IQ("iq"),
-
-            @SerializedName("ir")
-            IR("ir"),
-
-            @SerializedName("is")
-            IS("is"),
-
-            @SerializedName("it")
-            IT("it"),
-
-            @SerializedName("je")
-            JE("je"),
-
-            @SerializedName("jm")
-            JM("jm"),
-
-            @SerializedName("jo")
-            JO("jo"),
-
-            @SerializedName("jp")
-            JP("jp"),
-
-            @SerializedName("ke")
-            KE("ke"),
-
-            @SerializedName("kg")
-            KG("kg"),
-
-            @SerializedName("kh")
-            KH("kh"),
-
-            @SerializedName("ki")
-            KI("ki"),
-
-            @SerializedName("km")
-            KM("km"),
-
-            @SerializedName("kn")
-            KN("kn"),
-
-            @SerializedName("kp")
-            KP("kp"),
-
-            @SerializedName("kr")
-            KR("kr"),
-
-            @SerializedName("kw")
-            KW("kw"),
-
-            @SerializedName("ky")
-            KY("ky"),
-
-            @SerializedName("kz")
-            KZ("kz"),
-
-            @SerializedName("la")
-            LA("la"),
-
-            @SerializedName("lb")
-            LB("lb"),
-
-            @SerializedName("lc")
-            LC("lc"),
-
-            @SerializedName("li")
-            LI("li"),
-
-            @SerializedName("lk")
-            LK("lk"),
-
-            @SerializedName("lr")
-            LR("lr"),
-
-            @SerializedName("ls")
-            LS("ls"),
-
-            @SerializedName("lt")
-            LT("lt"),
-
-            @SerializedName("lu")
-            LU("lu"),
-
-            @SerializedName("lv")
-            LV("lv"),
-
-            @SerializedName("ly")
-            LY("ly"),
-
-            @SerializedName("ma")
-            MA("ma"),
-
-            @SerializedName("mc")
-            MC("mc"),
-
-            @SerializedName("md")
-            MD("md"),
-
-            @SerializedName("me")
-            ME("me"),
-
-            @SerializedName("mf")
-            MF("mf"),
-
-            @SerializedName("mg")
-            MG("mg"),
-
-            @SerializedName("mh")
-            MH("mh"),
-
-            @SerializedName("mk")
-            MK("mk"),
-
-            @SerializedName("ml")
-            ML("ml"),
-
-            @SerializedName("mm")
-            MM("mm"),
-
-            @SerializedName("mn")
-            MN("mn"),
-
-            @SerializedName("mo")
-            MO("mo"),
-
-            @SerializedName("mp")
-            MP("mp"),
-
-            @SerializedName("mq")
-            MQ("mq"),
-
-            @SerializedName("mr")
-            MR("mr"),
-
-            @SerializedName("ms")
-            MS("ms"),
-
-            @SerializedName("mt")
-            MT("mt"),
-
-            @SerializedName("mu")
-            MU("mu"),
-
-            @SerializedName("mv")
-            MV("mv"),
-
-            @SerializedName("mw")
-            MW("mw"),
-
-            @SerializedName("mx")
-            MX("mx"),
-
-            @SerializedName("my")
-            MY("my"),
-
-            @SerializedName("mz")
-            MZ("mz"),
-
-            @SerializedName("na")
-            NA("na"),
-
-            @SerializedName("nc")
-            NC("nc"),
-
-            @SerializedName("ne")
-            NE("ne"),
-
-            @SerializedName("nf")
-            NF("nf"),
-
-            @SerializedName("ng")
-            NG("ng"),
-
-            @SerializedName("ni")
-            NI("ni"),
-
-            @SerializedName("nl")
-            NL("nl"),
-
-            @SerializedName("no")
-            NO("no"),
-
-            @SerializedName("np")
-            NP("np"),
-
-            @SerializedName("nr")
-            NR("nr"),
-
-            @SerializedName("nu")
-            NU("nu"),
-
-            @SerializedName("nz")
-            NZ("nz"),
-
-            @SerializedName("om")
-            OM("om"),
-
-            @SerializedName("pa")
-            PA("pa"),
-
-            @SerializedName("pe")
-            PE("pe"),
-
-            @SerializedName("pf")
-            PF("pf"),
-
-            @SerializedName("pg")
-            PG("pg"),
-
-            @SerializedName("ph")
-            PH("ph"),
-
-            @SerializedName("pk")
-            PK("pk"),
-
-            @SerializedName("pl")
-            PL("pl"),
-
-            @SerializedName("pm")
-            PM("pm"),
-
-            @SerializedName("pn")
-            PN("pn"),
-
-            @SerializedName("pr")
-            PR("pr"),
-
-            @SerializedName("ps")
-            PS("ps"),
-
-            @SerializedName("pt")
-            PT("pt"),
-
-            @SerializedName("pw")
-            PW("pw"),
-
-            @SerializedName("py")
-            PY("py"),
-
-            @SerializedName("qa")
-            QA("qa"),
-
-            @SerializedName("qz")
-            QZ("qz"),
-
-            @SerializedName("re")
-            RE("re"),
-
-            @SerializedName("ro")
-            RO("ro"),
-
-            @SerializedName("rs")
-            RS("rs"),
-
-            @SerializedName("ru")
-            RU("ru"),
-
-            @SerializedName("rw")
-            RW("rw"),
-
-            @SerializedName("sa")
-            SA("sa"),
-
-            @SerializedName("sb")
-            SB("sb"),
-
-            @SerializedName("sc")
-            SC("sc"),
-
-            @SerializedName("sd")
-            SD("sd"),
-
-            @SerializedName("se")
-            SE("se"),
-
-            @SerializedName("sg")
-            SG("sg"),
-
-            @SerializedName("sh")
-            SH("sh"),
-
-            @SerializedName("si")
-            SI("si"),
-
-            @SerializedName("sj")
-            SJ("sj"),
-
-            @SerializedName("sk")
-            SK("sk"),
-
-            @SerializedName("sl")
-            SL("sl"),
-
-            @SerializedName("sm")
-            SM("sm"),
-
-            @SerializedName("sn")
-            SN("sn"),
-
-            @SerializedName("so")
-            SO("so"),
-
-            @SerializedName("sr")
-            SR("sr"),
-
-            @SerializedName("ss")
-            SS("ss"),
-
-            @SerializedName("st")
-            ST("st"),
-
-            @SerializedName("sv")
-            SV("sv"),
-
-            @SerializedName("sx")
-            SX("sx"),
-
-            @SerializedName("sy")
-            SY("sy"),
-
-            @SerializedName("sz")
-            SZ("sz"),
-
-            @SerializedName("tc")
-            TC("tc"),
-
-            @SerializedName("td")
-            TD("td"),
-
-            @SerializedName("tf")
-            TF("tf"),
-
-            @SerializedName("tg")
-            TG("tg"),
-
-            @SerializedName("th")
-            TH("th"),
-
-            @SerializedName("tj")
-            TJ("tj"),
-
-            @SerializedName("tk")
-            TK("tk"),
-
-            @SerializedName("tl")
-            TL("tl"),
-
-            @SerializedName("tm")
-            TM("tm"),
-
-            @SerializedName("tn")
-            TN("tn"),
-
-            @SerializedName("to")
-            TO("to"),
-
-            @SerializedName("tr")
-            TR("tr"),
-
-            @SerializedName("tt")
-            TT("tt"),
-
-            @SerializedName("tv")
-            TV("tv"),
-
-            @SerializedName("tw")
-            TW("tw"),
-
-            @SerializedName("tz")
-            TZ("tz"),
-
-            @SerializedName("ua")
-            UA("ua"),
-
-            @SerializedName("ug")
-            UG("ug"),
-
-            @SerializedName("um")
-            UM("um"),
-
-            @SerializedName("us")
-            US("us"),
-
-            @SerializedName("uy")
-            UY("uy"),
-
-            @SerializedName("uz")
-            UZ("uz"),
-
-            @SerializedName("va")
-            VA("va"),
-
-            @SerializedName("vc")
-            VC("vc"),
-
-            @SerializedName("ve")
-            VE("ve"),
-
-            @SerializedName("vg")
-            VG("vg"),
-
-            @SerializedName("vi")
-            VI("vi"),
-
-            @SerializedName("vn")
-            VN("vn"),
-
-            @SerializedName("vu")
-            VU("vu"),
-
-            @SerializedName("wf")
-            WF("wf"),
-
-            @SerializedName("ws")
-            WS("ws"),
-
-            @SerializedName("xx")
-            XX("xx"),
-
-            @SerializedName("ye")
-            YE("ye"),
-
-            @SerializedName("yt")
-            YT("yt"),
-
-            @SerializedName("za")
-            ZA("za"),
-
-            @SerializedName("zm")
-            ZM("zm"),
-
-            @SerializedName("zw")
-            ZW("zw");
-
-            @Getter(onMethod_ = {@Override})
-            private final String value;
-
-            Country(String value) {
-              this.value = value;
-            }
-          }
         }
       }
 
@@ -25639,13 +17934,13 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /** Persons name in kana script. */
         @SerializedName("kana")
-        Object kana;
+        Kana kana;
 
         /** Persons name in kanji script. */
         @SerializedName("kanji")
-        Object kanji;
+        Kanji kanji;
 
-        private ScriptNames(Map<String, Object> extraParams, Object kana, Object kanji) {
+        private ScriptNames(Map<String, Object> extraParams, Kana kana, Kanji kanji) {
           this.extraParams = extraParams;
           this.kana = kana;
           this.kanji = kanji;
@@ -25658,9 +17953,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Object kana;
+          private Kana kana;
 
-          private Object kanji;
+          private Kanji kanji;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Identity.Individual.ScriptNames build() {
@@ -25702,20 +17997,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Persons name in kana script. */
-          public Builder setKana(EmptyParam kana) {
-            this.kana = kana;
-            return this;
-          }
-
           /** Persons name in kanji script. */
           public Builder setKanji(AccountUpdateParams.Identity.Individual.ScriptNames.Kanji kanji) {
-            this.kanji = kanji;
-            return this;
-          }
-
-          /** Persons name in kanji script. */
-          public Builder setKanji(EmptyParam kanji) {
             this.kanji = kanji;
             return this;
           }
@@ -25937,768 +18220,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
-      public enum Nationality implements ApiRequestParams.EnumParam {
-        @SerializedName("ad")
-        AD("ad"),
-
-        @SerializedName("ae")
-        AE("ae"),
-
-        @SerializedName("af")
-        AF("af"),
-
-        @SerializedName("ag")
-        AG("ag"),
-
-        @SerializedName("ai")
-        AI("ai"),
-
-        @SerializedName("al")
-        AL("al"),
-
-        @SerializedName("am")
-        AM("am"),
-
-        @SerializedName("ao")
-        AO("ao"),
-
-        @SerializedName("aq")
-        AQ("aq"),
-
-        @SerializedName("ar")
-        AR("ar"),
-
-        @SerializedName("as")
-        AS("as"),
-
-        @SerializedName("at")
-        AT("at"),
-
-        @SerializedName("au")
-        AU("au"),
-
-        @SerializedName("aw")
-        AW("aw"),
-
-        @SerializedName("ax")
-        AX("ax"),
-
-        @SerializedName("az")
-        AZ("az"),
-
-        @SerializedName("ba")
-        BA("ba"),
-
-        @SerializedName("bb")
-        BB("bb"),
-
-        @SerializedName("bd")
-        BD("bd"),
-
-        @SerializedName("be")
-        BE("be"),
-
-        @SerializedName("bf")
-        BF("bf"),
-
-        @SerializedName("bg")
-        BG("bg"),
-
-        @SerializedName("bh")
-        BH("bh"),
-
-        @SerializedName("bi")
-        BI("bi"),
-
-        @SerializedName("bj")
-        BJ("bj"),
-
-        @SerializedName("bl")
-        BL("bl"),
-
-        @SerializedName("bm")
-        BM("bm"),
-
-        @SerializedName("bn")
-        BN("bn"),
-
-        @SerializedName("bo")
-        BO("bo"),
-
-        @SerializedName("bq")
-        BQ("bq"),
-
-        @SerializedName("br")
-        BR("br"),
-
-        @SerializedName("bs")
-        BS("bs"),
-
-        @SerializedName("bt")
-        BT("bt"),
-
-        @SerializedName("bv")
-        BV("bv"),
-
-        @SerializedName("bw")
-        BW("bw"),
-
-        @SerializedName("by")
-        BY("by"),
-
-        @SerializedName("bz")
-        BZ("bz"),
-
-        @SerializedName("ca")
-        CA("ca"),
-
-        @SerializedName("cc")
-        CC("cc"),
-
-        @SerializedName("cd")
-        CD("cd"),
-
-        @SerializedName("cf")
-        CF("cf"),
-
-        @SerializedName("cg")
-        CG("cg"),
-
-        @SerializedName("ch")
-        CH("ch"),
-
-        @SerializedName("ci")
-        CI("ci"),
-
-        @SerializedName("ck")
-        CK("ck"),
-
-        @SerializedName("cl")
-        CL("cl"),
-
-        @SerializedName("cm")
-        CM("cm"),
-
-        @SerializedName("cn")
-        CN("cn"),
-
-        @SerializedName("co")
-        CO("co"),
-
-        @SerializedName("cr")
-        CR("cr"),
-
-        @SerializedName("cu")
-        CU("cu"),
-
-        @SerializedName("cv")
-        CV("cv"),
-
-        @SerializedName("cw")
-        CW("cw"),
-
-        @SerializedName("cx")
-        CX("cx"),
-
-        @SerializedName("cy")
-        CY("cy"),
-
-        @SerializedName("cz")
-        CZ("cz"),
-
-        @SerializedName("de")
-        DE("de"),
-
-        @SerializedName("dj")
-        DJ("dj"),
-
-        @SerializedName("dk")
-        DK("dk"),
-
-        @SerializedName("dm")
-        DM("dm"),
-
-        @SerializedName("do")
-        DO("do"),
-
-        @SerializedName("dz")
-        DZ("dz"),
-
-        @SerializedName("ec")
-        EC("ec"),
-
-        @SerializedName("ee")
-        EE("ee"),
-
-        @SerializedName("eg")
-        EG("eg"),
-
-        @SerializedName("eh")
-        EH("eh"),
-
-        @SerializedName("er")
-        ER("er"),
-
-        @SerializedName("es")
-        ES("es"),
-
-        @SerializedName("et")
-        ET("et"),
-
-        @SerializedName("fi")
-        FI("fi"),
-
-        @SerializedName("fj")
-        FJ("fj"),
-
-        @SerializedName("fk")
-        FK("fk"),
-
-        @SerializedName("fm")
-        FM("fm"),
-
-        @SerializedName("fo")
-        FO("fo"),
-
-        @SerializedName("fr")
-        FR("fr"),
-
-        @SerializedName("ga")
-        GA("ga"),
-
-        @SerializedName("gb")
-        GB("gb"),
-
-        @SerializedName("gd")
-        GD("gd"),
-
-        @SerializedName("ge")
-        GE("ge"),
-
-        @SerializedName("gf")
-        GF("gf"),
-
-        @SerializedName("gg")
-        GG("gg"),
-
-        @SerializedName("gh")
-        GH("gh"),
-
-        @SerializedName("gi")
-        GI("gi"),
-
-        @SerializedName("gl")
-        GL("gl"),
-
-        @SerializedName("gm")
-        GM("gm"),
-
-        @SerializedName("gn")
-        GN("gn"),
-
-        @SerializedName("gp")
-        GP("gp"),
-
-        @SerializedName("gq")
-        GQ("gq"),
-
-        @SerializedName("gr")
-        GR("gr"),
-
-        @SerializedName("gs")
-        GS("gs"),
-
-        @SerializedName("gt")
-        GT("gt"),
-
-        @SerializedName("gu")
-        GU("gu"),
-
-        @SerializedName("gw")
-        GW("gw"),
-
-        @SerializedName("gy")
-        GY("gy"),
-
-        @SerializedName("hk")
-        HK("hk"),
-
-        @SerializedName("hm")
-        HM("hm"),
-
-        @SerializedName("hn")
-        HN("hn"),
-
-        @SerializedName("hr")
-        HR("hr"),
-
-        @SerializedName("ht")
-        HT("ht"),
-
-        @SerializedName("hu")
-        HU("hu"),
-
-        @SerializedName("id")
-        ID("id"),
-
-        @SerializedName("ie")
-        IE("ie"),
-
-        @SerializedName("il")
-        IL("il"),
-
-        @SerializedName("im")
-        IM("im"),
-
-        @SerializedName("in")
-        IN("in"),
-
-        @SerializedName("io")
-        IO("io"),
-
-        @SerializedName("iq")
-        IQ("iq"),
-
-        @SerializedName("ir")
-        IR("ir"),
-
-        @SerializedName("is")
-        IS("is"),
-
-        @SerializedName("it")
-        IT("it"),
-
-        @SerializedName("je")
-        JE("je"),
-
-        @SerializedName("jm")
-        JM("jm"),
-
-        @SerializedName("jo")
-        JO("jo"),
-
-        @SerializedName("jp")
-        JP("jp"),
-
-        @SerializedName("ke")
-        KE("ke"),
-
-        @SerializedName("kg")
-        KG("kg"),
-
-        @SerializedName("kh")
-        KH("kh"),
-
-        @SerializedName("ki")
-        KI("ki"),
-
-        @SerializedName("km")
-        KM("km"),
-
-        @SerializedName("kn")
-        KN("kn"),
-
-        @SerializedName("kp")
-        KP("kp"),
-
-        @SerializedName("kr")
-        KR("kr"),
-
-        @SerializedName("kw")
-        KW("kw"),
-
-        @SerializedName("ky")
-        KY("ky"),
-
-        @SerializedName("kz")
-        KZ("kz"),
-
-        @SerializedName("la")
-        LA("la"),
-
-        @SerializedName("lb")
-        LB("lb"),
-
-        @SerializedName("lc")
-        LC("lc"),
-
-        @SerializedName("li")
-        LI("li"),
-
-        @SerializedName("lk")
-        LK("lk"),
-
-        @SerializedName("lr")
-        LR("lr"),
-
-        @SerializedName("ls")
-        LS("ls"),
-
-        @SerializedName("lt")
-        LT("lt"),
-
-        @SerializedName("lu")
-        LU("lu"),
-
-        @SerializedName("lv")
-        LV("lv"),
-
-        @SerializedName("ly")
-        LY("ly"),
-
-        @SerializedName("ma")
-        MA("ma"),
-
-        @SerializedName("mc")
-        MC("mc"),
-
-        @SerializedName("md")
-        MD("md"),
-
-        @SerializedName("me")
-        ME("me"),
-
-        @SerializedName("mf")
-        MF("mf"),
-
-        @SerializedName("mg")
-        MG("mg"),
-
-        @SerializedName("mh")
-        MH("mh"),
-
-        @SerializedName("mk")
-        MK("mk"),
-
-        @SerializedName("ml")
-        ML("ml"),
-
-        @SerializedName("mm")
-        MM("mm"),
-
-        @SerializedName("mn")
-        MN("mn"),
-
-        @SerializedName("mo")
-        MO("mo"),
-
-        @SerializedName("mp")
-        MP("mp"),
-
-        @SerializedName("mq")
-        MQ("mq"),
-
-        @SerializedName("mr")
-        MR("mr"),
-
-        @SerializedName("ms")
-        MS("ms"),
-
-        @SerializedName("mt")
-        MT("mt"),
-
-        @SerializedName("mu")
-        MU("mu"),
-
-        @SerializedName("mv")
-        MV("mv"),
-
-        @SerializedName("mw")
-        MW("mw"),
-
-        @SerializedName("mx")
-        MX("mx"),
-
-        @SerializedName("my")
-        MY("my"),
-
-        @SerializedName("mz")
-        MZ("mz"),
-
-        @SerializedName("na")
-        NA("na"),
-
-        @SerializedName("nc")
-        NC("nc"),
-
-        @SerializedName("ne")
-        NE("ne"),
-
-        @SerializedName("nf")
-        NF("nf"),
-
-        @SerializedName("ng")
-        NG("ng"),
-
-        @SerializedName("ni")
-        NI("ni"),
-
-        @SerializedName("nl")
-        NL("nl"),
-
-        @SerializedName("no")
-        NO("no"),
-
-        @SerializedName("np")
-        NP("np"),
-
-        @SerializedName("nr")
-        NR("nr"),
-
-        @SerializedName("nu")
-        NU("nu"),
-
-        @SerializedName("nz")
-        NZ("nz"),
-
-        @SerializedName("om")
-        OM("om"),
-
-        @SerializedName("pa")
-        PA("pa"),
-
-        @SerializedName("pe")
-        PE("pe"),
-
-        @SerializedName("pf")
-        PF("pf"),
-
-        @SerializedName("pg")
-        PG("pg"),
-
-        @SerializedName("ph")
-        PH("ph"),
-
-        @SerializedName("pk")
-        PK("pk"),
-
-        @SerializedName("pl")
-        PL("pl"),
-
-        @SerializedName("pm")
-        PM("pm"),
-
-        @SerializedName("pn")
-        PN("pn"),
-
-        @SerializedName("pr")
-        PR("pr"),
-
-        @SerializedName("ps")
-        PS("ps"),
-
-        @SerializedName("pt")
-        PT("pt"),
-
-        @SerializedName("pw")
-        PW("pw"),
-
-        @SerializedName("py")
-        PY("py"),
-
-        @SerializedName("qa")
-        QA("qa"),
-
-        @SerializedName("qz")
-        QZ("qz"),
-
-        @SerializedName("re")
-        RE("re"),
-
-        @SerializedName("ro")
-        RO("ro"),
-
-        @SerializedName("rs")
-        RS("rs"),
-
-        @SerializedName("ru")
-        RU("ru"),
-
-        @SerializedName("rw")
-        RW("rw"),
-
-        @SerializedName("sa")
-        SA("sa"),
-
-        @SerializedName("sb")
-        SB("sb"),
-
-        @SerializedName("sc")
-        SC("sc"),
-
-        @SerializedName("sd")
-        SD("sd"),
-
-        @SerializedName("se")
-        SE("se"),
-
-        @SerializedName("sg")
-        SG("sg"),
-
-        @SerializedName("sh")
-        SH("sh"),
-
-        @SerializedName("si")
-        SI("si"),
-
-        @SerializedName("sj")
-        SJ("sj"),
-
-        @SerializedName("sk")
-        SK("sk"),
-
-        @SerializedName("sl")
-        SL("sl"),
-
-        @SerializedName("sm")
-        SM("sm"),
-
-        @SerializedName("sn")
-        SN("sn"),
-
-        @SerializedName("so")
-        SO("so"),
-
-        @SerializedName("sr")
-        SR("sr"),
-
-        @SerializedName("ss")
-        SS("ss"),
-
-        @SerializedName("st")
-        ST("st"),
-
-        @SerializedName("sv")
-        SV("sv"),
-
-        @SerializedName("sx")
-        SX("sx"),
-
-        @SerializedName("sy")
-        SY("sy"),
-
-        @SerializedName("sz")
-        SZ("sz"),
-
-        @SerializedName("tc")
-        TC("tc"),
-
-        @SerializedName("td")
-        TD("td"),
-
-        @SerializedName("tf")
-        TF("tf"),
-
-        @SerializedName("tg")
-        TG("tg"),
-
-        @SerializedName("th")
-        TH("th"),
-
-        @SerializedName("tj")
-        TJ("tj"),
-
-        @SerializedName("tk")
-        TK("tk"),
-
-        @SerializedName("tl")
-        TL("tl"),
-
-        @SerializedName("tm")
-        TM("tm"),
-
-        @SerializedName("tn")
-        TN("tn"),
-
-        @SerializedName("to")
-        TO("to"),
-
-        @SerializedName("tr")
-        TR("tr"),
-
-        @SerializedName("tt")
-        TT("tt"),
-
-        @SerializedName("tv")
-        TV("tv"),
-
-        @SerializedName("tw")
-        TW("tw"),
-
-        @SerializedName("tz")
-        TZ("tz"),
-
-        @SerializedName("ua")
-        UA("ua"),
-
-        @SerializedName("ug")
-        UG("ug"),
-
-        @SerializedName("um")
-        UM("um"),
-
-        @SerializedName("us")
-        US("us"),
-
-        @SerializedName("uy")
-        UY("uy"),
-
-        @SerializedName("uz")
-        UZ("uz"),
-
-        @SerializedName("va")
-        VA("va"),
-
-        @SerializedName("vc")
-        VC("vc"),
-
-        @SerializedName("ve")
-        VE("ve"),
-
-        @SerializedName("vg")
-        VG("vg"),
-
-        @SerializedName("vi")
-        VI("vi"),
-
-        @SerializedName("vn")
-        VN("vn"),
-
-        @SerializedName("vu")
-        VU("vu"),
-
-        @SerializedName("wf")
-        WF("wf"),
-
-        @SerializedName("ws")
-        WS("ws"),
-
-        @SerializedName("xx")
-        XX("xx"),
-
-        @SerializedName("ye")
-        YE("ye"),
-
-        @SerializedName("yt")
-        YT("yt"),
-
-        @SerializedName("za")
-        ZA("za"),
-
-        @SerializedName("zm")
-        ZM("zm"),
-
-        @SerializedName("zw")
-        ZW("zw");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        Nationality(String value) {
-          this.value = value;
-        }
-      }
-
       public enum PoliticalExposure implements ApiRequestParams.EnumParam {
         @SerializedName("existing")
         EXISTING("existing"),
@@ -26712,768 +18233,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         PoliticalExposure(String value) {
           this.value = value;
         }
-      }
-    }
-
-    public enum Country implements ApiRequestParams.EnumParam {
-      @SerializedName("ad")
-      AD("ad"),
-
-      @SerializedName("ae")
-      AE("ae"),
-
-      @SerializedName("af")
-      AF("af"),
-
-      @SerializedName("ag")
-      AG("ag"),
-
-      @SerializedName("ai")
-      AI("ai"),
-
-      @SerializedName("al")
-      AL("al"),
-
-      @SerializedName("am")
-      AM("am"),
-
-      @SerializedName("ao")
-      AO("ao"),
-
-      @SerializedName("aq")
-      AQ("aq"),
-
-      @SerializedName("ar")
-      AR("ar"),
-
-      @SerializedName("as")
-      AS("as"),
-
-      @SerializedName("at")
-      AT("at"),
-
-      @SerializedName("au")
-      AU("au"),
-
-      @SerializedName("aw")
-      AW("aw"),
-
-      @SerializedName("ax")
-      AX("ax"),
-
-      @SerializedName("az")
-      AZ("az"),
-
-      @SerializedName("ba")
-      BA("ba"),
-
-      @SerializedName("bb")
-      BB("bb"),
-
-      @SerializedName("bd")
-      BD("bd"),
-
-      @SerializedName("be")
-      BE("be"),
-
-      @SerializedName("bf")
-      BF("bf"),
-
-      @SerializedName("bg")
-      BG("bg"),
-
-      @SerializedName("bh")
-      BH("bh"),
-
-      @SerializedName("bi")
-      BI("bi"),
-
-      @SerializedName("bj")
-      BJ("bj"),
-
-      @SerializedName("bl")
-      BL("bl"),
-
-      @SerializedName("bm")
-      BM("bm"),
-
-      @SerializedName("bn")
-      BN("bn"),
-
-      @SerializedName("bo")
-      BO("bo"),
-
-      @SerializedName("bq")
-      BQ("bq"),
-
-      @SerializedName("br")
-      BR("br"),
-
-      @SerializedName("bs")
-      BS("bs"),
-
-      @SerializedName("bt")
-      BT("bt"),
-
-      @SerializedName("bv")
-      BV("bv"),
-
-      @SerializedName("bw")
-      BW("bw"),
-
-      @SerializedName("by")
-      BY("by"),
-
-      @SerializedName("bz")
-      BZ("bz"),
-
-      @SerializedName("ca")
-      CA("ca"),
-
-      @SerializedName("cc")
-      CC("cc"),
-
-      @SerializedName("cd")
-      CD("cd"),
-
-      @SerializedName("cf")
-      CF("cf"),
-
-      @SerializedName("cg")
-      CG("cg"),
-
-      @SerializedName("ch")
-      CH("ch"),
-
-      @SerializedName("ci")
-      CI("ci"),
-
-      @SerializedName("ck")
-      CK("ck"),
-
-      @SerializedName("cl")
-      CL("cl"),
-
-      @SerializedName("cm")
-      CM("cm"),
-
-      @SerializedName("cn")
-      CN("cn"),
-
-      @SerializedName("co")
-      CO("co"),
-
-      @SerializedName("cr")
-      CR("cr"),
-
-      @SerializedName("cu")
-      CU("cu"),
-
-      @SerializedName("cv")
-      CV("cv"),
-
-      @SerializedName("cw")
-      CW("cw"),
-
-      @SerializedName("cx")
-      CX("cx"),
-
-      @SerializedName("cy")
-      CY("cy"),
-
-      @SerializedName("cz")
-      CZ("cz"),
-
-      @SerializedName("de")
-      DE("de"),
-
-      @SerializedName("dj")
-      DJ("dj"),
-
-      @SerializedName("dk")
-      DK("dk"),
-
-      @SerializedName("dm")
-      DM("dm"),
-
-      @SerializedName("do")
-      DO("do"),
-
-      @SerializedName("dz")
-      DZ("dz"),
-
-      @SerializedName("ec")
-      EC("ec"),
-
-      @SerializedName("ee")
-      EE("ee"),
-
-      @SerializedName("eg")
-      EG("eg"),
-
-      @SerializedName("eh")
-      EH("eh"),
-
-      @SerializedName("er")
-      ER("er"),
-
-      @SerializedName("es")
-      ES("es"),
-
-      @SerializedName("et")
-      ET("et"),
-
-      @SerializedName("fi")
-      FI("fi"),
-
-      @SerializedName("fj")
-      FJ("fj"),
-
-      @SerializedName("fk")
-      FK("fk"),
-
-      @SerializedName("fm")
-      FM("fm"),
-
-      @SerializedName("fo")
-      FO("fo"),
-
-      @SerializedName("fr")
-      FR("fr"),
-
-      @SerializedName("ga")
-      GA("ga"),
-
-      @SerializedName("gb")
-      GB("gb"),
-
-      @SerializedName("gd")
-      GD("gd"),
-
-      @SerializedName("ge")
-      GE("ge"),
-
-      @SerializedName("gf")
-      GF("gf"),
-
-      @SerializedName("gg")
-      GG("gg"),
-
-      @SerializedName("gh")
-      GH("gh"),
-
-      @SerializedName("gi")
-      GI("gi"),
-
-      @SerializedName("gl")
-      GL("gl"),
-
-      @SerializedName("gm")
-      GM("gm"),
-
-      @SerializedName("gn")
-      GN("gn"),
-
-      @SerializedName("gp")
-      GP("gp"),
-
-      @SerializedName("gq")
-      GQ("gq"),
-
-      @SerializedName("gr")
-      GR("gr"),
-
-      @SerializedName("gs")
-      GS("gs"),
-
-      @SerializedName("gt")
-      GT("gt"),
-
-      @SerializedName("gu")
-      GU("gu"),
-
-      @SerializedName("gw")
-      GW("gw"),
-
-      @SerializedName("gy")
-      GY("gy"),
-
-      @SerializedName("hk")
-      HK("hk"),
-
-      @SerializedName("hm")
-      HM("hm"),
-
-      @SerializedName("hn")
-      HN("hn"),
-
-      @SerializedName("hr")
-      HR("hr"),
-
-      @SerializedName("ht")
-      HT("ht"),
-
-      @SerializedName("hu")
-      HU("hu"),
-
-      @SerializedName("id")
-      ID("id"),
-
-      @SerializedName("ie")
-      IE("ie"),
-
-      @SerializedName("il")
-      IL("il"),
-
-      @SerializedName("im")
-      IM("im"),
-
-      @SerializedName("in")
-      IN("in"),
-
-      @SerializedName("io")
-      IO("io"),
-
-      @SerializedName("iq")
-      IQ("iq"),
-
-      @SerializedName("ir")
-      IR("ir"),
-
-      @SerializedName("is")
-      IS("is"),
-
-      @SerializedName("it")
-      IT("it"),
-
-      @SerializedName("je")
-      JE("je"),
-
-      @SerializedName("jm")
-      JM("jm"),
-
-      @SerializedName("jo")
-      JO("jo"),
-
-      @SerializedName("jp")
-      JP("jp"),
-
-      @SerializedName("ke")
-      KE("ke"),
-
-      @SerializedName("kg")
-      KG("kg"),
-
-      @SerializedName("kh")
-      KH("kh"),
-
-      @SerializedName("ki")
-      KI("ki"),
-
-      @SerializedName("km")
-      KM("km"),
-
-      @SerializedName("kn")
-      KN("kn"),
-
-      @SerializedName("kp")
-      KP("kp"),
-
-      @SerializedName("kr")
-      KR("kr"),
-
-      @SerializedName("kw")
-      KW("kw"),
-
-      @SerializedName("ky")
-      KY("ky"),
-
-      @SerializedName("kz")
-      KZ("kz"),
-
-      @SerializedName("la")
-      LA("la"),
-
-      @SerializedName("lb")
-      LB("lb"),
-
-      @SerializedName("lc")
-      LC("lc"),
-
-      @SerializedName("li")
-      LI("li"),
-
-      @SerializedName("lk")
-      LK("lk"),
-
-      @SerializedName("lr")
-      LR("lr"),
-
-      @SerializedName("ls")
-      LS("ls"),
-
-      @SerializedName("lt")
-      LT("lt"),
-
-      @SerializedName("lu")
-      LU("lu"),
-
-      @SerializedName("lv")
-      LV("lv"),
-
-      @SerializedName("ly")
-      LY("ly"),
-
-      @SerializedName("ma")
-      MA("ma"),
-
-      @SerializedName("mc")
-      MC("mc"),
-
-      @SerializedName("md")
-      MD("md"),
-
-      @SerializedName("me")
-      ME("me"),
-
-      @SerializedName("mf")
-      MF("mf"),
-
-      @SerializedName("mg")
-      MG("mg"),
-
-      @SerializedName("mh")
-      MH("mh"),
-
-      @SerializedName("mk")
-      MK("mk"),
-
-      @SerializedName("ml")
-      ML("ml"),
-
-      @SerializedName("mm")
-      MM("mm"),
-
-      @SerializedName("mn")
-      MN("mn"),
-
-      @SerializedName("mo")
-      MO("mo"),
-
-      @SerializedName("mp")
-      MP("mp"),
-
-      @SerializedName("mq")
-      MQ("mq"),
-
-      @SerializedName("mr")
-      MR("mr"),
-
-      @SerializedName("ms")
-      MS("ms"),
-
-      @SerializedName("mt")
-      MT("mt"),
-
-      @SerializedName("mu")
-      MU("mu"),
-
-      @SerializedName("mv")
-      MV("mv"),
-
-      @SerializedName("mw")
-      MW("mw"),
-
-      @SerializedName("mx")
-      MX("mx"),
-
-      @SerializedName("my")
-      MY("my"),
-
-      @SerializedName("mz")
-      MZ("mz"),
-
-      @SerializedName("na")
-      NA("na"),
-
-      @SerializedName("nc")
-      NC("nc"),
-
-      @SerializedName("ne")
-      NE("ne"),
-
-      @SerializedName("nf")
-      NF("nf"),
-
-      @SerializedName("ng")
-      NG("ng"),
-
-      @SerializedName("ni")
-      NI("ni"),
-
-      @SerializedName("nl")
-      NL("nl"),
-
-      @SerializedName("no")
-      NO("no"),
-
-      @SerializedName("np")
-      NP("np"),
-
-      @SerializedName("nr")
-      NR("nr"),
-
-      @SerializedName("nu")
-      NU("nu"),
-
-      @SerializedName("nz")
-      NZ("nz"),
-
-      @SerializedName("om")
-      OM("om"),
-
-      @SerializedName("pa")
-      PA("pa"),
-
-      @SerializedName("pe")
-      PE("pe"),
-
-      @SerializedName("pf")
-      PF("pf"),
-
-      @SerializedName("pg")
-      PG("pg"),
-
-      @SerializedName("ph")
-      PH("ph"),
-
-      @SerializedName("pk")
-      PK("pk"),
-
-      @SerializedName("pl")
-      PL("pl"),
-
-      @SerializedName("pm")
-      PM("pm"),
-
-      @SerializedName("pn")
-      PN("pn"),
-
-      @SerializedName("pr")
-      PR("pr"),
-
-      @SerializedName("ps")
-      PS("ps"),
-
-      @SerializedName("pt")
-      PT("pt"),
-
-      @SerializedName("pw")
-      PW("pw"),
-
-      @SerializedName("py")
-      PY("py"),
-
-      @SerializedName("qa")
-      QA("qa"),
-
-      @SerializedName("qz")
-      QZ("qz"),
-
-      @SerializedName("re")
-      RE("re"),
-
-      @SerializedName("ro")
-      RO("ro"),
-
-      @SerializedName("rs")
-      RS("rs"),
-
-      @SerializedName("ru")
-      RU("ru"),
-
-      @SerializedName("rw")
-      RW("rw"),
-
-      @SerializedName("sa")
-      SA("sa"),
-
-      @SerializedName("sb")
-      SB("sb"),
-
-      @SerializedName("sc")
-      SC("sc"),
-
-      @SerializedName("sd")
-      SD("sd"),
-
-      @SerializedName("se")
-      SE("se"),
-
-      @SerializedName("sg")
-      SG("sg"),
-
-      @SerializedName("sh")
-      SH("sh"),
-
-      @SerializedName("si")
-      SI("si"),
-
-      @SerializedName("sj")
-      SJ("sj"),
-
-      @SerializedName("sk")
-      SK("sk"),
-
-      @SerializedName("sl")
-      SL("sl"),
-
-      @SerializedName("sm")
-      SM("sm"),
-
-      @SerializedName("sn")
-      SN("sn"),
-
-      @SerializedName("so")
-      SO("so"),
-
-      @SerializedName("sr")
-      SR("sr"),
-
-      @SerializedName("ss")
-      SS("ss"),
-
-      @SerializedName("st")
-      ST("st"),
-
-      @SerializedName("sv")
-      SV("sv"),
-
-      @SerializedName("sx")
-      SX("sx"),
-
-      @SerializedName("sy")
-      SY("sy"),
-
-      @SerializedName("sz")
-      SZ("sz"),
-
-      @SerializedName("tc")
-      TC("tc"),
-
-      @SerializedName("td")
-      TD("td"),
-
-      @SerializedName("tf")
-      TF("tf"),
-
-      @SerializedName("tg")
-      TG("tg"),
-
-      @SerializedName("th")
-      TH("th"),
-
-      @SerializedName("tj")
-      TJ("tj"),
-
-      @SerializedName("tk")
-      TK("tk"),
-
-      @SerializedName("tl")
-      TL("tl"),
-
-      @SerializedName("tm")
-      TM("tm"),
-
-      @SerializedName("tn")
-      TN("tn"),
-
-      @SerializedName("to")
-      TO("to"),
-
-      @SerializedName("tr")
-      TR("tr"),
-
-      @SerializedName("tt")
-      TT("tt"),
-
-      @SerializedName("tv")
-      TV("tv"),
-
-      @SerializedName("tw")
-      TW("tw"),
-
-      @SerializedName("tz")
-      TZ("tz"),
-
-      @SerializedName("ua")
-      UA("ua"),
-
-      @SerializedName("ug")
-      UG("ug"),
-
-      @SerializedName("um")
-      UM("um"),
-
-      @SerializedName("us")
-      US("us"),
-
-      @SerializedName("uy")
-      UY("uy"),
-
-      @SerializedName("uz")
-      UZ("uz"),
-
-      @SerializedName("va")
-      VA("va"),
-
-      @SerializedName("vc")
-      VC("vc"),
-
-      @SerializedName("ve")
-      VE("ve"),
-
-      @SerializedName("vg")
-      VG("vg"),
-
-      @SerializedName("vi")
-      VI("vi"),
-
-      @SerializedName("vn")
-      VN("vn"),
-
-      @SerializedName("vu")
-      VU("vu"),
-
-      @SerializedName("wf")
-      WF("wf"),
-
-      @SerializedName("ws")
-      WS("ws"),
-
-      @SerializedName("xx")
-      XX("xx"),
-
-      @SerializedName("ye")
-      YE("ye"),
-
-      @SerializedName("yt")
-      YT("yt"),
-
-      @SerializedName("za")
-      ZA("za"),
-
-      @SerializedName("zm")
-      ZM("zm"),
-
-      @SerializedName("zw")
-      ZW("zw");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Country(String value) {
-        this.value = value;
       }
     }
 

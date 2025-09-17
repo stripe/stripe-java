@@ -3,6 +3,7 @@ package com.stripe.service.v2.billing.pricingplans;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.DeletedObject;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.billing.PricingPlanComponent;
 import com.stripe.net.ApiRequest;
@@ -74,11 +75,11 @@ public final class ComponentService extends ApiService {
     return this.request(request, PricingPlanComponent.class);
   }
   /** Remove a Pricing Plan Component from the latest version of a Pricing Plan. */
-  public PricingPlanComponent delete(String pricingPlanId, String id) throws StripeException {
+  public DeletedObject delete(String pricingPlanId, String id) throws StripeException {
     return delete(pricingPlanId, id, (RequestOptions) null);
   }
   /** Remove a Pricing Plan Component from the latest version of a Pricing Plan. */
-  public PricingPlanComponent delete(String pricingPlanId, String id, RequestOptions options)
+  public DeletedObject delete(String pricingPlanId, String id, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -86,7 +87,7 @@ public final class ComponentService extends ApiService {
             ApiResource.urlEncodeId(pricingPlanId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
-    return this.request(request, PricingPlanComponent.class);
+    return this.request(request, DeletedObject.class);
   }
   /** Retrieve a Pricing Plan Component object. */
   public PricingPlanComponent retrieve(String pricingPlanId, String id) throws StripeException {

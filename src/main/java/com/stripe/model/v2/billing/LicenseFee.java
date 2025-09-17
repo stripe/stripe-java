@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +48,10 @@ public class LicenseFee extends StripeObject implements HasId {
   @SerializedName("latest_version")
   String latestVersion;
 
-  /** The Licensed Item that this License Fee binds to. */
+  /**
+   * A Licensed Item represents a billable item whose pricing is based on license fees. You can use
+   * license fees to specify the pricing and create subscriptions to these items.
+   */
   @SerializedName("licensed_item")
   LicensedItem licensedItem;
 
@@ -102,7 +106,7 @@ public class LicenseFee extends StripeObject implements HasId {
    * service_interval} to {@code "month"} in order to specify quarterly service.
    */
   @SerializedName("service_interval_count")
-  Integer serviceIntervalCount;
+  Long serviceIntervalCount;
 
   /**
    * The Stripe Tax tax behavior - whether the license fee is inclusive or exclusive of tax.
@@ -167,7 +171,7 @@ public class LicenseFee extends StripeObject implements HasId {
      * up_to_decimal} and {@code up_to_inf} may be set.
      */
     @SerializedName("up_to_decimal")
-    String upToDecimal;
+    BigDecimal upToDecimal;
 
     /**
      * No upper bound to this tier. Only one of {@code up_to_decimal} and {@code up_to_inf} may be
@@ -178,8 +182,8 @@ public class LicenseFee extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about TransformQuantity, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * Apply a transformation to the reported usage or set quantity before computing the amount
+   * billed.
    */
   @Getter
   @Setter

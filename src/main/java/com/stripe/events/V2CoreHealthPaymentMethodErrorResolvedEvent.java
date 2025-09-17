@@ -41,7 +41,7 @@ public final class V2CoreHealthPaymentMethodErrorResolvedEvent extends Event {
       String errorCode;
       /** The number of impacted requests. */
       @SerializedName("impacted_requests")
-      Integer impactedRequests;
+      Long impactedRequests;
       /**
        * The type of the payment method.
        *

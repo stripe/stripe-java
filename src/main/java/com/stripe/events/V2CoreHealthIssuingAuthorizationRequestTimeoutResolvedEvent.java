@@ -42,13 +42,13 @@ public final class V2CoreHealthIssuingAuthorizationRequestTimeoutResolvedEvent e
       Amount approvedAmount;
       /** The number of approved requests which are impacted. */
       @SerializedName("approved_impacted_requests")
-      Integer approvedImpactedRequests;
+      Long approvedImpactedRequests;
       /** Estimated aggregated amount for the declined requests. */
       @SerializedName("declined_amount")
       Amount declinedAmount;
       /** The number of declined requests which are impacted. */
       @SerializedName("declined_impacted_requests")
-      Integer declinedImpactedRequests;
+      Long declinedImpactedRequests;
     }
   }
 }

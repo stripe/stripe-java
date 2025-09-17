@@ -75,7 +75,7 @@ public final class EventDataClassLookup {
 
     classLookup.put("v2.core.account", com.stripe.model.v2.core.Account.class);
     classLookup.put("v2.core.account_link", com.stripe.model.v2.core.AccountLink.class);
-    classLookup.put("v2.core.account_person", com.stripe.model.v2.core.Person.class);
+    classLookup.put("v2.core.account_person", com.stripe.model.v2.core.AccountPerson.class);
     classLookup.put("v2.core.claimable_sandbox", com.stripe.model.v2.core.ClaimableSandbox.class);
 
     classLookup.put(
@@ -127,9 +127,6 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.payments.off_session_payment", com.stripe.model.v2.payments.OffSessionPayment.class);
 
-    classLookup.put("v2.reporting.report", com.stripe.model.v2.reporting.Report.class);
-    classLookup.put("v2.reporting.report_run", com.stripe.model.v2.reporting.ReportRun.class);
-
     classLookup.put("v2.tax.automatic_rule", com.stripe.model.v2.tax.AutomaticRule.class);
 
     eventClassLookup.put(
@@ -143,6 +140,8 @@ public final class EventDataClassLookup {
         "v2.billing.cadence.canceled", com.stripe.events.V2BillingCadenceCanceledEvent.class);
     eventClassLookup.put(
         "v2.billing.cadence.created", com.stripe.events.V2BillingCadenceCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.billing.cadence.errored", com.stripe.events.V2BillingCadenceErroredEvent.class);
     eventClassLookup.put(
         "v2.billing.license_fee.created", com.stripe.events.V2BillingLicenseFeeCreatedEvent.class);
     eventClassLookup.put(
@@ -293,18 +292,6 @@ public final class EventDataClassLookup {
         "v2.core.account_person.deleted", com.stripe.events.V2CoreAccountPersonDeletedEvent.class);
     eventClassLookup.put(
         "v2.core.account_person.updated", com.stripe.events.V2CoreAccountPersonUpdatedEvent.class);
-    eventClassLookup.put(
-        "v2.core.claimable_sandbox.claimed",
-        com.stripe.events.V2CoreClaimableSandboxClaimedEvent.class);
-    eventClassLookup.put(
-        "v2.core.claimable_sandbox.expired",
-        com.stripe.events.V2CoreClaimableSandboxExpiredEvent.class);
-    eventClassLookup.put(
-        "v2.core.claimable_sandbox.expiring",
-        com.stripe.events.V2CoreClaimableSandboxExpiringEvent.class);
-    eventClassLookup.put(
-        "v2.core.claimable_sandbox.sandbox_details_owner_account_updated",
-        com.stripe.events.V2CoreClaimableSandboxSandboxDetailsOwnerAccountUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
     eventClassLookup.put(
@@ -477,16 +464,5 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEvent.class);
-    eventClassLookup.put(
-        "v2.reporting.report_run.created",
-        com.stripe.events.V2ReportingReportRunCreatedEvent.class);
-    eventClassLookup.put(
-        "v2.reporting.report_run.failed", com.stripe.events.V2ReportingReportRunFailedEvent.class);
-    eventClassLookup.put(
-        "v2.reporting.report_run.succeeded",
-        com.stripe.events.V2ReportingReportRunSucceededEvent.class);
-    eventClassLookup.put(
-        "v2.reporting.report_run.updated",
-        com.stripe.events.V2ReportingReportRunUpdatedEvent.class);
   }
 }

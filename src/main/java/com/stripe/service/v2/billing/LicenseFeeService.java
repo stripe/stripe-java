@@ -71,14 +71,6 @@ public final class LicenseFeeService extends ApiService {
     return update(id, params, (RequestOptions) null);
   }
   /** Update a License Fee object. */
-  public LicenseFee update(String id, RequestOptions options) throws StripeException {
-    return update(id, (LicenseFeeUpdateParams) null, options);
-  }
-  /** Update a License Fee object. */
-  public LicenseFee update(String id) throws StripeException {
-    return update(id, (LicenseFeeUpdateParams) null, (RequestOptions) null);
-  }
-  /** Update a License Fee object. */
   public LicenseFee update(String id, LicenseFeeUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/billing/license_fees/%s", ApiResource.urlEncodeId(id));

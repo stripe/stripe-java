@@ -28,17 +28,14 @@ public class LicenseFeeListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /** <strong>Required.</strong> Filter by lookup keys. You can specify up to 10 lookup keys. */
   @SerializedName("lookup_keys")
   List<String> lookupKeys;
 
   private LicenseFeeListParams(
-      Map<String, Object> extraParams,
-      String licensedItem,
-      Integer limit,
-      List<String> lookupKeys) {
+      Map<String, Object> extraParams, String licensedItem, Long limit, List<String> lookupKeys) {
     this.extraParams = extraParams;
     this.licensedItem = licensedItem;
     this.limit = limit;
@@ -54,7 +51,7 @@ public class LicenseFeeListParams extends ApiRequestParams {
 
     private String licensedItem;
 
-    private Integer limit;
+    private Long limit;
 
     private List<String> lookupKeys;
 
@@ -97,7 +94,7 @@ public class LicenseFeeListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

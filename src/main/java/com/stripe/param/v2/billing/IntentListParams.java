@@ -22,9 +22,9 @@ public class IntentListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 10. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
-  private IntentListParams(Map<String, Object> extraParams, Integer limit) {
+  private IntentListParams(Map<String, Object> extraParams, Long limit) {
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -36,7 +36,7 @@ public class IntentListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public IntentListParams build() {
@@ -70,7 +70,7 @@ public class IntentListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 10. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

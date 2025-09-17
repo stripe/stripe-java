@@ -11,6 +11,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Metered Item represents a billable item whose pricing is based on usage, measured by a meter.
+ * You can use rate cards to specify the pricing and create subscriptions to these items.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -103,10 +107,7 @@ public class MeteredItem extends StripeObject implements HasId {
     String value;
   }
 
-  /**
-   * For more details about TaxDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Stripe Tax details. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

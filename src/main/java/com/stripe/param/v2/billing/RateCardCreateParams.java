@@ -64,7 +64,7 @@ public class RateCardCreateParams extends ApiRequestParams {
    * service.
    */
   @SerializedName("service_interval_count")
-  Integer serviceIntervalCount;
+  Long serviceIntervalCount;
 
   /**
    * <strong>Required.</strong> The Stripe Tax tax behavior - whether the rates are inclusive or
@@ -80,7 +80,7 @@ public class RateCardCreateParams extends ApiRequestParams {
       String lookupKey,
       Map<String, String> metadata,
       ServiceInterval serviceInterval,
-      Integer serviceIntervalCount,
+      Long serviceIntervalCount,
       TaxBehavior taxBehavior) {
     this.currency = currency;
     this.displayName = displayName;
@@ -109,7 +109,7 @@ public class RateCardCreateParams extends ApiRequestParams {
 
     private ServiceInterval serviceInterval;
 
-    private Integer serviceIntervalCount;
+    private Long serviceIntervalCount;
 
     private TaxBehavior taxBehavior;
 
@@ -221,7 +221,7 @@ public class RateCardCreateParams extends ApiRequestParams {
      * this to 3 and {@code service_interval} to {@code "month"} in order to specify quarterly
      * service.
      */
-    public Builder setServiceIntervalCount(Integer serviceIntervalCount) {
+    public Builder setServiceIntervalCount(Long serviceIntervalCount) {
       this.serviceIntervalCount = serviceIntervalCount;
       return this;
     }

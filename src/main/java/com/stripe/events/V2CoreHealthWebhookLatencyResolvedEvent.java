@@ -38,7 +38,7 @@ public final class V2CoreHealthWebhookLatencyResolvedEvent extends Event {
     public static final class Impact {
       /** The number of impacted requests. */
       @SerializedName("impacted_requests")
-      Integer impactedRequests;
+      Long impactedRequests;
     }
   }
 }
