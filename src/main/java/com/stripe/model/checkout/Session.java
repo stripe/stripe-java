@@ -94,6 +94,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("billing_address_collection")
   String billingAddressCollection;
 
+  @SerializedName("branding_settings")
+  BrandingSettings brandingSettings;
+
   /**
    * If set, Checkout displays a back button and customers will be directed to this URL if they
    * decide to cancel payment and return to your website.
@@ -1021,6 +1024,74 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         this.account = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
     }
+  }
+
+  /**
+   * For more details about BrandingSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BrandingSettings extends StripeObject {
+    /**
+     * A hex color value starting with {@code #} representing the background color for the Checkout
+     * Session.
+     */
+    @SerializedName("background_color")
+    String backgroundColor;
+
+    /**
+     * The border style for the Checkout Session. Must be one of {@code rounded}, {@code
+     * rectangular}, or {@code pill}.
+     */
+    @SerializedName("border_style")
+    String borderStyle;
+
+    /**
+     * A hex color value starting with {@code #} representing the button color for the Checkout
+     * Session.
+     */
+    @SerializedName("button_color")
+    String buttonColor;
+
+    /** The display name shown on the Checkout Session. */
+    @SerializedName("display_name")
+    String displayName;
+
+    /**
+     * The font family for the Checkout Session. Must be one of the <a
+     * href="https://docs.stripe.com/payments/checkout/customization/appearance?payment-ui=stripe-hosted#font-compatibility">supported
+     * font families</a>.
+     */
+    @SerializedName("font_family")
+    String fontFamily;
+
+    /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    @SerializedName("icon")
+    Icon icon;
+
+    /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    @SerializedName("logo")
+    Logo logo;
+
+    /**
+     * For more details about Icon, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Icon extends StripeObject {}
+
+    /**
+     * For more details about Logo, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Logo extends StripeObject {}
   }
 
   /**
@@ -4324,6 +4395,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(adaptivePricing, responseGetter);
     trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
+    trySetResponseGetter(brandingSettings, responseGetter);
     trySetResponseGetter(collectedInformation, responseGetter);
     trySetResponseGetter(consent, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);

@@ -45,6 +45,13 @@ public class SessionCreateParams extends ApiRequestParams {
   BillingAddressCollection billingAddressCollection;
 
   /**
+   * The branding settings for the Checkout Session. This parameter is not allowed if ui_mode is
+   * {@code custom}.
+   */
+  @SerializedName("branding_settings")
+  BrandingSettings brandingSettings;
+
+  /**
    * If set, Checkout displays a back button and customers will be directed to this URL if they
    * decide to cancel payment and return to your website. This parameter is not allowed if ui_mode
    * is {@code embedded} or {@code custom}.
@@ -421,6 +428,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Boolean allowPromotionCodes,
       AutomaticTax automaticTax,
       BillingAddressCollection billingAddressCollection,
+      BrandingSettings brandingSettings,
       String cancelUrl,
       String clientReferenceId,
       ConsentCollection consentCollection,
@@ -470,6 +478,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.allowPromotionCodes = allowPromotionCodes;
     this.automaticTax = automaticTax;
     this.billingAddressCollection = billingAddressCollection;
+    this.brandingSettings = brandingSettings;
     this.cancelUrl = cancelUrl;
     this.clientReferenceId = clientReferenceId;
     this.consentCollection = consentCollection;
@@ -530,6 +539,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private AutomaticTax automaticTax;
 
     private BillingAddressCollection billingAddressCollection;
+
+    private BrandingSettings brandingSettings;
 
     private String cancelUrl;
 
@@ -627,6 +638,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.allowPromotionCodes,
           this.automaticTax,
           this.billingAddressCollection,
+          this.brandingSettings,
           this.cancelUrl,
           this.clientReferenceId,
           this.consentCollection,
@@ -710,6 +722,15 @@ public class SessionCreateParams extends ApiRequestParams {
     public Builder setBillingAddressCollection(
         SessionCreateParams.BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
+      return this;
+    }
+
+    /**
+     * The branding settings for the Checkout Session. This parameter is not allowed if ui_mode is
+     * {@code custom}.
+     */
+    public Builder setBrandingSettings(SessionCreateParams.BrandingSettings brandingSettings) {
+      this.brandingSettings = brandingSettings;
       return this;
     }
 
@@ -1771,6 +1792,586 @@ public class SessionCreateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BrandingSettings {
+    /**
+     * A hex color value starting with {@code #} representing the background color for the Checkout
+     * Session.
+     */
+    @SerializedName("background_color")
+    Object backgroundColor;
+
+    /** The border style for the Checkout Session. */
+    @SerializedName("border_style")
+    ApiRequestParams.EnumParam borderStyle;
+
+    /**
+     * A hex color value starting with {@code #} representing the button color for the Checkout
+     * Session.
+     */
+    @SerializedName("button_color")
+    Object buttonColor;
+
+    /** A string to override the business name shown on the Checkout Session. */
+    @SerializedName("display_name")
+    String displayName;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * The font family for the Checkout Session corresponding to one of the <a
+     * href="https://docs.stripe.com/payments/checkout/customization/appearance?payment-ui=stripe-hosted#font-compatibility">supported
+     * font families</a>.
+     */
+    @SerializedName("font_family")
+    ApiRequestParams.EnumParam fontFamily;
+
+    /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    @SerializedName("icon")
+    Icon icon;
+
+    /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    @SerializedName("logo")
+    Logo logo;
+
+    private BrandingSettings(
+        Object backgroundColor,
+        ApiRequestParams.EnumParam borderStyle,
+        Object buttonColor,
+        String displayName,
+        Map<String, Object> extraParams,
+        ApiRequestParams.EnumParam fontFamily,
+        Icon icon,
+        Logo logo) {
+      this.backgroundColor = backgroundColor;
+      this.borderStyle = borderStyle;
+      this.buttonColor = buttonColor;
+      this.displayName = displayName;
+      this.extraParams = extraParams;
+      this.fontFamily = fontFamily;
+      this.icon = icon;
+      this.logo = logo;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object backgroundColor;
+
+      private ApiRequestParams.EnumParam borderStyle;
+
+      private Object buttonColor;
+
+      private String displayName;
+
+      private Map<String, Object> extraParams;
+
+      private ApiRequestParams.EnumParam fontFamily;
+
+      private Icon icon;
+
+      private Logo logo;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.BrandingSettings build() {
+        return new SessionCreateParams.BrandingSettings(
+            this.backgroundColor,
+            this.borderStyle,
+            this.buttonColor,
+            this.displayName,
+            this.extraParams,
+            this.fontFamily,
+            this.icon,
+            this.logo);
+      }
+
+      /**
+       * A hex color value starting with {@code #} representing the background color for the
+       * Checkout Session.
+       */
+      public Builder setBackgroundColor(String backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        return this;
+      }
+
+      /**
+       * A hex color value starting with {@code #} representing the background color for the
+       * Checkout Session.
+       */
+      public Builder setBackgroundColor(EmptyParam backgroundColor) {
+        this.backgroundColor = backgroundColor;
+        return this;
+      }
+
+      /** The border style for the Checkout Session. */
+      public Builder setBorderStyle(SessionCreateParams.BrandingSettings.BorderStyle borderStyle) {
+        this.borderStyle = borderStyle;
+        return this;
+      }
+
+      /** The border style for the Checkout Session. */
+      public Builder setBorderStyle(EmptyParam borderStyle) {
+        this.borderStyle = borderStyle;
+        return this;
+      }
+
+      /**
+       * A hex color value starting with {@code #} representing the button color for the Checkout
+       * Session.
+       */
+      public Builder setButtonColor(String buttonColor) {
+        this.buttonColor = buttonColor;
+        return this;
+      }
+
+      /**
+       * A hex color value starting with {@code #} representing the button color for the Checkout
+       * Session.
+       */
+      public Builder setButtonColor(EmptyParam buttonColor) {
+        this.buttonColor = buttonColor;
+        return this;
+      }
+
+      /** A string to override the business name shown on the Checkout Session. */
+      public Builder setDisplayName(String displayName) {
+        this.displayName = displayName;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.BrandingSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.BrandingSettings#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The font family for the Checkout Session corresponding to one of the <a
+       * href="https://docs.stripe.com/payments/checkout/customization/appearance?payment-ui=stripe-hosted#font-compatibility">supported
+       * font families</a>.
+       */
+      public Builder setFontFamily(SessionCreateParams.BrandingSettings.FontFamily fontFamily) {
+        this.fontFamily = fontFamily;
+        return this;
+      }
+
+      /**
+       * The font family for the Checkout Session corresponding to one of the <a
+       * href="https://docs.stripe.com/payments/checkout/customization/appearance?payment-ui=stripe-hosted#font-compatibility">supported
+       * font families</a>.
+       */
+      public Builder setFontFamily(EmptyParam fontFamily) {
+        this.fontFamily = fontFamily;
+        return this;
+      }
+
+      /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+      public Builder setIcon(SessionCreateParams.BrandingSettings.Icon icon) {
+        this.icon = icon;
+        return this;
+      }
+
+      /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+      public Builder setLogo(SessionCreateParams.BrandingSettings.Logo logo) {
+        this.logo = logo;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Icon {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+       * icon. Purpose must be {@code business_icon}. Required if {@code type} is {@code file} and
+       * disallowed otherwise.
+       */
+      @SerializedName("file")
+      String file;
+
+      /**
+       * <strong>Required.</strong> The type of image for the icon. Must be one of {@code file} or
+       * {@code url}.
+       */
+      @SerializedName("type")
+      Type type;
+
+      /** The URL of the image. Required if {@code type} is {@code url} and disallowed otherwise. */
+      @SerializedName("url")
+      String url;
+
+      private Icon(Map<String, Object> extraParams, String file, Type type, String url) {
+        this.extraParams = extraParams;
+        this.file = file;
+        this.type = type;
+        this.url = url;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String file;
+
+        private Type type;
+
+        private String url;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.BrandingSettings.Icon build() {
+          return new SessionCreateParams.BrandingSettings.Icon(
+              this.extraParams, this.file, this.type, this.url);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.BrandingSettings.Icon#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.BrandingSettings.Icon#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+         * icon. Purpose must be {@code business_icon}. Required if {@code type} is {@code file} and
+         * disallowed otherwise.
+         */
+        public Builder setFile(String file) {
+          this.file = file;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The type of image for the icon. Must be one of {@code file} or
+         * {@code url}.
+         */
+        public Builder setType(SessionCreateParams.BrandingSettings.Icon.Type type) {
+          this.type = type;
+          return this;
+        }
+
+        /**
+         * The URL of the image. Required if {@code type} is {@code url} and disallowed otherwise.
+         */
+        public Builder setUrl(String url) {
+          this.url = url;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("file")
+        FILE("file"),
+
+        @SerializedName("url")
+        URL("url");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Logo {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+       * logo. Purpose must be {@code business_logo}. Required if {@code type} is {@code file} and
+       * disallowed otherwise.
+       */
+      @SerializedName("file")
+      String file;
+
+      /**
+       * <strong>Required.</strong> The type of image for the logo. Must be one of {@code file} or
+       * {@code url}.
+       */
+      @SerializedName("type")
+      Type type;
+
+      /** The URL of the image. Required if {@code type} is {@code url} and disallowed otherwise. */
+      @SerializedName("url")
+      String url;
+
+      private Logo(Map<String, Object> extraParams, String file, Type type, String url) {
+        this.extraParams = extraParams;
+        this.file = file;
+        this.type = type;
+        this.url = url;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String file;
+
+        private Type type;
+
+        private String url;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.BrandingSettings.Logo build() {
+          return new SessionCreateParams.BrandingSettings.Logo(
+              this.extraParams, this.file, this.type, this.url);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.BrandingSettings.Logo#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.BrandingSettings.Logo#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+         * logo. Purpose must be {@code business_logo}. Required if {@code type} is {@code file} and
+         * disallowed otherwise.
+         */
+        public Builder setFile(String file) {
+          this.file = file;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The type of image for the logo. Must be one of {@code file} or
+         * {@code url}.
+         */
+        public Builder setType(SessionCreateParams.BrandingSettings.Logo.Type type) {
+          this.type = type;
+          return this;
+        }
+
+        /**
+         * The URL of the image. Required if {@code type} is {@code url} and disallowed otherwise.
+         */
+        public Builder setUrl(String url) {
+          this.url = url;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("file")
+        FILE("file"),
+
+        @SerializedName("url")
+        URL("url");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum BorderStyle implements ApiRequestParams.EnumParam {
+      @SerializedName("pill")
+      PILL("pill"),
+
+      @SerializedName("rectangular")
+      RECTANGULAR("rectangular"),
+
+      @SerializedName("rounded")
+      ROUNDED("rounded");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      BorderStyle(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum FontFamily implements ApiRequestParams.EnumParam {
+      @SerializedName("be_vietnam_pro")
+      BE_VIETNAM_PRO("be_vietnam_pro"),
+
+      @SerializedName("bitter")
+      BITTER("bitter"),
+
+      @SerializedName("chakra_petch")
+      CHAKRA_PETCH("chakra_petch"),
+
+      @SerializedName("default")
+      DEFAULT("default"),
+
+      @SerializedName("hahmlet")
+      HAHMLET("hahmlet"),
+
+      @SerializedName("inconsolata")
+      INCONSOLATA("inconsolata"),
+
+      @SerializedName("inter")
+      INTER("inter"),
+
+      @SerializedName("lato")
+      LATO("lato"),
+
+      @SerializedName("lora")
+      LORA("lora"),
+
+      @SerializedName("m_plus_1_code")
+      M_PLUS_1_CODE("m_plus_1_code"),
+
+      @SerializedName("montserrat")
+      MONTSERRAT("montserrat"),
+
+      @SerializedName("noto_sans")
+      NOTO_SANS("noto_sans"),
+
+      @SerializedName("noto_sans_jp")
+      NOTO_SANS_JP("noto_sans_jp"),
+
+      @SerializedName("noto_serif")
+      NOTO_SERIF("noto_serif"),
+
+      @SerializedName("nunito")
+      NUNITO("nunito"),
+
+      @SerializedName("open_sans")
+      OPEN_SANS("open_sans"),
+
+      @SerializedName("pridi")
+      PRIDI("pridi"),
+
+      @SerializedName("pt_sans")
+      PT_SANS("pt_sans"),
+
+      @SerializedName("pt_serif")
+      PT_SERIF("pt_serif"),
+
+      @SerializedName("raleway")
+      RALEWAY("raleway"),
+
+      @SerializedName("roboto")
+      ROBOTO("roboto"),
+
+      @SerializedName("roboto_slab")
+      ROBOTO_SLAB("roboto_slab"),
+
+      @SerializedName("source_sans_pro")
+      SOURCE_SANS_PRO("source_sans_pro"),
+
+      @SerializedName("titillium_web")
+      TITILLIUM_WEB("titillium_web"),
+
+      @SerializedName("ubuntu_mono")
+      UBUNTU_MONO("ubuntu_mono"),
+
+      @SerializedName("zen_maru_gothic")
+      ZEN_MARU_GOTHIC("zen_maru_gothic");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      FontFamily(String value) {
+        this.value = value;
       }
     }
   }
