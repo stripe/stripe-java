@@ -275,6 +275,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("mode")
   String mode;
 
+  @SerializedName("name_collection")
+  NameCollection nameCollection;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -1036,6 +1039,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("email")
     String email;
 
+    /** Customer’s individual name for this Checkout Session. */
+    @SerializedName("individual_name")
+    String individualName;
+
     /** Customer’s phone number for this Checkout Session. */
     @SerializedName("phone")
     String phone;
@@ -1462,6 +1469,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("address")
     Address address;
 
+    /** The customer's business name after a completed Checkout Session. */
+    @SerializedName("business_name")
+    String businessName;
+
     /**
      * The email associated with the Customer, if one exists, on the Checkout Session after a
      * completed Checkout Session or at time of session expiry. Otherwise, if the customer has
@@ -1470,6 +1481,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("email")
     String email;
+
+    /** The customer's individual name after a completed Checkout Session. */
+    @SerializedName("individual_name")
+    String individualName;
 
     /**
      * The customer's name after a completed Checkout Session. Note: This property is populated only
@@ -1770,6 +1785,61 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("template")
         String template;
       }
+    }
+  }
+
+  /**
+   * For more details about NameCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NameCollection extends StripeObject {
+    @SerializedName("business")
+    Business business;
+
+    @SerializedName("individual")
+    Individual individual;
+
+    /**
+     * For more details about Business, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Business extends StripeObject {
+      /** Indicates whether business name collection is enabled for the session. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Whether the customer is required to complete the field before completing the Checkout
+       * Session. Defaults to {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
+    }
+
+    /**
+     * For more details about Individual, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Individual extends StripeObject {
+      /** Indicates whether individual name collection is enabled for the session. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Whether the customer is required to complete the field before completing the Checkout
+       * Session. Defaults to {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
     }
   }
 
@@ -4264,6 +4334,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentLink, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
