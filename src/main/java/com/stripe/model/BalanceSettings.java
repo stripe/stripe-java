@@ -242,6 +242,13 @@ public class BalanceSettings extends ApiResource {
       /** The number of days charge funds are held before becoming available. */
       @SerializedName("delay_days")
       Long delayDays;
+
+      /**
+       * The number of days charge funds are held before becoming available. If present, overrides
+       * the default, or minimum available, for the account.
+       */
+      @SerializedName("delay_days_override")
+      Long delayDaysOverride;
     }
   }
 
