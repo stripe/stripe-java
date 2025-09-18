@@ -78,6 +78,15 @@ public class Dispute extends ApiResource
   String id;
 
   /**
+   * Intended submission method for the dispute.
+   *
+   * <p>One of {@code manual}, {@code prefer_manual}, {@code prefer_smart_disputes}, or {@code
+   * smart_disputes}.
+   */
+  @SerializedName("intended_submission_method")
+  String intendedSubmissionMethod;
+
+  /**
    * If true, it's still possible to refund the disputed payment. After the payment has been fully
    * refunded, no further funds are withdrawn from your Stripe account as a result of this dispute.
    */
@@ -881,11 +890,11 @@ public class Dispute extends ApiResource
             @SerializedName("country")
             String country;
 
-            /** Address line 1 (e.g., street, PO Box, or company name). */
+            /** Address line 1, such as the street, PO Box, or company name. */
             @SerializedName("line1")
             String line1;
 
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            /** Address line 2, such as the apartment, suite, unit, or building. */
             @SerializedName("line2")
             String line2;
 
@@ -969,11 +978,11 @@ public class Dispute extends ApiResource
             @SerializedName("country")
             String country;
 
-            /** Address line 1 (e.g., street, PO Box, or company name). */
+            /** Address line 1, such as the street, PO Box, or company name. */
             @SerializedName("line1")
             String line1;
 
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            /** Address line 2, such as the apartment, suite, unit, or building. */
             @SerializedName("line2")
             String line2;
 

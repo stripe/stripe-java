@@ -635,6 +635,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BillingMode extends StripeObject {
+    /** Configure behavior for flexible billing mode. */
+    @SerializedName("flexible")
+    Flexible flexible;
+
     /**
      * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
      *
@@ -646,6 +650,22 @@ public class SubscriptionSchedule extends ApiResource
     /** Details on when the current billing_mode was adopted. */
     @SerializedName("updated_at")
     Long updatedAt;
+
+    /**
+     * For more details about Flexible, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Flexible extends StripeObject {
+      /**
+       * When true, proration line items will show accurate discount amounts and use gross amounts,
+       * making them consistent with non-proration line items.
+       */
+      @SerializedName("consistent_proration_discount_amounts")
+      Boolean consistentProrationDiscountAmounts;
+    }
   }
 
   /**

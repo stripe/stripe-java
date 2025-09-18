@@ -21,8 +21,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
    * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
    * (exclusive). Must be aligned with minute boundaries.
    */
-  @SerializedName("ends_at")
-  Long endsAt;
+  @SerializedName("end_time")
+  Long endTime;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -48,8 +48,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
    * <strong>Required.</strong> The timestamp from when to start aggregating meter events
    * (inclusive). Must be aligned with minute boundaries.
    */
-  @SerializedName("starts_at")
-  Long startsAt;
+  @SerializedName("start_time")
+  Long startTime;
 
   /** The timezone to use for the start and end times. Defaults to UTC if not specified. */
   @SerializedName("timezone")
@@ -64,19 +64,19 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
 
   private MeterUsageRetrieveParams(
       String customer,
-      Long endsAt,
+      Long endTime,
       List<String> expand,
       Map<String, Object> extraParams,
       List<MeterUsageRetrieveParams.Meter> meters,
-      Long startsAt,
+      Long startTime,
       Timezone timezone,
       ValueGroupingWindow valueGroupingWindow) {
     this.customer = customer;
-    this.endsAt = endsAt;
+    this.endTime = endTime;
     this.expand = expand;
     this.extraParams = extraParams;
     this.meters = meters;
-    this.startsAt = startsAt;
+    this.startTime = startTime;
     this.timezone = timezone;
     this.valueGroupingWindow = valueGroupingWindow;
   }
@@ -88,7 +88,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
   public static class Builder {
     private String customer;
 
-    private Long endsAt;
+    private Long endTime;
 
     private List<String> expand;
 
@@ -96,7 +96,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
 
     private List<MeterUsageRetrieveParams.Meter> meters;
 
-    private Long startsAt;
+    private Long startTime;
 
     private Timezone timezone;
 
@@ -106,11 +106,11 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
     public MeterUsageRetrieveParams build() {
       return new MeterUsageRetrieveParams(
           this.customer,
-          this.endsAt,
+          this.endTime,
           this.expand,
           this.extraParams,
           this.meters,
-          this.startsAt,
+          this.startTime,
           this.timezone,
           this.valueGroupingWindow);
     }
@@ -125,8 +125,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
      * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
      * (exclusive). Must be aligned with minute boundaries.
      */
-    public Builder setEndsAt(Long endsAt) {
-      this.endsAt = endsAt;
+    public Builder setEndTime(Long endTime) {
+      this.endTime = endTime;
       return this;
     }
 
@@ -212,8 +212,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
      * <strong>Required.</strong> The timestamp from when to start aggregating meter events
      * (inclusive). Must be aligned with minute boundaries.
      */
-    public Builder setStartsAt(Long startsAt) {
-      this.startsAt = startsAt;
+    public Builder setStartTime(Long startTime) {
+      this.startTime = startTime;
       return this;
     }
 
@@ -261,8 +261,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /** <strong>Required.</strong> Meter id to query usage for. */
-    @SerializedName("meter")
-    String meter;
+    @SerializedName("meter_id")
+    String meterId;
 
     /**
      * Key-value pairs used to filter usage events by high cardinality tenant dimension values. If
@@ -275,12 +275,12 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
         Map<String, String> dimensionFilters,
         List<String> dimensionGroupByKeys,
         Map<String, Object> extraParams,
-        String meter,
+        String meterId,
         Map<String, String> tenantFilters) {
       this.dimensionFilters = dimensionFilters;
       this.dimensionGroupByKeys = dimensionGroupByKeys;
       this.extraParams = extraParams;
-      this.meter = meter;
+      this.meterId = meterId;
       this.tenantFilters = tenantFilters;
     }
 
@@ -295,7 +295,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private String meter;
+      private String meterId;
 
       private Map<String, String> tenantFilters;
 
@@ -305,7 +305,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
             this.dimensionFilters,
             this.dimensionGroupByKeys,
             this.extraParams,
-            this.meter,
+            this.meterId,
             this.tenantFilters);
       }
 
@@ -388,8 +388,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
       }
 
       /** <strong>Required.</strong> Meter id to query usage for. */
-      public Builder setMeter(String meter) {
-        this.meter = meter;
+      public Builder setMeterId(String meterId) {
+        this.meterId = meterId;
         return this;
       }
 

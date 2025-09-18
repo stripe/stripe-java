@@ -165,6 +165,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("replacement_reason")
   String replacementReason;
 
+  /** Text separate from cardholder name, printed on the card. */
+  @SerializedName("second_line")
+  String secondLine;
+
   /** Where and how the card will be shipped. */
   @SerializedName("shipping")
   Shipping shipping;
