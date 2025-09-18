@@ -98,6 +98,9 @@ public class Discount extends StripeObject implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PromotionCode> promotionCode;
 
+  @SerializedName("source")
+  Source source;
+
   /** Date that the coupon was applied. */
   @SerializedName("start")
   Long start;
@@ -150,5 +153,41 @@ public class Discount extends StripeObject implements HasId {
   public void setPromotionCodeObject(PromotionCode expandableObject) {
     this.promotionCode =
         new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * For more details about Source, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Source extends StripeObject {
+    /** The coupon that was redeemed to create this discount. */
+    @SerializedName("coupon")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Coupon> coupon;
+
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code coupon} object. */
+    public String getCoupon() {
+      return (this.coupon != null) ? this.coupon.getId() : null;
+    }
+
+    public void setCoupon(String id) {
+      this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+    }
+
+    /** Get expanded {@code coupon}. */
+    public Coupon getCouponObject() {
+      return (this.coupon != null) ? this.coupon.getExpanded() : null;
+    }
+
+    public void setCouponObject(Coupon expandableObject) {
+      this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+    }
   }
 }
