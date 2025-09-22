@@ -1247,7 +1247,7 @@ public class Dispute extends ApiResource
   public static class SmartDisputes extends StripeObject {
     /** Evidence that could be provided to improve the SmartDisputes packet. */
     @SerializedName("recommended_evidence")
-    List<String> recommendedEvidence;
+    List<List<String>> recommendedEvidence;
 
     /**
      * Smart Disputes auto representment packet availability status.
