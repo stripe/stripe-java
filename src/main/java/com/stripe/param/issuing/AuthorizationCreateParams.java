@@ -2830,6 +2830,9 @@ public class AuthorizationCreateParams extends ApiRequestParams {
         @SerializedName("highest")
         HIGHEST("highest"),
 
+        @SerializedName("low")
+        LOW("low"),
+
         @SerializedName("normal")
         NORMAL("normal"),
 
@@ -2956,6 +2959,9 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
         @SerializedName("highest")
         HIGHEST("highest"),
+
+        @SerializedName("low")
+        LOW("low"),
 
         @SerializedName("normal")
         NORMAL("normal"),

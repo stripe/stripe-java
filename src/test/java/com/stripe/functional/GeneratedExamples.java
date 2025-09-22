@@ -12812,7 +12812,10 @@ class GeneratedExamples extends BaseStripeTest {
   @Test
   public void testPromotionCodesPost() throws StripeException {
     PromotionCodeCreateParams params =
-        PromotionCodeCreateParams.builder().setCoupon("Z4OV52SU").build();
+        PromotionCodeCreateParams.builder()
+            .setPromotion(
+                PromotionCodeCreateParams.Promotion.builder().setCoupon("Z4OV52SU").build())
+            .build();
 
     PromotionCode promotionCode = PromotionCode.create(params);
     assertNotNull(promotionCode);
@@ -12829,7 +12832,12 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.PromotionCodeCreateParams params =
-        com.stripe.param.PromotionCodeCreateParams.builder().setCoupon("Z4OV52SU").build();
+        com.stripe.param.PromotionCodeCreateParams.builder()
+            .setPromotion(
+                com.stripe.param.PromotionCodeCreateParams.Promotion.builder()
+                    .setCoupon("Z4OV52SU")
+                    .build())
+            .build();
 
     com.stripe.model.PromotionCode promotionCode = client.v1().promotionCodes().create(params);
     assertNotNull(promotionCode);
@@ -12846,7 +12854,12 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.PromotionCodeCreateParams params =
-        com.stripe.param.PromotionCodeCreateParams.builder().setCoupon("Z4OV52SU").build();
+        com.stripe.param.PromotionCodeCreateParams.builder()
+            .setPromotion(
+                com.stripe.param.PromotionCodeCreateParams.Promotion.builder()
+                    .setCoupon("Z4OV52SU")
+                    .build())
+            .build();
 
     com.stripe.model.PromotionCode promotionCode = client.promotionCodes().create(params);
     assertNotNull(promotionCode);

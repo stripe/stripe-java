@@ -489,14 +489,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Flexible {
       /**
-       * Set to {@code true} to display gross amounts, net amounts, and discount amounts
-       * consistently between prorations and non-proration items on invoices, line items, and
-       * invoice items. Once set to {@code true}, you can't change it back to {@code false}.
-       */
-      @SerializedName("consistent_proration_discount_amounts")
-      Boolean consistentProrationDiscountAmounts;
-
-      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -505,10 +497,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Flexible(
-          Boolean consistentProrationDiscountAmounts, Map<String, Object> extraParams) {
-        this.consistentProrationDiscountAmounts = consistentProrationDiscountAmounts;
+      /** Controls how invoices and invoice items display proration amounts and discount amounts. */
+      @SerializedName("proration_discounts")
+      ProrationDiscounts prorationDiscounts;
+
+      private Flexible(Map<String, Object> extraParams, ProrationDiscounts prorationDiscounts) {
         this.extraParams = extraParams;
+        this.prorationDiscounts = prorationDiscounts;
       }
 
       public static Builder builder() {
@@ -516,25 +511,14 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Boolean consistentProrationDiscountAmounts;
-
         private Map<String, Object> extraParams;
+
+        private ProrationDiscounts prorationDiscounts;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleCreateParams.BillingMode.Flexible build() {
           return new SubscriptionScheduleCreateParams.BillingMode.Flexible(
-              this.consistentProrationDiscountAmounts, this.extraParams);
-        }
-
-        /**
-         * Set to {@code true} to display gross amounts, net amounts, and discount amounts
-         * consistently between prorations and non-proration items on invoices, line items, and
-         * invoice items. Once set to {@code true}, you can't change it back to {@code false}.
-         */
-        public Builder setConsistentProrationDiscountAmounts(
-            Boolean consistentProrationDiscountAmounts) {
-          this.consistentProrationDiscountAmounts = consistentProrationDiscountAmounts;
-          return this;
+              this.extraParams, this.prorationDiscounts);
         }
 
         /**
@@ -563,6 +547,31 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+
+        /**
+         * Controls how invoices and invoice items display proration amounts and discount amounts.
+         */
+        public Builder setProrationDiscounts(
+            SubscriptionScheduleCreateParams.BillingMode.Flexible.ProrationDiscounts
+                prorationDiscounts) {
+          this.prorationDiscounts = prorationDiscounts;
+          return this;
+        }
+      }
+
+      public enum ProrationDiscounts implements ApiRequestParams.EnumParam {
+        @SerializedName("included")
+        INCLUDED("included"),
+
+        @SerializedName("itemized")
+        ITEMIZED("itemized");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        ProrationDiscounts(String value) {
+          this.value = value;
         }
       }
     }

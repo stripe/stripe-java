@@ -2221,11 +2221,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
       @EqualsAndHashCode(callSuper = false)
       public static class Flexible extends StripeObject {
         /**
-         * When true, proration line items will show accurate discount amounts and use gross
-         * amounts, making them consistent with non-proration line items.
+         * Controls how invoices and invoice items display proration amounts and discount amounts.
+         *
+         * <p>One of {@code included}, or {@code itemized}.
          */
-        @SerializedName("consistent_proration_discount_amounts")
-        Boolean consistentProrationDiscountAmounts;
+        @SerializedName("proration_discounts")
+        String prorationDiscounts;
       }
     }
 

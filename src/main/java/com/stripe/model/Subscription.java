@@ -70,6 +70,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_mode")
   BillingMode billingMode;
 
+  /** Billing schedules for this subscription. */
+  @SerializedName("billing_schedules")
+  List<Subscription.BillingSchedule> billingSchedules;
+
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period.
@@ -1438,11 +1442,117 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @EqualsAndHashCode(callSuper = false)
     public static class Flexible extends StripeObject {
       /**
-       * When true, proration line items will show accurate discount amounts and use gross amounts,
-       * making them consistent with non-proration line items.
+       * Controls how invoices and invoice items display proration amounts and discount amounts.
+       *
+       * <p>One of {@code included}, or {@code itemized}.
        */
-      @SerializedName("consistent_proration_discount_amounts")
-      Boolean consistentProrationDiscountAmounts;
+      @SerializedName("proration_discounts")
+      String prorationDiscounts;
+    }
+  }
+
+  /** Sets the billing schedule for the subscription. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingSchedule extends StripeObject {
+    /** Specifies which subscription items the billing schedule applies to. */
+    @SerializedName("applies_to")
+    List<Subscription.BillingSchedule.AppliesTo> appliesTo;
+
+    /** Specifies the billing period. */
+    @SerializedName("bill_until")
+    BillUntil billUntil;
+
+    /** Unique identifier for the billing schedule. */
+    @SerializedName("key")
+    String key;
+
+    /** Represents the entities that the billing schedule applies to. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AppliesTo extends StripeObject {
+      /** The billing schedule will apply to the subscription item with the given price ID. */
+      @SerializedName("price")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Price> price;
+
+      /**
+       * Controls which subscription items the billing schedule applies to.
+       *
+       * <p>Equal to {@code price}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code price} object. */
+      public String getPrice() {
+        return (this.price != null) ? this.price.getId() : null;
+      }
+
+      public void setPrice(String id) {
+        this.price = ApiResource.setExpandableFieldId(id, this.price);
+      }
+
+      /** Get expanded {@code price}. */
+      public Price getPriceObject() {
+        return (this.price != null) ? this.price.getExpanded() : null;
+      }
+
+      public void setPriceObject(Price expandableObject) {
+        this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    /** Specifies the billing period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillUntil extends StripeObject {
+      /** The timestamp the billing schedule will apply until. */
+      @SerializedName("computed_timestamp")
+      Long computedTimestamp;
+
+      /** Specifies the billing period. */
+      @SerializedName("duration")
+      Duration duration;
+
+      /** If specified, the billing schedule will apply until the specified timestamp. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * Describes how the billing schedule will determine the end date. Either {@code duration} or
+       * {@code timestamp}.
+       *
+       * <p>One of {@code duration}, or {@code timestamp}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * Configures the {@code bill_until} date based on the provided {@code interval} and {@code
+       * interval_count}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration extends StripeObject {
+        /**
+         * Specifies billing duration. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /** The multiplier applied to the interval. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+      }
     }
   }
 
