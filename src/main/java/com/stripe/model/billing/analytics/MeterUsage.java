@@ -8,8 +8,8 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.billing.analytics.MeterUsageRetrieveParams;
-import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,14 +23,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class MeterUsage extends ApiResource {
-  /** The aggregated meter usage data for the specified customer and time range. */
-  @SerializedName("data")
-  List<MeterUsageRow> data;
-
-  /** Timestamp indicating how fresh the data is. Measured in seconds since the Unix epoch. */
-  @SerializedName("data_refreshed_at")
-  Long dataRefreshedAt;
-
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
@@ -45,6 +37,13 @@ public class MeterUsage extends ApiResource {
    */
   @SerializedName("object")
   String object;
+
+  /** The timestamp to indicate data freshness, measured in seconds since the Unix epoch. */
+  @SerializedName("refreshed_at")
+  Long refreshedAt;
+
+  @SerializedName("rows")
+  MeterUsageRowCollection rows;
 
   /**
    * Returns aggregated meter usage data for a customer within a specified time interval. The data
@@ -90,5 +89,11 @@ public class MeterUsage extends ApiResource {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, MeterUsage.class);
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(rows, responseGetter);
   }
 }
