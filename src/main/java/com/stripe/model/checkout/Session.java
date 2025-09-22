@@ -1082,7 +1082,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Icon extends StripeObject {}
+    public static class Icon extends StripeObject {
+      /**
+       * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+       * icon. Purpose must be {@code business_icon}. Required if {@code type} is {@code file} and
+       * disallowed otherwise.
+       */
+      @SerializedName("file")
+      String file;
+
+      /** The type of image for the icon. Must be one of {@code file} or {@code url}. */
+      @SerializedName("type")
+      String type;
+
+      /** The URL of the image. Present when {@code type} is {@code url}. */
+      @SerializedName("url")
+      String url;
+    }
 
     /**
      * For more details about Logo, please refer to the <a href="https://docs.stripe.com/api">API
@@ -1091,7 +1107,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Logo extends StripeObject {}
+    public static class Logo extends StripeObject {
+      /**
+       * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+       * logo. Purpose must be {@code business_logo}. Required if {@code type} is {@code file} and
+       * disallowed otherwise.
+       */
+      @SerializedName("file")
+      String file;
+
+      /** The type of image for the logo. Must be one of {@code file} or {@code url}. */
+      @SerializedName("type")
+      String type;
+
+      /** The URL of the image. Present when {@code type} is {@code url}. */
+      @SerializedName("url")
+      String url;
+    }
   }
 
   /**
