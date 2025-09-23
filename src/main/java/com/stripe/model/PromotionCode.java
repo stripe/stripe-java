@@ -19,9 +19,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A Promotion Code represents a customer-redeemable code for a <a
- * href="https://stripe.com/docs/api#coupons">coupon</a>. You can create multiple codes for a single
- * coupon.
+ * A Promotion Code represents a customer-redeemable code for an underlying promotion. You can
+ * create multiple codes for a single promotion.
  *
  * <p>If you enable promotion codes in your <a
  * href="https://stripe.com/docs/customer-management/configure-portal">customer portal
@@ -47,19 +46,6 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("code")
   String code;
-
-  /**
-   * A coupon contains information about a percent-off or amount-off discount you might want to
-   * apply to a customer. Coupons may be applied to <a
-   * href="https://stripe.com/docs/api#subscriptions">subscriptions</a>, <a
-   * href="https://stripe.com/docs/api#invoices">invoices</a>, <a
-   * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a>, <a
-   * href="https://stripe.com/docs/api#quotes">quotes</a>, and more. Coupons do not work with
-   * conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a> or <a
-   * href="https://stripe.com/docs/api/payment_intents">payment intents</a>.
-   */
-  @SerializedName("coupon")
-  Coupon coupon;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -108,6 +94,9 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("object")
   String object;
 
+  @SerializedName("promotion")
+  Promotion promotion;
+
   @SerializedName("restrictions")
   Restrictions restrictions;
 
@@ -134,16 +123,16 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A promotion code points to a coupon. You can optionally restrict the code to a specific
-   * customer, redemption limit, and expiration date.
+   * A promotion code points to an underlying promotion. You can optionally restrict the code to a
+   * specific customer, redemption limit, and expiration date.
    */
   public static PromotionCode create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * A promotion code points to a coupon. You can optionally restrict the code to a specific
-   * customer, redemption limit, and expiration date.
+   * A promotion code points to an underlying promotion. You can optionally restrict the code to a
+   * specific customer, redemption limit, and expiration date.
    */
   public static PromotionCode create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -154,16 +143,16 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A promotion code points to a coupon. You can optionally restrict the code to a specific
-   * customer, redemption limit, and expiration date.
+   * A promotion code points to an underlying promotion. You can optionally restrict the code to a
+   * specific customer, redemption limit, and expiration date.
    */
   public static PromotionCode create(PromotionCodeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * A promotion code points to a coupon. You can optionally restrict the code to a specific
-   * customer, redemption limit, and expiration date.
+   * A promotion code points to an underlying promotion. You can optionally restrict the code to a
+   * specific customer, redemption limit, and expiration date.
    */
   public static PromotionCode create(PromotionCodeCreateParams params, RequestOptions options)
       throws StripeException {
@@ -316,6 +305,47 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about Promotion, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Promotion extends StripeObject {
+    /** If promotion type is 'coupon', the coupon for this promotion. */
+    @SerializedName("coupon")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Coupon> coupon;
+
+    /**
+     * The type of promotion.
+     *
+     * <p>Equal to {@code coupon}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code coupon} object. */
+    public String getCoupon() {
+      return (this.coupon != null) ? this.coupon.getId() : null;
+    }
+
+    public void setCoupon(String id) {
+      this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+    }
+
+    /** Get expanded {@code coupon}. */
+    public Coupon getCouponObject() {
+      return (this.coupon != null) ? this.coupon.getExpanded() : null;
+    }
+
+    public void setCouponObject(Coupon expandableObject) {
+      this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
    * For more details about Restrictions, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -369,8 +399,8 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(coupon, responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(promotion, responseGetter);
     trySetResponseGetter(restrictions, responseGetter);
   }
 }

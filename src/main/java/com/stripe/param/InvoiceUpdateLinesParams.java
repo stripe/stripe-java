@@ -1146,19 +1146,28 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
         @SerializedName("tax_code")
         String taxCode;
 
+        /**
+         * A label that represents units of this product. When set, this will be included in
+         * customers' receipts, invoices, Checkout, and the customer portal.
+         */
+        @SerializedName("unit_label")
+        String unitLabel;
+
         private ProductData(
             String description,
             Map<String, Object> extraParams,
             List<String> images,
             Map<String, String> metadata,
             String name,
-            String taxCode) {
+            String taxCode,
+            String unitLabel) {
           this.description = description;
           this.extraParams = extraParams;
           this.images = images;
           this.metadata = metadata;
           this.name = name;
           this.taxCode = taxCode;
+          this.unitLabel = unitLabel;
         }
 
         public static Builder builder() {
@@ -1178,6 +1187,8 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
 
           private String taxCode;
 
+          private String unitLabel;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceUpdateLinesParams.Line.PriceData.ProductData build() {
             return new InvoiceUpdateLinesParams.Line.PriceData.ProductData(
@@ -1186,7 +1197,8 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
                 this.images,
                 this.metadata,
                 this.name,
-                this.taxCode);
+                this.taxCode,
+                this.unitLabel);
           }
 
           /**
@@ -1294,6 +1306,15 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
           /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(String taxCode) {
             this.taxCode = taxCode;
+            return this;
+          }
+
+          /**
+           * A label that represents units of this product. When set, this will be included in
+           * customers' receipts, invoices, Checkout, and the customer portal.
+           */
+          public Builder setUnitLabel(String unitLabel) {
+            this.unitLabel = unitLabel;
             return this;
           }
         }

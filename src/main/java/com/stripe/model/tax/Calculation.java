@@ -290,11 +290,11 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("country")
       String country;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -304,7 +304,7 @@ public class Calculation extends ApiResource implements HasId {
 
       /**
        * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-       * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+       * subdivision code, without country prefix, such as &quot;NY&quot; or &quot;TX&quot;.
        */
       @SerializedName("state")
       String state;
@@ -380,11 +380,11 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("country")
       String country;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -394,7 +394,7 @@ public class Calculation extends ApiResource implements HasId {
 
       /**
        * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-       * subdivision code, without country prefix. Example: &quot;NY&quot; or &quot;TX&quot;.
+       * subdivision code, without country prefix, such as &quot;NY&quot; or &quot;TX&quot;.
        */
       @SerializedName("state")
       String state;

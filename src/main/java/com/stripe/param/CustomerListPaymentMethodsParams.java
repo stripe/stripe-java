@@ -318,6 +318,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
     @SerializedName("link")
     LINK("link"),
 
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
 
@@ -347,6 +350,9 @@ public class CustomerListPaymentMethodsParams extends ApiRequestParams {
 
     @SerializedName("paypal")
     PAYPAL("paypal"),
+
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
 
     @SerializedName("pix")
     PIX("pix"),

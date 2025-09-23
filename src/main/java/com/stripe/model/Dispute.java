@@ -878,11 +878,11 @@ public class Dispute extends ApiResource
             @SerializedName("country")
             String country;
 
-            /** Address line 1 (e.g., street, PO Box, or company name). */
+            /** Address line 1, such as the street, PO Box, or company name. */
             @SerializedName("line1")
             String line1;
 
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            /** Address line 2, such as the apartment, suite, unit, or building. */
             @SerializedName("line2")
             String line2;
 
@@ -966,11 +966,11 @@ public class Dispute extends ApiResource
             @SerializedName("country")
             String country;
 
-            /** Address line 1 (e.g., street, PO Box, or company name). */
+            /** Address line 1, such as the street, PO Box, or company name. */
             @SerializedName("line1")
             String line1;
 
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            /** Address line 2, such as the apartment, suite, unit, or building. */
             @SerializedName("line2")
             String line2;
 
@@ -1190,6 +1190,10 @@ public class Dispute extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
+      /** Chargeback loss reason mapped by Stripe from Klarna's chargeback loss reason. */
+      @SerializedName("chargeback_loss_reason_code")
+      String chargebackLossReasonCode;
+
       /** The reason for the dispute as defined by Klarna. */
       @SerializedName("reason_code")
       String reasonCode;
