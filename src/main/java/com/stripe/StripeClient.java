@@ -126,8 +126,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.accountLinks() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().accountLinks(). See <a
+   * @deprecated StripeClient.accountLinks() is deprecated, use StripeClient.v1().accountLinks()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().accountLinks(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -137,8 +138,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.accountSessions() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().accountSessions(). See <a
+   * @deprecated StripeClient.accountSessions() is deprecated, use
+   *     StripeClient.v1().accountSessions() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().accountSessions(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -148,8 +150,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.accounts() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().accounts(). See <a
+   * @deprecated StripeClient.accounts() is deprecated, use StripeClient.v1().accounts() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().accounts(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -159,8 +161,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.applePayDomains() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().applePayDomains(). See <a
+   * @deprecated StripeClient.applePayDomains() is deprecated, use
+   *     StripeClient.v1().applePayDomains() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().applePayDomains(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -170,8 +173,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.applicationFees() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().applicationFees(). See <a
+   * @deprecated StripeClient.applicationFees() is deprecated, use
+   *     StripeClient.v1().applicationFees() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().applicationFees(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -181,8 +185,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.apps() is deprecated. All functionality under it has been copied over
-   *     to StripeClient.v1().apps(). See <a
+   * @deprecated StripeClient.apps() is deprecated, use StripeClient.v1().apps() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().apps(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -192,8 +196,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.balance() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().balance(). See <a
+   * @deprecated StripeClient.balance() is deprecated, use StripeClient.v1().balance() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().balance(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -203,8 +207,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.balanceTransactions() is deprecated. All functionality under it has
-   *     been copied over to StripeClient.v1().balanceTransactions(). See <a
+   * @deprecated StripeClient.balanceTransactions() is deprecated, use
+   *     StripeClient.v1().balanceTransactions() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().balanceTransactions(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -214,8 +219,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.billing() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().billing(). See <a
+   * @deprecated StripeClient.billing() is deprecated, use StripeClient.v1().billing() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().billing(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -225,8 +230,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.billingPortal() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().billingPortal(). See <a
+   * @deprecated StripeClient.billingPortal() is deprecated, use StripeClient.v1().billingPortal()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().billingPortal(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -236,8 +242,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.charges() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().charges(). See <a
+   * @deprecated StripeClient.charges() is deprecated, use StripeClient.v1().charges() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().charges(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -247,8 +253,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.checkout() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().checkout(). See <a
+   * @deprecated StripeClient.checkout() is deprecated, use StripeClient.v1().checkout() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().checkout(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -258,8 +264,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.climate() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().climate(). See <a
+   * @deprecated StripeClient.climate() is deprecated, use StripeClient.v1().climate() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().climate(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -269,8 +275,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.confirmationTokens() is deprecated. All functionality under it has
-   *     been copied over to StripeClient.v1().confirmationTokens(). See <a
+   * @deprecated StripeClient.confirmationTokens() is deprecated, use
+   *     StripeClient.v1().confirmationTokens() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().confirmationTokens(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -280,8 +287,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.countrySpecs() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().countrySpecs(). See <a
+   * @deprecated StripeClient.countrySpecs() is deprecated, use StripeClient.v1().countrySpecs()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().countrySpecs(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -291,8 +299,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.coupons() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().coupons(). See <a
+   * @deprecated StripeClient.coupons() is deprecated, use StripeClient.v1().coupons() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().coupons(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -302,8 +310,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.creditNotes() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().creditNotes(). See <a
+   * @deprecated StripeClient.creditNotes() is deprecated, use StripeClient.v1().creditNotes()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().creditNotes(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -313,8 +322,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.customerSessions() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().customerSessions(). See <a
+   * @deprecated StripeClient.customerSessions() is deprecated, use
+   *     StripeClient.v1().customerSessions() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().customerSessions(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -324,8 +334,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.customers() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().customers(). See <a
+   * @deprecated StripeClient.customers() is deprecated, use StripeClient.v1().customers() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().customers(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -335,8 +345,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.disputes() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().disputes(). See <a
+   * @deprecated StripeClient.disputes() is deprecated, use StripeClient.v1().disputes() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().disputes(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -346,8 +356,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.entitlements() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().entitlements(). See <a
+   * @deprecated StripeClient.entitlements() is deprecated, use StripeClient.v1().entitlements()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().entitlements(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -357,8 +368,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.ephemeralKeys() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().ephemeralKeys(). See <a
+   * @deprecated StripeClient.ephemeralKeys() is deprecated, use StripeClient.v1().ephemeralKeys()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().ephemeralKeys(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -368,8 +380,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.events() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().events(). See <a
+   * @deprecated StripeClient.events() is deprecated, use StripeClient.v1().events() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().events(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -379,8 +391,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.exchangeRates() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().exchangeRates(). See <a
+   * @deprecated StripeClient.exchangeRates() is deprecated, use StripeClient.v1().exchangeRates()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().exchangeRates(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -390,8 +403,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.fileLinks() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().fileLinks(). See <a
+   * @deprecated StripeClient.fileLinks() is deprecated, use StripeClient.v1().fileLinks() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().fileLinks(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -401,8 +414,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.files() is deprecated. All functionality under it has been copied over
-   *     to StripeClient.v1().files(). See <a
+   * @deprecated StripeClient.files() is deprecated, use StripeClient.v1().files() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().files(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -412,8 +425,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.financialConnections() is deprecated. All functionality under it has
-   *     been copied over to StripeClient.v1().financialConnections(). See <a
+   * @deprecated StripeClient.financialConnections() is deprecated, use
+   *     StripeClient.v1().financialConnections() instead. All functionality under it has been
+   *     copied over to StripeClient.v1().financialConnections(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -423,8 +437,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.forwarding() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().forwarding(). See <a
+   * @deprecated StripeClient.forwarding() is deprecated, use StripeClient.v1().forwarding()
+   *     instead. All functionality under it has been copied over to StripeClient.v1().forwarding().
+   *     See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -434,8 +449,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.identity() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().identity(). See <a
+   * @deprecated StripeClient.identity() is deprecated, use StripeClient.v1().identity() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().identity(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -445,8 +460,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.invoiceItems() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().invoiceItems(). See <a
+   * @deprecated StripeClient.invoiceItems() is deprecated, use StripeClient.v1().invoiceItems()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().invoiceItems(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -456,8 +472,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.invoicePayments() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().invoicePayments(). See <a
+   * @deprecated StripeClient.invoicePayments() is deprecated, use
+   *     StripeClient.v1().invoicePayments() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().invoicePayments(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -467,8 +484,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.invoiceRenderingTemplates() is deprecated. All functionality under it
-   *     has been copied over to StripeClient.v1().invoiceRenderingTemplates(). See <a
+   * @deprecated StripeClient.invoiceRenderingTemplates() is deprecated, use
+   *     StripeClient.v1().invoiceRenderingTemplates() instead. All functionality under it has been
+   *     copied over to StripeClient.v1().invoiceRenderingTemplates(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -478,8 +496,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.invoices() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().invoices(). See <a
+   * @deprecated StripeClient.invoices() is deprecated, use StripeClient.v1().invoices() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().invoices(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -489,8 +507,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.issuing() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().issuing(). See <a
+   * @deprecated StripeClient.issuing() is deprecated, use StripeClient.v1().issuing() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().issuing(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -500,8 +518,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.mandates() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().mandates(). See <a
+   * @deprecated StripeClient.mandates() is deprecated, use StripeClient.v1().mandates() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().mandates(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -511,8 +529,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.paymentIntents() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().paymentIntents(). See <a
+   * @deprecated StripeClient.paymentIntents() is deprecated, use StripeClient.v1().paymentIntents()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().paymentIntents(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -522,8 +541,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.paymentLinks() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().paymentLinks(). See <a
+   * @deprecated StripeClient.paymentLinks() is deprecated, use StripeClient.v1().paymentLinks()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().paymentLinks(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -533,8 +553,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.paymentMethodConfigurations() is deprecated. All functionality under
-   *     it has been copied over to StripeClient.v1().paymentMethodConfigurations(). See <a
+   * @deprecated StripeClient.paymentMethodConfigurations() is deprecated, use
+   *     StripeClient.v1().paymentMethodConfigurations() instead. All functionality under it has
+   *     been copied over to StripeClient.v1().paymentMethodConfigurations(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -544,8 +565,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.paymentMethodDomains() is deprecated. All functionality under it has
-   *     been copied over to StripeClient.v1().paymentMethodDomains(). See <a
+   * @deprecated StripeClient.paymentMethodDomains() is deprecated, use
+   *     StripeClient.v1().paymentMethodDomains() instead. All functionality under it has been
+   *     copied over to StripeClient.v1().paymentMethodDomains(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -555,8 +577,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.paymentMethods() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().paymentMethods(). See <a
+   * @deprecated StripeClient.paymentMethods() is deprecated, use StripeClient.v1().paymentMethods()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().paymentMethods(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -566,8 +589,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.payouts() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().payouts(). See <a
+   * @deprecated StripeClient.payouts() is deprecated, use StripeClient.v1().payouts() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().payouts(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -577,8 +600,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.plans() is deprecated. All functionality under it has been copied over
-   *     to StripeClient.v1().plans(). See <a
+   * @deprecated StripeClient.plans() is deprecated, use StripeClient.v1().plans() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().plans(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -588,8 +611,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.prices() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().prices(). See <a
+   * @deprecated StripeClient.prices() is deprecated, use StripeClient.v1().prices() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().prices(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -599,8 +622,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.products() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().products(). See <a
+   * @deprecated StripeClient.products() is deprecated, use StripeClient.v1().products() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().products(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -610,8 +633,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.promotionCodes() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().promotionCodes(). See <a
+   * @deprecated StripeClient.promotionCodes() is deprecated, use StripeClient.v1().promotionCodes()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().promotionCodes(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -621,8 +645,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.quotes() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().quotes(). See <a
+   * @deprecated StripeClient.quotes() is deprecated, use StripeClient.v1().quotes() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().quotes(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -632,8 +656,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.radar() is deprecated. All functionality under it has been copied over
-   *     to StripeClient.v1().radar(). See <a
+   * @deprecated StripeClient.radar() is deprecated, use StripeClient.v1().radar() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().radar(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -643,8 +667,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.refunds() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().refunds(). See <a
+   * @deprecated StripeClient.refunds() is deprecated, use StripeClient.v1().refunds() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().refunds(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -654,8 +678,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.reporting() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().reporting(). See <a
+   * @deprecated StripeClient.reporting() is deprecated, use StripeClient.v1().reporting() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().reporting(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -665,8 +689,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.reviews() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().reviews(). See <a
+   * @deprecated StripeClient.reviews() is deprecated, use StripeClient.v1().reviews() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().reviews(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -676,8 +700,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.setupAttempts() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().setupAttempts(). See <a
+   * @deprecated StripeClient.setupAttempts() is deprecated, use StripeClient.v1().setupAttempts()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().setupAttempts(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -687,8 +712,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.setupIntents() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().setupIntents(). See <a
+   * @deprecated StripeClient.setupIntents() is deprecated, use StripeClient.v1().setupIntents()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().setupIntents(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -698,8 +724,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.shippingRates() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().shippingRates(). See <a
+   * @deprecated StripeClient.shippingRates() is deprecated, use StripeClient.v1().shippingRates()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().shippingRates(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -709,8 +736,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.sigma() is deprecated. All functionality under it has been copied over
-   *     to StripeClient.v1().sigma(). See <a
+   * @deprecated StripeClient.sigma() is deprecated, use StripeClient.v1().sigma() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().sigma(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -720,8 +747,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.sources() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().sources(). See <a
+   * @deprecated StripeClient.sources() is deprecated, use StripeClient.v1().sources() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().sources(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -731,8 +758,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.subscriptionItems() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().subscriptionItems(). See <a
+   * @deprecated StripeClient.subscriptionItems() is deprecated, use
+   *     StripeClient.v1().subscriptionItems() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().subscriptionItems(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -742,8 +770,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.subscriptionSchedules() is deprecated. All functionality under it has
-   *     been copied over to StripeClient.v1().subscriptionSchedules(). See <a
+   * @deprecated StripeClient.subscriptionSchedules() is deprecated, use
+   *     StripeClient.v1().subscriptionSchedules() instead. All functionality under it has been
+   *     copied over to StripeClient.v1().subscriptionSchedules(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -753,8 +782,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.subscriptions() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().subscriptions(). See <a
+   * @deprecated StripeClient.subscriptions() is deprecated, use StripeClient.v1().subscriptions()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().subscriptions(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -764,8 +794,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.tax() is deprecated. All functionality under it has been copied over
-   *     to StripeClient.v1().tax(). See <a
+   * @deprecated StripeClient.tax() is deprecated, use StripeClient.v1().tax() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().tax(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -775,8 +805,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.taxCodes() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().taxCodes(). See <a
+   * @deprecated StripeClient.taxCodes() is deprecated, use StripeClient.v1().taxCodes() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().taxCodes(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -786,8 +816,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.taxIds() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().taxIds(). See <a
+   * @deprecated StripeClient.taxIds() is deprecated, use StripeClient.v1().taxIds() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().taxIds(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -797,8 +827,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.taxRates() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().taxRates(). See <a
+   * @deprecated StripeClient.taxRates() is deprecated, use StripeClient.v1().taxRates() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().taxRates(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -808,8 +838,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.terminal() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().terminal(). See <a
+   * @deprecated StripeClient.terminal() is deprecated, use StripeClient.v1().terminal() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().terminal(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -819,8 +849,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.testHelpers() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().testHelpers(). See <a
+   * @deprecated StripeClient.testHelpers() is deprecated, use StripeClient.v1().testHelpers()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().testHelpers(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -830,8 +861,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.tokens() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().tokens(). See <a
+   * @deprecated StripeClient.tokens() is deprecated, use StripeClient.v1().tokens() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().tokens(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -841,8 +872,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.topups() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().topups(). See <a
+   * @deprecated StripeClient.topups() is deprecated, use StripeClient.v1().topups() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().topups(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -852,8 +883,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.transfers() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().transfers(). See <a
+   * @deprecated StripeClient.transfers() is deprecated, use StripeClient.v1().transfers() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().transfers(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -863,8 +894,8 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.treasury() is deprecated. All functionality under it has been copied
-   *     over to StripeClient.v1().treasury(). See <a
+   * @deprecated StripeClient.treasury() is deprecated, use StripeClient.v1().treasury() instead.
+   *     All functionality under it has been copied over to StripeClient.v1().treasury(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
@@ -874,8 +905,9 @@ public class StripeClient {
   }
 
   /**
-   * @deprecated StripeClient.webhookEndpoints() is deprecated. All functionality under it has been
-   *     copied over to StripeClient.v1().webhookEndpoints(). See <a
+   * @deprecated StripeClient.webhookEndpoints() is deprecated, use
+   *     StripeClient.v1().webhookEndpoints() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().webhookEndpoints(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
    *     guide</a> for more on this and tips on migrating to the new v1 namespace.
    */
