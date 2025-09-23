@@ -31,10 +31,10 @@ public class AccountListParams extends ApiRequestParams {
 
   /** The upper limit on the number of accounts returned by the List Account request. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   private AccountListParams(
-      List<String> appliedConfigurations, Map<String, Object> extraParams, Integer limit) {
+      List<String> appliedConfigurations, Map<String, Object> extraParams, Long limit) {
     this.appliedConfigurations = appliedConfigurations;
     this.extraParams = extraParams;
     this.limit = limit;
@@ -49,7 +49,7 @@ public class AccountListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AccountListParams build() {
@@ -109,7 +109,7 @@ public class AccountListParams extends ApiRequestParams {
     }
 
     /** The upper limit on the number of accounts returned by the List Account request. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

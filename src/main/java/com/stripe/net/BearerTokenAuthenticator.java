@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import com.stripe.exception.ApiKeyMissingException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
 import com.stripe.util.StringUtils;
@@ -11,7 +12,7 @@ public final class BearerTokenAuthenticator implements Authenticator {
 
   public BearerTokenAuthenticator(String apiKey) {
     if (apiKey == null) {
-      throw new IllegalArgumentException("apiKey should be not-null");
+      throw new ApiKeyMissingException("API key cannot be null. Set Stripe.apiKey");
     }
     this.apiKey = apiKey;
   }

@@ -4,6 +4,7 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -80,10 +81,7 @@ public class Cadence extends StripeObject implements HasId {
   @SerializedName("test_clock")
   String testClock;
 
-  /**
-   * For more details about BillingCycle, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The billing cycle is the object that defines future billing cycle dates. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -97,7 +95,7 @@ public class Cadence extends StripeObject implements HasId {
      * example, type=month and interval_count=3 bills every 3 months.
      */
     @SerializedName("interval_count")
-    Integer intervalCount;
+    Long intervalCount;
 
     /** Specific configuration for determining billing dates when type=month. */
     @SerializedName("month")
@@ -119,10 +117,7 @@ public class Cadence extends StripeObject implements HasId {
     @SerializedName("year")
     Year year;
 
-    /**
-     * For more details about Day, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Specific configuration for determining billing dates when type=day. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -131,10 +126,7 @@ public class Cadence extends StripeObject implements HasId {
       @SerializedName("time")
       Time time;
 
-      /**
-       * For more details about Time, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
+      /** The time at which the billing cycle ends. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -144,28 +136,25 @@ public class Cadence extends StripeObject implements HasId {
          * inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * The second at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
       }
     }
 
-    /**
-     * For more details about Month, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Specific configuration for determining billing dates when type=month. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -176,23 +165,13 @@ public class Cadence extends StripeObject implements HasId {
        * to the last day of the month.
        */
       @SerializedName("day_of_month")
-      Integer dayOfMonth;
-
-      /**
-       * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
-       * Occurrences are calculated from the month anchor.
-       */
-      @SerializedName("month_of_year")
-      Integer monthOfYear;
+      Long dayOfMonth;
 
       /** The time at which the billing cycle ends. */
       @SerializedName("time")
       Time time;
 
-      /**
-       * For more details about Time, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
+      /** The time at which the billing cycle ends. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -202,28 +181,25 @@ public class Cadence extends StripeObject implements HasId {
          * inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * The second at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
       }
     }
 
-    /**
-     * For more details about Week, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Specific configuration for determining billing dates when type=week. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -233,16 +209,13 @@ public class Cadence extends StripeObject implements HasId {
        * Sunday respectively, based on the ISO-8601 week day numbering.
        */
       @SerializedName("day_of_week")
-      Integer dayOfWeek;
+      Long dayOfWeek;
 
       /** The time at which the billing cycle ends. */
       @SerializedName("time")
       Time time;
 
-      /**
-       * For more details about Time, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
+      /** The time at which the billing cycle ends. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -252,28 +225,25 @@ public class Cadence extends StripeObject implements HasId {
          * inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * The second at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
       }
     }
 
-    /**
-     * For more details about Year, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Specific configuration for determining billing dates when type=year. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -284,23 +254,20 @@ public class Cadence extends StripeObject implements HasId {
        * to the last day of the month.
        */
       @SerializedName("day_of_month")
-      Integer dayOfMonth;
+      Long dayOfMonth;
 
       /**
        * The month to bill on from 1-12. If not provided, this will default to the month the cadence
        * was created.
        */
       @SerializedName("month_of_year")
-      Integer monthOfYear;
+      Long monthOfYear;
 
       /** The time at which the billing cycle ends. */
       @SerializedName("time")
       Time time;
 
-      /**
-       * For more details about Time, please refer to the <a href="https://docs.stripe.com/api">API
-       * Reference.</a>
-       */
+      /** The time at which the billing cycle ends. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -310,21 +277,21 @@ public class Cadence extends StripeObject implements HasId {
          * inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * The minute at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * The second at which the billing cycle ends. Must be an integer between 0 and 59,
          * inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
       }
     }
   }
@@ -354,10 +321,7 @@ public class Cadence extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about PercentOff, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Details if the discount is a percentage off. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -371,12 +335,9 @@ public class Cadence extends StripeObject implements HasId {
        * $100 amount $50 instead.
        */
       @SerializedName("percent_off")
-      String percentOff;
+      BigDecimal percentOff;
 
-      /**
-       * For more details about MaximumApplications, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The maximum applications configuration for this discount. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -392,10 +353,7 @@ public class Cadence extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about Payer, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** The payer determines the entity financially responsible for the bill. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -418,10 +376,7 @@ public class Cadence extends StripeObject implements HasId {
     String type;
   }
 
-  /**
-   * For more details about Settings, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** The settings associated with the cadence. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -438,8 +393,8 @@ public class Cadence extends StripeObject implements HasId {
     Collection collection;
 
     /**
-     * For more details about Bill, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * Settings that configure bills generation, which includes calculating totals, tax, and
+     * presenting invoices.
      */
     @Getter
     @Setter
@@ -455,10 +410,7 @@ public class Cadence extends StripeObject implements HasId {
       String version;
     }
 
-    /**
-     * For more details about Collection, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Settings that configure and manage the behavior of collecting payments. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Licensed Item represents a billable item whose pricing is based on license fees. You can use
+ * license fees to specify the pricing and create subscriptions to these items.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -73,10 +77,7 @@ public class LicensedItem extends StripeObject implements HasId {
   @SerializedName("unit_label")
   String unitLabel;
 
-  /**
-   * For more details about TaxDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Stripe Tax details. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

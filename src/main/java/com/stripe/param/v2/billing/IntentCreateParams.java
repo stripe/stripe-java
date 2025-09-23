@@ -3,6 +3,7 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -501,12 +502,12 @@ public class IntentCreateParams extends ApiRequestParams {
            * percent_off of 50.0 will make $100 amount $50 instead.
            */
           @SerializedName("percent_off")
-          String percentOff;
+          BigDecimal percentOff;
 
           private PercentOff(
               Map<String, Object> extraParams,
               MaximumApplications maximumApplications,
-              String percentOff) {
+              BigDecimal percentOff) {
             this.extraParams = extraParams;
             this.maximumApplications = maximumApplications;
             this.percentOff = percentOff;
@@ -521,7 +522,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
             private MaximumApplications maximumApplications;
 
-            private String percentOff;
+            private BigDecimal percentOff;
 
             /** Finalize and obtain parameter instance from this builder. */
             public IntentCreateParams.Action.Apply.InvoiceDiscountRule.PercentOff build() {
@@ -574,7 +575,7 @@ public class IntentCreateParams extends ApiRequestParams {
              * <strong>Required.</strong> Percent that will be taken off of the amount. For example,
              * percent_off of 50.0 will make $100 amount $50 instead.
              */
-            public Builder setPercentOff(String percentOff) {
+            public Builder setPercentOff(BigDecimal percentOff) {
               this.percentOff = percentOff;
               return this;
             }
@@ -1023,9 +1024,6 @@ public class IntentCreateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
-          @SerializedName("current_billing_period_end")
-          CURRENT_BILLING_PERIOD_END("current_billing_period_end"),
-
           @SerializedName("current_billing_period_start")
           CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
 
@@ -1646,13 +1644,13 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /** Quantity of the component to be used. */
           @SerializedName("quantity")
-          Integer quantity;
+          Long quantity;
 
           private ComponentConfiguration(
               Map<String, Object> extraParams,
               String lookupKey,
               String pricingPlanComponent,
-              Integer quantity) {
+              Long quantity) {
             this.extraParams = extraParams;
             this.lookupKey = lookupKey;
             this.pricingPlanComponent = pricingPlanComponent;
@@ -1670,7 +1668,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
             private String pricingPlanComponent;
 
-            private Integer quantity;
+            private Long quantity;
 
             /** Finalize and obtain parameter instance from this builder. */
             public IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails
@@ -1724,7 +1722,7 @@ public class IntentCreateParams extends ApiRequestParams {
             }
 
             /** Quantity of the component to be used. */
-            public Builder setQuantity(Integer quantity) {
+            public Builder setQuantity(Long quantity) {
               this.quantity = quantity;
               return this;
             }
@@ -2408,13 +2406,13 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /** Quantity of the component to be used. */
           @SerializedName("quantity")
-          Integer quantity;
+          Long quantity;
 
           private ComponentConfiguration(
               Map<String, Object> extraParams,
               String lookupKey,
               String pricingPlanComponent,
-              Integer quantity) {
+              Long quantity) {
             this.extraParams = extraParams;
             this.lookupKey = lookupKey;
             this.pricingPlanComponent = pricingPlanComponent;
@@ -2432,7 +2430,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
             private String pricingPlanComponent;
 
-            private Integer quantity;
+            private Long quantity;
 
             /** Finalize and obtain parameter instance from this builder. */
             public IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails
@@ -2486,7 +2484,7 @@ public class IntentCreateParams extends ApiRequestParams {
             }
 
             /** Quantity of the component to be used. */
-            public Builder setQuantity(Integer quantity) {
+            public Builder setQuantity(Long quantity) {
               this.quantity = quantity;
               return this;
             }
@@ -2682,13 +2680,13 @@ public class IntentCreateParams extends ApiRequestParams {
 
           /** Quantity for this item. If not provided, will default to 1. */
           @SerializedName("quantity")
-          Integer quantity;
+          Long quantity;
 
           private Item(
               Map<String, Object> extraParams,
               Map<String, String> metadata,
               String price,
-              Integer quantity) {
+              Long quantity) {
             this.extraParams = extraParams;
             this.metadata = metadata;
             this.price = price;
@@ -2706,7 +2704,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
             private String price;
 
-            private Integer quantity;
+            private Long quantity;
 
             /** Finalize and obtain parameter instance from this builder. */
             public IntentCreateParams.Action.Subscribe.V1SubscriptionDetails.Item build() {
@@ -2781,7 +2779,7 @@ public class IntentCreateParams extends ApiRequestParams {
             }
 
             /** Quantity for this item. If not provided, will default to 1. */
-            public Builder setQuantity(Integer quantity) {
+            public Builder setQuantity(Long quantity) {
               this.quantity = quantity;
               return this;
             }

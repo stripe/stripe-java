@@ -3,6 +3,7 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.Event;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.Getter;
@@ -46,7 +47,7 @@ public final class V2CoreHealthAuthorizationRateDropResolvedEvent extends Event 
       String chargeType;
       /** The current authorization rate percentage. */
       @SerializedName("current_percentage")
-      String currentPercentage;
+      BigDecimal currentPercentage;
       /** Dimensions that describe what subset of payments are impacted. */
       @SerializedName("dimensions")
       List<V2CoreHealthAuthorizationRateDropResolvedEvent.EventData.Impact.Dimension> dimensions;
@@ -68,7 +69,7 @@ public final class V2CoreHealthAuthorizationRateDropResolvedEvent extends Event 
       String paymentMethodType;
       /** The previous authorization rate percentage. */
       @SerializedName("previous_percentage")
-      String previousPercentage;
+      BigDecimal previousPercentage;
 
       public static final class Dimension {
         /** The issuer dimension. */

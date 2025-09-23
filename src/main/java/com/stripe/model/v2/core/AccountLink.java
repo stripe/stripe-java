@@ -9,6 +9,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * AccountLinks are the means by which a Merchant grants an Account permission to access
+ * Stripe-hosted applications, such as Recipient Onboarding. This API is only available for users
+ * enrolled in the public preview for Accounts v2.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -49,10 +54,7 @@ public class AccountLink extends StripeObject {
   @SerializedName("use_case")
   UseCase useCase;
 
-  /**
-   * For more details about UseCase, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** The use case of AccountLink the user is requesting. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -73,10 +75,7 @@ public class AccountLink extends StripeObject {
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about AccountOnboarding, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Indicates that the AccountLink provided should onboard an account. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -113,8 +112,8 @@ public class AccountLink extends StripeObject {
       String returnUrl;
 
       /**
-       * For more details about CollectionOptions, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+       * flow.
        */
       @Getter
       @Setter
@@ -142,10 +141,7 @@ public class AccountLink extends StripeObject {
       }
     }
 
-    /**
-     * For more details about AccountUpdate, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Indicates that the AccountLink provided should update a previously onboarded account. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -182,8 +178,8 @@ public class AccountLink extends StripeObject {
       String returnUrl;
 
       /**
-       * For more details about CollectionOptions, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * Specifies the requirements that Stripe collects from v2/core/accounts in the Onboarding
+       * flow.
        */
       @Getter
       @Setter

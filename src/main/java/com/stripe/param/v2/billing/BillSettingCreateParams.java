@@ -402,10 +402,9 @@ public class BillSettingCreateParams extends ApiRequestParams {
        * interval_count=30, the invoice will be due in 30 days.
        */
       @SerializedName("interval_count")
-      Integer intervalCount;
+      Long intervalCount;
 
-      private TimeUntilDue(
-          Map<String, Object> extraParams, Interval interval, Integer intervalCount) {
+      private TimeUntilDue(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
         this.extraParams = extraParams;
         this.interval = interval;
         this.intervalCount = intervalCount;
@@ -420,7 +419,7 @@ public class BillSettingCreateParams extends ApiRequestParams {
 
         private Interval interval;
 
-        private Integer intervalCount;
+        private Long intervalCount;
 
         /** Finalize and obtain parameter instance from this builder. */
         public BillSettingCreateParams.Invoice.TimeUntilDue build() {
@@ -466,7 +465,7 @@ public class BillSettingCreateParams extends ApiRequestParams {
          * <strong>Required.</strong> The number of interval units. For example, if interval=day and
          * interval_count=30, the invoice will be due in 30 days.
          */
-        public Builder setIntervalCount(Integer intervalCount) {
+        public Builder setIntervalCount(Long intervalCount) {
           this.intervalCount = intervalCount;
           return this;
         }

@@ -54,7 +54,7 @@ public final class V2CoreHealthApiErrorResolvedEvent extends Event {
       String httpStatus;
       /** The number of impacted requests. */
       @SerializedName("impacted_requests")
-      Integer impactedRequests;
+      Long impactedRequests;
     }
   }
 }

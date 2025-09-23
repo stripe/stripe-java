@@ -60,7 +60,7 @@ public class OutboundPaymentListParams extends ApiRequestParams {
 
   /** The maximum number of results to return. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /** Only return OutboundPayments sent to this recipient. */
   @SerializedName("recipient")
@@ -77,7 +77,7 @@ public class OutboundPaymentListParams extends ApiRequestParams {
       Instant createdLt,
       Instant createdLte,
       Map<String, Object> extraParams,
-      Integer limit,
+      Long limit,
       String recipient,
       List<OutboundPaymentListParams.Status> status) {
     this.created = created;
@@ -108,7 +108,7 @@ public class OutboundPaymentListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private String recipient;
 
@@ -200,7 +200,7 @@ public class OutboundPaymentListParams extends ApiRequestParams {
     }
 
     /** The maximum number of results to return. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

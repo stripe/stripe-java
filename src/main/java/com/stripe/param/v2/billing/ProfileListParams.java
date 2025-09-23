@@ -38,7 +38,7 @@ public class ProfileListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 10. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * <strong>Required.</strong> Filter billing profiles by lookup keys. Mutually exclusive with
@@ -58,7 +58,7 @@ public class ProfileListParams extends ApiRequestParams {
       String customer,
       String defaultPaymentMethod,
       Map<String, Object> extraParams,
-      Integer limit,
+      Long limit,
       List<String> lookupKeys,
       Status status) {
     this.customer = customer;
@@ -80,7 +80,7 @@ public class ProfileListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private List<String> lookupKeys;
 
@@ -142,7 +142,7 @@ public class ProfileListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 10. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

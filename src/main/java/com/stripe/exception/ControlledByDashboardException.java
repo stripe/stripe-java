@@ -6,10 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/**
- * Returned when the PayoutMethodBankAccount object is controlled by the Stripe Dashboard, and
- * cannot be archived.
- */
+/** Information about the error that occurred. */
 public final class ControlledByDashboardException extends ApiException {
   private static final long serialVersionUID = 2L;
 

@@ -10,6 +10,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Rate Card represents a versioned set of usage-based prices (rates). Each rate is associated
+ * with one Metered Item and defines how much to charge for usage of that item. After you've set up
+ * a RateCard, you can subscribe customers to it by creating a Rate Card Subscription.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -101,7 +106,7 @@ public class RateCard extends StripeObject implements HasId {
    * service_interval} to {@code "month"} in order to specify quarterly service.
    */
   @SerializedName("service_interval_count")
-  Integer serviceIntervalCount;
+  Long serviceIntervalCount;
 
   /**
    * The Stripe Tax tax behavior - whether the rates are inclusive or exclusive of tax.

@@ -220,7 +220,7 @@ public class CadenceCreateParams extends ApiRequestParams {
      * will default to 1.
      */
     @SerializedName("interval_count")
-    Integer intervalCount;
+    Long intervalCount;
 
     /** Specific configuration for determining billing dates when type=month. */
     @SerializedName("month")
@@ -241,7 +241,7 @@ public class CadenceCreateParams extends ApiRequestParams {
     private BillingCycle(
         Day day,
         Map<String, Object> extraParams,
-        Integer intervalCount,
+        Long intervalCount,
         Month month,
         Type type,
         Week week,
@@ -264,7 +264,7 @@ public class CadenceCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private Integer intervalCount;
+      private Long intervalCount;
 
       private Month month;
 
@@ -323,7 +323,7 @@ public class CadenceCreateParams extends ApiRequestParams {
        * example, type=month and interval_count=3 bills every 3 months. If this is not provided, it
        * will default to 1.
        */
-      public Builder setIntervalCount(Integer intervalCount) {
+      public Builder setIntervalCount(Long intervalCount) {
         this.intervalCount = intervalCount;
         return this;
       }
@@ -447,24 +447,23 @@ public class CadenceCreateParams extends ApiRequestParams {
          * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
 
-        private Time(
-            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
+        private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
@@ -478,11 +477,11 @@ public class CadenceCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Integer hour;
+          private Long hour;
 
-          private Integer minute;
+          private Long minute;
 
-          private Integer second;
+          private Long second;
 
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Day.Time build() {
@@ -522,7 +521,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
            * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
            */
-          public Builder setHour(Integer hour) {
+          public Builder setHour(Long hour) {
             this.hour = hour;
             return this;
           }
@@ -531,7 +530,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setMinute(Integer minute) {
+          public Builder setMinute(Long minute) {
             this.minute = minute;
             return this;
           }
@@ -540,7 +539,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setSecond(Integer second) {
+          public Builder setSecond(Long second) {
             this.second = second;
             return this;
           }
@@ -558,7 +557,7 @@ public class CadenceCreateParams extends ApiRequestParams {
        * default to the day the cadence was created.
        */
       @SerializedName("day_of_month")
-      Integer dayOfMonth;
+      Long dayOfMonth;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -570,26 +569,15 @@ public class CadenceCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12. If
-       * not provided, this will default to the month the cadence was created. This setting can only
-       * be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
-       * occurrences will be calculated from month provided.
-       */
-      @SerializedName("month_of_year")
-      Integer monthOfYear;
-
-      /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
        * will default to the time at which the cadence was created in UTC timezone.
        */
       @SerializedName("time")
       Time time;
 
-      private Month(
-          Integer dayOfMonth, Map<String, Object> extraParams, Integer monthOfYear, Time time) {
+      private Month(Long dayOfMonth, Map<String, Object> extraParams, Time time) {
         this.dayOfMonth = dayOfMonth;
         this.extraParams = extraParams;
-        this.monthOfYear = monthOfYear;
         this.time = time;
       }
 
@@ -598,18 +586,16 @@ public class CadenceCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Integer dayOfMonth;
+        private Long dayOfMonth;
 
         private Map<String, Object> extraParams;
-
-        private Integer monthOfYear;
 
         private Time time;
 
         /** Finalize and obtain parameter instance from this builder. */
         public CadenceCreateParams.BillingCycle.Month build() {
           return new CadenceCreateParams.BillingCycle.Month(
-              this.dayOfMonth, this.extraParams, this.monthOfYear, this.time);
+              this.dayOfMonth, this.extraParams, this.time);
         }
 
         /**
@@ -618,7 +604,7 @@ public class CadenceCreateParams extends ApiRequestParams {
          * being billed, this will anchor to the last day of the month. If not provided, this will
          * default to the day the cadence was created.
          */
-        public Builder setDayOfMonth(Integer dayOfMonth) {
+        public Builder setDayOfMonth(Long dayOfMonth) {
           this.dayOfMonth = dayOfMonth;
           return this;
         }
@@ -652,17 +638,6 @@ public class CadenceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
-         * If not provided, this will default to the month the cadence was created. This setting can
-         * only be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
-         * occurrences will be calculated from month provided.
-         */
-        public Builder setMonthOfYear(Integer monthOfYear) {
-          this.monthOfYear = monthOfYear;
-          return this;
-        }
-
-        /**
          * The time at which the billing cycle ends. This field is optional, and if not provided, it
          * will default to the time at which the cadence was created in UTC timezone.
          */
@@ -690,24 +665,23 @@ public class CadenceCreateParams extends ApiRequestParams {
          * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
 
-        private Time(
-            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
+        private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
@@ -721,11 +695,11 @@ public class CadenceCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Integer hour;
+          private Long hour;
 
-          private Integer minute;
+          private Long minute;
 
-          private Integer second;
+          private Long second;
 
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Month.Time build() {
@@ -765,7 +739,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
            * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
            */
-          public Builder setHour(Integer hour) {
+          public Builder setHour(Long hour) {
             this.hour = hour;
             return this;
           }
@@ -774,7 +748,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setMinute(Integer minute) {
+          public Builder setMinute(Long minute) {
             this.minute = minute;
             return this;
           }
@@ -783,7 +757,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setSecond(Integer second) {
+          public Builder setSecond(Long second) {
             this.second = second;
             return this;
           }
@@ -800,7 +774,7 @@ public class CadenceCreateParams extends ApiRequestParams {
        * numbering. If not provided, this will default to the day the cadence was created.
        */
       @SerializedName("day_of_week")
-      Integer dayOfWeek;
+      Long dayOfWeek;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -818,7 +792,7 @@ public class CadenceCreateParams extends ApiRequestParams {
       @SerializedName("time")
       Time time;
 
-      private Week(Integer dayOfWeek, Map<String, Object> extraParams, Time time) {
+      private Week(Long dayOfWeek, Map<String, Object> extraParams, Time time) {
         this.dayOfWeek = dayOfWeek;
         this.extraParams = extraParams;
         this.time = time;
@@ -829,7 +803,7 @@ public class CadenceCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Integer dayOfWeek;
+        private Long dayOfWeek;
 
         private Map<String, Object> extraParams;
 
@@ -846,7 +820,7 @@ public class CadenceCreateParams extends ApiRequestParams {
          * Numbered from 1-7 for Monday to Sunday respectively, based on the ISO-8601 week day
          * numbering. If not provided, this will default to the day the cadence was created.
          */
-        public Builder setDayOfWeek(Integer dayOfWeek) {
+        public Builder setDayOfWeek(Long dayOfWeek) {
           this.dayOfWeek = dayOfWeek;
           return this;
         }
@@ -907,24 +881,23 @@ public class CadenceCreateParams extends ApiRequestParams {
          * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
 
-        private Time(
-            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
+        private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
@@ -938,11 +911,11 @@ public class CadenceCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Integer hour;
+          private Long hour;
 
-          private Integer minute;
+          private Long minute;
 
-          private Integer second;
+          private Long second;
 
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Week.Time build() {
@@ -982,7 +955,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
            * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
            */
-          public Builder setHour(Integer hour) {
+          public Builder setHour(Long hour) {
             this.hour = hour;
             return this;
           }
@@ -991,7 +964,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setMinute(Integer minute) {
+          public Builder setMinute(Long minute) {
             this.minute = minute;
             return this;
           }
@@ -1000,7 +973,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setSecond(Integer second) {
+          public Builder setSecond(Long second) {
             this.second = second;
             return this;
           }
@@ -1018,7 +991,7 @@ public class CadenceCreateParams extends ApiRequestParams {
        * created.
        */
       @SerializedName("day_of_month")
-      Integer dayOfMonth;
+      Long dayOfMonth;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1034,7 +1007,7 @@ public class CadenceCreateParams extends ApiRequestParams {
        * was created.
        */
       @SerializedName("month_of_year")
-      Integer monthOfYear;
+      Long monthOfYear;
 
       /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
@@ -1043,8 +1016,7 @@ public class CadenceCreateParams extends ApiRequestParams {
       @SerializedName("time")
       Time time;
 
-      private Year(
-          Integer dayOfMonth, Map<String, Object> extraParams, Integer monthOfYear, Time time) {
+      private Year(Long dayOfMonth, Map<String, Object> extraParams, Long monthOfYear, Time time) {
         this.dayOfMonth = dayOfMonth;
         this.extraParams = extraParams;
         this.monthOfYear = monthOfYear;
@@ -1056,11 +1028,11 @@ public class CadenceCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Integer dayOfMonth;
+        private Long dayOfMonth;
 
         private Map<String, Object> extraParams;
 
-        private Integer monthOfYear;
+        private Long monthOfYear;
 
         private Time time;
 
@@ -1076,7 +1048,7 @@ public class CadenceCreateParams extends ApiRequestParams {
          * anchor to the last day of the month. If not provided, this will default to the day the
          * cadence was created.
          */
-        public Builder setDayOfMonth(Integer dayOfMonth) {
+        public Builder setDayOfMonth(Long dayOfMonth) {
           this.dayOfMonth = dayOfMonth;
           return this;
         }
@@ -1113,7 +1085,7 @@ public class CadenceCreateParams extends ApiRequestParams {
          * The month to bill on from 1-12. If not provided, this will default to the month the
          * cadence was created.
          */
-        public Builder setMonthOfYear(Integer monthOfYear) {
+        public Builder setMonthOfYear(Long monthOfYear) {
           this.monthOfYear = monthOfYear;
           return this;
         }
@@ -1146,24 +1118,23 @@ public class CadenceCreateParams extends ApiRequestParams {
          * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
          */
         @SerializedName("hour")
-        Integer hour;
+        Long hour;
 
         /**
          * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("minute")
-        Integer minute;
+        Long minute;
 
         /**
          * <strong>Required.</strong> The second at which the billing cycle ends. Must be an integer
          * between 0 and 59, inclusive.
          */
         @SerializedName("second")
-        Integer second;
+        Long second;
 
-        private Time(
-            Map<String, Object> extraParams, Integer hour, Integer minute, Integer second) {
+        private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
           this.extraParams = extraParams;
           this.hour = hour;
           this.minute = minute;
@@ -1177,11 +1148,11 @@ public class CadenceCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
-          private Integer hour;
+          private Long hour;
 
-          private Integer minute;
+          private Long minute;
 
-          private Integer second;
+          private Long second;
 
           /** Finalize and obtain parameter instance from this builder. */
           public CadenceCreateParams.BillingCycle.Year.Time build() {
@@ -1221,7 +1192,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
            * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
            */
-          public Builder setHour(Integer hour) {
+          public Builder setHour(Long hour) {
             this.hour = hour;
             return this;
           }
@@ -1230,7 +1201,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setMinute(Integer minute) {
+          public Builder setMinute(Long minute) {
             this.minute = minute;
             return this;
           }
@@ -1239,7 +1210,7 @@ public class CadenceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
            * integer between 0 and 59, inclusive.
            */
-          public Builder setSecond(Integer second) {
+          public Builder setSecond(Long second) {
             this.second = second;
             return this;
           }

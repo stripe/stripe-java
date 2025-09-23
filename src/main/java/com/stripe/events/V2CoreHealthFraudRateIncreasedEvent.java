@@ -46,7 +46,7 @@ public final class V2CoreHealthFraudRateIncreasedEvent extends Event {
       String attackType;
       /** The number of impacted requests which are detected. */
       @SerializedName("impacted_requests")
-      Integer impactedRequests;
+      Long impactedRequests;
       /** Estimated aggregated amount for the impacted requests. */
       @SerializedName("realized_fraud_amount")
       Amount realizedFraudAmount;

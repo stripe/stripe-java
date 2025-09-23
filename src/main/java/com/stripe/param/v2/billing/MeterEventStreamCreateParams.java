@@ -14,10 +14,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class MeterEventStreamCreateParams extends ApiRequestParams {
-  /**
-   * <strong>Required.</strong> List of meter events to include in the request. Supports up to 100
-   * events per request.
-   */
+  /** <strong>Required.</strong> List of meter events to include in the request. */
   @SerializedName("events")
   List<MeterEventStreamCreateParams.Event> events;
 

@@ -3,6 +3,7 @@ package com.stripe.service.v2.billing.ratecards;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.DeletedObject;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.billing.RateCardRate;
 import com.stripe.net.ApiRequest;
@@ -106,14 +107,14 @@ public final class RateService extends ApiService {
    * Remove an existing Rate from a Rate Card. This will create a new Rate Card Version without that
    * Rate.
    */
-  public RateCardRate delete(String rateCardId, String id) throws StripeException {
+  public DeletedObject delete(String rateCardId, String id) throws StripeException {
     return delete(rateCardId, id, (RequestOptions) null);
   }
   /**
    * Remove an existing Rate from a Rate Card. This will create a new Rate Card Version without that
    * Rate.
    */
-  public RateCardRate delete(String rateCardId, String id, RequestOptions options)
+  public DeletedObject delete(String rateCardId, String id, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -121,7 +122,7 @@ public final class RateService extends ApiService {
             ApiResource.urlEncodeId(rateCardId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
-    return this.request(request, RateCardRate.class);
+    return this.request(request, DeletedObject.class);
   }
   /** Retrieve a Rate object. */
   public RateCardRate retrieve(String rateCardId, String id) throws StripeException {

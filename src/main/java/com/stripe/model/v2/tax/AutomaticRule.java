@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** An AutomaticRule holds automatic Tax configuration for a BillableItem. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -9,6 +9,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * BillSetting is responsible for settings which dictate generating bills, which include settings
+ * for calculating totals on bills, tax on bill items, as well as how to generate and present
+ * invoices.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -75,10 +80,7 @@ public class BillSetting extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /**
-   * For more details about Calculation, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Settings related to calculating a bill. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -87,10 +89,7 @@ public class BillSetting extends StripeObject implements HasId {
     @SerializedName("tax")
     Tax tax;
 
-    /**
-     * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** Settings for calculating tax. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -106,10 +105,7 @@ public class BillSetting extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about Invoice, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Settings related to invoice behavior. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -118,10 +114,7 @@ public class BillSetting extends StripeObject implements HasId {
     @SerializedName("time_until_due")
     TimeUntilDue timeUntilDue;
 
-    /**
-     * For more details about TimeUntilDue, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The amount of time until the invoice will be overdue for payment. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -139,7 +132,7 @@ public class BillSetting extends StripeObject implements HasId {
        * invoice will be due in 30 days.
        */
       @SerializedName("interval_count")
-      Integer intervalCount;
+      Long intervalCount;
     }
   }
 }

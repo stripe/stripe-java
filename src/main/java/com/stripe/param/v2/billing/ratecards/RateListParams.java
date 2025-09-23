@@ -22,7 +22,7 @@ public class RateListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /** Optionally filter by a Metered Item. */
   @SerializedName("metered_item")
@@ -33,7 +33,7 @@ public class RateListParams extends ApiRequestParams {
   String rateCardVersion;
 
   private RateListParams(
-      Map<String, Object> extraParams, Integer limit, String meteredItem, String rateCardVersion) {
+      Map<String, Object> extraParams, Long limit, String meteredItem, String rateCardVersion) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.meteredItem = meteredItem;
@@ -47,7 +47,7 @@ public class RateListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private String meteredItem;
 
@@ -86,7 +86,7 @@ public class RateListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

@@ -28,14 +28,14 @@ public class RateCardListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /** Filter by lookup keys. You can specify up to 10 lookup keys. */
   @SerializedName("lookup_keys")
   List<String> lookupKeys;
 
   private RateCardListParams(
-      Boolean active, Map<String, Object> extraParams, Integer limit, List<String> lookupKeys) {
+      Boolean active, Map<String, Object> extraParams, Long limit, List<String> lookupKeys) {
     this.active = active;
     this.extraParams = extraParams;
     this.limit = limit;
@@ -51,7 +51,7 @@ public class RateCardListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private List<String> lookupKeys;
 
@@ -93,7 +93,7 @@ public class RateCardListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

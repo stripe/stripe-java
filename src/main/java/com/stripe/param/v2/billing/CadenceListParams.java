@@ -28,7 +28,7 @@ public class CadenceListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * If provided, only cadences that specifically reference the payer will be returned. Mutually
@@ -47,7 +47,7 @@ public class CadenceListParams extends ApiRequestParams {
   private CadenceListParams(
       Map<String, Object> extraParams,
       List<CadenceListParams.Include> include,
-      Integer limit,
+      Long limit,
       Payer payer,
       String testClock) {
     this.extraParams = extraParams;
@@ -66,7 +66,7 @@ public class CadenceListParams extends ApiRequestParams {
 
     private List<CadenceListParams.Include> include;
 
-    private Integer limit;
+    private Long limit;
 
     private Payer payer;
 
@@ -131,7 +131,7 @@ public class CadenceListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

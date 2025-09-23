@@ -30,7 +30,7 @@ public class CustomPricingUnitListParams extends ApiRequestParams {
 
   /** Optionally set the maximum number of results per page. Defaults to 20. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /**
    * Filter by lookup keys. Mutually exclusive with {@code active}. You can specify up to 10 lookup
@@ -40,7 +40,7 @@ public class CustomPricingUnitListParams extends ApiRequestParams {
   List<String> lookupKeys;
 
   private CustomPricingUnitListParams(
-      Boolean active, Map<String, Object> extraParams, Integer limit, List<String> lookupKeys) {
+      Boolean active, Map<String, Object> extraParams, Long limit, List<String> lookupKeys) {
     this.active = active;
     this.extraParams = extraParams;
     this.limit = limit;
@@ -56,7 +56,7 @@ public class CustomPricingUnitListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private List<String> lookupKeys;
 
@@ -101,7 +101,7 @@ public class CustomPricingUnitListParams extends ApiRequestParams {
     }
 
     /** Optionally set the maximum number of results per page. Defaults to 20. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

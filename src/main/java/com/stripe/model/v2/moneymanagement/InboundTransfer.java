@@ -7,10 +7,15 @@ import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * An InboundTransfer object, representing a money movement from a user owned PaymentMethod to a
+ * FinancialAccount belonging to the same user.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -70,10 +75,7 @@ public class InboundTransfer extends StripeObject implements HasId {
   @SerializedName("transfer_history")
   List<InboundTransfer.TransferHistory> transferHistory;
 
-  /**
-   * For more details about From, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** A nested object containing information about the origin of the InboundTransfer. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -86,10 +88,7 @@ public class InboundTransfer extends StripeObject implements HasId {
     @SerializedName("payment_method")
     PaymentMethod paymentMethod;
 
-    /**
-     * For more details about PaymentMethod, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The Payment Method object used to create the InboundTransfer. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -107,10 +106,7 @@ public class InboundTransfer extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about To, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** A nested object containing information about the destination of the InboundTransfer. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -138,11 +134,11 @@ public class InboundTransfer extends StripeObject implements HasId {
 
     /** The history entry for a processing InboundTransfer. */
     @SerializedName("bank_debit_processing")
-    BankDebitProcessing bankDebitProcessing;
+    Map<String, Object> bankDebitProcessing;
 
     /** The history entry for a queued InboundTransfer. */
     @SerializedName("bank_debit_queued")
-    BankDebitQueued bankDebitQueued;
+    Map<String, Object> bankDebitQueued;
 
     /** The history entry for a returned InboundTransfer. */
     @SerializedName("bank_debit_returned")
@@ -150,7 +146,7 @@ public class InboundTransfer extends StripeObject implements HasId {
 
     /** The history entry for a succeeded InboundTransfer. */
     @SerializedName("bank_debit_succeeded")
-    BankDebitSucceeded bankDebitSucceeded;
+    Map<String, Object> bankDebitSucceeded;
 
     /** Creation time of the HistoryEntry in RFC 3339 format and UTC. */
     @SerializedName("created")
@@ -182,10 +178,7 @@ public class InboundTransfer extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about BankDebitFailed, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The history entry for a failed InboundTransfer. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -201,28 +194,7 @@ public class InboundTransfer extends StripeObject implements HasId {
       String failureReason;
     }
 
-    /**
-     * For more details about BankDebitProcessing, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BankDebitProcessing extends StripeObject {}
-
-    /**
-     * For more details about BankDebitQueued, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BankDebitQueued extends StripeObject {}
-
-    /**
-     * For more details about BankDebitReturned, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The history entry for a returned InboundTransfer. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -237,14 +209,5 @@ public class InboundTransfer extends StripeObject implements HasId {
       @SerializedName("return_reason")
       String returnReason;
     }
-
-    /**
-     * For more details about BankDebitSucceeded, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BankDebitSucceeded extends StripeObject {}
   }
 }

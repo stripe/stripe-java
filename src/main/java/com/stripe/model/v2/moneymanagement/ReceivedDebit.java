@@ -10,6 +10,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** ReceivedDebit resource. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -91,8 +92,8 @@ public class ReceivedDebit extends StripeObject implements HasId {
   String type;
 
   /**
-   * For more details about BankTransfer, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * This object stores details about the originating banking transaction that resulted in the
+   * ReceivedDebit. Present if {@code type} field value is {@code bank_transfer}.
    */
   @Getter
   @Setter
@@ -118,10 +119,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
-    /**
-     * For more details about UsBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The payment method used to originate the debit. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -144,10 +142,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about StatusDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Detailed information about the status of the ReceivedDebit. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -160,8 +155,8 @@ public class ReceivedDebit extends StripeObject implements HasId {
     Failed failed;
 
     /**
-     * For more details about Failed, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * Information that elaborates on the {@code failed} status of a ReceivedDebit. It is only
+     * present when the ReceivedDebit status is {@code failed}.
      */
     @Getter
     @Setter
@@ -178,10 +173,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about StatusTransitions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** The time at which the ReceivedDebit transitioned to a particular status. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

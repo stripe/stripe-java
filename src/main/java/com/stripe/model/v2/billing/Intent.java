@@ -62,10 +62,7 @@ public class Intent extends StripeObject implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
-  /**
-   * For more details about AmountDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Breakdown of the amount for this Billing Intent. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -95,10 +92,7 @@ public class Intent extends StripeObject implements HasId {
     String total;
   }
 
-  /**
-   * For more details about StatusTransitions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Timestamps for status transitions of the Billing Intent. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** The required storer capabilities are missing. */
+/** Information about the error that occurred. */
 public final class FeatureNotEnabledException extends ApiException {
   private static final long serialVersionUID = 2L;
 

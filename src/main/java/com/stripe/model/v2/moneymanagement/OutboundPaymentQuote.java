@@ -12,6 +12,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * OutboundPaymentQuote represents a quote that provides fee and amount estimates for
+ * OutboundPayment.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -68,10 +72,7 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
   @SerializedName("to")
   To to;
 
-  /**
-   * For more details about DeliveryOptions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Delivery options to be used to send the OutboundPayment. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -107,10 +108,7 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     String type;
   }
 
-  /**
-   * For more details about From, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details about the sender of an OutboundPaymentQuote. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -124,10 +122,7 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     String financialAccount;
   }
 
-  /**
-   * For more details about FxQuote, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** The underlying FXQuote details for the OutboundPaymentQuote. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -176,10 +171,7 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about To, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details about the recipient of an OutboundPaymentQuote. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

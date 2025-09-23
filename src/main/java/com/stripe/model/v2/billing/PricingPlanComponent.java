@@ -79,10 +79,7 @@ public class PricingPlanComponent extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
-  /**
-   * For more details about LicenseFee, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Details if this component is a License Fee. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -97,10 +94,7 @@ public class PricingPlanComponent extends StripeObject implements HasId {
     String version;
   }
 
-  /**
-   * For more details about RateCard, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details if this component is a Rate Card. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -115,10 +109,7 @@ public class PricingPlanComponent extends StripeObject implements HasId {
     String version;
   }
 
-  /**
-   * For more details about ServiceAction, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Details if this component is a Service Action. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

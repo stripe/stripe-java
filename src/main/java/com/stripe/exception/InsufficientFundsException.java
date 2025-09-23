@@ -6,10 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/**
- * Error returned when the balance of provided financial account and balance type in the
- * OutboundPayment/OutboundTransfer request does not have enough funds.
- */
+/** Information about the error that occurred. */
 public final class InsufficientFundsException extends ApiException {
   private static final long serialVersionUID = 2L;
 

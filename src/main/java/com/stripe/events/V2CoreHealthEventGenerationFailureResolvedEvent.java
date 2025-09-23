@@ -47,7 +47,7 @@ public final class V2CoreHealthEventGenerationFailureResolvedEvent extends Event
       Boolean livemode;
       /** The number of webhooks that Stripe failed to create and deliver. */
       @SerializedName("missing_delivery_attempts")
-      Integer missingDeliveryAttempts;
+      Long missingDeliveryAttempts;
       /** The related object id. */
       @SerializedName("related_object_id")
       String relatedObjectId;

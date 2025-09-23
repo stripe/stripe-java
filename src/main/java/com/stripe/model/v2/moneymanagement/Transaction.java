@@ -10,6 +10,13 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Use Transactions to view changes to your FinancialAccount balance over time. Every flow that
+ * moves money, such as OutboundPayments or ReceivedCredits, will have one or more Transactions that
+ * describes how the flow impacted your balance. Note that while the FinancialAccount balance will
+ * always be up to date, be aware that Transactions and TransactionEntries are created shortly after
+ * to reflect changes.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -88,8 +95,8 @@ public class Transaction extends StripeObject implements HasId {
   StatusTransitions statusTransitions;
 
   /**
-   * For more details about BalanceImpact, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * The delta to the FinancialAccount's balance. The balance_impact for the Transaction is equal to
+   * sum of its TransactionEntries that have {@code effective_at}s in the past.
    */
   @Getter
   @Setter
@@ -108,10 +115,7 @@ public class Transaction extends StripeObject implements HasId {
     Amount outboundPending;
   }
 
-  /**
-   * For more details about Flow, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Details about the Flow object that created the Transaction. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -163,10 +167,7 @@ public class Transaction extends StripeObject implements HasId {
     String type;
   }
 
-  /**
-   * For more details about StatusTransitions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Timestamps for when the Transaction transitioned to a particular status. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

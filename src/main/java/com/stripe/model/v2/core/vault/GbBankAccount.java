@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Use the GBBankAccounts API to create and manage GB bank account objects. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -76,8 +77,9 @@ public class GbBankAccount extends StripeObject implements HasId {
   String sortCode;
 
   /**
-   * For more details about ConfirmationOfPayee, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * Information around the status of Confirmation of Payee matching done on this bank account.
+   * Confirmation of Payee is a name matching service that must be done before making
+   * OutboundPayments in the UK.
    */
   @Getter
   @Setter
@@ -99,8 +101,8 @@ public class GbBankAccount extends StripeObject implements HasId {
     String status;
 
     /**
-     * For more details about Result, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * The result of the Confirmation of Payee check, once the check has been initiated. Closed
+     * enum.
      */
     @Getter
     @Setter
@@ -135,8 +137,8 @@ public class GbBankAccount extends StripeObject implements HasId {
       Provided provided;
 
       /**
-       * For more details about Matched, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The fields that CoP service matched against. Only has value if MATCH or PARTIAL_MATCH,
+       * empty otherwise.
        */
       @Getter
       @Setter
@@ -156,10 +158,7 @@ public class GbBankAccount extends StripeObject implements HasId {
         String name;
       }
 
-      /**
-       * For more details about Provided, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The fields that are matched against what the network has on file. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
