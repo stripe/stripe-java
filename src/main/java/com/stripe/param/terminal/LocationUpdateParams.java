@@ -22,6 +22,14 @@ public class LocationUpdateParams extends ApiRequestParams {
   @SerializedName("address")
   Address address;
 
+  /** The Kana variation of the full address of the location (Japan only). */
+  @SerializedName("address_kana")
+  AddressKana addressKana;
+
+  /** The Kanji variation of the full address of the location (Japan only). */
+  @SerializedName("address_kanji")
+  AddressKanji addressKanji;
+
   /** The ID of a configuration that will be used to customize all readers in this location. */
   @SerializedName("configuration_overrides")
   Object configurationOverrides;
@@ -29,6 +37,14 @@ public class LocationUpdateParams extends ApiRequestParams {
   /** A name for the location. */
   @SerializedName("display_name")
   Object displayName;
+
+  /** The Kana variation of the name for the location (Japan only). */
+  @SerializedName("display_name_kana")
+  Object displayNameKana;
+
+  /** The Kanji variation of the name for the location (Japan only). */
+  @SerializedName("display_name_kanji")
+  Object displayNameKanji;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -52,19 +68,33 @@ public class LocationUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /** The phone number for the location. */
+  @SerializedName("phone")
+  Object phone;
+
   private LocationUpdateParams(
       Address address,
+      AddressKana addressKana,
+      AddressKanji addressKanji,
       Object configurationOverrides,
       Object displayName,
+      Object displayNameKana,
+      Object displayNameKanji,
       List<String> expand,
       Map<String, Object> extraParams,
-      Object metadata) {
+      Object metadata,
+      Object phone) {
     this.address = address;
+    this.addressKana = addressKana;
+    this.addressKanji = addressKanji;
     this.configurationOverrides = configurationOverrides;
     this.displayName = displayName;
+    this.displayNameKana = displayNameKana;
+    this.displayNameKanji = displayNameKanji;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.phone = phone;
   }
 
   public static Builder builder() {
@@ -74,9 +104,17 @@ public class LocationUpdateParams extends ApiRequestParams {
   public static class Builder {
     private Address address;
 
+    private AddressKana addressKana;
+
+    private AddressKanji addressKanji;
+
     private Object configurationOverrides;
 
     private Object displayName;
+
+    private Object displayNameKana;
+
+    private Object displayNameKanji;
 
     private List<String> expand;
 
@@ -84,15 +122,22 @@ public class LocationUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Object phone;
+
     /** Finalize and obtain parameter instance from this builder. */
     public LocationUpdateParams build() {
       return new LocationUpdateParams(
           this.address,
+          this.addressKana,
+          this.addressKanji,
           this.configurationOverrides,
           this.displayName,
+          this.displayNameKana,
+          this.displayNameKanji,
           this.expand,
           this.extraParams,
-          this.metadata);
+          this.metadata,
+          this.phone);
     }
 
     /**
@@ -102,6 +147,18 @@ public class LocationUpdateParams extends ApiRequestParams {
      */
     public Builder setAddress(LocationUpdateParams.Address address) {
       this.address = address;
+      return this;
+    }
+
+    /** The Kana variation of the full address of the location (Japan only). */
+    public Builder setAddressKana(LocationUpdateParams.AddressKana addressKana) {
+      this.addressKana = addressKana;
+      return this;
+    }
+
+    /** The Kanji variation of the full address of the location (Japan only). */
+    public Builder setAddressKanji(LocationUpdateParams.AddressKanji addressKanji) {
+      this.addressKanji = addressKanji;
       return this;
     }
 
@@ -126,6 +183,30 @@ public class LocationUpdateParams extends ApiRequestParams {
     /** A name for the location. */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;
+      return this;
+    }
+
+    /** The Kana variation of the name for the location (Japan only). */
+    public Builder setDisplayNameKana(String displayNameKana) {
+      this.displayNameKana = displayNameKana;
+      return this;
+    }
+
+    /** The Kana variation of the name for the location (Japan only). */
+    public Builder setDisplayNameKana(EmptyParam displayNameKana) {
+      this.displayNameKana = displayNameKana;
+      return this;
+    }
+
+    /** The Kanji variation of the name for the location (Japan only). */
+    public Builder setDisplayNameKanji(String displayNameKanji) {
+      this.displayNameKanji = displayNameKanji;
+      return this;
+    }
+
+    /** The Kanji variation of the name for the location (Japan only). */
+    public Builder setDisplayNameKanji(EmptyParam displayNameKanji) {
+      this.displayNameKanji = displayNameKanji;
       return this;
     }
 
@@ -230,6 +311,18 @@ public class LocationUpdateParams extends ApiRequestParams {
       this.metadata = metadata;
       return this;
     }
+
+    /** The phone number for the location. */
+    public Builder setPhone(String phone) {
+      this.phone = phone;
+      return this;
+    }
+
+    /** The phone number for the location. */
+    public Builder setPhone(EmptyParam phone) {
+      this.phone = phone;
+      return this;
+    }
   }
 
   @Getter
@@ -255,11 +348,11 @@ public class LocationUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Address line 1 (e.g., street, PO Box, or company name). */
+    /** Address line 1, such as the street, PO Box, or company name. */
     @SerializedName("line1")
     Object line1;
 
-    /** Address line 2 (e.g., apartment, suite, unit, or building). */
+    /** Address line 2, such as the apartment, suite, unit, or building. */
     @SerializedName("line2")
     Object line2;
 
@@ -375,25 +468,25 @@ public class LocationUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       public Builder setLine1(String line1) {
         this.line1 = line1;
         return this;
       }
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       public Builder setLine1(EmptyParam line1) {
         this.line1 = line1;
         return this;
       }
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       public Builder setLine2(String line2) {
         this.line2 = line2;
         return this;
       }
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       public Builder setLine2(EmptyParam line2) {
         this.line2 = line2;
         return this;
@@ -420,6 +513,434 @@ public class LocationUpdateParams extends ApiRequestParams {
       /** State, county, province, or region. */
       public Builder setState(EmptyParam state) {
         this.state = state;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AddressKana {
+    /** City or ward. */
+    @SerializedName("city")
+    Object city;
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    @SerializedName("country")
+    Object country;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Block or building number. */
+    @SerializedName("line1")
+    Object line1;
+
+    /** Building details. */
+    @SerializedName("line2")
+    Object line2;
+
+    /** Postal code. */
+    @SerializedName("postal_code")
+    Object postalCode;
+
+    /** Prefecture. */
+    @SerializedName("state")
+    Object state;
+
+    /** Town or cho-me. */
+    @SerializedName("town")
+    Object town;
+
+    private AddressKana(
+        Object city,
+        Object country,
+        Map<String, Object> extraParams,
+        Object line1,
+        Object line2,
+        Object postalCode,
+        Object state,
+        Object town) {
+      this.city = city;
+      this.country = country;
+      this.extraParams = extraParams;
+      this.line1 = line1;
+      this.line2 = line2;
+      this.postalCode = postalCode;
+      this.state = state;
+      this.town = town;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object city;
+
+      private Object country;
+
+      private Map<String, Object> extraParams;
+
+      private Object line1;
+
+      private Object line2;
+
+      private Object postalCode;
+
+      private Object state;
+
+      private Object town;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public LocationUpdateParams.AddressKana build() {
+        return new LocationUpdateParams.AddressKana(
+            this.city,
+            this.country,
+            this.extraParams,
+            this.line1,
+            this.line2,
+            this.postalCode,
+            this.state,
+            this.town);
+      }
+
+      /** City or ward. */
+      public Builder setCity(String city) {
+        this.city = city;
+        return this;
+      }
+
+      /** City or ward. */
+      public Builder setCity(EmptyParam city) {
+        this.city = city;
+        return this;
+      }
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      public Builder setCountry(EmptyParam country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * LocationUpdateParams.AddressKana#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link LocationUpdateParams.AddressKana#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Block or building number. */
+      public Builder setLine1(String line1) {
+        this.line1 = line1;
+        return this;
+      }
+
+      /** Block or building number. */
+      public Builder setLine1(EmptyParam line1) {
+        this.line1 = line1;
+        return this;
+      }
+
+      /** Building details. */
+      public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      /** Building details. */
+      public Builder setLine2(EmptyParam line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      /** Postal code. */
+      public Builder setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
+      /** Postal code. */
+      public Builder setPostalCode(EmptyParam postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
+      /** Prefecture. */
+      public Builder setState(String state) {
+        this.state = state;
+        return this;
+      }
+
+      /** Prefecture. */
+      public Builder setState(EmptyParam state) {
+        this.state = state;
+        return this;
+      }
+
+      /** Town or cho-me. */
+      public Builder setTown(String town) {
+        this.town = town;
+        return this;
+      }
+
+      /** Town or cho-me. */
+      public Builder setTown(EmptyParam town) {
+        this.town = town;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AddressKanji {
+    /** City or ward. */
+    @SerializedName("city")
+    Object city;
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    @SerializedName("country")
+    Object country;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Block or building number. */
+    @SerializedName("line1")
+    Object line1;
+
+    /** Building details. */
+    @SerializedName("line2")
+    Object line2;
+
+    /** Postal code. */
+    @SerializedName("postal_code")
+    Object postalCode;
+
+    /** Prefecture. */
+    @SerializedName("state")
+    Object state;
+
+    /** Town or cho-me. */
+    @SerializedName("town")
+    Object town;
+
+    private AddressKanji(
+        Object city,
+        Object country,
+        Map<String, Object> extraParams,
+        Object line1,
+        Object line2,
+        Object postalCode,
+        Object state,
+        Object town) {
+      this.city = city;
+      this.country = country;
+      this.extraParams = extraParams;
+      this.line1 = line1;
+      this.line2 = line2;
+      this.postalCode = postalCode;
+      this.state = state;
+      this.town = town;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object city;
+
+      private Object country;
+
+      private Map<String, Object> extraParams;
+
+      private Object line1;
+
+      private Object line2;
+
+      private Object postalCode;
+
+      private Object state;
+
+      private Object town;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public LocationUpdateParams.AddressKanji build() {
+        return new LocationUpdateParams.AddressKanji(
+            this.city,
+            this.country,
+            this.extraParams,
+            this.line1,
+            this.line2,
+            this.postalCode,
+            this.state,
+            this.town);
+      }
+
+      /** City or ward. */
+      public Builder setCity(String city) {
+        this.city = city;
+        return this;
+      }
+
+      /** City or ward. */
+      public Builder setCity(EmptyParam city) {
+        this.city = city;
+        return this;
+      }
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
+       */
+      public Builder setCountry(EmptyParam country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * LocationUpdateParams.AddressKanji#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link LocationUpdateParams.AddressKanji#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Block or building number. */
+      public Builder setLine1(String line1) {
+        this.line1 = line1;
+        return this;
+      }
+
+      /** Block or building number. */
+      public Builder setLine1(EmptyParam line1) {
+        this.line1 = line1;
+        return this;
+      }
+
+      /** Building details. */
+      public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      /** Building details. */
+      public Builder setLine2(EmptyParam line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      /** Postal code. */
+      public Builder setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
+      /** Postal code. */
+      public Builder setPostalCode(EmptyParam postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
+      /** Prefecture. */
+      public Builder setState(String state) {
+        this.state = state;
+        return this;
+      }
+
+      /** Prefecture. */
+      public Builder setState(EmptyParam state) {
+        this.state = state;
+        return this;
+      }
+
+      /** Town or cho-me. */
+      public Builder setTown(String town) {
+        this.town = town;
+        return this;
+      }
+
+      /** Town or cho-me. */
+      public Builder setTown(EmptyParam town) {
+        this.town = town;
         return this;
       }
     }

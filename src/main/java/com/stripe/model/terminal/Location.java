@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -33,6 +34,12 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   @SerializedName("address")
   Address address;
 
+  @SerializedName("address_kana")
+  AddressKana addressKana;
+
+  @SerializedName("address_kanji")
+  AddressKanji addressKanji;
+
   /** The ID of a configuration that will be used to customize all readers in this location. */
   @SerializedName("configuration_overrides")
   String configurationOverrides;
@@ -44,6 +51,14 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   /** The display name of the location. */
   @SerializedName("display_name")
   String displayName;
+
+  /** The Kana variation of the display name of the location. */
+  @SerializedName("display_name_kana")
+  String displayNameKana;
+
+  /** The Kanji variation of the display name of the location. */
+  @SerializedName("display_name_kanji")
+  String displayNameKanji;
 
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
@@ -73,6 +88,10 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
    */
   @SerializedName("object")
   String object;
+
+  /** The phone number of the location. */
+  @SerializedName("phone")
+  String phone;
 
   /**
    * Creates a new {@code Location} object. For further details, including which address fields are
@@ -265,9 +284,91 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
     return getResponseGetter().request(request, Location.class);
   }
 
+  /**
+   * For more details about AddressKana, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AddressKana extends StripeObject {
+    /** City/Ward. */
+    @SerializedName("city")
+    String city;
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Block/Building number. */
+    @SerializedName("line1")
+    String line1;
+
+    /** Building details. */
+    @SerializedName("line2")
+    String line2;
+
+    /** ZIP or postal code. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /** Prefecture. */
+    @SerializedName("state")
+    String state;
+
+    /** Town/cho-me. */
+    @SerializedName("town")
+    String town;
+  }
+
+  /**
+   * For more details about AddressKanji, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AddressKanji extends StripeObject {
+    /** City/Ward. */
+    @SerializedName("city")
+    String city;
+
+    /**
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Block/Building number. */
+    @SerializedName("line1")
+    String line1;
+
+    /** Building details. */
+    @SerializedName("line2")
+    String line2;
+
+    /** ZIP or postal code. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /** Prefecture. */
+    @SerializedName("state")
+    String state;
+
+    /** Town/cho-me. */
+    @SerializedName("town")
+    String town;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(address, responseGetter);
+    trySetResponseGetter(addressKana, responseGetter);
+    trySetResponseGetter(addressKanji, responseGetter);
   }
 }

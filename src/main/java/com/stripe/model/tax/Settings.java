@@ -150,6 +150,15 @@ public class Settings extends ApiResource {
   @EqualsAndHashCode(callSuper = false)
   public static class Defaults extends StripeObject {
     /**
+     * The tax calculation provider this account uses. Defaults to {@code stripe} when not using a
+     * <a href="https://stripe.com/tax/third-party-apps">third-party provider</a>.
+     *
+     * <p>One of {@code anrok}, {@code avalara}, {@code sphere}, or {@code stripe}.
+     */
+    @SerializedName("provider")
+    String provider;
+
+    /**
      * Default <a
      * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#tax-behavior">tax
      * behavior</a> used to specify whether the price is considered inclusive of taxes or exclusive

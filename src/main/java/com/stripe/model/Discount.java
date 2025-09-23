@@ -27,19 +27,6 @@ public class Discount extends StripeObject implements HasId {
   @SerializedName("checkout_session")
   String checkoutSession;
 
-  /**
-   * A coupon contains information about a percent-off or amount-off discount you might want to
-   * apply to a customer. Coupons may be applied to <a
-   * href="https://stripe.com/docs/api#subscriptions">subscriptions</a>, <a
-   * href="https://stripe.com/docs/api#invoices">invoices</a>, <a
-   * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a>, <a
-   * href="https://stripe.com/docs/api#quotes">quotes</a>, and more. Coupons do not work with
-   * conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a> or <a
-   * href="https://stripe.com/docs/api/payment_intents">payment intents</a>.
-   */
-  @SerializedName("coupon")
-  Coupon coupon;
-
   /** The ID of the customer associated with this discount. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -94,6 +81,9 @@ public class Discount extends StripeObject implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PromotionCode> promotionCode;
 
+  @SerializedName("source")
+  Source source;
+
   /** Date that the coupon was applied. */
   @SerializedName("start")
   Long start;
@@ -146,5 +136,46 @@ public class Discount extends StripeObject implements HasId {
   public void setPromotionCodeObject(PromotionCode expandableObject) {
     this.promotionCode =
         new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * For more details about Source, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Source extends StripeObject {
+    /** The coupon that was redeemed to create this discount. */
+    @SerializedName("coupon")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Coupon> coupon;
+
+    /**
+     * The source type of the discount.
+     *
+     * <p>Equal to {@code coupon}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** Get ID of expandable {@code coupon} object. */
+    public String getCoupon() {
+      return (this.coupon != null) ? this.coupon.getId() : null;
+    }
+
+    public void setCoupon(String id) {
+      this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
+    }
+
+    /** Get expanded {@code coupon}. */
+    public Coupon getCouponObject() {
+      return (this.coupon != null) ? this.coupon.getExpanded() : null;
+    }
+
+    public void setCouponObject(Coupon expandableObject) {
+      this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+    }
   }
 }
