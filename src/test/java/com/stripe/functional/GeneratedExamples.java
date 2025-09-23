@@ -12811,55 +12811,6 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testPromotionCodesPost() throws StripeException {
-    PromotionCodeCreateParams params =
-        PromotionCodeCreateParams.builder().setCoupon("Z4OV52SU").build();
-
-    PromotionCode promotionCode = PromotionCode.create(params);
-    assertNotNull(promotionCode);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/promotion_codes",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testPromotionCodesPostServices() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.PromotionCodeCreateParams params =
-        com.stripe.param.PromotionCodeCreateParams.builder().setCoupon("Z4OV52SU").build();
-
-    com.stripe.model.PromotionCode promotionCode = client.v1().promotionCodes().create(params);
-    assertNotNull(promotionCode);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/promotion_codes",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testPromotionCodesPostServicesNonNamespaced() throws StripeException {
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.PromotionCodeCreateParams params =
-        com.stripe.param.PromotionCodeCreateParams.builder().setCoupon("Z4OV52SU").build();
-
-    com.stripe.model.PromotionCode promotionCode = client.promotionCodes().create(params);
-    assertNotNull(promotionCode);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v1/promotion_codes",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testPromotionCodesPost2() throws StripeException {
     PromotionCode resource = PromotionCode.retrieve("promo_xxxxxxxxxxxxx");
 
     PromotionCodeUpdateParams params =
@@ -12876,7 +12827,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testPromotionCodesPost2Services() throws StripeException {
+  public void testPromotionCodesPostServices() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.PromotionCodeUpdateParams params =
@@ -12896,7 +12847,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testPromotionCodesPost2ServicesNonNamespaced() throws StripeException {
+  public void testPromotionCodesPostServicesNonNamespaced() throws StripeException {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.PromotionCodeUpdateParams params =
