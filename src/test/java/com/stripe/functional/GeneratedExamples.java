@@ -16017,7 +16017,6 @@ class GeneratedExamples extends BaseStripeTest {
                             .setPrice("price_xxxxxxxxxxxxx")
                             .setQuantity(1L)
                             .build())
-                    .setIterations(12L)
                     .build())
             .build();
 
@@ -16047,7 +16046,6 @@ class GeneratedExamples extends BaseStripeTest {
                             .setPrice("price_xxxxxxxxxxxxx")
                             .setQuantity(1L)
                             .build())
-                    .setIterations(12L)
                     .build())
             .build();
 
@@ -16078,7 +16076,6 @@ class GeneratedExamples extends BaseStripeTest {
                             .setPrice("price_xxxxxxxxxxxxx")
                             .setQuantity(1L)
                             .build())
-                    .setIterations(12L)
                     .build())
             .build();
 
@@ -24588,7 +24585,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.DeletedObject.class,
-        "{\"id\":\"abc_123\",\"object\":\"some.object.tag\",\"deleted\":true}");
+        "{\"id\":\"abc_123\",\"object\":\"some.object.tag\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.DeletedObject deletedObject =
