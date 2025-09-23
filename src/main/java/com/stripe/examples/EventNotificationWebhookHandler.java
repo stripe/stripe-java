@@ -18,13 +18,13 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Receive and process thin events like the v1.billing.meter.error_report_triggered event.
+ * Receive and process EventNotifications like the v1.billing.meter.error_report_triggered event.
  *
  * <p>In this example, we:
  *
  * <ul>
- *   <li>use parseThinEvent to parse the received thin event webhook body
- *   <li>call StripeClient.v2.core.events.retrieve to retrieve the flil event object
+ *   <li>use parseEventNotification to parse the received event notification webhook body
+ *   <li>call StripeClient.v2.core.events.retrieve to retrieve the full event object
  *   <li>if it is a V1BillingMeterErrorReportTriggeredEvent event type, call fetchRelatedObject to
  *       retrieve the Billing Meter object associated with the event.
  * </ul>
