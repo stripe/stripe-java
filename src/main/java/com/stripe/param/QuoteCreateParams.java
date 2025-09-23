@@ -2110,15 +2110,20 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Configure behavior for flexible billing mode. */
+      @SerializedName("flexible")
+      Flexible flexible;
+
       /**
        * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-       * invoices for subscriptions.
+       * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
        */
       @SerializedName("type")
       Type type;
 
-      private BillingMode(Map<String, Object> extraParams, Type type) {
+      private BillingMode(Map<String, Object> extraParams, Flexible flexible, Type type) {
         this.extraParams = extraParams;
+        this.flexible = flexible;
         this.type = type;
       }
 
@@ -2129,11 +2134,14 @@ public class QuoteCreateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Flexible flexible;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public QuoteCreateParams.SubscriptionData.BillingMode build() {
-          return new QuoteCreateParams.SubscriptionData.BillingMode(this.extraParams, this.type);
+          return new QuoteCreateParams.SubscriptionData.BillingMode(
+              this.extraParams, this.flexible, this.type);
         }
 
         /**
@@ -2164,13 +2172,114 @@ public class QuoteCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Configure behavior for flexible billing mode. */
+        public Builder setFlexible(
+            QuoteCreateParams.SubscriptionData.BillingMode.Flexible flexible) {
+          this.flexible = flexible;
+          return this;
+        }
+
         /**
          * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-         * invoices for subscriptions.
+         * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
          */
         public Builder setType(QuoteCreateParams.SubscriptionData.BillingMode.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Flexible {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Controls how invoices and invoice items display proration amounts and discount amounts.
+         */
+        @SerializedName("proration_discounts")
+        ProrationDiscounts prorationDiscounts;
+
+        private Flexible(Map<String, Object> extraParams, ProrationDiscounts prorationDiscounts) {
+          this.extraParams = extraParams;
+          this.prorationDiscounts = prorationDiscounts;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrationDiscounts prorationDiscounts;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public QuoteCreateParams.SubscriptionData.BillingMode.Flexible build() {
+            return new QuoteCreateParams.SubscriptionData.BillingMode.Flexible(
+                this.extraParams, this.prorationDiscounts);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteCreateParams.SubscriptionData.BillingMode.Flexible#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link QuoteCreateParams.SubscriptionData.BillingMode.Flexible#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls how invoices and invoice items display proration amounts and discount amounts.
+           */
+          public Builder setProrationDiscounts(
+              QuoteCreateParams.SubscriptionData.BillingMode.Flexible.ProrationDiscounts
+                  prorationDiscounts) {
+            this.prorationDiscounts = prorationDiscounts;
+            return this;
+          }
+        }
+
+        public enum ProrationDiscounts implements ApiRequestParams.EnumParam {
+          @SerializedName("included")
+          INCLUDED("included"),
+
+          @SerializedName("itemized")
+          ITEMIZED("itemized");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrationDiscounts(String value) {
+            this.value = value;
+          }
         }
       }
 

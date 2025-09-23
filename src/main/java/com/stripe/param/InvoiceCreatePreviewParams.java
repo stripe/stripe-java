@@ -844,11 +844,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -951,13 +951,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
@@ -1101,11 +1101,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         @SerializedName("line1")
         String line1;
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         @SerializedName("line2")
         String line2;
 
@@ -1211,13 +1211,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             return this;
           }
 
-          /** Address line 1 (e.g., street, PO Box, or company name). */
+          /** Address line 1, such as the street, PO Box, or company name. */
           public Builder setLine1(String line1) {
             this.line1 = line1;
             return this;
           }
 
-          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          /** Address line 2, such as the apartment, suite, unit, or building. */
           public Builder setLine2(String line2) {
             this.line2 = line2;
             return this;
@@ -3101,15 +3101,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Configure behavior for flexible billing mode. */
+      @SerializedName("flexible")
+      Flexible flexible;
+
       /**
        * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-       * invoices for subscriptions.
+       * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
        */
       @SerializedName("type")
       Type type;
 
-      private BillingMode(Map<String, Object> extraParams, Type type) {
+      private BillingMode(Map<String, Object> extraParams, Flexible flexible, Type type) {
         this.extraParams = extraParams;
+        this.flexible = flexible;
         this.type = type;
       }
 
@@ -3120,12 +3125,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Flexible flexible;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceCreatePreviewParams.ScheduleDetails.BillingMode build() {
           return new InvoiceCreatePreviewParams.ScheduleDetails.BillingMode(
-              this.extraParams, this.type);
+              this.extraParams, this.flexible, this.type);
         }
 
         /**
@@ -3156,13 +3163,116 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
+        /** Configure behavior for flexible billing mode. */
+        public Builder setFlexible(
+            InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Flexible flexible) {
+          this.flexible = flexible;
+          return this;
+        }
+
         /**
          * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-         * invoices for subscriptions.
+         * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
          */
         public Builder setType(InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Flexible {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Controls how invoices and invoice items display proration amounts and discount amounts.
+         */
+        @SerializedName("proration_discounts")
+        ProrationDiscounts prorationDiscounts;
+
+        private Flexible(Map<String, Object> extraParams, ProrationDiscounts prorationDiscounts) {
+          this.extraParams = extraParams;
+          this.prorationDiscounts = prorationDiscounts;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrationDiscounts prorationDiscounts;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Flexible build() {
+            return new InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Flexible(
+                this.extraParams, this.prorationDiscounts);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Flexible#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Flexible#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls how invoices and invoice items display proration amounts and discount amounts.
+           */
+          public Builder setProrationDiscounts(
+              InvoiceCreatePreviewParams.ScheduleDetails.BillingMode.Flexible.ProrationDiscounts
+                  prorationDiscounts) {
+            this.prorationDiscounts = prorationDiscounts;
+            return this;
+          }
+        }
+
+        public enum ProrationDiscounts implements ApiRequestParams.EnumParam {
+          @SerializedName("included")
+          INCLUDED("included"),
+
+          @SerializedName("itemized")
+          ITEMIZED("itemized");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrationDiscounts(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -3310,16 +3420,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       List<InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item> items;
 
       /**
-       * Integer representing the multiplier applied to the price interval. For example, {@code
-       * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
-       * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
-       * must not be set. This parameter is deprecated and will be removed in a future version. Use
-       * {@code duration} instead.
-       */
-      @SerializedName("iterations")
-      Long iterations;
-
-      /**
        * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
        * attach to a phase. Metadata on a schedule's phase will update the underlying subscription's
        * {@code metadata} when the phase is entered, adding new keys and replacing existing keys in
@@ -3395,7 +3495,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           InvoiceSettings invoiceSettings,
           List<InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item> items,
-          Long iterations,
           Map<String, String> metadata,
           String onBehalfOf,
           ProrationBehavior prorationBehavior,
@@ -3419,7 +3518,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.invoiceSettings = invoiceSettings;
         this.items = items;
-        this.iterations = iterations;
         this.metadata = metadata;
         this.onBehalfOf = onBehalfOf;
         this.prorationBehavior = prorationBehavior;
@@ -3467,8 +3565,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         private List<InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item> items;
 
-        private Long iterations;
-
         private Map<String, String> metadata;
 
         private String onBehalfOf;
@@ -3502,7 +3598,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               this.extraParams,
               this.invoiceSettings,
               this.items,
-              this.iterations,
               this.metadata,
               this.onBehalfOf,
               this.prorationBehavior,
@@ -3849,18 +3944,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Integer representing the multiplier applied to the price interval. For example, {@code
-         * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
-         * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
-         * must not be set. This parameter is deprecated and will be removed in a future version.
-         * Use {@code duration} instead.
-         */
-        public Builder setIterations(Long iterations) {
-          this.iterations = iterations;
-          return this;
-        }
-
-        /**
          * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
          * call, and subsequent calls add additional key/value pairs to the original map. See {@link
          * InvoiceCreatePreviewParams.ScheduleDetails.Phase#metadata} for the field documentation.
@@ -3996,8 +4079,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Map<String, String> metadata;
 
         /**
-         * The period associated with this invoice item. Defaults to the period of the underlying
-         * subscription that surrounds the start of the phase.
+         * The period associated with this invoice item. If not set, {@code period.start.type}
+         * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+         * min_item_period_end}.
          */
         @SerializedName("period")
         Period period;
@@ -4170,8 +4254,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           /**
-           * The period associated with this invoice item. Defaults to the period of the underlying
-           * subscription that surrounds the start of the phase.
+           * The period associated with this invoice item. If not set, {@code period.start.type}
+           * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to
+           * {@code min_item_period_end}.
            */
           public Builder setPeriod(
               InvoiceCreatePreviewParams.ScheduleDetails.Phase.AddInvoiceItem.Period period) {
@@ -7222,15 +7307,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Configure behavior for flexible billing mode. */
+      @SerializedName("flexible")
+      Flexible flexible;
+
       /**
        * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-       * invoices for subscriptions.
+       * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
        */
       @SerializedName("type")
       Type type;
 
-      private BillingMode(Map<String, Object> extraParams, Type type) {
+      private BillingMode(Map<String, Object> extraParams, Flexible flexible, Type type) {
         this.extraParams = extraParams;
+        this.flexible = flexible;
         this.type = type;
       }
 
@@ -7241,12 +7331,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Flexible flexible;
+
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode build() {
           return new InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode(
-              this.extraParams, this.type);
+              this.extraParams, this.flexible, this.type);
         }
 
         /**
@@ -7277,14 +7369,117 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
+        /** Configure behavior for flexible billing mode. */
+        public Builder setFlexible(
+            InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Flexible flexible) {
+          this.flexible = flexible;
+          return this;
+        }
+
         /**
          * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-         * invoices for subscriptions.
+         * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
          */
         public Builder setType(
             InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Flexible {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Controls how invoices and invoice items display proration amounts and discount amounts.
+         */
+        @SerializedName("proration_discounts")
+        ProrationDiscounts prorationDiscounts;
+
+        private Flexible(Map<String, Object> extraParams, ProrationDiscounts prorationDiscounts) {
+          this.extraParams = extraParams;
+          this.prorationDiscounts = prorationDiscounts;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private ProrationDiscounts prorationDiscounts;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Flexible build() {
+            return new InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Flexible(
+                this.extraParams, this.prorationDiscounts);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Flexible#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Flexible#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls how invoices and invoice items display proration amounts and discount amounts.
+           */
+          public Builder setProrationDiscounts(
+              InvoiceCreatePreviewParams.SubscriptionDetails.BillingMode.Flexible.ProrationDiscounts
+                  prorationDiscounts) {
+            this.prorationDiscounts = prorationDiscounts;
+            return this;
+          }
+        }
+
+        public enum ProrationDiscounts implements ApiRequestParams.EnumParam {
+          @SerializedName("included")
+          INCLUDED("included"),
+
+          @SerializedName("itemized")
+          ITEMIZED("itemized");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          ProrationDiscounts(String value) {
+            this.value = value;
+          }
         }
       }
 

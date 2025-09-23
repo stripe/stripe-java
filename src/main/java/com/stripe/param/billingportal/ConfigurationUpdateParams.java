@@ -1247,19 +1247,25 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       @SerializedName("schedule_at_period_end")
       ScheduleAtPeriodEnd scheduleAtPeriodEnd;
 
+      /** The behavior when updating a subscription that is trialing. */
+      @SerializedName("trial_update_behavior")
+      TrialUpdateBehavior trialUpdateBehavior;
+
       private SubscriptionUpdate(
           Object defaultAllowedUpdates,
           Boolean enabled,
           Map<String, Object> extraParams,
           Object products,
           ProrationBehavior prorationBehavior,
-          ScheduleAtPeriodEnd scheduleAtPeriodEnd) {
+          ScheduleAtPeriodEnd scheduleAtPeriodEnd,
+          TrialUpdateBehavior trialUpdateBehavior) {
         this.defaultAllowedUpdates = defaultAllowedUpdates;
         this.enabled = enabled;
         this.extraParams = extraParams;
         this.products = products;
         this.prorationBehavior = prorationBehavior;
         this.scheduleAtPeriodEnd = scheduleAtPeriodEnd;
+        this.trialUpdateBehavior = trialUpdateBehavior;
       }
 
       public static Builder builder() {
@@ -1279,6 +1285,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
         private ScheduleAtPeriodEnd scheduleAtPeriodEnd;
 
+        private TrialUpdateBehavior trialUpdateBehavior;
+
         /** Finalize and obtain parameter instance from this builder. */
         public ConfigurationUpdateParams.Features.SubscriptionUpdate build() {
           return new ConfigurationUpdateParams.Features.SubscriptionUpdate(
@@ -1287,7 +1295,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
               this.extraParams,
               this.products,
               this.prorationBehavior,
-              this.scheduleAtPeriodEnd);
+              this.scheduleAtPeriodEnd,
+              this.trialUpdateBehavior);
         }
 
         /**
@@ -1455,6 +1464,14 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
             ConfigurationUpdateParams.Features.SubscriptionUpdate.ScheduleAtPeriodEnd
                 scheduleAtPeriodEnd) {
           this.scheduleAtPeriodEnd = scheduleAtPeriodEnd;
+          return this;
+        }
+
+        /** The behavior when updating a subscription that is trialing. */
+        public Builder setTrialUpdateBehavior(
+            ConfigurationUpdateParams.Features.SubscriptionUpdate.TrialUpdateBehavior
+                trialUpdateBehavior) {
+          this.trialUpdateBehavior = trialUpdateBehavior;
           return this;
         }
       }
@@ -1977,6 +1994,21 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         private final String value;
 
         ProrationBehavior(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum TrialUpdateBehavior implements ApiRequestParams.EnumParam {
+        @SerializedName("continue_trial")
+        CONTINUE_TRIAL("continue_trial"),
+
+        @SerializedName("end_trial")
+        END_TRIAL("end_trial");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TrialUpdateBehavior(String value) {
           this.value = value;
         }
       }

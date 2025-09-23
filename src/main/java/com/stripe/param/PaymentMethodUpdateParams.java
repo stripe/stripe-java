@@ -48,13 +48,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
-   * method.
-   */
-  @SerializedName("link")
-  Link link;
-
-  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -62,13 +55,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
    */
   @SerializedName("metadata")
   Object metadata;
-
-  /**
-   * If this is a {@code pay_by_bank} PaymentMethod, this hash contains details about the PayByBank
-   * payment method.
-   */
-  @SerializedName("pay_by_bank")
-  PayByBank payByBank;
 
   /**
    * If this is an {@code us_bank_account} PaymentMethod, this hash contains details about the US
@@ -83,18 +69,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Card card,
       List<String> expand,
       Map<String, Object> extraParams,
-      Link link,
       Object metadata,
-      PayByBank payByBank,
       UsBankAccount usBankAccount) {
     this.allowRedisplay = allowRedisplay;
     this.billingDetails = billingDetails;
     this.card = card;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.link = link;
     this.metadata = metadata;
-    this.payByBank = payByBank;
     this.usBankAccount = usBankAccount;
   }
 
@@ -113,11 +95,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Link link;
-
     private Object metadata;
-
-    private PayByBank payByBank;
 
     private UsBankAccount usBankAccount;
 
@@ -129,9 +107,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           this.card,
           this.expand,
           this.extraParams,
-          this.link,
           this.metadata,
-          this.payByBank,
           this.usBankAccount);
     }
 
@@ -214,15 +190,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is an {@code Link} PaymentMethod, this hash contains details about the Link payment
-     * method.
-     */
-    public Builder setLink(PaymentMethodUpdateParams.Link link) {
-      this.link = link;
-      return this;
-    }
-
-    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * PaymentMethodUpdateParams#metadata} for the field documentation.
@@ -269,15 +236,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
-      return this;
-    }
-
-    /**
-     * If this is a {@code pay_by_bank} PaymentMethod, this hash contains details about the
-     * PayByBank payment method.
-     */
-    public Builder setPayByBank(PaymentMethodUpdateParams.PayByBank payByBank) {
-      this.payByBank = payByBank;
       return this;
     }
 
@@ -481,11 +439,11 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       Object line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       Object line2;
 
@@ -603,25 +561,25 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(EmptyParam line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
@@ -853,118 +811,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
         Preferred(String value) {
           this.value = value;
         }
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Link {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    private Link(Map<String, Object> extraParams) {
-      this.extraParams = extraParams;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PaymentMethodUpdateParams.Link build() {
-        return new PaymentMethodUpdateParams.Link(this.extraParams);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentMethodUpdateParams.Link#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentMethodUpdateParams.Link#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-    }
-  }
-
-  @Getter
-  @EqualsAndHashCode(callSuper = false)
-  public static class PayByBank {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    private PayByBank(Map<String, Object> extraParams) {
-      this.extraParams = extraParams;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public PaymentMethodUpdateParams.PayByBank build() {
-        return new PaymentMethodUpdateParams.PayByBank(this.extraParams);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentMethodUpdateParams.PayByBank#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentMethodUpdateParams.PayByBank#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
       }
     }
   }

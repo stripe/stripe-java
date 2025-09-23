@@ -52,6 +52,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("balance")
   Long balance;
 
+  /** The customer's business name. */
+  @SerializedName("business_name")
+  String businessName;
+
   /**
    * The current funds being held by Stripe on behalf of the customer. You can apply these funds
    * towards payment intents when the source is &quot;cash_balance&quot;. The {@code
@@ -121,6 +125,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /** The customer's individual name. */
+  @SerializedName("individual_name")
+  String individualName;
 
   /**
    * The current multi-currency balances, if any, that's stored on the customer. If positive in a
