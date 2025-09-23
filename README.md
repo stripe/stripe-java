@@ -83,7 +83,7 @@ public class StripeExample {
                 .build();
 
         try {
-            Customer customer = client.customers().create(params);
+            Customer customer = client.v1().customers().create(params);
             System.out.println(customer);
         } catch (StripeException e) {
             e.printStackTrace();
@@ -102,7 +102,7 @@ Once the legacy pattern is deprecated, new API endpoints will only be accessible
 
 ### Per-request Configuration
 
-All of the request methods accept an optional `RequestOptions` object. This is
+All the request methods accept an optional `RequestOptions` object. This is
 used if you want to set an [idempotency key][idempotency-keys], if you are
 using [Stripe Connect][connect-auth], or if you want to pass the secret API
 key on each method.
@@ -114,9 +114,9 @@ RequestOptions requestOptions = RequestOptions.builder()
     .setStripeAccount("acct_...")
     .build();
 
-client.customers().list(requestOptions);
+client.v1().customers().list(requestOptions);
 
-client.customers().retrieve("cus_123456789", requestOptions);
+client.v1().customers().retrieve("cus_123456789", requestOptions);
 ```
 
 ### Configuring automatic retries
@@ -137,7 +137,7 @@ Or on a finer grain level using `RequestOptions`:
 RequestOptions options = RequestOptions.builder()
     .setMaxNetworkRetries(2)
     .build();
-client.customers().create(params, options);
+client.v1().customers().create(params, options);
 ```
 
 [Idempotency keys][idempotency-keys] are added to requests to guarantee that
@@ -161,7 +161,7 @@ RequestOptions options = RequestOptions.builder()
     .setConnectTimeout(30 * 1000) // in milliseconds
     .setReadTimeout(80 * 1000)
     .build();
-client.customers().create(params, options);
+client.v1().customers().create(params, options);
 ```
 
 Please take care to set conservative read timeouts. Some API requests can take
@@ -197,7 +197,7 @@ CustomerCreateParams params =
     .putExtraParam("secret_parameter[secondary]", "secondary value")
     .build();
 
-client.customers().create(params);
+client.v1().customers().create(params);
 ```
 
 #### Properties
@@ -205,7 +205,7 @@ client.customers().create(params);
 To retrieve undocumented properties from Stripe using Java you can use an option in the library to return the raw JSON object and return the property as a native type. An example of this is shown below:
 
 ```java
-final Customer customer = client.customers().retrieve("cus_1234");
+final Customer customer = client.v1().customers().retrieve("cus_1234");
 Boolean featureEnabled =
   customer.getRawJsonObject()
     .getAsJsonPrimitive("secret_feature_enabled")
@@ -250,7 +250,7 @@ Stripe.enableTelemetry = false;
 Stripe has features in the [public preview phase](https://docs.stripe.com/release-phases) that can be accessed via versions of this package that have the `-beta.X` suffix like `25.2.0-beta.2`.
 We would love for you to try these as we incrementally release new features and improve them based on your feedback.
 
- To install, choose the version that includes support for the preview feature you are interested in by reviewing the [releases page](https://github.com/stripe/stripe-java/releases/) and then use it [installation steps above](#installation).
+ To install, pick the latest version with the `beta` suffix by reviewing the [releases page](https://github.com/stripe/stripe-java/releases/) and then use it [installation steps above](#installation).
 
 > **Note**
 > There can be breaking changes between two versions of the public preview SDKs without a bump in the major version. Therefore we recommend pinning the package version to a specific version. This way you can install the same version each time without breaking changes unless you are intentionally looking for the latest public preview SDK.
@@ -260,6 +260,9 @@ Some preview features require a name and version to be set in the `Stripe-Versio
 ```java
 Stripe.addBetaVersion("feature_beta", "v3");
 ```
+### Private Preview SDKs
+
+Stripe has features in the [private preview phase](https://docs.stripe.com/release-phases) that can be accessed via versions of this package that have the `-alpha.X` suffix like `25.2.0-alpha.2`. These are invite-only features. Once invited, you can install the private preview SDKs by following the same instructions as for the [public preview SDKs](https://github.com/stripe/stripe-java?tab=readme-ov-file#public-preview-sdks) above and replacing the term `beta` with `alpha`.
 
 ### Custom requests
 

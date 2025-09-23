@@ -57,7 +57,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * Mutually exclusive with billing_cycle_anchor and only valid with monthly and yearly price
-   * intervals. When provided, the billing_cycle_anchor is set to the next occurence of the
+   * intervals. When provided, the billing_cycle_anchor is set to the next occurrence of the
    * day_of_month at the hour, minute, and second UTC.
    */
   @SerializedName("billing_cycle_anchor_config")
@@ -66,6 +66,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
   @SerializedName("billing_mode")
   BillingMode billingMode;
+
+  /** Sets the billing schedules for the subscription. */
+  @SerializedName("billing_schedules")
+  List<SubscriptionCreateParams.BillingSchedule> billingSchedules;
 
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -319,6 +323,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long billingCycleAnchor,
       BillingCycleAnchorConfig billingCycleAnchorConfig,
       BillingMode billingMode,
+      List<SubscriptionCreateParams.BillingSchedule> billingSchedules,
       Object billingThresholds,
       Object cancelAt,
       Boolean cancelAtPeriodEnd,
@@ -356,6 +361,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingCycleAnchorConfig = billingCycleAnchorConfig;
     this.billingMode = billingMode;
+    this.billingSchedules = billingSchedules;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
@@ -406,6 +412,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private BillingCycleAnchorConfig billingCycleAnchorConfig;
 
     private BillingMode billingMode;
+
+    private List<SubscriptionCreateParams.BillingSchedule> billingSchedules;
 
     private Object billingThresholds;
 
@@ -477,6 +485,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.billingCycleAnchor,
           this.billingCycleAnchorConfig,
           this.billingMode,
+          this.billingSchedules,
           this.billingThresholds,
           this.cancelAt,
           this.cancelAtPeriodEnd,
@@ -591,7 +600,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * Mutually exclusive with billing_cycle_anchor and only valid with monthly and yearly price
-     * intervals. When provided, the billing_cycle_anchor is set to the next occurence of the
+     * intervals. When provided, the billing_cycle_anchor is set to the next occurrence of the
      * day_of_month at the hour, minute, and second UTC.
      */
     public Builder setBillingCycleAnchorConfig(
@@ -603,6 +612,32 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /** Controls how prorations and invoices for subscriptions are calculated and orchestrated. */
     public Builder setBillingMode(SubscriptionCreateParams.BillingMode billingMode) {
       this.billingMode = billingMode;
+      return this;
+    }
+
+    /**
+     * Add an element to `billingSchedules` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionCreateParams#billingSchedules} for the field documentation.
+     */
+    public Builder addBillingSchedule(SubscriptionCreateParams.BillingSchedule element) {
+      if (this.billingSchedules == null) {
+        this.billingSchedules = new ArrayList<>();
+      }
+      this.billingSchedules.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `billingSchedules` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionCreateParams#billingSchedules} for the field documentation.
+     */
+    public Builder addAllBillingSchedule(List<SubscriptionCreateParams.BillingSchedule> elements) {
+      if (this.billingSchedules == null) {
+        this.billingSchedules = new ArrayList<>();
+      }
+      this.billingSchedules.addAll(elements);
       return this;
     }
 
@@ -1161,8 +1196,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
-     * The period associated with this invoice item. Defaults to the current period of the
-     * subscription.
+     * The period associated with this invoice item. If not set, {@code period.start.type} defaults
+     * to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+     * min_item_period_end}.
      */
     @SerializedName("period")
     Period period;
@@ -1323,8 +1359,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The period associated with this invoice item. Defaults to the current period of the
-       * subscription.
+       * The period associated with this invoice item. If not set, {@code period.start.type}
+       * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+       * min_item_period_end}.
        */
       public Builder setPeriod(SubscriptionCreateParams.AddInvoiceItem.Period period) {
         this.period = period;
@@ -2617,15 +2654,20 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Configure behavior for flexible billing mode. */
+    @SerializedName("flexible")
+    Flexible flexible;
+
     /**
      * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-     * invoices for subscriptions.
+     * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
      */
     @SerializedName("type")
     Type type;
 
-    private BillingMode(Map<String, Object> extraParams, Type type) {
+    private BillingMode(Map<String, Object> extraParams, Flexible flexible, Type type) {
       this.extraParams = extraParams;
+      this.flexible = flexible;
       this.type = type;
     }
 
@@ -2636,11 +2678,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private Flexible flexible;
+
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionCreateParams.BillingMode build() {
-        return new SubscriptionCreateParams.BillingMode(this.extraParams, this.type);
+        return new SubscriptionCreateParams.BillingMode(this.extraParams, this.flexible, this.type);
       }
 
       /**
@@ -2669,13 +2713,109 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Configure behavior for flexible billing mode. */
+      public Builder setFlexible(SubscriptionCreateParams.BillingMode.Flexible flexible) {
+        this.flexible = flexible;
+        return this;
+      }
+
       /**
        * <strong>Required.</strong> Controls the calculation and orchestration of prorations and
-       * invoices for subscriptions.
+       * invoices for subscriptions. If no value is passed, the default is {@code flexible}.
        */
       public Builder setType(SubscriptionCreateParams.BillingMode.Type type) {
         this.type = type;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Flexible {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Controls how invoices and invoice items display proration amounts and discount amounts. */
+      @SerializedName("proration_discounts")
+      ProrationDiscounts prorationDiscounts;
+
+      private Flexible(Map<String, Object> extraParams, ProrationDiscounts prorationDiscounts) {
+        this.extraParams = extraParams;
+        this.prorationDiscounts = prorationDiscounts;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private ProrationDiscounts prorationDiscounts;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.BillingMode.Flexible build() {
+          return new SubscriptionCreateParams.BillingMode.Flexible(
+              this.extraParams, this.prorationDiscounts);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.BillingMode.Flexible#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.BillingMode.Flexible#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Controls how invoices and invoice items display proration amounts and discount amounts.
+         */
+        public Builder setProrationDiscounts(
+            SubscriptionCreateParams.BillingMode.Flexible.ProrationDiscounts prorationDiscounts) {
+          this.prorationDiscounts = prorationDiscounts;
+          return this;
+        }
+      }
+
+      public enum ProrationDiscounts implements ApiRequestParams.EnumParam {
+        @SerializedName("included")
+        INCLUDED("included"),
+
+        @SerializedName("itemized")
+        ITEMIZED("itemized");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        ProrationDiscounts(String value) {
+          this.value = value;
+        }
       }
     }
 
@@ -2691,6 +2831,474 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       Type(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingSchedule {
+    /** Configure billing schedule differently for individual subscription items. */
+    @SerializedName("applies_to")
+    List<SubscriptionCreateParams.BillingSchedule.AppliesTo> appliesTo;
+
+    /** <strong>Required.</strong> The end date for the billing schedule. */
+    @SerializedName("bill_until")
+    BillUntil billUntil;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Specify a key for the billing schedule. Must be unique to this field, alphanumeric, and up to
+     * 200 characters. If not provided, a unique key will be generated.
+     */
+    @SerializedName("key")
+    String key;
+
+    private BillingSchedule(
+        List<SubscriptionCreateParams.BillingSchedule.AppliesTo> appliesTo,
+        BillUntil billUntil,
+        Map<String, Object> extraParams,
+        String key) {
+      this.appliesTo = appliesTo;
+      this.billUntil = billUntil;
+      this.extraParams = extraParams;
+      this.key = key;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private List<SubscriptionCreateParams.BillingSchedule.AppliesTo> appliesTo;
+
+      private BillUntil billUntil;
+
+      private Map<String, Object> extraParams;
+
+      private String key;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SubscriptionCreateParams.BillingSchedule build() {
+        return new SubscriptionCreateParams.BillingSchedule(
+            this.appliesTo, this.billUntil, this.extraParams, this.key);
+      }
+
+      /**
+       * Add an element to `appliesTo` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionCreateParams.BillingSchedule#appliesTo} for the field documentation.
+       */
+      public Builder addAppliesTo(SubscriptionCreateParams.BillingSchedule.AppliesTo element) {
+        if (this.appliesTo == null) {
+          this.appliesTo = new ArrayList<>();
+        }
+        this.appliesTo.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `appliesTo` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionCreateParams.BillingSchedule#appliesTo} for the field documentation.
+       */
+      public Builder addAllAppliesTo(
+          List<SubscriptionCreateParams.BillingSchedule.AppliesTo> elements) {
+        if (this.appliesTo == null) {
+          this.appliesTo = new ArrayList<>();
+        }
+        this.appliesTo.addAll(elements);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The end date for the billing schedule. */
+      public Builder setBillUntil(SubscriptionCreateParams.BillingSchedule.BillUntil billUntil) {
+        this.billUntil = billUntil;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.BillingSchedule#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.BillingSchedule#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Specify a key for the billing schedule. Must be unique to this field, alphanumeric, and up
+       * to 200 characters. If not provided, a unique key will be generated.
+       */
+      public Builder setKey(String key) {
+        this.key = key;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AppliesTo {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the price object. */
+      @SerializedName("price")
+      String price;
+
+      /**
+       * <strong>Required.</strong> Controls which subscription items the billing schedule applies
+       * to.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private AppliesTo(Map<String, Object> extraParams, String price, Type type) {
+        this.extraParams = extraParams;
+        this.price = price;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String price;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.BillingSchedule.AppliesTo build() {
+          return new SubscriptionCreateParams.BillingSchedule.AppliesTo(
+              this.extraParams, this.price, this.type);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.BillingSchedule.AppliesTo#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.BillingSchedule.AppliesTo#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the price object. */
+        public Builder setPrice(String price) {
+          this.price = price;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Controls which subscription items the billing schedule applies
+         * to.
+         */
+        public Builder setType(SubscriptionCreateParams.BillingSchedule.AppliesTo.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("price")
+        PRICE("price");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillUntil {
+      /** Specifies the billing period. */
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The end date of the billing schedule. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * <strong>Required.</strong> Describes how the billing schedule will determine the end date.
+       * Either {@code duration} or {@code timestamp}.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private BillUntil(
+          Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
+        this.duration = duration;
+        this.extraParams = extraParams;
+        this.timestamp = timestamp;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Duration duration;
+
+        private Map<String, Object> extraParams;
+
+        private Long timestamp;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionCreateParams.BillingSchedule.BillUntil build() {
+          return new SubscriptionCreateParams.BillingSchedule.BillUntil(
+              this.duration, this.extraParams, this.timestamp, this.type);
+        }
+
+        /** Specifies the billing period. */
+        public Builder setDuration(
+            SubscriptionCreateParams.BillingSchedule.BillUntil.Duration duration) {
+          this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.BillingSchedule.BillUntil#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionCreateParams.BillingSchedule.BillUntil#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The end date of the billing schedule. */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Describes how the billing schedule will determine the end
+         * date. Either {@code duration} or {@code timestamp}.
+         */
+        public Builder setType(SubscriptionCreateParams.BillingSchedule.BillUntil.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> Specifies billing duration. Either {@code day}, {@code week},
+         * {@code month} or {@code year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /** The multiplier applied to the interval. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.BillingSchedule.BillUntil.Duration build() {
+            return new SubscriptionCreateParams.BillingSchedule.BillUntil.Duration(
+                this.extraParams, this.interval, this.intervalCount);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.BillingSchedule.BillUntil.Duration#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.BillingSchedule.BillUntil.Duration#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Specifies billing duration. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
+           */
+          public Builder setInterval(
+              SubscriptionCreateParams.BillingSchedule.BillUntil.Duration.Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /** The multiplier applied to the interval. */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("duration")
+        DURATION("duration"),
+
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
   }
@@ -4842,6 +5450,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Object konbini;
 
       /**
+       * This sub-hash contains details about the Pix payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("pix")
+      Object pix;
+
+      /**
        * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
        * to the invoice’s PaymentIntent.
        */
@@ -4870,6 +5485,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           Object idBankTransfer,
           Object konbini,
+          Object pix,
           Object sepaDebit,
           Object upi,
           Object usBankAccount) {
@@ -4880,6 +5496,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.idBankTransfer = idBankTransfer;
         this.konbini = konbini;
+        this.pix = pix;
         this.sepaDebit = sepaDebit;
         this.upi = upi;
         this.usBankAccount = usBankAccount;
@@ -4904,6 +5521,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
         private Object konbini;
 
+        private Object pix;
+
         private Object sepaDebit;
 
         private Object upi;
@@ -4920,6 +5539,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
               this.extraParams,
               this.idBankTransfer,
               this.konbini,
+              this.pix,
               this.sepaDebit,
               this.upi,
               this.usBankAccount);
@@ -5068,6 +5688,25 @@ public class SubscriptionCreateParams extends ApiRequestParams {
          */
         public Builder setKonbini(EmptyParam konbini) {
           this.konbini = konbini;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Pix payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setPix(
+            SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix pix) {
+          this.pix = pix;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the Pix payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setPix(EmptyParam pix) {
+          this.pix = pix;
           return this;
         }
 
@@ -6201,6 +6840,261 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class Pix {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Configuration options for setting up a mandate. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Pix(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix build() {
+            return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Configuration options for setting up a mandate. */
+          public Builder setMandateOptions(
+              SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /** Amount to be charged for future payments. If not provided, defaults to 40000. */
+          @SerializedName("amount")
+          Long amount;
+
+          /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+          @SerializedName("amount_includes_iof")
+          AmountIncludesIof amountIncludesIof;
+
+          /**
+           * Date when the mandate expires and no further payments will be charged, in {@code
+           * YYYY-MM-DD}. If not provided, the mandate will be active until canceled.
+           */
+          @SerializedName("end_date")
+          String endDate;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Schedule at which the future payments will be charged. Defaults to {@code weekly}. */
+          @SerializedName("payment_schedule")
+          PaymentSchedule paymentSchedule;
+
+          private MandateOptions(
+              Long amount,
+              AmountIncludesIof amountIncludesIof,
+              String endDate,
+              Map<String, Object> extraParams,
+              PaymentSchedule paymentSchedule) {
+            this.amount = amount;
+            this.amountIncludesIof = amountIncludesIof;
+            this.endDate = endDate;
+            this.extraParams = extraParams;
+            this.paymentSchedule = paymentSchedule;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private AmountIncludesIof amountIncludesIof;
+
+            private String endDate;
+
+            private Map<String, Object> extraParams;
+
+            private PaymentSchedule paymentSchedule;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions
+                build() {
+              return new SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix
+                  .MandateOptions(
+                  this.amount,
+                  this.amountIncludesIof,
+                  this.endDate,
+                  this.extraParams,
+                  this.paymentSchedule);
+            }
+
+            /** Amount to be charged for future payments. If not provided, defaults to 40000. */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /** Determines if the amount includes the IOF tax. Defaults to {@code never}. */
+            public Builder setAmountIncludesIof(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions
+                        .AmountIncludesIof
+                    amountIncludesIof) {
+              this.amountIncludesIof = amountIncludesIof;
+              return this;
+            }
+
+            /**
+             * Date when the mandate expires and no further payments will be charged, in {@code
+             * YYYY-MM-DD}. If not provided, the mandate will be active until canceled.
+             */
+            public Builder setEndDate(String endDate) {
+              this.endDate = endDate;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Schedule at which the future payments will be charged. Defaults to {@code weekly}.
+             */
+            public Builder setPaymentSchedule(
+                SubscriptionCreateParams.PaymentSettings.PaymentMethodOptions.Pix.MandateOptions
+                        .PaymentSchedule
+                    paymentSchedule) {
+              this.paymentSchedule = paymentSchedule;
+              return this;
+            }
+          }
+
+          public enum AmountIncludesIof implements ApiRequestParams.EnumParam {
+            @SerializedName("always")
+            ALWAYS("always"),
+
+            @SerializedName("never")
+            NEVER("never");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            AmountIncludesIof(String value) {
+              this.value = value;
+            }
+          }
+
+          public enum PaymentSchedule implements ApiRequestParams.EnumParam {
+            @SerializedName("halfyearly")
+            HALFYEARLY("halfyearly"),
+
+            @SerializedName("monthly")
+            MONTHLY("monthly"),
+
+            @SerializedName("quarterly")
+            QUARTERLY("quarterly"),
+
+            @SerializedName("weekly")
+            WEEKLY("weekly"),
+
+            @SerializedName("yearly")
+            YEARLY("yearly");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            PaymentSchedule(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -7106,6 +8000,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("paypal")
       PAYPAL("paypal"),
+
+      @SerializedName("pix")
+      PIX("pix"),
 
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),

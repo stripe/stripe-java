@@ -11,6 +11,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** OffSessionPayment resource. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -143,17 +144,14 @@ public class OffSessionPayment extends StripeObject implements HasId {
   @SerializedName("transfer_data")
   TransferData transferData;
 
-  /**
-   * For more details about RetryDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Details about the OffSessionPayment retries. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class RetryDetails extends StripeObject {
     /** Number of authorization attempts so far. */
     @SerializedName("attempts")
-    Integer attempts;
+    Long attempts;
 
     /**
      * Indicates the strategy for how you want Stripe to retry the payment.
@@ -165,8 +163,9 @@ public class OffSessionPayment extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about TransferData, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * The data that automatically creates a Transfer after the payment finalizes. Learn more about
+   * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+   * accounts</a>.
    */
   @Getter
   @Setter
@@ -181,7 +180,7 @@ public class OffSessionPayment extends StripeObject implements HasId {
      * unit (e.g., 100 cents to charge $1.00).
      */
     @SerializedName("amount")
-    Integer amount;
+    Long amount;
 
     /**
      * The account (if any) that the payment is attributed to for tax reporting, and where funds

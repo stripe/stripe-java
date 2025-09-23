@@ -58,7 +58,7 @@ public class InboundTransferListParams extends ApiRequestParams {
 
   /** The page limit. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   private InboundTransferListParams(
       Instant created,
@@ -67,7 +67,7 @@ public class InboundTransferListParams extends ApiRequestParams {
       Instant createdLt,
       Instant createdLte,
       Map<String, Object> extraParams,
-      Integer limit) {
+      Long limit) {
     this.created = created;
     this.createdGt = createdGt;
     this.createdGte = createdGte;
@@ -94,7 +94,7 @@ public class InboundTransferListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InboundTransferListParams build() {
@@ -180,7 +180,7 @@ public class InboundTransferListParams extends ApiRequestParams {
     }
 
     /** The page limit. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

@@ -24,14 +24,14 @@ public class PayoutMethodListParams extends ApiRequestParams {
 
   /** The page size. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /** Usage status filter. */
   @SerializedName("usage_status")
   UsageStatus usageStatus;
 
   private PayoutMethodListParams(
-      Map<String, Object> extraParams, Integer limit, UsageStatus usageStatus) {
+      Map<String, Object> extraParams, Long limit, UsageStatus usageStatus) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.usageStatus = usageStatus;
@@ -44,7 +44,7 @@ public class PayoutMethodListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private UsageStatus usageStatus;
 
@@ -80,7 +80,7 @@ public class PayoutMethodListParams extends ApiRequestParams {
     }
 
     /** The page size. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

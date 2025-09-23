@@ -12,6 +12,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
+import com.stripe.param.PaymentRecordReportPaymentAttemptInformationalParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptParams;
 import com.stripe.param.PaymentRecordReportPaymentParams;
 import com.stripe.param.PaymentRecordRetrieveParams;
@@ -356,6 +357,60 @@ public class PaymentRecord extends ApiResource implements HasId {
     String path =
         String.format(
             "/v1/payment_records/%s/report_payment_attempt_guaranteed",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational() throws StripeException {
+    return reportPaymentAttemptInformational((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(RequestOptions options)
+      throws StripeException {
+    return reportPaymentAttemptInformational((Map<String, Object>) null, options);
+  }
+
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(Map<String, Object> params)
+      throws StripeException {
+    return reportPaymentAttemptInformational(params, (RequestOptions) null);
+  }
+
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_informational",
+            ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentRecord.class);
+  }
+
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(
+      PaymentRecordReportPaymentAttemptInformationalParams params) throws StripeException {
+    return reportPaymentAttemptInformational(params, (RequestOptions) null);
+  }
+
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(
+      PaymentRecordReportPaymentAttemptInformationalParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_informational",
             ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
@@ -729,6 +784,9 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     @SerializedName("paypal")
     Paypal paypal;
+
+    @SerializedName("paypay")
+    Paypay paypay;
 
     @SerializedName("payto")
     Payto payto;
@@ -1290,11 +1348,11 @@ public class PaymentRecord extends ApiResource implements HasId {
         @SerializedName("country")
         String country;
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         @SerializedName("line1")
         String line1;
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         @SerializedName("line2")
         String line2;
 
@@ -1432,6 +1490,10 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
 
+      /** If this Card is part of a card wallet, this contains the details of the card wallet. */
+      @SerializedName("wallet")
+      Wallet wallet;
+
       /**
        * For more details about Checks, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -1458,6 +1520,10 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class NetworkToken extends StripeObject {
+        /**
+         * Indicates if Stripe used a network token, either user provided or Stripe managed when
+         * processing the transaction.
+         */
         @SerializedName("used")
         Boolean used;
       }
@@ -1481,6 +1547,57 @@ public class PaymentRecord extends ApiResource implements HasId {
 
         @SerializedName("version")
         String version;
+      }
+
+      /**
+       * For more details about Wallet, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Wallet extends StripeObject {
+        @SerializedName("apple_pay")
+        ApplePay applePay;
+
+        /** (For tokenized numbers only.) The last four digits of the device account number. */
+        @SerializedName("dynamic_last4")
+        String dynamicLast4;
+
+        @SerializedName("google_pay")
+        GooglePay googlePay;
+
+        /**
+         * The type of the card wallet, one of {@code apple_pay} or {@code google_pay}. An
+         * additional hash is included on the Wallet subhash with a name matching this value. It
+         * contains additional information specific to the card wallet type.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about ApplePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ApplePay extends StripeObject {
+          /**
+           * Type of the apple_pay transaction, one of {@code apple_pay} or {@code apple_pay_later}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /**
+         * For more details about GooglePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class GooglePay extends StripeObject {}
       }
     }
 
@@ -2779,6 +2896,15 @@ public class PaymentRecord extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {}
+
+    /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -3385,11 +3511,11 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("country")
       String country;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 

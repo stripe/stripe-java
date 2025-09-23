@@ -12,6 +12,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A FinancialAccount represents a balance and can be used as the source or destination for the
+ * money management ({@code /v2/money_management}) APIs.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -27,39 +31,6 @@ public class FinancialAccount extends StripeObject implements HasId {
   /**
    * Open Enum. Two-letter country code that represents the country where the LegalEntity associated
    * with the FinancialAccount is based in.
-   *
-   * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code am},
-   * {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw}, {@code ax},
-   * {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf}, {@code bg}, {@code bh},
-   * {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn}, {@code bo}, {@code bq}, {@code br},
-   * {@code bs}, {@code bt}, {@code bv}, {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc},
-   * {@code cd}, {@code cf}, {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm},
-   * {@code cn}, {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-   * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz}, {@code ec},
-   * {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et}, {@code fi}, {@code fj},
-   * {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga}, {@code gb}, {@code gd}, {@code ge},
-   * {@code gf}, {@code gg}, {@code gh}, {@code gi}, {@code gl}, {@code gm}, {@code gn}, {@code gp},
-   * {@code gq}, {@code gr}, {@code gs}, {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk},
-   * {@code hm}, {@code hn}, {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il},
-   * {@code im}, {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-   * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km},
-   * {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la}, {@code lb},
-   * {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt}, {@code lu}, {@code lv},
-   * {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me}, {@code mf}, {@code mg}, {@code mh},
-   * {@code mk}, {@code ml}, {@code mm}, {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr},
-   * {@code ms}, {@code mt}, {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz},
-   * {@code na}, {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-   * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe}, {@code pf},
-   * {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn}, {@code pr}, {@code ps},
-   * {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz}, {@code re}, {@code ro}, {@code rs},
-   * {@code ru}, {@code rw}, {@code sa}, {@code sb}, {@code sc}, {@code sd}, {@code se}, {@code sg},
-   * {@code sh}, {@code si}, {@code sj}, {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so},
-   * {@code sr}, {@code ss}, {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc},
-   * {@code td}, {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-   * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
-   * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve},
-   * {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code ye},
-   * {@code yt}, {@code za}, {@code zm}, or {@code zw}.
    */
   @SerializedName("country")
   String country;
@@ -137,8 +108,9 @@ public class FinancialAccount extends StripeObject implements HasId {
   String type;
 
   /**
-   * For more details about Balance, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
+   * Multi-currency balance of this FinancialAccount, split by availability state. Each balance is
+   * represented as a hash where the key is the three-letter ISO currency code, in lowercase, and
+   * the value is the amount for that currency.
    */
   @Getter
   @Setter
@@ -158,8 +130,8 @@ public class FinancialAccount extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about Other, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
+   * If this is a {@code other} FinancialAccount, this hash indicates what the actual type is.
+   * Upgrade your API version to see it reflected in {@code type}.
    */
   @Getter
   @Setter
@@ -218,8 +190,8 @@ public class FinancialAccount extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about Storage, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
+   * If this is a {@code storage} FinancialAccount, this hash includes details specific to {@code
+   * storage} FinancialAccounts.
    */
   @Getter
   @Setter

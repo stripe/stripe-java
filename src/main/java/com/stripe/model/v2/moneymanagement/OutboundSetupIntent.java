@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** Use the OutboundSetupIntent API to create and setup usable payout methods. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -42,9 +43,7 @@ public class OutboundSetupIntent extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /**
-   * Information about the payout method that’s created and linked to this outbound setup intent.
-   */
+  /** Use the PayoutMethods API to list and interact with PayoutMethod objects. */
   @SerializedName("payout_method")
   PayoutMethod payoutMethod;
 
@@ -65,10 +64,7 @@ public class OutboundSetupIntent extends StripeObject implements HasId {
   @SerializedName("usage_intent")
   String usageIntent;
 
-  /**
-   * For more details about NextAction, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Specifies which actions needs to be taken next to continue setup of the credential. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -85,10 +81,7 @@ public class OutboundSetupIntent extends StripeObject implements HasId {
     @SerializedName("type")
     String type;
 
-    /**
-     * For more details about ConfirmationOfPayee, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Confirmation of Payee details. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

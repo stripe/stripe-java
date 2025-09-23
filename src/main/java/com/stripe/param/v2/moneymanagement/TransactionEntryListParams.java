@@ -43,7 +43,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
 
   /** The page limit. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   /** Filter for TransactionEntries belonging to a Transaction. */
   @SerializedName("transaction")
@@ -56,7 +56,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
       Instant createdLt,
       Instant createdLte,
       Map<String, Object> extraParams,
-      Integer limit,
+      Long limit,
       String transaction) {
     this.created = created;
     this.createdGt = createdGt;
@@ -85,7 +85,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     private String transaction;
 
@@ -159,7 +159,7 @@ public class TransactionEntryListParams extends ApiRequestParams {
     }
 
     /** The page limit. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

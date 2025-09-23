@@ -127,6 +127,13 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   Map<String, String> metadata;
 
   /**
+   * The amount after discounts, but before credits and taxes. This field is {@code null} for {@code
+   * discountable=true} items.
+   */
+  @SerializedName("net_amount")
+  Long netAmount;
+
+  /**
    * String representing the object's type. Objects of the same type share the same value.
    *
    * <p>Equal to {@code invoiceitem}.
@@ -151,6 +158,9 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    */
   @SerializedName("proration")
   Boolean proration;
+
+  @SerializedName("proration_details")
+  ProrationDetails prorationDetails;
 
   /**
    * Quantity of units for the invoice item. If the invoice item is a proration, the quantity of the
@@ -623,6 +633,56 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     }
   }
 
+  /**
+   * For more details about ProrationDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ProrationDetails extends StripeObject {
+    /** Discount amounts applied when the proration was created. */
+    @SerializedName("discount_amounts")
+    List<InvoiceItem.ProrationDetails.DiscountAmount> discountAmounts;
+
+    /**
+     * For more details about DiscountAmount, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DiscountAmount extends StripeObject {
+      /** The amount, in cents (or local equivalent), of the discount. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** The discount that was applied to get this discount amount. */
+      @SerializedName("discount")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Discount> discount;
+
+      /** Get ID of expandable {@code discount} object. */
+      public String getDiscount() {
+        return (this.discount != null) ? this.discount.getId() : null;
+      }
+
+      public void setDiscount(String id) {
+        this.discount = ApiResource.setExpandableFieldId(id, this.discount);
+      }
+
+      /** Get expanded {@code discount}. */
+      public Discount getDiscountObject() {
+        return (this.discount != null) ? this.discount.getExpanded() : null;
+      }
+
+      public void setDiscountObject(Discount expandableObject) {
+        this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+      }
+    }
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -631,6 +691,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     trySetResponseGetter(parent, responseGetter);
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(pricing, responseGetter);
+    trySetResponseGetter(prorationDetails, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }
 }

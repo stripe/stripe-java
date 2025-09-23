@@ -36,7 +36,7 @@ public final class EventDataClassLookup {
 
     classLookup.put("v2.core.account", com.stripe.model.v2.core.Account.class);
     classLookup.put("v2.core.account_link", com.stripe.model.v2.core.AccountLink.class);
-    classLookup.put("v2.core.account_person", com.stripe.model.v2.core.Person.class);
+    classLookup.put("v2.core.account_person", com.stripe.model.v2.core.AccountPerson.class);
 
     classLookup.put(
         "v2.core.vault.gb_bank_account", com.stripe.model.v2.core.vault.GbBankAccount.class);
