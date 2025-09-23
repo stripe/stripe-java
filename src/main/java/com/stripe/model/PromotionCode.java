@@ -312,7 +312,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Promotion extends StripeObject {
-    /** If promotion type is 'coupon', the coupon for this promotion. */
+    /** If promotion {@code type} is {@code coupon}, the coupon for this promotion. */
     @SerializedName("coupon")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)

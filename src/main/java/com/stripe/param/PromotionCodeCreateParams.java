@@ -282,7 +282,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Promotion {
-    /** If the promotion type is 'coupon', the coupon for this promotion code. */
+    /** If promotion {@code type} is {@code coupon}, the coupon for this promotion code. */
     @SerializedName("coupon")
     String coupon;
 
@@ -295,7 +295,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Specifies the type of promotion code. */
+    /** <strong>Required.</strong> Specifies the type of promotion. */
     @SerializedName("type")
     Type type;
 
@@ -321,7 +321,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
         return new PromotionCodeCreateParams.Promotion(this.coupon, this.extraParams, this.type);
       }
 
-      /** If the promotion type is 'coupon', the coupon for this promotion code. */
+      /** If promotion {@code type} is {@code coupon}, the coupon for this promotion code. */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
         return this;
@@ -353,7 +353,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Specifies the type of promotion code. */
+      /** <strong>Required.</strong> Specifies the type of promotion. */
       public Builder setType(PromotionCodeCreateParams.Promotion.Type type) {
         this.type = type;
         return this;
