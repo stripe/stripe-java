@@ -3,8 +3,9 @@ package com.stripe.service.v2.core.accounts;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.DeletedObject;
 import com.stripe.model.v2.StripeCollection;
-import com.stripe.model.v2.core.Person;
+import com.stripe.model.v2.core.AccountPerson;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -22,21 +23,21 @@ public final class PersonService extends ApiService {
   }
 
   /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(String accountId, PersonListParams params)
+  public StripeCollection<AccountPerson> list(String accountId, PersonListParams params)
       throws StripeException {
     return list(accountId, params, (RequestOptions) null);
   }
   /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(String accountId, RequestOptions options)
+  public StripeCollection<AccountPerson> list(String accountId, RequestOptions options)
       throws StripeException {
     return list(accountId, (PersonListParams) null, options);
   }
   /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(String accountId) throws StripeException {
+  public StripeCollection<AccountPerson> list(String accountId) throws StripeException {
     return list(accountId, (PersonListParams) null, (RequestOptions) null);
   }
   /** Returns a list of Persons associated with an Account. */
-  public StripeCollection<Person> list(
+  public StripeCollection<AccountPerson> list(
       String accountId, PersonListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v2/core/accounts/%s/persons", ApiResource.urlEncodeId(accountId));
     ApiRequest request =
@@ -46,22 +47,22 @@ public final class PersonService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
-    return this.request(request, new TypeToken<StripeCollection<Person>>() {}.getType());
+    return this.request(request, new TypeToken<StripeCollection<AccountPerson>>() {}.getType());
   }
   /** Create a Person associated with an Account. */
-  public Person create(String accountId, PersonCreateParams params) throws StripeException {
+  public AccountPerson create(String accountId, PersonCreateParams params) throws StripeException {
     return create(accountId, params, (RequestOptions) null);
   }
   /** Create a Person associated with an Account. */
-  public Person create(String accountId, RequestOptions options) throws StripeException {
+  public AccountPerson create(String accountId, RequestOptions options) throws StripeException {
     return create(accountId, (PersonCreateParams) null, options);
   }
   /** Create a Person associated with an Account. */
-  public Person create(String accountId) throws StripeException {
+  public AccountPerson create(String accountId) throws StripeException {
     return create(accountId, (PersonCreateParams) null, (RequestOptions) null);
   }
   /** Create a Person associated with an Account. */
-  public Person create(String accountId, PersonCreateParams params, RequestOptions options)
+  public AccountPerson create(String accountId, PersonCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/core/accounts/%s/persons", ApiResource.urlEncodeId(accountId));
     ApiRequest request =
@@ -71,28 +72,29 @@ public final class PersonService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
-    return this.request(request, Person.class);
+    return this.request(request, AccountPerson.class);
   }
   /** Delete a Person associated with an Account. */
-  public Person delete(String accountId, String id) throws StripeException {
+  public DeletedObject delete(String accountId, String id) throws StripeException {
     return delete(accountId, id, (RequestOptions) null);
   }
   /** Delete a Person associated with an Account. */
-  public Person delete(String accountId, String id, RequestOptions options) throws StripeException {
+  public DeletedObject delete(String accountId, String id, RequestOptions options)
+      throws StripeException {
     String path =
         String.format(
             "/v2/core/accounts/%s/persons/%s",
             ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, null, options);
-    return this.request(request, Person.class);
+    return this.request(request, DeletedObject.class);
   }
   /** Retrieves a Person associated with an Account. */
-  public Person retrieve(String accountId, String id) throws StripeException {
+  public AccountPerson retrieve(String accountId, String id) throws StripeException {
     return retrieve(accountId, id, (RequestOptions) null);
   }
   /** Retrieves a Person associated with an Account. */
-  public Person retrieve(String accountId, String id, RequestOptions options)
+  public AccountPerson retrieve(String accountId, String id, RequestOptions options)
       throws StripeException {
     String path =
         String.format(
@@ -100,23 +102,24 @@ public final class PersonService extends ApiService {
             ApiResource.urlEncodeId(accountId), ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
-    return this.request(request, Person.class);
+    return this.request(request, AccountPerson.class);
   }
   /** Updates a Person associated with an Account. */
-  public Person update(String accountId, String id, PersonUpdateParams params)
+  public AccountPerson update(String accountId, String id, PersonUpdateParams params)
       throws StripeException {
     return update(accountId, id, params, (RequestOptions) null);
   }
   /** Updates a Person associated with an Account. */
-  public Person update(String accountId, String id, RequestOptions options) throws StripeException {
+  public AccountPerson update(String accountId, String id, RequestOptions options)
+      throws StripeException {
     return update(accountId, id, (PersonUpdateParams) null, options);
   }
   /** Updates a Person associated with an Account. */
-  public Person update(String accountId, String id) throws StripeException {
+  public AccountPerson update(String accountId, String id) throws StripeException {
     return update(accountId, id, (PersonUpdateParams) null, (RequestOptions) null);
   }
   /** Updates a Person associated with an Account. */
-  public Person update(
+  public AccountPerson update(
       String accountId, String id, PersonUpdateParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -130,6 +133,6 @@ public final class PersonService extends ApiService {
             path,
             ApiRequestParams.paramsToMap(params),
             options);
-    return this.request(request, Person.class);
+    return this.request(request, AccountPerson.class);
   }
 }

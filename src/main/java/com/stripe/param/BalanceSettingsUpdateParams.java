@@ -28,8 +28,7 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> Settings that apply to the <a
-   * href="https://docs.stripe.com/api/balance">Payments Balance</a>.
+   * Settings that apply to the <a href="https://docs.stripe.com/api/balance">Payments Balance</a>.
    */
   @SerializedName("payments")
   Payments payments;
@@ -110,8 +109,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Settings that apply to the <a
-     * href="https://docs.stripe.com/api/balance">Payments Balance</a>.
+     * Settings that apply to the <a href="https://docs.stripe.com/api/balance">Payments
+     * Balance</a>.
      */
     public Builder setPayments(BalanceSettingsUpdateParams.Payments payments) {
       this.payments = payments;
@@ -242,6 +241,15 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * The minimum balance amount to retain per currency after automatic payouts. Only funds that
+       * exceed these amounts are paid out. Learn more about the <a
+       * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+       * for automatic payouts</a>.
+       */
+      @SerializedName("minimum_balance_by_currency")
+      Object minimumBalanceByCurrency;
+
+      /**
        * Details on when funds from charges are available, and when they are paid out to an external
        * account. For details, see our <a
        * href="https://stripe.com/connect/bank-transfers#payout-information">Setting Bank and Debit
@@ -258,8 +266,12 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       Object statementDescriptor;
 
       private Payouts(
-          Map<String, Object> extraParams, Schedule schedule, Object statementDescriptor) {
+          Map<String, Object> extraParams,
+          Object minimumBalanceByCurrency,
+          Schedule schedule,
+          Object statementDescriptor) {
         this.extraParams = extraParams;
+        this.minimumBalanceByCurrency = minimumBalanceByCurrency;
         this.schedule = schedule;
         this.statementDescriptor = statementDescriptor;
       }
@@ -271,6 +283,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
+        private Object minimumBalanceByCurrency;
+
         private Schedule schedule;
 
         private Object statementDescriptor;
@@ -278,7 +292,10 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public BalanceSettingsUpdateParams.Payments.Payouts build() {
           return new BalanceSettingsUpdateParams.Payments.Payouts(
-              this.extraParams, this.schedule, this.statementDescriptor);
+              this.extraParams,
+              this.minimumBalanceByCurrency,
+              this.schedule,
+              this.statementDescriptor);
         }
 
         /**
@@ -306,6 +323,83 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `minimumBalanceByCurrency` map. A map is initialized for the
+         * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link
+         * BalanceSettingsUpdateParams.Payments.Payouts#minimumBalanceByCurrency} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putMinimumBalanceByCurrency(String key, Long value) {
+          if (this.minimumBalanceByCurrency == null
+              || this.minimumBalanceByCurrency instanceof EmptyParam) {
+            this.minimumBalanceByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.minimumBalanceByCurrency).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `minimumBalanceByCurrency` map. A map is initialized for the
+         * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. See {@link
+         * BalanceSettingsUpdateParams.Payments.Payouts#minimumBalanceByCurrency} for the field
+         * documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putMinimumBalanceByCurrency(String key, EmptyParam value) {
+          if (this.minimumBalanceByCurrency == null
+              || this.minimumBalanceByCurrency instanceof EmptyParam) {
+            this.minimumBalanceByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.minimumBalanceByCurrency).put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `minimumBalanceByCurrency` map. A map is initialized for
+         * the first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+         * original map. Map values can only be one of the following types: `Long`, `EmptyParam`.
+         * See {@link BalanceSettingsUpdateParams.Payments.Payouts#minimumBalanceByCurrency} for the
+         * field documentation.
+         */
+        @SuppressWarnings("unchecked")
+        public Builder putAllMinimumBalanceByCurrency(Map<String, Object> map) {
+          if (!map.values().stream().allMatch(v -> v instanceof Long || v instanceof EmptyParam)) {
+            throw new IllegalArgumentException(
+                "All map values must one of the following types: Long, EmptyParam");
+          }
+          if (this.minimumBalanceByCurrency == null
+              || this.minimumBalanceByCurrency instanceof EmptyParam) {
+            this.minimumBalanceByCurrency = new HashMap<String, Object>();
+          }
+          ((Map<String, Object>) this.minimumBalanceByCurrency).putAll(map);
+          return this;
+        }
+
+        /**
+         * The minimum balance amount to retain per currency after automatic payouts. Only funds
+         * that exceed these amounts are paid out. Learn more about the <a
+         * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+         * for automatic payouts</a>.
+         */
+        public Builder setMinimumBalanceByCurrency(EmptyParam minimumBalanceByCurrency) {
+          this.minimumBalanceByCurrency = minimumBalanceByCurrency;
+          return this;
+        }
+
+        /**
+         * The minimum balance amount to retain per currency after automatic payouts. Only funds
+         * that exceed these amounts are paid out. Learn more about the <a
+         * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+         * for automatic payouts</a>.
+         */
+        public Builder setMinimumBalanceByCurrency(Map<String, Object> minimumBalanceByCurrency) {
+          this.minimumBalanceByCurrency = minimumBalanceByCurrency;
           return this;
         }
 
@@ -370,8 +464,8 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
 
         /**
          * The days of the week when available funds are paid out, specified as an array, e.g.,
-         * [{@code monday}, {@code tuesday}]. (required and applicable only if {@code interval} is
-         * {@code weekly}.)
+         * [{@code monday}, {@code tuesday}]. Required and applicable only if {@code interval} is
+         * {@code weekly}.
          */
         @SerializedName("weekly_payout_days")
         List<BalanceSettingsUpdateParams.Payments.Payouts.Schedule.WeeklyPayoutDay>
@@ -535,12 +629,6 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
           @SerializedName("monday")
           MONDAY("monday"),
 
-          @SerializedName("saturday")
-          SATURDAY("saturday"),
-
-          @SerializedName("sunday")
-          SUNDAY("sunday"),
-
           @SerializedName("thursday")
           THURSDAY("thursday"),
 
@@ -564,15 +652,15 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class SettlementTiming {
       /**
-       * The number of days charge funds are held before becoming available. May also be set to
-       * {@code minimum}, representing the lowest available value for the account country. Default
-       * is {@code minimum}. The {@code delay_days} parameter remains at the last configured value
-       * if {@code payouts.schedule.interval} is {@code manual}. <a
-       * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
-       * payout delay days</a>.
+       * Change {@code delay_days} for this account, which determines the number of days charge
+       * funds are held before becoming available. The maximum value is 31. Passing an empty string
+       * to {@code delay_days_override} will return {@code delay_days} to the default, which is the
+       * lowest available value for the account. <a
+       * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling delay
+       * days</a>.
        */
       @SerializedName("delay_days_override")
-      Long delayDaysOverride;
+      Object delayDaysOverride;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -583,7 +671,7 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private SettlementTiming(Long delayDaysOverride, Map<String, Object> extraParams) {
+      private SettlementTiming(Object delayDaysOverride, Map<String, Object> extraParams) {
         this.delayDaysOverride = delayDaysOverride;
         this.extraParams = extraParams;
       }
@@ -593,7 +681,7 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Long delayDaysOverride;
+        private Object delayDaysOverride;
 
         private Map<String, Object> extraParams;
 
@@ -604,14 +692,27 @@ public class BalanceSettingsUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The number of days charge funds are held before becoming available. May also be set to
-         * {@code minimum}, representing the lowest available value for the account country. Default
-         * is {@code minimum}. The {@code delay_days} parameter remains at the last configured value
-         * if {@code payouts.schedule.interval} is {@code manual}. <a
+         * Change {@code delay_days} for this account, which determines the number of days charge
+         * funds are held before becoming available. The maximum value is 31. Passing an empty
+         * string to {@code delay_days_override} will return {@code delay_days} to the default,
+         * which is the lowest available value for the account. <a
          * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
-         * payout delay days</a>.
+         * delay days</a>.
          */
         public Builder setDelayDaysOverride(Long delayDaysOverride) {
+          this.delayDaysOverride = delayDaysOverride;
+          return this;
+        }
+
+        /**
+         * Change {@code delay_days} for this account, which determines the number of days charge
+         * funds are held before becoming available. The maximum value is 31. Passing an empty
+         * string to {@code delay_days_override} will return {@code delay_days} to the default,
+         * which is the lowest available value for the account. <a
+         * href="https://stripe.com/connect/manage-payout-schedule">Learn more about controlling
+         * delay days</a>.
+         */
+        public Builder setDelayDaysOverride(EmptyParam delayDaysOverride) {
           this.delayDaysOverride = delayDaysOverride;
           return this;
         }

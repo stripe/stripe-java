@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.v2.Amount;
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A V2 Account is a representation of a company or individual that a Stripe user does business
+ * with. Accounts contain the contact details, Legal Entity information, and configuration required
+ * to enable the Account for use across Stripe products.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -104,8 +110,8 @@ public class Account extends StripeObject implements HasId {
   Requirements requirements;
 
   /**
-   * For more details about Configuration, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * An Account Configuration which allows the Account to take on a key persona across Stripe
+   * products.
    */
   @Getter
   @Setter
@@ -134,10 +140,7 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("storer")
     Storer storer;
 
-    /**
-     * For more details about Customer, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The Customer Configuration allows the Account to be used in inbound payment flows. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -180,8 +183,9 @@ public class Account extends StripeObject implements HasId {
       String testClock;
 
       /**
-       * For more details about AutomaticIndirectTax, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * Automatic indirect tax settings to be used when automatic tax calculation is enabled on the
+       * customer's invoices, subscriptions, checkout sessions, or payment links. Surfaces if
+       * automatic tax calculation is possible given the current customer location information.
        */
       @Getter
       @Setter
@@ -221,53 +225,14 @@ public class Account extends StripeObject implements HasId {
         String locationSource;
 
         /**
-         * For more details about Location, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * The customer’s identified tax location - uses {@code location_source}. Will only be
+         * rendered if the {@code automatic_indirect_tax} feature is requested and {@code active}.
          */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Location extends StripeObject {
-          /**
-           * The identified tax country of the customer.
-           *
-           * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
-           * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
-           * {@code aw}, {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be},
-           * {@code bf}, {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm},
-           * {@code bn}, {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv},
-           * {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf},
-           * {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn},
-           * {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-           * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz},
-           * {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et},
-           * {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga},
-           * {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi},
-           * {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs},
-           * {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-           * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-           * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-           * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki},
-           * {@code km}, {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz},
-           * {@code la}, {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls},
-           * {@code lt}, {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md},
-           * {@code me}, {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm},
-           * {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt},
-           * {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na},
-           * {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-           * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe},
-           * {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn},
-           * {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz},
-           * {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb},
-           * {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-           * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-           * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td},
-           * {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-           * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
-           * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
-           * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
-           */
+          /** The identified tax country of the customer. */
           @SerializedName("country")
           String country;
 
@@ -278,8 +243,8 @@ public class Account extends StripeObject implements HasId {
       }
 
       /**
-       * For more details about Billing, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * Billing settings - default settings used for this customer in Billing flows such as
+       * Invoices and Subscriptions.
        */
       @Getter
       @Setter
@@ -296,10 +261,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("invoice")
         Invoice invoice;
 
-        /**
-         * For more details about Invoice, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Default settings used on invoices for this customer. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -317,7 +279,7 @@ public class Account extends StripeObject implements HasId {
 
           /** The sequence to be used on the customer's next invoice. Defaults to 1. */
           @SerializedName("next_sequence")
-          Integer nextSequence;
+          Long nextSequence;
 
           /**
            * The prefix for the customer used to generate unique invoice numbers. Must be 3–12
@@ -350,10 +312,7 @@ public class Account extends StripeObject implements HasId {
             String value;
           }
 
-          /**
-           * For more details about Rendering, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Default options for invoice PDF rendering for this customer. */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -374,10 +333,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about Capabilities, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Capabilities that have been requested on the Customer Configuration. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -392,8 +348,10 @@ public class Account extends StripeObject implements HasId {
         AutomaticIndirectTax automaticIndirectTax;
 
         /**
-         * For more details about AutomaticIndirectTax, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * Generates requirements for enabling automatic indirect tax calculation on this customer's
+         * invoices or subscriptions. Recommended to request this capability if planning to enable
+         * automatic tax calculation on this customer's invoices or subscriptions. Uses the {@code
+         * location_source} field.
          */
         @Getter
         @Setter
@@ -450,10 +408,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about Shipping, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The customer's shipping information. Appears on invoices emailed to this customer. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -470,10 +425,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("phone")
         String phone;
 
-        /**
-         * For more details about Address, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Customer shipping address. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -485,43 +437,6 @@ public class Account extends StripeObject implements HasId {
           /**
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
-           *
-           * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
-           * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
-           * {@code aw}, {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be},
-           * {@code bf}, {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm},
-           * {@code bn}, {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv},
-           * {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf},
-           * {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn},
-           * {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-           * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz},
-           * {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et},
-           * {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga},
-           * {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi},
-           * {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs},
-           * {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-           * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-           * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-           * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki},
-           * {@code km}, {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz},
-           * {@code la}, {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls},
-           * {@code lt}, {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md},
-           * {@code me}, {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm},
-           * {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt},
-           * {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na},
-           * {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-           * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe},
-           * {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn},
-           * {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz},
-           * {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb},
-           * {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-           * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-           * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td},
-           * {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-           * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
-           * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
-           * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -546,8 +461,9 @@ public class Account extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about Merchant, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * The Merchant configuration allows the Account to act as a connected account and collect
+     * payments facilitated by a Connect platform. You can add this configuration to your connected
+     * accounts only if you’ve completed onboarding as a Connect platform.
      */
     @Getter
     @Setter
@@ -598,10 +514,7 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("support")
       Support support;
 
-      /**
-       * For more details about BacsDebitPayments, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Settings used for Bacs debit payments. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -616,8 +529,8 @@ public class Account extends StripeObject implements HasId {
       }
 
       /**
-       * For more details about Branding, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * Settings used to apply the merchant's branding to email receipts, invoices, Checkout, and
+       * other products.
        */
       @Getter
       @Setter
@@ -647,10 +560,7 @@ public class Account extends StripeObject implements HasId {
         String secondaryColor;
       }
 
-      /**
-       * For more details about Capabilities, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Capabilities that have been requested on the Merchant Configuration. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -835,10 +745,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("zip_payments")
         ZipPayments zipPayments;
 
-        /**
-         * For more details about AchDebitPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process ACH debit payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -893,10 +800,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about AcssDebitPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process ACSS debit payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -951,10 +855,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about AffirmPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Affirm payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1009,10 +910,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about AfterpayClearpayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Afterpay/Clearpay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1067,10 +965,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about AlmaPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Alma payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1124,10 +1019,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about AmazonPayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Amazon Pay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1182,10 +1074,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about AuBecsDebitPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Australian BECS Direct Debit payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1240,10 +1129,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about BacsDebitPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process BACS Direct Debit payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1298,10 +1184,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about BancontactPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Bancontact payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1356,10 +1239,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about BlikPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process BLIK payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1413,10 +1293,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about BoletoPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Boleto payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1471,10 +1348,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about CardPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to collect card payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1528,10 +1402,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about CartesBancairesPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Cartes Bancaires payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1586,10 +1457,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about CashappPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Cash App payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1644,10 +1512,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about EpsPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process EPS payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1701,10 +1566,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about FpxPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process FPX payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1758,10 +1620,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about GbBankTransferPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process UK bank transfer payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1816,10 +1675,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about GrabpayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process GrabPay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1874,10 +1730,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about IdealPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process iDEAL payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1932,10 +1785,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about JcbPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process JCB card payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -1989,10 +1839,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about JpBankTransferPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Japanese bank transfer payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2047,10 +1894,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about KakaoPayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Kakao Pay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2105,10 +1949,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about KlarnaPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Klarna payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2163,10 +2004,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about KonbiniPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Konbini convenience store payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2221,10 +2059,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about KrCardPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Korean card payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2279,10 +2114,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about LinkPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Link payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2336,10 +2168,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about MobilepayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process MobilePay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2394,10 +2223,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about MultibancoPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Multibanco payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2452,10 +2278,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about MxBankTransferPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Mexican bank transfer payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2510,10 +2333,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about NaverPayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Naver Pay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2568,10 +2388,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about OxxoPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process OXXO payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2625,10 +2442,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about P24Payments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Przelewy24 (P24) payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2682,10 +2496,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about PayByBankPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Pay by Bank payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2740,10 +2551,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about PaycoPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process PAYCO payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2798,10 +2606,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about PaynowPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process PayNow payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2856,10 +2661,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about PromptpayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process PromptPay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2914,10 +2716,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about RevolutPayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Revolut Pay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -2972,10 +2771,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about SamsungPayPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Samsung Pay payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3030,10 +2826,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about SepaBankTransferPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process SEPA bank transfer payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3088,10 +2881,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about SepaDebitPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process SEPA Direct Debit payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3146,10 +2936,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about StripeBalance, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Capabilities that enable the merchant to manage their Stripe Balance (/v1/balance). */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3158,10 +2945,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("payouts")
           Payouts payouts;
 
-          /**
-           * For more details about Payouts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Allows the account to do payouts using their Stripe Balance (/v1/balance). */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -3218,10 +3002,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about SwishPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Swish payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3276,10 +3057,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about TwintPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process TWINT payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3334,10 +3112,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about UsBankTransferPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process US bank transfer payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3392,10 +3167,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about ZipPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Allow the merchant to process Zip payments. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3450,10 +3222,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about CardPayments, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Card payments settings. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3466,8 +3235,8 @@ public class Account extends StripeObject implements HasId {
         DeclineOn declineOn;
 
         /**
-         * For more details about DeclineOn, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * Automatically declines certain charge types regardless of whether the card issuer
+         * accepted or declined the charge.
          */
         @Getter
         @Setter
@@ -3490,10 +3259,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about SepaDebitPayments, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Settings used for SEPA debit payments. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3503,10 +3269,7 @@ public class Account extends StripeObject implements HasId {
         String creditorId;
       }
 
-      /**
-       * For more details about StatementDescriptor, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Statement descriptor. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3535,10 +3298,7 @@ public class Account extends StripeObject implements HasId {
         String prefix;
       }
 
-      /**
-       * For more details about Support, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Publicly available contact information for sending support issues to. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3559,10 +3319,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("url")
         String url;
 
-        /**
-         * For more details about Address, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** A publicly available mailing address for sending support issues to. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3574,43 +3331,6 @@ public class Account extends StripeObject implements HasId {
           /**
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
-           *
-           * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
-           * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
-           * {@code aw}, {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be},
-           * {@code bf}, {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm},
-           * {@code bn}, {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv},
-           * {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf},
-           * {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn},
-           * {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-           * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz},
-           * {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et},
-           * {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga},
-           * {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi},
-           * {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs},
-           * {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-           * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-           * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-           * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki},
-           * {@code km}, {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz},
-           * {@code la}, {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls},
-           * {@code lt}, {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md},
-           * {@code me}, {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm},
-           * {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt},
-           * {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na},
-           * {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-           * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe},
-           * {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn},
-           * {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz},
-           * {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb},
-           * {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-           * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-           * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td},
-           * {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-           * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
-           * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
-           * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -3638,10 +3358,7 @@ public class Account extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about Recipient, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** The Recipient Configuration allows the Account to receive funds. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -3664,10 +3381,7 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("default_outbound_destination")
       DefaultOutboundDestination defaultOutboundDestination;
 
-      /**
-       * For more details about Capabilities, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Capabilities that have been requested on the Recipient Configuration. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -3684,10 +3398,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("stripe_balance")
         StripeBalance stripeBalance;
 
-        /**
-         * For more details about BankAccounts, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Capabilities that enable OutboundPayments to a bank account linked to this Account. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3704,8 +3415,8 @@ public class Account extends StripeObject implements HasId {
           Wire wire;
 
           /**
-           * For more details about Local, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Enables this Account to receive OutboundPayments to linked bank accounts over local
+           * networks.
            */
           @Getter
           @Setter
@@ -3762,10 +3473,7 @@ public class Account extends StripeObject implements HasId {
             }
           }
 
-          /**
-           * For more details about Wire, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Enables this Account to receive OutboundPayments to linked bank accounts over wire. */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -3822,10 +3530,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about Cards, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Capability that enable OutboundPayments to a debit card linked to this Account. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3879,10 +3584,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about StripeBalance, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Capabilities that enable the recipient to manage their Stripe Balance (/v1/balance). */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -3897,10 +3599,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("stripe_transfers")
           StripeTransfers stripeTransfers;
 
-          /**
-           * For more details about Payouts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Allows the account to do payouts using their Stripe Balance (/v1/balance). */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -3957,8 +3656,7 @@ public class Account extends StripeObject implements HasId {
           }
 
           /**
-           * For more details about StripeTransfers, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Allows the account to receive /v1/transfers into their Stripe Balance (/v1/balance).
            */
           @Getter
           @Setter
@@ -4020,8 +3718,8 @@ public class Account extends StripeObject implements HasId {
       }
 
       /**
-       * For more details about DefaultOutboundDestination, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The payout method to be used as a default outbound destination. This will allow the
+       * PayoutMethod to be omitted on OutboundPayments made through the dashboard.
        */
       @Getter
       @Setter
@@ -4062,8 +3760,8 @@ public class Account extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about Storer, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * The Storer Configuration allows the Account to store and move funds using stored-value
+     * FinancialAccounts.
      */
     @Getter
     @Setter
@@ -4080,10 +3778,7 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("capabilities")
       Capabilities capabilities;
 
-      /**
-       * For more details about Capabilities, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Capabilities that have been requested on the Storer Configuration. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -4108,10 +3803,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("outbound_transfers")
         OutboundTransfers outboundTransfers;
 
-        /**
-         * For more details about FinancialAddresses, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Can provision a financial address to credit/debit a FinancialAccount. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4124,8 +3816,8 @@ public class Account extends StripeObject implements HasId {
           BankAccounts bankAccounts;
 
           /**
-           * For more details about BankAccounts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Can provision a bank-account like financial address (VBAN) to credit/debit a
+           * FinancialAccount.
            */
           @Getter
           @Setter
@@ -4185,10 +3877,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about HoldsCurrencies, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Can hold storage-type funds on Stripe. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4197,10 +3886,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("gbp")
           Gbp gbp;
 
-          /**
-           * For more details about Gbp, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Can hold storage-type funds on Stripe in GBP. */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -4257,10 +3943,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about InboundTransfers, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Can pull funds from an external source, owned by yourself, to a FinancialAccount. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4272,8 +3955,7 @@ public class Account extends StripeObject implements HasId {
           BankAccounts bankAccounts;
 
           /**
-           * For more details about BankAccounts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Can pull funds from an external bank account, owned by yourself, to a FinancialAccount.
            */
           @Getter
           @Setter
@@ -4333,10 +4015,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about OutboundPayments, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Can send funds from a FinancialAccount to a destination owned by someone else. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4356,10 +4035,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("financial_accounts")
           FinancialAccounts financialAccounts;
 
-          /**
-           * For more details about BankAccounts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Can send funds from a FinancialAccount to a bank account, owned by someone else. */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -4417,10 +4093,7 @@ public class Account extends StripeObject implements HasId {
             }
           }
 
-          /**
-           * For more details about Cards, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Can send funds from a FinancialAccount to a debit card, owned by someone else. */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -4477,8 +4150,8 @@ public class Account extends StripeObject implements HasId {
           }
 
           /**
-           * For more details about FinancialAccounts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Can send funds from a FinancialAccount to another FinancialAccount, owned by someone
+           * else.
            */
           @Getter
           @Setter
@@ -4538,10 +4211,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about OutboundTransfers, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Can send funds from a FinancialAccount to a destination owned by yourself. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -4556,10 +4226,7 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("financial_accounts")
           FinancialAccounts financialAccounts;
 
-          /**
-           * For more details about BankAccounts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
-           */
+          /** Can send funds from a FinancialAccount, to a bank account, owned by yourself. */
           @Getter
           @Setter
           @EqualsAndHashCode(callSuper = false)
@@ -4618,8 +4285,7 @@ public class Account extends StripeObject implements HasId {
           }
 
           /**
-           * For more details about FinancialAccounts, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Can send funds from a FinancialAccount to another FinancialAccount, owned by yourself.
            */
           @Getter
           @Setter
@@ -4682,10 +4348,7 @@ public class Account extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about Defaults, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Default values to be used on Account Configurations. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -4694,33 +4357,6 @@ public class Account extends StripeObject implements HasId {
      * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
      * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
      * currency</a>.
-     *
-     * <p>One of {@code aed}, {@code afn}, {@code all}, {@code amd}, {@code ang}, {@code aoa},
-     * {@code ars}, {@code aud}, {@code awg}, {@code azn}, {@code bam}, {@code bbd}, {@code bdt},
-     * {@code bgn}, {@code bhd}, {@code bif}, {@code bmd}, {@code bnd}, {@code bob}, {@code bov},
-     * {@code brl}, {@code bsd}, {@code btn}, {@code bwp}, {@code byn}, {@code byr}, {@code bzd},
-     * {@code cad}, {@code cdf}, {@code che}, {@code chf}, {@code chw}, {@code clf}, {@code clp},
-     * {@code cny}, {@code cop}, {@code cou}, {@code crc}, {@code cuc}, {@code cup}, {@code cve},
-     * {@code czk}, {@code djf}, {@code dkk}, {@code dop}, {@code dzd}, {@code eek}, {@code egp},
-     * {@code ern}, {@code etb}, {@code eur}, {@code fjd}, {@code fkp}, {@code gbp}, {@code gel},
-     * {@code ghc}, {@code ghs}, {@code gip}, {@code gmd}, {@code gnf}, {@code gtq}, {@code gyd},
-     * {@code hkd}, {@code hnl}, {@code hrk}, {@code htg}, {@code huf}, {@code idr}, {@code ils},
-     * {@code inr}, {@code iqd}, {@code irr}, {@code isk}, {@code jmd}, {@code jod}, {@code jpy},
-     * {@code kes}, {@code kgs}, {@code khr}, {@code kmf}, {@code kpw}, {@code krw}, {@code kwd},
-     * {@code kyd}, {@code kzt}, {@code lak}, {@code lbp}, {@code lkr}, {@code lrd}, {@code lsl},
-     * {@code ltl}, {@code lvl}, {@code lyd}, {@code mad}, {@code mdl}, {@code mga}, {@code mkd},
-     * {@code mmk}, {@code mnt}, {@code mop}, {@code mro}, {@code mru}, {@code mur}, {@code mvr},
-     * {@code mwk}, {@code mxn}, {@code mxv}, {@code myr}, {@code mzn}, {@code nad}, {@code ngn},
-     * {@code nio}, {@code nok}, {@code npr}, {@code nzd}, {@code omr}, {@code pab}, {@code pen},
-     * {@code pgk}, {@code php}, {@code pkr}, {@code pln}, {@code pyg}, {@code qar}, {@code ron},
-     * {@code rsd}, {@code rub}, {@code rwf}, {@code sar}, {@code sbd}, {@code scr}, {@code sdg},
-     * {@code sek}, {@code sgd}, {@code shp}, {@code sle}, {@code sll}, {@code sos}, {@code srd},
-     * {@code ssp}, {@code std}, {@code stn}, {@code svc}, {@code syp}, {@code szl}, {@code thb},
-     * {@code tjs}, {@code tmt}, {@code tnd}, {@code top}, {@code try}, {@code ttd}, {@code twd},
-     * {@code tzs}, {@code uah}, {@code ugx}, {@code usd}, {@code usdb}, {@code usdc}, {@code usn},
-     * {@code uyi}, {@code uyu}, {@code uzs}, {@code vef}, {@code ves}, {@code vnd}, {@code vuv},
-     * {@code wst}, {@code xaf}, {@code xcd}, {@code xcg}, {@code xof}, {@code xpf}, {@code yer},
-     * {@code zar}, {@code zmk}, {@code zmw}, {@code zwd}, {@code zwg}, or {@code zwl}.
      */
     @SerializedName("currency")
     String currency;
@@ -4733,10 +4369,7 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("responsibilities")
     Responsibilities responsibilities;
 
-    /**
-     * For more details about Responsibilities, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Default responsibilities held by either Stripe or the platform. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4761,10 +4394,7 @@ public class Account extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about Identity, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
+  /** Information about the company, individual, and business represented by the Account. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -4781,41 +4411,6 @@ public class Account extends StripeObject implements HasId {
      * The country in which the account holder resides, or in which the business is legally
      * established. This should be an <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
      * 3166-1 alpha-2</a> country code.
-     *
-     * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code am},
-     * {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw}, {@code
-     * ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf}, {@code bg},
-     * {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn}, {@code bo}, {@code
-     * bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw}, {@code by}, {@code bz},
-     * {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg}, {@code ch}, {@code ci}, {@code
-     * ck}, {@code cl}, {@code cm}, {@code cn}, {@code co}, {@code cr}, {@code cu}, {@code cv},
-     * {@code cw}, {@code cx}, {@code cy}, {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code
-     * dm}, {@code do}, {@code dz}, {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er},
-     * {@code es}, {@code et}, {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code
-     * fr}, {@code ga}, {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh},
-     * {@code gi}, {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code
-     * gs}, {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-     * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im}, {@code
-     * in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code jm},
-     * {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km}, {@code
-     * kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la}, {@code lb},
-     * {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt}, {@code lu}, {@code
-     * lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me}, {@code mf}, {@code mg},
-     * {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn}, {@code mo}, {@code mp}, {@code
-     * mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu}, {@code mv}, {@code mw}, {@code mx},
-     * {@code my}, {@code mz}, {@code na}, {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code
-     * ni}, {@code nl}, {@code no}, {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om},
-     * {@code pa}, {@code pe}, {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code
-     * pm}, {@code pn}, {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa},
-     * {@code qz}, {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code
-     * sb}, {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-     * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss}, {@code
-     * st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code tf},
-     * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn}, {@code
-     * to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua}, {@code ug},
-     * {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc}, {@code ve}, {@code
-     * vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws}, {@code xx}, {@code ye},
-     * {@code yt}, {@code za}, {@code zm}, or {@code zw}.
      */
     @SerializedName("country")
     String country;
@@ -4836,10 +4431,7 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("individual")
     Individual individual;
 
-    /**
-     * For more details about Attestations, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Attestations from the identity's key people, e.g. owners, executives, directors. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4867,8 +4459,8 @@ public class Account extends StripeObject implements HasId {
       TermsOfService termsOfService;
 
       /**
-       * For more details about DirectorshipDeclaration, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * This hash is used to attest that the directors information provided to Stripe is both
+       * current and correct.
        */
       @Getter
       @Setter
@@ -4891,8 +4483,8 @@ public class Account extends StripeObject implements HasId {
       }
 
       /**
-       * For more details about OwnershipDeclaration, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * This hash is used to attest that the beneficial owner information provided to Stripe is
+       * both current and correct.
        */
       @Getter
       @Setter
@@ -4915,10 +4507,7 @@ public class Account extends StripeObject implements HasId {
         String userAgent;
       }
 
-      /**
-       * For more details about PersonsProvided, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Attestation that all Persons with a specific Relationship value have been provided. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -4957,10 +4546,7 @@ public class Account extends StripeObject implements HasId {
         String ownershipExemptionReason;
       }
 
-      /**
-       * For more details about TermsOfService, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Attestations of accepted terms of service agreements. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -4978,8 +4564,9 @@ public class Account extends StripeObject implements HasId {
         Storer storer;
 
         /**
-         * For more details about InnerAccount, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * Details on the Account's acceptance of the <a
+         * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
+         * Agreement</a>.
          */
         @Getter
         @Setter
@@ -5007,10 +4594,7 @@ public class Account extends StripeObject implements HasId {
           String userAgent;
         }
 
-        /**
-         * For more details about Storer, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Details on the Account's acceptance of Treasury-specific terms of service. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5039,10 +4623,7 @@ public class Account extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about BusinessDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
+    /** Information about the company or business. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -5068,7 +4649,7 @@ public class Account extends StripeObject implements HasId {
        * business.
        */
       @SerializedName("estimated_worker_count")
-      Integer estimatedWorkerCount;
+      Long estimatedWorkerCount;
 
       /** The provided ID numbers of a business entity. */
       @SerializedName("id_numbers")
@@ -5122,10 +4703,7 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("url")
       String url;
 
-      /**
-       * For more details about Address, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The company’s primary address. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5137,43 +4715,6 @@ public class Account extends StripeObject implements HasId {
         /**
          * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
          * 3166-1 alpha-2</a>).
-         *
-         * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code
-         * am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw},
-         * {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf},
-         * {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn},
-         * {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw},
-         * {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg},
-         * {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn}, {@code co},
-         * {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy}, {@code cz},
-         * {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz}, {@code ec},
-         * {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et}, {@code fi},
-         * {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga}, {@code gb},
-         * {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi}, {@code gl},
-         * {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs}, {@code gt},
-         * {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn}, {@code hr},
-         * {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im}, {@code in},
-         * {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code jm},
-         * {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km},
-         * {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la},
-         * {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt},
-         * {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me},
-         * {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn},
-         * {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu},
-         * {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na}, {@code nc},
-         * {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no}, {@code np},
-         * {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe}, {@code pf},
-         * {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn}, {@code pr},
-         * {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz}, {@code re},
-         * {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb}, {@code sc},
-         * {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj}, {@code sk},
-         * {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss}, {@code st},
-         * {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code tf},
-         * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn},
-         * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
-         * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
-         * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -5199,10 +4740,7 @@ public class Account extends StripeObject implements HasId {
         String town;
       }
 
-      /**
-       * For more details about AnnualRevenue, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The business gross annual revenue for its preceding fiscal year. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5219,10 +4757,7 @@ public class Account extends StripeObject implements HasId {
         String fiscalYearEnd;
       }
 
-      /**
-       * For more details about Documents, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Documents that may be submitted to satisfy various informational requests. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5281,8 +4816,9 @@ public class Account extends StripeObject implements HasId {
         ProofOfUltimateBeneficialOwnership proofOfUltimateBeneficialOwnership;
 
         /**
-         * For more details about BankAccountOwnershipVerification, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * One or more documents that support the Bank account ownership verification requirement.
+         * Must be a document associated with the account’s primary active bank account that
+         * displays the last 4 digits of the account number, either a statement or a check.
          */
         @Getter
         @Setter
@@ -5305,10 +4841,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /**
-         * For more details about CompanyLicense, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** One or more documents that demonstrate proof of a company’s license to operate. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5330,10 +4863,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /**
-         * For more details about CompanyMemorandumOfAssociation, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** One or more documents showing the company’s Memorandum of Association. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5356,8 +4886,8 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * For more details about CompanyMinisterialDecree, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * Certain countries only: One or more documents showing the ministerial decree legalizing
+         * the company’s establishment.
          */
         @Getter
         @Setter
@@ -5381,8 +4911,8 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * For more details about CompanyRegistrationVerification, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * One or more documents that demonstrate proof of a company’s registration with the
+         * appropriate local authorities.
          */
         @Getter
         @Setter
@@ -5405,10 +4935,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /**
-         * For more details about CompanyTaxIdVerification, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** One or more documents that demonstrate proof of a company’s tax ID. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5430,10 +4957,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /**
-         * For more details about PrimaryVerification, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** A document verifying the business. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5454,8 +4978,8 @@ public class Account extends StripeObject implements HasId {
           String type;
 
           /**
-           * For more details about FrontBack, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
+           * tokens for the front and back of the verification document.
            */
           @Getter
           @Setter
@@ -5483,10 +5007,7 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
-        /**
-         * For more details about ProofOfAddress, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** One or more documents that demonstrate proof of address. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5509,8 +5030,8 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * For more details about ProofOfRegistration, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * One or more documents showing the company’s proof of registration with the national
+         * business registry.
          */
         @Getter
         @Setter
@@ -5533,10 +5054,7 @@ public class Account extends StripeObject implements HasId {
           String type;
         }
 
-        /**
-         * For more details about ProofOfUltimateBeneficialOwnership, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** One or more documents that demonstrate proof of ultimate beneficial ownership. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5593,10 +5111,7 @@ public class Account extends StripeObject implements HasId {
         String type;
       }
 
-      /**
-       * For more details about MonthlyEstimatedRevenue, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** An estimate of the monthly revenue of the business. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5606,10 +5121,7 @@ public class Account extends StripeObject implements HasId {
         Amount amount;
       }
 
-      /**
-       * For more details about ScriptAddresses, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The business registration address of the business entity in non latin script. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5622,10 +5134,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("kanji")
         Kanji kanji;
 
-        /**
-         * For more details about Kana, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Kana Address. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5637,43 +5146,6 @@ public class Account extends StripeObject implements HasId {
           /**
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
-           *
-           * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
-           * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
-           * {@code aw}, {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be},
-           * {@code bf}, {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm},
-           * {@code bn}, {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv},
-           * {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf},
-           * {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn},
-           * {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-           * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz},
-           * {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et},
-           * {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga},
-           * {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi},
-           * {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs},
-           * {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-           * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-           * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-           * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki},
-           * {@code km}, {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz},
-           * {@code la}, {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls},
-           * {@code lt}, {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md},
-           * {@code me}, {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm},
-           * {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt},
-           * {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na},
-           * {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-           * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe},
-           * {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn},
-           * {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz},
-           * {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb},
-           * {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-           * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-           * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td},
-           * {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-           * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
-           * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
-           * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -5699,10 +5171,7 @@ public class Account extends StripeObject implements HasId {
           String town;
         }
 
-        /**
-         * For more details about Kanji, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Kanji Address. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5714,43 +5183,6 @@ public class Account extends StripeObject implements HasId {
           /**
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
-           *
-           * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
-           * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
-           * {@code aw}, {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be},
-           * {@code bf}, {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm},
-           * {@code bn}, {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv},
-           * {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf},
-           * {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn},
-           * {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-           * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz},
-           * {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et},
-           * {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga},
-           * {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi},
-           * {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs},
-           * {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-           * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-           * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-           * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki},
-           * {@code km}, {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz},
-           * {@code la}, {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls},
-           * {@code lt}, {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md},
-           * {@code me}, {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm},
-           * {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt},
-           * {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na},
-           * {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-           * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe},
-           * {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn},
-           * {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz},
-           * {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb},
-           * {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-           * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-           * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td},
-           * {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-           * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
-           * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
-           * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -5777,10 +5209,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about ScriptNames, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The business legal name in non latin script. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -5793,10 +5222,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("kanji")
         Kanji kanji;
 
-        /**
-         * For more details about Kana, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Kana name. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5806,10 +5232,7 @@ public class Account extends StripeObject implements HasId {
           String registeredName;
         }
 
-        /**
-         * For more details about Kanji, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Kanji name. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -5822,8 +5245,8 @@ public class Account extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about Individual, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * Information about the individual represented by the Account. This property is {@code null}
+     * unless {@code entity_type} is set to {@code individual}.
      */
     @Getter
     @Setter
@@ -5957,43 +5380,6 @@ public class Account extends StripeObject implements HasId {
         /**
          * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
          * 3166-1 alpha-2</a>).
-         *
-         * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code
-         * am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw},
-         * {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf},
-         * {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn},
-         * {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw},
-         * {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg},
-         * {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn}, {@code co},
-         * {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy}, {@code cz},
-         * {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz}, {@code ec},
-         * {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et}, {@code fi},
-         * {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga}, {@code gb},
-         * {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi}, {@code gl},
-         * {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs}, {@code gt},
-         * {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn}, {@code hr},
-         * {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im}, {@code in},
-         * {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code jm},
-         * {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km},
-         * {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la},
-         * {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt},
-         * {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me},
-         * {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn},
-         * {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu},
-         * {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na}, {@code nc},
-         * {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no}, {@code np},
-         * {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe}, {@code pf},
-         * {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn}, {@code pr},
-         * {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz}, {@code re},
-         * {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb}, {@code sc},
-         * {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj}, {@code sk},
-         * {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss}, {@code st},
-         * {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code tf},
-         * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn},
-         * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
-         * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
-         * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -6056,10 +5442,7 @@ public class Account extends StripeObject implements HasId {
         String surname;
       }
 
-      /**
-       * For more details about AdditionalTermsOfService, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Terms of service acceptances. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -6068,10 +5451,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("account")
         InnerAccount account;
 
-        /**
-         * For more details about InnerAccount, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Stripe terms of service agreement. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6099,10 +5479,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about Address, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The individual's residential address. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -6114,43 +5491,6 @@ public class Account extends StripeObject implements HasId {
         /**
          * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
          * 3166-1 alpha-2</a>).
-         *
-         * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al}, {@code
-         * am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au}, {@code aw},
-         * {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be}, {@code bf},
-         * {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm}, {@code bn},
-         * {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv}, {@code bw},
-         * {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf}, {@code cg},
-         * {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn}, {@code co},
-         * {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy}, {@code cz},
-         * {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz}, {@code ec},
-         * {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et}, {@code fi},
-         * {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga}, {@code gb},
-         * {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi}, {@code gl},
-         * {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs}, {@code gt},
-         * {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn}, {@code hr},
-         * {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im}, {@code in},
-         * {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je}, {@code jm},
-         * {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki}, {@code km},
-         * {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz}, {@code la},
-         * {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls}, {@code lt},
-         * {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md}, {@code me},
-         * {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm}, {@code mn},
-         * {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt}, {@code mu},
-         * {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na}, {@code nc},
-         * {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no}, {@code np},
-         * {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe}, {@code pf},
-         * {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn}, {@code pr},
-         * {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz}, {@code re},
-         * {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb}, {@code sc},
-         * {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj}, {@code sk},
-         * {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss}, {@code st},
-         * {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td}, {@code tf},
-         * {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm}, {@code tn},
-         * {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz}, {@code ua},
-         * {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va}, {@code vc},
-         * {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf}, {@code ws},
-         * {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
          */
         @SerializedName("country")
         String country;
@@ -6176,31 +5516,25 @@ public class Account extends StripeObject implements HasId {
         String town;
       }
 
-      /**
-       * For more details about DateOfBirth, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The individual's date of birth. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class DateOfBirth extends StripeObject {
         /** The day of birth, between 1 and 31. */
         @SerializedName("day")
-        Integer day;
+        Long day;
 
         /** The month of birth, between 1 and 12. */
         @SerializedName("month")
-        Integer month;
+        Long month;
 
         /** The four-digit year of birth. */
         @SerializedName("year")
-        Integer year;
+        Long year;
       }
 
-      /**
-       * For more details about Documents, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** Documents that may be submitted to satisfy various informational requests. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -6239,8 +5573,8 @@ public class Account extends StripeObject implements HasId {
         Visa visa;
 
         /**
-         * For more details about CompanyAuthorization, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * One or more documents that demonstrate proof that this person is authorized to represent
+         * the company.
          */
         @Getter
         @Setter
@@ -6264,8 +5598,7 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * For more details about Passport, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * One or more documents showing the person’s passport page with photo and personal data.
          */
         @Getter
         @Setter
@@ -6289,8 +5622,7 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * For more details about PrimaryVerification, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * An identifying document showing the person's name, either a passport or local ID card.
          */
         @Getter
         @Setter
@@ -6312,8 +5644,8 @@ public class Account extends StripeObject implements HasId {
           String type;
 
           /**
-           * For more details about FrontBack, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
+           * tokens for the front and back of the verification document.
            */
           @Getter
           @Setter
@@ -6342,8 +5674,8 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * For more details about SecondaryVerification, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * A document showing address, either a passport, local ID card, or utility bill from a
+         * well-known utility company.
          */
         @Getter
         @Setter
@@ -6365,8 +5697,8 @@ public class Account extends StripeObject implements HasId {
           String type;
 
           /**
-           * For more details about FrontBack, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * The <a href="https://docs.stripe.com/api/persons/update#create_file">file upload</a>
+           * tokens for the front and back of the verification document.
            */
           @Getter
           @Setter
@@ -6395,8 +5727,8 @@ public class Account extends StripeObject implements HasId {
         }
 
         /**
-         * For more details about Visa, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
+         * One or more documents showing the person’s visa required for living in the country where
+         * they are residing.
          */
         @Getter
         @Setter
@@ -6443,10 +5775,7 @@ public class Account extends StripeObject implements HasId {
         String type;
       }
 
-      /**
-       * For more details about Relationship, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The relationship that this individual has with the Account's identity. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -6480,7 +5809,7 @@ public class Account extends StripeObject implements HasId {
 
         /** The percent owned by the individual of the Account’s legal entity. */
         @SerializedName("percent_ownership")
-        String percentOwnership;
+        BigDecimal percentOwnership;
 
         /**
          * Whether the individual is authorized as the primary representative of the Account. This
@@ -6497,10 +5826,7 @@ public class Account extends StripeObject implements HasId {
         String title;
       }
 
-      /**
-       * For more details about ScriptAddresses, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The script addresses (e.g., non-Latin characters) associated with the individual. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -6513,10 +5839,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("kanji")
         Kanji kanji;
 
-        /**
-         * For more details about Kana, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Kana Address. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6528,43 +5851,6 @@ public class Account extends StripeObject implements HasId {
           /**
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
-           *
-           * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
-           * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
-           * {@code aw}, {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be},
-           * {@code bf}, {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm},
-           * {@code bn}, {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv},
-           * {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf},
-           * {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn},
-           * {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-           * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz},
-           * {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et},
-           * {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga},
-           * {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi},
-           * {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs},
-           * {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-           * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-           * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-           * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki},
-           * {@code km}, {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz},
-           * {@code la}, {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls},
-           * {@code lt}, {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md},
-           * {@code me}, {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm},
-           * {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt},
-           * {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na},
-           * {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-           * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe},
-           * {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn},
-           * {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz},
-           * {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb},
-           * {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-           * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-           * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td},
-           * {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-           * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
-           * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
-           * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -6590,10 +5876,7 @@ public class Account extends StripeObject implements HasId {
           String town;
         }
 
-        /**
-         * For more details about Kanji, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Kanji Address. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6605,43 +5888,6 @@ public class Account extends StripeObject implements HasId {
           /**
            * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
            * 3166-1 alpha-2</a>).
-           *
-           * <p>One of {@code ad}, {@code ae}, {@code af}, {@code ag}, {@code ai}, {@code al},
-           * {@code am}, {@code ao}, {@code aq}, {@code ar}, {@code as}, {@code at}, {@code au},
-           * {@code aw}, {@code ax}, {@code az}, {@code ba}, {@code bb}, {@code bd}, {@code be},
-           * {@code bf}, {@code bg}, {@code bh}, {@code bi}, {@code bj}, {@code bl}, {@code bm},
-           * {@code bn}, {@code bo}, {@code bq}, {@code br}, {@code bs}, {@code bt}, {@code bv},
-           * {@code bw}, {@code by}, {@code bz}, {@code ca}, {@code cc}, {@code cd}, {@code cf},
-           * {@code cg}, {@code ch}, {@code ci}, {@code ck}, {@code cl}, {@code cm}, {@code cn},
-           * {@code co}, {@code cr}, {@code cu}, {@code cv}, {@code cw}, {@code cx}, {@code cy},
-           * {@code cz}, {@code de}, {@code dj}, {@code dk}, {@code dm}, {@code do}, {@code dz},
-           * {@code ec}, {@code ee}, {@code eg}, {@code eh}, {@code er}, {@code es}, {@code et},
-           * {@code fi}, {@code fj}, {@code fk}, {@code fm}, {@code fo}, {@code fr}, {@code ga},
-           * {@code gb}, {@code gd}, {@code ge}, {@code gf}, {@code gg}, {@code gh}, {@code gi},
-           * {@code gl}, {@code gm}, {@code gn}, {@code gp}, {@code gq}, {@code gr}, {@code gs},
-           * {@code gt}, {@code gu}, {@code gw}, {@code gy}, {@code hk}, {@code hm}, {@code hn},
-           * {@code hr}, {@code ht}, {@code hu}, {@code id}, {@code ie}, {@code il}, {@code im},
-           * {@code in}, {@code io}, {@code iq}, {@code ir}, {@code is}, {@code it}, {@code je},
-           * {@code jm}, {@code jo}, {@code jp}, {@code ke}, {@code kg}, {@code kh}, {@code ki},
-           * {@code km}, {@code kn}, {@code kp}, {@code kr}, {@code kw}, {@code ky}, {@code kz},
-           * {@code la}, {@code lb}, {@code lc}, {@code li}, {@code lk}, {@code lr}, {@code ls},
-           * {@code lt}, {@code lu}, {@code lv}, {@code ly}, {@code ma}, {@code mc}, {@code md},
-           * {@code me}, {@code mf}, {@code mg}, {@code mh}, {@code mk}, {@code ml}, {@code mm},
-           * {@code mn}, {@code mo}, {@code mp}, {@code mq}, {@code mr}, {@code ms}, {@code mt},
-           * {@code mu}, {@code mv}, {@code mw}, {@code mx}, {@code my}, {@code mz}, {@code na},
-           * {@code nc}, {@code ne}, {@code nf}, {@code ng}, {@code ni}, {@code nl}, {@code no},
-           * {@code np}, {@code nr}, {@code nu}, {@code nz}, {@code om}, {@code pa}, {@code pe},
-           * {@code pf}, {@code pg}, {@code ph}, {@code pk}, {@code pl}, {@code pm}, {@code pn},
-           * {@code pr}, {@code ps}, {@code pt}, {@code pw}, {@code py}, {@code qa}, {@code qz},
-           * {@code re}, {@code ro}, {@code rs}, {@code ru}, {@code rw}, {@code sa}, {@code sb},
-           * {@code sc}, {@code sd}, {@code se}, {@code sg}, {@code sh}, {@code si}, {@code sj},
-           * {@code sk}, {@code sl}, {@code sm}, {@code sn}, {@code so}, {@code sr}, {@code ss},
-           * {@code st}, {@code sv}, {@code sx}, {@code sy}, {@code sz}, {@code tc}, {@code td},
-           * {@code tf}, {@code tg}, {@code th}, {@code tj}, {@code tk}, {@code tl}, {@code tm},
-           * {@code tn}, {@code to}, {@code tr}, {@code tt}, {@code tv}, {@code tw}, {@code tz},
-           * {@code ua}, {@code ug}, {@code um}, {@code us}, {@code uy}, {@code uz}, {@code va},
-           * {@code vc}, {@code ve}, {@code vg}, {@code vi}, {@code vn}, {@code vu}, {@code wf},
-           * {@code ws}, {@code xx}, {@code ye}, {@code yt}, {@code za}, {@code zm}, or {@code zw}.
            */
           @SerializedName("country")
           String country;
@@ -6668,10 +5914,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about ScriptNames, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The script names (e.g. non-Latin characters) associated with the individual. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -6684,10 +5927,7 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("kanji")
         Kanji kanji;
 
-        /**
-         * For more details about Kana, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Persons name in kana script. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6701,10 +5941,7 @@ public class Account extends StripeObject implements HasId {
           String surname;
         }
 
-        /**
-         * For more details about Kanji, please refer to the <a
-         * href="https://docs.stripe.com/api">API Reference.</a>
-         */
+        /** Persons name in kanji script. */
         @Getter
         @Setter
         @EqualsAndHashCode(callSuper = false)
@@ -6722,8 +5959,8 @@ public class Account extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about Requirements, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * Information about the requirements for the Account, including what information needs to be
+   * collected, and by when.
    */
   @Getter
   @Setter
@@ -6872,8 +6109,8 @@ public class Account extends StripeObject implements HasId {
       }
 
       /**
-       * For more details about Impact, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * A hash describing the impact of not collecting the requirement, or Stripe not being able to
+       * verify the collected information.
        */
       @Getter
       @Setter
@@ -6940,8 +6177,8 @@ public class Account extends StripeObject implements HasId {
           Deadline deadline;
 
           /**
-           * For more details about Deadline, please refer to the <a
-           * href="https://docs.stripe.com/api">API Reference.</a>
+           * Details about when in the account lifecycle the requirement must be collected by the
+           * avoid the Capability restriction.
            */
           @Getter
           @Setter
@@ -6958,10 +6195,7 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
-      /**
-       * For more details about MinimumDeadline, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The soonest point when the account will be impacted by not providing the requirement. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -6975,10 +6209,7 @@ public class Account extends StripeObject implements HasId {
         String status;
       }
 
-      /**
-       * For more details about Reference, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** A reference to the location of the requirement. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
@@ -7020,10 +6251,7 @@ public class Account extends StripeObject implements HasId {
       }
     }
 
-    /**
-     * For more details about Summary, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
+    /** An object containing an overview of requirements for the Account. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -7037,8 +6265,9 @@ public class Account extends StripeObject implements HasId {
       MinimumDeadline minimumDeadline;
 
       /**
-       * For more details about MinimumDeadline, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
+       * The soonest date and time a requirement on the Account will become {@code past due}.
+       * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+       * {@code 2022-09-18T13:22:18.123Z}.
        */
       @Getter
       @Setter

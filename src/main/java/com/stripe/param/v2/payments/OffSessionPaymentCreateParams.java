@@ -391,7 +391,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
      * unit (e.g., 100 cents to charge $1.00).
      */
     @SerializedName("amount")
-    Integer amount;
+    Long amount;
 
     /**
      * <strong>Required.</strong> The account (if any) that the payment is attributed to for tax
@@ -409,7 +409,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(Integer amount, String destination, Map<String, Object> extraParams) {
+    private TransferData(Long amount, String destination, Map<String, Object> extraParams) {
       this.amount = amount;
       this.destination = destination;
       this.extraParams = extraParams;
@@ -420,7 +420,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Integer amount;
+      private Long amount;
 
       private String destination;
 
@@ -440,7 +440,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
        * and must be a positive integer representing how much to transfer in the smallest currency
        * unit (e.g., 100 cents to charge $1.00).
        */
-      public Builder setAmount(Integer amount) {
+      public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }

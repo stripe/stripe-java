@@ -49,15 +49,15 @@ public final class PromotionCodeService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<PromotionCode>>() {}.getType());
   }
   /**
-   * A promotion code points to a coupon. You can optionally restrict the code to a specific
-   * customer, redemption limit, and expiration date.
+   * A promotion code points to an underlying promotion. You can optionally restrict the code to a
+   * specific customer, redemption limit, and expiration date.
    */
   public PromotionCode create(PromotionCodeCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * A promotion code points to a coupon. You can optionally restrict the code to a specific
-   * customer, redemption limit, and expiration date.
+   * A promotion code points to an underlying promotion. You can optionally restrict the code to a
+   * specific customer, redemption limit, and expiration date.
    */
   public PromotionCode create(PromotionCodeCreateParams params, RequestOptions options)
       throws StripeException {

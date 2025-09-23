@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Use ReceivedCredits API to retrieve information on when, where, and how funds are sent into your
+ * FinancialAccount.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -103,8 +107,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
   String type;
 
   /**
-   * For more details about BalanceTransfer, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * This object stores details about the originating Stripe transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code balance_transfer}.
    */
   @Getter
   @Setter
@@ -136,8 +140,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about BankTransfer, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * This object stores details about the originating banking transaction that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code external_credit}.
    */
   @Getter
   @Setter
@@ -174,8 +178,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
     UsBankAccount usBankAccount;
 
     /**
-     * For more details about GbBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * Hash containing the transaction bank details. Present if {@code payment_method_type} field
+     * value is {@code gb_bank_account}.
      */
     @Getter
     @Setter
@@ -207,8 +211,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about UsBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * Hash containing the transaction bank details. Present if {@code payment_method_type} field
+     * value is {@code us_bank_account}.
      */
     @Getter
     @Setter
@@ -237,8 +241,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
   }
 
   /**
-   * For more details about StatusDetails, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * This hash contains detailed information that elaborates on the specific status of the
+   * ReceivedCredit. e.g the reason behind a failure if the status is marked as {@code failed}.
    */
   @Getter
   @Setter
@@ -259,8 +263,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
     Returned returned;
 
     /**
-     * For more details about Failed, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
+     * Hash that provides additional information regarding the reason behind a {@code failed}
+     * ReceivedCredit status. It is only present when the ReceivedCredit status is {@code failed}.
      */
     @Getter
     @Setter
@@ -277,8 +281,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about Returned, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * Hash that provides additional information regarding the reason behind a {@code returned}
+     * ReceivedCredit status. It is only present when the ReceivedCredit status is {@code returned}.
      */
     @Getter
     @Setter
@@ -294,10 +298,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
     }
   }
 
-  /**
-   * For more details about StatusTransitions, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
-   */
+  /** Hash containing timestamps of when the object transitioned to a particular status. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

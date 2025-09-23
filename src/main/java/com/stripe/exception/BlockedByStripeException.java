@@ -6,10 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/**
- * Returned if an InboundTransfer is not allowed for risk, legal, regulatory or other unforeseen
- * reasons.
- */
+/** Information about the error that occurred. */
 public final class BlockedByStripeException extends ApiException {
   private static final long serialVersionUID = 2L;
 

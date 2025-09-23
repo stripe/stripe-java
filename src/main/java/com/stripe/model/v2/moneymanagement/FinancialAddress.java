@@ -9,6 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A FinancialAddress contains information needed to transfer money to a Financial Account. A
+ * Financial Account can have more than one Financial Address.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -26,36 +30,7 @@ public class FinancialAddress extends StripeObject implements HasId {
   @SerializedName("credentials")
   Credentials credentials;
 
-  /**
-   * Open Enum. The currency the FinancialAddress supports.
-   *
-   * <p>One of {@code aed}, {@code afn}, {@code all}, {@code amd}, {@code ang}, {@code aoa}, {@code
-   * ars}, {@code aud}, {@code awg}, {@code azn}, {@code bam}, {@code bbd}, {@code bdt}, {@code
-   * bgn}, {@code bhd}, {@code bif}, {@code bmd}, {@code bnd}, {@code bob}, {@code bov}, {@code
-   * brl}, {@code bsd}, {@code btn}, {@code bwp}, {@code byn}, {@code byr}, {@code bzd}, {@code
-   * cad}, {@code cdf}, {@code che}, {@code chf}, {@code chw}, {@code clf}, {@code clp}, {@code
-   * cny}, {@code cop}, {@code cou}, {@code crc}, {@code cuc}, {@code cup}, {@code cve}, {@code
-   * czk}, {@code djf}, {@code dkk}, {@code dop}, {@code dzd}, {@code eek}, {@code egp}, {@code
-   * ern}, {@code etb}, {@code eur}, {@code fjd}, {@code fkp}, {@code gbp}, {@code gel}, {@code
-   * ghc}, {@code ghs}, {@code gip}, {@code gmd}, {@code gnf}, {@code gtq}, {@code gyd}, {@code
-   * hkd}, {@code hnl}, {@code hrk}, {@code htg}, {@code huf}, {@code idr}, {@code ils}, {@code
-   * inr}, {@code iqd}, {@code irr}, {@code isk}, {@code jmd}, {@code jod}, {@code jpy}, {@code
-   * kes}, {@code kgs}, {@code khr}, {@code kmf}, {@code kpw}, {@code krw}, {@code kwd}, {@code
-   * kyd}, {@code kzt}, {@code lak}, {@code lbp}, {@code lkr}, {@code lrd}, {@code lsl}, {@code
-   * ltl}, {@code lvl}, {@code lyd}, {@code mad}, {@code mdl}, {@code mga}, {@code mkd}, {@code
-   * mmk}, {@code mnt}, {@code mop}, {@code mro}, {@code mru}, {@code mur}, {@code mvr}, {@code
-   * mwk}, {@code mxn}, {@code mxv}, {@code myr}, {@code mzn}, {@code nad}, {@code ngn}, {@code
-   * nio}, {@code nok}, {@code npr}, {@code nzd}, {@code omr}, {@code pab}, {@code pen}, {@code
-   * pgk}, {@code php}, {@code pkr}, {@code pln}, {@code pyg}, {@code qar}, {@code ron}, {@code
-   * rsd}, {@code rub}, {@code rwf}, {@code sar}, {@code sbd}, {@code scr}, {@code sdg}, {@code
-   * sek}, {@code sgd}, {@code shp}, {@code sle}, {@code sll}, {@code sos}, {@code srd}, {@code
-   * ssp}, {@code std}, {@code stn}, {@code svc}, {@code syp}, {@code szl}, {@code thb}, {@code
-   * tjs}, {@code tmt}, {@code tnd}, {@code top}, {@code try}, {@code ttd}, {@code twd}, {@code
-   * tzs}, {@code uah}, {@code ugx}, {@code usd}, {@code usdb}, {@code usdc}, {@code usn}, {@code
-   * uyi}, {@code uyu}, {@code uzs}, {@code vef}, {@code ves}, {@code vnd}, {@code vuv}, {@code
-   * wst}, {@code xaf}, {@code xcd}, {@code xcg}, {@code xof}, {@code xpf}, {@code yer}, {@code
-   * zar}, {@code zmk}, {@code zmw}, {@code zwd}, {@code zwg}, or {@code zwl}.
-   */
+  /** Open Enum. The currency the FinancialAddress supports. */
   @SerializedName("currency")
   String currency;
 
@@ -94,8 +69,10 @@ public class FinancialAddress extends StripeObject implements HasId {
   String status;
 
   /**
-   * For more details about Credentials, please refer to the <a
-   * href="https://docs.stripe.com/api">API Reference.</a>
+   * Object indicates the type of credentials that have been allocated and attached to the
+   * FinancialAddress. It contains all necessary banking details with which to perform money
+   * movements with the FinancialAddress. This field is only available for FinancialAddresses with
+   * an active status.
    */
   @Getter
   @Setter
@@ -124,8 +101,8 @@ public class FinancialAddress extends StripeObject implements HasId {
     UsBankAccount usBankAccount;
 
     /**
-     * For more details about GbBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * The credentials of the UK Bank Account for the FinancialAddress. This contains unique banking
+     * details such as the sort code, account number, etc. of a UK bank account.
      */
     @Getter
     @Setter
@@ -153,8 +130,8 @@ public class FinancialAddress extends StripeObject implements HasId {
     }
 
     /**
-     * For more details about UsBankAccount, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * The credentials of the US Bank Account for the FinancialAddress. This contains unique banking
+     * details such as the routing number, account number, etc. of a US bank account.
      */
     @Getter
     @Setter

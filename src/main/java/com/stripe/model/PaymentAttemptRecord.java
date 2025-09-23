@@ -530,6 +530,9 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("paypay")
+    Paypay paypay;
+
     @SerializedName("payto")
     Payto payto;
 
@@ -1090,11 +1093,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
         @SerializedName("country")
         String country;
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         @SerializedName("line1")
         String line1;
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         @SerializedName("line2")
         String line2;
 
@@ -1232,6 +1235,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
 
+      /** If this Card is part of a card wallet, this contains the details of the card wallet. */
+      @SerializedName("wallet")
+      Wallet wallet;
+
       /**
        * For more details about Checks, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
@@ -1258,6 +1265,10 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class NetworkToken extends StripeObject {
+        /**
+         * Indicates if Stripe used a network token, either user provided or Stripe managed when
+         * processing the transaction.
+         */
         @SerializedName("used")
         Boolean used;
       }
@@ -1281,6 +1292,57 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
 
         @SerializedName("version")
         String version;
+      }
+
+      /**
+       * For more details about Wallet, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Wallet extends StripeObject {
+        @SerializedName("apple_pay")
+        ApplePay applePay;
+
+        /** (For tokenized numbers only.) The last four digits of the device account number. */
+        @SerializedName("dynamic_last4")
+        String dynamicLast4;
+
+        @SerializedName("google_pay")
+        GooglePay googlePay;
+
+        /**
+         * The type of the card wallet, one of {@code apple_pay} or {@code google_pay}. An
+         * additional hash is included on the Wallet subhash with a name matching this value. It
+         * contains additional information specific to the card wallet type.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about ApplePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ApplePay extends StripeObject {
+          /**
+           * Type of the apple_pay transaction, one of {@code apple_pay} or {@code apple_pay_later}.
+           */
+          @SerializedName("type")
+          String type;
+        }
+
+        /**
+         * For more details about GooglePay, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class GooglePay extends StripeObject {}
       }
     }
 
@@ -2580,6 +2642,15 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
     }
 
     /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {}
+
+    /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -3186,11 +3257,11 @@ public class PaymentAttemptRecord extends ApiResource implements HasId {
       @SerializedName("country")
       String country;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 

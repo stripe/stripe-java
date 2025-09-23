@@ -9,6 +9,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Use the USBankAccounts API to create and manage US bank accounts objects that you can use to
+ * receive funds. Note that these are not interchangeable with v1 Tokens.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -33,6 +33,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Configuration extends ApiResource implements HasId {
+  @SerializedName("bbpos_wisepad3")
+  BbposWisepad3 bbposWisepad3;
+
   @SerializedName("bbpos_wisepos_e")
   BbposWiseposE bbposWiseposE;
 
@@ -256,6 +259,39 @@ public class Configuration extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, Configuration.class);
+  }
+
+  /**
+   * For more details about BbposWisepad3, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BbposWisepad3 extends StripeObject {
+    /** A File ID representing an image to display on the reader. */
+    @SerializedName("splashscreen")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<File> splashscreen;
+
+    /** Get ID of expandable {@code splashscreen} object. */
+    public String getSplashscreen() {
+      return (this.splashscreen != null) ? this.splashscreen.getId() : null;
+    }
+
+    public void setSplashscreen(String id) {
+      this.splashscreen = ApiResource.setExpandableFieldId(id, this.splashscreen);
+    }
+
+    /** Get expanded {@code splashscreen}. */
+    public File getSplashscreenObject() {
+      return (this.splashscreen != null) ? this.splashscreen.getExpanded() : null;
+    }
+
+    public void setSplashscreenObject(File expandableObject) {
+      this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
   }
 
   /**
@@ -1083,6 +1119,7 @@ public class Configuration extends ApiResource implements HasId {
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(bbposWisepad3, responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
     trySetResponseGetter(offline, responseGetter);
     trySetResponseGetter(readerSecurity, responseGetter);

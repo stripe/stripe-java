@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/** The PayoutMethodsBankAccountSpec object. */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -63,11 +64,11 @@ public class PayoutMethodsBankAccountSpec extends StripeObject {
 
       /** The maximum length of the field. */
       @SerializedName("max_length")
-      Integer maxLength;
+      Long maxLength;
 
       /** THe minimum length of the field. */
       @SerializedName("min_length")
-      Integer minLength;
+      Long minLength;
 
       /** The placeholder value of the field. */
       @SerializedName("placeholder")
@@ -81,17 +82,16 @@ public class PayoutMethodsBankAccountSpec extends StripeObject {
       @SerializedName("validation_regex")
       String validationRegex;
 
-      /**
-       * For more details about LocalNameHuman, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
+      /** The human readable local name of the field. */
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class LocalNameHuman extends StripeObject {
+        /** The default content of the localizable string. */
         @SerializedName("content")
         String content;
 
+        /** A unique key representing the instance of this localizable string. */
         @SerializedName("localization_key")
         String localizationKey;
       }

@@ -70,6 +70,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_mode")
   BillingMode billingMode;
 
+  /** Billing schedules for this subscription. */
+  @SerializedName("billing_schedules")
+  List<Subscription.BillingSchedule> billingSchedules;
+
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period.
@@ -1413,6 +1417,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BillingMode extends StripeObject {
+    /** Configure behavior for flexible billing mode. */
+    @SerializedName("flexible")
+    Flexible flexible;
+
     /**
      * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
      *
@@ -1424,6 +1432,128 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     /** Details on when the current billing_mode was adopted. */
     @SerializedName("updated_at")
     Long updatedAt;
+
+    /**
+     * For more details about Flexible, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Flexible extends StripeObject {
+      /**
+       * Controls how invoices and invoice items display proration amounts and discount amounts.
+       *
+       * <p>One of {@code included}, or {@code itemized}.
+       */
+      @SerializedName("proration_discounts")
+      String prorationDiscounts;
+    }
+  }
+
+  /** Sets the billing schedule for the subscription. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingSchedule extends StripeObject {
+    /** Specifies which subscription items the billing schedule applies to. */
+    @SerializedName("applies_to")
+    List<Subscription.BillingSchedule.AppliesTo> appliesTo;
+
+    /** Specifies the billing period. */
+    @SerializedName("bill_until")
+    BillUntil billUntil;
+
+    /** Unique identifier for the billing schedule. */
+    @SerializedName("key")
+    String key;
+
+    /** Represents the entities that the billing schedule applies to. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AppliesTo extends StripeObject {
+      /** The billing schedule will apply to the subscription item with the given price ID. */
+      @SerializedName("price")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Price> price;
+
+      /**
+       * Controls which subscription items the billing schedule applies to.
+       *
+       * <p>Equal to {@code price}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code price} object. */
+      public String getPrice() {
+        return (this.price != null) ? this.price.getId() : null;
+      }
+
+      public void setPrice(String id) {
+        this.price = ApiResource.setExpandableFieldId(id, this.price);
+      }
+
+      /** Get expanded {@code price}. */
+      public Price getPriceObject() {
+        return (this.price != null) ? this.price.getExpanded() : null;
+      }
+
+      public void setPriceObject(Price expandableObject) {
+        this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    /** Specifies the billing period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillUntil extends StripeObject {
+      /** The timestamp the billing schedule will apply until. */
+      @SerializedName("computed_timestamp")
+      Long computedTimestamp;
+
+      /** Specifies the billing period. */
+      @SerializedName("duration")
+      Duration duration;
+
+      /** If specified, the billing schedule will apply until the specified timestamp. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * Describes how the billing schedule will determine the end date. Either {@code duration} or
+       * {@code timestamp}.
+       *
+       * <p>One of {@code duration}, or {@code timestamp}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * Configures the {@code bill_until} date based on the provided {@code interval} and {@code
+       * interval_count}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration extends StripeObject {
+        /**
+         * Specifies billing duration. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /** The multiplier applied to the interval. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+      }
+    }
   }
 
   /**
@@ -1732,6 +1862,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Konbini konbini;
 
       /**
+       * This sub-hash contains details about the Pix payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("pix")
+      Pix pix;
+
+      /**
        * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
        * to invoices created by the subscription.
        */
@@ -1945,6 +2082,55 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
+
+      /**
+       * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pix extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Determines if the amount includes the IOF tax.
+           *
+           * <p>One of {@code always}, or {@code never}.
+           */
+          @SerializedName("amount_includes_iof")
+          String amountIncludesIof;
+
+          /**
+           * Date when the mandate expires and no further payments will be charged, in {@code
+           * YYYY-MM-DD}.
+           */
+          @SerializedName("end_date")
+          String endDate;
+
+          /**
+           * Schedule at which the future payments will be charged.
+           *
+           * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or
+           * {@code yearly}.
+           */
+          @SerializedName("payment_schedule")
+          String paymentSchedule;
+        }
+      }
 
       /**
        * For more details about SepaDebit, please refer to the <a

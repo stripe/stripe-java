@@ -22,9 +22,9 @@ public class OutboundSetupIntentListParams extends ApiRequestParams {
 
   /** The page size. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
-  private OutboundSetupIntentListParams(Map<String, Object> extraParams, Integer limit) {
+  private OutboundSetupIntentListParams(Map<String, Object> extraParams, Long limit) {
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -36,7 +36,7 @@ public class OutboundSetupIntentListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public OutboundSetupIntentListParams build() {
@@ -70,7 +70,7 @@ public class OutboundSetupIntentListParams extends ApiRequestParams {
     }
 
     /** The page size. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

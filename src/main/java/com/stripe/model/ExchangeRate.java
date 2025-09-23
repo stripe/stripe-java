@@ -17,10 +17,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * {@code ExchangeRate} objects allow you to determine the rates that Stripe is currently using to
- * convert from one currency to another. Since this number is variable throughout the day, there are
- * various reasons why you might want to know the current rate (for example, to dynamically price an
- * item for a user with a default payment in a foreign currency).
+ * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+ * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+ * API</a> instead.
+ *
+ * <p>{@code ExchangeRate} objects allow you to determine the rates that Stripe is currently using
+ * to convert from one currency to another. Since this number is variable throughout the day, there
+ * are various reasons why you might want to know the current rate (for example, to dynamically
+ * price an item for a user with a default payment in a foreign currency).
  *
  * <p>Please refer to our <a href="https://stripe.com/docs/fx-rates">Exchange Rates API</a> guide
  * for more details.
@@ -74,17 +78,27 @@ public class ExchangeRate extends ApiResource implements HasId {
   Map<String, BigDecimal> rates;
 
   /**
-   * Returns a list of objects that contain the rates at which foreign currencies are converted to
-   * one another. Only shows the currencies for which Stripe supports.
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Returns a list of objects that contain the rates at which foreign currencies are converted
+   * to one another. Only shows the currencies for which Stripe supports.
    */
+  @Deprecated
   public static ExchangeRateCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of objects that contain the rates at which foreign currencies are converted to
-   * one another. Only shows the currencies for which Stripe supports.
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Returns a list of objects that contain the rates at which foreign currencies are converted
+   * to one another. Only shows the currencies for which Stripe supports.
    */
+  @Deprecated
   public static ExchangeRateCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/exchange_rates";
@@ -94,17 +108,27 @@ public class ExchangeRate extends ApiResource implements HasId {
   }
 
   /**
-   * Returns a list of objects that contain the rates at which foreign currencies are converted to
-   * one another. Only shows the currencies for which Stripe supports.
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Returns a list of objects that contain the rates at which foreign currencies are converted
+   * to one another. Only shows the currencies for which Stripe supports.
    */
+  @Deprecated
   public static ExchangeRateCollection list(ExchangeRateListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of objects that contain the rates at which foreign currencies are converted to
-   * one another. Only shows the currencies for which Stripe supports.
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Returns a list of objects that contain the rates at which foreign currencies are converted
+   * to one another. Only shows the currencies for which Stripe supports.
    */
+  @Deprecated
   public static ExchangeRateCollection list(ExchangeRateListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/exchange_rates";
@@ -119,18 +143,39 @@ public class ExchangeRate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, ExchangeRateCollection.class);
   }
 
-  /** Retrieves the exchange rates from the given currency to every supported currency. */
+  /**
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Retrieves the exchange rates from the given currency to every supported currency.
+   */
+  @Deprecated
   public static ExchangeRate retrieve(String rateId) throws StripeException {
     return retrieve(rateId, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the exchange rates from the given currency to every supported currency. */
+  /**
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Retrieves the exchange rates from the given currency to every supported currency.
+   */
+  @Deprecated
   public static ExchangeRate retrieve(String rateId, RequestOptions options)
       throws StripeException {
     return retrieve(rateId, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the exchange rates from the given currency to every supported currency. */
+  /**
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Retrieves the exchange rates from the given currency to every supported currency.
+   */
+  @Deprecated
   public static ExchangeRate retrieve(
       String rateId, Map<String, Object> params, RequestOptions options) throws StripeException {
     String path = String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(rateId));
@@ -139,7 +184,14 @@ public class ExchangeRate extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, ExchangeRate.class);
   }
 
-  /** Retrieves the exchange rates from the given currency to every supported currency. */
+  /**
+   * [Deprecated] The {@code ExchangeRate} APIs are deprecated. Please use the <a
+   * href="https://docs.stripe.com/payments/currencies/localize-prices/fx-quotes-api">FX Quotes
+   * API</a> instead.
+   *
+   * <p>Retrieves the exchange rates from the given currency to every supported currency.
+   */
+  @Deprecated
   public static ExchangeRate retrieve(
       String rateId, ExchangeRateRetrieveParams params, RequestOptions options)
       throws StripeException {

@@ -32,13 +32,13 @@ public class FinancialAddressListParams extends ApiRequestParams {
 
   /** The page limit. */
   @SerializedName("limit")
-  Integer limit;
+  Long limit;
 
   private FinancialAddressListParams(
       Map<String, Object> extraParams,
       String financialAccount,
       List<FinancialAddressListParams.Include> include,
-      Integer limit) {
+      Long limit) {
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
     this.include = include;
@@ -56,7 +56,7 @@ public class FinancialAddressListParams extends ApiRequestParams {
 
     private List<FinancialAddressListParams.Include> include;
 
-    private Integer limit;
+    private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAddressListParams build() {
@@ -123,7 +123,7 @@ public class FinancialAddressListParams extends ApiRequestParams {
     }
 
     /** The page limit. */
-    public Builder setLimit(Integer limit) {
+    public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }

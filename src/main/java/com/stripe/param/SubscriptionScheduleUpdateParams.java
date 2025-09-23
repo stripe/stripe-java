@@ -1485,16 +1485,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     List<SubscriptionScheduleUpdateParams.Phase.Item> items;
 
     /**
-     * Integer representing the multiplier applied to the price interval. For example, {@code
-     * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
-     * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date} must
-     * not be set. This parameter is deprecated and will be removed in a future version. Use {@code
-     * duration} instead.
-     */
-    @SerializedName("iterations")
-    Long iterations;
-
-    /**
      * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
      * to a phase. Metadata on a schedule's phase will update the underlying subscription's {@code
      * metadata} when the phase is entered, adding new keys and replacing existing keys in the
@@ -1586,7 +1576,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
         List<SubscriptionScheduleUpdateParams.Phase.Item> items,
-        Long iterations,
         Map<String, String> metadata,
         Object onBehalfOf,
         PauseCollection pauseCollection,
@@ -1613,7 +1602,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
       this.items = items;
-      this.iterations = iterations;
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
       this.pauseCollection = pauseCollection;
@@ -1663,8 +1651,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private List<SubscriptionScheduleUpdateParams.Phase.Item> items;
 
-      private Long iterations;
-
       private Map<String, String> metadata;
 
       private Object onBehalfOf;
@@ -1704,7 +1690,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.extraParams,
             this.invoiceSettings,
             this.items,
-            this.iterations,
             this.metadata,
             this.onBehalfOf,
             this.pauseCollection,
@@ -2058,18 +2043,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Integer representing the multiplier applied to the price interval. For example, {@code
-       * iterations=2} applied to a price with {@code interval=month} and {@code interval_count=3}
-       * results in a phase of duration {@code 2 * 3 months = 6 months}. If set, {@code end_date}
-       * must not be set. This parameter is deprecated and will be removed in a future version. Use
-       * {@code duration} instead.
-       */
-      public Builder setIterations(Long iterations) {
-        this.iterations = iterations;
-        return this;
-      }
-
-      /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
        * SubscriptionScheduleUpdateParams.Phase#metadata} for the field documentation.
@@ -2236,8 +2209,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Map<String, String> metadata;
 
       /**
-       * The period associated with this invoice item. Defaults to the period of the underlying
-       * subscription that surrounds the start of the phase.
+       * The period associated with this invoice item. If not set, {@code period.start.type}
+       * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+       * min_item_period_end}.
        */
       @SerializedName("period")
       Period period;
@@ -2404,8 +2378,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The period associated with this invoice item. Defaults to the period of the underlying
-         * subscription that surrounds the start of the phase.
+         * The period associated with this invoice item. If not set, {@code period.start.type}
+         * defaults to {@code max_item_period_start} and {@code period.end.type} defaults to {@code
+         * min_item_period_end}.
          */
         public Builder setPeriod(
             SubscriptionScheduleUpdateParams.Phase.AddInvoiceItem.Period period) {
