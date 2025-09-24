@@ -103,6 +103,9 @@ public class FinancialAddressRetrieveParams extends ApiRequestParams {
     @SerializedName("credentials.gb_bank_account.account_number")
     CREDENTIALS__GB_BANK_ACCOUNT__ACCOUNT_NUMBER("credentials.gb_bank_account.account_number"),
 
+    @SerializedName("credentials.sepa_bank_account.iban")
+    CREDENTIALS__SEPA_BANK_ACCOUNT__IBAN("credentials.sepa_bank_account.iban"),
+
     @SerializedName("credentials.us_bank_account.account_number")
     CREDENTIALS__US_BANK_ACCOUNT__ACCOUNT_NUMBER("credentials.us_bank_account.account_number");
 

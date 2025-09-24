@@ -27,7 +27,10 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> Values that are prefilled when a user claims the sandbox. */
+  /**
+   * <strong>Required.</strong> Values that are prefilled when a user claims the sandbox. When a
+   * user claims the sandbox, they will be able to update these values.
+   */
   @SerializedName("prefill")
   Prefill prefill;
 
@@ -89,7 +92,10 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Values that are prefilled when a user claims the sandbox. */
+    /**
+     * <strong>Required.</strong> Values that are prefilled when a user claims the sandbox. When a
+     * user claims the sandbox, they will be able to update these values.
+     */
     public Builder setPrefill(ClaimableSandboxCreateParams.Prefill prefill) {
       this.prefill = prefill;
       return this;

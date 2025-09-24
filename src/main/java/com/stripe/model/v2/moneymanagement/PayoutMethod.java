@@ -31,6 +31,10 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("created")
   Instant created;
 
+  /** The PayoutMethodCryptoWallet object details. */
+  @SerializedName("crypto_wallet")
+  CryptoWallet cryptoWallet;
+
   /** ID of the PayoutMethod object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -59,7 +63,7 @@ public class PayoutMethod extends StripeObject implements HasId {
   /**
    * Closed Enum. The type of payout method.
    *
-   * <p>One of {@code bank_account}, or {@code card}.
+   * <p>One of {@code bank_account}, {@code card}, or {@code crypto_wallet}.
    */
   @SerializedName("type")
   String type;
@@ -146,6 +150,37 @@ public class PayoutMethod extends StripeObject implements HasId {
     /** The last 4 digits of the card number. */
     @SerializedName("last4")
     String last4;
+  }
+
+  /** The PayoutMethodCryptoWallet object details. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CryptoWallet extends StripeObject {
+    /** Destination wallet address. */
+    @SerializedName("address")
+    String address;
+
+    /**
+     * Whether the crypto wallet was archived. Crypto wallets can be archived through the /archive
+     * API, and they will not be automatically archived by Stripe. Archived crypto wallets cannot be
+     * used as payout method and will not appear in the payout method list.
+     */
+    @SerializedName("archived")
+    Boolean archived;
+
+    /** Optional field, required if network supports memos (only &quot;stellar&quot; currently). */
+    @SerializedName("memo")
+    String memo;
+
+    /**
+     * Which rail is being used to make an outbound money movement to this wallet.
+     *
+     * <p>One of {@code arbitrum}, {@code avalanche_c_chain}, {@code base}, {@code ethereum}, {@code
+     * optimism}, {@code polygon}, {@code solana}, or {@code stellar}.
+     */
+    @SerializedName("network")
+    String network;
   }
 
   /**

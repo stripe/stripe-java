@@ -101,6 +101,10 @@ public class RateCardRate extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomPricingUnitAmount extends StripeObject implements HasId {
+    /** The Custom Pricing Unit object. */
+    @SerializedName("custom_pricing_unit_details")
+    CustomPricingUnit customPricingUnitDetails;
+
     /** The id of the custom pricing unit. */
     @Getter(onMethod_ = {@Override})
     @SerializedName("id")

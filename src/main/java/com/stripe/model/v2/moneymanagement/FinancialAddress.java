@@ -59,6 +59,10 @@ public class FinancialAddress extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
+  /** Open Enum. The currency the FinancialAddress settles into the FinancialAccount. */
+  @SerializedName("settlement_currency")
+  String settlementCurrency;
+
   /**
    * Closed Enum. An enum representing the status of the FinancialAddress. This indicates whether or
    * not the FinancialAddress can be used for any money movement flows.
@@ -86,9 +90,16 @@ public class FinancialAddress extends StripeObject implements HasId {
     GbBankAccount gbBankAccount;
 
     /**
+     * The credentials of the SEPA Bank Account for the FinancialAddress. This contains unique
+     * banking details such as the IBAN, BIC, etc. of a SEPA bank account.
+     */
+    @SerializedName("sepa_bank_account")
+    SepaBankAccount sepaBankAccount;
+
+    /**
      * Open Enum. The type of Credentials that are provisioned for the FinancialAddress.
      *
-     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code gb_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("type")
     String type;
@@ -127,6 +138,43 @@ public class FinancialAddress extends StripeObject implements HasId {
       /** The sort code of the UK Bank Account. */
       @SerializedName("sort_code")
       String sortCode;
+    }
+
+    /**
+     * The credentials of the SEPA Bank Account for the FinancialAddress. This contains unique
+     * banking details such as the IBAN, BIC, etc. of a SEPA bank account.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaBankAccount extends StripeObject {
+      /** The account holder name to be used during bank transfers. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The name of the Bank. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The BIC of the SEPA Bank Account. */
+      @SerializedName("bic")
+      String bic;
+
+      /** The originating country of the SEPA Bank account. */
+      @SerializedName("country")
+      String country;
+
+      /** The IBAN of the SEPA Bank Account. */
+      @SerializedName("iban")
+      String iban;
+
+      /**
+       * The last four digits of the SEPA Bank Account number. This will always be returned. To view
+       * the full account number when retrieving or listing FinancialAddresses, use the {@code
+       * include} request parameter.
+       */
+      @SerializedName("last4")
+      String last4;
     }
 
     /**

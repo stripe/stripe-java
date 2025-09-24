@@ -127,6 +127,9 @@ public class FinancialAddressCreditParams extends ApiRequestParams {
     @SerializedName("rtp")
     RTP("rtp"),
 
+    @SerializedName("sepa_credit_transfer")
+    SEPA_CREDIT_TRANSFER("sepa_credit_transfer"),
+
     @SerializedName("wire")
     WIRE("wire");
 

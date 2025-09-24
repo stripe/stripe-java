@@ -44,6 +44,13 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /**
+   * The recipient verification id for this OutboundTransfer. Only required for countries with
+   * regulatory mandates to verify recipient names before OutboundTransfer creation.
+   */
+  @SerializedName("recipient_verification")
+  String recipientVerification;
+
   /** <strong>Required.</strong> To which payout method to send the OutboundTransfer. */
   @SerializedName("to")
   To to;
@@ -55,6 +62,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       From from,
       Map<String, String> metadata,
+      String recipientVerification,
       To to) {
     this.amount = amount;
     this.deliveryOptions = deliveryOptions;
@@ -62,6 +70,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.from = from;
     this.metadata = metadata;
+    this.recipientVerification = recipientVerification;
     this.to = to;
   }
 
@@ -82,6 +91,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String recipientVerification;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -93,6 +104,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
           this.extraParams,
           this.from,
           this.metadata,
+          this.recipientVerification,
           this.to);
     }
 
@@ -172,6 +184,15 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * The recipient verification id for this OutboundTransfer. Only required for countries with
+     * regulatory mandates to verify recipient names before OutboundTransfer creation.
+     */
+    public Builder setRecipientVerification(String recipientVerification) {
+      this.recipientVerification = recipientVerification;
       return this;
     }
 

@@ -28,6 +28,13 @@ public class CadenceUpdateParams extends ApiRequestParams {
   List<CadenceUpdateParams.Include> include;
 
   /**
+   * A lookup key used to retrieve cadences dynamically from a static string. Maximum length of 200
+   * characters.
+   */
+  @SerializedName("lookup_key")
+  Object lookupKey;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
@@ -46,11 +53,13 @@ public class CadenceUpdateParams extends ApiRequestParams {
   private CadenceUpdateParams(
       Map<String, Object> extraParams,
       List<CadenceUpdateParams.Include> include,
+      Object lookupKey,
       Map<String, Object> metadata,
       Payer payer,
       Settings settings) {
     this.extraParams = extraParams;
     this.include = include;
+    this.lookupKey = lookupKey;
     this.metadata = metadata;
     this.payer = payer;
     this.settings = settings;
@@ -65,6 +74,8 @@ public class CadenceUpdateParams extends ApiRequestParams {
 
     private List<CadenceUpdateParams.Include> include;
 
+    private Object lookupKey;
+
     private Map<String, Object> metadata;
 
     private Payer payer;
@@ -74,7 +85,7 @@ public class CadenceUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CadenceUpdateParams build() {
       return new CadenceUpdateParams(
-          this.extraParams, this.include, this.metadata, this.payer, this.settings);
+          this.extraParams, this.include, this.lookupKey, this.metadata, this.payer, this.settings);
     }
 
     /**
@@ -126,6 +137,24 @@ public class CadenceUpdateParams extends ApiRequestParams {
         this.include = new ArrayList<>();
       }
       this.include.addAll(elements);
+      return this;
+    }
+
+    /**
+     * A lookup key used to retrieve cadences dynamically from a static string. Maximum length of
+     * 200 characters.
+     */
+    public Builder setLookupKey(String lookupKey) {
+      this.lookupKey = lookupKey;
+      return this;
+    }
+
+    /**
+     * A lookup key used to retrieve cadences dynamically from a static string. Maximum length of
+     * 200 characters.
+     */
+    public Builder setLookupKey(EmptyParam lookupKey) {
+      this.lookupKey = lookupKey;
       return this;
     }
 
@@ -582,7 +611,10 @@ public class CadenceUpdateParams extends ApiRequestParams {
 
   public enum Include implements ApiRequestParams.EnumParam {
     @SerializedName("invoice_discount_rules")
-    INVOICE_DISCOUNT_RULES("invoice_discount_rules");
+    INVOICE_DISCOUNT_RULES("invoice_discount_rules"),
+
+    @SerializedName("settings_data")
+    SETTINGS_DATA("settings_data");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

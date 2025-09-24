@@ -40,14 +40,6 @@ public class RateCreateParams extends ApiRequestParams {
   String meteredItem;
 
   /**
-   * The ID of the price object to take price information from. The price must have the same
-   * interval as the rate card. Updates to the Price will not be reflected in the Rate Card or its
-   * rates.
-   */
-  @SerializedName("price")
-  String price;
-
-  /**
    * Defines whether the tiered price should be graduated or volume-based. In volume-based tiering,
    * the maximum quantity within a period determines the per-unit price. In graduated tiering, the
    * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is set.
@@ -78,7 +70,6 @@ public class RateCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Map<String, String> metadata,
       String meteredItem,
-      String price,
       TieringMode tieringMode,
       List<RateCreateParams.Tier> tiers,
       TransformQuantity transformQuantity,
@@ -87,7 +78,6 @@ public class RateCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.meteredItem = meteredItem;
-    this.price = price;
     this.tieringMode = tieringMode;
     this.tiers = tiers;
     this.transformQuantity = transformQuantity;
@@ -107,8 +97,6 @@ public class RateCreateParams extends ApiRequestParams {
 
     private String meteredItem;
 
-    private String price;
-
     private TieringMode tieringMode;
 
     private List<RateCreateParams.Tier> tiers;
@@ -124,7 +112,6 @@ public class RateCreateParams extends ApiRequestParams {
           this.extraParams,
           this.metadata,
           this.meteredItem,
-          this.price,
           this.tieringMode,
           this.tiers,
           this.transformQuantity,
@@ -193,16 +180,6 @@ public class RateCreateParams extends ApiRequestParams {
     /** The Metered Item that this rate binds to. */
     public Builder setMeteredItem(String meteredItem) {
       this.meteredItem = meteredItem;
-      return this;
-    }
-
-    /**
-     * The ID of the price object to take price information from. The price must have the same
-     * interval as the rate card. Updates to the Price will not be reflected in the Rate Card or its
-     * rates.
-     */
-    public Builder setPrice(String price) {
-      this.price = price;
       return this;
     }
 

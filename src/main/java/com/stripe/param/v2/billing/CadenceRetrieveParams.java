@@ -101,7 +101,10 @@ public class CadenceRetrieveParams extends ApiRequestParams {
 
   public enum Include implements ApiRequestParams.EnumParam {
     @SerializedName("invoice_discount_rules")
-    INVOICE_DISCOUNT_RULES("invoice_discount_rules");
+    INVOICE_DISCOUNT_RULES("invoice_discount_rules"),
+
+    @SerializedName("settings_data")
+    SETTINGS_DATA("settings_data");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
