@@ -21,11 +21,13 @@ public final class V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpda
     /**
      * Open Enum. The capability which had its status updated.
      *
-     * <p>One of {@code financial_addressses.bank_accounts}, {@code holds_currencies.eur}, {@code
-     * holds_currencies.gbp}, {@code holds_currencies.usd}, {@code inbound_transfers.bank_accounts},
-     * {@code outbound_payments.bank_accounts}, {@code outbound_payments.cards}, {@code
-     * outbound_payments.financial_accounts}, {@code outbound_transfers.bank_accounts}, or {@code
-     * outbound_transfers.financial_accounts}.
+     * <p>One of {@code financial_addressses.bank_accounts}, {@code
+     * financial_addressses.crypto_wallets}, {@code holds_currencies.eur}, {@code
+     * holds_currencies.gbp}, {@code holds_currencies.usd}, {@code holds_currencies.usdc}, {@code
+     * inbound_transfers.bank_accounts}, {@code outbound_payments.bank_accounts}, {@code
+     * outbound_payments.cards}, {@code outbound_payments.crypto_wallets}, {@code
+     * outbound_payments.financial_accounts}, {@code outbound_transfers.bank_accounts}, {@code
+     * outbound_transfers.crypto_wallets}, or {@code outbound_transfers.financial_accounts}.
      */
     @SerializedName("updated_capability")
     String updatedCapability;

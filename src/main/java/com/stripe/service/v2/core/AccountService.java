@@ -2,6 +2,7 @@
 package com.stripe.service.v2.core;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.RateLimitException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.core.Account;
@@ -93,20 +94,22 @@ public final class AccountService extends ApiService {
     return this.request(request, Account.class);
   }
   /** Retrieves the details of an Account. */
-  public Account retrieve(String id, AccountRetrieveParams params) throws StripeException {
+  public Account retrieve(String id, AccountRetrieveParams params)
+      throws StripeException, RateLimitException {
     return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of an Account. */
-  public Account retrieve(String id, RequestOptions options) throws StripeException {
+  public Account retrieve(String id, RequestOptions options)
+      throws StripeException, RateLimitException {
     return retrieve(id, (AccountRetrieveParams) null, options);
   }
   /** Retrieves the details of an Account. */
-  public Account retrieve(String id) throws StripeException {
+  public Account retrieve(String id) throws StripeException, RateLimitException {
     return retrieve(id, (AccountRetrieveParams) null, (RequestOptions) null);
   }
   /** Retrieves the details of an Account. */
   public Account retrieve(String id, AccountRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, RateLimitException {
     String path = String.format("/v2/core/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
@@ -118,20 +121,22 @@ public final class AccountService extends ApiService {
     return this.request(request, Account.class);
   }
   /** Updates the details of an Account. */
-  public Account update(String id, AccountUpdateParams params) throws StripeException {
+  public Account update(String id, AccountUpdateParams params)
+      throws StripeException, RateLimitException {
     return update(id, params, (RequestOptions) null);
   }
   /** Updates the details of an Account. */
-  public Account update(String id, RequestOptions options) throws StripeException {
+  public Account update(String id, RequestOptions options)
+      throws StripeException, RateLimitException {
     return update(id, (AccountUpdateParams) null, options);
   }
   /** Updates the details of an Account. */
-  public Account update(String id) throws StripeException {
+  public Account update(String id) throws StripeException, RateLimitException {
     return update(id, (AccountUpdateParams) null, (RequestOptions) null);
   }
   /** Updates the details of an Account. */
   public Account update(String id, AccountUpdateParams params, RequestOptions options)
-      throws StripeException {
+      throws StripeException, RateLimitException {
     String path = String.format("/v2/core/accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(

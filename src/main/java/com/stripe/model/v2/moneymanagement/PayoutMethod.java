@@ -59,7 +59,7 @@ public class PayoutMethod extends StripeObject implements HasId {
   /**
    * Closed Enum. The type of payout method.
    *
-   * <p>One of {@code bank_account}, or {@code card}.
+   * <p>One of {@code bank_account}, {@code card}, or {@code crypto_wallet}.
    */
   @SerializedName("type")
   String type;

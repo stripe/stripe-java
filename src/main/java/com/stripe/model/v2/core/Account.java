@@ -3376,7 +3376,7 @@ public class Account extends StripeObject implements HasId {
 
       /**
        * The payout method to be used as a default outbound destination. This will allow the
-       * PayoutMethod to be omitted on OutboundPayments made through the dashboard.
+       * PayoutMethod to be omitted on OutboundPayments made through the dashboard or APIs.
        */
       @SerializedName("default_outbound_destination")
       DefaultOutboundDestination defaultOutboundDestination;
@@ -3719,7 +3719,7 @@ public class Account extends StripeObject implements HasId {
 
       /**
        * The payout method to be used as a default outbound destination. This will allow the
-       * PayoutMethod to be omitted on OutboundPayments made through the dashboard.
+       * PayoutMethod to be omitted on OutboundPayments made through the dashboard or APIs.
        */
       @Getter
       @Setter
@@ -3736,23 +3736,23 @@ public class Account extends StripeObject implements HasId {
          * <p>One of {@code at_bank_account}, {@code au_bank_account}, {@code ba_bank_account},
          * {@code be_bank_account}, {@code bg_bank_account}, {@code bj_bank_account}, {@code
          * bs_bank_account}, {@code card}, {@code ca_bank_account}, {@code ch_bank_account}, {@code
-         * ci_bank_account}, {@code cy_bank_account}, {@code cz_bank_account}, {@code
-         * de_bank_account}, {@code dk_bank_account}, {@code ec_bank_account}, {@code
-         * ee_bank_account}, {@code es_bank_account}, {@code et_bank_account}, {@code
-         * fi_bank_account}, {@code fr_bank_account}, {@code gb_bank_account}, {@code
-         * gr_bank_account}, {@code hr_bank_account}, {@code hu_bank_account}, {@code
-         * id_bank_account}, {@code ie_bank_account}, {@code il_bank_account}, {@code
-         * in_bank_account}, {@code is_bank_account}, {@code it_bank_account}, {@code
-         * ke_bank_account}, {@code li_bank_account}, {@code lt_bank_account}, {@code
-         * lu_bank_account}, {@code lv_bank_account}, {@code mn_bank_account}, {@code
-         * mt_bank_account}, {@code mu_bank_account}, {@code mx_bank_account}, {@code
-         * na_bank_account}, {@code nl_bank_account}, {@code no_bank_account}, {@code
-         * nz_bank_account}, {@code pa_bank_account}, {@code ph_bank_account}, {@code
-         * pl_bank_account}, {@code pt_bank_account}, {@code ro_bank_account}, {@code
-         * rs_bank_account}, {@code se_bank_account}, {@code sg_bank_account}, {@code
-         * si_bank_account}, {@code sk_bank_account}, {@code sn_bank_account}, {@code
-         * sv_bank_account}, {@code tn_bank_account}, {@code tr_bank_account}, {@code
-         * us_bank_account}, or {@code za_bank_account}.
+         * ci_bank_account}, {@code crypto_wallet}, {@code cy_bank_account}, {@code
+         * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
+         * ec_bank_account}, {@code ee_bank_account}, {@code es_bank_account}, {@code
+         * et_bank_account}, {@code fi_bank_account}, {@code fr_bank_account}, {@code
+         * gb_bank_account}, {@code gr_bank_account}, {@code hr_bank_account}, {@code
+         * hu_bank_account}, {@code id_bank_account}, {@code ie_bank_account}, {@code
+         * il_bank_account}, {@code in_bank_account}, {@code is_bank_account}, {@code
+         * it_bank_account}, {@code ke_bank_account}, {@code li_bank_account}, {@code
+         * lt_bank_account}, {@code lu_bank_account}, {@code lv_bank_account}, {@code
+         * mn_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
+         * mx_bank_account}, {@code na_bank_account}, {@code nl_bank_account}, {@code
+         * no_bank_account}, {@code nz_bank_account}, {@code pa_bank_account}, {@code
+         * ph_bank_account}, {@code pl_bank_account}, {@code pt_bank_account}, {@code
+         * ro_bank_account}, {@code rs_bank_account}, {@code se_bank_account}, {@code
+         * sg_bank_account}, {@code si_bank_account}, {@code sk_bank_account}, {@code
+         * sn_bank_account}, {@code sv_bank_account}, {@code tn_bank_account}, {@code
+         * tr_bank_account}, {@code us_bank_account}, or {@code za_bank_account}.
          */
         @SerializedName("type")
         String type;
@@ -4365,9 +4365,34 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("locales")
     List<String> locales;
 
+    /** Account profile information. */
+    @SerializedName("profile")
+    Profile profile;
+
     /** Default responsibilities held by either Stripe or the platform. */
     @SerializedName("responsibilities")
     Responsibilities responsibilities;
+
+    /** Account profile information. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Profile extends StripeObject {
+      /** The business's publicly-available website. */
+      @SerializedName("business_url")
+      String businessUrl;
+
+      /** The company’s legal name. */
+      @SerializedName("doing_business_as")
+      String doingBusinessAs;
+
+      /**
+       * Internal-only description of the product sold or service provided by the business. It's
+       * used by Stripe for risk and underwriting purposes.
+       */
+      @SerializedName("product_description")
+      String productDescription;
+    }
 
     /** Default responsibilities held by either Stripe or the platform. */
     @Getter
@@ -4640,10 +4665,6 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("documents")
       Documents documents;
 
-      /** The company’s legal name. */
-      @SerializedName("doing_business_as")
-      String doingBusinessAs;
-
       /**
        * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
        * business.
@@ -4662,13 +4683,6 @@ public class Account extends StripeObject implements HasId {
       /** The company’s phone number (used for verification). */
       @SerializedName("phone")
       String phone;
-
-      /**
-       * Internal-only description of the product sold or service provided by the business. It’s
-       * used by Stripe for risk and underwriting purposes.
-       */
-      @SerializedName("product_description")
-      String productDescription;
 
       /** The business legal name. */
       @SerializedName("registered_name")
@@ -4698,10 +4712,6 @@ public class Account extends StripeObject implements HasId {
        */
       @SerializedName("structure")
       String structure;
-
-      /** The business's publicly available website. */
-      @SerializedName("url")
-      String url;
 
       /** The company’s primary address. */
       @Getter
