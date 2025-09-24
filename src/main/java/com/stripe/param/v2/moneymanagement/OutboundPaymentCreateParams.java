@@ -55,6 +55,13 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @SerializedName("recipient_notification")
   RecipientNotification recipientNotification;
 
+  /**
+   * The recipient verification id for this OutboundPayment. Only required for countries with
+   * regulatory mandates to verify recipient names before OutboundPayment creation.
+   */
+  @SerializedName("recipient_verification")
+  String recipientVerification;
+
   /** <strong>Required.</strong> To which payout method to send the OutboundPayment. */
   @SerializedName("to")
   To to;
@@ -68,6 +75,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String outboundPaymentQuote,
       RecipientNotification recipientNotification,
+      String recipientVerification,
       To to) {
     this.amount = amount;
     this.deliveryOptions = deliveryOptions;
@@ -77,6 +85,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.outboundPaymentQuote = outboundPaymentQuote;
     this.recipientNotification = recipientNotification;
+    this.recipientVerification = recipientVerification;
     this.to = to;
   }
 
@@ -101,6 +110,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     private RecipientNotification recipientNotification;
 
+    private String recipientVerification;
+
     private To to;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -114,6 +125,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.metadata,
           this.outboundPaymentQuote,
           this.recipientNotification,
+          this.recipientVerification,
           this.to);
     }
 
@@ -212,6 +224,15 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     public Builder setRecipientNotification(
         OutboundPaymentCreateParams.RecipientNotification recipientNotification) {
       this.recipientNotification = recipientNotification;
+      return this;
+    }
+
+    /**
+     * The recipient verification id for this OutboundPayment. Only required for countries with
+     * regulatory mandates to verify recipient names before OutboundPayment creation.
+     */
+    public Builder setRecipientVerification(String recipientVerification) {
+      this.recipientVerification = recipientVerification;
       return this;
     }
 

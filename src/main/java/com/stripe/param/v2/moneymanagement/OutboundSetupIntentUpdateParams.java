@@ -535,7 +535,10 @@ public class OutboundSetupIntentUpdateParams extends ApiRequestParams {
       BANK_ACCOUNT("bank_account"),
 
       @SerializedName("card")
-      CARD("card");
+      CARD("card"),
+
+      @SerializedName("crypto_wallet")
+      CRYPTO_WALLET("crypto_wallet");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

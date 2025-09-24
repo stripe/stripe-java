@@ -11,6 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.billing.ActionServiceCreateParams;
+import com.stripe.param.v2.billing.ActionServiceUpdateParams;
 
 public final class ServiceActionService extends ApiService {
   public ServiceActionService(StripeResponseGetter responseGetter) {
@@ -43,6 +44,31 @@ public final class ServiceActionService extends ApiService {
     String path = String.format("/v2/billing/service_actions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, ServiceAction.class);
+  }
+  /** Update a ServiceAction object. */
+  public ServiceAction update(String id, ActionServiceUpdateParams params) throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Update a ServiceAction object. */
+  public ServiceAction update(String id, RequestOptions options) throws StripeException {
+    return update(id, (ActionServiceUpdateParams) null, options);
+  }
+  /** Update a ServiceAction object. */
+  public ServiceAction update(String id) throws StripeException {
+    return update(id, (ActionServiceUpdateParams) null, (RequestOptions) null);
+  }
+  /** Update a ServiceAction object. */
+  public ServiceAction update(String id, ActionServiceUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path = String.format("/v2/billing/service_actions/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, ServiceAction.class);
   }
 }

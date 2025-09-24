@@ -13,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.billing.PricingPlanSubscriptionListParams;
+import com.stripe.param.v2.billing.PricingPlanSubscriptionUpdateParams;
 
 public final class PricingPlanSubscriptionService extends ApiService {
   public PricingPlanSubscriptionService(StripeResponseGetter responseGetter) {
@@ -58,6 +59,34 @@ public final class PricingPlanSubscriptionService extends ApiService {
         String.format("/v2/billing/pricing_plan_subscriptions/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, PricingPlanSubscription.class);
+  }
+  /** Update a Pricing Plan Subscription object. */
+  public PricingPlanSubscription update(String id, PricingPlanSubscriptionUpdateParams params)
+      throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Update a Pricing Plan Subscription object. */
+  public PricingPlanSubscription update(String id, RequestOptions options) throws StripeException {
+    return update(id, (PricingPlanSubscriptionUpdateParams) null, options);
+  }
+  /** Update a Pricing Plan Subscription object. */
+  public PricingPlanSubscription update(String id) throws StripeException {
+    return update(id, (PricingPlanSubscriptionUpdateParams) null, (RequestOptions) null);
+  }
+  /** Update a Pricing Plan Subscription object. */
+  public PricingPlanSubscription update(
+      String id, PricingPlanSubscriptionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v2/billing/pricing_plan_subscriptions/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, PricingPlanSubscription.class);
   }
 }

@@ -34,6 +34,13 @@ public class CadenceCreateParams extends ApiRequestParams {
   List<CadenceCreateParams.Include> include;
 
   /**
+   * A lookup key used to retrieve cadences dynamically from a static string. Maximum length of 200
+   * characters.
+   */
+  @SerializedName("lookup_key")
+  String lookupKey;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
@@ -56,12 +63,14 @@ public class CadenceCreateParams extends ApiRequestParams {
       BillingCycle billingCycle,
       Map<String, Object> extraParams,
       List<CadenceCreateParams.Include> include,
+      String lookupKey,
       Map<String, String> metadata,
       Payer payer,
       Settings settings) {
     this.billingCycle = billingCycle;
     this.extraParams = extraParams;
     this.include = include;
+    this.lookupKey = lookupKey;
     this.metadata = metadata;
     this.payer = payer;
     this.settings = settings;
@@ -78,6 +87,8 @@ public class CadenceCreateParams extends ApiRequestParams {
 
     private List<CadenceCreateParams.Include> include;
 
+    private String lookupKey;
+
     private Map<String, String> metadata;
 
     private Payer payer;
@@ -90,6 +101,7 @@ public class CadenceCreateParams extends ApiRequestParams {
           this.billingCycle,
           this.extraParams,
           this.include,
+          this.lookupKey,
           this.metadata,
           this.payer,
           this.settings);
@@ -153,6 +165,15 @@ public class CadenceCreateParams extends ApiRequestParams {
         this.include = new ArrayList<>();
       }
       this.include.addAll(elements);
+      return this;
+    }
+
+    /**
+     * A lookup key used to retrieve cadences dynamically from a static string. Maximum length of
+     * 200 characters.
+     */
+    public Builder setLookupKey(String lookupKey) {
+      this.lookupKey = lookupKey;
       return this;
     }
 
@@ -569,15 +590,25 @@ public class CadenceCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
+       * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12. If
+       * not provided, this will default to the month the cadence was created. This setting can only
+       * be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
+       * occurrences will be calculated from month provided.
+       */
+      @SerializedName("month_of_year")
+      Long monthOfYear;
+
+      /**
        * The time at which the billing cycle ends. This field is optional, and if not provided, it
        * will default to the time at which the cadence was created in UTC timezone.
        */
       @SerializedName("time")
       Time time;
 
-      private Month(Long dayOfMonth, Map<String, Object> extraParams, Time time) {
+      private Month(Long dayOfMonth, Map<String, Object> extraParams, Long monthOfYear, Time time) {
         this.dayOfMonth = dayOfMonth;
         this.extraParams = extraParams;
+        this.monthOfYear = monthOfYear;
         this.time = time;
       }
 
@@ -590,12 +621,14 @@ public class CadenceCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Long monthOfYear;
+
         private Time time;
 
         /** Finalize and obtain parameter instance from this builder. */
         public CadenceCreateParams.BillingCycle.Month build() {
           return new CadenceCreateParams.BillingCycle.Month(
-              this.dayOfMonth, this.extraParams, this.time);
+              this.dayOfMonth, this.extraParams, this.monthOfYear, this.time);
         }
 
         /**
@@ -634,6 +667,17 @@ public class CadenceCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
+         * If not provided, this will default to the month the cadence was created. This setting can
+         * only be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
+         * occurrences will be calculated from month provided.
+         */
+        public Builder setMonthOfYear(Long monthOfYear) {
+          this.monthOfYear = monthOfYear;
           return this;
         }
 
@@ -1244,16 +1288,11 @@ public class CadenceCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Payer {
     /**
-     * The ID of the Billing Profile object which determines how a bill will be paid. If provided,
-     * the created cadence will be associated with the provided Billing Profile. If not provided, a
-     * new Billing Profile will be created and associated with the cadence.
+     * <strong>Required.</strong> The ID of the Billing Profile object which determines how a bill
+     * will be paid.
      */
     @SerializedName("billing_profile")
     String billingProfile;
-
-    /** The ID of the Customer object. */
-    @SerializedName("customer")
-    String customer;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1264,19 +1303,9 @@ public class CadenceCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * A string identifying the type of the payer. Currently the only supported value is {@code
-     * customer}.
-     */
-    @SerializedName("type")
-    Type type;
-
-    private Payer(
-        String billingProfile, String customer, Map<String, Object> extraParams, Type type) {
+    private Payer(String billingProfile, Map<String, Object> extraParams) {
       this.billingProfile = billingProfile;
-      this.customer = customer;
       this.extraParams = extraParams;
-      this.type = type;
     }
 
     public static Builder builder() {
@@ -1286,31 +1315,19 @@ public class CadenceCreateParams extends ApiRequestParams {
     public static class Builder {
       private String billingProfile;
 
-      private String customer;
-
       private Map<String, Object> extraParams;
-
-      private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public CadenceCreateParams.Payer build() {
-        return new CadenceCreateParams.Payer(
-            this.billingProfile, this.customer, this.extraParams, this.type);
+        return new CadenceCreateParams.Payer(this.billingProfile, this.extraParams);
       }
 
       /**
-       * The ID of the Billing Profile object which determines how a bill will be paid. If provided,
-       * the created cadence will be associated with the provided Billing Profile. If not provided,
-       * a new Billing Profile will be created and associated with the cadence.
+       * <strong>Required.</strong> The ID of the Billing Profile object which determines how a bill
+       * will be paid.
        */
       public Builder setBillingProfile(String billingProfile) {
         this.billingProfile = billingProfile;
-        return this;
-      }
-
-      /** The ID of the Customer object. */
-      public Builder setCustomer(String customer) {
-        this.customer = customer;
         return this;
       }
 
@@ -1338,27 +1355,6 @@ public class CadenceCreateParams extends ApiRequestParams {
         }
         this.extraParams.putAll(map);
         return this;
-      }
-
-      /**
-       * A string identifying the type of the payer. Currently the only supported value is {@code
-       * customer}.
-       */
-      public Builder setType(CadenceCreateParams.Payer.Type type) {
-        this.type = type;
-        return this;
-      }
-    }
-
-    public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("customer")
-      CUSTOMER("customer");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Type(String value) {
-        this.value = value;
       }
     }
   }
@@ -1647,7 +1643,10 @@ public class CadenceCreateParams extends ApiRequestParams {
 
   public enum Include implements ApiRequestParams.EnumParam {
     @SerializedName("invoice_discount_rules")
-    INVOICE_DISCOUNT_RULES("invoice_discount_rules");
+    INVOICE_DISCOUNT_RULES("invoice_discount_rules"),
+
+    @SerializedName("settings_data")
+    SETTINGS_DATA("settings_data");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

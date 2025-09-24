@@ -1024,6 +1024,9 @@ public class IntentCreateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("current_billing_period_end")
+          CURRENT_BILLING_PERIOD_END("current_billing_period_end"),
+
           @SerializedName("current_billing_period_start")
           CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
 

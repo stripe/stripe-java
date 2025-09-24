@@ -31,8 +31,15 @@ public class CadenceListParams extends ApiRequestParams {
   Long limit;
 
   /**
+   * Only return the cadences with these lookup_keys, if any exist. You can specify up to 10
+   * lookup_keys. Mutually exclusive with {@code test_clock} and {@code payer}.
+   */
+  @SerializedName("lookup_keys")
+  List<String> lookupKeys;
+
+  /**
    * If provided, only cadences that specifically reference the payer will be returned. Mutually
-   * exclusive with {@code test_clock}.
+   * exclusive with {@code test_clock} and {@code lookup_keys}.
    */
   @SerializedName("payer")
   Payer payer;
@@ -48,11 +55,13 @@ public class CadenceListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<CadenceListParams.Include> include,
       Long limit,
+      List<String> lookupKeys,
       Payer payer,
       String testClock) {
     this.extraParams = extraParams;
     this.include = include;
     this.limit = limit;
+    this.lookupKeys = lookupKeys;
     this.payer = payer;
     this.testClock = testClock;
   }
@@ -68,6 +77,8 @@ public class CadenceListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private List<String> lookupKeys;
+
     private Payer payer;
 
     private String testClock;
@@ -75,7 +86,7 @@ public class CadenceListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CadenceListParams build() {
       return new CadenceListParams(
-          this.extraParams, this.include, this.limit, this.payer, this.testClock);
+          this.extraParams, this.include, this.limit, this.lookupKeys, this.payer, this.testClock);
     }
 
     /**
@@ -137,8 +148,34 @@ public class CadenceListParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * CadenceListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addLookupKey(String element) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `lookupKeys` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * CadenceListParams#lookupKeys} for the field documentation.
+     */
+    public Builder addAllLookupKey(List<String> elements) {
+      if (this.lookupKeys == null) {
+        this.lookupKeys = new ArrayList<>();
+      }
+      this.lookupKeys.addAll(elements);
+      return this;
+    }
+
+    /**
      * If provided, only cadences that specifically reference the payer will be returned. Mutually
-     * exclusive with {@code test_clock}.
+     * exclusive with {@code test_clock} and {@code lookup_keys}.
      */
     public Builder setPayer(CadenceListParams.Payer payer) {
       this.payer = payer;
@@ -263,7 +300,10 @@ public class CadenceListParams extends ApiRequestParams {
 
   public enum Include implements ApiRequestParams.EnumParam {
     @SerializedName("invoice_discount_rules")
-    INVOICE_DISCOUNT_RULES("invoice_discount_rules");
+    INVOICE_DISCOUNT_RULES("invoice_discount_rules"),
+
+    @SerializedName("settings_data")
+    SETTINGS_DATA("settings_data");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

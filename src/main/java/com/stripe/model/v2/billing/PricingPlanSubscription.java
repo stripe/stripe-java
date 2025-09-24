@@ -130,5 +130,13 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
     /** When the servicing status transitioned to paused. */
     @SerializedName("paused_at")
     String pausedAt;
+
+    /** When the servicing is scheduled to transition to activate. */
+    @SerializedName("will_activate_at")
+    String willActivateAt;
+
+    /** When the servicing is scheduled to cancel. */
+    @SerializedName("will_cancel_at")
+    String willCancelAt;
   }
 }
