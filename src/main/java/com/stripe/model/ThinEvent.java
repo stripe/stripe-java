@@ -30,7 +30,7 @@ public class ThinEvent {
 
   /** [Optional] Authentication context needed to fetch the event or related object. */
   @SerializedName("context")
-  public String context;
+  public StripeContext context;
 
   /** [Optional] Object containing the reference to API resource relevant to the event. */
   @SerializedName("related_object")

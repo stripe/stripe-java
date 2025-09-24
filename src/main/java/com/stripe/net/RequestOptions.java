@@ -1,6 +1,7 @@
 package com.stripe.net;
 
 import com.stripe.Stripe;
+import com.stripe.model.StripeContext;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
@@ -232,6 +233,16 @@ public class RequestOptions {
 
     public RequestOptionsBuilder setStripeContext(String context) {
       this.stripeContext = context;
+      return this;
+    }
+
+    public RequestOptionsBuilder setStripeContext(StripeContext context) {
+      if (context != null) {
+        String contextValue = context.toString();
+        this.stripeContext = !contextValue.isEmpty() ? contextValue : null;
+      } else {
+        this.stripeContext = null;
+      }
       return this;
     }
 
