@@ -1709,7 +1709,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails extends StripeObject {
-    /** The amount an item was discounted for. */
+    /** The total discount applied on the transaction. */
     @SerializedName("discount_amount")
     Long discountAmount;
 
@@ -3318,6 +3318,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("paypay")
+    Paypay paypay;
+
     @SerializedName("payto")
     Payto payto;
 
@@ -4219,11 +4222,11 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
           @SerializedName("country")
           String country;
 
-          /** Address line 1 (e.g., street, PO Box, or company name). */
+          /** Address line 1, such as the street, PO Box, or company name. */
           @SerializedName("line1")
           String line1;
 
-          /** Address line 2 (e.g., apartment, suite, unit, or building). */
+          /** Address line 2, such as the apartment, suite, unit, or building. */
           @SerializedName("line2")
           String line2;
 
@@ -5413,6 +5416,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         }
       }
     }
+
+    /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {}
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API

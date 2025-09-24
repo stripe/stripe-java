@@ -4,7 +4,6 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -133,7 +132,7 @@ public class IntentAction extends StripeObject implements HasId {
          * $100 amount $50 instead.
          */
         @SerializedName("percent_off")
-        BigDecimal percentOff;
+        String percentOff;
 
         /** The maximum number of times this discount can be applied for this Billing Cadence. */
         @Getter
@@ -212,7 +211,8 @@ public class IntentAction extends StripeObject implements HasId {
       /**
        * When the deactivate action will take effect.
        *
-       * <p>One of {@code current_billing_period_start}, {@code on_reserve}, or {@code timestamp}.
+       * <p>One of {@code current_billing_period_end}, {@code current_billing_period_start}, {@code
+       * on_reserve}, or {@code timestamp}.
        */
       @SerializedName("type")
       String type;

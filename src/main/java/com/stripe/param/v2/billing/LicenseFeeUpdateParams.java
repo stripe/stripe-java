@@ -4,7 +4,6 @@ package com.stripe.param.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +15,9 @@ import lombok.Getter;
 @EqualsAndHashCode(callSuper = false)
 public class LicenseFeeUpdateParams extends ApiRequestParams {
   /**
-   * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
-   * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on Invoices.
-   * Maximum length of 250 characters.
+   * A customer-facing name for the License Fee. This name is used in Stripe-hosted products like
+   * the Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
+   * characters.
    */
   @SerializedName("display_name")
   Object displayName;
@@ -139,9 +138,9 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
-     * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on
-     * Invoices. Maximum length of 250 characters.
+     * A customer-facing name for the License Fee. This name is used in Stripe-hosted products like
+     * the Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
+     * characters.
      */
     public Builder setDisplayName(String displayName) {
       this.displayName = displayName;
@@ -149,9 +148,9 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> A customer-facing name for the License Fee. This name is used in
-     * Stripe-hosted products like the Customer Portal and Checkout. It does not show up on
-     * Invoices. Maximum length of 250 characters.
+     * A customer-facing name for the License Fee. This name is used in Stripe-hosted products like
+     * the Customer Portal and Checkout. It does not show up on Invoices. Maximum length of 250
+     * characters.
      */
     public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;
@@ -470,7 +469,7 @@ public class LicenseFeeUpdateParams extends ApiRequestParams {
        * Up to and including this quantity will be contained in the tier. Only one of {@code
        * up_to_decimal} and {@code up_to_inf} may be set.
        */
-      public Builder setUpToDecimal(BigDecimal upToDecimal) {
+      public Builder setUpToDecimal(String upToDecimal) {
         this.upToDecimal = upToDecimal;
         return this;
       }

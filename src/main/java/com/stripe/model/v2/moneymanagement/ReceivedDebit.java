@@ -104,6 +104,14 @@ public class ReceivedDebit extends StripeObject implements HasId {
     String financialAddress;
 
     /**
+     * Open Enum. Indicates the origin type through which this debit was initiated.
+     *
+     * <p>Equal to {@code us_bank_account}.
+     */
+    @SerializedName("origin_type")
+    String originType;
+
+    /**
      * Open Enum. The type of the payment method used to originate the debit.
      *
      * <p>Equal to {@code us_bank_account}.

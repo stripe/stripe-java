@@ -141,6 +141,10 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     @SerializedName("card")
     Card card;
 
+    /** The type specific details of the crypto wallet payout method. */
+    @SerializedName("crypto_wallet")
+    CryptoWallet cryptoWallet;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -155,9 +159,14 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
     Type type;
 
     private PayoutMethodData(
-        BankAccount bankAccount, Card card, Map<String, Object> extraParams, Type type) {
+        BankAccount bankAccount,
+        Card card,
+        CryptoWallet cryptoWallet,
+        Map<String, Object> extraParams,
+        Type type) {
       this.bankAccount = bankAccount;
       this.card = card;
+      this.cryptoWallet = cryptoWallet;
       this.extraParams = extraParams;
       this.type = type;
     }
@@ -171,6 +180,8 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
 
       private Card card;
 
+      private CryptoWallet cryptoWallet;
+
       private Map<String, Object> extraParams;
 
       private Type type;
@@ -178,7 +189,7 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public OutboundSetupIntentCreateParams.PayoutMethodData build() {
         return new OutboundSetupIntentCreateParams.PayoutMethodData(
-            this.bankAccount, this.card, this.extraParams, this.type);
+            this.bankAccount, this.card, this.cryptoWallet, this.extraParams, this.type);
       }
 
       /** The type specific details of the bank account payout method. */
@@ -191,6 +202,13 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       /** The type specific details of the card payout method. */
       public Builder setCard(OutboundSetupIntentCreateParams.PayoutMethodData.Card card) {
         this.card = card;
+        return this;
+      }
+
+      /** The type specific details of the crypto wallet payout method. */
+      public Builder setCryptoWallet(
+          OutboundSetupIntentCreateParams.PayoutMethodData.CryptoWallet cryptoWallet) {
+        this.cryptoWallet = cryptoWallet;
         return this;
       }
 
@@ -494,12 +512,160 @@ public class OutboundSetupIntentCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CryptoWallet {
+      /** <strong>Required.</strong> Crypto wallet address. */
+      @SerializedName("address")
+      String address;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Optional field, required if network supports memos (only &quot;stellar&quot; currently).
+       */
+      @SerializedName("memo")
+      String memo;
+
+      /**
+       * <strong>Required.</strong> Which rail we should use to make an Outbound money movement to
+       * this wallet.
+       */
+      @SerializedName("network")
+      Network network;
+
+      private CryptoWallet(
+          String address, Map<String, Object> extraParams, String memo, Network network) {
+        this.address = address;
+        this.extraParams = extraParams;
+        this.memo = memo;
+        this.network = network;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String address;
+
+        private Map<String, Object> extraParams;
+
+        private String memo;
+
+        private Network network;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public OutboundSetupIntentCreateParams.PayoutMethodData.CryptoWallet build() {
+          return new OutboundSetupIntentCreateParams.PayoutMethodData.CryptoWallet(
+              this.address, this.extraParams, this.memo, this.network);
+        }
+
+        /** <strong>Required.</strong> Crypto wallet address. */
+        public Builder setAddress(String address) {
+          this.address = address;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * OutboundSetupIntentCreateParams.PayoutMethodData.CryptoWallet#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * OutboundSetupIntentCreateParams.PayoutMethodData.CryptoWallet#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Optional field, required if network supports memos (only &quot;stellar&quot; currently).
+         */
+        public Builder setMemo(String memo) {
+          this.memo = memo;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Which rail we should use to make an Outbound money movement to
+         * this wallet.
+         */
+        public Builder setNetwork(
+            OutboundSetupIntentCreateParams.PayoutMethodData.CryptoWallet.Network network) {
+          this.network = network;
+          return this;
+        }
+      }
+
+      public enum Network implements ApiRequestParams.EnumParam {
+        @SerializedName("arbitrum")
+        ARBITRUM("arbitrum"),
+
+        @SerializedName("avalanche_c_chain")
+        AVALANCHE_C_CHAIN("avalanche_c_chain"),
+
+        @SerializedName("base")
+        BASE("base"),
+
+        @SerializedName("ethereum")
+        ETHEREUM("ethereum"),
+
+        @SerializedName("optimism")
+        OPTIMISM("optimism"),
+
+        @SerializedName("polygon")
+        POLYGON("polygon"),
+
+        @SerializedName("solana")
+        SOLANA("solana"),
+
+        @SerializedName("stellar")
+        STELLAR("stellar");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Network(String value) {
+          this.value = value;
+        }
+      }
+    }
+
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("bank_account")
       BANK_ACCOUNT("bank_account"),
 
       @SerializedName("card")
-      CARD("card");
+      CARD("card"),
+
+      @SerializedName("crypto_wallet")
+      CRYPTO_WALLET("crypto_wallet");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

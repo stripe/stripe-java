@@ -66,6 +66,20 @@ public final class BalanceSettingsService extends ApiService {
    * Updates balance settings for a given connected account. Related guide: <a
    * href="https://stripe.com/connect/authentication">Making API calls for connected accounts</a>
    */
+  public BalanceSettings update(RequestOptions options) throws StripeException {
+    return update((BalanceSettingsUpdateParams) null, options);
+  }
+  /**
+   * Updates balance settings for a given connected account. Related guide: <a
+   * href="https://stripe.com/connect/authentication">Making API calls for connected accounts</a>
+   */
+  public BalanceSettings update() throws StripeException {
+    return update((BalanceSettingsUpdateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Updates balance settings for a given connected account. Related guide: <a
+   * href="https://stripe.com/connect/authentication">Making API calls for connected accounts</a>
+   */
   public BalanceSettings update(BalanceSettingsUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/balance_settings";

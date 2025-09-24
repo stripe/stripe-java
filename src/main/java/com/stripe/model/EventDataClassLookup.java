@@ -14,92 +14,100 @@ public final class EventDataClassLookup {
   public static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
 
   static {
-    classLookup.put("account", Account.class);
-    classLookup.put("account_link", AccountLink.class);
-    classLookup.put("account_notice", AccountNotice.class);
-    classLookup.put("account_session", AccountSession.class);
-    classLookup.put("apple_pay_domain", ApplePayDomain.class);
-    classLookup.put("application", Application.class);
-    classLookup.put("application_fee", ApplicationFee.class);
-    classLookup.put("balance", Balance.class);
-    classLookup.put("balance_settings", BalanceSettings.class);
-    classLookup.put("balance_transaction", BalanceTransaction.class);
-    classLookup.put("bank_account", BankAccount.class);
-    classLookup.put("capability", Capability.class);
-    classLookup.put("card", Card.class);
-    classLookup.put("cash_balance", CashBalance.class);
-    classLookup.put("charge", Charge.class);
-    classLookup.put("confirmation_token", ConfirmationToken.class);
-    classLookup.put("connect_collection_transfer", ConnectCollectionTransfer.class);
-    classLookup.put("country_spec", CountrySpec.class);
-    classLookup.put("coupon", Coupon.class);
-    classLookup.put("credit_note", CreditNote.class);
-    classLookup.put("credit_note_line_item", CreditNoteLineItem.class);
-    classLookup.put("customer", Customer.class);
-    classLookup.put("customer_balance_transaction", CustomerBalanceTransaction.class);
-    classLookup.put("customer_cash_balance_transaction", CustomerCashBalanceTransaction.class);
-    classLookup.put("customer_session", CustomerSession.class);
-    classLookup.put("discount", Discount.class);
-    classLookup.put("dispute", Dispute.class);
-    classLookup.put("ephemeral_key", EphemeralKey.class);
-    classLookup.put("event", Event.class);
-    classLookup.put("exchange_rate", ExchangeRate.class);
-    classLookup.put("fee_refund", FeeRefund.class);
-    classLookup.put("file", File.class);
-    classLookup.put("file_link", FileLink.class);
-    classLookup.put("funding_instructions", FundingInstructions.class);
-    classLookup.put("fx_quote", FxQuote.class);
-    classLookup.put("invoice", Invoice.class);
-    classLookup.put("invoice_payment", InvoicePayment.class);
-    classLookup.put("invoice_rendering_template", InvoiceRenderingTemplate.class);
-    classLookup.put("invoiceitem", InvoiceItem.class);
-    classLookup.put("item", LineItem.class);
-    classLookup.put("line_item", InvoiceLineItem.class);
-    classLookup.put("login_link", LoginLink.class);
-    classLookup.put("mandate", Mandate.class);
-    classLookup.put("margin", Margin.class);
-    classLookup.put("order", Order.class);
-    classLookup.put("payment_attempt_record", PaymentAttemptRecord.class);
-    classLookup.put("payment_intent", PaymentIntent.class);
+    classLookup.put("account", com.stripe.model.Account.class);
+    classLookup.put("account_link", com.stripe.model.AccountLink.class);
+    classLookup.put("account_notice", com.stripe.model.AccountNotice.class);
+    classLookup.put("account_session", com.stripe.model.AccountSession.class);
+    classLookup.put("apple_pay_domain", com.stripe.model.ApplePayDomain.class);
+    classLookup.put("application", com.stripe.model.Application.class);
+    classLookup.put("application_fee", com.stripe.model.ApplicationFee.class);
+    classLookup.put("balance", com.stripe.model.Balance.class);
+    classLookup.put("balance_settings", com.stripe.model.BalanceSettings.class);
+    classLookup.put("balance_transaction", com.stripe.model.BalanceTransaction.class);
+    classLookup.put("bank_account", com.stripe.model.BankAccount.class);
+    classLookup.put("capability", com.stripe.model.Capability.class);
+    classLookup.put("card", com.stripe.model.Card.class);
+    classLookup.put("cash_balance", com.stripe.model.CashBalance.class);
+    classLookup.put("charge", com.stripe.model.Charge.class);
+    classLookup.put("confirmation_token", com.stripe.model.ConfirmationToken.class);
     classLookup.put(
-        "payment_intent_amount_details_line_item", PaymentIntentAmountDetailsLineItem.class);
-    classLookup.put("payment_link", PaymentLink.class);
-    classLookup.put("payment_method", PaymentMethod.class);
-    classLookup.put("payment_method_configuration", PaymentMethodConfiguration.class);
-    classLookup.put("payment_method_domain", PaymentMethodDomain.class);
-    classLookup.put("payment_record", PaymentRecord.class);
-    classLookup.put("payout", Payout.class);
-    classLookup.put("person", Person.class);
-    classLookup.put("plan", Plan.class);
-    classLookup.put("price", Price.class);
-    classLookup.put("product", Product.class);
-    classLookup.put("product_feature", ProductFeature.class);
-    classLookup.put("promotion_code", PromotionCode.class);
-    classLookup.put("quote", Quote.class);
-    classLookup.put("quote_line", QuoteLine.class);
-    classLookup.put("quote_preview_invoice", QuotePreviewInvoice.class);
-    classLookup.put("quote_preview_subscription_schedule", QuotePreviewSubscriptionSchedule.class);
-    classLookup.put("refund", Refund.class);
-    classLookup.put("reserve_transaction", ReserveTransaction.class);
-    classLookup.put("review", Review.class);
-    classLookup.put("setup_attempt", SetupAttempt.class);
-    classLookup.put("setup_intent", SetupIntent.class);
-    classLookup.put("shipping_rate", ShippingRate.class);
-    classLookup.put("source", Source.class);
-    classLookup.put("source_mandate_notification", SourceMandateNotification.class);
-    classLookup.put("source_transaction", SourceTransaction.class);
-    classLookup.put("subscription", Subscription.class);
-    classLookup.put("subscription_item", SubscriptionItem.class);
-    classLookup.put("subscription_schedule", SubscriptionSchedule.class);
-    classLookup.put("tax_code", TaxCode.class);
-    classLookup.put("tax_deducted_at_source", TaxDeductedAtSource.class);
-    classLookup.put("tax_id", TaxId.class);
-    classLookup.put("tax_rate", TaxRate.class);
-    classLookup.put("token", Token.class);
-    classLookup.put("topup", Topup.class);
-    classLookup.put("transfer", Transfer.class);
-    classLookup.put("transfer_reversal", TransferReversal.class);
-    classLookup.put("webhook_endpoint", WebhookEndpoint.class);
+        "connect_collection_transfer", com.stripe.model.ConnectCollectionTransfer.class);
+    classLookup.put("country_spec", com.stripe.model.CountrySpec.class);
+    classLookup.put("coupon", com.stripe.model.Coupon.class);
+    classLookup.put("credit_note", com.stripe.model.CreditNote.class);
+    classLookup.put("credit_note_line_item", com.stripe.model.CreditNoteLineItem.class);
+    classLookup.put("customer", com.stripe.model.Customer.class);
+    classLookup.put(
+        "customer_balance_transaction", com.stripe.model.CustomerBalanceTransaction.class);
+    classLookup.put(
+        "customer_cash_balance_transaction", com.stripe.model.CustomerCashBalanceTransaction.class);
+    classLookup.put("customer_session", com.stripe.model.CustomerSession.class);
+    classLookup.put("discount", com.stripe.model.Discount.class);
+    classLookup.put("dispute", com.stripe.model.Dispute.class);
+    classLookup.put("ephemeral_key", com.stripe.model.EphemeralKey.class);
+    classLookup.put("event", com.stripe.model.Event.class);
+    classLookup.put("exchange_rate", com.stripe.model.ExchangeRate.class);
+    classLookup.put("fee_refund", com.stripe.model.FeeRefund.class);
+    classLookup.put("file", com.stripe.model.File.class);
+    classLookup.put("file_link", com.stripe.model.FileLink.class);
+    classLookup.put("funding_instructions", com.stripe.model.FundingInstructions.class);
+    classLookup.put("fx_quote", com.stripe.model.FxQuote.class);
+    classLookup.put("invoice", com.stripe.model.Invoice.class);
+    classLookup.put("invoice_payment", com.stripe.model.InvoicePayment.class);
+    classLookup.put("invoice_rendering_template", com.stripe.model.InvoiceRenderingTemplate.class);
+    classLookup.put("invoiceitem", com.stripe.model.InvoiceItem.class);
+    classLookup.put("item", com.stripe.model.LineItem.class);
+    classLookup.put("line_item", com.stripe.model.InvoiceLineItem.class);
+    classLookup.put("login_link", com.stripe.model.LoginLink.class);
+    classLookup.put("mandate", com.stripe.model.Mandate.class);
+    classLookup.put("margin", com.stripe.model.Margin.class);
+    classLookup.put("order", com.stripe.model.Order.class);
+    classLookup.put("payment_attempt_record", com.stripe.model.PaymentAttemptRecord.class);
+    classLookup.put("payment_intent", com.stripe.model.PaymentIntent.class);
+    classLookup.put(
+        "payment_intent_amount_details_line_item",
+        com.stripe.model.PaymentIntentAmountDetailsLineItem.class);
+    classLookup.put("payment_link", com.stripe.model.PaymentLink.class);
+    classLookup.put("payment_method", com.stripe.model.PaymentMethod.class);
+    classLookup.put(
+        "payment_method_configuration", com.stripe.model.PaymentMethodConfiguration.class);
+    classLookup.put("payment_method_domain", com.stripe.model.PaymentMethodDomain.class);
+    classLookup.put("payment_record", com.stripe.model.PaymentRecord.class);
+    classLookup.put("payout", com.stripe.model.Payout.class);
+    classLookup.put("person", com.stripe.model.Person.class);
+    classLookup.put("plan", com.stripe.model.Plan.class);
+    classLookup.put("price", com.stripe.model.Price.class);
+    classLookup.put("product", com.stripe.model.Product.class);
+    classLookup.put("product_feature", com.stripe.model.ProductFeature.class);
+    classLookup.put("promotion_code", com.stripe.model.PromotionCode.class);
+    classLookup.put("quote", com.stripe.model.Quote.class);
+    classLookup.put("quote_line", com.stripe.model.QuoteLine.class);
+    classLookup.put("quote_preview_invoice", com.stripe.model.QuotePreviewInvoice.class);
+    classLookup.put(
+        "quote_preview_subscription_schedule",
+        com.stripe.model.QuotePreviewSubscriptionSchedule.class);
+    classLookup.put("refund", com.stripe.model.Refund.class);
+    classLookup.put("reserve_transaction", com.stripe.model.ReserveTransaction.class);
+    classLookup.put("review", com.stripe.model.Review.class);
+    classLookup.put("setup_attempt", com.stripe.model.SetupAttempt.class);
+    classLookup.put("setup_intent", com.stripe.model.SetupIntent.class);
+    classLookup.put("shipping_rate", com.stripe.model.ShippingRate.class);
+    classLookup.put("source", com.stripe.model.Source.class);
+    classLookup.put(
+        "source_mandate_notification", com.stripe.model.SourceMandateNotification.class);
+    classLookup.put("source_transaction", com.stripe.model.SourceTransaction.class);
+    classLookup.put("subscription", com.stripe.model.Subscription.class);
+    classLookup.put("subscription_item", com.stripe.model.SubscriptionItem.class);
+    classLookup.put("subscription_schedule", com.stripe.model.SubscriptionSchedule.class);
+    classLookup.put("tax_code", com.stripe.model.TaxCode.class);
+    classLookup.put("tax_deducted_at_source", com.stripe.model.TaxDeductedAtSource.class);
+    classLookup.put("tax_id", com.stripe.model.TaxId.class);
+    classLookup.put("tax_rate", com.stripe.model.TaxRate.class);
+    classLookup.put("token", com.stripe.model.Token.class);
+    classLookup.put("topup", com.stripe.model.Topup.class);
+    classLookup.put("transfer", com.stripe.model.Transfer.class);
+    classLookup.put("transfer_reversal", com.stripe.model.TransferReversal.class);
+    classLookup.put("webhook_endpoint", com.stripe.model.WebhookEndpoint.class);
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
@@ -117,8 +125,12 @@ public final class EventDataClassLookup {
         "billing.meter_event_adjustment", com.stripe.model.billing.MeterEventAdjustment.class);
     classLookup.put(
         "billing.meter_event_summary", com.stripe.model.billing.MeterEventSummary.class);
-    classLookup.put("billing.meter_usage", com.stripe.model.billing.MeterUsage.class);
-    classLookup.put("billing.meter_usage_row", com.stripe.model.billing.MeterUsageRow.class);
+
+    classLookup.put(
+        "billing.analytics.meter_usage", com.stripe.model.billing.analytics.MeterUsage.class);
+    classLookup.put(
+        "billing.analytics.meter_usage_row",
+        com.stripe.model.billing.analytics.MeterUsageRow.class);
 
     classLookup.put(
         "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);

@@ -3,7 +3,6 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -502,12 +501,12 @@ public class IntentCreateParams extends ApiRequestParams {
            * percent_off of 50.0 will make $100 amount $50 instead.
            */
           @SerializedName("percent_off")
-          BigDecimal percentOff;
+          String percentOff;
 
           private PercentOff(
               Map<String, Object> extraParams,
               MaximumApplications maximumApplications,
-              BigDecimal percentOff) {
+              String percentOff) {
             this.extraParams = extraParams;
             this.maximumApplications = maximumApplications;
             this.percentOff = percentOff;
@@ -522,7 +521,7 @@ public class IntentCreateParams extends ApiRequestParams {
 
             private MaximumApplications maximumApplications;
 
-            private BigDecimal percentOff;
+            private String percentOff;
 
             /** Finalize and obtain parameter instance from this builder. */
             public IntentCreateParams.Action.Apply.InvoiceDiscountRule.PercentOff build() {
@@ -575,7 +574,7 @@ public class IntentCreateParams extends ApiRequestParams {
              * <strong>Required.</strong> Percent that will be taken off of the amount. For example,
              * percent_off of 50.0 will make $100 amount $50 instead.
              */
-            public Builder setPercentOff(BigDecimal percentOff) {
+            public Builder setPercentOff(String percentOff) {
               this.percentOff = percentOff;
               return this;
             }
@@ -1024,6 +1023,9 @@ public class IntentCreateParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("current_billing_period_end")
+          CURRENT_BILLING_PERIOD_END("current_billing_period_end"),
+
           @SerializedName("current_billing_period_start")
           CURRENT_BILLING_PERIOD_START("current_billing_period_start"),
 

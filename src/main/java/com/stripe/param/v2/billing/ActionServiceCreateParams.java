@@ -3,7 +3,6 @@ package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -182,6 +181,10 @@ public class ActionServiceCreateParams extends ApiRequestParams {
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
 
+    /** The category of the credit grant. */
+    @SerializedName("category")
+    Category category;
+
     /** <strong>Required.</strong> The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
     ExpiryConfig expiryConfig;
@@ -199,17 +202,28 @@ public class ActionServiceCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    @SerializedName("priority")
+    Long priority;
+
     private CreditGrant(
         com.stripe.param.v2.billing.ActionServiceCreateParams.CreditGrant.Amount amount,
         ApplicabilityConfig applicabilityConfig,
+        Category category,
         ExpiryConfig expiryConfig,
         Map<String, Object> extraParams,
-        String name) {
+        String name,
+        Long priority) {
       this.amount = amount;
       this.applicabilityConfig = applicabilityConfig;
+      this.category = category;
       this.expiryConfig = expiryConfig;
       this.extraParams = extraParams;
       this.name = name;
+      this.priority = priority;
     }
 
     public static Builder builder() {
@@ -221,16 +235,26 @@ public class ActionServiceCreateParams extends ApiRequestParams {
 
       private ApplicabilityConfig applicabilityConfig;
 
+      private Category category;
+
       private ExpiryConfig expiryConfig;
 
       private Map<String, Object> extraParams;
 
       private String name;
 
+      private Long priority;
+
       /** Finalize and obtain parameter instance from this builder. */
       public ActionServiceCreateParams.CreditGrant build() {
         return new ActionServiceCreateParams.CreditGrant(
-            this.amount, this.applicabilityConfig, this.expiryConfig, this.extraParams, this.name);
+            this.amount,
+            this.applicabilityConfig,
+            this.category,
+            this.expiryConfig,
+            this.extraParams,
+            this.name,
+            this.priority);
       }
 
       /** <strong>Required.</strong> The amount of the credit grant. */
@@ -243,6 +267,12 @@ public class ActionServiceCreateParams extends ApiRequestParams {
       public Builder setApplicabilityConfig(
           ActionServiceCreateParams.CreditGrant.ApplicabilityConfig applicabilityConfig) {
         this.applicabilityConfig = applicabilityConfig;
+        return this;
+      }
+
+      /** The category of the credit grant. */
+      public Builder setCategory(ActionServiceCreateParams.CreditGrant.Category category) {
+        this.category = category;
         return this;
       }
 
@@ -282,6 +312,15 @@ public class ActionServiceCreateParams extends ApiRequestParams {
       /** <strong>Required.</strong> A descriptive name shown in dashboard. */
       public Builder setName(String name) {
         this.name = name;
+        return this;
+      }
+
+      /**
+       * The desired priority for applying this credit grant. If not specified, it will be set to
+       * the default value of 50. The highest priority is 0 and the lowest is 100.
+       */
+      public Builder setPriority(Long priority) {
+        this.priority = priority;
         return this;
       }
     }
@@ -424,9 +463,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
          * string.
          */
         @SerializedName("value")
-        BigDecimal value;
+        String value;
 
-        private CustomPricingUnit(Map<String, Object> extraParams, String id, BigDecimal value) {
+        private CustomPricingUnit(Map<String, Object> extraParams, String id, String value) {
           this.extraParams = extraParams;
           this.id = id;
           this.value = value;
@@ -441,7 +480,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
 
           private String id;
 
-          private BigDecimal value;
+          private String value;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ActionServiceCreateParams.CreditGrant.Amount.CustomPricingUnit build() {
@@ -489,7 +528,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The value of the credit grant, decimal value represented as
            * a string.
            */
-          public Builder setValue(BigDecimal value) {
+          public Builder setValue(String value) {
             this.value = value;
             return this;
           }
@@ -808,6 +847,21 @@ public class ActionServiceCreateParams extends ApiRequestParams {
         }
       }
     }
+
+    public enum Category implements ApiRequestParams.EnumParam {
+      @SerializedName("paid")
+      PAID("paid"),
+
+      @SerializedName("promotional")
+      PROMOTIONAL("promotional");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Category(String value) {
+        this.value = value;
+      }
+    }
   }
 
   @Getter
@@ -820,6 +874,10 @@ public class ActionServiceCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> Defines the scope where the credit grant is applicable. */
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
+
+    /** The category of the credit grant. */
+    @SerializedName("category")
+    Category category;
 
     /** <strong>Required.</strong> The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
@@ -842,19 +900,30 @@ public class ActionServiceCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    @SerializedName("priority")
+    Long priority;
+
     private CreditGrantPerTenant(
         com.stripe.param.v2.billing.ActionServiceCreateParams.CreditGrantPerTenant.Amount amount,
         ApplicabilityConfig applicabilityConfig,
+        Category category,
         ExpiryConfig expiryConfig,
         Map<String, Object> extraParams,
         GrantCondition grantCondition,
-        String name) {
+        String name,
+        Long priority) {
       this.amount = amount;
       this.applicabilityConfig = applicabilityConfig;
+      this.category = category;
       this.expiryConfig = expiryConfig;
       this.extraParams = extraParams;
       this.grantCondition = grantCondition;
       this.name = name;
+      this.priority = priority;
     }
 
     public static Builder builder() {
@@ -867,6 +936,8 @@ public class ActionServiceCreateParams extends ApiRequestParams {
 
       private ApplicabilityConfig applicabilityConfig;
 
+      private Category category;
+
       private ExpiryConfig expiryConfig;
 
       private Map<String, Object> extraParams;
@@ -875,15 +946,19 @@ public class ActionServiceCreateParams extends ApiRequestParams {
 
       private String name;
 
+      private Long priority;
+
       /** Finalize and obtain parameter instance from this builder. */
       public ActionServiceCreateParams.CreditGrantPerTenant build() {
         return new ActionServiceCreateParams.CreditGrantPerTenant(
             this.amount,
             this.applicabilityConfig,
+            this.category,
             this.expiryConfig,
             this.extraParams,
             this.grantCondition,
-            this.name);
+            this.name,
+            this.priority);
       }
 
       /** <strong>Required.</strong> The amount of the credit grant. */
@@ -896,6 +971,12 @@ public class ActionServiceCreateParams extends ApiRequestParams {
       public Builder setApplicabilityConfig(
           ActionServiceCreateParams.CreditGrantPerTenant.ApplicabilityConfig applicabilityConfig) {
         this.applicabilityConfig = applicabilityConfig;
+        return this;
+      }
+
+      /** The category of the credit grant. */
+      public Builder setCategory(ActionServiceCreateParams.CreditGrantPerTenant.Category category) {
+        this.category = category;
         return this;
       }
 
@@ -943,6 +1024,15 @@ public class ActionServiceCreateParams extends ApiRequestParams {
       /** <strong>Required.</strong> Customer-facing name for the credit grant. */
       public Builder setName(String name) {
         this.name = name;
+        return this;
+      }
+
+      /**
+       * The desired priority for applying this credit grant. If not specified, it will be set to
+       * the default value of 50. The highest priority is 0 and the lowest is 100.
+       */
+      public Builder setPriority(Long priority) {
+        this.priority = priority;
         return this;
       }
     }
@@ -1086,9 +1176,9 @@ public class ActionServiceCreateParams extends ApiRequestParams {
          * string.
          */
         @SerializedName("value")
-        BigDecimal value;
+        String value;
 
-        private CustomPricingUnit(Map<String, Object> extraParams, String id, BigDecimal value) {
+        private CustomPricingUnit(Map<String, Object> extraParams, String id, String value) {
           this.extraParams = extraParams;
           this.id = id;
           this.value = value;
@@ -1103,7 +1193,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
 
           private String id;
 
-          private BigDecimal value;
+          private String value;
 
           /** Finalize and obtain parameter instance from this builder. */
           public ActionServiceCreateParams.CreditGrantPerTenant.Amount.CustomPricingUnit build() {
@@ -1151,7 +1241,7 @@ public class ActionServiceCreateParams extends ApiRequestParams {
            * <strong>Required.</strong> The value of the credit grant, decimal value represented as
            * a string.
            */
-          public Builder setValue(BigDecimal value) {
+          public Builder setValue(String value) {
             this.value = value;
             return this;
           }
@@ -1909,6 +1999,21 @@ public class ActionServiceCreateParams extends ApiRequestParams {
         Type(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum Category implements ApiRequestParams.EnumParam {
+      @SerializedName("paid")
+      PAID("paid"),
+
+      @SerializedName("promotional")
+      PROMOTIONAL("promotional");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Category(String value) {
+        this.value = value;
       }
     }
   }

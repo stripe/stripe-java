@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
 import com.stripe.v2.Amount;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7382,7 +7381,9 @@ public class AccountUpdateParams extends ApiRequestParams {
        * The payout method id to be used as a default outbound destination. This will allow the
        * PayoutMethod to be omitted on OutboundPayments made through API or sending payouts via
        * dashboard. Can also be explicitly set to {@code null} to clear the existing default
-       * outbound destination.
+       * outbound destination. For further details about creating an Outbound Destination, see <a
+       * href="https://docs.corp.stripe.com/global-payouts-private-preview/quickstart?dashboard-or-api=api#collect-bank-account-details">Collect
+       * recipient's payment details</a>.
        */
       @SerializedName("default_outbound_destination")
       Object defaultOutboundDestination;
@@ -7446,7 +7447,9 @@ public class AccountUpdateParams extends ApiRequestParams {
          * The payout method id to be used as a default outbound destination. This will allow the
          * PayoutMethod to be omitted on OutboundPayments made through API or sending payouts via
          * dashboard. Can also be explicitly set to {@code null} to clear the existing default
-         * outbound destination.
+         * outbound destination. For further details about creating an Outbound Destination, see <a
+         * href="https://docs.corp.stripe.com/global-payouts-private-preview/quickstart?dashboard-or-api=api#collect-bank-account-details">Collect
+         * recipient's payment details</a>.
          */
         public Builder setDefaultOutboundDestination(String defaultOutboundDestination) {
           this.defaultOutboundDestination = defaultOutboundDestination;
@@ -7457,7 +7460,9 @@ public class AccountUpdateParams extends ApiRequestParams {
          * The payout method id to be used as a default outbound destination. This will allow the
          * PayoutMethod to be omitted on OutboundPayments made through API or sending payouts via
          * dashboard. Can also be explicitly set to {@code null} to clear the existing default
-         * outbound destination.
+         * outbound destination. For further details about creating an Outbound Destination, see <a
+         * href="https://docs.corp.stripe.com/global-payouts-private-preview/quickstart?dashboard-or-api=api#collect-bank-account-details">Collect
+         * recipient's payment details</a>.
          */
         public Builder setDefaultOutboundDestination(EmptyParam defaultOutboundDestination) {
           this.defaultOutboundDestination = defaultOutboundDestination;
@@ -7504,6 +7509,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("cards")
         Cards cards;
 
+        /** Capabilities that enable OutboundPayments to a crypto wallet linked to this Account. */
+        @SerializedName("crypto_wallets")
+        CryptoWallets cryptoWallets;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -7521,10 +7530,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         private Capabilities(
             BankAccounts bankAccounts,
             Cards cards,
+            CryptoWallets cryptoWallets,
             Map<String, Object> extraParams,
             StripeBalance stripeBalance) {
           this.bankAccounts = bankAccounts;
           this.cards = cards;
+          this.cryptoWallets = cryptoWallets;
           this.extraParams = extraParams;
           this.stripeBalance = stripeBalance;
         }
@@ -7538,6 +7549,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Cards cards;
 
+          private CryptoWallets cryptoWallets;
+
           private Map<String, Object> extraParams;
 
           private StripeBalance stripeBalance;
@@ -7545,7 +7558,11 @@ public class AccountUpdateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountUpdateParams.Configuration.Recipient.Capabilities build() {
             return new AccountUpdateParams.Configuration.Recipient.Capabilities(
-                this.bankAccounts, this.cards, this.extraParams, this.stripeBalance);
+                this.bankAccounts,
+                this.cards,
+                this.cryptoWallets,
+                this.extraParams,
+                this.stripeBalance);
           }
 
           /** Capabilities that enable OutboundPayments to a bank account linked to this Account. */
@@ -7559,6 +7576,16 @@ public class AccountUpdateParams extends ApiRequestParams {
           public Builder setCards(
               AccountUpdateParams.Configuration.Recipient.Capabilities.Cards cards) {
             this.cards = cards;
+            return this;
+          }
+
+          /**
+           * Capabilities that enable OutboundPayments to a crypto wallet linked to this Account.
+           */
+          public Builder setCryptoWallets(
+              AccountUpdateParams.Configuration.Recipient.Capabilities.CryptoWallets
+                  cryptoWallets) {
+            this.cryptoWallets = cryptoWallets;
             return this;
           }
 
@@ -7924,6 +7951,87 @@ public class AccountUpdateParams extends ApiRequestParams {
              * original map. See {@link
              * AccountUpdateParams.Configuration.Recipient.Capabilities.Cards#extraParams} for the
              * field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            public Builder setRequested(Boolean requested) {
+              this.requested = requested;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CryptoWallets {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * To request a new Capability for an account, pass true. There can be a delay before the
+           * requested Capability becomes active.
+           */
+          @SerializedName("requested")
+          Boolean requested;
+
+          private CryptoWallets(Map<String, Object> extraParams, Boolean requested) {
+            this.extraParams = extraParams;
+            this.requested = requested;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Boolean requested;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Recipient.Capabilities.CryptoWallets build() {
+              return new AccountUpdateParams.Configuration.Recipient.Capabilities.CryptoWallets(
+                  this.extraParams, this.requested);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Recipient.Capabilities.CryptoWallets#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Recipient.Capabilities.CryptoWallets#extraParams}
+             * for the field documentation.
              */
             public Builder putAllExtraParam(Map<String, Object> map) {
               if (this.extraParams == null) {
@@ -9496,6 +9604,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("locales")
     List<AccountUpdateParams.Defaults.Locale> locales;
 
+    /** Account profile information. */
+    @SerializedName("profile")
+    Profile profile;
+
     /** Default responsibilities held by either Stripe or the platform. */
     @SerializedName("responsibilities")
     Responsibilities responsibilities;
@@ -9504,10 +9616,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object currency,
         Map<String, Object> extraParams,
         List<AccountUpdateParams.Defaults.Locale> locales,
+        Profile profile,
         Responsibilities responsibilities) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.locales = locales;
+      this.profile = profile;
       this.responsibilities = responsibilities;
     }
 
@@ -9522,12 +9636,14 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private List<AccountUpdateParams.Defaults.Locale> locales;
 
+      private Profile profile;
+
       private Responsibilities responsibilities;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AccountUpdateParams.Defaults build() {
         return new AccountUpdateParams.Defaults(
-            this.currency, this.extraParams, this.locales, this.responsibilities);
+            this.currency, this.extraParams, this.locales, this.profile, this.responsibilities);
       }
 
       /**
@@ -9602,11 +9718,146 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Account profile information. */
+      public Builder setProfile(AccountUpdateParams.Defaults.Profile profile) {
+        this.profile = profile;
+        return this;
+      }
+
       /** Default responsibilities held by either Stripe or the platform. */
       public Builder setResponsibilities(
           AccountUpdateParams.Defaults.Responsibilities responsibilities) {
         this.responsibilities = responsibilities;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Profile {
+      /** The business's publicly-available website. */
+      @SerializedName("business_url")
+      Object businessUrl;
+
+      /** The name which is used by the business. */
+      @SerializedName("doing_business_as")
+      Object doingBusinessAs;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Internal-only description of the product sold or service provided by the business. It's
+       * used by Stripe for risk and underwriting purposes.
+       */
+      @SerializedName("product_description")
+      Object productDescription;
+
+      private Profile(
+          Object businessUrl,
+          Object doingBusinessAs,
+          Map<String, Object> extraParams,
+          Object productDescription) {
+        this.businessUrl = businessUrl;
+        this.doingBusinessAs = doingBusinessAs;
+        this.extraParams = extraParams;
+        this.productDescription = productDescription;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Object businessUrl;
+
+        private Object doingBusinessAs;
+
+        private Map<String, Object> extraParams;
+
+        private Object productDescription;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Defaults.Profile build() {
+          return new AccountUpdateParams.Defaults.Profile(
+              this.businessUrl, this.doingBusinessAs, this.extraParams, this.productDescription);
+        }
+
+        /** The business's publicly-available website. */
+        public Builder setBusinessUrl(String businessUrl) {
+          this.businessUrl = businessUrl;
+          return this;
+        }
+
+        /** The business's publicly-available website. */
+        public Builder setBusinessUrl(EmptyParam businessUrl) {
+          this.businessUrl = businessUrl;
+          return this;
+        }
+
+        /** The name which is used by the business. */
+        public Builder setDoingBusinessAs(String doingBusinessAs) {
+          this.doingBusinessAs = doingBusinessAs;
+          return this;
+        }
+
+        /** The name which is used by the business. */
+        public Builder setDoingBusinessAs(EmptyParam doingBusinessAs) {
+          this.doingBusinessAs = doingBusinessAs;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Defaults.Profile#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Defaults.Profile#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Internal-only description of the product sold or service provided by the business. It's
+         * used by Stripe for risk and underwriting purposes.
+         */
+        public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
+
+        /**
+         * Internal-only description of the product sold or service provided by the business. It's
+         * used by Stripe for risk and underwriting purposes.
+         */
+        public Builder setProductDescription(EmptyParam productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
       }
     }
 
@@ -11090,10 +11341,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("documents")
       Documents documents;
 
-      /** The name which is used by the business. */
-      @SerializedName("doing_business_as")
-      Object doingBusinessAs;
-
       /**
        * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
        * business.
@@ -11122,13 +11369,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("phone")
       Object phone;
 
-      /**
-       * Internal-only description of the product sold or service provided by the business. It’s
-       * used by Stripe for risk and underwriting purposes.
-       */
-      @SerializedName("product_description")
-      Object productDescription;
-
       /** The business legal name. */
       @SerializedName("registered_name")
       Object registeredName;
@@ -11145,41 +11385,31 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("structure")
       Structure structure;
 
-      /** The business's publicly available website. */
-      @SerializedName("url")
-      Object url;
-
       private BusinessDetails(
           Address address,
           AnnualRevenue annualRevenue,
           Documents documents,
-          Object doingBusinessAs,
           Long estimatedWorkerCount,
           Map<String, Object> extraParams,
           List<AccountUpdateParams.Identity.BusinessDetails.IdNumber> idNumbers,
           MonthlyEstimatedRevenue monthlyEstimatedRevenue,
           Object phone,
-          Object productDescription,
           Object registeredName,
           ScriptAddresses scriptAddresses,
           ScriptNames scriptNames,
-          Structure structure,
-          Object url) {
+          Structure structure) {
         this.address = address;
         this.annualRevenue = annualRevenue;
         this.documents = documents;
-        this.doingBusinessAs = doingBusinessAs;
         this.estimatedWorkerCount = estimatedWorkerCount;
         this.extraParams = extraParams;
         this.idNumbers = idNumbers;
         this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
         this.phone = phone;
-        this.productDescription = productDescription;
         this.registeredName = registeredName;
         this.scriptAddresses = scriptAddresses;
         this.scriptNames = scriptNames;
         this.structure = structure;
-        this.url = url;
       }
 
       public static Builder builder() {
@@ -11193,8 +11423,6 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Documents documents;
 
-        private Object doingBusinessAs;
-
         private Long estimatedWorkerCount;
 
         private Map<String, Object> extraParams;
@@ -11205,8 +11433,6 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Object phone;
 
-        private Object productDescription;
-
         private Object registeredName;
 
         private ScriptAddresses scriptAddresses;
@@ -11215,26 +11441,21 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Structure structure;
 
-        private Object url;
-
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Identity.BusinessDetails build() {
           return new AccountUpdateParams.Identity.BusinessDetails(
               this.address,
               this.annualRevenue,
               this.documents,
-              this.doingBusinessAs,
               this.estimatedWorkerCount,
               this.extraParams,
               this.idNumbers,
               this.monthlyEstimatedRevenue,
               this.phone,
-              this.productDescription,
               this.registeredName,
               this.scriptAddresses,
               this.scriptNames,
-              this.structure,
-              this.url);
+              this.structure);
         }
 
         /** The business registration address of the business entity. */
@@ -11254,18 +11475,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         public Builder setDocuments(
             AccountUpdateParams.Identity.BusinessDetails.Documents documents) {
           this.documents = documents;
-          return this;
-        }
-
-        /** The name which is used by the business. */
-        public Builder setDoingBusinessAs(String doingBusinessAs) {
-          this.doingBusinessAs = doingBusinessAs;
-          return this;
-        }
-
-        /** The name which is used by the business. */
-        public Builder setDoingBusinessAs(EmptyParam doingBusinessAs) {
-          this.doingBusinessAs = doingBusinessAs;
           return this;
         }
 
@@ -11353,24 +11562,6 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * Internal-only description of the product sold or service provided by the business. It’s
-         * used by Stripe for risk and underwriting purposes.
-         */
-        public Builder setProductDescription(String productDescription) {
-          this.productDescription = productDescription;
-          return this;
-        }
-
-        /**
-         * Internal-only description of the product sold or service provided by the business. It’s
-         * used by Stripe for risk and underwriting purposes.
-         */
-        public Builder setProductDescription(EmptyParam productDescription) {
-          this.productDescription = productDescription;
-          return this;
-        }
-
         /** The business legal name. */
         public Builder setRegisteredName(String registeredName) {
           this.registeredName = registeredName;
@@ -11401,18 +11592,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         public Builder setStructure(
             AccountUpdateParams.Identity.BusinessDetails.Structure structure) {
           this.structure = structure;
-          return this;
-        }
-
-        /** The business's publicly available website. */
-        public Builder setUrl(String url) {
-          this.url = url;
-          return this;
-        }
-
-        /** The business's publicly available website. */
-        public Builder setUrl(EmptyParam url) {
-          this.url = url;
           return this;
         }
       }
@@ -17368,7 +17547,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /** The percent owned by the person of the account's legal entity. */
-          public Builder setPercentOwnership(BigDecimal percentOwnership) {
+          public Builder setPercentOwnership(String percentOwnership) {
             this.percentOwnership = percentOwnership;
             return this;
           }

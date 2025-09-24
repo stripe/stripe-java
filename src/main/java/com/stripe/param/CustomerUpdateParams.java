@@ -27,6 +27,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @SerializedName("balance")
   Long balance;
 
+  /** The customer's business name. This may be up to <em>150 characters</em>. */
+  @SerializedName("business_name")
+  Object businessName;
+
   /** Balance information and default balance settings for this customer. */
   @SerializedName("cash_balance")
   CashBalance cashBalance;
@@ -71,6 +75,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /** The customer's full name. This may be up to <em>150 characters</em>. */
+  @SerializedName("individual_name")
+  Object individualName;
 
   /**
    * The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase
@@ -129,12 +137,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
   private CustomerUpdateParams(
       Object address,
       Long balance,
+      Object businessName,
       CashBalance cashBalance,
       Object defaultSource,
       Object description,
       Object email,
       List<String> expand,
       Map<String, Object> extraParams,
+      Object individualName,
       Object invoicePrefix,
       InvoiceSettings invoiceSettings,
       Object metadata,
@@ -149,12 +159,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Boolean validate) {
     this.address = address;
     this.balance = balance;
+    this.businessName = businessName;
     this.cashBalance = cashBalance;
     this.defaultSource = defaultSource;
     this.description = description;
     this.email = email;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.individualName = individualName;
     this.invoicePrefix = invoicePrefix;
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
@@ -178,6 +190,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private Long balance;
 
+    private Object businessName;
+
     private CashBalance cashBalance;
 
     private Object defaultSource;
@@ -189,6 +203,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Object individualName;
 
     private Object invoicePrefix;
 
@@ -219,12 +235,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return new CustomerUpdateParams(
           this.address,
           this.balance,
+          this.businessName,
           this.cashBalance,
           this.defaultSource,
           this.description,
           this.email,
           this.expand,
           this.extraParams,
+          this.individualName,
           this.invoicePrefix,
           this.invoiceSettings,
           this.metadata,
@@ -259,6 +277,18 @@ public class CustomerUpdateParams extends ApiRequestParams {
      */
     public Builder setBalance(Long balance) {
       this.balance = balance;
+      return this;
+    }
+
+    /** The customer's business name. This may be up to <em>150 characters</em>. */
+    public Builder setBusinessName(String businessName) {
+      this.businessName = businessName;
+      return this;
+    }
+
+    /** The customer's business name. This may be up to <em>150 characters</em>. */
+    public Builder setBusinessName(EmptyParam businessName) {
+      this.businessName = businessName;
       return this;
     }
 
@@ -387,6 +417,18 @@ public class CustomerUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** The customer's full name. This may be up to <em>150 characters</em>. */
+    public Builder setIndividualName(String individualName) {
+      this.individualName = individualName;
+      return this;
+    }
+
+    /** The customer's full name. This may be up to <em>150 characters</em>. */
+    public Builder setIndividualName(EmptyParam individualName) {
+      this.individualName = individualName;
       return this;
     }
 
@@ -590,11 +632,11 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Address line 1 (e.g., street, PO Box, or company name). */
+    /** Address line 1, such as the street, PO Box, or company name. */
     @SerializedName("line1")
     Object line1;
 
-    /** Address line 2 (e.g., apartment, suite, unit, or building). */
+    /** Address line 2, such as the apartment, suite, unit, or building. */
     @SerializedName("line2")
     Object line2;
 
@@ -712,25 +754,25 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       public Builder setLine1(String line1) {
         this.line1 = line1;
         return this;
       }
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       public Builder setLine1(EmptyParam line1) {
         this.line1 = line1;
         return this;
       }
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       public Builder setLine2(String line2) {
         this.line2 = line2;
         return this;
       }
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       public Builder setLine2(EmptyParam line2) {
         this.line2 = line2;
         return this;
@@ -1506,11 +1548,11 @@ public class CustomerUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       Object line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       Object line2;
 
@@ -1630,25 +1672,25 @@ public class CustomerUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(EmptyParam line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;

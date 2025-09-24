@@ -450,6 +450,16 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
       ScheduleAtPeriodEnd scheduleAtPeriodEnd;
 
       /**
+       * Determines how handle updates to trialing subscriptions. Valid values are {@code end_trial}
+       * and {@code continue_trial}. Defaults to a value of {@code end_trial} if you don't set it
+       * during creation.
+       *
+       * <p>One of {@code continue_trial}, or {@code end_trial}.
+       */
+      @SerializedName("trial_update_behavior")
+      String trialUpdateBehavior;
+
+      /**
        * For more details about Product, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */

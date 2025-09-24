@@ -4,7 +4,6 @@ package com.stripe.param.v2.core.accounts;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -2760,7 +2759,7 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       /** The percentage of ownership the person has in the associated legal entity. */
-      public Builder setPercentOwnership(BigDecimal percentOwnership) {
+      public Builder setPercentOwnership(String percentOwnership) {
         this.percentOwnership = percentOwnership;
         return this;
       }

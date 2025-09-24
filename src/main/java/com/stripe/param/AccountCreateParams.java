@@ -1137,11 +1137,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -1244,13 +1244,13 @@ public class AccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
@@ -1499,6 +1499,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("paypal_payments")
     PaypalPayments paypalPayments;
 
+    /** The paypay_payments capability. */
+    @SerializedName("paypay_payments")
+    PaypayPayments paypayPayments;
+
     /** The payto_payments capability. */
     @SerializedName("payto_payments")
     PaytoPayments paytoPayments;
@@ -1649,6 +1653,7 @@ public class AccountCreateParams extends ApiRequestParams {
         PaycoPayments paycoPayments,
         PaynowPayments paynowPayments,
         PaypalPayments paypalPayments,
+        PaypayPayments paypayPayments,
         PaytoPayments paytoPayments,
         PixPayments pixPayments,
         PromptpayPayments promptpayPayments,
@@ -1723,6 +1728,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.paycoPayments = paycoPayments;
       this.paynowPayments = paynowPayments;
       this.paypalPayments = paypalPayments;
+      this.paypayPayments = paypayPayments;
       this.paytoPayments = paytoPayments;
       this.pixPayments = pixPayments;
       this.promptpayPayments = promptpayPayments;
@@ -1853,6 +1859,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private PaypalPayments paypalPayments;
 
+      private PaypayPayments paypayPayments;
+
       private PaytoPayments paytoPayments;
 
       private PixPayments pixPayments;
@@ -1955,6 +1963,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.paycoPayments,
             this.paynowPayments,
             this.paypalPayments,
+            this.paypayPayments,
             this.paytoPayments,
             this.pixPayments,
             this.promptpayPayments,
@@ -2332,6 +2341,13 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setPaypalPayments(
           AccountCreateParams.Capabilities.PaypalPayments paypalPayments) {
         this.paypalPayments = paypalPayments;
+        return this;
+      }
+
+      /** The paypay_payments capability. */
+      public Builder setPaypayPayments(
+          AccountCreateParams.Capabilities.PaypayPayments paypayPayments) {
+        this.paypayPayments = paypayPayments;
         return this;
       }
 
@@ -6345,6 +6361,86 @@ public class AccountCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class PaypayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Passing true requests the capability for the account, if it is not already requested. A
+       * requested capability may not immediately become active. Any requirements to activate the
+       * capability are returned in the {@code requirements} arrays.
+       */
+      @SerializedName("requested")
+      Boolean requested;
+
+      private PaypayPayments(Map<String, Object> extraParams, Boolean requested) {
+        this.extraParams = extraParams;
+        this.requested = requested;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean requested;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Capabilities.PaypayPayments build() {
+          return new AccountCreateParams.Capabilities.PaypayPayments(
+              this.extraParams, this.requested);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.PaypayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Capabilities.PaypayPayments#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Passing true requests the capability for the account, if it is not already requested. A
+         * requested capability may not immediately become active. Any requirements to activate the
+         * capability are returned in the {@code requirements} arrays.
+         */
+        public Builder setRequested(Boolean requested) {
+          this.requested = requested;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class PaytoPayments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -8873,11 +8969,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -8980,13 +9076,13 @@ public class AccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
@@ -12346,11 +12442,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -12453,13 +12549,13 @@ public class AccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
@@ -12942,11 +13038,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Address line 1 (e.g., street, PO Box, or company name). */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -13049,13 +13145,13 @@ public class AccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1 (e.g., street, PO Box, or company name). */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
@@ -15392,16 +15488,15 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * The day of the week when available funds are paid out, specified as {@code monday},
-         * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
-         * weekly}.)
+         * {@code tuesday}, etc. Required and applicable only if {@code interval} is {@code weekly}.
          */
         @SerializedName("weekly_anchor")
         WeeklyAnchor weeklyAnchor;
 
         /**
          * The days of the week when available funds are paid out, specified as an array, e.g.,
-         * [{@code monday}, {@code tuesday}]. (required and applicable only if {@code interval} is
-         * {@code weekly} and {@code weekly_anchor} is not set.)
+         * [{@code monday}, {@code tuesday}]. Required and applicable only if {@code interval} is
+         * {@code weekly}.
          */
         @SerializedName("weekly_payout_days")
         List<AccountCreateParams.Settings.Payouts.Schedule.WeeklyPayoutDay> weeklyPayoutDays;
@@ -15561,8 +15656,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * The day of the week when available funds are paid out, specified as {@code monday},
-           * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
-           * weekly}.)
+           * {@code tuesday}, etc. Required and applicable only if {@code interval} is {@code
+           * weekly}.
            */
           public Builder setWeeklyAnchor(
               AccountCreateParams.Settings.Payouts.Schedule.WeeklyAnchor weeklyAnchor) {
@@ -15670,12 +15765,6 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @SerializedName("monday")
           MONDAY("monday"),
-
-          @SerializedName("saturday")
-          SATURDAY("saturday"),
-
-          @SerializedName("sunday")
-          SUNDAY("sunday"),
 
           @SerializedName("thursday")
           THURSDAY("thursday"),

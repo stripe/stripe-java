@@ -2201,6 +2201,9 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BillingMode extends StripeObject {
+      @SerializedName("flexible")
+      Flexible flexible;
+
       /**
        * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
        *
@@ -2208,6 +2211,23 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about Flexible, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Flexible extends StripeObject {
+        /**
+         * Controls how invoices and invoice items display proration amounts and discount amounts.
+         *
+         * <p>One of {@code included}, or {@code itemized}.
+         */
+        @SerializedName("proration_discounts")
+        String prorationDiscounts;
+      }
     }
 
     /**

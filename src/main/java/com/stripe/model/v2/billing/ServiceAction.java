@@ -4,7 +4,6 @@ package com.stripe.model.v2.billing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import lombok.EqualsAndHashCode;
@@ -88,6 +87,14 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
 
+    /**
+     * The category of the credit grant.
+     *
+     * <p>One of {@code paid}, or {@code promotional}.
+     */
+    @SerializedName("category")
+    String category;
+
     /** The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
     ExpiryConfig expiryConfig;
@@ -95,6 +102,13 @@ public class ServiceAction extends StripeObject implements HasId {
     /** A descriptive name shown in dashboard. */
     @SerializedName("name")
     String name;
+
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    @SerializedName("priority")
+    Long priority;
 
     /** The amount of the credit grant. */
     @Getter
@@ -106,7 +120,8 @@ public class ServiceAction extends StripeObject implements HasId {
        * custom_pricing_unit}.
        */
       @SerializedName("custom_pricing_unit")
-      CustomPricingUnit customPricingUnit;
+      com.stripe.model.v2.billing.ServiceAction.CreditGrant.Amount.CustomPricingUnit
+          customPricingUnit;
 
       /** The monetary amount of the credit grant. Required if {@code type} is {@code monetary}. */
       @SerializedName("monetary")
@@ -129,6 +144,10 @@ public class ServiceAction extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** The Custom Pricing Unit object. */
+        @SerializedName("custom_pricing_unit_details")
+        com.stripe.model.v2.billing.CustomPricingUnit customPricingUnitDetails;
+
         /** The id of the custom pricing unit. */
         @Getter(onMethod_ = {@Override})
         @SerializedName("id")
@@ -136,7 +155,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        BigDecimal value;
+        String value;
       }
     }
 
@@ -201,6 +220,14 @@ public class ServiceAction extends StripeObject implements HasId {
     @SerializedName("applicability_config")
     ApplicabilityConfig applicabilityConfig;
 
+    /**
+     * The category of the credit grant.
+     *
+     * <p>One of {@code paid}, or {@code promotional}.
+     */
+    @SerializedName("category")
+    String category;
+
     /** The expiry configuration for the credit grant. */
     @SerializedName("expiry_config")
     ExpiryConfig expiryConfig;
@@ -208,6 +235,13 @@ public class ServiceAction extends StripeObject implements HasId {
     /** Customer-facing name for the credit grant. */
     @SerializedName("name")
     String name;
+
+    /**
+     * The desired priority for applying this credit grant. If not specified, it will be set to the
+     * default value of 50. The highest priority is 0 and the lowest is 100.
+     */
+    @SerializedName("priority")
+    Long priority;
 
     /** The amount of the credit grant. */
     @Getter
@@ -219,7 +253,8 @@ public class ServiceAction extends StripeObject implements HasId {
        * custom_pricing_unit}.
        */
       @SerializedName("custom_pricing_unit")
-      CustomPricingUnit customPricingUnit;
+      com.stripe.model.v2.billing.ServiceAction.CreditGrantPerTenant.Amount.CustomPricingUnit
+          customPricingUnit;
 
       /** The monetary amount of the credit grant. Required if {@code type} is {@code monetary}. */
       @SerializedName("monetary")
@@ -242,6 +277,10 @@ public class ServiceAction extends StripeObject implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** The Custom Pricing Unit object. */
+        @SerializedName("custom_pricing_unit_details")
+        com.stripe.model.v2.billing.CustomPricingUnit customPricingUnitDetails;
+
         /** The id of the custom pricing unit. */
         @Getter(onMethod_ = {@Override})
         @SerializedName("id")
@@ -249,7 +288,7 @@ public class ServiceAction extends StripeObject implements HasId {
 
         /** The value of the credit grant, decimal value represented as a string. */
         @SerializedName("value")
-        BigDecimal value;
+        String value;
       }
     }
 
