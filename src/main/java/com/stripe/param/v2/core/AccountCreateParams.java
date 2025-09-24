@@ -4,7 +4,6 @@ package com.stripe.param.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.v2.Amount;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16459,7 +16458,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /** The percent owned by the person of the account's legal entity. */
         @SerializedName("percent_ownership")
-        BigDecimal percentOwnership;
+        String percentOwnership;
 
         /** The person's title (e.g., CEO, Support Engineer). */
         @SerializedName("title")
@@ -16470,7 +16469,7 @@ public class AccountCreateParams extends ApiRequestParams {
             Boolean executive,
             Map<String, Object> extraParams,
             Boolean owner,
-            BigDecimal percentOwnership,
+            String percentOwnership,
             String title) {
           this.director = director;
           this.executive = executive;
@@ -16493,7 +16492,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private Boolean owner;
 
-          private BigDecimal percentOwnership;
+          private String percentOwnership;
 
           private String title;
 
@@ -16562,7 +16561,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /** The percent owned by the person of the account's legal entity. */
-          public Builder setPercentOwnership(BigDecimal percentOwnership) {
+          public Builder setPercentOwnership(String percentOwnership) {
             this.percentOwnership = percentOwnership;
             return this;
           }

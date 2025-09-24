@@ -24992,7 +24992,7 @@ class GeneratedExamples extends BaseStripeTest {
                                                             .InvoiceDiscountRule.PercentOff
                                                             .MaximumApplications.Type.INDEFINITE)
                                                     .build())
-                                            .setPercentOff(new BigDecimal("991934883.3333334"))
+                                            .setPercentOff("percent_off")
                                             .build())
                                     .build())
                             .build())

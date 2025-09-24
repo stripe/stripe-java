@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
 import com.stripe.v2.Amount;
-import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17548,7 +17547,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /** The percent owned by the person of the account's legal entity. */
-          public Builder setPercentOwnership(BigDecimal percentOwnership) {
+          public Builder setPercentOwnership(String percentOwnership) {
             this.percentOwnership = percentOwnership;
             return this;
           }
