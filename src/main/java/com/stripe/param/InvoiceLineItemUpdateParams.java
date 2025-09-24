@@ -1006,19 +1006,28 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
       @SerializedName("tax_code")
       Object taxCode;
 
+      /**
+       * A label that represents units of this product. When set, this will be included in
+       * customers' receipts, invoices, Checkout, and the customer portal.
+       */
+      @SerializedName("unit_label")
+      Object unitLabel;
+
       private ProductData(
           Object description,
           Map<String, Object> extraParams,
           List<String> images,
           Map<String, String> metadata,
           Object name,
-          Object taxCode) {
+          Object taxCode,
+          Object unitLabel) {
         this.description = description;
         this.extraParams = extraParams;
         this.images = images;
         this.metadata = metadata;
         this.name = name;
         this.taxCode = taxCode;
+        this.unitLabel = unitLabel;
       }
 
       public static Builder builder() {
@@ -1038,6 +1047,8 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
 
         private Object taxCode;
 
+        private Object unitLabel;
+
         /** Finalize and obtain parameter instance from this builder. */
         public InvoiceLineItemUpdateParams.PriceData.ProductData build() {
           return new InvoiceLineItemUpdateParams.PriceData.ProductData(
@@ -1046,7 +1057,8 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
               this.images,
               this.metadata,
               this.name,
-              this.taxCode);
+              this.taxCode,
+              this.unitLabel);
         }
 
         /**
@@ -1175,6 +1187,24 @@ public class InvoiceLineItemUpdateParams extends ApiRequestParams {
         /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
         public Builder setTaxCode(EmptyParam taxCode) {
           this.taxCode = taxCode;
+          return this;
+        }
+
+        /**
+         * A label that represents units of this product. When set, this will be included in
+         * customers' receipts, invoices, Checkout, and the customer portal.
+         */
+        public Builder setUnitLabel(String unitLabel) {
+          this.unitLabel = unitLabel;
+          return this;
+        }
+
+        /**
+         * A label that represents units of this product. When set, this will be included in
+         * customers' receipts, invoices, Checkout, and the customer portal.
+         */
+        public Builder setUnitLabel(EmptyParam unitLabel) {
+          this.unitLabel = unitLabel;
           return this;
         }
       }

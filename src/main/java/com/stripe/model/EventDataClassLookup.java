@@ -21,6 +21,7 @@ public final class EventDataClassLookup {
     classLookup.put("application", Application.class);
     classLookup.put("application_fee", ApplicationFee.class);
     classLookup.put("balance", Balance.class);
+    classLookup.put("balance_settings", BalanceSettings.class);
     classLookup.put("balance_transaction", BalanceTransaction.class);
     classLookup.put("bank_account", BankAccount.class);
     classLookup.put("capability", Capability.class);

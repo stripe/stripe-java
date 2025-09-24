@@ -94,6 +94,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("billing_address_collection")
   String billingAddressCollection;
 
+  @SerializedName("branding_settings")
+  BrandingSettings brandingSettings;
+
   /**
    * If set, Checkout displays a back button and customers will be directed to this URL if they
    * decide to cancel payment and return to your website.
@@ -201,6 +204,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @SerializedName("discounts")
   List<Session.Discount> discounts;
 
+  /**
+   * A list of the types of payment methods (e.g., {@code card}) that should be excluded from this
+   * Checkout Session. This should only be used when payment methods for this Checkout Session are
+   * managed through the <a href="https://dashboard.stripe.com/settings/payment_methods">Stripe
+   * Dashboard</a>.
+   */
+  @SerializedName("excluded_payment_method_types")
+  List<String> excludedPaymentMethodTypes;
+
   /** The timestamp at which the Checkout Session will expire. */
   @SerializedName("expires_at")
   Long expiresAt;
@@ -261,6 +273,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    */
   @SerializedName("mode")
   String mode;
+
+  @SerializedName("name_collection")
+  NameCollection nameCollection;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -1008,6 +1023,106 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about BrandingSettings, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BrandingSettings extends StripeObject {
+    /**
+     * A hex color value starting with {@code #} representing the background color for the Checkout
+     * Session.
+     */
+    @SerializedName("background_color")
+    String backgroundColor;
+
+    /**
+     * The border style for the Checkout Session. Must be one of {@code rounded}, {@code
+     * rectangular}, or {@code pill}.
+     */
+    @SerializedName("border_style")
+    String borderStyle;
+
+    /**
+     * A hex color value starting with {@code #} representing the button color for the Checkout
+     * Session.
+     */
+    @SerializedName("button_color")
+    String buttonColor;
+
+    /** The display name shown on the Checkout Session. */
+    @SerializedName("display_name")
+    String displayName;
+
+    /**
+     * The font family for the Checkout Session. Must be one of the <a
+     * href="https://docs.stripe.com/payments/checkout/customization/appearance?payment-ui=stripe-hosted#font-compatibility">supported
+     * font families</a>.
+     */
+    @SerializedName("font_family")
+    String fontFamily;
+
+    /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    @SerializedName("icon")
+    Icon icon;
+
+    /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    @SerializedName("logo")
+    Logo logo;
+
+    /**
+     * For more details about Icon, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Icon extends StripeObject {
+      /**
+       * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+       * icon. Purpose must be {@code business_icon}. Required if {@code type} is {@code file} and
+       * disallowed otherwise.
+       */
+      @SerializedName("file")
+      String file;
+
+      /** The type of image for the icon. Must be one of {@code file} or {@code url}. */
+      @SerializedName("type")
+      String type;
+
+      /** The URL of the image. Present when {@code type} is {@code url}. */
+      @SerializedName("url")
+      String url;
+    }
+
+    /**
+     * For more details about Logo, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Logo extends StripeObject {
+      /**
+       * The ID of a <a href="https://stripe.com/docs/api/files">File upload</a> representing the
+       * logo. Purpose must be {@code business_logo}. Required if {@code type} is {@code file} and
+       * disallowed otherwise.
+       */
+      @SerializedName("file")
+      String file;
+
+      /** The type of image for the logo. Must be one of {@code file} or {@code url}. */
+      @SerializedName("type")
+      String type;
+
+      /** The URL of the image. Present when {@code type} is {@code url}. */
+      @SerializedName("url")
+      String url;
+    }
+  }
+
+  /**
    * For more details about CollectedInformation, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1015,6 +1130,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CollectedInformation extends StripeObject {
+    /** Customer’s business name for this Checkout Session. */
+    @SerializedName("business_name")
+    String businessName;
+
+    /** Customer’s individual name for this Checkout Session. */
+    @SerializedName("individual_name")
+    String individualName;
+
     /** Shipping information for this Checkout Session. */
     @SerializedName("shipping_details")
     ShippingDetails shippingDetails;
@@ -1394,6 +1517,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("address")
     Address address;
 
+    /** The customer's business name after a completed Checkout Session. */
+    @SerializedName("business_name")
+    String businessName;
+
     /**
      * The email associated with the Customer, if one exists, on the Checkout Session after a
      * completed Checkout Session or at time of session expiry. Otherwise, if the customer has
@@ -1402,6 +1529,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("email")
     String email;
+
+    /** The customer's individual name after a completed Checkout Session. */
+    @SerializedName("individual_name")
+    String individualName;
 
     /**
      * The customer's name after a completed Checkout Session. Note: This property is populated only
@@ -1706,6 +1837,61 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   }
 
   /**
+   * For more details about NameCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NameCollection extends StripeObject {
+    @SerializedName("business")
+    Business business;
+
+    @SerializedName("individual")
+    Individual individual;
+
+    /**
+     * For more details about Business, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Business extends StripeObject {
+      /** Indicates whether business name collection is enabled for the session. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Whether the customer is required to complete the field before completing the Checkout
+       * Session. Defaults to {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
+    }
+
+    /**
+     * For more details about Individual, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Individual extends StripeObject {
+      /** Indicates whether individual name collection is enabled for the session. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Whether the customer is required to complete the field before completing the Checkout
+       * Session. Defaults to {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
+    }
+  }
+
+  /**
    * For more details about OptionalItem, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1790,6 +1976,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("alma")
+    Alma alma;
+
     @SerializedName("amazon_pay")
     AmazonPay amazonPay;
 
@@ -1801,6 +1990,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     @SerializedName("bancontact")
     Bancontact bancontact;
+
+    @SerializedName("billie")
+    Billie billie;
 
     @SerializedName("boleto")
     Boleto boleto;
@@ -1876,6 +2068,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
     @SerializedName("samsung_pay")
     SamsungPay samsungPay;
+
+    @SerializedName("satispay")
+    Satispay satispay;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -2001,6 +2196,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -2033,6 +2236,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterpayClearpay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2092,6 +2303,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Alma, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alma extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
      * For more details about AmazonPay, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -2099,6 +2327,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AmazonPay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2260,6 +2496,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     }
 
     /**
+     * For more details about Billie, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Billie extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
      * For more details about Boleto, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -2308,6 +2561,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       @SerializedName("installments")
       Installments installments;
 
@@ -2449,6 +2710,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cashapp extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -2785,6 +3054,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @EqualsAndHashCode(callSuper = false)
     public static class Klarna extends StripeObject {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -2901,6 +3178,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @EqualsAndHashCode(callSuper = false)
     public static class Link extends StripeObject {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -2933,6 +3218,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Mobilepay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -3263,6 +3556,14 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @EqualsAndHashCode(callSuper = false)
     public static class RevolutPay extends StripeObject {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
        * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
@@ -3295,6 +3596,23 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SamsungPay extends StripeObject {
+      /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>Equal to {@code manual}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+    }
+
+    /**
+     * For more details about Satispay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Satispay extends StripeObject {
       /**
        * Controls when the funds will be captured from the customer's account.
        *
@@ -3917,6 +4235,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(adaptivePricing, responseGetter);
     trySetResponseGetter(afterExpiration, responseGetter);
     trySetResponseGetter(automaticTax, responseGetter);
+    trySetResponseGetter(brandingSettings, responseGetter);
     trySetResponseGetter(collectedInformation, responseGetter);
     trySetResponseGetter(consent, responseGetter);
     trySetResponseGetter(consentCollection, responseGetter);
@@ -3927,6 +4246,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     trySetResponseGetter(invoice, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentLink, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
