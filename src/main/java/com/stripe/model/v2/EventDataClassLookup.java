@@ -27,12 +27,22 @@ public final class EventDataClassLookup {
     classLookup.put("v2.core.event", com.stripe.model.v2.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.EventDestination.class);
 
+    classLookup.put("v2.billing.bill_setting", com.stripe.model.v2.billing.BillSetting.class);
+    classLookup.put(
+        "v2.billing.bill_setting_version", com.stripe.model.v2.billing.BillSettingVersion.class);
+    classLookup.put("v2.billing.cadence", com.stripe.model.v2.billing.Cadence.class);
+    classLookup.put(
+        "v2.billing.collection_setting", com.stripe.model.v2.billing.CollectionSetting.class);
+    classLookup.put(
+        "v2.billing.collection_setting_version",
+        com.stripe.model.v2.billing.CollectionSettingVersion.class);
     classLookup.put("v2.billing.meter_event", com.stripe.model.v2.billing.MeterEvent.class);
     classLookup.put(
         "v2.billing.meter_event_adjustment",
         com.stripe.model.v2.billing.MeterEventAdjustment.class);
     classLookup.put(
         "v2.billing.meter_event_session", com.stripe.model.v2.billing.MeterEventSession.class);
+    classLookup.put("v2.billing.profile", com.stripe.model.v2.billing.Profile.class);
 
     classLookup.put("v2.core.account", com.stripe.model.v2.core.Account.class);
     classLookup.put("v2.core.account_link", com.stripe.model.v2.core.AccountLink.class);
@@ -92,6 +102,9 @@ public final class EventDataClassLookup {
         com.stripe.events.V1BillingMeterErrorReportTriggeredEvent.class);
     eventClassLookup.put(
         "v1.billing.meter.no_meter_found", com.stripe.events.V1BillingMeterNoMeterFoundEvent.class);
+    eventClassLookup.put(
+        "v2.billing.bill_setting.updated",
+        com.stripe.events.V2BillingBillSettingUpdatedEvent.class);
     eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEvent.class);
     eventClassLookup.put(

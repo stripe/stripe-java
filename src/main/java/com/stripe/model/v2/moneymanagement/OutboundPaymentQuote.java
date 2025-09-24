@@ -129,22 +129,25 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
   public static class FxQuote extends StripeObject {
     /**
      * The duration the exchange rate lock remains valid from creation time. Allowed value is
-     * five_minutes.
+     * five_minutes or none.
      *
-     * <p>Equal to {@code five_minutes}.
+     * <p>One of {@code five_minutes}, or {@code none}.
      */
     @SerializedName("lock_duration")
     String lockDuration;
 
-    /** Time at which the rate lock will expire, measured in seconds since the Unix epoch. */
+    /**
+     * Time at which the rate lock will expire, measured in seconds since the Unix epoch. Null when
+     * rate locking is not supported.
+     */
     @SerializedName("lock_expires_at")
     Instant lockExpiresAt;
 
     /**
      * Lock status of the quote. Transitions from active to expired once past the lock_expires_at
-     * timestamp. Value can be active or expired.
+     * timestamp. Value can be active, expired or none.
      *
-     * <p>One of {@code active}, or {@code expired}.
+     * <p>One of {@code active}, {@code expired}, or {@code none}.
      */
     @SerializedName("lock_status")
     String lockStatus;

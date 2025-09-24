@@ -31,7 +31,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
 
   /**
    * This object stores details about the originating banking transaction that resulted in the
-   * ReceivedCredit. Present if {@code type} field value is {@code external_credit}.
+   * ReceivedCredit. Present if {@code type} field value is {@code bank_transfer}.
    */
   @SerializedName("bank_transfer")
   BankTransfer bankTransfer;
@@ -141,7 +141,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
 
   /**
    * This object stores details about the originating banking transaction that resulted in the
-   * ReceivedCredit. Present if {@code type} field value is {@code external_credit}.
+   * ReceivedCredit. Present if {@code type} field value is {@code bank_transfer}.
    */
   @Getter
   @Setter
@@ -152,34 +152,41 @@ public class ReceivedCredit extends StripeObject implements HasId {
     String financialAddress;
 
     /**
-     * Hash containing the transaction bank details. Present if {@code payment_method_type} field
-     * value is {@code gb_bank_account}.
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code gb_bank_account}.
      */
     @SerializedName("gb_bank_account")
     GbBankAccount gbBankAccount;
 
     /**
-     * Open Enum. Indicates the type of source via from which external funds originated.
+     * Open Enum. Indicates the origin of source from which external funds originated from.
      *
-     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code gb_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
      */
-    @SerializedName("payment_method_type")
-    String paymentMethodType;
+    @SerializedName("origin_type")
+    String originType;
+
+    /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code sepa_bank_account}.
+     */
+    @SerializedName("sepa_bank_account")
+    SepaBankAccount sepaBankAccount;
 
     /** Freeform string set by originator of the external ReceivedCredit. */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
     /**
-     * Hash containing the transaction bank details. Present if {@code payment_method_type} field
-     * value is {@code us_bank_account}.
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code us_bank_account}.
      */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
 
     /**
-     * Hash containing the transaction bank details. Present if {@code payment_method_type} field
-     * value is {@code gb_bank_account}.
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code gb_bank_account}.
      */
     @Getter
     @Setter
@@ -211,8 +218,45 @@ public class ReceivedCredit extends StripeObject implements HasId {
     }
 
     /**
-     * Hash containing the transaction bank details. Present if {@code payment_method_type} field
-     * value is {@code us_bank_account}.
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code sepa_bank_account}.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaBankAccount extends StripeObject {
+      /** The account holder name of the bank account the transfer was received from. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** The bank name the transfer was received from. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** The BIC of the SEPA account. */
+      @SerializedName("bic")
+      String bic;
+
+      /** The origination country of the bank transfer. */
+      @SerializedName("country")
+      String country;
+
+      /** The IBAN that originated the transfer. */
+      @SerializedName("iban")
+      String iban;
+
+      /**
+       * The money transmission network used to send funds for this ReceivedCredit.
+       *
+       * <p>Equal to {@code sepa_credit_transfer}.
+       */
+      @SerializedName("network")
+      String network;
+    }
+
+    /**
+     * Hash containing the transaction bank details. Present if {@code origin_type} field value is
+     * {@code us_bank_account}.
      */
     @Getter
     @Setter

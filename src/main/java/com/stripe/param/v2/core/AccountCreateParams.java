@@ -9023,6 +9023,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("locales")
     List<AccountCreateParams.Defaults.Locale> locales;
 
+    /** Account profile information. */
+    @SerializedName("profile")
+    Profile profile;
+
     /** Default responsibilities held by either Stripe or the platform. */
     @SerializedName("responsibilities")
     Responsibilities responsibilities;
@@ -9031,10 +9035,12 @@ public class AccountCreateParams extends ApiRequestParams {
         String currency,
         Map<String, Object> extraParams,
         List<AccountCreateParams.Defaults.Locale> locales,
+        Profile profile,
         Responsibilities responsibilities) {
       this.currency = currency;
       this.extraParams = extraParams;
       this.locales = locales;
+      this.profile = profile;
       this.responsibilities = responsibilities;
     }
 
@@ -9049,12 +9055,14 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private List<AccountCreateParams.Defaults.Locale> locales;
 
+      private Profile profile;
+
       private Responsibilities responsibilities;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AccountCreateParams.Defaults build() {
         return new AccountCreateParams.Defaults(
-            this.currency, this.extraParams, this.locales, this.responsibilities);
+            this.currency, this.extraParams, this.locales, this.profile, this.responsibilities);
       }
 
       /**
@@ -9119,11 +9127,125 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Account profile information. */
+      public Builder setProfile(AccountCreateParams.Defaults.Profile profile) {
+        this.profile = profile;
+        return this;
+      }
+
       /** Default responsibilities held by either Stripe or the platform. */
       public Builder setResponsibilities(
           AccountCreateParams.Defaults.Responsibilities responsibilities) {
         this.responsibilities = responsibilities;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Profile {
+      /** The business's publicly-available website. */
+      @SerializedName("business_url")
+      String businessUrl;
+
+      /** The name which is used by the business. */
+      @SerializedName("doing_business_as")
+      String doingBusinessAs;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Internal-only description of the product sold or service provided by the business. It's
+       * used by Stripe for risk and underwriting purposes.
+       */
+      @SerializedName("product_description")
+      String productDescription;
+
+      private Profile(
+          String businessUrl,
+          String doingBusinessAs,
+          Map<String, Object> extraParams,
+          String productDescription) {
+        this.businessUrl = businessUrl;
+        this.doingBusinessAs = doingBusinessAs;
+        this.extraParams = extraParams;
+        this.productDescription = productDescription;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String businessUrl;
+
+        private String doingBusinessAs;
+
+        private Map<String, Object> extraParams;
+
+        private String productDescription;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Defaults.Profile build() {
+          return new AccountCreateParams.Defaults.Profile(
+              this.businessUrl, this.doingBusinessAs, this.extraParams, this.productDescription);
+        }
+
+        /** The business's publicly-available website. */
+        public Builder setBusinessUrl(String businessUrl) {
+          this.businessUrl = businessUrl;
+          return this;
+        }
+
+        /** The name which is used by the business. */
+        public Builder setDoingBusinessAs(String doingBusinessAs) {
+          this.doingBusinessAs = doingBusinessAs;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Defaults.Profile#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Defaults.Profile#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Internal-only description of the product sold or service provided by the business. It's
+         * used by Stripe for risk and underwriting purposes.
+         */
+        public Builder setProductDescription(String productDescription) {
+          this.productDescription = productDescription;
+          return this;
+        }
       }
     }
 
@@ -10536,10 +10658,6 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("documents")
       Documents documents;
 
-      /** The name which is used by the business. */
-      @SerializedName("doing_business_as")
-      String doingBusinessAs;
-
       /**
        * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
        * business.
@@ -10568,13 +10686,6 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("phone")
       String phone;
 
-      /**
-       * Internal-only description of the product sold or service provided by the business. It's
-       * used by Stripe for risk and underwriting purposes.
-       */
-      @SerializedName("product_description")
-      String productDescription;
-
       /** The business legal name. */
       @SerializedName("registered_name")
       String registeredName;
@@ -10591,41 +10702,31 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("structure")
       Structure structure;
 
-      /** The business's publicly available website. */
-      @SerializedName("url")
-      String url;
-
       private BusinessDetails(
           Address address,
           AnnualRevenue annualRevenue,
           Documents documents,
-          String doingBusinessAs,
           Long estimatedWorkerCount,
           Map<String, Object> extraParams,
           List<AccountCreateParams.Identity.BusinessDetails.IdNumber> idNumbers,
           MonthlyEstimatedRevenue monthlyEstimatedRevenue,
           String phone,
-          String productDescription,
           String registeredName,
           ScriptAddresses scriptAddresses,
           ScriptNames scriptNames,
-          Structure structure,
-          String url) {
+          Structure structure) {
         this.address = address;
         this.annualRevenue = annualRevenue;
         this.documents = documents;
-        this.doingBusinessAs = doingBusinessAs;
         this.estimatedWorkerCount = estimatedWorkerCount;
         this.extraParams = extraParams;
         this.idNumbers = idNumbers;
         this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
         this.phone = phone;
-        this.productDescription = productDescription;
         this.registeredName = registeredName;
         this.scriptAddresses = scriptAddresses;
         this.scriptNames = scriptNames;
         this.structure = structure;
-        this.url = url;
       }
 
       public static Builder builder() {
@@ -10639,8 +10740,6 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private Documents documents;
 
-        private String doingBusinessAs;
-
         private Long estimatedWorkerCount;
 
         private Map<String, Object> extraParams;
@@ -10651,8 +10750,6 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private String phone;
 
-        private String productDescription;
-
         private String registeredName;
 
         private ScriptAddresses scriptAddresses;
@@ -10661,26 +10758,21 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private Structure structure;
 
-        private String url;
-
         /** Finalize and obtain parameter instance from this builder. */
         public AccountCreateParams.Identity.BusinessDetails build() {
           return new AccountCreateParams.Identity.BusinessDetails(
               this.address,
               this.annualRevenue,
               this.documents,
-              this.doingBusinessAs,
               this.estimatedWorkerCount,
               this.extraParams,
               this.idNumbers,
               this.monthlyEstimatedRevenue,
               this.phone,
-              this.productDescription,
               this.registeredName,
               this.scriptAddresses,
               this.scriptNames,
-              this.structure,
-              this.url);
+              this.structure);
         }
 
         /** The business registration address of the business entity. */
@@ -10700,12 +10792,6 @@ public class AccountCreateParams extends ApiRequestParams {
         public Builder setDocuments(
             AccountCreateParams.Identity.BusinessDetails.Documents documents) {
           this.documents = documents;
-          return this;
-        }
-
-        /** The name which is used by the business. */
-        public Builder setDoingBusinessAs(String doingBusinessAs) {
-          this.doingBusinessAs = doingBusinessAs;
           return this;
         }
 
@@ -10787,15 +10873,6 @@ public class AccountCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * Internal-only description of the product sold or service provided by the business. It's
-         * used by Stripe for risk and underwriting purposes.
-         */
-        public Builder setProductDescription(String productDescription) {
-          this.productDescription = productDescription;
-          return this;
-        }
-
         /** The business legal name. */
         public Builder setRegisteredName(String registeredName) {
           this.registeredName = registeredName;
@@ -10820,12 +10897,6 @@ public class AccountCreateParams extends ApiRequestParams {
         public Builder setStructure(
             AccountCreateParams.Identity.BusinessDetails.Structure structure) {
           this.structure = structure;
-          return this;
-        }
-
-        /** The business's publicly available website. */
-        public Builder setUrl(String url) {
-          this.url = url;
           return this;
         }
       }

@@ -1,16 +1,18 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.v2.moneymanagement;
+package com.stripe.param.v2.billing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class FinancialAddressCreateParams extends ApiRequestParams {
+public class CadenceRetrieveParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -20,22 +22,14 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * <strong>Required.</strong> The ID of the FinancialAccount the new FinancialAddress should be
-   * associated with.
-   */
-  @SerializedName("financial_account")
-  String financialAccount;
+  /** Additional resource to include in the response. */
+  @SerializedName("include")
+  List<CadenceRetrieveParams.Include> include;
 
-  /** <strong>Required.</strong> The type of FinancialAddress details to provision. */
-  @SerializedName("type")
-  Type type;
-
-  private FinancialAddressCreateParams(
-      Map<String, Object> extraParams, String financialAccount, Type type) {
+  private CadenceRetrieveParams(
+      Map<String, Object> extraParams, List<CadenceRetrieveParams.Include> include) {
     this.extraParams = extraParams;
-    this.financialAccount = financialAccount;
-    this.type = type;
+    this.include = include;
   }
 
   public static Builder builder() {
@@ -45,19 +39,17 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
-    private String financialAccount;
-
-    private Type type;
+    private List<CadenceRetrieveParams.Include> include;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public FinancialAddressCreateParams build() {
-      return new FinancialAddressCreateParams(this.extraParams, this.financialAccount, this.type);
+    public CadenceRetrieveParams build() {
+      return new CadenceRetrieveParams(this.extraParams, this.include);
     }
 
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * FinancialAddressCreateParams#extraParams} for the field documentation.
+     * CadenceRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -70,7 +62,7 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link FinancialAddressCreateParams#extraParams} for the field documentation.
+     * See {@link CadenceRetrieveParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -81,35 +73,40 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> The ID of the FinancialAccount the new FinancialAddress should be
-     * associated with.
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CadenceRetrieveParams#include} for the field documentation.
      */
-    public Builder setFinancialAccount(String financialAccount) {
-      this.financialAccount = financialAccount;
+    public Builder addInclude(CadenceRetrieveParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
       return this;
     }
 
-    /** <strong>Required.</strong> The type of FinancialAddress details to provision. */
-    public Builder setType(FinancialAddressCreateParams.Type type) {
-      this.type = type;
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * CadenceRetrieveParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<CadenceRetrieveParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
       return this;
     }
   }
 
-  public enum Type implements ApiRequestParams.EnumParam {
-    @SerializedName("gb_bank_account")
-    GB_BANK_ACCOUNT("gb_bank_account"),
-
-    @SerializedName("sepa_bank_account")
-    SEPA_BANK_ACCOUNT("sepa_bank_account"),
-
-    @SerializedName("us_bank_account")
-    US_BANK_ACCOUNT("us_bank_account");
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("settings_data")
+    SETTINGS_DATA("settings_data");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
 
-    Type(String value) {
+    Include(String value) {
       this.value = value;
     }
   }
