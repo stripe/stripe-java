@@ -20,11 +20,6 @@ import lombok.Setter;
 /**
  * Options for customizing account balances and payout settings for a Stripe platform’s connected
  * accounts.
- *
- * <p>This API is only available for users enrolled in the public preview for Accounts v2 on Stripe
- * Connect. If you are not in this preview, please use the <a
- * href="https://docs.stripe.com/api/accounts?api-version=2025-03-31.basil">Accounts v1 API</a> to
- * manage your connected accounts’ balance settings instead.
  */
 @Getter
 @Setter
@@ -167,6 +162,15 @@ public class BalanceSettings extends ApiResource {
     @EqualsAndHashCode(callSuper = false)
     public static class Payouts extends StripeObject {
       /**
+       * The minimum balance amount to retain per currency after automatic payouts. Only funds that
+       * exceed these amounts are paid out. Learn more about the <a
+       * href="https://stripe.com/payouts/minimum-balances-for-automatic-payouts">minimum balances
+       * for automatic payouts</a>.
+       */
+      @SerializedName("minimum_balance_by_currency")
+      Map<String, Long> minimumBalanceByCurrency;
+
+      /**
        * Details on when funds from charges are available, and when they are paid out to an external
        * account. See our <a
        * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
@@ -233,6 +237,13 @@ public class BalanceSettings extends ApiResource {
       /** The number of days charge funds are held before becoming available. */
       @SerializedName("delay_days")
       Long delayDays;
+
+      /**
+       * The number of days charge funds are held before becoming available. If present, overrides
+       * the default, or minimum available, for the account.
+       */
+      @SerializedName("delay_days_override")
+      Long delayDaysOverride;
     }
   }
 

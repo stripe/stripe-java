@@ -13,6 +13,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentRecordReportPaymentAttemptCanceledParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptFailedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
+import com.stripe.param.PaymentRecordReportPaymentAttemptInformationalParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptParams;
 import com.stripe.param.PaymentRecordReportPaymentParams;
 import com.stripe.param.PaymentRecordRetrieveParams;
@@ -133,6 +134,42 @@ public final class PaymentRecordService extends ApiService {
     String path =
         String.format(
             "/v1/payment_records/%s/report_payment_attempt_guaranteed",
+            ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentRecord.class);
+  }
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(
+      String id, PaymentRecordReportPaymentAttemptInformationalParams params)
+      throws StripeException {
+    return reportPaymentAttemptInformational(id, params, (RequestOptions) null);
+  }
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(String id, RequestOptions options)
+      throws StripeException {
+    return reportPaymentAttemptInformational(
+        id, (PaymentRecordReportPaymentAttemptInformationalParams) null, options);
+  }
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(String id) throws StripeException {
+    return reportPaymentAttemptInformational(
+        id, (PaymentRecordReportPaymentAttemptInformationalParams) null, (RequestOptions) null);
+  }
+  /** Report informational updates on the specified Payment Record. */
+  public PaymentRecord reportPaymentAttemptInformational(
+      String id,
+      PaymentRecordReportPaymentAttemptInformationalParams params,
+      RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_records/%s/report_payment_attempt_informational",
             ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(

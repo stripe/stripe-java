@@ -320,6 +320,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BillingMode extends StripeObject {
+    /** Configure behavior for flexible billing mode. */
+    @SerializedName("flexible")
+    Flexible flexible;
+
     /**
      * Controls how prorations and invoices for subscriptions are calculated and orchestrated.
      *
@@ -331,6 +335,23 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     /** Details on when the current billing_mode was adopted. */
     @SerializedName("updated_at")
     Long updatedAt;
+
+    /**
+     * For more details about Flexible, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Flexible extends StripeObject {
+      /**
+       * Controls how invoices and invoice items display proration amounts and discount amounts.
+       *
+       * <p>One of {@code included}, or {@code itemized}.
+       */
+      @SerializedName("proration_discounts")
+      String prorationDiscounts;
+    }
   }
 
   /**

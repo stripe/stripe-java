@@ -13,6 +13,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class InvoiceListParams extends ApiRequestParams {
+  /** Only return invoices for the cadence specified by this billing cadence ID. */
+  @SerializedName("billing_cadence")
+  String billingCadence;
+
   /**
    * The collection method of the invoice to retrieve. Either {@code charge_automatically} or {@code
    * send_invoice}.
@@ -86,6 +90,7 @@ public class InvoiceListParams extends ApiRequestParams {
   String subscription;
 
   private InvoiceListParams(
+      String billingCadence,
       CollectionMethod collectionMethod,
       Object created,
       String customer,
@@ -98,6 +103,7 @@ public class InvoiceListParams extends ApiRequestParams {
       String startingAfter,
       Status status,
       String subscription) {
+    this.billingCadence = billingCadence;
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.customer = customer;
@@ -117,6 +123,8 @@ public class InvoiceListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String billingCadence;
+
     private CollectionMethod collectionMethod;
 
     private Object created;
@@ -144,6 +152,7 @@ public class InvoiceListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceListParams build() {
       return new InvoiceListParams(
+          this.billingCadence,
           this.collectionMethod,
           this.created,
           this.customer,
@@ -156,6 +165,12 @@ public class InvoiceListParams extends ApiRequestParams {
           this.startingAfter,
           this.status,
           this.subscription);
+    }
+
+    /** Only return invoices for the cadence specified by this billing cadence ID. */
+    public Builder setBillingCadence(String billingCadence) {
+      this.billingCadence = billingCadence;
+      return this;
     }
 
     /**

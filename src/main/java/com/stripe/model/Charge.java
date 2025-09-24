@@ -23,9 +23,9 @@ import lombok.Setter;
 
 /**
  * The {@code Charge} object represents a single attempt to move money into your Stripe account.
- * PaymentIntent confirmation is the most common way to create Charges, but transferring money to a
- * different Stripe account through Connect also creates Charges. Some legacy payment flows create
- * Charges directly, which is not recommended for new integrations.
+ * PaymentIntent confirmation is the most common way to create Charges, but <a
+ * href="https://stripe.com/docs/connect/account-debits">Account Debits</a> may also create Charges.
+ * Some legacy payment flows create Charges directly, which is not recommended for new integrations.
  */
 @Getter
 @Setter
@@ -1278,6 +1278,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     @SerializedName("paypal")
     Paypal paypal;
+
+    @SerializedName("paypay")
+    Paypay paypay;
 
     @SerializedName("payto")
     Payto payto;
@@ -3603,6 +3606,20 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Paynow extends StripeObject {
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
+       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
+
       /** Reference number associated with this PayNow payment. */
       @SerializedName("reference")
       String reference;
@@ -3704,6 +3721,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String status;
       }
     }
+
+    /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {}
 
     /**
      * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API

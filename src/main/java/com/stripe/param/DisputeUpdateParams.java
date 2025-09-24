@@ -35,6 +35,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Intended submission method for the dispute. */
+  @SerializedName("intended_submission_method")
+  IntendedSubmissionMethod intendedSubmissionMethod;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -56,11 +60,13 @@ public class DisputeUpdateParams extends ApiRequestParams {
       Evidence evidence,
       List<String> expand,
       Map<String, Object> extraParams,
+      IntendedSubmissionMethod intendedSubmissionMethod,
       Object metadata,
       Boolean submit) {
     this.evidence = evidence;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.intendedSubmissionMethod = intendedSubmissionMethod;
     this.metadata = metadata;
     this.submit = submit;
   }
@@ -76,6 +82,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private IntendedSubmissionMethod intendedSubmissionMethod;
+
     private Object metadata;
 
     private Boolean submit;
@@ -83,7 +91,12 @@ public class DisputeUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeUpdateParams build() {
       return new DisputeUpdateParams(
-          this.evidence, this.expand, this.extraParams, this.metadata, this.submit);
+          this.evidence,
+          this.expand,
+          this.extraParams,
+          this.intendedSubmissionMethod,
+          this.metadata,
+          this.submit);
     }
 
     /**
@@ -145,6 +158,13 @@ public class DisputeUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Intended submission method for the dispute. */
+    public Builder setIntendedSubmissionMethod(
+        DisputeUpdateParams.IntendedSubmissionMethod intendedSubmissionMethod) {
+      this.intendedSubmissionMethod = intendedSubmissionMethod;
       return this;
     }
 
@@ -1581,11 +1601,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Address line 1 (e.g., street, PO Box, or company name). */
+            /** Address line 1, such as the street, PO Box, or company name. */
             @SerializedName("line1")
             Object line1;
 
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            /** Address line 2, such as the apartment, suite, unit, or building. */
             @SerializedName("line2")
             Object line2;
 
@@ -1708,25 +1728,25 @@ public class DisputeUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Address line 1 (e.g., street, PO Box, or company name). */
+              /** Address line 1, such as the street, PO Box, or company name. */
               public Builder setLine1(String line1) {
                 this.line1 = line1;
                 return this;
               }
 
-              /** Address line 1 (e.g., street, PO Box, or company name). */
+              /** Address line 1, such as the street, PO Box, or company name. */
               public Builder setLine1(EmptyParam line1) {
                 this.line1 = line1;
                 return this;
               }
 
-              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              /** Address line 2, such as the apartment, suite, unit, or building. */
               public Builder setLine2(String line2) {
                 this.line2 = line2;
                 return this;
               }
 
-              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              /** Address line 2, such as the apartment, suite, unit, or building. */
               public Builder setLine2(EmptyParam line2) {
                 this.line2 = line2;
                 return this;
@@ -2067,11 +2087,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
             @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
             Map<String, Object> extraParams;
 
-            /** Address line 1 (e.g., street, PO Box, or company name). */
+            /** Address line 1, such as the street, PO Box, or company name. */
             @SerializedName("line1")
             Object line1;
 
-            /** Address line 2 (e.g., apartment, suite, unit, or building). */
+            /** Address line 2, such as the apartment, suite, unit, or building. */
             @SerializedName("line2")
             Object line2;
 
@@ -2194,25 +2214,25 @@ public class DisputeUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** Address line 1 (e.g., street, PO Box, or company name). */
+              /** Address line 1, such as the street, PO Box, or company name. */
               public Builder setLine1(String line1) {
                 this.line1 = line1;
                 return this;
               }
 
-              /** Address line 1 (e.g., street, PO Box, or company name). */
+              /** Address line 1, such as the street, PO Box, or company name. */
               public Builder setLine1(EmptyParam line1) {
                 this.line1 = line1;
                 return this;
               }
 
-              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              /** Address line 2, such as the apartment, suite, unit, or building. */
               public Builder setLine2(String line2) {
                 this.line2 = line2;
                 return this;
               }
 
-              /** Address line 2 (e.g., apartment, suite, unit, or building). */
+              /** Address line 2, such as the apartment, suite, unit, or building. */
               public Builder setLine2(EmptyParam line2) {
                 this.line2 = line2;
                 return this;
@@ -2332,6 +2352,27 @@ public class DisputeUpdateParams extends ApiRequestParams {
           }
         }
       }
+    }
+  }
+
+  public enum IntendedSubmissionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("manual")
+    MANUAL("manual"),
+
+    @SerializedName("prefer_manual")
+    PREFER_MANUAL("prefer_manual"),
+
+    @SerializedName("prefer_smart_disputes")
+    PREFER_SMART_DISPUTES("prefer_smart_disputes"),
+
+    @SerializedName("smart_disputes")
+    SMART_DISPUTES("smart_disputes");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    IntendedSubmissionMethod(String value) {
+      this.value = value;
     }
   }
 }

@@ -276,6 +276,10 @@ public class AlertCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Filter {
+      /** The credit grants for which to configure the credit balance alert. */
+      @SerializedName("credit_grants")
+      CreditGrants creditGrants;
+
       /** Limit the scope to this credit balance alert only to this customer. */
       @SerializedName("customer")
       String customer;
@@ -296,7 +300,9 @@ public class AlertCreateParams extends ApiRequestParams {
       @SerializedName("type")
       Type type;
 
-      private Filter(String customer, Map<String, Object> extraParams, Type type) {
+      private Filter(
+          CreditGrants creditGrants, String customer, Map<String, Object> extraParams, Type type) {
+        this.creditGrants = creditGrants;
         this.customer = customer;
         this.extraParams = extraParams;
         this.type = type;
@@ -307,6 +313,8 @@ public class AlertCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CreditGrants creditGrants;
+
         private String customer;
 
         private Map<String, Object> extraParams;
@@ -316,7 +324,14 @@ public class AlertCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AlertCreateParams.CreditBalanceThreshold.Filter build() {
           return new AlertCreateParams.CreditBalanceThreshold.Filter(
-              this.customer, this.extraParams, this.type);
+              this.creditGrants, this.customer, this.extraParams, this.type);
+        }
+
+        /** The credit grants for which to configure the credit balance alert. */
+        public Builder setCreditGrants(
+            AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants creditGrants) {
+          this.creditGrants = creditGrants;
+          return this;
         }
 
         /** Limit the scope to this credit balance alert only to this customer. */
@@ -360,6 +375,543 @@ public class AlertCreateParams extends ApiRequestParams {
         public Builder setType(AlertCreateParams.CreditBalanceThreshold.Filter.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CreditGrants {
+        /**
+         * <strong>Required.</strong> The applicability configuration for this credit grants filter.
+         */
+        @SerializedName("applicability_config")
+        ApplicabilityConfig applicabilityConfig;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private CreditGrants(
+            ApplicabilityConfig applicabilityConfig, Map<String, Object> extraParams) {
+          this.applicabilityConfig = applicabilityConfig;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private ApplicabilityConfig applicabilityConfig;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants build() {
+            return new AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants(
+                this.applicabilityConfig, this.extraParams);
+          }
+
+          /**
+           * <strong>Required.</strong> The applicability configuration for this credit grants
+           * filter.
+           */
+          public Builder setApplicabilityConfig(
+              AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                  applicabilityConfig) {
+            this.applicabilityConfig = applicabilityConfig;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ApplicabilityConfig {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> Specify the scope of this applicability config. */
+          @SerializedName("scope")
+          Scope scope;
+
+          private ApplicabilityConfig(Map<String, Object> extraParams, Scope scope) {
+            this.extraParams = extraParams;
+            this.scope = scope;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Scope scope;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                build() {
+              return new AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                  .ApplicabilityConfig(this.extraParams, this.scope);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** <strong>Required.</strong> Specify the scope of this applicability config. */
+            public Builder setScope(
+                AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                        .Scope
+                    scope) {
+              this.scope = scope;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Scope {
+            /**
+             * A list of billable items that the credit grant can apply to. We currently only
+             * support metered billable items. Cannot be used in combination with {@code price_type}
+             * or {@code prices}.
+             */
+            @SerializedName("billable_items")
+            List<
+                    AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                        .Scope.BillableItem>
+                billableItems;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * The price type that credit grants can apply to. We currently only support the {@code
+             * metered} price type. Cannot be used in combination with {@code prices}.
+             */
+            @SerializedName("price_type")
+            PriceType priceType;
+
+            /**
+             * A list of prices that the credit grant can apply to. We currently only support the
+             * {@code metered} prices. Cannot be used in combination with {@code price_type}.
+             */
+            @SerializedName("prices")
+            List<
+                    AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                        .Scope.Price>
+                prices;
+
+            private Scope(
+                List<
+                        AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                            .ApplicabilityConfig.Scope.BillableItem>
+                    billableItems,
+                Map<String, Object> extraParams,
+                PriceType priceType,
+                List<
+                        AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                            .ApplicabilityConfig.Scope.Price>
+                    prices) {
+              this.billableItems = billableItems;
+              this.extraParams = extraParams;
+              this.priceType = priceType;
+              this.prices = prices;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private List<
+                      AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                          .ApplicabilityConfig.Scope.BillableItem>
+                  billableItems;
+
+              private Map<String, Object> extraParams;
+
+              private PriceType priceType;
+
+              private List<
+                      AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                          .ApplicabilityConfig.Scope.Price>
+                  prices;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                      .ApplicabilityConfig.Scope
+                  build() {
+                return new AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                    .ApplicabilityConfig.Scope(
+                    this.billableItems, this.extraParams, this.priceType, this.prices);
+              }
+
+              /**
+               * Add an element to `billableItems` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope#billableItems}
+               * for the field documentation.
+               */
+              public Builder addBillableItem(
+                  AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                          .Scope.BillableItem
+                      element) {
+                if (this.billableItems == null) {
+                  this.billableItems = new ArrayList<>();
+                }
+                this.billableItems.add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `billableItems` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope#billableItems}
+               * for the field documentation.
+               */
+              public Builder addAllBillableItem(
+                  List<
+                          AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                              .ApplicabilityConfig.Scope.BillableItem>
+                      elements) {
+                if (this.billableItems == null) {
+                  this.billableItems = new ArrayList<>();
+                }
+                this.billableItems.addAll(elements);
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * The price type that credit grants can apply to. We currently only support the
+               * {@code metered} price type. Cannot be used in combination with {@code prices}.
+               */
+              public Builder setPriceType(
+                  AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                          .Scope.PriceType
+                      priceType) {
+                this.priceType = priceType;
+                return this;
+              }
+
+              /**
+               * Add an element to `prices` list. A list is initialized for the first `add/addAll`
+               * call, and subsequent calls adds additional elements to the original list. See
+               * {@link
+               * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope#prices}
+               * for the field documentation.
+               */
+              public Builder addPrice(
+                  AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig
+                          .Scope.Price
+                      element) {
+                if (this.prices == null) {
+                  this.prices = new ArrayList<>();
+                }
+                this.prices.add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `prices` list. A list is initialized for the first `add/addAll`
+               * call, and subsequent calls adds additional elements to the original list. See
+               * {@link
+               * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope#prices}
+               * for the field documentation.
+               */
+              public Builder addAllPrice(
+                  List<
+                          AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                              .ApplicabilityConfig.Scope.Price>
+                      elements) {
+                if (this.prices == null) {
+                  this.prices = new ArrayList<>();
+                }
+                this.prices.addAll(elements);
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class BillableItem {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> The billable item ID this credit grant should apply to.
+               */
+              @SerializedName("id")
+              String id;
+
+              private BillableItem(Map<String, Object> extraParams, String id) {
+                this.extraParams = extraParams;
+                this.id = id;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private String id;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                        .ApplicabilityConfig.Scope.BillableItem
+                    build() {
+                  return new AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                      .ApplicabilityConfig.Scope.BillableItem(this.extraParams, this.id);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope.BillableItem#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope.BillableItem#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> The billable item ID this credit grant should apply
+                 * to.
+                 */
+                public Builder setId(String id) {
+                  this.id = id;
+                  return this;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Price {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> The price ID this credit grant should apply to. */
+              @SerializedName("id")
+              String id;
+
+              private Price(Map<String, Object> extraParams, String id) {
+                this.extraParams = extraParams;
+                this.id = id;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private String id;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                        .ApplicabilityConfig.Scope.Price
+                    build() {
+                  return new AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants
+                      .ApplicabilityConfig.Scope.Price(this.extraParams, this.id);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope.Price#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AlertCreateParams.CreditBalanceThreshold.Filter.CreditGrants.ApplicabilityConfig.Scope.Price#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The price ID this credit grant should apply to. */
+                public Builder setId(String id) {
+                  this.id = id;
+                  return this;
+                }
+              }
+            }
+
+            public enum PriceType implements ApiRequestParams.EnumParam {
+              @SerializedName("metered")
+              METERED("metered");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              PriceType(String value) {
+                this.value = value;
+              }
+            }
+          }
         }
       }
 
@@ -722,10 +1274,7 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName("meter")
     String meter;
 
-    /**
-     * <strong>Required.</strong> Whether the alert should only fire only once, or once per billing
-     * cycle.
-     */
+    /** <strong>Required.</strong> Defines how the alert will behave. */
     @SerializedName("recurrence")
     Recurrence recurrence;
 
@@ -830,10 +1379,7 @@ public class AlertCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> Whether the alert should only fire only once, or once per
-       * billing cycle.
-       */
+      /** <strong>Required.</strong> Defines how the alert will behave. */
       public Builder setRecurrence(AlertCreateParams.UsageThreshold.Recurrence recurrence) {
         this.recurrence = recurrence;
         return this;

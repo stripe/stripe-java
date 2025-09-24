@@ -30,6 +30,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class SubscriptionItem extends ApiResource
     implements HasId, MetadataStore<SubscriptionItem> {
+  /** The time period the subscription item has been billed for. */
+  @SerializedName("billed_until")
+  Long billedUntil;
+
   /**
    * Define thresholds at which an invoice will be sent, and the related subscription advanced to a
    * new billing period.

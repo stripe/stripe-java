@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param.tax;
+package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -13,10 +13,14 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class SettingsUpdateParams extends ApiRequestParams {
-  /** Default configuration to be used on Stripe Tax calculations. */
-  @SerializedName("defaults")
-  Defaults defaults;
+public class PaymentRecordReportPaymentAttemptInformationalParams extends ApiRequestParams {
+  /** Customer information for this payment. */
+  @SerializedName("customer_details")
+  CustomerDetails customerDetails;
+
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
+  Object description;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -31,19 +35,32 @@ public class SettingsUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The place where your business is located. */
-  @SerializedName("head_office")
-  HeadOffice headOffice;
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format. Individual keys can be unset by posting an empty value to them. All keys can
+   * be unset by posting an empty value to {@code metadata}.
+   */
+  @SerializedName("metadata")
+  Object metadata;
 
-  private SettingsUpdateParams(
-      Defaults defaults,
+  /** Shipping information for this payment. */
+  @SerializedName("shipping_details")
+  Object shippingDetails;
+
+  private PaymentRecordReportPaymentAttemptInformationalParams(
+      CustomerDetails customerDetails,
+      Object description,
       List<String> expand,
       Map<String, Object> extraParams,
-      HeadOffice headOffice) {
-    this.defaults = defaults;
+      Object metadata,
+      Object shippingDetails) {
+    this.customerDetails = customerDetails;
+    this.description = description;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.headOffice = headOffice;
+    this.metadata = metadata;
+    this.shippingDetails = shippingDetails;
   }
 
   public static Builder builder() {
@@ -51,30 +68,52 @@ public class SettingsUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Defaults defaults;
+    private CustomerDetails customerDetails;
+
+    private Object description;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private HeadOffice headOffice;
+    private Object metadata;
+
+    private Object shippingDetails;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public SettingsUpdateParams build() {
-      return new SettingsUpdateParams(
-          this.defaults, this.expand, this.extraParams, this.headOffice);
+    public PaymentRecordReportPaymentAttemptInformationalParams build() {
+      return new PaymentRecordReportPaymentAttemptInformationalParams(
+          this.customerDetails,
+          this.description,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.shippingDetails);
     }
 
-    /** Default configuration to be used on Stripe Tax calculations. */
-    public Builder setDefaults(SettingsUpdateParams.Defaults defaults) {
-      this.defaults = defaults;
+    /** Customer information for this payment. */
+    public Builder setCustomerDetails(
+        PaymentRecordReportPaymentAttemptInformationalParams.CustomerDetails customerDetails) {
+      this.customerDetails = customerDetails;
+      return this;
+    }
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(EmptyParam description) {
+      this.description = description;
       return this;
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SettingsUpdateParams#expand} for the field documentation.
+     * PaymentRecordReportPaymentAttemptInformationalParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -87,7 +126,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * SettingsUpdateParams#expand} for the field documentation.
+     * PaymentRecordReportPaymentAttemptInformationalParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -100,7 +139,8 @@ public class SettingsUpdateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SettingsUpdateParams#extraParams} for the field documentation.
+     * PaymentRecordReportPaymentAttemptInformationalParams#extraParams} for the field
+     * documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -113,7 +153,8 @@ public class SettingsUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SettingsUpdateParams#extraParams} for the field documentation.
+     * See {@link PaymentRecordReportPaymentAttemptInformationalParams#extraParams} for the field
+     * documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -123,16 +164,82 @@ public class SettingsUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The place where your business is located. */
-    public Builder setHeadOffice(SettingsUpdateParams.HeadOffice headOffice) {
-      this.headOffice = headOffice;
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PaymentRecordReportPaymentAttemptInformationalParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PaymentRecordReportPaymentAttemptInformationalParams#metadata} for the field
+     * documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * to an object. This can be useful for storing additional information about the object in a
+     * structured format. Individual keys can be unset by posting an empty value to them. All keys
+     * can be unset by posting an empty value to {@code metadata}.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /** Shipping information for this payment. */
+    public Builder setShippingDetails(
+        PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails shippingDetails) {
+      this.shippingDetails = shippingDetails;
+      return this;
+    }
+
+    /** Shipping information for this payment. */
+    public Builder setShippingDetails(EmptyParam shippingDetails) {
+      this.shippingDetails = shippingDetails;
       return this;
     }
   }
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class Defaults {
+  public static class CustomerDetails {
+    /** The customer who made the payment. */
+    @SerializedName("customer")
+    String customer;
+
+    /** The customer's phone number. */
+    @SerializedName("email")
+    String email;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -142,23 +249,21 @@ public class SettingsUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Specifies the default <a
-     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#tax-behavior">tax
-     * behavior</a> to be used when the item's price has unspecified tax behavior. One of inclusive,
-     * exclusive, or inferred_by_currency. Once specified, it cannot be changed back to null.
-     */
-    @SerializedName("tax_behavior")
-    TaxBehavior taxBehavior;
+    /** The customer's name. */
+    @SerializedName("name")
+    String name;
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
-    @SerializedName("tax_code")
-    Object taxCode;
+    /** The customer's phone number. */
+    @SerializedName("phone")
+    String phone;
 
-    private Defaults(Map<String, Object> extraParams, TaxBehavior taxBehavior, Object taxCode) {
+    private CustomerDetails(
+        String customer, String email, Map<String, Object> extraParams, String name, String phone) {
+      this.customer = customer;
+      this.email = email;
       this.extraParams = extraParams;
-      this.taxBehavior = taxBehavior;
-      this.taxCode = taxCode;
+      this.name = name;
+      this.phone = phone;
     }
 
     public static Builder builder() {
@@ -166,21 +271,39 @@ public class SettingsUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private String customer;
+
+      private String email;
+
       private Map<String, Object> extraParams;
 
-      private TaxBehavior taxBehavior;
+      private String name;
 
-      private Object taxCode;
+      private String phone;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public SettingsUpdateParams.Defaults build() {
-        return new SettingsUpdateParams.Defaults(this.extraParams, this.taxBehavior, this.taxCode);
+      public PaymentRecordReportPaymentAttemptInformationalParams.CustomerDetails build() {
+        return new PaymentRecordReportPaymentAttemptInformationalParams.CustomerDetails(
+            this.customer, this.email, this.extraParams, this.name, this.phone);
+      }
+
+      /** The customer who made the payment. */
+      public Builder setCustomer(String customer) {
+        this.customer = customer;
+        return this;
+      }
+
+      /** The customer's phone number. */
+      public Builder setEmail(String email) {
+        this.email = email;
+        return this;
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SettingsUpdateParams.Defaults#extraParams} for the field documentation.
+       * PaymentRecordReportPaymentAttemptInformationalParams.CustomerDetails#extraParams} for the
+       * field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -193,7 +316,9 @@ public class SettingsUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SettingsUpdateParams.Defaults#extraParams} for the field documentation.
+       * See {@link
+       * PaymentRecordReportPaymentAttemptInformationalParams.CustomerDetails#extraParams} for the
+       * field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -203,54 +328,24 @@ public class SettingsUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Specifies the default <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#tax-behavior">tax
-       * behavior</a> to be used when the item's price has unspecified tax behavior. One of
-       * inclusive, exclusive, or inferred_by_currency. Once specified, it cannot be changed back to
-       * null.
-       */
-      public Builder setTaxBehavior(SettingsUpdateParams.Defaults.TaxBehavior taxBehavior) {
-        this.taxBehavior = taxBehavior;
+      /** The customer's name. */
+      public Builder setName(String name) {
+        this.name = name;
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
-      public Builder setTaxCode(String taxCode) {
-        this.taxCode = taxCode;
+      /** The customer's phone number. */
+      public Builder setPhone(String phone) {
+        this.phone = phone;
         return this;
-      }
-
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
-      public Builder setTaxCode(EmptyParam taxCode) {
-        this.taxCode = taxCode;
-        return this;
-      }
-    }
-
-    public enum TaxBehavior implements ApiRequestParams.EnumParam {
-      @SerializedName("exclusive")
-      EXCLUSIVE("exclusive"),
-
-      @SerializedName("inclusive")
-      INCLUSIVE("inclusive"),
-
-      @SerializedName("inferred_by_currency")
-      INFERRED_BY_CURRENCY("inferred_by_currency");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      TaxBehavior(String value) {
-        this.value = value;
       }
     }
   }
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class HeadOffice {
-    /** <strong>Required.</strong> The location of the business for tax purposes. */
+  public static class ShippingDetails {
+    /** The physical shipping address. */
     @SerializedName("address")
     Address address;
 
@@ -263,9 +358,20 @@ public class SettingsUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private HeadOffice(Address address, Map<String, Object> extraParams) {
+    /** The shipping recipient's name. */
+    @SerializedName("name")
+    String name;
+
+    /** The shipping recipient's phone number. */
+    @SerializedName("phone")
+    String phone;
+
+    private ShippingDetails(
+        Address address, Map<String, Object> extraParams, String name, String phone) {
       this.address = address;
       this.extraParams = extraParams;
+      this.name = name;
+      this.phone = phone;
     }
 
     public static Builder builder() {
@@ -277,13 +383,19 @@ public class SettingsUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String name;
+
+      private String phone;
+
       /** Finalize and obtain parameter instance from this builder. */
-      public SettingsUpdateParams.HeadOffice build() {
-        return new SettingsUpdateParams.HeadOffice(this.address, this.extraParams);
+      public PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails build() {
+        return new PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails(
+            this.address, this.extraParams, this.name, this.phone);
       }
 
-      /** <strong>Required.</strong> The location of the business for tax purposes. */
-      public Builder setAddress(SettingsUpdateParams.HeadOffice.Address address) {
+      /** The physical shipping address. */
+      public Builder setAddress(
+          PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails.Address address) {
         this.address = address;
         return this;
       }
@@ -291,7 +403,8 @@ public class SettingsUpdateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SettingsUpdateParams.HeadOffice#extraParams} for the field documentation.
+       * PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails#extraParams} for the
+       * field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -304,13 +417,27 @@ public class SettingsUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SettingsUpdateParams.HeadOffice#extraParams} for the field documentation.
+       * See {@link
+       * PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails#extraParams} for the
+       * field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The shipping recipient's name. */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /** The shipping recipient's phone number. */
+      public Builder setPhone(String phone) {
+        this.phone = phone;
         return this;
       }
     }
@@ -320,14 +447,14 @@ public class SettingsUpdateParams extends ApiRequestParams {
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
-      Object city;
+      String city;
 
       /**
        * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
        * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
-      Object country;
+      String country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -340,31 +467,28 @@ public class SettingsUpdateParams extends ApiRequestParams {
 
       /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
-      Object line1;
+      String line1;
 
       /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
-      Object line2;
+      String line2;
 
       /** ZIP or postal code. */
       @SerializedName("postal_code")
-      Object postalCode;
+      String postalCode;
 
-      /**
-       * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-       * subdivision code, without country prefix, such as &quot;NY&quot; or &quot;TX&quot;.
-       */
+      /** State, county, province, or region. */
       @SerializedName("state")
-      Object state;
+      String state;
 
       private Address(
-          Object city,
-          Object country,
+          String city,
+          String country,
           Map<String, Object> extraParams,
-          Object line1,
-          Object line2,
-          Object postalCode,
-          Object state) {
+          String line1,
+          String line2,
+          String postalCode,
+          String state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -379,23 +503,24 @@ public class SettingsUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private Object city;
+        private String city;
 
-        private Object country;
+        private String country;
 
         private Map<String, Object> extraParams;
 
-        private Object line1;
+        private String line1;
 
-        private Object line2;
+        private String line2;
 
-        private Object postalCode;
+        private String postalCode;
 
-        private Object state;
+        private String state;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public SettingsUpdateParams.HeadOffice.Address build() {
-          return new SettingsUpdateParams.HeadOffice.Address(
+        public PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails.Address
+            build() {
+          return new PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails.Address(
               this.city,
               this.country,
               this.extraParams,
@@ -411,12 +536,6 @@ public class SettingsUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** City, district, suburb, town, or village. */
-        public Builder setCity(EmptyParam city) {
-          this.city = city;
-          return this;
-        }
-
         /**
          * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
          * 3166-1 alpha-2</a>).
@@ -427,19 +546,11 @@ public class SettingsUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-         * 3166-1 alpha-2</a>).
-         */
-        public Builder setCountry(EmptyParam country) {
-          this.country = country;
-          return this;
-        }
-
-        /**
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SettingsUpdateParams.HeadOffice.Address#extraParams} for the field
-         * documentation.
+         * map. See {@link
+         * PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails.Address#extraParams}
+         * for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -452,8 +563,9 @@ public class SettingsUpdateParams extends ApiRequestParams {
         /**
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SettingsUpdateParams.HeadOffice.Address#extraParams} for the field
-         * documentation.
+         * map. See {@link
+         * PaymentRecordReportPaymentAttemptInformationalParams.ShippingDetails.Address#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -469,20 +581,8 @@ public class SettingsUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Address line 1, such as the street, PO Box, or company name. */
-        public Builder setLine1(EmptyParam line1) {
-          this.line1 = line1;
-          return this;
-        }
-
         /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
-          this.line2 = line2;
-          return this;
-        }
-
-        /** Address line 2, such as the apartment, suite, unit, or building. */
-        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -493,26 +593,8 @@ public class SettingsUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** ZIP or postal code. */
-        public Builder setPostalCode(EmptyParam postalCode) {
-          this.postalCode = postalCode;
-          return this;
-        }
-
-        /**
-         * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-         * subdivision code, without country prefix, such as &quot;NY&quot; or &quot;TX&quot;.
-         */
+        /** State, county, province, or region. */
         public Builder setState(String state) {
-          this.state = state;
-          return this;
-        }
-
-        /**
-         * State/province as an <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>
-         * subdivision code, without country prefix, such as &quot;NY&quot; or &quot;TX&quot;.
-         */
-        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }

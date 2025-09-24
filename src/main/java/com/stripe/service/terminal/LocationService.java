@@ -133,6 +133,22 @@ public final class LocationService extends ApiService {
    * required in each country, see the <a
    * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
    */
+  public Location create(RequestOptions options) throws StripeException {
+    return create((LocationCreateParams) null, options);
+  }
+  /**
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
+  public Location create() throws StripeException {
+    return create((LocationCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Creates a new {@code Location} object. For further details, including which address fields are
+   * required in each country, see the <a
+   * href="https://stripe.com/docs/terminal/fleet/locations">Manage locations</a> guide.
+   */
   public Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/terminal/locations";

@@ -25,6 +25,22 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
+  /**
+   * The desired expiration month (1-12) for this card if <a
+   * href="https://stripe.com/issuing/cards/virtual/issue-cards?testing-method=with-code#exp-dates">specifying
+   * a custom expiration date</a>.
+   */
+  @SerializedName("exp_month")
+  Long expMonth;
+
+  /**
+   * The desired 4-digit expiration year for this card if <a
+   * href="https://stripe.com/issuing/cards/virtual/issue-cards?testing-method=with-code#exp-dates">specifying
+   * a custom expiration date</a>.
+   */
+  @SerializedName("exp_year")
+  Long expYear;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -105,6 +121,8 @@ public class CardCreateParams extends ApiRequestParams {
   private CardCreateParams(
       String cardholder,
       String currency,
+      Long expMonth,
+      Long expYear,
       List<String> expand,
       Map<String, Object> extraParams,
       String financialAccount,
@@ -120,6 +138,8 @@ public class CardCreateParams extends ApiRequestParams {
       Type type) {
     this.cardholder = cardholder;
     this.currency = currency;
+    this.expMonth = expMonth;
+    this.expYear = expYear;
     this.expand = expand;
     this.extraParams = extraParams;
     this.financialAccount = financialAccount;
@@ -143,6 +163,10 @@ public class CardCreateParams extends ApiRequestParams {
     private String cardholder;
 
     private String currency;
+
+    private Long expMonth;
+
+    private Long expYear;
 
     private List<String> expand;
 
@@ -175,6 +199,8 @@ public class CardCreateParams extends ApiRequestParams {
       return new CardCreateParams(
           this.cardholder,
           this.currency,
+          this.expMonth,
+          this.expYear,
           this.expand,
           this.extraParams,
           this.financialAccount,
@@ -202,6 +228,26 @@ public class CardCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> The currency for the card. */
     public Builder setCurrency(String currency) {
       this.currency = currency;
+      return this;
+    }
+
+    /**
+     * The desired expiration month (1-12) for this card if <a
+     * href="https://stripe.com/issuing/cards/virtual/issue-cards?testing-method=with-code#exp-dates">specifying
+     * a custom expiration date</a>.
+     */
+    public Builder setExpMonth(Long expMonth) {
+      this.expMonth = expMonth;
+      return this;
+    }
+
+    /**
+     * The desired 4-digit expiration year for this card if <a
+     * href="https://stripe.com/issuing/cards/virtual/issue-cards?testing-method=with-code#exp-dates">specifying
+     * a custom expiration date</a>.
+     */
+    public Builder setExpYear(Long expYear) {
+      this.expYear = expYear;
       return this;
     }
 
@@ -638,11 +684,11 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
+      /** <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       String line1;
 
-      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      /** Address line 2, such as the apartment, suite, unit, or building. */
       @SerializedName("line2")
       String line2;
 
@@ -745,13 +791,15 @@ public class CardCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Address line 1 (e.g., street, PO Box, or company name). */
+        /**
+         * <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name.
+         */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        /** Address line 2, such as the apartment, suite, unit, or building. */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
