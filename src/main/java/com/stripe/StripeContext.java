@@ -19,7 +19,7 @@ public final class StripeContext {
 
   /** Creates a new StripeContext with no segments. */
   public StripeContext() {
-    this.segments = Collections.emptyList();
+    this(null);
   }
 
   /**

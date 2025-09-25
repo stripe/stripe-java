@@ -119,6 +119,17 @@ public class StripeContextIntegrationTest {
   }
 
   @Test
+  public void testEventNotificationNullContext() {
+    String payload =
+        "{\"id\":\"evt_123\",\"type\":\"test.event\",\"created\":\"2023-01-01T00:00:00Z\",\"livemode\":false,\"context\":null}";
+    StripeClient client = new StripeClient("sk_test_123");
+
+    EventNotification notification = EventNotification.fromJson(payload, client);
+
+    assertNull(notification.getContext());
+  }
+
+  @Test
   public void testContextBuilderPattern() {
     // Test the builder pattern works well with StripeContext
     StripeContext baseContext = StripeContext.parse("workspace_123");
