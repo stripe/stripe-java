@@ -567,6 +567,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * proration_behavior}. If set during a future period, this will always cause a proration for
      * that period.
      */
+    public Builder setCancelAt(SubscriptionUpdateParams.CancelAt cancelAt) {
+      this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
+     * A timestamp at which the subscription should cancel. If set to a date before the current
+     * period ends, this will cause a proration if prorations have been enabled using {@code
+     * proration_behavior}. If set during a future period, this will always cause a proration for
+     * that period.
+     */
     public Builder setCancelAt(EmptyParam cancelAt) {
       this.cancelAt = cancelAt;
       return this;
@@ -6534,6 +6545,21 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private final String value;
 
     BillingCycleAnchor(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CancelAt implements ApiRequestParams.EnumParam {
+    @SerializedName("max_period_end")
+    MAX_PERIOD_END("max_period_end"),
+
+    @SerializedName("min_period_end")
+    MIN_PERIOD_END("min_period_end");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CancelAt(String value) {
       this.value = value;
     }
   }
