@@ -2,10 +2,12 @@ package com.stripe.examples;
 
 import com.stripe.StripeClient;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
+import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.exception.StripeException;
-import com.stripe.model.ThinEvent;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.v2.Event;
+import com.stripe.model.v2.EventNotification;
+import com.stripe.model.v2.UnknownEventNotification;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -16,18 +18,18 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Receive and process thin events like the v1.billing.meter.error_report_triggered event.
+ * Receive and process EventNotifications like the v1.billing.meter.error_report_triggered event.
  *
  * <p>In this example, we:
  *
  * <ul>
- *   <li>use parseThinEvent to parse the received thin event webhook body
- *   <li>call StripeClient.v2.core.events.retrieve to retrieve the flil event object
+ *   <li>use parseEventNotification to parse the received event notification webhook body
+ *   <li>call StripeClient.v2.core.events.retrieve to retrieve the full event object
  *   <li>if it is a V1BillingMeterErrorReportTriggeredEvent event type, call fetchRelatedObject to
  *       retrieve the Billing Meter object associated with the event.
  * </ul>
  */
-public class ThinEventWebhookHandler {
+public class EventNotificationWebhookHandler {
   private static final String API_KEY = System.getenv("STRIPE_API_KEY");
   private static final String WEBHOOK_SECRET = System.getenv("WEBHOOK_SECRET");
 
@@ -65,20 +67,34 @@ public class ThinEventWebhookHandler {
         String sigHeader = exchange.getRequestHeaders().getFirst("Stripe-Signature");
 
         try {
-          ThinEvent thinEvent = client.parseThinEvent(webhookBody, sigHeader, WEBHOOK_SECRET);
+          EventNotification eventNotif =
+              client.parseEventNotification(webhookBody, sigHeader, WEBHOOK_SECRET);
 
-          // Fetch the event data to understand the failure
-          Event baseEvent = client.v2().core().events().retrieve(thinEvent.getId());
-          if (baseEvent instanceof V1BillingMeterErrorReportTriggeredEvent) {
-            V1BillingMeterErrorReportTriggeredEvent event =
-                (V1BillingMeterErrorReportTriggeredEvent) baseEvent;
-            Meter meter = event.fetchRelatedObject();
+          // determine what sort of event you have
+          if (eventNotif instanceof V1BillingMeterErrorReportTriggeredEventNotification) {
+            V1BillingMeterErrorReportTriggeredEventNotification eventNotification =
+                (V1BillingMeterErrorReportTriggeredEventNotification) eventNotif;
 
-            String meterId = meter.getId();
-            System.out.println(meterId);
+            // after casting, can fetch the related object (which is correctly typed)
+            Meter meter = eventNotification.fetchRelatedObject();
+            System.out.println(meter.getId());
 
-            // Record the failures and alert your team
-            // Add your logic here
+            V1BillingMeterErrorReportTriggeredEvent event = eventNotification.fetchEvent();
+            System.out.println(event.getData().getDeveloperMessageSummary());
+
+            // add additional logic
+          }
+          // ... check other event types you know about
+          else if (eventNotif instanceof UnknownEventNotification) {
+            UnknownEventNotification unknownEvent = (UnknownEventNotification) eventNotif;
+            System.out.println("Received unknown event: " + unknownEvent.getId());
+            // can keep matching on the "type" field
+            // other helper methods still work, but you'll have to handle types yourself
+            if (unknownEvent.getType().equals("some.new.event")) {
+              Event event = unknownEvent.fetchEvent();
+              System.out.println(event.getReason());
+              // handle
+            }
           }
 
           exchange.sendResponseHeaders(200, -1);
