@@ -225,7 +225,7 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals("evt_234", eventNotification.getId());
     assertEquals("v1.billing.meter.no_meter_found", eventNotification.getType());
     assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventNotification.created);
-    assertNull(eventNotification.context);
+    assertNull(eventNotification.getContext());
     assertInstanceOf(V1BillingMeterNoMeterFoundEventNotification.class, eventNotification);
   }
 
@@ -248,7 +248,7 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals("evt_234", eventNotification.getId());
     assertEquals("v1.billing.meter.error_report_triggered", eventNotification.getType());
     assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventNotification.created);
-    assertEquals("org_123", eventNotification.context);
+    assertEquals("org_123", eventNotification.getContext().toString());
     assertInstanceOf(V1BillingMeterErrorReportTriggeredEventNotification.class, eventNotification);
     assertEquals("request", eventNotification.getReason().getType());
     assertEquals("abc123", eventNotification.getReason().getRequest().getId());

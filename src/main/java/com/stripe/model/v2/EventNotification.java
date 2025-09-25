@@ -3,6 +3,7 @@ package com.stripe.model.v2;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.StripeClient;
+import com.stripe.StripeContext;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
 import com.stripe.model.v2.Event.RelatedObject;
@@ -71,7 +72,10 @@ public abstract class EventNotification {
 
   /** [Optional] Authentication context needed to fetch the event or related object. */
   @SerializedName("context")
-  public String context;
+  private String contextString;
+
+  /** [Optional] Authentication context needed to fetch the event or related object. */
+  private transient StripeContext contextObject;
 
   /** [Optional] Reason for the event. */
   @SerializedName("reason")
@@ -98,14 +102,31 @@ public abstract class EventNotification {
 
     EventNotification e = ApiResource.GSON.fromJson(payload, cls);
     e.client = client;
+
+    // Convert string context to StripeContext
+    if (e.contextString != null && !e.contextString.isEmpty()) {
+      e.contextObject = StripeContext.parse(e.contextString);
+    }
+
     return e;
   }
 
+  /**
+   * Returns the authentication context needed to fetch the event or related object.
+   *
+   * @return the StripeContext object or null if no context is present
+   */
+  public StripeContext getContext() {
+    return contextObject;
+  }
+
   private RawRequestOptions getRequestOptions() {
-    if (context == null) {
+    if (contextObject == null) {
       return null;
     }
-    return new RawRequestOptions.RawRequestOptionsBuilder().setStripeContext(context).build();
+    return new RawRequestOptions.RawRequestOptionsBuilder()
+        .setStripeContext(contextObject.toString())
+        .build();
   }
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */
