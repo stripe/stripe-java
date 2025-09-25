@@ -72,7 +72,7 @@ public abstract class EventNotification {
   public Boolean livemode;
 
   /** [Optional] Authentication context needed to fetch the event or related object. */
-  private transient StripeContext contextObject;
+  public transient StripeContext context;
 
   /** [Optional] Reason for the event. */
   @SerializedName("reason")
@@ -105,7 +105,7 @@ public abstract class EventNotification {
     if (contextElement != null && !contextElement.isJsonNull()) {
       String contextString = contextElement.getAsString().trim();
       if (!contextString.isEmpty()) {
-        e.contextObject = StripeContext.parse(contextString);
+        e.context = StripeContext.parse(contextString);
       }
     }
 
@@ -117,16 +117,16 @@ public abstract class EventNotification {
    *
    * @return the StripeContext object or null if no context is present
    */
-  public StripeContext getContext() {
-    return contextObject;
-  }
+  // public StripeContext getContext() {
+  //   return contextObject;
+  // }
 
   private RawRequestOptions getRequestOptions() {
-    if (contextObject == null) {
+    if (context == null) {
       return null;
     }
     return new RawRequestOptions.RawRequestOptionsBuilder()
-        .setStripeContext(contextObject.toString())
+        .setStripeContext(context.toString())
         .build();
   }
 

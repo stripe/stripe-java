@@ -91,9 +91,9 @@ public class StripeContextIntegrationTest {
 
     EventNotification notification = EventNotification.fromJson(payload, client);
 
-    assertNotNull(notification.getContext());
-    assertEquals(Arrays.asList("a", "b", "c"), notification.getContext().getSegments());
-    assertEquals("a/b/c", notification.getContext().toString());
+    assertNotNull(notification.context);
+    assertEquals(Arrays.asList("a", "b", "c"), notification.context.getSegments());
+    assertEquals("a/b/c", notification.context.toString());
   }
 
   @Test

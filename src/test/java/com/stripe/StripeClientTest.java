@@ -225,7 +225,7 @@ public class StripeClientTest extends BaseStripeTest {
     assertEquals("evt_234", eventNotification.getId());
     assertEquals("v1.billing.meter.no_meter_found", eventNotification.getType());
     assertEquals(Instant.parse("2022-02-15T00:27:45.330Z"), eventNotification.created);
-    assertNull(eventNotification.getContext());
+    assertNull(eventNotification.context);
     assertInstanceOf(V1BillingMeterNoMeterFoundEventNotification.class, eventNotification);
   }
 
