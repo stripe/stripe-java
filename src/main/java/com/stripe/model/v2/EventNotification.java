@@ -1,6 +1,5 @@
 package com.stripe.model.v2;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.StripeClient;
@@ -72,7 +71,8 @@ public abstract class EventNotification {
   public Boolean livemode;
 
   /** [Optional] Authentication context needed to fetch the event or related object. */
-  public transient StripeContext context;
+  @SerializedName("context")
+  public StripeContext context;
 
   /** [Optional] Reason for the event. */
   @SerializedName("reason")
@@ -100,26 +100,8 @@ public abstract class EventNotification {
     EventNotification e = ApiResource.GSON.fromJson(payload, cls);
     e.client = client;
 
-    // Only create a context if the value is present and non-zero length
-    JsonElement contextElement = jsonObject.get("context");
-    if (contextElement != null && !contextElement.isJsonNull()) {
-      String contextString = contextElement.getAsString().trim();
-      if (!contextString.isEmpty()) {
-        e.context = StripeContext.parse(contextString);
-      }
-    }
-
     return e;
   }
-
-  /**
-   * Returns the authentication context needed to fetch the event or related object.
-   *
-   * @return the StripeContext object or null if no context is present
-   */
-  // public StripeContext getContext() {
-  //   return contextObject;
-  // }
 
   private RawRequestOptions getRequestOptions() {
     if (context == null) {
