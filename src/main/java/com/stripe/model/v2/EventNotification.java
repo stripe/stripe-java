@@ -71,10 +71,6 @@ public abstract class EventNotification {
   @SerializedName("livemode")
   public Boolean livemode;
 
-  // /** [Optional] Authentication context needed to fetch the event or related object. */
-  // @SerializedName("context")
-  // private String contextString;
-
   /** [Optional] Authentication context needed to fetch the event or related object. */
   private transient StripeContext contextObject;
 
