@@ -41,6 +41,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
+   * The Billing Cadence which controls the timing of recurring invoice generation for this
+   * subscription. If unset, the subscription will bill according to its own configured schedule and
+   * create its own invoices. If set, this subscription will be billed by the cadence instead,
+   * potentially sharing invoices with the other subscriptions linked to that Cadence.
+   */
+  @SerializedName("billing_cadence")
+  Object billingCadence;
+
+  /**
    * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
    * subscription's billing cycle anchor to the current time (in UTC). For more information, see the
    * billing cycle <a
@@ -297,6 +306,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       List<SubscriptionUpdateParams.AddInvoiceItem> addInvoiceItems,
       Object applicationFeePercent,
       AutomaticTax automaticTax,
+      Object billingCadence,
       BillingCycleAnchor billingCycleAnchor,
       Object billingSchedules,
       Object billingThresholds,
@@ -331,6 +341,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.addInvoiceItems = addInvoiceItems;
     this.applicationFeePercent = applicationFeePercent;
     this.automaticTax = automaticTax;
+    this.billingCadence = billingCadence;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingSchedules = billingSchedules;
     this.billingThresholds = billingThresholds;
@@ -374,6 +385,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private Object applicationFeePercent;
 
     private AutomaticTax automaticTax;
+
+    private Object billingCadence;
 
     private BillingCycleAnchor billingCycleAnchor;
 
@@ -443,6 +456,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.addInvoiceItems,
           this.applicationFeePercent,
           this.automaticTax,
+          this.billingCadence,
           this.billingCycleAnchor,
           this.billingSchedules,
           this.billingThresholds,
@@ -534,6 +548,28 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setAutomaticTax(SubscriptionUpdateParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
+      return this;
+    }
+
+    /**
+     * The Billing Cadence which controls the timing of recurring invoice generation for this
+     * subscription. If unset, the subscription will bill according to its own configured schedule
+     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
+     * potentially sharing invoices with the other subscriptions linked to that Cadence.
+     */
+    public Builder setBillingCadence(String billingCadence) {
+      this.billingCadence = billingCadence;
+      return this;
+    }
+
+    /**
+     * The Billing Cadence which controls the timing of recurring invoice generation for this
+     * subscription. If unset, the subscription will bill according to its own configured schedule
+     * and create its own invoices. If set, this subscription will be billed by the cadence instead,
+     * potentially sharing invoices with the other subscriptions linked to that Cadence.
+     */
+    public Builder setBillingCadence(EmptyParam billingCadence) {
+      this.billingCadence = billingCadence;
       return this;
     }
 
