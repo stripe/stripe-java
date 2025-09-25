@@ -115,15 +115,6 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.customer.deleted", com.stripe.events.V1CustomerDeletedEventNotification.class);
     eventClassLookup.put(
-        "v1.customer.discount.created",
-        com.stripe.events.V1CustomerDiscountCreatedEventNotification.class);
-    eventClassLookup.put(
-        "v1.customer.discount.deleted",
-        com.stripe.events.V1CustomerDiscountDeletedEventNotification.class);
-    eventClassLookup.put(
-        "v1.customer.discount.updated",
-        com.stripe.events.V1CustomerDiscountUpdatedEventNotification.class);
-    eventClassLookup.put(
         "v1.customer.subscription.created",
         com.stripe.events.V1CustomerSubscriptionCreatedEventNotification.class);
     eventClassLookup.put(

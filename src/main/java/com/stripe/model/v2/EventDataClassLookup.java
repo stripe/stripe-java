@@ -23,7 +23,6 @@ public final class EventDataClassLookup {
     classLookup.put("coupon", com.stripe.model.Coupon.class);
     classLookup.put("credit_note", com.stripe.model.CreditNote.class);
     classLookup.put("customer", com.stripe.model.Customer.class);
-    classLookup.put("discount", com.stripe.model.Discount.class);
     classLookup.put("dispute", com.stripe.model.Dispute.class);
     classLookup.put("file", com.stripe.model.File.class);
     classLookup.put("invoice", com.stripe.model.Invoice.class);
@@ -272,12 +271,6 @@ public final class EventDataClassLookup {
     eventClassLookup.put("v1.credit_note.voided", com.stripe.events.V1CreditNoteVoidedEvent.class);
     eventClassLookup.put("v1.customer.created", com.stripe.events.V1CustomerCreatedEvent.class);
     eventClassLookup.put("v1.customer.deleted", com.stripe.events.V1CustomerDeletedEvent.class);
-    eventClassLookup.put(
-        "v1.customer.discount.created", com.stripe.events.V1CustomerDiscountCreatedEvent.class);
-    eventClassLookup.put(
-        "v1.customer.discount.deleted", com.stripe.events.V1CustomerDiscountDeletedEvent.class);
-    eventClassLookup.put(
-        "v1.customer.discount.updated", com.stripe.events.V1CustomerDiscountUpdatedEvent.class);
     eventClassLookup.put(
         "v1.customer.subscription.created",
         com.stripe.events.V1CustomerSubscriptionCreatedEvent.class);
