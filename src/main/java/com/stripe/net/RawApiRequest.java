@@ -22,7 +22,7 @@ public class RawApiRequest extends BaseApiRequest {
     super(baseAddress, method, path, options, usage);
     this.rawContent = rawContent;
     this.options = options;
-    this.apiMode = path.startsWith("/v2") ? ApiMode.V2 : ApiMode.V1;
+    this.apiMode = ApiMode.getMode(path);
   }
 
   public RawApiRequest(
