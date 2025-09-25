@@ -82,9 +82,9 @@ public abstract class EventNotification {
 
   /**
    * Helper for constructing an Event Notification. Doesn't perform signature validation, so you
-   * should use {@link StripeClient#parseEventNotification() parseEventNotification} instead for
-   * initial handling. This is useful in unit tests and working with EventNotifications that you've
-   * already validated the authenticity of.
+   * should use {@link com.stripe.StripeClient#parseEventNotification} instead for initial handling.
+   * This is useful in unit tests and working with EventNotifications that you've already validated
+   * the authenticity of.
    */
   public static EventNotification fromJson(String payload, StripeClient client) {
     // don't love the double json parse here, but I don't think we can avoid it?
