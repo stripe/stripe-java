@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.v2.Event;
+import com.stripe.model.v2.Event.RelatedObject;
 import lombok.Getter;
 
 @Getter
