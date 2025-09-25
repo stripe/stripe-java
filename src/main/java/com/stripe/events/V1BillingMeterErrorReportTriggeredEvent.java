@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
 import com.stripe.model.v2.Event;
+import com.stripe.model.v2.Event.RelatedObject;
 import java.time.Instant;
 import java.util.List;
 import lombok.Getter;
