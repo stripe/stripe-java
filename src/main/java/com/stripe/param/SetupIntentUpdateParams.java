@@ -734,13 +734,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     Paypal paypal;
 
     /**
-     * If this is a {@code paypay} PaymentMethod, this hash contains details about the PayPay
-     * payment method.
-     */
-    @SerializedName("paypay")
-    Paypay paypay;
-
-    /**
      * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
      * method.
      */
@@ -880,7 +873,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
         Payco payco,
         Paynow paynow,
         Paypal paypal,
-        Paypay paypay,
         Pix pix,
         Promptpay promptpay,
         RadarOptions radarOptions,
@@ -936,7 +928,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       this.payco = payco;
       this.paynow = paynow;
       this.paypal = paypal;
-      this.paypay = paypay;
       this.pix = pix;
       this.promptpay = promptpay;
       this.radarOptions = radarOptions;
@@ -1040,8 +1031,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       private Paypal paypal;
 
-      private Paypay paypay;
-
       private Pix pix;
 
       private Promptpay promptpay;
@@ -1114,7 +1103,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
             this.payco,
             this.paynow,
             this.paypal,
-            this.paypay,
             this.pix,
             this.promptpay,
             this.radarOptions,
@@ -1542,15 +1530,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setPaypal(SetupIntentUpdateParams.PaymentMethodData.Paypal paypal) {
         this.paypal = paypal;
-        return this;
-      }
-
-      /**
-       * If this is a {@code paypay} PaymentMethod, this hash contains details about the PayPay
-       * payment method.
-       */
-      public Builder setPaypay(SetupIntentUpdateParams.PaymentMethodData.Paypay paypay) {
-        this.paypay = paypay;
         return this;
       }
 
@@ -5055,64 +5034,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class Paypay {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      private Paypay(Map<String, Object> extraParams) {
-        this.extraParams = extraParams;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public SetupIntentUpdateParams.PaymentMethodData.Paypay build() {
-          return new SetupIntentUpdateParams.PaymentMethodData.Paypay(this.extraParams);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Paypay#extraParams} for the
-         * field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link SetupIntentUpdateParams.PaymentMethodData.Paypay#extraParams} for the
-         * field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
     public static class Pix {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -6219,9 +6140,6 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
       @SerializedName("paypal")
       PAYPAL("paypal"),
-
-      @SerializedName("paypay")
-      PAYPAY("paypay"),
 
       @SerializedName("pix")
       PIX("pix"),
