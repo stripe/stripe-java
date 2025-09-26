@@ -5118,9 +5118,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.CustomerPaymentSourceUpdateParams params =
-        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
-            .setAccountHolderName("Kamil")
-            .build();
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder().setName("Kamil").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.v1().customers().paymentSources().update("cus_123", "card_123", params);
@@ -5138,9 +5136,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.CustomerPaymentSourceUpdateParams params =
-        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
-            .setAccountHolderName("Kamil")
-            .build();
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder().setName("Kamil").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.customers().paymentSources().update("cus_123", "card_123", params);
