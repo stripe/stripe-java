@@ -4,7 +4,6 @@ package com.stripe.param.v2.payments;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.v2.Amount;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +26,14 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @SerializedName("cadence")
   Cadence cadence;
 
+  /** Details about the capture configuration for the OffSessionPayment. */
+  @SerializedName("capture")
+  Capture capture;
+
+  /** Whether the OffSessionPayment should be captured automatically or manually. */
+  @SerializedName("capture_method")
+  CaptureMethod captureMethod;
+
   /** <strong>Required.</strong> ID of the Customer to which this OffSessionPayment belongs. */
   @SerializedName("customer")
   String customer;
@@ -39,10 +46,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
-
-  /** This hash contains details about the Mandate to create. */
-  @SerializedName("mandate_data")
-  MandateData mandateData;
 
   /**
    * <strong>Required.</strong> Set of <a href="https://docs.corp.stripe.com/api/metadata">key-value
@@ -109,9 +112,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       Amount amount,
       AmountDetails amountDetails,
       Cadence cadence,
+      Capture capture,
+      CaptureMethod captureMethod,
       String customer,
       Map<String, Object> extraParams,
-      MandateData mandateData,
       Map<String, String> metadata,
       String onBehalfOf,
       String paymentMethod,
@@ -125,9 +129,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     this.amount = amount;
     this.amountDetails = amountDetails;
     this.cadence = cadence;
+    this.capture = capture;
+    this.captureMethod = captureMethod;
     this.customer = customer;
     this.extraParams = extraParams;
-    this.mandateData = mandateData;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentMethod = paymentMethod;
@@ -151,11 +156,13 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
     private Cadence cadence;
 
+    private Capture capture;
+
+    private CaptureMethod captureMethod;
+
     private String customer;
 
     private Map<String, Object> extraParams;
-
-    private MandateData mandateData;
 
     private Map<String, String> metadata;
 
@@ -183,9 +190,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
           this.amount,
           this.amountDetails,
           this.cadence,
+          this.capture,
+          this.captureMethod,
           this.customer,
           this.extraParams,
-          this.mandateData,
           this.metadata,
           this.onBehalfOf,
           this.paymentMethod,
@@ -213,6 +221,18 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> The frequency of the underlying payment. */
     public Builder setCadence(OffSessionPaymentCreateParams.Cadence cadence) {
       this.cadence = cadence;
+      return this;
+    }
+
+    /** Details about the capture configuration for the OffSessionPayment. */
+    public Builder setCapture(OffSessionPaymentCreateParams.Capture capture) {
+      this.capture = capture;
+      return this;
+    }
+
+    /** Whether the OffSessionPayment should be captured automatically or manually. */
+    public Builder setCaptureMethod(OffSessionPaymentCreateParams.CaptureMethod captureMethod) {
+      this.captureMethod = captureMethod;
       return this;
     }
 
@@ -245,12 +265,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /** This hash contains details about the Mandate to create. */
-    public Builder setMandateData(OffSessionPaymentCreateParams.MandateData mandateData) {
-      this.mandateData = mandateData;
       return this;
     }
 
@@ -890,13 +904,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class MandateData {
-    /**
-     * <strong>Required.</strong> This hash contains details about the customer acceptance of the
-     * Mandate.
-     */
-    @SerializedName("customer_acceptance")
-    CustomerAcceptance customerAcceptance;
+  public static class Capture {
+    /** <strong>Required.</strong> The method to use to capture the payment. */
+    @SerializedName("capture_method")
+    CaptureMethod captureMethod;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -907,8 +918,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private MandateData(CustomerAcceptance customerAcceptance, Map<String, Object> extraParams) {
-      this.customerAcceptance = customerAcceptance;
+    private Capture(CaptureMethod captureMethod, Map<String, Object> extraParams) {
+      this.captureMethod = captureMethod;
       this.extraParams = extraParams;
     }
 
@@ -917,30 +928,26 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private CustomerAcceptance customerAcceptance;
+      private CaptureMethod captureMethod;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public OffSessionPaymentCreateParams.MandateData build() {
-        return new OffSessionPaymentCreateParams.MandateData(
-            this.customerAcceptance, this.extraParams);
+      public OffSessionPaymentCreateParams.Capture build() {
+        return new OffSessionPaymentCreateParams.Capture(this.captureMethod, this.extraParams);
       }
 
-      /**
-       * <strong>Required.</strong> This hash contains details about the customer acceptance of the
-       * Mandate.
-       */
-      public Builder setCustomerAcceptance(
-          OffSessionPaymentCreateParams.MandateData.CustomerAcceptance customerAcceptance) {
-        this.customerAcceptance = customerAcceptance;
+      /** <strong>Required.</strong> The method to use to capture the payment. */
+      public Builder setCaptureMethod(
+          OffSessionPaymentCreateParams.Capture.CaptureMethod captureMethod) {
+        this.captureMethod = captureMethod;
         return this;
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OffSessionPaymentCreateParams.MandateData#extraParams} for the field documentation.
+       * OffSessionPaymentCreateParams.Capture#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -953,8 +960,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OffSessionPaymentCreateParams.MandateData#extraParams} for the field
-       * documentation.
+       * See {@link OffSessionPaymentCreateParams.Capture#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -965,107 +971,18 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class CustomerAcceptance {
-      /** The time at which the customer accepted the Mandate. */
-      @SerializedName("accepted_at")
-      Instant acceptedAt;
+    public enum CaptureMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
 
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
+      @SerializedName("manual")
+      MANUAL("manual");
 
-      /**
-       * <strong>Required.</strong> The type of customer acceptance information included with the
-       * Mandate.
-       */
-      @SerializedName("type")
-      Type type;
+      @Getter(onMethod_ = {@Override})
+      private final String value;
 
-      private CustomerAcceptance(Instant acceptedAt, Map<String, Object> extraParams, Type type) {
-        this.acceptedAt = acceptedAt;
-        this.extraParams = extraParams;
-        this.type = type;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Instant acceptedAt;
-
-        private Map<String, Object> extraParams;
-
-        private Type type;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public OffSessionPaymentCreateParams.MandateData.CustomerAcceptance build() {
-          return new OffSessionPaymentCreateParams.MandateData.CustomerAcceptance(
-              this.acceptedAt, this.extraParams, this.type);
-        }
-
-        /** The time at which the customer accepted the Mandate. */
-        public Builder setAcceptedAt(Instant acceptedAt) {
-          this.acceptedAt = acceptedAt;
-          return this;
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.MandateData.CustomerAcceptance#extraParams}
-         * for the field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.MandateData.CustomerAcceptance#extraParams}
-         * for the field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /**
-         * <strong>Required.</strong> The type of customer acceptance information included with the
-         * Mandate.
-         */
-        public Builder setType(
-            OffSessionPaymentCreateParams.MandateData.CustomerAcceptance.Type type) {
-          this.type = type;
-          return this;
-        }
-      }
-
-      public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("offline")
-        OFFLINE("offline");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        Type(String value) {
-          this.value = value;
-        }
+      CaptureMethod(String value) {
+        this.value = value;
       }
     }
   }
@@ -1539,6 +1456,21 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     private final String value;
 
     Cadence(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CaptureMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("automatic")
+    AUTOMATIC("automatic"),
+
+    @SerializedName("manual")
+    MANUAL("manual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CaptureMethod(String value) {
       this.value = value;
     }
   }
