@@ -12,6 +12,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.v2.payments.OffSessionPaymentCaptureParams;
 import com.stripe.param.v2.payments.OffSessionPaymentCreateParams;
 import com.stripe.param.v2.payments.OffSessionPaymentListParams;
 
@@ -85,6 +86,26 @@ public final class OffSessionPaymentService extends ApiService {
         String.format("/v2/payments/off_session_payments/%s/cancel", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
+    return this.request(request, OffSessionPayment.class);
+  }
+  /** Captures an OffSessionPayment that has previously been created. */
+  public OffSessionPayment capture(String id, OffSessionPaymentCaptureParams params)
+      throws StripeException {
+    return capture(id, params, (RequestOptions) null);
+  }
+  /** Captures an OffSessionPayment that has previously been created. */
+  public OffSessionPayment capture(
+      String id, OffSessionPaymentCaptureParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v2/payments/off_session_payments/%s/capture", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, OffSessionPayment.class);
   }
 }
