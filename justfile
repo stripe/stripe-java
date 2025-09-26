@@ -28,7 +28,8 @@ format-check:
 update-version version:
     echo "{{ version }}" > VERSION
     perl -pi -e 's|badge/maven--central-v[.\d\-\w]+-blue|badge/maven--central-v{{ version }}-blue|' README.md
-    perl -pi -e 's|https:\/\/search\.maven\.org\/remotecontent\?filepath=com\/stripe\/stripe-java\/[.\d\-\w]+\/stripe-java-[.\d\-\w]+.jar|https://search.maven.org/remotecontent?filepath=com/stripe/stripe-java/{{ version }}/stripe-java-{{ version }}.jar|' README.md
+    perl -pi -e 's|https:\/\/repo1\.maven\.org\/maven2\/com\/stripe\/stripe-java\/[.\d\-\w]+\/stripe-java-[.\d\-\w]+.jar|https://repo1.maven.org/maven2/com/stripe/stripe-java/{{ version }}/stripe-java-{{ version }}.jar|' README.md
+    perl -pi -e 's|Current release version: [.\d\-\w]+|Current release version: {{ version }}|' README.md
     perl -pi -e 's|implementation "com\.stripe:stripe-java:[.\d\-\w]+"|implementation "com.stripe:stripe-java:{{ version }}"|' README.md
     perl -pi -e 's|<version>[.\d\-\w]+<\/version>|<version>{{ version }}</version>|' README.md
     perl -pi -e 's|VERSION_NAME=[.\d\-\w]+|VERSION_NAME={{ version }}|' gradle.properties
