@@ -1,6 +1,7 @@
 package com.stripe.net;
 
 import com.google.gson.*;
+import com.stripe.StripeContext;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.*;
 import com.stripe.model.v2.EventTypeAdapterFactory;
@@ -54,6 +55,7 @@ public abstract class ApiResource extends StripeObject implements StripeActiveOb
             .registerTypeAdapter(EphemeralKey.class, new EphemeralKeyDeserializer())
             .registerTypeAdapter(Event.Data.class, new EventDataDeserializer())
             .registerTypeAdapter(Event.Request.class, new EventRequestDeserializer())
+            .registerTypeAdapter(StripeContext.class, new StripeContextDeserializer())
             .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
             .registerTypeAdapter(Instant.class, new InstantDeserializer())
             .registerTypeAdapterFactory(new EventTypeAdapterFactory())

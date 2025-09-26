@@ -37,8 +37,8 @@ Add this dependency to your project's POM:
 If you are not using Gradle or Maven, you will need to manually install the following JARs:
 
 1. The Stripe JAR:
-   - Download the latest release version from [Maven Central](https://repo1.maven.org/maven2/com/stripe/stripe-java/29.0.0/stripe-java-29.0.0.jar)
-   - Current release version: 29.0.0
+   - Download the latest release version from [Maven Central](https://repo1.maven.org/maven2/com/stripe/stripe-java/29.5.0/stripe-java-29.5.0.jar)
+   - Current release version: 29.5.0
 
 2. Google Gson:
    - The Stripe JAR builds and tests with Gson version 2.10.1

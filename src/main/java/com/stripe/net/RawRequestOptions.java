@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import com.stripe.StripeContext;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.Map;
@@ -77,6 +78,12 @@ public class RawRequestOptions extends RequestOptions {
 
     @Override
     public RawRequestOptionsBuilder setStripeContext(String stripeContext) {
+      super.setStripeContext(stripeContext);
+      return this;
+    }
+
+    @Override
+    public RawRequestOptionsBuilder setStripeContext(StripeContext stripeContext) {
       super.setStripeContext(stripeContext);
       return this;
     }

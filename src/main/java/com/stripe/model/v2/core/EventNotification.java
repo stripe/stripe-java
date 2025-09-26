@@ -3,6 +3,7 @@ package com.stripe.model.v2.core;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.StripeClient;
+import com.stripe.StripeContext;
 import com.stripe.events.UnknownEventNotification;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
@@ -73,7 +74,7 @@ public abstract class EventNotification {
 
   /** [Optional] Authentication context needed to fetch the event or related object. */
   @SerializedName("context")
-  public String context;
+  public StripeContext context;
 
   /** [Optional] Reason for the event. */
   @SerializedName("reason")
@@ -100,6 +101,7 @@ public abstract class EventNotification {
 
     EventNotification e = ApiResource.GSON.fromJson(payload, cls);
     e.client = client;
+
     return e;
   }
 
@@ -107,7 +109,9 @@ public abstract class EventNotification {
     if (context == null) {
       return null;
     }
-    return new RawRequestOptions.RawRequestOptionsBuilder().setStripeContext(context).build();
+    return new RawRequestOptions.RawRequestOptionsBuilder()
+        .setStripeContext(context.toString())
+        .build();
   }
 
   /* retrieves the full payload for an event. Protected because individual push classes use it, but type it correctly */
