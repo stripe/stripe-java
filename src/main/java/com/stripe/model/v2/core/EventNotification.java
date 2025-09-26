@@ -1,12 +1,14 @@
-package com.stripe.model.v2;
+package com.stripe.model.v2.core;
 
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.StripeClient;
 import com.stripe.StripeContext;
+import com.stripe.events.UnknownEventNotification;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
-import com.stripe.model.v2.Event.RelatedObject;
+import com.stripe.model.v2.EventNotificationClassLookup;
+import com.stripe.model.v2.core.Event.RelatedObject;
 import com.stripe.net.ApiMode;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ApiResource.RequestMethod;

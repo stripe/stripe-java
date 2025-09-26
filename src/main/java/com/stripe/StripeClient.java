@@ -3,7 +3,7 @@ package com.stripe;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
-import com.stripe.model.v2.EventNotification;
+import com.stripe.model.v2.core.EventNotification;
 import com.stripe.net.*;
 import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;

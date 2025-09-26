@@ -2,7 +2,7 @@ package com.stripe;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.stripe.model.v2.EventNotification;
+import com.stripe.model.v2.core.EventNotification;
 import com.stripe.net.RawRequestOptions;
 import com.stripe.net.RequestOptions;
 import java.util.Arrays;

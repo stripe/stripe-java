@@ -4,6 +4,7 @@ import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import com.stripe.model.v2.core.Event;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;

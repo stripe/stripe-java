@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2;
 
+import com.stripe.model.v2.core.EventNotification;
 import java.util.HashMap;
 import java.util.Map;
 
