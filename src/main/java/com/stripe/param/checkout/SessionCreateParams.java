@@ -19381,9 +19381,6 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("paypal")
     PAYPAL("paypal"),
 
-    @SerializedName("paypay")
-    PAYPAY("paypay"),
-
     @SerializedName("pix")
     PIX("pix"),
 
@@ -19716,9 +19713,6 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("paypal")
     PAYPAL("paypal"),
-
-    @SerializedName("paypay")
-    PAYPAY("paypay"),
 
     @SerializedName("pix")
     PIX("pix"),
