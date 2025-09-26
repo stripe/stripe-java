@@ -138,8 +138,8 @@ public class Dispute extends ApiResource
    * warning_under_review}, {@code warning_closed}, {@code needs_response}, {@code under_review},
    * {@code won}, {@code lost}, or {@code prevented}.
    *
-   * <p>One of {@code lost}, {@code needs_response}, {@code under_review}, {@code warning_closed},
-   * {@code warning_needs_response}, {@code warning_under_review}, or {@code won}.
+   * <p>One of {@code lost}, {@code needs_response}, {@code prevented}, {@code under_review}, {@code
+   * warning_closed}, {@code warning_needs_response}, {@code warning_under_review}, or {@code won}.
    */
   @SerializedName("status")
   String status;

@@ -2640,9 +2640,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("paypal")
     Paypal paypal;
 
-    @SerializedName("paypay")
-    Paypay paypay;
-
     @SerializedName("pix")
     Pix pix;
 
@@ -4477,15 +4474,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
     }
-
-    /**
-     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Paypay extends StripeObject {}
 
     /**
      * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API

@@ -2,6 +2,7 @@ package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.stripe.StripeContext;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
@@ -167,6 +168,57 @@ public class RequestOptionsTest {
     assertEquals("3", merged.getIdempotencyKey());
     assertEquals("4", merged.getStripeAccount());
     assertEquals("5", merged.getStripeContext());
+  }
+
+  @Test
+  public void clientContextIsUsedWhenRequestNull() {
+    StripeResponseGetterOptions clientOptions =
+        TestStripeResponseGetterOptions.builder().setStripeContext("a/b/c").build();
+
+    RequestOptions requestOptions =
+        RequestOptions.builder().setStripeContext((StripeContext) null).build();
+
+    RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
+
+    assertEquals("a/b/c", merged.getStripeContext());
+  }
+
+  @Test
+  public void requestContextPrioritizedIfRequestSetNullString() {
+    StripeResponseGetterOptions clientOptions =
+        TestStripeResponseGetterOptions.builder().setStripeContext("a/b/c").build();
+
+    RequestOptions requestOptions =
+        RequestOptions.builder().setStripeContext((String) null).build();
+
+    RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
+
+    assertEquals("a/b/c", merged.getStripeContext());
+  }
+
+  @Test
+  public void mergeRequestOptionsWithEmptyContextOverwritesClientContext() {
+    StripeResponseGetterOptions clientOptions =
+        TestStripeResponseGetterOptions.builder().setStripeContext("a/b/c").build();
+
+    RequestOptions requestOptions =
+        RequestOptions.builder().setStripeContext(new StripeContext()).build();
+
+    RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
+
+    assertNull(merged.getStripeContext());
+  }
+
+  @Test
+  public void requestContextPrioritized() {
+    StripeResponseGetterOptions clientOptions =
+        TestStripeResponseGetterOptions.builder().setStripeContext("a/b/c").build();
+
+    RequestOptions requestOptions = RequestOptions.builder().setStripeContext("d/e/f").build();
+
+    RequestOptions merged = RequestOptions.merge(clientOptions, requestOptions);
+
+    assertEquals("d/e/f", merged.getStripeContext());
   }
 
   @Test

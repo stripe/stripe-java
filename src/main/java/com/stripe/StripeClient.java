@@ -3,7 +3,7 @@ package com.stripe;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
-import com.stripe.model.ThinEvent;
+import com.stripe.model.v2.EventNotification;
 import com.stripe.net.*;
 import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;
@@ -52,9 +52,9 @@ public class StripeClient {
    * @return the StripeEvent instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public ThinEvent parseThinEvent(String payload, String sigHeader, String secret)
+  public EventNotification parseEventNotification(String payload, String sigHeader, String secret)
       throws SignatureVerificationException {
-    return parseThinEvent(payload, sigHeader, secret, Webhook.DEFAULT_TOLERANCE);
+    return parseEventNotification(payload, sigHeader, secret, Webhook.DEFAULT_TOLERANCE);
   }
 
   /**
@@ -70,11 +70,12 @@ public class StripeClient {
    * @return the StripeEvent instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public ThinEvent parseThinEvent(String payload, String sigHeader, String secret, long tolerance)
+  public EventNotification parseEventNotification(
+      String payload, String sigHeader, String secret, long tolerance)
       throws SignatureVerificationException {
     Signature.verifyHeader(payload, sigHeader, secret, tolerance);
 
-    return ApiResource.GSON.fromJson(payload, ThinEvent.class);
+    return EventNotification.fromJson(payload, this);
   }
 
   /**
@@ -1219,6 +1220,11 @@ public class StripeClient {
 
     public StripeClientBuilder setStripeContext(String context) {
       this.stripeContext = context;
+      return this;
+    }
+
+    public StripeClientBuilder setStripeContext(StripeContext context) {
+      this.stripeContext = context == null ? null : context.toString();
       return this;
     }
 
