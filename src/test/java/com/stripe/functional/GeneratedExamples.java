@@ -5118,9 +5118,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.CustomerPaymentSourceUpdateParams params =
-        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
-            .setAccountHolderName("Kamil")
-            .build();
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder().setName("Kamil").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.v1().customers().paymentSources().update("cus_123", "card_123", params);
@@ -5138,9 +5136,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.CustomerPaymentSourceUpdateParams params =
-        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
-            .setAccountHolderName("Kamil")
-            .build();
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder().setName("Kamil").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.customers().paymentSources().update("cus_123", "card_123", params);
@@ -28851,6 +28847,35 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/payments/off_session_payments/id_123/cancel",
         null,
+        null);
+  }
+
+  @Test
+  public void testV2PaymentsOffSessionPaymentPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/payments/off_session_payments/id_123/capture",
+        null,
+        null,
+        com.stripe.model.v2.payments.OffSessionPayment.class,
+        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.payments.OffSessionPaymentCaptureParams params =
+        com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder()
+            .setAmountToCapture(1374310455L)
+            .putMetadata("key", "metadata")
+            .build();
+
+    com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
+        client.v2().payments().offSessionPayments().capture("id_123", params);
+    assertNotNull(offSessionPayment);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/payments/off_session_payments/id_123/capture",
+        params.toMap(),
         null);
   }
 
