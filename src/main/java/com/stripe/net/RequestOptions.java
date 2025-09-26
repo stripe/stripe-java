@@ -237,6 +237,17 @@ public class RequestOptions {
       return this;
     }
 
+    public RequestOptionsBuilder setStripeContext(com.stripe.StripeContext context) {
+      this.stripeContext = context != null ? context.toString() : null;
+      return this;
+    }
+
+    /**
+     * Empties the current builder value for StripeContext, which will defer to the client options.
+     *
+     * <p>To send no context at all, call `setContext(new StripeContext())`or set the context to an
+     * empty string.
+     */
     public RequestOptionsBuilder clearStripeContext() {
       this.stripeContext = null;
       return this;
@@ -474,15 +485,28 @@ public class RequestOptions {
           clientOptions.getProxyCredential() // proxyCredential
           );
     }
+
+    // callers need to be able to explicitly unset context per-request
+    // an empty StripeContext serializes to a "", so check for that and empty context out if it's
+    // there.
+    String stripeContext;
+    if (options.getStripeContext() != null) {
+      String requestContext = options.getStripeContext().trim();
+      if (requestContext.isEmpty()) {
+        stripeContext = null;
+      } else {
+        stripeContext = requestContext;
+      }
+    } else {
+      stripeContext = clientOptions.getStripeContext();
+    }
     return new RequestOptions(
         options.getAuthenticator() != null
             ? options.getAuthenticator()
             : clientOptions.getAuthenticator(),
         options.getClientId() != null ? options.getClientId() : clientOptions.getClientId(),
         options.getIdempotencyKey(),
-        options.getStripeContext() != null
-            ? options.getStripeContext()
-            : clientOptions.getStripeContext(),
+        stripeContext,
         options.getStripeAccount() != null
             ? options.getStripeAccount()
             : clientOptions.getStripeAccount(),

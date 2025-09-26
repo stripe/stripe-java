@@ -1326,6 +1326,11 @@ public class StripeClient {
       return this;
     }
 
+    public StripeClientBuilder setStripeContext(StripeContext context) {
+      this.stripeContext = context == null ? null : context.toString();
+      return this;
+    }
+
     public String getStripeContext() {
       return this.stripeContext;
     }
