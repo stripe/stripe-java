@@ -214,6 +214,9 @@ public final class EventNotificationClassLookup {
         "v2.payments.off_session_payment.failed",
         com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification.class);
     eventClassLookup.put(
+        "v2.payments.off_session_payment.requires_capture",
+        com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEventNotification.class);
+    eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification.class);
   }
