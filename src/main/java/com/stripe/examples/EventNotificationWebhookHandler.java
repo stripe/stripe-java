@@ -1,13 +1,13 @@
 package com.stripe.examples;
 
 import com.stripe.StripeClient;
+import com.stripe.events.UnknownEventNotification;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
-import com.stripe.model.v2.Event;
-import com.stripe.model.v2.EventNotification;
-import com.stripe.model.v2.UnknownEventNotification;
+import com.stripe.model.v2.core.Event;
+import com.stripe.model.v2.core.EventNotification;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
