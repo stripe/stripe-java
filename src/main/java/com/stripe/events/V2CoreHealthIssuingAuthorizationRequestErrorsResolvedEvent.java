@@ -2,7 +2,7 @@
 package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.model.v2.Event;
+import com.stripe.model.v2.core.Event;
 import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.Getter;

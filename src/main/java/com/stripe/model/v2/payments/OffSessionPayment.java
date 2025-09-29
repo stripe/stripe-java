@@ -17,6 +17,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class OffSessionPayment extends StripeObject implements HasId {
+  /** The amount available to be captured. */
+  @SerializedName("amount_capturable")
+  Amount amountCapturable;
+
   /** Provides industry-specific information about the amount. */
   @SerializedName("amount_details")
   AmountDetails amountDetails;
@@ -32,6 +36,18 @@ public class OffSessionPayment extends StripeObject implements HasId {
    */
   @SerializedName("cadence")
   String cadence;
+
+  /** Details about the capture configuration for the OffSessionPayment. */
+  @SerializedName("capture")
+  Capture capture;
+
+  /**
+   * Whether the OffSessionPayment should be captured automatically or manually.
+   *
+   * <p>One of {@code automatic}, or {@code manual}.
+   */
+  @SerializedName("capture_method")
+  String captureMethod;
 
   /** ID of the owning compartment. */
   @SerializedName("compartment_id")
@@ -248,6 +264,24 @@ public class OffSessionPayment extends StripeObject implements HasId {
       @SerializedName("total_tax_amount")
       Long totalTaxAmount;
     }
+  }
+
+  /** Details about the capture configuration for the OffSessionPayment. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Capture extends StripeObject {
+    /** The timestamp when this payment is no longer eligible to be captured. */
+    @SerializedName("capture_before")
+    Instant captureBefore;
+
+    /**
+     * The method to use to capture the payment.
+     *
+     * <p>One of {@code automatic}, or {@code manual}.
+     */
+    @SerializedName("capture_method")
+    String captureMethod;
   }
 
   /** Details about the payments orchestration configuration. */

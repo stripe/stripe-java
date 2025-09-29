@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec
 package com.stripe.model.v2;
 
+import com.stripe.model.v2.core.EventNotification;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -874,6 +875,9 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.payments.off_session_payment.failed",
         com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.requires_capture",
+        com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEventNotification.class);
     eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification.class);
