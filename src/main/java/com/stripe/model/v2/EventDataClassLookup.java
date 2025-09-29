@@ -2,6 +2,7 @@
 package com.stripe.model.v2;
 
 import com.stripe.model.StripeObject;
+import com.stripe.model.v2.core.Event;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,8 +25,6 @@ public final class EventDataClassLookup {
     classLookup.put(
         "financial_address_generated_microdeposits",
         com.stripe.model.v2.FinancialAddressGeneratedMicrodeposits.class);
-    classLookup.put("v2.core.event", com.stripe.model.v2.Event.class);
-    classLookup.put("v2.core.event_destination", com.stripe.model.v2.EventDestination.class);
 
     classLookup.put("v2.billing.bill_setting", com.stripe.model.v2.billing.BillSetting.class);
     classLookup.put(
@@ -47,6 +46,8 @@ public final class EventDataClassLookup {
     classLookup.put("v2.core.account", com.stripe.model.v2.core.Account.class);
     classLookup.put("v2.core.account_link", com.stripe.model.v2.core.AccountLink.class);
     classLookup.put("v2.core.account_person", com.stripe.model.v2.core.AccountPerson.class);
+    classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
+    classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
 
     classLookup.put(
         "v2.core.vault.gb_bank_account", com.stripe.model.v2.core.vault.GbBankAccount.class);
