@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.core.Event.RelatedObject;
 import com.stripe.model.v2.core.EventNotification;
-import com.stripe.model.v2.moneymanagement.OutboundPayment;
+import com.stripe.model.v2.payments.OffSessionPayment;
 import lombok.Getter;
 
 @Getter
-public final class V2MoneyManagementOutboundPaymentPostedEventNotification
+public final class V2PaymentsOffSessionPaymentRequiresCaptureEventNotification
     extends EventNotification {
   @SerializedName("related_object")
 
@@ -17,12 +17,12 @@ public final class V2MoneyManagementOutboundPaymentPostedEventNotification
   RelatedObject relatedObject;
 
   /** Retrieves the related object from the API. Make an API request on every call. */
-  public OutboundPayment fetchRelatedObject() throws StripeException {
-    return (OutboundPayment) super.fetchRelatedObject(this.relatedObject);
+  public OffSessionPayment fetchRelatedObject() throws StripeException {
+    return (OffSessionPayment) super.fetchRelatedObject(this.relatedObject);
   }
   /** Retrieve the corresponding full event from the Stripe API. */
   @Override
-  public V2MoneyManagementOutboundPaymentPostedEvent fetchEvent() throws StripeException {
-    return (V2MoneyManagementOutboundPaymentPostedEvent) super.fetchEvent();
+  public V2PaymentsOffSessionPaymentRequiresCaptureEvent fetchEvent() throws StripeException {
+    return (V2PaymentsOffSessionPaymentRequiresCaptureEvent) super.fetchEvent();
   }
 }

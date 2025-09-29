@@ -3207,11 +3207,11 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/events/ll_123",
         null,
         null,
-        com.stripe.model.v2.Event.class,
+        com.stripe.model.v2.core.Event.class,
         "{\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.model.v2.Event event = client.v2().core().events().retrieve("ll_123");
+    com.stripe.model.v2.core.Event event = client.v2().core().events().retrieve("ll_123");
     assertNotNull(event);
     verifyRequest(
         BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events/ll_123", null, null);
@@ -5118,9 +5118,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.CustomerPaymentSourceUpdateParams params =
-        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
-            .setAccountHolderName("Kamil")
-            .build();
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder().setName("Kamil").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.v1().customers().paymentSources().update("cus_123", "card_123", params);
@@ -5138,9 +5136,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.CustomerPaymentSourceUpdateParams params =
-        com.stripe.param.CustomerPaymentSourceUpdateParams.builder()
-            .setAccountHolderName("Kamil")
-            .build();
+        com.stripe.param.CustomerPaymentSourceUpdateParams.builder().setName("Kamil").build();
 
     com.stripe.model.PaymentSource paymentSource =
         client.customers().paymentSources().update("cus_123", "card_123", params);
@@ -25409,14 +25405,14 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         new TypeToken<
-            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event>>() {}.getType(),
+            com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.Event>>() {}.getType(),
         "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"type\":\"type\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventListParams params =
         com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
 
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.Event> stripeCollection =
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.Event> stripeCollection =
         client.v2().core().events().list(params);
     assertNotNull(stripeCollection);
     verifyRequest(
@@ -25431,11 +25427,11 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/events/id_123",
         null,
         null,
-        com.stripe.model.v2.Event.class,
+        com.stripe.model.v2.core.Event.class,
         "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"type\":\"type\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.model.v2.Event event = client.v2().core().events().retrieve("id_123");
+    com.stripe.model.v2.core.Event event = client.v2().core().events().retrieve("id_123");
     assertNotNull(event);
     verifyRequest(
         BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/events/id_123", null, null);
@@ -25451,15 +25447,15 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
-                com.stripe.model.v2.EventDestination>>() {}.getType(),
+                com.stripe.model.v2.core.EventDestination>>() {}.getType(),
         "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"id\":\"obj_123\",\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"status\":\"disabled\",\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventDestinationListParams params =
         com.stripe.param.v2.core.EventDestinationListParams.builder().build();
 
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.EventDestination> stripeCollection =
-        client.v2().core().eventDestinations().list(params);
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.EventDestination>
+        stripeCollection = client.v2().core().eventDestinations().list(params);
     assertNotNull(stripeCollection);
     verifyRequest(
         BaseAddress.API,
@@ -25477,7 +25473,7 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations",
         null,
         null,
-        com.stripe.model.v2.EventDestination.class,
+        com.stripe.model.v2.core.EventDestination.class,
         "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"id\":\"obj_123\",\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"status\":\"disabled\",\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
@@ -25490,7 +25486,7 @@ class GeneratedExamples extends BaseStripeTest {
             .setType(com.stripe.param.v2.core.EventDestinationCreateParams.Type.AMAZON_EVENTBRIDGE)
             .build();
 
-    com.stripe.model.v2.EventDestination eventDestination =
+    com.stripe.model.v2.core.EventDestination eventDestination =
         client.v2().core().eventDestinations().create(params);
     assertNotNull(eventDestination);
     verifyRequest(
@@ -25532,14 +25528,14 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations/id_123",
         null,
         null,
-        com.stripe.model.v2.EventDestination.class,
+        com.stripe.model.v2.core.EventDestination.class,
         "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"id\":\"obj_123\",\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"status\":\"disabled\",\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventDestinationRetrieveParams params =
         com.stripe.param.v2.core.EventDestinationRetrieveParams.builder().build();
 
-    com.stripe.model.v2.EventDestination eventDestination =
+    com.stripe.model.v2.core.EventDestination eventDestination =
         client.v2().core().eventDestinations().retrieve("id_123", params);
     assertNotNull(eventDestination);
     verifyRequest(
@@ -25558,14 +25554,14 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations/id_123",
         null,
         null,
-        com.stripe.model.v2.EventDestination.class,
+        com.stripe.model.v2.core.EventDestination.class,
         "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"id\":\"obj_123\",\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"status\":\"disabled\",\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventDestinationUpdateParams params =
         com.stripe.param.v2.core.EventDestinationUpdateParams.builder().build();
 
-    com.stripe.model.v2.EventDestination eventDestination =
+    com.stripe.model.v2.core.EventDestination eventDestination =
         client.v2().core().eventDestinations().update("id_123", params);
     assertNotNull(eventDestination);
     verifyRequest(
@@ -25584,11 +25580,11 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations/id_123/disable",
         null,
         null,
-        com.stripe.model.v2.EventDestination.class,
+        com.stripe.model.v2.core.EventDestination.class,
         "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"id\":\"obj_123\",\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"status\":\"disabled\",\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.model.v2.EventDestination eventDestination =
+    com.stripe.model.v2.core.EventDestination eventDestination =
         client.v2().core().eventDestinations().disable("id_123");
     assertNotNull(eventDestination);
     verifyRequest(
@@ -25607,11 +25603,11 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations/id_123/enable",
         null,
         null,
-        com.stripe.model.v2.EventDestination.class,
+        com.stripe.model.v2.core.EventDestination.class,
         "{\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"enabled_events\":[\"enabled_events\"],\"event_payload\":\"thin\",\"id\":\"obj_123\",\"name\":\"name\",\"object\":\"v2.core.event_destination\",\"status\":\"disabled\",\"type\":\"amazon_eventbridge\",\"updated\":\"1970-01-03T17:07:10.277Z\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.model.v2.EventDestination eventDestination =
+    com.stripe.model.v2.core.EventDestination eventDestination =
         client.v2().core().eventDestinations().enable("id_123");
     assertNotNull(eventDestination);
     verifyRequest(
@@ -25630,11 +25626,11 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/core/event_destinations/id_123/ping",
         null,
         null,
-        com.stripe.model.v2.Event.class,
+        com.stripe.model.v2.core.Event.class,
         "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"type\":\"type\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.model.v2.Event event = client.v2().core().eventDestinations().ping("id_123");
+    com.stripe.model.v2.core.Event event = client.v2().core().eventDestinations().ping("id_123");
     assertNotNull(event);
     verifyRequest(
         BaseAddress.API,
@@ -27045,6 +27041,35 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/payments/off_session_payments/id_123/cancel",
         null,
+        null);
+  }
+
+  @Test
+  public void testV2PaymentsOffSessionPaymentPost3Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/payments/off_session_payments/id_123/capture",
+        null,
+        null,
+        com.stripe.model.v2.payments.OffSessionPayment.class,
+        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.payments.OffSessionPaymentCaptureParams params =
+        com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder()
+            .setAmountToCapture(1374310455L)
+            .putMetadata("key", "metadata")
+            .build();
+
+    com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
+        client.v2().payments().offSessionPayments().capture("id_123", params);
+    assertNotNull(offSessionPayment);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/payments/off_session_payments/id_123/capture",
+        params.toMap(),
         null);
   }
 
