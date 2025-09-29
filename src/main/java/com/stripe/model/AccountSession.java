@@ -132,9 +132,6 @@ public class AccountSession extends ApiResource {
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
-    @SerializedName("balance_report")
-    BalanceReport balanceReport;
-
     @SerializedName("balances")
     Balances balances;
 
@@ -173,9 +170,6 @@ public class AccountSession extends ApiResource {
 
     @SerializedName("payout_details")
     PayoutDetails payoutDetails;
-
-    @SerializedName("payout_reconciliation_report")
-    PayoutReconciliationReport payoutReconciliationReport;
 
     @SerializedName("payouts")
     Payouts payouts;
@@ -275,31 +269,6 @@ public class AccountSession extends ApiResource {
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
       }
-    }
-
-    /**
-     * For more details about BalanceReport, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BalanceReport extends StripeObject {
-      /** Whether the embedded component is enabled. */
-      @SerializedName("enabled")
-      Boolean enabled;
-
-      @SerializedName("features")
-      Features features;
-
-      /**
-       * For more details about Features, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
     }
 
     /**
@@ -865,31 +834,6 @@ public class AccountSession extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PayoutDetails extends StripeObject {
-      /** Whether the embedded component is enabled. */
-      @SerializedName("enabled")
-      Boolean enabled;
-
-      @SerializedName("features")
-      Features features;
-
-      /**
-       * For more details about Features, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Features extends StripeObject {}
-    }
-
-    /**
-     * For more details about PayoutReconciliationReport, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class PayoutReconciliationReport extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
