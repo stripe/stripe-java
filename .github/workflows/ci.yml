@@ -64,6 +64,7 @@ jobs:
           - "25"
           # non-LTS versions
           # we should periodically add the latest non-LTS version here to test against
+          # as of 2025-09-29, the latest version of java (25) is LTS, so this section is empty. In March 2026, we'll add "26".
 
     steps:
       - uses: extractions/setup-just@v2
