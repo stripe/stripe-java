@@ -3,8 +3,8 @@ package com.stripe.service.v2.core;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
-import com.stripe.model.v2.Event;
 import com.stripe.model.v2.StripeCollection;
+import com.stripe.model.v2.core.Event;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;

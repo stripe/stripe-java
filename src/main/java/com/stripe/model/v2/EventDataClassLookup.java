@@ -2,6 +2,7 @@
 package com.stripe.model.v2;
 
 import com.stripe.model.StripeObject;
+import com.stripe.model.v2.core.Event;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,8 +26,8 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.billing.meter_event_session", com.stripe.model.v2.billing.MeterEventSession.class);
 
-    classLookup.put("v2.core.event", com.stripe.model.v2.Event.class);
-    classLookup.put("v2.core.event_destination", com.stripe.model.v2.EventDestination.class);
+    classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
+    classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
 
     eventClassLookup.put(
         "v1.billing.meter.error_report_triggered",
