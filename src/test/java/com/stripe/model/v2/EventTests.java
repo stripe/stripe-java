@@ -6,6 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
+import com.stripe.model.v2.core.Event;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
 import java.time.Instant;
@@ -121,9 +122,9 @@ public class EventTests extends BaseStripeTest {
         Meter.class,
         getResourceAsString("/api_fixtures/billing_meter.json"));
 
-    assertEquals("/v1/billing/meters/meter_123", event.getRelatedObject().url);
-    assertEquals("meter_123", event.getRelatedObject().id);
-    assertEquals("billing.meter", event.getRelatedObject().type);
+    assertEquals("/v1/billing/meters/meter_123", event.getRelatedObject().getUrl());
+    assertEquals("meter_123", event.getRelatedObject().getId());
+    assertEquals("billing.meter", event.getRelatedObject().getType());
 
     Meter meter = event.fetchRelatedObject();
 
