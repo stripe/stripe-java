@@ -54,14 +54,16 @@ jobs:
       matrix:
         # We test Stripe SDK against Java LTS versions(8, 11, 17, 21) and currently supported non-LTS versions.
         # https://www.oracle.com/java/technologies/java-se-support-roadmap.html
+        # https://endoflife.date/oracle-jdk
         java-version:
+          # LTS versions
           - "1.8"
           - "11"
           - "17"
           - "21"
-          - "22"
-          - "23"
-          - "24"
+          - "25"
+          # non-LTS versions
+          # we should periodically add the latest non-LTS version here to test against
 
     steps:
       - uses: extractions/setup-just@v2
