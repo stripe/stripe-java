@@ -2,6 +2,7 @@
 package com.stripe.model.v2;
 
 import com.stripe.model.StripeObject;
+import com.stripe.model.v2.core.Event;
 import java.util.HashMap;
 import java.util.Map;
 

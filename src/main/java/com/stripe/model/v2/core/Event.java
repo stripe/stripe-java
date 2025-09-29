@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.model.v2;
+package com.stripe.model.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
@@ -7,6 +7,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeActiveObject;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
+import com.stripe.model.v2.EventDataClassLookup;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;

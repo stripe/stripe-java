@@ -1,9 +1,11 @@
-package com.stripe.model.v2;
+package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.StripeObject;
-import com.stripe.model.v2.Event.RelatedObject;
+import com.stripe.model.v2.core.Event;
+import com.stripe.model.v2.core.Event.RelatedObject;
+import com.stripe.model.v2.core.EventNotification;
 import lombok.Getter;
 
 /**
