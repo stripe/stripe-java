@@ -3,9 +3,9 @@ package com.stripe.events;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
-import com.stripe.model.v2.Event.RelatedObject;
-import com.stripe.model.v2.EventNotification;
 import com.stripe.model.v2.billing.LicensedItem;
+import com.stripe.model.v2.core.Event.RelatedObject;
+import com.stripe.model.v2.core.EventNotification;
 import lombok.Getter;
 
 @Getter
