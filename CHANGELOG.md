@@ -1,5 +1,60 @@
 # Changelog
 
+## 30.1.0-beta.1 - 2025-09-30
+This release changes the pinned API version to `2025-09-30.preview`. It is built on top of SDK version 30.0.0 which contains breaking changes. Please review the [changelog for 30.0.0](https://github.com/stripe/stripe-java/blob/master/CHANGELOG.md#3000---2025-09-30) if upgrading from older SDK versions.
+
+* [#2060](https://github.com/stripe/stripe-java/pull/2060) Update generated code for beta
+  * Add support for `attach_cadence` method on resource `Subscription`
+  * Add support for `billingCadence` on `InvoiceCreatePreviewParams`, `SubscriptionCreateParams`, `SubscriptionUpdateParams`, and `Subscription`
+  * Add support for `billingCadenceDetails` on `Invoice.parent` and `QuotePreviewInvoice.parent`
+* [#2049](https://github.com/stripe/stripe-java/pull/2049) Update generated code for beta
+  * Add support for new resources `v2.billing.BillSettingVersion`, `v2.billing.BillSetting`, `v2.billing.Cadence`, `v2.billing.CollectionSettingVersion`, `v2.billing.CollectionSetting`, and `v2.billing.Profile`
+  * Add support for `create`, `list`, `retrieve`, and `update` methods on resources `v2.billing.BillSetting`, `v2.billing.CollectionSetting`, and `v2.billing.Profile`
+  * Add support for `list` and `retrieve` methods on resources `v2.billing.BillSettingVersion` and `v2.billing.CollectionSettingVersion`
+  * Add support for `cancel`, `create`, `list`, `retrieve`, and `update` methods on resource `v2.billing.Cadence`
+  * Add support for `profile` on `v2.core.Account.defaults`, `v2.core.AccountCreateParams.defaults`, and `v2.core.AccountUpdateParams.defaults`
+  * Add support for `iP` on `v2.core.Account.identity.attestations.directorship_declaration`, `v2.core.Account.identity.attestations.ownership_declaration`, `v2.core.Account.identity.attestations.terms_of_service.account`, `v2.core.Account.identity.attestations.terms_of_service.storer`, `v2.core.Account.identity.individual.additional_terms_of_service.account`, `v2.core.AccountCreateParams.identity.attestations.terms_of_service.account`, `v2.core.AccountCreateParams.identity.attestations.terms_of_service.storer`, `v2.core.AccountUpdateParams.identity.attestations.terms_of_service.account`, `v2.core.AccountUpdateParams.identity.attestations.terms_of_service.storer`, `v2.core.Person.additional_terms_of_service.account`, `v2.core.PersonCreateParams.additional_terms_of_service.account`, and `v2.core.PersonUpdateParams.additional_terms_of_service.account`
+  * Remove support for `ip` on `v2.core.Account.identity.attestations.directorship_declaration`, `v2.core.Account.identity.attestations.ownership_declaration`, `v2.core.Account.identity.attestations.terms_of_service.account`, `v2.core.Account.identity.attestations.terms_of_service.storer`, `v2.core.Account.identity.individual.additional_terms_of_service.account`, `v2.core.AccountCreateParams.identity.attestations.terms_of_service.account`, `v2.core.AccountCreateParams.identity.attestations.terms_of_service.storer`, `v2.core.AccountUpdateParams.identity.attestations.terms_of_service.account`, `v2.core.AccountUpdateParams.identity.attestations.terms_of_service.storer`, `v2.core.Person.additional_terms_of_service.account`, `v2.core.PersonCreateParams.additional_terms_of_service.account`, and `v2.core.PersonUpdateParams.additional_terms_of_service.account`
+  * Remove support for `doingBusinessAs`, `productDescription`, and `url` on `v2.core.Account.identity.business_details`, `v2.core.AccountCreateParams.identity.business_details`, and `v2.core.AccountUpdateParams.identity.business_details`
+  * Add support for `settlementCurrency` on `v2.moneymanagement.FinancialAddress`
+  * Add support for `sepaBankAccount` on `v2.moneymanagement.FinancialAddress.credentials` and `v2.moneymanagement.ReceivedCredit.bank_transfer`
+  * Add support for `amountDetails` and `paymentsOrchestration` on `v2.payments.OffSessionPaymentCreateParams` and `v2.payments.OffSessionPayment`
+  * Add support for `retryPolicy` on `v2.payments.OffSessionPayment.retry_details` and `v2.payments.OffSessionPaymentCreateParams.retry_details`
+  * Change type of `v2.moneymanagement.OutboundPaymentQuote.fx_quote.lockDuration` from `literal('five_minutes')` to `enum('five_minutes'|'none')`
+  * Add support for `originType` on `v2.moneymanagement.ReceivedCredit.bank_transfer`
+  * Remove support for `paymentMethodType` on `v2.moneymanagement.ReceivedCredit.bank_transfer`
+  * Add support for `mandateData` and `paymentMethodOptions` on `v2.payments.OffSessionPaymentCreateParams`
+  * Add support for new values `heuristic` and `scheduled` on enum `v2.payments.OffSessionPaymentCreateParams.retry_details.retryStrategy`
+  * Add support for new value `crypto_wallet` on enums `v2.moneymanagement.OutboundSetupIntentCreateParams.payout_method_data.type` and `v2.moneymanagement.OutboundSetupIntentUpdateParams.payout_method_data.type`
+  * Add support for `type` on `v2.moneymanagement.FinancialAddressCreateParams`
+  * Remove support for `currency` on `v2.moneymanagement.FinancialAddressCreateParams`
+  * Add support for new values `financial_addressses.crypto_wallets`, `holds_currencies.usdc`, `outbound_payments.crypto_wallets`, and `outbound_transfers.crypto_wallets` on enum `EventsV2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEvent.updatedCapability`
+  * Add support for thin event `V2BillingBillSettingUpdatedEvent` with related object `v2.billing.BillSetting`
+  * Add support for error type `RateLimitException`
+* [#2047](https://github.com/stripe/stripe-java/pull/2047) Update generated code for beta
+  * Add support for new resources `billing.analytics.MeterUsageRow` and `billing.analytics.MeterUsage`
+  * Remove support for resources `billing.MeterUsageRow` and `billing.MeterUsage`
+  * Add support for `retrieve` method on resource `billing.analytics.MeterUsage`
+  * Remove support for `retrieve` method on resource `billing.MeterUsage`
+  * Add support for `report_payment_attempt_informational` method on resource `PaymentRecord`
+  * Add support for `minimumBalanceByCurrency` on `BalanceSettings.payments.payouts` and `BalanceSettingsUpdateParams.payments.payouts`
+  * Remove support for values `saturday` and `sunday` from enum `BalanceSettingsUpdateParams.payments.payouts.schedule.weeklyPayoutDays`
+  * Change type of `BalanceSettingsUpdateParams.payments.settlement_timing.delayDaysOverride` from `longInteger` to `emptyable(longInteger)`
+  * Change `BalanceSettingsUpdateParams.payments` to be optional
+  * Add support for `delayDaysOverride` on `BalanceSettings.payments.settlement_timing`
+  * Add support for `automaticTax` and `invoiceCreation` on `checkout.SessionUpdateParams`
+  * Add support for `unitLabel` on `checkout.SessionUpdateParams.line_items[].price_data.product_data`
+  * Add support for `invoiceSettings` on `checkout.SessionUpdateParams.subscription_data`
+  * Add support for `intendedSubmissionMethod` on `DisputeUpdateParams` and `Dispute`
+  * Change type of `Dispute.smart_disputes.recommendedEvidence` from `string` to `array(string)`
+  * Add support for `pix` on `Invoice.payment_settings.payment_method_options`, `InvoiceCreateParams.payment_settings.payment_method_options`, `InvoiceUpdateParams.payment_settings.payment_method_options`, `QuotePreviewInvoice.payment_settings.payment_method_options`, `Subscription.payment_settings.payment_method_options`, `SubscriptionCreateParams.payment_settings.payment_method_options`, and `SubscriptionUpdateParams.payment_settings.payment_method_options`
+  * Add support for new value `pix` on enums `InvoiceCreateParams.payment_settings.paymentMethodTypes`, `InvoiceUpdateParams.payment_settings.paymentMethodTypes`, `SubscriptionCreateParams.payment_settings.paymentMethodTypes`, and `SubscriptionUpdateParams.payment_settings.paymentMethodTypes`
+  * Add support for `billingSchedules` on `InvoiceCreatePreviewParams.subscription_details`, `SubscriptionCreateParams`, `SubscriptionUpdateParams`, and `Subscription`
+  * Add support for `paypay` on `PaymentAttemptRecord.payment_method_details` and `PaymentRecord.payment_method_details`
+  * Add support for `wallet` on `PaymentAttemptRecord.payment_method_details.card` and `PaymentRecord.payment_method_details.card`
+  * Add support for `flexible` on `QuotePreviewSubscriptionSchedule.billing_mode`
+  * Add support for `billedUntil` on `SubscriptionItem`
+
 ## 30.0.0 - 2025-09-30
 This release changes the pinned API version to `2025-09-30.clover` and contains breaking changes (prefixed with ⚠️ below)
 
