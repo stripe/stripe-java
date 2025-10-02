@@ -363,6 +363,9 @@ public class FileListParams extends ApiRequestParams {
     @SerializedName("pci_document")
     PCI_DOCUMENT("pci_document"),
 
+    @SerializedName("platform_terms_of_service")
+    PLATFORM_TERMS_OF_SERVICE("platform_terms_of_service"),
+
     @SerializedName("selfie")
     SELFIE("selfie"),
 
