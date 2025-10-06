@@ -2975,7 +2975,11 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Rechnung extends StripeObject {}
+    public static class Rechnung extends StripeObject {
+      /** Payment portal URL. */
+      @SerializedName("payment_portal_url")
+      String paymentPortalUrl;
+    }
 
     /**
      * For more details about RevolutPay, please refer to the <a
