@@ -91,9 +91,10 @@ public class EventNotificationWebhookHandler {
             V1BillingMeterErrorReportTriggeredEvent event = eventNotification.fetchEvent();
             System.out.println("More info: " + event.getData().getDeveloperMessageSummary());
           } else if (notif instanceof UnknownEventNotification) {
-            // this is a valid event type, but it's newer than this SDK, so there's no corresponding
-            // class
-            // we'll have to match on "type" instead
+            // Events that were introduced after this SDK version release are
+            // represented as `UnknownEventNotification`s.
+            // They're valid, the SDK just doesn't have corresponding classes for them.
+            // You must match on the "type" property instead.
             UnknownEventNotification unknownEvent = (UnknownEventNotification) notif;
             if (unknownEvent.getType().equals("some.new.event")) {
               // you can still `.fetchEvent()` and `.fetchRelatedObject()`, but the latter may
