@@ -23,9 +23,6 @@ public final class EventNotificationClassLookup {
         "v1.billing.meter.no_meter_found",
         com.stripe.events.V1BillingMeterNoMeterFoundEventNotification.class);
     eventClassLookup.put(
-        "v2.billing.bill_setting.updated",
-        com.stripe.events.V2BillingBillSettingUpdatedEventNotification.class);
-    eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEventNotification.class);
     eventClassLookup.put(
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEventNotification.class);
