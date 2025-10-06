@@ -4,6 +4,7 @@ package com.stripe.service;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentMethod;
+import com.stripe.model.PaymentMethodBalance;
 import com.stripe.model.StripeCollection;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -13,6 +14,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentMethodAttachParams;
+import com.stripe.param.PaymentMethodCheckBalanceParams;
 import com.stripe.param.PaymentMethodCreateParams;
 import com.stripe.param.PaymentMethodDetachParams;
 import com.stripe.param.PaymentMethodListParams;
@@ -309,6 +311,37 @@ public final class PaymentMethodService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, PaymentMethod.class);
+  }
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(
+      String paymentMethod, PaymentMethodCheckBalanceParams params) throws StripeException {
+    return checkBalance(paymentMethod, params, (RequestOptions) null);
+  }
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(String paymentMethod, RequestOptions options)
+      throws StripeException {
+    return checkBalance(paymentMethod, (PaymentMethodCheckBalanceParams) null, options);
+  }
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(String paymentMethod) throws StripeException {
+    return checkBalance(
+        paymentMethod, (PaymentMethodCheckBalanceParams) null, (RequestOptions) null);
+  }
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(
+      String paymentMethod, PaymentMethodCheckBalanceParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_methods/%s/check_balance", ApiResource.urlEncodeId(paymentMethod));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentMethodBalance.class);
   }
   /**
    * Detaches a PaymentMethod object from a Customer. After a PaymentMethod is detached, it can no

@@ -1853,6 +1853,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("authorization_code")
       String authorizationCode;
 
+      @SerializedName("benefits")
+      Benefits benefits;
+
       /**
        * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
        * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
@@ -2006,6 +2009,19 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** If this Card is part of a card wallet, this contains the details of the card wallet. */
       @SerializedName("wallet")
       Wallet wallet;
+
+      /**
+       * For more details about Benefits, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Benefits extends StripeObject {
+        /** Issuer of the benefit card utilized on this payment. */
+        @SerializedName("issuer")
+        String issuer;
+      }
 
       /**
        * For more details about Checks, please refer to the <a

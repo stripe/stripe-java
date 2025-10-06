@@ -89,6 +89,9 @@ public class Card extends ApiResource
   @SerializedName("available_payout_methods")
   List<String> availablePayoutMethods;
 
+  @SerializedName("benefits")
+  Benefits benefits;
+
   /**
    * Card brand. Can be {@code American Express}, {@code Cartes Bancaires}, {@code Diners Club},
    * {@code Discover}, {@code Eftpos Australia}, {@code Girocard}, {@code JCB}, {@code MasterCard},
@@ -510,6 +513,23 @@ public class Card extends ApiResource
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, url, params, options);
     return getResponseGetter().request(request, Card.class);
+  }
+
+  /**
+   * For more details about Benefits, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Benefits extends StripeObject {
+    /** Issuer of this benefit card. */
+    @SerializedName("issuer")
+    String issuer;
+
+    /** Available benefit programs for this card. */
+    @SerializedName("programs")
+    List<String> programs;
   }
 
   /**

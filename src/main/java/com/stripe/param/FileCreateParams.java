@@ -361,6 +361,9 @@ public class FileCreateParams extends ApiRequestParams {
     @SerializedName("pci_document")
     PCI_DOCUMENT("pci_document"),
 
+    @SerializedName("platform_terms_of_service")
+    PLATFORM_TERMS_OF_SERVICE("platform_terms_of_service"),
+
     @SerializedName("tax_document_user_upload")
     TAX_DOCUMENT_USER_UPLOAD("tax_document_user_upload"),
 
