@@ -489,9 +489,6 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.transfer.updated", com.stripe.events.V1TransferUpdatedEventNotification.class);
     eventClassLookup.put(
-        "v2.billing.bill_setting.updated",
-        com.stripe.events.V2BillingBillSettingUpdatedEventNotification.class);
-    eventClassLookup.put(
         "v2.billing.cadence.billed",
         com.stripe.events.V2BillingCadenceBilledEventNotification.class);
     eventClassLookup.put(

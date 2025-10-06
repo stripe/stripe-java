@@ -575,9 +575,6 @@ public final class EventDataClassLookup {
     eventClassLookup.put("v1.transfer.reversed", com.stripe.events.V1TransferReversedEvent.class);
     eventClassLookup.put("v1.transfer.updated", com.stripe.events.V1TransferUpdatedEvent.class);
     eventClassLookup.put(
-        "v2.billing.bill_setting.updated",
-        com.stripe.events.V2BillingBillSettingUpdatedEvent.class);
-    eventClassLookup.put(
         "v2.billing.cadence.billed", com.stripe.events.V2BillingCadenceBilledEvent.class);
     eventClassLookup.put(
         "v2.billing.cadence.canceled", com.stripe.events.V2BillingCadenceCanceledEvent.class);
