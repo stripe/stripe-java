@@ -8,7 +8,10 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 import lombok.Getter;
 
-/** Information about the error that occurred. */
+/**
+ * Returned in cases where the bank account provided is not valid (wrong format of account number or
+ * a routing number that does not correspond to a banking institution).
+ */
 public final class InvalidPaymentMethodException extends ApiException {
   private static final long serialVersionUID = 2L;
   @Getter String invalidParam;

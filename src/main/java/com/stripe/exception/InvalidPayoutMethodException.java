@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Information about the error that occurred. */
+/** Returned in cases where the ID provided doesn't correspond to a valid payout method. */
 public final class InvalidPayoutMethodException extends ApiException {
   private static final long serialVersionUID = 2L;
 
