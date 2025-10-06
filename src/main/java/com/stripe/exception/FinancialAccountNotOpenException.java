@@ -6,7 +6,6 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Information about the error that occurred. */
 public final class FinancialAccountNotOpenException extends ApiException {
   private static final long serialVersionUID = 2L;
 

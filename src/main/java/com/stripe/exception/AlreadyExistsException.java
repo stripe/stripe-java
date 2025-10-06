@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Information about the error that occurred. */
+/** The resource already exists. */
 public final class AlreadyExistsException extends ApiException {
   private static final long serialVersionUID = 2L;
 

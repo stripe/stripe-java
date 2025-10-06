@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Information about the error that occurred. */
+/** Error returned when user tries to cancel an OutboundPayment that was already canceled. */
 public final class AlreadyCanceledException extends ApiException {
   private static final long serialVersionUID = 2L;
 
