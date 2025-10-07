@@ -2784,7 +2784,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, or {@code polygon}.
+       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, or {@code solana}.
        */
       @SerializedName("network")
       String network;
