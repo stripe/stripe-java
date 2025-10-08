@@ -37,26 +37,12 @@ public class PaymentAttemptRecordListParams extends ApiRequestParams {
   @SerializedName("payment_record")
   String paymentRecord;
 
-  /**
-   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
-   * in the list. For instance, if you make a list request and receive 100 objects, ending with
-   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
-   * fetch the next page of the list.
-   */
-  @SerializedName("starting_after")
-  String startingAfter;
-
   private PaymentAttemptRecordListParams(
-      List<String> expand,
-      Map<String, Object> extraParams,
-      Long limit,
-      String paymentRecord,
-      String startingAfter) {
+      List<String> expand, Map<String, Object> extraParams, Long limit, String paymentRecord) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.paymentRecord = paymentRecord;
-    this.startingAfter = startingAfter;
   }
 
   public static Builder builder() {
@@ -72,12 +58,10 @@ public class PaymentAttemptRecordListParams extends ApiRequestParams {
 
     private String paymentRecord;
 
-    private String startingAfter;
-
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentAttemptRecordListParams build() {
       return new PaymentAttemptRecordListParams(
-          this.expand, this.extraParams, this.limit, this.paymentRecord, this.startingAfter);
+          this.expand, this.extraParams, this.limit, this.paymentRecord);
     }
 
     /**
@@ -144,17 +128,6 @@ public class PaymentAttemptRecordListParams extends ApiRequestParams {
     /** <strong>Required.</strong> The ID of the Payment Record. */
     public Builder setPaymentRecord(String paymentRecord) {
       this.paymentRecord = paymentRecord;
-      return this;
-    }
-
-    /**
-     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
-     * place in the list. For instance, if you make a list request and receive 100 objects, ending
-     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
-     * order to fetch the next page of the list.
-     */
-    public Builder setStartingAfter(String startingAfter) {
-      this.startingAfter = startingAfter;
       return this;
     }
   }

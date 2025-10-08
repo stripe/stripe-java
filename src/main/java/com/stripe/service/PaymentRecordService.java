@@ -16,7 +16,6 @@ import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptInformationalParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptParams;
 import com.stripe.param.PaymentRecordReportPaymentParams;
-import com.stripe.param.PaymentRecordReportRefundParams;
 import com.stripe.param.PaymentRecordRetrieveParams;
 
 public final class PaymentRecordService extends ApiService {
@@ -172,26 +171,6 @@ public final class PaymentRecordService extends ApiService {
         String.format(
             "/v1/payment_records/%s/report_payment_attempt_informational",
             ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, PaymentRecord.class);
-  }
-  /** Report that the most recent payment attempt on the specified Payment Record was refunded. */
-  public PaymentRecord reportRefund(String id, PaymentRecordReportRefundParams params)
-      throws StripeException {
-    return reportRefund(id, params, (RequestOptions) null);
-  }
-  /** Report that the most recent payment attempt on the specified Payment Record was refunded. */
-  public PaymentRecord reportRefund(
-      String id, PaymentRecordReportRefundParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/payment_records/%s/report_refund", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

@@ -84,10 +84,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @SerializedName("label")
   String label;
 
-  /** The last time this reader reported to Stripe backend. */
-  @SerializedName("last_seen_at")
-  Long lastSeenAt;
-
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.

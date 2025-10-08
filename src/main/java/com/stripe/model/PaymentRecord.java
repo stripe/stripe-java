@@ -15,7 +15,6 @@ import com.stripe.param.PaymentRecordReportPaymentAttemptGuaranteedParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptInformationalParams;
 import com.stripe.param.PaymentRecordReportPaymentAttemptParams;
 import com.stripe.param.PaymentRecordReportPaymentParams;
-import com.stripe.param.PaymentRecordReportRefundParams;
 import com.stripe.param.PaymentRecordRetrieveParams;
 import java.util.List;
 import java.util.Map;
@@ -413,44 +412,6 @@ public class PaymentRecord extends ApiResource implements HasId {
         String.format(
             "/v1/payment_records/%s/report_payment_attempt_informational",
             ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, PaymentRecord.class);
-  }
-
-  /** Report that the most recent payment attempt on the specified Payment Record was refunded. */
-  public PaymentRecord reportRefund(Map<String, Object> params) throws StripeException {
-    return reportRefund(params, (RequestOptions) null);
-  }
-
-  /** Report that the most recent payment attempt on the specified Payment Record was refunded. */
-  public PaymentRecord reportRefund(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_records/%s/report_refund", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, PaymentRecord.class);
-  }
-
-  /** Report that the most recent payment attempt on the specified Payment Record was refunded. */
-  public PaymentRecord reportRefund(PaymentRecordReportRefundParams params) throws StripeException {
-    return reportRefund(params, (RequestOptions) null);
-  }
-
-  /** Report that the most recent payment attempt on the specified Payment Record was refunded. */
-  public PaymentRecord reportRefund(PaymentRecordReportRefundParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format(
-            "/v1/payment_records/%s/report_refund", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(
@@ -1960,7 +1921,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, or {@code solana}.
+       * <p>One of {@code base}, {@code ethereum}, or {@code polygon}.
        */
       @SerializedName("network")
       String network;
@@ -3014,11 +2975,7 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Rechnung extends StripeObject {
-      /** Payment portal URL. */
-      @SerializedName("payment_portal_url")
-      String paymentPortalUrl;
-    }
+    public static class Rechnung extends StripeObject {}
 
     /**
      * For more details about RevolutPay, please refer to the <a

@@ -2784,7 +2784,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The blockchain network that the transaction was sent on.
        *
-       * <p>One of {@code base}, {@code ethereum}, {@code polygon}, or {@code solana}.
+       * <p>One of {@code base}, {@code ethereum}, or {@code polygon}.
        */
       @SerializedName("network")
       String network;
@@ -3818,11 +3818,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
-    public static class Rechnung extends StripeObject {
-      /** Payment portal URL. */
-      @SerializedName("payment_portal_url")
-      String paymentPortalUrl;
-    }
+    public static class Rechnung extends StripeObject {}
 
     /**
      * For more details about RevolutPay, please refer to the <a
