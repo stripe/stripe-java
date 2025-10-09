@@ -100,6 +100,9 @@ public class AccountRetrieveParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("configuration.card_creator")
+    CONFIGURATION__CARD_CREATOR("configuration.card_creator"),
+
     @SerializedName("configuration.customer")
     CONFIGURATION__CUSTOMER("configuration.customer"),
 

@@ -105,6 +105,9 @@ public class AccountCloseParams extends ApiRequestParams {
   }
 
   public enum AppliedConfiguration implements ApiRequestParams.EnumParam {
+    @SerializedName("card_creator")
+    CARD_CREATOR("card_creator"),
+
     @SerializedName("customer")
     CUSTOMER("customer"),
 

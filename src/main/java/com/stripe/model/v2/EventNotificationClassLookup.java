@@ -610,6 +610,15 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.core.account.updated", com.stripe.events.V2CoreAccountUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.account[configuration.card_creator].capability_status_updated",
+        com.stripe.events
+            .V2CoreAccountIncludingConfigurationCardCreatorCapabilityStatusUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.core.account[configuration.card_creator].updated",
+        com.stripe.events.V2CoreAccountIncludingConfigurationCardCreatorUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
         "v2.core.account[configuration.customer].capability_status_updated",
         com.stripe.events
             .V2CoreAccountIncludingConfigurationCustomerCapabilityStatusUpdatedEventNotification

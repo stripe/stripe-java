@@ -116,6 +116,10 @@ public class Account extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Configuration extends StripeObject {
+    /** The CardCreator Configuration allows the Account to create and issue cards to users. */
+    @SerializedName("card_creator")
+    CardCreator cardCreator;
+
     /** The Customer Configuration allows the Account to be used in inbound payment flows. */
     @SerializedName("customer")
     Customer customer;
@@ -138,6 +142,441 @@ public class Account extends StripeObject implements HasId {
      */
     @SerializedName("storer")
     Storer storer;
+
+    /** The CardCreator Configuration allows the Account to create and issue cards to users. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardCreator extends StripeObject {
+      /**
+       * Represents the state of the configuration, and can be updated to deactivate or re-apply a
+       * configuration.
+       */
+      @SerializedName("applied")
+      Boolean applied;
+
+      /** Capabilities that have been requested on the CardCreator Configuration. */
+      @SerializedName("capabilities")
+      Capabilities capabilities;
+
+      /** Capabilities that have been requested on the CardCreator Configuration. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Capabilities extends StripeObject {
+        /** Can create cards for commercial issuing use cases. */
+        @SerializedName("commercial")
+        Commercial commercial;
+
+        /** Can create cards for commercial issuing use cases. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Commercial extends StripeObject {
+          /** Can create commercial issuing cards with Celtic as BIN sponsor. */
+          @SerializedName("celtic")
+          Celtic celtic;
+
+          /** Can create commercial issuing cards with Cross River Bank as BIN sponsor. */
+          @SerializedName("cross_river_bank")
+          CrossRiverBank crossRiverBank;
+
+          /** Can create commercial issuing cards with Stripe as a BIN sponsor. */
+          @SerializedName("stripe")
+          Stripe stripe;
+
+          /** Can create commercial issuing cards with Celtic as BIN sponsor. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Celtic extends StripeObject {
+            /** Can create commercial issuing charge cards with Celtic as BIN sponsor. */
+            @SerializedName("charge_card")
+            ChargeCard chargeCard;
+
+            /** Can create commercial issuing spend cards with Celtic as BIN sponsor. */
+            @SerializedName("spend_card")
+            SpendCard spendCard;
+
+            /** Can create commercial issuing charge cards with Celtic as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ChargeCard extends StripeObject {
+              /** Whether the Capability has been requested. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details regarding the status of the Capability. {@code status_details}
+               * will be empty if the Capability's status is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Commercial.Celtic.ChargeCard
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can create commercial issuing spend cards with Celtic as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class SpendCard extends StripeObject {
+              /** Whether the Capability has been requested. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details regarding the status of the Capability. {@code status_details}
+               * will be empty if the Capability's status is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Commercial.Celtic.SpendCard
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+
+          /** Can create commercial issuing cards with Cross River Bank as BIN sponsor. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CrossRiverBank extends StripeObject {
+            /** Can create commercial issuing charge cards with Cross River Bank as BIN sponsor. */
+            @SerializedName("charge_card")
+            ChargeCard chargeCard;
+
+            /** Can create commercial issuing spend cards with Cross River Bank as BIN sponsor. */
+            @SerializedName("spend_card")
+            SpendCard spendCard;
+
+            /** Can create commercial issuing charge cards with Cross River Bank as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ChargeCard extends StripeObject {
+              /** Whether the Capability has been requested. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details regarding the status of the Capability. {@code status_details}
+               * will be empty if the Capability's status is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank
+                          .ChargeCard.StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can create commercial issuing spend cards with Cross River Bank as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class SpendCard extends StripeObject {
+              /** Whether the Capability has been requested. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details regarding the status of the Capability. {@code status_details}
+               * will be empty if the Capability's status is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank
+                          .SpendCard.StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+
+          /** Can create commercial issuing cards with Stripe as a BIN sponsor. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Stripe extends StripeObject {
+            /** Can create commercial issuing charge cards with Stripe as BIN sponsor. */
+            @SerializedName("charge_card")
+            ChargeCard chargeCard;
+
+            /** Can create commercial issuing prepaid cards with Stripe as BIN sponsor. */
+            @SerializedName("prepaid_card")
+            PrepaidCard prepaidCard;
+
+            /** Can create commercial issuing charge cards with Stripe as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ChargeCard extends StripeObject {
+              /** Whether the Capability has been requested. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details regarding the status of the Capability. {@code status_details}
+               * will be empty if the Capability's status is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Commercial.Stripe.ChargeCard
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+
+            /** Can create commercial issuing prepaid cards with Stripe as BIN sponsor. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PrepaidCard extends StripeObject {
+              /** Whether the Capability has been requested. */
+              @SerializedName("requested")
+              Boolean requested;
+
+              /**
+               * The status of the Capability.
+               *
+               * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+               * unsupported}.
+               */
+              @SerializedName("status")
+              String status;
+
+              /**
+               * Additional details regarding the status of the Capability. {@code status_details}
+               * will be empty if the Capability's status is {@code active}.
+               */
+              @SerializedName("status_details")
+              List<
+                      Account.Configuration.CardCreator.Capabilities.Commercial.Stripe.PrepaidCard
+                          .StatusDetail>
+                  statusDetails;
+
+              /**
+               * For more details about StatusDetail, please refer to the <a
+               * href="https://docs.stripe.com/api">API Reference.</a>
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class StatusDetail extends StripeObject {
+                /**
+                 * Machine-readable code explaining the reason for the Capability to be in its
+                 * current status.
+                 *
+                 * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+                 * requirements_pending_verification}, {@code restricted_other}, {@code
+                 * unsupported_business}, {@code unsupported_country}, or {@code
+                 * unsupported_entity_type}.
+                 */
+                @SerializedName("code")
+                String code;
+
+                /**
+                 * Machine-readable code explaining how to make the Capability active.
+                 *
+                 * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+                 */
+                @SerializedName("resolution")
+                String resolution;
+              }
+            }
+          }
+        }
+      }
+    }
 
     /** The Customer Configuration allows the Account to be used in inbound payment flows. */
     @Getter
@@ -4642,9 +5081,663 @@ public class Account extends StripeObject implements HasId {
         @SerializedName("account")
         InnerAccount account;
 
+        /** Details on the Account's acceptance of Issuing-specific terms of service. */
+        @SerializedName("card_creator")
+        CardCreator cardCreator;
+
         /** Details on the Account's acceptance of Treasury-specific terms of service. */
         @SerializedName("storer")
         Storer storer;
+
+        /** Details on the Account's acceptance of Issuing-specific terms of service. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CardCreator extends StripeObject {
+          /** Terms of service acceptances to create cards for commercial issuing use cases. */
+          @SerializedName("commercial")
+          Commercial commercial;
+
+          /** Terms of service acceptances to create cards for commercial issuing use cases. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Commercial extends StripeObject {
+            /** Terms of service acceptances for Stripe commercial card issuing. */
+            @SerializedName("account_holder")
+            AccountHolder accountHolder;
+
+            /**
+             * Terms of service acceptances for commercial issuing cards with Celtic as BIN sponsor.
+             */
+            @SerializedName("celtic")
+            Celtic celtic;
+
+            /**
+             * Terms of service acceptances for commercial issuing cards with Cross River Bank as
+             * BIN sponsor.
+             */
+            @SerializedName("cross_river_bank")
+            CrossRiverBank crossRiverBank;
+
+            /** Terms of service acceptances for Stripe commercial card issuing. */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class AccountHolder extends StripeObject {
+              /**
+               * The time when the Account's representative accepted the terms of service.
+               * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for
+               * example: 2022-09-18T13:22:18.123Z.
+               */
+              @SerializedName("date")
+              Instant date;
+
+              /**
+               * The IP address from which the Account's representative accepted the terms of
+               * service.
+               */
+              @SerializedName("ip")
+              String ip;
+
+              /** The URL to the service agreement the Account's representative accepted. */
+              @SerializedName("url")
+              String url;
+
+              /**
+               * The user agent of the browser from which the Account's representative accepted the
+               * terms of service.
+               */
+              @SerializedName("user_agent")
+              String userAgent;
+            }
+
+            /**
+             * Terms of service acceptances for commercial issuing cards with Celtic as BIN sponsor.
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Celtic extends StripeObject {
+              /**
+               * Terms of service acceptances for commercial issuing Apple Pay cards with Celtic as
+               * BIN sponsor.
+               */
+              @SerializedName("apple_pay")
+              ApplePay applePay;
+
+              /**
+               * Terms of service acceptances for commercial issuing charge cards with Celtic as BIN
+               * sponsor.
+               */
+              @SerializedName("charge_card")
+              ChargeCard chargeCard;
+
+              /**
+               * Terms of service acceptances for commercial issuing spend cards with Celtic as BIN
+               * sponsor.
+               */
+              @SerializedName("spend_card")
+              SpendCard spendCard;
+
+              /**
+               * Terms of service acceptances for commercial issuing Apple Pay cards with Celtic as
+               * BIN sponsor.
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ApplePay extends StripeObject {
+                /**
+                 * The time when the Account's representative accepted the terms of service.
+                 * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for
+                 * example: 2022-09-18T13:22:18.123Z.
+                 */
+                @SerializedName("date")
+                Instant date;
+
+                /**
+                 * The IP address from which the Account's representative accepted the terms of
+                 * service.
+                 */
+                @SerializedName("ip")
+                String ip;
+
+                /** The URL to the service agreement the Account's representative accepted. */
+                @SerializedName("url")
+                String url;
+
+                /**
+                 * The user agent of the browser from which the Account's representative accepted
+                 * the terms of service.
+                 */
+                @SerializedName("user_agent")
+                String userAgent;
+              }
+
+              /**
+               * Terms of service acceptances for commercial issuing charge cards with Celtic as BIN
+               * sponsor.
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ChargeCard extends StripeObject {
+                /**
+                 * Bank terms of service acceptance for commercial issuing charge cards with Celtic
+                 * as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing charge cards with
+                 * Celtic as BIN sponsor.
+                 */
+                @SerializedName("platform")
+                Platform platform;
+
+                /**
+                 * Bank terms of service acceptance for commercial issuing charge cards with Celtic
+                 * as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing charge cards with
+                 * Celtic as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Platform extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+              }
+
+              /**
+               * Terms of service acceptances for commercial issuing spend cards with Celtic as BIN
+               * sponsor.
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class SpendCard extends StripeObject {
+                /**
+                 * Bank terms of service acceptance for commercial issuing spend cards with Celtic
+                 * as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing spend
+                 * cards with Celtic as BIN sponsor.
+                 */
+                @SerializedName("financing_disclosures")
+                FinancingDisclosures financingDisclosures;
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing spend cards with
+                 * Celtic as BIN sponsor.
+                 */
+                @SerializedName("platform")
+                Platform platform;
+
+                /**
+                 * Bank terms of service acceptance for commercial issuing spend cards with Celtic
+                 * as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing spend
+                 * cards with Celtic as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class FinancingDisclosures extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing spend cards with
+                 * Celtic as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Platform extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+              }
+            }
+
+            /**
+             * Terms of service acceptances for commercial issuing cards with Cross River Bank as
+             * BIN sponsor.
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class CrossRiverBank extends StripeObject {
+              /**
+               * Terms of service acceptances for commercial issuing Apple Pay cards with Cross
+               * River Bank as BIN sponsor.
+               */
+              @SerializedName("apple_pay")
+              ApplePay applePay;
+
+              /**
+               * Terms of service acceptances for commercial issuing charge cards with Cross River
+               * Bank as BIN sponsor.
+               */
+              @SerializedName("charge_card")
+              ChargeCard chargeCard;
+
+              /**
+               * Terms of service acceptances for commercial issuing spend cards with Cross River
+               * Bank as BIN sponsor.
+               */
+              @SerializedName("spend_card")
+              SpendCard spendCard;
+
+              /**
+               * Terms of service acceptances for commercial issuing Apple Pay cards with Cross
+               * River Bank as BIN sponsor.
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ApplePay extends StripeObject {
+                /**
+                 * The time when the Account's representative accepted the terms of service.
+                 * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for
+                 * example: 2022-09-18T13:22:18.123Z.
+                 */
+                @SerializedName("date")
+                Instant date;
+
+                /**
+                 * The IP address from which the Account's representative accepted the terms of
+                 * service.
+                 */
+                @SerializedName("ip")
+                String ip;
+
+                /** The URL to the service agreement the Account's representative accepted. */
+                @SerializedName("url")
+                String url;
+
+                /**
+                 * The user agent of the browser from which the Account's representative accepted
+                 * the terms of service.
+                 */
+                @SerializedName("user_agent")
+                String userAgent;
+              }
+
+              /**
+               * Terms of service acceptances for commercial issuing charge cards with Cross River
+               * Bank as BIN sponsor.
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ChargeCard extends StripeObject {
+                /**
+                 * Bank terms of service acceptance for commercial issuing charge cards with Cross
+                 * River Bank as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing charge
+                 * cards with Cross River Bank as BIN sponsor.
+                 */
+                @SerializedName("financing_disclosures")
+                FinancingDisclosures financingDisclosures;
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing charge cards with
+                 * Cross River Bank as BIN sponsor.
+                 */
+                @SerializedName("platform")
+                Platform platform;
+
+                /**
+                 * Bank terms of service acceptance for commercial issuing charge cards with Cross
+                 * River Bank as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing charge
+                 * cards with Cross River Bank as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class FinancingDisclosures extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing charge cards with
+                 * Cross River Bank as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Platform extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+              }
+
+              /**
+               * Terms of service acceptances for commercial issuing spend cards with Cross River
+               * Bank as BIN sponsor.
+               */
+              @Getter
+              @Setter
+              @EqualsAndHashCode(callSuper = false)
+              public static class SpendCard extends StripeObject {
+                /**
+                 * Bank terms of service acceptance for commercial issuing spend cards with Cross
+                 * River Bank as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing spend
+                 * cards with Cross River Bank as BIN sponsor.
+                 */
+                @SerializedName("financing_disclosures")
+                FinancingDisclosures financingDisclosures;
+
+                /**
+                 * Bank terms of service acceptance for commercial issuing spend cards with Cross
+                 * River Bank as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing spend
+                 * cards with Cross River Bank as BIN sponsor.
+                 */
+                @Getter
+                @Setter
+                @EqualsAndHashCode(callSuper = false)
+                public static class FinancingDisclosures extends StripeObject {
+                  /**
+                   * The time when the Account's representative accepted the terms of service.
+                   * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
+                   * for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * The IP address from which the Account's representative accepted the terms of
+                   * service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /** The URL to the service agreement the Account's representative accepted. */
+                  @SerializedName("url")
+                  String url;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+                }
+              }
+            }
+          }
+        }
 
         /**
          * Details on the Account's acceptance of the <a
@@ -6208,7 +7301,10 @@ public class Account extends StripeObject implements HasId {
            * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
            * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
            * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
-           * cashapp_payments}, {@code crypto}, {@code eps_payments}, {@code
+           * cashapp_payments}, {@code commercial.celtic.charge_card}, {@code
+           * commercial.celtic.spend_card}, {@code commercial.cross_river_bank.charge_card}, {@code
+           * commercial.cross_river_bank.spend_card}, {@code commercial.stripe.charge_card}, {@code
+           * commercial.stripe.prepaid_card}, {@code crypto}, {@code eps_payments}, {@code
            * financial_addresses.bank_accounts}, {@code fpx_payments}, {@code
            * gb_bank_transfer_payments}, {@code grabpay_payments}, {@code holds_currencies.gbp},
            * {@code ideal_payments}, {@code inbound_transfers.financial_accounts}, {@code
@@ -6232,7 +7328,8 @@ public class Account extends StripeObject implements HasId {
           /**
            * The configuration which specifies the Capability which will be restricted.
            *
-           * <p>One of {@code customer}, {@code merchant}, {@code recipient}, or {@code storer}.
+           * <p>One of {@code card_creator}, {@code customer}, {@code merchant}, {@code recipient},
+           * or {@code storer}.
            */
           @SerializedName("configuration")
           String configuration;
