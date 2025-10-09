@@ -26,11 +26,14 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> PaymentIntent ID */
+  /** <strong>Required.</strong> The ID of the PaymentIntent to process on the reader. */
   @SerializedName("payment_intent")
   String paymentIntent;
 
-  /** Configuration overrides. */
+  /**
+   * Configuration overrides for this transaction, such as tipping and customer cancellation
+   * settings.
+   */
   @SerializedName("process_config")
   ProcessConfig processConfig;
 
@@ -116,13 +119,16 @@ public class ReaderProcessPaymentIntentParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> PaymentIntent ID */
+    /** <strong>Required.</strong> The ID of the PaymentIntent to process on the reader. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
     }
 
-    /** Configuration overrides. */
+    /**
+     * Configuration overrides for this transaction, such as tipping and customer cancellation
+     * settings.
+     */
     public Builder setProcessConfig(ReaderProcessPaymentIntentParams.ProcessConfig processConfig) {
       this.processConfig = processConfig;
       return this;
