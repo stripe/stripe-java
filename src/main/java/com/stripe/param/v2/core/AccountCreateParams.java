@@ -259,6 +259,10 @@ public class AccountCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Configuration {
+    /** The CardCreator Configuration allows the Account to create and issue cards to users. */
+    @SerializedName("card_creator")
+    CardCreator cardCreator;
+
     /** The Customer Configuration allows the Account to be used in inbound payment flows. */
     @SerializedName("customer")
     Customer customer;
@@ -292,11 +296,13 @@ public class AccountCreateParams extends ApiRequestParams {
     Storer storer;
 
     private Configuration(
+        CardCreator cardCreator,
         Customer customer,
         Map<String, Object> extraParams,
         Merchant merchant,
         Recipient recipient,
         Storer storer) {
+      this.cardCreator = cardCreator;
       this.customer = customer;
       this.extraParams = extraParams;
       this.merchant = merchant;
@@ -309,6 +315,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private CardCreator cardCreator;
+
       private Customer customer;
 
       private Map<String, Object> extraParams;
@@ -322,7 +330,18 @@ public class AccountCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountCreateParams.Configuration build() {
         return new AccountCreateParams.Configuration(
-            this.customer, this.extraParams, this.merchant, this.recipient, this.storer);
+            this.cardCreator,
+            this.customer,
+            this.extraParams,
+            this.merchant,
+            this.recipient,
+            this.storer);
+      }
+
+      /** The CardCreator Configuration allows the Account to create and issue cards to users. */
+      public Builder setCardCreator(AccountCreateParams.Configuration.CardCreator cardCreator) {
+        this.cardCreator = cardCreator;
+        return this;
       }
 
       /** The Customer Configuration allows the Account to be used in inbound payment flows. */
@@ -380,6 +399,1053 @@ public class AccountCreateParams extends ApiRequestParams {
       public Builder setStorer(AccountCreateParams.Configuration.Storer storer) {
         this.storer = storer;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardCreator {
+      /** Capabilities to request on the CardCreator Configuration. */
+      @SerializedName("capabilities")
+      Capabilities capabilities;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private CardCreator(Capabilities capabilities, Map<String, Object> extraParams) {
+        this.capabilities = capabilities;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Capabilities capabilities;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Configuration.CardCreator build() {
+          return new AccountCreateParams.Configuration.CardCreator(
+              this.capabilities, this.extraParams);
+        }
+
+        /** Capabilities to request on the CardCreator Configuration. */
+        public Builder setCapabilities(
+            AccountCreateParams.Configuration.CardCreator.Capabilities capabilities) {
+          this.capabilities = capabilities;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Configuration.CardCreator#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Configuration.CardCreator#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Capabilities {
+        /** Can create cards for commercial issuing use cases. */
+        @SerializedName("commercial")
+        Commercial commercial;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Capabilities(Commercial commercial, Map<String, Object> extraParams) {
+          this.commercial = commercial;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Commercial commercial;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountCreateParams.Configuration.CardCreator.Capabilities build() {
+            return new AccountCreateParams.Configuration.CardCreator.Capabilities(
+                this.commercial, this.extraParams);
+          }
+
+          /** Can create cards for commercial issuing use cases. */
+          public Builder setCommercial(
+              AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial commercial) {
+            this.commercial = commercial;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Configuration.CardCreator.Capabilities#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Configuration.CardCreator.Capabilities#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Commercial {
+          /** Can create commercial issuing cards with Celtic as BIN sponsor. */
+          @SerializedName("celtic")
+          Celtic celtic;
+
+          /** Can create commercial issuing cards with Cross River Bank as BIN sponsor. */
+          @SerializedName("cross_river_bank")
+          CrossRiverBank crossRiverBank;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Can create commercial issuing cards with Stripe as BIN sponsor. */
+          @SerializedName("stripe")
+          Stripe stripe;
+
+          private Commercial(
+              Celtic celtic,
+              CrossRiverBank crossRiverBank,
+              Map<String, Object> extraParams,
+              Stripe stripe) {
+            this.celtic = celtic;
+            this.crossRiverBank = crossRiverBank;
+            this.extraParams = extraParams;
+            this.stripe = stripe;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Celtic celtic;
+
+            private CrossRiverBank crossRiverBank;
+
+            private Map<String, Object> extraParams;
+
+            private Stripe stripe;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial build() {
+              return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial(
+                  this.celtic, this.crossRiverBank, this.extraParams, this.stripe);
+            }
+
+            /** Can create commercial issuing cards with Celtic as BIN sponsor. */
+            public Builder setCeltic(
+                AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic
+                    celtic) {
+              this.celtic = celtic;
+              return this;
+            }
+
+            /** Can create commercial issuing cards with Cross River Bank as BIN sponsor. */
+            public Builder setCrossRiverBank(
+                AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank
+                    crossRiverBank) {
+              this.crossRiverBank = crossRiverBank;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Can create commercial issuing cards with Stripe as BIN sponsor. */
+            public Builder setStripe(
+                AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe
+                    stripe) {
+              this.stripe = stripe;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Celtic {
+            /** Can create commercial issuing charge cards with Celtic as BIN sponsor. */
+            @SerializedName("charge_card")
+            ChargeCard chargeCard;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Can create commercial issuing spend cards with Celtic as BIN sponsor. */
+            @SerializedName("spend_card")
+            SpendCard spendCard;
+
+            private Celtic(
+                ChargeCard chargeCard, Map<String, Object> extraParams, SpendCard spendCard) {
+              this.chargeCard = chargeCard;
+              this.extraParams = extraParams;
+              this.spendCard = spendCard;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private ChargeCard chargeCard;
+
+              private Map<String, Object> extraParams;
+
+              private SpendCard spendCard;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic
+                  build() {
+                return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                    .Celtic(this.chargeCard, this.extraParams, this.spendCard);
+              }
+
+              /** Can create commercial issuing charge cards with Celtic as BIN sponsor. */
+              public Builder setChargeCard(
+                  AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic
+                          .ChargeCard
+                      chargeCard) {
+                this.chargeCard = chargeCard;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Can create commercial issuing spend cards with Celtic as BIN sponsor. */
+              public Builder setSpendCard(
+                  AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic
+                          .SpendCard
+                      spendCard) {
+                this.spendCard = spendCard;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ChargeCard {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private ChargeCard(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic
+                        .ChargeCard
+                    build() {
+                  return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                      .Celtic.ChargeCard(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic.ChargeCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic.ChargeCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> To request a new Capability for an account, pass true.
+                 * There can be a delay before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class SpendCard {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private SpendCard(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic
+                        .SpendCard
+                    build() {
+                  return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                      .Celtic.SpendCard(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic.SpendCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Celtic.SpendCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> To request a new Capability for an account, pass true.
+                 * There can be a delay before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CrossRiverBank {
+            /** Can create commercial issuing charge cards with Cross River Bank as BIN sponsor. */
+            @SerializedName("charge_card")
+            ChargeCard chargeCard;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Can create commercial issuing spend cards with Cross River Bank as BIN sponsor. */
+            @SerializedName("spend_card")
+            SpendCard spendCard;
+
+            private CrossRiverBank(
+                ChargeCard chargeCard, Map<String, Object> extraParams, SpendCard spendCard) {
+              this.chargeCard = chargeCard;
+              this.extraParams = extraParams;
+              this.spendCard = spendCard;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private ChargeCard chargeCard;
+
+              private Map<String, Object> extraParams;
+
+              private SpendCard spendCard;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                      .CrossRiverBank
+                  build() {
+                return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                    .CrossRiverBank(this.chargeCard, this.extraParams, this.spendCard);
+              }
+
+              /**
+               * Can create commercial issuing charge cards with Cross River Bank as BIN sponsor.
+               */
+              public Builder setChargeCard(
+                  AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                          .CrossRiverBank.ChargeCard
+                      chargeCard) {
+                this.chargeCard = chargeCard;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Can create commercial issuing spend cards with Cross River Bank as BIN sponsor. */
+              public Builder setSpendCard(
+                  AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                          .CrossRiverBank.SpendCard
+                      spendCard) {
+                this.spendCard = spendCard;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ChargeCard {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private ChargeCard(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                        .CrossRiverBank.ChargeCard
+                    build() {
+                  return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                      .CrossRiverBank.ChargeCard(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank.ChargeCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank.ChargeCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> To request a new Capability for an account, pass true.
+                 * There can be a delay before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class SpendCard {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private SpendCard(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                        .CrossRiverBank.SpendCard
+                    build() {
+                  return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                      .CrossRiverBank.SpendCard(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank.SpendCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.CrossRiverBank.SpendCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> To request a new Capability for an account, pass true.
+                 * There can be a delay before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Stripe {
+            /** Can create commercial issuing charge cards with Stripe as BIN sponsor. */
+            @SerializedName("charge_card")
+            ChargeCard chargeCard;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Can create commercial issuing prepaid cards with Stripe as BIN sponsor. */
+            @SerializedName("prepaid_card")
+            PrepaidCard prepaidCard;
+
+            private Stripe(
+                ChargeCard chargeCard, Map<String, Object> extraParams, PrepaidCard prepaidCard) {
+              this.chargeCard = chargeCard;
+              this.extraParams = extraParams;
+              this.prepaidCard = prepaidCard;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private ChargeCard chargeCard;
+
+              private Map<String, Object> extraParams;
+
+              private PrepaidCard prepaidCard;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe
+                  build() {
+                return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                    .Stripe(this.chargeCard, this.extraParams, this.prepaidCard);
+              }
+
+              /** Can create commercial issuing charge cards with Stripe as BIN sponsor. */
+              public Builder setChargeCard(
+                  AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe
+                          .ChargeCard
+                      chargeCard) {
+                this.chargeCard = chargeCard;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Can create commercial issuing prepaid cards with Stripe as BIN sponsor. */
+              public Builder setPrepaidCard(
+                  AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe
+                          .PrepaidCard
+                      prepaidCard) {
+                this.prepaidCard = prepaidCard;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ChargeCard {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private ChargeCard(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe
+                        .ChargeCard
+                    build() {
+                  return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                      .Stripe.ChargeCard(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe.ChargeCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe.ChargeCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> To request a new Capability for an account, pass true.
+                 * There can be a delay before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class PrepaidCard {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              @SerializedName("requested")
+              Boolean requested;
+
+              private PrepaidCard(Map<String, Object> extraParams, Boolean requested) {
+                this.extraParams = extraParams;
+                this.requested = requested;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private Boolean requested;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe
+                        .PrepaidCard
+                    build() {
+                  return new AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial
+                      .Stripe.PrepaidCard(this.extraParams, this.requested);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe.PrepaidCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Configuration.CardCreator.Capabilities.Commercial.Stripe.PrepaidCard#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> To request a new Capability for an account, pass true.
+                 * There can be a delay before the requested Capability becomes active.
+                 */
+                public Builder setRequested(Boolean requested) {
+                  this.requested = requested;
+                  return this;
+                }
+              }
+            }
+          }
+        }
       }
     }
 
@@ -10415,6 +11481,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("account")
         Account account;
 
+        /** Details on the Account's acceptance of Issuing-specific terms of service. */
+        @SerializedName("card_creator")
+        CardCreator cardCreator;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10429,8 +11499,13 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("storer")
         Storer storer;
 
-        private TermsOfService(Account account, Map<String, Object> extraParams, Storer storer) {
+        private TermsOfService(
+            Account account,
+            CardCreator cardCreator,
+            Map<String, Object> extraParams,
+            Storer storer) {
           this.account = account;
+          this.cardCreator = cardCreator;
           this.extraParams = extraParams;
           this.storer = storer;
         }
@@ -10442,6 +11517,8 @@ public class AccountCreateParams extends ApiRequestParams {
         public static class Builder {
           private Account account;
 
+          private CardCreator cardCreator;
+
           private Map<String, Object> extraParams;
 
           private Storer storer;
@@ -10449,7 +11526,7 @@ public class AccountCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountCreateParams.Identity.Attestations.TermsOfService build() {
             return new AccountCreateParams.Identity.Attestations.TermsOfService(
-                this.account, this.extraParams, this.storer);
+                this.account, this.cardCreator, this.extraParams, this.storer);
           }
 
           /**
@@ -10460,6 +11537,13 @@ public class AccountCreateParams extends ApiRequestParams {
           public Builder setAccount(
               AccountCreateParams.Identity.Attestations.TermsOfService.Account account) {
             this.account = account;
+            return this;
+          }
+
+          /** Details on the Account's acceptance of Issuing-specific terms of service. */
+          public Builder setCardCreator(
+              AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator cardCreator) {
+            this.cardCreator = cardCreator;
             return this;
           }
 
@@ -10617,6 +11701,2597 @@ public class AccountCreateParams extends ApiRequestParams {
             public Builder setUserAgent(String userAgent) {
               this.userAgent = userAgent;
               return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CardCreator {
+          /** Terms of service acceptances to create cards for commercial issuing use cases. */
+          @SerializedName("commercial")
+          Commercial commercial;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private CardCreator(Commercial commercial, Map<String, Object> extraParams) {
+            this.commercial = commercial;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Commercial commercial;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator build() {
+              return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator(
+                  this.commercial, this.extraParams);
+            }
+
+            /** Terms of service acceptances to create cards for commercial issuing use cases. */
+            public Builder setCommercial(
+                AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                    commercial) {
+              this.commercial = commercial;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Commercial {
+            /** Terms of service acceptances for Stripe commercial card issuing. */
+            @SerializedName("account_holder")
+            AccountHolder accountHolder;
+
+            /**
+             * Terms of service acceptances for commercial issuing cards with Celtic as BIN sponsor.
+             */
+            @SerializedName("celtic")
+            Celtic celtic;
+
+            /**
+             * Terms of service acceptances for commercial issuing cards with Cross River Bank as
+             * BIN sponsor.
+             */
+            @SerializedName("cross_river_bank")
+            CrossRiverBank crossRiverBank;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            private Commercial(
+                AccountHolder accountHolder,
+                Celtic celtic,
+                CrossRiverBank crossRiverBank,
+                Map<String, Object> extraParams) {
+              this.accountHolder = accountHolder;
+              this.celtic = celtic;
+              this.crossRiverBank = crossRiverBank;
+              this.extraParams = extraParams;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private AccountHolder accountHolder;
+
+              private Celtic celtic;
+
+              private CrossRiverBank crossRiverBank;
+
+              private Map<String, Object> extraParams;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                  build() {
+                return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                    .Commercial(
+                    this.accountHolder, this.celtic, this.crossRiverBank, this.extraParams);
+              }
+
+              /** Terms of service acceptances for Stripe commercial card issuing. */
+              public Builder setAccountHolder(
+                  AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                          .AccountHolder
+                      accountHolder) {
+                this.accountHolder = accountHolder;
+                return this;
+              }
+
+              /**
+               * Terms of service acceptances for commercial issuing cards with Celtic as BIN
+               * sponsor.
+               */
+              public Builder setCeltic(
+                  AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                          .Celtic
+                      celtic) {
+                this.celtic = celtic;
+                return this;
+              }
+
+              /**
+               * Terms of service acceptances for commercial issuing cards with Cross River Bank as
+               * BIN sponsor.
+               */
+              public Builder setCrossRiverBank(
+                  AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                          .CrossRiverBank
+                      crossRiverBank) {
+                this.crossRiverBank = crossRiverBank;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class AccountHolder {
+              /**
+               * <strong>Required.</strong> The time when the Account's representative accepted the
+               * terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+               * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+               */
+              @SerializedName("date")
+              Instant date;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * <strong>Required.</strong> The IP address from which the Account's representative
+               * accepted the terms of service.
+               */
+              @SerializedName("ip")
+              String ip;
+
+              /**
+               * The user agent of the browser from which the Account's representative accepted the
+               * terms of service.
+               */
+              @SerializedName("user_agent")
+              String userAgent;
+
+              private AccountHolder(
+                  Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                this.date = date;
+                this.extraParams = extraParams;
+                this.ip = ip;
+                this.userAgent = userAgent;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Instant date;
+
+                private Map<String, Object> extraParams;
+
+                private String ip;
+
+                private String userAgent;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.AccountHolder
+                    build() {
+                  return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                      .Commercial.AccountHolder(
+                      this.date, this.extraParams, this.ip, this.userAgent);
+                }
+
+                /**
+                 * <strong>Required.</strong> The time when the Account's representative accepted
+                 * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                 * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                 */
+                public Builder setDate(Instant date) {
+                  this.date = date;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.AccountHolder#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.AccountHolder#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> The IP address from which the Account's representative
+                 * accepted the terms of service.
+                 */
+                public Builder setIp(String ip) {
+                  this.ip = ip;
+                  return this;
+                }
+
+                /**
+                 * The user agent of the browser from which the Account's representative accepted
+                 * the terms of service.
+                 */
+                public Builder setUserAgent(String userAgent) {
+                  this.userAgent = userAgent;
+                  return this;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Celtic {
+              /**
+               * Terms of service acceptances for commercial issuing Apple Pay cards with Celtic as
+               * BIN sponsor.
+               */
+              @SerializedName("apple_pay")
+              ApplePay applePay;
+
+              /**
+               * Terms of service acceptances for commercial issuing charge cards with Celtic as BIN
+               * sponsor.
+               */
+              @SerializedName("charge_card")
+              ChargeCard chargeCard;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * Terms of service acceptances for commercial issuing spend cards with Celtic as BIN
+               * sponsor.
+               */
+              @SerializedName("spend_card")
+              SpendCard spendCard;
+
+              private Celtic(
+                  ApplePay applePay,
+                  ChargeCard chargeCard,
+                  Map<String, Object> extraParams,
+                  SpendCard spendCard) {
+                this.applePay = applePay;
+                this.chargeCard = chargeCard;
+                this.extraParams = extraParams;
+                this.spendCard = spendCard;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private ApplePay applePay;
+
+                private ChargeCard chargeCard;
+
+                private Map<String, Object> extraParams;
+
+                private SpendCard spendCard;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.Celtic
+                    build() {
+                  return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                      .Commercial.Celtic(
+                      this.applePay, this.chargeCard, this.extraParams, this.spendCard);
+                }
+
+                /**
+                 * Terms of service acceptances for commercial issuing Apple Pay cards with Celtic
+                 * as BIN sponsor.
+                 */
+                public Builder setApplePay(
+                    AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                            .Celtic.ApplePay
+                        applePay) {
+                  this.applePay = applePay;
+                  return this;
+                }
+
+                /**
+                 * Terms of service acceptances for commercial issuing charge cards with Celtic as
+                 * BIN sponsor.
+                 */
+                public Builder setChargeCard(
+                    AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                            .Celtic.ChargeCard
+                        chargeCard) {
+                  this.chargeCard = chargeCard;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Terms of service acceptances for commercial issuing spend cards with Celtic as
+                 * BIN sponsor.
+                 */
+                public Builder setSpendCard(
+                    AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                            .Celtic.SpendCard
+                        spendCard) {
+                  this.spendCard = spendCard;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ApplePay {
+                /**
+                 * <strong>Required.</strong> The time when the Account's representative accepted
+                 * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                 * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                 */
+                @SerializedName("date")
+                Instant date;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * <strong>Required.</strong> The IP address from which the Account's representative
+                 * accepted the terms of service.
+                 */
+                @SerializedName("ip")
+                String ip;
+
+                /**
+                 * The user agent of the browser from which the Account's representative accepted
+                 * the terms of service.
+                 */
+                @SerializedName("user_agent")
+                String userAgent;
+
+                private ApplePay(
+                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                  this.date = date;
+                  this.extraParams = extraParams;
+                  this.ip = ip;
+                  this.userAgent = userAgent;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Instant date;
+
+                  private Map<String, Object> extraParams;
+
+                  private String ip;
+
+                  private String userAgent;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                          .Commercial.Celtic.ApplePay
+                      build() {
+                    return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.Celtic.ApplePay(
+                        this.date, this.extraParams, this.ip, this.userAgent);
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  public Builder setDate(Instant date) {
+                    this.date = date;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ApplePay#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ApplePay#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  public Builder setIp(String ip) {
+                    this.ip = ip;
+                    return this;
+                  }
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  public Builder setUserAgent(String userAgent) {
+                    this.userAgent = userAgent;
+                    return this;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ChargeCard {
+                /**
+                 * Bank terms of service acceptance for commercial issuing charge cards with Celtic
+                 * as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing charge cards with
+                 * Celtic as BIN sponsor.
+                 */
+                @SerializedName("platform")
+                Platform platform;
+
+                private ChargeCard(
+                    BankTerms bankTerms, Map<String, Object> extraParams, Platform platform) {
+                  this.bankTerms = bankTerms;
+                  this.extraParams = extraParams;
+                  this.platform = platform;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private BankTerms bankTerms;
+
+                  private Map<String, Object> extraParams;
+
+                  private Platform platform;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                          .Commercial.Celtic.ChargeCard
+                      build() {
+                    return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.Celtic.ChargeCard(
+                        this.bankTerms, this.extraParams, this.platform);
+                  }
+
+                  /**
+                   * Bank terms of service acceptance for commercial issuing charge cards with
+                   * Celtic as BIN sponsor.
+                   */
+                  public Builder setBankTerms(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.Celtic.ChargeCard.BankTerms
+                          bankTerms) {
+                    this.bankTerms = bankTerms;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ChargeCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ChargeCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * Platform terms of service acceptance for commercial issuing charge cards with
+                   * Celtic as BIN sponsor.
+                   */
+                  public Builder setPlatform(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.Celtic.ChargeCard.Platform
+                          platform) {
+                    this.platform = platform;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private BankTerms(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.Celtic.ChargeCard.BankTerms
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.Celtic.ChargeCard.BankTerms(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ChargeCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ChargeCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Platform {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private Platform(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.Celtic.ChargeCard.Platform
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.Celtic.ChargeCard.Platform(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ChargeCard.Platform#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.ChargeCard.Platform#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class SpendCard {
+                /**
+                 * Bank terms of service acceptance for commercial issuing spend cards with Celtic
+                 * as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing spend
+                 * cards with Celtic as BIN sponsor.
+                 */
+                @SerializedName("financing_disclosures")
+                FinancingDisclosures financingDisclosures;
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing spend cards with
+                 * Celtic as BIN sponsor.
+                 */
+                @SerializedName("platform")
+                Platform platform;
+
+                private SpendCard(
+                    BankTerms bankTerms,
+                    Map<String, Object> extraParams,
+                    FinancingDisclosures financingDisclosures,
+                    Platform platform) {
+                  this.bankTerms = bankTerms;
+                  this.extraParams = extraParams;
+                  this.financingDisclosures = financingDisclosures;
+                  this.platform = platform;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private BankTerms bankTerms;
+
+                  private Map<String, Object> extraParams;
+
+                  private FinancingDisclosures financingDisclosures;
+
+                  private Platform platform;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                          .Commercial.Celtic.SpendCard
+                      build() {
+                    return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.Celtic.SpendCard(
+                        this.bankTerms, this.extraParams, this.financingDisclosures, this.platform);
+                  }
+
+                  /**
+                   * Bank terms of service acceptance for commercial issuing spend cards with Celtic
+                   * as BIN sponsor.
+                   */
+                  public Builder setBankTerms(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.Celtic.SpendCard.BankTerms
+                          bankTerms) {
+                    this.bankTerms = bankTerms;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * Financial disclosures terms of service acceptance for commercial issuing spend
+                   * cards with Celtic as BIN sponsor.
+                   */
+                  public Builder setFinancingDisclosures(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.Celtic.SpendCard.FinancingDisclosures
+                          financingDisclosures) {
+                    this.financingDisclosures = financingDisclosures;
+                    return this;
+                  }
+
+                  /**
+                   * Platform terms of service acceptance for commercial issuing spend cards with
+                   * Celtic as BIN sponsor.
+                   */
+                  public Builder setPlatform(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.Celtic.SpendCard.Platform
+                          platform) {
+                    this.platform = platform;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private BankTerms(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.Celtic.SpendCard.BankTerms
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.Celtic.SpendCard.BankTerms(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class FinancingDisclosures {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private FinancingDisclosures(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.Celtic.SpendCard.FinancingDisclosures
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.Celtic.SpendCard.FinancingDisclosures(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard.FinancingDisclosures#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard.FinancingDisclosures#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Platform {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private Platform(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.Celtic.SpendCard.Platform
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.Celtic.SpendCard.Platform(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard.Platform#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.Celtic.SpendCard.Platform#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class CrossRiverBank {
+              /**
+               * Terms of service acceptances for commercial issuing Apple Pay cards with Cross
+               * River Bank as BIN sponsor.
+               */
+              @SerializedName("apple_pay")
+              ApplePay applePay;
+
+              /**
+               * Terms of service acceptances for commercial issuing charge cards with Cross River
+               * Bank as BIN sponsor.
+               */
+              @SerializedName("charge_card")
+              ChargeCard chargeCard;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * Terms of service acceptances for commercial issuing spend cards with Cross River
+               * Bank as BIN sponsor.
+               */
+              @SerializedName("spend_card")
+              SpendCard spendCard;
+
+              private CrossRiverBank(
+                  ApplePay applePay,
+                  ChargeCard chargeCard,
+                  Map<String, Object> extraParams,
+                  SpendCard spendCard) {
+                this.applePay = applePay;
+                this.chargeCard = chargeCard;
+                this.extraParams = extraParams;
+                this.spendCard = spendCard;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private ApplePay applePay;
+
+                private ChargeCard chargeCard;
+
+                private Map<String, Object> extraParams;
+
+                private SpendCard spendCard;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.CrossRiverBank
+                    build() {
+                  return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                      .Commercial.CrossRiverBank(
+                      this.applePay, this.chargeCard, this.extraParams, this.spendCard);
+                }
+
+                /**
+                 * Terms of service acceptances for commercial issuing Apple Pay cards with Cross
+                 * River Bank as BIN sponsor.
+                 */
+                public Builder setApplePay(
+                    AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                            .CrossRiverBank.ApplePay
+                        applePay) {
+                  this.applePay = applePay;
+                  return this;
+                }
+
+                /**
+                 * Terms of service acceptances for commercial issuing charge cards with Cross River
+                 * Bank as BIN sponsor.
+                 */
+                public Builder setChargeCard(
+                    AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                            .CrossRiverBank.ChargeCard
+                        chargeCard) {
+                  this.chargeCard = chargeCard;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Terms of service acceptances for commercial issuing spend cards with Cross River
+                 * Bank as BIN sponsor.
+                 */
+                public Builder setSpendCard(
+                    AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial
+                            .CrossRiverBank.SpendCard
+                        spendCard) {
+                  this.spendCard = spendCard;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ApplePay {
+                /**
+                 * <strong>Required.</strong> The time when the Account's representative accepted
+                 * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                 * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                 */
+                @SerializedName("date")
+                Instant date;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * <strong>Required.</strong> The IP address from which the Account's representative
+                 * accepted the terms of service.
+                 */
+                @SerializedName("ip")
+                String ip;
+
+                /**
+                 * The user agent of the browser from which the Account's representative accepted
+                 * the terms of service.
+                 */
+                @SerializedName("user_agent")
+                String userAgent;
+
+                private ApplePay(
+                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                  this.date = date;
+                  this.extraParams = extraParams;
+                  this.ip = ip;
+                  this.userAgent = userAgent;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Instant date;
+
+                  private Map<String, Object> extraParams;
+
+                  private String ip;
+
+                  private String userAgent;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                          .Commercial.CrossRiverBank.ApplePay
+                      build() {
+                    return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.CrossRiverBank.ApplePay(
+                        this.date, this.extraParams, this.ip, this.userAgent);
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  public Builder setDate(Instant date) {
+                    this.date = date;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ApplePay#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ApplePay#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  public Builder setIp(String ip) {
+                    this.ip = ip;
+                    return this;
+                  }
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  public Builder setUserAgent(String userAgent) {
+                    this.userAgent = userAgent;
+                    return this;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ChargeCard {
+                /**
+                 * Bank terms of service acceptance for commercial issuing charge cards with Cross
+                 * River Bank as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing charge
+                 * cards with Cross River Bank as BIN sponsor.
+                 */
+                @SerializedName("financing_disclosures")
+                FinancingDisclosures financingDisclosures;
+
+                /**
+                 * Platform terms of service acceptance for commercial issuing charge cards with
+                 * Cross River Bank as BIN sponsor.
+                 */
+                @SerializedName("platform")
+                Platform platform;
+
+                private ChargeCard(
+                    BankTerms bankTerms,
+                    Map<String, Object> extraParams,
+                    FinancingDisclosures financingDisclosures,
+                    Platform platform) {
+                  this.bankTerms = bankTerms;
+                  this.extraParams = extraParams;
+                  this.financingDisclosures = financingDisclosures;
+                  this.platform = platform;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private BankTerms bankTerms;
+
+                  private Map<String, Object> extraParams;
+
+                  private FinancingDisclosures financingDisclosures;
+
+                  private Platform platform;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                          .Commercial.CrossRiverBank.ChargeCard
+                      build() {
+                    return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.CrossRiverBank.ChargeCard(
+                        this.bankTerms, this.extraParams, this.financingDisclosures, this.platform);
+                  }
+
+                  /**
+                   * Bank terms of service acceptance for commercial issuing charge cards with Cross
+                   * River Bank as BIN sponsor.
+                   */
+                  public Builder setBankTerms(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.CrossRiverBank.ChargeCard.BankTerms
+                          bankTerms) {
+                    this.bankTerms = bankTerms;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * Financial disclosures terms of service acceptance for commercial issuing charge
+                   * cards with Cross River Bank as BIN sponsor.
+                   */
+                  public Builder setFinancingDisclosures(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.CrossRiverBank.ChargeCard.FinancingDisclosures
+                          financingDisclosures) {
+                    this.financingDisclosures = financingDisclosures;
+                    return this;
+                  }
+
+                  /**
+                   * Platform terms of service acceptance for commercial issuing charge cards with
+                   * Cross River Bank as BIN sponsor.
+                   */
+                  public Builder setPlatform(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.CrossRiverBank.ChargeCard.Platform
+                          platform) {
+                    this.platform = platform;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private BankTerms(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.CrossRiverBank.ChargeCard.BankTerms
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.CrossRiverBank.ChargeCard.BankTerms(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class FinancingDisclosures {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private FinancingDisclosures(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.CrossRiverBank.ChargeCard.FinancingDisclosures
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.CrossRiverBank.ChargeCard.FinancingDisclosures(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard.FinancingDisclosures#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard.FinancingDisclosures#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Platform {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private Platform(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.CrossRiverBank.ChargeCard.Platform
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.CrossRiverBank.ChargeCard.Platform(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard.Platform#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.ChargeCard.Platform#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class SpendCard {
+                /**
+                 * Bank terms of service acceptance for commercial issuing spend cards with Cross
+                 * River Bank as BIN sponsor.
+                 */
+                @SerializedName("bank_terms")
+                BankTerms bankTerms;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * Financial disclosures terms of service acceptance for commercial issuing spend
+                 * cards with Cross River Bank as BIN sponsor.
+                 */
+                @SerializedName("financing_disclosures")
+                FinancingDisclosures financingDisclosures;
+
+                private SpendCard(
+                    BankTerms bankTerms,
+                    Map<String, Object> extraParams,
+                    FinancingDisclosures financingDisclosures) {
+                  this.bankTerms = bankTerms;
+                  this.extraParams = extraParams;
+                  this.financingDisclosures = financingDisclosures;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private BankTerms bankTerms;
+
+                  private Map<String, Object> extraParams;
+
+                  private FinancingDisclosures financingDisclosures;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                          .Commercial.CrossRiverBank.SpendCard
+                      build() {
+                    return new AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                        .Commercial.CrossRiverBank.SpendCard(
+                        this.bankTerms, this.extraParams, this.financingDisclosures);
+                  }
+
+                  /**
+                   * Bank terms of service acceptance for commercial issuing spend cards with Cross
+                   * River Bank as BIN sponsor.
+                   */
+                  public Builder setBankTerms(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.CrossRiverBank.SpendCard.BankTerms
+                          bankTerms) {
+                    this.bankTerms = bankTerms;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.SpendCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.SpendCard#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * Financial disclosures terms of service acceptance for commercial issuing spend
+                   * cards with Cross River Bank as BIN sponsor.
+                   */
+                  public Builder setFinancingDisclosures(
+                      AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                              .Commercial.CrossRiverBank.SpendCard.FinancingDisclosures
+                          financingDisclosures) {
+                    this.financingDisclosures = financingDisclosures;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class BankTerms {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private BankTerms(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.CrossRiverBank.SpendCard.BankTerms
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.CrossRiverBank.SpendCard.BankTerms(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.SpendCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.SpendCard.BankTerms#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class FinancingDisclosures {
+                  /**
+                   * <strong>Required.</strong> The time when the Account's representative accepted
+                   * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
+                   * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                   */
+                  @SerializedName("date")
+                  Instant date;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /**
+                   * <strong>Required.</strong> The IP address from which the Account's
+                   * representative accepted the terms of service.
+                   */
+                  @SerializedName("ip")
+                  String ip;
+
+                  /**
+                   * The user agent of the browser from which the Account's representative accepted
+                   * the terms of service.
+                   */
+                  @SerializedName("user_agent")
+                  String userAgent;
+
+                  private FinancingDisclosures(
+                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    this.date = date;
+                    this.extraParams = extraParams;
+                    this.ip = ip;
+                    this.userAgent = userAgent;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Instant date;
+
+                    private Map<String, Object> extraParams;
+
+                    private String ip;
+
+                    private String userAgent;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator
+                            .Commercial.CrossRiverBank.SpendCard.FinancingDisclosures
+                        build() {
+                      return new AccountCreateParams.Identity.Attestations.TermsOfService
+                          .CardCreator.Commercial.CrossRiverBank.SpendCard.FinancingDisclosures(
+                          this.date, this.extraParams, this.ip, this.userAgent);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The time when the Account's representative
+                     * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
+                     * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
+                     */
+                    public Builder setDate(Instant date) {
+                      this.date = date;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.SpendCard.FinancingDisclosures#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator.Commercial.CrossRiverBank.SpendCard.FinancingDisclosures#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The IP address from which the Account's
+                     * representative accepted the terms of service.
+                     */
+                    public Builder setIp(String ip) {
+                      this.ip = ip;
+                      return this;
+                    }
+
+                    /**
+                     * The user agent of the browser from which the Account's representative
+                     * accepted the terms of service.
+                     */
+                    public Builder setUserAgent(String userAgent) {
+                      this.userAgent = userAgent;
+                      return this;
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -17344,6 +21019,9 @@ public class AccountCreateParams extends ApiRequestParams {
   }
 
   public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("configuration.card_creator")
+    CONFIGURATION__CARD_CREATOR("configuration.card_creator"),
+
     @SerializedName("configuration.customer")
     CONFIGURATION__CUSTOMER("configuration.customer"),
 

@@ -6,7 +6,6 @@ import com.stripe.events.V1BillingMeterErrorReportTriggeredEvent;
 import com.stripe.events.V1BillingMeterErrorReportTriggeredEventNotification;
 import com.stripe.exception.StripeException;
 import com.stripe.model.billing.Meter;
-import com.stripe.model.v2.core.Event;
 import com.stripe.model.v2.core.EventNotification;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -67,33 +66,39 @@ public class EventNotificationWebhookHandler {
         String sigHeader = exchange.getRequestHeaders().getFirst("Stripe-Signature");
 
         try {
-          EventNotification eventNotif =
+          EventNotification notif =
               client.parseEventNotification(webhookBody, sigHeader, WEBHOOK_SECRET);
 
-          // determine what sort of event you have
-          if (eventNotif instanceof V1BillingMeterErrorReportTriggeredEventNotification) {
+          if (notif instanceof V1BillingMeterErrorReportTriggeredEventNotification) {
             V1BillingMeterErrorReportTriggeredEventNotification eventNotification =
-                (V1BillingMeterErrorReportTriggeredEventNotification) eventNotif;
+                (V1BillingMeterErrorReportTriggeredEventNotification) notif;
 
-            // after casting, can fetch the related object (which is correctly typed)
+            // there's basic info about the related object in the notification
+            System.out.println(
+                "Meter w/ id " + eventNotification.getRelatedObject().getId() + " had a problem");
+
+            // or you can fetch the full object form the API for more details
             Meter meter = eventNotification.fetchRelatedObject();
-            System.out.println(meter.getId());
+            StringBuilder sb = new StringBuilder();
+            sb.append("Meter ")
+                .append(meter.getDisplayName())
+                .append(" (")
+                .append(meter.getId())
+                .append(") had a problem");
+            System.out.println(sb.toString());
 
+            // And you can always fetch the full event:
             V1BillingMeterErrorReportTriggeredEvent event = eventNotification.fetchEvent();
-            System.out.println(event.getData().getDeveloperMessageSummary());
-
-            // add additional logic
-          }
-          // ... check other event types you know about
-          else if (eventNotif instanceof UnknownEventNotification) {
-            UnknownEventNotification unknownEvent = (UnknownEventNotification) eventNotif;
-            System.out.println("Received unknown event: " + unknownEvent.getId());
-            // can keep matching on the "type" field
-            // other helper methods still work, but you'll have to handle types yourself
+            System.out.println("More info: " + event.getData().getDeveloperMessageSummary());
+          } else if (notif instanceof UnknownEventNotification) {
+            // Events that were introduced after this SDK version release are
+            // represented as `UnknownEventNotification`s.
+            // They're valid, the SDK just doesn't have corresponding classes for them.
+            // You must match on the "type" property instead.
+            UnknownEventNotification unknownEvent = (UnknownEventNotification) notif;
             if (unknownEvent.getType().equals("some.new.event")) {
-              Event event = unknownEvent.fetchEvent();
-              System.out.println(event.getReason());
-              // handle
+              // you can still `.fetchEvent()` and `.fetchRelatedObject()`, but the latter may
+              // return `null` if that event type doesn't have a related object.
             }
           }
 

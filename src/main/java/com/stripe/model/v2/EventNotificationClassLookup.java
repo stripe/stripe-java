@@ -489,9 +489,6 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v1.transfer.updated", com.stripe.events.V1TransferUpdatedEventNotification.class);
     eventClassLookup.put(
-        "v2.billing.bill_setting.updated",
-        com.stripe.events.V2BillingBillSettingUpdatedEventNotification.class);
-    eventClassLookup.put(
         "v2.billing.cadence.billed",
         com.stripe.events.V2BillingCadenceBilledEventNotification.class);
     eventClassLookup.put(
@@ -612,6 +609,15 @@ public final class EventNotificationClassLookup {
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEventNotification.class);
     eventClassLookup.put(
         "v2.core.account.updated", com.stripe.events.V2CoreAccountUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.account[configuration.card_creator].capability_status_updated",
+        com.stripe.events
+            .V2CoreAccountIncludingConfigurationCardCreatorCapabilityStatusUpdatedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.core.account[configuration.card_creator].updated",
+        com.stripe.events.V2CoreAccountIncludingConfigurationCardCreatorUpdatedEventNotification
+            .class);
     eventClassLookup.put(
         "v2.core.account[configuration.customer].capability_status_updated",
         com.stripe.events

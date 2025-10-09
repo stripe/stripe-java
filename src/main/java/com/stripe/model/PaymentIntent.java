@@ -2786,6 +2786,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentDetails extends StripeObject {
+    @SerializedName("benefit")
+    Benefit benefit;
+
     @SerializedName("car_rental")
     CarRental carRental;
 
@@ -2805,6 +2808,31 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("subscription")
     Subscription subscription;
+
+    /**
+     * For more details about Benefit, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Benefit extends StripeObject {
+      @SerializedName("fr_meal_voucher")
+      FrMealVoucher frMealVoucher;
+
+      /**
+       * For more details about FrMealVoucher, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FrMealVoucher extends StripeObject {
+        /** The 14-digit SIRET of the meal voucher acceptor. */
+        @SerializedName("siret")
+        String siret;
+      }
+    }
 
     /**
      * For more details about CarRental, please refer to the <a

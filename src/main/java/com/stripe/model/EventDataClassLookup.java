@@ -69,6 +69,7 @@ public final class EventDataClassLookup {
         com.stripe.model.PaymentIntentAmountDetailsLineItem.class);
     classLookup.put("payment_link", com.stripe.model.PaymentLink.class);
     classLookup.put("payment_method", com.stripe.model.PaymentMethod.class);
+    classLookup.put("payment_method_balance", com.stripe.model.PaymentMethodBalance.class);
     classLookup.put(
         "payment_method_configuration", com.stripe.model.PaymentMethodConfiguration.class);
     classLookup.put("payment_method_domain", com.stripe.model.PaymentMethodDomain.class);

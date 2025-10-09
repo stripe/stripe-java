@@ -161,6 +161,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("return_url")
   String returnUrl;
 
+  /** Provides industry-specific information about the SetupIntent. */
+  @SerializedName("setup_details")
+  SetupDetails setupDetails;
+
   /**
    * If you populate this hash, this SetupIntent generates a {@code single_use} mandate after
    * successful completion.
@@ -206,6 +210,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes,
       String returnUrl,
+      SetupDetails setupDetails,
       SingleUse singleUse,
       Usage usage,
       Boolean useStripeSdk) {
@@ -228,6 +233,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.returnUrl = returnUrl;
+    this.setupDetails = setupDetails;
     this.singleUse = singleUse;
     this.usage = usage;
     this.useStripeSdk = useStripeSdk;
@@ -276,6 +282,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private String returnUrl;
 
+    private SetupDetails setupDetails;
+
     private SingleUse singleUse;
 
     private Usage usage;
@@ -304,6 +312,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.returnUrl,
+          this.setupDetails,
           this.singleUse,
           this.usage,
           this.useStripeSdk);
@@ -585,6 +594,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /** Provides industry-specific information about the SetupIntent. */
+    public Builder setSetupDetails(SetupIntentCreateParams.SetupDetails setupDetails) {
+      this.setupDetails = setupDetails;
       return this;
     }
 
@@ -12454,6 +12469,221 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         VerificationMethod(String value) {
           this.value = value;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SetupDetails {
+    /** Benefit details for this SetupIntent. */
+    @SerializedName("benefit")
+    Benefit benefit;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private SetupDetails(Benefit benefit, Map<String, Object> extraParams) {
+      this.benefit = benefit;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Benefit benefit;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SetupIntentCreateParams.SetupDetails build() {
+        return new SetupIntentCreateParams.SetupDetails(this.benefit, this.extraParams);
+      }
+
+      /** Benefit details for this SetupIntent. */
+      public Builder setBenefit(SetupIntentCreateParams.SetupDetails.Benefit benefit) {
+        this.benefit = benefit;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SetupIntentCreateParams.SetupDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SetupIntentCreateParams.SetupDetails#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Benefit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** French meal voucher benefit details for this SetupIntent. */
+      @SerializedName("fr_meal_voucher")
+      FrMealVoucher frMealVoucher;
+
+      private Benefit(Map<String, Object> extraParams, FrMealVoucher frMealVoucher) {
+        this.extraParams = extraParams;
+        this.frMealVoucher = frMealVoucher;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private FrMealVoucher frMealVoucher;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SetupIntentCreateParams.SetupDetails.Benefit build() {
+          return new SetupIntentCreateParams.SetupDetails.Benefit(
+              this.extraParams, this.frMealVoucher);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.SetupDetails.Benefit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SetupIntentCreateParams.SetupDetails.Benefit#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** French meal voucher benefit details for this SetupIntent. */
+        public Builder setFrMealVoucher(
+            SetupIntentCreateParams.SetupDetails.Benefit.FrMealVoucher frMealVoucher) {
+          this.frMealVoucher = frMealVoucher;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FrMealVoucher {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+        @SerializedName("siret")
+        String siret;
+
+        private FrMealVoucher(Map<String, Object> extraParams, String siret) {
+          this.extraParams = extraParams;
+          this.siret = siret;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String siret;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SetupIntentCreateParams.SetupDetails.Benefit.FrMealVoucher build() {
+            return new SetupIntentCreateParams.SetupDetails.Benefit.FrMealVoucher(
+                this.extraParams, this.siret);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SetupIntentCreateParams.SetupDetails.Benefit.FrMealVoucher#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SetupIntentCreateParams.SetupDetails.Benefit.FrMealVoucher#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+          public Builder setSiret(String siret) {
+            this.siret = siret;
+            return this;
+          }
         }
       }
     }

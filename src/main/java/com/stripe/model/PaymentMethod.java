@@ -10,6 +10,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.PaymentMethodAttachParams;
+import com.stripe.param.PaymentMethodCheckBalanceParams;
 import com.stripe.param.PaymentMethodCreateParams;
 import com.stripe.param.PaymentMethodDetachParams;
 import com.stripe.param.PaymentMethodListParams;
@@ -460,6 +461,55 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentMethod.class);
+  }
+
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance() throws StripeException {
+    return checkBalance((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(RequestOptions options) throws StripeException {
+    return checkBalance((Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(Map<String, Object> params) throws StripeException {
+    return checkBalance(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_methods/%s/check_balance", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, PaymentMethodBalance.class);
+  }
+
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(PaymentMethodCheckBalanceParams params)
+      throws StripeException {
+    return checkBalance(params, (RequestOptions) null);
+  }
+
+  /** Retrieves a payment method’s balance. */
+  public PaymentMethodBalance checkBalance(
+      PaymentMethodCheckBalanceParams params, RequestOptions options) throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_methods/%s/check_balance", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, PaymentMethodBalance.class);
   }
 
   /**
@@ -965,6 +1015,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Card extends StripeObject {
+    @SerializedName("benefits")
+    Benefits benefits;
+
     /**
      * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code discover},
      * {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code
@@ -1068,6 +1121,23 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** If this Card is part of a card wallet, this contains the details of the card wallet. */
     @SerializedName("wallet")
     Wallet wallet;
+
+    /**
+     * For more details about Benefits, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Benefits extends StripeObject {
+      /** Issuer of this benefit card. */
+      @SerializedName("issuer")
+      String issuer;
+
+      /** Available benefit programs for this card. */
+      @SerializedName("programs")
+      List<String> programs;
+    }
 
     /**
      * For more details about Checks, please refer to the <a href="https://docs.stripe.com/api">API

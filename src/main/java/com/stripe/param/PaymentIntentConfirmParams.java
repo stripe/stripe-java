@@ -2513,6 +2513,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentDetails {
+    /** Benefit details for this PaymentIntent. */
+    @SerializedName("benefit")
+    Benefit benefit;
+
     /** Car rental details for this PaymentIntent. */
     @SerializedName("car_rental")
     CarRental carRental;
@@ -2554,6 +2558,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     Subscription subscription;
 
     private PaymentDetails(
+        Benefit benefit,
         CarRental carRental,
         Object customerReference,
         EventDetails eventDetails,
@@ -2562,6 +2567,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Lodging lodging,
         Object orderReference,
         Subscription subscription) {
+      this.benefit = benefit;
       this.carRental = carRental;
       this.customerReference = customerReference;
       this.eventDetails = eventDetails;
@@ -2577,6 +2583,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Benefit benefit;
+
       private CarRental carRental;
 
       private Object customerReference;
@@ -2596,6 +2604,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentConfirmParams.PaymentDetails build() {
         return new PaymentIntentConfirmParams.PaymentDetails(
+            this.benefit,
             this.carRental,
             this.customerReference,
             this.eventDetails,
@@ -2604,6 +2613,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
             this.lodging,
             this.orderReference,
             this.subscription);
+      }
+
+      /** Benefit details for this PaymentIntent. */
+      public Builder setBenefit(PaymentIntentConfirmParams.PaymentDetails.Benefit benefit) {
+        this.benefit = benefit;
+        return this;
       }
 
       /** Car rental details for this PaymentIntent. */
@@ -2693,6 +2708,154 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           PaymentIntentConfirmParams.PaymentDetails.Subscription subscription) {
         this.subscription = subscription;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Benefit {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** French meal voucher benefit details for this PaymentIntent. */
+      @SerializedName("fr_meal_voucher")
+      FrMealVoucher frMealVoucher;
+
+      private Benefit(Map<String, Object> extraParams, FrMealVoucher frMealVoucher) {
+        this.extraParams = extraParams;
+        this.frMealVoucher = frMealVoucher;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private FrMealVoucher frMealVoucher;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentConfirmParams.PaymentDetails.Benefit build() {
+          return new PaymentIntentConfirmParams.PaymentDetails.Benefit(
+              this.extraParams, this.frMealVoucher);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentDetails.Benefit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.PaymentDetails.Benefit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** French meal voucher benefit details for this PaymentIntent. */
+        public Builder setFrMealVoucher(
+            PaymentIntentConfirmParams.PaymentDetails.Benefit.FrMealVoucher frMealVoucher) {
+          this.frMealVoucher = frMealVoucher;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class FrMealVoucher {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+        @SerializedName("siret")
+        String siret;
+
+        private FrMealVoucher(Map<String, Object> extraParams, String siret) {
+          this.extraParams = extraParams;
+          this.siret = siret;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String siret;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentConfirmParams.PaymentDetails.Benefit.FrMealVoucher build() {
+            return new PaymentIntentConfirmParams.PaymentDetails.Benefit.FrMealVoucher(
+                this.extraParams, this.siret);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentDetails.Benefit.FrMealVoucher#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.PaymentDetails.Benefit.FrMealVoucher#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The 14-digit SIRET of the meal voucher acceptor. */
+          public Builder setSiret(String siret) {
+            this.siret = siret;
+            return this;
+          }
+        }
       }
     }
 
