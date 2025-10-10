@@ -25,7 +25,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("applicability_config")
   ApplicabilityConfig applicabilityConfig;
 
-  /** <strong>Required.</strong> The category of this credit grant. */
+  /** The category of this credit grant. It defaults to {@code paid} if not specified. */
   @SerializedName("category")
   Category category;
 
@@ -171,7 +171,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The category of this credit grant. */
+    /** The category of this credit grant. It defaults to {@code paid} if not specified. */
     public Builder setCategory(CreditGrantCreateParams.Category category) {
       this.category = category;
       return this;
