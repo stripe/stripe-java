@@ -4,6 +4,7 @@ package com.stripe.model.identity;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
+import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
@@ -193,6 +194,15 @@ public class VerificationReport extends ApiResource implements HasId {
     @SerializedName("address")
     Address address;
 
+    /**
+     * If document was not verified due to extracted data being on the blocklist, this is the token
+     * of the BlocklistEntry that blocked it.
+     */
+    @SerializedName("blocked_by_entry")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<BlocklistEntry> blockedByEntry;
+
     /** Date of birth as it appears in the document. */
     @SerializedName("dob")
     Dob dob;
@@ -263,6 +273,25 @@ public class VerificationReport extends ApiResource implements HasId {
     /** Sex as it appears in the document. */
     @SerializedName("unparsed_sex")
     String unparsedSex;
+
+    /** Get ID of expandable {@code blockedByEntry} object. */
+    public String getBlockedByEntry() {
+      return (this.blockedByEntry != null) ? this.blockedByEntry.getId() : null;
+    }
+
+    public void setBlockedByEntry(String id) {
+      this.blockedByEntry = ApiResource.setExpandableFieldId(id, this.blockedByEntry);
+    }
+
+    /** Get expanded {@code blockedByEntry}. */
+    public BlocklistEntry getBlockedByEntryObject() {
+      return (this.blockedByEntry != null) ? this.blockedByEntry.getExpanded() : null;
+    }
+
+    public void setBlockedByEntryObject(BlocklistEntry expandableObject) {
+      this.blockedByEntry =
+          new ExpandableField<BlocklistEntry>(expandableObject.getId(), expandableObject);
+    }
 
     /** Point in Time. */
     @Getter
@@ -594,6 +623,15 @@ public class VerificationReport extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Selfie extends StripeObject {
     /**
+     * If selfie was not verified due to being on the blocklist, this is the token of the
+     * BlocklistEntry that blocked it.
+     */
+    @SerializedName("blocked_by_entry")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<BlocklistEntry> blockedByEntry;
+
+    /**
      * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the
      * identity document used in this check.
      */
@@ -618,6 +656,25 @@ public class VerificationReport extends ApiResource implements HasId {
      */
     @SerializedName("status")
     String status;
+
+    /** Get ID of expandable {@code blockedByEntry} object. */
+    public String getBlockedByEntry() {
+      return (this.blockedByEntry != null) ? this.blockedByEntry.getId() : null;
+    }
+
+    public void setBlockedByEntry(String id) {
+      this.blockedByEntry = ApiResource.setExpandableFieldId(id, this.blockedByEntry);
+    }
+
+    /** Get expanded {@code blockedByEntry}. */
+    public BlocklistEntry getBlockedByEntryObject() {
+      return (this.blockedByEntry != null) ? this.blockedByEntry.getExpanded() : null;
+    }
+
+    public void setBlockedByEntryObject(BlocklistEntry expandableObject) {
+      this.blockedByEntry =
+          new ExpandableField<BlocklistEntry>(expandableObject.getId(), expandableObject);
+    }
 
     /**
      * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API

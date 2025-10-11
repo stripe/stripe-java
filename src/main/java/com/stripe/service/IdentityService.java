@@ -9,6 +9,10 @@ public final class IdentityService extends ApiService {
     super(responseGetter);
   }
 
+  public com.stripe.service.identity.BlocklistEntryService blocklistEntries() {
+    return new com.stripe.service.identity.BlocklistEntryService(this.getResponseGetter());
+  }
+
   public com.stripe.service.identity.VerificationReportService verificationReports() {
     return new com.stripe.service.identity.VerificationReportService(this.getResponseGetter());
   }

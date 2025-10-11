@@ -12,19 +12,8 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class VerificationReportListParams extends ApiRequestParams {
-  /** Only return VerificationReports that were blocked by this BlocklistEntry id. */
-  @SerializedName("blocked_by_entry")
-  String blockedByEntry;
-
-  /**
-   * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
-   * be used to reconcile this verification with your internal systems.
-   */
-  @SerializedName("client_reference_id")
-  String clientReferenceId;
-
-  /** Only return VerificationReports that were created during the given date interval. */
+public class BlocklistEntryListParams extends ApiRequestParams {
+  /** Only return BlocklistEntries that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
@@ -66,38 +55,37 @@ public class VerificationReportListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return VerificationReports of this type. */
+  /** Only return blocklist entries with the specified status. */
+  @SerializedName("status")
+  Status status;
+
+  /** Only return blocklist entries of the specified type. */
   @SerializedName("type")
   Type type;
 
-  /**
-   * Only return VerificationReports created by this VerificationSession ID. It is allowed to
-   * provide a VerificationIntent ID.
-   */
-  @SerializedName("verification_session")
-  String verificationSession;
+  /** Only return blocklist entries created from this verification report. */
+  @SerializedName("verification_report")
+  String verificationReport;
 
-  private VerificationReportListParams(
-      String blockedByEntry,
-      String clientReferenceId,
+  private BlocklistEntryListParams(
       Object created,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter,
+      Status status,
       Type type,
-      String verificationSession) {
-    this.blockedByEntry = blockedByEntry;
-    this.clientReferenceId = clientReferenceId;
+      String verificationReport) {
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
+    this.status = status;
     this.type = type;
-    this.verificationSession = verificationSession;
+    this.verificationReport = verificationReport;
   }
 
   public static Builder builder() {
@@ -105,10 +93,6 @@ public class VerificationReportListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String blockedByEntry;
-
-    private String clientReferenceId;
-
     private Object created;
 
     private String endingBefore;
@@ -121,47 +105,33 @@ public class VerificationReportListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private Status status;
+
     private Type type;
 
-    private String verificationSession;
+    private String verificationReport;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public VerificationReportListParams build() {
-      return new VerificationReportListParams(
-          this.blockedByEntry,
-          this.clientReferenceId,
+    public BlocklistEntryListParams build() {
+      return new BlocklistEntryListParams(
           this.created,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
           this.startingAfter,
+          this.status,
           this.type,
-          this.verificationSession);
+          this.verificationReport);
     }
 
-    /** Only return VerificationReports that were blocked by this BlocklistEntry id. */
-    public Builder setBlockedByEntry(String blockedByEntry) {
-      this.blockedByEntry = blockedByEntry;
-      return this;
-    }
-
-    /**
-     * A string to reference this user. This can be a customer ID, a session ID, or similar, and can
-     * be used to reconcile this verification with your internal systems.
-     */
-    public Builder setClientReferenceId(String clientReferenceId) {
-      this.clientReferenceId = clientReferenceId;
-      return this;
-    }
-
-    /** Only return VerificationReports that were created during the given date interval. */
-    public Builder setCreated(VerificationReportListParams.Created created) {
+    /** Only return BlocklistEntries that were created during the given date interval. */
+    public Builder setCreated(BlocklistEntryListParams.Created created) {
       this.created = created;
       return this;
     }
 
-    /** Only return VerificationReports that were created during the given date interval. */
+    /** Only return BlocklistEntries that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
@@ -181,7 +151,7 @@ public class VerificationReportListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * VerificationReportListParams#expand} for the field documentation.
+     * BlocklistEntryListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -194,7 +164,7 @@ public class VerificationReportListParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * VerificationReportListParams#expand} for the field documentation.
+     * BlocklistEntryListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -207,7 +177,7 @@ public class VerificationReportListParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * VerificationReportListParams#extraParams} for the field documentation.
+     * BlocklistEntryListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -220,7 +190,7 @@ public class VerificationReportListParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link VerificationReportListParams#extraParams} for the field documentation.
+     * See {@link BlocklistEntryListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -250,18 +220,21 @@ public class VerificationReportListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return VerificationReports of this type. */
-    public Builder setType(VerificationReportListParams.Type type) {
+    /** Only return blocklist entries with the specified status. */
+    public Builder setStatus(BlocklistEntryListParams.Status status) {
+      this.status = status;
+      return this;
+    }
+
+    /** Only return blocklist entries of the specified type. */
+    public Builder setType(BlocklistEntryListParams.Type type) {
       this.type = type;
       return this;
     }
 
-    /**
-     * Only return VerificationReports created by this VerificationSession ID. It is allowed to
-     * provide a VerificationIntent ID.
-     */
-    public Builder setVerificationSession(String verificationSession) {
-      this.verificationSession = verificationSession;
+    /** Only return blocklist entries created from this verification report. */
+    public Builder setVerificationReport(String verificationReport) {
+      this.verificationReport = verificationReport;
       return this;
     }
   }
@@ -318,15 +291,15 @@ public class VerificationReportListParams extends ApiRequestParams {
       private Long lte;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public VerificationReportListParams.Created build() {
-        return new VerificationReportListParams.Created(
+      public BlocklistEntryListParams.Created build() {
+        return new BlocklistEntryListParams.Created(
             this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * VerificationReportListParams.Created#extraParams} for the field documentation.
+       * BlocklistEntryListParams.Created#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -339,7 +312,7 @@ public class VerificationReportListParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link VerificationReportListParams.Created#extraParams} for the field documentation.
+       * See {@link BlocklistEntryListParams.Created#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -375,12 +348,30 @@ public class VerificationReportListParams extends ApiRequestParams {
     }
   }
 
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("active")
+    ACTIVE("active"),
+
+    @SerializedName("disabled")
+    DISABLED("disabled"),
+
+    @SerializedName("redacted")
+    REDACTED("redacted");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
+      this.value = value;
+    }
+  }
+
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("document")
     DOCUMENT("document"),
 
-    @SerializedName("id_number")
-    ID_NUMBER("id_number");
+    @SerializedName("selfie")
+    SELFIE("selfie");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

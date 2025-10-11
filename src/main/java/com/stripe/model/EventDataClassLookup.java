@@ -177,6 +177,7 @@ public final class EventDataClassLookup {
 
     classLookup.put("forwarding.request", com.stripe.model.forwarding.Request.class);
 
+    classLookup.put("identity.blocklist_entry", com.stripe.model.identity.BlocklistEntry.class);
     classLookup.put(
         "identity.verification_report", com.stripe.model.identity.VerificationReport.class);
     classLookup.put(
