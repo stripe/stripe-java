@@ -1817,7 +1817,11 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("button_color")
     Object buttonColor;
 
-    /** A string to override the business name shown on the Checkout Session. */
+    /**
+     * A string to override the business name shown on the Checkout Session. This only shows at the
+     * top of the Checkout page, and your business name still appears in terms, receipts, and other
+     * places.
+     */
     @SerializedName("display_name")
     String displayName;
 
@@ -1838,11 +1842,11 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("font_family")
     ApiRequestParams.EnumParam fontFamily;
 
-    /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    /** The icon for the Checkout Session. For best results, use a square image. */
     @SerializedName("icon")
     Icon icon;
 
-    /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    /** The logo for the Checkout Session. */
     @SerializedName("logo")
     Logo logo;
 
@@ -1947,7 +1951,11 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A string to override the business name shown on the Checkout Session. */
+      /**
+       * A string to override the business name shown on the Checkout Session. This only shows at
+       * the top of the Checkout page, and your business name still appears in terms, receipts, and
+       * other places.
+       */
       public Builder setDisplayName(String displayName) {
         this.displayName = displayName;
         return this;
@@ -1999,13 +2007,13 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+      /** The icon for the Checkout Session. For best results, use a square image. */
       public Builder setIcon(SessionCreateParams.BrandingSettings.Icon icon) {
         this.icon = icon;
         return this;
       }
 
-      /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+      /** The logo for the Checkout Session. */
       public Builder setLogo(SessionCreateParams.BrandingSettings.Logo logo) {
         this.logo = logo;
         return this;
