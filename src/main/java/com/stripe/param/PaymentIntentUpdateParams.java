@@ -1728,6 +1728,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           @SerializedName("product_url")
           Object productUrl;
 
+          /**
+           * Unique reference for this line item to correlate it with your system’s internal
+           * records. The field is displayed in the Klarna Consumer App if passed.
+           */
+          @SerializedName("reference")
+          Object reference;
+
           /** Reference for the subscription this line item is for. */
           @SerializedName("subscription_reference")
           Object subscriptionReference;
@@ -1736,10 +1743,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
               Map<String, Object> extraParams,
               Object imageUrl,
               Object productUrl,
+              Object reference,
               Object subscriptionReference) {
             this.extraParams = extraParams;
             this.imageUrl = imageUrl;
             this.productUrl = productUrl;
+            this.reference = reference;
             this.subscriptionReference = subscriptionReference;
           }
 
@@ -1754,6 +1763,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
             private Object productUrl;
 
+            private Object reference;
+
             private Object subscriptionReference;
 
             /** Finalize and obtain parameter instance from this builder. */
@@ -1761,7 +1772,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
                 build() {
               return new PaymentIntentUpdateParams.AmountDetails.LineItem.PaymentMethodOptions
                   .Klarna(
-                  this.extraParams, this.imageUrl, this.productUrl, this.subscriptionReference);
+                  this.extraParams,
+                  this.imageUrl,
+                  this.productUrl,
+                  this.reference,
+                  this.subscriptionReference);
             }
 
             /**
@@ -1815,6 +1830,24 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
             /** URL to the product page. Max length, 4096 characters. */
             public Builder setProductUrl(EmptyParam productUrl) {
               this.productUrl = productUrl;
+              return this;
+            }
+
+            /**
+             * Unique reference for this line item to correlate it with your system’s internal
+             * records. The field is displayed in the Klarna Consumer App if passed.
+             */
+            public Builder setReference(String reference) {
+              this.reference = reference;
+              return this;
+            }
+
+            /**
+             * Unique reference for this line item to correlate it with your system’s internal
+             * records. The field is displayed in the Klarna Consumer App if passed.
+             */
+            public Builder setReference(EmptyParam reference) {
+              this.reference = reference;
               return this;
             }
 
