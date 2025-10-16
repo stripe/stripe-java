@@ -149,6 +149,10 @@ public final class EventDataClassLookup {
     classLookup.put("climate.supplier", com.stripe.model.climate.Supplier.class);
 
     classLookup.put(
+        "delegated_checkout.requested_session",
+        com.stripe.model.delegatedcheckout.RequestedSession.class);
+
+    classLookup.put(
         "entitlements.active_entitlement", com.stripe.model.entitlements.ActiveEntitlement.class);
     classLookup.put(
         "entitlements.active_entitlement_summary",

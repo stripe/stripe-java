@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeObject;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
@@ -24,7 +23,7 @@ import lombok.Setter;
 /**
  * A BlocklistEntry represents an entry in our identity verification blocklist. It helps prevent
  * fraudulent users from repeatedly attempting verification with similar information. When you
- * create a BlocklistEntry, we store data from a previous verification attempt, such as document
+ * create a BlocklistEntry, we store data from a specified VerificationReport, such as document
  * details or facial biometrics. This allows us to compare future verification attempts against
  * these entries. If a match is found, we categorize the new verification as unverified.
  *
@@ -66,13 +65,6 @@ public class BlocklistEntry extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
-
-  /**
-   * Redaction status of the BlocklistEntry. If the BlocklistEntry isn't redacted, this field is
-   * null.
-   */
-  @SerializedName("redaction")
-  Redaction redaction;
 
   /**
    * The current status of the BlocklistEntry.
@@ -444,27 +436,9 @@ public class BlocklistEntry extends ApiResource implements HasId {
     return getGlobalResponseGetter().request(request, BlocklistEntry.class);
   }
 
-  /**
-   * For more details about Redaction, please refer to the <a href="https://docs.stripe.com/api">API
-   * Reference.</a>
-   */
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Redaction extends StripeObject {
-    /**
-     * Indicates whether this object and its related objects have been redacted or not.
-     *
-     * <p>One of {@code processing}, or {@code redacted}.
-     */
-    @SerializedName("status")
-    String status;
-  }
-
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
-    trySetResponseGetter(redaction, responseGetter);
     trySetResponseGetter(verificationReport, responseGetter);
     trySetResponseGetter(verificationSession, responseGetter);
   }

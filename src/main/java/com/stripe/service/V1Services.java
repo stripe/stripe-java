@@ -97,6 +97,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.CustomerService(this.getResponseGetter());
   }
 
+  public com.stripe.service.DelegatedCheckoutService delegatedCheckout() {
+    return new com.stripe.service.DelegatedCheckoutService(this.getResponseGetter());
+  }
+
   public com.stripe.service.DisputeService disputes() {
     return new com.stripe.service.DisputeService(this.getResponseGetter());
   }
