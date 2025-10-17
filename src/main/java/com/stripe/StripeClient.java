@@ -381,6 +381,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.delegatedCheckout() is deprecated, use
+   *     StripeClient.v1().delegatedCheckout() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().delegatedCheckout(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.DelegatedCheckoutService delegatedCheckout() {
+    return new com.stripe.service.DelegatedCheckoutService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.disputes() is deprecated, use StripeClient.v1().disputes() instead.
    *     All functionality under it has been copied over to StripeClient.v1().disputes(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
