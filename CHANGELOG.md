@@ -1,5 +1,12 @@
 # Changelog
 
+## 30.1.0-alpha.3 - 2025-10-17
+* [#2087](https://github.com/stripe/stripe-java/pull/2087) Update generated code for private-preview
+  * Add support for new resources `delegatedcheckout.RequestedSession` and `identity.BlocklistEntry`
+  * Add support for `confirm`, `create`, `expire`, `retrieve`, and `update` methods on resource `delegatedcheckout.RequestedSession`
+  * Add support for `create`, `disable`, `list`, and `retrieve` methods on resource `identity.BlocklistEntry`
+  * Add support for `blockedByEntry` on `identity.VerificationReport.document`, `identity.VerificationReport.selfie`, and `identity.VerificationReportListParams`
+
 ## 30.1.0-alpha.2 - 2025-10-09
 * [#2085](https://github.com/stripe/stripe-java/pull/2085) Update generated code for private-preview
   * Add support for new resource `PaymentMethodBalance`
