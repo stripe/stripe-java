@@ -285,6 +285,9 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("crypto")
     CRYPTO("crypto"),
 
+    @SerializedName("custom")
+    CUSTOM("custom"),
+
     @SerializedName("customer_balance")
     CUSTOMER_BALANCE("customer_balance"),
 
