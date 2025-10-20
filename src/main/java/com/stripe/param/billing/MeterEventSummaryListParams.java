@@ -18,6 +18,20 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
   String customer;
 
   /**
+   * Key-value pairs used to filter meter events by dimension values. If specified, event summaries
+   * will be generated with only matching meter events.
+   */
+  @SerializedName("dimension_filters")
+  Map<String, String> dimensionFilters;
+
+  /**
+   * List of dimension payload keys to group by. If specified, event summaries will be grouped by
+   * the given dimension payload key values.
+   */
+  @SerializedName("dimension_group_by_keys")
+  List<String> dimensionGroupByKeys;
+
+  /**
    * <strong>Required.</strong> The timestamp from when to stop aggregating meter events
    * (exclusive). Must be aligned with minute boundaries.
    */
@@ -80,6 +94,8 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
   private MeterEventSummaryListParams(
       String customer,
+      Map<String, String> dimensionFilters,
+      List<String> dimensionGroupByKeys,
       Long endTime,
       String endingBefore,
       List<String> expand,
@@ -89,6 +105,8 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
       String startingAfter,
       ValueGroupingWindow valueGroupingWindow) {
     this.customer = customer;
+    this.dimensionFilters = dimensionFilters;
+    this.dimensionGroupByKeys = dimensionGroupByKeys;
     this.endTime = endTime;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -105,6 +123,10 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
 
   public static class Builder {
     private String customer;
+
+    private Map<String, String> dimensionFilters;
+
+    private List<String> dimensionGroupByKeys;
 
     private Long endTime;
 
@@ -126,6 +148,8 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
     public MeterEventSummaryListParams build() {
       return new MeterEventSummaryListParams(
           this.customer,
+          this.dimensionFilters,
+          this.dimensionGroupByKeys,
           this.endTime,
           this.endingBefore,
           this.expand,
@@ -139,6 +163,58 @@ public class MeterEventSummaryListParams extends ApiRequestParams {
     /** <strong>Required.</strong> The customer for which to fetch event summaries. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `dimensionFilters` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link MeterEventSummaryListParams#dimensionFilters} for the field documentation.
+     */
+    public Builder putDimensionFilter(String key, String value) {
+      if (this.dimensionFilters == null) {
+        this.dimensionFilters = new HashMap<>();
+      }
+      this.dimensionFilters.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `dimensionFilters` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link MeterEventSummaryListParams#dimensionFilters} for the field documentation.
+     */
+    public Builder putAllDimensionFilter(Map<String, String> map) {
+      if (this.dimensionFilters == null) {
+        this.dimensionFilters = new HashMap<>();
+      }
+      this.dimensionFilters.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `dimensionGroupByKeys` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link MeterEventSummaryListParams#dimensionGroupByKeys} for the field documentation.
+     */
+    public Builder addDimensionGroupByKey(String element) {
+      if (this.dimensionGroupByKeys == null) {
+        this.dimensionGroupByKeys = new ArrayList<>();
+      }
+      this.dimensionGroupByKeys.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `dimensionGroupByKeys` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link MeterEventSummaryListParams#dimensionGroupByKeys} for the field documentation.
+     */
+    public Builder addAllDimensionGroupByKey(List<String> elements) {
+      if (this.dimensionGroupByKeys == null) {
+        this.dimensionGroupByKeys = new ArrayList<>();
+      }
+      this.dimensionGroupByKeys.addAll(elements);
       return this;
     }
 

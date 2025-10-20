@@ -21,6 +21,13 @@ public class MeterCreateParams extends ApiRequestParams {
   @SerializedName("default_aggregation")
   DefaultAggregation defaultAggregation;
 
+  /**
+   * Set of keys that will be used to group meter events by. Each key must be present in the event
+   * payload.
+   */
+  @SerializedName("dimension_payload_keys")
+  List<String> dimensionPayloadKeys;
+
   /** <strong>Required.</strong> The meter’s name. Not visible to the customer. */
   @SerializedName("display_name")
   String displayName;
@@ -56,6 +63,7 @@ public class MeterCreateParams extends ApiRequestParams {
   private MeterCreateParams(
       CustomerMapping customerMapping,
       DefaultAggregation defaultAggregation,
+      List<String> dimensionPayloadKeys,
       String displayName,
       String eventName,
       EventTimeWindow eventTimeWindow,
@@ -64,6 +72,7 @@ public class MeterCreateParams extends ApiRequestParams {
       ValueSettings valueSettings) {
     this.customerMapping = customerMapping;
     this.defaultAggregation = defaultAggregation;
+    this.dimensionPayloadKeys = dimensionPayloadKeys;
     this.displayName = displayName;
     this.eventName = eventName;
     this.eventTimeWindow = eventTimeWindow;
@@ -80,6 +89,8 @@ public class MeterCreateParams extends ApiRequestParams {
     private CustomerMapping customerMapping;
 
     private DefaultAggregation defaultAggregation;
+
+    private List<String> dimensionPayloadKeys;
 
     private String displayName;
 
@@ -98,6 +109,7 @@ public class MeterCreateParams extends ApiRequestParams {
       return new MeterCreateParams(
           this.customerMapping,
           this.defaultAggregation,
+          this.dimensionPayloadKeys,
           this.displayName,
           this.eventName,
           this.eventTimeWindow,
@@ -115,6 +127,32 @@ public class MeterCreateParams extends ApiRequestParams {
     /** <strong>Required.</strong> The default settings to aggregate a meter's events with. */
     public Builder setDefaultAggregation(MeterCreateParams.DefaultAggregation defaultAggregation) {
       this.defaultAggregation = defaultAggregation;
+      return this;
+    }
+
+    /**
+     * Add an element to `dimensionPayloadKeys` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link MeterCreateParams#dimensionPayloadKeys} for the field documentation.
+     */
+    public Builder addDimensionPayloadKey(String element) {
+      if (this.dimensionPayloadKeys == null) {
+        this.dimensionPayloadKeys = new ArrayList<>();
+      }
+      this.dimensionPayloadKeys.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `dimensionPayloadKeys` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link MeterCreateParams#dimensionPayloadKeys} for the field documentation.
+     */
+    public Builder addAllDimensionPayloadKey(List<String> elements) {
+      if (this.dimensionPayloadKeys == null) {
+        this.dimensionPayloadKeys = new ArrayList<>();
+      }
+      this.dimensionPayloadKeys.addAll(elements);
       return this;
     }
 
