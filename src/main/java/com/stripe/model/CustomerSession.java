@@ -172,6 +172,10 @@ public class CustomerSession extends ApiResource {
     @SerializedName("pricing_table")
     PricingTable pricingTable;
 
+    /** This hash contains whether the Tax ID Element is enabled and the features it supports. */
+    @SerializedName("tax_id_element")
+    TaxIdElement taxIdElement;
+
     /** This hash contains whether the buy button is enabled. */
     @Getter
     @Setter
@@ -425,6 +429,51 @@ public class CustomerSession extends ApiResource {
       /** Whether the pricing table is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
+    }
+
+    /** This hash contains whether the Tax ID Element is enabled and the features it supports. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxIdElement extends StripeObject {
+      /** Whether the Tax ID Element is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /** This hash defines whether the Tax ID Element supports certain features. */
+      @SerializedName("features")
+      Features features;
+
+      /** This hash defines whether the Tax ID Element supports certain features. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {
+        /**
+         * Controls whether the Tax ID Element displays saved tax IDs for the customer. This
+         * parameter defaults to {@code disabled}.
+         *
+         * <p>When enabled, the Tax ID Element will show existing tax IDs associated with the
+         * customer, allowing them to select from previously saved tax identification numbers.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
+         */
+        @SerializedName("tax_id_redisplay")
+        String taxIdRedisplay;
+
+        /**
+         * Controls whether the Tax ID Element allows merchants to save new tax IDs for their
+         * customer. This parameter defaults to {@code disabled}.
+         *
+         * <p>When enabled, customers can enter and save new tax identification numbers during the
+         * payment flow, which will be stored securely and associated with their customer object for
+         * future use.
+         *
+         * <p>One of {@code disabled}, or {@code enabled}.
+         */
+        @SerializedName("tax_id_save")
+        String taxIdSave;
+      }
     }
   }
 
