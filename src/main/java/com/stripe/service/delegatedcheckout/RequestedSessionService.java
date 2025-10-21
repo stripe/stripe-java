@@ -88,14 +88,6 @@ public final class RequestedSessionService extends ApiService {
     return create(params, (RequestOptions) null);
   }
   /** Creates a requested session. */
-  public RequestedSession create(RequestOptions options) throws StripeException {
-    return create((RequestedSessionCreateParams) null, options);
-  }
-  /** Creates a requested session. */
-  public RequestedSession create() throws StripeException {
-    return create((RequestedSessionCreateParams) null, (RequestOptions) null);
-  }
-  /** Creates a requested session. */
   public RequestedSession create(RequestedSessionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/delegated_checkout/requested_sessions";
