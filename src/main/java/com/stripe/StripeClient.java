@@ -542,6 +542,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.paymentAttemptRecords() is deprecated, use
+   *     StripeClient.v1().paymentAttemptRecords() instead. All functionality under it has been
+   *     copied over to StripeClient.v1().paymentAttemptRecords(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.PaymentAttemptRecordService paymentAttemptRecords() {
+    return new com.stripe.service.PaymentAttemptRecordService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.paymentIntents() is deprecated, use StripeClient.v1().paymentIntents()
    *     instead. All functionality under it has been copied over to
    *     StripeClient.v1().paymentIntents(). See <a
@@ -599,6 +611,18 @@ public class StripeClient {
   @Deprecated
   public com.stripe.service.PaymentMethodService paymentMethods() {
     return new com.stripe.service.PaymentMethodService(this.getResponseGetter());
+  }
+
+  /**
+   * @deprecated StripeClient.paymentRecords() is deprecated, use StripeClient.v1().paymentRecords()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().paymentRecords(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.PaymentRecordService paymentRecords() {
+    return new com.stripe.service.PaymentRecordService(this.getResponseGetter());
   }
 
   /**

@@ -739,11 +739,19 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @SerializedName("amount_refunded")
     Long amountRefunded;
 
+    /** The PaymentRecord refund details associated with this credit note refund. */
+    @SerializedName("payment_record_refund")
+    PaymentRecordRefund paymentRecordRefund;
+
     /** ID of the refund. */
     @SerializedName("refund")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<com.stripe.model.Refund> refund;
+
+    /** Type of the refund, one of {@code refund} or {@code payment_record_refund}. */
+    @SerializedName("type")
+    String type;
 
     /** Get ID of expandable {@code refund} object. */
     public String getRefund() {
@@ -762,6 +770,23 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     public void setRefundObject(com.stripe.model.Refund expandableObject) {
       this.refund =
           new ExpandableField<com.stripe.model.Refund>(expandableObject.getId(), expandableObject);
+    }
+
+    /**
+     * For more details about PaymentRecordRefund, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaymentRecordRefund extends StripeObject {
+      /** ID of the payment record. */
+      @SerializedName("payment_record")
+      String paymentRecord;
+
+      /** ID of the refund group. */
+      @SerializedName("refund_group")
+      String refundGroup;
     }
   }
 

@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
-  /** Configuration overrides. */
+  /** Configuration overrides for this confirmation, such as surcharge settings and return URL. */
   @SerializedName("confirm_config")
   ConfirmConfig confirmConfig;
 
@@ -30,7 +30,7 @@ public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> PaymentIntent ID. */
+  /** <strong>Required.</strong> The ID of the PaymentIntent to confirm. */
   @SerializedName("payment_intent")
   String paymentIntent;
 
@@ -64,7 +64,7 @@ public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
           this.confirmConfig, this.expand, this.extraParams, this.paymentIntent);
     }
 
-    /** Configuration overrides. */
+    /** Configuration overrides for this confirmation, such as surcharge settings and return URL. */
     public Builder setConfirmConfig(ReaderConfirmPaymentIntentParams.ConfirmConfig confirmConfig) {
       this.confirmConfig = confirmConfig;
       return this;
@@ -122,7 +122,7 @@ public class ReaderConfirmPaymentIntentParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> PaymentIntent ID. */
+    /** <strong>Required.</strong> The ID of the PaymentIntent to confirm. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;

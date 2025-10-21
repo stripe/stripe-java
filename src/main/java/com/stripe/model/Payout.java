@@ -573,8 +573,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
-   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US and Canadian bank accounts. If the payout is manual and in
+   * the {@code pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -586,8 +586,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
-   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US and Canadian bank accounts. If the payout is manual and in
+   * the {@code pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -599,8 +599,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
-   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US and Canadian bank accounts. If the payout is manual and in
+   * the {@code pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -612,8 +612,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
-   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US and Canadian bank accounts. If the payout is manual and in
+   * the {@code pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -628,8 +628,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
-   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US and Canadian bank accounts. If the payout is manual and in
+   * the {@code pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and
@@ -641,8 +641,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * Reverses a payout by debiting the destination bank account. At this time, you can only reverse
-   * payouts for connected accounts to US bank accounts. If the payout is manual and in the {@code
-   * pending} status, use {@code /v1/payouts/:id/cancel} instead.
+   * payouts for connected accounts to US and Canadian bank accounts. If the payout is manual and in
+   * the {@code pending} status, use {@code /v1/payouts/:id/cancel} instead.
    *
    * <p>By requesting a reversal through {@code /v1/payouts/:id/reverse}, you confirm that the
    * authorized signatory of the selected bank account authorizes the debit on the bank account and

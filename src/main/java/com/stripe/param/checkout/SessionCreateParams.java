@@ -1802,7 +1802,11 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("button_color")
     Object buttonColor;
 
-    /** A string to override the business name shown on the Checkout Session. */
+    /**
+     * A string to override the business name shown on the Checkout Session. This only shows at the
+     * top of the Checkout page, and your business name still appears in terms, receipts, and other
+     * places.
+     */
     @SerializedName("display_name")
     String displayName;
 
@@ -1823,11 +1827,11 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("font_family")
     ApiRequestParams.EnumParam fontFamily;
 
-    /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    /** The icon for the Checkout Session. For best results, use a square image. */
     @SerializedName("icon")
     Icon icon;
 
-    /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+    /** The logo for the Checkout Session. */
     @SerializedName("logo")
     Logo logo;
 
@@ -1932,7 +1936,11 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A string to override the business name shown on the Checkout Session. */
+      /**
+       * A string to override the business name shown on the Checkout Session. This only shows at
+       * the top of the Checkout page, and your business name still appears in terms, receipts, and
+       * other places.
+       */
       public Builder setDisplayName(String displayName) {
         this.displayName = displayName;
         return this;
@@ -1984,13 +1992,13 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The icon for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+      /** The icon for the Checkout Session. For best results, use a square image. */
       public Builder setIcon(SessionCreateParams.BrandingSettings.Icon icon) {
         this.icon = icon;
         return this;
       }
 
-      /** The logo for the Checkout Session. You cannot set both {@code logo} and {@code icon}. */
+      /** The logo for the Checkout Session. */
       public Builder setLogo(SessionCreateParams.BrandingSettings.Logo logo) {
         this.logo = logo;
         return this;
@@ -7247,6 +7255,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("swish")
     Swish swish;
 
+    /** contains details about the TWINT payment method options. */
+    @SerializedName("twint")
+    Twint twint;
+
     /** contains details about the Us Bank Account payment method options. */
     @SerializedName("us_bank_account")
     UsBankAccount usBankAccount;
@@ -7298,6 +7310,7 @@ public class SessionCreateParams extends ApiRequestParams {
         SepaDebit sepaDebit,
         Sofort sofort,
         Swish swish,
+        Twint twint,
         UsBankAccount usBankAccount,
         WechatPay wechatPay) {
       this.acssDebit = acssDebit;
@@ -7342,6 +7355,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.sepaDebit = sepaDebit;
       this.sofort = sofort;
       this.swish = swish;
+      this.twint = twint;
       this.usBankAccount = usBankAccount;
       this.wechatPay = wechatPay;
     }
@@ -7435,6 +7449,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Swish swish;
 
+      private Twint twint;
+
       private UsBankAccount usBankAccount;
 
       private WechatPay wechatPay;
@@ -7484,6 +7500,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.sepaDebit,
             this.sofort,
             this.swish,
+            this.twint,
             this.usBankAccount,
             this.wechatPay);
       }
@@ -7761,6 +7778,12 @@ public class SessionCreateParams extends ApiRequestParams {
       /** contains details about the Swish payment method options. */
       public Builder setSwish(SessionCreateParams.PaymentMethodOptions.Swish swish) {
         this.swish = swish;
+        return this;
+      }
+
+      /** contains details about the TWINT payment method options. */
+      public Builder setTwint(SessionCreateParams.PaymentMethodOptions.Twint twint) {
+        this.twint = twint;
         return this;
       }
 
@@ -15090,6 +15113,128 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Twint {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       */
+      @SerializedName("setup_future_usage")
+      SetupFutureUsage setupFutureUsage;
+
+      private Twint(Map<String, Object> extraParams, SetupFutureUsage setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private SetupFutureUsage setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SessionCreateParams.PaymentMethodOptions.Twint build() {
+          return new SessionCreateParams.PaymentMethodOptions.Twint(
+              this.extraParams, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Twint#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentMethodOptions.Twint#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         */
+        public Builder setSetupFutureUsage(
+            SessionCreateParams.PaymentMethodOptions.Twint.SetupFutureUsage setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -19351,6 +19496,9 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("kr_card")
     KR_CARD("kr_card"),
 
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
 
@@ -19683,6 +19831,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     @SerializedName("link")
     LINK("link"),
+
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
 
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),

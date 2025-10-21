@@ -1517,6 +1517,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     RegistrationDate registrationDate;
 
     /**
+     * This hash is used to attest that the representative is authorized to act as the
+     * representative of their legal entity.
+     */
+    @SerializedName("representative_declaration")
+    RepresentativeDeclaration representativeDeclaration;
+
+    /**
      * The category identifying the legal structure of the company or legal entity. Also available
      * for accounts where <a
      * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
@@ -1699,6 +1706,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /** The four-digit year of registration. */
       @SerializedName("year")
       Long year;
+    }
+
+    /**
+     * For more details about RepresentativeDeclaration, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RepresentativeDeclaration extends StripeObject {
+      /** The Unix timestamp marking when the representative declaration attestation was made. */
+      @SerializedName("date")
+      Long date;
+
+      /** The IP address from which the representative declaration attestation was made. */
+      @SerializedName("ip")
+      String ip;
+
+      /**
+       * The user-agent string from the browser where the representative declaration attestation was
+       * made.
+       */
+      @SerializedName("user_agent")
+      String userAgent;
     }
 
     /**

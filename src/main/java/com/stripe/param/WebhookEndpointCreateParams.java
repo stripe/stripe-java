@@ -630,7 +630,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_08_27_BASIL("2025-08-27.basil"),
 
     @SerializedName("2025-09-30.clover")
-    VERSION_2025_09_30_CLOVER("2025-09-30.clover");
+    VERSION_2025_09_30_CLOVER("2025-09-30.clover"),
+
+    @SerializedName("2025-10-29.clover")
+    VERSION_2025_10_29_CLOVER("2025-10-29.clover");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -673,6 +676,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
+
+    @SerializedName("balance_settings.updated")
+    BALANCE_SETTINGS__UPDATED("balance_settings.updated"),
 
     @SerializedName("billing.alert.triggered")
     BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
@@ -923,6 +929,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
+
+    @SerializedName("invoice.payment_attempt_required")
+    INVOICE__PAYMENT_ATTEMPT_REQUIRED("invoice.payment_attempt_required"),
 
     @SerializedName("invoice.payment_failed")
     INVOICE__PAYMENT_FAILED("invoice.payment_failed"),

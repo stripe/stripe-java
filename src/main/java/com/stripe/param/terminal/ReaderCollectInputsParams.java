@@ -26,7 +26,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> List of inputs to be collected using the Reader */
+  /**
+   * <strong>Required.</strong> List of inputs to be collected from the customer using the Reader.
+   * Maximum 5 inputs.
+   */
   @SerializedName("inputs")
   List<ReaderCollectInputsParams.Input> inputs;
 
@@ -348,11 +351,11 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The skip button text. */
+      /** Custom text for the skip button. Maximum 14 characters. */
       @SerializedName("skip_button")
       String skipButton;
 
-      /** The submit button text. */
+      /** Custom text for the submit button. Maximum 30 characters. */
       @SerializedName("submit_button")
       String submitButton;
 
@@ -428,13 +431,13 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
           return this;
         }
 
-        /** The skip button text. */
+        /** Custom text for the skip button. Maximum 14 characters. */
         public Builder setSkipButton(String skipButton) {
           this.skipButton = skipButton;
           return this;
         }
 
-        /** The submit button text. */
+        /** Custom text for the submit button. Maximum 30 characters. */
         public Builder setSubmitButton(String submitButton) {
           this.submitButton = submitButton;
           return this;
@@ -560,7 +563,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
         @SerializedName("id")
         String id;
 
-        /** The style of the button which will be shown for this choice. */
+        /**
+         * The style of the button which will be shown for this choice. Can be {@code primary} or
+         * {@code secondary}.
+         */
         @SerializedName("style")
         Style style;
 
@@ -628,7 +634,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
             return this;
           }
 
-          /** The style of the button which will be shown for this choice. */
+          /**
+           * The style of the button which will be shown for this choice. Can be {@code primary} or
+           * {@code secondary}.
+           */
           public Builder setStyle(ReaderCollectInputsParams.Input.Selection.Choice.Style style) {
             this.style = style;
             return this;
@@ -663,11 +672,14 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Toggle {
-      /** The default value of the toggle. */
+      /** The default value of the toggle. Can be {@code enabled} or {@code disabled}. */
       @SerializedName("default_value")
       DefaultValue defaultValue;
 
-      /** The description which will be displayed for the toggle. */
+      /**
+       * The description which will be displayed for the toggle. Maximum 50 characters. At least one
+       * of title or description must be provided.
+       */
       @SerializedName("description")
       String description;
 
@@ -680,7 +692,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The title which will be displayed for the toggle. */
+      /**
+       * The title which will be displayed for the toggle. Maximum 50 characters. At least one of
+       * title or description must be provided.
+       */
       @SerializedName("title")
       String title;
 
@@ -714,14 +729,17 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
               this.defaultValue, this.description, this.extraParams, this.title);
         }
 
-        /** The default value of the toggle. */
+        /** The default value of the toggle. Can be {@code enabled} or {@code disabled}. */
         public Builder setDefaultValue(
             ReaderCollectInputsParams.Input.Toggle.DefaultValue defaultValue) {
           this.defaultValue = defaultValue;
           return this;
         }
 
-        /** The description which will be displayed for the toggle. */
+        /**
+         * The description which will be displayed for the toggle. Maximum 50 characters. At least
+         * one of title or description must be provided.
+         */
         public Builder setDescription(String description) {
           this.description = description;
           return this;
@@ -755,7 +773,10 @@ public class ReaderCollectInputsParams extends ApiRequestParams {
           return this;
         }
 
-        /** The title which will be displayed for the toggle. */
+        /**
+         * The title which will be displayed for the toggle. Maximum 50 characters. At least one of
+         * title or description must be provided.
+         */
         public Builder setTitle(String title) {
           this.title = title;
           return this;
