@@ -22,7 +22,9 @@ public class MoneyManagementRecipientVerificationsParams extends ApiRequestParam
 
   /**
    * <strong>Required.</strong> Expected match level of the RecipientVerification to be created:
-   * {@code match}, {@code close_match}, {@code no_match}, {@code unavailable}.
+   * {@code match}, {@code close_match}, {@code no_match}, {@code unavailable}. For {@code
+   * close_match}, the simulated response appends &quot;close_match&quot; to the provided name in
+   * match_result_details.matched_name.
    */
   @SerializedName("match_result")
   MatchResult matchResult;
@@ -97,7 +99,9 @@ public class MoneyManagementRecipientVerificationsParams extends ApiRequestParam
 
     /**
      * <strong>Required.</strong> Expected match level of the RecipientVerification to be created:
-     * {@code match}, {@code close_match}, {@code no_match}, {@code unavailable}.
+     * {@code match}, {@code close_match}, {@code no_match}, {@code unavailable}. For {@code
+     * close_match}, the simulated response appends &quot;close_match&quot; to the provided name in
+     * match_result_details.matched_name.
      */
     public Builder setMatchResult(
         MoneyManagementRecipientVerificationsParams.MatchResult matchResult) {

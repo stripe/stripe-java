@@ -147,19 +147,35 @@ public final class AccountService extends ApiService {
             options);
     return this.request(request, Account.class);
   }
-  /** Removes access to the Account and its associated resources. */
+  /**
+   * Removes access to the Account and its associated resources. Closed Accounts can no longer be
+   * operated on, but limited information can still be retrieved through the API in order to be able
+   * to track their history.
+   */
   public Account close(String id, AccountCloseParams params) throws StripeException {
     return close(id, params, (RequestOptions) null);
   }
-  /** Removes access to the Account and its associated resources. */
+  /**
+   * Removes access to the Account and its associated resources. Closed Accounts can no longer be
+   * operated on, but limited information can still be retrieved through the API in order to be able
+   * to track their history.
+   */
   public Account close(String id, RequestOptions options) throws StripeException {
     return close(id, (AccountCloseParams) null, options);
   }
-  /** Removes access to the Account and its associated resources. */
+  /**
+   * Removes access to the Account and its associated resources. Closed Accounts can no longer be
+   * operated on, but limited information can still be retrieved through the API in order to be able
+   * to track their history.
+   */
   public Account close(String id) throws StripeException {
     return close(id, (AccountCloseParams) null, (RequestOptions) null);
   }
-  /** Removes access to the Account and its associated resources. */
+  /**
+   * Removes access to the Account and its associated resources. Closed Accounts can no longer be
+   * operated on, but limited information can still be retrieved through the API in order to be able
+   * to track their history.
+   */
   public Account close(String id, AccountCloseParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/core/accounts/%s/close", ApiResource.urlEncodeId(id));

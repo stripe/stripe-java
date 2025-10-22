@@ -28,6 +28,10 @@ public class Account extends StripeObject implements HasId {
   @SerializedName("applied_configurations")
   List<String> appliedConfigurations;
 
+  /** A value indicating if the Account has been closed. */
+  @SerializedName("closed")
+  Boolean closed;
+
   /**
    * An Account Configuration which allows the Account to take on a key persona across Stripe
    * products.
@@ -657,7 +661,8 @@ public class Account extends StripeObject implements HasId {
          * 'identity_address'. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          *
-         * <p>One of {@code identity_address}, {@code ip_address}, or {@code shipping_address}.
+         * <p>One of {@code identity_address}, {@code ip_address}, {@code payment_method}, or {@code
+         * shipping_address}.
          */
         @SerializedName("location_source")
         String locationSource;
@@ -4960,7 +4965,8 @@ public class Account extends StripeObject implements HasId {
        * A value indicating the responsible payer of a bundle of Stripe fees for pricing-control
        * eligible products on this Account.
        *
-       * <p>One of {@code application}, or {@code stripe}.
+       * <p>One of {@code application}, {@code application_custom}, {@code application_express}, or
+       * {@code stripe}.
        */
       @SerializedName("fees_collector")
       String feesCollector;

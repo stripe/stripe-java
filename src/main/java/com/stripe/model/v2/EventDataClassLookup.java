@@ -126,6 +126,9 @@ public final class EventDataClassLookup {
         "v2.billing.pricing_plan_subscription",
         com.stripe.model.v2.billing.PricingPlanSubscription.class);
     classLookup.put(
+        "v2.billing.pricing_plan_subscription_components",
+        com.stripe.model.v2.billing.PricingPlanSubscriptionComponents.class);
+    classLookup.put(
         "v2.billing.pricing_plan_version", com.stripe.model.v2.billing.PricingPlanVersion.class);
     classLookup.put("v2.billing.profile", com.stripe.model.v2.billing.Profile.class);
     classLookup.put("v2.billing.rate_card", com.stripe.model.v2.billing.RateCard.class);

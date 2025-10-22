@@ -3,7 +3,10 @@ package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,18 +23,51 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Filter for events created after the specified timestamp. */
+  @SerializedName("gt")
+  Instant gt;
+
+  /** Filter for events created at or after the specified timestamp. */
+  @SerializedName("gte")
+  Instant gte;
+
   /** The page size. */
   @SerializedName("limit")
   Long limit;
 
-  /** <strong>Required.</strong> Primary object ID used to retrieve related events. */
+  /** Filter for events created before the specified timestamp. */
+  @SerializedName("lt")
+  Instant lt;
+
+  /** Filter for events created at or before the specified timestamp. */
+  @SerializedName("lte")
+  Instant lte;
+
+  /** Primary object ID used to retrieve related events. */
   @SerializedName("object_id")
   String objectId;
 
-  private EventListParams(Map<String, Object> extraParams, Long limit, String objectId) {
+  /** An array of up to 20 strings containing specific event names. */
+  @SerializedName("types")
+  List<String> types;
+
+  private EventListParams(
+      Map<String, Object> extraParams,
+      Instant gt,
+      Instant gte,
+      Long limit,
+      Instant lt,
+      Instant lte,
+      String objectId,
+      List<String> types) {
     this.extraParams = extraParams;
+    this.gt = gt;
+    this.gte = gte;
     this.limit = limit;
+    this.lt = lt;
+    this.lte = lte;
     this.objectId = objectId;
+    this.types = types;
   }
 
   public static Builder builder() {
@@ -41,13 +77,31 @@ public class EventListParams extends ApiRequestParams {
   public static class Builder {
     private Map<String, Object> extraParams;
 
+    private Instant gt;
+
+    private Instant gte;
+
     private Long limit;
+
+    private Instant lt;
+
+    private Instant lte;
 
     private String objectId;
 
+    private List<String> types;
+
     /** Finalize and obtain parameter instance from this builder. */
     public EventListParams build() {
-      return new EventListParams(this.extraParams, this.limit, this.objectId);
+      return new EventListParams(
+          this.extraParams,
+          this.gt,
+          this.gte,
+          this.limit,
+          this.lt,
+          this.lte,
+          this.objectId,
+          this.types);
     }
 
     /**
@@ -76,15 +130,65 @@ public class EventListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Filter for events created after the specified timestamp. */
+    public Builder setGt(Instant gt) {
+      this.gt = gt;
+      return this;
+    }
+
+    /** Filter for events created at or after the specified timestamp. */
+    public Builder setGte(Instant gte) {
+      this.gte = gte;
+      return this;
+    }
+
     /** The page size. */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }
 
-    /** <strong>Required.</strong> Primary object ID used to retrieve related events. */
+    /** Filter for events created before the specified timestamp. */
+    public Builder setLt(Instant lt) {
+      this.lt = lt;
+      return this;
+    }
+
+    /** Filter for events created at or before the specified timestamp. */
+    public Builder setLte(Instant lte) {
+      this.lte = lte;
+      return this;
+    }
+
+    /** Primary object ID used to retrieve related events. */
     public Builder setObjectId(String objectId) {
       this.objectId = objectId;
+      return this;
+    }
+
+    /**
+     * Add an element to `types` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * EventListParams#types} for the field documentation.
+     */
+    public Builder addType(String element) {
+      if (this.types == null) {
+        this.types = new ArrayList<>();
+      }
+      this.types.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `types` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * EventListParams#types} for the field documentation.
+     */
+    public Builder addAllType(List<String> elements) {
+      if (this.types == null) {
+        this.types = new ArrayList<>();
+      }
+      this.types.addAll(elements);
       return this;
     }
   }
