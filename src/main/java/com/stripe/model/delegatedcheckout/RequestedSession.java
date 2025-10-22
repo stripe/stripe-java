@@ -369,10 +369,6 @@ public class RequestedSession extends ApiResource
     @SerializedName("email")
     String email;
 
-    /** The fulfillment option. */
-    @SerializedName("fulfillment_option")
-    FulfillmentOption fulfillmentOption;
-
     /** The fulfillment options. */
     @SerializedName("fulfillment_options")
     List<RequestedSession.FulfillmentDetails.FulfillmentOption> fulfillmentOptions;
@@ -384,6 +380,10 @@ public class RequestedSession extends ApiResource
     /** The phone number for the fulfillment details. */
     @SerializedName("phone")
     String phone;
+
+    /** The fulfillment option. */
+    @SerializedName("selected_fulfillment_option")
+    SelectedFulfillmentOption selectedFulfillmentOption;
 
     /**
      * For more details about Address, please refer to the <a href="https://docs.stripe.com/api">API
@@ -419,36 +419,6 @@ public class RequestedSession extends ApiResource
       /** State, county, province, or region. */
       @SerializedName("state")
       String state;
-    }
-
-    /**
-     * For more details about FulfillmentOption, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class FulfillmentOption extends StripeObject {
-      /** The shipping option. */
-      @SerializedName("shipping")
-      Shipping shipping;
-
-      /** The type of the selected fulfillment option. */
-      @SerializedName("type")
-      String type;
-
-      /**
-       * For more details about Shipping, please refer to the <a
-       * href="https://docs.stripe.com/api">API Reference.</a>
-       */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Shipping extends StripeObject {
-        /** The shipping option. */
-        @SerializedName("shipping_option")
-        String shippingOption;
-      }
     }
 
     /**
@@ -512,6 +482,36 @@ public class RequestedSession extends ApiResource
           @SerializedName("shipping_amount")
           Long shippingAmount;
         }
+      }
+    }
+
+    /**
+     * For more details about SelectedFulfillmentOption, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SelectedFulfillmentOption extends StripeObject {
+      /** The shipping option. */
+      @SerializedName("shipping")
+      Shipping shipping;
+
+      /** The type of the selected fulfillment option. */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * For more details about Shipping, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Shipping extends StripeObject {
+        /** The shipping option. */
+        @SerializedName("shipping_option")
+        String shippingOption;
       }
     }
   }

@@ -281,10 +281,6 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The fulfillment option to select. */
-    @SerializedName("fulfillment_option")
-    FulfillmentOption fulfillmentOption;
-
     /** The customer's name. */
     @SerializedName("name")
     Object name;
@@ -293,19 +289,23 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     @SerializedName("phone")
     Object phone;
 
+    /** The fulfillment option to select. */
+    @SerializedName("selected_fulfillment_option")
+    SelectedFulfillmentOption selectedFulfillmentOption;
+
     private FulfillmentDetails(
         Address address,
         Object email,
         Map<String, Object> extraParams,
-        FulfillmentOption fulfillmentOption,
         Object name,
-        Object phone) {
+        Object phone,
+        SelectedFulfillmentOption selectedFulfillmentOption) {
       this.address = address;
       this.email = email;
       this.extraParams = extraParams;
-      this.fulfillmentOption = fulfillmentOption;
       this.name = name;
       this.phone = phone;
+      this.selectedFulfillmentOption = selectedFulfillmentOption;
     }
 
     public static Builder builder() {
@@ -319,11 +319,11 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private FulfillmentOption fulfillmentOption;
-
       private Object name;
 
       private Object phone;
+
+      private SelectedFulfillmentOption selectedFulfillmentOption;
 
       /** Finalize and obtain parameter instance from this builder. */
       public RequestedSessionUpdateParams.FulfillmentDetails build() {
@@ -331,9 +331,9 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
             this.address,
             this.email,
             this.extraParams,
-            this.fulfillmentOption,
             this.name,
-            this.phone);
+            this.phone,
+            this.selectedFulfillmentOption);
       }
 
       public Builder setAddress(RequestedSessionUpdateParams.FulfillmentDetails.Address address) {
@@ -380,13 +380,6 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The fulfillment option to select. */
-      public Builder setFulfillmentOption(
-          RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption fulfillmentOption) {
-        this.fulfillmentOption = fulfillmentOption;
-        return this;
-      }
-
       /** The customer's name. */
       public Builder setName(String name) {
         this.name = name;
@@ -408,6 +401,14 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       /** The customer's phone number. */
       public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
+        return this;
+      }
+
+      /** The fulfillment option to select. */
+      public Builder setSelectedFulfillmentOption(
+          RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption
+              selectedFulfillmentOption) {
+        this.selectedFulfillmentOption = selectedFulfillmentOption;
         return this;
       }
     }
@@ -613,7 +614,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
-    public static class FulfillmentOption {
+    public static class SelectedFulfillmentOption {
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -631,7 +632,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       @SerializedName("type")
       Object type;
 
-      private FulfillmentOption(Map<String, Object> extraParams, Shipping shipping, Object type) {
+      private SelectedFulfillmentOption(
+          Map<String, Object> extraParams, Shipping shipping, Object type) {
         this.extraParams = extraParams;
         this.shipping = shipping;
         this.type = type;
@@ -649,8 +651,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         private Object type;
 
         /** Finalize and obtain parameter instance from this builder. */
-        public RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption build() {
-          return new RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption(
+        public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption build() {
+          return new RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption(
               this.extraParams, this.shipping, this.type);
         }
 
@@ -658,8 +660,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
          * Add a key/value pair to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link
-         * RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption#extraParams} for the
-         * field documentation.
+         * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption#extraParams}
+         * for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -673,8 +675,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
          * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
          * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
          * map. See {@link
-         * RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption#extraParams} for the
-         * field documentation.
+         * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -686,7 +688,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
         /** <strong>Required.</strong> The shipping fulfillment option. */
         public Builder setShipping(
-            RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption.Shipping shipping) {
+            RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Shipping
+                shipping) {
           this.shipping = shipping;
           return this;
         }
@@ -736,17 +739,17 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           private Object shippingOption;
 
           /** Finalize and obtain parameter instance from this builder. */
-          public RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption.Shipping
+          public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Shipping
               build() {
-            return new RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption.Shipping(
-                this.extraParams, this.shippingOption);
+            return new RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption
+                .Shipping(this.extraParams, this.shippingOption);
           }
 
           /**
            * Add a key/value pair to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption.Shipping#extraParams}
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Shipping#extraParams}
            * for the field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
@@ -761,7 +764,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
            * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
            * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
            * map. See {@link
-           * RequestedSessionUpdateParams.FulfillmentDetails.FulfillmentOption.Shipping#extraParams}
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Shipping#extraParams}
            * for the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
