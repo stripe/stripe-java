@@ -18,6 +18,7 @@ import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.moneymanagement.FinancialAccountCloseParams;
 import com.stripe.param.v2.moneymanagement.FinancialAccountCreateParams;
 import com.stripe.param.v2.moneymanagement.FinancialAccountListParams;
+import com.stripe.param.v2.moneymanagement.FinancialAccountUpdateParams;
 
 public final class FinancialAccountService extends ApiService {
   public FinancialAccountService(StripeResponseGetter responseGetter) {
@@ -78,6 +79,34 @@ public final class FinancialAccountService extends ApiService {
         String.format("/v2/money_management/financial_accounts/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+    return this.request(request, FinancialAccount.class);
+  }
+  /** Updates an existing FinancialAccount. */
+  public FinancialAccount update(String id, FinancialAccountUpdateParams params)
+      throws StripeException {
+    return update(id, params, (RequestOptions) null);
+  }
+  /** Updates an existing FinancialAccount. */
+  public FinancialAccount update(String id, RequestOptions options) throws StripeException {
+    return update(id, (FinancialAccountUpdateParams) null, options);
+  }
+  /** Updates an existing FinancialAccount. */
+  public FinancialAccount update(String id) throws StripeException {
+    return update(id, (FinancialAccountUpdateParams) null, (RequestOptions) null);
+  }
+  /** Updates an existing FinancialAccount. */
+  public FinancialAccount update(
+      String id, FinancialAccountUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v2/money_management/financial_accounts/%s", ApiResource.urlEncodeId(id));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, FinancialAccount.class);
   }
   /** Closes a FinancialAccount with or without forwarding settings. */

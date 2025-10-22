@@ -25477,7 +25477,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventListParams params =
-        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
+        com.stripe.param.v2.core.EventListParams.builder().build();
 
     com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.Event> stripeCollection =
         client.v2().core().events().list(params);
@@ -26169,6 +26169,32 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testV2MoneyManagementFinancialAccountPost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_accounts/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FinancialAccount.class,
+        "{\"balance\":{\"available\":{\"key\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FinancialAccountUpdateParams params =
+        com.stripe.param.v2.moneymanagement.FinancialAccountUpdateParams.builder().build();
+
+    com.stripe.model.v2.moneymanagement.FinancialAccount financialAccount =
+        client.v2().moneyManagement().financialAccounts().update("id_123", params);
+    assertNotNull(financialAccount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_accounts/id_123",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFinancialAccountPost3Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
@@ -27420,7 +27446,7 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/money_management/financial_accounts",
         null,
         null,
-        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"recipient_feature_not_active\"}}",
+        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"outbound_flow_from_closed_financial_account_unsupported\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 

@@ -792,6 +792,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ip_address")
           IP_ADDRESS("ip_address"),
 
+          @SerializedName("payment_method")
+          PAYMENT_METHOD("payment_method"),
+
           @SerializedName("shipping_address")
           SHIPPING_ADDRESS("shipping_address");
 
@@ -9958,6 +9961,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       public enum FeesCollector implements ApiRequestParams.EnumParam {
         @SerializedName("application")
         APPLICATION("application"),
+
+        @SerializedName("application_custom")
+        APPLICATION_CUSTOM("application_custom"),
+
+        @SerializedName("application_express")
+        APPLICATION_EXPRESS("application_express"),
 
         @SerializedName("stripe")
         STRIPE("stripe");
