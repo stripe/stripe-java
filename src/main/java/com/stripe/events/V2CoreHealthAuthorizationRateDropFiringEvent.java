@@ -52,14 +52,19 @@ public final class V2CoreHealthAuthorizationRateDropFiringEvent extends Event {
        *
        * <p>One of {@code acss_debit}, {@code affirm}, {@code afterpay_clearpay}, {@code alipay},
        * {@code alma}, {@code amazon_pay}, {@code apple_pay}, {@code au_becs_debit}, {@code
-       * bacs_debit}, {@code bancontact}, {@code blik}, {@code boleto}, {@code card}, {@code
-       * card_present}, {@code cartes_bancaires}, {@code cashapp}, {@code dummy_passthrough_card},
-       * {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay}, {@code ideal}, {@code
-       * interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code link}, {@code
-       * mobilepay}, {@code multibanco}, {@code naver_pay}, {@code oxxo}, {@code p24}, {@code
-       * paper_check}, {@code paynow}, {@code paypal}, {@code payto}, {@code pay_by_bank}, {@code
-       * pix}, {@code promptpay}, {@code revolut_pay}, {@code sepa_debit}, {@code sofort}, {@code
-       * swish}, {@code twint}, {@code upi}, {@code wechat_pay}, or {@code zip}.
+       * bacs_debit}, {@code bancontact}, {@code billie}, {@code blik}, {@code boleto}, {@code
+       * card}, {@code card_present}, {@code cartes_bancaires}, {@code cashapp}, {@code crypto},
+       * {@code dummy_passthrough_card}, {@code eps}, {@code fpx}, {@code giropay}, {@code grabpay},
+       * {@code ideal}, {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini},
+       * {@code kriya}, {@code kr_card}, {@code link}, {@code mb_way}, {@code mobilepay}, {@code
+       * mondu}, {@code multibanco}, {@code naver_pay}, {@code ng_bank}, {@code ng_bank_transfer},
+       * {@code ng_card}, {@code ng_market}, {@code ng_ussd}, {@code ng_wallet}, {@code oxxo},
+       * {@code p24}, {@code paper_check}, {@code payco}, {@code paynow}, {@code paypal}, {@code
+       * paypay}, {@code payto}, {@code pay_by_bank}, {@code pix}, {@code promptpay}, {@code
+       * rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code scalapay},
+       * {@code sepa_debit}, {@code sequra}, {@code sofort}, {@code sunbit}, {@code swish}, {@code
+       * twint}, {@code upi}, {@code us_bank_account}, {@code vipps}, {@code wechat_pay}, or {@code
+       * zip}.
        */
       @SerializedName("payment_method_type")
       String paymentMethodType;
