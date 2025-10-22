@@ -167,6 +167,9 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
 
       @SerializedName("reference")
       String reference;
+
+      @SerializedName("subscription_reference")
+      String subscriptionReference;
     }
 
     /**
