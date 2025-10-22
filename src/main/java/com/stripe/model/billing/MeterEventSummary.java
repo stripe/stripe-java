@@ -35,6 +35,10 @@ public class MeterEventSummary extends ApiResource implements HasId {
   @SerializedName("aggregated_value")
   BigDecimal aggregatedValue;
 
+  /** Key-value pairs of dimension values for event summaries with grouping on dimensions. */
+  @SerializedName("dimensions")
+  Map<String, String> dimensions;
+
   /** End timestamp for this event summary (exclusive). Must be aligned with minute boundaries. */
   @SerializedName("end_time")
   Long endTime;

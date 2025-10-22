@@ -26246,6 +26246,30 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2BillingPricingPlanSubscriptionsComponentGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/pricing_plan_subscriptions/id_123/components",
+        null,
+        null,
+        com.stripe.model.v2.billing.PricingPlanSubscriptionComponents.class,
+        "{\"components\":[{\"pricing_plan_component\":\"pricing_plan_component\",\"type\":\"license_fee_subscription\"}],\"object\":\"v2.billing.pricing_plan_subscription_components\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.billing.PricingPlanSubscriptionComponents
+        pricingPlanSubscriptionComponents =
+            client.v2().billing().pricingPlanSubscriptions().components().retrieve("id_123");
+    assertNotNull(pricingPlanSubscriptionComponents);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/billing/pricing_plan_subscriptions/id_123/components",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2BillingProfileGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -27209,7 +27233,7 @@ class GeneratedExamples extends BaseStripeTest {
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventListParams params =
-        com.stripe.param.v2.core.EventListParams.builder().setObjectId("object_id").build();
+        com.stripe.param.v2.core.EventListParams.builder().build();
 
     com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.Event> stripeCollection =
         client.v2().core().events().list(params);
@@ -27440,6 +27464,34 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreVaultGbBankAccountGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/vault/gb_bank_accounts",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.core.vault.GbBankAccount>>() {}.getType(),
+        "{\"data\":[{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"confirmation_of_payee\":{\"result\":{\"created\":\"1970-01-12T21:42:34.472Z\",\"match_result\":\"unavailable\",\"matched\":{},\"message\":\"message\",\"provided\":{\"business_type\":\"personal\",\"name\":\"name\"}},\"status\":\"awaiting_acknowledgement\"},\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.gb_bank_account\",\"sort_code\":\"sort_code\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.GbBankAccountListParams params =
+        com.stripe.param.v2.core.vault.GbBankAccountListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.vault.GbBankAccount>
+        stripeCollection = client.v2().core().vault().gbBankAccounts().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/vault/gb_bank_accounts",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2CoreVaultGbBankAccountPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -27469,7 +27521,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2CoreVaultGbBankAccountGetServices() throws StripeException {
+  public void testV2CoreVaultGbBankAccountGet2Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
@@ -27565,6 +27617,34 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreVaultUsBankAccountGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/vault/us_bank_accounts",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.core.vault.UsBankAccount>>() {}.getType(),
+        "{\"data\":[{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"verification\":{\"status\":\"verification_failed\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.UsBankAccountListParams params =
+        com.stripe.param.v2.core.vault.UsBankAccountListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.vault.UsBankAccount>
+        stripeCollection = client.v2().core().vault().usBankAccounts().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/vault/us_bank_accounts",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2CoreVaultUsBankAccountPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -27573,7 +27653,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.vault.UsBankAccount.class,
-        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"livemode\":true}");
+        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"verification\":{\"status\":\"verification_failed\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.vault.UsBankAccountCreateParams params =
@@ -27593,7 +27673,7 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testV2CoreVaultUsBankAccountGetServices() throws StripeException {
+  public void testV2CoreVaultUsBankAccountGet2Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
@@ -27601,7 +27681,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.vault.UsBankAccount.class,
-        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"livemode\":true}");
+        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"verification\":{\"status\":\"verification_failed\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.vault.UsBankAccount usBankAccount =
@@ -27624,7 +27704,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.vault.UsBankAccount.class,
-        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"livemode\":true}");
+        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"verification\":{\"status\":\"verification_failed\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.vault.UsBankAccountUpdateParams params =
@@ -27650,7 +27730,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.vault.UsBankAccount.class,
-        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"livemode\":true}");
+        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"verification\":{\"status\":\"verification_failed\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.vault.UsBankAccount usBankAccount =
@@ -27660,6 +27740,55 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
         "/v2/core/vault/us_bank_accounts/id_123/archive",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2CoreVaultUsBankAccountPost4Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/confirm_microdeposits",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.UsBankAccount.class,
+        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"verification\":{\"status\":\"verification_failed\"},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.vault.UsBankAccountConfirmMicrodepositsParams params =
+        com.stripe.param.v2.core.vault.UsBankAccountConfirmMicrodepositsParams.builder().build();
+
+    com.stripe.model.v2.core.vault.UsBankAccount usBankAccount =
+        client.v2().core().vault().usBankAccounts().confirmMicrodeposits("id_123", params);
+    assertNotNull(usBankAccount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/confirm_microdeposits",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreVaultUsBankAccountPost5Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/send_microdeposits",
+        null,
+        null,
+        com.stripe.model.v2.core.vault.UsBankAccount.class,
+        "{\"archived\":true,\"bank_account_type\":\"savings\",\"bank_name\":\"bank_name\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"last4\":\"last4\",\"object\":\"v2.core.vault.us_bank_account\",\"verification\":{\"status\":\"verification_failed\"},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.vault.UsBankAccount usBankAccount =
+        client.v2().core().vault().usBankAccounts().sendMicrodeposits("id_123");
+    assertNotNull(usBankAccount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/vault/us_bank_accounts/id_123/send_microdeposits",
         null,
         null);
   }
@@ -27796,6 +27925,32 @@ class GeneratedExamples extends BaseStripeTest {
 
   @Test
   public void testV2MoneyManagementFinancialAccountPost2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_accounts/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.FinancialAccount.class,
+        "{\"balance\":{\"available\":{\"key\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.FinancialAccountUpdateParams params =
+        com.stripe.param.v2.moneymanagement.FinancialAccountUpdateParams.builder().build();
+
+    com.stripe.model.v2.moneymanagement.FinancialAccount financialAccount =
+        client.v2().moneyManagement().financialAccounts().update("id_123", params);
+    assertNotNull(financialAccount);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/financial_accounts/id_123",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementFinancialAccountPost3Services() throws StripeException {
     stubRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
@@ -29281,7 +29436,7 @@ class GeneratedExamples extends BaseStripeTest {
         "/v2/money_management/financial_accounts",
         null,
         null,
-        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"recipient_feature_not_active\"}}",
+        "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"outbound_flow_from_closed_financial_account_unsupported\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 

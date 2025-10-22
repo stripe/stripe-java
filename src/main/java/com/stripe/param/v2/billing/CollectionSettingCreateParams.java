@@ -200,8 +200,8 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Controls emails for when the payment is due. For example after the invoice is finilized and
-     * transition to Open state.
+     * Controls emails for when the payment is due. For example after the invoice is finalized and
+     * transitions to Open state.
      */
     @SerializedName("payment_due")
     PaymentDue paymentDue;
@@ -253,8 +253,8 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Controls emails for when the payment is due. For example after the invoice is finilized and
-       * transition to Open state.
+       * Controls emails for when the payment is due. For example after the invoice is finalized and
+       * transitions to Open state.
        */
       public Builder setPaymentDue(
           CollectionSettingCreateParams.EmailDelivery.PaymentDue paymentDue) {
@@ -283,7 +283,7 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> If true the payment link to hosted invocie page would be
+       * <strong>Required.</strong> If true the payment link to hosted invoice page would be
        * included in email and PDF of the invoice.
        */
       @SerializedName("include_payment_link")
@@ -351,7 +351,7 @@ public class CollectionSettingCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> If true the payment link to hosted invocie page would be
+         * <strong>Required.</strong> If true the payment link to hosted invoice page would be
          * included in email and PDF of the invoice.
          */
         public Builder setIncludePaymentLink(Boolean includePaymentLink) {

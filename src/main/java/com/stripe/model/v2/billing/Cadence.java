@@ -567,15 +567,15 @@ public class Cadence extends StripeObject implements HasId {
       @EqualsAndHashCode(callSuper = false)
       public static class EmailDelivery extends StripeObject {
         /**
-         * Controls emails for when the payment is due. For example after the invoice is finilized
-         * and transition to Open state.
+         * Controls emails for when the payment is due. For example after the invoice is finalized
+         * and transitions to Open state.
          */
         @SerializedName("payment_due")
         PaymentDue paymentDue;
 
         /**
-         * Controls emails for when the payment is due. For example after the invoice is finilized
-         * and transition to Open state.
+         * Controls emails for when the payment is due. For example after the invoice is finalized
+         * and transitions to Open state.
          */
         @Getter
         @Setter
@@ -586,7 +586,7 @@ public class Cadence extends StripeObject implements HasId {
           Boolean enabled;
 
           /**
-           * If true the payment link to hosted invocie page would be included in email and PDF of
+           * If true the payment link to hosted invoice page would be included in email and PDF of
            * the invoice.
            */
           @SerializedName("include_payment_link")

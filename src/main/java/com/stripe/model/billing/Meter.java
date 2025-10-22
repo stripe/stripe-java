@@ -18,6 +18,7 @@ import com.stripe.param.billing.MeterListParams;
 import com.stripe.param.billing.MeterReactivateParams;
 import com.stripe.param.billing.MeterRetrieveParams;
 import com.stripe.param.billing.MeterUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,6 +45,10 @@ public class Meter extends ApiResource implements HasId {
 
   @SerializedName("default_aggregation")
   DefaultAggregation defaultAggregation;
+
+  /** Set of keys that will be used to group meter events by. */
+  @SerializedName("dimension_payload_keys")
+  List<String> dimensionPayloadKeys;
 
   /** The meter's name. */
   @SerializedName("display_name")

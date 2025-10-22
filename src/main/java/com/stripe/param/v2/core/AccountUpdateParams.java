@@ -1878,6 +1878,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ip_address")
           IP_ADDRESS("ip_address"),
 
+          @SerializedName("payment_method")
+          PAYMENT_METHOD("payment_method"),
+
           @SerializedName("shipping_address")
           SHIPPING_ADDRESS("shipping_address");
 
@@ -9726,9 +9729,14 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("gbp")
           Gbp gbp;
 
-          private HoldsCurrencies(Map<String, Object> extraParams, Gbp gbp) {
+          /** Can hold storage-type funds on Stripe in USD. */
+          @SerializedName("usd")
+          Usd usd;
+
+          private HoldsCurrencies(Map<String, Object> extraParams, Gbp gbp, Usd usd) {
             this.extraParams = extraParams;
             this.gbp = gbp;
+            this.usd = usd;
           }
 
           public static Builder builder() {
@@ -9740,10 +9748,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
             private Gbp gbp;
 
+            private Usd usd;
+
             /** Finalize and obtain parameter instance from this builder. */
             public AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies build() {
               return new AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies(
-                  this.extraParams, this.gbp);
+                  this.extraParams, this.gbp, this.usd);
             }
 
             /**
@@ -9780,6 +9790,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             public Builder setGbp(
                 AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Gbp gbp) {
               this.gbp = gbp;
+              return this;
+            }
+
+            /** Can hold storage-type funds on Stripe in USD. */
+            public Builder setUsd(
+                AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usd usd) {
+              this.usd = usd;
               return this;
             }
           }
@@ -9845,6 +9862,88 @@ public class AccountUpdateParams extends ApiRequestParams {
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
                * AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Gbp#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * To request a new Capability for an account, pass true. There can be a delay before
+               * the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Usd {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Usd(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usd
+                  build() {
+                return new AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies
+                    .Usd(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usd#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usd#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -11052,6 +11151,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("application")
         APPLICATION("application"),
 
+        @SerializedName("application_custom")
+        APPLICATION_CUSTOM("application_custom"),
+
+        @SerializedName("application_express")
+        APPLICATION_EXPRESS("application_express"),
+
         @SerializedName("stripe")
         STRIPE("stripe");
 
@@ -11344,7 +11449,10 @@ public class AccountUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Identity {
-    /** Attestations from the identity's key people, e.g. owners, executives, directors. */
+    /**
+     * Attestations from the identity's key people, e.g. owners, executives, directors,
+     * representatives.
+     */
     @SerializedName("attestations")
     Attestations attestations;
 
@@ -11423,7 +11531,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.individual);
       }
 
-      /** Attestations from the identity's key people, e.g. owners, executives, directors. */
+      /**
+       * Attestations from the identity's key people, e.g. owners, executives, directors,
+       * representatives.
+       */
       public Builder setAttestations(AccountUpdateParams.Identity.Attestations attestations) {
         this.attestations = attestations;
         return this;
@@ -11530,6 +11641,13 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("persons_provided")
       PersonsProvided personsProvided;
 
+      /**
+       * This hash is used to attest that the representative is authorized to act as the
+       * representative of their legal entity.
+       */
+      @SerializedName("representative_declaration")
+      RepresentativeDeclaration representativeDeclaration;
+
       /** Attestations of accepted terms of service agreements. */
       @SerializedName("terms_of_service")
       TermsOfService termsOfService;
@@ -11539,11 +11657,13 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           OwnershipDeclaration ownershipDeclaration,
           PersonsProvided personsProvided,
+          RepresentativeDeclaration representativeDeclaration,
           TermsOfService termsOfService) {
         this.directorshipDeclaration = directorshipDeclaration;
         this.extraParams = extraParams;
         this.ownershipDeclaration = ownershipDeclaration;
         this.personsProvided = personsProvided;
+        this.representativeDeclaration = representativeDeclaration;
         this.termsOfService = termsOfService;
       }
 
@@ -11560,6 +11680,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private PersonsProvided personsProvided;
 
+        private RepresentativeDeclaration representativeDeclaration;
+
         private TermsOfService termsOfService;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -11569,6 +11691,7 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.extraParams,
               this.ownershipDeclaration,
               this.personsProvided,
+              this.representativeDeclaration,
               this.termsOfService);
         }
 
@@ -11625,6 +11748,17 @@ public class AccountUpdateParams extends ApiRequestParams {
         public Builder setPersonsProvided(
             AccountUpdateParams.Identity.Attestations.PersonsProvided personsProvided) {
           this.personsProvided = personsProvided;
+          return this;
+        }
+
+        /**
+         * This hash is used to attest that the representative is authorized to act as the
+         * representative of their legal entity.
+         */
+        public Builder setRepresentativeDeclaration(
+            AccountUpdateParams.Identity.Attestations.RepresentativeDeclaration
+                representativeDeclaration) {
+          this.representativeDeclaration = representativeDeclaration;
           return this;
         }
 
@@ -12037,6 +12171,128 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           OwnershipExemptionReason(String value) {
             this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RepresentativeDeclaration {
+        /**
+         * The time marking when the representative attestation was made. Represented as a RFC 3339
+         * date &amp; time UTC value in millisecond precision, for example:
+         * 2022-09-18T13:22:18.123Z.
+         */
+        @SerializedName("date")
+        Instant date;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The IP address from which the representative attestation was made. */
+        @SerializedName("ip")
+        Object ip;
+
+        /** The user agent of the browser from which the representative attestation was made. */
+        @SerializedName("user_agent")
+        Object userAgent;
+
+        private RepresentativeDeclaration(
+            Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+          this.date = date;
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Instant date;
+
+          private Map<String, Object> extraParams;
+
+          private Object ip;
+
+          private Object userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountUpdateParams.Identity.Attestations.RepresentativeDeclaration build() {
+            return new AccountUpdateParams.Identity.Attestations.RepresentativeDeclaration(
+                this.date, this.extraParams, this.ip, this.userAgent);
+          }
+
+          /**
+           * The time marking when the representative attestation was made. Represented as a RFC
+           * 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          public Builder setDate(Instant date) {
+            this.date = date;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountUpdateParams.Identity.Attestations.RepresentativeDeclaration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountUpdateParams.Identity.Attestations.RepresentativeDeclaration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The IP address from which the representative attestation was made. */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /** The IP address from which the representative attestation was made. */
+          public Builder setIp(EmptyParam ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /** The user agent of the browser from which the representative attestation was made. */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+
+          /** The user agent of the browser from which the representative attestation was made. */
+          public Builder setUserAgent(EmptyParam userAgent) {
+            this.userAgent = userAgent;
+            return this;
           }
         }
       }

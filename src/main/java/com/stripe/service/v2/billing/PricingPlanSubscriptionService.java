@@ -89,4 +89,9 @@ public final class PricingPlanSubscriptionService extends ApiService {
             options);
     return this.request(request, PricingPlanSubscription.class);
   }
+
+  public com.stripe.service.v2.billing.pricingplansubscriptions.ComponentService components() {
+    return new com.stripe.service.v2.billing.pricingplansubscriptions.ComponentService(
+        this.getResponseGetter());
+  }
 }
