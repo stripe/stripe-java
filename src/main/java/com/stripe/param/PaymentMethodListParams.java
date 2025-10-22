@@ -56,9 +56,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
   String startingAfter;
 
   /**
-   * An optional filter on the list, based on the object {@code type} field. Without the filter, the
-   * list includes all current and future payment method types. If your integration expects only one
-   * type of payment method in the response, make sure to provide a type value in the request.
+   * Filters the list by the object {@code type} field. Unfiltered, the list returns all payment
+   * method types except {@code custom}. If your integration expects only one type of payment method
+   * in the response, specify that type value in the request to reduce your payload.
    */
   @SerializedName("type")
   Type type;
@@ -201,10 +201,9 @@ public class PaymentMethodListParams extends ApiRequestParams {
     }
 
     /**
-     * An optional filter on the list, based on the object {@code type} field. Without the filter,
-     * the list includes all current and future payment method types. If your integration expects
-     * only one type of payment method in the response, make sure to provide a type value in the
-     * request.
+     * Filters the list by the object {@code type} field. Unfiltered, the list returns all payment
+     * method types except {@code custom}. If your integration expects only one type of payment
+     * method in the response, specify that type value in the request to reduce your payload.
      */
     public Builder setType(PaymentMethodListParams.Type type) {
       this.type = type;
