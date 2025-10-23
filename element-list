@@ -103,6 +103,7 @@ com.stripe.service.v2.billing.collectionsettings
 com.stripe.service.v2.billing.intents
 com.stripe.service.v2.billing.licensefees
 com.stripe.service.v2.billing.pricingplans
+com.stripe.service.v2.billing.pricingplansubscriptions
 com.stripe.service.v2.billing.ratecards
 com.stripe.service.v2.core
 com.stripe.service.v2.core.accounts
