@@ -6,6 +6,30 @@
 
 The official [Stripe][stripe] Java client library.
 
+## Table of Contents
+
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Gradle users](#gradle-users)
+  - [Maven users](#maven-users)
+  - [Others](#others)
+  - [ProGuard](#proguard)
+- [Documentation](#documentation)
+- [Usage](#usage)
+  - [StripeClient vs legacy pattern](#stripeclient-vs-legacy-pattern)
+  - [Per-request Configuration](#per-request-configuration)
+  - [Configuring automatic retries](#configuring-automatic-retries)
+  - [Configuring Timeouts](#configuring-timeouts)
+  - [Configuring DNS Cache TTL](#configuring-dns-cache-ttl)
+  - [How to use undocumented parameters and properties](#how-to-use-undocumented-parameters-and-properties)
+  - [Writing a plugin](#writing-a-plugin)
+  - [Request latency telemetry](#request-latency-telemetry)
+  - [Public Preview SDKs](#public-preview-sdks)
+  - [Private Preview SDKs](#private-preview-sdks)
+  - [Custom requests](#custom-requests)
+- [Support](#support)
+- [Development](#development)
+
 ## Installation
 
 ### Requirements
