@@ -30,11 +30,19 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
   @SerializedName("payment_intent")
   String paymentIntent;
 
+  /** The ID of the PaymentRecord to attach to the invoice. */
+  @SerializedName("payment_record")
+  String paymentRecord;
+
   private InvoiceAttachPaymentParams(
-      List<String> expand, Map<String, Object> extraParams, String paymentIntent) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      String paymentIntent,
+      String paymentRecord) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.paymentIntent = paymentIntent;
+    this.paymentRecord = paymentRecord;
   }
 
   public static Builder builder() {
@@ -48,9 +56,12 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
 
     private String paymentIntent;
 
+    private String paymentRecord;
+
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceAttachPaymentParams build() {
-      return new InvoiceAttachPaymentParams(this.expand, this.extraParams, this.paymentIntent);
+      return new InvoiceAttachPaymentParams(
+          this.expand, this.extraParams, this.paymentIntent, this.paymentRecord);
     }
 
     /**
@@ -108,6 +119,12 @@ public class InvoiceAttachPaymentParams extends ApiRequestParams {
     /** The ID of the PaymentIntent to attach to the invoice. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
+      return this;
+    }
+
+    /** The ID of the PaymentRecord to attach to the invoice. */
+    public Builder setPaymentRecord(String paymentRecord) {
+      this.paymentRecord = paymentRecord;
       return this;
     }
   }

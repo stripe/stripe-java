@@ -233,6 +233,15 @@ public class InvoicePayment extends ApiResource implements HasId {
     ExpandableField<PaymentIntent> paymentIntent;
 
     /**
+     * ID of the PaymentRecord associated with this payment when {@code type} is {@code
+     * payment_record}.
+     */
+    @SerializedName("payment_record")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentRecord> paymentRecord;
+
+    /**
      * Type of payment object associated with this invoice payment.
      *
      * <p>One of {@code charge}, or {@code payment_intent}.
@@ -275,6 +284,25 @@ public class InvoicePayment extends ApiResource implements HasId {
     public void setPaymentIntentObject(PaymentIntent expandableObject) {
       this.paymentIntent =
           new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code paymentRecord} object. */
+    public String getPaymentRecord() {
+      return (this.paymentRecord != null) ? this.paymentRecord.getId() : null;
+    }
+
+    public void setPaymentRecord(String id) {
+      this.paymentRecord = ApiResource.setExpandableFieldId(id, this.paymentRecord);
+    }
+
+    /** Get expanded {@code paymentRecord}. */
+    public PaymentRecord getPaymentRecordObject() {
+      return (this.paymentRecord != null) ? this.paymentRecord.getExpanded() : null;
+    }
+
+    public void setPaymentRecordObject(PaymentRecord expandableObject) {
+      this.paymentRecord =
+          new ExpandableField<PaymentRecord>(expandableObject.getId(), expandableObject);
     }
   }
 

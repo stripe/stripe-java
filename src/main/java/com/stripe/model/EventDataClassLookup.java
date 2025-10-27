@@ -58,12 +58,17 @@ public final class EventDataClassLookup {
     classLookup.put("line_item", com.stripe.model.InvoiceLineItem.class);
     classLookup.put("login_link", com.stripe.model.LoginLink.class);
     classLookup.put("mandate", com.stripe.model.Mandate.class);
+    classLookup.put("payment_attempt_record", com.stripe.model.PaymentAttemptRecord.class);
     classLookup.put("payment_intent", com.stripe.model.PaymentIntent.class);
+    classLookup.put(
+        "payment_intent_amount_details_line_item",
+        com.stripe.model.PaymentIntentAmountDetailsLineItem.class);
     classLookup.put("payment_link", com.stripe.model.PaymentLink.class);
     classLookup.put("payment_method", com.stripe.model.PaymentMethod.class);
     classLookup.put(
         "payment_method_configuration", com.stripe.model.PaymentMethodConfiguration.class);
     classLookup.put("payment_method_domain", com.stripe.model.PaymentMethodDomain.class);
+    classLookup.put("payment_record", com.stripe.model.PaymentRecord.class);
     classLookup.put("payout", com.stripe.model.Payout.class);
     classLookup.put("person", com.stripe.model.Person.class);
     classLookup.put("plan", com.stripe.model.Plan.class);

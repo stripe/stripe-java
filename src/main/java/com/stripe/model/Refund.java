@@ -625,6 +625,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    @SerializedName("crypto")
+    Crypto crypto;
+
     @SerializedName("customer_cash_balance")
     CustomerCashBalance customerCashBalance;
 
@@ -840,6 +843,19 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Cashapp extends StripeObject {}
+
+    /**
+     * For more details about Crypto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Crypto extends StripeObject {
+      /** The transaction hash of the refund. */
+      @SerializedName("reference")
+      String reference;
+    }
 
     /**
      * For more details about CustomerCashBalance, please refer to the <a

@@ -234,13 +234,19 @@ public class InvoicePaymentListParams extends ApiRequestParams {
     @SerializedName("payment_intent")
     String paymentIntent;
 
+    /** Only return invoice payments associated by this payment record ID. */
+    @SerializedName("payment_record")
+    String paymentRecord;
+
     /** <strong>Required.</strong> Only return invoice payments associated by this payment type. */
     @SerializedName("type")
     Type type;
 
-    private Payment(Map<String, Object> extraParams, String paymentIntent, Type type) {
+    private Payment(
+        Map<String, Object> extraParams, String paymentIntent, String paymentRecord, Type type) {
       this.extraParams = extraParams;
       this.paymentIntent = paymentIntent;
+      this.paymentRecord = paymentRecord;
       this.type = type;
     }
 
@@ -253,12 +259,14 @@ public class InvoicePaymentListParams extends ApiRequestParams {
 
       private String paymentIntent;
 
+      private String paymentRecord;
+
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public InvoicePaymentListParams.Payment build() {
         return new InvoicePaymentListParams.Payment(
-            this.extraParams, this.paymentIntent, this.type);
+            this.extraParams, this.paymentIntent, this.paymentRecord, this.type);
       }
 
       /**
@@ -293,6 +301,12 @@ public class InvoicePaymentListParams extends ApiRequestParams {
         return this;
       }
 
+      /** Only return invoice payments associated by this payment record ID. */
+      public Builder setPaymentRecord(String paymentRecord) {
+        this.paymentRecord = paymentRecord;
+        return this;
+      }
+
       /**
        * <strong>Required.</strong> Only return invoice payments associated by this payment type.
        */
@@ -304,7 +318,10 @@ public class InvoicePaymentListParams extends ApiRequestParams {
 
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("payment_intent")
-      PAYMENT_INTENT("payment_intent");
+      PAYMENT_INTENT("payment_intent"),
+
+      @SerializedName("payment_record")
+      PAYMENT_RECORD("payment_record");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

@@ -296,6 +296,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
 
+    @SerializedName("balance_settings.updated")
+    BALANCE_SETTINGS__UPDATED("balance_settings.updated"),
+
     @SerializedName("billing.alert.triggered")
     BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
 
@@ -545,6 +548,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
+
+    @SerializedName("invoice.payment_attempt_required")
+    INVOICE__PAYMENT_ATTEMPT_REQUIRED("invoice.payment_attempt_required"),
 
     @SerializedName("invoice.payment_failed")
     INVOICE__PAYMENT_FAILED("invoice.payment_failed"),

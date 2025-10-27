@@ -35,11 +35,11 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** Configuration overrides. */
+  /** Configuration overrides for this setup, such as MOTO and customer cancellation settings. */
   @SerializedName("process_config")
   ProcessConfig processConfig;
 
-  /** <strong>Required.</strong> SetupIntent ID */
+  /** <strong>Required.</strong> The ID of the SetupIntent to process on the reader. */
   @SerializedName("setup_intent")
   String setupIntent;
 
@@ -140,13 +140,13 @@ public class ReaderProcessSetupIntentParams extends ApiRequestParams {
       return this;
     }
 
-    /** Configuration overrides. */
+    /** Configuration overrides for this setup, such as MOTO and customer cancellation settings. */
     public Builder setProcessConfig(ReaderProcessSetupIntentParams.ProcessConfig processConfig) {
       this.processConfig = processConfig;
       return this;
     }
 
-    /** <strong>Required.</strong> SetupIntent ID */
+    /** <strong>Required.</strong> The ID of the SetupIntent to process on the reader. */
     public Builder setSetupIntent(String setupIntent) {
       this.setupIntent = setupIntent;
       return this;

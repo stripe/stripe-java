@@ -113,6 +113,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("description")
   String description;
 
+  /** Payment method types that are excluded from this SetupIntent. */
+  @SerializedName("excluded_payment_method_types")
+  List<String> excludedPaymentMethodTypes;
+
   /**
    * Indicates the directions of money movement for which this payment method is intended to be
    * used.

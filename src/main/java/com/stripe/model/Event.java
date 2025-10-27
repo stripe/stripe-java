@@ -104,7 +104,7 @@ public class Event extends ApiResource implements HasId {
    * {@code account.external_account.created}, {@code account.external_account.deleted}, {@code
    * account.external_account.updated}, {@code account.updated}, {@code application_fee.created},
    * {@code application_fee.refund.updated}, {@code application_fee.refunded}, {@code
-   * balance.available}, {@code billing.alert.triggered}, {@code
+   * balance.available}, {@code balance_settings.updated}, {@code billing.alert.triggered}, {@code
    * billing_portal.configuration.created}, {@code billing_portal.configuration.updated}, {@code
    * billing_portal.session.created}, {@code capability.updated}, {@code
    * cash_balance.funds_available}, {@code charge.captured}, {@code charge.dispute.closed}, {@code
@@ -141,7 +141,8 @@ public class Event extends ApiResource implements HasId {
    * identity.verification_session.verified}, {@code invoice.created}, {@code invoice.deleted},
    * {@code invoice.finalization_failed}, {@code invoice.finalized}, {@code
    * invoice.marked_uncollectible}, {@code invoice.overdue}, {@code invoice.overpaid}, {@code
-   * invoice.paid}, {@code invoice.payment_action_required}, {@code invoice.payment_failed}, {@code
+   * invoice.paid}, {@code invoice.payment_action_required}, {@code
+   * invoice.payment_attempt_required}, {@code invoice.payment_failed}, {@code
    * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
    * invoice.updated}, {@code invoice.voided}, {@code invoice.will_be_due}, {@code
    * invoice_payment.paid}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code

@@ -244,6 +244,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  @SerializedName("payment_details")
+  PaymentDetails paymentDetails;
+
   /** ID of the payment method used in this PaymentIntent. */
   @SerializedName("payment_method")
   @Getter(lombok.AccessLevel.NONE)
@@ -1516,8 +1519,59 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails extends StripeObject {
+    /** The total discount applied on the transaction. */
+    @SerializedName("discount_amount")
+    Long discountAmount;
+
+    /**
+     * A list of line items, each containing information about a product in the PaymentIntent. There
+     * is a maximum of 100 line items.
+     */
+    @SerializedName("line_items")
+    PaymentIntentAmountDetailsLineItemCollection lineItems;
+
+    @SerializedName("shipping")
+    Shipping shipping;
+
+    @SerializedName("tax")
+    Tax tax;
+
     @SerializedName("tip")
     Tip tip;
+
+    /**
+     * For more details about Shipping, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Shipping extends StripeObject {
+      /** Portion of the amount that is for shipping. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** The postal code that represents the shipping source. */
+      @SerializedName("from_postal_code")
+      String fromPostalCode;
+
+      /** The postal code that represents the shipping destination. */
+      @SerializedName("to_postal_code")
+      String toPostalCode;
+    }
+
+    /**
+     * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Tax extends StripeObject {
+      /** Total portion of the amount that is for tax. */
+      @SerializedName("total_tax_amount")
+      Long totalTaxAmount;
+    }
 
     /**
      * For more details about Tip, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2495,6 +2549,26 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("native_url")
       String nativeUrl;
     }
+  }
+
+  /**
+   * For more details about PaymentDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentDetails extends StripeObject {
+    /**
+     * Some customers might be required by their company or organization to provide this
+     * information. If so, provide this value. Otherwise you can ignore this field.
+     */
+    @SerializedName("customer_reference")
+    String customerReference;
+
+    /** A unique value assigned by the business to identify the transaction. */
+    @SerializedName("order_reference")
+    String orderReference;
   }
 
   /**
@@ -5139,6 +5213,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(latestCharge, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
+    trySetResponseGetter(paymentDetails, responseGetter);
     trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);

@@ -96,6 +96,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Controls settings applied for collecting the customer's name. */
+  @SerializedName("name_collection")
+  Object nameCollection;
+
   /**
    * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in {@code
    * payment} mode.
@@ -176,6 +180,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
       InvoiceCreation invoiceCreation,
       List<PaymentLinkUpdateParams.LineItem> lineItems,
       Map<String, String> metadata,
+      Object nameCollection,
       PaymentIntentData paymentIntentData,
       PaymentMethodCollection paymentMethodCollection,
       Object paymentMethodTypes,
@@ -199,6 +204,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.metadata = metadata;
+    this.nameCollection = nameCollection;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodCollection = paymentMethodCollection;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -243,6 +249,8 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Object nameCollection;
+
     private PaymentIntentData paymentIntentData;
 
     private PaymentMethodCollection paymentMethodCollection;
@@ -278,6 +286,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
           this.invoiceCreation,
           this.lineItems,
           this.metadata,
+          this.nameCollection,
           this.paymentIntentData,
           this.paymentMethodCollection,
           this.paymentMethodTypes,
@@ -504,6 +513,18 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** Controls settings applied for collecting the customer's name. */
+    public Builder setNameCollection(PaymentLinkUpdateParams.NameCollection nameCollection) {
+      this.nameCollection = nameCollection;
+      return this;
+    }
+
+    /** Controls settings applied for collecting the customer's name. */
+    public Builder setNameCollection(EmptyParam nameCollection) {
+      this.nameCollection = nameCollection;
       return this;
     }
 
@@ -3396,6 +3417,284 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class NameCollection {
+    /** Controls settings applied for collecting the customer's business name. */
+    @SerializedName("business")
+    Business business;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Controls settings applied for collecting the customer's individual name. */
+    @SerializedName("individual")
+    Individual individual;
+
+    private NameCollection(
+        Business business, Map<String, Object> extraParams, Individual individual) {
+      this.business = business;
+      this.extraParams = extraParams;
+      this.individual = individual;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Business business;
+
+      private Map<String, Object> extraParams;
+
+      private Individual individual;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentLinkUpdateParams.NameCollection build() {
+        return new PaymentLinkUpdateParams.NameCollection(
+            this.business, this.extraParams, this.individual);
+      }
+
+      /** Controls settings applied for collecting the customer's business name. */
+      public Builder setBusiness(PaymentLinkUpdateParams.NameCollection.Business business) {
+        this.business = business;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentLinkUpdateParams.NameCollection#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentLinkUpdateParams.NameCollection#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Controls settings applied for collecting the customer's individual name. */
+      public Builder setIndividual(PaymentLinkUpdateParams.NameCollection.Individual individual) {
+        this.individual = individual;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Business {
+      /**
+       * <strong>Required.</strong> Enable business name collection on the payment link. Defaults to
+       * {@code false}.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Whether the customer is required to provide their business name before checking out.
+       * Defaults to {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
+
+      private Business(Boolean enabled, Map<String, Object> extraParams, Boolean optional) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.optional = optional;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Boolean optional;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.NameCollection.Business build() {
+          return new PaymentLinkUpdateParams.NameCollection.Business(
+              this.enabled, this.extraParams, this.optional);
+        }
+
+        /**
+         * <strong>Required.</strong> Enable business name collection on the payment link. Defaults
+         * to {@code false}.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.NameCollection.Business#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.NameCollection.Business#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Whether the customer is required to provide their business name before checking out.
+         * Defaults to {@code false}.
+         */
+        public Builder setOptional(Boolean optional) {
+          this.optional = optional;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Individual {
+      /**
+       * <strong>Required.</strong> Enable individual name collection on the payment link. Defaults
+       * to {@code false}.
+       */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Whether the customer is required to provide their full name before checking out. Defaults
+       * to {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
+
+      private Individual(Boolean enabled, Map<String, Object> extraParams, Boolean optional) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.optional = optional;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Boolean optional;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentLinkUpdateParams.NameCollection.Individual build() {
+          return new PaymentLinkUpdateParams.NameCollection.Individual(
+              this.enabled, this.extraParams, this.optional);
+        }
+
+        /**
+         * <strong>Required.</strong> Enable individual name collection on the payment link.
+         * Defaults to {@code false}.
+         */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.NameCollection.Individual#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentLinkUpdateParams.NameCollection.Individual#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Whether the customer is required to provide their full name before checking out. Defaults
+         * to {@code false}.
+         */
+        public Builder setOptional(Boolean optional) {
+          this.optional = optional;
+          return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class PaymentIntentData {
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
@@ -5480,6 +5779,9 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     @SerializedName("link")
     LINK("link"),
+
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
 
     @SerializedName("mobilepay")
     MOBILEPAY("mobilepay"),
