@@ -145,6 +145,9 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  @SerializedName("name_collection")
+  NameCollection nameCollection;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -1041,6 +1044,61 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   }
 
   /**
+   * For more details about NameCollection, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NameCollection extends StripeObject {
+    @SerializedName("business")
+    Business business;
+
+    @SerializedName("individual")
+    Individual individual;
+
+    /**
+     * For more details about Business, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Business extends StripeObject {
+      /** Indicates whether business name collection is enabled for the payment link. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Whether the customer is required to complete the field before checking out. Defaults to
+       * {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
+    }
+
+    /**
+     * For more details about Individual, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Individual extends StripeObject {
+      /** Indicates whether individual name collection is enabled for the payment link. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Whether the customer is required to complete the field before checking out. Defaults to
+       * {@code false}.
+       */
+      @SerializedName("optional")
+      Boolean optional;
+    }
+  }
+
+  /**
    * For more details about OptionalItem, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1433,6 +1491,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     trySetResponseGetter(customText, responseGetter);
     trySetResponseGetter(invoiceCreation, responseGetter);
     trySetResponseGetter(lineItems, responseGetter);
+    trySetResponseGetter(nameCollection, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentIntentData, responseGetter);
     trySetResponseGetter(phoneNumberCollection, responseGetter);

@@ -72,4 +72,49 @@ public class UsBankAccount extends StripeObject implements HasId {
   /** The ACH routing number of the bank account. */
   @SerializedName("routing_number")
   String routingNumber;
+
+  /** The bank account verification details. */
+  @SerializedName("verification")
+  Verification verification;
+
+  /** The bank account verification details. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Verification extends StripeObject {
+    /** The microdeposit verification details if the status is awaiting verification. */
+    @SerializedName("microdeposit_verification_details")
+    MicrodepositVerificationDetails microdepositVerificationDetails;
+
+    /**
+     * The bank account verification status.
+     *
+     * <p>One of {@code awaiting_verification}, {@code unverified}, {@code verification_failed}, or
+     * {@code verified}.
+     */
+    @SerializedName("status")
+    String status;
+
+    /** The microdeposit verification details if the status is awaiting verification. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MicrodepositVerificationDetails extends StripeObject {
+      /** Time when microdeposits will expire and have to be re-sent. */
+      @SerializedName("expires")
+      Instant expires;
+
+      /**
+       * Microdeposit type can be amounts or descriptor_type.
+       *
+       * <p>One of {@code amounts}, or {@code descriptor_code}.
+       */
+      @SerializedName("microdeposit_type")
+      String microdepositType;
+
+      /** Time when microdeposits were sent. */
+      @SerializedName("sent")
+      Instant sent;
+    }
+  }
 }

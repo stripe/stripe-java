@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.core.vault;
 
+import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.core.vault.GbBankAccount;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -12,12 +14,47 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.core.vault.GbBankAccountCreateParams;
 import com.stripe.param.v2.core.vault.GbBankAccountInitiateConfirmationOfPayeeParams;
+import com.stripe.param.v2.core.vault.GbBankAccountListParams;
 
 public final class GbBankAccountService extends ApiService {
   public GbBankAccountService(StripeResponseGetter responseGetter) {
     super(responseGetter);
   }
 
+  /**
+   * List objects that can be used as destinations for outbound money movement via OutboundPayment.
+   */
+  public StripeCollection<GbBankAccount> list(GbBankAccountListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /**
+   * List objects that can be used as destinations for outbound money movement via OutboundPayment.
+   */
+  public StripeCollection<GbBankAccount> list(RequestOptions options) throws StripeException {
+    return list((GbBankAccountListParams) null, options);
+  }
+  /**
+   * List objects that can be used as destinations for outbound money movement via OutboundPayment.
+   */
+  public StripeCollection<GbBankAccount> list() throws StripeException {
+    return list((GbBankAccountListParams) null, (RequestOptions) null);
+  }
+  /**
+   * List objects that can be used as destinations for outbound money movement via OutboundPayment.
+   */
+  public StripeCollection<GbBankAccount> list(
+      GbBankAccountListParams params, RequestOptions options) throws StripeException {
+    String path = "/v2/core/vault/gb_bank_accounts";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, new TypeToken<StripeCollection<GbBankAccount>>() {}.getType());
+  }
   /** Create a GB bank account. */
   public GbBankAccount create(GbBankAccountCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);

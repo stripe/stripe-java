@@ -8552,6 +8552,13 @@ public class AccountCreateParams extends ApiRequestParams {
     String registrationNumber;
 
     /**
+     * This hash is used to attest that the representative is authorized to act as the
+     * representative of their legal entity.
+     */
+    @SerializedName("representative_declaration")
+    RepresentativeDeclaration representativeDeclaration;
+
+    /**
      * The category identifying the legal structure of the company or legal entity. See <a
      * href="https://stripe.com/connect/identity-verification#business-structure">Business
      * structure</a> for more details. Pass an empty string to unset this value.
@@ -8600,6 +8607,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String phone,
         Object registrationDate,
         String registrationNumber,
+        RepresentativeDeclaration representativeDeclaration,
         ApiRequestParams.EnumParam structure,
         String taxId,
         String taxIdRegistrar,
@@ -8623,6 +8631,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.phone = phone;
       this.registrationDate = registrationDate;
       this.registrationNumber = registrationNumber;
+      this.representativeDeclaration = representativeDeclaration;
       this.structure = structure;
       this.taxId = taxId;
       this.taxIdRegistrar = taxIdRegistrar;
@@ -8671,6 +8680,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String registrationNumber;
 
+      private RepresentativeDeclaration representativeDeclaration;
+
       private ApiRequestParams.EnumParam structure;
 
       private String taxId;
@@ -8702,6 +8713,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.phone,
             this.registrationDate,
             this.registrationNumber,
+            this.representativeDeclaration,
             this.structure,
             this.taxId,
             this.taxIdRegistrar,
@@ -8892,6 +8904,16 @@ public class AccountCreateParams extends ApiRequestParams {
        */
       public Builder setRegistrationNumber(String registrationNumber) {
         this.registrationNumber = registrationNumber;
+        return this;
+      }
+
+      /**
+       * This hash is used to attest that the representative is authorized to act as the
+       * representative of their legal entity.
+       */
+      public Builder setRepresentativeDeclaration(
+          AccountCreateParams.Company.RepresentativeDeclaration representativeDeclaration) {
+        this.representativeDeclaration = representativeDeclaration;
         return this;
       }
 
@@ -9740,6 +9762,111 @@ public class AccountCreateParams extends ApiRequestParams {
         /** <strong>Required.</strong> The four-digit year of registration. */
         public Builder setYear(Long year) {
           this.year = year;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RepresentativeDeclaration {
+      /** The Unix timestamp marking when the representative declaration attestation was made. */
+      @SerializedName("date")
+      Long date;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The IP address from which the representative declaration attestation was made. */
+      @SerializedName("ip")
+      String ip;
+
+      /**
+       * The user agent of the browser from which the representative declaration attestation was
+       * made.
+       */
+      @SerializedName("user_agent")
+      String userAgent;
+
+      private RepresentativeDeclaration(
+          Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+        this.date = date;
+        this.extraParams = extraParams;
+        this.ip = ip;
+        this.userAgent = userAgent;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long date;
+
+        private Map<String, Object> extraParams;
+
+        private String ip;
+
+        private String userAgent;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Company.RepresentativeDeclaration build() {
+          return new AccountCreateParams.Company.RepresentativeDeclaration(
+              this.date, this.extraParams, this.ip, this.userAgent);
+        }
+
+        /** The Unix timestamp marking when the representative declaration attestation was made. */
+        public Builder setDate(Long date) {
+          this.date = date;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Company.RepresentativeDeclaration#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Company.RepresentativeDeclaration#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The IP address from which the representative declaration attestation was made. */
+        public Builder setIp(String ip) {
+          this.ip = ip;
+          return this;
+        }
+
+        /**
+         * The user agent of the browser from which the representative declaration attestation was
+         * made.
+         */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
           return this;
         }
       }

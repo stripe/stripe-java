@@ -58,7 +58,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
   @SerializedName("refund_application_fee")
   Boolean refundApplicationFee;
 
-  /** Configuration overrides. */
+  /** Configuration overrides for this refund, such as customer cancellation settings. */
   @SerializedName("refund_payment_config")
   RefundPaymentConfig refundPaymentConfig;
 
@@ -237,7 +237,7 @@ public class ReaderRefundPaymentParams extends ApiRequestParams {
       return this;
     }
 
-    /** Configuration overrides. */
+    /** Configuration overrides for this refund, such as customer cancellation settings. */
     public Builder setRefundPaymentConfig(
         ReaderRefundPaymentParams.RefundPaymentConfig refundPaymentConfig) {
       this.refundPaymentConfig = refundPaymentConfig;

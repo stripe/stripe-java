@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Information about the error that occurred. */
+/** Returned when attempting to update an archived card. */
 public final class QuotaExceededException extends ApiException {
   private static final long serialVersionUID = 2L;
 

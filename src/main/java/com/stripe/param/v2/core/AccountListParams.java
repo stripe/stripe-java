@@ -21,6 +21,12 @@ public class AccountListParams extends ApiRequestParams {
   List<String> appliedConfigurations;
 
   /**
+   * Filter by whether the account is closed. If omitted, returns only Accounts that are not closed.
+   */
+  @SerializedName("closed")
+  Boolean closed;
+
+  /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
    * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -34,8 +40,12 @@ public class AccountListParams extends ApiRequestParams {
   Long limit;
 
   private AccountListParams(
-      List<String> appliedConfigurations, Map<String, Object> extraParams, Long limit) {
+      List<String> appliedConfigurations,
+      Boolean closed,
+      Map<String, Object> extraParams,
+      Long limit) {
     this.appliedConfigurations = appliedConfigurations;
+    this.closed = closed;
     this.extraParams = extraParams;
     this.limit = limit;
   }
@@ -47,13 +57,16 @@ public class AccountListParams extends ApiRequestParams {
   public static class Builder {
     private List<String> appliedConfigurations;
 
+    private Boolean closed;
+
     private Map<String, Object> extraParams;
 
     private Long limit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public AccountListParams build() {
-      return new AccountListParams(this.appliedConfigurations, this.extraParams, this.limit);
+      return new AccountListParams(
+          this.appliedConfigurations, this.closed, this.extraParams, this.limit);
     }
 
     /**
@@ -79,6 +92,15 @@ public class AccountListParams extends ApiRequestParams {
         this.appliedConfigurations = new ArrayList<>();
       }
       this.appliedConfigurations.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Filter by whether the account is closed. If omitted, returns only Accounts that are not
+     * closed.
+     */
+    public Builder setClosed(Boolean closed) {
+      this.closed = closed;
       return this;
     }
 

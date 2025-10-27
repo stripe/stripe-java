@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Information about the error that occurred. */
+/** Error thrown if a user tries to close an account that has non-zero balances. */
 public final class NonZeroBalanceException extends ApiException {
   private static final long serialVersionUID = 2L;
 

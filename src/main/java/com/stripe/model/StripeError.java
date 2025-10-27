@@ -75,12 +75,12 @@ public class StripeError extends StripeObject {
    * {@code payment_intent_invalid_parameter}, {@code
    * payment_intent_konbini_rejected_confirmation_number}, {@code payment_intent_mandate_invalid},
    * {@code payment_intent_payment_attempt_expired}, {@code payment_intent_payment_attempt_failed},
-   * {@code payment_intent_unexpected_state}, {@code payment_method_bank_account_already_verified},
-   * {@code payment_method_bank_account_blocked}, {@code
-   * payment_method_billing_details_address_missing}, {@code payment_method_configuration_failures},
-   * {@code payment_method_currency_mismatch}, {@code payment_method_customer_decline}, {@code
-   * payment_method_invalid_parameter}, {@code payment_method_invalid_parameter_testmode}, {@code
-   * payment_method_microdeposit_failed}, {@code
+   * {@code payment_intent_rate_limit_exceeded}, {@code payment_intent_unexpected_state}, {@code
+   * payment_method_bank_account_already_verified}, {@code payment_method_bank_account_blocked},
+   * {@code payment_method_billing_details_address_missing}, {@code
+   * payment_method_configuration_failures}, {@code payment_method_currency_mismatch}, {@code
+   * payment_method_customer_decline}, {@code payment_method_invalid_parameter}, {@code
+   * payment_method_invalid_parameter_testmode}, {@code payment_method_microdeposit_failed}, {@code
    * payment_method_microdeposit_verification_amounts_invalid}, {@code
    * payment_method_microdeposit_verification_amounts_mismatch}, {@code
    * payment_method_microdeposit_verification_attempts_exceeded}, {@code

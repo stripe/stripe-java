@@ -54,14 +54,14 @@ public final class OutboundPaymentService extends ApiService {
   }
   /** Creates an OutboundPayment. */
   public OutboundPayment create(OutboundPaymentCreateParams params)
-      throws StripeException, InsufficientFundsException, QuotaExceededException,
-          RecipientNotNotifiableException, FeatureNotEnabledException {
+      throws StripeException, InsufficientFundsException, FeatureNotEnabledException,
+          QuotaExceededException, RecipientNotNotifiableException {
     return create(params, (RequestOptions) null);
   }
   /** Creates an OutboundPayment. */
   public OutboundPayment create(OutboundPaymentCreateParams params, RequestOptions options)
-      throws StripeException, InsufficientFundsException, QuotaExceededException,
-          RecipientNotNotifiableException, FeatureNotEnabledException {
+      throws StripeException, InsufficientFundsException, FeatureNotEnabledException,
+          QuotaExceededException, RecipientNotNotifiableException {
     String path = "/v2/money_management/outbound_payments";
     ApiRequest request =
         new ApiRequest(

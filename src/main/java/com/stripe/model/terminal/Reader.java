@@ -149,22 +149,38 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     this.location = new ExpandableField<Location>(expandableObject.getId(), expandableObject);
   }
 
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction() throws StripeException {
     return cancelAction((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(RequestOptions options) throws StripeException {
     return cancelAction((Map<String, Object>) null, options);
   }
 
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(Map<String, Object> params) throws StripeException {
     return cancelAction(params, (RequestOptions) null);
   }
 
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -175,12 +191,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(ReaderCancelActionParams params) throws StripeException {
     return cancelAction(params, (RequestOptions) null);
   }
 
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(ReaderCancelActionParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -197,12 +221,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Initiates an input collection flow on a Reader. */
+  /**
+   * Initiates an <a href="https://stripe.com/docs/terminal/features/collect-inputs">input
+   * collection flow</a> on a Reader to display input forms and collect information from your
+   * customers.
+   */
   public Reader collectInputs(Map<String, Object> params) throws StripeException {
     return collectInputs(params, (RequestOptions) null);
   }
 
-  /** Initiates an input collection flow on a Reader. */
+  /**
+   * Initiates an <a href="https://stripe.com/docs/terminal/features/collect-inputs">input
+   * collection flow</a> on a Reader to display input forms and collect information from your
+   * customers.
+   */
   public Reader collectInputs(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -213,12 +245,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Initiates an input collection flow on a Reader. */
+  /**
+   * Initiates an <a href="https://stripe.com/docs/terminal/features/collect-inputs">input
+   * collection flow</a> on a Reader to display input forms and collect information from your
+   * customers.
+   */
   public Reader collectInputs(ReaderCollectInputsParams params) throws StripeException {
     return collectInputs(params, (RequestOptions) null);
   }
 
-  /** Initiates an input collection flow on a Reader. */
+  /**
+   * Initiates an <a href="https://stripe.com/docs/terminal/features/collect-inputs">input
+   * collection flow</a> on a Reader to display input forms and collect information from your
+   * customers.
+   */
   public Reader collectInputs(ReaderCollectInputsParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -237,7 +277,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
-   * manual confirmation.
+   * manual confirmation. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#collect-a-paymentmethod">Collecting
+   * a Payment method</a> for more details.
    */
   public Reader collectPaymentMethod(Map<String, Object> params) throws StripeException {
     return collectPaymentMethod(params, (RequestOptions) null);
@@ -245,7 +287,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
-   * manual confirmation.
+   * manual confirmation. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#collect-a-paymentmethod">Collecting
+   * a Payment method</a> for more details.
    */
   public Reader collectPaymentMethod(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -260,7 +304,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
-   * manual confirmation.
+   * manual confirmation. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#collect-a-paymentmethod">Collecting
+   * a Payment method</a> for more details.
    */
   public Reader collectPaymentMethod(ReaderCollectPaymentMethodParams params)
       throws StripeException {
@@ -269,7 +315,9 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
-   * manual confirmation.
+   * manual confirmation. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#collect-a-paymentmethod">Collecting
+   * a Payment method</a> for more details.
    */
   public Reader collectPaymentMethod(
       ReaderCollectPaymentMethodParams params, RequestOptions options) throws StripeException {
@@ -288,12 +336,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Finalizes a payment on a Reader. */
+  /**
+   * Finalizes a payment on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#confirm-the-paymentintent">Confirming
+   * a Payment</a> for more details.
+   */
   public Reader confirmPaymentIntent(Map<String, Object> params) throws StripeException {
     return confirmPaymentIntent(params, (RequestOptions) null);
   }
 
-  /** Finalizes a payment on a Reader. */
+  /**
+   * Finalizes a payment on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#confirm-the-paymentintent">Confirming
+   * a Payment</a> for more details.
+   */
   public Reader confirmPaymentIntent(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -305,13 +361,21 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Finalizes a payment on a Reader. */
+  /**
+   * Finalizes a payment on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#confirm-the-paymentintent">Confirming
+   * a Payment</a> for more details.
+   */
   public Reader confirmPaymentIntent(ReaderConfirmPaymentIntentParams params)
       throws StripeException {
     return confirmPaymentIntent(params, (RequestOptions) null);
   }
 
-  /** Finalizes a payment on a Reader. */
+  /**
+   * Finalizes a payment on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#confirm-the-paymentintent">Confirming
+   * a Payment</a> for more details.
+   */
   public Reader confirmPaymentIntent(
       ReaderConfirmPaymentIntentParams params, RequestOptions options) throws StripeException {
     String path =
@@ -420,12 +484,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getGlobalResponseGetter().request(request, ReaderCollection.class);
   }
 
-  /** Initiates a payment flow on a Reader. */
+  /**
+   * Initiates a payment flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=immediately#process-payment">process
+   * the payment</a> for more details.
+   */
   public Reader processPaymentIntent(Map<String, Object> params) throws StripeException {
     return processPaymentIntent(params, (RequestOptions) null);
   }
 
-  /** Initiates a payment flow on a Reader. */
+  /**
+   * Initiates a payment flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=immediately#process-payment">process
+   * the payment</a> for more details.
+   */
   public Reader processPaymentIntent(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -437,13 +509,21 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Initiates a payment flow on a Reader. */
+  /**
+   * Initiates a payment flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=immediately#process-payment">process
+   * the payment</a> for more details.
+   */
   public Reader processPaymentIntent(ReaderProcessPaymentIntentParams params)
       throws StripeException {
     return processPaymentIntent(params, (RequestOptions) null);
   }
 
-  /** Initiates a payment flow on a Reader. */
+  /**
+   * Initiates a payment flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=immediately#process-payment">process
+   * the payment</a> for more details.
+   */
   public Reader processPaymentIntent(
       ReaderProcessPaymentIntentParams params, RequestOptions options) throws StripeException {
     String path =
@@ -461,12 +541,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Initiates a setup intent flow on a Reader. */
+  /**
+   * Initiates a SetupIntent flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/features/saving-payment-details/save-directly">Save
+   * directly without charging</a> for more details.
+   */
   public Reader processSetupIntent(Map<String, Object> params) throws StripeException {
     return processSetupIntent(params, (RequestOptions) null);
   }
 
-  /** Initiates a setup intent flow on a Reader. */
+  /**
+   * Initiates a SetupIntent flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/features/saving-payment-details/save-directly">Save
+   * directly without charging</a> for more details.
+   */
   public Reader processSetupIntent(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -477,12 +565,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Initiates a setup intent flow on a Reader. */
+  /**
+   * Initiates a SetupIntent flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/features/saving-payment-details/save-directly">Save
+   * directly without charging</a> for more details.
+   */
   public Reader processSetupIntent(ReaderProcessSetupIntentParams params) throws StripeException {
     return processSetupIntent(params, (RequestOptions) null);
   }
 
-  /** Initiates a setup intent flow on a Reader. */
+  /**
+   * Initiates a SetupIntent flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/features/saving-payment-details/save-directly">Save
+   * directly without charging</a> for more details.
+   */
   public Reader processSetupIntent(ReaderProcessSetupIntentParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -499,22 +595,38 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment() throws StripeException {
     return refundPayment((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(RequestOptions options) throws StripeException {
     return refundPayment((Map<String, Object>) null, options);
   }
 
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(Map<String, Object> params) throws StripeException {
     return refundPayment(params, (RequestOptions) null);
   }
 
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -525,12 +637,20 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(ReaderRefundPaymentParams params) throws StripeException {
     return refundPayment(params, (RequestOptions) null);
   }
 
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(ReaderRefundPaymentParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -581,12 +701,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getGlobalResponseGetter().request(request, Reader.class);
   }
 
-  /** Sets reader display to show cart details. */
+  /**
+   * Sets the reader display to show <a
+   * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
+   */
   public Reader setReaderDisplay(Map<String, Object> params) throws StripeException {
     return setReaderDisplay(params, (RequestOptions) null);
   }
 
-  /** Sets reader display to show cart details. */
+  /**
+   * Sets the reader display to show <a
+   * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
+   */
   public Reader setReaderDisplay(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -597,12 +723,18 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     return getResponseGetter().request(request, Reader.class);
   }
 
-  /** Sets reader display to show cart details. */
+  /**
+   * Sets the reader display to show <a
+   * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
+   */
   public Reader setReaderDisplay(ReaderSetReaderDisplayParams params) throws StripeException {
     return setReaderDisplay(params, (RequestOptions) null);
   }
 
-  /** Sets reader display to show cart details. */
+  /**
+   * Sets the reader display to show <a
+   * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
+   */
   public Reader setReaderDisplay(ReaderSetReaderDisplayParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -870,20 +1002,16 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
           @Setter
           @EqualsAndHashCode(callSuper = false)
           public static class Choice extends StripeObject implements HasId {
-            /** The id to be selected. */
+            /** The identifier for the selected choice. Maximum 50 characters. */
             @Getter(onMethod_ = {@Override})
             @SerializedName("id")
             String id;
 
-            /**
-             * The button style for the choice
-             *
-             * <p>One of {@code primary}, or {@code secondary}.
-             */
+            /** The button style for the choice. Can be {@code primary} or {@code secondary}. */
             @SerializedName("style")
             String style;
 
-            /** The text to be selected. */
+            /** The text to be selected. Maximum 30 characters. */
             @SerializedName("text")
             String text;
           }
@@ -914,27 +1042,19 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class Toggle extends StripeObject {
-          /**
-           * The toggle's default value
-           *
-           * <p>One of {@code disabled}, or {@code enabled}.
-           */
+          /** The toggle's default value. Can be {@code enabled} or {@code disabled}. */
           @SerializedName("default_value")
           String defaultValue;
 
-          /** The toggle's description text. */
+          /** The toggle's description text. Maximum 50 characters. */
           @SerializedName("description")
           String description;
 
-          /** The toggle's title text. */
+          /** The toggle's title text. Maximum 50 characters. */
           @SerializedName("title")
           String title;
 
-          /**
-           * The toggle's collected value
-           *
-           * <p>One of {@code disabled}, or {@code enabled}.
-           */
+          /** The toggle's collected value. Can be {@code enabled} or {@code disabled}. */
           @SerializedName("value")
           String value;
         }
@@ -1348,12 +1468,13 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class SetReaderDisplay extends StripeObject {
-      /** Cart object to be displayed by the reader. */
+      /** Cart object to be displayed by the reader, including line items, amounts, and currency. */
       @SerializedName("cart")
       Cart cart;
 
       /**
-       * Type of information to be displayed by the reader.
+       * Type of information to be displayed by the reader. Only {@code cart} is currently
+       * supported.
        *
        * <p>Equal to {@code cart}.
        */

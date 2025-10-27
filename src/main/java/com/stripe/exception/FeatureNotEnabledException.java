@@ -6,7 +6,7 @@ import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.net.StripeResponseGetter;
 
-/** Information about the error that occurred. */
+/** The user attempts to create an outbound flow from a closed Financial Account. */
 public final class FeatureNotEnabledException extends ApiException {
   private static final long serialVersionUID = 2L;
 

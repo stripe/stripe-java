@@ -28,6 +28,10 @@ public class Account extends StripeObject implements HasId {
   @SerializedName("applied_configurations")
   List<String> appliedConfigurations;
 
+  /** A value indicating if the Account has been closed. */
+  @SerializedName("closed")
+  Boolean closed;
+
   /**
    * An Account Configuration which allows the Account to take on a key persona across Stripe
    * products.
@@ -218,7 +222,8 @@ public class Account extends StripeObject implements HasId {
          * 'identity_address'. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          *
-         * <p>One of {@code identity_address}, {@code ip_address}, or {@code shipping_address}.
+         * <p>One of {@code identity_address}, {@code ip_address}, {@code payment_method}, or {@code
+         * shipping_address}.
          */
         @SerializedName("location_source")
         String locationSource;
@@ -3885,6 +3890,10 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("gbp")
           Gbp gbp;
 
+          /** Can hold storage-type funds on Stripe in USD. */
+          @SerializedName("usd")
+          Usd usd;
+
           /** Can hold storage-type funds on Stripe in GBP. */
           @Getter
           @Setter
@@ -3909,6 +3918,62 @@ public class Account extends StripeObject implements HasId {
              */
             @SerializedName("status_details")
             List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Gbp.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /** Can hold storage-type funds on Stripe in USD. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Usd extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usd.StatusDetail>
                 statusDetails;
 
             /**
@@ -4402,7 +4467,8 @@ public class Account extends StripeObject implements HasId {
        * A value indicating the responsible payer of a bundle of Stripe fees for pricing-control
        * eligible products on this Account.
        *
-       * <p>One of {@code application}, or {@code stripe}.
+       * <p>One of {@code application}, {@code application_custom}, {@code application_express}, or
+       * {@code stripe}.
        */
       @SerializedName("fees_collector")
       String feesCollector;
@@ -4423,7 +4489,10 @@ public class Account extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Identity extends StripeObject {
-    /** Attestations from the identity's key people, e.g. owners, executives, directors. */
+    /**
+     * Attestations from the identity's key people, e.g. owners, executives, directors,
+     * representatives.
+     */
     @SerializedName("attestations")
     Attestations attestations;
 
@@ -4455,7 +4524,10 @@ public class Account extends StripeObject implements HasId {
     @SerializedName("individual")
     Individual individual;
 
-    /** Attestations from the identity's key people, e.g. owners, executives, directors. */
+    /**
+     * Attestations from the identity's key people, e.g. owners, executives, directors,
+     * representatives.
+     */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
@@ -4477,6 +4549,13 @@ public class Account extends StripeObject implements HasId {
       /** Attestation that all Persons with a specific Relationship value have been provided. */
       @SerializedName("persons_provided")
       PersonsProvided personsProvided;
+
+      /**
+       * This hash is used to attest that the representative is authorized to act as the
+       * representative of their legal entity.
+       */
+      @SerializedName("representative_declaration")
+      RepresentativeDeclaration representativeDeclaration;
 
       /** Attestations of accepted terms of service agreements. */
       @SerializedName("terms_of_service")
@@ -4568,6 +4647,31 @@ public class Account extends StripeObject implements HasId {
          */
         @SerializedName("ownership_exemption_reason")
         String ownershipExemptionReason;
+      }
+
+      /**
+       * This hash is used to attest that the representative is authorized to act as the
+       * representative of their legal entity.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RepresentativeDeclaration extends StripeObject {
+        /**
+         * The time marking when the representative attestation was made. Represented as a RFC 3339
+         * date &amp; time UTC value in millisecond precision, for example:
+         * 2022-09-18T13:22:18.123Z.
+         */
+        @SerializedName("date")
+        Instant date;
+
+        /** The IP address from which the representative attestation was made. */
+        @SerializedName("ip")
+        String ip;
+
+        /** The user agent of the browser from which the representative attestation was made. */
+        @SerializedName("user_agent")
+        String userAgent;
       }
 
       /** Attestations of accepted terms of service agreements. */
@@ -6151,8 +6255,8 @@ public class Account extends StripeObject implements HasId {
            * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
            * cashapp_payments}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
            * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
-           * {@code holds_currencies.gbp}, {@code ideal_payments}, {@code
-           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
+           * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
+           * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
            * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
            * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
            * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},

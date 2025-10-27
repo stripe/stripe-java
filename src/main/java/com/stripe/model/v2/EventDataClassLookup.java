@@ -104,9 +104,6 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v1.billing.meter.no_meter_found", com.stripe.events.V1BillingMeterNoMeterFoundEvent.class);
     eventClassLookup.put(
-        "v2.billing.bill_setting.updated",
-        com.stripe.events.V2BillingBillSettingUpdatedEvent.class);
-    eventClassLookup.put(
         "v2.core.account.closed", com.stripe.events.V2CoreAccountClosedEvent.class);
     eventClassLookup.put(
         "v2.core.account.created", com.stripe.events.V2CoreAccountCreatedEvent.class);

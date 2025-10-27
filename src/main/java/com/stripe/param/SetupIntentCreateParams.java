@@ -70,6 +70,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("description")
   String description;
 
+  /** The list of payment method types to exclude from use with this SetupIntent. */
+  @SerializedName("excluded_payment_method_types")
+  List<SetupIntentCreateParams.ExcludedPaymentMethodType> excludedPaymentMethodTypes;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -194,6 +198,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       String customer,
       String customerAccount,
       String description,
+      List<SetupIntentCreateParams.ExcludedPaymentMethodType> excludedPaymentMethodTypes,
       List<String> expand,
       Map<String, Object> extraParams,
       List<SetupIntentCreateParams.FlowDirection> flowDirections,
@@ -216,6 +221,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     this.customer = customer;
     this.customerAccount = customerAccount;
     this.description = description;
+    this.excludedPaymentMethodTypes = excludedPaymentMethodTypes;
     this.expand = expand;
     this.extraParams = extraParams;
     this.flowDirections = flowDirections;
@@ -251,6 +257,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     private String customerAccount;
 
     private String description;
+
+    private List<SetupIntentCreateParams.ExcludedPaymentMethodType> excludedPaymentMethodTypes;
 
     private List<String> expand;
 
@@ -292,6 +300,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.customer,
           this.customerAccount,
           this.description,
+          this.excludedPaymentMethodTypes,
           this.expand,
           this.extraParams,
           this.flowDirections,
@@ -381,6 +390,34 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     public Builder setDescription(String description) {
       this.description = description;
+      return this;
+    }
+
+    /**
+     * Add an element to `excludedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SetupIntentCreateParams#excludedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addExcludedPaymentMethodType(
+        SetupIntentCreateParams.ExcludedPaymentMethodType element) {
+      if (this.excludedPaymentMethodTypes == null) {
+        this.excludedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.excludedPaymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `excludedPaymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SetupIntentCreateParams#excludedPaymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllExcludedPaymentMethodType(
+        List<SetupIntentCreateParams.ExcludedPaymentMethodType> elements) {
+      if (this.excludedPaymentMethodTypes == null) {
+        this.excludedPaymentMethodTypes = new ArrayList<>();
+      }
+      this.excludedPaymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -12564,6 +12601,183 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+    }
+  }
+
+  public enum ExcludedPaymentMethodType implements ApiRequestParams.EnumParam {
+    @SerializedName("acss_debit")
+    ACSS_DEBIT("acss_debit"),
+
+    @SerializedName("affirm")
+    AFFIRM("affirm"),
+
+    @SerializedName("afterpay_clearpay")
+    AFTERPAY_CLEARPAY("afterpay_clearpay"),
+
+    @SerializedName("alipay")
+    ALIPAY("alipay"),
+
+    @SerializedName("alma")
+    ALMA("alma"),
+
+    @SerializedName("amazon_pay")
+    AMAZON_PAY("amazon_pay"),
+
+    @SerializedName("au_becs_debit")
+    AU_BECS_DEBIT("au_becs_debit"),
+
+    @SerializedName("bacs_debit")
+    BACS_DEBIT("bacs_debit"),
+
+    @SerializedName("bancontact")
+    BANCONTACT("bancontact"),
+
+    @SerializedName("billie")
+    BILLIE("billie"),
+
+    @SerializedName("blik")
+    BLIK("blik"),
+
+    @SerializedName("boleto")
+    BOLETO("boleto"),
+
+    @SerializedName("card")
+    CARD("card"),
+
+    @SerializedName("cashapp")
+    CASHAPP("cashapp"),
+
+    @SerializedName("crypto")
+    CRYPTO("crypto"),
+
+    @SerializedName("customer_balance")
+    CUSTOMER_BALANCE("customer_balance"),
+
+    @SerializedName("eps")
+    EPS("eps"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
+
+    @SerializedName("giropay")
+    GIROPAY("giropay"),
+
+    @SerializedName("gopay")
+    GOPAY("gopay"),
+
+    @SerializedName("grabpay")
+    GRABPAY("grabpay"),
+
+    @SerializedName("id_bank_transfer")
+    ID_BANK_TRANSFER("id_bank_transfer"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("kakao_pay")
+    KAKAO_PAY("kakao_pay"),
+
+    @SerializedName("klarna")
+    KLARNA("klarna"),
+
+    @SerializedName("konbini")
+    KONBINI("konbini"),
+
+    @SerializedName("kr_card")
+    KR_CARD("kr_card"),
+
+    @SerializedName("mb_way")
+    MB_WAY("mb_way"),
+
+    @SerializedName("mobilepay")
+    MOBILEPAY("mobilepay"),
+
+    @SerializedName("multibanco")
+    MULTIBANCO("multibanco"),
+
+    @SerializedName("naver_pay")
+    NAVER_PAY("naver_pay"),
+
+    @SerializedName("nz_bank_account")
+    NZ_BANK_ACCOUNT("nz_bank_account"),
+
+    @SerializedName("oxxo")
+    OXXO("oxxo"),
+
+    @SerializedName("p24")
+    P24("p24"),
+
+    @SerializedName("pay_by_bank")
+    PAY_BY_BANK("pay_by_bank"),
+
+    @SerializedName("payco")
+    PAYCO("payco"),
+
+    @SerializedName("paynow")
+    PAYNOW("paynow"),
+
+    @SerializedName("paypal")
+    PAYPAL("paypal"),
+
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
+    @SerializedName("payto")
+    PAYTO("payto"),
+
+    @SerializedName("pix")
+    PIX("pix"),
+
+    @SerializedName("promptpay")
+    PROMPTPAY("promptpay"),
+
+    @SerializedName("qris")
+    QRIS("qris"),
+
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
+
+    @SerializedName("revolut_pay")
+    REVOLUT_PAY("revolut_pay"),
+
+    @SerializedName("samsung_pay")
+    SAMSUNG_PAY("samsung_pay"),
+
+    @SerializedName("satispay")
+    SATISPAY("satispay"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit"),
+
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
+
+    @SerializedName("sofort")
+    SOFORT("sofort"),
+
+    @SerializedName("stripe_balance")
+    STRIPE_BALANCE("stripe_balance"),
+
+    @SerializedName("swish")
+    SWISH("swish"),
+
+    @SerializedName("twint")
+    TWINT("twint"),
+
+    @SerializedName("us_bank_account")
+    US_BANK_ACCOUNT("us_bank_account"),
+
+    @SerializedName("wechat_pay")
+    WECHAT_PAY("wechat_pay"),
+
+    @SerializedName("zip")
+    ZIP("zip");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ExcludedPaymentMethodType(String value) {
+      this.value = value;
     }
   }
 
