@@ -307,8 +307,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
     CarRental carRental;
 
     /**
-     * Some customers might be required by their company or organization to provide this
-     * information. If so, provide this value. Otherwise you can ignore this field.
+     * A unique value to identify the customer. This field is available only for card payments.
+     *
+     * <p>This field is truncated to 25 alphanumeric characters, excluding spaces, before being sent
+     * to card networks.
      */
     @SerializedName("customer_reference")
     Object customerReference;
@@ -334,7 +336,18 @@ public class ChargeCaptureParams extends ApiRequestParams {
     @SerializedName("lodging")
     Lodging lodging;
 
-    /** A unique value assigned by the business to identify the transaction. */
+    /**
+     * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+     * rates.
+     *
+     * <p>Required when the Payment Method Types array contains {@code card}, including when <a
+     * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
+     * is set to {@code true}.
+     *
+     * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before
+     * being sent to card networks. For Klarna, this field is truncated to 255 characters and is
+     * visible to customers when they view the order in the Klarna app.
+     */
     @SerializedName("order_reference")
     Object orderReference;
 
@@ -402,8 +415,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       /**
-       * Some customers might be required by their company or organization to provide this
-       * information. If so, provide this value. Otherwise you can ignore this field.
+       * A unique value to identify the customer. This field is available only for card payments.
+       *
+       * <p>This field is truncated to 25 alphanumeric characters, excluding spaces, before being
+       * sent to card networks.
        */
       public Builder setCustomerReference(String customerReference) {
         this.customerReference = customerReference;
@@ -411,8 +426,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       /**
-       * Some customers might be required by their company or organization to provide this
-       * information. If so, provide this value. Otherwise you can ignore this field.
+       * A unique value to identify the customer. This field is available only for card payments.
+       *
+       * <p>This field is truncated to 25 alphanumeric characters, excluding spaces, before being
+       * sent to card networks.
        */
       public Builder setCustomerReference(EmptyParam customerReference) {
         this.customerReference = customerReference;
@@ -463,13 +480,35 @@ public class ChargeCaptureParams extends ApiRequestParams {
         return this;
       }
 
-      /** A unique value assigned by the business to identify the transaction. */
+      /**
+       * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+       * rates.
+       *
+       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
+       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
+       * is set to {@code true}.
+       *
+       * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
+       * before being sent to card networks. For Klarna, this field is truncated to 255 characters
+       * and is visible to customers when they view the order in the Klarna app.
+       */
       public Builder setOrderReference(String orderReference) {
         this.orderReference = orderReference;
         return this;
       }
 
-      /** A unique value assigned by the business to identify the transaction. */
+      /**
+       * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+       * rates.
+       *
+       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
+       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
+       * is set to {@code true}.
+       *
+       * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
+       * before being sent to card networks. For Klarna, this field is truncated to 255 characters
+       * and is visible to customers when they view the order in the Klarna app.
+       */
       public Builder setOrderReference(EmptyParam orderReference) {
         this.orderReference = orderReference;
         return this;
