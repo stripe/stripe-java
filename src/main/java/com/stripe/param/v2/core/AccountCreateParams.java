@@ -8845,9 +8845,71 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Storer(Capabilities capabilities, Map<String, Object> extraParams) {
+      /** List of high-risk activities the business is involved in. */
+      @SerializedName("high_risk_activities")
+      List<AccountCreateParams.Configuration.Storer.HighRiskActivity> highRiskActivities;
+
+      /** An explanation of the high risk activities that the business performs. */
+      @SerializedName("high_risk_activities_description")
+      String highRiskActivitiesDescription;
+
+      /** Description of the money services offered by the business. */
+      @SerializedName("money_services_description")
+      String moneyServicesDescription;
+
+      /** Does the business operate in any prohibited countries. */
+      @SerializedName("operates_in_prohibited_countries")
+      Boolean operatesInProhibitedCountries;
+
+      /** Does the business participate in any regulated activity. */
+      @SerializedName("participates_in_regulated_activity")
+      Boolean participatesInRegulatedActivity;
+
+      /** Primary purpose of the stored funds. */
+      @SerializedName("purpose_of_funds")
+      PurposeOfFunds purposeOfFunds;
+
+      /** Description of the purpose of the stored funds. */
+      @SerializedName("purpose_of_funds_description")
+      String purposeOfFundsDescription;
+
+      /** Details of the regulated activity if the business participates in one. */
+      @SerializedName("regulated_activity")
+      RegulatedActivity regulatedActivity;
+
+      /** The source of funds for the business, e.g. profits, income, venture capital, etc. */
+      @SerializedName("source_of_funds")
+      SourceOfFunds sourceOfFunds;
+
+      /** Description of the source of funds for the business' account. */
+      @SerializedName("source_of_funds_description")
+      String sourceOfFundsDescription;
+
+      private Storer(
+          Capabilities capabilities,
+          Map<String, Object> extraParams,
+          List<AccountCreateParams.Configuration.Storer.HighRiskActivity> highRiskActivities,
+          String highRiskActivitiesDescription,
+          String moneyServicesDescription,
+          Boolean operatesInProhibitedCountries,
+          Boolean participatesInRegulatedActivity,
+          PurposeOfFunds purposeOfFunds,
+          String purposeOfFundsDescription,
+          RegulatedActivity regulatedActivity,
+          SourceOfFunds sourceOfFunds,
+          String sourceOfFundsDescription) {
         this.capabilities = capabilities;
         this.extraParams = extraParams;
+        this.highRiskActivities = highRiskActivities;
+        this.highRiskActivitiesDescription = highRiskActivitiesDescription;
+        this.moneyServicesDescription = moneyServicesDescription;
+        this.operatesInProhibitedCountries = operatesInProhibitedCountries;
+        this.participatesInRegulatedActivity = participatesInRegulatedActivity;
+        this.purposeOfFunds = purposeOfFunds;
+        this.purposeOfFundsDescription = purposeOfFundsDescription;
+        this.regulatedActivity = regulatedActivity;
+        this.sourceOfFunds = sourceOfFunds;
+        this.sourceOfFundsDescription = sourceOfFundsDescription;
       }
 
       public static Builder builder() {
@@ -8859,9 +8921,41 @@ public class AccountCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private List<AccountCreateParams.Configuration.Storer.HighRiskActivity> highRiskActivities;
+
+        private String highRiskActivitiesDescription;
+
+        private String moneyServicesDescription;
+
+        private Boolean operatesInProhibitedCountries;
+
+        private Boolean participatesInRegulatedActivity;
+
+        private PurposeOfFunds purposeOfFunds;
+
+        private String purposeOfFundsDescription;
+
+        private RegulatedActivity regulatedActivity;
+
+        private SourceOfFunds sourceOfFunds;
+
+        private String sourceOfFundsDescription;
+
         /** Finalize and obtain parameter instance from this builder. */
         public AccountCreateParams.Configuration.Storer build() {
-          return new AccountCreateParams.Configuration.Storer(this.capabilities, this.extraParams);
+          return new AccountCreateParams.Configuration.Storer(
+              this.capabilities,
+              this.extraParams,
+              this.highRiskActivities,
+              this.highRiskActivitiesDescription,
+              this.moneyServicesDescription,
+              this.operatesInProhibitedCountries,
+              this.participatesInRegulatedActivity,
+              this.purposeOfFunds,
+              this.purposeOfFundsDescription,
+              this.regulatedActivity,
+              this.sourceOfFunds,
+              this.sourceOfFundsDescription);
         }
 
         /** Capabilities to request on the Storer Configuration. */
@@ -8896,6 +8990,93 @@ public class AccountCreateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Add an element to `highRiskActivities` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link AccountCreateParams.Configuration.Storer#highRiskActivities} for the field
+         * documentation.
+         */
+        public Builder addHighRiskActivity(
+            AccountCreateParams.Configuration.Storer.HighRiskActivity element) {
+          if (this.highRiskActivities == null) {
+            this.highRiskActivities = new ArrayList<>();
+          }
+          this.highRiskActivities.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `highRiskActivities` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link AccountCreateParams.Configuration.Storer#highRiskActivities} for the field
+         * documentation.
+         */
+        public Builder addAllHighRiskActivity(
+            List<AccountCreateParams.Configuration.Storer.HighRiskActivity> elements) {
+          if (this.highRiskActivities == null) {
+            this.highRiskActivities = new ArrayList<>();
+          }
+          this.highRiskActivities.addAll(elements);
+          return this;
+        }
+
+        /** An explanation of the high risk activities that the business performs. */
+        public Builder setHighRiskActivitiesDescription(String highRiskActivitiesDescription) {
+          this.highRiskActivitiesDescription = highRiskActivitiesDescription;
+          return this;
+        }
+
+        /** Description of the money services offered by the business. */
+        public Builder setMoneyServicesDescription(String moneyServicesDescription) {
+          this.moneyServicesDescription = moneyServicesDescription;
+          return this;
+        }
+
+        /** Does the business operate in any prohibited countries. */
+        public Builder setOperatesInProhibitedCountries(Boolean operatesInProhibitedCountries) {
+          this.operatesInProhibitedCountries = operatesInProhibitedCountries;
+          return this;
+        }
+
+        /** Does the business participate in any regulated activity. */
+        public Builder setParticipatesInRegulatedActivity(Boolean participatesInRegulatedActivity) {
+          this.participatesInRegulatedActivity = participatesInRegulatedActivity;
+          return this;
+        }
+
+        /** Primary purpose of the stored funds. */
+        public Builder setPurposeOfFunds(
+            AccountCreateParams.Configuration.Storer.PurposeOfFunds purposeOfFunds) {
+          this.purposeOfFunds = purposeOfFunds;
+          return this;
+        }
+
+        /** Description of the purpose of the stored funds. */
+        public Builder setPurposeOfFundsDescription(String purposeOfFundsDescription) {
+          this.purposeOfFundsDescription = purposeOfFundsDescription;
+          return this;
+        }
+
+        /** Details of the regulated activity if the business participates in one. */
+        public Builder setRegulatedActivity(
+            AccountCreateParams.Configuration.Storer.RegulatedActivity regulatedActivity) {
+          this.regulatedActivity = regulatedActivity;
+          return this;
+        }
+
+        /** The source of funds for the business, e.g. profits, income, venture capital, etc. */
+        public Builder setSourceOfFunds(
+            AccountCreateParams.Configuration.Storer.SourceOfFunds sourceOfFunds) {
+          this.sourceOfFunds = sourceOfFunds;
+          return this;
+        }
+
+        /** Description of the source of funds for the business' account. */
+        public Builder setSourceOfFundsDescription(String sourceOfFundsDescription) {
+          this.sourceOfFundsDescription = sourceOfFundsDescription;
           return this;
         }
       }
@@ -9055,6 +9236,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("bank_accounts")
           BankAccounts bankAccounts;
 
+          /** Can provision a crypto wallet like financial address to credit a FinancialAccount. */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -9065,8 +9250,12 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          private FinancialAddresses(BankAccounts bankAccounts, Map<String, Object> extraParams) {
+          private FinancialAddresses(
+              BankAccounts bankAccounts,
+              CryptoWallets cryptoWallets,
+              Map<String, Object> extraParams) {
             this.bankAccounts = bankAccounts;
+            this.cryptoWallets = cryptoWallets;
             this.extraParams = extraParams;
           }
 
@@ -9077,13 +9266,15 @@ public class AccountCreateParams extends ApiRequestParams {
           public static class Builder {
             private BankAccounts bankAccounts;
 
+            private CryptoWallets cryptoWallets;
+
             private Map<String, Object> extraParams;
 
             /** Finalize and obtain parameter instance from this builder. */
             public AccountCreateParams.Configuration.Storer.Capabilities.FinancialAddresses
                 build() {
               return new AccountCreateParams.Configuration.Storer.Capabilities.FinancialAddresses(
-                  this.bankAccounts, this.extraParams);
+                  this.bankAccounts, this.cryptoWallets, this.extraParams);
             }
 
             /**
@@ -9095,6 +9286,17 @@ public class AccountCreateParams extends ApiRequestParams {
                         .BankAccounts
                     bankAccounts) {
               this.bankAccounts = bankAccounts;
+              return this;
+            }
+
+            /**
+             * Can provision a crypto wallet like financial address to credit a FinancialAccount.
+             */
+            public Builder setCryptoWallets(
+                AccountCreateParams.Configuration.Storer.Capabilities.FinancialAddresses
+                        .CryptoWallets
+                    cryptoWallets) {
+              this.cryptoWallets = cryptoWallets;
               return this;
             }
 
@@ -9211,6 +9413,89 @@ public class AccountCreateParams extends ApiRequestParams {
               }
             }
           }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private CryptoWallets(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Storer.Capabilities.FinancialAddresses
+                      .CryptoWallets
+                  build() {
+                return new AccountCreateParams.Configuration.Storer.Capabilities.FinancialAddresses
+                    .CryptoWallets(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.FinancialAddresses.CryptoWallets#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.FinancialAddresses.CryptoWallets#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
         }
 
         @Getter
@@ -9234,10 +9519,15 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("usd")
           Usd usd;
 
-          private HoldsCurrencies(Map<String, Object> extraParams, Gbp gbp, Usd usd) {
+          /** Can hold storage-type funds on Stripe in USDC. */
+          @SerializedName("usdc")
+          Usdc usdc;
+
+          private HoldsCurrencies(Map<String, Object> extraParams, Gbp gbp, Usd usd, Usdc usdc) {
             this.extraParams = extraParams;
             this.gbp = gbp;
             this.usd = usd;
+            this.usdc = usdc;
           }
 
           public static Builder builder() {
@@ -9251,10 +9541,12 @@ public class AccountCreateParams extends ApiRequestParams {
 
             private Usd usd;
 
+            private Usdc usdc;
+
             /** Finalize and obtain parameter instance from this builder. */
             public AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies build() {
               return new AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies(
-                  this.extraParams, this.gbp, this.usd);
+                  this.extraParams, this.gbp, this.usd, this.usdc);
             }
 
             /**
@@ -9298,6 +9590,13 @@ public class AccountCreateParams extends ApiRequestParams {
             public Builder setUsd(
                 AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usd usd) {
               this.usd = usd;
+              return this;
+            }
+
+            /** Can hold storage-type funds on Stripe in USDC. */
+            public Builder setUsdc(
+                AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc usdc) {
+              this.usdc = usdc;
               return this;
             }
           }
@@ -9445,6 +9744,88 @@ public class AccountCreateParams extends ApiRequestParams {
                * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
                * original map. See {@link
                * AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usd#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Usdc {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Usdc(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc
+                  build() {
+                return new AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies
+                    .Usdc(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc#extraParams}
                * for the field documentation.
                */
               public Builder putAllExtraParam(Map<String, Object> map) {
@@ -9642,6 +10023,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("cards")
           Cards cards;
 
+          /** Can send funds from a FinancialAccount to a crypto wallet owned by someone else. */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -9662,10 +10047,12 @@ public class AccountCreateParams extends ApiRequestParams {
           private OutboundPayments(
               BankAccounts bankAccounts,
               Cards cards,
+              CryptoWallets cryptoWallets,
               Map<String, Object> extraParams,
               FinancialAccounts financialAccounts) {
             this.bankAccounts = bankAccounts;
             this.cards = cards;
+            this.cryptoWallets = cryptoWallets;
             this.extraParams = extraParams;
             this.financialAccounts = financialAccounts;
           }
@@ -9679,6 +10066,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
             private Cards cards;
 
+            private CryptoWallets cryptoWallets;
+
             private Map<String, Object> extraParams;
 
             private FinancialAccounts financialAccounts;
@@ -9686,7 +10075,11 @@ public class AccountCreateParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments build() {
               return new AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments(
-                  this.bankAccounts, this.cards, this.extraParams, this.financialAccounts);
+                  this.bankAccounts,
+                  this.cards,
+                  this.cryptoWallets,
+                  this.extraParams,
+                  this.financialAccounts);
             }
 
             /** Can send funds from a FinancialAccount to a bank account owned by someone else. */
@@ -9702,6 +10095,14 @@ public class AccountCreateParams extends ApiRequestParams {
                 AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.Cards
                     cards) {
               this.cards = cards;
+              return this;
+            }
+
+            /** Can send funds from a FinancialAccount to a crypto wallet owned by someone else. */
+            public Builder setCryptoWallets(
+                AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.CryptoWallets
+                    cryptoWallets) {
+              this.cryptoWallets = cryptoWallets;
               return this;
             }
 
@@ -9915,6 +10316,89 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private CryptoWallets(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments
+                      .CryptoWallets
+                  build() {
+                return new AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments
+                    .CryptoWallets(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.CryptoWallets#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.OutboundPayments.CryptoWallets#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class FinancialAccounts {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -10004,6 +10488,10 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("bank_accounts")
           BankAccounts bankAccounts;
 
+          /** Can send funds from a FinancialAccount to a crypto wallet owned by yourself. */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10022,9 +10510,11 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private OutboundTransfers(
               BankAccounts bankAccounts,
+              CryptoWallets cryptoWallets,
               Map<String, Object> extraParams,
               FinancialAccounts financialAccounts) {
             this.bankAccounts = bankAccounts;
+            this.cryptoWallets = cryptoWallets;
             this.extraParams = extraParams;
             this.financialAccounts = financialAccounts;
           }
@@ -10036,6 +10526,8 @@ public class AccountCreateParams extends ApiRequestParams {
           public static class Builder {
             private BankAccounts bankAccounts;
 
+            private CryptoWallets cryptoWallets;
+
             private Map<String, Object> extraParams;
 
             private FinancialAccounts financialAccounts;
@@ -10043,7 +10535,7 @@ public class AccountCreateParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers build() {
               return new AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers(
-                  this.bankAccounts, this.extraParams, this.financialAccounts);
+                  this.bankAccounts, this.cryptoWallets, this.extraParams, this.financialAccounts);
             }
 
             /** Can send funds from a FinancialAccount to a bank account owned by yourself. */
@@ -10051,6 +10543,15 @@ public class AccountCreateParams extends ApiRequestParams {
                 AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers.BankAccounts
                     bankAccounts) {
               this.bankAccounts = bankAccounts;
+              return this;
+            }
+
+            /** Can send funds from a FinancialAccount to a crypto wallet owned by yourself. */
+            public Builder setCryptoWallets(
+                AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers
+                        .CryptoWallets
+                    cryptoWallets) {
+              this.cryptoWallets = cryptoWallets;
               return this;
             }
 
@@ -10181,6 +10682,89 @@ public class AccountCreateParams extends ApiRequestParams {
 
           @Getter
           @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private CryptoWallets(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers
+                      .CryptoWallets
+                  build() {
+                return new AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers
+                    .CryptoWallets(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers.CryptoWallets#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Storer.Capabilities.OutboundTransfers.CryptoWallets#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
           public static class FinancialAccounts {
             /**
              * Map of extra parameters for custom features not available in this client library. The
@@ -10261,6 +10845,296 @@ public class AccountCreateParams extends ApiRequestParams {
               }
             }
           }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RegulatedActivity {
+        /**
+         * A detailed description of the regulated activities the business is licensed to conduct.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The license number or registration number assigned by the business's primary regulator.
+         */
+        @SerializedName("license_number")
+        String licenseNumber;
+
+        /**
+         * The country of the primary regulatory authority that oversees the business's regulated
+         * activities.
+         */
+        @SerializedName("primary_regulatory_authority_country")
+        String primaryRegulatoryAuthorityCountry;
+
+        /**
+         * The name of the primary regulatory authority that oversees the business's regulated
+         * activities.
+         */
+        @SerializedName("primary_regulatory_authority_name")
+        String primaryRegulatoryAuthorityName;
+
+        private RegulatedActivity(
+            String description,
+            Map<String, Object> extraParams,
+            String licenseNumber,
+            String primaryRegulatoryAuthorityCountry,
+            String primaryRegulatoryAuthorityName) {
+          this.description = description;
+          this.extraParams = extraParams;
+          this.licenseNumber = licenseNumber;
+          this.primaryRegulatoryAuthorityCountry = primaryRegulatoryAuthorityCountry;
+          this.primaryRegulatoryAuthorityName = primaryRegulatoryAuthorityName;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String description;
+
+          private Map<String, Object> extraParams;
+
+          private String licenseNumber;
+
+          private String primaryRegulatoryAuthorityCountry;
+
+          private String primaryRegulatoryAuthorityName;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountCreateParams.Configuration.Storer.RegulatedActivity build() {
+            return new AccountCreateParams.Configuration.Storer.RegulatedActivity(
+                this.description,
+                this.extraParams,
+                this.licenseNumber,
+                this.primaryRegulatoryAuthorityCountry,
+                this.primaryRegulatoryAuthorityName);
+          }
+
+          /**
+           * A detailed description of the regulated activities the business is licensed to conduct.
+           */
+          public Builder setDescription(String description) {
+            this.description = description;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Configuration.Storer.RegulatedActivity#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Configuration.Storer.RegulatedActivity#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The license number or registration number assigned by the business's primary regulator.
+           */
+          public Builder setLicenseNumber(String licenseNumber) {
+            this.licenseNumber = licenseNumber;
+            return this;
+          }
+
+          /**
+           * The country of the primary regulatory authority that oversees the business's regulated
+           * activities.
+           */
+          public Builder setPrimaryRegulatoryAuthorityCountry(
+              String primaryRegulatoryAuthorityCountry) {
+            this.primaryRegulatoryAuthorityCountry = primaryRegulatoryAuthorityCountry;
+            return this;
+          }
+
+          /**
+           * The name of the primary regulatory authority that oversees the business's regulated
+           * activities.
+           */
+          public Builder setPrimaryRegulatoryAuthorityName(String primaryRegulatoryAuthorityName) {
+            this.primaryRegulatoryAuthorityName = primaryRegulatoryAuthorityName;
+            return this;
+          }
+        }
+      }
+
+      public enum HighRiskActivity implements ApiRequestParams.EnumParam {
+        @SerializedName("adult_entertainment")
+        ADULT_ENTERTAINMENT("adult_entertainment"),
+
+        @SerializedName("gambling")
+        GAMBLING("gambling"),
+
+        @SerializedName("hold_client_funds")
+        HOLD_CLIENT_FUNDS("hold_client_funds"),
+
+        @SerializedName("investment_services")
+        INVESTMENT_SERVICES("investment_services"),
+
+        @SerializedName("lending_banking")
+        LENDING_BANKING("lending_banking"),
+
+        @SerializedName("marijuana_or_related_services")
+        MARIJUANA_OR_RELATED_SERVICES("marijuana_or_related_services"),
+
+        @SerializedName("money_services")
+        MONEY_SERVICES("money_services"),
+
+        @SerializedName("nicotine_tobacco_or_related_services")
+        NICOTINE_TOBACCO_OR_RELATED_SERVICES("nicotine_tobacco_or_related_services"),
+
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("operate_foreign_exchange_virtual_currencies_brokerage_otc")
+        OPERATE_FOREIGN_EXCHANGE_VIRTUAL_CURRENCIES_BROKERAGE_OTC(
+            "operate_foreign_exchange_virtual_currencies_brokerage_otc"),
+
+        @SerializedName("pharmaceuticals")
+        PHARMACEUTICALS("pharmaceuticals"),
+
+        @SerializedName("precious_metals_precious_stones_jewelry")
+        PRECIOUS_METALS_PRECIOUS_STONES_JEWELRY("precious_metals_precious_stones_jewelry"),
+
+        @SerializedName("safe_deposit_box_rentals")
+        SAFE_DEPOSIT_BOX_RENTALS("safe_deposit_box_rentals"),
+
+        @SerializedName("third_party_payment_processing")
+        THIRD_PARTY_PAYMENT_PROCESSING("third_party_payment_processing"),
+
+        @SerializedName("weapons_firearms_and_explosives")
+        WEAPONS_FIREARMS_AND_EXPLOSIVES("weapons_firearms_and_explosives");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        HighRiskActivity(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum PurposeOfFunds implements ApiRequestParams.EnumParam {
+        @SerializedName("charitable_donations")
+        CHARITABLE_DONATIONS("charitable_donations"),
+
+        @SerializedName("ecommerce_retail_payments")
+        ECOMMERCE_RETAIL_PAYMENTS("ecommerce_retail_payments"),
+
+        @SerializedName("investment_purposes")
+        INVESTMENT_PURPOSES("investment_purposes"),
+
+        @SerializedName("other")
+        OTHER("other"),
+
+        @SerializedName("payments_to_friends_or_family_abroad")
+        PAYMENTS_TO_FRIENDS_OR_FAMILY_ABROAD("payments_to_friends_or_family_abroad"),
+
+        @SerializedName("payroll")
+        PAYROLL("payroll"),
+
+        @SerializedName("personal_or_living_expenses")
+        PERSONAL_OR_LIVING_EXPENSES("personal_or_living_expenses"),
+
+        @SerializedName("protect_wealth")
+        PROTECT_WEALTH("protect_wealth"),
+
+        @SerializedName("purchase_goods_and_services")
+        PURCHASE_GOODS_AND_SERVICES("purchase_goods_and_services"),
+
+        @SerializedName("receive_payments_for_goods_and_services")
+        RECEIVE_PAYMENTS_FOR_GOODS_AND_SERVICES("receive_payments_for_goods_and_services"),
+
+        @SerializedName("tax_optimization")
+        TAX_OPTIMIZATION("tax_optimization"),
+
+        @SerializedName("third_party_money_transmission")
+        THIRD_PARTY_MONEY_TRANSMISSION("third_party_money_transmission"),
+
+        @SerializedName("treasury_management")
+        TREASURY_MANAGEMENT("treasury_management");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PurposeOfFunds(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum SourceOfFunds implements ApiRequestParams.EnumParam {
+        @SerializedName("business_loans")
+        BUSINESS_LOANS("business_loans"),
+
+        @SerializedName("grants")
+        GRANTS("grants"),
+
+        @SerializedName("inter_company_funds")
+        INTER_COMPANY_FUNDS("inter_company_funds"),
+
+        @SerializedName("investment_proceeds")
+        INVESTMENT_PROCEEDS("investment_proceeds"),
+
+        @SerializedName("legal_settlement")
+        LEGAL_SETTLEMENT("legal_settlement"),
+
+        @SerializedName("owners_capital")
+        OWNERS_CAPITAL("owners_capital"),
+
+        @SerializedName("pension_retirement")
+        PENSION_RETIREMENT("pension_retirement"),
+
+        @SerializedName("sales_of_assets")
+        SALES_OF_ASSETS("sales_of_assets"),
+
+        @SerializedName("sales_of_goods_and_services")
+        SALES_OF_GOODS_AND_SERVICES("sales_of_goods_and_services"),
+
+        @SerializedName("tax_refund")
+        TAX_REFUND("tax_refund"),
+
+        @SerializedName("third_party_funds")
+        THIRD_PARTY_FUNDS("third_party_funds"),
+
+        @SerializedName("treasury_reserves")
+        TREASURY_RESERVES("treasury_reserves");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SourceOfFunds(String value) {
+          this.value = value;
         }
       }
     }
@@ -11729,6 +12603,10 @@ public class AccountCreateParams extends ApiRequestParams {
         @SerializedName("card_creator")
         CardCreator cardCreator;
 
+        /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
+        @SerializedName("crypto_storer")
+        CryptoStorer cryptoStorer;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -11746,10 +12624,12 @@ public class AccountCreateParams extends ApiRequestParams {
         private TermsOfService(
             Account account,
             CardCreator cardCreator,
+            CryptoStorer cryptoStorer,
             Map<String, Object> extraParams,
             Storer storer) {
           this.account = account;
           this.cardCreator = cardCreator;
+          this.cryptoStorer = cryptoStorer;
           this.extraParams = extraParams;
           this.storer = storer;
         }
@@ -11763,6 +12643,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
           private CardCreator cardCreator;
 
+          private CryptoStorer cryptoStorer;
+
           private Map<String, Object> extraParams;
 
           private Storer storer;
@@ -11770,7 +12652,7 @@ public class AccountCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public AccountCreateParams.Identity.Attestations.TermsOfService build() {
             return new AccountCreateParams.Identity.Attestations.TermsOfService(
-                this.account, this.cardCreator, this.extraParams, this.storer);
+                this.account, this.cardCreator, this.cryptoStorer, this.extraParams, this.storer);
           }
 
           /**
@@ -11788,6 +12670,13 @@ public class AccountCreateParams extends ApiRequestParams {
           public Builder setCardCreator(
               AccountCreateParams.Identity.Attestations.TermsOfService.CardCreator cardCreator) {
             this.cardCreator = cardCreator;
+            return this;
+          }
+
+          /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
+          public Builder setCryptoStorer(
+              AccountCreateParams.Identity.Attestations.TermsOfService.CryptoStorer cryptoStorer) {
+            this.cryptoStorer = cryptoStorer;
             return this;
           }
 
@@ -14542,6 +15431,128 @@ public class AccountCreateParams extends ApiRequestParams {
 
         @Getter
         @EqualsAndHashCode(callSuper = false)
+        public static class CryptoStorer {
+          /**
+           * <strong>Required.</strong> The time when the Account's representative accepted the
+           * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
+           * precision, for example: 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          Instant date;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> The IP address from which the Account's representative
+           * accepted the terms of service.
+           */
+          @SerializedName("ip")
+          String ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          String userAgent;
+
+          private CryptoStorer(
+              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+            this.date = date;
+            this.extraParams = extraParams;
+            this.ip = ip;
+            this.userAgent = userAgent;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Instant date;
+
+            private Map<String, Object> extraParams;
+
+            private String ip;
+
+            private String userAgent;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountCreateParams.Identity.Attestations.TermsOfService.CryptoStorer build() {
+              return new AccountCreateParams.Identity.Attestations.TermsOfService.CryptoStorer(
+                  this.date, this.extraParams, this.ip, this.userAgent);
+            }
+
+            /**
+             * <strong>Required.</strong> The time when the Account's representative accepted the
+             * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
+             * precision, for example: 2022-09-18T13:22:18.123Z.
+             */
+            public Builder setDate(Instant date) {
+              this.date = date;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Identity.Attestations.TermsOfService.CryptoStorer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountCreateParams.Identity.Attestations.TermsOfService.CryptoStorer#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The IP address from which the Account's representative
+             * accepted the terms of service.
+             */
+            public Builder setIp(String ip) {
+              this.ip = ip;
+              return this;
+            }
+
+            /**
+             * The user agent of the browser from which the Account's representative accepted the
+             * terms of service.
+             */
+            public Builder setUserAgent(String userAgent) {
+              this.userAgent = userAgent;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
         public static class Storer {
           /**
            * <strong>Required.</strong> The time when the Account's representative accepted the
@@ -14675,6 +15686,13 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName("annual_revenue")
       AnnualRevenue annualRevenue;
 
+      /**
+       * A detailed description of the business's compliance and anti-money laundering controls and
+       * practices.
+       */
+      @SerializedName("compliance_screening_description")
+      String complianceScreeningDescription;
+
       /** A document verifying the business. */
       @SerializedName("documents")
       Documents documents;
@@ -14726,6 +15744,7 @@ public class AccountCreateParams extends ApiRequestParams {
       private BusinessDetails(
           Address address,
           AnnualRevenue annualRevenue,
+          String complianceScreeningDescription,
           Documents documents,
           Long estimatedWorkerCount,
           Map<String, Object> extraParams,
@@ -14738,6 +15757,7 @@ public class AccountCreateParams extends ApiRequestParams {
           Structure structure) {
         this.address = address;
         this.annualRevenue = annualRevenue;
+        this.complianceScreeningDescription = complianceScreeningDescription;
         this.documents = documents;
         this.estimatedWorkerCount = estimatedWorkerCount;
         this.extraParams = extraParams;
@@ -14758,6 +15778,8 @@ public class AccountCreateParams extends ApiRequestParams {
         private Address address;
 
         private AnnualRevenue annualRevenue;
+
+        private String complianceScreeningDescription;
 
         private Documents documents;
 
@@ -14784,6 +15806,7 @@ public class AccountCreateParams extends ApiRequestParams {
           return new AccountCreateParams.Identity.BusinessDetails(
               this.address,
               this.annualRevenue,
+              this.complianceScreeningDescription,
               this.documents,
               this.estimatedWorkerCount,
               this.extraParams,
@@ -14806,6 +15829,15 @@ public class AccountCreateParams extends ApiRequestParams {
         public Builder setAnnualRevenue(
             AccountCreateParams.Identity.BusinessDetails.AnnualRevenue annualRevenue) {
           this.annualRevenue = annualRevenue;
+          return this;
+        }
+
+        /**
+         * A detailed description of the business's compliance and anti-money laundering controls
+         * and practices.
+         */
+        public Builder setComplianceScreeningDescription(String complianceScreeningDescription) {
+          this.complianceScreeningDescription = complianceScreeningDescription;
           return this;
         }
 

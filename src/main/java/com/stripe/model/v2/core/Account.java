@@ -4280,6 +4280,61 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("capabilities")
       Capabilities capabilities;
 
+      /** List of high-risk activities the business is involved in. */
+      @SerializedName("high_risk_activities")
+      List<String> highRiskActivities;
+
+      /** An explanation of the high risk activities that the business performs. */
+      @SerializedName("high_risk_activities_description")
+      String highRiskActivitiesDescription;
+
+      /** Description of the money services offered by the business. */
+      @SerializedName("money_services_description")
+      String moneyServicesDescription;
+
+      /** Does the business operate in any prohibited countries. */
+      @SerializedName("operates_in_prohibited_countries")
+      Boolean operatesInProhibitedCountries;
+
+      /** Does the business participate in any regulated activity. */
+      @SerializedName("participates_in_regulated_activity")
+      Boolean participatesInRegulatedActivity;
+
+      /**
+       * Primary purpose of the stored funds.
+       *
+       * <p>One of {@code charitable_donations}, {@code ecommerce_retail_payments}, {@code
+       * investment_purposes}, {@code other}, {@code payments_to_friends_or_family_abroad}, {@code
+       * payroll}, {@code personal_or_living_expenses}, {@code protect_wealth}, {@code
+       * purchase_goods_and_services}, {@code receive_payments_for_goods_and_services}, {@code
+       * tax_optimization}, {@code third_party_money_transmission}, or {@code treasury_management}.
+       */
+      @SerializedName("purpose_of_funds")
+      String purposeOfFunds;
+
+      /** Description of the purpose of the stored funds. */
+      @SerializedName("purpose_of_funds_description")
+      String purposeOfFundsDescription;
+
+      /** Details of the regulated activity if the business participates in one. */
+      @SerializedName("regulated_activity")
+      RegulatedActivity regulatedActivity;
+
+      /**
+       * The source of funds for the business, e.g. profits, income, venture capital, etc.
+       *
+       * <p>One of {@code business_loans}, {@code grants}, {@code inter_company_funds}, {@code
+       * investment_proceeds}, {@code legal_settlement}, {@code owners_capital}, {@code
+       * pension_retirement}, {@code sales_of_assets}, {@code sales_of_goods_and_services}, {@code
+       * tax_refund}, {@code third_party_funds}, or {@code treasury_reserves}.
+       */
+      @SerializedName("source_of_funds")
+      String sourceOfFunds;
+
+      /** Description of the source of funds for the business' account. */
+      @SerializedName("source_of_funds_description")
+      String sourceOfFundsDescription;
+
       /** Capabilities that have been requested on the Storer Configuration. */
       @Getter
       @Setter
@@ -4316,6 +4371,10 @@ public class Account extends StripeObject implements HasId {
            */
           @SerializedName("bank_accounts")
           BankAccounts bankAccounts;
+
+          /** Can provision a crypto wallet like financial address to credit a FinancialAccount. */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
 
           /**
            * Can provision a bank-account like financial address (VBAN) to credit/debit a
@@ -4377,6 +4436,64 @@ public class Account extends StripeObject implements HasId {
               String resolution;
             }
           }
+
+          /** Can provision a crypto wallet like financial address to credit a FinancialAccount. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.Storer.Capabilities.FinancialAddresses.CryptoWallets
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
         }
 
         /** Can hold storage-type funds on Stripe. */
@@ -4391,6 +4508,10 @@ public class Account extends StripeObject implements HasId {
           /** Can hold storage-type funds on Stripe in USD. */
           @SerializedName("usd")
           Usd usd;
+
+          /** Can hold storage-type funds on Stripe in USDC. */
+          @SerializedName("usdc")
+          Usdc usdc;
 
           /** Can hold storage-type funds on Stripe in GBP. */
           @Getter
@@ -4472,6 +4593,62 @@ public class Account extends StripeObject implements HasId {
              */
             @SerializedName("status_details")
             List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usd.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /** Can hold storage-type funds on Stripe in USDC. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Usdc extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc.StatusDetail>
                 statusDetails;
 
             /**
@@ -4589,6 +4766,10 @@ public class Account extends StripeObject implements HasId {
           /** Can send funds from a FinancialAccount to a debit card, owned by someone else. */
           @SerializedName("cards")
           Cards cards;
+
+          /** Can send funds from a FinancialAccount to a crypto wallet, owned by someone else. */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
 
           /**
            * Can send funds from a FinancialAccount to another FinancialAccount, owned by someone
@@ -4711,6 +4892,64 @@ public class Account extends StripeObject implements HasId {
             }
           }
 
+          /** Can send funds from a FinancialAccount to a crypto wallet, owned by someone else. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.Storer.Capabilities.OutboundPayments.CryptoWallets
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
           /**
            * Can send funds from a FinancialAccount to another FinancialAccount, owned by someone
            * else.
@@ -4782,6 +5021,10 @@ public class Account extends StripeObject implements HasId {
           @SerializedName("bank_accounts")
           BankAccounts bankAccounts;
 
+          /** Can send funds from a FinancialAccount to a crypto wallet, owned by yourself. */
+          @SerializedName("crypto_wallets")
+          CryptoWallets cryptoWallets;
+
           /**
            * Can send funds from a FinancialAccount to another FinancialAccount, owned by yourself.
            */
@@ -4813,6 +5056,64 @@ public class Account extends StripeObject implements HasId {
             @SerializedName("status_details")
             List<
                     Account.Configuration.Storer.Capabilities.OutboundTransfers.BankAccounts
+                        .StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
+
+          /** Can send funds from a FinancialAccount to a crypto wallet, owned by yourself. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CryptoWallets extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<
+                    Account.Configuration.Storer.Capabilities.OutboundTransfers.CryptoWallets
                         .StatusDetail>
                 statusDetails;
 
@@ -4906,6 +5207,38 @@ public class Account extends StripeObject implements HasId {
             }
           }
         }
+      }
+
+      /** Details of the regulated activity if the business participates in one. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RegulatedActivity extends StripeObject {
+        /**
+         * A detailed description of the regulated activities the business is licensed to conduct.
+         */
+        @SerializedName("description")
+        String description;
+
+        /**
+         * The license number or registration number assigned by the business's primary regulator.
+         */
+        @SerializedName("license_number")
+        String licenseNumber;
+
+        /**
+         * The country of the primary regulatory authority that oversees the business's regulated
+         * activities.
+         */
+        @SerializedName("primary_regulatory_authority_country")
+        String primaryRegulatoryAuthorityCountry;
+
+        /**
+         * The name of the primary regulatory authority that oversees the business's regulated
+         * activities.
+         */
+        @SerializedName("primary_regulatory_authority_name")
+        String primaryRegulatoryAuthorityName;
       }
     }
   }
@@ -5188,6 +5521,10 @@ public class Account extends StripeObject implements HasId {
         /** Details on the Account's acceptance of Issuing-specific terms of service. */
         @SerializedName("card_creator")
         CardCreator cardCreator;
+
+        /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
+        @SerializedName("crypto_storer")
+        CryptoStorer cryptoStorer;
 
         /** Details on the Account's acceptance of Treasury-specific terms of service. */
         @SerializedName("storer")
@@ -5843,6 +6180,33 @@ public class Account extends StripeObject implements HasId {
           }
         }
 
+        /** Details on the Account's acceptance of Crypto-storer-specific terms of service. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CryptoStorer extends StripeObject {
+          /**
+           * The time when the Account's representative accepted the terms of service. Represented
+           * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+           * 2022-09-18T13:22:18.123Z.
+           */
+          @SerializedName("date")
+          Instant date;
+
+          /**
+           * The IP address from which the Account's representative accepted the terms of service.
+           */
+          @SerializedName("ip")
+          String ip;
+
+          /**
+           * The user agent of the browser from which the Account's representative accepted the
+           * terms of service.
+           */
+          @SerializedName("user_agent")
+          String userAgent;
+        }
+
         /**
          * Details on the Account's acceptance of the <a
          * href="https://docs.stripe.com/connect/updating-accounts#tos-acceptance">Stripe Services
@@ -5915,6 +6279,13 @@ public class Account extends StripeObject implements HasId {
       /** The business gross annual revenue for its preceding fiscal year. */
       @SerializedName("annual_revenue")
       AnnualRevenue annualRevenue;
+
+      /**
+       * A detailed description of the business's compliance and anti-money laundering controls and
+       * practices.
+       */
+      @SerializedName("compliance_screening_description")
+      String complianceScreeningDescription;
 
       /** Documents that may be submitted to satisfy various informational requests. */
       @SerializedName("documents")
