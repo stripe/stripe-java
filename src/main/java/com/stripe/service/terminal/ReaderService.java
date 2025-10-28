@@ -144,20 +144,36 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(String reader, ReaderCancelActionParams params)
       throws StripeException {
     return cancelAction(reader, params, (RequestOptions) null);
   }
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(String reader, RequestOptions options) throws StripeException {
     return cancelAction(reader, (ReaderCancelActionParams) null, options);
   }
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(String reader) throws StripeException {
     return cancelAction(reader, (ReaderCancelActionParams) null, (RequestOptions) null);
   }
-  /** Cancels the current reader action. */
+  /**
+   * Cancels the current reader action. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven#programmatic-cancellation">Programmatic
+   * Cancellation</a> for more details.
+   */
   public Reader cancelAction(String reader, ReaderCancelActionParams params, RequestOptions options)
       throws StripeException {
     String path =
@@ -171,12 +187,20 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Initiates an input collection flow on a Reader. */
+  /**
+   * Initiates an <a href="https://stripe.com/docs/terminal/features/collect-inputs">input
+   * collection flow</a> on a Reader to display input forms and collect information from your
+   * customers.
+   */
   public Reader collectInputs(String reader, ReaderCollectInputsParams params)
       throws StripeException {
     return collectInputs(reader, params, (RequestOptions) null);
   }
-  /** Initiates an input collection flow on a Reader. */
+  /**
+   * Initiates an <a href="https://stripe.com/docs/terminal/features/collect-inputs">input
+   * collection flow</a> on a Reader to display input forms and collect information from your
+   * customers.
+   */
   public Reader collectInputs(
       String reader, ReaderCollectInputsParams params, RequestOptions options)
       throws StripeException {
@@ -193,7 +217,9 @@ public final class ReaderService extends ApiService {
   }
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
-   * manual confirmation.
+   * manual confirmation. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#collect-a-paymentmethod">Collecting
+   * a Payment method</a> for more details.
    */
   public Reader collectPaymentMethod(String reader, ReaderCollectPaymentMethodParams params)
       throws StripeException {
@@ -201,7 +227,9 @@ public final class ReaderService extends ApiService {
   }
   /**
    * Initiates a payment flow on a Reader and updates the PaymentIntent with card details before
-   * manual confirmation.
+   * manual confirmation. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#collect-a-paymentmethod">Collecting
+   * a Payment method</a> for more details.
    */
   public Reader collectPaymentMethod(
       String reader, ReaderCollectPaymentMethodParams params, RequestOptions options)
@@ -218,12 +246,20 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Finalizes a payment on a Reader. */
+  /**
+   * Finalizes a payment on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#confirm-the-paymentintent">Confirming
+   * a Payment</a> for more details.
+   */
   public Reader confirmPaymentIntent(String reader, ReaderConfirmPaymentIntentParams params)
       throws StripeException {
     return confirmPaymentIntent(reader, params, (RequestOptions) null);
   }
-  /** Finalizes a payment on a Reader. */
+  /**
+   * Finalizes a payment on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=inspect#confirm-the-paymentintent">Confirming
+   * a Payment</a> for more details.
+   */
   public Reader confirmPaymentIntent(
       String reader, ReaderConfirmPaymentIntentParams params, RequestOptions options)
       throws StripeException {
@@ -239,12 +275,20 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Initiates a payment flow on a Reader. */
+  /**
+   * Initiates a payment flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=immediately#process-payment">process
+   * the payment</a> for more details.
+   */
   public Reader processPaymentIntent(String reader, ReaderProcessPaymentIntentParams params)
       throws StripeException {
     return processPaymentIntent(reader, params, (RequestOptions) null);
   }
-  /** Initiates a payment flow on a Reader. */
+  /**
+   * Initiates a payment flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/collect-card-payment?terminal-sdk-platform=server-driven&process=immediately#process-payment">process
+   * the payment</a> for more details.
+   */
   public Reader processPaymentIntent(
       String reader, ReaderProcessPaymentIntentParams params, RequestOptions options)
       throws StripeException {
@@ -260,12 +304,20 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Initiates a setup intent flow on a Reader. */
+  /**
+   * Initiates a SetupIntent flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/features/saving-payment-details/save-directly">Save
+   * directly without charging</a> for more details.
+   */
   public Reader processSetupIntent(String reader, ReaderProcessSetupIntentParams params)
       throws StripeException {
     return processSetupIntent(reader, params, (RequestOptions) null);
   }
-  /** Initiates a setup intent flow on a Reader. */
+  /**
+   * Initiates a SetupIntent flow on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/features/saving-payment-details/save-directly">Save
+   * directly without charging</a> for more details.
+   */
   public Reader processSetupIntent(
       String reader, ReaderProcessSetupIntentParams params, RequestOptions options)
       throws StripeException {
@@ -281,20 +333,36 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(String reader, ReaderRefundPaymentParams params)
       throws StripeException {
     return refundPayment(reader, params, (RequestOptions) null);
   }
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(String reader, RequestOptions options) throws StripeException {
     return refundPayment(reader, (ReaderRefundPaymentParams) null, options);
   }
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(String reader) throws StripeException {
     return refundPayment(reader, (ReaderRefundPaymentParams) null, (RequestOptions) null);
   }
-  /** Initiates a refund on a Reader. */
+  /**
+   * Initiates an in-person refund on a Reader. See <a
+   * href="https://stripe.com/docs/terminal/payments/regional?integration-country=CA#refund-an-interac-payment">Refund
+   * an Interac Payment</a> for more details.
+   */
   public Reader refundPayment(
       String reader, ReaderRefundPaymentParams params, RequestOptions options)
       throws StripeException {
@@ -309,12 +377,18 @@ public final class ReaderService extends ApiService {
             options);
     return this.request(request, Reader.class);
   }
-  /** Sets reader display to show cart details. */
+  /**
+   * Sets the reader display to show <a
+   * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
+   */
   public Reader setReaderDisplay(String reader, ReaderSetReaderDisplayParams params)
       throws StripeException {
     return setReaderDisplay(reader, params, (RequestOptions) null);
   }
-  /** Sets reader display to show cart details. */
+  /**
+   * Sets the reader display to show <a
+   * href="https://stripe.com/docs/terminal/features/display">cart details</a>.
+   */
   public Reader setReaderDisplay(
       String reader, ReaderSetReaderDisplayParams params, RequestOptions options)
       throws StripeException {

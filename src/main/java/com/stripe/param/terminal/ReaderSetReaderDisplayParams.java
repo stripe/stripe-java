@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ReaderSetReaderDisplayParams extends ApiRequestParams {
-  /** Cart. */
+  /** Cart details to display on the reader screen, including line items, amounts, and currency. */
   @SerializedName("cart")
   Cart cart;
 
@@ -30,7 +30,10 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> Type */
+  /**
+   * <strong>Required.</strong> Type of information to display. Only {@code cart} is currently
+   * supported.
+   */
   @SerializedName("type")
   Type type;
 
@@ -60,7 +63,9 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       return new ReaderSetReaderDisplayParams(this.cart, this.expand, this.extraParams, this.type);
     }
 
-    /** Cart. */
+    /**
+     * Cart details to display on the reader screen, including line items, amounts, and currency.
+     */
     public Builder setCart(ReaderSetReaderDisplayParams.Cart cart) {
       this.cart = cart;
       return this;
@@ -118,7 +123,10 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> Type */
+    /**
+     * <strong>Required.</strong> Type of information to display. Only {@code cart} is currently
+     * supported.
+     */
     public Builder setType(ReaderSetReaderDisplayParams.Type type) {
       this.type = type;
       return this;
@@ -145,15 +153,21 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Array of line items that were purchased. */
+    /** <strong>Required.</strong> Array of line items to display. */
     @SerializedName("line_items")
     List<ReaderSetReaderDisplayParams.Cart.LineItem> lineItems;
 
-    /** The amount of tax in cents. */
+    /**
+     * The amount of tax in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * currency unit</a>.
+     */
     @SerializedName("tax")
     Long tax;
 
-    /** <strong>Required.</strong> Total balance of cart due in cents. */
+    /**
+     * <strong>Required.</strong> Total balance of cart due in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     */
     @SerializedName("total")
     Long total;
 
@@ -253,13 +267,19 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
         return this;
       }
 
-      /** The amount of tax in cents. */
+      /**
+       * The amount of tax in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+       * currency unit</a>.
+       */
       public Builder setTax(Long tax) {
         this.tax = tax;
         return this;
       }
 
-      /** <strong>Required.</strong> Total balance of cart due in cents. */
+      /**
+       * <strong>Required.</strong> Total balance of cart due in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
       public Builder setTotal(Long total) {
         this.total = total;
         return this;
@@ -269,7 +289,10 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class LineItem {
-      /** <strong>Required.</strong> The price of the item in cents. */
+      /**
+       * <strong>Required.</strong> The price of the item in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       */
       @SerializedName("amount")
       Long amount;
 
@@ -317,7 +340,10 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
               this.amount, this.description, this.extraParams, this.quantity);
         }
 
-        /** <strong>Required.</strong> The price of the item in cents. */
+        /**
+         * <strong>Required.</strong> The price of the item in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;

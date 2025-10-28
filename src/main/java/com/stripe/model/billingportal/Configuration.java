@@ -24,7 +24,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** A portal configuration describes the functionality and behavior of a portal session. */
+/**
+ * A portal configuration describes the functionality and behavior you embed in a portal session.
+ * Related guide: <a href="https://stripe.com/customer-management/configure-portal">Configure the
+ * customer portal</a>.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

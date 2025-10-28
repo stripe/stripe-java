@@ -135,14 +135,14 @@ public final class AccountService extends ApiService {
   }
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
-   * Account}.
+   * Account}. When the account status is active, data is typically refreshed once a day.
    */
   public Account subscribe(String account, AccountSubscribeParams params) throws StripeException {
     return subscribe(account, params, (RequestOptions) null);
   }
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
-   * Account}.
+   * Account}. When the account status is active, data is typically refreshed once a day.
    */
   public Account subscribe(String account, AccountSubscribeParams params, RequestOptions options)
       throws StripeException {

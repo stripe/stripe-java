@@ -13,7 +13,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
-  /** Configuration overrides. */
+  /**
+   * Configuration overrides for this collection, such as tipping, surcharging, and customer
+   * cancellation settings.
+   */
   @SerializedName("collect_config")
   CollectConfig collectConfig;
 
@@ -30,7 +33,7 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> PaymentIntent ID. */
+  /** <strong>Required.</strong> The ID of the PaymentIntent to collect a payment method for. */
   @SerializedName("payment_intent")
   String paymentIntent;
 
@@ -64,7 +67,10 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
           this.collectConfig, this.expand, this.extraParams, this.paymentIntent);
     }
 
-    /** Configuration overrides. */
+    /**
+     * Configuration overrides for this collection, such as tipping, surcharging, and customer
+     * cancellation settings.
+     */
     public Builder setCollectConfig(ReaderCollectPaymentMethodParams.CollectConfig collectConfig) {
       this.collectConfig = collectConfig;
       return this;
@@ -122,7 +128,7 @@ public class ReaderCollectPaymentMethodParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> PaymentIntent ID. */
+    /** <strong>Required.</strong> The ID of the PaymentIntent to collect a payment method for. */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;
       return this;
