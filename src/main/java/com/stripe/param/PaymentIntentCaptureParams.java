@@ -380,7 +380,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails {
-    /** The total discount applied on the transaction. */
+    /**
+     * The total discount applied on the transaction represented in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An integer
+     * greater than 0.
+     *
+     * <p>This field is mutually exclusive with the {@code
+     * amount_details[line_items][#][discount_amount]} field.
+     */
     @SerializedName("discount_amount")
     Object discountAmount;
 
@@ -442,13 +449,27 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             this.discountAmount, this.extraParams, this.lineItems, this.shipping, this.tax);
       }
 
-      /** The total discount applied on the transaction. */
+      /**
+       * The total discount applied on the transaction represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * integer greater than 0.
+       *
+       * <p>This field is mutually exclusive with the {@code
+       * amount_details[line_items][#][discount_amount]} field.
+       */
       public Builder setDiscountAmount(Long discountAmount) {
         this.discountAmount = discountAmount;
         return this;
       }
 
-      /** The total discount applied on the transaction. */
+      /**
+       * The total discount applied on the transaction represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * integer greater than 0.
+       *
+       * <p>This field is mutually exclusive with the {@code
+       * amount_details[line_items][#][discount_amount]} field.
+       */
       public Builder setDiscountAmount(EmptyParam discountAmount) {
         this.discountAmount = discountAmount;
         return this;
@@ -557,7 +578,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class LineItem {
-      /** The amount an item was discounted for. Positive integer. */
+      /**
+       * The discount applied on this line item represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * integer greater than 0.
+       *
+       * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]} field.
+       */
       @SerializedName("discount_amount")
       Long discountAmount;
 
@@ -574,15 +601,27 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       @SerializedName("payment_method_options")
       PaymentMethodOptions paymentMethodOptions;
 
-      /** Unique identifier of the product. At most 12 characters long. */
+      /**
+       * The product code of the line item, such as an SKU. Required for L3 rates. At most 12
+       * characters long.
+       */
       @SerializedName("product_code")
       String productCode;
 
-      /** <strong>Required.</strong> Name of the product. At most 100 characters long. */
+      /**
+       * <strong>Required.</strong> The product name of the line item. Required for L3 rates. At
+       * most 1024 characters long.
+       *
+       * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to
+       * the card networks. For Paypal, this field is truncated to 127 characters.
+       */
       @SerializedName("product_name")
       String productName;
 
-      /** <strong>Required.</strong> Number of items of the product. Positive integer. */
+      /**
+       * <strong>Required.</strong> The quantity of items. Required for L3 rates. An integer greater
+       * than 0.
+       */
       @SerializedName("quantity")
       Long quantity;
 
@@ -590,7 +629,11 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       @SerializedName("tax")
       Tax tax;
 
-      /** <strong>Required.</strong> Cost of the product. Non-negative integer. */
+      /**
+       * <strong>Required.</strong> The unit cost of the line item represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * for L3 rates. An integer greater than or equal to 0.
+       */
       @SerializedName("unit_cost")
       Long unitCost;
 
@@ -656,7 +699,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               this.unitOfMeasure);
         }
 
-        /** The amount an item was discounted for. Positive integer. */
+        /**
+         * The discount applied on this line item represented in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * integer greater than 0.
+         *
+         * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]}
+         * field.
+         */
         public Builder setDiscountAmount(Long discountAmount) {
           this.discountAmount = discountAmount;
           return this;
@@ -698,19 +748,31 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           return this;
         }
 
-        /** Unique identifier of the product. At most 12 characters long. */
+        /**
+         * The product code of the line item, such as an SKU. Required for L3 rates. At most 12
+         * characters long.
+         */
         public Builder setProductCode(String productCode) {
           this.productCode = productCode;
           return this;
         }
 
-        /** <strong>Required.</strong> Name of the product. At most 100 characters long. */
+        /**
+         * <strong>Required.</strong> The product name of the line item. Required for L3 rates. At
+         * most 1024 characters long.
+         *
+         * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to
+         * the card networks. For Paypal, this field is truncated to 127 characters.
+         */
         public Builder setProductName(String productName) {
           this.productName = productName;
           return this;
         }
 
-        /** <strong>Required.</strong> Number of items of the product. Positive integer. */
+        /**
+         * <strong>Required.</strong> The quantity of items. Required for L3 rates. An integer
+         * greater than 0.
+         */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
           return this;
@@ -722,7 +784,11 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Cost of the product. Non-negative integer. */
+        /**
+         * <strong>Required.</strong> The unit cost of the line item represented in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * Required for L3 rates. An integer greater than or equal to 0.
+         */
         public Builder setUnitCost(Long unitCost) {
           this.unitCost = unitCost;
           return this;
@@ -1321,7 +1387,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** <strong>Required.</strong> The total tax on an item. Non-negative integer. */
+        /**
+         * <strong>Required.</strong> The total amount of tax on a single line item represented in
+         * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * Required for L3 rates. An integer greater than or equal to 0.
+         *
+         * <p>This field is mutually exclusive with the {@code
+         * amount_details[tax][total_tax_amount]} field.
+         */
         @SerializedName("total_tax_amount")
         Long totalTaxAmount;
 
@@ -1373,7 +1446,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> The total tax on an item. Non-negative integer. */
+          /**
+           * <strong>Required.</strong> The total amount of tax on a single line item represented in
+           * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+           * unit</a>. Required for L3 rates. An integer greater than or equal to 0.
+           *
+           * <p>This field is mutually exclusive with the {@code
+           * amount_details[tax][total_tax_amount]} field.
+           */
           public Builder setTotalTaxAmount(Long totalTaxAmount) {
             this.totalTaxAmount = totalTaxAmount;
             return this;
@@ -1385,7 +1465,11 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Shipping {
-      /** Portion of the amount that is for shipping. */
+      /**
+       * If a physical good is being shipped, the cost of shipping represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * integer greater than or equal to 0.
+       */
       @SerializedName("amount")
       Object amount;
 
@@ -1398,11 +1482,17 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The postal code that represents the shipping source. */
+      /**
+       * If a physical good is being shipped, the postal code of where it is being shipped from. At
+       * most 10 alphanumeric characters long, hyphens are allowed.
+       */
       @SerializedName("from_postal_code")
       Object fromPostalCode;
 
-      /** The postal code that represents the shipping destination. */
+      /**
+       * If a physical good is being shipped, the postal code of where it is being shipped to. At
+       * most 10 alphanumeric characters long, hyphens are allowed.
+       */
       @SerializedName("to_postal_code")
       Object toPostalCode;
 
@@ -1436,13 +1526,21 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               this.amount, this.extraParams, this.fromPostalCode, this.toPostalCode);
         }
 
-        /** Portion of the amount that is for shipping. */
+        /**
+         * If a physical good is being shipped, the cost of shipping represented in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * integer greater than or equal to 0.
+         */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
         }
 
-        /** Portion of the amount that is for shipping. */
+        /**
+         * If a physical good is being shipped, the cost of shipping represented in the <a
+         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * integer greater than or equal to 0.
+         */
         public Builder setAmount(EmptyParam amount) {
           this.amount = amount;
           return this;
@@ -1476,25 +1574,37 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           return this;
         }
 
-        /** The postal code that represents the shipping source. */
+        /**
+         * If a physical good is being shipped, the postal code of where it is being shipped from.
+         * At most 10 alphanumeric characters long, hyphens are allowed.
+         */
         public Builder setFromPostalCode(String fromPostalCode) {
           this.fromPostalCode = fromPostalCode;
           return this;
         }
 
-        /** The postal code that represents the shipping source. */
+        /**
+         * If a physical good is being shipped, the postal code of where it is being shipped from.
+         * At most 10 alphanumeric characters long, hyphens are allowed.
+         */
         public Builder setFromPostalCode(EmptyParam fromPostalCode) {
           this.fromPostalCode = fromPostalCode;
           return this;
         }
 
-        /** The postal code that represents the shipping destination. */
+        /**
+         * If a physical good is being shipped, the postal code of where it is being shipped to. At
+         * most 10 alphanumeric characters long, hyphens are allowed.
+         */
         public Builder setToPostalCode(String toPostalCode) {
           this.toPostalCode = toPostalCode;
           return this;
         }
 
-        /** The postal code that represents the shipping destination. */
+        /**
+         * If a physical good is being shipped, the postal code of where it is being shipped to. At
+         * most 10 alphanumeric characters long, hyphens are allowed.
+         */
         public Builder setToPostalCode(EmptyParam toPostalCode) {
           this.toPostalCode = toPostalCode;
           return this;
@@ -1514,7 +1624,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Total portion of the amount that is for tax. */
+      /**
+       * <strong>Required.</strong> The total amount of tax on the transaction represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * for L2 rates. An integer greater than or equal to 0.
+       *
+       * <p>This field is mutually exclusive with the {@code
+       * amount_details[line_items][#][tax][total_tax_amount]} field.
+       */
       @SerializedName("total_tax_amount")
       Long totalTaxAmount;
 
@@ -1566,7 +1683,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Total portion of the amount that is for tax. */
+        /**
+         * <strong>Required.</strong> The total amount of tax on the transaction represented in the
+         * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * Required for L2 rates. An integer greater than or equal to 0.
+         *
+         * <p>This field is mutually exclusive with the {@code
+         * amount_details[line_items][#][tax][total_tax_amount]} field.
+         */
         public Builder setTotalTaxAmount(Long totalTaxAmount) {
           this.totalTaxAmount = totalTaxAmount;
           return this;
@@ -1811,8 +1935,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     CarRental carRental;
 
     /**
-     * Some customers might be required by their company or organization to provide this
-     * information. If so, provide this value. Otherwise you can ignore this field.
+     * A unique value to identify the customer. This field is available only for card payments.
+     *
+     * <p>This field is truncated to 25 alphanumeric characters, excluding spaces, before being sent
+     * to card networks.
      */
     @SerializedName("customer_reference")
     Object customerReference;
@@ -1838,7 +1964,18 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     @SerializedName("lodging")
     Lodging lodging;
 
-    /** A unique value assigned by the business to identify the transaction. */
+    /**
+     * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+     * rates.
+     *
+     * <p>Required when the Payment Method Types array contains {@code card}, including when <a
+     * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
+     * is set to {@code true}.
+     *
+     * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before
+     * being sent to card networks. For Klarna, this field is truncated to 255 characters and is
+     * visible to customers when they view the order in the Klarna app.
+     */
     @SerializedName("order_reference")
     Object orderReference;
 
@@ -1906,8 +2043,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       }
 
       /**
-       * Some customers might be required by their company or organization to provide this
-       * information. If so, provide this value. Otherwise you can ignore this field.
+       * A unique value to identify the customer. This field is available only for card payments.
+       *
+       * <p>This field is truncated to 25 alphanumeric characters, excluding spaces, before being
+       * sent to card networks.
        */
       public Builder setCustomerReference(String customerReference) {
         this.customerReference = customerReference;
@@ -1915,8 +2054,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       }
 
       /**
-       * Some customers might be required by their company or organization to provide this
-       * information. If so, provide this value. Otherwise you can ignore this field.
+       * A unique value to identify the customer. This field is available only for card payments.
+       *
+       * <p>This field is truncated to 25 alphanumeric characters, excluding spaces, before being
+       * sent to card networks.
        */
       public Builder setCustomerReference(EmptyParam customerReference) {
         this.customerReference = customerReference;
@@ -1969,13 +2110,35 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         return this;
       }
 
-      /** A unique value assigned by the business to identify the transaction. */
+      /**
+       * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+       * rates.
+       *
+       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
+       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
+       * is set to {@code true}.
+       *
+       * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
+       * before being sent to card networks. For Klarna, this field is truncated to 255 characters
+       * and is visible to customers when they view the order in the Klarna app.
+       */
       public Builder setOrderReference(String orderReference) {
         this.orderReference = orderReference;
         return this;
       }
 
-      /** A unique value assigned by the business to identify the transaction. */
+      /**
+       * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+       * rates.
+       *
+       * <p>Required when the Payment Method Types array contains {@code card}, including when <a
+       * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
+       * is set to {@code true}.
+       *
+       * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces,
+       * before being sent to card networks. For Klarna, this field is truncated to 255 characters
+       * and is visible to customers when they view the order in the Klarna app.
+       */
       public Builder setOrderReference(EmptyParam orderReference) {
         this.orderReference = orderReference;
         return this;

@@ -1709,7 +1709,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AmountDetails extends StripeObject {
-    /** The total discount applied on the transaction. */
+    /**
+     * The total discount applied on the transaction represented in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An integer
+     * greater than 0.
+     *
+     * <p>This field is mutually exclusive with the {@code
+     * amount_details[line_items][#][discount_amount]} field.
+     */
     @SerializedName("discount_amount")
     Long discountAmount;
 
@@ -1737,15 +1744,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Shipping extends StripeObject {
-      /** Portion of the amount that is for shipping. */
+      /**
+       * If a physical good is being shipped, the cost of shipping represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * integer greater than or equal to 0.
+       */
       @SerializedName("amount")
       Long amount;
 
-      /** The postal code that represents the shipping source. */
+      /**
+       * If a physical good is being shipped, the postal code of where it is being shipped from. At
+       * most 10 alphanumeric characters long, hyphens are allowed.
+       */
       @SerializedName("from_postal_code")
       String fromPostalCode;
 
-      /** The postal code that represents the shipping destination. */
+      /**
+       * If a physical good is being shipped, the postal code of where it is being shipped to. At
+       * most 10 alphanumeric characters long, hyphens are allowed.
+       */
       @SerializedName("to_postal_code")
       String toPostalCode;
     }
@@ -1758,7 +1775,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Tax extends StripeObject {
-      /** Total portion of the amount that is for tax. */
+      /**
+       * The total amount of tax on the transaction represented in the <a
+       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * for L2 rates. An integer greater than or equal to 0.
+       *
+       * <p>This field is mutually exclusive with the {@code
+       * amount_details[line_items][#][tax][total_tax_amount]} field.
+       */
       @SerializedName("total_tax_amount")
       Long totalTaxAmount;
     }
@@ -2790,8 +2814,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     CarRental carRental;
 
     /**
-     * Some customers might be required by their company or organization to provide this
-     * information. If so, provide this value. Otherwise you can ignore this field.
+     * A unique value to identify the customer. This field is available only for card payments.
+     *
+     * <p>This field is truncated to 25 alphanumeric characters, excluding spaces, before being sent
+     * to card networks.
      */
     @SerializedName("customer_reference")
     String customerReference;
@@ -2799,7 +2825,18 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("event_details")
     EventDetails eventDetails;
 
-    /** A unique value assigned by the business to identify the transaction. */
+    /**
+     * A unique value assigned by the business to identify the transaction. Required for L2 and L3
+     * rates.
+     *
+     * <p>Required when the Payment Method Types array contains {@code card}, including when <a
+     * href="https://stripe.com/api/payment_intents/create#create_payment_intent-automatic_payment_methods-enabled">automatic_payment_methods.enabled</a>
+     * is set to {@code true}.
+     *
+     * <p>For Cards, this field is truncated to 25 alphanumeric characters, excluding spaces, before
+     * being sent to card networks. For Klarna, this field is truncated to 255 characters and is
+     * visible to customers when they view the order in the Klarna app.
+     */
     @SerializedName("order_reference")
     String orderReference;
 
@@ -5478,6 +5515,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         /**
          * The type of amount that will be collected. The amount charged must be exact or up to the
          * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         * Defaults to {@code maximum}.
          *
          * <p>One of {@code fixed}, or {@code maximum}.
          */
@@ -5492,7 +5530,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String endDate;
 
         /**
-         * The periodicity at which payments will be collected.
+         * The periodicity at which payments will be collected. Defaults to {@code adhoc}.
          *
          * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
          * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
@@ -5509,7 +5547,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         Long paymentsPerPeriod;
 
         /**
-         * The purpose for which payments are made. Defaults to retail.
+         * The purpose for which payments are made. Has a default value based on your merchant
+         * category code.
          *
          * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
          * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code
