@@ -318,14 +318,10 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     @SerializedName("payout")
     String payout;
 
-    /** Transfer ID that created this application fee. */
-    @SerializedName("transfer")
-    String transfer;
-
     /**
      * Type of object that created the application fee.
      *
-     * <p>One of {@code charge}, {@code payout}, or {@code transfer}.
+     * <p>One of {@code charge}, or {@code payout}.
      */
     @SerializedName("type")
     String type;

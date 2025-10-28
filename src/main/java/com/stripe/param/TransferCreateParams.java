@@ -17,9 +17,6 @@ public class TransferCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Long amount;
 
-  @SerializedName("application_fee_amount")
-  Long applicationFeeAmount;
-
   /**
    * <strong>Required.</strong> Three-letter <a
    * href="https://www.iso.org/iso-4217-currency-codes.html">ISO code for currency</a> in lowercase.
@@ -96,7 +93,6 @@ public class TransferCreateParams extends ApiRequestParams {
 
   private TransferCreateParams(
       Long amount,
-      Long applicationFeeAmount,
       String currency,
       String description,
       String destination,
@@ -108,7 +104,6 @@ public class TransferCreateParams extends ApiRequestParams {
       SourceType sourceType,
       String transferGroup) {
     this.amount = amount;
-    this.applicationFeeAmount = applicationFeeAmount;
     this.currency = currency;
     this.description = description;
     this.destination = destination;
@@ -127,8 +122,6 @@ public class TransferCreateParams extends ApiRequestParams {
 
   public static class Builder {
     private Long amount;
-
-    private Long applicationFeeAmount;
 
     private String currency;
 
@@ -154,7 +147,6 @@ public class TransferCreateParams extends ApiRequestParams {
     public TransferCreateParams build() {
       return new TransferCreateParams(
           this.amount,
-          this.applicationFeeAmount,
           this.currency,
           this.description,
           this.destination,
@@ -170,11 +162,6 @@ public class TransferCreateParams extends ApiRequestParams {
     /** A positive integer in cents (or local equivalent) representing how much to transfer. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
-      return this;
-    }
-
-    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
-      this.applicationFeeAmount = applicationFeeAmount;
       return this;
     }
 

@@ -43,8 +43,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /**
    * The balance that this transaction impacts.
    *
-   * <p>One of {@code issuing}, {@code payments}, {@code refund_and_dispute_prefunding}, or {@code
-   * transit}.
+   * <p>One of {@code issuing}, {@code payments}, or {@code refund_and_dispute_prefunding}.
    */
   @SerializedName("balance_type")
   String balanceType;
