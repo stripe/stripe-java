@@ -47,7 +47,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("reader_security")
   Object readerSecurity;
 
-  /** Reboot time settings for readers. that support customized reboot time configuration. */
+  /** Reboot time settings for readers that support customized reboot time configuration. */
   @SerializedName("reboot_window")
   RebootWindow rebootWindow;
 
@@ -55,7 +55,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
   @SerializedName("stripe_s700")
   StripeS700 stripeS700;
 
-  /** Tipping configurations for readers. supporting on-reader tips */
+  /** Tipping configurations for readers supporting on-reader tips. */
   @SerializedName("tipping")
   Object tipping;
 
@@ -234,7 +234,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Reboot time settings for readers. that support customized reboot time configuration. */
+    /** Reboot time settings for readers that support customized reboot time configuration. */
     public Builder setRebootWindow(ConfigurationCreateParams.RebootWindow rebootWindow) {
       this.rebootWindow = rebootWindow;
       return this;
@@ -246,13 +246,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Tipping configurations for readers. supporting on-reader tips */
+    /** Tipping configurations for readers supporting on-reader tips. */
     public Builder setTipping(ConfigurationCreateParams.Tipping tipping) {
       this.tipping = tipping;
       return this;
     }
 
-    /** Tipping configurations for readers. supporting on-reader tips */
+    /** Tipping configurations for readers supporting on-reader tips. */
     public Builder setTipping(EmptyParam tipping) {
       this.tipping = tipping;
       return this;
@@ -289,7 +289,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you want to display on the reader. */
+    /** A File ID representing an image you would like displayed on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -339,13 +339,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you want to display on the reader. */
+      /** A File ID representing an image you would like displayed on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you want to display on the reader. */
+      /** A File ID representing an image you would like displayed on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;
@@ -688,7 +688,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you want to display on the reader. */
+    /** A File ID representing an image you would like displayed on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -737,13 +737,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you want to display on the reader. */
+      /** A File ID representing an image you would like displayed on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you want to display on the reader. */
+      /** A File ID representing an image you would like displayed on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;
@@ -4407,7 +4407,7 @@ public class ConfigurationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you want to display on the reader. */
+    /** A File ID representing an image you would like displayed on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -4456,13 +4456,13 @@ public class ConfigurationCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you want to display on the reader. */
+      /** A File ID representing an image you would like displayed on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you want to display on the reader. */
+      /** A File ID representing an image you would like displayed on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;

@@ -3633,7 +3633,6 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         /**
          * The type of amount that will be collected. The amount charged must be exact or up to the
          * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
-         * Defaults to {@code maximum}.
          *
          * <p>One of {@code fixed}, or {@code maximum}.
          */
@@ -3648,7 +3647,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         String endDate;
 
         /**
-         * The periodicity at which payments will be collected. Defaults to {@code adhoc}.
+         * The periodicity at which payments will be collected.
          *
          * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
          * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
@@ -3665,8 +3664,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         Long paymentsPerPeriod;
 
         /**
-         * The purpose for which payments are made. Has a default value based on your merchant
-         * category code.
+         * The purpose for which payments are made. Defaults to retail.
          *
          * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
          * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code
