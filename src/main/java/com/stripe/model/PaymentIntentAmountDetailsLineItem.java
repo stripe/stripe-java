@@ -19,7 +19,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntentAmountDetailsLineItem extends ApiResource implements HasId {
-  /** The amount an item was discounted for. Positive integer. */
+  /**
+   * The discount applied on this line item represented in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An integer
+   * greater than 0.
+   *
+   * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]} field.
+   */
   @SerializedName("discount_amount")
   Long discountAmount;
 
@@ -40,15 +46,23 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @SerializedName("payment_method_options")
   PaymentMethodOptions paymentMethodOptions;
 
-  /** Unique identifier of the product. At most 12 characters long. */
+  /**
+   * The product code of the line item, such as an SKU. Required for L3 rates. At most 12 characters
+   * long.
+   */
   @SerializedName("product_code")
   String productCode;
 
-  /** Name of the product. At most 100 characters long. */
+  /**
+   * The product name of the line item. Required for L3 rates. At most 1024 characters long.
+   *
+   * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to the
+   * card networks. For Paypal, this field is truncated to 127 characters.
+   */
   @SerializedName("product_name")
   String productName;
 
-  /** Number of items of the product. Positive integer. */
+  /** The quantity of items. Required for L3 rates. An integer greater than 0. */
   @SerializedName("quantity")
   Long quantity;
 
@@ -56,11 +70,18 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @SerializedName("tax")
   Tax tax;
 
-  /** Cost of the product. Non-negative integer. */
+  /**
+   * The unit cost of the line item represented in the <a
+   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required for
+   * L3 rates. An integer greater than or equal to 0.
+   */
   @SerializedName("unit_cost")
   Long unitCost;
 
-  /** A unit of measure for the line item, such as gallons, feet, meters, etc. */
+  /**
+   * A unit of measure for the line item, such as gallons, feet, meters, etc. Required for L3 rates.
+   * At most 12 alphanumeric characters long.
+   */
   @SerializedName("unit_of_measure")
   String unitOfMeasure;
 
@@ -211,7 +232,14 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Tax extends StripeObject {
-    /** Total portion of the amount that is for tax. */
+    /**
+     * The total amount of tax on the transaction represented in the <a
+     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+     * for L2 rates. An integer greater than or equal to 0.
+     *
+     * <p>This field is mutually exclusive with the {@code
+     * amount_details[line_items][#][tax][total_tax_amount]} field.
+     */
     @SerializedName("total_tax_amount")
     Long totalTaxAmount;
   }
