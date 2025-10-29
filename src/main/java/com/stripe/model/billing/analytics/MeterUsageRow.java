@@ -46,6 +46,10 @@ public class MeterUsageRow extends StripeObject implements HasId {
   @SerializedName("starts_at")
   Long startsAt;
 
+  /** A set of key-value pairs representing the tenants of the meter usage. */
+  @SerializedName("tenants")
+  Map<String, String> tenants;
+
   /** The aggregated meter usage value for the specified bucket. */
   @SerializedName("value")
   BigDecimal value;
