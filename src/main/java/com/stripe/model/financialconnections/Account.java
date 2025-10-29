@@ -424,7 +424,7 @@ public class Account extends ApiResource implements HasId {
 
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
-   * Account}.
+   * Account}. When the account status is active, data is typically refreshed once a day.
    */
   public com.stripe.model.financialconnections.Account subscribe(Map<String, Object> params)
       throws StripeException {
@@ -433,7 +433,7 @@ public class Account extends ApiResource implements HasId {
 
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
-   * Account}.
+   * Account}. When the account status is active, data is typically refreshed once a day.
    */
   public com.stripe.model.financialconnections.Account subscribe(
       Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -449,7 +449,7 @@ public class Account extends ApiResource implements HasId {
 
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
-   * Account}.
+   * Account}. When the account status is active, data is typically refreshed once a day.
    */
   public com.stripe.model.financialconnections.Account subscribe(AccountSubscribeParams params)
       throws StripeException {
@@ -458,7 +458,7 @@ public class Account extends ApiResource implements HasId {
 
   /**
    * Subscribes to periodic refreshes of data associated with a Financial Connections {@code
-   * Account}.
+   * Account}. When the account status is active, data is typically refreshed once a day.
    */
   public com.stripe.model.financialconnections.Account subscribe(
       AccountSubscribeParams params, RequestOptions options) throws StripeException {

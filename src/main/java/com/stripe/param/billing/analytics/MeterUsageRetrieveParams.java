@@ -271,17 +271,26 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
     @SerializedName("tenant_filters")
     Map<String, String> tenantFilters;
 
+    /**
+     * List of high cardinality tenant dimension keys to group by. If specified, usage events will
+     * be grouped by the given tenant dimension key's values.
+     */
+    @SerializedName("tenant_group_by_keys")
+    List<String> tenantGroupByKeys;
+
     private Meter(
         Map<String, String> dimensionFilters,
         List<String> dimensionGroupByKeys,
         Map<String, Object> extraParams,
         String meter,
-        Map<String, String> tenantFilters) {
+        Map<String, String> tenantFilters,
+        List<String> tenantGroupByKeys) {
       this.dimensionFilters = dimensionFilters;
       this.dimensionGroupByKeys = dimensionGroupByKeys;
       this.extraParams = extraParams;
       this.meter = meter;
       this.tenantFilters = tenantFilters;
+      this.tenantGroupByKeys = tenantGroupByKeys;
     }
 
     public static Builder builder() {
@@ -299,6 +308,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
 
       private Map<String, String> tenantFilters;
 
+      private List<String> tenantGroupByKeys;
+
       /** Finalize and obtain parameter instance from this builder. */
       public MeterUsageRetrieveParams.Meter build() {
         return new MeterUsageRetrieveParams.Meter(
@@ -306,7 +317,8 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
             this.dimensionGroupByKeys,
             this.extraParams,
             this.meter,
-            this.tenantFilters);
+            this.tenantFilters,
+            this.tenantGroupByKeys);
       }
 
       /**
@@ -416,6 +428,32 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
           this.tenantFilters = new HashMap<>();
         }
         this.tenantFilters.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add an element to `tenantGroupByKeys` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link MeterUsageRetrieveParams.Meter#tenantGroupByKeys} for the field documentation.
+       */
+      public Builder addTenantGroupByKey(String element) {
+        if (this.tenantGroupByKeys == null) {
+          this.tenantGroupByKeys = new ArrayList<>();
+        }
+        this.tenantGroupByKeys.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `tenantGroupByKeys` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link MeterUsageRetrieveParams.Meter#tenantGroupByKeys} for the field documentation.
+       */
+      public Builder addAllTenantGroupByKey(List<String> elements) {
+        if (this.tenantGroupByKeys == null) {
+          this.tenantGroupByKeys = new ArrayList<>();
+        }
+        this.tenantGroupByKeys.addAll(elements);
         return this;
       }
     }

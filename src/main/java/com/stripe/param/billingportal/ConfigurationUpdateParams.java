@@ -803,9 +803,21 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private PaymentMethodUpdate(Boolean enabled, Map<String, Object> extraParams) {
+      /**
+       * The <a href="https://stripe.com/api/payment_method_configurations">Payment Method
+       * Configuration</a> to use for this portal session. When specified, customers will be able to
+       * update their payment method to one of the options specified by the payment method
+       * configuration. If not set or set to an empty string, the default payment method
+       * configuration is used.
+       */
+      @SerializedName("payment_method_configuration")
+      Object paymentMethodConfiguration;
+
+      private PaymentMethodUpdate(
+          Boolean enabled, Map<String, Object> extraParams, Object paymentMethodConfiguration) {
         this.enabled = enabled;
         this.extraParams = extraParams;
+        this.paymentMethodConfiguration = paymentMethodConfiguration;
       }
 
       public static Builder builder() {
@@ -817,10 +829,12 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private Object paymentMethodConfiguration;
+
         /** Finalize and obtain parameter instance from this builder. */
         public ConfigurationUpdateParams.Features.PaymentMethodUpdate build() {
           return new ConfigurationUpdateParams.Features.PaymentMethodUpdate(
-              this.enabled, this.extraParams);
+              this.enabled, this.extraParams, this.paymentMethodConfiguration);
         }
 
         /** <strong>Required.</strong> Whether the feature is enabled. */
@@ -854,6 +868,30 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
             this.extraParams = new HashMap<>();
           }
           this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The <a href="https://stripe.com/api/payment_method_configurations">Payment Method
+         * Configuration</a> to use for this portal session. When specified, customers will be able
+         * to update their payment method to one of the options specified by the payment method
+         * configuration. If not set or set to an empty string, the default payment method
+         * configuration is used.
+         */
+        public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
+          this.paymentMethodConfiguration = paymentMethodConfiguration;
+          return this;
+        }
+
+        /**
+         * The <a href="https://stripe.com/api/payment_method_configurations">Payment Method
+         * Configuration</a> to use for this portal session. When specified, customers will be able
+         * to update their payment method to one of the options specified by the payment method
+         * configuration. If not set or set to an empty string, the default payment method
+         * configuration is used.
+         */
+        public Builder setPaymentMethodConfiguration(EmptyParam paymentMethodConfiguration) {
+          this.paymentMethodConfiguration = paymentMethodConfiguration;
           return this;
         }
       }

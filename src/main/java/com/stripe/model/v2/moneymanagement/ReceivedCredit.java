@@ -47,6 +47,10 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
+  /** The amount and currency of the original/external credit request. */
+  @SerializedName("external_amount")
+  Amount externalAmount;
+
   /** Financial Account ID on which funds for ReceivedCredit were received. */
   @SerializedName("financial_account")
   String financialAccount;

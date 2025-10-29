@@ -37,6 +37,10 @@ public class ReceivedDebit extends StripeObject implements HasId {
   @SerializedName("description")
   String description;
 
+  /** The amount and currency of the original/external debit request. */
+  @SerializedName("external_amount")
+  Amount externalAmount;
+
   /** Financial Account on which funds for ReceivedDebit were debited. */
   @SerializedName("financial_account")
   String financialAccount;

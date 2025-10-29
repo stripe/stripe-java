@@ -983,6 +983,15 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     Location location;
 
     /**
+     * The tax calculation provider used for location resolution. Defaults to {@code stripe} when
+     * not using a <a href="https://stripe.com/tax/third-party-apps">third-party provider</a>.
+     *
+     * <p>One of {@code anrok}, {@code avalara}, {@code sphere}, or {@code stripe}.
+     */
+    @SerializedName("provider")
+    String provider;
+
+    /**
      * For more details about Location, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */

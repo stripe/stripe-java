@@ -48,6 +48,14 @@ public class Transfer extends ApiResource
   @SerializedName("amount_reversed")
   Long amountReversed;
 
+  @SerializedName("application_fee")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<ApplicationFee> applicationFee;
+
+  @SerializedName("application_fee_amount")
+  Long applicationFeeAmount;
+
   /** Balance transaction that describes the impact of this transfer on your account balance. */
   @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
@@ -151,6 +159,25 @@ public class Transfer extends ApiResource
    */
   @SerializedName("transfer_group")
   String transferGroup;
+
+  /** Get ID of expandable {@code applicationFee} object. */
+  public String getApplicationFee() {
+    return (this.applicationFee != null) ? this.applicationFee.getId() : null;
+  }
+
+  public void setApplicationFee(String id) {
+    this.applicationFee = ApiResource.setExpandableFieldId(id, this.applicationFee);
+  }
+
+  /** Get expanded {@code applicationFee}. */
+  public ApplicationFee getApplicationFeeObject() {
+    return (this.applicationFee != null) ? this.applicationFee.getExpanded() : null;
+  }
+
+  public void setApplicationFeeObject(ApplicationFee expandableObject) {
+    this.applicationFee =
+        new ExpandableField<ApplicationFee>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
@@ -433,6 +460,7 @@ public class Transfer extends ApiResource
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(applicationFee, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(destination, responseGetter);
     trySetResponseGetter(destinationPayment, responseGetter);

@@ -46,6 +46,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntent extends ApiResource implements HasId, MetadataStore<PaymentIntent> {
+  /** Allocated Funds configuration for this PaymentIntent. */
+  @SerializedName("allocated_funds")
+  AllocatedFunds allocatedFunds;
+
   /**
    * Amount intended to be collected by this PaymentIntent. A positive integer representing how much
    * to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
@@ -1699,6 +1703,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, PaymentIntent.class);
+  }
+
+  /**
+   * For more details about AllocatedFunds, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AllocatedFunds extends StripeObject {
+    /** Allocated Funds configuration for this PaymentIntent. */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   /**
@@ -6399,6 +6416,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(allocatedFunds, responseGetter);
     trySetResponseGetter(amountDetails, responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticPaymentMethods, responseGetter);
