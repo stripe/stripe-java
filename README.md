@@ -1,6 +1,6 @@
 # Stripe Java client library
 
-[![Maven Central](https://img.shields.io/badge/maven--central-v30.0.0-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
+[![Maven Central](https://img.shields.io/badge/maven--central-v30.1.0-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
 
@@ -23,7 +23,7 @@ We support LTS versions of the JDK. Currently, that's Java versions:
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:30.0.0"
+implementation "com.stripe:stripe-java:30.1.0"
 ```
 
 ### Maven users
@@ -34,7 +34,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>30.0.0</version>
+  <version>30.1.0</version>
 </dependency>
 ```
 
@@ -43,8 +43,8 @@ Add this dependency to your project's POM:
 If you are not using Gradle or Maven, you will need to manually install the following JARs:
 
 1. The Stripe JAR:
-   - Download the latest release version from [Maven Central](https://repo1.maven.org/maven2/com/stripe/stripe-java/30.0.0/stripe-java-30.0.0.jar)
-   - Current release version: 30.0.0
+   - Download the latest release version from [Maven Central](https://repo1.maven.org/maven2/com/stripe/stripe-java/30.1.0/stripe-java-30.1.0.jar)
+   - Current release version: 30.1.0
 
 2. Google Gson:
    - The Stripe JAR builds and tests with Gson version 2.10.1
