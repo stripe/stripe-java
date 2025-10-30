@@ -807,7 +807,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     @SerializedName("key")
     Object key;
 
-    /** The quantity of the line item. */
+    /** <strong>Required.</strong> The quantity of the line item. */
     @SerializedName("quantity")
     Long quantity;
 
@@ -873,7 +873,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The quantity of the line item. */
+      /** <strong>Required.</strong> The quantity of the line item. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
