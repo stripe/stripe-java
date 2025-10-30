@@ -70,6 +70,9 @@ This release changes the pinned API version to `2025-10-29.preview`.
   * Add support for new value `2025-10-29.clover` on enum `WebhookEndpointCreateParams.apiVersion`
   
 ## 30.1.0 - 2025-10-29
+
+This release changes the pinned API version to `2025-10-29.clover`.
+
 * [#2093](https://github.com/stripe/stripe-java/pull/2093) Update generated code
   * Improve docs for PaymentIntent related endpoints
 * [#2086](https://github.com/stripe/stripe-java/pull/2086) Update generated code

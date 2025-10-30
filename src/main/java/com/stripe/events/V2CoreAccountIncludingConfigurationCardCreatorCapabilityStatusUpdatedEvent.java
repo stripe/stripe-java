@@ -24,7 +24,8 @@ public final class V2CoreAccountIncludingConfigurationCardCreatorCapabilityStatu
      *
      * <p>One of {@code commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
      * commercial.cross_river_bank.charge_card}, {@code commercial.cross_river_bank.spend_card},
-     * {@code commercial.stripe.charge_card}, or {@code commercial.stripe.prepaid_card}.
+     * {@code commercial.lead.prepaid_card}, {@code commercial.stripe.charge_card}, or {@code
+     * commercial.stripe.prepaid_card}.
      */
     @SerializedName("updated_capability")
     String updatedCapability;
