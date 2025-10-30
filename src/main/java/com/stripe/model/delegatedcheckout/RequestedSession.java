@@ -101,6 +101,10 @@ public class RequestedSession extends ApiResource
   @SerializedName("payment_method")
   String paymentMethod;
 
+  /** The preview of the payment method to be created when the requested session is confirmed. */
+  @SerializedName("payment_method_preview")
+  PaymentMethodPreview paymentMethodPreview;
+
   @SerializedName("seller_details")
   SellerDetails sellerDetails;
 
@@ -561,9 +565,116 @@ public class RequestedSession extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OrderDetails extends StripeObject {
+    /** The seller's order identifier. */
+    @SerializedName("order_id")
+    String orderId;
+
     /** The URL to the order status. */
     @SerializedName("order_status_url")
     String orderStatusUrl;
+  }
+
+  /**
+   * For more details about PaymentMethodPreview, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodPreview extends StripeObject {
+    /** The billing details of the payment method. */
+    @SerializedName("billing_details")
+    BillingDetails billingDetails;
+
+    /** The card details of the payment method. */
+    @SerializedName("card")
+    Card card;
+
+    /** The type of the payment method. */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about BillingDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingDetails extends StripeObject {
+      /** The billing address. */
+      @SerializedName("address")
+      Address address;
+
+      /** The email address for the billing details. */
+      @SerializedName("email")
+      String email;
+
+      /** The name for the billing details. */
+      @SerializedName("name")
+      String name;
+
+      /** The phone number for the billing details. */
+      @SerializedName("phone")
+      String phone;
+
+      /**
+       * For more details about Address, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Address extends StripeObject {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /** Address line 1, such as the street, PO Box, or company name. */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2, such as the apartment, suite, unit, or building. */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** State, county, province, or region. */
+        @SerializedName("state")
+        String state;
+      }
+    }
+
+    /**
+     * For more details about Card, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /** The expiry month of the card. */
+      @SerializedName("exp_month")
+      Long expMonth;
+
+      /** The expiry year of the card. */
+      @SerializedName("exp_year")
+      Long expYear;
+
+      /** The last 4 digits of the card number. */
+      @SerializedName("last4")
+      String last4;
+    }
   }
 
   /**
@@ -601,6 +712,7 @@ public class RequestedSession extends ApiResource
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(fulfillmentDetails, responseGetter);
     trySetResponseGetter(orderDetails, responseGetter);
+    trySetResponseGetter(paymentMethodPreview, responseGetter);
     trySetResponseGetter(sellerDetails, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
   }
