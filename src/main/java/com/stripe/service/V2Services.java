@@ -25,6 +25,10 @@ public final class V2Services extends ApiService {
     return new com.stripe.service.v2.PaymentService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.ReportingService reporting() {
+    return new com.stripe.service.v2.ReportingService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.TaxService tax() {
     return new com.stripe.service.v2.TaxService(this.getResponseGetter());
   }

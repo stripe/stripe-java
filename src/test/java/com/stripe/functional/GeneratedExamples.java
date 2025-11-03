@@ -13,6 +13,9 @@ import com.stripe.net.ApiResource;
 import com.stripe.param.*;
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import org.junit.jupiter.api.Test;
 
 class GeneratedExamples extends BaseStripeTest {
@@ -3208,7 +3211,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.Event.class,
-        "{\"changes\":{\"key\":{}},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\",\"v1_event_id\":\"v1_event_id\",\"livemode\":true}");
+        "{\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\",\"v1_event_id\":\"v1_event_id\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.Event event = client.v2().core().events().retrieve("ll_123");
@@ -29098,6 +29101,92 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/payments/off_session_payments/id_123/capture",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2ReportingReportGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/reporting/reports/id_123",
+        null,
+        null,
+        com.stripe.model.v2.reporting.Report.class,
+        "{\"id\":\"obj_123\",\"name\":\"name\",\"object\":\"v2.reporting.report\",\"parameters\":{\"key\":{\"description\":\"description\",\"required\":true,\"type\":\"string\"}},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.reporting.Report report =
+        client.v2().reporting().reports().retrieve("id_123");
+    assertNotNull(report);
+    verifyRequest(
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/reporting/reports/id_123", null, null);
+  }
+
+  @Test
+  public void testV2ReportingReportRunPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/reporting/report_runs",
+        null,
+        null,
+        com.stripe.model.v2.reporting.ReportRun.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.reporting.report_run\",\"report\":\"report\",\"report_name\":\"report_name\",\"report_parameters\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"status\":\"failed\",\"status_details\":{\"key\":{}},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.reporting.ReportRunCreateParams params =
+        com.stripe.param.v2.reporting.ReportRunCreateParams.builder()
+            .setReport("report")
+            .putReportParameter("int_key", new BigDecimal(123))
+            .putReportParameter("string_key", "value")
+            .putReportParameter("boolean_key", true)
+            .putReportParameter(
+                "object_key",
+                new HashMap<String, Object>() {
+                  {
+                    put("object_int_key", new BigDecimal(123));
+                    put("object_string_key", "value");
+                    put("object_boolean_key", true);
+                  }
+                })
+            .putReportParameter(
+                "array_key",
+                new ArrayList<>(
+                    Arrays.asList(new BigDecimal(1), new BigDecimal(2), new BigDecimal(3))))
+            .build();
+
+    com.stripe.model.v2.reporting.ReportRun reportRun =
+        client.v2().reporting().reportRuns().create(params);
+    assertNotNull(reportRun);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/reporting/report_runs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2ReportingReportRunGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/reporting/report_runs/id_123",
+        null,
+        null,
+        com.stripe.model.v2.reporting.ReportRun.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.reporting.report_run\",\"report\":\"report\",\"report_name\":\"report_name\",\"report_parameters\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"status\":\"failed\",\"status_details\":{\"key\":{}},\"livemode\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.reporting.ReportRun reportRun =
+        client.v2().reporting().reportRuns().retrieve("id_123");
+    assertNotNull(reportRun);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/reporting/report_runs/id_123",
+        null,
         null);
   }
 

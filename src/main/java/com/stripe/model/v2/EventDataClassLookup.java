@@ -199,6 +199,9 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.payments.off_session_payment", com.stripe.model.v2.payments.OffSessionPayment.class);
 
+    classLookup.put("v2.reporting.report", com.stripe.model.v2.reporting.Report.class);
+    classLookup.put("v2.reporting.report_run", com.stripe.model.v2.reporting.ReportRun.class);
+
     classLookup.put("v2.tax.automatic_rule", com.stripe.model.v2.tax.AutomaticRule.class);
 
     eventClassLookup.put("v1.account.updated", com.stripe.events.V1AccountUpdatedEvent.class);
@@ -942,5 +945,16 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEvent.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.created",
+        com.stripe.events.V2ReportingReportRunCreatedEvent.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.failed", com.stripe.events.V2ReportingReportRunFailedEvent.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.succeeded",
+        com.stripe.events.V2ReportingReportRunSucceededEvent.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.updated",
+        com.stripe.events.V2ReportingReportRunUpdatedEvent.class);
   }
 }
