@@ -218,8 +218,8 @@ public class Account extends StripeObject implements HasId {
         Location location;
 
         /**
-         * The data source used to identify the customer's tax location - defaults to
-         * 'identity_address'. Will only be used for automatic tax calculation on the customer's
+         * The data source used to identify the customer's tax location - defaults to {@code
+         * identity_address}. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          *
          * <p>One of {@code identity_address}, {@code ip_address}, {@code payment_method}, or {@code
@@ -499,12 +499,20 @@ public class Account extends StripeObject implements HasId {
       @SerializedName("card_payments")
       CardPayments cardPayments;
 
+      /** Settings specific to Konbini payments on the account. */
+      @SerializedName("konbini_payments")
+      KonbiniPayments konbiniPayments;
+
       /**
        * The merchant category code for the merchant. MCCs are used to classify businesses based on
        * the goods or services they provide.
        */
       @SerializedName("mcc")
       String mcc;
+
+      /** Settings for the default text that appears on statements for language variations. */
+      @SerializedName("script_statement_descriptor")
+      ScriptStatementDescriptor scriptStatementDescriptor;
 
       /** Settings used for SEPA debit payments. */
       @SerializedName("sepa_debit_payments")
@@ -3263,6 +3271,140 @@ public class Account extends StripeObject implements HasId {
         }
       }
 
+      /** Settings specific to Konbini payments on the account. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class KonbiniPayments extends StripeObject {
+        /** Support for Konbini payments. */
+        @SerializedName("support")
+        Support support;
+
+        /** Support for Konbini payments. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Support extends StripeObject {
+          /** Support email address for Konbini payments. */
+          @SerializedName("email")
+          String email;
+
+          /** Support hours for Konbini payments. */
+          @SerializedName("hours")
+          Hours hours;
+
+          /** Support phone number for Konbini payments. */
+          @SerializedName("phone")
+          String phone;
+
+          /** Support hours for Konbini payments. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Hours extends StripeObject {
+            /** Support hours end time (JST time of day) for in {@code HH:MM} format. */
+            @SerializedName("end_time")
+            String endTime;
+
+            /** Support hours start time (JST time of day) for in {@code HH:MM} format. */
+            @SerializedName("start_time")
+            String startTime;
+          }
+        }
+      }
+
+      /** Settings for the default text that appears on statements for language variations. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ScriptStatementDescriptor extends StripeObject {
+        /**
+         * The Kana variation of statement_descriptor used for charges in Japan. Japanese statement
+         * descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
+         */
+        @SerializedName("kana")
+        Kana kana;
+
+        /**
+         * The Kanji variation of statement_descriptor used for charges in Japan. Japanese statement
+         * descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
+         */
+        @SerializedName("kanji")
+        Kanji kanji;
+
+        /**
+         * The Kana variation of statement_descriptor used for charges in Japan. Japanese statement
+         * descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Kana extends StripeObject {
+          /**
+           * The default text that appears on statements for non-card charges outside of Japan. For
+           * card charges, if you don’t set a statement_descriptor_prefix, this text is also used as
+           * the statement descriptor prefix. In that case, if concatenating the statement
+           * descriptor suffix causes the combined statement descriptor to exceed 22 characters, we
+           * truncate the statement_descriptor text to limit the full descriptor to 22 characters.
+           * For more information about statement descriptors and their requirements, see the
+           * Merchant Configuration settings documentation.
+           */
+          @SerializedName("descriptor")
+          String descriptor;
+
+          /**
+           * Default text that appears on statements for card charges outside of Japan, prefixing
+           * any dynamic statement_descriptor_suffix specified on the charge. To maximize space for
+           * the dynamic part of the descriptor, keep this text short. If you don’t specify this
+           * value, statement_descriptor is used as the prefix. For more information about statement
+           * descriptors and their requirements, see the Merchant Configuration settings
+           * documentation.
+           */
+          @SerializedName("prefix")
+          String prefix;
+        }
+
+        /**
+         * The Kanji variation of statement_descriptor used for charges in Japan. Japanese statement
+         * descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Kanji extends StripeObject {
+          /**
+           * The default text that appears on statements for non-card charges outside of Japan. For
+           * card charges, if you don’t set a statement_descriptor_prefix, this text is also used as
+           * the statement descriptor prefix. In that case, if concatenating the statement
+           * descriptor suffix causes the combined statement descriptor to exceed 22 characters, we
+           * truncate the statement_descriptor text to limit the full descriptor to 22 characters.
+           * For more information about statement descriptors and their requirements, see the
+           * Merchant Configuration settings documentation.
+           */
+          @SerializedName("descriptor")
+          String descriptor;
+
+          /**
+           * Default text that appears on statements for card charges outside of Japan, prefixing
+           * any dynamic statement_descriptor_suffix specified on the charge. To maximize space for
+           * the dynamic part of the descriptor, keep this text short. If you don’t specify this
+           * value, statement_descriptor is used as the prefix. For more information about statement
+           * descriptors and their requirements, see the Merchant Configuration settings
+           * documentation.
+           */
+          @SerializedName("prefix")
+          String prefix;
+        }
+      }
+
       /** Settings used for SEPA debit payments. */
       @Getter
       @Setter
@@ -3886,6 +4028,10 @@ public class Account extends StripeObject implements HasId {
         @Setter
         @EqualsAndHashCode(callSuper = false)
         public static class HoldsCurrencies extends StripeObject {
+          /** Can hold storage-type funds on Stripe in EUR. */
+          @SerializedName("eur")
+          Eur eur;
+
           /** Can hold storage-type funds on Stripe in GBP. */
           @SerializedName("gbp")
           Gbp gbp;
@@ -3893,6 +4039,62 @@ public class Account extends StripeObject implements HasId {
           /** Can hold storage-type funds on Stripe in USD. */
           @SerializedName("usd")
           Usd usd;
+
+          /** Can hold storage-type funds on Stripe in EUR. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Eur extends StripeObject {
+            /** Whether the Capability has been requested. */
+            @SerializedName("requested")
+            Boolean requested;
+
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details regarding the status of the Capability. {@code status_details}
+             * will be empty if the Capability's status is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Storer.Capabilities.HoldsCurrencies.Eur.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
 
           /** Can hold storage-type funds on Stripe in GBP. */
           @Getter
