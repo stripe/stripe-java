@@ -31,6 +31,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Charge extends ApiResource implements MetadataStore<Charge>, BalanceTransactionSource {
+  /** Funds that are in transit and destined for another balance or another connected account. */
+  @SerializedName("allocated_funds")
+  TransitBalance allocatedFunds;
+
   /**
    * Amount intended to be collected by this payment. A positive integer representing how much to
    * charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
@@ -4383,6 +4387,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
+    trySetResponseGetter(allocatedFunds, responseGetter);
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(applicationFee, responseGetter);
     trySetResponseGetter(balanceTransaction, responseGetter);
