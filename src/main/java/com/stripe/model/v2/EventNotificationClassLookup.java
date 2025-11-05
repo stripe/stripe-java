@@ -887,5 +887,17 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.created",
+        com.stripe.events.V2ReportingReportRunCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.failed",
+        com.stripe.events.V2ReportingReportRunFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.succeeded",
+        com.stripe.events.V2ReportingReportRunSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.reporting.report_run.updated",
+        com.stripe.events.V2ReportingReportRunUpdatedEventNotification.class);
   }
 }

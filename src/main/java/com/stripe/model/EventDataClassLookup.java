@@ -108,6 +108,7 @@ public final class EventDataClassLookup {
     classLookup.put("topup", com.stripe.model.Topup.class);
     classLookup.put("transfer", com.stripe.model.Transfer.class);
     classLookup.put("transfer_reversal", com.stripe.model.TransferReversal.class);
+    classLookup.put("transit_balance", com.stripe.model.TransitBalance.class);
     classLookup.put("webhook_endpoint", com.stripe.model.WebhookEndpoint.class);
 
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
