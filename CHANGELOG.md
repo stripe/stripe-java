@@ -1,5 +1,8 @@
 # Changelog
 
+## 30.2.1-alpha.1 - 2025-11-05
+* Updated publishing configuration.  No changes to SDK content.
+
 ## 30.2.0-alpha.2 - 2025-10-30
 * [#2099](https://github.com/stripe/stripe-java/pull/2099) Update generated code for private-preview
   * Change `delegatedcheckout.RequestedSessionUpdateParams.line_item_details[].quantity` to be required
