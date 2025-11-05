@@ -3592,6 +3592,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>One of {@code manual}, or {@code manual_preferred}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
        * Request ability to capture this payment beyond the standard <a
        * href="https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity">authorization
        * validity window.</a>
