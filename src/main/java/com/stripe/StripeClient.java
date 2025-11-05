@@ -1333,4 +1333,8 @@ public class StripeClient {
   public StripeObject deserialize(String rawJson, ApiMode apiMode) throws StripeException {
     return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter(), apiMode);
   }
+
+  public StripeEventHandler handler(String webhookSecret) {
+    return new StripeEventHandler(webhookSecret, this);
+  }
 }
