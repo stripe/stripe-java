@@ -35,7 +35,7 @@ public class StripeEventHandler {
    * @param sigHeader the incoming webhook signature header
    * @throws SignatureVerificationException if the validation of the webhook signature fails
    * @throws IllegalArgumentException if no handler is registered for the event type
-   * @throws Exception any other exception that the registered handler might throw
+   * @throws * any other exception that the registered handler might throw
    */
   @SuppressWarnings("unchecked")
   public void handle(String webhookBody, String sigHeader) throws SignatureVerificationException {
