@@ -14339,6 +14339,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent {
       /**
+       * Controls when the funds are captured from the customer's account.
+       *
+       * <p>If provided, this parameter overrides the behavior of the top-level <a
+       * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+       * for this payment method type when finalizing the payment with this payment method type.
+       *
+       * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty value
+       * for this parameter unsets the stored value for this payment method type.
+       */
+      @SerializedName("capture_method")
+      CaptureMethod captureMethod;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -14374,10 +14387,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Routing routing;
 
       private CardPresent(
+          CaptureMethod captureMethod,
           Map<String, Object> extraParams,
           Boolean requestExtendedAuthorization,
           Boolean requestIncrementalAuthorizationSupport,
           Routing routing) {
+        this.captureMethod = captureMethod;
         this.extraParams = extraParams;
         this.requestExtendedAuthorization = requestExtendedAuthorization;
         this.requestIncrementalAuthorizationSupport = requestIncrementalAuthorizationSupport;
@@ -14389,6 +14404,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CaptureMethod captureMethod;
+
         private Map<String, Object> extraParams;
 
         private Boolean requestExtendedAuthorization;
@@ -14400,10 +14417,28 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent build() {
           return new PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent(
+              this.captureMethod,
               this.extraParams,
               this.requestExtendedAuthorization,
               this.requestIncrementalAuthorizationSupport,
               this.routing);
+        }
+
+        /**
+         * Controls when the funds are captured from the customer's account.
+         *
+         * <p>If provided, this parameter overrides the behavior of the top-level <a
+         * href="https://stripe.com/api/payment_intents/update#update_payment_intent-capture_method">capture_method</a>
+         * for this payment method type when finalizing the payment with this payment method type.
+         *
+         * <p>If {@code capture_method} is already set on the PaymentIntent, providing an empty
+         * value for this parameter unsets the stored value for this payment method type.
+         */
+        public Builder setCaptureMethod(
+            PaymentIntentUpdateParams.PaymentMethodOptions.CardPresent.CaptureMethod
+                captureMethod) {
+          this.captureMethod = captureMethod;
+          return this;
         }
 
         /**
@@ -14558,6 +14593,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           RequestedPriority(String value) {
             this.value = value;
           }
+        }
+      }
+
+      public enum CaptureMethod implements ApiRequestParams.EnumParam {
+        @SerializedName("manual")
+        MANUAL("manual"),
+
+        @SerializedName("manual_preferred")
+        MANUAL_PREFERRED("manual_preferred");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CaptureMethod(String value) {
+          this.value = value;
         }
       }
     }

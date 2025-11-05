@@ -43,7 +43,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("offline")
   Object offline;
 
-  /** Reboot time settings for readers that support customized reboot time configuration. */
+  /** Reboot time settings for readers. that support customized reboot time configuration. */
   @SerializedName("reboot_window")
   Object rebootWindow;
 
@@ -51,7 +51,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("stripe_s700")
   Object stripeS700;
 
-  /** Tipping configurations for readers supporting on-reader tips. */
+  /** Tipping configurations for readers. supporting on-reader tips */
   @SerializedName("tipping")
   Object tipping;
 
@@ -231,13 +231,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Reboot time settings for readers that support customized reboot time configuration. */
+    /** Reboot time settings for readers. that support customized reboot time configuration. */
     public Builder setRebootWindow(ConfigurationUpdateParams.RebootWindow rebootWindow) {
       this.rebootWindow = rebootWindow;
       return this;
     }
 
-    /** Reboot time settings for readers that support customized reboot time configuration. */
+    /** Reboot time settings for readers. that support customized reboot time configuration. */
     public Builder setRebootWindow(EmptyParam rebootWindow) {
       this.rebootWindow = rebootWindow;
       return this;
@@ -255,13 +255,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Tipping configurations for readers supporting on-reader tips. */
+    /** Tipping configurations for readers. supporting on-reader tips */
     public Builder setTipping(ConfigurationUpdateParams.Tipping tipping) {
       this.tipping = tipping;
       return this;
     }
 
-    /** Tipping configurations for readers supporting on-reader tips. */
+    /** Tipping configurations for readers. supporting on-reader tips */
     public Builder setTipping(EmptyParam tipping) {
       this.tipping = tipping;
       return this;
@@ -304,7 +304,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image you want to display on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -354,13 +354,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image you want to display on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image you want to display on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;
@@ -626,7 +626,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image you want to display on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -675,13 +675,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image you want to display on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image you want to display on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;
@@ -4345,7 +4345,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** A File ID representing an image you would like displayed on the reader. */
+    /** A File ID representing an image you want to display on the reader. */
     @SerializedName("splashscreen")
     Object splashscreen;
 
@@ -4394,13 +4394,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image you want to display on the reader. */
       public Builder setSplashscreen(String splashscreen) {
         this.splashscreen = splashscreen;
         return this;
       }
 
-      /** A File ID representing an image you would like displayed on the reader. */
+      /** A File ID representing an image you want to display on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
         return this;

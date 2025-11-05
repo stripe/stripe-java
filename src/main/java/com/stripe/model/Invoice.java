@@ -174,7 +174,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * A new subscription was created. * {@code subscription_cycle}: A subscription advanced into a
    * new period. * {@code subscription_threshold}: A subscription reached a billing threshold. *
    * {@code subscription_update}: A subscription was updated. * {@code upcoming}: Reserved for
-   * simulated invoices, per the upcoming invoice endpoint.
+   * upcoming invoices created through the Create Preview Invoice API or when an {@code
+   * invoice.upcoming} event is generated for an upcoming invoice on a subscription.
    *
    * <p>One of {@code automatic_pending_invoice_item_invoice}, {@code manual}, {@code quote_accept},
    * {@code subscription}, {@code subscription_create}, {@code subscription_cycle}, {@code

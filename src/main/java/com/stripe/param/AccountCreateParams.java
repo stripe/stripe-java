@@ -13078,8 +13078,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Whether payment methods should be saved when a payment is completed for a one-time invoices
-       * on a hosted invoice page.
+       * Whether to save the payment method after a payment is completed for a one-time invoice or a
+       * subscription invoice when the customer already has a default payment method on the hosted
+       * invoice page.
        */
       @SerializedName("hosted_payment_method_save")
       HostedPaymentMethodSave hostedPaymentMethodSave;
@@ -13134,8 +13135,9 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Whether payment methods should be saved when a payment is completed for a one-time
-         * invoices on a hosted invoice page.
+         * Whether to save the payment method after a payment is completed for a one-time invoice or
+         * a subscription invoice when the customer already has a default payment method on the
+         * hosted invoice page.
          */
         public Builder setHostedPaymentMethodSave(
             AccountCreateParams.Settings.Invoices.HostedPaymentMethodSave hostedPaymentMethodSave) {
