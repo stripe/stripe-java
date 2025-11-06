@@ -14,6 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntentCreateParams extends ApiRequestParams {
+  /** Allocated Funds configuration for this PaymentIntent. */
+  @SerializedName("allocated_funds")
+  AllocatedFunds allocatedFunds;
+
   /**
    * <strong>Required.</strong> Amount intended to be collected by this PaymentIntent. A positive
    * integer representing how much to charge in the <a
@@ -361,6 +365,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Boolean useStripeSdk;
 
   private PaymentIntentCreateParams(
+      AllocatedFunds allocatedFunds,
       Long amount,
       AmountDetails amountDetails,
       Long applicationFeeAmount,
@@ -401,6 +406,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       TransferData transferData,
       String transferGroup,
       Boolean useStripeSdk) {
+    this.allocatedFunds = allocatedFunds;
     this.amount = amount;
     this.amountDetails = amountDetails;
     this.applicationFeeAmount = applicationFeeAmount;
@@ -448,6 +454,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private AllocatedFunds allocatedFunds;
+
     private Long amount;
 
     private AmountDetails amountDetails;
@@ -531,6 +539,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentCreateParams build() {
       return new PaymentIntentCreateParams(
+          this.allocatedFunds,
           this.amount,
           this.amountDetails,
           this.applicationFeeAmount,
@@ -571,6 +580,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.transferData,
           this.transferGroup,
           this.useStripeSdk);
+    }
+
+    /** Allocated Funds configuration for this PaymentIntent. */
+    public Builder setAllocatedFunds(PaymentIntentCreateParams.AllocatedFunds allocatedFunds) {
+      this.allocatedFunds = allocatedFunds;
+      return this;
     }
 
     /**
@@ -1117,6 +1132,76 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public Builder setUseStripeSdk(Boolean useStripeSdk) {
       this.useStripeSdk = useStripeSdk;
       return this;
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AllocatedFunds {
+    /** Whether Allocated Funds creation is enabled for this PaymentIntent. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private AllocatedFunds(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentIntentCreateParams.AllocatedFunds build() {
+        return new PaymentIntentCreateParams.AllocatedFunds(this.enabled, this.extraParams);
+      }
+
+      /** Whether Allocated Funds creation is enabled for this PaymentIntent. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentCreateParams.AllocatedFunds#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentCreateParams.AllocatedFunds#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
     }
   }
 

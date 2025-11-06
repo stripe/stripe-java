@@ -11,8 +11,10 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.capital.FinancingOfferCreateParams;
 import com.stripe.param.capital.FinancingOfferListParams;
 import com.stripe.param.capital.FinancingOfferMarkDeliveredParams;
+import com.stripe.param.capital.FinancingOfferRefillParams;
 import com.stripe.param.capital.FinancingOfferRetrieveParams;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -363,6 +365,92 @@ public class FinancingOffer extends ApiResource implements HasId {
     /** Per-transaction rate at which Stripe will withhold funds to repay the financing. */
     @SerializedName("withhold_rate")
     BigDecimal withholdRate;
+  }
+
+  public TestHelpers getTestHelpers() {
+    return new TestHelpers(this);
+  }
+
+  public static class TestHelpers {
+    private final FinancingOffer resource;
+
+    private TestHelpers(FinancingOffer resource) {
+      this.resource = resource;
+    }
+
+    /** Creates a test financing offer for a connected account. */
+    public static FinancingOffer create(Map<String, Object> params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Creates a test financing offer for a connected account. */
+    public static FinancingOffer create(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/capital/financing_offers";
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return getGlobalResponseGetter().request(request, FinancingOffer.class);
+    }
+
+    /** Creates a test financing offer for a connected account. */
+    public static FinancingOffer create(FinancingOfferCreateParams params) throws StripeException {
+      return create(params, (RequestOptions) null);
+    }
+
+    /** Creates a test financing offer for a connected account. */
+    public static FinancingOffer create(FinancingOfferCreateParams params, RequestOptions options)
+        throws StripeException {
+      String path = "/v1/test_helpers/capital/financing_offers";
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return getGlobalResponseGetter().request(request, FinancingOffer.class);
+    }
+
+    /** Refills a test financing offer for a connected account. */
+    public FinancingOffer refill(Map<String, Object> params) throws StripeException {
+      return refill(params, (RequestOptions) null);
+    }
+
+    /** Refills a test financing offer for a connected account. */
+    public FinancingOffer refill(Map<String, Object> params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/capital/financing_offers/%s/refill",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiRequest request =
+          new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+      return resource.getResponseGetter().request(request, FinancingOffer.class);
+    }
+
+    /** Refills a test financing offer for a connected account. */
+    public FinancingOffer refill(FinancingOfferRefillParams params) throws StripeException {
+      return refill(params, (RequestOptions) null);
+    }
+
+    /** Refills a test financing offer for a connected account. */
+    public FinancingOffer refill(FinancingOfferRefillParams params, RequestOptions options)
+        throws StripeException {
+      String path =
+          String.format(
+              "/v1/test_helpers/capital/financing_offers/%s/refill",
+              ApiResource.urlEncodeId(this.resource.getId()));
+      ApiResource.checkNullTypedParams(path, params);
+      ApiRequest request =
+          new ApiRequest(
+              BaseAddress.API,
+              ApiResource.RequestMethod.POST,
+              path,
+              ApiRequestParams.paramsToMap(params),
+              options);
+      return resource.getResponseGetter().request(request, FinancingOffer.class);
+    }
   }
 
   @Override
