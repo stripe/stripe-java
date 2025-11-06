@@ -160,6 +160,14 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
   @SerializedName("relationship")
   Relationship relationship;
 
+  /** The credit applicant's self-reported yearly income in minor units. */
+  @SerializedName("self_reported_income")
+  SelfReportedIncome selfReportedIncome;
+
+  /** The credit applicant's self-reported monthly housing payment in minor units. */
+  @SerializedName("self_reported_monthly_housing_payment")
+  SelfReportedMonthlyHousingPayment selfReportedMonthlyHousingPayment;
+
   /** The last four digits of the person's Social Security number (U.S. only). */
   @SerializedName("ssn_last_4")
   Object ssnLast4;
@@ -200,6 +208,8 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
       PoliticalExposure politicalExposure,
       RegisteredAddress registeredAddress,
       Relationship relationship,
+      SelfReportedIncome selfReportedIncome,
+      SelfReportedMonthlyHousingPayment selfReportedMonthlyHousingPayment,
       Object ssnLast4,
       UsCfpbData usCfpbData,
       Verification verification) {
@@ -230,6 +240,8 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     this.politicalExposure = politicalExposure;
     this.registeredAddress = registeredAddress;
     this.relationship = relationship;
+    this.selfReportedIncome = selfReportedIncome;
+    this.selfReportedMonthlyHousingPayment = selfReportedMonthlyHousingPayment;
     this.ssnLast4 = ssnLast4;
     this.usCfpbData = usCfpbData;
     this.verification = verification;
@@ -294,6 +306,10 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
 
     private Relationship relationship;
 
+    private SelfReportedIncome selfReportedIncome;
+
+    private SelfReportedMonthlyHousingPayment selfReportedMonthlyHousingPayment;
+
     private Object ssnLast4;
 
     private UsCfpbData usCfpbData;
@@ -330,6 +346,8 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
           this.politicalExposure,
           this.registeredAddress,
           this.relationship,
+          this.selfReportedIncome,
+          this.selfReportedMonthlyHousingPayment,
           this.ssnLast4,
           this.usCfpbData,
           this.verification);
@@ -753,6 +771,21 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
     /** The relationship that this person has with the account's legal entity. */
     public Builder setRelationship(AccountPersonUpdateParams.Relationship relationship) {
       this.relationship = relationship;
+      return this;
+    }
+
+    /** The credit applicant's self-reported yearly income in minor units. */
+    public Builder setSelfReportedIncome(
+        AccountPersonUpdateParams.SelfReportedIncome selfReportedIncome) {
+      this.selfReportedIncome = selfReportedIncome;
+      return this;
+    }
+
+    /** The credit applicant's self-reported monthly housing payment in minor units. */
+    public Builder setSelfReportedMonthlyHousingPayment(
+        AccountPersonUpdateParams.SelfReportedMonthlyHousingPayment
+            selfReportedMonthlyHousingPayment) {
+      this.selfReportedMonthlyHousingPayment = selfReportedMonthlyHousingPayment;
       return this;
     }
 
@@ -2500,6 +2533,188 @@ public class AccountPersonUpdateParams extends ApiRequestParams {
       /** The person's title (e.g., CEO, Support Engineer). */
       public Builder setTitle(EmptyParam title) {
         this.title = title;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SelfReportedIncome {
+    /** <strong>Required.</strong> */
+    @SerializedName("amount")
+    Long amount;
+
+    /** <strong>Required.</strong> */
+    @SerializedName("currency")
+    Object currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private SelfReportedIncome(Long amount, Object currency, Map<String, Object> extraParams) {
+      this.amount = amount;
+      this.currency = currency;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private Object currency;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountPersonUpdateParams.SelfReportedIncome build() {
+        return new AccountPersonUpdateParams.SelfReportedIncome(
+            this.amount, this.currency, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setCurrency(EmptyParam currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountPersonUpdateParams.SelfReportedIncome#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountPersonUpdateParams.SelfReportedIncome#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SelfReportedMonthlyHousingPayment {
+    /** <strong>Required.</strong> */
+    @SerializedName("amount")
+    Long amount;
+
+    /** <strong>Required.</strong> */
+    @SerializedName("currency")
+    Object currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private SelfReportedMonthlyHousingPayment(
+        Long amount, Object currency, Map<String, Object> extraParams) {
+      this.amount = amount;
+      this.currency = currency;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private Object currency;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AccountPersonUpdateParams.SelfReportedMonthlyHousingPayment build() {
+        return new AccountPersonUpdateParams.SelfReportedMonthlyHousingPayment(
+            this.amount, this.currency, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /** <strong>Required.</strong> */
+      public Builder setCurrency(EmptyParam currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountPersonUpdateParams.SelfReportedMonthlyHousingPayment#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountPersonUpdateParams.SelfReportedMonthlyHousingPayment#extraParams} for the
+       * field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
