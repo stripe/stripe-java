@@ -1,5 +1,9 @@
 # Changelog
 
+## 30.2.0 - 2025-11-05
+* [#2102](https://github.com/stripe/stripe-java/pull/2102) Update generated code
+  * Add support for `captureMethod` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
+
 ## 30.2.0-beta.1 - 2025-10-29
 
 This release changes the pinned API version to `2025-10-29.preview`.
