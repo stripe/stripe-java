@@ -27256,7 +27256,6 @@ class GeneratedExamples extends BaseStripeTest {
 
     com.stripe.param.v2.payments.OffSessionPaymentCaptureParams params =
         com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder()
-            .setAmountToCapture(1374310455L)
             .putMetadata("key", "metadata")
             .build();
 

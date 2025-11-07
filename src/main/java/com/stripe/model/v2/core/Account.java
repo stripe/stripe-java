@@ -4683,6 +4683,14 @@ public class Account extends StripeObject implements HasId {
        */
       @SerializedName("losses_collector")
       String lossesCollector;
+
+      /**
+       * A value indicating responsibility for collecting requirements on this account.
+       *
+       * <p>One of {@code application}, or {@code stripe}.
+       */
+      @SerializedName("requirements_collector")
+      String requirementsCollector;
     }
   }
 
@@ -6281,14 +6289,6 @@ public class Account extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
-    /**
-     * A value indicating responsibility for collecting requirements on this account.
-     *
-     * <p>One of {@code application}, or {@code stripe}.
-     */
-    @SerializedName("collector")
-    String collector;
-
     /** A list of requirements for the Account. */
     @SerializedName("entries")
     List<Account.Requirements.Entry> entries;
@@ -6538,10 +6538,11 @@ public class Account extends StripeObject implements HasId {
         String resource;
 
         /**
-         * The type of the reference. An additional hash is included with a name matching the type.
-         * It contains additional information specific to the type.
+         * The type of the reference. If the type is &quot;inquiry&quot;, the inquiry token can be
+         * found in the &quot;inquiry&quot; field. Otherwise the type is an API resource, the token
+         * for which can be found in the &quot;resource&quot; field.
          *
-         * <p>One of {@code inquiry}, or {@code resource}.
+         * <p>One of {@code inquiry}, {@code payment_method}, or {@code person}.
          */
         @SerializedName("type")
         String type;
