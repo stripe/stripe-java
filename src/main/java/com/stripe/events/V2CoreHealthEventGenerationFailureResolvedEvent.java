@@ -34,23 +34,31 @@ public final class V2CoreHealthEventGenerationFailureResolvedEvent extends Event
 
     public static final class Impact {
       /**
-       * The account id the event should have been generated for. Only present when the account is a
+       * The context the event should have been generated for. Only present when the account is a
        * connected account.
        */
-      @SerializedName("account")
-      String account;
+      @SerializedName("context")
+      String context;
       /** The type of event that Stripe failed to generate. */
       @SerializedName("event_type")
       String eventType;
-      /** Indicates if the event was for livemode or not. */
-      @SerializedName("livemode")
-      Boolean livemode;
-      /** The number of webhooks that Stripe failed to create and deliver. */
-      @SerializedName("missing_delivery_attempts")
-      Long missingDeliveryAttempts;
-      /** The related object id. */
-      @SerializedName("related_object_id")
-      String relatedObjectId;
+      /** The related object details. */
+      @SerializedName("related_object")
+      com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEvent.EventData.Impact
+              .RelatedObject
+          relatedObject;
+
+      public static final class RelatedObject {
+        /** The ID of the related object (e.g., &quot;pi_...&quot;). */
+        @SerializedName("id")
+        String id;
+        /** The type of the related object (e.g., &quot;payment_intent&quot;). */
+        @SerializedName("type")
+        String type;
+        /** The API URL for the related object (e.g., &quot;/v1/payment_intents/pi_...&quot;). */
+        @SerializedName("url")
+        String url;
+      }
     }
   }
 }

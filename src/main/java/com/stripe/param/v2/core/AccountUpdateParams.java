@@ -1897,8 +1897,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object ipAddress;
 
         /**
-         * The data source used to identify the customer's tax location - defaults to
-         * 'identity_address'. Will only be used for automatic tax calculation on the customer's
+         * The data source used to identify the customer's tax location - defaults to {@code
+         * identity_address}. Will only be used for automatic tax calculation on the customer's
          * Invoices and Subscriptions.
          */
         @SerializedName("location_source")
@@ -2007,8 +2007,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The data source used to identify the customer's tax location - defaults to
-           * 'identity_address'. Will only be used for automatic tax calculation on the customer's
+           * The data source used to identify the customer's tax location - defaults to {@code
+           * identity_address}. Will only be used for automatic tax calculation on the customer's
            * Invoices and Subscriptions.
            */
           public Builder setLocationSource(
@@ -3148,12 +3148,20 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Settings specific to Konbini payments on the account. */
+      @SerializedName("konbini_payments")
+      KonbiniPayments konbiniPayments;
+
       /**
        * The merchant category code for the merchant. MCCs are used to classify businesses based on
        * the goods or services they provide.
        */
       @SerializedName("mcc")
       Object mcc;
+
+      /** Settings for the default text that appears on statements for language variations. */
+      @SerializedName("script_statement_descriptor")
+      ScriptStatementDescriptor scriptStatementDescriptor;
 
       /** Statement descriptor. */
       @SerializedName("statement_descriptor")
@@ -3170,7 +3178,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           Capabilities capabilities,
           CardPayments cardPayments,
           Map<String, Object> extraParams,
+          KonbiniPayments konbiniPayments,
           Object mcc,
+          ScriptStatementDescriptor scriptStatementDescriptor,
           StatementDescriptor statementDescriptor,
           Support support) {
         this.applied = applied;
@@ -3179,7 +3189,9 @@ public class AccountUpdateParams extends ApiRequestParams {
         this.capabilities = capabilities;
         this.cardPayments = cardPayments;
         this.extraParams = extraParams;
+        this.konbiniPayments = konbiniPayments;
         this.mcc = mcc;
+        this.scriptStatementDescriptor = scriptStatementDescriptor;
         this.statementDescriptor = statementDescriptor;
         this.support = support;
       }
@@ -3201,7 +3213,11 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        private KonbiniPayments konbiniPayments;
+
         private Object mcc;
+
+        private ScriptStatementDescriptor scriptStatementDescriptor;
 
         private StatementDescriptor statementDescriptor;
 
@@ -3216,7 +3232,9 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.capabilities,
               this.cardPayments,
               this.extraParams,
+              this.konbiniPayments,
               this.mcc,
+              this.scriptStatementDescriptor,
               this.statementDescriptor,
               this.support);
         }
@@ -3288,6 +3306,13 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Settings specific to Konbini payments on the account. */
+        public Builder setKonbiniPayments(
+            AccountUpdateParams.Configuration.Merchant.KonbiniPayments konbiniPayments) {
+          this.konbiniPayments = konbiniPayments;
+          return this;
+        }
+
         /**
          * The merchant category code for the merchant. MCCs are used to classify businesses based
          * on the goods or services they provide.
@@ -3303,6 +3328,14 @@ public class AccountUpdateParams extends ApiRequestParams {
          */
         public Builder setMcc(EmptyParam mcc) {
           this.mcc = mcc;
+          return this;
+        }
+
+        /** Settings for the default text that appears on statements for language variations. */
+        public Builder setScriptStatementDescriptor(
+            AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor
+                scriptStatementDescriptor) {
+          this.scriptStatementDescriptor = scriptStatementDescriptor;
           return this;
         }
 
@@ -8129,6 +8162,698 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class KonbiniPayments {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Support for Konbini payments. */
+        @SerializedName("support")
+        Support support;
+
+        private KonbiniPayments(Map<String, Object> extraParams, Support support) {
+          this.extraParams = extraParams;
+          this.support = support;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Support support;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountUpdateParams.Configuration.Merchant.KonbiniPayments build() {
+            return new AccountUpdateParams.Configuration.Merchant.KonbiniPayments(
+                this.extraParams, this.support);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountUpdateParams.Configuration.Merchant.KonbiniPayments#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountUpdateParams.Configuration.Merchant.KonbiniPayments#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Support for Konbini payments. */
+          public Builder setSupport(
+              AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support support) {
+            this.support = support;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Support {
+          /** Support email address for Konbini payments. */
+          @SerializedName("email")
+          Object email;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Support hours for Konbini payments. */
+          @SerializedName("hours")
+          Hours hours;
+
+          /** Support phone number for Konbini payments. */
+          @SerializedName("phone")
+          Object phone;
+
+          private Support(
+              Object email, Map<String, Object> extraParams, Hours hours, Object phone) {
+            this.email = email;
+            this.extraParams = extraParams;
+            this.hours = hours;
+            this.phone = phone;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object email;
+
+            private Map<String, Object> extraParams;
+
+            private Hours hours;
+
+            private Object phone;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support build() {
+              return new AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support(
+                  this.email, this.extraParams, this.hours, this.phone);
+            }
+
+            /** Support email address for Konbini payments. */
+            public Builder setEmail(String email) {
+              this.email = email;
+              return this;
+            }
+
+            /** Support email address for Konbini payments. */
+            public Builder setEmail(EmptyParam email) {
+              this.email = email;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Support hours for Konbini payments. */
+            public Builder setHours(
+                AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support.Hours hours) {
+              this.hours = hours;
+              return this;
+            }
+
+            /** Support phone number for Konbini payments. */
+            public Builder setPhone(String phone) {
+              this.phone = phone;
+              return this;
+            }
+
+            /** Support phone number for Konbini payments. */
+            public Builder setPhone(EmptyParam phone) {
+              this.phone = phone;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Hours {
+            /** Support hours end time (JST time of day) for in {@code HH:MM} format. */
+            @SerializedName("end_time")
+            Object endTime;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Support hours start time (JST time of day) for in {@code HH:MM} format. */
+            @SerializedName("start_time")
+            Object startTime;
+
+            private Hours(Object endTime, Map<String, Object> extraParams, Object startTime) {
+              this.endTime = endTime;
+              this.extraParams = extraParams;
+              this.startTime = startTime;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object endTime;
+
+              private Map<String, Object> extraParams;
+
+              private Object startTime;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support.Hours
+                  build() {
+                return new AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support.Hours(
+                    this.endTime, this.extraParams, this.startTime);
+              }
+
+              /** Support hours end time (JST time of day) for in {@code HH:MM} format. */
+              public Builder setEndTime(String endTime) {
+                this.endTime = endTime;
+                return this;
+              }
+
+              /** Support hours end time (JST time of day) for in {@code HH:MM} format. */
+              public Builder setEndTime(EmptyParam endTime) {
+                this.endTime = endTime;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support.Hours#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Merchant.KonbiniPayments.Support.Hours#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Support hours start time (JST time of day) for in {@code HH:MM} format. */
+              public Builder setStartTime(String startTime) {
+                this.startTime = startTime;
+                return this;
+              }
+
+              /** Support hours start time (JST time of day) for in {@code HH:MM} format. */
+              public Builder setStartTime(EmptyParam startTime) {
+                this.startTime = startTime;
+                return this;
+              }
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ScriptStatementDescriptor {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The Kana variation of statement_descriptor used for charges in Japan. Japanese statement
+         * descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
+         */
+        @SerializedName("kana")
+        Kana kana;
+
+        /**
+         * The Kanji variation of statement_descriptor used for charges in Japan. Japanese statement
+         * descriptors have <a
+         * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+         * requirements</a>.
+         */
+        @SerializedName("kanji")
+        Kanji kanji;
+
+        private ScriptStatementDescriptor(Map<String, Object> extraParams, Kana kana, Kanji kanji) {
+          this.extraParams = extraParams;
+          this.kana = kana;
+          this.kanji = kanji;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Kana kana;
+
+          private Kanji kanji;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor build() {
+            return new AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor(
+                this.extraParams, this.kana, this.kanji);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The Kana variation of statement_descriptor used for charges in Japan. Japanese
+           * statement descriptors have <a
+           * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+           * requirements</a>.
+           */
+          public Builder setKana(
+              AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kana kana) {
+            this.kana = kana;
+            return this;
+          }
+
+          /**
+           * The Kanji variation of statement_descriptor used for charges in Japan. Japanese
+           * statement descriptors have <a
+           * href="https://docs.stripe.com/get-started/account/statement-descriptors#set-japanese-statement-descriptors">special
+           * requirements</a>.
+           */
+          public Builder setKanji(
+              AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kanji kanji) {
+            this.kanji = kanji;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Kana {
+          /**
+           * The default text that appears on statements for non-card charges outside of Japan. For
+           * card charges, if you don’t set a statement_descriptor_prefix, this text is also used as
+           * the statement descriptor prefix. In that case, if concatenating the statement
+           * descriptor suffix causes the combined statement descriptor to exceed 22 characters, we
+           * truncate the statement_descriptor text to limit the full descriptor to 22 characters.
+           * For more information about statement descriptors and their requirements, see the
+           * Merchant Configuration settings documentation.
+           */
+          @SerializedName("descriptor")
+          Object descriptor;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Default text that appears on statements for card charges outside of Japan, prefixing
+           * any dynamic statement_descriptor_suffix specified on the charge. To maximize space for
+           * the dynamic part of the descriptor, keep this text short. If you don’t specify this
+           * value, statement_descriptor is used as the prefix. For more information about statement
+           * descriptors and their requirements, see the Merchant Configuration settings
+           * documentation.
+           */
+          @SerializedName("prefix")
+          Object prefix;
+
+          private Kana(Object descriptor, Map<String, Object> extraParams, Object prefix) {
+            this.descriptor = descriptor;
+            this.extraParams = extraParams;
+            this.prefix = prefix;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object descriptor;
+
+            private Map<String, Object> extraParams;
+
+            private Object prefix;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kana
+                build() {
+              return new AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kana(
+                  this.descriptor, this.extraParams, this.prefix);
+            }
+
+            /**
+             * The default text that appears on statements for non-card charges outside of Japan.
+             * For card charges, if you don’t set a statement_descriptor_prefix, this text is also
+             * used as the statement descriptor prefix. In that case, if concatenating the statement
+             * descriptor suffix causes the combined statement descriptor to exceed 22 characters,
+             * we truncate the statement_descriptor text to limit the full descriptor to 22
+             * characters. For more information about statement descriptors and their requirements,
+             * see the Merchant Configuration settings documentation.
+             */
+            public Builder setDescriptor(String descriptor) {
+              this.descriptor = descriptor;
+              return this;
+            }
+
+            /**
+             * The default text that appears on statements for non-card charges outside of Japan.
+             * For card charges, if you don’t set a statement_descriptor_prefix, this text is also
+             * used as the statement descriptor prefix. In that case, if concatenating the statement
+             * descriptor suffix causes the combined statement descriptor to exceed 22 characters,
+             * we truncate the statement_descriptor text to limit the full descriptor to 22
+             * characters. For more information about statement descriptors and their requirements,
+             * see the Merchant Configuration settings documentation.
+             */
+            public Builder setDescriptor(EmptyParam descriptor) {
+              this.descriptor = descriptor;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kana#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kana#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Default text that appears on statements for card charges outside of Japan, prefixing
+             * any dynamic statement_descriptor_suffix specified on the charge. To maximize space
+             * for the dynamic part of the descriptor, keep this text short. If you don’t specify
+             * this value, statement_descriptor is used as the prefix. For more information about
+             * statement descriptors and their requirements, see the Merchant Configuration settings
+             * documentation.
+             */
+            public Builder setPrefix(String prefix) {
+              this.prefix = prefix;
+              return this;
+            }
+
+            /**
+             * Default text that appears on statements for card charges outside of Japan, prefixing
+             * any dynamic statement_descriptor_suffix specified on the charge. To maximize space
+             * for the dynamic part of the descriptor, keep this text short. If you don’t specify
+             * this value, statement_descriptor is used as the prefix. For more information about
+             * statement descriptors and their requirements, see the Merchant Configuration settings
+             * documentation.
+             */
+            public Builder setPrefix(EmptyParam prefix) {
+              this.prefix = prefix;
+              return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Kanji {
+          /**
+           * The default text that appears on statements for non-card charges outside of Japan. For
+           * card charges, if you don’t set a statement_descriptor_prefix, this text is also used as
+           * the statement descriptor prefix. In that case, if concatenating the statement
+           * descriptor suffix causes the combined statement descriptor to exceed 22 characters, we
+           * truncate the statement_descriptor text to limit the full descriptor to 22 characters.
+           * For more information about statement descriptors and their requirements, see the
+           * Merchant Configuration settings documentation.
+           */
+          @SerializedName("descriptor")
+          Object descriptor;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * Default text that appears on statements for card charges outside of Japan, prefixing
+           * any dynamic statement_descriptor_suffix specified on the charge. To maximize space for
+           * the dynamic part of the descriptor, keep this text short. If you don’t specify this
+           * value, statement_descriptor is used as the prefix. For more information about statement
+           * descriptors and their requirements, see the Merchant Configuration settings
+           * documentation.
+           */
+          @SerializedName("prefix")
+          Object prefix;
+
+          private Kanji(Object descriptor, Map<String, Object> extraParams, Object prefix) {
+            this.descriptor = descriptor;
+            this.extraParams = extraParams;
+            this.prefix = prefix;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Object descriptor;
+
+            private Map<String, Object> extraParams;
+
+            private Object prefix;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kanji
+                build() {
+              return new AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kanji(
+                  this.descriptor, this.extraParams, this.prefix);
+            }
+
+            /**
+             * The default text that appears on statements for non-card charges outside of Japan.
+             * For card charges, if you don’t set a statement_descriptor_prefix, this text is also
+             * used as the statement descriptor prefix. In that case, if concatenating the statement
+             * descriptor suffix causes the combined statement descriptor to exceed 22 characters,
+             * we truncate the statement_descriptor text to limit the full descriptor to 22
+             * characters. For more information about statement descriptors and their requirements,
+             * see the Merchant Configuration settings documentation.
+             */
+            public Builder setDescriptor(String descriptor) {
+              this.descriptor = descriptor;
+              return this;
+            }
+
+            /**
+             * The default text that appears on statements for non-card charges outside of Japan.
+             * For card charges, if you don’t set a statement_descriptor_prefix, this text is also
+             * used as the statement descriptor prefix. In that case, if concatenating the statement
+             * descriptor suffix causes the combined statement descriptor to exceed 22 characters,
+             * we truncate the statement_descriptor text to limit the full descriptor to 22
+             * characters. For more information about statement descriptors and their requirements,
+             * see the Merchant Configuration settings documentation.
+             */
+            public Builder setDescriptor(EmptyParam descriptor) {
+              this.descriptor = descriptor;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kanji#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor.Kanji#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Default text that appears on statements for card charges outside of Japan, prefixing
+             * any dynamic statement_descriptor_suffix specified on the charge. To maximize space
+             * for the dynamic part of the descriptor, keep this text short. If you don’t specify
+             * this value, statement_descriptor is used as the prefix. For more information about
+             * statement descriptors and their requirements, see the Merchant Configuration settings
+             * documentation.
+             */
+            public Builder setPrefix(String prefix) {
+              this.prefix = prefix;
+              return this;
+            }
+
+            /**
+             * Default text that appears on statements for card charges outside of Japan, prefixing
+             * any dynamic statement_descriptor_suffix specified on the charge. To maximize space
+             * for the dynamic part of the descriptor, keep this text short. If you don’t specify
+             * this value, statement_descriptor is used as the prefix. For more information about
+             * statement descriptors and their requirements, see the Merchant Configuration settings
+             * documentation.
+             */
+            public Builder setPrefix(EmptyParam prefix) {
+              this.prefix = prefix;
+              return this;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class StatementDescriptor {
         /**
          * The default text that appears on statements for non-card charges outside of Japan. For
@@ -10202,6 +10927,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @Getter
         @EqualsAndHashCode(callSuper = false)
         public static class HoldsCurrencies {
+          /** Can hold storage-type funds on Stripe in EUR. */
+          @SerializedName("eur")
+          Eur eur;
+
           /**
            * Map of extra parameters for custom features not available in this client library. The
            * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -10224,7 +10953,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("usdc")
           Usdc usdc;
 
-          private HoldsCurrencies(Map<String, Object> extraParams, Gbp gbp, Usd usd, Usdc usdc) {
+          private HoldsCurrencies(
+              Eur eur, Map<String, Object> extraParams, Gbp gbp, Usd usd, Usdc usdc) {
+            this.eur = eur;
             this.extraParams = extraParams;
             this.gbp = gbp;
             this.usd = usd;
@@ -10236,6 +10967,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
+            private Eur eur;
+
             private Map<String, Object> extraParams;
 
             private Gbp gbp;
@@ -10247,7 +10980,14 @@ public class AccountUpdateParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies build() {
               return new AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies(
-                  this.extraParams, this.gbp, this.usd, this.usdc);
+                  this.eur, this.extraParams, this.gbp, this.usd, this.usdc);
+            }
+
+            /** Can hold storage-type funds on Stripe in EUR. */
+            public Builder setEur(
+                AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Eur eur) {
+              this.eur = eur;
+              return this;
             }
 
             /**
@@ -10299,6 +11039,88 @@ public class AccountUpdateParams extends ApiRequestParams {
                 AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Usdc usdc) {
               this.usdc = usdc;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Eur {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Eur(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Eur
+                  build() {
+                return new AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies
+                    .Eur(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Eur#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Storer.Capabilities.HoldsCurrencies.Eur#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * To request a new Capability for an account, pass true. There can be a delay before
+               * the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
             }
           }
 

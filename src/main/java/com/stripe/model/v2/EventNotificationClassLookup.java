@@ -865,6 +865,12 @@ public final class EventNotificationClassLookup {
         "v2.money_management.transaction.updated",
         com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.payments.off_session_payment.attempt_failed",
+        com.stripe.events.V2PaymentsOffSessionPaymentAttemptFailedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.off_session_payment.attempt_started",
+        com.stripe.events.V2PaymentsOffSessionPaymentAttemptStartedEventNotification.class);
+    eventClassLookup.put(
         "v2.payments.off_session_payment.authorization_attempt_failed",
         com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEventNotification
             .class);
