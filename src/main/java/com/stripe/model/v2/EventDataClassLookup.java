@@ -157,6 +157,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.core.event_destination.ping", com.stripe.events.V2CoreEventDestinationPingEvent.class);
     eventClassLookup.put(
+        "v2.core.health.event_generation_failure.resolved",
+        com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEvent.class);
+    eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEvent.class);
     eventClassLookup.put(

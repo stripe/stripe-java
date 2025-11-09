@@ -88,6 +88,9 @@ public final class EventNotificationClassLookup {
         "v2.core.event_destination.ping",
         com.stripe.events.V2CoreEventDestinationPingEventNotification.class);
     eventClassLookup.put(
+        "v2.core.health.event_generation_failure.resolved",
+        com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification.class);
     eventClassLookup.put(
