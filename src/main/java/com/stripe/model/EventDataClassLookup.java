@@ -184,6 +184,7 @@ public final class EventDataClassLookup {
     classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
+    classLookup.put("terminal.onboarding_link", com.stripe.model.terminal.OnboardingLink.class);
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);
 
     classLookup.put("test_helpers.test_clock", com.stripe.model.testhelpers.TestClock.class);

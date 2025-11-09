@@ -2351,7 +2351,8 @@ public class ConfirmationToken extends ApiResource implements HasId {
            *
            * <p>One of {@code bank_account_closed}, {@code bank_account_frozen}, {@code
            * bank_account_invalid_details}, {@code bank_account_restricted}, {@code
-           * bank_account_unusable}, or {@code debit_not_authorized}.
+           * bank_account_unusable}, {@code debit_not_authorized}, or {@code
+           * tokenized_account_number_deactivated}.
            */
           @SerializedName("reason")
           String reason;

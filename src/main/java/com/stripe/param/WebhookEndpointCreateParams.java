@@ -864,6 +864,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("file.created")
     FILE__CREATED("file.created"),
 
+    @SerializedName("financial_connections.account.account_numbers_updated")
+    FINANCIAL_CONNECTIONS__ACCOUNT__ACCOUNT_NUMBERS_UPDATED(
+        "financial_connections.account.account_numbers_updated"),
+
     @SerializedName("financial_connections.account.created")
     FINANCIAL_CONNECTIONS__ACCOUNT__CREATED("financial_connections.account.created"),
 
@@ -887,6 +891,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("financial_connections.account.refreshed_transactions")
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_TRANSACTIONS(
         "financial_connections.account.refreshed_transactions"),
+
+    @SerializedName("financial_connections.account.upcoming_account_number_expiry")
+    FINANCIAL_CONNECTIONS__ACCOUNT__UPCOMING_ACCOUNT_NUMBER_EXPIRY(
+        "financial_connections.account.upcoming_account_number_expiry"),
 
     @SerializedName("identity.verification_session.canceled")
     IDENTITY__VERIFICATION_SESSION__CANCELED("identity.verification_session.canceled"),

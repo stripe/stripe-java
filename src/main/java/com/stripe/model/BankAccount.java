@@ -156,20 +156,24 @@ public class BankAccount extends ApiResource
 
   /**
    * For bank accounts, possible values are {@code new}, {@code validated}, {@code verified}, {@code
-   * verification_failed}, or {@code errored}. A bank account that hasn't had any activity or
-   * validation performed is {@code new}. If Stripe can determine that the bank account exists, its
-   * status will be {@code validated}. Note that there often isn’t enough information to know (e.g.,
-   * for smaller credit unions), and the validation is not always run. If customer bank account
-   * verification has succeeded, the bank account status will be {@code verified}. If the
-   * verification failed for any reason, such as microdeposit failure, the status will be {@code
-   * verification_failed}. If a payout sent to this bank account fails, we'll set the status to
-   * {@code errored} and will not continue to send <a
+   * verification_failed}, {@code tokenized_account_number_deactivated} or {@code errored}. A bank
+   * account that hasn't had any activity or validation performed is {@code new}. If Stripe can
+   * determine that the bank account exists, its status will be {@code validated}. Note that there
+   * often isn’t enough information to know (e.g., for smaller credit unions), and the validation is
+   * not always run. If customer bank account verification has succeeded, the bank account status
+   * will be {@code verified}. If the verification failed for any reason, such as microdeposit
+   * failure, the status will be {@code verification_failed}. If the status is {@code
+   * tokenized_account_number_deactivated}, the account utilizes a tokenized account number which
+   * has been deactivated due to expiration or revocation. This account will need to be reverified
+   * to continue using it for money movement. If a payout sent to this bank account fails, we'll set
+   * the status to {@code errored} and will not continue to send <a
    * href="https://stripe.com/docs/payouts#payout-schedule">scheduled payouts</a> until the bank
    * details are updated.
    *
-   * <p>For external accounts, possible values are {@code new}, {@code errored} and {@code
-   * verification_failed}. If a payout fails, the status is set to {@code errored} and scheduled
-   * payouts are stopped until account details are updated. In the US and India, if we can't <a
+   * <p>For external accounts, possible values are {@code new}, {@code errored}, {@code
+   * verification_failed}, and {@code tokenized_account_number_deactivated}. If a payout fails, the
+   * status is set to {@code errored} and scheduled payouts are stopped until account details are
+   * updated. In the US and India, if we can't <a
    * href="https://support.stripe.com/questions/bank-account-ownership-verification">verify the
    * owner of the bank account</a>, we'll set the status to {@code verification_failed}. Other
    * validations aren't run against external accounts because they're only used for payouts. This
