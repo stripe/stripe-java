@@ -116,24 +116,24 @@ public class Event extends ApiResource implements HasId {
    * {@code balance_settings.updated}, {@code billing.alert.triggered}, {@code
    * billing_portal.configuration.created}, {@code billing_portal.configuration.updated}, {@code
    * billing_portal.session.created}, {@code capability.updated}, {@code
-   * capital.financing_offer.accepted}, {@code capital.financing_offer.canceled}, {@code
-   * capital.financing_offer.created}, {@code capital.financing_offer.expired}, {@code
-   * capital.financing_offer.fully_repaid}, {@code capital.financing_offer.paid_out}, {@code
-   * capital.financing_offer.rejected}, {@code capital.financing_offer.replacement_created}, {@code
-   * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
-   * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
-   * charge.dispute.funds_reinstated}, {@code charge.dispute.funds_withdrawn}, {@code
-   * charge.dispute.updated}, {@code charge.expired}, {@code charge.failed}, {@code charge.pending},
-   * {@code charge.refund.updated}, {@code charge.refunded}, {@code charge.succeeded}, {@code
-   * charge.updated}, {@code checkout.session.async_payment_failed}, {@code
-   * checkout.session.async_payment_succeeded}, {@code checkout.session.completed}, {@code
-   * checkout.session.expired}, {@code climate.order.canceled}, {@code climate.order.created},
-   * {@code climate.order.delayed}, {@code climate.order.delivered}, {@code
-   * climate.order.product_substituted}, {@code climate.product.created}, {@code
-   * climate.product.pricing_updated}, {@code coupon.created}, {@code coupon.deleted}, {@code
-   * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
-   * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
-   * customer.discount.created}, {@code customer.discount.deleted}, {@code
+   * capital.financing_offer.accepted}, {@code capital.financing_offer.accepted_other_offer}, {@code
+   * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
+   * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
+   * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
+   * capital.financing_offer.replacement_created}, {@code capital.financing_transaction.created},
+   * {@code cash_balance.funds_available}, {@code charge.captured}, {@code charge.dispute.closed},
+   * {@code charge.dispute.created}, {@code charge.dispute.funds_reinstated}, {@code
+   * charge.dispute.funds_withdrawn}, {@code charge.dispute.updated}, {@code charge.expired}, {@code
+   * charge.failed}, {@code charge.pending}, {@code charge.refund.updated}, {@code charge.refunded},
+   * {@code charge.succeeded}, {@code charge.updated}, {@code
+   * checkout.session.async_payment_failed}, {@code checkout.session.async_payment_succeeded},
+   * {@code checkout.session.completed}, {@code checkout.session.expired}, {@code
+   * climate.order.canceled}, {@code climate.order.created}, {@code climate.order.delayed}, {@code
+   * climate.order.delivered}, {@code climate.order.product_substituted}, {@code
+   * climate.product.created}, {@code climate.product.pricing_updated}, {@code coupon.created},
+   * {@code coupon.deleted}, {@code coupon.updated}, {@code credit_note.created}, {@code
+   * credit_note.updated}, {@code credit_note.voided}, {@code customer.created}, {@code
+   * customer.deleted}, {@code customer.discount.created}, {@code customer.discount.deleted}, {@code
    * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
    * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
    * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
@@ -146,6 +146,7 @@ public class Event extends ApiResource implements HasId {
    * customer.tax_id.created}, {@code customer.tax_id.deleted}, {@code customer.tax_id.updated},
    * {@code customer.updated}, {@code customer_cash_balance_transaction.created}, {@code
    * entitlements.active_entitlement_summary.updated}, {@code file.created}, {@code
+   * financial_connections.account.account_numbers_updated}, {@code
    * financial_connections.account.created}, {@code financial_connections.account.deactivated},
    * {@code financial_connections.account.disconnected}, {@code
    * financial_connections.account.reactivated}, {@code
@@ -153,6 +154,7 @@ public class Event extends ApiResource implements HasId {
    * financial_connections.account.refreshed_inferred_balances}, {@code
    * financial_connections.account.refreshed_ownership}, {@code
    * financial_connections.account.refreshed_transactions}, {@code
+   * financial_connections.account.upcoming_account_number_expiry}, {@code
    * financial_connections.session.updated}, {@code fx_quote.expired}, {@code
    * identity.verification_session.canceled}, {@code identity.verification_session.created}, {@code
    * identity.verification_session.processing}, {@code identity.verification_session.redacted},

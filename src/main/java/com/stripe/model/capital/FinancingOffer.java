@@ -293,8 +293,7 @@ public class FinancingOffer extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class AcceptedTerms extends StripeObject {
     /**
-     * Amount of financing offered, in minor units. For example, $1,000 USD will be represented as
-     * 100000.
+     * Amount of financing offered, in minor units. For example, 1,000 USD is represented as 100000.
      */
     @SerializedName("advance_amount")
     Long advanceAmount;
@@ -303,7 +302,7 @@ public class FinancingOffer extends ApiResource implements HasId {
     @SerializedName("currency")
     String currency;
 
-    /** Fixed fee amount, in minor units. For example, $100 USD will be represented as 10000. */
+    /** Fixed fee amount, in minor units. For example, 100 USD is represented as 10000. */
     @SerializedName("fee_amount")
     Long feeAmount;
 
@@ -314,7 +313,7 @@ public class FinancingOffer extends ApiResource implements HasId {
     @SerializedName("previous_financing_fee_discount_amount")
     Long previousFinancingFeeDiscountAmount;
 
-    /** Per-transaction rate at which Stripe will withhold funds to repay the financing. */
+    /** Per-transaction rate at which Stripe withholds funds to repay the financing. */
     @SerializedName("withhold_rate")
     BigDecimal withholdRate;
   }
@@ -328,8 +327,7 @@ public class FinancingOffer extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class OfferedTerms extends StripeObject {
     /**
-     * Amount of financing offered, in minor units. For example, $1,000 USD will be represented as
-     * 100000.
+     * Amount of financing offered, in minor units. For example, 1,000 USD is represented as 100000.
      */
     @SerializedName("advance_amount")
     Long advanceAmount;
@@ -347,7 +345,7 @@ public class FinancingOffer extends ApiResource implements HasId {
     @SerializedName("currency")
     String currency;
 
-    /** Fixed fee amount, in minor units. For example, $100 USD will be represented as 10000. */
+    /** Fixed fee amount, in minor units. For example, 100 USD is represented as 10000. */
     @SerializedName("fee_amount")
     Long feeAmount;
 
@@ -360,7 +358,7 @@ public class FinancingOffer extends ApiResource implements HasId {
     @SerializedName("previous_financing_fee_discount_rate")
     BigDecimal previousFinancingFeeDiscountRate;
 
-    /** Per-transaction rate at which Stripe will withhold funds to repay the financing. */
+    /** Per-transaction rate at which Stripe withholds funds to repay the financing. */
     @SerializedName("withhold_rate")
     BigDecimal withholdRate;
   }
