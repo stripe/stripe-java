@@ -319,6 +319,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class FulfillmentDetails {
+    /** The customer's address. */
     @SerializedName("address")
     Address address;
 
@@ -373,6 +374,7 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
             this.address, this.email, this.extraParams, this.name, this.phone);
       }
 
+      /** The customer's address. */
       public Builder setAddress(RequestedSessionCreateParams.FulfillmentDetails.Address address) {
         this.address = address;
         return this;
