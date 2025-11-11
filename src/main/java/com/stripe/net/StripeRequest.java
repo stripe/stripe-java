@@ -71,7 +71,7 @@ public class StripeRequest {
       this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
       this.options = (options != null) ? options : RequestOptions.getDefault();
       this.method = method;
-      this.url = buildURL(method, url, params, apiMode);
+      this.url = buildURL(method, url, params);
       this.headers = buildHeaders(method, this.options, this.content, apiMode);
       this.apiMode = apiMode;
     } catch (IOException e) {
@@ -107,7 +107,7 @@ public class StripeRequest {
       this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
       this.options = options;
       this.method = method;
-      this.url = buildURL(method, url, params, apiMode);
+      this.url = buildURL(method, url, params);
       this.content = buildContent(method, params, apiMode);
       this.headers = buildHeaders(method, this.options, this.content, apiMode);
       this.apiMode = apiMode;
@@ -219,7 +219,7 @@ public class StripeRequest {
   }
 
   private static URL buildURL(
-      ApiResource.RequestMethod method, String spec, Map<String, Object> params, ApiMode apiMode)
+      ApiResource.RequestMethod method, String spec, Map<String, Object> params)
       throws IOException {
     StringBuilder sb = new StringBuilder();
 
@@ -229,8 +229,7 @@ public class StripeRequest {
     String specQueryString = specUrl.getQuery();
 
     if ((method != ApiResource.RequestMethod.POST) && (params != null)) {
-      String queryString =
-          FormEncoder.createQueryString(params, apiMode == ApiMode.V2 ? true : false);
+      String queryString = FormEncoder.createQueryString(params);
 
       if (queryString != null && !queryString.isEmpty()) {
         if (specQueryString != null && !specQueryString.isEmpty()) {

@@ -26,10 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
@@ -130,12 +128,10 @@ public class FormEncoderTest extends BaseStripeTest {
     org.junit.Assume.assumeTrue(!System.getProperty("java.version").startsWith("10."));
 
     @Data
-    @RequiredArgsConstructor
     @AllArgsConstructor
     class TestCase {
       private final Map<String, Object> data;
       private final String want;
-      @Nullable private Boolean arrayAsRepeated = false;
     }
 
     List<TestCase> testCases =
@@ -376,18 +372,16 @@ public class FormEncoderTest extends BaseStripeTest {
                         "array", new Object[] {new String[] {"foo", "bar"}, new int[] {1, 2, 3}}),
                     "array[0][0]=foo&array[0][1]=bar&array[1][0]=1&array[1][1]=2&array[1][2]=3"));
 
-            // Array (arrayAsRepeated)
-            add(new TestCase(Collections.singletonMap("array", new String[] {}), "", true));
+            // Array
+            add(new TestCase(Collections.singletonMap("array", new String[] {}), "array="));
             add(
                 new TestCase(
                     Collections.singletonMap("array", new String[] {"1", "2", "3"}),
-                    "array=1&array=2&array=3",
-                    true));
+                    "array[0]=1&array[1]=2&array[2]=3"));
             add(
                 new TestCase(
                     Collections.singletonMap("array", new Object[] {123, "foo"}),
-                    "array=123&array=foo",
-                    true));
+                    "array[0]=123&array[1]=foo"));
             // Collection
             add(
                 new TestCase(
@@ -429,9 +423,7 @@ public class FormEncoderTest extends BaseStripeTest {
         };
 
     for (TestCase testCase : testCases) {
-      assertEquals(
-          testCase.getWant(),
-          FormEncoder.createQueryString(testCase.getData(), testCase.getArrayAsRepeated()));
+      assertEquals(testCase.getWant(), FormEncoder.createQueryString(testCase.getData()));
     }
   }
 
@@ -481,7 +473,7 @@ public class FormEncoderTest extends BaseStripeTest {
         };
 
     for (TestCase testCase : testCases) {
-      assertEquals(testCase.getWant(), FormEncoder.flattenParams(testCase.getData(), false));
+      assertEquals(testCase.getWant(), FormEncoder.flattenParams(testCase.getData()));
     }
   }
 
