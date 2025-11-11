@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class OffSessionPaymentCaptureParams extends ApiRequestParams {
-  /** The amount to capture. */
+  /** <strong>Required.</strong> The amount to capture. */
   @SerializedName("amount_to_capture")
   Long amountToCapture;
 
@@ -104,7 +104,7 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
           this.transferData);
     }
 
-    /** The amount to capture. */
+    /** <strong>Required.</strong> The amount to capture. */
     public Builder setAmountToCapture(Long amountToCapture) {
       this.amountToCapture = amountToCapture;
       return this;
@@ -211,6 +211,13 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     Long amount;
 
     /**
+     * <strong>Required.</strong> The account (if any) that the payment is attributed to for tax
+     * reporting, and where funds from the payment are transferred to after payment success.
+     */
+    @SerializedName("destination")
+    String destination;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -219,8 +226,9 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(Long amount, Map<String, Object> extraParams) {
+    private TransferData(Long amount, String destination, Map<String, Object> extraParams) {
       this.amount = amount;
+      this.destination = destination;
       this.extraParams = extraParams;
     }
 
@@ -231,11 +239,14 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     public static class Builder {
       private Long amount;
 
+      private String destination;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public OffSessionPaymentCaptureParams.TransferData build() {
-        return new OffSessionPaymentCaptureParams.TransferData(this.amount, this.extraParams);
+        return new OffSessionPaymentCaptureParams.TransferData(
+            this.amount, this.destination, this.extraParams);
       }
 
       /**
@@ -248,6 +259,15 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The account (if any) that the payment is attributed to for tax
+       * reporting, and where funds from the payment are transferred to after payment success.
+       */
+      public Builder setDestination(String destination) {
+        this.destination = destination;
         return this;
       }
 
