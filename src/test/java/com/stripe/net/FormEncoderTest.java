@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hamcrest.CoreMatchers;
@@ -378,8 +377,7 @@ public class FormEncoderTest extends BaseStripeTest {
             add(
                 new TestCase(
                     Collections.singletonMap("array", new String[] {"1", "2", "3"}),
-                    "array[0]=1&array[1]=2&array[2]=3"
-                  ));
+                    "array[0]=1&array[1]=2&array[2]=3"));
             add(
                 new TestCase(
                     Collections.singletonMap("array", new Object[] {123, "foo"}),
@@ -425,9 +423,7 @@ public class FormEncoderTest extends BaseStripeTest {
         };
 
     for (TestCase testCase : testCases) {
-      assertEquals(
-          testCase.getWant(),
-          FormEncoder.createQueryString(testCase.getData()));
+      assertEquals(testCase.getWant(), FormEncoder.createQueryString(testCase.getData()));
     }
   }
 

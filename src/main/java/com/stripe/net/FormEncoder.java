@@ -121,8 +121,7 @@ public final class FormEncoder {
    * @param params The map of parameters.
    * @return The flattened list of parameters.
    */
-  public static List<KeyValuePair<String, Object>> flattenParams(
-      Map<String, Object> params) {
+  public static List<KeyValuePair<String, Object>> flattenParams(Map<String, Object> params) {
     return flattenParamsValue(params, null);
   }
 
