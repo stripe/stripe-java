@@ -249,7 +249,8 @@ public final class FormEncoder {
 
     int index = 0;
     for (Object value : collection) {
-      String newPrefix = arraysAsRepeated ? keyPrefix : String.format("%s[%d]", keyPrefix, index);
+      // Always use indexed format for arrays
+      String newPrefix = String.format("%s[%d]", keyPrefix, index);
       flatParams.addAll(flattenParamsValue(value, newPrefix, arraysAsRepeated));
       index += 1;
     }

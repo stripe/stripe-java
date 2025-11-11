@@ -376,17 +376,17 @@ public class FormEncoderTest extends BaseStripeTest {
                         "array", new Object[] {new String[] {"foo", "bar"}, new int[] {1, 2, 3}}),
                     "array[0][0]=foo&array[0][1]=bar&array[1][0]=1&array[1][1]=2&array[1][2]=3"));
 
-            // Array (arrayAsRepeated)
+            // Array (now always uses indexed format)
             add(new TestCase(Collections.singletonMap("array", new String[] {}), "", true));
             add(
                 new TestCase(
                     Collections.singletonMap("array", new String[] {"1", "2", "3"}),
-                    "array=1&array=2&array=3",
+                    "array[0]=1&array[1]=2&array[2]=3",
                     true));
             add(
                 new TestCase(
                     Collections.singletonMap("array", new Object[] {123, "foo"}),
-                    "array=123&array=foo",
+                    "array[0]=123&array[1]=foo",
                     true));
             // Collection
             add(
