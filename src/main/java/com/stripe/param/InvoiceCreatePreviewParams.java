@@ -3519,6 +3519,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_mode")
     BillingMode billingMode;
 
+    /** Sets the billing schedules for the subscription schedule. */
+    @SerializedName("billing_schedules")
+    List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules;
+
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
      * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
@@ -3560,6 +3564,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment> amendments,
         BillingBehavior billingBehavior,
         BillingMode billingMode,
+        List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules,
         EndBehavior endBehavior,
         Map<String, Object> extraParams,
         List<InvoiceCreatePreviewParams.ScheduleDetails.Phase> phases,
@@ -3568,6 +3573,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       this.amendments = amendments;
       this.billingBehavior = billingBehavior;
       this.billingMode = billingMode;
+      this.billingSchedules = billingSchedules;
       this.endBehavior = endBehavior;
       this.extraParams = extraParams;
       this.phases = phases;
@@ -3586,6 +3592,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private BillingMode billingMode;
 
+      private List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules;
+
       private EndBehavior endBehavior;
 
       private Map<String, Object> extraParams;
@@ -3602,6 +3610,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.amendments,
             this.billingBehavior,
             this.billingMode,
+            this.billingSchedules,
             this.endBehavior,
             this.extraParams,
             this.phases,
@@ -3653,6 +3662,35 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public Builder setBillingMode(
           InvoiceCreatePreviewParams.ScheduleDetails.BillingMode billingMode) {
         this.billingMode = billingMode;
+        return this;
+      }
+
+      /**
+       * Add an element to `billingSchedules` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceCreatePreviewParams.ScheduleDetails#billingSchedules} for the field documentation.
+       */
+      public Builder addBillingSchedule(
+          InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule element) {
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
+        }
+        this.billingSchedules.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `billingSchedules` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link InvoiceCreatePreviewParams.ScheduleDetails#billingSchedules} for the field
+       * documentation.
+       */
+      public Builder addAllBillingSchedule(
+          List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> elements) {
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
+        }
+        this.billingSchedules.addAll(elements);
         return this;
       }
 
@@ -8059,6 +8097,504 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         Type(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingSchedule {
+      /** Configure billing schedule differently for individual subscription items. */
+      @SerializedName("applies_to")
+      List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo> appliesTo;
+
+      /** The end date for the billing schedule. */
+      @SerializedName("bill_until")
+      BillUntil billUntil;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Specify a key for the billing schedule. Must be unique to this field, alphanumeric, and up
+       * to 200 characters. If not provided, a unique key will be generated.
+       */
+      @SerializedName("key")
+      String key;
+
+      private BillingSchedule(
+          List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo> appliesTo,
+          BillUntil billUntil,
+          Map<String, Object> extraParams,
+          String key) {
+        this.appliesTo = appliesTo;
+        this.billUntil = billUntil;
+        this.extraParams = extraParams;
+        this.key = key;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo>
+            appliesTo;
+
+        private BillUntil billUntil;
+
+        private Map<String, Object> extraParams;
+
+        private String key;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule build() {
+          return new InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule(
+              this.appliesTo, this.billUntil, this.extraParams, this.key);
+        }
+
+        /**
+         * Add an element to `appliesTo` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule#appliesTo} for the field
+         * documentation.
+         */
+        public Builder addAppliesTo(
+            InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo element) {
+          if (this.appliesTo == null) {
+            this.appliesTo = new ArrayList<>();
+          }
+          this.appliesTo.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `appliesTo` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule#appliesTo} for the field
+         * documentation.
+         */
+        public Builder addAllAppliesTo(
+            List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo> elements) {
+          if (this.appliesTo == null) {
+            this.appliesTo = new ArrayList<>();
+          }
+          this.appliesTo.addAll(elements);
+          return this;
+        }
+
+        /** The end date for the billing schedule. */
+        public Builder setBillUntil(
+            InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil billUntil) {
+          this.billUntil = billUntil;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Specify a key for the billing schedule. Must be unique to this field, alphanumeric, and
+         * up to 200 characters. If not provided, a unique key will be generated.
+         */
+        public Builder setKey(String key) {
+          this.key = key;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AppliesTo {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The ID of the price object. */
+        @SerializedName("price")
+        String price;
+
+        /**
+         * <strong>Required.</strong> Controls which subscription items the billing schedule applies
+         * to.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private AppliesTo(Map<String, Object> extraParams, String price, Type type) {
+          this.extraParams = extraParams;
+          this.price = price;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String price;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo build() {
+            return new InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo(
+                this.extraParams, this.price, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The ID of the price object. */
+          public Builder setPrice(String price) {
+            this.price = price;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Controls which subscription items the billing schedule
+           * applies to.
+           */
+          public Builder setType(
+              InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.AppliesTo.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("price")
+          PRICE("price");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillUntil {
+        /** Specifies the billing period. */
+        @SerializedName("duration")
+        Duration duration;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The end date of the billing schedule. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * <strong>Required.</strong> Describes how the billing schedule will determine the end
+         * date. Either {@code duration} or {@code timestamp}.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private BillUntil(
+            Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
+          this.duration = duration;
+          this.extraParams = extraParams;
+          this.timestamp = timestamp;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Duration duration;
+
+          private Map<String, Object> extraParams;
+
+          private Long timestamp;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil build() {
+            return new InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil(
+                this.duration, this.extraParams, this.timestamp, this.type);
+          }
+
+          /** Specifies the billing period. */
+          public Builder setDuration(
+              InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil.Duration
+                  duration) {
+            this.duration = duration;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The end date of the billing schedule. */
+          public Builder setTimestamp(Long timestamp) {
+            this.timestamp = timestamp;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Describes how the billing schedule will determine the end
+           * date. Either {@code duration} or {@code timestamp}.
+           */
+          public Builder setType(
+              InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Duration {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> Specifies billing duration. Either {@code day}, {@code
+           * week}, {@code month} or {@code year}.
+           */
+          @SerializedName("interval")
+          Interval interval;
+
+          /** The multiplier applied to the interval. */
+          @SerializedName("interval_count")
+          Long intervalCount;
+
+          private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+            this.extraParams = extraParams;
+            this.interval = interval;
+            this.intervalCount = intervalCount;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Interval interval;
+
+            private Long intervalCount;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil.Duration
+                build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil
+                  .Duration(this.extraParams, this.interval, this.intervalCount);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil.Duration#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil.Duration#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> Specifies billing duration. Either {@code day}, {@code
+             * week}, {@code month} or {@code year}.
+             */
+            public Builder setInterval(
+                InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule.BillUntil.Duration
+                        .Interval
+                    interval) {
+              this.interval = interval;
+              return this;
+            }
+
+            /** The multiplier applied to the interval. */
+            public Builder setIntervalCount(Long intervalCount) {
+              this.intervalCount = intervalCount;
+              return this;
+            }
+          }
+
+          public enum Interval implements ApiRequestParams.EnumParam {
+            @SerializedName("day")
+            DAY("day"),
+
+            @SerializedName("month")
+            MONTH("month"),
+
+            @SerializedName("week")
+            WEEK("week"),
+
+            @SerializedName("year")
+            YEAR("year");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Interval(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("amendment_end")
+          AMENDMENT_END("amendment_end"),
+
+          @SerializedName("duration")
+          DURATION("duration"),
+
+          @SerializedName("line_ends_at")
+          LINE_ENDS_AT("line_ends_at"),
+
+          @SerializedName("schedule_end")
+          SCHEDULE_END("schedule_end"),
+
+          @SerializedName("timestamp")
+          TIMESTAMP("timestamp"),
+
+          @SerializedName("upcoming_invoice")
+          UPCOMING_INVOICE("upcoming_invoice");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
     }
