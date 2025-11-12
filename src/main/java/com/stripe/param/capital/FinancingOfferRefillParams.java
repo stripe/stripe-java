@@ -14,7 +14,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class FinancingOfferRefillParams extends ApiRequestParams {
-  /** <strong>Required.</strong> */
+  /**
+   * <strong>Required.</strong> Amount of financing offered, in minor units. For example, 1,000 USD
+   * is represented as 100000.
+   */
   @SerializedName("advance_amount")
   Long advanceAmount;
 
@@ -31,18 +34,25 @@ public class FinancingOfferRefillParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** <strong>Required.</strong> */
+  /**
+   * <strong>Required.</strong> Fixed fee amount, in minor units. For example, 100 USD is
+   * represented as 10000.
+   */
   @SerializedName("fee_amount")
   Long feeAmount;
 
-  /** <strong>Required.</strong> */
+  /** <strong>Required.</strong> The type of financing offer */
   @SerializedName("financing_type")
   FinancingType financingType;
 
+  /** The status of the financing offer. */
   @SerializedName("status")
   Status status;
 
-  /** <strong>Required.</strong> */
+  /**
+   * <strong>Required.</strong> Per-transaction rate at which Stripe withholds funds to repay the
+   * financing.
+   */
   @SerializedName("withhold_rate")
   BigDecimal withholdRate;
 
@@ -94,7 +104,10 @@ public class FinancingOfferRefillParams extends ApiRequestParams {
           this.withholdRate);
     }
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> Amount of financing offered, in minor units. For example, 1,000
+     * USD is represented as 100000.
+     */
     public Builder setAdvanceAmount(Long advanceAmount) {
       this.advanceAmount = advanceAmount;
       return this;
@@ -152,24 +165,31 @@ public class FinancingOfferRefillParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> Fixed fee amount, in minor units. For example, 100 USD is
+     * represented as 10000.
+     */
     public Builder setFeeAmount(Long feeAmount) {
       this.feeAmount = feeAmount;
       return this;
     }
 
-    /** <strong>Required.</strong> */
+    /** <strong>Required.</strong> The type of financing offer */
     public Builder setFinancingType(FinancingOfferRefillParams.FinancingType financingType) {
       this.financingType = financingType;
       return this;
     }
 
+    /** The status of the financing offer. */
     public Builder setStatus(FinancingOfferRefillParams.Status status) {
       this.status = status;
       return this;
     }
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> Per-transaction rate at which Stripe withholds funds to repay the
+     * financing.
+     */
     public Builder setWithholdRate(BigDecimal withholdRate) {
       this.withholdRate = withholdRate;
       return this;

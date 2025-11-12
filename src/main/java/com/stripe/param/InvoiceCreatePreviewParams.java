@@ -14614,11 +14614,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("amendment_end")
+          AMENDMENT_END("amendment_end"),
+
           @SerializedName("duration")
           DURATION("duration"),
 
+          @SerializedName("line_ends_at")
+          LINE_ENDS_AT("line_ends_at"),
+
+          @SerializedName("schedule_end")
+          SCHEDULE_END("schedule_end"),
+
           @SerializedName("timestamp")
-          TIMESTAMP("timestamp");
+          TIMESTAMP("timestamp"),
+
+          @SerializedName("upcoming_invoice")
+          UPCOMING_INVOICE("upcoming_invoice");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

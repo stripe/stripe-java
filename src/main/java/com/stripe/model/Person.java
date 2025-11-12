@@ -214,6 +214,12 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("requirements")
   Requirements requirements;
 
+  @SerializedName("self_reported_income")
+  SelfReportedIncome selfReportedIncome;
+
+  @SerializedName("self_reported_monthly_housing_payment")
+  SelfReportedMonthlyHousingPayment selfReportedMonthlyHousingPayment;
+
   /**
    * Whether the last four digits of the person's Social Security number have been provided (U.S.
    * only).
@@ -837,6 +843,48 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   }
 
   /**
+   * For more details about SelfReportedIncome, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SelfReportedIncome extends StripeObject {
+    /** Amount in the minor currency unit (e.g., cents for USD). */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+  }
+
+  /**
+   * For more details about SelfReportedMonthlyHousingPayment, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SelfReportedMonthlyHousingPayment extends StripeObject {
+    /** Amount in the minor currency unit (e.g., cents for USD). */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+  }
+
+  /**
    * For more details about UsCfpbData, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -1116,6 +1164,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     trySetResponseGetter(registeredAddress, responseGetter);
     trySetResponseGetter(relationship, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
+    trySetResponseGetter(selfReportedIncome, responseGetter);
+    trySetResponseGetter(selfReportedMonthlyHousingPayment, responseGetter);
     trySetResponseGetter(usCfpbData, responseGetter);
     trySetResponseGetter(verification, responseGetter);
   }

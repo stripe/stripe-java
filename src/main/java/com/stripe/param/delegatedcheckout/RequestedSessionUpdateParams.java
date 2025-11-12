@@ -265,6 +265,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class FulfillmentDetails {
+    /** The customer's address. */
     @SerializedName("address")
     Address address;
 
@@ -336,6 +337,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
             this.selectedFulfillmentOption);
       }
 
+      /** The customer's address. */
       public Builder setAddress(RequestedSessionUpdateParams.FulfillmentDetails.Address address) {
         this.address = address;
         return this;

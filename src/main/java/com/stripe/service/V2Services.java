@@ -29,10 +29,6 @@ public final class V2Services extends ApiService {
     return new com.stripe.service.v2.ReportingService(this.getResponseGetter());
   }
 
-  public com.stripe.service.v2.TaxService tax() {
-    return new com.stripe.service.v2.TaxService(this.getResponseGetter());
-  }
-
   public com.stripe.service.v2.TestHelperService testHelpers() {
     return new com.stripe.service.v2.TestHelperService(this.getResponseGetter());
   }

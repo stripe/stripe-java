@@ -202,8 +202,6 @@ public final class EventDataClassLookup {
     classLookup.put("v2.reporting.report", com.stripe.model.v2.reporting.Report.class);
     classLookup.put("v2.reporting.report_run", com.stripe.model.v2.reporting.ReportRun.class);
 
-    classLookup.put("v2.tax.automatic_rule", com.stripe.model.v2.tax.AutomaticRule.class);
-
     eventClassLookup.put("v1.account.updated", com.stripe.events.V1AccountUpdatedEvent.class);
     eventClassLookup.put(
         "v1.application_fee.created", com.stripe.events.V1ApplicationFeeCreatedEvent.class);
