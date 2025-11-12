@@ -4217,6 +4217,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("buut")
         BUUT("buut"),
 
+        @SerializedName("finom")
+        FINOM("finom"),
+
         @SerializedName("handelsbanken")
         HANDELSBANKEN("handelsbanken"),
 

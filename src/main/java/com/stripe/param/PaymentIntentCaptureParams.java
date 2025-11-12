@@ -58,6 +58,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   @SerializedName("final_capture")
   Boolean finalCapture;
 
+  /** Automations to be run during the PaymentIntent lifecycle. */
+  @SerializedName("hooks")
+  Hooks hooks;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -109,6 +113,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Boolean finalCapture,
+      Hooks hooks,
       Object metadata,
       Object paymentDetails,
       String statementDescriptor,
@@ -120,6 +125,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.finalCapture = finalCapture;
+    this.hooks = hooks;
     this.metadata = metadata;
     this.paymentDetails = paymentDetails;
     this.statementDescriptor = statementDescriptor;
@@ -144,6 +150,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     private Boolean finalCapture;
 
+    private Hooks hooks;
+
     private Object metadata;
 
     private Object paymentDetails;
@@ -163,6 +171,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.finalCapture,
+          this.hooks,
           this.metadata,
           this.paymentDetails,
           this.statementDescriptor,
@@ -258,6 +267,12 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
      */
     public Builder setFinalCapture(Boolean finalCapture) {
       this.finalCapture = finalCapture;
+      return this;
+    }
+
+    /** Automations to be run during the PaymentIntent lifecycle. */
+    public Builder setHooks(PaymentIntentCaptureParams.Hooks hooks) {
+      this.hooks = hooks;
       return this;
     }
 
@@ -1679,6 +1694,234 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         public Builder setTotalTaxAmount(Long totalTaxAmount) {
           this.totalTaxAmount = totalTaxAmount;
           return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Hooks {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Arguments passed in automations. */
+    @SerializedName("inputs")
+    Inputs inputs;
+
+    private Hooks(Map<String, Object> extraParams, Inputs inputs) {
+      this.extraParams = extraParams;
+      this.inputs = inputs;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Inputs inputs;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentIntentCaptureParams.Hooks build() {
+        return new PaymentIntentCaptureParams.Hooks(this.extraParams, this.inputs);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentCaptureParams.Hooks#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentCaptureParams.Hooks#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Arguments passed in automations. */
+      public Builder setInputs(PaymentIntentCaptureParams.Hooks.Inputs inputs) {
+        this.inputs = inputs;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Inputs {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Tax arguments for automations. */
+      @SerializedName("tax")
+      Tax tax;
+
+      private Inputs(Map<String, Object> extraParams, Tax tax) {
+        this.extraParams = extraParams;
+        this.tax = tax;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Tax tax;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCaptureParams.Hooks.Inputs build() {
+          return new PaymentIntentCaptureParams.Hooks.Inputs(this.extraParams, this.tax);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCaptureParams.Hooks.Inputs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCaptureParams.Hooks.Inputs#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Tax arguments for automations. */
+        public Builder setTax(PaymentIntentCaptureParams.Hooks.Inputs.Tax tax) {
+          this.tax = tax;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax {
+        /**
+         * <strong>Required.</strong> The <a
+         * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+         */
+        @SerializedName("calculation")
+        Object calculation;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Tax(Object calculation, Map<String, Object> extraParams) {
+          this.calculation = calculation;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object calculation;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentCaptureParams.Hooks.Inputs.Tax build() {
+            return new PaymentIntentCaptureParams.Hooks.Inputs.Tax(
+                this.calculation, this.extraParams);
+          }
+
+          /**
+           * <strong>Required.</strong> The <a
+           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           */
+          public Builder setCalculation(String calculation) {
+            this.calculation = calculation;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The <a
+           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           */
+          public Builder setCalculation(EmptyParam calculation) {
+            this.calculation = calculation;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentIntentCaptureParams.Hooks.Inputs.Tax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link PaymentIntentCaptureParams.Hooks.Inputs.Tax#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
     }
