@@ -2165,9 +2165,9 @@ public class PaymentRecord extends ApiResource implements HasId {
     public static class Ideal extends StripeObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * buut}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code n26},
-       * {@code nn}, {@code rabobank}, {@code regiobank}, {@code revolut}, {@code sns_bank}, {@code
-       * triodos_bank}, {@code van_lanschot}, or {@code yoursafe}.
+       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code moneyou},
+       * {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code revolut}, {@code
+       * sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -2176,9 +2176,9 @@ public class PaymentRecord extends ApiResource implements HasId {
        * The Bank Identifier Code of the customer's bank.
        *
        * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
-       * BUUTNL2A}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code
-       * MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code RBRBNL21}, {@code
-       * REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
+       * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
+       * KNABNL2H}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code
+       * RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;

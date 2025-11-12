@@ -17119,6 +17119,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("buut")
         BUUT("buut"),
 
+        @SerializedName("finom")
+        FINOM("finom"),
+
         @SerializedName("handelsbanken")
         HANDELSBANKEN("handelsbanken"),
 
