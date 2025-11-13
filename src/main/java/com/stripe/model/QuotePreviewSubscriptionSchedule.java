@@ -48,6 +48,10 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   @SerializedName("billing_mode")
   BillingMode billingMode;
 
+  /** Billing schedules for this subscription schedule. */
+  @SerializedName("billing_schedules")
+  List<QuotePreviewSubscriptionSchedule.BillingSchedule> billingSchedules;
+
   /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
    */
@@ -104,6 +108,12 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
   /** Details of the most recent price migration that failed for the subscription schedule. */
   @SerializedName("last_price_migration_error")
   LastPriceMigrationError lastPriceMigrationError;
+
+  /** The most recent invoice this subscription schedule has generated. */
+  @SerializedName("latest_invoice")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Invoice> latestInvoice;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -204,6 +214,24 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get ID of expandable {@code latestInvoice} object. */
+  public String getLatestInvoice() {
+    return (this.latestInvoice != null) ? this.latestInvoice.getId() : null;
+  }
+
+  public void setLatestInvoice(String id) {
+    this.latestInvoice = ApiResource.setExpandableFieldId(id, this.latestInvoice);
+  }
+
+  /** Get expanded {@code latestInvoice}. */
+  public Invoice getLatestInvoiceObject() {
+    return (this.latestInvoice != null) ? this.latestInvoice.getExpanded() : null;
+  }
+
+  public void setLatestInvoiceObject(Invoice expandableObject) {
+    this.latestInvoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get ID of expandable {@code subscription} object. */
@@ -354,6 +382,226 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     }
   }
 
+  /** Sets the billing schedule for the subscription. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingSchedule extends StripeObject {
+    /** Specifies which subscription items the billing schedule applies to. */
+    @SerializedName("applies_to")
+    List<QuotePreviewSubscriptionSchedule.BillingSchedule.AppliesTo> appliesTo;
+
+    /** Specifies the start of the billing period. */
+    @SerializedName("bill_from")
+    BillFrom billFrom;
+
+    /** Specifies the billing period. */
+    @SerializedName("bill_until")
+    BillUntil billUntil;
+
+    /** Unique identifier for the billing schedule. */
+    @SerializedName("key")
+    String key;
+
+    /** Represents the entities that the billing schedule applies to. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AppliesTo extends StripeObject {
+      /** The billing schedule will apply to the subscription item with the given price ID. */
+      @SerializedName("price")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Price> price;
+
+      /**
+       * Controls which subscription items the billing schedule applies to.
+       *
+       * <p>Equal to {@code price}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Get ID of expandable {@code price} object. */
+      public String getPrice() {
+        return (this.price != null) ? this.price.getId() : null;
+      }
+
+      public void setPrice(String id) {
+        this.price = ApiResource.setExpandableFieldId(id, this.price);
+      }
+
+      /** Get expanded {@code price}. */
+      public Price getPriceObject() {
+        return (this.price != null) ? this.price.getExpanded() : null;
+      }
+
+      public void setPriceObject(Price expandableObject) {
+        this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
+      }
+    }
+
+    /** Specifies the start of the billing period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillFrom extends StripeObject {
+      /** Use an index to specify the position of an amendment to start prebilling with. */
+      @SerializedName("amendment_start")
+      AmendmentStart amendmentStart;
+
+      /** The time the billing schedule applies from. */
+      @SerializedName("computed_timestamp")
+      Long computedTimestamp;
+
+      /** Lets you bill the period starting from a particular Quote line. */
+      @SerializedName("line_starts_at")
+      LineStartsAt lineStartsAt;
+
+      /** Timestamp is calculated from the request time. */
+      @SerializedName("relative")
+      Relative relative;
+
+      /**
+       * Use a precise Unix timestamp for prebilling to start. Must be earlier than {@code
+       * bill_until}.
+       */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * Describes how the billing schedule determines the start date. Possible values are {@code
+       * timestamp}, {@code relative}, {@code amendment_start}, {@code now}, {@code
+       * quote_acceptance_date}, {@code line_starts_at}, or {@code pause_collection_start}.
+       *
+       * <p>One of {@code amendment_start}, {@code line_starts_at}, {@code now}, {@code
+       * pause_collection_start}, {@code quote_acceptance_date}, {@code relative}, or {@code
+       * timestamp}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Use an index to specify the position of an amendment to start prebilling with. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AmendmentStart extends StripeObject {
+        /** Use an index to specify the position of an amendment to start prebilling with. */
+        @SerializedName("index")
+        Long index;
+      }
+
+      /** The timestamp the given line starts at. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LineStartsAt extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+      }
+
+      /** Timestamp is calculated from the request time. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Relative extends StripeObject {
+        /**
+         * Specifies billing duration. Possible values are {@code day}, {@code week}, {@code month},
+         * or {@code year}.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /** The multiplier applied to the interval. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+      }
+    }
+
+    /** Specifies the billing period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillUntil extends StripeObject {
+      /** Use an index to specify the position of an amendment to end prebilling with. */
+      @SerializedName("amendment_end")
+      AmendmentEnd amendmentEnd;
+
+      /** The timestamp the billing schedule will apply until. */
+      @SerializedName("computed_timestamp")
+      Long computedTimestamp;
+
+      /** Specifies the billing period. */
+      @SerializedName("duration")
+      Duration duration;
+
+      /** Lets you bill the period ending at a particular Quote line. */
+      @SerializedName("line_ends_at")
+      LineEndsAt lineEndsAt;
+
+      /** If specified, the billing schedule will apply until the specified timestamp. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * Describes how the billing schedule will determine the end date. Either {@code duration} or
+       * {@code timestamp}.
+       *
+       * <p>One of {@code amendment_end}, {@code duration}, {@code line_ends_at}, {@code
+       * schedule_end}, {@code timestamp}, or {@code upcoming_invoice}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** Use an index to specify the position of an amendment to end prebilling with. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AmendmentEnd extends StripeObject {
+        /** Use an index to specify the position of an amendment to end prebilling with. */
+        @SerializedName("index")
+        Long index;
+      }
+
+      /**
+       * Configures the {@code bill_until} date based on the provided {@code interval} and {@code
+       * interval_count}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration extends StripeObject {
+        /**
+         * Specifies billing duration. Either {@code day}, {@code week}, {@code month} or {@code
+         * year}.
+         *
+         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
+         */
+        @SerializedName("interval")
+        String interval;
+
+        /** The multiplier applied to the interval. */
+        @SerializedName("interval_count")
+        Long intervalCount;
+      }
+
+      /** The timestamp the given line ends at. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LineEndsAt extends StripeObject implements HasId {
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+      }
+    }
+  }
+
   /**
    * For more details about CurrentPhase, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
@@ -448,6 +696,19 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> onBehalfOf;
+
+    /**
+     * Configures how the subscription schedule handles billing for phase transitions. Possible
+     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
+     * bills based on the current state of the subscription, ignoring changes scheduled in future
+     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
+     * the current billing cycle, including pricing changes and service period adjustments that will
+     * occur before the next invoice.
+     *
+     * <p>One of {@code billing_period_start}, or {@code phase_start}.
+     */
+    @SerializedName("phase_effective_at")
+    String phaseEffectiveAt;
 
     /**
      * The account (if any) the associated subscription's payments will be attributed to for tax
@@ -1922,6 +2183,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);
     trySetResponseGetter(lastPriceMigrationError, responseGetter);
+    trySetResponseGetter(latestInvoice, responseGetter);
     trySetResponseGetter(prebilling, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);

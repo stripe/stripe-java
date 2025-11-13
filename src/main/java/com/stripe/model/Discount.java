@@ -85,6 +85,13 @@ public class Discount extends StripeObject implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PromotionCode> promotionCode;
 
+  /**
+   * The subscription schedule that this coupon is applied to, if it is applied to a particular
+   * subscription schedule.
+   */
+  @SerializedName("schedule")
+  String schedule;
+
   @SerializedName("source")
   Source source;
 
