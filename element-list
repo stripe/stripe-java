@@ -33,7 +33,6 @@ com.stripe.model.v2.core.vault
 com.stripe.model.v2.moneymanagement
 com.stripe.model.v2.payments
 com.stripe.model.v2.reporting
-com.stripe.model.v2.tax
 com.stripe.net
 com.stripe.param
 com.stripe.param.apps
@@ -71,7 +70,6 @@ com.stripe.param.v2.core.vault
 com.stripe.param.v2.moneymanagement
 com.stripe.param.v2.payments
 com.stripe.param.v2.reporting
-com.stripe.param.v2.tax
 com.stripe.param.v2.testhelpers
 com.stripe.service
 com.stripe.service.apps
@@ -114,7 +112,6 @@ com.stripe.service.v2.core.vault
 com.stripe.service.v2.moneymanagement
 com.stripe.service.v2.payments
 com.stripe.service.v2.reporting
-com.stripe.service.v2.tax
 com.stripe.service.v2.testhelpers
 com.stripe.util
 com.stripe.v2
