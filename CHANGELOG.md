@@ -1,5 +1,26 @@
 # Changelog
 
+## 30.3.0-alpha.2 - 2025-11-13
+This release changes the pinned API version to `2025-10-29.preview`.
+
+* [#2111](https://github.com/stripe/stripe-java/pull/2111) Update generated code for private-preview
+  * Add support for new resource `issuing.Program`
+  * Add support for `create`, `list`, `retrieve`, and `update` methods on resource `issuing.Program`
+  * Add support for `schedule` on `Discount`
+  * Add support for `applicableFees` on `delegatedcheckout.RequestedSession.total_details`
+  * Add support for `scheduleDetails` on `Invoice.parent`, `InvoiceItem.parent`, `InvoiceLineItem.parent`, and `QuotePreviewInvoice.parent`
+  * Add support for `billingSchedules` on `InvoiceCreatePreviewParams.schedule_details`, `QuotePreviewSubscriptionSchedule`, `SubscriptionScheduleCreateParams`, `SubscriptionScheduleUpdateParams`, and `SubscriptionSchedule`
+  * Add support for `latestInvoice` on `QuotePreviewSubscriptionSchedule` and `SubscriptionSchedule`
+  * Add support for `phaseEffectiveAt` on `QuotePreviewSubscriptionSchedule.default_settings`, `SubscriptionSchedule.default_settings`, `SubscriptionScheduleCreateParams.default_settings`, and `SubscriptionScheduleUpdateParams.default_settings`
+* [#2107](https://github.com/stripe/stripe-java/pull/2107) Update generated code for private-preview
+  * ⚠️ Remove support for resource `v2.tax.AutomaticRule`
+  * ⚠️ Remove support for `create`, `deactivate`, `find`, `retrieve`, and `update` methods on resource `v2.tax.AutomaticRule`
+  * Add support for `selfReportedIncome` and `selfReportedMonthlyHousingPayment` on `AccountCreateParams.individual`, `AccountUpdateParams.individual`, `PersonCreateParams`, `PersonUpdateParams`, `Person`, `TokenCreateParams.account.individual`, and `TokenCreateParams.person`
+  * Add support for new values `amendment_end`, `line_ends_at`, `schedule_end`, and `upcoming_invoice` on enums `InvoiceCreatePreviewParams.subscription_details.billing_schedules[].bill_until.type`, `SubscriptionCreateParams.billing_schedules[].bill_until.type`, and `SubscriptionUpdateParams.billing_schedules[].bill_until.type`
+  * Add support for `billingSchedules` and `phaseEffectiveAt` on `Quote.subscription_data_overrides[]`, `Quote.subscription_data`, `QuoteCreateParams.subscription_data_overrides[]`, `QuoteCreateParams.subscription_data`, `QuoteUpdateParams.subscription_data_overrides[]`, and `QuoteUpdateParams.subscription_data`
+  * Add support for `billFrom` on `Subscription.billing_schedules[]`
+  * Add support for `amendmentEnd` and `lineEndsAt` on `Subscription.billing_schedules[].bill_until`
+
 ## 30.3.0-alpha.1 - 2025-11-06
 * [#2105](https://github.com/stripe/stripe-java/pull/2105) Update generated code for private-preview
   * Add support for new resources `TransitBalance`, `v2.reporting.ReportRun`, `v2.reporting.Report`
