@@ -705,6 +705,31 @@ public class RequestedSession extends ApiResource
     /** The amount tax of the total details. */
     @SerializedName("amount_tax")
     Long amountTax;
+
+    /** The applicable fees of the total details. */
+    @SerializedName("applicable_fees")
+    List<RequestedSession.TotalDetails.ApplicableFee> applicableFees;
+
+    /**
+     * For more details about ApplicableFee, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApplicableFee extends StripeObject {
+      /** The amount of the applicable fee. */
+      @SerializedName("amount")
+      Long amount;
+
+      /** The description of the applicable fee. */
+      @SerializedName("description")
+      String description;
+
+      /** The display name of the applicable fee. */
+      @SerializedName("display_name")
+      String displayName;
+    }
   }
 
   @Override

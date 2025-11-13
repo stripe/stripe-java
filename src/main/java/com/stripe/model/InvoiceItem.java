@@ -547,6 +547,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @SerializedName("rate_card_subscription_details")
     RateCardSubscriptionDetails rateCardSubscriptionDetails;
 
+    /** Details about the subscription schedule that generated this invoice item. */
+    @SerializedName("schedule_details")
+    ScheduleDetails scheduleDetails;
+
     /** Details about the subscription that generated this invoice item. */
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
@@ -555,7 +559,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
      * The type of parent that generated this invoice item
      *
      * <p>One of {@code license_fee_subscription_details}, {@code rate_card_subscription_details},
-     * or {@code subscription_details}.
+     * {@code schedule_details}, or {@code subscription_details}.
      */
     @SerializedName("type")
     String type;
@@ -608,6 +612,19 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       /** The rate card version that generated this invoice item. */
       @SerializedName("rate_card_version")
       String rateCardVersion;
+    }
+
+    /**
+     * For more details about ScheduleDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ScheduleDetails extends StripeObject {
+      /** The subscription schedule that generated this invoice item. */
+      @SerializedName("schedule")
+      String schedule;
     }
 
     /**

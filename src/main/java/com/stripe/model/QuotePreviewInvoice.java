@@ -1195,6 +1195,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
 
+    /** Details about the schedule that generated this invoice. */
+    @SerializedName("schedule_details")
+    ScheduleDetails scheduleDetails;
+
     /** Details about the subscription that generated this invoice. */
     @SerializedName("subscription_details")
     SubscriptionDetails subscriptionDetails;
@@ -1202,8 +1206,8 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     /**
      * The type of parent that generated this invoice
      *
-     * <p>One of {@code billing_cadence_details}, {@code quote_details}, or {@code
-     * subscription_details}.
+     * <p>One of {@code billing_cadence_details}, {@code quote_details}, {@code schedule_details},
+     * or {@code subscription_details}.
      */
     @SerializedName("type")
     String type;
@@ -1232,6 +1236,19 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       /** The quote that generated this invoice. */
       @SerializedName("quote")
       String quote;
+    }
+
+    /**
+     * For more details about ScheduleDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ScheduleDetails extends StripeObject {
+      /** The schedule that generated this invoice. */
+      @SerializedName("schedule")
+      String schedule;
     }
 
     /**

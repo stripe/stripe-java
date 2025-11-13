@@ -203,6 +203,7 @@ public final class EventDataClassLookup {
     classLookup.put(
         "issuing.personalization_design", com.stripe.model.issuing.PersonalizationDesign.class);
     classLookup.put("issuing.physical_bundle", com.stripe.model.issuing.PhysicalBundle.class);
+    classLookup.put("issuing.program", com.stripe.model.issuing.Program.class);
     classLookup.put("issuing.settlement", com.stripe.model.issuing.Settlement.class);
     classLookup.put("issuing.token", com.stripe.model.issuing.Token.class);
     classLookup.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
