@@ -73,6 +73,13 @@ public class Account extends StripeObject implements HasId {
   @SerializedName("display_name")
   String displayName;
 
+  /**
+   * Information about the future requirements for the Account that will eventually come into
+   * effect, including what information needs to be collected, and by when.
+   */
+  @SerializedName("future_requirements")
+  FutureRequirements futureRequirements;
+
   /** Unique identifier for the Account. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -106,8 +113,8 @@ public class Account extends StripeObject implements HasId {
   String object;
 
   /**
-   * Information about the requirements for the Account, including what information needs to be
-   * collected, and by when.
+   * Information about the active requirements for the Account, including what information needs to
+   * be collected, and by when.
    */
   @SerializedName("requirements")
   Requirements requirements;
@@ -211,16 +218,17 @@ public class Account extends StripeObject implements HasId {
         String ipAddress;
 
         /**
-         * The customer’s identified tax location - uses {@code location_source}. Will only be
-         * rendered if the {@code automatic_indirect_tax} feature is requested and {@code active}.
+         * The <a
+         * href="https://docs.stripe.com/tax/customer-locations#address-hierarchy-other">identified</a>
+         * tax location of the customer. Will only be rendered if the {@code automatic_indirect_tax}
+         * feature is requested and {@code active}.
          */
         @SerializedName("location")
         Location location;
 
         /**
-         * The data source used to identify the customer's tax location - defaults to {@code
-         * identity_address}. Will only be used for automatic tax calculation on the customer's
-         * Invoices and Subscriptions.
+         * The data source used to identify the customer's tax location. Will only be used for
+         * automatic tax calculation on the customer's Invoices and Subscriptions.
          *
          * <p>One of {@code identity_address}, {@code ip_address}, {@code payment_method}, or {@code
          * shipping_address}.
@@ -229,8 +237,10 @@ public class Account extends StripeObject implements HasId {
         String locationSource;
 
         /**
-         * The customer’s identified tax location - uses {@code location_source}. Will only be
-         * rendered if the {@code automatic_indirect_tax} feature is requested and {@code active}.
+         * The <a
+         * href="https://docs.stripe.com/tax/customer-locations#address-hierarchy-other">identified</a>
+         * tax location of the customer. Will only be rendered if the {@code automatic_indirect_tax}
+         * feature is requested and {@code active}.
          */
         @Getter
         @Setter
@@ -345,8 +355,7 @@ public class Account extends StripeObject implements HasId {
         /**
          * Generates requirements for enabling automatic indirect tax calculation on this customer's
          * invoices or subscriptions. Recommended to request this capability if planning to enable
-         * automatic tax calculation on this customer's invoices or subscriptions. Uses the {@code
-         * location_source} field.
+         * automatic tax calculation on this customer's invoices or subscriptions.
          */
         @SerializedName("automatic_indirect_tax")
         AutomaticIndirectTax automaticIndirectTax;
@@ -354,8 +363,7 @@ public class Account extends StripeObject implements HasId {
         /**
          * Generates requirements for enabling automatic indirect tax calculation on this customer's
          * invoices or subscriptions. Recommended to request this capability if planning to enable
-         * automatic tax calculation on this customer's invoices or subscriptions. Uses the {@code
-         * location_source} field.
+         * automatic tax calculation on this customer's invoices or subscriptions.
          */
         @Getter
         @Setter
@@ -4694,6 +4702,333 @@ public class Account extends StripeObject implements HasId {
     }
   }
 
+  /**
+   * Information about the future requirements for the Account that will eventually come into
+   * effect, including what information needs to be collected, and by when.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FutureRequirements extends StripeObject {
+    /** A list of requirements for the Account. */
+    @SerializedName("entries")
+    List<Account.FutureRequirements.Entry> entries;
+
+    /** The time at which the future requirements become effective. */
+    @SerializedName("minimum_transition_date")
+    Instant minimumTransitionDate;
+
+    /** An object containing an overview of requirements for the Account. */
+    @SerializedName("summary")
+    Summary summary;
+
+    /**
+     * For more details about Entry, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Entry extends StripeObject {
+      /**
+       * Whether the responsibility is with the integrator or with Stripe (to review info, to wait
+       * for some condition, etc.) to action the requirement.
+       *
+       * <p>One of {@code stripe}, or {@code user}.
+       */
+      @SerializedName("awaiting_action_from")
+      String awaitingActionFrom;
+
+      /** Machine-readable string describing the requirement. */
+      @SerializedName("description")
+      String description;
+
+      /**
+       * Descriptions of why the requirement must be collected, or why the collected information
+       * isn't satisfactory to Stripe.
+       */
+      @SerializedName("errors")
+      List<Account.FutureRequirements.Entry.Errors> errors;
+
+      /**
+       * A hash describing the impact of not collecting the requirement, or Stripe not being able to
+       * verify the collected information.
+       */
+      @SerializedName("impact")
+      Impact impact;
+
+      /** The soonest point when the account will be impacted by not providing the requirement. */
+      @SerializedName("minimum_deadline")
+      MinimumDeadline minimumDeadline;
+
+      /** A reference to the location of the requirement. */
+      @SerializedName("reference")
+      Reference reference;
+
+      /** A list of reasons why Stripe is collecting the requirement. */
+      @SerializedName("requested_reasons")
+      List<Account.FutureRequirements.Entry.RequestedReason> requestedReasons;
+
+      /**
+       * For more details about Errors, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Errors extends StripeObject {
+        /**
+         * Machine-readable code describing the error.
+         *
+         * <p>One of {@code invalid_address_city_state_postal_code}, {@code
+         * invalid_address_highway_contract_box}, {@code invalid_address_private_mailbox}, {@code
+         * invalid_business_profile_name}, {@code invalid_business_profile_name_denylisted}, {@code
+         * invalid_company_name_denylisted}, {@code invalid_dob_age_over_maximum}, {@code
+         * invalid_dob_age_under_18}, {@code invalid_dob_age_under_minimum}, {@code
+         * invalid_product_description_length}, {@code invalid_product_description_url_match},
+         * {@code invalid_representative_country}, {@code
+         * invalid_statement_descriptor_business_mismatch}, {@code
+         * invalid_statement_descriptor_denylisted}, {@code invalid_statement_descriptor_length},
+         * {@code invalid_statement_descriptor_prefix_denylisted}, {@code
+         * invalid_statement_descriptor_prefix_mismatch}, {@code invalid_street_address}, {@code
+         * invalid_tax_id}, {@code invalid_tax_id_format}, {@code invalid_tos_acceptance}, {@code
+         * invalid_url_denylisted}, {@code invalid_url_format}, {@code
+         * invalid_url_website_business_information_mismatch}, {@code invalid_url_website_empty},
+         * {@code invalid_url_website_inaccessible}, {@code
+         * invalid_url_website_inaccessible_geoblocked}, {@code
+         * invalid_url_website_inaccessible_password_protected}, {@code
+         * invalid_url_website_incomplete}, {@code
+         * invalid_url_website_incomplete_cancellation_policy}, {@code
+         * invalid_url_website_incomplete_customer_service_details}, {@code
+         * invalid_url_website_incomplete_legal_restrictions}, {@code
+         * invalid_url_website_incomplete_refund_policy}, {@code
+         * invalid_url_website_incomplete_return_policy}, {@code
+         * invalid_url_website_incomplete_terms_and_conditions}, {@code
+         * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
+         * {@code invalid_url_web_presence_detected}, {@code invalid_value_other}, {@code
+         * unresolvable_ip_address}, {@code unresolvable_postal_code}, {@code
+         * verification_directors_mismatch}, {@code verification_document_address_mismatch}, {@code
+         * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
+         * verification_document_country_not_supported}, {@code
+         * verification_document_directors_mismatch}, {@code verification_document_dob_mismatch},
+         * {@code verification_document_duplicate_type}, {@code verification_document_expired},
+         * {@code verification_document_failed_copy}, {@code
+         * verification_document_failed_greyscale}, {@code verification_document_failed_other},
+         * {@code verification_document_failed_test_mode}, {@code verification_document_fraudulent},
+         * {@code verification_document_id_number_mismatch}, {@code
+         * verification_document_id_number_missing}, {@code verification_document_incomplete},
+         * {@code verification_document_invalid}, {@code
+         * verification_document_issue_or_expiry_date_missing}, {@code
+         * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
+         * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
+         * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
+         * {@code verification_document_not_readable}, {@code verification_document_not_signed},
+         * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+         * {@code verification_document_too_large}, {@code
+         * verification_document_type_not_supported}, {@code verification_extraneous_directors},
+         * {@code verification_failed_address_match}, {@code
+         * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+         * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+         * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+         * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
+         * verification_failed_residential_address}, {@code verification_failed_tax_id_match},
+         * {@code verification_failed_tax_id_not_issued}, {@code verification_missing_directors},
+         * {@code verification_missing_executives}, {@code verification_missing_owners}, {@code
+         * verification_requires_additional_memorandum_of_associations}, {@code
+         * verification_requires_additional_proof_of_registration}, {@code
+         * verification_selfie_document_missing_photo}, {@code verification_selfie_face_mismatch},
+         * {@code verification_selfie_manipulated}, {@code verification_selfie_unverified_other},
+         * {@code verification_supportability}, or {@code verification_token_stale}.
+         */
+        @SerializedName("code")
+        String code;
+
+        /** Human-readable description of the error. */
+        @SerializedName("description")
+        String description;
+      }
+
+      /**
+       * A hash describing the impact of not collecting the requirement, or Stripe not being able to
+       * verify the collected information.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Impact extends StripeObject {
+        /**
+         * The Capabilities that will be restricted if the requirement is not collected and
+         * satisfactory to Stripe.
+         */
+        @SerializedName("restricts_capabilities")
+        List<Account.FutureRequirements.Entry.Impact.RestrictsCapability> restrictsCapabilities;
+
+        /**
+         * For more details about RestrictsCapability, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class RestrictsCapability extends StripeObject {
+          /**
+           * The name of the Capability which will be restricted.
+           *
+           * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code
+           * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
+           * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
+           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
+           * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
+           * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
+           * cashapp_payments}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
+           * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
+           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
+           * holds_currencies.usd}, {@code ideal_payments}, {@code
+           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
+           * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
+           * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
+           * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
+           * {@code naver_pay_payments}, {@code outbound_payments.bank_accounts}, {@code
+           * outbound_payments.cards}, {@code outbound_payments.financial_accounts}, {@code
+           * outbound_transfers.bank_accounts}, {@code outbound_transfers.financial_accounts},
+           * {@code oxxo_payments}, {@code p24_payments}, {@code payco_payments}, {@code
+           * paynow_payments}, {@code pay_by_bank_payments}, {@code promptpay_payments}, {@code
+           * revolut_pay_payments}, {@code samsung_pay_payments}, {@code
+           * sepa_bank_transfer_payments}, {@code sepa_debit_payments}, {@code
+           * stripe_balance.payouts}, {@code stripe_balance.stripe_transfers}, {@code
+           * swish_payments}, {@code twint_payments}, {@code us_bank_transfer_payments}, or {@code
+           * zip_payments}.
+           */
+          @SerializedName("capability")
+          String capability;
+
+          /**
+           * The configuration which specifies the Capability which will be restricted.
+           *
+           * <p>One of {@code customer}, {@code merchant}, {@code recipient}, or {@code storer}.
+           */
+          @SerializedName("configuration")
+          String configuration;
+
+          /**
+           * Details about when in the account lifecycle the requirement must be collected by the
+           * avoid the Capability restriction.
+           */
+          @SerializedName("deadline")
+          Deadline deadline;
+
+          /**
+           * Details about when in the account lifecycle the requirement must be collected by the
+           * avoid the Capability restriction.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Deadline extends StripeObject {
+            /**
+             * The current status of the requirement's impact.
+             *
+             * <p>One of {@code currently_due}, {@code eventually_due}, or {@code past_due}.
+             */
+            @SerializedName("status")
+            String status;
+          }
+        }
+      }
+
+      /** The soonest point when the account will be impacted by not providing the requirement. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MinimumDeadline extends StripeObject {
+        /**
+         * The current status of the requirement's impact.
+         *
+         * <p>One of {@code currently_due}, {@code eventually_due}, or {@code past_due}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+
+      /** A reference to the location of the requirement. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Reference extends StripeObject {
+        /** If {@code inquiry} is the type, the inquiry token. */
+        @SerializedName("inquiry")
+        String inquiry;
+
+        /** If {@code resource} is the type, the resource token. */
+        @SerializedName("resource")
+        String resource;
+
+        /**
+         * The type of the reference. If the type is &quot;inquiry&quot;, the inquiry token can be
+         * found in the &quot;inquiry&quot; field. Otherwise the type is an API resource, the token
+         * for which can be found in the &quot;resource&quot; field.
+         *
+         * <p>One of {@code inquiry}, {@code payment_method}, or {@code person}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+
+      /**
+       * For more details about RequestedReason, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class RequestedReason extends StripeObject {
+        /**
+         * Machine-readable description of Stripe's reason for collecting the requirement.
+         *
+         * <p>One of {@code routine_onboarding}, or {@code routine_verification}.
+         */
+        @SerializedName("code")
+        String code;
+      }
+    }
+
+    /** An object containing an overview of requirements for the Account. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Summary extends StripeObject {
+      /**
+       * The soonest date and time a requirement on the Account will become {@code past due}.
+       * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+       * {@code 2022-09-18T13:22:18.123Z}.
+       */
+      @SerializedName("minimum_deadline")
+      MinimumDeadline minimumDeadline;
+
+      /**
+       * The soonest date and time a requirement on the Account will become {@code past due}.
+       * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
+       * {@code 2022-09-18T13:22:18.123Z}.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MinimumDeadline extends StripeObject {
+        /**
+         * The current strictest status of all requirements on the Account.
+         *
+         * <p>One of {@code currently_due}, {@code eventually_due}, or {@code past_due}.
+         */
+        @SerializedName("status")
+        String status;
+
+        /** The soonest RFC3339 date &amp; time UTC value a requirement can impact the Account. */
+        @SerializedName("time")
+        Instant time;
+      }
+    }
+  }
+
   /** Information about the company, individual, and business represented by the Account. */
   @Getter
   @Setter
@@ -5415,20 +5750,20 @@ public class Account extends StripeObject implements HasId {
         /**
          * Open Enum. The ID number type of a business entity.
          *
-         * <p>One of {@code ae_crn}, {@code ae_vat}, {@code ao_nif}, {@code at_fn}, {@code au_abn},
-         * {@code au_acn}, {@code au_in}, {@code az_tin}, {@code bd_etin}, {@code be_cbe}, {@code
-         * bg_uic}, {@code br_cnpj}, {@code ca_cn}, {@code ca_crarr}, {@code ca_neq}, {@code
-         * ca_rid}, {@code ch_chid}, {@code ch_uid}, {@code cr_cpj}, {@code cr_nite}, {@code
-         * cy_tic}, {@code cz_ico}, {@code de_hrn}, {@code de_vat}, {@code dk_cvr}, {@code do_rcn},
-         * {@code ee_rk}, {@code es_cif}, {@code fi_yt}, {@code fr_siren}, {@code fr_vat}, {@code
-         * gb_crn}, {@code gi_crn}, {@code gr_gemi}, {@code gt_nit}, {@code hk_br}, {@code hk_cr},
-         * {@code hk_mbs}, {@code hu_cjs}, {@code ie_crn}, {@code it_rea}, {@code it_vat}, {@code
-         * jp_cn}, {@code kz_bin}, {@code li_uid}, {@code lt_ccrn}, {@code lu_rcs}, {@code lv_urn},
-         * {@code mt_crn}, {@code mx_rfc}, {@code my_brn}, {@code my_coid}, {@code my_sst}, {@code
-         * mz_nuit}, {@code nl_kvk}, {@code no_orgnr}, {@code nz_bn}, {@code pe_ruc}, {@code
-         * pk_ntn}, {@code pl_regon}, {@code pt_vat}, {@code ro_cui}, {@code sa_crn}, {@code
-         * sa_tin}, {@code se_orgnr}, {@code sg_uen}, {@code si_msp}, {@code sk_ico}, {@code
-         * th_crn}, {@code th_prn}, {@code th_tin}, or {@code us_ein}.
+         * <p>One of {@code ae_crn}, {@code ae_vat}, {@code ao_nif}, {@code ar_cuit}, {@code at_fn},
+         * {@code au_abn}, {@code au_acn}, {@code au_in}, {@code az_tin}, {@code bd_etin}, {@code
+         * be_cbe}, {@code bg_uic}, {@code br_cnpj}, {@code ca_cn}, {@code ca_crarr}, {@code
+         * ca_neq}, {@code ca_rid}, {@code ch_chid}, {@code ch_uid}, {@code cr_cpj}, {@code
+         * cr_nite}, {@code cy_tic}, {@code cz_ico}, {@code de_hrn}, {@code de_vat}, {@code dk_cvr},
+         * {@code do_rcn}, {@code ee_rk}, {@code es_cif}, {@code fi_yt}, {@code fr_siren}, {@code
+         * fr_vat}, {@code gb_crn}, {@code gi_crn}, {@code gr_gemi}, {@code gt_nit}, {@code hk_br},
+         * {@code hk_cr}, {@code hk_mbs}, {@code hu_cjs}, {@code ie_crn}, {@code it_rea}, {@code
+         * it_vat}, {@code jp_cn}, {@code kz_bin}, {@code li_uid}, {@code lt_ccrn}, {@code lu_rcs},
+         * {@code lv_urn}, {@code mt_crn}, {@code mx_rfc}, {@code my_brn}, {@code my_coid}, {@code
+         * my_sst}, {@code mz_nuit}, {@code nl_kvk}, {@code no_orgnr}, {@code nz_bn}, {@code
+         * pe_ruc}, {@code pk_ntn}, {@code pl_regon}, {@code pt_vat}, {@code ro_cui}, {@code
+         * sa_crn}, {@code sa_tin}, {@code se_orgnr}, {@code sg_uen}, {@code si_msp}, {@code
+         * sk_ico}, {@code th_crn}, {@code th_prn}, {@code th_tin}, or {@code us_ein}.
          */
         @SerializedName("type")
         String type;
@@ -6086,8 +6421,8 @@ public class Account extends StripeObject implements HasId {
         /**
          * The ID number type of an individual.
          *
-         * <p>One of {@code ae_eid}, {@code ao_nif}, {@code az_tin}, {@code bd_brc}, {@code
-         * bd_etin}, {@code bd_nid}, {@code br_cpf}, {@code cr_cpf}, {@code cr_dimex}, {@code
+         * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_dni}, {@code az_tin}, {@code bd_brc},
+         * {@code bd_etin}, {@code bd_nid}, {@code br_cpf}, {@code cr_cpf}, {@code cr_dimex}, {@code
          * cr_nite}, {@code de_stn}, {@code do_rcn}, {@code gt_nit}, {@code hk_id}, {@code kz_iin},
          * {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code nl_bsn}, {@code pe_dni}, {@code
          * pk_cnic}, {@code pk_snic}, {@code sa_tin}, {@code sg_fin}, {@code sg_nric}, {@code
@@ -6282,8 +6617,8 @@ public class Account extends StripeObject implements HasId {
   }
 
   /**
-   * Information about the requirements for the Account, including what information needs to be
-   * collected, and by when.
+   * Information about the active requirements for the Account, including what information needs to
+   * be collected, and by when.
    */
   @Getter
   @Setter
@@ -6457,8 +6792,9 @@ public class Account extends StripeObject implements HasId {
            * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
            * cashapp_payments}, {@code eps_payments}, {@code financial_addresses.bank_accounts},
            * {@code fpx_payments}, {@code gb_bank_transfer_payments}, {@code grabpay_payments},
-           * {@code holds_currencies.gbp}, {@code holds_currencies.usd}, {@code ideal_payments},
-           * {@code inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
+           * {@code holds_currencies.eur}, {@code holds_currencies.gbp}, {@code
+           * holds_currencies.usd}, {@code ideal_payments}, {@code
+           * inbound_transfers.financial_accounts}, {@code jcb_payments}, {@code
            * jp_bank_transfer_payments}, {@code kakao_pay_payments}, {@code klarna_payments}, {@code
            * konbini_payments}, {@code kr_card_payments}, {@code link_payments}, {@code
            * mobilepay_payments}, {@code multibanco_payments}, {@code mx_bank_transfer_payments},
@@ -6559,8 +6895,7 @@ public class Account extends StripeObject implements HasId {
         /**
          * Machine-readable description of Stripe's reason for collecting the requirement.
          *
-         * <p>One of {@code future_requirements}, {@code routine_onboarding}, or {@code
-         * routine_verification}.
+         * <p>One of {@code routine_onboarding}, or {@code routine_verification}.
          */
         @SerializedName("code")
         String code;
