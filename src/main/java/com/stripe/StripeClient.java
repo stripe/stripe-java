@@ -1413,7 +1413,8 @@ public class StripeClient {
     return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter(), apiMode);
   }
 
-  public StripeEventHandler handler(String webhookSecret) {
-    return new StripeEventHandler(webhookSecret, this);
+  public StripeEventRouter router(
+      String webhookSecret, StripeEventRouter.EventHandler<EventNotification> handler) {
+    return new StripeEventRouter(webhookSecret, this, handler);
   }
 }
