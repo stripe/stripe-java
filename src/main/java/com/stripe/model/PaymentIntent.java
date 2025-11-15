@@ -179,6 +179,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("excluded_payment_method_types")
   List<String> excludedPaymentMethodTypes;
 
+  @SerializedName("hooks")
+  Hooks hooks;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -1636,6 +1639,43 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     /** Automatically calculates compatible payment methods. */
     @SerializedName("enabled")
     Boolean enabled;
+  }
+
+  /**
+   * For more details about Hooks, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Hooks extends StripeObject {
+    @SerializedName("inputs")
+    Inputs inputs;
+
+    /**
+     * For more details about Inputs, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Inputs extends StripeObject {
+      @SerializedName("tax")
+      Tax tax;
+
+      /**
+       * For more details about Tax, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Tax extends StripeObject {
+        /** The <a href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id */
+        @SerializedName("calculation")
+        String calculation;
+      }
+    }
   }
 
   /**
@@ -5254,6 +5294,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(application, responseGetter);
     trySetResponseGetter(automaticPaymentMethods, responseGetter);
     trySetResponseGetter(customer, responseGetter);
+    trySetResponseGetter(hooks, responseGetter);
     trySetResponseGetter(lastPaymentError, responseGetter);
     trySetResponseGetter(latestCharge, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);

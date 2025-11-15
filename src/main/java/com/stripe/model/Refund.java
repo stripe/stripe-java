@@ -652,6 +652,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     @SerializedName("klarna")
     Klarna klarna;
 
+    @SerializedName("mb_way")
+    MbWay mbWay;
+
     @SerializedName("multibanco")
     Multibanco multibanco;
 
@@ -684,6 +687,9 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
 
     @SerializedName("th_bank_transfer")
     ThBankTransfer thBankTransfer;
+
+    @SerializedName("twint")
+    Twint twint;
 
     /**
      * The type of transaction-specific details of the payment method used in the refund (e.g.,
@@ -963,6 +969,26 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
     public static class Klarna extends StripeObject {}
 
     /**
+     * For more details about MbWay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class MbWay extends StripeObject {
+      /** The reference assigned to the refund. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Status of the reference on the refund. This can be {@code pending}, {@code available} or
+       * {@code unavailable}.
+       */
+      @SerializedName("reference_status")
+      String referenceStatus;
+    }
+
+    /**
      * For more details about Multibanco, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1129,6 +1155,15 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
       @SerializedName("reference_status")
       String referenceStatus;
     }
+
+    /**
+     * For more details about Twint, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Twint extends StripeObject {}
 
     /**
      * For more details about UsBankTransfer, please refer to the <a
