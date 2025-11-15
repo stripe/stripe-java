@@ -1414,7 +1414,7 @@ public class StripeClient {
   }
 
   public StripeEventRouter router(
-      String webhookSecret, StripeEventRouter.EventHandler<EventNotification> handler) {
+      String webhookSecret, StripeEventRouter.UnhandledEventHandler handler) {
     return new StripeEventRouter(webhookSecret, this, handler);
   }
 }

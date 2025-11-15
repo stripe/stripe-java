@@ -75,8 +75,8 @@ import java.util.HashMap;
 
 public class StripeEventRouter {
   /**
-   * Functional interface for event handlers that can throw StripeException. Adherents should
-   * implement this interface to handle specific event types.
+   * Functional interface for event handlers. It describes the signature of the functions you'll
+   * register on the StripeEventRouter to process incoming event notifications.
    */
   @FunctionalInterface
   public interface EventHandler<T extends EventNotification> {
@@ -84,20 +84,49 @@ public class StripeEventRouter {
     void process(T event, StripeClient client);
   }
 
+  /**
+   * Functional interface for handling otherwise unhandled events. It's similar to {@link
+   * EventHandler}, but includes additional information about the unhandled event to help debug it.
+   */
+  @FunctionalInterface
+  public interface UnhandledEventHandler {
+    // this is an internal-facing method name that dictates how we call the stored method
+    void process(
+        EventNotification event, StripeClient client, UnhandledNotificationDetails details);
+  }
+
+  /**
+   * Information about an unhandled event notification to make it easier to respond (and potentially
+   * update your integration).
+   */
+  public static class UnhandledNotificationDetails {
+    private boolean isKnownEventType;
+
+    private UnhandledNotificationDetails(boolean isKnownEventType) {
+      this.isKnownEventType = isKnownEventType;
+    }
+
+    /**
+     * If true, the unhandled event's type is known to the SDK (i.e., it was successfully
+     * deserialized into a specific `EventNotification` subclass).
+     */
+    public boolean isKnownEventType() {
+      return isKnownEventType;
+    }
+  }
+
   private boolean hasHandledEvent = false;
 
   private final String webhookSecret;
-  private final StripeClient stripeClient;
-  private final EventHandler<EventNotification> onUnhandledHandler;
+  private final StripeClient client;
+  private final UnhandledEventHandler onUnhandledHandler;
   private final HashMap<String, EventHandler<? extends EventNotification>> registeredHandlers =
       new HashMap<>();
 
   public StripeEventRouter(
-      String webhookSecret,
-      StripeClient stripeClient,
-      EventHandler<EventNotification> onUnhandledHandler) {
+      String webhookSecret, StripeClient client, UnhandledEventHandler onUnhandledHandler) {
     this.webhookSecret = webhookSecret;
-    this.stripeClient = stripeClient;
+    this.client = client;
     this.onUnhandledHandler = onUnhandledHandler;
   }
 
@@ -127,21 +156,28 @@ public class StripeEventRouter {
     hasHandledEvent = true;
 
     EventNotification eventNotification =
-        this.stripeClient.parseEventNotification(webhookBody, sigHeader, this.webhookSecret);
+        this.client.parseEventNotification(webhookBody, sigHeader, this.webhookSecret);
 
     EventHandler<? extends EventNotification> handler =
-        // I don't _love_ getName as a matcher but lets us bucket all the unknown events in a way
-        // that checking .type doesn't.
         registeredHandlers.get(eventNotification.getType());
 
-    if (handler == null) {
-      throw new IllegalArgumentException(
-          "No handler registered for event type: " + eventNotification.getType());
-    }
+    StripeContext originalContext = this.client.getContext();
+    this.client.setContext(eventNotification.getContext());
+    try {
+      // TODO: re-bind client context
+      if (handler == null) {
+        boolean isKnownEventType =
+            !(eventNotification instanceof com.stripe.events.UnknownEventNotification);
+        UnhandledNotificationDetails details = new UnhandledNotificationDetails(isKnownEventType);
 
-    // TODO: re-bind client context
-    // this is technically unsafe but we control the registration API so should be ok
-    ((EventHandler<EventNotification>) handler).process(eventNotification, this.stripeClient);
+        this.onUnhandledHandler.process(eventNotification, this.client, details);
+      } else {
+        // this is technically unsafe but we control the registration API so should be ok
+        ((EventHandler<EventNotification>) handler).process(eventNotification, this.client);
+      }
+    } finally {
+      this.client.setContext(originalContext);
+    }
   }
 
   // event-router-methods: The beginning of the section generated from our OpenAPI spec
