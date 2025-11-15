@@ -163,7 +163,12 @@ public class StripeEventRouter {
 
     String originalContext = this.client.getContext();
     try {
-      this.client.setContext(eventNotification.getContext());
+      if (eventNotification.context == null) {
+        this.client.setContext((String) null);
+      } else {
+        this.client.setContext(eventNotification.context);
+      }
+
       if (handler == null) {
         boolean isKnownEventType =
             !(eventNotification instanceof com.stripe.events.UnknownEventNotification);
@@ -574,4 +579,15 @@ public class StripeEventRouter {
     return this;
   }
   // event-router-methods: The end of the section generated from our OpenAPI spec
+
+  /**
+   * Get a sorted list of all registered event types.
+   *
+   * @return A sorted list of event type strings
+   */
+  public java.util.List<String> getRegisteredEventTypes() {
+    java.util.List<String> eventTypes = new java.util.ArrayList<>(this.registeredHandlers.keySet());
+    java.util.Collections.sort(eventTypes);
+    return eventTypes;
+  }
 }
