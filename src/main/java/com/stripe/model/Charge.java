@@ -1216,8 +1216,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("giropay")
     Giropay giropay;
 
+    @SerializedName("gopay")
+    Gopay gopay;
+
     @SerializedName("grabpay")
     Grabpay grabpay;
+
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
 
     @SerializedName("ideal")
     Ideal ideal;
@@ -1273,11 +1279,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("paypay")
+    Paypay paypay;
+
+    @SerializedName("payto")
+    Payto payto;
+
     @SerializedName("pix")
     Pix pix;
 
     @SerializedName("promptpay")
     Promptpay promptpay;
+
+    @SerializedName("qris")
+    Qris qris;
+
+    @SerializedName("rechnung")
+    Rechnung rechnung;
 
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
@@ -1294,11 +1312,17 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
+    @SerializedName("shopeepay")
+    Shopeepay shopeepay;
+
     @SerializedName("sofort")
     Sofort sofort;
 
     @SerializedName("stripe_account")
     StripeAccount stripeAccount;
+
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
 
     @SerializedName("swish")
     Swish swish;
@@ -1581,6 +1605,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
           String brand;
 
           /**
+           * The <a href="https://stripe.com/docs/card-product-codes">product code</a> that
+           * identifies the specific program or product associated with a card. (For internal use
+           * only and not typically available in standard API requests.)
+           */
+          @SerializedName("brand_product")
+          String brandProduct;
+
+          /**
            * Two-letter ISO code representing the country of the card. You could use this attribute
            * to get a sense of the international breakdown of cards you've collected.
            */
@@ -1813,6 +1845,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("amount_authorized")
       Long amountAuthorized;
 
+      /** The latest amount intended to be authorized by this charge. */
+      @SerializedName("amount_requested")
+      Long amountRequested;
+
       /** Authorization code on the charge. */
       @SerializedName("authorization_code")
       String authorizationCode;
@@ -1842,6 +1878,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
        */
       @SerializedName("country")
       String country;
+
+      @SerializedName("decremental_authorization")
+      DecrementalAuthorization decrementalAuthorization;
 
       /**
        * A high-level description of the type of cards issued in this range. (For internal use only
@@ -1949,6 +1988,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("overcapture")
       Overcapture overcapture;
 
+      @SerializedName("partial_authorization")
+      PartialAuthorization partialAuthorization;
+
       /**
        * Status of a card based on the card issuer.
        *
@@ -1993,6 +2035,23 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("cvc_check")
         String cvcCheck;
+      }
+
+      /**
+       * For more details about DecrementalAuthorization, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DecrementalAuthorization extends StripeObject {
+        /**
+         * Indicates whether or not the decremental authorization feature is supported.
+         *
+         * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
       }
 
       /**
@@ -2122,6 +2181,25 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          * Indicates whether or not the authorized amount can be over-captured.
          *
          * <p>One of {@code available}, or {@code unavailable}.
+         */
+        @SerializedName("status")
+        String status;
+      }
+
+      /**
+       * For more details about PartialAuthorization, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PartialAuthorization extends StripeObject {
+        /**
+         * Indicates whether the transaction requested for partial authorization feature and the
+         * authorization outcome.
+         *
+         * <p>One of {@code declined}, {@code fully_authorized}, {@code not_requested}, or {@code
+         * partially_authorized}.
          */
         @SerializedName("status")
         String status;
@@ -2809,6 +2887,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
 
     /**
+     * For more details about Gopay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gopay extends StripeObject {}
+
+    /**
      * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -2819,6 +2906,42 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Unique transaction id generated by GrabPay. */
       @SerializedName("transaction_id")
       String transactionId;
+    }
+
+    /**
+     * For more details about IdBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IdBankTransfer extends StripeObject {
+      /** Account number of the bank account to transfer funds to. */
+      @SerializedName("account_number")
+      String accountNumber;
+
+      /**
+       * Bank where the account is located.
+       *
+       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, or {@code permata}.
+       */
+      @SerializedName("bank")
+      String bank;
+
+      /** Local bank code of the bank. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /**
+       * Merchant name and billing details name, for the customer to check for the correct merchant
+       * when performing the bank transfer.
+       */
+      @SerializedName("display_name")
+      String displayName;
     }
 
     /**
@@ -3543,9 +3666,39 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("seller_protection")
       SellerProtection sellerProtection;
 
+      /**
+       * The shipping address for the customer, as supplied by the merchant at the point of payment
+       * execution. This shipping address will not be updated if the merchant updates the shipping
+       * address on the PaymentIntent after the PaymentIntent was successfully confirmed.
+       */
+      @SerializedName("shipping")
+      com.stripe.model.Address shipping;
+
       /** A unique ID generated by PayPal for this transaction. */
       @SerializedName("transaction_id")
       String transactionId;
+
+      /**
+       * The shipping address for the customer, as supplied by the merchant at the point of payment
+       * execution. This shipping address will not be updated if the merchant updates the shipping
+       * address on the PaymentIntent after the PaymentIntent was successfully confirmed.
+       */
+      @SerializedName("verified_address")
+      com.stripe.model.Address verifiedAddress;
+
+      /**
+       * Owner's verified email. Values are verified or provided by PayPal directly (if supported)
+       * at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_email")
+      String verifiedEmail;
+
+      /**
+       * Owner's verified full name. Values are verified or provided by PayPal directly (if
+       * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_name")
+      String verifiedName;
 
       /**
        * For more details about SellerProtection, please refer to the <a
@@ -3570,6 +3723,40 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
 
     /**
+     * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Paypay extends StripeObject {}
+
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      /** Bank-State-Branch number of the bank account. */
+      @SerializedName("bsb_number")
+      String bsbNumber;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** ID of the mandate used to make this payment. */
+      @SerializedName("mandate")
+      String mandate;
+
+      /** The PayID alias for the bank account. */
+      @SerializedName("pay_id")
+      String payId;
+    }
+
+    /**
      * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -3580,6 +3767,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Unique transaction id generated by BCB. */
       @SerializedName("bank_transaction_id")
       String bankTransactionId;
+
+      /** ID of the multi use Mandate generated by the PaymentIntent. */
+      @SerializedName("mandate")
+      String mandate;
     }
 
     /**
@@ -3593,6 +3784,28 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Bill reference generated by PromptPay. */
       @SerializedName("reference")
       String reference;
+    }
+
+    /**
+     * For more details about Qris, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Qris extends StripeObject {}
+
+    /**
+     * For more details about Rechnung, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rechnung extends StripeObject {
+      /** Payment portal URL. */
+      @SerializedName("payment_portal_url")
+      String paymentPortalUrl;
     }
 
     /**
@@ -3644,6 +3857,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
            */
           @SerializedName("brand")
           String brand;
+
+          /**
+           * The <a href="https://stripe.com/docs/card-product-codes">product code</a> that
+           * identifies the specific program or product associated with a card. (For internal use
+           * only and not typically available in standard API requests.)
+           */
+          @SerializedName("brand_product")
+          String brandProduct;
 
           /**
            * Two-letter ISO code representing the country of the card. You could use this attribute
@@ -3767,6 +3988,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     }
 
     /**
+     * For more details about Shopeepay, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Shopeepay extends StripeObject {}
+
+    /**
      * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -3873,6 +4103,29 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class StripeAccount extends StripeObject {}
+
+    /**
+     * For more details about StripeBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance extends StripeObject {
+      /** The connected account ID whose Stripe balance to use as the source of payment. */
+      @SerializedName("account")
+      String account;
+
+      /**
+       * The <a
+       * href="https://docs.stripe.com/api/balance/balance_object#balance_object-available-source_types">source_type</a>
+       * of the balance
+       *
+       * <p>One of {@code bank_account}, {@code card}, or {@code fpx}.
+       */
+      @SerializedName("source_type")
+      String sourceType;
+    }
 
     /**
      * For more details about Swish, please refer to the <a href="https://docs.stripe.com/api">API

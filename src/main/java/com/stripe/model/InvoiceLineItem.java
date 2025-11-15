@@ -78,6 +78,17 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** The amount of margin calculated per margin for this line item. */
+  @SerializedName("margin_amounts")
+  List<InvoiceLineItem.MarginAmount> marginAmounts;
+
+  /**
+   * The margins applied to the line item. When set, the {@code default_margins} on the invoice do
+   * not apply to the line item. Use {@code expand[]=margins} to expand each margin.
+   */
+  @SerializedName("margins")
+  List<ExpandableField<Margin>> margins;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -122,6 +133,10 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
+
+  /** The tax calculation identifiers of the line item. */
+  @SerializedName("tax_calculation_reference")
+  TaxCalculationReference taxCalculationReference;
 
   /** The tax information of the line item. */
   @SerializedName("taxes")
@@ -183,6 +198,47 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
         objs != null
             ? objs.stream()
                 .map(x -> new ExpandableField<Discount>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get IDs of expandable {@code margins} object list. */
+  public List<String> getMargins() {
+    return (this.margins != null)
+        ? this.margins.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setMargins(List<String> ids) {
+    if (ids == null) {
+      this.margins = null;
+      return;
+    }
+    if (this.margins != null
+        && this.margins.stream().map(x -> x.getId()).collect(Collectors.toList()).equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.margins =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Margin>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code margins}. */
+  public List<Margin> getMarginObjects() {
+    return (this.margins != null)
+        ? this.margins.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setMarginObjects(List<Margin> objs) {
+    this.margins =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Margin>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
   }
@@ -287,6 +343,43 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
+   * For more details about MarginAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MarginAmount extends StripeObject {
+    /** The amount, in cents (or local equivalent), of the reduction in line item amount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The margin that was applied to get this margin amount. */
+    @SerializedName("margin")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Margin> margin;
+
+    /** Get ID of expandable {@code margin} object. */
+    public String getMargin() {
+      return (this.margin != null) ? this.margin.getId() : null;
+    }
+
+    public void setMargin(String id) {
+      this.margin = ApiResource.setExpandableFieldId(id, this.margin);
+    }
+
+    /** Get expanded {@code margin}. */
+    public Margin getMarginObject() {
+      return (this.margin != null) ? this.margin.getExpanded() : null;
+    }
+
+    public void setMarginObject(Margin expandableObject) {
+      this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
   }
 
@@ -479,10 +572,16 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Discount> discount;
 
+    /** The margin that was applied to get this pretax credit amount. */
+    @SerializedName("margin")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Margin> margin;
+
     /**
      * Type of the pretax credit amount referenced.
      *
-     * <p>One of {@code credit_balance_transaction}, or {@code discount}.
+     * <p>One of {@code credit_balance_transaction}, {@code discount}, or {@code margin}.
      */
     @SerializedName("type")
     String type;
@@ -525,6 +624,24 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code margin} object. */
+    public String getMargin() {
+      return (this.margin != null) ? this.margin.getId() : null;
+    }
+
+    public void setMargin(String id) {
+      this.margin = ApiResource.setExpandableFieldId(id, this.margin);
+    }
+
+    /** Get expanded {@code margin}. */
+    public Margin getMarginObject() {
+      return (this.margin != null) ? this.margin.getExpanded() : null;
+    }
+
+    public void setMarginObject(Margin expandableObject) {
+      this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
   }
 
@@ -638,6 +755,23 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     }
   }
 
+  /**
+   * For more details about TaxCalculationReference, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxCalculationReference extends StripeObject {
+    /** The calculation identifier for tax calculation response. */
+    @SerializedName("calculation_id")
+    String calculationId;
+
+    /** The calculation identifier for tax calculation response line item. */
+    @SerializedName("calculation_item_id")
+    String calculationItemId;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -645,5 +779,6 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
     trySetResponseGetter(period, responseGetter);
     trySetResponseGetter(pricing, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
+    trySetResponseGetter(taxCalculationReference, responseGetter);
   }
 }

@@ -117,6 +117,10 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Subscriptions using this price will be migrated to use the new referenced price. */
+  @SerializedName("migrate_to")
+  MigrateTo migrateTo;
+
   /** A brief description of the price, hidden from customers. */
   @SerializedName("nickname")
   String nickname;
@@ -585,6 +589,31 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   }
 
   /**
+   * For more details about MigrateTo, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MigrateTo extends StripeObject {
+    /**
+     * The behavior controlling at what point in the subscription lifecycle to migrate the price
+     *
+     * <p>Equal to {@code at_cycle_end}.
+     */
+    @SerializedName("behavior")
+    String behavior;
+
+    /** The unix timestamp after at which subscriptions will start to migrate to the new price. */
+    @SerializedName("effective_after")
+    Long effectiveAfter;
+
+    /** The id of the price being migrated to. */
+    @SerializedName("price")
+    String price;
+  }
+
+  /**
    * For more details about Recurring, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -683,6 +712,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(customUnitAmount, responseGetter);
+    trySetResponseGetter(migrateTo, responseGetter);
     trySetResponseGetter(product, responseGetter);
     trySetResponseGetter(recurring, responseGetter);
     trySetResponseGetter(transformQuantity, responseGetter);

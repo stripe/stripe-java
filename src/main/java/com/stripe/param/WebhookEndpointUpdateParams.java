@@ -284,6 +284,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("account.updated")
     ACCOUNT__UPDATED("account.updated"),
 
+    @SerializedName("account_notice.created")
+    ACCOUNT_NOTICE__CREATED("account_notice.created"),
+
+    @SerializedName("account_notice.updated")
+    ACCOUNT_NOTICE__UPDATED("account_notice.updated"),
+
     @SerializedName("application_fee.created")
     APPLICATION_FEE__CREATED("application_fee.created"),
 
@@ -313,6 +319,33 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("capability.updated")
     CAPABILITY__UPDATED("capability.updated"),
+
+    @SerializedName("capital.financing_offer.accepted")
+    CAPITAL__FINANCING_OFFER__ACCEPTED("capital.financing_offer.accepted"),
+
+    @SerializedName("capital.financing_offer.canceled")
+    CAPITAL__FINANCING_OFFER__CANCELED("capital.financing_offer.canceled"),
+
+    @SerializedName("capital.financing_offer.created")
+    CAPITAL__FINANCING_OFFER__CREATED("capital.financing_offer.created"),
+
+    @SerializedName("capital.financing_offer.expired")
+    CAPITAL__FINANCING_OFFER__EXPIRED("capital.financing_offer.expired"),
+
+    @SerializedName("capital.financing_offer.fully_repaid")
+    CAPITAL__FINANCING_OFFER__FULLY_REPAID("capital.financing_offer.fully_repaid"),
+
+    @SerializedName("capital.financing_offer.paid_out")
+    CAPITAL__FINANCING_OFFER__PAID_OUT("capital.financing_offer.paid_out"),
+
+    @SerializedName("capital.financing_offer.rejected")
+    CAPITAL__FINANCING_OFFER__REJECTED("capital.financing_offer.rejected"),
+
+    @SerializedName("capital.financing_offer.replacement_created")
+    CAPITAL__FINANCING_OFFER__REPLACEMENT_CREATED("capital.financing_offer.replacement_created"),
+
+    @SerializedName("capital.financing_transaction.created")
+    CAPITAL__FINANCING_TRANSACTION__CREATED("capital.financing_transaction.created"),
 
     @SerializedName("cash_balance.funds_available")
     CASH_BALANCE__FUNDS_AVAILABLE("cash_balance.funds_available"),
@@ -434,8 +467,17 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("customer.source.updated")
     CUSTOMER__SOURCE__UPDATED("customer.source.updated"),
 
+    @SerializedName("customer.subscription.collection_paused")
+    CUSTOMER__SUBSCRIPTION__COLLECTION_PAUSED("customer.subscription.collection_paused"),
+
+    @SerializedName("customer.subscription.collection_resumed")
+    CUSTOMER__SUBSCRIPTION__COLLECTION_RESUMED("customer.subscription.collection_resumed"),
+
     @SerializedName("customer.subscription.created")
     CUSTOMER__SUBSCRIPTION__CREATED("customer.subscription.created"),
+
+    @SerializedName("customer.subscription.custom_event")
+    CUSTOMER__SUBSCRIPTION__CUSTOM_EVENT("customer.subscription.custom_event"),
 
     @SerializedName("customer.subscription.deleted")
     CUSTOMER__SUBSCRIPTION__DELETED("customer.subscription.deleted"),
@@ -448,6 +490,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("customer.subscription.pending_update_expired")
     CUSTOMER__SUBSCRIPTION__PENDING_UPDATE_EXPIRED("customer.subscription.pending_update_expired"),
+
+    @SerializedName("customer.subscription.price_migration_failed")
+    CUSTOMER__SUBSCRIPTION__PRICE_MIGRATION_FAILED("customer.subscription.price_migration_failed"),
 
     @SerializedName("customer.subscription.resumed")
     CUSTOMER__SUBSCRIPTION__RESUMED("customer.subscription.resumed"),
@@ -496,6 +541,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_BALANCE(
         "financial_connections.account.refreshed_balance"),
 
+    @SerializedName("financial_connections.account.refreshed_inferred_balances")
+    FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_INFERRED_BALANCES(
+        "financial_connections.account.refreshed_inferred_balances"),
+
     @SerializedName("financial_connections.account.refreshed_ownership")
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_OWNERSHIP(
         "financial_connections.account.refreshed_ownership"),
@@ -503,6 +552,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("financial_connections.account.refreshed_transactions")
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_TRANSACTIONS(
         "financial_connections.account.refreshed_transactions"),
+
+    @SerializedName("financial_connections.session.updated")
+    FINANCIAL_CONNECTIONS__SESSION__UPDATED("financial_connections.session.updated"),
+
+    @SerializedName("fx_quote.expired")
+    FX_QUOTE__EXPIRED("fx_quote.expired"),
 
     @SerializedName("identity.verification_session.canceled")
     IDENTITY__VERIFICATION_SESSION__CANCELED("identity.verification_session.canceled"),
@@ -545,6 +600,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("invoice.paid")
     INVOICE__PAID("invoice.paid"),
+
+    @SerializedName("invoice.payment.overpaid")
+    INVOICE__PAYMENT__OVERPAID("invoice.payment.overpaid"),
 
     @SerializedName("invoice.payment_action_required")
     INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
@@ -621,6 +679,15 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("issuing_dispute.updated")
     ISSUING_DISPUTE__UPDATED("issuing_dispute.updated"),
 
+    @SerializedName("issuing_dispute_settlement_detail.created")
+    ISSUING_DISPUTE_SETTLEMENT_DETAIL__CREATED("issuing_dispute_settlement_detail.created"),
+
+    @SerializedName("issuing_dispute_settlement_detail.updated")
+    ISSUING_DISPUTE_SETTLEMENT_DETAIL__UPDATED("issuing_dispute_settlement_detail.updated"),
+
+    @SerializedName("issuing_fraud_liability_debit.created")
+    ISSUING_FRAUD_LIABILITY_DEBIT__CREATED("issuing_fraud_liability_debit.created"),
+
     @SerializedName("issuing_personalization_design.activated")
     ISSUING_PERSONALIZATION_DESIGN__ACTIVATED("issuing_personalization_design.activated"),
 
@@ -632,6 +699,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("issuing_personalization_design.updated")
     ISSUING_PERSONALIZATION_DESIGN__UPDATED("issuing_personalization_design.updated"),
+
+    @SerializedName("issuing_settlement.created")
+    ISSUING_SETTLEMENT__CREATED("issuing_settlement.created"),
+
+    @SerializedName("issuing_settlement.updated")
+    ISSUING_SETTLEMENT__UPDATED("issuing_settlement.updated"),
 
     @SerializedName("issuing_token.created")
     ISSUING_TOKEN__CREATED("issuing_token.created"),
@@ -739,6 +812,21 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("price.updated")
     PRICE__UPDATED("price.updated"),
 
+    @SerializedName("privacy.redaction_job.canceled")
+    PRIVACY__REDACTION_JOB__CANCELED("privacy.redaction_job.canceled"),
+
+    @SerializedName("privacy.redaction_job.created")
+    PRIVACY__REDACTION_JOB__CREATED("privacy.redaction_job.created"),
+
+    @SerializedName("privacy.redaction_job.ready")
+    PRIVACY__REDACTION_JOB__READY("privacy.redaction_job.ready"),
+
+    @SerializedName("privacy.redaction_job.succeeded")
+    PRIVACY__REDACTION_JOB__SUCCEEDED("privacy.redaction_job.succeeded"),
+
+    @SerializedName("privacy.redaction_job.validation_error")
+    PRIVACY__REDACTION_JOB__VALIDATION_ERROR("privacy.redaction_job.validation_error"),
+
     @SerializedName("product.created")
     PRODUCT__CREATED("product.created"),
 
@@ -754,8 +842,14 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("promotion_code.updated")
     PROMOTION_CODE__UPDATED("promotion_code.updated"),
 
+    @SerializedName("quote.accept_failed")
+    QUOTE__ACCEPT_FAILED("quote.accept_failed"),
+
     @SerializedName("quote.accepted")
     QUOTE__ACCEPTED("quote.accepted"),
+
+    @SerializedName("quote.accepting")
+    QUOTE__ACCEPTING("quote.accepting"),
 
     @SerializedName("quote.canceled")
     QUOTE__CANCELED("quote.canceled"),
@@ -763,8 +857,20 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("quote.created")
     QUOTE__CREATED("quote.created"),
 
+    @SerializedName("quote.draft")
+    QUOTE__DRAFT("quote.draft"),
+
     @SerializedName("quote.finalized")
     QUOTE__FINALIZED("quote.finalized"),
+
+    @SerializedName("quote.reestimate_failed")
+    QUOTE__REESTIMATE_FAILED("quote.reestimate_failed"),
+
+    @SerializedName("quote.reestimated")
+    QUOTE__REESTIMATED("quote.reestimated"),
+
+    @SerializedName("quote.stale")
+    QUOTE__STALE("quote.stale"),
 
     @SerializedName("radar.early_fraud_warning.created")
     RADAR__EARLY_FRAUD_WARNING__CREATED("radar.early_fraud_warning.created"),
@@ -850,11 +956,17 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("subscription_schedule.expiring")
     SUBSCRIPTION_SCHEDULE__EXPIRING("subscription_schedule.expiring"),
 
+    @SerializedName("subscription_schedule.price_migration_failed")
+    SUBSCRIPTION_SCHEDULE__PRICE_MIGRATION_FAILED("subscription_schedule.price_migration_failed"),
+
     @SerializedName("subscription_schedule.released")
     SUBSCRIPTION_SCHEDULE__RELEASED("subscription_schedule.released"),
 
     @SerializedName("subscription_schedule.updated")
     SUBSCRIPTION_SCHEDULE__UPDATED("subscription_schedule.updated"),
+
+    @SerializedName("tax.form.updated")
+    TAX__FORM__UPDATED("tax.form.updated"),
 
     @SerializedName("tax.settings.updated")
     TAX__SETTINGS__UPDATED("tax.settings.updated"),

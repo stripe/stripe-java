@@ -29,9 +29,13 @@ public class CreditGrantCreateParams extends ApiRequestParams {
   @SerializedName("category")
   Category category;
 
-  /** <strong>Required.</strong> ID of the customer to receive the billing credits. */
+  /** ID of the customer to receive the billing credits. */
   @SerializedName("customer")
   String customer;
+
+  /** ID of the account to receive the billing credits. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * The time when the billing credits become effective-when they're eligible for use. It defaults
@@ -82,6 +86,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       ApplicabilityConfig applicabilityConfig,
       Category category,
       String customer,
+      String customerAccount,
       Long effectiveAt,
       List<String> expand,
       Long expiresAt,
@@ -93,6 +98,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
     this.applicabilityConfig = applicabilityConfig;
     this.category = category;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.effectiveAt = effectiveAt;
     this.expand = expand;
     this.expiresAt = expiresAt;
@@ -115,6 +121,8 @@ public class CreditGrantCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private Long effectiveAt;
 
     private List<String> expand;
@@ -136,6 +144,7 @@ public class CreditGrantCreateParams extends ApiRequestParams {
           this.applicabilityConfig,
           this.category,
           this.customer,
+          this.customerAccount,
           this.effectiveAt,
           this.expand,
           this.expiresAt,
@@ -168,9 +177,15 @@ public class CreditGrantCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> ID of the customer to receive the billing credits. */
+    /** ID of the customer to receive the billing credits. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** ID of the account to receive the billing credits. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

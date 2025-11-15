@@ -48,7 +48,6 @@ public class BaseStripeTest {
   private String origApiKey;
   private String origClientId;
   private String origUploadBase;
-
   protected static final String TEST_API_KEY = "sk_test_123";
 
   static {
@@ -120,9 +119,11 @@ public class BaseStripeTest {
     this.origApiKey = Stripe.apiKey;
     this.origClientId = Stripe.clientId;
 
+    Stripe.clearBetaVersion();
+
     Stripe.overrideApiBase("http://localhost:" + port);
     Stripe.overrideUploadBase("http://localhost:" + port);
-    Stripe.apiKey = "sk_test_123";
+    Stripe.apiKey = TEST_API_KEY;
     Stripe.clientId = "ca_123";
     Stripe.enableTelemetry = false;
 

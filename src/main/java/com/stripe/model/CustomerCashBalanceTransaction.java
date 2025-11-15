@@ -41,6 +41,9 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * The total available cash balance for the specified currency after this transaction was applied.
    * Represented in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency

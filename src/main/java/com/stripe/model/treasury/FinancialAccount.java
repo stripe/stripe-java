@@ -55,6 +55,14 @@ public class FinancialAccount extends ApiResource
   Long created;
 
   /**
+   * The display name for the FinancialAccount. Use this field to customize the names of the
+   * FinancialAccounts for your connected accounts. Unlike the {@code nickname} field, {@code
+   * display_name} is not internal metadata and will be exposed to connected accounts.
+   */
+  @SerializedName("display_name")
+  String displayName;
+
+  /**
    * Encodes whether a FinancialAccount has access to a particular Feature, with a {@code status}
    * enum and associated {@code status_details}. Stripe or the platform can control Features via the
    * requested field.

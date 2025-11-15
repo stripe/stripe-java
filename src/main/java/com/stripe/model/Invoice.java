@@ -118,6 +118,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("amount_shipping")
   Long amountShipping;
 
+  /**
+   * List of expected payments and corresponding due dates. This value will be null for invoices
+   * where collection_method=charge_automatically.
+   */
+  @SerializedName("amounts_due")
+  List<Invoice.AmountsDue> amountsDue;
+
   /** ID of the Connect Application that created the invoice. */
   @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)
@@ -221,6 +228,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The ID of the account who will be billed. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * The customer's address. Until the invoice is finalized, this field will equal {@code
    * customer.address}. Once the invoice is finalized, this field will no longer be updated.
@@ -272,6 +283,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("customer_tax_ids")
   List<Invoice.CustomerTaxId> customerTaxIds;
+
+  /**
+   * The margins applied to the invoice. Can be overridden by line item {@code margins}. Use {@code
+   * expand[]=default_margins} to expand each margin.
+   */
+  @SerializedName("default_margins")
+  List<ExpandableField<Margin>> defaultMargins;
 
   /**
    * ID of the default payment method for the invoice. It must belong to the customer associated
@@ -567,6 +585,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("total_excluding_tax")
   Long totalExcludingTax;
 
+  /** The aggregate amounts calculated per margin across all line items. */
+  @SerializedName("total_margin_amounts")
+  List<Invoice.TotalMarginAmount> totalMarginAmounts;
+
   /**
    * Contains pretax credit amounts (ex: discount, credit grants, etc) that apply to this invoice.
    * This is a combined list of total_pretax_credit_amounts across all invoice line items.
@@ -756,6 +778,50 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
         objs != null
             ? objs.stream()
                 .map(x -> new ExpandableField<TaxId>(x.getId(), x))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get IDs of expandable {@code defaultMargins} object list. */
+  public List<String> getDefaultMargins() {
+    return (this.defaultMargins != null)
+        ? this.defaultMargins.stream().map(x -> x.getId()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDefaultMargins(List<String> ids) {
+    if (ids == null) {
+      this.defaultMargins = null;
+      return;
+    }
+    if (this.defaultMargins != null
+        && this.defaultMargins.stream()
+            .map(x -> x.getId())
+            .collect(Collectors.toList())
+            .equals(ids)) {
+      // noop if the ids are equal to what are already present
+      return;
+    }
+    this.defaultMargins =
+        (ids != null)
+            ? ids.stream()
+                .map(id -> new ExpandableField<Margin>(id, null))
+                .collect(Collectors.toList())
+            : null;
+  }
+
+  /** Get expanded {@code defaultMargins}. */
+  public List<Margin> getDefaultMarginObjects() {
+    return (this.defaultMargins != null)
+        ? this.defaultMargins.stream().map(x -> x.getExpanded()).collect(Collectors.toList())
+        : null;
+  }
+
+  public void setDefaultMarginObjects(List<Margin> objs) {
+    this.defaultMargins =
+        objs != null
+            ? objs.stream()
+                .map(x -> new ExpandableField<Margin>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
   }
@@ -1961,6 +2027,49 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about AmountsDue, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountsDue extends StripeObject {
+    /** Incremental amount due for this payment in cents (or local equivalent). */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The amount in cents (or local equivalent) that was paid for this payment. */
+    @SerializedName("amount_paid")
+    Long amountPaid;
+
+    /**
+     * The difference between the payment’s amount and amount_paid, in cents (or local equivalent).
+     */
+    @SerializedName("amount_remaining")
+    Long amountRemaining;
+
+    /** Number of days from when invoice is finalized until the payment is due. */
+    @SerializedName("days_until_due")
+    Long daysUntilDue;
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
+    /** Date on which a payment plan’s payment is due. */
+    @SerializedName("due_date")
+    Long dueDate;
+
+    /** Timestamp when the payment was paid. */
+    @SerializedName("paid_at")
+    Long paidAt;
+
+    /** The status of the payment, one of {@code open}, {@code paid}, or {@code past_due}. */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about AutomaticTax, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2210,6 +2319,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
+    /** Details about the billing cadence that generated this invoice. */
+    @SerializedName("billing_cadence_details")
+    BillingCadenceDetails billingCadenceDetails;
+
     /** Details about the quote that generated this invoice. */
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
@@ -2221,10 +2334,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /**
      * The type of parent that generated this invoice
      *
-     * <p>One of {@code quote_details}, or {@code subscription_details}.
+     * <p>One of {@code billing_cadence_details}, {@code quote_details}, or {@code
+     * subscription_details}.
      */
     @SerializedName("type")
     String type;
+
+    /**
+     * For more details about BillingCadenceDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingCadenceDetails extends StripeObject {
+      /** The billing cadence that generated this invoice. */
+      @SerializedName("billing_cadence")
+      String billingCadence;
+    }
 
     /**
      * For more details about QuoteDetails, please refer to the <a
@@ -2256,6 +2383,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @SerializedName("metadata")
       Map<String, String> metadata;
 
+      /**
+       * If specified, payment collection for this subscription will be paused. Note that the
+       * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+       * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+       * collection</a>.
+       */
+      @SerializedName("pause_collection")
+      PauseCollection pauseCollection;
+
       /** The subscription that generated this invoice. */
       @SerializedName("subscription")
       @Getter(lombok.AccessLevel.NONE)
@@ -2286,6 +2422,26 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       public void setSubscriptionObject(Subscription expandableObject) {
         this.subscription =
             new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+      }
+
+      /**
+       * The Pause Collection settings determine how we will pause collection for this subscription
+       * and for how long the subscription should be paused.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class PauseCollection extends StripeObject {
+        /**
+         * The payment collection behavior for this subscription while paused. One of {@code
+         * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+         */
+        @SerializedName("behavior")
+        String behavior;
+
+        /** The time after which the subscription will resume collecting payments. */
+        @SerializedName("resumes_at")
+        Long resumesAt;
       }
     }
   }
@@ -2356,6 +2512,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       CustomerBalance customerBalance;
 
       /**
+       * If paying by {@code id_bank_transfer}, this sub-hash contains details about the Indonesia
+       * bank transfer payment method options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("id_bank_transfer")
+      IdBankTransfer idBankTransfer;
+
+      /**
        * If paying by {@code konbini}, this sub-hash contains details about the Konbini payment
        * method options to pass to the invoice’s PaymentIntent.
        */
@@ -2363,11 +2526,25 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       Konbini konbini;
 
       /**
+       * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("pix")
+      Pix pix;
+
+      /**
        * If paying by {@code sepa_debit}, this sub-hash contains details about the SEPA Direct Debit
        * payment method options to pass to the invoice’s PaymentIntent.
        */
       @SerializedName("sepa_debit")
       SepaDebit sepaDebit;
+
+      /**
+       * If paying by {@code upi}, this sub-hash contains details about the UPI payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("upi")
+      Upi upi;
 
       /**
        * If paying by {@code us_bank_account}, this sub-hash contains details about the ACH direct
@@ -2531,6 +2708,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       }
 
       /**
+       * For more details about IdBankTransfer, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class IdBankTransfer extends StripeObject {}
+
+      /**
        * For more details about Konbini, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -2540,6 +2726,23 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       public static class Konbini extends StripeObject {}
 
       /**
+       * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Pix extends StripeObject {
+        /**
+         * Determines if the amount includes the IOF tax.
+         *
+         * <p>One of {@code always}, or {@code never}.
+         */
+        @SerializedName("amount_includes_iof")
+        String amountIncludesIof;
+      }
+
+      /**
        * For more details about SepaDebit, please refer to the <a
        * href="https://docs.stripe.com/api">API Reference.</a>
        */
@@ -2547,6 +2750,53 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class SepaDebit extends StripeObject {}
+
+      /**
+       * For more details about Upi, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Upi extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /** Amount to be charged for future payments. */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * One of {@code fixed} or {@code maximum}. If {@code fixed}, the {@code amount} param
+           * refers to the exact amount to be charged in future payments. If {@code maximum}, the
+           * amount charged can be up to the value passed for the {@code amount} param.
+           */
+          @SerializedName("amount_type")
+          String amountType;
+
+          /**
+           * A description of the mandate or subscription that is meant to be displayed to the
+           * customer.
+           */
+          @SerializedName("description")
+          String description;
+
+          /**
+           * End date of the mandate or subscription. If not provided, the mandate will be active
+           * until canceled. If provided, end date should be after start date.
+           */
+          @SerializedName("end_date")
+          Long endDate;
+        }
+      }
 
       /**
        * For more details about UsBankAccount, please refer to the <a
@@ -2603,6 +2853,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
              */
             @SerializedName("account_subcategories")
             List<String> accountSubcategories;
+
+            /** The institution to use to filter for possible accounts to link. */
+            @SerializedName("institution")
+            String institution;
           }
         }
       }
@@ -2841,6 +3095,43 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * For more details about TotalMarginAmount, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TotalMarginAmount extends StripeObject {
+    /** The amount, in cents (or local equivalent), of the reduction in line item amount. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** The margin that was applied to get this margin amount. */
+    @SerializedName("margin")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Margin> margin;
+
+    /** Get ID of expandable {@code margin} object. */
+    public String getMargin() {
+      return (this.margin != null) ? this.margin.getId() : null;
+    }
+
+    public void setMargin(String id) {
+      this.margin = ApiResource.setExpandableFieldId(id, this.margin);
+    }
+
+    /** Get expanded {@code margin}. */
+    public Margin getMarginObject() {
+      return (this.margin != null) ? this.margin.getExpanded() : null;
+    }
+
+    public void setMarginObject(Margin expandableObject) {
+      this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
+    }
+  }
+
+  /**
    * For more details about TotalPretaxCreditAmount, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -2864,10 +3155,16 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Discount> discount;
 
+    /** The margin that was applied to get this pretax credit amount. */
+    @SerializedName("margin")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Margin> margin;
+
     /**
      * Type of the pretax credit amount referenced.
      *
-     * <p>One of {@code credit_balance_transaction}, or {@code discount}.
+     * <p>One of {@code credit_balance_transaction}, {@code discount}, or {@code margin}.
      */
     @SerializedName("type")
     String type;
@@ -2910,6 +3207,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
     public void setDiscountObject(Discount expandableObject) {
       this.discount = new ExpandableField<Discount>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get ID of expandable {@code margin} object. */
+    public String getMargin() {
+      return (this.margin != null) ? this.margin.getId() : null;
+    }
+
+    public void setMargin(String id) {
+      this.margin = ApiResource.setExpandableFieldId(id, this.margin);
+    }
+
+    /** Get expanded {@code margin}. */
+    public Margin getMarginObject() {
+      return (this.margin != null) ? this.margin.getExpanded() : null;
+    }
+
+    public void setMarginObject(Margin expandableObject) {
+      this.margin = new ExpandableField<Margin>(expandableObject.getId(), expandableObject);
     }
   }
 

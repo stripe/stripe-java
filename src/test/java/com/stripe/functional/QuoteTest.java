@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
+import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.LineItemCollection;
 import com.stripe.model.Quote;
 import com.stripe.model.QuoteCollection;
@@ -138,5 +139,15 @@ public class QuoteTest extends BaseStripeTest {
     final String body = StreamUtils.readToEnd(stream, ApiResource.CHARSET);
     assertNotNull(stream);
     assertEquals(body, "Stripe binary response");
+  }
+
+  @Test
+  public void testQuoteList() throws StripeException {
+    Quote quote = Quote.retrieve("q_123");
+    InvoiceLineItemCollection lines =
+        quote.listPreviewInvoiceLines("inv_123", (Map<String, Object>) null, null);
+    assertNotNull(lines);
+    verifyRequest(
+        ApiResource.RequestMethod.GET, "/v1/quotes/q_123/preview_invoices/inv_123/lines", null);
   }
 }

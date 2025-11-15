@@ -12,6 +12,7 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.SubscriptionScheduleAmendParams;
 import com.stripe.param.SubscriptionScheduleCancelParams;
 import com.stripe.param.SubscriptionScheduleCreateParams;
 import com.stripe.param.SubscriptionScheduleListParams;
@@ -149,6 +150,35 @@ public final class SubscriptionScheduleService extends ApiService {
       String schedule, SubscriptionScheduleUpdateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, SubscriptionSchedule.class);
+  }
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(String schedule, SubscriptionScheduleAmendParams params)
+      throws StripeException {
+    return amend(schedule, params, (RequestOptions) null);
+  }
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(String schedule, RequestOptions options)
+      throws StripeException {
+    return amend(schedule, (SubscriptionScheduleAmendParams) null, options);
+  }
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(String schedule) throws StripeException {
+    return amend(schedule, (SubscriptionScheduleAmendParams) null, (RequestOptions) null);
+  }
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(
+      String schedule, SubscriptionScheduleAmendParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(schedule));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

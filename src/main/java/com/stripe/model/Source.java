@@ -169,6 +169,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("p24")
   P24 p24;
 
+  @SerializedName("paypal")
+  Paypal paypal;
+
   @SerializedName("receiver")
   Receiver receiver;
 
@@ -666,6 +669,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("brand")
     String brand;
 
+    @SerializedName("brand_product")
+    String brandProduct;
+
     @SerializedName("country")
     String country;
 
@@ -731,6 +737,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("brand")
     String brand;
+
+    @SerializedName("brand_product")
+    String brandProduct;
 
     @SerializedName("country")
     String country;
@@ -1073,6 +1082,42 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   }
 
   /**
+   * For more details about Paypal, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Paypal extends StripeObject {
+    @SerializedName("billing_agreement")
+    String billingAgreement;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("payer_id")
+    String payerId;
+
+    @SerializedName("reference_id")
+    String referenceId;
+
+    @SerializedName("reference_transaction_amount")
+    String referenceTransactionAmount;
+
+    @SerializedName("reference_transaction_charged")
+    Boolean referenceTransactionCharged;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    @SerializedName("transaction_id")
+    String transactionId;
+
+    @SerializedName("verified_email")
+    String verifiedEmail;
+  }
+
+  /**
    * For more details about Receiver, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1357,6 +1402,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("brand")
     String brand;
 
+    @SerializedName("brand_product")
+    String brandProduct;
+
     @SerializedName("card")
     String card;
 
@@ -1443,6 +1491,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     trySetResponseGetter(multibanco, responseGetter);
     trySetResponseGetter(owner, responseGetter);
     trySetResponseGetter(p24, responseGetter);
+    trySetResponseGetter(paypal, responseGetter);
     trySetResponseGetter(receiver, responseGetter);
     trySetResponseGetter(redirect, responseGetter);
     trySetResponseGetter(sepaCreditTransfer, responseGetter);

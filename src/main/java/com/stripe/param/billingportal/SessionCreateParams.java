@@ -22,9 +22,13 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("configuration")
   String configuration;
 
-  /** <strong>Required.</strong> The ID of an existing customer. */
+  /** The ID of an existing customer. */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of an existing account. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -77,6 +81,7 @@ public class SessionCreateParams extends ApiRequestParams {
   private SessionCreateParams(
       String configuration,
       String customer,
+      String customerAccount,
       List<String> expand,
       Map<String, Object> extraParams,
       FlowData flowData,
@@ -85,6 +90,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String returnUrl) {
     this.configuration = configuration;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
     this.flowData = flowData;
@@ -101,6 +107,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private String configuration;
 
     private String customer;
+
+    private String customerAccount;
 
     private List<String> expand;
 
@@ -119,6 +127,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return new SessionCreateParams(
           this.configuration,
           this.customer,
+          this.customerAccount,
           this.expand,
           this.extraParams,
           this.flowData,
@@ -138,9 +147,15 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of an existing customer. */
+    /** The ID of an existing customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of an existing account. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

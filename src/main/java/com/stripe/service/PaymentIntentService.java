@@ -18,10 +18,12 @@ import com.stripe.param.PaymentIntentCancelParams;
 import com.stripe.param.PaymentIntentCaptureParams;
 import com.stripe.param.PaymentIntentConfirmParams;
 import com.stripe.param.PaymentIntentCreateParams;
+import com.stripe.param.PaymentIntentDecrementAuthorizationParams;
 import com.stripe.param.PaymentIntentIncrementAuthorizationParams;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
 import com.stripe.param.PaymentIntentSearchParams;
+import com.stripe.param.PaymentIntentTriggerActionParams;
 import com.stripe.param.PaymentIntentUpdateParams;
 import com.stripe.param.PaymentIntentVerifyMicrodepositsParams;
 
@@ -564,6 +566,63 @@ public final class PaymentIntentService extends ApiService {
     return this.request(request, PaymentIntent.class);
   }
   /**
+   * Perform a decremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
+   * must be {@code available}.
+   *
+   * <p>Decremental authorizations decrease the authorized amount on your customer’s card to the
+   * new, lower {@code amount} provided. A single PaymentIntent can call this endpoint multiple
+   * times to further decrease the authorized amount.
+   *
+   * <p>After decrement, the PaymentIntent object returns with the updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * The PaymentIntent will now be capturable up to the new authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
+   * decremented.
+   */
+  public PaymentIntent decrementAuthorization(
+      String intent, PaymentIntentDecrementAuthorizationParams params) throws StripeException {
+    return decrementAuthorization(intent, params, (RequestOptions) null);
+  }
+  /**
+   * Perform a decremental authorization on an eligible <a
+   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
+   * the PaymentIntent’s status must be {@code requires_capture} and <a
+   * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card-decremental_authorization">decremental_authorization.status</a>
+   * must be {@code available}.
+   *
+   * <p>Decremental authorizations decrease the authorized amount on your customer’s card to the
+   * new, lower {@code amount} provided. A single PaymentIntent can call this endpoint multiple
+   * times to further decrease the authorized amount.
+   *
+   * <p>After decrement, the PaymentIntent object returns with the updated <a
+   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-amount">amount</a>.
+   * The PaymentIntent will now be capturable up to the new authorized amount.
+   *
+   * <p>Each PaymentIntent can have a maximum of 10 decremental or incremental authorization
+   * attempts, including declines. After it’s fully captured, a PaymentIntent can no longer be
+   * decremented.
+   */
+  public PaymentIntent decrementAuthorization(
+      String intent, PaymentIntentDecrementAuthorizationParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/payment_intents/%s/decrement_authorization", ApiResource.urlEncodeId(intent));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentIntent.class);
+  }
+  /**
    * Perform an incremental authorization on an eligible <a
    * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a>. To be eligible,
    * the PaymentIntent’s status must be {@code requires_capture} and <a
@@ -658,6 +717,27 @@ public final class PaymentIntentService extends ApiService {
     String path =
         String.format(
             "/v1/payment_intents/%s/verify_microdeposits", ApiResource.urlEncodeId(intent));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, PaymentIntent.class);
+  }
+  /** Trigger an external action on a PaymentIntent. */
+  public PaymentIntent triggerAction(String intent, PaymentIntentTriggerActionParams params)
+      throws StripeException {
+    return triggerAction(intent, params, (RequestOptions) null);
+  }
+  /** Trigger an external action on a PaymentIntent. */
+  public PaymentIntent triggerAction(
+      String intent, PaymentIntentTriggerActionParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format(
+            "/v1/test/payment_intents/%s/trigger_action", ApiResource.urlEncodeId(intent));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

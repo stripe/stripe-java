@@ -2,7 +2,9 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import com.stripe.net.ApiResource;
 import java.util.List;
+import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +14,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class LineItem extends StripeObject implements HasId {
+  @SerializedName("adjustable_quantity")
+  AdjustableQuantity adjustableQuantity;
+
   /** Total discount amount applied. If no discounts were applied, defaults to 0. */
   @SerializedName("amount_discount")
   Long amountDiscount;
@@ -46,10 +51,21 @@ public class LineItem extends StripeObject implements HasId {
   @SerializedName("discounts")
   List<LineItem.Discount> discounts;
 
+  @SerializedName("display")
+  Display display;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /**
+   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -63,13 +79,63 @@ public class LineItem extends StripeObject implements HasId {
   @SerializedName("price")
   Price price;
 
+  /**
+   * The ID of the product for this line item.
+   *
+   * <p>This will always be the same as {@code price.product}.
+   */
+  @SerializedName("product")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Product> product;
+
   /** The quantity of products being purchased. */
   @SerializedName("quantity")
   Long quantity;
 
+  /** The tax calculation identifiers of the line item. */
+  @SerializedName("tax_calculation_reference")
+  TaxCalculationReference taxCalculationReference;
+
   /** The taxes applied to the line item. */
   @SerializedName("taxes")
   List<LineItem.Tax> taxes;
+
+  /** Get ID of expandable {@code product} object. */
+  public String getProduct() {
+    return (this.product != null) ? this.product.getId() : null;
+  }
+
+  public void setProduct(String id) {
+    this.product = ApiResource.setExpandableFieldId(id, this.product);
+  }
+
+  /** Get expanded {@code product}. */
+  public Product getProductObject() {
+    return (this.product != null) ? this.product.getExpanded() : null;
+  }
+
+  public void setProductObject(Product expandableObject) {
+    this.product = new ExpandableField<Product>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * For more details about AdjustableQuantity, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AdjustableQuantity extends StripeObject {
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    @SerializedName("maximum")
+    Long maximum;
+
+    @SerializedName("minimum")
+    Long minimum;
+  }
 
   /**
    * For more details about Discount, please refer to the <a href="https://docs.stripe.com/api">API
@@ -94,6 +160,24 @@ public class LineItem extends StripeObject implements HasId {
      */
     @SerializedName("discount")
     com.stripe.model.Discount discount;
+  }
+
+  /**
+   * For more details about Display, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Display extends StripeObject {
+    @SerializedName("description")
+    String description;
+
+    @SerializedName("images")
+    List<String> images;
+
+    @SerializedName("name")
+    String name;
   }
 
   /**
@@ -136,5 +220,22 @@ public class LineItem extends StripeObject implements HasId {
     /** The amount on which tax is calculated, in cents (or local equivalent). */
     @SerializedName("taxable_amount")
     Long taxableAmount;
+  }
+
+  /**
+   * For more details about TaxCalculationReference, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxCalculationReference extends StripeObject {
+    /** The calculation identifier for tax calculation response. */
+    @SerializedName("calculation_id")
+    String calculationId;
+
+    /** The calculation identifier for tax calculation response line item. */
+    @SerializedName("calculation_item_id")
+    String calculationItemId;
   }
 }

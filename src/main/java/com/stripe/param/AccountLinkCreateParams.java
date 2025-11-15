@@ -385,7 +385,13 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     ACCOUNT_ONBOARDING("account_onboarding"),
 
     @SerializedName("account_update")
-    ACCOUNT_UPDATE("account_update");
+    ACCOUNT_UPDATE("account_update"),
+
+    @SerializedName("capital_financing_offer")
+    CAPITAL_FINANCING_OFFER("capital_financing_offer"),
+
+    @SerializedName("capital_financing_reporting")
+    CAPITAL_FINANCING_REPORTING("capital_financing_reporting");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

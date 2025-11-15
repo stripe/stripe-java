@@ -166,6 +166,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("requirements")
   Requirements requirements;
 
+  @SerializedName("risk_controls")
+  RiskControls riskControls;
+
   /** Options for customizing how the account functions within Stripe. */
   @SerializedName("settings")
   Settings settings;
@@ -912,6 +915,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String auBecsDebitPayments;
 
     /**
+     * The status of the automatic_indirect_tax capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("automatic_indirect_tax")
+    String automaticIndirectTax;
+
+    /**
      * The status of the Bacs Direct Debits payments capability of the account, or whether the
      * account can directly process Bacs Direct Debits charges.
      *
@@ -1047,6 +1058,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String giropayPayments;
 
     /**
+     * The status of the Gopay capability of the account, or whether the account can directly
+     * process Gopay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("gopay_payments")
+    String gopayPayments;
+
+    /**
      * The status of the GrabPay payments capability of the account, or whether the account can
      * directly process GrabPay charges.
      *
@@ -1054,6 +1074,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("grabpay_payments")
     String grabpayPayments;
+
+    /**
+     * The status of the Indonesia Bank Transfer payments capability of the account, or whether the
+     * account can directly process Indonesia Bank Transfer charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("id_bank_transfer_payments")
+    String idBankTransferPayments;
+
+    /**
+     * The status of Bank BCA onboarding of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("id_bank_transfer_payments_bca")
+    String idBankTransferPaymentsBca;
 
     /**
      * The status of the iDEAL payments capability of the account, or whether the account can
@@ -1244,6 +1281,33 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String paynowPayments;
 
     /**
+     * The status of the PayPal payments capability of the account, or whether the account can
+     * directly process PayPal charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("paypal_payments")
+    String paypalPayments;
+
+    /**
+     * The status of the Paypay capability of the account, or whether the account can directly
+     * process Paypay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("paypay_payments")
+    String paypayPayments;
+
+    /**
+     * The status of the PayTo capability of the account, or whether the account can directly
+     * process PayTo charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("payto_payments")
+    String paytoPayments;
+
+    /**
      * The status of the pix payments capability of the account, or whether the account can directly
      * process pix charges.
      *
@@ -1260,6 +1324,24 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("promptpay_payments")
     String promptpayPayments;
+
+    /**
+     * The status of the Qris capability of the account, or whether the account can directly process
+     * Qris payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("qris_payments")
+    String qrisPayments;
+
+    /**
+     * The status of the Rechnung capability of the account, or whether the account can directly
+     * process Rechnung payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("rechnung_payments")
+    String rechnungPayments;
 
     /**
      * The status of the RevolutPay capability of the account, or whether the account can directly
@@ -1307,6 +1389,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String sepaDebitPayments;
 
     /**
+     * The status of the ShopeePay capability of the account, or whether the account can directly
+     * process ShopeePay payments.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("shopeepay_payments")
+    String shopeepayPayments;
+
+    /**
      * The status of the Sofort payments capability of the account, or whether the account can
      * directly process Sofort charges.
      *
@@ -1314,6 +1405,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("sofort_payments")
     String sofortPayments;
+
+    /**
+     * The status of the stripe_balance payments capability of the account, or whether the account
+     * can directly process stripe_balance charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("stripe_balance_payments")
+    String stripeBalancePayments;
 
     /**
      * The status of the Swish capability of the account, or whether the account can directly
@@ -1356,6 +1456,30 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      */
     @SerializedName("treasury")
     String treasury;
+
+    /**
+     * The status of the treasury_evolve capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_evolve")
+    String treasuryEvolve;
+
+    /**
+     * The status of the treasury_fifth_third capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_fifth_third")
+    String treasuryFifthThird;
+
+    /**
+     * The status of the treasury_goldman_sachs capability of the account.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("treasury_goldman_sachs")
+    String treasuryGoldmanSachs;
 
     /**
      * The status of the TWINT capability of the account, or whether the account can directly
@@ -1836,6 +1960,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Controller extends StripeObject {
+    @SerializedName("application")
+    Application application;
+
+    @SerializedName("dashboard")
+    Dashboard dashboard;
+
     @SerializedName("fees")
     Fees fees;
 
@@ -1871,6 +2001,51 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String type;
 
     /**
+     * For more details about Application, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Application extends StripeObject {
+      /**
+       * {@code true} if the Connect application is responsible for negative balances and should
+       * manage credit and fraud risk on the account.
+       */
+      @SerializedName("loss_liable")
+      Boolean lossLiable;
+
+      /** {@code true} if the Connect application is responsible for onboarding the account. */
+      @SerializedName("onboarding_owner")
+      Boolean onboardingOwner;
+
+      /**
+       * {@code true} if the Connect application is responsible for paying Stripe fees on
+       * pricing-control eligible products.
+       */
+      @SerializedName("pricing_controls")
+      Boolean pricingControls;
+    }
+
+    /**
+     * For more details about Dashboard, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dashboard extends StripeObject {
+      /**
+       * Whether this account has access to the full Stripe dashboard ({@code full}), to the Express
+       * dashboard ({@code express}), or to no dashboard ({@code none}).
+       *
+       * <p>One of {@code express}, {@code full}, or {@code none}.
+       */
+      @SerializedName("type")
+      String type;
+    }
+
+    /**
      * For more details about Fees, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -1884,8 +2059,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * href="https://docs.stripe.com/connect/direct-charges-fee-payer-behavior">fee behavior on
        * connected accounts</a>.
        *
-       * <p>One of {@code account}, {@code application}, {@code application_custom}, or {@code
-       * application_express}.
+       * <p>One of {@code account}, {@code application}, {@code application_custom}, {@code
+       * application_express}, or {@code application_unified_accounts_beta}.
        */
       @SerializedName("payer")
       String payer;
@@ -2064,29 +2239,29 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * invalid_url_website_incomplete_terms_and_conditions}, {@code
        * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
        * {@code invalid_value_other}, {@code unsupported_business_type}, {@code
-       * verification_directors_mismatch}, {@code verification_document_address_mismatch}, {@code
-       * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
-       * verification_document_country_not_supported}, {@code
-       * verification_document_directors_mismatch}, {@code verification_document_dob_mismatch},
-       * {@code verification_document_duplicate_type}, {@code verification_document_expired}, {@code
-       * verification_document_failed_copy}, {@code verification_document_failed_greyscale}, {@code
-       * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
-       * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
-       * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
-       * verification_document_invalid}, {@code verification_document_issue_or_expiry_date_missing},
-       * {@code verification_document_manipulated}, {@code verification_document_missing_back},
-       * {@code verification_document_missing_front}, {@code verification_document_name_mismatch},
-       * {@code verification_document_name_missing}, {@code
-       * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
-       * {@code verification_document_not_signed}, {@code verification_document_not_uploaded},
-       * {@code verification_document_photo_mismatch}, {@code verification_document_too_large},
-       * {@code verification_document_type_not_supported}, {@code
-       * verification_extraneous_directors}, {@code verification_failed_address_match}, {@code
-       * verification_failed_authorizer_authority}, {@code verification_failed_business_iec_number},
-       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
-       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_representative_authority}, {@code
+       * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
+       * verification_document_address_mismatch}, {@code verification_document_address_missing},
+       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
+       * {@code verification_document_directors_mismatch}, {@code
+       * verification_document_dob_mismatch}, {@code verification_document_duplicate_type}, {@code
+       * verification_document_expired}, {@code verification_document_failed_copy}, {@code
+       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
+       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
+       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
+       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
+       * verification_document_issue_or_expiry_date_missing}, {@code
+       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
+       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
+       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
+       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
+       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
+       * {@code verification_extraneous_directors}, {@code verification_failed_address_match},
+       * {@code verification_failed_authorizer_authority}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code
        * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
@@ -2267,29 +2442,29 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        * invalid_url_website_incomplete_terms_and_conditions}, {@code
        * invalid_url_website_incomplete_under_construction}, {@code invalid_url_website_other},
        * {@code invalid_value_other}, {@code unsupported_business_type}, {@code
-       * verification_directors_mismatch}, {@code verification_document_address_mismatch}, {@code
-       * verification_document_address_missing}, {@code verification_document_corrupt}, {@code
-       * verification_document_country_not_supported}, {@code
-       * verification_document_directors_mismatch}, {@code verification_document_dob_mismatch},
-       * {@code verification_document_duplicate_type}, {@code verification_document_expired}, {@code
-       * verification_document_failed_copy}, {@code verification_document_failed_greyscale}, {@code
-       * verification_document_failed_other}, {@code verification_document_failed_test_mode}, {@code
-       * verification_document_fraudulent}, {@code verification_document_id_number_mismatch}, {@code
-       * verification_document_id_number_missing}, {@code verification_document_incomplete}, {@code
-       * verification_document_invalid}, {@code verification_document_issue_or_expiry_date_missing},
-       * {@code verification_document_manipulated}, {@code verification_document_missing_back},
-       * {@code verification_document_missing_front}, {@code verification_document_name_mismatch},
-       * {@code verification_document_name_missing}, {@code
-       * verification_document_nationality_mismatch}, {@code verification_document_not_readable},
-       * {@code verification_document_not_signed}, {@code verification_document_not_uploaded},
-       * {@code verification_document_photo_mismatch}, {@code verification_document_too_large},
-       * {@code verification_document_type_not_supported}, {@code
-       * verification_extraneous_directors}, {@code verification_failed_address_match}, {@code
-       * verification_failed_authorizer_authority}, {@code verification_failed_business_iec_number},
-       * {@code verification_failed_document_match}, {@code verification_failed_id_number_match},
-       * {@code verification_failed_keyed_identity}, {@code verification_failed_keyed_match}, {@code
-       * verification_failed_name_match}, {@code verification_failed_other}, {@code
-       * verification_failed_representative_authority}, {@code
+       * verification_data_not_found}, {@code verification_directors_mismatch}, {@code
+       * verification_document_address_mismatch}, {@code verification_document_address_missing},
+       * {@code verification_document_corrupt}, {@code verification_document_country_not_supported},
+       * {@code verification_document_directors_mismatch}, {@code
+       * verification_document_dob_mismatch}, {@code verification_document_duplicate_type}, {@code
+       * verification_document_expired}, {@code verification_document_failed_copy}, {@code
+       * verification_document_failed_greyscale}, {@code verification_document_failed_other}, {@code
+       * verification_document_failed_test_mode}, {@code verification_document_fraudulent}, {@code
+       * verification_document_id_number_mismatch}, {@code verification_document_id_number_missing},
+       * {@code verification_document_incomplete}, {@code verification_document_invalid}, {@code
+       * verification_document_issue_or_expiry_date_missing}, {@code
+       * verification_document_manipulated}, {@code verification_document_missing_back}, {@code
+       * verification_document_missing_front}, {@code verification_document_name_mismatch}, {@code
+       * verification_document_name_missing}, {@code verification_document_nationality_mismatch},
+       * {@code verification_document_not_readable}, {@code verification_document_not_signed},
+       * {@code verification_document_not_uploaded}, {@code verification_document_photo_mismatch},
+       * {@code verification_document_too_large}, {@code verification_document_type_not_supported},
+       * {@code verification_extraneous_directors}, {@code verification_failed_address_match},
+       * {@code verification_failed_authorizer_authority}, {@code
+       * verification_failed_business_iec_number}, {@code verification_failed_document_match},
+       * {@code verification_failed_id_number_match}, {@code verification_failed_keyed_identity},
+       * {@code verification_failed_keyed_match}, {@code verification_failed_name_match}, {@code
+       * verification_failed_other}, {@code verification_failed_representative_authority}, {@code
        * verification_failed_residential_address}, {@code verification_failed_tax_id_match}, {@code
        * verification_failed_tax_id_not_issued}, {@code
        * verification_legal_entity_structure_mismatch}, {@code verification_missing_directors},
@@ -2319,6 +2494,59 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
+   * For more details about RiskControls, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RiskControls extends StripeObject {
+    @SerializedName("charges")
+    Charges charges;
+
+    @SerializedName("payouts")
+    Payouts payouts;
+
+    /**
+     * Represents the rejected reason of the account. Empty if account is not rejected, or rejected
+     * by Stripe. Please see <a href="https://stripe.com/docs/connect/">this page for more
+     * details</a>
+     *
+     * <p>One of {@code credit}, {@code fraud}, {@code fraud_no_intent_to_fulfill}, {@code
+     * fraud_other}, {@code fraud_payment_method_casher}, {@code fraud_payment_method_tester},
+     * {@code other}, or {@code terms_of_service}.
+     */
+    @SerializedName("rejected_reason")
+    String rejectedReason;
+
+    /**
+     * For more details about Charges, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Charges extends StripeObject {
+      /** Whether a pause of the risk control has been requested. */
+      @SerializedName("pause_requested")
+      Boolean pauseRequested;
+    }
+
+    /**
+     * For more details about Payouts, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payouts extends StripeObject {
+      /** Whether a pause of the risk control has been requested. */
+      @SerializedName("pause_requested")
+      Boolean pauseRequested;
+    }
+  }
+
+  /**
    * For more details about Settings, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -2329,8 +2557,14 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("bacs_debit_payments")
     BacsDebitPayments bacsDebitPayments;
 
+    @SerializedName("bank_bca_onboarding")
+    BankBcaOnboarding bankBcaOnboarding;
+
     @SerializedName("branding")
     Branding branding;
+
+    @SerializedName("capital")
+    Capital capital;
 
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
@@ -2352,6 +2586,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
+
+    @SerializedName("tax_forms")
+    TaxForms taxForms;
 
     @SerializedName("treasury")
     Treasury treasury;
@@ -2382,6 +2619,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("service_user_number")
       String serviceUserNumber;
+    }
+
+    /**
+     * For more details about BankBcaOnboarding, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BankBcaOnboarding extends StripeObject {
+      /** Bank BCA business account holder name. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
+      /** Bank BCA business account number. */
+      @SerializedName("business_account_number")
+      String businessAccountNumber;
     }
 
     /**
@@ -2454,6 +2708,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       public void setLogoObject(File expandableObject) {
         this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    /**
+     * For more details about Capital, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Capital extends StripeObject {
+      /** Per-currency mapping of user-selected destination accounts used to pay out loans. */
+      @SerializedName("payout_destination")
+      Map<String, String> payoutDestination;
+
+      /** Per-currency mapping of all destination accounts eligible to receive loan payouts. */
+      @SerializedName("payout_destination_selector")
+      Map<String, List<String>> payoutDestinationSelector;
     }
 
     /**
@@ -2800,6 +3071,19 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     }
 
     /**
+     * For more details about TaxForms, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxForms extends StripeObject {
+      /** Whether the account opted out of receiving their tax forms by postal delivery. */
+      @SerializedName("consented_to_paperless_delivery")
+      Boolean consentedToPaperlessDelivery;
+    }
+
+    /**
      * For more details about Treasury, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -2881,6 +3165,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     trySetResponseGetter(groups, responseGetter);
     trySetResponseGetter(individual, responseGetter);
     trySetResponseGetter(requirements, responseGetter);
+    trySetResponseGetter(riskControls, responseGetter);
     trySetResponseGetter(settings, responseGetter);
     trySetResponseGetter(tosAcceptance, responseGetter);
   }

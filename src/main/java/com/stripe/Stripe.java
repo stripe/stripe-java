@@ -4,6 +4,7 @@ import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Getter;
 
 public abstract class Stripe {
   public static final int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;
@@ -14,11 +15,70 @@ public abstract class Stripe {
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
   public static final String METER_EVENTS_API_BASE = "https://meter-events.stripe.com";
-  public static final String VERSION = "30.1.0";
+  public static final String VERSION = "30.2.0-beta.1";
 
   public static volatile String apiKey;
   public static volatile String clientId;
   public static volatile boolean enableTelemetry = true;
+
+  /**
+   * Stripe API version which is sent by default on requests. This is set to the API version that is
+   * linked to this SDK version. Call {@link Stripe#addBetaVersion(String,String)} to add beta
+   * version information.
+   */
+  public static final String stripeVersion = API_VERSION;
+
+  // Used to set the default version in RequestOptions
+  @Getter private static String stripeVersionWithBetaHeaders = stripeVersion;
+
+  /**
+   * Add a specified beta to the global Stripe API Version. If the betaName already exists, the
+   * higher version will be used.
+   *
+   * @throws IllegalArgumentException if the betaVersion is not in the format 'v' + number (e.g.
+   *     "v3")
+   */
+  public static void addBetaVersion(String betaName, String betaVersion) {
+    if (!betaVersion.matches("v\\d+")) {
+      throw new IllegalArgumentException(
+          String.format(
+              "Invalid beta version format: %s. Expected format is 'v<number>'.", betaVersion));
+    }
+
+    int incomingVersion =
+        Integer.parseInt(betaVersion.substring(1)); // Extract the number after 'v'
+
+    String existingEntry = "; " + betaName + "=";
+    int existingIndex = stripeVersionWithBetaHeaders.indexOf(existingEntry);
+
+    if (existingIndex >= 0) {
+      int startIndex = existingIndex + existingEntry.length();
+      int endIndex = stripeVersionWithBetaHeaders.indexOf(";", startIndex);
+      endIndex = (endIndex == -1) ? stripeVersionWithBetaHeaders.length() : endIndex;
+
+      String existingVersionStr = stripeVersionWithBetaHeaders.substring(startIndex, endIndex);
+      int existingVersion =
+          Integer.parseInt(existingVersionStr.substring(1)); // Extract the number after 'v'
+
+      if (incomingVersion <= existingVersion) {
+        return; // Keep the higher version (existing one)
+      }
+
+      // Remove the existing entry
+      stripeVersionWithBetaHeaders =
+          stripeVersionWithBetaHeaders.substring(0, existingIndex)
+              + stripeVersionWithBetaHeaders.substring(endIndex);
+    }
+
+    // Add the new beta version
+    stripeVersionWithBetaHeaders =
+        String.format("%s; %s=%s", stripeVersionWithBetaHeaders, betaName, betaVersion);
+  }
+
+  // For testing only.  This is not part of a stable API and could change in non-major versions.
+  public static void clearBetaVersion() {
+    stripeVersionWithBetaHeaders = stripeVersion;
+  }
 
   // Note that URLConnection reserves the value of 0 to mean "infinite
   // timeout", so we use -1 here to represent an unset value which should

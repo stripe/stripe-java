@@ -186,6 +186,11 @@ public final class AccountService extends ApiService {
     return this.request(request, Account.class);
   }
 
+  public com.stripe.service.financialconnections.AccountInferredBalanceService inferredBalances() {
+    return new com.stripe.service.financialconnections.AccountInferredBalanceService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.financialconnections.AccountOwnerService owners() {
     return new com.stripe.service.financialconnections.AccountOwnerService(
         this.getResponseGetter());

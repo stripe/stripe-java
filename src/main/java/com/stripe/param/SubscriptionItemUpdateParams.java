@@ -638,6 +638,10 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     @SerializedName("discount")
     Object discount;
 
+    /** Details to determine how long the discount should be applied for. */
+    @SerializedName("discount_end")
+    DiscountEnd discountEnd;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -652,9 +656,14 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     Object promotionCode;
 
     private Discount(
-        Object coupon, Object discount, Map<String, Object> extraParams, Object promotionCode) {
+        Object coupon,
+        Object discount,
+        DiscountEnd discountEnd,
+        Map<String, Object> extraParams,
+        Object promotionCode) {
       this.coupon = coupon;
       this.discount = discount;
+      this.discountEnd = discountEnd;
       this.extraParams = extraParams;
       this.promotionCode = promotionCode;
     }
@@ -668,6 +677,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
       private Object discount;
 
+      private DiscountEnd discountEnd;
+
       private Map<String, Object> extraParams;
 
       private Object promotionCode;
@@ -675,7 +686,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionItemUpdateParams.Discount build() {
         return new SubscriptionItemUpdateParams.Discount(
-            this.coupon, this.discount, this.extraParams, this.promotionCode);
+            this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -699,6 +710,12 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
       public Builder setDiscount(EmptyParam discount) {
         this.discount = discount;
+        return this;
+      }
+
+      /** Details to determine how long the discount should be applied for. */
+      public Builder setDiscountEnd(SubscriptionItemUpdateParams.Discount.DiscountEnd discountEnd) {
+        this.discountEnd = discountEnd;
         return this;
       }
 
@@ -738,6 +755,247 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       public Builder setPromotionCode(EmptyParam promotionCode) {
         this.promotionCode = promotionCode;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DiscountEnd {
+      /** Time span for the redeemed discount. */
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** A precise Unix timestamp for the discount to end. Must be in the future. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * <strong>Required.</strong> The type of calculation made to determine when the discount
+       * ends.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private DiscountEnd(
+          Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
+        this.duration = duration;
+        this.extraParams = extraParams;
+        this.timestamp = timestamp;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Duration duration;
+
+        private Map<String, Object> extraParams;
+
+        private Long timestamp;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionItemUpdateParams.Discount.DiscountEnd build() {
+          return new SubscriptionItemUpdateParams.Discount.DiscountEnd(
+              this.duration, this.extraParams, this.timestamp, this.type);
+        }
+
+        /** Time span for the redeemed discount. */
+        public Builder setDuration(
+            SubscriptionItemUpdateParams.Discount.DiscountEnd.Duration duration) {
+          this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemUpdateParams.Discount.DiscountEnd#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionItemUpdateParams.Discount.DiscountEnd#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** A precise Unix timestamp for the discount to end. Must be in the future. */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
+        public Builder setType(SubscriptionItemUpdateParams.Discount.DiscountEnd.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionItemUpdateParams.Discount.DiscountEnd.Duration build() {
+            return new SubscriptionItemUpdateParams.Discount.DiscountEnd.Duration(
+                this.extraParams, this.interval, this.intervalCount);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionItemUpdateParams.Discount.DiscountEnd.Duration#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SubscriptionItemUpdateParams.Discount.DiscountEnd.Duration#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
+           */
+          public Builder setInterval(
+              SubscriptionItemUpdateParams.Discount.DiscountEnd.Duration.Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("duration")
+        DURATION("duration"),
+
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
   }

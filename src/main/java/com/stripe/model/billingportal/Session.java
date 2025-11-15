@@ -51,6 +51,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of the account for this session. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * Information about a specific flow for the customer to go through. See the <a
    * href="https://stripe.com/docs/customer-management/portal-deep-links">docs</a> to learn more

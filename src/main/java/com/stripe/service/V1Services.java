@@ -13,6 +13,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.AccountLinkService(this.getResponseGetter());
   }
 
+  public com.stripe.service.AccountNoticeService accountNotices() {
+    return new com.stripe.service.AccountNoticeService(this.getResponseGetter());
+  }
+
   public com.stripe.service.AccountSessionService accountSessions() {
     return new com.stripe.service.AccountSessionService(this.getResponseGetter());
   }
@@ -51,6 +55,10 @@ public final class V1Services extends ApiService {
 
   public com.stripe.service.BillingPortalService billingPortal() {
     return new com.stripe.service.BillingPortalService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.CapitalService capital() {
+    return new com.stripe.service.CapitalService(this.getResponseGetter());
   }
 
   public com.stripe.service.ChargeService charges() {
@@ -109,6 +117,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.ExchangeRateService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ExternalAccountService externalAccounts() {
+    return new com.stripe.service.ExternalAccountService(this.getResponseGetter());
+  }
+
   public com.stripe.service.FileLinkService fileLinks() {
     return new com.stripe.service.FileLinkService(this.getResponseGetter());
   }
@@ -123,6 +135,10 @@ public final class V1Services extends ApiService {
 
   public com.stripe.service.ForwardingService forwarding() {
     return new com.stripe.service.ForwardingService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.FxQuoteService fxQuotes() {
+    return new com.stripe.service.FxQuoteService(this.getResponseGetter());
   }
 
   public com.stripe.service.IdentityService identity() {
@@ -151,6 +167,14 @@ public final class V1Services extends ApiService {
 
   public com.stripe.service.MandateService mandates() {
     return new com.stripe.service.MandateService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.MarginService margins() {
+    return new com.stripe.service.MarginService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.OrderService orders() {
+    return new com.stripe.service.OrderService(this.getResponseGetter());
   }
 
   public com.stripe.service.PaymentAttemptRecordService paymentAttemptRecords() {
@@ -191,6 +215,10 @@ public final class V1Services extends ApiService {
 
   public com.stripe.service.PriceService prices() {
     return new com.stripe.service.PriceService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.PrivacyService privacy() {
+    return new com.stripe.service.PrivacyService(this.getResponseGetter());
   }
 
   public com.stripe.service.ProductService products() {

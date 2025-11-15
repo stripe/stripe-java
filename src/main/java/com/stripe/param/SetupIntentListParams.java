@@ -34,6 +34,10 @@ public class SetupIntentListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** Only return SetupIntents for the account specified by this customer ID. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -80,6 +84,7 @@ public class SetupIntentListParams extends ApiRequestParams {
       Boolean attachToSelf,
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -89,6 +94,7 @@ public class SetupIntentListParams extends ApiRequestParams {
     this.attachToSelf = attachToSelf;
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -108,6 +114,8 @@ public class SetupIntentListParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -126,6 +134,7 @@ public class SetupIntentListParams extends ApiRequestParams {
           this.attachToSelf,
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -171,6 +180,12 @@ public class SetupIntentListParams extends ApiRequestParams {
     /** Only return SetupIntents for the customer specified by this customer ID. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Only return SetupIntents for the account specified by this customer ID. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

@@ -3,6 +3,7 @@ package com.stripe.functional;
 import static org.junit.Assert.assertEquals;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -27,7 +28,7 @@ public class StripeClientTest extends BaseStripeTest {
   }
 
   @Test
-  public void testReportsUsageTelemetry() throws StripeException {
+  public void testReportsStripeClientUsageTelemetry() throws StripeException {
     mockClient.customers().create();
     mockClient.customers().update("cus_xyz");
     verifyStripeRequest(
@@ -43,6 +44,30 @@ public class StripeClientTest extends BaseStripeTest {
                   .get("usage")
                   .getAsString();
           assertEquals("stripe_client", usage);
+        });
+  }
+
+  @Test
+  public void testReportsRawRequestUsageTelemetry() throws StripeException {
+    mockClient.rawRequest(
+        com.stripe.net.ApiResource.RequestMethod.POST, "/v1/customers", "description=foo", null);
+    mockClient.rawRequest(
+        com.stripe.net.ApiResource.RequestMethod.POST, "/v1/customers", "description=foo", null);
+    verifyStripeRequest(
+        (stripeRequest) -> {
+          assert (stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").isPresent());
+          JsonArray usage =
+              new Gson()
+                  .fromJson(
+                      stripeRequest.headers().firstValue("X-Stripe-Client-Telemetry").get(),
+                      JsonObject.class)
+                  .get("last_request_metrics")
+                  .getAsJsonObject()
+                  .get("usage")
+                  .getAsJsonArray();
+          assertEquals(2, usage.size());
+          assertEquals("stripe_client", usage.get(0).getAsString());
+          assertEquals("raw_request", usage.get(1).getAsString());
         });
   }
 }

@@ -33,6 +33,10 @@ public class Discount extends StripeObject implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The ID of the account associated with this discount. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;

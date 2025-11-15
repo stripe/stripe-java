@@ -1066,6 +1066,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CollectPaymentMethod extends StripeObject {
+      /** Account the payment intent belongs to. */
+      @SerializedName("account")
+      String account;
+
       /** Represents a per-transaction override of a reader configuration. */
       @SerializedName("collect_config")
       CollectConfig collectConfig;
@@ -1145,6 +1149,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ConfirmPaymentIntent extends StripeObject {
+      /** Account the payment intent belongs to. */
+      @SerializedName("account")
+      String account;
+
       /** Represents a per-transaction override of a reader configuration. */
       @SerializedName("confirm_config")
       ConfirmConfig confirmConfig;
@@ -1193,6 +1201,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ProcessPaymentIntent extends StripeObject {
+      /** Account the payment intent belongs to. */
+      @SerializedName("account")
+      String account;
+
       /** Most recent PaymentIntent processed by the reader. */
       @SerializedName("payment_intent")
       @Getter(lombok.AccessLevel.NONE)
@@ -1320,6 +1332,10 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class RefundPayment extends StripeObject {
+      /** Account the payment intent belongs to. */
+      @SerializedName("account")
+      String account;
+
       /** The amount being refunded. */
       @SerializedName("amount")
       Long amount;

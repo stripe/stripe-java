@@ -50,12 +50,18 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  @SerializedName("limits")
+  Limits limits;
+
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
+
+  @SerializedName("manual_entry")
+  ManualEntry manualEntry;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -79,6 +85,17 @@ public class Session extends ApiResource implements HasId {
    */
   @SerializedName("return_url")
   String returnUrl;
+
+  /**
+   * The current state of the session.
+   *
+   * <p>One of {@code cancelled}, {@code failed}, {@code pending}, or {@code succeeded}.
+   */
+  @SerializedName("status")
+  String status;
+
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
 
   /**
    * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
@@ -188,6 +205,9 @@ public class Session extends ApiResource implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Customer> customer;
 
+    @SerializedName("customer_account")
+    String customerAccount;
+
     /**
      * Type of account holder that this account belongs to.
      *
@@ -252,6 +272,61 @@ public class Session extends ApiResource implements HasId {
     /** List of countries from which to filter accounts. */
     @SerializedName("countries")
     List<String> countries;
+
+    /** Stripe ID of the institution with which the customer should be directed to log in. */
+    @SerializedName("institution")
+    String institution;
+  }
+
+  /**
+   * For more details about Limits, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Limits extends StripeObject {
+    /** The number of accounts that can be linked in this Session. */
+    @SerializedName("accounts")
+    Long accounts;
+  }
+
+  /**
+   * For more details about ManualEntry, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManualEntry extends StripeObject {}
+
+  /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("cancelled")
+    Cancelled cancelled;
+
+    /**
+     * For more details about Cancelled, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Cancelled extends StripeObject {
+      /**
+       * The reason for the Session being cancelled.
+       *
+       * <p>One of {@code custom_manual_entry}, or {@code other}.
+       */
+      @SerializedName("reason")
+      String reason;
+    }
   }
 
   @Override
@@ -260,5 +335,8 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(accountHolder, responseGetter);
     trySetResponseGetter(accounts, responseGetter);
     trySetResponseGetter(filters, responseGetter);
+    trySetResponseGetter(limits, responseGetter);
+    trySetResponseGetter(manualEntry, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
   }
 }

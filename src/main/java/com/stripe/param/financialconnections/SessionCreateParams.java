@@ -34,6 +34,14 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("filters")
   Filters filters;
 
+  /** Settings for configuring Session-specific limits. */
+  @SerializedName("limits")
+  Limits limits;
+
+  /** Customize manual entry behavior. */
+  @SerializedName("manual_entry")
+  ManualEntry manualEntry;
+
   /**
    * <strong>Required.</strong> List of data features that you would like to request access to.
    *
@@ -59,6 +67,8 @@ public class SessionCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Filters filters,
+      Limits limits,
+      ManualEntry manualEntry,
       List<SessionCreateParams.Permission> permissions,
       List<SessionCreateParams.Prefetch> prefetch,
       String returnUrl) {
@@ -66,6 +76,8 @@ public class SessionCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.filters = filters;
+    this.limits = limits;
+    this.manualEntry = manualEntry;
     this.permissions = permissions;
     this.prefetch = prefetch;
     this.returnUrl = returnUrl;
@@ -84,6 +96,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Filters filters;
 
+    private Limits limits;
+
+    private ManualEntry manualEntry;
+
     private List<SessionCreateParams.Permission> permissions;
 
     private List<SessionCreateParams.Prefetch> prefetch;
@@ -97,6 +113,8 @@ public class SessionCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.filters,
+          this.limits,
+          this.manualEntry,
           this.permissions,
           this.prefetch,
           this.returnUrl);
@@ -163,6 +181,18 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Filters to restrict the kinds of accounts to collect. */
     public Builder setFilters(SessionCreateParams.Filters filters) {
       this.filters = filters;
+      return this;
+    }
+
+    /** Settings for configuring Session-specific limits. */
+    public Builder setLimits(SessionCreateParams.Limits limits) {
+      this.limits = limits;
+      return this;
+    }
+
+    /** Customize manual entry behavior. */
+    public Builder setManualEntry(SessionCreateParams.ManualEntry manualEntry) {
+      this.manualEntry = manualEntry;
       return this;
     }
 
@@ -246,6 +276,13 @@ public class SessionCreateParams extends ApiRequestParams {
     String customer;
 
     /**
+     * The ID of the Stripe customer Account whose accounts will be retrieved. Should only be
+     * present if {@code type} is {@code customer}.
+     */
+    @SerializedName("customer_account")
+    String customerAccount;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -259,9 +296,14 @@ public class SessionCreateParams extends ApiRequestParams {
     Type type;
 
     private AccountHolder(
-        String account, String customer, Map<String, Object> extraParams, Type type) {
+        String account,
+        String customer,
+        String customerAccount,
+        Map<String, Object> extraParams,
+        Type type) {
       this.account = account;
       this.customer = customer;
+      this.customerAccount = customerAccount;
       this.extraParams = extraParams;
       this.type = type;
     }
@@ -275,6 +317,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private String customer;
 
+      private String customerAccount;
+
       private Map<String, Object> extraParams;
 
       private Type type;
@@ -282,7 +326,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.AccountHolder build() {
         return new SessionCreateParams.AccountHolder(
-            this.account, this.customer, this.extraParams, this.type);
+            this.account, this.customer, this.customerAccount, this.extraParams, this.type);
       }
 
       /**
@@ -300,6 +344,15 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;
+        return this;
+      }
+
+      /**
+       * The ID of the Stripe customer Account whose accounts will be retrieved. Should only be
+       * present if {@code type} is {@code customer}.
+       */
+      public Builder setCustomerAccount(String customerAccount) {
+        this.customerAccount = customerAccount;
         return this;
       }
 
@@ -376,13 +429,19 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Stripe ID of the institution with which the customer should be directed to log in. */
+    @SerializedName("institution")
+    String institution;
+
     private Filters(
         List<SessionCreateParams.Filters.AccountSubcategory> accountSubcategories,
         List<String> countries,
-        Map<String, Object> extraParams) {
+        Map<String, Object> extraParams,
+        String institution) {
       this.accountSubcategories = accountSubcategories;
       this.countries = countries;
       this.extraParams = extraParams;
+      this.institution = institution;
     }
 
     public static Builder builder() {
@@ -396,10 +455,12 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private String institution;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SessionCreateParams.Filters build() {
         return new SessionCreateParams.Filters(
-            this.accountSubcategories, this.countries, this.extraParams);
+            this.accountSubcategories, this.countries, this.extraParams, this.institution);
       }
 
       /**
@@ -480,6 +541,12 @@ public class SessionCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+
+      /** Stripe ID of the institution with which the customer should be directed to log in. */
+      public Builder setInstitution(String institution) {
+        this.institution = institution;
+        return this;
+      }
     }
 
     public enum AccountSubcategory implements ApiRequestParams.EnumParam {
@@ -502,6 +569,159 @@ public class SessionCreateParams extends ApiRequestParams {
       private final String value;
 
       AccountSubcategory(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Limits {
+    /** <strong>Required.</strong> The number of accounts that can be linked in this Session. */
+    @SerializedName("accounts")
+    Long accounts;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Limits(Long accounts, Map<String, Object> extraParams) {
+      this.accounts = accounts;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long accounts;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.Limits build() {
+        return new SessionCreateParams.Limits(this.accounts, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> The number of accounts that can be linked in this Session. */
+      public Builder setAccounts(Long accounts) {
+        this.accounts = accounts;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.Limits#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.Limits#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManualEntry {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Whether manual entry will be handled by Stripe during the Session. */
+    @SerializedName("mode")
+    Mode mode;
+
+    private ManualEntry(Map<String, Object> extraParams, Mode mode) {
+      this.extraParams = extraParams;
+      this.mode = mode;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Mode mode;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.ManualEntry build() {
+        return new SessionCreateParams.ManualEntry(this.extraParams, this.mode);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.ManualEntry#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.ManualEntry#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Whether manual entry will be handled by Stripe during the Session. */
+      public Builder setMode(SessionCreateParams.ManualEntry.Mode mode) {
+        this.mode = mode;
+        return this;
+      }
+    }
+
+    public enum Mode implements ApiRequestParams.EnumParam {
+      @SerializedName("automatic")
+      AUTOMATIC("automatic"),
+
+      @SerializedName("custom")
+      CUSTOM("custom");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Mode(String value) {
         this.value = value;
       }
     }
@@ -531,6 +751,9 @@ public class SessionCreateParams extends ApiRequestParams {
   public enum Prefetch implements ApiRequestParams.EnumParam {
     @SerializedName("balances")
     BALANCES("balances"),
+
+    @SerializedName("inferred_balances")
+    INFERRED_BALANCES("inferred_balances"),
 
     @SerializedName("ownership")
     OWNERSHIP("ownership"),

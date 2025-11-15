@@ -109,6 +109,15 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /**
+   * ID of the Account this SetupIntent belongs to, if one exists.
+   *
+   * <p>If present, the SetupIntent's payment method will be attached to the Account on successful
+   * setup. Payment methods attached to other Accounts cannot be used with this SetupIntent.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -868,6 +877,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("cashapp_handle_redirect_or_display_qr_code")
     CashappHandleRedirectOrDisplayQrCode cashappHandleRedirectOrDisplayQrCode;
 
+    @SerializedName("pix_display_qr_code")
+    PixDisplayQrCode pixDisplayQrCode;
+
     @SerializedName("redirect_to_url")
     RedirectToUrl redirectToUrl;
 
@@ -933,6 +945,41 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("image_url_svg")
         String imageUrlSvg;
       }
+    }
+
+    /**
+     * For more details about PixDisplayQrCode, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PixDisplayQrCode extends StripeObject {
+      /**
+       * The raw data string used to generate QR code, it should be used together with QR code
+       * library.
+       */
+      @SerializedName("data")
+      String data;
+
+      /** The date (unix timestamp) when the PIX expires. */
+      @SerializedName("expires_at")
+      Long expiresAt;
+
+      /**
+       * The URL to the hosted pix instructions page, which allows customers to view the pix QR
+       * code.
+       */
+      @SerializedName("hosted_instructions_url")
+      String hostedInstructionsUrl;
+
+      /** The image_url_png string used to render png QR code. */
+      @SerializedName("image_url_png")
+      String imageUrlPng;
+
+      /** The image_url_svg string used to render svg QR code. */
+      @SerializedName("image_url_svg")
+      String imageUrlSvg;
     }
 
     /**
@@ -1034,6 +1081,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
     @SerializedName("paypal")
     Paypal paypal;
+
+    @SerializedName("payto")
+    Payto payto;
+
+    @SerializedName("pix")
+    Pix pix;
 
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
@@ -1311,6 +1364,172 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        */
       @SerializedName("billing_agreement_id")
       String billingAgreementId;
+
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * The Stripe connected account IDs of the sellers on the platform for this transaction
+       * (optional). Only allowed when <a
+       * href="https://stripe.com/docs/connect/separate-charges-and-transfers">separate charges and
+       * transfers</a> are used.
+       */
+      @SerializedName("subsellers")
+      List<String> subsellers;
+    }
+
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * The type of amount that will be collected. The amount charged must be exact or up to the
+         * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+         * end date.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * The periodicity at which payments will be collected.
+         *
+         * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
+         * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /**
+         * The number of payments that will be made during a payment period. Defaults to 1 except
+         * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+         * limit.
+         */
+        @SerializedName("payments_per_period")
+        Long paymentsPerPeriod;
+
+        /**
+         * The purpose for which payments are made. Defaults to retail.
+         *
+         * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
+         * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code
+         * tax}, or {@code utility}.
+         */
+        @SerializedName("purpose")
+        String purpose;
+
+        /**
+         * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
+         * confirmation time.
+         */
+        @SerializedName("start_date")
+        String startDate;
+      }
+    }
+
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Determines if the amount includes the IOF tax.
+         *
+         * <p>One of {@code always}, or {@code never}.
+         */
+        @SerializedName("amount_includes_iof")
+        String amountIncludesIof;
+
+        /**
+         * Type of amount.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Date when the mandate expires and no further payments will be charged, in {@code
+         * YYYY-MM-DD}.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * Schedule at which the future payments will be charged.
+         *
+         * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or
+         * {@code yearly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /** Subscription name displayed to buyers in their bank app. */
+        @SerializedName("reference")
+        String reference;
+
+        /** Start date of the mandate, in {@code YYYY-MM-DD}. */
+        @SerializedName("start_date")
+        String startDate;
+      }
     }
 
     /**
@@ -1375,6 +1594,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         @SerializedName("filters")
         Filters filters;
 
+        @SerializedName("manual_entry")
+        ManualEntry manualEntry;
+
         /**
          * The list of permissions to request. The {@code payment_method} permission must be
          * included.
@@ -1407,6 +1629,27 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
            */
           @SerializedName("account_subcategories")
           List<String> accountSubcategories;
+
+          /** The institution to use to filter for possible accounts to link. */
+          @SerializedName("institution")
+          String institution;
+        }
+
+        /**
+         * For more details about ManualEntry, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ManualEntry extends StripeObject {
+          /**
+           * Settings for configuring manual entry of account details.
+           *
+           * <p>One of {@code automatic}, or {@code custom}.
+           */
+          @SerializedName("mode")
+          String mode;
         }
       }
 

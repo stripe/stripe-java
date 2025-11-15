@@ -97,7 +97,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private StripeRequest toRawStripeRequest(RawApiRequest apiRequest, RequestOptions mergedOptions)
       throws StripeException {
-
     String fullUrl = fullUrl(apiRequest);
 
     Optional<String> telemetryHeaderValue = requestTelemetry.pollPayload();

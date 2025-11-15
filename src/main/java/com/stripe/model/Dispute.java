@@ -78,6 +78,15 @@ public class Dispute extends ApiResource
   String id;
 
   /**
+   * Intended submission method for the dispute.
+   *
+   * <p>One of {@code manual}, {@code prefer_manual}, {@code prefer_smart_disputes}, or {@code
+   * smart_disputes}.
+   */
+  @SerializedName("intended_submission_method")
+  String intendedSubmissionMethod;
+
+  /**
    * If true, it's still possible to refund the disputed payment. After the payment has been fully
    * refunded, no further funds are withdrawn from your Stripe account as a result of this dispute.
    */
@@ -132,6 +141,9 @@ public class Dispute extends ApiResource
    */
   @SerializedName("reason")
   String reason;
+
+  @SerializedName("smart_disputes")
+  SmartDisputes smartDisputes;
 
   /**
    * The current status of a dispute. Possible values include:{@code warning_needs_response}, {@code
@@ -1045,6 +1057,14 @@ public class Dispute extends ApiResource
     Long submissionCount;
 
     /**
+     * Whether the dispute was submitted manually, with Smart Disputes, or not submitted.
+     *
+     * <p>One of {@code manual}, {@code not_submitted}, or {@code smart_disputes}.
+     */
+    @SerializedName("submission_method")
+    String submissionMethod;
+
+    /**
      * For more details about EnhancedEligibility, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1217,6 +1237,28 @@ public class Dispute extends ApiResource
     }
   }
 
+  /**
+   * For more details about SmartDisputes, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SmartDisputes extends StripeObject {
+    /** Evidence that could be provided to improve the SmartDisputes packet. */
+    @SerializedName("recommended_evidence")
+    List<List<String>> recommendedEvidence;
+
+    /**
+     * Smart Disputes auto representment packet availability status.
+     *
+     * <p>One of {@code available}, {@code processing}, {@code requires_evidence}, or {@code
+     * unavailable}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -1225,5 +1267,6 @@ public class Dispute extends ApiResource
     trySetResponseGetter(evidenceDetails, responseGetter);
     trySetResponseGetter(paymentIntent, responseGetter);
     trySetResponseGetter(paymentMethodDetails, responseGetter);
+    trySetResponseGetter(smartDisputes, responseGetter);
   }
 }

@@ -300,8 +300,14 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("giropay")
     GIROPAY("giropay"),
 
+    @SerializedName("gopay")
+    GOPAY("gopay"),
+
     @SerializedName("grabpay")
     GRABPAY("grabpay"),
+
+    @SerializedName("id_bank_transfer")
+    ID_BANK_TRANSFER("id_bank_transfer"),
 
     @SerializedName("ideal")
     IDEAL("ideal"),
@@ -354,11 +360,23 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("paypal")
     PAYPAL("paypal"),
 
+    @SerializedName("paypay")
+    PAYPAY("paypay"),
+
+    @SerializedName("payto")
+    PAYTO("payto"),
+
     @SerializedName("pix")
     PIX("pix"),
 
     @SerializedName("promptpay")
     PROMPTPAY("promptpay"),
+
+    @SerializedName("qris")
+    QRIS("qris"),
+
+    @SerializedName("rechnung")
+    RECHNUNG("rechnung"),
 
     @SerializedName("revolut_pay")
     REVOLUT_PAY("revolut_pay"),
@@ -372,8 +390,14 @@ public class CustomerPaymentMethodListParams extends ApiRequestParams {
     @SerializedName("sepa_debit")
     SEPA_DEBIT("sepa_debit"),
 
+    @SerializedName("shopeepay")
+    SHOPEEPAY("shopeepay"),
+
     @SerializedName("sofort")
     SOFORT("sofort"),
+
+    @SerializedName("stripe_balance")
+    STRIPE_BALANCE("stripe_balance"),
 
     @SerializedName("swish")
     SWISH("swish"),

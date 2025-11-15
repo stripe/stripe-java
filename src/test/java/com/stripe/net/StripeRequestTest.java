@@ -1,6 +1,8 @@
 package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
@@ -257,6 +259,37 @@ public class StripeRequestTest extends BaseStripeTest {
             ApiMode.V1);
 
     assertNull(request.content());
+  }
+
+  @Test
+  public void testBuildContentIsNullWhenRequestIsGetCreateWithStringContent()
+      throws StripeException {
+    StripeRequest request =
+        StripeRequest.createWithStringContent(
+            ApiResource.RequestMethod.GET,
+            "http://example.com/get",
+            "key=value!",
+            options,
+            ApiMode.V1);
+
+    assertNull(request.content());
+  }
+
+  @Test
+  public void testBuildsJsonContentWhenV2Mode() throws StripeException {
+    StripeRequest request =
+        StripeRequest.createWithStringContent(
+            ApiResource.RequestMethod.POST,
+            "http://example.com/post",
+            "{\"key\":\"value!\"}",
+            options,
+            ApiMode.V2);
+
+    assertInstanceOf(HttpContent.class, request.content());
+    assertEquals("application/json", request.content().contentType());
+    assertArrayEquals(
+        "{\"key\":\"value!\"}".getBytes(StandardCharsets.UTF_8),
+        request.content().byteArrayContent());
   }
 
   @Test

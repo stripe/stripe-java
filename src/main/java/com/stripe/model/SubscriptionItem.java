@@ -30,6 +30,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class SubscriptionItem extends ApiResource
     implements HasId, MetadataStore<SubscriptionItem> {
+  /** The time period the subscription item has been billed for. */
+  @SerializedName("billed_until")
+  Long billedUntil;
+
   /**
    * Define thresholds at which an invoice will be sent, and the related subscription advanced to a
    * new billing period.
@@ -141,6 +145,10 @@ public class SubscriptionItem extends ApiResource
    */
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
+
+  /** Options that configure the trial on the subscription item. */
+  @SerializedName("trial")
+  Trial trial;
 
   /** Get IDs of expandable {@code discounts} object list. */
   public List<String> getDiscounts() {
@@ -400,11 +408,36 @@ public class SubscriptionItem extends ApiResource
     Long usageGte;
   }
 
+  /**
+   * For more details about Trial, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Trial extends StripeObject {
+    /**
+     * List of price IDs which, if present on the subscription following a paid trial, constitute
+     * opting-in to the paid trial.
+     */
+    @SerializedName("converts_to")
+    List<String> convertsTo;
+
+    /**
+     * Determines the type of trial for this item.
+     *
+     * <p>One of {@code free}, or {@code paid}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(billingThresholds, responseGetter);
     trySetResponseGetter(plan, responseGetter);
     trySetResponseGetter(price, responseGetter);
+    trySetResponseGetter(trial, responseGetter);
   }
 }

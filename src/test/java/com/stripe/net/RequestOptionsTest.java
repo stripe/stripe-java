@@ -2,6 +2,8 @@ package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.stripe.BaseStripeTest;
+import com.stripe.Stripe;
 import com.stripe.StripeContext;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.net.InetSocketAddress;
@@ -9,10 +11,12 @@ import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import org.junit.jupiter.api.Test;
 
-public class RequestOptionsTest {
+public class RequestOptionsTest extends BaseStripeTest {
 
   @Test
   public void testPersistentValuesInToBuilder() {
+    Stripe.clientId = "other value";
+
     RequestOptions opts =
         RequestOptionsBuilder.unsafeSetStripeVersionOverride(
                 RequestOptions.builder()
@@ -37,9 +41,9 @@ public class RequestOptionsTest {
     assertEquals("sk_foo", optsRebuilt.getApiKey());
     assertEquals("acct_bar", optsRebuilt.getStripeAccount());
 
-    assertNull(optsRebuilt.getClientId());
     assertNull(optsRebuilt.getIdempotencyKey());
     assertNull(RequestOptions.unsafeGetStripeVersionOverride(optsRebuilt));
+    assertNull(optsRebuilt.getClientId());
     assertNull(optsRebuilt.getConnectTimeout());
     assertNull(optsRebuilt.getReadTimeout());
     assertNull(optsRebuilt.getConnectionProxy());

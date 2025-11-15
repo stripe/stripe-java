@@ -225,7 +225,6 @@ public class RawRequestTest extends BaseStripeTest {
     assertEquals("application/json", request.getHeader("Content-Type"));
     assertEquals(Stripe.API_VERSION, request.getHeader("Stripe-Version"));
     assertEquals("{\"event_id\": \"evnt_123\"}", request.getBody().readUtf8());
-
     assertNotNull(response);
     assertEquals(200, response.code());
     assertTrue(response.body().length() > 0);

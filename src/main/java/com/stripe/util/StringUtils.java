@@ -47,4 +47,20 @@ public final class StringUtils {
         .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
         .toLowerCase();
   }
+
+  /**
+   * Trims the beta header part of an API Version string. For example, "2022-12-22; orders_beta=v3"
+   * is converted to "2022-12-22".
+   *
+   * @param apiVersion The API Version to trim. For example, "2022-12-22; orders_beta=v3".
+   */
+  public static String trimApiVersion(String apiVersion) {
+    int indexOfSemicolon = apiVersion.indexOf(";");
+
+    if (indexOfSemicolon != -1) {
+      return apiVersion.substring(0, indexOfSemicolon);
+    }
+
+    return apiVersion;
+  }
 }

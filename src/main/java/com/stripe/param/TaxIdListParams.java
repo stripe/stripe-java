@@ -200,6 +200,13 @@ public class TaxIdListParams extends ApiRequestParams {
     String customer;
 
     /**
+     * v2 Account the tax ID belongs to. Can be used in place of {@code customer} when {@code
+     * type=customer}
+     */
+    @SerializedName("customer_account")
+    String customerAccount;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -212,9 +219,15 @@ public class TaxIdListParams extends ApiRequestParams {
     @SerializedName("type")
     Type type;
 
-    private Owner(String account, String customer, Map<String, Object> extraParams, Type type) {
+    private Owner(
+        String account,
+        String customer,
+        String customerAccount,
+        Map<String, Object> extraParams,
+        Type type) {
       this.account = account;
       this.customer = customer;
+      this.customerAccount = customerAccount;
       this.extraParams = extraParams;
       this.type = type;
     }
@@ -228,13 +241,16 @@ public class TaxIdListParams extends ApiRequestParams {
 
       private String customer;
 
+      private String customerAccount;
+
       private Map<String, Object> extraParams;
 
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public TaxIdListParams.Owner build() {
-        return new TaxIdListParams.Owner(this.account, this.customer, this.extraParams, this.type);
+        return new TaxIdListParams.Owner(
+            this.account, this.customer, this.customerAccount, this.extraParams, this.type);
       }
 
       /** Account the tax ID belongs to. Required when {@code type=account} */
@@ -246,6 +262,15 @@ public class TaxIdListParams extends ApiRequestParams {
       /** Customer the tax ID belongs to. Required when {@code type=customer} */
       public Builder setCustomer(String customer) {
         this.customer = customer;
+        return this;
+      }
+
+      /**
+       * v2 Account the tax ID belongs to. Can be used in place of {@code customer} when {@code
+       * type=customer}
+       */
+      public Builder setCustomerAccount(String customerAccount) {
+        this.customerAccount = customerAccount;
         return this;
       }
 

@@ -10,6 +10,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import com.stripe.param.SubscriptionScheduleAmendParams;
 import com.stripe.param.SubscriptionScheduleCancelParams;
 import com.stripe.param.SubscriptionScheduleCreateParams;
 import com.stripe.param.SubscriptionScheduleListParams;
@@ -42,6 +43,18 @@ public class SubscriptionSchedule extends ApiResource
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
+
+  /**
+   * Configures when the subscription schedule generates prorations for phase transitions. Possible
+   * values are {@code prorate_on_next_phase} or {@code prorate_up_front} with the default being
+   * {@code prorate_on_next_phase}. {@code prorate_on_next_phase} will apply phase changes and
+   * generate prorations at transition time. {@code prorate_up_front} will bill for all phases
+   * within the current billing cycle up front.
+   *
+   * <p>One of {@code prorate_on_next_phase}, or {@code prorate_up_front}.
+   */
+  @SerializedName("billing_behavior")
+  String billingBehavior;
 
   /** The billing mode of the subscription. */
   @SerializedName("billing_mode")
@@ -77,6 +90,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** ID of the account who owns the subscription schedule. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   @SerializedName("default_settings")
   DefaultSettings defaultSettings;
 
@@ -95,6 +112,10 @@ public class SubscriptionSchedule extends ApiResource
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /** Details of the most recent price migration that failed for the subscription schedule. */
+  @SerializedName("last_price_migration_error")
+  LastPriceMigrationError lastPriceMigrationError;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -123,6 +144,10 @@ public class SubscriptionSchedule extends ApiResource
   /** Configuration for the subscription schedule's phases. */
   @SerializedName("phases")
   List<SubscriptionSchedule.Phase> phases;
+
+  /** Time period and invoice for a Subscription billed in advance. */
+  @SerializedName("prebilling")
+  Prebilling prebilling;
 
   /**
    * Time at which the subscription schedule was released. Measured in seconds since the Unix epoch.
@@ -229,6 +254,52 @@ public class SubscriptionSchedule extends ApiResource
 
   public void setTestClockObject(TestClock expandableObject) {
     this.testClock = new ExpandableField<TestClock>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend() throws StripeException {
+    return amend((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(RequestOptions options) throws StripeException {
+    return amend((Map<String, Object>) null, options);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(Map<String, Object> params) throws StripeException {
+    return amend(params, (RequestOptions) null);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(SubscriptionScheduleAmendParams params) throws StripeException {
+    return amend(params, (RequestOptions) null);
+  }
+
+  /** Amends an existing subscription schedule. */
+  public SubscriptionSchedule amend(SubscriptionScheduleAmendParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscription_schedules/%s/amend", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return getResponseGetter().request(request, SubscriptionSchedule.class);
   }
 
   /**
@@ -986,6 +1057,48 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /**
+   * For more details about LastPriceMigrationError, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LastPriceMigrationError extends StripeObject {
+    /** The time at which the price migration encountered an error. */
+    @SerializedName("errored_at")
+    Long erroredAt;
+
+    /** The involved price pairs in each failed transition. */
+    @SerializedName("failed_transitions")
+    List<SubscriptionSchedule.LastPriceMigrationError.FailedTransition> failedTransitions;
+
+    /**
+     * The type of error encountered by the price migration.
+     *
+     * <p>Equal to {@code price_uniqueness_violation}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about FailedTransition, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FailedTransition extends StripeObject {
+      /** The original price to be migrated. */
+      @SerializedName("source_price")
+      String sourcePrice;
+
+      /** The intended resulting price of the migration. */
+      @SerializedName("target_price")
+      String targetPrice;
+    }
+  }
+
+  /**
    * A phase describes the plans, coupon, and trialing status of a subscription for a predefined
    * time period.
    */
@@ -1115,6 +1228,15 @@ public class SubscriptionSchedule extends ApiResource
     ExpandableField<Account> onBehalfOf;
 
     /**
+     * If specified, payment collection for this subscription will be paused. Note that the
+     * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
+     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+     * collection</a>.
+     */
+    @SerializedName("pause_collection")
+    PauseCollection pauseCollection;
+
+    /**
      * When transitioning phases, controls how prorations are handled (if any). Possible values are
      * {@code create_prorations}, {@code none}, and {@code always_invoice}.
      *
@@ -1135,9 +1257,21 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("transfer_data")
     TransferData transferData;
 
+    /**
+     * Specify behavior of the trial when crossing schedule phase boundaries
+     *
+     * <p>One of {@code continue}, or {@code none}.
+     */
+    @SerializedName("trial_continuation")
+    String trialContinuation;
+
     /** When the trial ends within the phase. */
     @SerializedName("trial_end")
     Long trialEnd;
+
+    /** Settings related to any trials on the subscription during this phase. */
+    @SerializedName("trial_settings")
+    TrialSettings trialSettings;
 
     /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
@@ -1254,6 +1388,10 @@ public class SubscriptionSchedule extends ApiResource
         @Setter(lombok.AccessLevel.NONE)
         ExpandableField<com.stripe.model.Discount> discount;
 
+        /** Details to determine how long the discount should be applied for. */
+        @SerializedName("discount_end")
+        DiscountEnd discountEnd;
+
         /** ID of the promotion code to create a new discount for. */
         @SerializedName("promotion_code")
         @Getter(lombok.AccessLevel.NONE)
@@ -1315,6 +1453,27 @@ public class SubscriptionSchedule extends ApiResource
         public void setPromotionCodeObject(PromotionCode expandableObject) {
           this.promotionCode =
               new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+        }
+
+        /**
+         * For more details about DiscountEnd, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DiscountEnd extends StripeObject {
+          /** The discount end timestamp. */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * The discount end type.
+           *
+           * <p>Equal to {@code timestamp}.
+           */
+          @SerializedName("type")
+          String type;
         }
       }
 
@@ -1495,6 +1654,10 @@ public class SubscriptionSchedule extends ApiResource
       @Setter(lombok.AccessLevel.NONE)
       ExpandableField<com.stripe.model.Discount> discount;
 
+      /** Details to determine how long the discount should be applied for. */
+      @SerializedName("discount_end")
+      DiscountEnd discountEnd;
+
       /** ID of the promotion code to create a new discount for. */
       @SerializedName("promotion_code")
       @Getter(lombok.AccessLevel.NONE)
@@ -1556,6 +1719,27 @@ public class SubscriptionSchedule extends ApiResource
       public void setPromotionCodeObject(PromotionCode expandableObject) {
         this.promotionCode =
             new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+      }
+
+      /**
+       * For more details about DiscountEnd, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class DiscountEnd extends StripeObject {
+        /** The discount end timestamp. */
+        @SerializedName("timestamp")
+        Long timestamp;
+
+        /**
+         * The discount end type.
+         *
+         * <p>Equal to {@code timestamp}.
+         */
+        @SerializedName("type")
+        String type;
       }
     }
 
@@ -1725,6 +1909,10 @@ public class SubscriptionSchedule extends ApiResource
       @SerializedName("tax_rates")
       List<TaxRate> taxRates;
 
+      /** Options that configure the trial on the subscription item. */
+      @SerializedName("trial")
+      Trial trial;
+
       /** Get ID of expandable {@code plan} object. */
       public String getPlan() {
         return (this.plan != null) ? this.plan.getId() : null;
@@ -1794,6 +1982,10 @@ public class SubscriptionSchedule extends ApiResource
         @Setter(lombok.AccessLevel.NONE)
         ExpandableField<com.stripe.model.Discount> discount;
 
+        /** Details to determine how long the discount should be applied for. */
+        @SerializedName("discount_end")
+        DiscountEnd discountEnd;
+
         /** ID of the promotion code to create a new discount for. */
         @SerializedName("promotion_code")
         @Getter(lombok.AccessLevel.NONE)
@@ -1856,7 +2048,68 @@ public class SubscriptionSchedule extends ApiResource
           this.promotionCode =
               new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
         }
+
+        /**
+         * For more details about DiscountEnd, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DiscountEnd extends StripeObject {
+          /** The discount end timestamp. */
+          @SerializedName("timestamp")
+          Long timestamp;
+
+          /**
+           * The discount end type.
+           *
+           * <p>Equal to {@code timestamp}.
+           */
+          @SerializedName("type")
+          String type;
+        }
       }
+
+      /**
+       * For more details about Trial, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Trial extends StripeObject {
+        /**
+         * List of price IDs which, if present on the subscription following a paid trial,
+         * constitute opting-in to the paid trial.
+         */
+        @SerializedName("converts_to")
+        List<String> convertsTo;
+
+        /**
+         * Determines the type of trial for this item.
+         *
+         * <p>One of {@code free}, or {@code paid}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+    }
+
+    /**
+     * The Pause Collection settings specify how to pause collection for a subscription during a
+     * phase by modifying the behavior of the invoices that are generated during the paused period.
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PauseCollection extends StripeObject {
+      /**
+       * The payment collection behavior for this subscription while paused. One of {@code
+       * keep_as_draft}, {@code mark_uncollectible}, or {@code void}.
+       */
+      @SerializedName("behavior")
+      String behavior;
     }
 
     /**
@@ -1899,6 +2152,78 @@ public class SubscriptionSchedule extends ApiResource
         this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
       }
     }
+
+    /** Configures how the scheduled subscription behaves during the trial period. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TrialSettings extends StripeObject {
+      /** Defines how the subscription should behave when a trial ends. */
+      @SerializedName("end_behavior")
+      EndBehavior endBehavior;
+
+      /** Defines how the scheduled subscription behaves when a trial ends. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EndBehavior extends StripeObject {
+        /**
+         * Configure how an opt-in following a paid trial is billed when using {@code
+         * billing_behavior: prorate_up_front}.
+         *
+         * <p>One of {@code defer}, or {@code include}.
+         */
+        @SerializedName("prorate_up_front")
+        String prorateUpFront;
+      }
+    }
+  }
+
+  /** Prebilling stores the time period and invoice for a Subscription billed in advance. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Prebilling extends StripeObject {
+    /** ID of the prebilling invoice. */
+    @SerializedName("invoice")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Invoice> invoice;
+
+    /** The end of the last period for which the invoice pre-bills. */
+    @SerializedName("period_end")
+    Long periodEnd;
+
+    /** The start of the first period for which the invoice pre-bills. */
+    @SerializedName("period_start")
+    Long periodStart;
+
+    /**
+     * Whether to cancel or preserve {@code prebilling} if the subscription is updated during the
+     * prebilled period.
+     *
+     * <p>One of {@code prebill}, or {@code reset}.
+     */
+    @SerializedName("update_behavior")
+    String updateBehavior;
+
+    /** Get ID of expandable {@code invoice} object. */
+    public String getInvoice() {
+      return (this.invoice != null) ? this.invoice.getId() : null;
+    }
+
+    public void setInvoice(String id) {
+      this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+    }
+
+    /** Get expanded {@code invoice}. */
+    public Invoice getInvoiceObject() {
+      return (this.invoice != null) ? this.invoice.getExpanded() : null;
+    }
+
+    public void setInvoiceObject(Invoice expandableObject) {
+      this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Override
@@ -1909,6 +2234,8 @@ public class SubscriptionSchedule extends ApiResource
     trySetResponseGetter(currentPhase, responseGetter);
     trySetResponseGetter(customer, responseGetter);
     trySetResponseGetter(defaultSettings, responseGetter);
+    trySetResponseGetter(lastPriceMigrationError, responseGetter);
+    trySetResponseGetter(prebilling, responseGetter);
     trySetResponseGetter(subscription, responseGetter);
     trySetResponseGetter(testClock, responseGetter);
   }

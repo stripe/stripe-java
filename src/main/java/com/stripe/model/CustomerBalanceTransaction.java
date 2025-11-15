@@ -68,6 +68,9 @@ public class CustomerBalanceTransaction extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;

@@ -56,6 +56,12 @@ public class PriceUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
+  /**
+   * If specified, subscriptions using this price will be updated to use the new referenced price.
+   */
+  @SerializedName("migrate_to")
+  Object migrateTo;
+
   /** A brief description of the price, hidden from customers. */
   @SerializedName("nickname")
   Object nickname;
@@ -85,6 +91,7 @@ public class PriceUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Object lookupKey,
       Object metadata,
+      Object migrateTo,
       Object nickname,
       TaxBehavior taxBehavior,
       Boolean transferLookupKey) {
@@ -94,6 +101,7 @@ public class PriceUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.lookupKey = lookupKey;
     this.metadata = metadata;
+    this.migrateTo = migrateTo;
     this.nickname = nickname;
     this.taxBehavior = taxBehavior;
     this.transferLookupKey = transferLookupKey;
@@ -116,6 +124,8 @@ public class PriceUpdateParams extends ApiRequestParams {
 
     private Object metadata;
 
+    private Object migrateTo;
+
     private Object nickname;
 
     private TaxBehavior taxBehavior;
@@ -131,6 +141,7 @@ public class PriceUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.lookupKey,
           this.metadata,
+          this.migrateTo,
           this.nickname,
           this.taxBehavior,
           this.transferLookupKey);
@@ -308,6 +319,22 @@ public class PriceUpdateParams extends ApiRequestParams {
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * If specified, subscriptions using this price will be updated to use the new referenced price.
+     */
+    public Builder setMigrateTo(PriceUpdateParams.MigrateTo migrateTo) {
+      this.migrateTo = migrateTo;
+      return this;
+    }
+
+    /**
+     * If specified, subscriptions using this price will be updated to use the new referenced price.
+     */
+    public Builder setMigrateTo(EmptyParam migrateTo) {
+      this.migrateTo = migrateTo;
       return this;
     }
 
@@ -894,6 +921,127 @@ public class PriceUpdateParams extends ApiRequestParams {
       private final String value;
 
       TaxBehavior(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class MigrateTo {
+    /**
+     * <strong>Required.</strong> The behavior controlling the point in the subscription lifecycle
+     * after which to migrate the price. Currently must be {@code at_cycle_end}.
+     */
+    @SerializedName("behavior")
+    Behavior behavior;
+
+    /** The time after which subscriptions should start using the new price. */
+    @SerializedName("effective_after")
+    Long effectiveAfter;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> The ID of the price object. */
+    @SerializedName("price")
+    Object price;
+
+    private MigrateTo(
+        Behavior behavior, Long effectiveAfter, Map<String, Object> extraParams, Object price) {
+      this.behavior = behavior;
+      this.effectiveAfter = effectiveAfter;
+      this.extraParams = extraParams;
+      this.price = price;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Behavior behavior;
+
+      private Long effectiveAfter;
+
+      private Map<String, Object> extraParams;
+
+      private Object price;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PriceUpdateParams.MigrateTo build() {
+        return new PriceUpdateParams.MigrateTo(
+            this.behavior, this.effectiveAfter, this.extraParams, this.price);
+      }
+
+      /**
+       * <strong>Required.</strong> The behavior controlling the point in the subscription lifecycle
+       * after which to migrate the price. Currently must be {@code at_cycle_end}.
+       */
+      public Builder setBehavior(PriceUpdateParams.MigrateTo.Behavior behavior) {
+        this.behavior = behavior;
+        return this;
+      }
+
+      /** The time after which subscriptions should start using the new price. */
+      public Builder setEffectiveAfter(Long effectiveAfter) {
+        this.effectiveAfter = effectiveAfter;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PriceUpdateParams.MigrateTo#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PriceUpdateParams.MigrateTo#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> The ID of the price object. */
+      public Builder setPrice(String price) {
+        this.price = price;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The ID of the price object. */
+      public Builder setPrice(EmptyParam price) {
+        this.price = price;
+        return this;
+      }
+    }
+
+    public enum Behavior implements ApiRequestParams.EnumParam {
+      @SerializedName("at_cycle_end")
+      AT_CYCLE_END("at_cycle_end");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Behavior(String value) {
         this.value = value;
       }
     }

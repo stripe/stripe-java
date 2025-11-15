@@ -43,6 +43,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("offline")
   Object offline;
 
+  /** Configurations for reader security settings. */
+  @SerializedName("reader_security")
+  Object readerSecurity;
+
   /** Reboot time settings for readers that support customized reboot time configuration. */
   @SerializedName("reboot_window")
   Object rebootWindow;
@@ -70,6 +74,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Object name,
       Object offline,
+      Object readerSecurity,
       Object rebootWindow,
       Object stripeS700,
       Object tipping,
@@ -81,6 +86,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.name = name;
     this.offline = offline;
+    this.readerSecurity = readerSecurity;
     this.rebootWindow = rebootWindow;
     this.stripeS700 = stripeS700;
     this.tipping = tipping;
@@ -105,6 +111,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
     private Object offline;
 
+    private Object readerSecurity;
+
     private Object rebootWindow;
 
     private Object stripeS700;
@@ -124,6 +132,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.name,
           this.offline,
+          this.readerSecurity,
           this.rebootWindow,
           this.stripeS700,
           this.tipping,
@@ -228,6 +237,18 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /** Configurations for collecting transactions offline. */
     public Builder setOffline(EmptyParam offline) {
       this.offline = offline;
+      return this;
+    }
+
+    /** Configurations for reader security settings. */
+    public Builder setReaderSecurity(ConfigurationUpdateParams.ReaderSecurity readerSecurity) {
+      this.readerSecurity = readerSecurity;
+      return this;
+    }
+
+    /** Configurations for reader security settings. */
+    public Builder setReaderSecurity(EmptyParam readerSecurity) {
+      this.readerSecurity = readerSecurity;
       return this;
     }
 
@@ -508,6 +529,83 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link ConfigurationUpdateParams.Offline#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReaderSecurity {
+    /** Passcode used to access a reader's admin menu. */
+    @SerializedName("admin_menu_passcode")
+    Object adminMenuPasscode;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ReaderSecurity(Object adminMenuPasscode, Map<String, Object> extraParams) {
+      this.adminMenuPasscode = adminMenuPasscode;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Object adminMenuPasscode;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationUpdateParams.ReaderSecurity build() {
+        return new ConfigurationUpdateParams.ReaderSecurity(
+            this.adminMenuPasscode, this.extraParams);
+      }
+
+      /** Passcode used to access a reader's admin menu. */
+      public Builder setAdminMenuPasscode(String adminMenuPasscode) {
+        this.adminMenuPasscode = adminMenuPasscode;
+        return this;
+      }
+
+      /** Passcode used to access a reader's admin menu. */
+      public Builder setAdminMenuPasscode(EmptyParam adminMenuPasscode) {
+        this.adminMenuPasscode = adminMenuPasscode;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationUpdateParams.ReaderSecurity#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationUpdateParams.ReaderSecurity#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

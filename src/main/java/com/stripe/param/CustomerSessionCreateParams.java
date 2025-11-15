@@ -20,12 +20,13 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   @SerializedName("components")
   Components components;
 
-  /**
-   * <strong>Required.</strong> The ID of an existing customer for which to create the Customer
-   * Session.
-   */
+  /** The ID of an existing customer for which to create the Customer Session. */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of an existing Account for which to create the Customer Session. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -43,10 +44,12 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
   private CustomerSessionCreateParams(
       Components components,
       String customer,
+      String customerAccount,
       List<String> expand,
       Map<String, Object> extraParams) {
     this.components = components;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -60,6 +63,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -67,7 +72,7 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerSessionCreateParams build() {
       return new CustomerSessionCreateParams(
-          this.components, this.customer, this.expand, this.extraParams);
+          this.components, this.customer, this.customerAccount, this.expand, this.extraParams);
     }
 
     /**
@@ -79,12 +84,15 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * <strong>Required.</strong> The ID of an existing customer for which to create the Customer
-     * Session.
-     */
+    /** The ID of an existing customer for which to create the Customer Session. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of an existing Account for which to create the Customer Session. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -173,19 +181,25 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
     @SerializedName("pricing_table")
     PricingTable pricingTable;
 
+    /** Configuration for the Tax ID Element. */
+    @SerializedName("tax_id_element")
+    TaxIdElement taxIdElement;
+
     private Components(
         BuyButton buyButton,
         CustomerSheet customerSheet,
         Map<String, Object> extraParams,
         MobilePaymentElement mobilePaymentElement,
         PaymentElement paymentElement,
-        PricingTable pricingTable) {
+        PricingTable pricingTable,
+        TaxIdElement taxIdElement) {
       this.buyButton = buyButton;
       this.customerSheet = customerSheet;
       this.extraParams = extraParams;
       this.mobilePaymentElement = mobilePaymentElement;
       this.paymentElement = paymentElement;
       this.pricingTable = pricingTable;
+      this.taxIdElement = taxIdElement;
     }
 
     public static Builder builder() {
@@ -205,6 +219,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
 
       private PricingTable pricingTable;
 
+      private TaxIdElement taxIdElement;
+
       /** Finalize and obtain parameter instance from this builder. */
       public CustomerSessionCreateParams.Components build() {
         return new CustomerSessionCreateParams.Components(
@@ -213,7 +229,8 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
             this.extraParams,
             this.mobilePaymentElement,
             this.paymentElement,
-            this.pricingTable);
+            this.pricingTable,
+            this.taxIdElement);
       }
 
       /** Configuration for buy button. */
@@ -273,6 +290,13 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
       public Builder setPricingTable(
           CustomerSessionCreateParams.Components.PricingTable pricingTable) {
         this.pricingTable = pricingTable;
+        return this;
+      }
+
+      /** Configuration for the Tax ID Element. */
+      public Builder setTaxIdElement(
+          CustomerSessionCreateParams.Components.TaxIdElement taxIdElement) {
+        this.taxIdElement = taxIdElement;
         return this;
       }
     }
@@ -1563,6 +1587,240 @@ public class CustomerSessionCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxIdElement {
+      /** <strong>Required.</strong> Whether the Tax ID Element is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** This hash defines whether the Tax ID Element supports certain features. */
+      @SerializedName("features")
+      Features features;
+
+      private TaxIdElement(Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerSessionCreateParams.Components.TaxIdElement build() {
+          return new CustomerSessionCreateParams.Components.TaxIdElement(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the Tax ID Element is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerSessionCreateParams.Components.TaxIdElement#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CustomerSessionCreateParams.Components.TaxIdElement#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** This hash defines whether the Tax ID Element supports certain features. */
+        public Builder setFeatures(
+            CustomerSessionCreateParams.Components.TaxIdElement.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Controls whether the Tax ID Element displays saved tax IDs for the customer. This
+         * parameter defaults to {@code disabled}.
+         *
+         * <p>When enabled, the Tax ID Element will show existing tax IDs associated with the
+         * customer, allowing them to select from previously saved tax identification numbers.
+         */
+        @SerializedName("tax_id_redisplay")
+        TaxIdRedisplay taxIdRedisplay;
+
+        /**
+         * Controls whether the Tax ID Element allows merchants to save new tax IDs for their
+         * customer. This parameter defaults to {@code disabled}.
+         *
+         * <p>When enabled, customers can enter and save new tax identification numbers during the
+         * payment flow, which will be stored securely and associated with their customer object for
+         * future use.
+         */
+        @SerializedName("tax_id_save")
+        TaxIdSave taxIdSave;
+
+        private Features(
+            Map<String, Object> extraParams, TaxIdRedisplay taxIdRedisplay, TaxIdSave taxIdSave) {
+          this.extraParams = extraParams;
+          this.taxIdRedisplay = taxIdRedisplay;
+          this.taxIdSave = taxIdSave;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private TaxIdRedisplay taxIdRedisplay;
+
+          private TaxIdSave taxIdSave;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public CustomerSessionCreateParams.Components.TaxIdElement.Features build() {
+            return new CustomerSessionCreateParams.Components.TaxIdElement.Features(
+                this.extraParams, this.taxIdRedisplay, this.taxIdSave);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CustomerSessionCreateParams.Components.TaxIdElement.Features#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * CustomerSessionCreateParams.Components.TaxIdElement.Features#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Controls whether the Tax ID Element displays saved tax IDs for the customer. This
+           * parameter defaults to {@code disabled}.
+           *
+           * <p>When enabled, the Tax ID Element will show existing tax IDs associated with the
+           * customer, allowing them to select from previously saved tax identification numbers.
+           */
+          public Builder setTaxIdRedisplay(
+              CustomerSessionCreateParams.Components.TaxIdElement.Features.TaxIdRedisplay
+                  taxIdRedisplay) {
+            this.taxIdRedisplay = taxIdRedisplay;
+            return this;
+          }
+
+          /**
+           * Controls whether the Tax ID Element allows merchants to save new tax IDs for their
+           * customer. This parameter defaults to {@code disabled}.
+           *
+           * <p>When enabled, customers can enter and save new tax identification numbers during the
+           * payment flow, which will be stored securely and associated with their customer object
+           * for future use.
+           */
+          public Builder setTaxIdSave(
+              CustomerSessionCreateParams.Components.TaxIdElement.Features.TaxIdSave taxIdSave) {
+            this.taxIdSave = taxIdSave;
+            return this;
+          }
+        }
+
+        public enum TaxIdRedisplay implements ApiRequestParams.EnumParam {
+          @SerializedName("disabled")
+          DISABLED("disabled"),
+
+          @SerializedName("enabled")
+          ENABLED("enabled");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          TaxIdRedisplay(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum TaxIdSave implements ApiRequestParams.EnumParam {
+          @SerializedName("disabled")
+          DISABLED("disabled"),
+
+          @SerializedName("enabled")
+          ENABLED("enabled");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          TaxIdSave(String value) {
+            this.value = value;
+          }
         }
       }
     }

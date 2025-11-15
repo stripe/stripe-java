@@ -30,12 +30,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /**
-   * <strong>Required.</strong> The ID of the customer who will be billed when this invoice item is
-   * billed.
-   */
+  /** The ID of the customer who will be billed when this invoice item is billed. */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of the account who will be billed when this invoice item is billed. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /**
    * An arbitrary string which you can attach to the invoice item. The description is displayed in
@@ -81,6 +82,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
    */
   @SerializedName("invoice")
   String invoice;
+
+  /**
+   * The ids of the margins to apply to the invoice item. When set, the {@code default_margins} on
+   * the invoice do not apply to this invoice item.
+   */
+  @SerializedName("margins")
+  List<String> margins;
 
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
@@ -161,12 +169,14 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       Long amount,
       String currency,
       String customer,
+      String customerAccount,
       String description,
       Boolean discountable,
       Object discounts,
       List<String> expand,
       Map<String, Object> extraParams,
       String invoice,
+      List<String> margins,
       Object metadata,
       Period period,
       PriceData priceData,
@@ -180,12 +190,14 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     this.amount = amount;
     this.currency = currency;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.description = description;
     this.discountable = discountable;
     this.discounts = discounts;
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoice = invoice;
+    this.margins = margins;
     this.metadata = metadata;
     this.period = period;
     this.priceData = priceData;
@@ -209,6 +221,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String description;
 
     private Boolean discountable;
@@ -220,6 +234,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     private String invoice;
+
+    private List<String> margins;
 
     private Object metadata;
 
@@ -247,12 +263,14 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           this.amount,
           this.currency,
           this.customer,
+          this.customerAccount,
           this.description,
           this.discountable,
           this.discounts,
           this.expand,
           this.extraParams,
           this.invoice,
+          this.margins,
           this.metadata,
           this.period,
           this.priceData,
@@ -285,12 +303,15 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * <strong>Required.</strong> The ID of the customer who will be billed when this invoice item
-     * is billed.
-     */
+    /** The ID of the customer who will be billed when this invoice item is billed. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of the account who will be billed when this invoice item is billed. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -420,6 +441,32 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
      */
     public Builder setInvoice(String invoice) {
       this.invoice = invoice;
+      return this;
+    }
+
+    /**
+     * Add an element to `margins` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemCreateParams#margins} for the field documentation.
+     */
+    public Builder addMargin(String element) {
+      if (this.margins == null) {
+        this.margins = new ArrayList<>();
+      }
+      this.margins.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `margins` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemCreateParams#margins} for the field documentation.
+     */
+    public Builder addAllMargin(List<String> elements) {
+      if (this.margins == null) {
+        this.margins = new ArrayList<>();
+      }
+      this.margins.addAll(elements);
       return this;
     }
 
@@ -593,6 +640,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     @SerializedName("discount")
     String discount;
 
+    /** Details to determine how long the discount should be applied for. */
+    @SerializedName("discount_end")
+    DiscountEnd discountEnd;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -607,9 +658,14 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     String promotionCode;
 
     private Discount(
-        String coupon, String discount, Map<String, Object> extraParams, String promotionCode) {
+        String coupon,
+        String discount,
+        DiscountEnd discountEnd,
+        Map<String, Object> extraParams,
+        String promotionCode) {
       this.coupon = coupon;
       this.discount = discount;
+      this.discountEnd = discountEnd;
       this.extraParams = extraParams;
       this.promotionCode = promotionCode;
     }
@@ -623,6 +679,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
       private String discount;
 
+      private DiscountEnd discountEnd;
+
       private Map<String, Object> extraParams;
 
       private String promotionCode;
@@ -630,7 +688,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceItemCreateParams.Discount build() {
         return new InvoiceItemCreateParams.Discount(
-            this.coupon, this.discount, this.extraParams, this.promotionCode);
+            this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -642,6 +700,12 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       /** ID of an existing discount on the object (or one of its ancestors) to reuse. */
       public Builder setDiscount(String discount) {
         this.discount = discount;
+        return this;
+      }
+
+      /** Details to determine how long the discount should be applied for. */
+      public Builder setDiscountEnd(InvoiceItemCreateParams.Discount.DiscountEnd discountEnd) {
+        this.discountEnd = discountEnd;
         return this;
       }
 
@@ -675,6 +739,246 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       public Builder setPromotionCode(String promotionCode) {
         this.promotionCode = promotionCode;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DiscountEnd {
+      /** Time span for the redeemed discount. */
+      @SerializedName("duration")
+      Duration duration;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** A precise Unix timestamp for the discount to end. Must be in the future. */
+      @SerializedName("timestamp")
+      Long timestamp;
+
+      /**
+       * <strong>Required.</strong> The type of calculation made to determine when the discount
+       * ends.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private DiscountEnd(
+          Duration duration, Map<String, Object> extraParams, Long timestamp, Type type) {
+        this.duration = duration;
+        this.extraParams = extraParams;
+        this.timestamp = timestamp;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Duration duration;
+
+        private Map<String, Object> extraParams;
+
+        private Long timestamp;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceItemCreateParams.Discount.DiscountEnd build() {
+          return new InvoiceItemCreateParams.Discount.DiscountEnd(
+              this.duration, this.extraParams, this.timestamp, this.type);
+        }
+
+        /** Time span for the redeemed discount. */
+        public Builder setDuration(InvoiceItemCreateParams.Discount.DiscountEnd.Duration duration) {
+          this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceItemCreateParams.Discount.DiscountEnd#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceItemCreateParams.Discount.DiscountEnd#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** A precise Unix timestamp for the discount to end. Must be in the future. */
+        public Builder setTimestamp(Long timestamp) {
+          this.timestamp = timestamp;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The type of calculation made to determine when the discount
+         * ends.
+         */
+        public Builder setType(InvoiceItemCreateParams.Discount.DiscountEnd.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Duration {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day}, {@code
+         * week}, {@code month} or {@code year}.
+         */
+        @SerializedName("interval")
+        Interval interval;
+
+        /**
+         * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+         * Stripe multiplies this by the interval type to get the overall duration.
+         */
+        @SerializedName("interval_count")
+        Long intervalCount;
+
+        private Duration(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+          this.extraParams = extraParams;
+          this.interval = interval;
+          this.intervalCount = intervalCount;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Interval interval;
+
+          private Long intervalCount;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceItemCreateParams.Discount.DiscountEnd.Duration build() {
+            return new InvoiceItemCreateParams.Discount.DiscountEnd.Duration(
+                this.extraParams, this.interval, this.intervalCount);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link InvoiceItemCreateParams.Discount.DiscountEnd.Duration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link InvoiceItemCreateParams.Discount.DiscountEnd.Duration#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Specifies a type of interval unit. Either {@code day},
+           * {@code week}, {@code month} or {@code year}.
+           */
+          public Builder setInterval(
+              InvoiceItemCreateParams.Discount.DiscountEnd.Duration.Interval interval) {
+            this.interval = interval;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The number of intervals, as an whole number greater than 0.
+           * Stripe multiplies this by the interval type to get the overall duration.
+           */
+          public Builder setIntervalCount(Long intervalCount) {
+            this.intervalCount = intervalCount;
+            return this;
+          }
+        }
+
+        public enum Interval implements ApiRequestParams.EnumParam {
+          @SerializedName("day")
+          DAY("day"),
+
+          @SerializedName("month")
+          MONTH("month"),
+
+          @SerializedName("week")
+          WEEK("week"),
+
+          @SerializedName("year")
+          YEAR("year");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Interval(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("duration")
+        DURATION("duration"),
+
+        @SerializedName("timestamp")
+        TIMESTAMP("timestamp");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
   }

@@ -93,6 +93,14 @@ public class Event extends ApiResource implements HasId {
   @SerializedName("pending_webhooks")
   Long pendingWebhooks;
 
+  /**
+   * Information about the action that causes the event. Only present when the event is triggered by
+   * an API request or an <a href="https://docs.stripe.com/billing/automations">Automation</a>
+   * action.
+   */
+  @SerializedName("reason")
+  Reason reason;
+
   /** Information on the API request that triggers the event. */
   @SerializedName("request")
   Request request;
@@ -102,29 +110,38 @@ public class Event extends ApiResource implements HasId {
    *
    * <p>One of {@code account.application.authorized}, {@code account.application.deauthorized},
    * {@code account.external_account.created}, {@code account.external_account.deleted}, {@code
-   * account.external_account.updated}, {@code account.updated}, {@code application_fee.created},
-   * {@code application_fee.refund.updated}, {@code application_fee.refunded}, {@code
-   * balance.available}, {@code balance_settings.updated}, {@code billing.alert.triggered}, {@code
+   * account.external_account.updated}, {@code account.updated}, {@code account_notice.created},
+   * {@code account_notice.updated}, {@code application_fee.created}, {@code
+   * application_fee.refund.updated}, {@code application_fee.refunded}, {@code balance.available},
+   * {@code balance_settings.updated}, {@code billing.alert.triggered}, {@code
    * billing_portal.configuration.created}, {@code billing_portal.configuration.updated}, {@code
    * billing_portal.session.created}, {@code capability.updated}, {@code
-   * cash_balance.funds_available}, {@code charge.captured}, {@code charge.dispute.closed}, {@code
-   * charge.dispute.created}, {@code charge.dispute.funds_reinstated}, {@code
-   * charge.dispute.funds_withdrawn}, {@code charge.dispute.updated}, {@code charge.expired}, {@code
-   * charge.failed}, {@code charge.pending}, {@code charge.refund.updated}, {@code charge.refunded},
-   * {@code charge.succeeded}, {@code charge.updated}, {@code
-   * checkout.session.async_payment_failed}, {@code checkout.session.async_payment_succeeded},
-   * {@code checkout.session.completed}, {@code checkout.session.expired}, {@code
-   * climate.order.canceled}, {@code climate.order.created}, {@code climate.order.delayed}, {@code
-   * climate.order.delivered}, {@code climate.order.product_substituted}, {@code
-   * climate.product.created}, {@code climate.product.pricing_updated}, {@code coupon.created},
-   * {@code coupon.deleted}, {@code coupon.updated}, {@code credit_note.created}, {@code
-   * credit_note.updated}, {@code credit_note.voided}, {@code customer.created}, {@code
-   * customer.deleted}, {@code customer.discount.created}, {@code customer.discount.deleted}, {@code
+   * capital.financing_offer.accepted}, {@code capital.financing_offer.canceled}, {@code
+   * capital.financing_offer.created}, {@code capital.financing_offer.expired}, {@code
+   * capital.financing_offer.fully_repaid}, {@code capital.financing_offer.paid_out}, {@code
+   * capital.financing_offer.rejected}, {@code capital.financing_offer.replacement_created}, {@code
+   * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
+   * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
+   * charge.dispute.funds_reinstated}, {@code charge.dispute.funds_withdrawn}, {@code
+   * charge.dispute.updated}, {@code charge.expired}, {@code charge.failed}, {@code charge.pending},
+   * {@code charge.refund.updated}, {@code charge.refunded}, {@code charge.succeeded}, {@code
+   * charge.updated}, {@code checkout.session.async_payment_failed}, {@code
+   * checkout.session.async_payment_succeeded}, {@code checkout.session.completed}, {@code
+   * checkout.session.expired}, {@code climate.order.canceled}, {@code climate.order.created},
+   * {@code climate.order.delayed}, {@code climate.order.delivered}, {@code
+   * climate.order.product_substituted}, {@code climate.product.created}, {@code
+   * climate.product.pricing_updated}, {@code coupon.created}, {@code coupon.deleted}, {@code
+   * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
+   * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
+   * customer.discount.created}, {@code customer.discount.deleted}, {@code
    * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
    * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
-   * customer.subscription.created}, {@code customer.subscription.deleted}, {@code
-   * customer.subscription.paused}, {@code customer.subscription.pending_update_applied}, {@code
-   * customer.subscription.pending_update_expired}, {@code customer.subscription.resumed}, {@code
+   * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
+   * {@code customer.subscription.created}, {@code customer.subscription.custom_event}, {@code
+   * customer.subscription.deleted}, {@code customer.subscription.paused}, {@code
+   * customer.subscription.pending_update_applied}, {@code
+   * customer.subscription.pending_update_expired}, {@code
+   * customer.subscription.price_migration_failed}, {@code customer.subscription.resumed}, {@code
    * customer.subscription.trial_will_end}, {@code customer.subscription.updated}, {@code
    * customer.tax_id.created}, {@code customer.tax_id.deleted}, {@code customer.tax_id.updated},
    * {@code customer.updated}, {@code customer_cash_balance_transaction.created}, {@code
@@ -133,16 +150,18 @@ public class Event extends ApiResource implements HasId {
    * {@code financial_connections.account.disconnected}, {@code
    * financial_connections.account.reactivated}, {@code
    * financial_connections.account.refreshed_balance}, {@code
+   * financial_connections.account.refreshed_inferred_balances}, {@code
    * financial_connections.account.refreshed_ownership}, {@code
    * financial_connections.account.refreshed_transactions}, {@code
+   * financial_connections.session.updated}, {@code fx_quote.expired}, {@code
    * identity.verification_session.canceled}, {@code identity.verification_session.created}, {@code
    * identity.verification_session.processing}, {@code identity.verification_session.redacted},
    * {@code identity.verification_session.requires_input}, {@code
    * identity.verification_session.verified}, {@code invoice.created}, {@code invoice.deleted},
    * {@code invoice.finalization_failed}, {@code invoice.finalized}, {@code
    * invoice.marked_uncollectible}, {@code invoice.overdue}, {@code invoice.overpaid}, {@code
-   * invoice.paid}, {@code invoice.payment_action_required}, {@code
-   * invoice.payment_attempt_required}, {@code invoice.payment_failed}, {@code
+   * invoice.paid}, {@code invoice.payment.overpaid}, {@code invoice.payment_action_required},
+   * {@code invoice.payment_attempt_required}, {@code invoice.payment_failed}, {@code
    * invoice.payment_succeeded}, {@code invoice.sent}, {@code invoice.upcoming}, {@code
    * invoice.updated}, {@code invoice.voided}, {@code invoice.will_be_due}, {@code
    * invoice_payment.paid}, {@code invoiceitem.created}, {@code invoiceitem.deleted}, {@code
@@ -152,10 +171,13 @@ public class Event extends ApiResource implements HasId {
    * issuing_dispute.closed}, {@code issuing_dispute.created}, {@code
    * issuing_dispute.funds_reinstated}, {@code issuing_dispute.funds_rescinded}, {@code
    * issuing_dispute.submitted}, {@code issuing_dispute.updated}, {@code
+   * issuing_dispute_settlement_detail.created}, {@code issuing_dispute_settlement_detail.updated},
+   * {@code issuing_fraud_liability_debit.created}, {@code
    * issuing_personalization_design.activated}, {@code issuing_personalization_design.deactivated},
    * {@code issuing_personalization_design.rejected}, {@code
-   * issuing_personalization_design.updated}, {@code issuing_token.created}, {@code
-   * issuing_token.updated}, {@code issuing_transaction.created}, {@code
+   * issuing_personalization_design.updated}, {@code issuing_settlement.created}, {@code
+   * issuing_settlement.updated}, {@code issuing_token.created}, {@code issuing_token.updated},
+   * {@code issuing_transaction.created}, {@code
    * issuing_transaction.purchase_details_receipt_updated}, {@code issuing_transaction.updated},
    * {@code mandate.updated}, {@code payment_intent.amount_capturable_updated}, {@code
    * payment_intent.canceled}, {@code payment_intent.created}, {@code
@@ -168,9 +190,13 @@ public class Event extends ApiResource implements HasId {
    * payout.reconciliation_completed}, {@code payout.updated}, {@code person.created}, {@code
    * person.deleted}, {@code person.updated}, {@code plan.created}, {@code plan.deleted}, {@code
    * plan.updated}, {@code price.created}, {@code price.deleted}, {@code price.updated}, {@code
-   * product.created}, {@code product.deleted}, {@code product.updated}, {@code
-   * promotion_code.created}, {@code promotion_code.updated}, {@code quote.accepted}, {@code
-   * quote.canceled}, {@code quote.created}, {@code quote.finalized}, {@code
+   * privacy.redaction_job.canceled}, {@code privacy.redaction_job.created}, {@code
+   * privacy.redaction_job.ready}, {@code privacy.redaction_job.succeeded}, {@code
+   * privacy.redaction_job.validation_error}, {@code product.created}, {@code product.deleted},
+   * {@code product.updated}, {@code promotion_code.created}, {@code promotion_code.updated}, {@code
+   * quote.accept_failed}, {@code quote.accepted}, {@code quote.accepting}, {@code quote.canceled},
+   * {@code quote.created}, {@code quote.draft}, {@code quote.finalized}, {@code
+   * quote.reestimate_failed}, {@code quote.reestimated}, {@code quote.stale}, {@code
    * radar.early_fraud_warning.created}, {@code radar.early_fraud_warning.updated}, {@code
    * refund.created}, {@code refund.failed}, {@code refund.updated}, {@code
    * reporting.report_run.failed}, {@code reporting.report_run.succeeded}, {@code
@@ -182,8 +208,9 @@ public class Event extends ApiResource implements HasId {
    * {@code source.transaction.created}, {@code source.transaction.updated}, {@code
    * subscription_schedule.aborted}, {@code subscription_schedule.canceled}, {@code
    * subscription_schedule.completed}, {@code subscription_schedule.created}, {@code
-   * subscription_schedule.expiring}, {@code subscription_schedule.released}, {@code
-   * subscription_schedule.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
+   * subscription_schedule.expiring}, {@code subscription_schedule.price_migration_failed}, {@code
+   * subscription_schedule.released}, {@code subscription_schedule.updated}, {@code
+   * tax.form.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
    * tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
    * terminal.reader.action_succeeded}, {@code terminal.reader.action_updated}, {@code
    * test_helpers.test_clock.advancing}, {@code test_helpers.test_clock.created}, {@code
@@ -382,6 +409,95 @@ public class Event extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Reason, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Reason extends StripeObject {
+    @SerializedName("automation_action")
+    AutomationAction automationAction;
+
+    @SerializedName("request")
+    Request request;
+
+    /**
+     * The type of the reason for the event.
+     *
+     * <p>One of {@code automation_action}, or {@code request}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about AutomationAction, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AutomationAction extends StripeObject {
+      @SerializedName("stripe_send_webhook_custom_event")
+      StripeSendWebhookCustomEvent stripeSendWebhookCustomEvent;
+
+      /**
+       * The trigger name of the automation that triggered this action. Please visit <a
+       * href="https://docs.stripe.com/billing/automations#choose-a-trigger">Revenue and retention
+       * automations</a> for all possible trigger names.
+       */
+      @SerializedName("trigger")
+      String trigger;
+
+      /**
+       * The type of the {@code automation_action}.
+       *
+       * <p>Equal to {@code stripe_send_webhook_custom_event}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * For more details about StripeSendWebhookCustomEvent, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class StripeSendWebhookCustomEvent extends StripeObject {
+        /** Set of key-value pairs attached to the action when creating an Automation. */
+        @SerializedName("custom_data")
+        Map<String, String> customData;
+      }
+    }
+
+    /**
+     * For more details about Request, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Request extends StripeObject implements HasId {
+      /**
+       * ID of the API request that caused the event. If null, the event was automatic (e.g.,
+       * Stripe's automatic subscription handling). Request logs are available in the <a
+       * href="https://dashboard.stripe.com/logs">dashboard</a>, but currently not in the API.
+       */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /**
+       * The idempotency key transmitted during the request, if any. <em>Note: This property is
+       * populated only for events on or after May 23, 2017</em>.
+       */
+      @SerializedName("idempotency_key")
+      String idempotencyKey;
+    }
+  }
+
+  /**
    * For more details about Request, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -410,6 +526,7 @@ public class Event extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(data, responseGetter);
+    trySetResponseGetter(reason, responseGetter);
     trySetResponseGetter(request, responseGetter);
   }
 }

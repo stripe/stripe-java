@@ -60,6 +60,14 @@ public class SetupAttempt extends ApiResource implements HasId {
   ExpandableField<Customer> customer;
 
   /**
+   * The value of <a
+   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-customer_account">customer_account</a>
+   * on the SetupIntent at the time of this confirmation.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * Indicates the directions of money movement for which this payment method is intended to be
    * used.
    *
@@ -295,6 +303,9 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("cashapp")
     Cashapp cashapp;
 
+    @SerializedName("id_bank_transfer")
+    IdBankTransfer idBankTransfer;
+
     @SerializedName("ideal")
     Ideal ideal;
 
@@ -319,6 +330,12 @@ public class SetupAttempt extends ApiResource implements HasId {
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("payto")
+    Payto payto;
+
+    @SerializedName("pix")
+    Pix pix;
+
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
@@ -327,6 +344,9 @@ public class SetupAttempt extends ApiResource implements HasId {
 
     @SerializedName("sofort")
     Sofort sofort;
+
+    @SerializedName("stripe_balance")
+    StripeBalance stripeBalance;
 
     /**
      * The type of the payment method used in the SetupIntent (e.g., {@code card}). An additional
@@ -779,6 +799,38 @@ public class SetupAttempt extends ApiResource implements HasId {
     public static class Cashapp extends StripeObject {}
 
     /**
+     * For more details about IdBankTransfer, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class IdBankTransfer extends StripeObject {
+      /**
+       * Bank where the account is located.
+       *
+       * <p>One of {@code bca}, {@code bni}, {@code bri}, {@code cimb}, or {@code permata}.
+       */
+      @SerializedName("bank")
+      String bank;
+
+      /** Local bank code of the bank. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /**
+       * Merchant name and billing details name, for the customer to check for the correct merchant
+       * when performing the bank transfer.
+       */
+      @SerializedName("display_name")
+      String displayName;
+    }
+
+    /**
      * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */
@@ -947,6 +999,24 @@ public class SetupAttempt extends ApiResource implements HasId {
     public static class Paypal extends StripeObject {}
 
     /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {}
+
+    /**
+     * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Pix extends StripeObject {}
+
+    /**
      * For more details about RevolutPay, please refer to the <a
      * href="https://docs.stripe.com/api">API Reference.</a>
      */
@@ -1060,6 +1130,15 @@ public class SetupAttempt extends ApiResource implements HasId {
             new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
     }
+
+    /**
+     * For more details about StripeBalance, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeBalance extends StripeObject {}
 
     /**
      * For more details about UsBankAccount, please refer to the <a

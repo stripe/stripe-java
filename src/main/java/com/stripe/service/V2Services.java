@@ -16,4 +16,16 @@ public final class V2Services extends ApiService {
   public com.stripe.service.v2.CoreService core() {
     return new com.stripe.service.v2.CoreService(this.getResponseGetter());
   }
+
+  public com.stripe.service.v2.MoneyManagementService moneyManagement() {
+    return new com.stripe.service.v2.MoneyManagementService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.PaymentService payments() {
+    return new com.stripe.service.v2.PaymentService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.TestHelperService testHelpers() {
+    return new com.stripe.service.v2.TestHelperService(this.getResponseGetter());
+  }
 }

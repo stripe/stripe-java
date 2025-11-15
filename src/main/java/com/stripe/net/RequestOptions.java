@@ -15,9 +15,11 @@ public class RequestOptions {
   private final String stripeContext;
   private final String idempotencyKey;
   private final String stripeAccount;
+
   private final String baseUrl;
-  /** Stripe version always set at {@link Stripe#API_VERSION}. */
-  private final String stripeVersion = Stripe.API_VERSION;
+  /** Uses the globally set version by default, unless an override is provided. */
+  private final String stripeVersion = Stripe.getStripeVersionWithBetaHeaders();
+
   /**
    * Stripe version override when made on behalf of others. This can be used when the returned
    * response will not be deserialized into the current classes pinned to {@link Stripe#VERSION}.
@@ -129,8 +131,8 @@ public class RequestOptions {
   /**
    * Convert request options to builder, retaining invariant values for the integration.
    *
-   * @deprecated prefer {@link toBuilderFullCopy} which fully copies the request options instead of
-   *     a subset of its options.
+   * @deprecated prefer {@link toBuilderFullCopy()} which fully copies the request options instead
+   *     of a subset of its options.
    * @return option builder.
    */
   @Deprecated

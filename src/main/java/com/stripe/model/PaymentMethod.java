@@ -111,6 +111,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("customer_account")
+  String customerAccount;
+
   @SerializedName("customer_balance")
   CustomerBalance customerBalance;
 
@@ -123,6 +126,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("giropay")
   Giropay giropay;
 
+  @SerializedName("gopay")
+  Gopay gopay;
+
   @SerializedName("grabpay")
   Grabpay grabpay;
 
@@ -130,6 +136,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  @SerializedName("id_bank_transfer")
+  IdBankTransfer idBankTransfer;
 
   @SerializedName("ideal")
   Ideal ideal;
@@ -148,6 +157,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   @SerializedName("kr_card")
   KrCard krCard;
+
+  /**
+   * The Mandate object of the most recently created Mandate associated with this payment method.
+   */
+  @SerializedName("latest_active_mandate")
+  Mandate latestActiveMandate;
 
   @SerializedName("link")
   Link link;
@@ -209,11 +224,20 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("paypal")
   Paypal paypal;
 
+  @SerializedName("paypay")
+  Paypay paypay;
+
+  @SerializedName("payto")
+  Payto payto;
+
   @SerializedName("pix")
   Pix pix;
 
   @SerializedName("promptpay")
   Promptpay promptpay;
+
+  @SerializedName("qris")
+  Qris qris;
 
   /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
@@ -221,6 +245,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    */
   @SerializedName("radar_options")
   RadarOptions radarOptions;
+
+  @SerializedName("rechnung")
+  Rechnung rechnung;
 
   @SerializedName("revolut_pay")
   RevolutPay revolutPay;
@@ -234,8 +261,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
+  @SerializedName("shopeepay")
+  Shopeepay shopeepay;
+
   @SerializedName("sofort")
   Sofort sofort;
+
+  @SerializedName("stripe_balance")
+  StripeBalance stripeBalance;
 
   @SerializedName("swish")
   Swish swish;
@@ -251,13 +284,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * alma}, {@code amazon_pay}, {@code au_becs_debit}, {@code bacs_debit}, {@code bancontact},
    * {@code billie}, {@code blik}, {@code boleto}, {@code card}, {@code card_present}, {@code
    * cashapp}, {@code crypto}, {@code custom}, {@code customer_balance}, {@code eps}, {@code fpx},
-   * {@code giropay}, {@code grabpay}, {@code ideal}, {@code interac_present}, {@code kakao_pay},
-   * {@code klarna}, {@code konbini}, {@code kr_card}, {@code link}, {@code mb_way}, {@code
-   * mobilepay}, {@code multibanco}, {@code naver_pay}, {@code nz_bank_account}, {@code oxxo},
-   * {@code p24}, {@code pay_by_bank}, {@code payco}, {@code paynow}, {@code paypal}, {@code pix},
-   * {@code promptpay}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code
-   * sepa_debit}, {@code sofort}, {@code swish}, {@code twint}, {@code us_bank_account}, {@code
-   * wechat_pay}, or {@code zip}.
+   * {@code giropay}, {@code gopay}, {@code grabpay}, {@code id_bank_transfer}, {@code ideal},
+   * {@code interac_present}, {@code kakao_pay}, {@code klarna}, {@code konbini}, {@code kr_card},
+   * {@code link}, {@code mb_way}, {@code mobilepay}, {@code multibanco}, {@code naver_pay}, {@code
+   * nz_bank_account}, {@code oxxo}, {@code p24}, {@code pay_by_bank}, {@code payco}, {@code
+   * paynow}, {@code paypal}, {@code paypay}, {@code payto}, {@code pix}, {@code promptpay}, {@code
+   * qris}, {@code rechnung}, {@code revolut_pay}, {@code samsung_pay}, {@code satispay}, {@code
+   * sepa_debit}, {@code shopeepay}, {@code sofort}, {@code stripe_balance}, {@code swish}, {@code
+   * twint}, {@code us_bank_account}, {@code wechat_pay}, or {@code zip}.
    */
   @SerializedName("type")
   String type;
@@ -287,6 +321,48 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
+   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * future payments</a> for more information about setting up future payments.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
+   */
+  public PaymentMethod attach() throws StripeException {
+    return attach((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To attach a new PaymentMethod to a customer for future payments, we recommend you use a <a
+   * href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> or a PaymentIntent with <a
+   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-setup_future_usage">setup_future_usage</a>.
+   * These approaches will perform any necessary steps to set up the PaymentMethod for future
+   * payments. Using the {@code /v1/payment_methods/:id/attach} endpoint without first using a
+   * SetupIntent or PaymentIntent with {@code setup_future_usage} does not optimize the
+   * PaymentMethod for future use, which makes later declines and payment friction more likely. See
+   * <a href="https://stripe.com/docs/payments/payment-intents#future-usage">Optimizing cards for
+   * future payments</a> for more information about setting up future payments.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">{@code
+   * invoice_settings.default_payment_method}</a>, on the Customer to the PaymentMethod’s ID.
+   */
+  public PaymentMethod attach(RequestOptions options) throws StripeException {
+    return attach((Map<String, Object>) null, options);
   }
 
   /**
@@ -691,6 +767,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AcssDebit extends StripeObject {
+    /** Account number of the bank account. */
+    @SerializedName("account_number")
+    String accountNumber;
+
     /** Name of the bank associated with the bank account. */
     @SerializedName("bank_name")
     String bankName;
@@ -1879,6 +1959,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Giropay extends StripeObject {}
 
   /**
+   * For more details about Gopay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Gopay extends StripeObject {}
+
+  /**
    * For more details about Grabpay, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -1886,6 +1975,27 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Grabpay extends StripeObject {}
+
+  /**
+   * For more details about IdBankTransfer, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class IdBankTransfer extends StripeObject {
+    @SerializedName("bank")
+    String bank;
+
+    @SerializedName("bank_code")
+    String bankCode;
+
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("display_name")
+    String displayName;
+  }
 
   /**
    * For more details about Ideal, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2295,6 +2405,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String country;
 
     /**
+     * Uniquely identifies this particular PayPal account. You can use this attribute to check
+     * whether two PayPal accounts are the same.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /**
      * Owner's email. Values are provided by PayPal directly (if supported) at the time of
      * authorization or settlement. They cannot be set or mutated.
      */
@@ -2304,6 +2421,43 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** PayPal account PayerID. This identifier uniquely identifies the PayPal customer. */
     @SerializedName("payer_id")
     String payerId;
+
+    /**
+     * Owner's verified email. Values are verified or provided by PayPal directly (if supported) at
+     * the time of authorization or settlement. They cannot be set or mutated.
+     */
+    @SerializedName("verified_email")
+    String verifiedEmail;
+  }
+
+  /**
+   * For more details about Paypay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Paypay extends StripeObject {}
+
+  /**
+   * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Payto extends StripeObject {
+    /** Bank-State-Branch number of the bank account. */
+    @SerializedName("bsb_number")
+    String bsbNumber;
+
+    /** Last four digits of the bank account number. */
+    @SerializedName("last4")
+    String last4;
+
+    /** The PayID alias for the bank account. */
+    @SerializedName("pay_id")
+    String payId;
   }
 
   /**
@@ -2325,6 +2479,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Promptpay extends StripeObject {}
 
   /**
+   * For more details about Qris, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Qris extends StripeObject {}
+
+  /**
    * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
    * Session</a> for more information.
    */
@@ -2339,6 +2502,39 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("session")
     String session;
+  }
+
+  /**
+   * For more details about Rechnung, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Rechnung extends StripeObject {
+    @SerializedName("dob")
+    Dob dob;
+
+    /**
+     * For more details about Dob, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dob extends StripeObject {
+      /** The day of birth, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /** The month of birth, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The four-digit year of birth. */
+      @SerializedName("year")
+      Long year;
+    }
   }
 
   /**
@@ -2463,6 +2659,15 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about Shopeepay, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Shopeepay extends StripeObject {}
+
+  /**
    * For more details about Sofort, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -2473,6 +2678,29 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /** Two-letter ISO code representing the country the bank account is located in. */
     @SerializedName("country")
     String country;
+  }
+
+  /**
+   * For more details about StripeBalance, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeBalance extends StripeObject {
+    /** The connected account ID whose Stripe balance to use as the source of payment. */
+    @SerializedName("account")
+    String account;
+
+    /**
+     * The <a
+     * href="https://docs.stripe.com/api/balance/balance_object#balance_object-available-source_types">source_type</a>
+     * of the balance
+     *
+     * <p>One of {@code bank_account}, {@code card}, or {@code fpx}.
+     */
+    @SerializedName("source_type")
+    String sourceType;
   }
 
   /**
@@ -2508,6 +2736,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      */
     @SerializedName("account_holder_type")
     String accountHolderType;
+
+    /** Account number of the bank account. */
+    @SerializedName("account_number")
+    String accountNumber;
 
     /**
      * Account type: checkings or savings. Defaults to checking if omitted.
@@ -2650,13 +2882,16 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(eps, responseGetter);
     trySetResponseGetter(fpx, responseGetter);
     trySetResponseGetter(giropay, responseGetter);
+    trySetResponseGetter(gopay, responseGetter);
     trySetResponseGetter(grabpay, responseGetter);
+    trySetResponseGetter(idBankTransfer, responseGetter);
     trySetResponseGetter(ideal, responseGetter);
     trySetResponseGetter(interacPresent, responseGetter);
     trySetResponseGetter(kakaoPay, responseGetter);
     trySetResponseGetter(klarna, responseGetter);
     trySetResponseGetter(konbini, responseGetter);
     trySetResponseGetter(krCard, responseGetter);
+    trySetResponseGetter(latestActiveMandate, responseGetter);
     trySetResponseGetter(link, responseGetter);
     trySetResponseGetter(mbWay, responseGetter);
     trySetResponseGetter(mobilepay, responseGetter);
@@ -2669,14 +2904,20 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(payco, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
     trySetResponseGetter(paypal, responseGetter);
+    trySetResponseGetter(paypay, responseGetter);
+    trySetResponseGetter(payto, responseGetter);
     trySetResponseGetter(pix, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
+    trySetResponseGetter(qris, responseGetter);
     trySetResponseGetter(radarOptions, responseGetter);
+    trySetResponseGetter(rechnung, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);
     trySetResponseGetter(samsungPay, responseGetter);
     trySetResponseGetter(satispay, responseGetter);
     trySetResponseGetter(sepaDebit, responseGetter);
+    trySetResponseGetter(shopeepay, responseGetter);
     trySetResponseGetter(sofort, responseGetter);
+    trySetResponseGetter(stripeBalance, responseGetter);
     trySetResponseGetter(swish, responseGetter);
     trySetResponseGetter(twint, responseGetter);
     trySetResponseGetter(usBankAccount, responseGetter);

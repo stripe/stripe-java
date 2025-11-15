@@ -138,6 +138,9 @@ public class AccountRefreshParams extends ApiRequestParams {
     @SerializedName("balance")
     BALANCE("balance"),
 
+    @SerializedName("inferred_balances")
+    INFERRED_BALANCES("inferred_balances"),
+
     @SerializedName("ownership")
     OWNERSHIP("ownership"),
 

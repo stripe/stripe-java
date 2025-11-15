@@ -51,6 +51,13 @@ public class TransferCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * The FX rate in the quote is validated and used to convert the transfer amount to the
+   * destination currency.
+   */
+  @SerializedName("fx_quote")
+  String fxQuote;
+
+  /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -91,6 +98,7 @@ public class TransferCreateParams extends ApiRequestParams {
       String destination,
       List<String> expand,
       Map<String, Object> extraParams,
+      String fxQuote,
       Map<String, String> metadata,
       String sourceTransaction,
       SourceType sourceType,
@@ -101,6 +109,7 @@ public class TransferCreateParams extends ApiRequestParams {
     this.destination = destination;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fxQuote = fxQuote;
     this.metadata = metadata;
     this.sourceTransaction = sourceTransaction;
     this.sourceType = sourceType;
@@ -124,6 +133,8 @@ public class TransferCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String fxQuote;
+
     private Map<String, String> metadata;
 
     private String sourceTransaction;
@@ -141,6 +152,7 @@ public class TransferCreateParams extends ApiRequestParams {
           this.destination,
           this.expand,
           this.extraParams,
+          this.fxQuote,
           this.metadata,
           this.sourceTransaction,
           this.sourceType,
@@ -228,6 +240,15 @@ public class TransferCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * The FX rate in the quote is validated and used to convert the transfer amount to the
+     * destination currency.
+     */
+    public Builder setFxQuote(String fxQuote) {
+      this.fxQuote = fxQuote;
       return this;
     }
 

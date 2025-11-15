@@ -176,6 +176,10 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The ID of the account for this Session. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * Configure whether a Checkout Session creates a Customer when the Checkout Session completes.
    *
@@ -1134,13 +1138,25 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("business_name")
     String businessName;
 
+    /** Customer’s email for this Checkout Session. */
+    @SerializedName("email")
+    String email;
+
     /** Customer’s individual name for this Checkout Session. */
     @SerializedName("individual_name")
     String individualName;
 
+    /** Customer’s phone number for this Checkout Session. */
+    @SerializedName("phone")
+    String phone;
+
     /** Shipping information for this Checkout Session. */
     @SerializedName("shipping_details")
     ShippingDetails shippingDetails;
+
+    /** Customer’s tax ids for this Checkout Session. */
+    @SerializedName("tax_ids")
+    List<Session.CollectedInformation.TaxId> taxIds;
 
     /**
      * For more details about ShippingDetails, please refer to the <a
@@ -1156,6 +1172,45 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /** Customer name. */
       @SerializedName("name")
       String name;
+    }
+
+    /**
+     * For more details about TaxId, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class TaxId extends StripeObject {
+      /**
+       * The type of the tax ID, one of {@code ad_nrt}, {@code ar_cuit}, {@code eu_vat}, {@code
+       * bo_tin}, {@code br_cnpj}, {@code br_cpf}, {@code cn_tin}, {@code co_nit}, {@code cr_tin},
+       * {@code do_rcn}, {@code ec_ruc}, {@code eu_oss_vat}, {@code hr_oib}, {@code pe_ruc}, {@code
+       * ro_tin}, {@code rs_pib}, {@code sv_nit}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin},
+       * {@code gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst}, {@code
+       * no_vat}, {@code no_voec}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
+       * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
+       * tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid},
+       * {@code li_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code
+       * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst},
+       * {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code
+       * my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic},
+       * {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code
+       * ph_tin}, {@code al_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat},
+       * {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code
+       * md_vat}, {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin},
+       * {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code
+       * gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan},
+       * {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin}, {@code
+       * az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin},
+       * {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, or {@code unknown}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** The value of the tax ID. */
+      @SerializedName("value")
+      String value;
     }
   }
 
@@ -2060,6 +2115,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("payto")
+    Payto payto;
+
     @SerializedName("pix")
     Pix pix;
 
@@ -2574,6 +2632,15 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
       @SerializedName("installments")
       Installments installments;
+
+      /**
+       * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
+       * beyond the standard authorization validity window</a> for this CheckoutSession.
+       *
+       * <p>One of {@code if_available}, or {@code never}.
+       */
+      @SerializedName("request_decremental_authorization")
+      String requestDecrementalAuthorization;
 
       /**
        * Request ability to <a href="https://stripe.com/payments/extended-authorization">capture
@@ -3503,6 +3570,116 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * The Stripe connected account IDs of the sellers on the platform for this transaction
+       * (optional). Only allowed when <a
+       * href="https://stripe.com/docs/connect/separate-charges-and-transfers">separate charges and
+       * transfers</a> are used.
+       */
+      @SerializedName("subsellers")
+      List<String> subsellers;
+    }
+
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>One of {@code none}, or {@code off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /**
+         * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
+         */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * The type of amount that will be collected. The amount charged must be exact or up to the
+         * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+         * end date.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * The periodicity at which payments will be collected.
+         *
+         * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
+         * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /**
+         * The number of payments that will be made during a payment period. Defaults to 1 except
+         * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+         * limit.
+         */
+        @SerializedName("payments_per_period")
+        Long paymentsPerPeriod;
+
+        /**
+         * The purpose for which payments are made. Defaults to retail.
+         *
+         * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
+         * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code
+         * tax}, or {@code utility}.
+         */
+        @SerializedName("purpose")
+        String purpose;
+
+        /**
+         * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
+         * confirmation time.
+         */
+        @SerializedName("start_date")
+        String startDate;
+      }
     }
 
     /**
@@ -3525,6 +3702,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       @SerializedName("expires_after_seconds")
       Long expiresAfterSeconds;
 
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -3544,10 +3724,70 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * with regional legislation and network rules, such as <a
        * href="https://stripe.com/strong-customer-authentication">SCA</a>.
        *
-       * <p>Equal to {@code none}.
+       * <p>One of {@code none}, or {@code off_session}.
        */
       @SerializedName("setup_future_usage")
       String setupFutureUsage;
+
+      /**
+       * For more details about MandateOptions, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions extends StripeObject {
+        /** Amount to be charged for future payments. */
+        @SerializedName("amount")
+        Long amount;
+
+        /**
+         * Determines if the amount includes the IOF tax.
+         *
+         * <p>One of {@code always}, or {@code never}.
+         */
+        @SerializedName("amount_includes_iof")
+        String amountIncludesIof;
+
+        /**
+         * Type of amount.
+         *
+         * <p>One of {@code fixed}, or {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        String amountType;
+
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Date when the mandate expires and no further payments will be charged, in {@code
+         * YYYY-MM-DD}.
+         */
+        @SerializedName("end_date")
+        String endDate;
+
+        /**
+         * Schedule at which the future payments will be charged.
+         *
+         * <p>One of {@code halfyearly}, {@code monthly}, {@code quarterly}, {@code weekly}, or
+         * {@code yearly}.
+         */
+        @SerializedName("payment_schedule")
+        String paymentSchedule;
+
+        /** Subscription name displayed to buyers in their bank app. */
+        @SerializedName("reference")
+        String reference;
+
+        /** Start date of the mandate, in {@code YYYY-MM-DD}. */
+        @SerializedName("start_date")
+        String startDate;
+      }
     }
 
     /**
@@ -3830,6 +4070,9 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         @SerializedName("filters")
         Filters filters;
 
+        @SerializedName("manual_entry")
+        ManualEntry manualEntry;
+
         /**
          * The list of permissions to request. The {@code payment_method} permission must be
          * included.
@@ -3862,6 +4105,27 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
            */
           @SerializedName("account_subcategories")
           List<String> accountSubcategories;
+
+          /** The institution to use to filter for possible accounts to link. */
+          @SerializedName("institution")
+          String institution;
+        }
+
+        /**
+         * For more details about ManualEntry, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ManualEntry extends StripeObject {
+          /**
+           * Settings for configuring manual entry of account details.
+           *
+           * <p>One of {@code automatic}, or {@code custom}.
+           */
+          @SerializedName("mode")
+          String mode;
         }
       }
     }
@@ -3875,6 +4139,25 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Permissions extends StripeObject {
+    /** Permissions for updating the Checkout Session. */
+    @SerializedName("update")
+    Update update;
+
+    /**
+     * Determines which entity is allowed to update the line items.
+     *
+     * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the line
+     * items. If set to {@code server_only}, only your server is allowed to update the line items.
+     *
+     * <p>When set to {@code server_only}, you must add the onLineItemsChange event handler when
+     * initializing the Stripe Checkout client and manually update the line items from your server
+     * using the Stripe API.
+     *
+     * <p>One of {@code client_only}, or {@code server_only}.
+     */
+    @SerializedName("update_line_items")
+    String updateLineItems;
+
     /**
      * Determines which entity is allowed to update the shipping details.
      *
@@ -3890,6 +4173,47 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
      */
     @SerializedName("update_shipping_details")
     String updateShippingDetails;
+
+    /**
+     * For more details about Update, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Update extends StripeObject {
+      /**
+       * Determines which entity is allowed to update the line items.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+       * line items. If set to {@code server_only}, only your server is allowed to update the line
+       * items.
+       *
+       * <p>When set to {@code server_only}, you must add the onLineItemsChange event handler when
+       * initializing the Stripe Checkout client and manually update the line items from your server
+       * using the Stripe API.
+       *
+       * <p>One of {@code client_only}, or {@code server_only}.
+       */
+      @SerializedName("line_items")
+      String lineItems;
+
+      /**
+       * Determines which entity is allowed to update the shipping details.
+       *
+       * <p>Default is {@code client_only}. Stripe Checkout client will automatically update the
+       * shipping details. If set to {@code server_only}, only your server is allowed to update the
+       * shipping details.
+       *
+       * <p>When set to {@code server_only}, you must add the onShippingDetailsChange event handler
+       * when initializing the Stripe Checkout client and manually update the shipping details from
+       * your server using the Stripe API.
+       *
+       * <p>One of {@code client_only}, or {@code server_only}.
+       */
+      @SerializedName("shipping_details")
+      String shippingDetails;
+    }
   }
 
   /**

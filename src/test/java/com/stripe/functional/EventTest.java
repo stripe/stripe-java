@@ -13,6 +13,7 @@ import com.stripe.model.EventCollection;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.param.EventListParams;
+import com.stripe.util.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -57,8 +58,9 @@ public class EventTest extends BaseStripeTest {
   @Test
   public void testGetDataObjectWithSameApiVersion() throws StripeException {
     final Event event = Event.retrieve(EVENT_ID);
-    // Suppose event has the same API version as the library's pinned version
-    event.setApiVersion(Stripe.API_VERSION);
+    // Suppose event has the same API version as the library's pinned version. Note that beta
+    // payloads don't return beta headeres, so we trim.
+    event.setApiVersion(StringUtils.trimApiVersion(Stripe.API_VERSION));
 
     Optional<StripeObject> stripeObject = event.getDataObjectDeserializer().getObject();
 

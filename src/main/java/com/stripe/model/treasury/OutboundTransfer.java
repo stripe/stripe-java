@@ -114,6 +114,10 @@ public class OutboundTransfer extends ApiResource implements HasId {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Details about the network used for the OutboundTransfer. */
+  @SerializedName("network_details")
+  NetworkDetails networkDetails;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
@@ -489,6 +493,40 @@ public class OutboundTransfer extends ApiResource implements HasId {
       public void setMandateObject(Mandate expandableObject) {
         this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
       }
+    }
+  }
+
+  /**
+   * For more details about NetworkDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NetworkDetails extends StripeObject {
+    /** Details about an ACH transaction. */
+    @SerializedName("ach")
+    Ach ach;
+
+    /**
+     * The type of flow that originated the OutboundTransfer.
+     *
+     * <p>Equal to {@code ach}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * For more details about Ach, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ach extends StripeObject {
+      /** ACH Addenda record. */
+      @SerializedName("addenda")
+      String addenda;
     }
   }
 
@@ -901,6 +939,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(destinationPaymentMethodDetails, responseGetter);
+    trySetResponseGetter(networkDetails, responseGetter);
     trySetResponseGetter(returnedDetails, responseGetter);
     trySetResponseGetter(statusTransitions, responseGetter);
     trySetResponseGetter(trackingDetails, responseGetter);

@@ -84,6 +84,10 @@ public class Transfer extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> destinationPayment;
 
+  /** The FX Quote used for the transfer. */
+  @SerializedName("fx_quote")
+  String fxQuote;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

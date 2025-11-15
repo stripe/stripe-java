@@ -55,6 +55,10 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
   @SerializedName("related_customer")
   String relatedCustomer;
 
+  /** Token referencing a Customer Account resource. */
+  @SerializedName("related_customer_account")
+  String relatedCustomerAccount;
+
   /** Tokens referencing a Person resource and it's associated account. */
   @SerializedName("related_person")
   RelatedPerson relatedPerson;
@@ -86,6 +90,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
       Options options,
       ProvidedDetails providedDetails,
       String relatedCustomer,
+      String relatedCustomerAccount,
       RelatedPerson relatedPerson,
       String returnUrl,
       Type type,
@@ -97,6 +102,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     this.options = options;
     this.providedDetails = providedDetails;
     this.relatedCustomer = relatedCustomer;
+    this.relatedCustomerAccount = relatedCustomerAccount;
     this.relatedPerson = relatedPerson;
     this.returnUrl = returnUrl;
     this.type = type;
@@ -122,6 +128,8 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
 
     private String relatedCustomer;
 
+    private String relatedCustomerAccount;
+
     private RelatedPerson relatedPerson;
 
     private String returnUrl;
@@ -140,6 +148,7 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
           this.options,
           this.providedDetails,
           this.relatedCustomer,
+          this.relatedCustomerAccount,
           this.relatedPerson,
           this.returnUrl,
           this.type,
@@ -249,6 +258,12 @@ public class VerificationSessionCreateParams extends ApiRequestParams {
     /** Customer ID. */
     public Builder setRelatedCustomer(String relatedCustomer) {
       this.relatedCustomer = relatedCustomer;
+      return this;
+    }
+
+    /** Token referencing a Customer Account resource. */
+    public Builder setRelatedCustomerAccount(String relatedCustomerAccount) {
+      this.relatedCustomerAccount = relatedCustomerAccount;
       return this;
     }
 

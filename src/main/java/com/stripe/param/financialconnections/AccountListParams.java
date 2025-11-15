@@ -220,6 +220,10 @@ public class AccountListParams extends ApiRequestParams {
     @SerializedName("customer")
     String customer;
 
+    /** The Account ID of the Stripe customer whose accounts will be retrieved. */
+    @SerializedName("customer_account")
+    String customerAccount;
+
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -229,9 +233,11 @@ public class AccountListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private AccountHolder(String account, String customer, Map<String, Object> extraParams) {
+    private AccountHolder(
+        String account, String customer, String customerAccount, Map<String, Object> extraParams) {
       this.account = account;
       this.customer = customer;
+      this.customerAccount = customerAccount;
       this.extraParams = extraParams;
     }
 
@@ -244,11 +250,14 @@ public class AccountListParams extends ApiRequestParams {
 
       private String customer;
 
+      private String customerAccount;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AccountListParams.AccountHolder build() {
-        return new AccountListParams.AccountHolder(this.account, this.customer, this.extraParams);
+        return new AccountListParams.AccountHolder(
+            this.account, this.customer, this.customerAccount, this.extraParams);
       }
 
       /** The ID of the Stripe account whose accounts will be retrieved. */
@@ -260,6 +269,12 @@ public class AccountListParams extends ApiRequestParams {
       /** The ID of the Stripe customer whose accounts will be retrieved. */
       public Builder setCustomer(String customer) {
         this.customer = customer;
+        return this;
+      }
+
+      /** The Account ID of the Stripe customer whose accounts will be retrieved. */
+      public Builder setCustomerAccount(String customerAccount) {
+        this.customerAccount = customerAccount;
         return this;
       }
 

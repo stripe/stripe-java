@@ -35,6 +35,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Intended submission method for the dispute. */
+  @SerializedName("intended_submission_method")
+  IntendedSubmissionMethod intendedSubmissionMethod;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -56,11 +60,13 @@ public class DisputeUpdateParams extends ApiRequestParams {
       Evidence evidence,
       List<String> expand,
       Map<String, Object> extraParams,
+      IntendedSubmissionMethod intendedSubmissionMethod,
       Object metadata,
       Boolean submit) {
     this.evidence = evidence;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.intendedSubmissionMethod = intendedSubmissionMethod;
     this.metadata = metadata;
     this.submit = submit;
   }
@@ -76,6 +82,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private IntendedSubmissionMethod intendedSubmissionMethod;
+
     private Object metadata;
 
     private Boolean submit;
@@ -83,7 +91,12 @@ public class DisputeUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeUpdateParams build() {
       return new DisputeUpdateParams(
-          this.evidence, this.expand, this.extraParams, this.metadata, this.submit);
+          this.evidence,
+          this.expand,
+          this.extraParams,
+          this.intendedSubmissionMethod,
+          this.metadata,
+          this.submit);
     }
 
     /**
@@ -145,6 +158,13 @@ public class DisputeUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Intended submission method for the dispute. */
+    public Builder setIntendedSubmissionMethod(
+        DisputeUpdateParams.IntendedSubmissionMethod intendedSubmissionMethod) {
+      this.intendedSubmissionMethod = intendedSubmissionMethod;
       return this;
     }
 
@@ -2332,6 +2352,27 @@ public class DisputeUpdateParams extends ApiRequestParams {
           }
         }
       }
+    }
+  }
+
+  public enum IntendedSubmissionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("manual")
+    MANUAL("manual"),
+
+    @SerializedName("prefer_manual")
+    PREFER_MANUAL("prefer_manual"),
+
+    @SerializedName("prefer_smart_disputes")
+    PREFER_SMART_DISPUTES("prefer_smart_disputes"),
+
+    @SerializedName("smart_disputes")
+    SMART_DISPUTES("smart_disputes");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    IntendedSubmissionMethod(String value) {
+      this.value = value;
     }
   }
 }

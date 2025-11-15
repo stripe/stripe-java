@@ -17,6 +17,10 @@ public class QuoteListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** The ID of the account whose quotes will be retrieved. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -38,6 +42,10 @@ public class QuoteListParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /** The subscription which the quote updates. */
+  @SerializedName("from_subscription")
+  String fromSubscription;
 
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
@@ -68,17 +76,21 @@ public class QuoteListParams extends ApiRequestParams {
 
   private QuoteListParams(
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
+      String fromSubscription,
       Long limit,
       String startingAfter,
       Status status,
       String testClock) {
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fromSubscription = fromSubscription;
     this.limit = limit;
     this.startingAfter = startingAfter;
     this.status = status;
@@ -92,11 +104,15 @@ public class QuoteListParams extends ApiRequestParams {
   public static class Builder {
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private String fromSubscription;
 
     private Long limit;
 
@@ -110,9 +126,11 @@ public class QuoteListParams extends ApiRequestParams {
     public QuoteListParams build() {
       return new QuoteListParams(
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
+          this.fromSubscription,
           this.limit,
           this.startingAfter,
           this.status,
@@ -122,6 +140,12 @@ public class QuoteListParams extends ApiRequestParams {
     /** The ID of the customer whose quotes will be retrieved. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of the account whose quotes will be retrieved. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -188,6 +212,12 @@ public class QuoteListParams extends ApiRequestParams {
       return this;
     }
 
+    /** The subscription which the quote updates. */
+    public Builder setFromSubscription(String fromSubscription) {
+      this.fromSubscription = fromSubscription;
+      return this;
+    }
+
     /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
      * default is 10.
@@ -228,6 +258,9 @@ public class QuoteListParams extends ApiRequestParams {
     @SerializedName("accepted")
     ACCEPTED("accepted"),
 
+    @SerializedName("accepting")
+    ACCEPTING("accepting"),
+
     @SerializedName("canceled")
     CANCELED("canceled"),
 
@@ -235,7 +268,10 @@ public class QuoteListParams extends ApiRequestParams {
     DRAFT("draft"),
 
     @SerializedName("open")
-    OPEN("open");
+    OPEN("open"),
+
+    @SerializedName("stale")
+    STALE("stale");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

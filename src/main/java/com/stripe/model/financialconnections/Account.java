@@ -70,6 +70,19 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
+  /** The state of the most recent attempt to refresh the account's inferred balance history. */
+  @SerializedName("inferred_balances_refresh")
+  InferredBalancesRefresh inferredBalancesRefresh;
+
+  /**
+   * The ID of the Financial Connections Institution this account belongs to. Note that this
+   * relationship may sometimes change in rare circumstances (e.g. institution mergers).
+   */
+  @SerializedName("institution")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Institution> institution;
+
   /** The name of the institution that holds this account. */
   @SerializedName("institution_name")
   String institutionName;
@@ -144,6 +157,24 @@ public class Account extends ApiResource implements HasId {
   /** The state of the most recent attempt to refresh the account transactions. */
   @SerializedName("transaction_refresh")
   TransactionRefresh transactionRefresh;
+
+  /** Get ID of expandable {@code institution} object. */
+  public String getInstitution() {
+    return (this.institution != null) ? this.institution.getId() : null;
+  }
+
+  public void setInstitution(String id) {
+    this.institution = ApiResource.setExpandableFieldId(id, this.institution);
+  }
+
+  /** Get expanded {@code institution}. */
+  public Institution getInstitutionObject() {
+    return (this.institution != null) ? this.institution.getExpanded() : null;
+  }
+
+  public void setInstitutionObject(Institution expandableObject) {
+    this.institution = new ExpandableField<Institution>(expandableObject.getId(), expandableObject);
+  }
 
   /** Get ID of expandable {@code ownership} object. */
   public String getOwnership() {
@@ -529,6 +560,9 @@ public class Account extends ApiResource implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Customer> customer;
 
+    @SerializedName("customer_account")
+    String customerAccount;
+
     /**
      * Type of account holder that this account belongs to.
      *
@@ -696,6 +730,37 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about InferredBalancesRefresh, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InferredBalancesRefresh extends StripeObject {
+    /**
+     * The time at which the last refresh attempt was initiated. Measured in seconds since the Unix
+     * epoch.
+     */
+    @SerializedName("last_attempted_at")
+    Long lastAttemptedAt;
+
+    /**
+     * Time at which the next inferred balance refresh can be initiated. This value will be {@code
+     * null} when {@code status} is {@code pending}. Measured in seconds since the Unix epoch.
+     */
+    @SerializedName("next_refresh_available_at")
+    Long nextRefreshAvailableAt;
+
+    /**
+     * The status of the last refresh attempt.
+     *
+     * <p>One of {@code failed}, {@code pending}, or {@code succeeded}.
+     */
+    @SerializedName("status")
+    String status;
+  }
+
+  /**
    * For more details about OwnershipRefresh, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -768,6 +833,8 @@ public class Account extends ApiResource implements HasId {
     trySetResponseGetter(accountHolder, responseGetter);
     trySetResponseGetter(balance, responseGetter);
     trySetResponseGetter(balanceRefresh, responseGetter);
+    trySetResponseGetter(inferredBalancesRefresh, responseGetter);
+    trySetResponseGetter(institution, responseGetter);
     trySetResponseGetter(ownership, responseGetter);
     trySetResponseGetter(ownershipRefresh, responseGetter);
     trySetResponseGetter(transactionRefresh, responseGetter);

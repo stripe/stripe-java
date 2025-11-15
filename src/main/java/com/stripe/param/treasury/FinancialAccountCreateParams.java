@@ -14,6 +14,14 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAccountCreateParams extends ApiRequestParams {
+  /**
+   * The display name for the FinancialAccount. Use this field to customize the names of the
+   * FinancialAccounts for your connected accounts. Unlike the {@code nickname} field, {@code
+   * display_name} is not internal metadata and will be exposed to connected accounts.
+   */
+  @SerializedName("display_name")
+  Object displayName;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -56,6 +64,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   List<String> supportedCurrencies;
 
   private FinancialAccountCreateParams(
+      Object displayName,
       List<String> expand,
       Map<String, Object> extraParams,
       Features features,
@@ -63,6 +72,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       Object nickname,
       PlatformRestrictions platformRestrictions,
       List<String> supportedCurrencies) {
+    this.displayName = displayName;
     this.expand = expand;
     this.extraParams = extraParams;
     this.features = features;
@@ -77,6 +87,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Object displayName;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -94,6 +106,7 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountCreateParams build() {
       return new FinancialAccountCreateParams(
+          this.displayName,
           this.expand,
           this.extraParams,
           this.features,
@@ -101,6 +114,26 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           this.nickname,
           this.platformRestrictions,
           this.supportedCurrencies);
+    }
+
+    /**
+     * The display name for the FinancialAccount. Use this field to customize the names of the
+     * FinancialAccounts for your connected accounts. Unlike the {@code nickname} field, {@code
+     * display_name} is not internal metadata and will be exposed to connected accounts.
+     */
+    public Builder setDisplayName(String displayName) {
+      this.displayName = displayName;
+      return this;
+    }
+
+    /**
+     * The display name for the FinancialAccount. Use this field to customize the names of the
+     * FinancialAccounts for your connected accounts. Unlike the {@code nickname} field, {@code
+     * display_name} is not internal metadata and will be exposed to connected accounts.
+     */
+    public Builder setDisplayName(EmptyParam displayName) {
+      this.displayName = displayName;
+      return this;
     }
 
     /**
@@ -658,6 +691,10 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class Aba {
+        /** Requested bank partner. */
+        @SerializedName("bank")
+        Bank bank;
+
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -672,7 +709,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         @SerializedName("requested")
         Boolean requested;
 
-        private Aba(Map<String, Object> extraParams, Boolean requested) {
+        private Aba(Bank bank, Map<String, Object> extraParams, Boolean requested) {
+          this.bank = bank;
           this.extraParams = extraParams;
           this.requested = requested;
         }
@@ -682,6 +720,8 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Bank bank;
+
           private Map<String, Object> extraParams;
 
           private Boolean requested;
@@ -689,7 +729,14 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           /** Finalize and obtain parameter instance from this builder. */
           public FinancialAccountCreateParams.Features.FinancialAddresses.Aba build() {
             return new FinancialAccountCreateParams.Features.FinancialAddresses.Aba(
-                this.extraParams, this.requested);
+                this.bank, this.extraParams, this.requested);
+          }
+
+          /** Requested bank partner. */
+          public Builder setBank(
+              FinancialAccountCreateParams.Features.FinancialAddresses.Aba.Bank bank) {
+            this.bank = bank;
+            return this;
           }
 
           /**
@@ -726,6 +773,24 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
           public Builder setRequested(Boolean requested) {
             this.requested = requested;
             return this;
+          }
+        }
+
+        public enum Bank implements ApiRequestParams.EnumParam {
+          @SerializedName("evolve")
+          EVOLVE("evolve"),
+
+          @SerializedName("fifth_third")
+          FIFTH_THIRD("fifth_third"),
+
+          @SerializedName("goldman_sachs")
+          GOLDMAN_SACHS("goldman_sachs");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Bank(String value) {
+            this.value = value;
           }
         }
       }

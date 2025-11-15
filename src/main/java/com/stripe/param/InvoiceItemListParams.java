@@ -25,6 +25,13 @@ public class InvoiceItemListParams extends ApiRequestParams {
   String customer;
 
   /**
+   * The identifier of the account whose invoice items to return. If none is provided, all invoice
+   * items will be returned.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
    * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
@@ -80,6 +87,7 @@ public class InvoiceItemListParams extends ApiRequestParams {
   private InvoiceItemListParams(
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -89,6 +97,7 @@ public class InvoiceItemListParams extends ApiRequestParams {
       String startingAfter) {
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -106,6 +115,8 @@ public class InvoiceItemListParams extends ApiRequestParams {
     private Object created;
 
     private String customer;
+
+    private String customerAccount;
 
     private String endingBefore;
 
@@ -126,6 +137,7 @@ public class InvoiceItemListParams extends ApiRequestParams {
       return new InvoiceItemListParams(
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -153,6 +165,15 @@ public class InvoiceItemListParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * The identifier of the account whose invoice items to return. If none is provided, all invoice
+     * items will be returned.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

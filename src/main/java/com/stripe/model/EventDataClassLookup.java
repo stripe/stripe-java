@@ -16,6 +16,7 @@ public final class EventDataClassLookup {
   static {
     classLookup.put("account", com.stripe.model.Account.class);
     classLookup.put("account_link", com.stripe.model.AccountLink.class);
+    classLookup.put("account_notice", com.stripe.model.AccountNotice.class);
     classLookup.put("account_session", com.stripe.model.AccountSession.class);
     classLookup.put("apple_pay_domain", com.stripe.model.ApplePayDomain.class);
     classLookup.put("application", com.stripe.model.Application.class);
@@ -50,6 +51,7 @@ public final class EventDataClassLookup {
     classLookup.put("file", com.stripe.model.File.class);
     classLookup.put("file_link", com.stripe.model.FileLink.class);
     classLookup.put("funding_instructions", com.stripe.model.FundingInstructions.class);
+    classLookup.put("fx_quote", com.stripe.model.FxQuote.class);
     classLookup.put("invoice", com.stripe.model.Invoice.class);
     classLookup.put("invoice_payment", com.stripe.model.InvoicePayment.class);
     classLookup.put("invoice_rendering_template", com.stripe.model.InvoiceRenderingTemplate.class);
@@ -58,6 +60,8 @@ public final class EventDataClassLookup {
     classLookup.put("line_item", com.stripe.model.InvoiceLineItem.class);
     classLookup.put("login_link", com.stripe.model.LoginLink.class);
     classLookup.put("mandate", com.stripe.model.Mandate.class);
+    classLookup.put("margin", com.stripe.model.Margin.class);
+    classLookup.put("order", com.stripe.model.Order.class);
     classLookup.put("payment_attempt_record", com.stripe.model.PaymentAttemptRecord.class);
     classLookup.put("payment_intent", com.stripe.model.PaymentIntent.class);
     classLookup.put(
@@ -77,6 +81,11 @@ public final class EventDataClassLookup {
     classLookup.put("product_feature", com.stripe.model.ProductFeature.class);
     classLookup.put("promotion_code", com.stripe.model.PromotionCode.class);
     classLookup.put("quote", com.stripe.model.Quote.class);
+    classLookup.put("quote_line", com.stripe.model.QuoteLine.class);
+    classLookup.put("quote_preview_invoice", com.stripe.model.QuotePreviewInvoice.class);
+    classLookup.put(
+        "quote_preview_subscription_schedule",
+        com.stripe.model.QuotePreviewSubscriptionSchedule.class);
     classLookup.put("refund", com.stripe.model.Refund.class);
     classLookup.put("reserve_transaction", com.stripe.model.ReserveTransaction.class);
     classLookup.put("review", com.stripe.model.Review.class);
@@ -118,8 +127,19 @@ public final class EventDataClassLookup {
         "billing.meter_event_summary", com.stripe.model.billing.MeterEventSummary.class);
 
     classLookup.put(
+        "billing.analytics.meter_usage", com.stripe.model.billing.analytics.MeterUsage.class);
+    classLookup.put(
+        "billing.analytics.meter_usage_row",
+        com.stripe.model.billing.analytics.MeterUsageRow.class);
+
+    classLookup.put(
         "billing_portal.configuration", com.stripe.model.billingportal.Configuration.class);
     classLookup.put("billing_portal.session", com.stripe.model.billingportal.Session.class);
+
+    classLookup.put("capital.financing_offer", com.stripe.model.capital.FinancingOffer.class);
+    classLookup.put("capital.financing_summary", com.stripe.model.capital.FinancingSummary.class);
+    classLookup.put(
+        "capital.financing_transaction", com.stripe.model.capital.FinancingTransaction.class);
 
     classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
 
@@ -137,11 +157,17 @@ public final class EventDataClassLookup {
     classLookup.put(
         "financial_connections.account", com.stripe.model.financialconnections.Account.class);
     classLookup.put(
+        "financial_connections.account_inferred_balance",
+        com.stripe.model.financialconnections.AccountInferredBalance.class);
+    classLookup.put(
         "financial_connections.account_owner",
         com.stripe.model.financialconnections.AccountOwner.class);
     classLookup.put(
         "financial_connections.account_ownership",
         com.stripe.model.financialconnections.AccountOwnership.class);
+    classLookup.put(
+        "financial_connections.institution",
+        com.stripe.model.financialconnections.Institution.class);
     classLookup.put(
         "financial_connections.session", com.stripe.model.financialconnections.Session.class);
     classLookup.put(
@@ -158,12 +184,26 @@ public final class EventDataClassLookup {
     classLookup.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
     classLookup.put("issuing.card", com.stripe.model.issuing.Card.class);
     classLookup.put("issuing.cardholder", com.stripe.model.issuing.Cardholder.class);
+    classLookup.put(
+        "issuing.credit_underwriting_record",
+        com.stripe.model.issuing.CreditUnderwritingRecord.class);
     classLookup.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
+    classLookup.put(
+        "issuing.dispute_settlement_detail",
+        com.stripe.model.issuing.DisputeSettlementDetail.class);
+    classLookup.put(
+        "issuing.fraud_liability_debit", com.stripe.model.issuing.FraudLiabilityDebit.class);
     classLookup.put(
         "issuing.personalization_design", com.stripe.model.issuing.PersonalizationDesign.class);
     classLookup.put("issuing.physical_bundle", com.stripe.model.issuing.PhysicalBundle.class);
+    classLookup.put("issuing.settlement", com.stripe.model.issuing.Settlement.class);
     classLookup.put("issuing.token", com.stripe.model.issuing.Token.class);
     classLookup.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
+
+    classLookup.put("privacy.redaction_job", com.stripe.model.privacy.RedactionJob.class);
+    classLookup.put(
+        "privacy.redaction_job_validation_error",
+        com.stripe.model.privacy.RedactionJobValidationError.class);
 
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);
@@ -174,8 +214,10 @@ public final class EventDataClassLookup {
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
+    classLookup.put("tax.association", com.stripe.model.tax.Association.class);
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
     classLookup.put("tax.calculation_line_item", com.stripe.model.tax.CalculationLineItem.class);
+    classLookup.put("tax.form", com.stripe.model.tax.Form.class);
     classLookup.put("tax.registration", com.stripe.model.tax.Registration.class);
     classLookup.put("tax.settings", com.stripe.model.tax.Settings.class);
     classLookup.put("tax.transaction", com.stripe.model.tax.Transaction.class);
@@ -184,7 +226,10 @@ public final class EventDataClassLookup {
     classLookup.put("terminal.configuration", com.stripe.model.terminal.Configuration.class);
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
+    classLookup.put("terminal.onboarding_link", com.stripe.model.terminal.OnboardingLink.class);
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);
+    classLookup.put(
+        "terminal.reader_collected_data", com.stripe.model.terminal.ReaderCollectedData.class);
 
     classLookup.put("test_helpers.test_clock", com.stripe.model.testhelpers.TestClock.class);
 
