@@ -161,10 +161,9 @@ public class StripeEventRouter {
     EventHandler<? extends EventNotification> handler =
         registeredHandlers.get(eventNotification.getType());
 
-    StripeContext originalContext = this.client.getContext();
-    this.client.setContext(eventNotification.getContext());
+    String originalContext = this.client.getContext();
     try {
-      // TODO: re-bind client context
+      this.client.setContext(eventNotification.getContext());
       if (handler == null) {
         boolean isKnownEventType =
             !(eventNotification instanceof com.stripe.events.UnknownEventNotification);

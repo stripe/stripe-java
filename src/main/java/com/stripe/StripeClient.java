@@ -42,6 +42,50 @@ public class StripeClient {
   }
 
   /**
+   * Gets the current StripeContext from the client's configuration.
+   *
+   * @return the current StripeContext, or null if none is set
+   */
+  protected String getContext() {
+    // TODO(major): add getOptions to the StripeResponseGetter interface? that would simplify this
+    if (!(responseGetter instanceof LiveStripeResponseGetter)) {
+      return null;
+    }
+
+    LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
+    StripeResponseGetterOptions options = liveGetter.getOptions();
+
+    return options.getStripeContext();
+  }
+
+  /**
+   * Sets the StripeContext for this client. This updates the client configuration to use the
+   * provided context for all subsequent requests.
+   */
+  protected void setContext(String context) {
+    // TODO(major): add getOptions to the StripeResponseGetter interface? that would simplify this
+    if (!(responseGetter instanceof LiveStripeResponseGetter)) {
+      throw new IllegalStateException(
+          "Cannot set context on a StripeClient with a non-Live response getter");
+    }
+
+    LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
+    StripeResponseGetterOptions options = liveGetter.getOptions();
+
+    if (!(options instanceof ClientStripeResponseGetterOptions)) {
+      throw new IllegalStateException(
+          "Cannot set context on a StripeClient with non-standard options");
+    }
+
+    ClientStripeResponseGetterOptions clientOptions = (ClientStripeResponseGetterOptions) options;
+    clientOptions.setStripeContext(context);
+  }
+
+  protected void setContext(StripeContext context) {
+    setContext(context.toString());
+  }
+
+  /**
    * Returns an StripeEvent instance using the provided JSON payload. Throws a JsonSyntaxException
    * if the payload is not valid JSON, and a SignatureVerificationException if the signature
    * verification fails for any reason.
@@ -1073,7 +1117,7 @@ public class StripeClient {
     private final String stripeAccount;
 
     @Getter(onMethod_ = {@Override})
-    private final String stripeContext;
+    private volatile String stripeContext;
 
     ClientStripeResponseGetterOptions(
         Authenticator authenticator,
@@ -1101,6 +1145,15 @@ public class StripeClient {
       this.connectBase = connectBase;
       this.meterEventsBase = meterEventsBase;
       this.stripeAccount = stripeAccount;
+      this.stripeContext = stripeContext;
+    }
+
+    /**
+     * Updates the stripe context.
+     *
+     * @param stripeContext the new stripe context value
+     */
+    protected void setStripeContext(String stripeContext) {
       this.stripeContext = stripeContext;
     }
   }

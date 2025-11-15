@@ -64,8 +64,8 @@ public final class StripeContext {
   /**
    * Converts the context to a string by joining segments with '/'.
    *
-   * @return string representation of the context segments joined by '/', `null` if there are no
-   *     segments (useful for clearing context)
+   * @return string representation of the context segments joined by '/'. If there are no segments,
+   *     returns an empty string (useful for clearing context).
    */
   @Override
   public String toString() {
