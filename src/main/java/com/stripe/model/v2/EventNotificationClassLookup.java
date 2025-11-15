@@ -88,6 +88,9 @@ public final class EventNotificationClassLookup {
         "v2.core.event_destination.ping",
         com.stripe.events.V2CoreEventDestinationPingEventNotification.class);
     eventClassLookup.put(
+        "v2.core.health.event_generation_failure.resolved",
+        com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification.class);
     eventClassLookup.put(
@@ -194,28 +197,5 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.money_management.transaction.updated",
         com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.authorization_attempt_failed",
-        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEventNotification
-            .class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.authorization_attempt_started",
-        com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEventNotification
-            .class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.canceled",
-        com.stripe.events.V2PaymentsOffSessionPaymentCanceledEventNotification.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.created",
-        com.stripe.events.V2PaymentsOffSessionPaymentCreatedEventNotification.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.failed",
-        com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.requires_capture",
-        com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEventNotification.class);
-    eventClassLookup.put(
-        "v2.payments.off_session_payment.succeeded",
-        com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification.class);
   }
 }

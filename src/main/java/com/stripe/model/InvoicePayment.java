@@ -244,7 +244,7 @@ public class InvoicePayment extends ApiResource implements HasId {
     /**
      * Type of payment object associated with this invoice payment.
      *
-     * <p>One of {@code charge}, or {@code payment_intent}.
+     * <p>One of {@code charge}, {@code payment_intent}, or {@code payment_record}.
      */
     @SerializedName("type")
     String type;

@@ -1522,7 +1522,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     @SerializedName("applies_to")
     List<Subscription.BillingSchedule.AppliesTo> appliesTo;
 
-    /** Specifies the billing period. */
+    /** Specifies the end of billing period. */
     @SerializedName("bill_until")
     BillUntil billUntil;
 
@@ -1568,7 +1568,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       }
     }
 
-    /** Specifies the billing period. */
+    /** Specifies the end of billing period. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

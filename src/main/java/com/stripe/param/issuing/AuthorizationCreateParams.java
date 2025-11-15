@@ -2612,6 +2612,10 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Stripe’s assessment of this authorization’s likelihood to be fraudulent. */
+    @SerializedName("fraud_risk")
+    FraudRisk fraudRisk;
+
     /**
      * The dispute risk of the merchant (the seller on a purchase) on an authorization based on all
      * Stripe Issuing activity.
@@ -2622,9 +2626,11 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     private RiskAssessment(
         CardTestingRisk cardTestingRisk,
         Map<String, Object> extraParams,
+        FraudRisk fraudRisk,
         MerchantDisputeRisk merchantDisputeRisk) {
       this.cardTestingRisk = cardTestingRisk;
       this.extraParams = extraParams;
+      this.fraudRisk = fraudRisk;
       this.merchantDisputeRisk = merchantDisputeRisk;
     }
 
@@ -2637,12 +2643,14 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private FraudRisk fraudRisk;
+
       private MerchantDisputeRisk merchantDisputeRisk;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationCreateParams.RiskAssessment build() {
         return new AuthorizationCreateParams.RiskAssessment(
-            this.cardTestingRisk, this.extraParams, this.merchantDisputeRisk);
+            this.cardTestingRisk, this.extraParams, this.fraudRisk, this.merchantDisputeRisk);
       }
 
       /** Stripe's assessment of this authorization's likelihood of being card testing activity. */
@@ -2676,6 +2684,12 @@ public class AuthorizationCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Stripe’s assessment of this authorization’s likelihood to be fraudulent. */
+      public Builder setFraudRisk(AuthorizationCreateParams.RiskAssessment.FraudRisk fraudRisk) {
+        this.fraudRisk = fraudRisk;
         return this;
       }
 
@@ -2846,6 +2860,132 @@ public class AuthorizationCreateParams extends ApiRequestParams {
         private final String value;
 
         RiskLevel(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class FraudRisk {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> Stripe’s assessment of the likelihood of fraud on an
+       * authorization.
+       */
+      @SerializedName("level")
+      Level level;
+
+      /**
+       * Stripe’s numerical model score assessing the likelihood of fraudulent activity. A higher
+       * score means a higher likelihood of fraudulent activity, and anything above 25 is considered
+       * high risk.
+       */
+      @SerializedName("score")
+      BigDecimal score;
+
+      private FraudRisk(Map<String, Object> extraParams, Level level, BigDecimal score) {
+        this.extraParams = extraParams;
+        this.level = level;
+        this.score = score;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Level level;
+
+        private BigDecimal score;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AuthorizationCreateParams.RiskAssessment.FraudRisk build() {
+          return new AuthorizationCreateParams.RiskAssessment.FraudRisk(
+              this.extraParams, this.level, this.score);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AuthorizationCreateParams.RiskAssessment.FraudRisk#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AuthorizationCreateParams.RiskAssessment.FraudRisk#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> Stripe’s assessment of the likelihood of fraud on an
+         * authorization.
+         */
+        public Builder setLevel(AuthorizationCreateParams.RiskAssessment.FraudRisk.Level level) {
+          this.level = level;
+          return this;
+        }
+
+        /**
+         * Stripe’s numerical model score assessing the likelihood of fraudulent activity. A higher
+         * score means a higher likelihood of fraudulent activity, and anything above 25 is
+         * considered high risk.
+         */
+        public Builder setScore(BigDecimal score) {
+          this.score = score;
+          return this;
+        }
+      }
+
+      public enum Level implements ApiRequestParams.EnumParam {
+        @SerializedName("elevated")
+        ELEVATED("elevated"),
+
+        @SerializedName("highest")
+        HIGHEST("highest"),
+
+        @SerializedName("low")
+        LOW("low"),
+
+        @SerializedName("normal")
+        NORMAL("normal"),
+
+        @SerializedName("not_assessed")
+        NOT_ASSESSED("not_assessed"),
+
+        @SerializedName("unknown")
+        UNKNOWN("unknown");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Level(String value) {
           this.value = value;
         }
       }

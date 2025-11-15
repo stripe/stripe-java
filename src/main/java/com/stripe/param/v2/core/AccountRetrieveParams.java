@@ -115,6 +115,9 @@ public class AccountRetrieveParams extends ApiRequestParams {
     @SerializedName("defaults")
     DEFAULTS("defaults"),
 
+    @SerializedName("future_requirements")
+    FUTURE_REQUIREMENTS("future_requirements"),
+
     @SerializedName("identity")
     IDENTITY("identity"),
 

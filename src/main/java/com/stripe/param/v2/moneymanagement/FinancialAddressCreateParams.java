@@ -100,9 +100,6 @@ public class FinancialAddressCreateParams extends ApiRequestParams {
     @SerializedName("gb_bank_account")
     GB_BANK_ACCOUNT("gb_bank_account"),
 
-    @SerializedName("sepa_bank_account")
-    SEPA_BANK_ACCOUNT("sepa_bank_account"),
-
     @SerializedName("us_bank_account")
     US_BANK_ACCOUNT("us_bank_account");
 

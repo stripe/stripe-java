@@ -105,6 +105,13 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   String last4;
 
   /**
+   * Stripe’s assessment of whether this card’s details have been compromised. If this property
+   * isn't null, cancel and reissue the card to prevent fraudulent activity risk.
+   */
+  @SerializedName("latest_fraud_warning")
+  LatestFraudWarning latestFraudWarning;
+
+  /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
    * object exists in test mode.
    */
@@ -410,6 +417,30 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, Card.class);
+  }
+
+  /**
+   * For more details about LatestFraudWarning, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class LatestFraudWarning extends StripeObject {
+    /** Timestamp of the most recent fraud warning. */
+    @SerializedName("started_at")
+    Long startedAt;
+
+    /**
+     * The type of fraud warning that most recently took place on this card. This field updates with
+     * every new fraud warning, so the value changes over time. If populated, cancel and reissue the
+     * card.
+     *
+     * <p>One of {@code card_testing_exposure}, {@code fraud_dispute_filed}, {@code
+     * third_party_reported}, or {@code user_indicated_fraud}.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   /**
@@ -1041,6 +1072,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(cardholder, responseGetter);
+    trySetResponseGetter(latestFraudWarning, responseGetter);
     trySetResponseGetter(personalizationDesign, responseGetter);
     trySetResponseGetter(replacedBy, responseGetter);
     trySetResponseGetter(replacementFor, responseGetter);

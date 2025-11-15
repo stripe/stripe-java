@@ -4287,6 +4287,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
       /**
+       * Controls when the funds will be captured from the customer's account.
+       *
+       * <p>One of {@code manual}, or {@code manual_preferred}.
+       */
+      @SerializedName("capture_method")
+      String captureMethod;
+
+      /**
        * Request ability to capture this payment beyond the standard <a
        * href="https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity">authorization
        * validity window.</a>
@@ -5515,6 +5523,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         /**
          * The type of amount that will be collected. The amount charged must be exact or up to the
          * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         * Defaults to {@code maximum}.
          *
          * <p>One of {@code fixed}, or {@code maximum}.
          */
@@ -5529,7 +5538,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String endDate;
 
         /**
-         * The periodicity at which payments will be collected.
+         * The periodicity at which payments will be collected. Defaults to {@code adhoc}.
          *
          * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
          * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
@@ -5546,7 +5555,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         Long paymentsPerPeriod;
 
         /**
-         * The purpose for which payments are made. Defaults to retail.
+         * The purpose for which payments are made. Has a default value based on your merchant
+         * category code.
          *
          * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
          * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code

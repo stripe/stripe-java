@@ -98,8 +98,7 @@ public class FinancingSummary extends ApiResource {
   @EqualsAndHashCode(callSuper = false)
   public static class Details extends StripeObject {
     /**
-     * Amount of financing offered, in minor units. For example, $1,000 USD will be represented as
-     * 100000.
+     * Amount of financing offered, in minor units. For example, 1,000 USD is represented as 100000.
      */
     @SerializedName("advance_amount")
     Long advanceAmount;
@@ -119,20 +118,20 @@ public class FinancingSummary extends ApiResource {
     @SerializedName("current_repayment_interval")
     CurrentRepaymentInterval currentRepaymentInterval;
 
-    /** Fixed fee amount, in minor units. For example, $100 USD will be represented as 10000. */
+    /** Fixed fee amount, in minor units. For example, 100 USD is represented as 10000. */
     @SerializedName("fee_amount")
     Long feeAmount;
 
     /**
      * The amount the Connected account has paid toward the financing debt so far, in minor units.
-     * For example, $1,000 USD will be represented as 100000.
+     * For example, 1,000 USD is represented as 100000.
      */
     @SerializedName("paid_amount")
     Long paidAmount;
 
     /**
-     * The balance remaining to be paid on the financing, in minor units. For example, $1,000 USD
-     * will be represented as 100000.
+     * The balance remaining to be paid on the financing, in minor units. For example, 1,000 USD is
+     * represented as 100000.
      */
     @SerializedName("remaining_amount")
     Long remainingAmount;
@@ -144,7 +143,7 @@ public class FinancingSummary extends ApiResource {
     @SerializedName("repayments_begin_at")
     BigDecimal repaymentsBeginAt;
 
-    /** Per-transaction rate at which Stripe will withhold funds to repay the financing. */
+    /** Per-transaction rate at which Stripe withholds funds to repay the financing. */
     @SerializedName("withhold_rate")
     BigDecimal withholdRate;
 
@@ -163,14 +162,14 @@ public class FinancingSummary extends ApiResource {
 
       /**
        * The amount that has already been paid in the current repayment interval, in minor units.
-       * For example, $100 USD will be represented as 10000.
+       * For example, 100 USD is represented as 10000.
        */
       @SerializedName("paid_amount")
       Long paidAmount;
 
       /**
        * The amount that is yet to be paid in the current repayment interval, in minor units. For
-       * example, $100 USD will be represented as 10000.
+       * example, 100 USD is represented as 10000.
        */
       @SerializedName("remaining_amount")
       Long remainingAmount;

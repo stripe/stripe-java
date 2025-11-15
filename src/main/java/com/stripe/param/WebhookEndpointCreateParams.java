@@ -633,7 +633,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_09_30_CLOVER("2025-09-30.clover"),
 
     @SerializedName("2025-10-29.clover")
-    VERSION_2025_10_29_CLOVER("2025-10-29.clover");
+    VERSION_2025_10_29_CLOVER("2025-10-29.clover"),
+
+    @SerializedName("2025-11-17.clover")
+    VERSION_2025_11_17_CLOVER("2025-11-17.clover");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -703,6 +706,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("capital.financing_offer.accepted")
     CAPITAL__FINANCING_OFFER__ACCEPTED("capital.financing_offer.accepted"),
+
+    @SerializedName("capital.financing_offer.accepted_other_offer")
+    CAPITAL__FINANCING_OFFER__ACCEPTED_OTHER_OFFER("capital.financing_offer.accepted_other_offer"),
 
     @SerializedName("capital.financing_offer.canceled")
     CAPITAL__FINANCING_OFFER__CANCELED("capital.financing_offer.canceled"),
@@ -906,6 +912,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("file.created")
     FILE__CREATED("file.created"),
 
+    @SerializedName("financial_connections.account.account_numbers_updated")
+    FINANCIAL_CONNECTIONS__ACCOUNT__ACCOUNT_NUMBERS_UPDATED(
+        "financial_connections.account.account_numbers_updated"),
+
     @SerializedName("financial_connections.account.created")
     FINANCIAL_CONNECTIONS__ACCOUNT__CREATED("financial_connections.account.created"),
 
@@ -933,6 +943,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("financial_connections.account.refreshed_transactions")
     FINANCIAL_CONNECTIONS__ACCOUNT__REFRESHED_TRANSACTIONS(
         "financial_connections.account.refreshed_transactions"),
+
+    @SerializedName("financial_connections.account.upcoming_account_number_expiry")
+    FINANCIAL_CONNECTIONS__ACCOUNT__UPCOMING_ACCOUNT_NUMBER_EXPIRY(
+        "financial_connections.account.upcoming_account_number_expiry"),
 
     @SerializedName("financial_connections.session.updated")
     FINANCIAL_CONNECTIONS__SESSION__UPDATED("financial_connections.session.updated"),
