@@ -39,6 +39,7 @@ public final class FormEncoder {
     }
   }
 
+
   /**
    * Creates the HTTP query string for a given map of parameters.
    *
@@ -46,20 +47,6 @@ public final class FormEncoder {
    * @return The query string.
    */
   public static String createQueryString(Map<String, Object> params) {
-    return FormEncoder.createQueryString(params, false);
-  }
-
-  /**
-   * Creates the HTTP query string for a given map of parameters.
-   *
-   * @param params The map of parameters.
-   * @param arraysAsRepeated Whether to encode arrays as repeated value ({@code a=1&a=2}) defaults
-   *     to brackets encoding ({@code a[]=1,2}).
-   * @return The query string.
-   * @deprecated We no longer support the {@code arraysAsRepeated} argument
-   */
-  @Deprecated
-  public static String createQueryString(Map<String, Object> params, boolean arraysAsRepeated) {
     if (params == null) {
       return "";
     }
