@@ -21,6 +21,10 @@ public final class TerminalService extends ApiService {
     return new com.stripe.service.terminal.LocationService(this.getResponseGetter());
   }
 
+  public com.stripe.service.terminal.OnboardingLinkService onboardingLinks() {
+    return new com.stripe.service.terminal.OnboardingLinkService(this.getResponseGetter());
+  }
+
   public com.stripe.service.terminal.ReaderService readers() {
     return new com.stripe.service.terminal.ReaderService(this.getResponseGetter());
   }
