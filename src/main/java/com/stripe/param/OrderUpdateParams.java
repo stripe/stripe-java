@@ -5022,19 +5022,25 @@ public class OrderUpdateParams extends ApiRequestParams {
           @SerializedName("subscriptions")
           Object subscriptions;
 
+          /** Supplementary Purchase Data for the corresponding Klarna payment. */
+          @SerializedName("supplementary_purchase_data")
+          Object supplementaryPurchaseData;
+
           private Klarna(
               ApiRequestParams.EnumParam captureMethod,
               Map<String, Object> extraParams,
               OnDemand onDemand,
               PreferredLocale preferredLocale,
               SetupFutureUsage setupFutureUsage,
-              Object subscriptions) {
+              Object subscriptions,
+              Object supplementaryPurchaseData) {
             this.captureMethod = captureMethod;
             this.extraParams = extraParams;
             this.onDemand = onDemand;
             this.preferredLocale = preferredLocale;
             this.setupFutureUsage = setupFutureUsage;
             this.subscriptions = subscriptions;
+            this.supplementaryPurchaseData = supplementaryPurchaseData;
           }
 
           public static Builder builder() {
@@ -5054,6 +5060,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
             private Object subscriptions;
 
+            private Object supplementaryPurchaseData;
+
             /** Finalize and obtain parameter instance from this builder. */
             public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna build() {
               return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna(
@@ -5062,7 +5070,8 @@ public class OrderUpdateParams extends ApiRequestParams {
                   this.onDemand,
                   this.preferredLocale,
                   this.setupFutureUsage,
-                  this.subscriptions);
+                  this.subscriptions,
+                  this.supplementaryPurchaseData);
             }
 
             /**
@@ -5235,6 +5244,21 @@ public class OrderUpdateParams extends ApiRequestParams {
                 List<OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.Subscription>
                     subscriptions) {
               this.subscriptions = subscriptions;
+              return this;
+            }
+
+            /** Supplementary Purchase Data for the corresponding Klarna payment. */
+            public Builder setSupplementaryPurchaseData(
+                OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData
+                    supplementaryPurchaseData) {
+              this.supplementaryPurchaseData = supplementaryPurchaseData;
+              return this;
+            }
+
+            /** Supplementary Purchase Data for the corresponding Klarna payment. */
+            public Builder setSupplementaryPurchaseData(EmptyParam supplementaryPurchaseData) {
+              this.supplementaryPurchaseData = supplementaryPurchaseData;
               return this;
             }
           }
@@ -5721,6 +5745,7213 @@ public class OrderUpdateParams extends ApiRequestParams {
 
               Interval(String value) {
                 this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class SupplementaryPurchaseData {
+            /** Supplementary bus reservation details. */
+            @SerializedName("bus_reservation_details")
+            Object busReservationDetails;
+
+            /** Supplementary event reservation details. */
+            @SerializedName("event_reservation_details")
+            Object eventReservationDetails;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Supplementary ferry reservation details. */
+            @SerializedName("ferry_reservation_details")
+            Object ferryReservationDetails;
+
+            /** Supplementary insurance details. */
+            @SerializedName("insurances")
+            Object insurances;
+
+            /** Supplementary marketplace seller details. */
+            @SerializedName("marketplace_sellers")
+            Object marketplaceSellers;
+
+            /** Supplementary round trip reservation details. */
+            @SerializedName("round_trip_reservation_details")
+            Object roundTripReservationDetails;
+
+            /** Supplementary train reservation details. */
+            @SerializedName("train_reservation_details")
+            Object trainReservationDetails;
+
+            /** Voucher details, such as a gift card or discount code. */
+            @SerializedName("vouchers")
+            Object vouchers;
+
+            private SupplementaryPurchaseData(
+                Object busReservationDetails,
+                Object eventReservationDetails,
+                Map<String, Object> extraParams,
+                Object ferryReservationDetails,
+                Object insurances,
+                Object marketplaceSellers,
+                Object roundTripReservationDetails,
+                Object trainReservationDetails,
+                Object vouchers) {
+              this.busReservationDetails = busReservationDetails;
+              this.eventReservationDetails = eventReservationDetails;
+              this.extraParams = extraParams;
+              this.ferryReservationDetails = ferryReservationDetails;
+              this.insurances = insurances;
+              this.marketplaceSellers = marketplaceSellers;
+              this.roundTripReservationDetails = roundTripReservationDetails;
+              this.trainReservationDetails = trainReservationDetails;
+              this.vouchers = vouchers;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Object busReservationDetails;
+
+              private Object eventReservationDetails;
+
+              private Map<String, Object> extraParams;
+
+              private Object ferryReservationDetails;
+
+              private Object insurances;
+
+              private Object marketplaceSellers;
+
+              private Object roundTripReservationDetails;
+
+              private Object trainReservationDetails;
+
+              private Object vouchers;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData
+                  build() {
+                return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                    .SupplementaryPurchaseData(
+                    this.busReservationDetails,
+                    this.eventReservationDetails,
+                    this.extraParams,
+                    this.ferryReservationDetails,
+                    this.insurances,
+                    this.marketplaceSellers,
+                    this.roundTripReservationDetails,
+                    this.trainReservationDetails,
+                    this.vouchers);
+              }
+
+              /**
+               * Add an element to `busReservationDetails` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#busReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addBusReservationDetail(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail
+                      element) {
+                if (this.busReservationDetails == null
+                    || this.busReservationDetails instanceof EmptyParam) {
+                  this.busReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.BusReservationDetail>)
+                        this.busReservationDetails)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `busReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#busReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllBusReservationDetail(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail>
+                      elements) {
+                if (this.busReservationDetails == null
+                    || this.busReservationDetails instanceof EmptyParam) {
+                  this.busReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.BusReservationDetail>)
+                        this.busReservationDetails)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Supplementary bus reservation details. */
+              public Builder setBusReservationDetails(EmptyParam busReservationDetails) {
+                this.busReservationDetails = busReservationDetails;
+                return this;
+              }
+
+              /** Supplementary bus reservation details. */
+              public Builder setBusReservationDetails(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail>
+                      busReservationDetails) {
+                this.busReservationDetails = busReservationDetails;
+                return this;
+              }
+
+              /**
+               * Add an element to `eventReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#eventReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addEventReservationDetail(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.EventReservationDetail
+                      element) {
+                if (this.eventReservationDetails == null
+                    || this.eventReservationDetails instanceof EmptyParam) {
+                  this.eventReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.EventReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.EventReservationDetail>)
+                        this.eventReservationDetails)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `eventReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#eventReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllEventReservationDetail(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.EventReservationDetail>
+                      elements) {
+                if (this.eventReservationDetails == null
+                    || this.eventReservationDetails instanceof EmptyParam) {
+                  this.eventReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.EventReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.EventReservationDetail>)
+                        this.eventReservationDetails)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Supplementary event reservation details. */
+              public Builder setEventReservationDetails(EmptyParam eventReservationDetails) {
+                this.eventReservationDetails = eventReservationDetails;
+                return this;
+              }
+
+              /** Supplementary event reservation details. */
+              public Builder setEventReservationDetails(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.EventReservationDetail>
+                      eventReservationDetails) {
+                this.eventReservationDetails = eventReservationDetails;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * Add an element to `ferryReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#ferryReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addFerryReservationDetail(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail
+                      element) {
+                if (this.ferryReservationDetails == null
+                    || this.ferryReservationDetails instanceof EmptyParam) {
+                  this.ferryReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.FerryReservationDetail>)
+                        this.ferryReservationDetails)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `ferryReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#ferryReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllFerryReservationDetail(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail>
+                      elements) {
+                if (this.ferryReservationDetails == null
+                    || this.ferryReservationDetails instanceof EmptyParam) {
+                  this.ferryReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.FerryReservationDetail>)
+                        this.ferryReservationDetails)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Supplementary ferry reservation details. */
+              public Builder setFerryReservationDetails(EmptyParam ferryReservationDetails) {
+                this.ferryReservationDetails = ferryReservationDetails;
+                return this;
+              }
+
+              /** Supplementary ferry reservation details. */
+              public Builder setFerryReservationDetails(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail>
+                      ferryReservationDetails) {
+                this.ferryReservationDetails = ferryReservationDetails;
+                return this;
+              }
+
+              /**
+               * Add an element to `insurances` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#insurances}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addInsurance(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.Insurance
+                      element) {
+                if (this.insurances == null || this.insurances instanceof EmptyParam) {
+                  this.insurances =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Insurance>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.Insurance>)
+                        this.insurances)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `insurances` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#insurances}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllInsurance(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Insurance>
+                      elements) {
+                if (this.insurances == null || this.insurances instanceof EmptyParam) {
+                  this.insurances =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Insurance>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.Insurance>)
+                        this.insurances)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Supplementary insurance details. */
+              public Builder setInsurances(EmptyParam insurances) {
+                this.insurances = insurances;
+                return this;
+              }
+
+              /** Supplementary insurance details. */
+              public Builder setInsurances(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Insurance>
+                      insurances) {
+                this.insurances = insurances;
+                return this;
+              }
+
+              /**
+               * Add an element to `marketplaceSellers` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#marketplaceSellers}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addMarketplaceSeller(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.MarketplaceSeller
+                      element) {
+                if (this.marketplaceSellers == null
+                    || this.marketplaceSellers instanceof EmptyParam) {
+                  this.marketplaceSellers =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.MarketplaceSeller>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.MarketplaceSeller>)
+                        this.marketplaceSellers)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `marketplaceSellers` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#marketplaceSellers}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllMarketplaceSeller(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.MarketplaceSeller>
+                      elements) {
+                if (this.marketplaceSellers == null
+                    || this.marketplaceSellers instanceof EmptyParam) {
+                  this.marketplaceSellers =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.MarketplaceSeller>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.MarketplaceSeller>)
+                        this.marketplaceSellers)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Supplementary marketplace seller details. */
+              public Builder setMarketplaceSellers(EmptyParam marketplaceSellers) {
+                this.marketplaceSellers = marketplaceSellers;
+                return this;
+              }
+
+              /** Supplementary marketplace seller details. */
+              public Builder setMarketplaceSellers(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.MarketplaceSeller>
+                      marketplaceSellers) {
+                this.marketplaceSellers = marketplaceSellers;
+                return this;
+              }
+
+              /**
+               * Add an element to `roundTripReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#roundTripReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addRoundTripReservationDetail(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail
+                      element) {
+                if (this.roundTripReservationDetails == null
+                    || this.roundTripReservationDetails instanceof EmptyParam) {
+                  this.roundTripReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.RoundTripReservationDetail>)
+                        this.roundTripReservationDetails)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `roundTripReservationDetails` list. A list is initialized for
+               * the first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#roundTripReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllRoundTripReservationDetail(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail>
+                      elements) {
+                if (this.roundTripReservationDetails == null
+                    || this.roundTripReservationDetails instanceof EmptyParam) {
+                  this.roundTripReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.RoundTripReservationDetail>)
+                        this.roundTripReservationDetails)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Supplementary round trip reservation details. */
+              public Builder setRoundTripReservationDetails(
+                  EmptyParam roundTripReservationDetails) {
+                this.roundTripReservationDetails = roundTripReservationDetails;
+                return this;
+              }
+
+              /** Supplementary round trip reservation details. */
+              public Builder setRoundTripReservationDetails(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail>
+                      roundTripReservationDetails) {
+                this.roundTripReservationDetails = roundTripReservationDetails;
+                return this;
+              }
+
+              /**
+               * Add an element to `trainReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#trainReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addTrainReservationDetail(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail
+                      element) {
+                if (this.trainReservationDetails == null
+                    || this.trainReservationDetails instanceof EmptyParam) {
+                  this.trainReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.TrainReservationDetail>)
+                        this.trainReservationDetails)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `trainReservationDetails` list. A list is initialized for the
+               * first `add/addAll` call, and subsequent calls adds additional elements to the
+               * original list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#trainReservationDetails}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllTrainReservationDetail(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail>
+                      elements) {
+                if (this.trainReservationDetails == null
+                    || this.trainReservationDetails instanceof EmptyParam) {
+                  this.trainReservationDetails =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.TrainReservationDetail>)
+                        this.trainReservationDetails)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Supplementary train reservation details. */
+              public Builder setTrainReservationDetails(EmptyParam trainReservationDetails) {
+                this.trainReservationDetails = trainReservationDetails;
+                return this;
+              }
+
+              /** Supplementary train reservation details. */
+              public Builder setTrainReservationDetails(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail>
+                      trainReservationDetails) {
+                this.trainReservationDetails = trainReservationDetails;
+                return this;
+              }
+
+              /**
+               * Add an element to `vouchers` list. A list is initialized for the first `add/addAll`
+               * call, and subsequent calls adds additional elements to the original list. See
+               * {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#vouchers}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addVoucher(
+                  OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.Voucher
+                      element) {
+                if (this.vouchers == null || this.vouchers instanceof EmptyParam) {
+                  this.vouchers =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Voucher>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.Voucher>)
+                        this.vouchers)
+                    .add(element);
+                return this;
+              }
+
+              /**
+               * Add all elements to `vouchers` list. A list is initialized for the first
+               * `add/addAll` call, and subsequent calls adds additional elements to the original
+               * list. See {@link
+               * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData#vouchers}
+               * for the field documentation.
+               */
+              @SuppressWarnings("unchecked")
+              public Builder addAllVoucher(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Voucher>
+                      elements) {
+                if (this.vouchers == null || this.vouchers instanceof EmptyParam) {
+                  this.vouchers =
+                      new ArrayList<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Voucher>();
+                }
+                ((List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.Voucher>)
+                        this.vouchers)
+                    .addAll(elements);
+                return this;
+              }
+
+              /** Voucher details, such as a gift card or discount code. */
+              public Builder setVouchers(EmptyParam vouchers) {
+                this.vouchers = vouchers;
+                return this;
+              }
+
+              /** Voucher details, such as a gift card or discount code. */
+              public Builder setVouchers(
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.Voucher>
+                      vouchers) {
+                this.vouchers = vouchers;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class BusReservationDetail {
+              /** Name of associated or partner company for the service. */
+              @SerializedName("affiliate_name")
+              Object affiliateName;
+
+              /** Arrival details. */
+              @SerializedName("arrival")
+              Arrival arrival;
+
+              /** Name of transportation company. */
+              @SerializedName("carrier_name")
+              Object carrierName;
+
+              /** Currency. */
+              @SerializedName("currency")
+              Object currency;
+
+              /** Departure details. */
+              @SerializedName("departure")
+              Departure departure;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** List of insurances for this reservation. */
+              @SerializedName("insurances")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Insurance>
+                  insurances;
+
+              /** List of passengers that this reservation applies to. */
+              @SerializedName("passengers")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Passenger>
+                  passengers;
+
+              /** Price in cents. */
+              @SerializedName("price")
+              Long price;
+
+              /** Ticket class. */
+              @SerializedName("ticket_class")
+              TicketClass ticketClass;
+
+              private BusReservationDetail(
+                  Object affiliateName,
+                  Arrival arrival,
+                  Object carrierName,
+                  Object currency,
+                  Departure departure,
+                  Map<String, Object> extraParams,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail.Insurance>
+                      insurances,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail.Passenger>
+                      passengers,
+                  Long price,
+                  TicketClass ticketClass) {
+                this.affiliateName = affiliateName;
+                this.arrival = arrival;
+                this.carrierName = carrierName;
+                this.currency = currency;
+                this.departure = departure;
+                this.extraParams = extraParams;
+                this.insurances = insurances;
+                this.passengers = passengers;
+                this.price = price;
+                this.ticketClass = ticketClass;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Object affiliateName;
+
+                private Arrival arrival;
+
+                private Object carrierName;
+
+                private Object currency;
+
+                private Departure departure;
+
+                private Map<String, Object> extraParams;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Insurance>
+                    insurances;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Passenger>
+                    passengers;
+
+                private Long price;
+
+                private TicketClass ticketClass;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.BusReservationDetail
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.BusReservationDetail(
+                      this.affiliateName,
+                      this.arrival,
+                      this.carrierName,
+                      this.currency,
+                      this.departure,
+                      this.extraParams,
+                      this.insurances,
+                      this.passengers,
+                      this.price,
+                      this.ticketClass);
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(String affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(EmptyParam affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Arrival details. */
+                public Builder setArrival(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Arrival
+                        arrival) {
+                  this.arrival = arrival;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(String carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(EmptyParam carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(String currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(EmptyParam currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Departure details. */
+                public Builder setDeparture(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Departure
+                        departure) {
+                  this.departure = departure;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addInsurance(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Insurance
+                        element) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addAllInsurance(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.BusReservationDetail.Insurance>
+                        elements) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.addAll(elements);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addPassenger(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Passenger
+                        element) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addAllPassenger(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.BusReservationDetail.Passenger>
+                        elements) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.addAll(elements);
+                  return this;
+                }
+
+                /** Price in cents. */
+                public Builder setPrice(Long price) {
+                  this.price = price;
+                  return this;
+                }
+
+                /** Ticket class. */
+                public Builder setTicketClass(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.TicketClass
+                        ticketClass) {
+                  this.ticketClass = ticketClass;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Arrival {
+                /** Address of the arrival location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Identifier name or reference for the arrival location. */
+                @SerializedName("arrival_location")
+                Object arrivalLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Arrival(
+                    Address address, Object arrivalLocation, Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.arrivalLocation = arrivalLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Object arrivalLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Arrival
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.BusReservationDetail.Arrival(
+                        this.address, this.arrivalLocation, this.extraParams);
+                  }
+
+                  /** Address of the arrival location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail.Arrival.Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(String arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(EmptyParam arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Arrival.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Arrival.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Departure {
+                /** Address of the departure location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Timestamp of departure. */
+                @SerializedName("departs_at")
+                Long departsAt;
+
+                /** Identifier name or reference for the origin location. */
+                @SerializedName("departure_location")
+                Object departureLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Departure(
+                    Address address,
+                    Long departsAt,
+                    Object departureLocation,
+                    Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.departsAt = departsAt;
+                  this.departureLocation = departureLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Long departsAt;
+
+                  private Object departureLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Departure
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.BusReservationDetail.Departure(
+                        this.address, this.departsAt, this.departureLocation, this.extraParams);
+                  }
+
+                  /** Address of the departure location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail.Departure.Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Timestamp of departure. */
+                  public Builder setDepartsAt(Long departsAt) {
+                    this.departsAt = departsAt;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(String departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(EmptyParam departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.BusReservationDetail.Departure.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Departure.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Insurance {
+                /** Insurance currency. */
+                @SerializedName("currency")
+                Object currency;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** Name of the company providing the insurance. */
+                @SerializedName("insurance_company_name")
+                Object insuranceCompanyName;
+
+                /** Type of insurance. */
+                @SerializedName("insurance_type")
+                InsuranceType insuranceType;
+
+                /** Price of insurance in cents. */
+                @SerializedName("price")
+                Long price;
+
+                private Insurance(
+                    Object currency,
+                    Map<String, Object> extraParams,
+                    Object insuranceCompanyName,
+                    InsuranceType insuranceType,
+                    Long price) {
+                  this.currency = currency;
+                  this.extraParams = extraParams;
+                  this.insuranceCompanyName = insuranceCompanyName;
+                  this.insuranceType = insuranceType;
+                  this.price = price;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Object currency;
+
+                  private Map<String, Object> extraParams;
+
+                  private Object insuranceCompanyName;
+
+                  private InsuranceType insuranceType;
+
+                  private Long price;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Insurance
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.BusReservationDetail.Insurance(
+                        this.currency,
+                        this.extraParams,
+                        this.insuranceCompanyName,
+                        this.insuranceType,
+                        this.price);
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(String currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(EmptyParam currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(String insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(EmptyParam insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Type of insurance. */
+                  public Builder setInsuranceType(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.BusReservationDetail.Insurance
+                              .InsuranceType
+                          insuranceType) {
+                    this.insuranceType = insuranceType;
+                    return this;
+                  }
+
+                  /** Price of insurance in cents. */
+                  public Builder setPrice(Long price) {
+                    this.price = price;
+                    return this;
+                  }
+                }
+
+                public enum InsuranceType implements ApiRequestParams.EnumParam {
+                  @SerializedName("baggage")
+                  BAGGAGE("baggage"),
+
+                  @SerializedName("bankruptcy")
+                  BANKRUPTCY("bankruptcy"),
+
+                  @SerializedName("cancelation")
+                  CANCELATION("cancelation"),
+
+                  @SerializedName("emergency")
+                  EMERGENCY("emergency"),
+
+                  @SerializedName("medical")
+                  MEDICAL("medical");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  InsuranceType(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Passenger {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The family name of the person. */
+                @SerializedName("family_name")
+                Object familyName;
+
+                /** The given name of the person. */
+                @SerializedName("given_name")
+                Object givenName;
+
+                private Passenger(
+                    Map<String, Object> extraParams, Object familyName, Object givenName) {
+                  this.extraParams = extraParams;
+                  this.familyName = familyName;
+                  this.givenName = givenName;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Object familyName;
+
+                  private Object givenName;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.BusReservationDetail.Passenger
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.BusReservationDetail.Passenger(
+                        this.extraParams, this.familyName, this.givenName);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.BusReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(String familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(EmptyParam familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(String givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(EmptyParam givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+                }
+              }
+
+              public enum TicketClass implements ApiRequestParams.EnumParam {
+                @SerializedName("business")
+                BUSINESS("business"),
+
+                @SerializedName("economy")
+                ECONOMY("economy"),
+
+                @SerializedName("first_class")
+                FIRST_CLASS("first_class"),
+
+                @SerializedName("premium_economy")
+                PREMIUM_ECONOMY("premium_economy");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                TicketClass(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class EventReservationDetail {
+              /** Indicates if the tickets are digitally checked when entering the venue. */
+              @SerializedName("access_controlled_venue")
+              Boolean accessControlledVenue;
+
+              /** Address of the event. */
+              @SerializedName("address")
+              Address address;
+
+              /** Name of associated or partner company for the service. */
+              @SerializedName("affiliate_name")
+              Object affiliateName;
+
+              /** End timestamp of the event. */
+              @SerializedName("ends_at")
+              Long endsAt;
+
+              /** Company selling the ticket. */
+              @SerializedName("event_company_name")
+              Object eventCompanyName;
+
+              /** Name of the event. */
+              @SerializedName("event_name")
+              Object eventName;
+
+              /** Type of the event. */
+              @SerializedName("event_type")
+              EventType eventType;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** List of insurances for this event. */
+              @SerializedName("insurances")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.EventReservationDetail.Insurance>
+                  insurances;
+
+              /** Start timestamp of the event. */
+              @SerializedName("starts_at")
+              Long startsAt;
+
+              /** Name of the venue where the event takes place. */
+              @SerializedName("venue_name")
+              Object venueName;
+
+              private EventReservationDetail(
+                  Boolean accessControlledVenue,
+                  Address address,
+                  Object affiliateName,
+                  Long endsAt,
+                  Object eventCompanyName,
+                  Object eventName,
+                  EventType eventType,
+                  Map<String, Object> extraParams,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.EventReservationDetail.Insurance>
+                      insurances,
+                  Long startsAt,
+                  Object venueName) {
+                this.accessControlledVenue = accessControlledVenue;
+                this.address = address;
+                this.affiliateName = affiliateName;
+                this.endsAt = endsAt;
+                this.eventCompanyName = eventCompanyName;
+                this.eventName = eventName;
+                this.eventType = eventType;
+                this.extraParams = extraParams;
+                this.insurances = insurances;
+                this.startsAt = startsAt;
+                this.venueName = venueName;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Boolean accessControlledVenue;
+
+                private Address address;
+
+                private Object affiliateName;
+
+                private Long endsAt;
+
+                private Object eventCompanyName;
+
+                private Object eventName;
+
+                private EventType eventType;
+
+                private Map<String, Object> extraParams;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.EventReservationDetail.Insurance>
+                    insurances;
+
+                private Long startsAt;
+
+                private Object venueName;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.EventReservationDetail
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.EventReservationDetail(
+                      this.accessControlledVenue,
+                      this.address,
+                      this.affiliateName,
+                      this.endsAt,
+                      this.eventCompanyName,
+                      this.eventName,
+                      this.eventType,
+                      this.extraParams,
+                      this.insurances,
+                      this.startsAt,
+                      this.venueName);
+                }
+
+                /** Indicates if the tickets are digitally checked when entering the venue. */
+                public Builder setAccessControlledVenue(Boolean accessControlledVenue) {
+                  this.accessControlledVenue = accessControlledVenue;
+                  return this;
+                }
+
+                /** Address of the event. */
+                public Builder setAddress(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.EventReservationDetail.Address
+                        address) {
+                  this.address = address;
+                  return this;
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(String affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(EmptyParam affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** End timestamp of the event. */
+                public Builder setEndsAt(Long endsAt) {
+                  this.endsAt = endsAt;
+                  return this;
+                }
+
+                /** Company selling the ticket. */
+                public Builder setEventCompanyName(String eventCompanyName) {
+                  this.eventCompanyName = eventCompanyName;
+                  return this;
+                }
+
+                /** Company selling the ticket. */
+                public Builder setEventCompanyName(EmptyParam eventCompanyName) {
+                  this.eventCompanyName = eventCompanyName;
+                  return this;
+                }
+
+                /** Name of the event. */
+                public Builder setEventName(String eventName) {
+                  this.eventName = eventName;
+                  return this;
+                }
+
+                /** Name of the event. */
+                public Builder setEventName(EmptyParam eventName) {
+                  this.eventName = eventName;
+                  return this;
+                }
+
+                /** Type of the event. */
+                public Builder setEventType(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.EventReservationDetail.EventType
+                        eventType) {
+                  this.eventType = eventType;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addInsurance(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.EventReservationDetail.Insurance
+                        element) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addAllInsurance(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.EventReservationDetail.Insurance>
+                        elements) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.addAll(elements);
+                  return this;
+                }
+
+                /** Start timestamp of the event. */
+                public Builder setStartsAt(Long startsAt) {
+                  this.startsAt = startsAt;
+                  return this;
+                }
+
+                /** Name of the venue where the event takes place. */
+                public Builder setVenueName(String venueName) {
+                  this.venueName = venueName;
+                  return this;
+                }
+
+                /** Name of the venue where the event takes place. */
+                public Builder setVenueName(EmptyParam venueName) {
+                  this.venueName = venueName;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Address {
+                /** The city or town. */
+                @SerializedName("city")
+                Object city;
+
+                /** The country in ISO 3166-1 alpha-2 format. */
+                @SerializedName("country")
+                Object country;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The postal code formatted according to country. */
+                @SerializedName("postal_code")
+                Object postalCode;
+
+                /** The state, county, province, or region formatted according to country. */
+                @SerializedName("region")
+                Object region;
+
+                /** Line 1 of the street address. */
+                @SerializedName("street_address")
+                Object streetAddress;
+
+                /** Line 2 of the street address. */
+                @SerializedName("street_address2")
+                Object streetAddress2;
+
+                private Address(
+                    Object city,
+                    Object country,
+                    Map<String, Object> extraParams,
+                    Object postalCode,
+                    Object region,
+                    Object streetAddress,
+                    Object streetAddress2) {
+                  this.city = city;
+                  this.country = country;
+                  this.extraParams = extraParams;
+                  this.postalCode = postalCode;
+                  this.region = region;
+                  this.streetAddress = streetAddress;
+                  this.streetAddress2 = streetAddress2;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Object city;
+
+                  private Object country;
+
+                  private Map<String, Object> extraParams;
+
+                  private Object postalCode;
+
+                  private Object region;
+
+                  private Object streetAddress;
+
+                  private Object streetAddress2;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.EventReservationDetail.Address
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.EventReservationDetail.Address(
+                        this.city,
+                        this.country,
+                        this.extraParams,
+                        this.postalCode,
+                        this.region,
+                        this.streetAddress,
+                        this.streetAddress2);
+                  }
+
+                  /** The city or town. */
+                  public Builder setCity(String city) {
+                    this.city = city;
+                    return this;
+                  }
+
+                  /** The city or town. */
+                  public Builder setCity(EmptyParam city) {
+                    this.city = city;
+                    return this;
+                  }
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  public Builder setCountry(String country) {
+                    this.country = country;
+                    return this;
+                  }
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  public Builder setCountry(EmptyParam country) {
+                    this.country = country;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail.Address#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail.Address#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The postal code formatted according to country. */
+                  public Builder setPostalCode(String postalCode) {
+                    this.postalCode = postalCode;
+                    return this;
+                  }
+
+                  /** The postal code formatted according to country. */
+                  public Builder setPostalCode(EmptyParam postalCode) {
+                    this.postalCode = postalCode;
+                    return this;
+                  }
+
+                  /** The state, county, province, or region formatted according to country. */
+                  public Builder setRegion(String region) {
+                    this.region = region;
+                    return this;
+                  }
+
+                  /** The state, county, province, or region formatted according to country. */
+                  public Builder setRegion(EmptyParam region) {
+                    this.region = region;
+                    return this;
+                  }
+
+                  /** Line 1 of the street address. */
+                  public Builder setStreetAddress(String streetAddress) {
+                    this.streetAddress = streetAddress;
+                    return this;
+                  }
+
+                  /** Line 1 of the street address. */
+                  public Builder setStreetAddress(EmptyParam streetAddress) {
+                    this.streetAddress = streetAddress;
+                    return this;
+                  }
+
+                  /** Line 2 of the street address. */
+                  public Builder setStreetAddress2(String streetAddress2) {
+                    this.streetAddress2 = streetAddress2;
+                    return this;
+                  }
+
+                  /** Line 2 of the street address. */
+                  public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                    this.streetAddress2 = streetAddress2;
+                    return this;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Insurance {
+                /** Insurance currency. */
+                @SerializedName("currency")
+                Object currency;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** Name of the company providing the insurance. */
+                @SerializedName("insurance_company_name")
+                Object insuranceCompanyName;
+
+                /** Type of insurance. */
+                @SerializedName("insurance_type")
+                InsuranceType insuranceType;
+
+                /** Price of insurance in cents. */
+                @SerializedName("price")
+                Long price;
+
+                private Insurance(
+                    Object currency,
+                    Map<String, Object> extraParams,
+                    Object insuranceCompanyName,
+                    InsuranceType insuranceType,
+                    Long price) {
+                  this.currency = currency;
+                  this.extraParams = extraParams;
+                  this.insuranceCompanyName = insuranceCompanyName;
+                  this.insuranceType = insuranceType;
+                  this.price = price;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Object currency;
+
+                  private Map<String, Object> extraParams;
+
+                  private Object insuranceCompanyName;
+
+                  private InsuranceType insuranceType;
+
+                  private Long price;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.EventReservationDetail.Insurance
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.EventReservationDetail.Insurance(
+                        this.currency,
+                        this.extraParams,
+                        this.insuranceCompanyName,
+                        this.insuranceType,
+                        this.price);
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(String currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(EmptyParam currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.EventReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(String insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(EmptyParam insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Type of insurance. */
+                  public Builder setInsuranceType(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.EventReservationDetail.Insurance
+                              .InsuranceType
+                          insuranceType) {
+                    this.insuranceType = insuranceType;
+                    return this;
+                  }
+
+                  /** Price of insurance in cents. */
+                  public Builder setPrice(Long price) {
+                    this.price = price;
+                    return this;
+                  }
+                }
+
+                public enum InsuranceType implements ApiRequestParams.EnumParam {
+                  @SerializedName("bankruptcy")
+                  BANKRUPTCY("bankruptcy"),
+
+                  @SerializedName("cancelation")
+                  CANCELATION("cancelation"),
+
+                  @SerializedName("emergency")
+                  EMERGENCY("emergency"),
+
+                  @SerializedName("medical")
+                  MEDICAL("medical");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  InsuranceType(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              public enum EventType implements ApiRequestParams.EnumParam {
+                @SerializedName("concert")
+                CONCERT("concert"),
+
+                @SerializedName("conference")
+                CONFERENCE("conference"),
+
+                @SerializedName("digital_education")
+                DIGITAL_EDUCATION("digital_education"),
+
+                @SerializedName("expo")
+                EXPO("expo"),
+
+                @SerializedName("festival")
+                FESTIVAL("festival"),
+
+                @SerializedName("in_person_education")
+                IN_PERSON_EDUCATION("in_person_education"),
+
+                @SerializedName("sport")
+                SPORT("sport"),
+
+                @SerializedName("tour")
+                TOUR("tour");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                EventType(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class FerryReservationDetail {
+              /** Name of associated or partner company for the service. */
+              @SerializedName("affiliate_name")
+              Object affiliateName;
+
+              /** Arrival details. */
+              @SerializedName("arrival")
+              Arrival arrival;
+
+              /** Name of transportation company. */
+              @SerializedName("carrier_name")
+              Object carrierName;
+
+              /** Currency. */
+              @SerializedName("currency")
+              Object currency;
+
+              /** Departure details. */
+              @SerializedName("departure")
+              Departure departure;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** List of insurances for this reservation. */
+              @SerializedName("insurances")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Insurance>
+                  insurances;
+
+              /** List of passengers that this reservation applies to. */
+              @SerializedName("passengers")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Passenger>
+                  passengers;
+
+              /** Price in cents. */
+              @SerializedName("price")
+              Long price;
+
+              /** Ticket class. */
+              @SerializedName("ticket_class")
+              TicketClass ticketClass;
+
+              private FerryReservationDetail(
+                  Object affiliateName,
+                  Arrival arrival,
+                  Object carrierName,
+                  Object currency,
+                  Departure departure,
+                  Map<String, Object> extraParams,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail.Insurance>
+                      insurances,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail.Passenger>
+                      passengers,
+                  Long price,
+                  TicketClass ticketClass) {
+                this.affiliateName = affiliateName;
+                this.arrival = arrival;
+                this.carrierName = carrierName;
+                this.currency = currency;
+                this.departure = departure;
+                this.extraParams = extraParams;
+                this.insurances = insurances;
+                this.passengers = passengers;
+                this.price = price;
+                this.ticketClass = ticketClass;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Object affiliateName;
+
+                private Arrival arrival;
+
+                private Object carrierName;
+
+                private Object currency;
+
+                private Departure departure;
+
+                private Map<String, Object> extraParams;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Insurance>
+                    insurances;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Passenger>
+                    passengers;
+
+                private Long price;
+
+                private TicketClass ticketClass;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.FerryReservationDetail
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.FerryReservationDetail(
+                      this.affiliateName,
+                      this.arrival,
+                      this.carrierName,
+                      this.currency,
+                      this.departure,
+                      this.extraParams,
+                      this.insurances,
+                      this.passengers,
+                      this.price,
+                      this.ticketClass);
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(String affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(EmptyParam affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Arrival details. */
+                public Builder setArrival(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Arrival
+                        arrival) {
+                  this.arrival = arrival;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(String carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(EmptyParam carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(String currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(EmptyParam currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Departure details. */
+                public Builder setDeparture(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Departure
+                        departure) {
+                  this.departure = departure;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addInsurance(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Insurance
+                        element) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addAllInsurance(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.FerryReservationDetail.Insurance>
+                        elements) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.addAll(elements);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addPassenger(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Passenger
+                        element) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addAllPassenger(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.FerryReservationDetail.Passenger>
+                        elements) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.addAll(elements);
+                  return this;
+                }
+
+                /** Price in cents. */
+                public Builder setPrice(Long price) {
+                  this.price = price;
+                  return this;
+                }
+
+                /** Ticket class. */
+                public Builder setTicketClass(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.TicketClass
+                        ticketClass) {
+                  this.ticketClass = ticketClass;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Arrival {
+                /** Address of the arrival location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Identifier name or reference for the arrival location. */
+                @SerializedName("arrival_location")
+                Object arrivalLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Arrival(
+                    Address address, Object arrivalLocation, Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.arrivalLocation = arrivalLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Object arrivalLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Arrival
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.FerryReservationDetail.Arrival(
+                        this.address, this.arrivalLocation, this.extraParams);
+                  }
+
+                  /** Address of the arrival location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail.Arrival.Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(String arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(EmptyParam arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Arrival.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Arrival.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Departure {
+                /** Address of the departure location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Timestamp of departure. */
+                @SerializedName("departs_at")
+                Long departsAt;
+
+                /** Identifier name or reference for the origin location. */
+                @SerializedName("departure_location")
+                Object departureLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Departure(
+                    Address address,
+                    Long departsAt,
+                    Object departureLocation,
+                    Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.departsAt = departsAt;
+                  this.departureLocation = departureLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Long departsAt;
+
+                  private Object departureLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Departure
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.FerryReservationDetail.Departure(
+                        this.address, this.departsAt, this.departureLocation, this.extraParams);
+                  }
+
+                  /** Address of the departure location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail.Departure.Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Timestamp of departure. */
+                  public Builder setDepartsAt(Long departsAt) {
+                    this.departsAt = departsAt;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(String departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(EmptyParam departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.FerryReservationDetail.Departure.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Departure.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Insurance {
+                /** Insurance currency. */
+                @SerializedName("currency")
+                Object currency;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** Name of the company providing the insurance. */
+                @SerializedName("insurance_company_name")
+                Object insuranceCompanyName;
+
+                /** Type of insurance. */
+                @SerializedName("insurance_type")
+                InsuranceType insuranceType;
+
+                /** Price of insurance in cents. */
+                @SerializedName("price")
+                Long price;
+
+                private Insurance(
+                    Object currency,
+                    Map<String, Object> extraParams,
+                    Object insuranceCompanyName,
+                    InsuranceType insuranceType,
+                    Long price) {
+                  this.currency = currency;
+                  this.extraParams = extraParams;
+                  this.insuranceCompanyName = insuranceCompanyName;
+                  this.insuranceType = insuranceType;
+                  this.price = price;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Object currency;
+
+                  private Map<String, Object> extraParams;
+
+                  private Object insuranceCompanyName;
+
+                  private InsuranceType insuranceType;
+
+                  private Long price;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Insurance
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.FerryReservationDetail.Insurance(
+                        this.currency,
+                        this.extraParams,
+                        this.insuranceCompanyName,
+                        this.insuranceType,
+                        this.price);
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(String currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(EmptyParam currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(String insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(EmptyParam insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Type of insurance. */
+                  public Builder setInsuranceType(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.FerryReservationDetail.Insurance
+                              .InsuranceType
+                          insuranceType) {
+                    this.insuranceType = insuranceType;
+                    return this;
+                  }
+
+                  /** Price of insurance in cents. */
+                  public Builder setPrice(Long price) {
+                    this.price = price;
+                    return this;
+                  }
+                }
+
+                public enum InsuranceType implements ApiRequestParams.EnumParam {
+                  @SerializedName("baggage")
+                  BAGGAGE("baggage"),
+
+                  @SerializedName("bankruptcy")
+                  BANKRUPTCY("bankruptcy"),
+
+                  @SerializedName("cancelation")
+                  CANCELATION("cancelation"),
+
+                  @SerializedName("emergency")
+                  EMERGENCY("emergency"),
+
+                  @SerializedName("medical")
+                  MEDICAL("medical");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  InsuranceType(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Passenger {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The family name of the person. */
+                @SerializedName("family_name")
+                Object familyName;
+
+                /** The given name of the person. */
+                @SerializedName("given_name")
+                Object givenName;
+
+                private Passenger(
+                    Map<String, Object> extraParams, Object familyName, Object givenName) {
+                  this.extraParams = extraParams;
+                  this.familyName = familyName;
+                  this.givenName = givenName;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Object familyName;
+
+                  private Object givenName;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.FerryReservationDetail.Passenger
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.FerryReservationDetail.Passenger(
+                        this.extraParams, this.familyName, this.givenName);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.FerryReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(String familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(EmptyParam familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(String givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(EmptyParam givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+                }
+              }
+
+              public enum TicketClass implements ApiRequestParams.EnumParam {
+                @SerializedName("business")
+                BUSINESS("business"),
+
+                @SerializedName("economy")
+                ECONOMY("economy"),
+
+                @SerializedName("first_class")
+                FIRST_CLASS("first_class"),
+
+                @SerializedName("premium_economy")
+                PREMIUM_ECONOMY("premium_economy");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                TicketClass(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Insurance {
+              /** Insurance currency. */
+              @SerializedName("currency")
+              Object currency;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** Name of the company providing the insurance. */
+              @SerializedName("insurance_company_name")
+              Object insuranceCompanyName;
+
+              /** Type of insurance. */
+              @SerializedName("insurance_type")
+              InsuranceType insuranceType;
+
+              /** Price of insurance in cents. */
+              @SerializedName("price")
+              Long price;
+
+              private Insurance(
+                  Object currency,
+                  Map<String, Object> extraParams,
+                  Object insuranceCompanyName,
+                  InsuranceType insuranceType,
+                  Long price) {
+                this.currency = currency;
+                this.extraParams = extraParams;
+                this.insuranceCompanyName = insuranceCompanyName;
+                this.insuranceType = insuranceType;
+                this.price = price;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Object currency;
+
+                private Map<String, Object> extraParams;
+
+                private Object insuranceCompanyName;
+
+                private InsuranceType insuranceType;
+
+                private Long price;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.Insurance
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.Insurance(
+                      this.currency,
+                      this.extraParams,
+                      this.insuranceCompanyName,
+                      this.insuranceType,
+                      this.price);
+                }
+
+                /** Insurance currency. */
+                public Builder setCurrency(String currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Insurance currency. */
+                public Builder setCurrency(EmptyParam currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.Insurance#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.Insurance#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** Name of the company providing the insurance. */
+                public Builder setInsuranceCompanyName(String insuranceCompanyName) {
+                  this.insuranceCompanyName = insuranceCompanyName;
+                  return this;
+                }
+
+                /** Name of the company providing the insurance. */
+                public Builder setInsuranceCompanyName(EmptyParam insuranceCompanyName) {
+                  this.insuranceCompanyName = insuranceCompanyName;
+                  return this;
+                }
+
+                /** Type of insurance. */
+                public Builder setInsuranceType(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.Insurance.InsuranceType
+                        insuranceType) {
+                  this.insuranceType = insuranceType;
+                  return this;
+                }
+
+                /** Price of insurance in cents. */
+                public Builder setPrice(Long price) {
+                  this.price = price;
+                  return this;
+                }
+              }
+
+              public enum InsuranceType implements ApiRequestParams.EnumParam {
+                @SerializedName("bankruptcy")
+                BANKRUPTCY("bankruptcy"),
+
+                @SerializedName("cancelation")
+                CANCELATION("cancelation"),
+
+                @SerializedName("emergency")
+                EMERGENCY("emergency"),
+
+                @SerializedName("medical")
+                MEDICAL("medical");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                InsuranceType(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class MarketplaceSeller {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The references to line items for purchases with multiple associated sub-sellers.
+               */
+              @SerializedName("line_item_references")
+              List<String> lineItemReferences;
+
+              /** The address of the selling or delivering merchant. */
+              @SerializedName("marketplace_seller_address")
+              MarketplaceSellerAddress marketplaceSellerAddress;
+
+              /** The name of the marketplace seller. */
+              @SerializedName("marketplace_seller_name")
+              Object marketplaceSellerName;
+
+              /** The unique identifier for the marketplace seller. */
+              @SerializedName("marketplace_seller_reference")
+              Object marketplaceSellerReference;
+
+              /** The number of transactions the sub-seller completed in the last 12 months. */
+              @SerializedName("number_of_transactions")
+              Long numberOfTransactions;
+
+              /** The category of the product. */
+              @SerializedName("product_category")
+              ProductCategory productCategory;
+
+              /** The date when the seller's account with the marketplace was last logged in. */
+              @SerializedName("seller_last_login_at")
+              Long sellerLastLoginAt;
+
+              /**
+               * The current rating of the marketplace seller. If the marketplace uses numeric
+               * ranking, map these to the enum values.
+               */
+              @SerializedName("seller_rating")
+              SellerRating sellerRating;
+
+              /** The date when the seller's account with the marketplace was created. */
+              @SerializedName("seller_registered_at")
+              Long sellerRegisteredAt;
+
+              /** The date when the seller's account with the marketplace was last updated. */
+              @SerializedName("seller_updated_at")
+              Long sellerUpdatedAt;
+
+              /**
+               * The references to shipping addresses for purchases with multiple associated
+               * sub-sellers.
+               */
+              @SerializedName("shipping_references")
+              List<String> shippingReferences;
+
+              /**
+               * The accumulated amount of sales transactions made by the sub-merchant or sub-seller
+               * within the past 12 months in the payment currency. These transactions are in minor
+               * currency units.
+               */
+              @SerializedName("volume_of_transactions")
+              Long volumeOfTransactions;
+
+              private MarketplaceSeller(
+                  Map<String, Object> extraParams,
+                  List<String> lineItemReferences,
+                  MarketplaceSellerAddress marketplaceSellerAddress,
+                  Object marketplaceSellerName,
+                  Object marketplaceSellerReference,
+                  Long numberOfTransactions,
+                  ProductCategory productCategory,
+                  Long sellerLastLoginAt,
+                  SellerRating sellerRating,
+                  Long sellerRegisteredAt,
+                  Long sellerUpdatedAt,
+                  List<String> shippingReferences,
+                  Long volumeOfTransactions) {
+                this.extraParams = extraParams;
+                this.lineItemReferences = lineItemReferences;
+                this.marketplaceSellerAddress = marketplaceSellerAddress;
+                this.marketplaceSellerName = marketplaceSellerName;
+                this.marketplaceSellerReference = marketplaceSellerReference;
+                this.numberOfTransactions = numberOfTransactions;
+                this.productCategory = productCategory;
+                this.sellerLastLoginAt = sellerLastLoginAt;
+                this.sellerRating = sellerRating;
+                this.sellerRegisteredAt = sellerRegisteredAt;
+                this.sellerUpdatedAt = sellerUpdatedAt;
+                this.shippingReferences = shippingReferences;
+                this.volumeOfTransactions = volumeOfTransactions;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private List<String> lineItemReferences;
+
+                private MarketplaceSellerAddress marketplaceSellerAddress;
+
+                private Object marketplaceSellerName;
+
+                private Object marketplaceSellerReference;
+
+                private Long numberOfTransactions;
+
+                private ProductCategory productCategory;
+
+                private Long sellerLastLoginAt;
+
+                private SellerRating sellerRating;
+
+                private Long sellerRegisteredAt;
+
+                private Long sellerUpdatedAt;
+
+                private List<String> shippingReferences;
+
+                private Long volumeOfTransactions;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.MarketplaceSeller
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.MarketplaceSeller(
+                      this.extraParams,
+                      this.lineItemReferences,
+                      this.marketplaceSellerAddress,
+                      this.marketplaceSellerName,
+                      this.marketplaceSellerReference,
+                      this.numberOfTransactions,
+                      this.productCategory,
+                      this.sellerLastLoginAt,
+                      this.sellerRating,
+                      this.sellerRegisteredAt,
+                      this.sellerUpdatedAt,
+                      this.shippingReferences,
+                      this.volumeOfTransactions);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `lineItemReferences` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller#lineItemReferences}
+                 * for the field documentation.
+                 */
+                public Builder addLineItemReference(String element) {
+                  if (this.lineItemReferences == null) {
+                    this.lineItemReferences = new ArrayList<>();
+                  }
+                  this.lineItemReferences.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `lineItemReferences` list. A list is initialized for the
+                 * first `add/addAll` call, and subsequent calls adds additional elements to the
+                 * original list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller#lineItemReferences}
+                 * for the field documentation.
+                 */
+                public Builder addAllLineItemReference(List<String> elements) {
+                  if (this.lineItemReferences == null) {
+                    this.lineItemReferences = new ArrayList<>();
+                  }
+                  this.lineItemReferences.addAll(elements);
+                  return this;
+                }
+
+                /** The address of the selling or delivering merchant. */
+                public Builder setMarketplaceSellerAddress(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.MarketplaceSeller.MarketplaceSellerAddress
+                        marketplaceSellerAddress) {
+                  this.marketplaceSellerAddress = marketplaceSellerAddress;
+                  return this;
+                }
+
+                /** The name of the marketplace seller. */
+                public Builder setMarketplaceSellerName(String marketplaceSellerName) {
+                  this.marketplaceSellerName = marketplaceSellerName;
+                  return this;
+                }
+
+                /** The name of the marketplace seller. */
+                public Builder setMarketplaceSellerName(EmptyParam marketplaceSellerName) {
+                  this.marketplaceSellerName = marketplaceSellerName;
+                  return this;
+                }
+
+                /** The unique identifier for the marketplace seller. */
+                public Builder setMarketplaceSellerReference(String marketplaceSellerReference) {
+                  this.marketplaceSellerReference = marketplaceSellerReference;
+                  return this;
+                }
+
+                /** The unique identifier for the marketplace seller. */
+                public Builder setMarketplaceSellerReference(
+                    EmptyParam marketplaceSellerReference) {
+                  this.marketplaceSellerReference = marketplaceSellerReference;
+                  return this;
+                }
+
+                /** The number of transactions the sub-seller completed in the last 12 months. */
+                public Builder setNumberOfTransactions(Long numberOfTransactions) {
+                  this.numberOfTransactions = numberOfTransactions;
+                  return this;
+                }
+
+                /** The category of the product. */
+                public Builder setProductCategory(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.MarketplaceSeller.ProductCategory
+                        productCategory) {
+                  this.productCategory = productCategory;
+                  return this;
+                }
+
+                /** The date when the seller's account with the marketplace was last logged in. */
+                public Builder setSellerLastLoginAt(Long sellerLastLoginAt) {
+                  this.sellerLastLoginAt = sellerLastLoginAt;
+                  return this;
+                }
+
+                /**
+                 * The current rating of the marketplace seller. If the marketplace uses numeric
+                 * ranking, map these to the enum values.
+                 */
+                public Builder setSellerRating(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.MarketplaceSeller.SellerRating
+                        sellerRating) {
+                  this.sellerRating = sellerRating;
+                  return this;
+                }
+
+                /** The date when the seller's account with the marketplace was created. */
+                public Builder setSellerRegisteredAt(Long sellerRegisteredAt) {
+                  this.sellerRegisteredAt = sellerRegisteredAt;
+                  return this;
+                }
+
+                /** The date when the seller's account with the marketplace was last updated. */
+                public Builder setSellerUpdatedAt(Long sellerUpdatedAt) {
+                  this.sellerUpdatedAt = sellerUpdatedAt;
+                  return this;
+                }
+
+                /**
+                 * Add an element to `shippingReferences` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller#shippingReferences}
+                 * for the field documentation.
+                 */
+                public Builder addShippingReference(String element) {
+                  if (this.shippingReferences == null) {
+                    this.shippingReferences = new ArrayList<>();
+                  }
+                  this.shippingReferences.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `shippingReferences` list. A list is initialized for the
+                 * first `add/addAll` call, and subsequent calls adds additional elements to the
+                 * original list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller#shippingReferences}
+                 * for the field documentation.
+                 */
+                public Builder addAllShippingReference(List<String> elements) {
+                  if (this.shippingReferences == null) {
+                    this.shippingReferences = new ArrayList<>();
+                  }
+                  this.shippingReferences.addAll(elements);
+                  return this;
+                }
+
+                /**
+                 * The accumulated amount of sales transactions made by the sub-merchant or
+                 * sub-seller within the past 12 months in the payment currency. These transactions
+                 * are in minor currency units.
+                 */
+                public Builder setVolumeOfTransactions(Long volumeOfTransactions) {
+                  this.volumeOfTransactions = volumeOfTransactions;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class MarketplaceSellerAddress {
+                /** The city or town. */
+                @SerializedName("city")
+                Object city;
+
+                /** The country in ISO 3166-1 alpha-2 format. */
+                @SerializedName("country")
+                Object country;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The postal code formatted according to country. */
+                @SerializedName("postal_code")
+                Object postalCode;
+
+                /** The state, county, province, or region formatted according to country. */
+                @SerializedName("region")
+                Object region;
+
+                /** Line 1 of the street address. */
+                @SerializedName("street_address")
+                Object streetAddress;
+
+                /** Line 2 of the street address. */
+                @SerializedName("street_address2")
+                Object streetAddress2;
+
+                private MarketplaceSellerAddress(
+                    Object city,
+                    Object country,
+                    Map<String, Object> extraParams,
+                    Object postalCode,
+                    Object region,
+                    Object streetAddress,
+                    Object streetAddress2) {
+                  this.city = city;
+                  this.country = country;
+                  this.extraParams = extraParams;
+                  this.postalCode = postalCode;
+                  this.region = region;
+                  this.streetAddress = streetAddress;
+                  this.streetAddress2 = streetAddress2;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Object city;
+
+                  private Object country;
+
+                  private Map<String, Object> extraParams;
+
+                  private Object postalCode;
+
+                  private Object region;
+
+                  private Object streetAddress;
+
+                  private Object streetAddress2;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.MarketplaceSeller.MarketplaceSellerAddress
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.MarketplaceSeller.MarketplaceSellerAddress(
+                        this.city,
+                        this.country,
+                        this.extraParams,
+                        this.postalCode,
+                        this.region,
+                        this.streetAddress,
+                        this.streetAddress2);
+                  }
+
+                  /** The city or town. */
+                  public Builder setCity(String city) {
+                    this.city = city;
+                    return this;
+                  }
+
+                  /** The city or town. */
+                  public Builder setCity(EmptyParam city) {
+                    this.city = city;
+                    return this;
+                  }
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  public Builder setCountry(String country) {
+                    this.country = country;
+                    return this;
+                  }
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  public Builder setCountry(EmptyParam country) {
+                    this.country = country;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller.MarketplaceSellerAddress#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.MarketplaceSeller.MarketplaceSellerAddress#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The postal code formatted according to country. */
+                  public Builder setPostalCode(String postalCode) {
+                    this.postalCode = postalCode;
+                    return this;
+                  }
+
+                  /** The postal code formatted according to country. */
+                  public Builder setPostalCode(EmptyParam postalCode) {
+                    this.postalCode = postalCode;
+                    return this;
+                  }
+
+                  /** The state, county, province, or region formatted according to country. */
+                  public Builder setRegion(String region) {
+                    this.region = region;
+                    return this;
+                  }
+
+                  /** The state, county, province, or region formatted according to country. */
+                  public Builder setRegion(EmptyParam region) {
+                    this.region = region;
+                    return this;
+                  }
+
+                  /** Line 1 of the street address. */
+                  public Builder setStreetAddress(String streetAddress) {
+                    this.streetAddress = streetAddress;
+                    return this;
+                  }
+
+                  /** Line 1 of the street address. */
+                  public Builder setStreetAddress(EmptyParam streetAddress) {
+                    this.streetAddress = streetAddress;
+                    return this;
+                  }
+
+                  /** Line 2 of the street address. */
+                  public Builder setStreetAddress2(String streetAddress2) {
+                    this.streetAddress2 = streetAddress2;
+                    return this;
+                  }
+
+                  /** Line 2 of the street address. */
+                  public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                    this.streetAddress2 = streetAddress2;
+                    return this;
+                  }
+                }
+              }
+
+              public enum ProductCategory implements ApiRequestParams.EnumParam {
+                @SerializedName("accessories")
+                ACCESSORIES("accessories"),
+
+                @SerializedName("appliances")
+                APPLIANCES("appliances"),
+
+                @SerializedName("apps_and_games")
+                APPS_AND_GAMES("apps_and_games"),
+
+                @SerializedName("arts_crafts_and_sewing")
+                ARTS_CRAFTS_AND_SEWING("arts_crafts_and_sewing"),
+
+                @SerializedName("automotive")
+                AUTOMOTIVE("automotive"),
+
+                @SerializedName("baby")
+                BABY("baby"),
+
+                @SerializedName("baby_clothing")
+                BABY_CLOTHING("baby_clothing"),
+
+                @SerializedName("bags_and_purses")
+                BAGS_AND_PURSES("bags_and_purses"),
+
+                @SerializedName("beauty")
+                BEAUTY("beauty"),
+
+                @SerializedName("books")
+                BOOKS("books"),
+
+                @SerializedName("cds_and_vinyl")
+                CDS_AND_VINYL("cds_and_vinyl"),
+
+                @SerializedName("cell_phones_and_accessories")
+                CELL_PHONES_AND_ACCESSORIES("cell_phones_and_accessories"),
+
+                @SerializedName("collectibles_and_fine_arts")
+                COLLECTIBLES_AND_FINE_ARTS("collectibles_and_fine_arts"),
+
+                @SerializedName("digital_music")
+                DIGITAL_MUSIC("digital_music"),
+
+                @SerializedName("electronics")
+                ELECTRONICS("electronics"),
+
+                @SerializedName("grocery_and_gourmet_food")
+                GROCERY_AND_GOURMET_FOOD("grocery_and_gourmet_food"),
+
+                @SerializedName("handmade")
+                HANDMADE("handmade"),
+
+                @SerializedName("health_and_personal_care")
+                HEALTH_AND_PERSONAL_CARE("health_and_personal_care"),
+
+                @SerializedName("home_and_kitchen")
+                HOME_AND_KITCHEN("home_and_kitchen"),
+
+                @SerializedName("industrial_and_scientific")
+                INDUSTRIAL_AND_SCIENTIFIC("industrial_and_scientific"),
+
+                @SerializedName("luggage_and_travel_gear")
+                LUGGAGE_AND_TRAVEL_GEAR("luggage_and_travel_gear"),
+
+                @SerializedName("magazine_subscriptions")
+                MAGAZINE_SUBSCRIPTIONS("magazine_subscriptions"),
+
+                @SerializedName("men_clothing")
+                MEN_CLOTHING("men_clothing"),
+
+                @SerializedName("musical_instruments")
+                MUSICAL_INSTRUMENTS("musical_instruments"),
+
+                @SerializedName("office_products")
+                OFFICE_PRODUCTS("office_products"),
+
+                @SerializedName("patio_lawn_and_garden")
+                PATIO_LAWN_AND_GARDEN("patio_lawn_and_garden"),
+
+                @SerializedName("pet_supplies")
+                PET_SUPPLIES("pet_supplies"),
+
+                @SerializedName("shoes")
+                SHOES("shoes"),
+
+                @SerializedName("software")
+                SOFTWARE("software"),
+
+                @SerializedName("sports_and_outdoors")
+                SPORTS_AND_OUTDOORS("sports_and_outdoors"),
+
+                @SerializedName("tools_and_home_improvement")
+                TOOLS_AND_HOME_IMPROVEMENT("tools_and_home_improvement"),
+
+                @SerializedName("toys_and_games")
+                TOYS_AND_GAMES("toys_and_games"),
+
+                @SerializedName("video_games")
+                VIDEO_GAMES("video_games"),
+
+                @SerializedName("women_clothing")
+                WOMEN_CLOTHING("women_clothing");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                ProductCategory(String value) {
+                  this.value = value;
+                }
+              }
+
+              public enum SellerRating implements ApiRequestParams.EnumParam {
+                @SerializedName("high")
+                HIGH("high"),
+
+                @SerializedName("low")
+                LOW("low"),
+
+                @SerializedName("medium")
+                MEDIUM("medium"),
+
+                @SerializedName("very_high")
+                VERY_HIGH("very_high"),
+
+                @SerializedName("very_low")
+                VERY_LOW("very_low");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                SellerRating(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class RoundTripReservationDetail {
+              /** Name of associated or partner company for the service. */
+              @SerializedName("affiliate_name")
+              Object affiliateName;
+
+              /** Arrival details. */
+              @SerializedName("arrival")
+              Arrival arrival;
+
+              /** Name of transportation company. */
+              @SerializedName("carrier_name")
+              Object carrierName;
+
+              /** Currency. */
+              @SerializedName("currency")
+              Object currency;
+
+              /** Departure details. */
+              @SerializedName("departure")
+              Departure departure;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** List of insurances for this reservation. */
+              @SerializedName("insurances")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance>
+                  insurances;
+
+              /** List of passengers that this reservation applies to. */
+              @SerializedName("passengers")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Passenger>
+                  passengers;
+
+              /** Price in cents. */
+              @SerializedName("price")
+              Long price;
+
+              /** Ticket class. */
+              @SerializedName("ticket_class")
+              TicketClass ticketClass;
+
+              private RoundTripReservationDetail(
+                  Object affiliateName,
+                  Arrival arrival,
+                  Object carrierName,
+                  Object currency,
+                  Departure departure,
+                  Map<String, Object> extraParams,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance>
+                      insurances,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail.Passenger>
+                      passengers,
+                  Long price,
+                  TicketClass ticketClass) {
+                this.affiliateName = affiliateName;
+                this.arrival = arrival;
+                this.carrierName = carrierName;
+                this.currency = currency;
+                this.departure = departure;
+                this.extraParams = extraParams;
+                this.insurances = insurances;
+                this.passengers = passengers;
+                this.price = price;
+                this.ticketClass = ticketClass;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Object affiliateName;
+
+                private Arrival arrival;
+
+                private Object carrierName;
+
+                private Object currency;
+
+                private Departure departure;
+
+                private Map<String, Object> extraParams;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance>
+                    insurances;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Passenger>
+                    passengers;
+
+                private Long price;
+
+                private TicketClass ticketClass;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.RoundTripReservationDetail
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.RoundTripReservationDetail(
+                      this.affiliateName,
+                      this.arrival,
+                      this.carrierName,
+                      this.currency,
+                      this.departure,
+                      this.extraParams,
+                      this.insurances,
+                      this.passengers,
+                      this.price,
+                      this.ticketClass);
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(String affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(EmptyParam affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Arrival details. */
+                public Builder setArrival(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Arrival
+                        arrival) {
+                  this.arrival = arrival;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(String carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(EmptyParam carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(String currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(EmptyParam currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Departure details. */
+                public Builder setDeparture(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Departure
+                        departure) {
+                  this.departure = departure;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addInsurance(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance
+                        element) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addAllInsurance(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance>
+                        elements) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.addAll(elements);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addPassenger(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Passenger
+                        element) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addAllPassenger(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.RoundTripReservationDetail.Passenger>
+                        elements) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.addAll(elements);
+                  return this;
+                }
+
+                /** Price in cents. */
+                public Builder setPrice(Long price) {
+                  this.price = price;
+                  return this;
+                }
+
+                /** Ticket class. */
+                public Builder setTicketClass(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.TicketClass
+                        ticketClass) {
+                  this.ticketClass = ticketClass;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Arrival {
+                /** Address of the arrival location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Identifier name or reference for the arrival location. */
+                @SerializedName("arrival_location")
+                Object arrivalLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Arrival(
+                    Address address, Object arrivalLocation, Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.arrivalLocation = arrivalLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Object arrivalLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Arrival
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.RoundTripReservationDetail.Arrival(
+                        this.address, this.arrivalLocation, this.extraParams);
+                  }
+
+                  /** Address of the arrival location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail.Arrival.Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(String arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(EmptyParam arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Arrival.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Arrival.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Departure {
+                /** Address of the departure location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Timestamp of departure. */
+                @SerializedName("departs_at")
+                Long departsAt;
+
+                /** Identifier name or reference for the origin location. */
+                @SerializedName("departure_location")
+                Object departureLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Departure(
+                    Address address,
+                    Long departsAt,
+                    Object departureLocation,
+                    Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.departsAt = departsAt;
+                  this.departureLocation = departureLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Long departsAt;
+
+                  private Object departureLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Departure
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.RoundTripReservationDetail.Departure(
+                        this.address, this.departsAt, this.departureLocation, this.extraParams);
+                  }
+
+                  /** Address of the departure location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail.Departure
+                              .Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Timestamp of departure. */
+                  public Builder setDepartsAt(Long departsAt) {
+                    this.departsAt = departsAt;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(String departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(EmptyParam departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.RoundTripReservationDetail.Departure.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Departure.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Insurance {
+                /** Insurance currency. */
+                @SerializedName("currency")
+                Object currency;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** Name of the company providing the insurance. */
+                @SerializedName("insurance_company_name")
+                Object insuranceCompanyName;
+
+                /** Type of insurance. */
+                @SerializedName("insurance_type")
+                InsuranceType insuranceType;
+
+                /** Price of insurance in cents. */
+                @SerializedName("price")
+                Long price;
+
+                private Insurance(
+                    Object currency,
+                    Map<String, Object> extraParams,
+                    Object insuranceCompanyName,
+                    InsuranceType insuranceType,
+                    Long price) {
+                  this.currency = currency;
+                  this.extraParams = extraParams;
+                  this.insuranceCompanyName = insuranceCompanyName;
+                  this.insuranceType = insuranceType;
+                  this.price = price;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Object currency;
+
+                  private Map<String, Object> extraParams;
+
+                  private Object insuranceCompanyName;
+
+                  private InsuranceType insuranceType;
+
+                  private Long price;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance(
+                        this.currency,
+                        this.extraParams,
+                        this.insuranceCompanyName,
+                        this.insuranceType,
+                        this.price);
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(String currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(EmptyParam currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(String insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(EmptyParam insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Type of insurance. */
+                  public Builder setInsuranceType(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.RoundTripReservationDetail.Insurance
+                              .InsuranceType
+                          insuranceType) {
+                    this.insuranceType = insuranceType;
+                    return this;
+                  }
+
+                  /** Price of insurance in cents. */
+                  public Builder setPrice(Long price) {
+                    this.price = price;
+                    return this;
+                  }
+                }
+
+                public enum InsuranceType implements ApiRequestParams.EnumParam {
+                  @SerializedName("baggage")
+                  BAGGAGE("baggage"),
+
+                  @SerializedName("bankruptcy")
+                  BANKRUPTCY("bankruptcy"),
+
+                  @SerializedName("cancelation")
+                  CANCELATION("cancelation"),
+
+                  @SerializedName("emergency")
+                  EMERGENCY("emergency"),
+
+                  @SerializedName("medical")
+                  MEDICAL("medical");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  InsuranceType(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Passenger {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The family name of the person. */
+                @SerializedName("family_name")
+                Object familyName;
+
+                /** The given name of the person. */
+                @SerializedName("given_name")
+                Object givenName;
+
+                private Passenger(
+                    Map<String, Object> extraParams, Object familyName, Object givenName) {
+                  this.extraParams = extraParams;
+                  this.familyName = familyName;
+                  this.givenName = givenName;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Object familyName;
+
+                  private Object givenName;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.RoundTripReservationDetail.Passenger
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.RoundTripReservationDetail.Passenger(
+                        this.extraParams, this.familyName, this.givenName);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.RoundTripReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(String familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(EmptyParam familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(String givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(EmptyParam givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+                }
+              }
+
+              public enum TicketClass implements ApiRequestParams.EnumParam {
+                @SerializedName("business")
+                BUSINESS("business"),
+
+                @SerializedName("economy")
+                ECONOMY("economy"),
+
+                @SerializedName("first_class")
+                FIRST_CLASS("first_class"),
+
+                @SerializedName("premium_economy")
+                PREMIUM_ECONOMY("premium_economy");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                TicketClass(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class TrainReservationDetail {
+              /** Name of associated or partner company for the service. */
+              @SerializedName("affiliate_name")
+              Object affiliateName;
+
+              /** Arrival details. */
+              @SerializedName("arrival")
+              Arrival arrival;
+
+              /** Name of transportation company. */
+              @SerializedName("carrier_name")
+              Object carrierName;
+
+              /** Currency. */
+              @SerializedName("currency")
+              Object currency;
+
+              /** Departure details. */
+              @SerializedName("departure")
+              Departure departure;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** List of insurances for this reservation. */
+              @SerializedName("insurances")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Insurance>
+                  insurances;
+
+              /** List of passengers that this reservation applies to. */
+              @SerializedName("passengers")
+              List<
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Passenger>
+                  passengers;
+
+              /** Price in cents. */
+              @SerializedName("price")
+              Long price;
+
+              /** Ticket class. */
+              @SerializedName("ticket_class")
+              TicketClass ticketClass;
+
+              private TrainReservationDetail(
+                  Object affiliateName,
+                  Arrival arrival,
+                  Object carrierName,
+                  Object currency,
+                  Departure departure,
+                  Map<String, Object> extraParams,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail.Insurance>
+                      insurances,
+                  List<
+                          OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail.Passenger>
+                      passengers,
+                  Long price,
+                  TicketClass ticketClass) {
+                this.affiliateName = affiliateName;
+                this.arrival = arrival;
+                this.carrierName = carrierName;
+                this.currency = currency;
+                this.departure = departure;
+                this.extraParams = extraParams;
+                this.insurances = insurances;
+                this.passengers = passengers;
+                this.price = price;
+                this.ticketClass = ticketClass;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Object affiliateName;
+
+                private Arrival arrival;
+
+                private Object carrierName;
+
+                private Object currency;
+
+                private Departure departure;
+
+                private Map<String, Object> extraParams;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Insurance>
+                    insurances;
+
+                private List<
+                        OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Passenger>
+                    passengers;
+
+                private Long price;
+
+                private TicketClass ticketClass;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.TrainReservationDetail
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.TrainReservationDetail(
+                      this.affiliateName,
+                      this.arrival,
+                      this.carrierName,
+                      this.currency,
+                      this.departure,
+                      this.extraParams,
+                      this.insurances,
+                      this.passengers,
+                      this.price,
+                      this.ticketClass);
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(String affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Name of associated or partner company for the service. */
+                public Builder setAffiliateName(EmptyParam affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Arrival details. */
+                public Builder setArrival(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Arrival
+                        arrival) {
+                  this.arrival = arrival;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(String carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Name of transportation company. */
+                public Builder setCarrierName(EmptyParam carrierName) {
+                  this.carrierName = carrierName;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(String currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Currency. */
+                public Builder setCurrency(EmptyParam currency) {
+                  this.currency = currency;
+                  return this;
+                }
+
+                /** Departure details. */
+                public Builder setDeparture(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Departure
+                        departure) {
+                  this.departure = departure;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addInsurance(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Insurance
+                        element) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `insurances` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail#insurances}
+                 * for the field documentation.
+                 */
+                public Builder addAllInsurance(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.TrainReservationDetail.Insurance>
+                        elements) {
+                  if (this.insurances == null) {
+                    this.insurances = new ArrayList<>();
+                  }
+                  this.insurances.addAll(elements);
+                  return this;
+                }
+
+                /**
+                 * Add an element to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addPassenger(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Passenger
+                        element) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.add(element);
+                  return this;
+                }
+
+                /**
+                 * Add all elements to `passengers` list. A list is initialized for the first
+                 * `add/addAll` call, and subsequent calls adds additional elements to the original
+                 * list. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail#passengers}
+                 * for the field documentation.
+                 */
+                public Builder addAllPassenger(
+                    List<
+                            OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                                .SupplementaryPurchaseData.TrainReservationDetail.Passenger>
+                        elements) {
+                  if (this.passengers == null) {
+                    this.passengers = new ArrayList<>();
+                  }
+                  this.passengers.addAll(elements);
+                  return this;
+                }
+
+                /** Price in cents. */
+                public Builder setPrice(Long price) {
+                  this.price = price;
+                  return this;
+                }
+
+                /** Ticket class. */
+                public Builder setTicketClass(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.TicketClass
+                        ticketClass) {
+                  this.ticketClass = ticketClass;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Arrival {
+                /** Address of the arrival location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Identifier name or reference for the arrival location. */
+                @SerializedName("arrival_location")
+                Object arrivalLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Arrival(
+                    Address address, Object arrivalLocation, Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.arrivalLocation = arrivalLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Object arrivalLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Arrival
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.TrainReservationDetail.Arrival(
+                        this.address, this.arrivalLocation, this.extraParams);
+                  }
+
+                  /** Address of the arrival location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail.Arrival.Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(String arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the arrival location. */
+                  public Builder setArrivalLocation(EmptyParam arrivalLocation) {
+                    this.arrivalLocation = arrivalLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Arrival#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Arrival.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Arrival.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Arrival.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Departure {
+                /** Address of the departure location. */
+                @SerializedName("address")
+                Address address;
+
+                /** Timestamp of departure. */
+                @SerializedName("departs_at")
+                Long departsAt;
+
+                /** Identifier name or reference for the origin location. */
+                @SerializedName("departure_location")
+                Object departureLocation;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                private Departure(
+                    Address address,
+                    Long departsAt,
+                    Object departureLocation,
+                    Map<String, Object> extraParams) {
+                  this.address = address;
+                  this.departsAt = departsAt;
+                  this.departureLocation = departureLocation;
+                  this.extraParams = extraParams;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Address address;
+
+                  private Long departsAt;
+
+                  private Object departureLocation;
+
+                  private Map<String, Object> extraParams;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Departure
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.TrainReservationDetail.Departure(
+                        this.address, this.departsAt, this.departureLocation, this.extraParams);
+                  }
+
+                  /** Address of the departure location. */
+                  public Builder setAddress(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail.Departure.Address
+                          address) {
+                    this.address = address;
+                    return this;
+                  }
+
+                  /** Timestamp of departure. */
+                  public Builder setDepartsAt(Long departsAt) {
+                    this.departsAt = departsAt;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(String departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /** Identifier name or reference for the origin location. */
+                  public Builder setDepartureLocation(EmptyParam departureLocation) {
+                    this.departureLocation = departureLocation;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Departure#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Address {
+                  /** The city or town. */
+                  @SerializedName("city")
+                  Object city;
+
+                  /** The country in ISO 3166-1 alpha-2 format. */
+                  @SerializedName("country")
+                  Object country;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The postal code formatted according to country. */
+                  @SerializedName("postal_code")
+                  Object postalCode;
+
+                  /** The state, county, province, or region formatted according to country. */
+                  @SerializedName("region")
+                  Object region;
+
+                  /** Line 1 of the street address. */
+                  @SerializedName("street_address")
+                  Object streetAddress;
+
+                  /** Line 2 of the street address. */
+                  @SerializedName("street_address2")
+                  Object streetAddress2;
+
+                  private Address(
+                      Object city,
+                      Object country,
+                      Map<String, Object> extraParams,
+                      Object postalCode,
+                      Object region,
+                      Object streetAddress,
+                      Object streetAddress2) {
+                    this.city = city;
+                    this.country = country;
+                    this.extraParams = extraParams;
+                    this.postalCode = postalCode;
+                    this.region = region;
+                    this.streetAddress = streetAddress;
+                    this.streetAddress2 = streetAddress2;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Object city;
+
+                    private Object country;
+
+                    private Map<String, Object> extraParams;
+
+                    private Object postalCode;
+
+                    private Object region;
+
+                    private Object streetAddress;
+
+                    private Object streetAddress2;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.TrainReservationDetail.Departure.Address
+                        build() {
+                      return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Departure.Address(
+                          this.city,
+                          this.country,
+                          this.extraParams,
+                          this.postalCode,
+                          this.region,
+                          this.streetAddress,
+                          this.streetAddress2);
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(String city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The city or town. */
+                    public Builder setCity(EmptyParam city) {
+                      this.city = city;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(String country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /** The country in ISO 3166-1 alpha-2 format. */
+                    public Builder setCountry(EmptyParam country) {
+                      this.country = country;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Departure.Address#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(String postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The postal code formatted according to country. */
+                    public Builder setPostalCode(EmptyParam postalCode) {
+                      this.postalCode = postalCode;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(String region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** The state, county, province, or region formatted according to country. */
+                    public Builder setRegion(EmptyParam region) {
+                      this.region = region;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(String streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 1 of the street address. */
+                    public Builder setStreetAddress(EmptyParam streetAddress) {
+                      this.streetAddress = streetAddress;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(String streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+
+                    /** Line 2 of the street address. */
+                    public Builder setStreetAddress2(EmptyParam streetAddress2) {
+                      this.streetAddress2 = streetAddress2;
+                      return this;
+                    }
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Insurance {
+                /** Insurance currency. */
+                @SerializedName("currency")
+                Object currency;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** Name of the company providing the insurance. */
+                @SerializedName("insurance_company_name")
+                Object insuranceCompanyName;
+
+                /** Type of insurance. */
+                @SerializedName("insurance_type")
+                InsuranceType insuranceType;
+
+                /** Price of insurance in cents. */
+                @SerializedName("price")
+                Long price;
+
+                private Insurance(
+                    Object currency,
+                    Map<String, Object> extraParams,
+                    Object insuranceCompanyName,
+                    InsuranceType insuranceType,
+                    Long price) {
+                  this.currency = currency;
+                  this.extraParams = extraParams;
+                  this.insuranceCompanyName = insuranceCompanyName;
+                  this.insuranceType = insuranceType;
+                  this.price = price;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Object currency;
+
+                  private Map<String, Object> extraParams;
+
+                  private Object insuranceCompanyName;
+
+                  private InsuranceType insuranceType;
+
+                  private Long price;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Insurance
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.TrainReservationDetail.Insurance(
+                        this.currency,
+                        this.extraParams,
+                        this.insuranceCompanyName,
+                        this.insuranceType,
+                        this.price);
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(String currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /** Insurance currency. */
+                  public Builder setCurrency(EmptyParam currency) {
+                    this.currency = currency;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Insurance#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(String insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Name of the company providing the insurance. */
+                  public Builder setInsuranceCompanyName(EmptyParam insuranceCompanyName) {
+                    this.insuranceCompanyName = insuranceCompanyName;
+                    return this;
+                  }
+
+                  /** Type of insurance. */
+                  public Builder setInsuranceType(
+                      OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                              .SupplementaryPurchaseData.TrainReservationDetail.Insurance
+                              .InsuranceType
+                          insuranceType) {
+                    this.insuranceType = insuranceType;
+                    return this;
+                  }
+
+                  /** Price of insurance in cents. */
+                  public Builder setPrice(Long price) {
+                    this.price = price;
+                    return this;
+                  }
+                }
+
+                public enum InsuranceType implements ApiRequestParams.EnumParam {
+                  @SerializedName("baggage")
+                  BAGGAGE("baggage"),
+
+                  @SerializedName("bankruptcy")
+                  BANKRUPTCY("bankruptcy"),
+
+                  @SerializedName("cancelation")
+                  CANCELATION("cancelation"),
+
+                  @SerializedName("emergency")
+                  EMERGENCY("emergency"),
+
+                  @SerializedName("medical")
+                  MEDICAL("medical");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  InsuranceType(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Passenger {
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The family name of the person. */
+                @SerializedName("family_name")
+                Object familyName;
+
+                /** The given name of the person. */
+                @SerializedName("given_name")
+                Object givenName;
+
+                private Passenger(
+                    Map<String, Object> extraParams, Object familyName, Object givenName) {
+                  this.extraParams = extraParams;
+                  this.familyName = familyName;
+                  this.givenName = givenName;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Map<String, Object> extraParams;
+
+                  private Object familyName;
+
+                  private Object givenName;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                          .SupplementaryPurchaseData.TrainReservationDetail.Passenger
+                      build() {
+                    return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.TrainReservationDetail.Passenger(
+                        this.extraParams, this.familyName, this.givenName);
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.TrainReservationDetail.Passenger#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(String familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The family name of the person. */
+                  public Builder setFamilyName(EmptyParam familyName) {
+                    this.familyName = familyName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(String givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+
+                  /** The given name of the person. */
+                  public Builder setGivenName(EmptyParam givenName) {
+                    this.givenName = givenName;
+                    return this;
+                  }
+                }
+              }
+
+              public enum TicketClass implements ApiRequestParams.EnumParam {
+                @SerializedName("business")
+                BUSINESS("business"),
+
+                @SerializedName("economy")
+                ECONOMY("economy"),
+
+                @SerializedName("first_class")
+                FIRST_CLASS("first_class"),
+
+                @SerializedName("premium_economy")
+                PREMIUM_ECONOMY("premium_economy");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                TicketClass(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Voucher {
+              /** Name of associated or partner company for this voucher. */
+              @SerializedName("affiliate_name")
+              Object affiliateName;
+
+              /** The voucher validity end time. */
+              @SerializedName("ends_at")
+              Long endsAt;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The voucher validity start time. */
+              @SerializedName("starts_at")
+              Long startsAt;
+
+              /** The issuer or provider of this voucher. */
+              @SerializedName("voucher_company")
+              Object voucherCompany;
+
+              /** The name or reference to identify the voucher. */
+              @SerializedName("voucher_name")
+              Object voucherName;
+
+              /** The type of this voucher. */
+              @SerializedName("voucher_type")
+              VoucherType voucherType;
+
+              private Voucher(
+                  Object affiliateName,
+                  Long endsAt,
+                  Map<String, Object> extraParams,
+                  Long startsAt,
+                  Object voucherCompany,
+                  Object voucherName,
+                  VoucherType voucherType) {
+                this.affiliateName = affiliateName;
+                this.endsAt = endsAt;
+                this.extraParams = extraParams;
+                this.startsAt = startsAt;
+                this.voucherCompany = voucherCompany;
+                this.voucherName = voucherName;
+                this.voucherType = voucherType;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Object affiliateName;
+
+                private Long endsAt;
+
+                private Map<String, Object> extraParams;
+
+                private Long startsAt;
+
+                private Object voucherCompany;
+
+                private Object voucherName;
+
+                private VoucherType voucherType;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                        .SupplementaryPurchaseData.Voucher
+                    build() {
+                  return new OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                      .SupplementaryPurchaseData.Voucher(
+                      this.affiliateName,
+                      this.endsAt,
+                      this.extraParams,
+                      this.startsAt,
+                      this.voucherCompany,
+                      this.voucherName,
+                      this.voucherType);
+                }
+
+                /** Name of associated or partner company for this voucher. */
+                public Builder setAffiliateName(String affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** Name of associated or partner company for this voucher. */
+                public Builder setAffiliateName(EmptyParam affiliateName) {
+                  this.affiliateName = affiliateName;
+                  return this;
+                }
+
+                /** The voucher validity end time. */
+                public Builder setEndsAt(Long endsAt) {
+                  this.endsAt = endsAt;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.Voucher#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna.SupplementaryPurchaseData.Voucher#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The voucher validity start time. */
+                public Builder setStartsAt(Long startsAt) {
+                  this.startsAt = startsAt;
+                  return this;
+                }
+
+                /** The issuer or provider of this voucher. */
+                public Builder setVoucherCompany(String voucherCompany) {
+                  this.voucherCompany = voucherCompany;
+                  return this;
+                }
+
+                /** The issuer or provider of this voucher. */
+                public Builder setVoucherCompany(EmptyParam voucherCompany) {
+                  this.voucherCompany = voucherCompany;
+                  return this;
+                }
+
+                /** The name or reference to identify the voucher. */
+                public Builder setVoucherName(String voucherName) {
+                  this.voucherName = voucherName;
+                  return this;
+                }
+
+                /** The name or reference to identify the voucher. */
+                public Builder setVoucherName(EmptyParam voucherName) {
+                  this.voucherName = voucherName;
+                  return this;
+                }
+
+                /** The type of this voucher. */
+                public Builder setVoucherType(
+                    OrderUpdateParams.Payment.Settings.PaymentMethodOptions.Klarna
+                            .SupplementaryPurchaseData.Voucher.VoucherType
+                        voucherType) {
+                  this.voucherType = voucherType;
+                  return this;
+                }
+              }
+
+              public enum VoucherType implements ApiRequestParams.EnumParam {
+                @SerializedName("digital_product")
+                DIGITAL_PRODUCT("digital_product"),
+
+                @SerializedName("discount")
+                DISCOUNT("discount"),
+
+                @SerializedName("gift_card")
+                GIFT_CARD("gift_card"),
+
+                @SerializedName("physical_product")
+                PHYSICAL_PRODUCT("physical_product"),
+
+                @SerializedName("services")
+                SERVICES("services");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                VoucherType(String value) {
+                  this.value = value;
+                }
               }
             }
           }

@@ -776,6 +776,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("product_description")
     String productDescription;
 
+    /**
+     * A link to the business's publicly available terms related to the Specified Commercial
+     * Transaction Act. Only used for accounts in Japan.
+     */
+    @SerializedName("specified_commercial_transactions_act_url")
+    String specifiedCommercialTransactionsActUrl;
+
     /** A publicly available mailing address for sending support issues to. */
     @SerializedName("support_address")
     Address supportAddress;
@@ -2584,6 +2591,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("payouts")
     Payouts payouts;
 
+    @SerializedName("paypay_payments")
+    PaypayPayments paypayPayments;
+
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
 
@@ -2871,8 +2881,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       List<ExpandableField<TaxId>> defaultAccountTaxIds;
 
       /**
-       * Whether payment methods should be saved when a payment is completed for a one-time invoices
-       * on a hosted invoice page.
+       * Whether to save the payment method after a payment is completed for a one-time invoice or a
+       * subscription invoice when the customer already has a default payment method on the hosted
+       * invoice page.
        *
        * <p>One of {@code always}, {@code never}, or {@code offer}.
        */
@@ -3055,6 +3066,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         @SerializedName("weekly_payout_days")
         List<String> weeklyPayoutDays;
       }
+    }
+
+    /**
+     * For more details about PaypayPayments, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaypayPayments extends StripeObject {
+      /**
+       * Whether your business sells digital content or not.
+       *
+       * <p>One of {@code digital_content}, or {@code other}.
+       */
+      @SerializedName("goods_type")
+      String goodsType;
     }
 
     /**

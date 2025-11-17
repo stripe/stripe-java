@@ -15366,6 +15366,7 @@ public class SessionCreateParams extends ApiRequestParams {
         /**
          * The type of amount that will be collected. The amount charged must be exact or up to the
          * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         * Defaults to {@code maximum}.
          */
         @SerializedName("amount_type")
         AmountType amountType;
@@ -15387,7 +15388,7 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The periodicity at which payments will be collected. */
+        /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
         @SerializedName("payment_schedule")
         PaymentSchedule paymentSchedule;
 
@@ -15399,7 +15400,10 @@ public class SessionCreateParams extends ApiRequestParams {
         @SerializedName("payments_per_period")
         Long paymentsPerPeriod;
 
-        /** The purpose for which payments are made. Defaults to retail. */
+        /**
+         * The purpose for which payments are made. Has a default value based on your merchant
+         * category code.
+         */
         @SerializedName("purpose")
         Purpose purpose;
 
@@ -15475,7 +15479,7 @@ public class SessionCreateParams extends ApiRequestParams {
           /**
            * The type of amount that will be collected. The amount charged must be exact or up to
            * the value of {@code amount} param for {@code fixed} or {@code maximum} type
-           * respectively.
+           * respectively. Defaults to {@code maximum}.
            */
           public Builder setAmountType(
               SessionCreateParams.PaymentMethodOptions.Payto.MandateOptions.AmountType amountType) {
@@ -15522,7 +15526,7 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The periodicity at which payments will be collected. */
+          /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
           public Builder setPaymentSchedule(
               SessionCreateParams.PaymentMethodOptions.Payto.MandateOptions.PaymentSchedule
                   paymentSchedule) {
@@ -15540,7 +15544,10 @@ public class SessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The purpose for which payments are made. Defaults to retail. */
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           */
           public Builder setPurpose(
               SessionCreateParams.PaymentMethodOptions.Payto.MandateOptions.Purpose purpose) {
             this.purpose = purpose;

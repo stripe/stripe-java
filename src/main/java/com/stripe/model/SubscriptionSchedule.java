@@ -710,7 +710,7 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("bill_from")
     BillFrom billFrom;
 
-    /** Specifies the billing period. */
+    /** Specifies the end of billing period. */
     @SerializedName("bill_until")
     BillUntil billUntil;
 
@@ -837,7 +837,7 @@ public class SubscriptionSchedule extends ApiResource
       }
     }
 
-    /** Specifies the billing period. */
+    /** Specifies the end of billing period. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

@@ -24,6 +24,7 @@ public final class EventDataClassLookup {
     classLookup.put("balance", com.stripe.model.Balance.class);
     classLookup.put("balance_settings", com.stripe.model.BalanceSettings.class);
     classLookup.put("balance_transaction", com.stripe.model.BalanceTransaction.class);
+    classLookup.put("balance_transfer", com.stripe.model.BalanceTransfer.class);
     classLookup.put("bank_account", com.stripe.model.BankAccount.class);
     classLookup.put("capability", com.stripe.model.Capability.class);
     classLookup.put("card", com.stripe.model.Card.class);
@@ -213,6 +214,7 @@ public final class EventDataClassLookup {
         "privacy.redaction_job_validation_error",
         com.stripe.model.privacy.RedactionJobValidationError.class);
 
+    classLookup.put("radar.account_evaluation", com.stripe.model.radar.AccountEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);
     classLookup.put("radar.value_list_item", com.stripe.model.radar.ValueListItem.class);

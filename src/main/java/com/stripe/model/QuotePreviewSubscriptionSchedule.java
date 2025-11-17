@@ -395,7 +395,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @SerializedName("bill_from")
     BillFrom billFrom;
 
-    /** Specifies the billing period. */
+    /** Specifies the end of billing period. */
     @SerializedName("bill_until")
     BillUntil billUntil;
 
@@ -522,7 +522,7 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
       }
     }
 
-    /** Specifies the billing period. */
+    /** Specifies the end of billing period. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)

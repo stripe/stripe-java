@@ -49,6 +49,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.BalanceTransactionService(this.getResponseGetter());
   }
 
+  public com.stripe.service.BalanceTransferService balanceTransfers() {
+    return new com.stripe.service.BalanceTransferService(this.getResponseGetter());
+  }
+
   public com.stripe.service.BillingService billing() {
     return new com.stripe.service.BillingService(this.getResponseGetter());
   }

@@ -238,11 +238,12 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Meter {
     /**
-     * Key-value pairs used to filter usage events by meter dimension values. If specified, usage
-     * will be filtered for matching usage events.
+     * Key-value pairs used to filter usage events by meter dimension values. Each value is an array
+     * that can include multiple values for the key. If specified, usage is filtered for matching
+     * usage events.
      */
     @SerializedName("dimension_filters")
-    Map<String, String> dimensionFilters;
+    Map<String, List<String>> dimensionFilters;
 
     /**
      * List of meter dimension keys to group by. If specified, usage events will be grouped by the
@@ -265,11 +266,12 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
     String meter;
 
     /**
-     * Key-value pairs used to filter usage events by high cardinality tenant dimension values. If
-     * specified, usage will be filtered for matching usage events.
+     * Key-value pairs used to filter usage events by high cardinality tenant dimension values. Each
+     * value is an array that can include multiple values for the key. If specified, usage is
+     * filtered for matching usage events.
      */
     @SerializedName("tenant_filters")
-    Map<String, String> tenantFilters;
+    Map<String, List<String>> tenantFilters;
 
     /**
      * List of high cardinality tenant dimension keys to group by. If specified, usage events will
@@ -279,11 +281,11 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
     List<String> tenantGroupByKeys;
 
     private Meter(
-        Map<String, String> dimensionFilters,
+        Map<String, List<String>> dimensionFilters,
         List<String> dimensionGroupByKeys,
         Map<String, Object> extraParams,
         String meter,
-        Map<String, String> tenantFilters,
+        Map<String, List<String>> tenantFilters,
         List<String> tenantGroupByKeys) {
       this.dimensionFilters = dimensionFilters;
       this.dimensionGroupByKeys = dimensionGroupByKeys;
@@ -298,7 +300,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Map<String, String> dimensionFilters;
+      private Map<String, List<String>> dimensionFilters;
 
       private List<String> dimensionGroupByKeys;
 
@@ -306,7 +308,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
 
       private String meter;
 
-      private Map<String, String> tenantFilters;
+      private Map<String, List<String>> tenantFilters;
 
       private List<String> tenantGroupByKeys;
 
@@ -326,7 +328,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link MeterUsageRetrieveParams.Meter#dimensionFilters} for the field documentation.
        */
-      public Builder putDimensionFilter(String key, String value) {
+      public Builder putDimensionFilter(String key, List<String> value) {
         if (this.dimensionFilters == null) {
           this.dimensionFilters = new HashMap<>();
         }
@@ -339,7 +341,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link MeterUsageRetrieveParams.Meter#dimensionFilters} for the field documentation.
        */
-      public Builder putAllDimensionFilter(Map<String, String> map) {
+      public Builder putAllDimensionFilter(Map<String, List<String>> map) {
         if (this.dimensionFilters == null) {
           this.dimensionFilters = new HashMap<>();
         }
@@ -410,7 +412,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link MeterUsageRetrieveParams.Meter#tenantFilters} for the field documentation.
        */
-      public Builder putTenantFilter(String key, String value) {
+      public Builder putTenantFilter(String key, List<String> value) {
         if (this.tenantFilters == null) {
           this.tenantFilters = new HashMap<>();
         }
@@ -423,7 +425,7 @@ public class MeterUsageRetrieveParams extends ApiRequestParams {
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
        * See {@link MeterUsageRetrieveParams.Meter#tenantFilters} for the field documentation.
        */
-      public Builder putAllTenantFilter(Map<String, String> map) {
+      public Builder putAllTenantFilter(Map<String, List<String>> map) {
         if (this.tenantFilters == null) {
           this.tenantFilters = new HashMap<>();
         }
