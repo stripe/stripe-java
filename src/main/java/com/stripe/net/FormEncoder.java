@@ -39,7 +39,6 @@ public final class FormEncoder {
     }
   }
 
-
   /**
    * Creates the HTTP query string for a given map of parameters.
    *
