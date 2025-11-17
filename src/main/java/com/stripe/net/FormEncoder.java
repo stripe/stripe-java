@@ -22,7 +22,7 @@ public final class FormEncoder {
       return HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
     }
 
-    Collection<KeyValuePair<String, Object>> flatParams = flattenParams(params, false);
+    Collection<KeyValuePair<String, Object>> flatParams = flattenParams(params);
 
     // If all parameters have been encoded as strings, then the content can be represented
     // with application/x-www-form-url-encoded encoding. Otherwise, use
@@ -46,24 +46,12 @@ public final class FormEncoder {
    * @return The query string.
    */
   public static String createQueryString(Map<String, Object> params) {
-    return FormEncoder.createQueryString(params, false);
-  }
-
-  /**
-   * Creates the HTTP query string for a given map of parameters.
-   *
-   * @param params The map of parameters.
-   * @param arraysAsRepeated Whether to encode arrays as repeated value ({@code a=1&a=2}) defaults
-   *     to brackets encoding ({@code a[]=1,2}).
-   * @return The query string.
-   */
-  public static String createQueryString(Map<String, Object> params, boolean arraysAsRepeated) {
     if (params == null) {
       return "";
     }
 
     Collection<KeyValuePair<String, String>> flatParams =
-        flattenParams(params, arraysAsRepeated).stream()
+        flattenParams(params).stream()
             .filter(kvp -> kvp.getValue() instanceof String)
             .map(kvp -> new KeyValuePair<String, String>(kvp.getKey(), (String) kvp.getValue()))
             .collect(Collectors.toList());
@@ -117,13 +105,10 @@ public final class FormEncoder {
    * }</pre>
    *
    * @param params The map of parameters.
-   * @param arraysAsRepeated Whether to encode arrays as repeated value ({@code a=1&a=2}) defaults
-   *     to brackets encoding ({@code a[]=1,2}).
    * @return The flattened list of parameters.
    */
-  public static List<KeyValuePair<String, Object>> flattenParams(
-      Map<String, Object> params, boolean arraysAsRepeated) {
-    return flattenParamsValue(params, null, arraysAsRepeated);
+  public static List<KeyValuePair<String, Object>> flattenParams(Map<String, Object> params) {
+    return flattenParamsValue(params, null);
   }
 
   /**
@@ -157,12 +142,10 @@ public final class FormEncoder {
    *
    * @param value The value for which to create the list of parameters.
    * @param keyPrefix The key under which new keys should be nested, if any.
-   * @param arraysAsRepeated Whether to encode arrays as repeated value ({@code a=1&a=2}) defaults
-   *     to brackets encoding ({@code a[]=1,2}).
    * @return The list of parameters.
    */
   private static List<KeyValuePair<String, Object>> flattenParamsValue(
-      Object value, String keyPrefix, boolean arraysAsRepeated) {
+      Object value, String keyPrefix) {
     List<KeyValuePair<String, Object>> flatParams = null;
 
     // I wish Java had pattern matching :(
@@ -171,7 +154,7 @@ public final class FormEncoder {
       flatParams = singleParam(keyPrefix, "");
 
     } else if (value instanceof Map<?, ?>) {
-      flatParams = flattenParamsMap((Map<?, ?>) value, keyPrefix, arraysAsRepeated);
+      flatParams = flattenParamsMap((Map<?, ?>) value, keyPrefix);
 
     } else if (value instanceof String) {
       flatParams = singleParam(keyPrefix, value);
@@ -183,12 +166,12 @@ public final class FormEncoder {
       flatParams = singleParam(keyPrefix, value);
 
     } else if (value instanceof Collection<?>) {
-      flatParams = flattenParamsCollection((Collection<?>) value, keyPrefix, arraysAsRepeated);
+      flatParams = flattenParamsCollection((Collection<?>) value, keyPrefix);
 
     } else if (value.getClass().isArray()) {
       Object[] array = getArrayForObject(value);
       Collection<?> collection = Arrays.stream(array).collect(Collectors.toList());
-      flatParams = flattenParamsCollection(collection, keyPrefix, arraysAsRepeated);
+      flatParams = flattenParamsCollection(collection, keyPrefix);
 
     } else if (value.getClass().isEnum()) {
       flatParams =
@@ -211,7 +194,7 @@ public final class FormEncoder {
    * @return The list of parameters.
    */
   private static List<KeyValuePair<String, Object>> flattenParamsMap(
-      Map<?, ?> map, String keyPrefix, boolean arraysAsRepeated) {
+      Map<?, ?> map, String keyPrefix) {
     List<KeyValuePair<String, Object>> flatParams = new ArrayList<KeyValuePair<String, Object>>();
     if (map == null) {
       return flatParams;
@@ -223,7 +206,7 @@ public final class FormEncoder {
 
       String newPrefix = newPrefix(key, keyPrefix);
 
-      flatParams.addAll(flattenParamsValue(value, newPrefix, arraysAsRepeated));
+      flatParams.addAll(flattenParamsValue(value, newPrefix));
     }
 
     return flatParams;
@@ -236,12 +219,10 @@ public final class FormEncoder {
    *
    * @param collection The collection for which to create the list of parameters.
    * @param keyPrefix The key under which new keys should be nested.
-   * @param arraysAsRepeated Whether to encode arrays as repeated value ({@code a=1&a=2}) defaults
-   *     to brackets encoding ({@code a[]=1,2}).
    * @return The list of parameters.
    */
   private static List<KeyValuePair<String, Object>> flattenParamsCollection(
-      Collection<?> collection, String keyPrefix, boolean arraysAsRepeated) {
+      Collection<?> collection, String keyPrefix) {
     List<KeyValuePair<String, Object>> flatParams = new ArrayList<KeyValuePair<String, Object>>();
     if (collection == null) {
       return flatParams;
@@ -249,15 +230,16 @@ public final class FormEncoder {
 
     int index = 0;
     for (Object value : collection) {
-      String newPrefix = arraysAsRepeated ? keyPrefix : String.format("%s[%d]", keyPrefix, index);
-      flatParams.addAll(flattenParamsValue(value, newPrefix, arraysAsRepeated));
+      // Always use indexed format for arrays
+      String newPrefix = String.format("%s[%d]", keyPrefix, index);
+      flatParams.addAll(flattenParamsValue(value, newPrefix));
       index += 1;
     }
 
     /* Because application/x-www-form-urlencoded cannot represent an empty list, convention
      * is to take the list parameter and just set it to an empty string. (E.g. A regular
      * list might look like `a[0]=1&b[1]=2`. Emptying it would look like `a=`.) */
-    if (!arraysAsRepeated && flatParams.isEmpty()) {
+    if (flatParams.isEmpty()) {
       flatParams.add(new KeyValuePair<String, Object>(keyPrefix, ""));
     }
 
