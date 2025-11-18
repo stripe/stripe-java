@@ -3208,7 +3208,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.Event.class,
-        "{\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\",\"livemode\":true}");
+        "{\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.Event event = client.v2().core().events().retrieve("ll_123");
@@ -25389,6 +25389,55 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreAccountsPersonTokenPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/account_id_123/person_tokens",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountPersonToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_person_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.accounts.PersonTokenCreateParams params =
+        com.stripe.param.v2.core.accounts.PersonTokenCreateParams.builder().build();
+
+    com.stripe.model.v2.core.AccountPersonToken accountPersonToken =
+        client.v2().core().accounts().personTokens().create("account_id_123", params);
+    assertNotNull(accountPersonToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/account_id_123/person_tokens",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreAccountsPersonTokenGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/accounts/account_id_123/person_tokens/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountPersonToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_person_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.AccountPersonToken accountPersonToken =
+        client.v2().core().accounts().personTokens().retrieve("account_id_123", "id_123");
+    assertNotNull(accountPersonToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/accounts/account_id_123/person_tokens/id_123",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2CoreAccountLinkPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -25464,6 +25513,470 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreAccountTokenPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_tokens",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.AccountTokenCreateParams params =
+        com.stripe.param.v2.core.AccountTokenCreateParams.builder()
+            .setIdentity(
+                com.stripe.param.v2.core.AccountTokenCreateParams.Identity.builder()
+                    .setAttestations(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.Attestations
+                            .builder()
+                            .setDirectorshipDeclaration(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.DirectorshipDeclaration.builder()
+                                    .setAttested(true)
+                                    .build())
+                            .setOwnershipDeclaration(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.OwnershipDeclaration.builder()
+                                    .setAttested(true)
+                                    .build())
+                            .setPersonsProvided(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.PersonsProvided.builder()
+                                    .setDirectors(true)
+                                    .setExecutives(true)
+                                    .setOwners(true)
+                                    .setOwnershipExemptionReason(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.PersonsProvided.OwnershipExemptionReason
+                                            .QUALIFIED_ENTITY_EXCEEDS_OWNERSHIP_THRESHOLD)
+                                    .build())
+                            .setRepresentativeDeclaration(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.RepresentativeDeclaration.builder()
+                                    .setAttested(true)
+                                    .build())
+                            .setTermsOfService(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.TermsOfService.builder()
+                                    .setAccount(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.TermsOfService.Account.builder()
+                                            .setShownAndAccepted(true)
+                                            .build())
+                                    .setStorer(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.TermsOfService.Storer.builder()
+                                            .setShownAndAccepted(true)
+                                            .build())
+                                    .build())
+                            .build())
+                    .setBusinessDetails(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.BusinessDetails
+                            .builder()
+                            .setAddress(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.Address.builder()
+                                    .setCity("city")
+                                    .setCountry("country")
+                                    .setLine1("line1")
+                                    .setLine2("line2")
+                                    .setPostalCode("postal_code")
+                                    .setState("state")
+                                    .setTown("town")
+                                    .build())
+                            .setAnnualRevenue(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.AnnualRevenue.builder()
+                                    .setAmount(new com.stripe.v2.Amount(96, "USD"))
+                                    .setFiscalYearEnd("fiscal_year_end")
+                                    .build())
+                            .setDocuments(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.Documents.builder()
+                                    .setBankAccountOwnershipVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .BankAccountOwnershipVerification.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .BankAccountOwnershipVerification.Type.FILES)
+                                            .build())
+                                    .setCompanyLicense(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.CompanyLicense.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyLicense.Type.FILES)
+                                            .build())
+                                    .setCompanyMemorandumOfAssociation(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .CompanyMemorandumOfAssociation.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyMemorandumOfAssociation.Type.FILES)
+                                            .build())
+                                    .setCompanyMinisterialDecree(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.CompanyMinisterialDecree
+                                            .builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyMinisterialDecree.Type.FILES)
+                                            .build())
+                                    .setCompanyRegistrationVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .CompanyRegistrationVerification.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyRegistrationVerification.Type.FILES)
+                                            .build())
+                                    .setCompanyTaxIdVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.CompanyTaxIdVerification
+                                            .builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyTaxIdVerification.Type.FILES)
+                                            .build())
+                                    .setPrimaryVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.PrimaryVerification.builder()
+                                            .setFrontBack(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .PrimaryVerification.FrontBack.builder()
+                                                    .setBack("back")
+                                                    .setFront("front")
+                                                    .build())
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .PrimaryVerification.Type.FRONT_BACK)
+                                            .build())
+                                    .setProofOfAddress(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.ProofOfAddress.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .ProofOfAddress.Type.FILES)
+                                            .build())
+                                    .setProofOfRegistration(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.ProofOfRegistration.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .ProofOfRegistration.Type.FILES)
+                                            .build())
+                                    .setProofOfUltimateBeneficialOwnership(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .ProofOfUltimateBeneficialOwnership.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .ProofOfUltimateBeneficialOwnership.Type.FILES)
+                                            .build())
+                                    .build())
+                            .setEstimatedWorkerCount(884794319L)
+                            .addIdNumber(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.IdNumber.builder()
+                                    .setRegistrar("registrar")
+                                    .setType(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.IdNumber.Type.TH_PRN)
+                                    .setValue("value")
+                                    .build())
+                            .setMonthlyEstimatedRevenue(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.MonthlyEstimatedRevenue.builder()
+                                    .setAmount(new com.stripe.v2.Amount(96, "USD"))
+                                    .build())
+                            .setPhone("phone")
+                            .setRegisteredName("registered_name")
+                            .setScriptAddresses(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.ScriptAddresses.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptAddresses.Kana.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptAddresses.Kanji.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .build())
+                            .setScriptNames(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.ScriptNames.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptNames.Kana.builder()
+                                            .setRegisteredName("registered_name")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptNames.Kanji.builder()
+                                            .setRegisteredName("registered_name")
+                                            .build())
+                                    .build())
+                            .setStructure(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.Structure.PUBLIC_LISTED_CORPORATION)
+                            .build())
+                    .setEntityType(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.EntityType
+                            .INDIVIDUAL)
+                    .setIndividual(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.Individual
+                            .builder()
+                            .addAdditionalAddress(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.AdditionalAddress.builder()
+                                    .setCity("city")
+                                    .setCountry("country")
+                                    .setLine1("line1")
+                                    .setLine2("line2")
+                                    .setPostalCode("postal_code")
+                                    .setPurpose(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.AdditionalAddress.Purpose.REGISTERED)
+                                    .setState("state")
+                                    .setTown("town")
+                                    .build())
+                            .addAdditionalName(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.AdditionalName.builder()
+                                    .setFullName("full_name")
+                                    .setGivenName("given_name")
+                                    .setPurpose(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.AdditionalName.Purpose.ALIAS)
+                                    .setSurname("surname")
+                                    .build())
+                            .setAddress(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.Address.builder()
+                                    .setCity("city")
+                                    .setCountry("country")
+                                    .setLine1("line1")
+                                    .setLine2("line2")
+                                    .setPostalCode("postal_code")
+                                    .setState("state")
+                                    .setTown("town")
+                                    .build())
+                            .setDateOfBirth(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.DateOfBirth.builder()
+                                    .setDay(99228L)
+                                    .setMonth(104080000L)
+                                    .setYear(3704893L)
+                                    .build())
+                            .setDocuments(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.Documents.builder()
+                                    .setCompanyAuthorization(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.CompanyAuthorization.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .CompanyAuthorization.Type.FILES)
+                                            .build())
+                                    .setPassport(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.Passport.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents.Passport.Type
+                                                    .FILES)
+                                            .build())
+                                    .setPrimaryVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.PrimaryVerification.builder()
+                                            .setFrontBack(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .PrimaryVerification.FrontBack.builder()
+                                                    .setBack("back")
+                                                    .setFront("front")
+                                                    .build())
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .PrimaryVerification.Type.FRONT_BACK)
+                                            .build())
+                                    .setSecondaryVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.SecondaryVerification.builder()
+                                            .setFrontBack(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .SecondaryVerification.FrontBack.builder()
+                                                    .setBack("back")
+                                                    .setFront("front")
+                                                    .build())
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .SecondaryVerification.Type.FRONT_BACK)
+                                            .build())
+                                    .setVisa(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.Visa.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents.Visa.Type.FILES)
+                                            .build())
+                                    .build())
+                            .setEmail("email")
+                            .setGivenName("given_name")
+                            .addIdNumber(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.IdNumber.builder()
+                                    .setType(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.IdNumber.Type.TH_LC)
+                                    .setValue("value")
+                                    .build())
+                            .setLegalGender(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.LegalGender.MALE)
+                            .putMetadata("key", "metadata")
+                            .addNationality("nationalities")
+                            .setPhone("phone")
+                            .setPoliticalExposure(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.PoliticalExposure.NONE)
+                            .setRelationship(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.Relationship.builder()
+                                    .setDirector(true)
+                                    .setExecutive(true)
+                                    .setOwner(true)
+                                    .setPercentOwnership("percent_ownership")
+                                    .setTitle("title")
+                                    .build())
+                            .setScriptAddresses(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.ScriptAddresses.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptAddresses.Kana.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptAddresses.Kanji.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .build())
+                            .setScriptNames(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.ScriptNames.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptNames.Kana.builder()
+                                            .setGivenName("given_name")
+                                            .setSurname("surname")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptNames.Kanji.builder()
+                                            .setGivenName("given_name")
+                                            .setSurname("surname")
+                                            .build())
+                                    .build())
+                            .setSurname("surname")
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.v2.core.AccountToken accountToken =
+        client.v2().core().accountTokens().create(params);
+    assertNotNull(accountToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_tokens",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreAccountTokenGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/account_tokens/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.AccountToken accountToken =
+        client.v2().core().accountTokens().retrieve("id_123");
+    assertNotNull(accountToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/account_tokens/id_123",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2CoreEventGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -25473,7 +25986,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         new TypeToken<
             com.stripe.model.v2.StripeCollection<com.stripe.model.v2.core.Event>>() {}.getType(),
-        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"type\":\"type\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"type\":\"type\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.core.EventListParams params =
@@ -25495,7 +26008,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.Event.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"type\":\"type\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"type\":\"type\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.Event event = client.v2().core().events().retrieve("id_123");
@@ -25694,7 +26207,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.Event.class,
-        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.core.event\",\"type\":\"type\",\"livemode\":true}");
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"type\":\"type\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.Event event = client.v2().core().eventDestinations().ping("id_123");
@@ -27132,142 +27645,6 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.GET,
         "/v2/money_management/transaction_entries/id_123",
         null,
-        null);
-  }
-
-  @Test
-  public void testV2PaymentsOffSessionPaymentGetServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/payments/off_session_payments",
-        null,
-        null,
-        new TypeToken<
-            com.stripe.model.v2.StripeCollection<
-                com.stripe.model.v2.payments.OffSessionPayment>>() {}.getType(),
-        "{\"data\":[{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}],\"next_page_url\":null,\"previous_page_url\":null}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.payments.OffSessionPaymentListParams params =
-        com.stripe.param.v2.payments.OffSessionPaymentListParams.builder().build();
-
-    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.payments.OffSessionPayment>
-        stripeCollection = client.v2().payments().offSessionPayments().list(params);
-    assertNotNull(stripeCollection);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/payments/off_session_payments",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2PaymentsOffSessionPaymentPostServices() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments",
-        null,
-        null,
-        com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.payments.OffSessionPaymentCreateParams params =
-        com.stripe.param.v2.payments.OffSessionPaymentCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
-            .setCadence(
-                com.stripe.param.v2.payments.OffSessionPaymentCreateParams.Cadence.UNSCHEDULED)
-            .setCustomer("customer")
-            .putMetadata("key", "metadata")
-            .setPaymentMethod("payment_method")
-            .build();
-
-    com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
-        client.v2().payments().offSessionPayments().create(params);
-    assertNotNull(offSessionPayment);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments",
-        params.toMap(),
-        null);
-  }
-
-  @Test
-  public void testV2PaymentsOffSessionPaymentGet2Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/payments/off_session_payments/id_123",
-        null,
-        null,
-        com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
-        client.v2().payments().offSessionPayments().retrieve("id_123");
-    assertNotNull(offSessionPayment);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/payments/off_session_payments/id_123",
-        null,
-        null);
-  }
-
-  @Test
-  public void testV2PaymentsOffSessionPaymentPost2Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments/id_123/cancel",
-        null,
-        null,
-        com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
-        client.v2().payments().offSessionPayments().cancel("id_123");
-    assertNotNull(offSessionPayment);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments/id_123/cancel",
-        null,
-        null);
-  }
-
-  @Test
-  public void testV2PaymentsOffSessionPaymentPost3Services() throws StripeException {
-    stubRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments/id_123/capture",
-        null,
-        null,
-        com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.payments.OffSessionPaymentCaptureParams params =
-        com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder()
-            .setAmountToCapture(1374310455L)
-            .putMetadata("key", "metadata")
-            .build();
-
-    com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
-        client.v2().payments().offSessionPayments().capture("id_123", params);
-    assertNotNull(offSessionPayment);
-    verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/payments/off_session_payments/id_123/capture",
-        params.toMap(),
         null);
   }
 

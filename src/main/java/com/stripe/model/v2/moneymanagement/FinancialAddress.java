@@ -99,7 +99,7 @@ public class FinancialAddress extends StripeObject implements HasId {
     /**
      * Open Enum. The type of Credentials that are provisioned for the FinancialAddress.
      *
-     * <p>One of {@code gb_bank_account}, {@code sepa_bank_account}, or {@code us_bank_account}.
+     * <p>One of {@code gb_bank_account}, or {@code us_bank_account}.
      */
     @SerializedName("type")
     String type;
