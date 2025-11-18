@@ -27,7 +27,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
   /** Sets the billing schedules for the subscription schedule. */
   @SerializedName("billing_schedules")
-  List<SubscriptionScheduleUpdateParams.BillingSchedule> billingSchedules;
+  Object billingSchedules;
 
   /** Object representing the subscription schedule's default settings. */
   @SerializedName("default_settings")
@@ -87,7 +87,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
   private SubscriptionScheduleUpdateParams(
       BillingBehavior billingBehavior,
-      List<SubscriptionScheduleUpdateParams.BillingSchedule> billingSchedules,
+      Object billingSchedules,
       DefaultSettings defaultSettings,
       EndBehavior endBehavior,
       List<String> expand,
@@ -115,7 +115,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   public static class Builder {
     private BillingBehavior billingBehavior;
 
-    private List<SubscriptionScheduleUpdateParams.BillingSchedule> billingSchedules;
+    private Object billingSchedules;
 
     private DefaultSettings defaultSettings;
 
@@ -166,11 +166,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionScheduleUpdateParams#billingSchedules} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder addBillingSchedule(SubscriptionScheduleUpdateParams.BillingSchedule element) {
-      if (this.billingSchedules == null) {
-        this.billingSchedules = new ArrayList<>();
+      if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
+        this.billingSchedules = new ArrayList<SubscriptionScheduleUpdateParams.BillingSchedule>();
       }
-      this.billingSchedules.add(element);
+      ((List<SubscriptionScheduleUpdateParams.BillingSchedule>) this.billingSchedules).add(element);
       return this;
     }
 
@@ -179,12 +180,27 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * call, and subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionScheduleUpdateParams#billingSchedules} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder addAllBillingSchedule(
         List<SubscriptionScheduleUpdateParams.BillingSchedule> elements) {
-      if (this.billingSchedules == null) {
-        this.billingSchedules = new ArrayList<>();
+      if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
+        this.billingSchedules = new ArrayList<SubscriptionScheduleUpdateParams.BillingSchedule>();
       }
-      this.billingSchedules.addAll(elements);
+      ((List<SubscriptionScheduleUpdateParams.BillingSchedule>) this.billingSchedules)
+          .addAll(elements);
+      return this;
+    }
+
+    /** Sets the billing schedules for the subscription schedule. */
+    public Builder setBillingSchedules(EmptyParam billingSchedules) {
+      this.billingSchedules = billingSchedules;
+      return this;
+    }
+
+    /** Sets the billing schedules for the subscription schedule. */
+    public Builder setBillingSchedules(
+        List<SubscriptionScheduleUpdateParams.BillingSchedule> billingSchedules) {
+      this.billingSchedules = billingSchedules;
       return this;
     }
 

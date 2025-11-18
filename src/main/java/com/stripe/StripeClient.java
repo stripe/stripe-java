@@ -244,6 +244,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.balanceTransfers() is deprecated, use
+   *     StripeClient.v1().balanceTransfers() instead. All functionality under it has been copied
+   *     over to StripeClient.v1().balanceTransfers(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.BalanceTransferService balanceTransfers() {
+    return new com.stripe.service.BalanceTransferService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.billing() is deprecated, use StripeClient.v1().billing() instead. All
    *     functionality under it has been copied over to StripeClient.v1().billing(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
