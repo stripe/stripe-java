@@ -1141,6 +1141,19 @@ public class QuotePreviewSubscriptionSchedule extends ApiResource implements Has
     @SerializedName("discounts")
     List<QuotePreviewSubscriptionSchedule.Phase.Discount> discounts;
 
+    /**
+     * Configures how the subscription schedule handles billing for phase transitions. Possible
+     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
+     * bills based on the current state of the subscription, ignoring changes scheduled in future
+     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
+     * the current billing cycle, including pricing changes and service period adjustments that will
+     * occur before the next invoice.
+     *
+     * <p>One of {@code billing_period_start}, or {@code phase_start}.
+     */
+    @SerializedName("effective_at")
+    String effectiveAt;
+
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
     Long endDate;

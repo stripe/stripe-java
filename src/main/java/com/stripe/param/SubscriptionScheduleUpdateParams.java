@@ -2055,6 +2055,17 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Duration duration;
 
     /**
+     * Configures how the subscription schedule handles billing for phase transitions. Possible
+     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
+     * bills based on the current state of the subscription, ignoring changes scheduled in future
+     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
+     * the current billing cycle, including pricing changes and service period adjustments that will
+     * occur before the next invoice.
+     */
+    @SerializedName("effective_at")
+    EffectiveAt effectiveAt;
+
+    /**
      * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
      * must not be set.
      */
@@ -2169,6 +2180,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Object description,
         Object discounts,
         Duration duration,
+        EffectiveAt effectiveAt,
         Object endDate,
         Map<String, Object> extraParams,
         InvoiceSettings invoiceSettings,
@@ -2195,6 +2207,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       this.description = description;
       this.discounts = discounts;
       this.duration = duration;
+      this.effectiveAt = effectiveAt;
       this.endDate = endDate;
       this.extraParams = extraParams;
       this.invoiceSettings = invoiceSettings;
@@ -2240,6 +2253,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private Duration duration;
 
+      private EffectiveAt effectiveAt;
+
       private Object endDate;
 
       private Map<String, Object> extraParams;
@@ -2283,6 +2298,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             this.description,
             this.discounts,
             this.duration,
+            this.effectiveAt,
             this.endDate,
             this.extraParams,
             this.invoiceSettings,
@@ -2559,6 +2575,20 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        */
       public Builder setDuration(SubscriptionScheduleUpdateParams.Phase.Duration duration) {
         this.duration = duration;
+        return this;
+      }
+
+      /**
+       * Configures how the subscription schedule handles billing for phase transitions. Possible
+       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+       * phase_start} bills based on the current state of the subscription, ignoring changes
+       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+       * phase transitions within the current billing cycle, including pricing changes and service
+       * period adjustments that will occur before the next invoice.
+       */
+      public Builder setEffectiveAt(
+          SubscriptionScheduleUpdateParams.Phase.EffectiveAt effectiveAt) {
+        this.effectiveAt = effectiveAt;
         return this;
       }
 
@@ -6822,6 +6852,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       private final String value;
 
       CollectionMethod(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum EffectiveAt implements ApiRequestParams.EnumParam {
+      @SerializedName("billing_period_start")
+      BILLING_PERIOD_START("billing_period_start"),
+
+      @SerializedName("phase_start")
+      PHASE_START("phase_start");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EffectiveAt(String value) {
         this.value = value;
       }
     }
