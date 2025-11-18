@@ -255,6 +255,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @SerializedName("billing_cycle_anchor")
     BillingCycleAnchor billingCycleAnchor;
 
+    /** Actions to apply to the billing schedules. */
+    @SerializedName("billing_schedules_actions")
+    List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction> billingSchedulesActions;
+
     /**
      * Changes to the coupons being redeemed or discounts being applied during the amendment time
      * span.
@@ -311,6 +315,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         AmendmentEnd amendmentEnd,
         AmendmentStart amendmentStart,
         BillingCycleAnchor billingCycleAnchor,
+        List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction>
+            billingSchedulesActions,
         List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions,
         Map<String, Object> extraParams,
         List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions,
@@ -322,6 +328,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       this.amendmentEnd = amendmentEnd;
       this.amendmentStart = amendmentStart;
       this.billingCycleAnchor = billingCycleAnchor;
+      this.billingSchedulesActions = billingSchedulesActions;
       this.discountActions = discountActions;
       this.extraParams = extraParams;
       this.itemActions = itemActions;
@@ -342,6 +349,9 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       private AmendmentStart amendmentStart;
 
       private BillingCycleAnchor billingCycleAnchor;
+
+      private List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction>
+          billingSchedulesActions;
 
       private List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions;
 
@@ -365,6 +375,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.amendmentEnd,
             this.amendmentStart,
             this.billingCycleAnchor,
+            this.billingSchedulesActions,
             this.discountActions,
             this.extraParams,
             this.itemActions,
@@ -408,6 +419,36 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       public Builder setBillingCycleAnchor(
           SubscriptionScheduleAmendParams.Amendment.BillingCycleAnchor billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
+        return this;
+      }
+
+      /**
+       * Add an element to `billingSchedulesActions` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SubscriptionScheduleAmendParams.Amendment#billingSchedulesActions} for the field
+       * documentation.
+       */
+      public Builder addBillingSchedulesAction(
+          SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction element) {
+        if (this.billingSchedulesActions == null) {
+          this.billingSchedulesActions = new ArrayList<>();
+        }
+        this.billingSchedulesActions.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `billingSchedulesActions` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link SubscriptionScheduleAmendParams.Amendment#billingSchedulesActions} for the field
+       * documentation.
+       */
+      public Builder addAllBillingSchedulesAction(
+          List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction> elements) {
+        if (this.billingSchedulesActions == null) {
+          this.billingSchedulesActions = new ArrayList<>();
+        }
+        this.billingSchedulesActions.addAll(elements);
         return this;
       }
 
@@ -1226,6 +1267,248 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
         @SerializedName("upcoming_invoice")
         UPCOMING_INVOICE("upcoming_invoice");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingSchedulesAction {
+      /** Specify which subscription items the billing schedule applies to. */
+      @SerializedName("applies_to")
+      List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo> appliesTo;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> Select the action. */
+      @SerializedName("type")
+      Type type;
+
+      private BillingSchedulesAction(
+          List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo>
+              appliesTo,
+          Map<String, Object> extraParams,
+          Type type) {
+        this.appliesTo = appliesTo;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo>
+            appliesTo;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction build() {
+          return new SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction(
+              this.appliesTo, this.extraParams, this.type);
+        }
+
+        /**
+         * Add an element to `appliesTo` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction#appliesTo} for the field
+         * documentation.
+         */
+        public Builder addAppliesTo(
+            SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo element) {
+          if (this.appliesTo == null) {
+            this.appliesTo = new ArrayList<>();
+          }
+          this.appliesTo.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `appliesTo` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction#appliesTo} for the field
+         * documentation.
+         */
+        public Builder addAllAppliesTo(
+            List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo>
+                elements) {
+          if (this.appliesTo == null) {
+            this.appliesTo = new ArrayList<>();
+          }
+          this.appliesTo.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> Select the action. */
+        public Builder setType(
+            SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AppliesTo {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The ID of the price object. */
+        @SerializedName("price")
+        String price;
+
+        /**
+         * <strong>Required.</strong> Controls which subscription items the billing schedule applies
+         * to.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private AppliesTo(Map<String, Object> extraParams, String price, Type type) {
+          this.extraParams = extraParams;
+          this.price = price;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String price;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo
+              build() {
+            return new SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo(
+                this.extraParams, this.price, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The ID of the price object. */
+          public Builder setPrice(String price) {
+            this.price = price;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> Controls which subscription items the billing schedule
+           * applies to.
+           */
+          public Builder setType(
+              SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction.AppliesTo.Type
+                  type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("price")
+          PRICE("price");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("remove")
+        REMOVE("remove"),
+
+        @SerializedName("set")
+        SET("set");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
