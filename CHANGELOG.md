@@ -1,5 +1,30 @@
 # Changelog
 
+## 31.0.0 - 2025-11-18
+This release changes the pinned API version to `2025-11-17.clover`.
+
+* [#2113](https://github.com/stripe/stripe-java/pull/2113) Update generated code
+  * ⚠️ Remove support for `gt`, `gte`, `lt`, and `lte` on `v2.core.EventListParams` in favor of `created`.
+* [#2110](https://github.com/stripe/stripe-java/pull/2110) Update v2 array parameter serialization to use indexed format
+  - `Retrieve` and `List` calls for `/v2` endpoints now use indexed format (e.g., `?include[0]=foo&include[1]=bar`) instead of repeated parameter format (e.g., `?include=foo&include=bar`) when communicating with the Stripe API. This may break any unit tests that expect the latter behavior when setting up a mock server. Instead, they should now expect the former.
+  - The `arraysAsRepeated` parameter was removed from the internal-use-only method `FormEncoder#createQueryString`
+* [#2108](https://github.com/stripe/stripe-java/pull/2108) Update generated code
+  * Add support for new resources `tax.Association` and `terminal.OnboardingLink`
+  * Add support for `find` method on resource `tax.Association`
+  * Add support for `create` method on resource `terminal.OnboardingLink`
+  * Add support for `paymentMethodConfiguration` on `billingportal.Configuration.features.payment_method_update`
+  * Add support for `transactionId` on `Charge.payment_method_details.ideal`, `PaymentAttemptRecord.payment_method_details.ideal`, and `PaymentRecord.payment_method_details.ideal`
+  * Add support for new value `finom` on enums `ConfirmationTokenCreateParams.payment_method_data.ideal.bank`, `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for `created` on `CustomerBalanceTransactionListParams` and `InvoicePaymentListParams`
+  * Add support for `accountNumbers` on `financialconnections.Account`
+  * Add support for `fraudRisk` on `issuing.AuthorizationCreateParams.risk_assessment`
+  * Add support for `latestFraudWarning` on `issuing.Card`
+  * Add support for `hooks` on `PaymentIntentCaptureParams`, `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentIncrementAuthorizationParams`, `PaymentIntentUpdateParams`, and `PaymentIntent`
+  * Add support for `mbWay` and `twint` on `Refund.destination_details`
+  * Add support for new values `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
+  * Add support for `changes` on `v2.core.Event`
+  * Add support for snapshot events `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` with resource `financialconnections.Account`
+
 ## 30.3.0-alpha.2 - 2025-11-13
 This release changes the pinned API version to `2025-10-29.preview`.
 
