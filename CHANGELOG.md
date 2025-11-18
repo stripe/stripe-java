@@ -22,7 +22,6 @@ This release changes the pinned API version to `2025-11-17.clover`.
   * Add support for `hooks` on `PaymentIntentCaptureParams`, `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentIncrementAuthorizationParams`, `PaymentIntentUpdateParams`, and `PaymentIntent`
   * Add support for `mbWay` and `twint` on `Refund.destination_details`
   * Add support for new values `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
-  * Add support for `changes` on `v2.core.Event`
   * Add support for snapshot events `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` with resource `financialconnections.Account`
 
 ## 30.2.0 - 2025-11-05
