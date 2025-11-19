@@ -76,6 +76,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
   }
 
+  public StripeResponseGetterOptions getOptions() {
+    return this.options;
+  }
+
   private StripeRequest toStripeRequest(ApiRequest apiRequest, RequestOptions mergedOptions)
       throws StripeException {
     String fullUrl = fullUrl(apiRequest);
