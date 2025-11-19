@@ -25,6 +25,7 @@ import com.stripe.events.V2CoreAccountPersonDeletedEventNotification;
 import com.stripe.events.V2CoreAccountPersonUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountUpdatedEventNotification;
 import com.stripe.events.V2CoreEventDestinationPingEventNotification;
+import com.stripe.events.V2CoreHealthEventGenerationFailureResolvedEventNotification;
 import com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementFinancialAccountUpdatedEventNotification;
@@ -60,13 +61,6 @@ import com.stripe.events.V2MoneyManagementReceivedDebitSucceededEventNotificatio
 import com.stripe.events.V2MoneyManagementReceivedDebitUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentCanceledEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentCreatedEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentFailedEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentRequiresCaptureEventNotification;
-import com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.v2.core.EventNotification;
 import java.util.HashMap;
@@ -323,6 +317,12 @@ public class StripeEventRouter {
     return this;
   }
 
+  public StripeEventRouter on_V2CoreHealthEventGenerationFailureResolvedEventNotification(
+      EventHandler<V2CoreHealthEventGenerationFailureResolvedEventNotification> handler) {
+    this.register("v2.core.health.event_generation_failure.resolved", handler);
+    return this;
+  }
+
   public StripeEventRouter on_V2MoneyManagementAdjustmentCreatedEventNotification(
       EventHandler<V2MoneyManagementAdjustmentCreatedEventNotification> handler) {
     this.register("v2.money_management.adjustment.created", handler);
@@ -530,52 +530,6 @@ public class StripeEventRouter {
   public StripeEventRouter on_V2MoneyManagementTransactionUpdatedEventNotification(
       EventHandler<V2MoneyManagementTransactionUpdatedEventNotification> handler) {
     this.register("v2.money_management.transaction.updated", handler);
-    return this;
-  }
-
-  public StripeEventRouter
-      on_V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEventNotification(
-          EventHandler<V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEventNotification>
-              handler) {
-    this.register("v2.payments.off_session_payment.authorization_attempt_failed", handler);
-    return this;
-  }
-
-  public StripeEventRouter
-      on_V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEventNotification(
-          EventHandler<V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEventNotification>
-              handler) {
-    this.register("v2.payments.off_session_payment.authorization_attempt_started", handler);
-    return this;
-  }
-
-  public StripeEventRouter on_V2PaymentsOffSessionPaymentCanceledEventNotification(
-      EventHandler<V2PaymentsOffSessionPaymentCanceledEventNotification> handler) {
-    this.register("v2.payments.off_session_payment.canceled", handler);
-    return this;
-  }
-
-  public StripeEventRouter on_V2PaymentsOffSessionPaymentCreatedEventNotification(
-      EventHandler<V2PaymentsOffSessionPaymentCreatedEventNotification> handler) {
-    this.register("v2.payments.off_session_payment.created", handler);
-    return this;
-  }
-
-  public StripeEventRouter on_V2PaymentsOffSessionPaymentFailedEventNotification(
-      EventHandler<V2PaymentsOffSessionPaymentFailedEventNotification> handler) {
-    this.register("v2.payments.off_session_payment.failed", handler);
-    return this;
-  }
-
-  public StripeEventRouter on_V2PaymentsOffSessionPaymentRequiresCaptureEventNotification(
-      EventHandler<V2PaymentsOffSessionPaymentRequiresCaptureEventNotification> handler) {
-    this.register("v2.payments.off_session_payment.requires_capture", handler);
-    return this;
-  }
-
-  public StripeEventRouter on_V2PaymentsOffSessionPaymentSucceededEventNotification(
-      EventHandler<V2PaymentsOffSessionPaymentSucceededEventNotification> handler) {
-    this.register("v2.payments.off_session_payment.succeeded", handler);
     return this;
   }
   // event-router-methods: The end of the section generated from our OpenAPI spec
