@@ -48,6 +48,19 @@ public class QuoteLine extends StripeObject implements HasId {
   CancelSubscriptionSchedule cancelSubscriptionSchedule;
 
   /**
+   * Configures how the subscription schedule handles billing for phase transitions. Possible values
+   * are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start} bills
+   * based on the current state of the subscription, ignoring changes scheduled in future phases.
+   * {@code billing_period_start} bills predictively for upcoming phase transitions within the
+   * current billing cycle, including pricing changes and service period adjustments that will occur
+   * before the next invoice.
+   *
+   * <p>One of {@code billing_period_start}, or {@code line_start}.
+   */
+  @SerializedName("effective_at")
+  String effectiveAt;
+
+  /**
    * Details to identify the end of the time range modified by the proposed change. If not supplied,
    * the quote line is considered a point-in-time operation that only affects the exact timestamp at
    * {@code starts_at}, and a restricted set of attributes is supported on the quote line.
@@ -307,6 +320,10 @@ public class QuoteLine extends StripeObject implements HasId {
       /** Options that configure the trial on the subscription item. */
       @SerializedName("trial")
       Trial trial;
+
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
 
       /** Get ID of expandable {@code price} object. */
       public String getPrice() {
@@ -754,6 +771,10 @@ public class QuoteLine extends StripeObject implements HasId {
       /** Options that configure the trial on the subscription item. */
       @SerializedName("trial")
       Trial trial;
+
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
 
       /** Get ID of expandable {@code price} object. */
       public String getPrice() {

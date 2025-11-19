@@ -267,6 +267,17 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions;
 
     /**
+     * Configures how the subscription schedule handles billing for phase transitions. Possible
+     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
+     * bills based on the current state of the subscription, ignoring changes scheduled in future
+     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
+     * the current billing cycle, including pricing changes and service period adjustments that will
+     * occur before the next invoice.
+     */
+    @SerializedName("effective_at")
+    EffectiveAt effectiveAt;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -318,6 +329,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         List<SubscriptionScheduleAmendParams.Amendment.BillingSchedulesAction>
             billingSchedulesActions,
         List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions,
+        EffectiveAt effectiveAt,
         Map<String, Object> extraParams,
         List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions,
         List<SubscriptionScheduleAmendParams.Amendment.MetadataAction> metadataActions,
@@ -330,6 +342,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       this.billingCycleAnchor = billingCycleAnchor;
       this.billingSchedulesActions = billingSchedulesActions;
       this.discountActions = discountActions;
+      this.effectiveAt = effectiveAt;
       this.extraParams = extraParams;
       this.itemActions = itemActions;
       this.metadataActions = metadataActions;
@@ -355,6 +368,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
       private List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions;
 
+      private EffectiveAt effectiveAt;
+
       private Map<String, Object> extraParams;
 
       private List<SubscriptionScheduleAmendParams.Amendment.ItemAction> itemActions;
@@ -377,6 +392,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             this.billingCycleAnchor,
             this.billingSchedulesActions,
             this.discountActions,
+            this.effectiveAt,
             this.extraParams,
             this.itemActions,
             this.metadataActions,
@@ -478,6 +494,20 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           this.discountActions = new ArrayList<>();
         }
         this.discountActions.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Configures how the subscription schedule handles billing for phase transitions. Possible
+       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+       * phase_start} bills based on the current state of the subscription, ignoring changes
+       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+       * phase transitions within the current billing cycle, including pricing changes and service
+       * period adjustments that will occur before the next invoice.
+       */
+      public Builder setEffectiveAt(
+          SubscriptionScheduleAmendParams.Amendment.EffectiveAt effectiveAt) {
+        this.effectiveAt = effectiveAt;
         return this;
       }
 
@@ -2272,6 +2302,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
         private Add(
             List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount> discounts,
             Map<String, Object> extraParams,
@@ -2279,7 +2313,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             String price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            String trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -2287,6 +2322,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -2308,6 +2344,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private String trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add build() {
             return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add(
@@ -2317,7 +2355,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -2450,6 +2489,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           public Builder setTrial(
               SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -3101,6 +3146,10 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
         private Set(
             List<SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount> discounts,
             Map<String, Object> extraParams,
@@ -3108,7 +3157,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             String price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            String trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -3116,6 +3166,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -3137,6 +3188,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private String trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set build() {
             return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set(
@@ -3146,7 +3199,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -3288,6 +3342,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           public Builder setTrial(
               SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -4439,6 +4499,21 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
       private final String value;
 
       BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum EffectiveAt implements ApiRequestParams.EnumParam {
+      @SerializedName("amendment_start")
+      AMENDMENT_START("amendment_start"),
+
+      @SerializedName("billing_period_start")
+      BILLING_PERIOD_START("billing_period_start");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EffectiveAt(String value) {
         this.value = value;
       }
     }

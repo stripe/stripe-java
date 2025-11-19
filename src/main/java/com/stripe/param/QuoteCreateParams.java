@@ -1641,6 +1641,17 @@ public class QuoteCreateParams extends ApiRequestParams {
     CancelSubscriptionSchedule cancelSubscriptionSchedule;
 
     /**
+     * Configures how the subscription schedule handles billing for phase transitions. Possible
+     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
+     * bills based on the current state of the subscription, ignoring changes scheduled in future
+     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
+     * the current billing cycle, including pricing changes and service period adjustments that will
+     * occur before the next invoice.
+     */
+    @SerializedName("effective_at")
+    EffectiveAt effectiveAt;
+
+    /**
      * Details to identify the end of the time range modified by the proposed change. If not
      * supplied, the quote line is considered a point-in-time operation that only affects the exact
      * timestamp at {@code starts_at}, and a restricted set of attributes is supported on the quote
@@ -1692,6 +1703,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         AppliesTo appliesTo,
         BillingCycleAnchor billingCycleAnchor,
         CancelSubscriptionSchedule cancelSubscriptionSchedule,
+        EffectiveAt effectiveAt,
         EndsAt endsAt,
         Map<String, Object> extraParams,
         ProrationBehavior prorationBehavior,
@@ -1703,6 +1715,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       this.appliesTo = appliesTo;
       this.billingCycleAnchor = billingCycleAnchor;
       this.cancelSubscriptionSchedule = cancelSubscriptionSchedule;
+      this.effectiveAt = effectiveAt;
       this.endsAt = endsAt;
       this.extraParams = extraParams;
       this.prorationBehavior = prorationBehavior;
@@ -1725,6 +1738,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       private CancelSubscriptionSchedule cancelSubscriptionSchedule;
 
+      private EffectiveAt effectiveAt;
+
       private EndsAt endsAt;
 
       private Map<String, Object> extraParams;
@@ -1746,6 +1761,7 @@ public class QuoteCreateParams extends ApiRequestParams {
             this.appliesTo,
             this.billingCycleAnchor,
             this.cancelSubscriptionSchedule,
+            this.effectiveAt,
             this.endsAt,
             this.extraParams,
             this.prorationBehavior,
@@ -1811,6 +1827,19 @@ public class QuoteCreateParams extends ApiRequestParams {
       public Builder setCancelSubscriptionSchedule(
           QuoteCreateParams.Line.CancelSubscriptionSchedule cancelSubscriptionSchedule) {
         this.cancelSubscriptionSchedule = cancelSubscriptionSchedule;
+        return this;
+      }
+
+      /**
+       * Configures how the subscription schedule handles billing for phase transitions. Possible
+       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+       * phase_start} bills based on the current state of the subscription, ignoring changes
+       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+       * phase transitions within the current billing cycle, including pricing changes and service
+       * period adjustments that will occur before the next invoice.
+       */
+      public Builder setEffectiveAt(QuoteCreateParams.Line.EffectiveAt effectiveAt) {
+        this.effectiveAt = effectiveAt;
         return this;
       }
 
@@ -2502,6 +2531,10 @@ public class QuoteCreateParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
         private AddItem(
             List<QuoteCreateParams.Line.Action.AddItem.Discount> discounts,
             Map<String, Object> extraParams,
@@ -2509,7 +2542,8 @@ public class QuoteCreateParams extends ApiRequestParams {
             String price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            String trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -2517,6 +2551,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -2538,6 +2573,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private String trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteCreateParams.Line.Action.AddItem build() {
             return new QuoteCreateParams.Line.Action.AddItem(
@@ -2547,7 +2584,8 @@ public class QuoteCreateParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -2673,6 +2711,12 @@ public class QuoteCreateParams extends ApiRequestParams {
           /** Options that configure the trial on the subscription item. */
           public Builder setTrial(QuoteCreateParams.Line.Action.AddItem.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -3506,6 +3550,10 @@ public class QuoteCreateParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
         private SetItem(
             List<QuoteCreateParams.Line.Action.SetItem.Discount> discounts,
             Map<String, Object> extraParams,
@@ -3513,7 +3561,8 @@ public class QuoteCreateParams extends ApiRequestParams {
             String price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            String trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -3521,6 +3570,7 @@ public class QuoteCreateParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -3542,6 +3592,8 @@ public class QuoteCreateParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private String trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteCreateParams.Line.Action.SetItem build() {
             return new QuoteCreateParams.Line.Action.SetItem(
@@ -3551,7 +3603,8 @@ public class QuoteCreateParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -3686,6 +3739,12 @@ public class QuoteCreateParams extends ApiRequestParams {
            */
           public Builder setTrial(QuoteCreateParams.Line.Action.SetItem.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -5504,6 +5563,21 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
     }
 
+    public enum EffectiveAt implements ApiRequestParams.EnumParam {
+      @SerializedName("billing_period_start")
+      BILLING_PERIOD_START("billing_period_start"),
+
+      @SerializedName("line_start")
+      LINE_START("line_start");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EffectiveAt(String value) {
+        this.value = value;
+      }
+    }
+
     public enum ProrationBehavior implements ApiRequestParams.EnumParam {
       @SerializedName("always_invoice")
       ALWAYS_INVOICE("always_invoice"),
@@ -6486,7 +6560,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * when the quote is accepted.
      */
     @SerializedName("billing_schedules")
-    Object billingSchedules;
+    List<QuoteCreateParams.SubscriptionData.BillingSchedule> billingSchedules;
 
     /**
      * The subscription's description, meant to be displayable to the customer. Use this field to
@@ -6588,7 +6662,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         BillingBehavior billingBehavior,
         ApiRequestParams.EnumParam billingCycleAnchor,
         BillingMode billingMode,
-        Object billingSchedules,
+        List<QuoteCreateParams.SubscriptionData.BillingSchedule> billingSchedules,
         String description,
         Object effectiveDate,
         EndBehavior endBehavior,
@@ -6629,7 +6703,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       private BillingMode billingMode;
 
-      private Object billingSchedules;
+      private List<QuoteCreateParams.SubscriptionData.BillingSchedule> billingSchedules;
 
       private String description;
 
@@ -6721,15 +6795,12 @@ public class QuoteCreateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * QuoteCreateParams.SubscriptionData#billingSchedules} for the field documentation.
        */
-      @SuppressWarnings("unchecked")
       public Builder addBillingSchedule(
           QuoteCreateParams.SubscriptionData.BillingSchedule element) {
-        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
-          this.billingSchedules =
-              new ArrayList<QuoteCreateParams.SubscriptionData.BillingSchedule>();
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
         }
-        ((List<QuoteCreateParams.SubscriptionData.BillingSchedule>) this.billingSchedules)
-            .add(element);
+        this.billingSchedules.add(element);
         return this;
       }
 
@@ -6738,34 +6809,12 @@ public class QuoteCreateParams extends ApiRequestParams {
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link QuoteCreateParams.SubscriptionData#billingSchedules} for the field documentation.
        */
-      @SuppressWarnings("unchecked")
       public Builder addAllBillingSchedule(
           List<QuoteCreateParams.SubscriptionData.BillingSchedule> elements) {
-        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
-          this.billingSchedules =
-              new ArrayList<QuoteCreateParams.SubscriptionData.BillingSchedule>();
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
         }
-        ((List<QuoteCreateParams.SubscriptionData.BillingSchedule>) this.billingSchedules)
-            .addAll(elements);
-        return this;
-      }
-
-      /**
-       * Billing schedules that will be applied to the subscription or subscription schedule created
-       * when the quote is accepted.
-       */
-      public Builder setBillingSchedules(EmptyParam billingSchedules) {
-        this.billingSchedules = billingSchedules;
-        return this;
-      }
-
-      /**
-       * Billing schedules that will be applied to the subscription or subscription schedule created
-       * when the quote is accepted.
-       */
-      public Builder setBillingSchedules(
-          List<QuoteCreateParams.SubscriptionData.BillingSchedule> billingSchedules) {
-        this.billingSchedules = billingSchedules;
+        this.billingSchedules.addAll(elements);
         return this;
       }
 
@@ -8842,8 +8891,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName("billing_period_start")
       BILLING_PERIOD_START("billing_period_start"),
 
-      @SerializedName("phase_start")
-      PHASE_START("phase_start");
+      @SerializedName("line_start")
+      LINE_START("line_start");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -8901,7 +8950,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      * when the quote is accepted.
      */
     @SerializedName("billing_schedules")
-    Object billingSchedules;
+    List<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules;
 
     /**
      * The customer the Subscription Data override applies to. This is only relevant when {@code
@@ -8965,7 +9014,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         AppliesTo appliesTo,
         BillOnAcceptance billOnAcceptance,
         BillingBehavior billingBehavior,
-        Object billingSchedules,
+        List<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules,
         String customer,
         String description,
         EndBehavior endBehavior,
@@ -8995,7 +9044,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       private BillingBehavior billingBehavior;
 
-      private Object billingSchedules;
+      private List<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules;
 
       private String customer;
 
@@ -9058,15 +9107,12 @@ public class QuoteCreateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * QuoteCreateParams.SubscriptionDataOverride#billingSchedules} for the field documentation.
        */
-      @SuppressWarnings("unchecked")
       public Builder addBillingSchedule(
           QuoteCreateParams.SubscriptionDataOverride.BillingSchedule element) {
-        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
-          this.billingSchedules =
-              new ArrayList<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule>();
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
         }
-        ((List<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule>) this.billingSchedules)
-            .add(element);
+        this.billingSchedules.add(element);
         return this;
       }
 
@@ -9076,34 +9122,12 @@ public class QuoteCreateParams extends ApiRequestParams {
        * {@link QuoteCreateParams.SubscriptionDataOverride#billingSchedules} for the field
        * documentation.
        */
-      @SuppressWarnings("unchecked")
       public Builder addAllBillingSchedule(
           List<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule> elements) {
-        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
-          this.billingSchedules =
-              new ArrayList<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule>();
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
         }
-        ((List<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule>) this.billingSchedules)
-            .addAll(elements);
-        return this;
-      }
-
-      /**
-       * Billing schedules that will be applied to the subscription or subscription schedule created
-       * when the quote is accepted.
-       */
-      public Builder setBillingSchedules(EmptyParam billingSchedules) {
-        this.billingSchedules = billingSchedules;
-        return this;
-      }
-
-      /**
-       * Billing schedules that will be applied to the subscription or subscription schedule created
-       * when the quote is accepted.
-       */
-      public Builder setBillingSchedules(
-          List<QuoteCreateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules) {
-        this.billingSchedules = billingSchedules;
+        this.billingSchedules.addAll(elements);
         return this;
       }
 
@@ -10917,8 +10941,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName("billing_period_start")
       BILLING_PERIOD_START("billing_period_start"),
 
-      @SerializedName("phase_start")
-      PHASE_START("phase_start");
+      @SerializedName("line_start")
+      LINE_START("line_start");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

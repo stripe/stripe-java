@@ -1085,23 +1085,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("amendment_end")
-        AMENDMENT_END("amendment_end"),
-
         @SerializedName("duration")
         DURATION("duration"),
 
-        @SerializedName("line_ends_at")
-        LINE_ENDS_AT("line_ends_at"),
-
-        @SerializedName("schedule_end")
-        SCHEDULE_END("schedule_end"),
-
         @SerializedName("timestamp")
-        TIMESTAMP("timestamp"),
-
-        @SerializedName("upcoming_invoice")
-        UPCOMING_INVOICE("upcoming_invoice");
+        TIMESTAMP("timestamp");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -5247,6 +5235,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @SerializedName("trial")
       Trial trial;
 
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
+
       private Item(
           Object billingThresholds,
           Object discounts,
@@ -5257,7 +5249,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           PriceData priceData,
           Long quantity,
           Object taxRates,
-          Trial trial) {
+          Trial trial,
+          String trialOffer) {
         this.billingThresholds = billingThresholds;
         this.discounts = discounts;
         this.extraParams = extraParams;
@@ -5268,6 +5261,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         this.quantity = quantity;
         this.taxRates = taxRates;
         this.trial = trial;
+        this.trialOffer = trialOffer;
       }
 
       public static Builder builder() {
@@ -5295,6 +5289,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         private Trial trial;
 
+        private String trialOffer;
+
         /** Finalize and obtain parameter instance from this builder. */
         public SubscriptionScheduleCreateParams.Phase.Item build() {
           return new SubscriptionScheduleCreateParams.Phase.Item(
@@ -5307,7 +5303,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
               this.priceData,
               this.quantity,
               this.taxRates,
-              this.trial);
+              this.trial,
+              this.trialOffer);
         }
 
         /**
@@ -5517,6 +5514,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         /** Options that configure the trial on the subscription item. */
         public Builder setTrial(SubscriptionScheduleCreateParams.Phase.Item.Trial trial) {
           this.trial = trial;
+          return this;
+        }
+
+        /** The ID of the trial offer to apply to the configuration item. */
+        public Builder setTrialOffer(String trialOffer) {
+          this.trialOffer = trialOffer;
           return this;
         }
       }

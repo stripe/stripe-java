@@ -53,6 +53,10 @@ public class SubscriptionItem extends ApiResource
   @SerializedName("current_period_start")
   Long currentPeriodStart;
 
+  /** The current trial that is applied to this subscription item. */
+  @SerializedName("current_trial")
+  CurrentTrial currentTrial;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -408,6 +412,21 @@ public class SubscriptionItem extends ApiResource
     Long usageGte;
   }
 
+  /** The current trial attached to the subscription item. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CurrentTrial extends StripeObject {
+    @SerializedName("end_date")
+    Long endDate;
+
+    @SerializedName("start_date")
+    Long startDate;
+
+    @SerializedName("trial_offer")
+    String trialOffer;
+  }
+
   /**
    * For more details about Trial, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
@@ -436,6 +455,7 @@ public class SubscriptionItem extends ApiResource
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(billingThresholds, responseGetter);
+    trySetResponseGetter(currentTrial, responseGetter);
     trySetResponseGetter(plan, responseGetter);
     trySetResponseGetter(price, responseGetter);
     trySetResponseGetter(trial, responseGetter);

@@ -3083,23 +3083,11 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
-        @SerializedName("amendment_end")
-        AMENDMENT_END("amendment_end"),
-
         @SerializedName("duration")
         DURATION("duration"),
 
-        @SerializedName("line_ends_at")
-        LINE_ENDS_AT("line_ends_at"),
-
-        @SerializedName("schedule_end")
-        SCHEDULE_END("schedule_end"),
-
         @SerializedName("timestamp")
-        TIMESTAMP("timestamp"),
-
-        @SerializedName("upcoming_invoice")
-        UPCOMING_INVOICE("upcoming_invoice");
+        TIMESTAMP("timestamp");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -3982,6 +3970,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("clear_usage")
     Boolean clearUsage;
 
+    /** The trial offer to apply to this subscription item. */
+    @SerializedName("current_trial")
+    CurrentTrial currentTrial;
+
     /** A flag that, if set to {@code true}, will delete the specified item. */
     @SerializedName("deleted")
     Boolean deleted;
@@ -4048,6 +4040,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private Item(
         Object billingThresholds,
         Boolean clearUsage,
+        CurrentTrial currentTrial,
         Boolean deleted,
         Object discounts,
         Map<String, Object> extraParams,
@@ -4060,6 +4053,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         Object taxRates) {
       this.billingThresholds = billingThresholds;
       this.clearUsage = clearUsage;
+      this.currentTrial = currentTrial;
       this.deleted = deleted;
       this.discounts = discounts;
       this.extraParams = extraParams;
@@ -4080,6 +4074,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       private Object billingThresholds;
 
       private Boolean clearUsage;
+
+      private CurrentTrial currentTrial;
 
       private Boolean deleted;
 
@@ -4106,6 +4102,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         return new SubscriptionUpdateParams.Item(
             this.billingThresholds,
             this.clearUsage,
+            this.currentTrial,
             this.deleted,
             this.discounts,
             this.extraParams,
@@ -4144,6 +4141,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        */
       public Builder setClearUsage(Boolean clearUsage) {
         this.clearUsage = clearUsage;
+        return this;
+      }
+
+      /** The trial offer to apply to this subscription item. */
+      public Builder setCurrentTrial(SubscriptionUpdateParams.Item.CurrentTrial currentTrial) {
+        this.currentTrial = currentTrial;
         return this;
       }
 
@@ -4458,6 +4461,109 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setUsageGte(Long usageGte) {
           this.usageGte = usageGte;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CurrentTrial {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Unix timestamp representing the end of the trial offer period. Required when the trial
+       * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+       * duration.type=relative}.
+       */
+      @SerializedName("trial_end")
+      Long trialEnd;
+
+      /** <strong>Required.</strong> The ID of the trial offer to apply to the subscription item. */
+      @SerializedName("trial_offer")
+      Object trialOffer;
+
+      private CurrentTrial(Map<String, Object> extraParams, Long trialEnd, Object trialOffer) {
+        this.extraParams = extraParams;
+        this.trialEnd = trialEnd;
+        this.trialOffer = trialOffer;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Long trialEnd;
+
+        private Object trialOffer;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public SubscriptionUpdateParams.Item.CurrentTrial build() {
+          return new SubscriptionUpdateParams.Item.CurrentTrial(
+              this.extraParams, this.trialEnd, this.trialOffer);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.CurrentTrial#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionUpdateParams.Item.CurrentTrial#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Unix timestamp representing the end of the trial offer period. Required when the trial
+         * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+         * duration.type=relative}.
+         */
+        public Builder setTrialEnd(Long trialEnd) {
+          this.trialEnd = trialEnd;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        public Builder setTrialOffer(String trialOffer) {
+          this.trialOffer = trialOffer;
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        public Builder setTrialOffer(EmptyParam trialOffer) {
+          this.trialOffer = trialOffer;
           return this;
         }
       }
