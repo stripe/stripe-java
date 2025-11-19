@@ -1,6 +1,6 @@
 # Stripe Java client library
 
-[![Maven Central](https://img.shields.io/badge/maven--central-v30.2.0-beta.1-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
+[![Maven Central](https://img.shields.io/badge/maven--central-v31.1.0-beta.1-blue)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
 [![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
 [![Build Status](https://github.com/stripe/stripe-java/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/stripe/stripe-java/actions?query=branch%3Amaster)
 
@@ -23,7 +23,7 @@ We support LTS versions of the JDK. Currently, that's Java versions:
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:30.2.0-beta.1"
+implementation "com.stripe:stripe-java:31.1.0-beta.1"
 ```
 
 ### Maven users
@@ -34,7 +34,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>30.2.0-beta.1</version>
+  <version>31.1.0-beta.1</version>
 </dependency>
 ```
 
@@ -271,6 +271,8 @@ Stripe.addBetaVersion("feature_beta", "v3");
 Stripe has features in the [private preview phase](https://docs.stripe.com/release-phases) that can be accessed via versions of this package that have the `-alpha.X` suffix like `25.2.0-alpha.2`. These are invite-only features. Once invited, you can install the private preview SDKs by following the same instructions as for the [public preview SDKs](https://github.com/stripe/stripe-java?tab=readme-ov-file#public-preview-sdks) above and replacing the term `beta` with `alpha`.
 
 ### Custom requests
+
+> This feature is only available from version 27 of this SDK.
 
 If you would like to send a request to an undocumented API (for example you are in a private beta), or if you prefer to bypass the method definitions in the library and specify your request details directly, you can use the `rawRequest` method on `StripeClient`.
 

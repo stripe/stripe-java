@@ -1,5 +1,65 @@
 # Changelog
 
+## 31.1.0-beta.1 - 2025-11-18
+This release changes the pinned API version to `2025-11-17.preview`.
+
+* [#2103](https://github.com/stripe/stripe-java/pull/2103) Update generated code for beta
+  * Add support for new resources `v2.core.AccountPersonToken` and `v2.core.AccountToken`
+  * Remove support for resource `v2.payments.OffSessionPayment`
+  * Add support for `create` and `retrieve` methods on resources `v2.core.AccountPersonToken` and `v2.core.AccountToken`
+  * Remove support for `cancel`, `capture`, `create`, `list`, and `retrieve` methods on resource `v2.payments.OffSessionPayment`
+  * Add support for `specifiedCommercialTransactionsActUrl` on `Account.business_profile`, `AccountCreateParams.business_profile`, and `AccountUpdateParams.business_profile`
+  * Add support for `paypayPayments` on `Account.settings`, `AccountCreateParams.settings`, and `AccountUpdateParams.settings`
+  * Change type of `billing.analytics.MeterUsageRetrieveParams.meters[].dimensionFilters` from `string` to `array(string)`
+  * Change type of `billing.analytics.MeterUsageRetrieveParams.meters[].tenantFilters` from `string` to `array(string)`
+  * Add support for `carRentalData`, `flightData`, and `lodgingData` on `ChargeCaptureParams.payment_details`, `ChargeUpdateParams.payment_details`, `PaymentIntentCaptureParams.payment_details`, `PaymentIntentConfirmParams.payment_details`, `PaymentIntentCreateParams.payment_details`, and `PaymentIntentUpdateParams.payment_details`
+  * Add support for `supplementaryPurchaseData` on `OrderCreateParams.payment.settings.payment_method_options.klarna`, `OrderUpdateParams.payment.settings.payment_method_options.klarna`, `PaymentIntentConfirmParams.payment_method_options.klarna`, `PaymentIntentCreateParams.payment_method_options.klarna`, and `PaymentIntentUpdateParams.payment_method_options.klarna`
+  * Add support for `allowRedisplay` and `customerAccount` on `PaymentMethodListParams`
+  * Add support for `futureRequirements` on `v2.core.Account`
+  * Add support for `konbiniPayments` and `scriptStatementDescriptor` on `v2.core.Account.configuration.merchant`, `v2.core.AccountCreateParams.configuration.merchant`, and `v2.core.AccountUpdateParams.configuration.merchant`
+  * Add support for `eur` on `v2.core.Account.configuration.storer.capabilities.holds_currencies`, `v2.core.AccountCreateParams.configuration.storer.capabilities.holds_currencies`, and `v2.core.AccountUpdateParams.configuration.storer.capabilities.holds_currencies`
+  * Add support for `requirementsCollector` on `v2.core.Account.defaults.responsibilities`
+  * Remove support for `collector` on `v2.core.Account.requirements`
+  * Add support for `changes` on `v2.core.Event`
+  * Remove support for value `sepa_bank_account` from enum `v2.moneymanagement.FinancialAddressCreateParams.type`
+  * Add support for `accountToken` on `v2.core.AccountCreateParams` and `v2.core.AccountUpdateParams`
+  * Add support for new value `ar_cuit` on enums `v2.core.AccountCreateParams.identity.business_details.id_numbers[].type` and `v2.core.AccountUpdateParams.identity.business_details.id_numbers[].type`
+  * Add support for new value `ar_dni` on enums `v2.core.AccountCreateParams.identity.individual.id_numbers[].type`, `v2.core.AccountPersonCreateParams.id_numbers[].type`, `v2.core.AccountPersonUpdateParams.id_numbers[].type`, and `v2.core.AccountUpdateParams.identity.individual.id_numbers[].type`
+  * Add support for new value `future_requirements` on enums `v2.core.AccountCreateParams.include`, `v2.core.AccountRetrieveParams.include`, and `v2.core.AccountUpdateParams.include`
+  * Add support for `personToken` on `v2.core.AccountPersonCreateParams` and `v2.core.AccountPersonUpdateParams`
+  * Add support for `changes` on `v2.core.Event`
+  * Add support for thin event `V2CoreHealthEventGenerationFailureResolvedEvent`
+  * Remove support for thin events `V2PaymentsOffSessionPaymentAuthorizationAttemptFailedEvent`, `V2PaymentsOffSessionPaymentAuthorizationAttemptStartedEvent`, `V2PaymentsOffSessionPaymentCanceledEvent`, `V2PaymentsOffSessionPaymentCreatedEvent`, `V2PaymentsOffSessionPaymentFailedEvent`, `V2PaymentsOffSessionPaymentRequiresCaptureEvent`, and `V2PaymentsOffSessionPaymentSucceededEvent` with related object `v2.payments.OffSessionPayment`
+
+## 31.0.0 - 2025-11-18
+This release changes the pinned API version to `2025-11-17.clover`.
+
+* [#2113](https://github.com/stripe/stripe-java/pull/2113) Update generated code
+  * ⚠️ Remove support for `gt`, `gte`, `lt`, and `lte` on `v2.core.EventListParams` in favor of `created`.
+* [#2110](https://github.com/stripe/stripe-java/pull/2110) Update v2 array parameter serialization to use indexed format
+  - `Retrieve` and `List` calls for `/v2` endpoints now use indexed format (e.g., `?include[0]=foo&include[1]=bar`) instead of repeated parameter format (e.g., `?include=foo&include=bar`) when communicating with the Stripe API. This may break any unit tests that expect the latter behavior when setting up a mock server. Instead, they should now expect the former.
+  - The `arraysAsRepeated` parameter was removed from the internal-use-only method `FormEncoder#createQueryString`
+* [#2108](https://github.com/stripe/stripe-java/pull/2108) Update generated code
+  * Add support for new resources `tax.Association` and `terminal.OnboardingLink`
+  * Add support for `find` method on resource `tax.Association`
+  * Add support for `create` method on resource `terminal.OnboardingLink`
+  * Add support for `paymentMethodConfiguration` on `billingportal.Configuration.features.payment_method_update`
+  * Add support for `transactionId` on `Charge.payment_method_details.ideal`, `PaymentAttemptRecord.payment_method_details.ideal`, and `PaymentRecord.payment_method_details.ideal`
+  * Add support for new value `finom` on enums `ConfirmationTokenCreateParams.payment_method_data.ideal.bank`, `PaymentIntentConfirmParams.payment_method_data.ideal.bank`, `PaymentIntentCreateParams.payment_method_data.ideal.bank`, `PaymentIntentUpdateParams.payment_method_data.ideal.bank`, `PaymentMethodCreateParams.ideal.bank`, `SetupIntentConfirmParams.payment_method_data.ideal.bank`, `SetupIntentCreateParams.payment_method_data.ideal.bank`, and `SetupIntentUpdateParams.payment_method_data.ideal.bank`
+  * Add support for `created` on `CustomerBalanceTransactionListParams` and `InvoicePaymentListParams`
+  * Add support for `accountNumbers` on `financialconnections.Account`
+  * Add support for `fraudRisk` on `issuing.AuthorizationCreateParams.risk_assessment`
+  * Add support for `latestFraudWarning` on `issuing.Card`
+  * Add support for `hooks` on `PaymentIntentCaptureParams`, `PaymentIntentConfirmParams`, `PaymentIntentCreateParams`, `PaymentIntentIncrementAuthorizationParams`, `PaymentIntentUpdateParams`, and `PaymentIntent`
+  * Add support for `mbWay` and `twint` on `Refund.destination_details`
+  * Add support for new values `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` on enums `WebhookEndpointCreateParams.enabledEvents` and `WebhookEndpointUpdateParams.enabledEvents`
+  * Add support for `changes` on `v2.core.Event`
+  * Add support for snapshot events `financial_connections.account.account_numbers_updated` and `financial_connections.account.upcoming_account_number_expiry` with resource `financialconnections.Account`
+
+## 30.2.0 - 2025-11-05
+* [#2102](https://github.com/stripe/stripe-java/pull/2102) Update generated code
+  * Add support for `captureMethod` on `PaymentIntent.payment_method_options.card_present`, `PaymentIntentConfirmParams.payment_method_options.card_present`, `PaymentIntentCreateParams.payment_method_options.card_present`, and `PaymentIntentUpdateParams.payment_method_options.card_present`
+
 ## 30.2.0-beta.1 - 2025-10-29
 
 This release changes the pinned API version to `2025-10-29.preview`.

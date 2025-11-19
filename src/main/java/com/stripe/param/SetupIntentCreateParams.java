@@ -4559,6 +4559,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("buut")
         BUUT("buut"),
 
+        @SerializedName("finom")
+        FINOM("finom"),
+
         @SerializedName("handelsbanken")
         HANDELSBANKEN("handelsbanken"),
 
@@ -10801,6 +10804,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         /**
          * The type of amount that will be collected. The amount charged must be exact or up to the
          * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         * Defaults to {@code maximum}.
          */
         @SerializedName("amount_type")
         AmountType amountType;
@@ -10822,7 +10826,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** The periodicity at which payments will be collected. */
+        /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
         @SerializedName("payment_schedule")
         PaymentSchedule paymentSchedule;
 
@@ -10834,7 +10838,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("payments_per_period")
         Long paymentsPerPeriod;
 
-        /** The purpose for which payments are made. Defaults to retail. */
+        /**
+         * The purpose for which payments are made. Has a default value based on your merchant
+         * category code.
+         */
         @SerializedName("purpose")
         Purpose purpose;
 
@@ -10910,7 +10917,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           /**
            * The type of amount that will be collected. The amount charged must be exact or up to
            * the value of {@code amount} param for {@code fixed} or {@code maximum} type
-           * respectively.
+           * respectively. Defaults to {@code maximum}.
            */
           public Builder setAmountType(
               SetupIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions.AmountType
@@ -10958,7 +10965,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The periodicity at which payments will be collected. */
+          /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
           public Builder setPaymentSchedule(
               SetupIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions.PaymentSchedule
                   paymentSchedule) {
@@ -10976,7 +10983,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** The purpose for which payments are made. Defaults to retail. */
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           */
           public Builder setPurpose(
               SetupIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions.Purpose purpose) {
             this.purpose = purpose;

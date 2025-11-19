@@ -650,6 +650,13 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("product_description")
     String productDescription;
 
+    /**
+     * A link to the business's publicly available terms related to the Specified Commercial
+     * Transaction Act. Used by the Checkout product and for Japanese payment methods.
+     */
+    @SerializedName("specified_commercial_transactions_act_url")
+    Object specifiedCommercialTransactionsActUrl;
+
     /** A publicly available mailing address for sending support issues to. */
     @SerializedName("support_address")
     SupportAddress supportAddress;
@@ -680,6 +687,7 @@ public class AccountCreateParams extends ApiRequestParams {
         MonthlyEstimatedRevenue monthlyEstimatedRevenue,
         String name,
         String productDescription,
+        Object specifiedCommercialTransactionsActUrl,
         SupportAddress supportAddress,
         String supportEmail,
         String supportPhone,
@@ -693,6 +701,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.monthlyEstimatedRevenue = monthlyEstimatedRevenue;
       this.name = name;
       this.productDescription = productDescription;
+      this.specifiedCommercialTransactionsActUrl = specifiedCommercialTransactionsActUrl;
       this.supportAddress = supportAddress;
       this.supportEmail = supportEmail;
       this.supportPhone = supportPhone;
@@ -722,6 +731,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String productDescription;
 
+      private Object specifiedCommercialTransactionsActUrl;
+
       private SupportAddress supportAddress;
 
       private String supportEmail;
@@ -743,6 +754,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.monthlyEstimatedRevenue,
             this.name,
             this.productDescription,
+            this.specifiedCommercialTransactionsActUrl,
             this.supportAddress,
             this.supportEmail,
             this.supportPhone,
@@ -854,6 +866,26 @@ public class AccountCreateParams extends ApiRequestParams {
        */
       public Builder setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+        return this;
+      }
+
+      /**
+       * A link to the business's publicly available terms related to the Specified Commercial
+       * Transaction Act. Used by the Checkout product and for Japanese payment methods.
+       */
+      public Builder setSpecifiedCommercialTransactionsActUrl(
+          String specifiedCommercialTransactionsActUrl) {
+        this.specifiedCommercialTransactionsActUrl = specifiedCommercialTransactionsActUrl;
+        return this;
+      }
+
+      /**
+       * A link to the business's publicly available terms related to the Specified Commercial
+       * Transaction Act. Used by the Checkout product and for Japanese payment methods.
+       */
+      public Builder setSpecifiedCommercialTransactionsActUrl(
+          EmptyParam specifiedCommercialTransactionsActUrl) {
+        this.specifiedCommercialTransactionsActUrl = specifiedCommercialTransactionsActUrl;
         return this;
       }
 
@@ -14087,6 +14119,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("payouts")
     Payouts payouts;
 
+    /** Settings specific to the PayPay payments method. */
+    @SerializedName("paypay_payments")
+    PaypayPayments paypayPayments;
+
     /** Settings specific to the account's tax forms. */
     @SerializedName("tax_forms")
     TaxForms taxForms;
@@ -14106,6 +14142,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Invoices invoices,
         Payments payments,
         Payouts payouts,
+        PaypayPayments paypayPayments,
         TaxForms taxForms,
         Treasury treasury) {
       this.bacsDebitPayments = bacsDebitPayments;
@@ -14118,6 +14155,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.invoices = invoices;
       this.payments = payments;
       this.payouts = payouts;
+      this.paypayPayments = paypayPayments;
       this.taxForms = taxForms;
       this.treasury = treasury;
     }
@@ -14147,6 +14185,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private Payouts payouts;
 
+      private PaypayPayments paypayPayments;
+
       private TaxForms taxForms;
 
       private Treasury treasury;
@@ -14164,6 +14204,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.invoices,
             this.payments,
             this.payouts,
+            this.paypayPayments,
             this.taxForms,
             this.treasury);
       }
@@ -14250,6 +14291,12 @@ public class AccountCreateParams extends ApiRequestParams {
       /** Settings specific to the account's payouts. */
       public Builder setPayouts(AccountCreateParams.Settings.Payouts payouts) {
         this.payouts = payouts;
+        return this;
+      }
+
+      /** Settings specific to the PayPay payments method. */
+      public Builder setPaypayPayments(AccountCreateParams.Settings.PaypayPayments paypayPayments) {
+        this.paypayPayments = paypayPayments;
         return this;
       }
 
@@ -15206,8 +15253,9 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Whether payment methods should be saved when a payment is completed for a one-time invoices
-       * on a hosted invoice page.
+       * Whether to save the payment method after a payment is completed for a one-time invoice or a
+       * subscription invoice when the customer already has a default payment method on the hosted
+       * invoice page.
        */
       @SerializedName("hosted_payment_method_save")
       HostedPaymentMethodSave hostedPaymentMethodSave;
@@ -15262,8 +15310,9 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Whether payment methods should be saved when a payment is completed for a one-time
-         * invoices on a hosted invoice page.
+         * Whether to save the payment method after a payment is completed for a one-time invoice or
+         * a subscription invoice when the customer already has a default payment method on the
+         * hosted invoice page.
          */
         public Builder setHostedPaymentMethodSave(
             AccountCreateParams.Settings.Invoices.HostedPaymentMethodSave hostedPaymentMethodSave) {
@@ -15908,6 +15957,93 @@ public class AccountCreateParams extends ApiRequestParams {
           WeeklyPayoutDay(String value) {
             this.value = value;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaypayPayments {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Whether your business sells digital content or not. */
+      @SerializedName("goods_type")
+      GoodsType goodsType;
+
+      private PaypayPayments(Map<String, Object> extraParams, GoodsType goodsType) {
+        this.extraParams = extraParams;
+        this.goodsType = goodsType;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private GoodsType goodsType;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountCreateParams.Settings.PaypayPayments build() {
+          return new AccountCreateParams.Settings.PaypayPayments(this.extraParams, this.goodsType);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.PaypayPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Settings.PaypayPayments#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Whether your business sells digital content or not. */
+        public Builder setGoodsType(
+            AccountCreateParams.Settings.PaypayPayments.GoodsType goodsType) {
+          this.goodsType = goodsType;
+          return this;
+        }
+      }
+
+      public enum GoodsType implements ApiRequestParams.EnumParam {
+        @SerializedName("digital_content")
+        DIGITAL_CONTENT("digital_content"),
+
+        @SerializedName("other")
+        OTHER("other");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        GoodsType(String value) {
+          this.value = value;
         }
       }
     }
