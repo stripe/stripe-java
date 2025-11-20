@@ -4,7 +4,6 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -94,6 +93,27 @@ public class Transaction extends StripeObject implements HasId {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
+  /** The amount of the Transaction. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Amount extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
+  }
+
   /**
    * The delta to the FinancialAccount's balance. The balance_impact for the Transaction is equal to
    * sum of its TransactionEntries that have {@code effective_at}s in the past.
@@ -104,15 +124,78 @@ public class Transaction extends StripeObject implements HasId {
   public static class BalanceImpact extends StripeObject {
     /** Impact to the available balance. */
     @SerializedName("available")
-    Amount available;
+    Available available;
 
     /** Impact to the inbound_pending balance. */
     @SerializedName("inbound_pending")
-    Amount inboundPending;
+    InboundPending inboundPending;
 
     /** Impact to the outbound_pending balance. */
     @SerializedName("outbound_pending")
-    Amount outboundPending;
+    OutboundPending outboundPending;
+
+    /** Impact to the available balance. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Available extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
+
+    /** Impact to the inbound_pending balance. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InboundPending extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
+
+    /** Impact to the outbound_pending balance. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OutboundPending extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
   }
 
   /** Details about the Flow object that created the Transaction. */
