@@ -1554,6 +1554,17 @@ public class QuoteUpdateParams extends ApiRequestParams {
     CancelSubscriptionSchedule cancelSubscriptionSchedule;
 
     /**
+     * Configures how the subscription schedule handles billing for phase transitions. Possible
+     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
+     * bills based on the current state of the subscription, ignoring changes scheduled in future
+     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
+     * the current billing cycle, including pricing changes and service period adjustments that will
+     * occur before the next invoice.
+     */
+    @SerializedName("effective_at")
+    EffectiveAt effectiveAt;
+
+    /**
      * Details to identify the end of the time range modified by the proposed change. If not
      * supplied, the quote line is considered a point-in-time operation that only affects the exact
      * timestamp at {@code starts_at}, and a restricted set of attributes is supported on the quote
@@ -1609,6 +1620,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         AppliesTo appliesTo,
         BillingCycleAnchor billingCycleAnchor,
         CancelSubscriptionSchedule cancelSubscriptionSchedule,
+        EffectiveAt effectiveAt,
         EndsAt endsAt,
         Map<String, Object> extraParams,
         Object id,
@@ -1621,6 +1633,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       this.appliesTo = appliesTo;
       this.billingCycleAnchor = billingCycleAnchor;
       this.cancelSubscriptionSchedule = cancelSubscriptionSchedule;
+      this.effectiveAt = effectiveAt;
       this.endsAt = endsAt;
       this.extraParams = extraParams;
       this.id = id;
@@ -1643,6 +1656,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
       private BillingCycleAnchor billingCycleAnchor;
 
       private CancelSubscriptionSchedule cancelSubscriptionSchedule;
+
+      private EffectiveAt effectiveAt;
 
       private EndsAt endsAt;
 
@@ -1667,6 +1682,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
             this.appliesTo,
             this.billingCycleAnchor,
             this.cancelSubscriptionSchedule,
+            this.effectiveAt,
             this.endsAt,
             this.extraParams,
             this.id,
@@ -1733,6 +1749,19 @@ public class QuoteUpdateParams extends ApiRequestParams {
       public Builder setCancelSubscriptionSchedule(
           QuoteUpdateParams.Line.CancelSubscriptionSchedule cancelSubscriptionSchedule) {
         this.cancelSubscriptionSchedule = cancelSubscriptionSchedule;
+        return this;
+      }
+
+      /**
+       * Configures how the subscription schedule handles billing for phase transitions. Possible
+       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+       * phase_start} bills based on the current state of the subscription, ignoring changes
+       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+       * phase transitions within the current billing cycle, including pricing changes and service
+       * period adjustments that will occur before the next invoice.
+       */
+      public Builder setEffectiveAt(QuoteUpdateParams.Line.EffectiveAt effectiveAt) {
+        this.effectiveAt = effectiveAt;
         return this;
       }
 
@@ -2454,6 +2483,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        Object trialOffer;
+
         private AddItem(
             List<QuoteUpdateParams.Line.Action.AddItem.Discount> discounts,
             Map<String, Object> extraParams,
@@ -2461,7 +2494,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             Object price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            Object trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -2469,6 +2503,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -2490,6 +2525,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private Object trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteUpdateParams.Line.Action.AddItem build() {
             return new QuoteUpdateParams.Line.Action.AddItem(
@@ -2499,7 +2536,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -2631,6 +2669,18 @@ public class QuoteUpdateParams extends ApiRequestParams {
           /** Options that configure the trial on the subscription item. */
           public Builder setTrial(QuoteUpdateParams.Line.Action.AddItem.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(EmptyParam trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -3524,6 +3574,10 @@ public class QuoteUpdateParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        Object trialOffer;
+
         private SetItem(
             List<QuoteUpdateParams.Line.Action.SetItem.Discount> discounts,
             Map<String, Object> extraParams,
@@ -3531,7 +3585,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
             Object price,
             Long quantity,
             List<String> taxRates,
-            Trial trial) {
+            Trial trial,
+            Object trialOffer) {
           this.discounts = discounts;
           this.extraParams = extraParams;
           this.metadata = metadata;
@@ -3539,6 +3594,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -3560,6 +3616,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private Object trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public QuoteUpdateParams.Line.Action.SetItem build() {
             return new QuoteUpdateParams.Line.Action.SetItem(
@@ -3569,7 +3627,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
                 this.price,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -3710,6 +3769,18 @@ public class QuoteUpdateParams extends ApiRequestParams {
            */
           public Builder setTrial(QuoteUpdateParams.Line.Action.SetItem.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(EmptyParam trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -5590,6 +5661,21 @@ public class QuoteUpdateParams extends ApiRequestParams {
       private final String value;
 
       BillingCycleAnchor(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum EffectiveAt implements ApiRequestParams.EnumParam {
+      @SerializedName("billing_period_start")
+      BILLING_PERIOD_START("billing_period_start"),
+
+      @SerializedName("line_start")
+      LINE_START("line_start");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      EffectiveAt(String value) {
         this.value = value;
       }
     }
@@ -8813,8 +8899,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("billing_period_start")
       BILLING_PERIOD_START("billing_period_start"),
 
-      @SerializedName("phase_start")
-      PHASE_START("phase_start");
+      @SerializedName("line_start")
+      LINE_START("line_start");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -10949,8 +11035,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
       @SerializedName("billing_period_start")
       BILLING_PERIOD_START("billing_period_start"),
 
-      @SerializedName("phase_start")
-      PHASE_START("phase_start");
+      @SerializedName("line_start")
+      LINE_START("line_start");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

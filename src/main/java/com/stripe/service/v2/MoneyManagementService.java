@@ -13,6 +13,11 @@ public final class MoneyManagementService extends ApiService {
     return new com.stripe.service.v2.moneymanagement.AdjustmentService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.moneymanagement.CurrencyConversionService currencyConversions() {
+    return new com.stripe.service.v2.moneymanagement.CurrencyConversionService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.moneymanagement.FinancialAccountService financialAccounts() {
     return new com.stripe.service.v2.moneymanagement.FinancialAccountService(
         this.getResponseGetter());

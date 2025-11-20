@@ -3211,7 +3211,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.core.Event.class,
-        "{\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\",\"v1_event_id\":\"v1_event_id\"}");
+        "{\"changes\":{\"int_key\":123,\"string_key\":\"value\",\"boolean_key\":true,\"object_key\":{\"object_int_key\":123,\"object_string_key\":\"value\",\"object_boolean_key\":true},\"array_key\":[1,2,3]},\"context\":\"context\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.event\",\"reason\":{\"type\":\"request\",\"request\":{\"id\":\"obj_123\",\"idempotency_key\":\"idempotency_key\"}},\"type\":\"type\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.core.Event event = client.v2().core().events().retrieve("ll_123");
@@ -27091,6 +27091,55 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreAccountsPersonTokenPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/account_id_123/person_tokens",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountPersonToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_person_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.accounts.PersonTokenCreateParams params =
+        com.stripe.param.v2.core.accounts.PersonTokenCreateParams.builder().build();
+
+    com.stripe.model.v2.core.AccountPersonToken accountPersonToken =
+        client.v2().core().accounts().personTokens().create("account_id_123", params);
+    assertNotNull(accountPersonToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/accounts/account_id_123/person_tokens",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreAccountsPersonTokenGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/accounts/account_id_123/person_tokens/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountPersonToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_person_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.AccountPersonToken accountPersonToken =
+        client.v2().core().accounts().personTokens().retrieve("account_id_123", "id_123");
+    assertNotNull(accountPersonToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/accounts/account_id_123/person_tokens/id_123",
+        null,
+        null);
+  }
+
+  @Test
   public void testV2CoreAccountLinkPostServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
@@ -27162,6 +27211,683 @@ class GeneratedExamples extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v2/core/account_links",
         params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreAccountTokenPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_tokens",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.AccountTokenCreateParams params =
+        com.stripe.param.v2.core.AccountTokenCreateParams.builder()
+            .setIdentity(
+                com.stripe.param.v2.core.AccountTokenCreateParams.Identity.builder()
+                    .setAttestations(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.Attestations
+                            .builder()
+                            .setDirectorshipDeclaration(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.DirectorshipDeclaration.builder()
+                                    .setAttested(true)
+                                    .build())
+                            .setOwnershipDeclaration(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.OwnershipDeclaration.builder()
+                                    .setAttested(true)
+                                    .build())
+                            .setPersonsProvided(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.PersonsProvided.builder()
+                                    .setDirectors(true)
+                                    .setExecutives(true)
+                                    .setOwners(true)
+                                    .setOwnershipExemptionReason(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.PersonsProvided.OwnershipExemptionReason
+                                            .QUALIFIED_ENTITY_EXCEEDS_OWNERSHIP_THRESHOLD)
+                                    .build())
+                            .setRepresentativeDeclaration(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.RepresentativeDeclaration.builder()
+                                    .setAttested(true)
+                                    .build())
+                            .setTermsOfService(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Attestations.TermsOfService.builder()
+                                    .setAccount(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.TermsOfService.Account.builder()
+                                            .setShownAndAccepted(true)
+                                            .build())
+                                    .setCardCreator(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.TermsOfService.CardCreator.builder()
+                                            .setCommercial(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Attestations.TermsOfService
+                                                    .CardCreator.Commercial.builder()
+                                                    .setAccountHolder(
+                                                        com.stripe.param.v2.core
+                                                            .AccountTokenCreateParams.Identity
+                                                            .Attestations.TermsOfService.CardCreator
+                                                            .Commercial.AccountHolder.builder()
+                                                            .setShownAndAccepted(true)
+                                                            .build())
+                                                    .setCeltic(
+                                                        com.stripe.param.v2.core
+                                                            .AccountTokenCreateParams.Identity
+                                                            .Attestations.TermsOfService.CardCreator
+                                                            .Commercial.Celtic.builder()
+                                                            .setApplePay(
+                                                                com.stripe.param.v2.core
+                                                                    .AccountTokenCreateParams
+                                                                    .Identity.Attestations
+                                                                    .TermsOfService.CardCreator
+                                                                    .Commercial.Celtic.ApplePay
+                                                                    .builder()
+                                                                    .setShownAndAccepted(true)
+                                                                    .build())
+                                                            .setChargeCard(
+                                                                com.stripe.param.v2.core
+                                                                    .AccountTokenCreateParams
+                                                                    .Identity.Attestations
+                                                                    .TermsOfService.CardCreator
+                                                                    .Commercial.Celtic.ChargeCard
+                                                                    .builder()
+                                                                    .setBankTerms(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .Celtic.ChargeCard
+                                                                            .BankTerms.builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .setPlatform(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .Celtic.ChargeCard
+                                                                            .Platform.builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .build())
+                                                            .setSpendCard(
+                                                                com.stripe.param.v2.core
+                                                                    .AccountTokenCreateParams
+                                                                    .Identity.Attestations
+                                                                    .TermsOfService.CardCreator
+                                                                    .Commercial.Celtic.SpendCard
+                                                                    .builder()
+                                                                    .setBankTerms(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .Celtic.SpendCard
+                                                                            .BankTerms.builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .setFinancingDisclosures(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .Celtic.SpendCard
+                                                                            .FinancingDisclosures
+                                                                            .builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .setPlatform(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .Celtic.SpendCard
+                                                                            .Platform.builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .build())
+                                                            .build())
+                                                    .setCrossRiverBank(
+                                                        com.stripe.param.v2.core
+                                                            .AccountTokenCreateParams.Identity
+                                                            .Attestations.TermsOfService.CardCreator
+                                                            .Commercial.CrossRiverBank.builder()
+                                                            .setApplePay(
+                                                                com.stripe.param.v2.core
+                                                                    .AccountTokenCreateParams
+                                                                    .Identity.Attestations
+                                                                    .TermsOfService.CardCreator
+                                                                    .Commercial.CrossRiverBank
+                                                                    .ApplePay.builder()
+                                                                    .setShownAndAccepted(true)
+                                                                    .build())
+                                                            .setChargeCard(
+                                                                com.stripe.param.v2.core
+                                                                    .AccountTokenCreateParams
+                                                                    .Identity.Attestations
+                                                                    .TermsOfService.CardCreator
+                                                                    .Commercial.CrossRiverBank
+                                                                    .ChargeCard.builder()
+                                                                    .setBankTerms(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .CrossRiverBank
+                                                                            .ChargeCard.BankTerms
+                                                                            .builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .setFinancingDisclosures(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .CrossRiverBank
+                                                                            .ChargeCard
+                                                                            .FinancingDisclosures
+                                                                            .builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .setPlatform(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .CrossRiverBank
+                                                                            .ChargeCard.Platform
+                                                                            .builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .build())
+                                                            .setSpendCard(
+                                                                com.stripe.param.v2.core
+                                                                    .AccountTokenCreateParams
+                                                                    .Identity.Attestations
+                                                                    .TermsOfService.CardCreator
+                                                                    .Commercial.CrossRiverBank
+                                                                    .SpendCard.builder()
+                                                                    .setBankTerms(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .CrossRiverBank
+                                                                            .SpendCard.BankTerms
+                                                                            .builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .setFinancingDisclosures(
+                                                                        com.stripe.param.v2.core
+                                                                            .AccountTokenCreateParams
+                                                                            .Identity.Attestations
+                                                                            .TermsOfService
+                                                                            .CardCreator.Commercial
+                                                                            .CrossRiverBank
+                                                                            .SpendCard
+                                                                            .FinancingDisclosures
+                                                                            .builder()
+                                                                            .setShownAndAccepted(
+                                                                                true)
+                                                                            .build())
+                                                                    .build())
+                                                            .build())
+                                                    .build())
+                                            .build())
+                                    .setCryptoStorer(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.TermsOfService.CryptoStorer.builder()
+                                            .setShownAndAccepted(true)
+                                            .build())
+                                    .setStorer(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Attestations.TermsOfService.Storer.builder()
+                                            .setShownAndAccepted(true)
+                                            .build())
+                                    .build())
+                            .build())
+                    .setBusinessDetails(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.BusinessDetails
+                            .builder()
+                            .setAddress(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.Address.builder()
+                                    .setCity("city")
+                                    .setCountry("country")
+                                    .setLine1("line1")
+                                    .setLine2("line2")
+                                    .setPostalCode("postal_code")
+                                    .setState("state")
+                                    .setTown("town")
+                                    .build())
+                            .setAnnualRevenue(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.AnnualRevenue.builder()
+                                    .setAmount(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.AnnualRevenue.Amount.builder()
+                                            .setValue(111972721L)
+                                            .setCurrency("usd")
+                                            .build())
+                                    .setFiscalYearEnd("fiscal_year_end")
+                                    .build())
+                            .setComplianceScreeningDescription("compliance_screening_description")
+                            .setDocuments(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.Documents.builder()
+                                    .setBankAccountOwnershipVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .BankAccountOwnershipVerification.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .BankAccountOwnershipVerification.Type.FILES)
+                                            .build())
+                                    .setCompanyLicense(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.CompanyLicense.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyLicense.Type.FILES)
+                                            .build())
+                                    .setCompanyMemorandumOfAssociation(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .CompanyMemorandumOfAssociation.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyMemorandumOfAssociation.Type.FILES)
+                                            .build())
+                                    .setCompanyMinisterialDecree(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.CompanyMinisterialDecree
+                                            .builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyMinisterialDecree.Type.FILES)
+                                            .build())
+                                    .setCompanyRegistrationVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .CompanyRegistrationVerification.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyRegistrationVerification.Type.FILES)
+                                            .build())
+                                    .setCompanyTaxIdVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.CompanyTaxIdVerification
+                                            .builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .CompanyTaxIdVerification.Type.FILES)
+                                            .build())
+                                    .setPrimaryVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.PrimaryVerification.builder()
+                                            .setFrontBack(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .PrimaryVerification.FrontBack.builder()
+                                                    .setBack("back")
+                                                    .setFront("front")
+                                                    .build())
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .PrimaryVerification.Type.FRONT_BACK)
+                                            .build())
+                                    .setProofOfAddress(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.ProofOfAddress.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .ProofOfAddress.Type.FILES)
+                                            .build())
+                                    .setProofOfRegistration(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents.ProofOfRegistration.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .ProofOfRegistration.Type.FILES)
+                                            .build())
+                                    .setProofOfUltimateBeneficialOwnership(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.Documents
+                                            .ProofOfUltimateBeneficialOwnership.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.BusinessDetails.Documents
+                                                    .ProofOfUltimateBeneficialOwnership.Type.FILES)
+                                            .build())
+                                    .build())
+                            .setEstimatedWorkerCount(884794319L)
+                            .addIdNumber(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.IdNumber.builder()
+                                    .setRegistrar("registrar")
+                                    .setType(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.IdNumber.Type.TH_PRN)
+                                    .setValue("value")
+                                    .build())
+                            .setMonthlyEstimatedRevenue(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.MonthlyEstimatedRevenue.builder()
+                                    .setAmount(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.MonthlyEstimatedRevenue.Amount
+                                            .builder()
+                                            .setValue(111972721L)
+                                            .setCurrency("usd")
+                                            .build())
+                                    .build())
+                            .setPhone("phone")
+                            .setRegisteredName("registered_name")
+                            .setScriptAddresses(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.ScriptAddresses.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptAddresses.Kana.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptAddresses.Kanji.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .build())
+                            .setScriptNames(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.ScriptNames.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptNames.Kana.builder()
+                                            .setRegisteredName("registered_name")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .BusinessDetails.ScriptNames.Kanji.builder()
+                                            .setRegisteredName("registered_name")
+                                            .build())
+                                    .build())
+                            .setStructure(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .BusinessDetails.Structure.PUBLIC_LISTED_CORPORATION)
+                            .build())
+                    .setEntityType(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.EntityType
+                            .INDIVIDUAL)
+                    .setIndividual(
+                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity.Individual
+                            .builder()
+                            .addAdditionalAddress(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.AdditionalAddress.builder()
+                                    .setCity("city")
+                                    .setCountry("country")
+                                    .setLine1("line1")
+                                    .setLine2("line2")
+                                    .setPostalCode("postal_code")
+                                    .setPurpose(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.AdditionalAddress.Purpose.REGISTERED)
+                                    .setState("state")
+                                    .setTown("town")
+                                    .build())
+                            .addAdditionalName(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.AdditionalName.builder()
+                                    .setFullName("full_name")
+                                    .setGivenName("given_name")
+                                    .setPurpose(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.AdditionalName.Purpose.ALIAS)
+                                    .setSurname("surname")
+                                    .build())
+                            .setAddress(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.Address.builder()
+                                    .setCity("city")
+                                    .setCountry("country")
+                                    .setLine1("line1")
+                                    .setLine2("line2")
+                                    .setPostalCode("postal_code")
+                                    .setState("state")
+                                    .setTown("town")
+                                    .build())
+                            .setDateOfBirth(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.DateOfBirth.builder()
+                                    .setDay(99228L)
+                                    .setMonth(104080000L)
+                                    .setYear(3704893L)
+                                    .build())
+                            .setDocuments(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.Documents.builder()
+                                    .setCompanyAuthorization(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.CompanyAuthorization.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .CompanyAuthorization.Type.FILES)
+                                            .build())
+                                    .setPassport(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.Passport.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents.Passport.Type
+                                                    .FILES)
+                                            .build())
+                                    .setPrimaryVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.PrimaryVerification.builder()
+                                            .setFrontBack(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .PrimaryVerification.FrontBack.builder()
+                                                    .setBack("back")
+                                                    .setFront("front")
+                                                    .build())
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .PrimaryVerification.Type.FRONT_BACK)
+                                            .build())
+                                    .setSecondaryVerification(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.SecondaryVerification.builder()
+                                            .setFrontBack(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .SecondaryVerification.FrontBack.builder()
+                                                    .setBack("back")
+                                                    .setFront("front")
+                                                    .build())
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents
+                                                    .SecondaryVerification.Type.FRONT_BACK)
+                                            .build())
+                                    .setVisa(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.Documents.Visa.builder()
+                                            .addFile("files")
+                                            .setType(
+                                                com.stripe.param.v2.core.AccountTokenCreateParams
+                                                    .Identity.Individual.Documents.Visa.Type.FILES)
+                                            .build())
+                                    .build())
+                            .setEmail("email")
+                            .setGivenName("given_name")
+                            .addIdNumber(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.IdNumber.builder()
+                                    .setType(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.IdNumber.Type.TH_LC)
+                                    .setValue("value")
+                                    .build())
+                            .setLegalGender(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.LegalGender.MALE)
+                            .putMetadata("key", "metadata")
+                            .addNationality("nationalities")
+                            .setPhone("phone")
+                            .setPoliticalExposure(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.PoliticalExposure.NONE)
+                            .setRelationship(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.Relationship.builder()
+                                    .setDirector(true)
+                                    .setExecutive(true)
+                                    .setOwner(true)
+                                    .setPercentOwnership("percent_ownership")
+                                    .setTitle("title")
+                                    .build())
+                            .setScriptAddresses(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.ScriptAddresses.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptAddresses.Kana.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptAddresses.Kanji.builder()
+                                            .setCity("city")
+                                            .setCountry("country")
+                                            .setLine1("line1")
+                                            .setLine2("line2")
+                                            .setPostalCode("postal_code")
+                                            .setState("state")
+                                            .setTown("town")
+                                            .build())
+                                    .build())
+                            .setScriptNames(
+                                com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                    .Individual.ScriptNames.builder()
+                                    .setKana(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptNames.Kana.builder()
+                                            .setGivenName("given_name")
+                                            .setSurname("surname")
+                                            .build())
+                                    .setKanji(
+                                        com.stripe.param.v2.core.AccountTokenCreateParams.Identity
+                                            .Individual.ScriptNames.Kanji.builder()
+                                            .setGivenName("given_name")
+                                            .setSurname("surname")
+                                            .build())
+                                    .build())
+                            .setSurname("surname")
+                            .build())
+                    .build())
+            .build();
+
+    com.stripe.model.v2.core.AccountToken accountToken =
+        client.v2().core().accountTokens().create(params);
+    assertNotNull(accountToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/account_tokens",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2CoreAccountTokenGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/account_tokens/id_123",
+        null,
+        null,
+        com.stripe.model.v2.core.AccountToken.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"expires_at\":\"1970-01-10T15:36:51.170Z\",\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.core.account_token\",\"used\":true}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.core.AccountToken accountToken =
+        client.v2().core().accountTokens().retrieve("id_123");
+    assertNotNull(accountToken);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/core/account_tokens/id_123",
+        null,
         null);
   }
 
@@ -27807,7 +28533,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.Adjustment>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.adjustment\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.adjustment\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.AdjustmentListParams params =
@@ -27833,7 +28559,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.Adjustment.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.adjustment\",\"livemode\":true}");
+        "{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.adjustment\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.Adjustment adjustment =
@@ -27843,6 +28569,105 @@ class GeneratedExamples extends BaseStripeTest {
         BaseAddress.API,
         ApiResource.RequestMethod.GET,
         "/v2/money_management/adjustments/id_123",
+        null,
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementCurrencyConversionGetServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/currency_conversions",
+        null,
+        null,
+        new TypeToken<
+            com.stripe.model.v2.StripeCollection<
+                com.stripe.model.v2.moneymanagement.CurrencyConversion>>() {}.getType(),
+        "{\"data\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"exchange_rate\":\"exchange_rate\",\"financial_account\":\"financial_account\",\"from\":{\"amount\":{}},\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.money_management.currency_conversion\",\"to\":{\"amount\":{}}}],\"next_page_url\":null,\"previous_page_url\":null}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.CurrencyConversionListParams params =
+        com.stripe.param.v2.moneymanagement.CurrencyConversionListParams.builder().build();
+
+    com.stripe.model.v2.StripeCollection<com.stripe.model.v2.moneymanagement.CurrencyConversion>
+        stripeCollection = client.v2().moneyManagement().currencyConversions().list(params);
+    assertNotNull(stripeCollection);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/currency_conversions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementCurrencyConversionPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/currency_conversions",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.CurrencyConversion.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"exchange_rate\":\"exchange_rate\",\"financial_account\":\"financial_account\",\"from\":{\"amount\":{}},\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.money_management.currency_conversion\",\"to\":{\"amount\":{}}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams params =
+        com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.builder()
+            .setFinancialAccount("financial_account")
+            .setFrom(
+                com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.From.builder()
+                    .setAmount(
+                        com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.From
+                            .Amount.builder()
+                            .setValue(111972721L)
+                            .setCurrency("usd")
+                            .build())
+                    .setCurrency("usd")
+                    .build())
+            .setTo(
+                com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.To.builder()
+                    .setAmount(
+                        com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.To.Amount
+                            .builder()
+                            .setValue(111972721L)
+                            .setCurrency("usd")
+                            .build())
+                    .setCurrency("usd")
+                    .build())
+            .build();
+
+    com.stripe.model.v2.moneymanagement.CurrencyConversion currencyConversion =
+        client.v2().moneyManagement().currencyConversions().create(params);
+    assertNotNull(currencyConversion);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/money_management/currency_conversions",
+        params.toMap(),
+        null);
+  }
+
+  @Test
+  public void testV2MoneyManagementCurrencyConversionGet2Services() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/currency_conversions/id_123",
+        null,
+        null,
+        com.stripe.model.v2.moneymanagement.CurrencyConversion.class,
+        "{\"created\":\"1970-01-12T21:42:34.472Z\",\"exchange_rate\":\"exchange_rate\",\"financial_account\":\"financial_account\",\"from\":{\"amount\":{}},\"id\":\"obj_123\",\"livemode\":true,\"object\":\"v2.money_management.currency_conversion\",\"to\":{\"amount\":{}}}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.model.v2.moneymanagement.CurrencyConversion currencyConversion =
+        client.v2().moneyManagement().currencyConversions().retrieve("id_123");
+    assertNotNull(currencyConversion);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.GET,
+        "/v2/money_management/currency_conversions/id_123",
         null,
         null);
   }
@@ -27858,7 +28683,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.FinancialAccount>>() {}.getType(),
-        "{\"data\":[{\"balance\":{\"available\":{\"key\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"balance\":{\"available\":{\"key\":{}},\"inbound_pending\":{\"key\":{}},\"outbound_pending\":{\"key\":{}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAccountListParams params =
@@ -27884,7 +28709,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAccount.class,
-        "{\"balance\":{\"available\":{\"key\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
+        "{\"balance\":{\"available\":{\"key\":{}},\"inbound_pending\":{\"key\":{}},\"outbound_pending\":{\"key\":{}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAccountCreateParams params =
@@ -27912,7 +28737,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAccount.class,
-        "{\"balance\":{\"available\":{\"key\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
+        "{\"balance\":{\"available\":{\"key\":{}},\"inbound_pending\":{\"key\":{}},\"outbound_pending\":{\"key\":{}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.FinancialAccount financialAccount =
@@ -27935,7 +28760,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAccount.class,
-        "{\"balance\":{\"available\":{\"key\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
+        "{\"balance\":{\"available\":{\"key\":{}},\"inbound_pending\":{\"key\":{}},\"outbound_pending\":{\"key\":{}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAccountUpdateParams params =
@@ -27961,7 +28786,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.FinancialAccount.class,
-        "{\"balance\":{\"available\":{\"key\":{\"currency\":\"USD\",\"value\":35}},\"inbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":11}},\"outbound_pending\":{\"key\":{\"currency\":\"USD\",\"value\":60}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
+        "{\"balance\":{\"available\":{\"key\":{}},\"inbound_pending\":{\"key\":{}},\"outbound_pending\":{\"key\":{}}},\"country\":\"country\",\"created\":\"1970-01-12T21:42:34.472Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.financial_account\",\"status\":\"closed\",\"type\":\"other\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.FinancialAccountCloseParams params =
@@ -28074,7 +28899,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.InboundTransfer>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"payment_method\":{\"type\":\"type\"}},\"id\":\"obj_123\",\"object\":\"v2.money_management.inbound_transfer\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"financial_account\":\"financial_account\"},\"transfer_history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"level\":\"canonical\",\"type\":\"bank_debit_failed\"}],\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"from\":{\"debited\":{},\"payment_method\":{\"type\":\"type\"}},\"id\":\"obj_123\",\"object\":\"v2.money_management.inbound_transfer\",\"to\":{\"credited\":{},\"financial_account\":\"financial_account\"},\"transfer_history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"level\":\"canonical\",\"type\":\"bank_debit_failed\"}],\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.InboundTransferListParams params =
@@ -28100,12 +28925,16 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.InboundTransfer.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"payment_method\":{\"type\":\"type\"}},\"id\":\"obj_123\",\"object\":\"v2.money_management.inbound_transfer\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"financial_account\":\"financial_account\"},\"transfer_history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"level\":\"canonical\",\"type\":\"bank_debit_failed\"}],\"livemode\":true}");
+        "{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"from\":{\"debited\":{},\"payment_method\":{\"type\":\"type\"}},\"id\":\"obj_123\",\"object\":\"v2.money_management.inbound_transfer\",\"to\":{\"credited\":{},\"financial_account\":\"financial_account\"},\"transfer_history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"level\":\"canonical\",\"type\":\"bank_debit_failed\"}],\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.InboundTransferCreateParams params =
         com.stripe.param.v2.moneymanagement.InboundTransferCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.moneymanagement.InboundTransferCreateParams.Amount.builder()
+                    .setValue(111972721L)
+                    .setCurrency("usd")
+                    .build())
             .setFrom(
                 com.stripe.param.v2.moneymanagement.InboundTransferCreateParams.From.builder()
                     .setCurrency("usd")
@@ -28138,7 +28967,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.InboundTransfer.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"payment_method\":{\"type\":\"type\"}},\"id\":\"obj_123\",\"object\":\"v2.money_management.inbound_transfer\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"financial_account\":\"financial_account\"},\"transfer_history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"level\":\"canonical\",\"type\":\"bank_debit_failed\"}],\"livemode\":true}");
+        "{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"description\":\"description\",\"from\":{\"debited\":{},\"payment_method\":{\"type\":\"type\"}},\"id\":\"obj_123\",\"object\":\"v2.money_management.inbound_transfer\",\"to\":{\"credited\":{},\"financial_account\":\"financial_account\"},\"transfer_history\":[{\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"level\":\"canonical\",\"type\":\"bank_debit_failed\"}],\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.InboundTransfer inboundTransfer =
@@ -28163,7 +28992,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.OutboundPayment>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentListParams params =
@@ -28189,12 +29018,16 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPayment.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
+        "{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams params =
         com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.Amount.builder()
+                    .setValue(111972721L)
+                    .setCurrency("usd")
+                    .build())
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.From.builder()
                     .setCurrency("usd")
@@ -28228,7 +29061,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPayment.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
+        "{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundPayment outboundPayment =
@@ -28251,7 +29084,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPayment.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
+        "{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment\",\"recipient_notification\":{\"setting\":\"configured\"},\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundPayment outboundPayment =
@@ -28274,12 +29107,17 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
+        "{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"estimated_fees\":[{\"amount\":{},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams params =
         com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.Amount
+                    .builder()
+                    .setValue(111972721L)
+                    .setCurrency("usd")
+                    .build())
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentQuoteCreateParams.From.builder()
                     .setCurrency("usd")
@@ -28313,7 +29151,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundPaymentQuote.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"estimated_fees\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
+        "{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"estimated_fees\":[{\"amount\":{},\"type\":\"cross_border_payout_fee\"}],\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"fx_quote\":{\"lock_duration\":\"five_minutes\",\"lock_status\":\"active\",\"rates\":{\"key\":{\"exchange_rate\":\"exchange_rate\"}},\"to_currency\":\"usd\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_payment_quote\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\",\"recipient\":\"recipient\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundPaymentQuote outboundPaymentQuote =
@@ -28464,7 +29302,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.OutboundTransfer>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundTransferListParams params =
@@ -28490,12 +29328,16 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundTransfer.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
+        "{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams params =
         com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.Amount.builder()
+                    .setValue(111972721L)
+                    .setCurrency("usd")
+                    .build())
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundTransferCreateParams.From.builder()
                     .setCurrency("usd")
@@ -28528,7 +29370,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundTransfer.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
+        "{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundTransfer outboundTransfer =
@@ -28551,7 +29393,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.OutboundTransfer.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{\"currency\":\"USD\",\"value\":55},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{\"currency\":\"USD\",\"value\":68},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
+        "{\"amount\":{},\"cancelable\":true,\"created\":\"1970-01-12T21:42:34.472Z\",\"from\":{\"debited\":{},\"financial_account\":\"financial_account\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.outbound_transfer\",\"statement_descriptor\":\"statement_descriptor\",\"status\":\"canceled\",\"to\":{\"credited\":{},\"payout_method\":\"payout_method\"},\"trace_id\":{\"status\":\"pending\"},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.OutboundTransfer outboundTransfer =
@@ -28701,7 +29543,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.ReceivedCredit>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"status\":\"returned\",\"type\":\"balance_transfer\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"status\":\"returned\",\"type\":\"balance_transfer\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.ReceivedCreditListParams params =
@@ -28727,7 +29569,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.ReceivedCredit.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"status\":\"returned\",\"type\":\"balance_transfer\",\"livemode\":true}");
+        "{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_credit\",\"status\":\"returned\",\"type\":\"balance_transfer\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.ReceivedCredit receivedCredit =
@@ -28752,7 +29594,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.ReceivedDebit>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"status\":\"canceled\",\"type\":\"bank_transfer\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"status\":\"canceled\",\"type\":\"bank_transfer\",\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.ReceivedDebitListParams params =
@@ -28778,7 +29620,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.ReceivedDebit.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"status\":\"canceled\",\"type\":\"bank_transfer\",\"livemode\":true}");
+        "{\"amount\":{},\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"id\":\"obj_123\",\"object\":\"v2.money_management.received_debit\",\"status\":\"canceled\",\"type\":\"bank_transfer\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.ReceivedDebit receivedDebit =
@@ -28877,7 +29719,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.Transaction>>() {}.getType(),
-        "{\"data\":[{\"amount\":{\"currency\":\"USD\",\"value\":96},\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"category\":\"received_debit\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount\":{},\"balance_impact\":{\"available\":{},\"inbound_pending\":{},\"outbound_pending\":{}},\"category\":\"received_debit\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.TransactionListParams params =
@@ -28903,7 +29745,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.Transaction.class,
-        "{\"amount\":{\"currency\":\"USD\",\"value\":96},\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"category\":\"received_debit\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}");
+        "{\"amount\":{},\"balance_impact\":{\"available\":{},\"inbound_pending\":{},\"outbound_pending\":{}},\"category\":\"received_debit\",\"created\":\"1970-01-12T21:42:34.472Z\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"},\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction\",\"status\":\"pending\",\"status_transitions\":{},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.Transaction transaction =
@@ -28928,7 +29770,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.moneymanagement.TransactionEntry>>() {}.getType(),
-        "{\"data\":[{\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"}},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"balance_impact\":{\"available\":{},\"inbound_pending\":{},\"outbound_pending\":{}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"}},\"livemode\":true}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.moneymanagement.TransactionEntryListParams params =
@@ -28954,7 +29796,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.moneymanagement.TransactionEntry.class,
-        "{\"balance_impact\":{\"available\":{\"currency\":\"USD\",\"value\":35},\"inbound_pending\":{\"currency\":\"USD\",\"value\":11},\"outbound_pending\":{\"currency\":\"USD\",\"value\":60}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"}},\"livemode\":true}");
+        "{\"balance_impact\":{\"available\":{},\"inbound_pending\":{},\"outbound_pending\":{}},\"created\":\"1970-01-12T21:42:34.472Z\",\"effective_at\":\"1970-01-03T20:38:28.043Z\",\"id\":\"obj_123\",\"object\":\"v2.money_management.transaction_entry\",\"transaction\":\"transaction\",\"transaction_details\":{\"category\":\"received_debit\",\"financial_account\":\"financial_account\",\"flow\":{\"type\":\"fee_transaction\"}},\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.moneymanagement.TransactionEntry transactionEntry =
@@ -28979,7 +29821,7 @@ class GeneratedExamples extends BaseStripeTest {
         new TypeToken<
             com.stripe.model.v2.StripeCollection<
                 com.stripe.model.v2.payments.OffSessionPayment>>() {}.getType(),
-        "{\"data\":[{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}],\"next_page_url\":null,\"previous_page_url\":null}");
+        "{\"data\":[{\"amount_requested\":{},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}],\"next_page_url\":null,\"previous_page_url\":null}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.payments.OffSessionPaymentListParams params =
@@ -29005,12 +29847,16 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
+        "{\"amount_requested\":{},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.payments.OffSessionPaymentCreateParams params =
         com.stripe.param.v2.payments.OffSessionPaymentCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.payments.OffSessionPaymentCreateParams.Amount.builder()
+                    .setValue(111972721L)
+                    .setCurrency("usd")
+                    .build())
             .setCadence(
                 com.stripe.param.v2.payments.OffSessionPaymentCreateParams.Cadence.UNSCHEDULED)
             .setCustomer("customer")
@@ -29038,7 +29884,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
+        "{\"amount_requested\":{},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
@@ -29061,7 +29907,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
+        "{\"amount_requested\":{},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.payments.OffSessionPayment offSessionPayment =
@@ -29084,12 +29930,11 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.payments.OffSessionPayment.class,
-        "{\"amount_requested\":{\"currency\":\"USD\",\"value\":47},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
+        "{\"amount_requested\":{},\"cadence\":\"unscheduled\",\"compartment_id\":\"compartment_id\",\"created\":\"1970-01-12T21:42:34.472Z\",\"customer\":\"customer\",\"id\":\"obj_123\",\"livemode\":true,\"metadata\":{\"key\":\"metadata\"},\"object\":\"v2.payments.off_session_payment\",\"payment_method\":\"payment_method\",\"payments_orchestration\":{\"enabled\":true},\"retry_details\":{\"attempts\":542738246,\"retry_strategy\":\"scheduled\"},\"status\":\"pending\"}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.param.v2.payments.OffSessionPaymentCaptureParams params =
         com.stripe.param.v2.payments.OffSessionPaymentCaptureParams.builder()
-            .setAmountToCapture(1374310455L)
             .putMetadata("key", "metadata")
             .build();
 
@@ -29204,7 +30049,11 @@ class GeneratedExamples extends BaseStripeTest {
 
     com.stripe.param.v2.testhelpers.FinancialAddressCreditParams params =
         com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.Amount.builder()
+                    .setValue(111972721L)
+                    .setCurrency("usd")
+                    .build())
             .setNetwork(com.stripe.param.v2.testhelpers.FinancialAddressCreditParams.Network.ACH)
             .build();
 
@@ -29228,7 +30077,7 @@ class GeneratedExamples extends BaseStripeTest {
         null,
         null,
         com.stripe.model.v2.FinancialAddressGeneratedMicrodeposits.class,
-        "{\"amounts\":[{\"currency\":\"USD\",\"value\":1}],\"object\":\"financial_address_generated_microdeposits\",\"status\":\"accepted\",\"livemode\":true}");
+        "{\"amounts\":[{}],\"object\":\"financial_address_generated_microdeposits\",\"status\":\"accepted\",\"livemode\":true}");
     StripeClient client = new StripeClient(networkSpy);
 
     com.stripe.model.v2.FinancialAddressGeneratedMicrodeposits
@@ -29393,20 +30242,26 @@ class GeneratedExamples extends BaseStripeTest {
     stubRequestReturnError(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/financial_accounts",
+        "/v2/money_management/currency_conversions",
         null,
         null,
         "{\"error\":{\"type\":\"feature_not_enabled\",\"code\":\"outbound_flow_from_closed_financial_account_unsupported\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.moneymanagement.FinancialAccountCreateParams params =
-        com.stripe.param.v2.moneymanagement.FinancialAccountCreateParams.builder()
-            .setType(com.stripe.param.v2.moneymanagement.FinancialAccountCreateParams.Type.STORAGE)
+    com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams params =
+        com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.builder()
+            .setFinancialAccount("financial_account")
+            .setFrom(
+                com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.From.builder()
+                    .build())
+            .setTo(
+                com.stripe.param.v2.moneymanagement.CurrencyConversionCreateParams.To.builder()
+                    .build())
             .build();
 
     try {
-      client.v2().moneyManagement().financialAccounts().create(params);
+      client.v2().moneyManagement().currencyConversions().create(params);
     } catch (FeatureNotEnabledException e) {
 
     }
@@ -29414,7 +30269,7 @@ class GeneratedExamples extends BaseStripeTest {
     verifyRequest(
         BaseAddress.API,
         ApiResource.RequestMethod.POST,
-        "/v2/money_management/financial_accounts",
+        "/v2/money_management/currency_conversions",
         params.toMap(),
         null);
   }
@@ -29467,7 +30322,9 @@ class GeneratedExamples extends BaseStripeTest {
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams params =
         com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.Amount.builder()
+                    .build())
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.From.builder()
                     .setCurrency("usd")
@@ -29682,7 +30539,9 @@ class GeneratedExamples extends BaseStripeTest {
 
     com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams params =
         com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.builder()
-            .setAmount(new com.stripe.v2.Amount(96, "USD"))
+            .setAmount(
+                com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.Amount.builder()
+                    .build())
             .setFrom(
                 com.stripe.param.v2.moneymanagement.OutboundPaymentCreateParams.From.builder()
                     .setCurrency("usd")

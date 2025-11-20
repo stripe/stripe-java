@@ -76,10 +76,6 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
   @SerializedName("type")
   String type;
 
-  /** For interop events, this is the snapshot event ID. */
-  @SerializedName("v1_event_id")
-  String v1EventId;
-
   StripeResponseGetter responseGetter;
 
   @Override

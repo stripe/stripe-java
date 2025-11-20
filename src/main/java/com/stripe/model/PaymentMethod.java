@@ -466,22 +466,22 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PaymentMethod.class);
   }
 
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance() throws StripeException {
     return checkBalance((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(RequestOptions options) throws StripeException {
     return checkBalance((Map<String, Object>) null, options);
   }
 
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(Map<String, Object> params) throws StripeException {
     return checkBalance(params, (RequestOptions) null);
   }
 
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path =
@@ -492,13 +492,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PaymentMethodBalance.class);
   }
 
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(PaymentMethodCheckBalanceParams params)
       throws StripeException {
     return checkBalance(params, (RequestOptions) null);
   }
 
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(
       PaymentMethodCheckBalanceParams params, RequestOptions options) throws StripeException {
     String path =

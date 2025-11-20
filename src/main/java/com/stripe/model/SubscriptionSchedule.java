@@ -761,21 +761,9 @@ public class SubscriptionSchedule extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BillFrom extends StripeObject {
-      /** Use an index to specify the position of an amendment to start prebilling with. */
-      @SerializedName("amendment_start")
-      AmendmentStart amendmentStart;
-
       /** The time the billing schedule applies from. */
       @SerializedName("computed_timestamp")
       Long computedTimestamp;
-
-      /** Lets you bill the period starting from a particular Quote line. */
-      @SerializedName("line_starts_at")
-      LineStartsAt lineStartsAt;
-
-      /** Timestamp is calculated from the request time. */
-      @SerializedName("relative")
-      Relative relative;
 
       /**
        * Use a precise Unix timestamp for prebilling to start. Must be earlier than {@code
@@ -786,55 +774,12 @@ public class SubscriptionSchedule extends ApiResource
 
       /**
        * Describes how the billing schedule determines the start date. Possible values are {@code
-       * timestamp}, {@code relative}, {@code amendment_start}, {@code now}, {@code
-       * quote_acceptance_date}, {@code line_starts_at}, or {@code pause_collection_start}.
-       *
-       * <p>One of {@code amendment_start}, {@code line_starts_at}, {@code now}, {@code
-       * pause_collection_start}, {@code quote_acceptance_date}, {@code relative}, or {@code
        * timestamp}.
+       *
+       * <p>Equal to {@code timestamp}.
        */
       @SerializedName("type")
       String type;
-
-      /** Use an index to specify the position of an amendment to start prebilling with. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class AmendmentStart extends StripeObject {
-        /** Use an index to specify the position of an amendment to start prebilling with. */
-        @SerializedName("index")
-        Long index;
-      }
-
-      /** The timestamp the given line starts at. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class LineStartsAt extends StripeObject implements HasId {
-        /** Unique identifier for the object. */
-        @Getter(onMethod_ = {@Override})
-        @SerializedName("id")
-        String id;
-      }
-
-      /** Timestamp is calculated from the request time. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Relative extends StripeObject {
-        /**
-         * Specifies billing duration. Possible values are {@code day}, {@code week}, {@code month},
-         * or {@code year}.
-         *
-         * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
-         */
-        @SerializedName("interval")
-        String interval;
-
-        /** The multiplier applied to the interval. */
-        @SerializedName("interval_count")
-        Long intervalCount;
-      }
     }
 
     /** Specifies the end of billing period. */
@@ -842,10 +787,6 @@ public class SubscriptionSchedule extends ApiResource
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BillUntil extends StripeObject {
-      /** Use an index to specify the position of an amendment to end prebilling with. */
-      @SerializedName("amendment_end")
-      AmendmentEnd amendmentEnd;
-
       /** The timestamp the billing schedule will apply until. */
       @SerializedName("computed_timestamp")
       Long computedTimestamp;
@@ -853,10 +794,6 @@ public class SubscriptionSchedule extends ApiResource
       /** Specifies the billing period. */
       @SerializedName("duration")
       Duration duration;
-
-      /** Lets you bill the period ending at a particular Quote line. */
-      @SerializedName("line_ends_at")
-      LineEndsAt lineEndsAt;
 
       /** If specified, the billing schedule will apply until the specified timestamp. */
       @SerializedName("timestamp")
@@ -866,21 +803,10 @@ public class SubscriptionSchedule extends ApiResource
        * Describes how the billing schedule will determine the end date. Either {@code duration} or
        * {@code timestamp}.
        *
-       * <p>One of {@code amendment_end}, {@code duration}, {@code line_ends_at}, {@code
-       * schedule_end}, {@code timestamp}, or {@code upcoming_invoice}.
+       * <p>One of {@code duration}, or {@code timestamp}.
        */
       @SerializedName("type")
       String type;
-
-      /** Use an index to specify the position of an amendment to end prebilling with. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class AmendmentEnd extends StripeObject {
-        /** Use an index to specify the position of an amendment to end prebilling with. */
-        @SerializedName("index")
-        Long index;
-      }
 
       /**
        * Configures the {@code bill_until} date based on the provided {@code interval} and {@code
@@ -902,17 +828,6 @@ public class SubscriptionSchedule extends ApiResource
         /** The multiplier applied to the interval. */
         @SerializedName("interval_count")
         Long intervalCount;
-      }
-
-      /** The timestamp the given line ends at. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class LineEndsAt extends StripeObject implements HasId {
-        /** Unique identifier for the object. */
-        @Getter(onMethod_ = {@Override})
-        @SerializedName("id")
-        String id;
       }
     }
   }
@@ -1454,6 +1369,19 @@ public class SubscriptionSchedule extends ApiResource
      */
     @SerializedName("discounts")
     List<SubscriptionSchedule.Phase.Discount> discounts;
+
+    /**
+     * Configures how the subscription schedule handles billing for phase transitions. Possible
+     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
+     * bills based on the current state of the subscription, ignoring changes scheduled in future
+     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
+     * the current billing cycle, including pricing changes and service period adjustments that will
+     * occur before the next invoice.
+     *
+     * <p>One of {@code billing_period_start}, or {@code phase_start}.
+     */
+    @SerializedName("effective_at")
+    String effectiveAt;
 
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
@@ -2173,6 +2101,10 @@ public class SubscriptionSchedule extends ApiResource
       /** Options that configure the trial on the subscription item. */
       @SerializedName("trial")
       Trial trial;
+
+      /** The ID of the trial offer to apply to the configuration item. */
+      @SerializedName("trial_offer")
+      String trialOffer;
 
       /** Get ID of expandable {@code plan} object. */
       public String getPlan() {

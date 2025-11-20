@@ -189,6 +189,10 @@ public final class AccountService extends ApiService {
     return this.request(request, Account.class);
   }
 
+  public com.stripe.service.v2.core.accounts.PersonTokenService personTokens() {
+    return new com.stripe.service.v2.core.accounts.PersonTokenService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.accounts.PersonService persons() {
     return new com.stripe.service.v2.core.accounts.PersonService(this.getResponseGetter());
   }

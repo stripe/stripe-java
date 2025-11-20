@@ -52,6 +52,9 @@ public final class V2CoreHealthApiErrorResolvedEvent extends Event {
       /** The number of impacted requests. */
       @SerializedName("impacted_requests")
       Long impactedRequests;
+      /** The percentage of impacted requests. */
+      @SerializedName("impacted_requests_percentage")
+      String impactedRequestsPercentage;
     }
   }
 }

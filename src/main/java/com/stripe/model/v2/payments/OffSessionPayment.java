@@ -4,9 +4,7 @@ package com.stripe.model.v2.payments;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
-import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,15 +17,11 @@ import lombok.Setter;
 public class OffSessionPayment extends StripeObject implements HasId {
   /** The amount available to be captured. */
   @SerializedName("amount_capturable")
-  Amount amountCapturable;
-
-  /** Provides industry-specific information about the amount. */
-  @SerializedName("amount_details")
-  AmountDetails amountDetails;
+  AmountCapturable amountCapturable;
 
   /** The “presentment amount” to be collected from the customer. */
   @SerializedName("amount_requested")
-  Amount amountRequested;
+  AmountRequested amountRequested;
 
   /**
    * The frequency of the underlying payment.
@@ -40,14 +34,6 @@ public class OffSessionPayment extends StripeObject implements HasId {
   /** Details about the capture configuration for the OffSessionPayment. */
   @SerializedName("capture")
   Capture capture;
-
-  /**
-   * Whether the OffSessionPayment should be captured automatically or manually.
-   *
-   * <p>One of {@code automatic}, or {@code manual}.
-   */
-  @SerializedName("capture_method")
-  String captureMethod;
 
   /** ID of the owning compartment. */
   @SerializedName("compartment_id")
@@ -94,10 +80,10 @@ public class OffSessionPayment extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://docs.corp.stripe.com/api/metadata">key-value pairs</a> that you can
-   * attach to an object. This can be useful for storing additional information about the object in
-   * a structured format. Learn more about <a
-   * href="https://docs.corp.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
+   * to an object. This can be useful for storing additional information about the object in a
+   * structured format. Learn more about <a
+   * href="https://docs.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
    * information in metadata</a>.
    */
   @SerializedName("metadata")
@@ -164,106 +150,52 @@ public class OffSessionPayment extends StripeObject implements HasId {
 
   /**
    * The data that automatically creates a Transfer after the payment finalizes. Learn more about
-   * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+   * the use case for <a href="https://docs.stripe.com/payments/connected-accounts">connected
    * accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
-  /** Provides industry-specific information about the amount. */
+  /** The amount available to be captured. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class AmountDetails extends StripeObject {
-    /** The amount the total transaction was discounted for. */
-    @SerializedName("discount_amount")
-    Long discountAmount;
+  public static class AmountCapturable extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
 
     /**
-     * A list of line items, each containing information about a product in the PaymentIntent. There
-     * is a maximum of 100 line items.
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
-    @SerializedName("line_items")
-    List<OffSessionPayment.AmountDetails.LineItem> lineItems;
+    @SerializedName("value")
+    Long value;
+  }
 
-    /** Contains information about the shipping portion of the amount. */
-    @SerializedName("shipping")
-    Shipping shipping;
-
-    /** Contains information about the tax portion of the amount. */
-    @SerializedName("tax")
-    Tax tax;
+  /** The “presentment amount” to be collected from the customer. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AmountRequested extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
 
     /**
-     * For more details about LineItem, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class LineItem extends StripeObject {
-      /** The amount an item was discounted for. Positive integer. */
-      @SerializedName("discount_amount")
-      Long discountAmount;
-
-      /** Unique identifier of the product. At most 12 characters long. */
-      @SerializedName("product_code")
-      String productCode;
-
-      /** Name of the product. At most 100 characters long. */
-      @SerializedName("product_name")
-      String productName;
-
-      /** Number of items of the product. Positive integer. */
-      @SerializedName("quantity")
-      Long quantity;
-
-      /** Contains information about the tax on the item. */
-      @SerializedName("tax")
-      Tax tax;
-
-      /** Cost of the product. Non-negative integer. */
-      @SerializedName("unit_cost")
-      Long unitCost;
-
-      /** Contains information about the tax on the item. */
-      @Getter
-      @Setter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Tax extends StripeObject {
-        /** Total portion of the amount that is for tax. */
-        @SerializedName("total_tax_amount")
-        Long totalTaxAmount;
-      }
-    }
-
-    /** Contains information about the shipping portion of the amount. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Shipping extends StripeObject {
-      /** Portion of the amount that is for shipping. */
-      @SerializedName("amount")
-      Long amount;
-
-      /** The postal code that represents the shipping source. */
-      @SerializedName("from_postal_code")
-      String fromPostalCode;
-
-      /** The postal code that represents the shipping destination. */
-      @SerializedName("to_postal_code")
-      String toPostalCode;
-    }
-
-    /** Contains information about the tax portion of the amount. */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Tax extends StripeObject {
-      /** Total portion of the amount that is for tax. */
-      @SerializedName("total_tax_amount")
-      Long totalTaxAmount;
-    }
+    @SerializedName("value")
+    Long value;
   }
 
   /** Details about the capture configuration for the OffSessionPayment. */
@@ -321,7 +253,7 @@ public class OffSessionPayment extends StripeObject implements HasId {
 
   /**
    * The data that automatically creates a Transfer after the payment finalizes. Learn more about
-   * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+   * the use case for <a href="https://docs.stripe.com/payments/connected-accounts">connected
    * accounts</a>.
    */
   @Getter
@@ -332,7 +264,7 @@ public class OffSessionPayment extends StripeObject implements HasId {
      * The amount transferred to the destination account. This transfer will occur automatically
      * after the payment succeeds. If no amount is specified, by default the entire payment amount
      * is transferred to the destination account. The amount must be less than or equal to the <a
-     * href="https://docs.corp.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
+     * href="https://docs.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
      * and must be a positive integer representing how much to transfer in the smallest currency
      * unit (e.g., 100 cents to charge $1.00).
      */

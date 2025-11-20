@@ -3,10 +3,7 @@ package com.stripe.param.v2.payments;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.v2.Amount;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,10 +15,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Amount amount;
 
-  /** Provides industry-specific information about the amount. */
-  @SerializedName("amount_details")
-  AmountDetails amountDetails;
-
   /** <strong>Required.</strong> The frequency of the underlying payment. */
   @SerializedName("cadence")
   Cadence cadence;
@@ -29,10 +22,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   /** Details about the capture configuration for the OffSessionPayment. */
   @SerializedName("capture")
   Capture capture;
-
-  /** Whether the OffSessionPayment should be captured automatically or manually. */
-  @SerializedName("capture_method")
-  CaptureMethod captureMethod;
 
   /** <strong>Required.</strong> ID of the Customer to which this OffSessionPayment belongs. */
   @SerializedName("customer")
@@ -48,10 +37,10 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> Set of <a href="https://docs.corp.stripe.com/api/metadata">key-value
+   * <strong>Required.</strong> Set of <a href="https://docs.stripe.com/api/metadata">key-value
    * pairs</a> that you can attach to an object. This can be useful for storing additional
    * information about the object in a structured format. Learn more about <a
-   * href="https://docs.corp.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
+   * href="https://docs.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
    * information in metadata</a>.
    */
   @SerializedName("metadata")
@@ -102,7 +91,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
   /**
    * The data that automatically creates a Transfer after the payment finalizes. Learn more about
-   * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+   * the use case for <a href="https://docs.stripe.com/payments/connected-accounts">connected
    * accounts</a>.
    */
   @SerializedName("transfer_data")
@@ -110,10 +99,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
   private OffSessionPaymentCreateParams(
       Amount amount,
-      AmountDetails amountDetails,
       Cadence cadence,
       Capture capture,
-      CaptureMethod captureMethod,
       String customer,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
@@ -127,10 +114,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       String testClock,
       TransferData transferData) {
     this.amount = amount;
-    this.amountDetails = amountDetails;
     this.cadence = cadence;
     this.capture = capture;
-    this.captureMethod = captureMethod;
     this.customer = customer;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -152,13 +137,9 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
   public static class Builder {
     private Amount amount;
 
-    private AmountDetails amountDetails;
-
     private Cadence cadence;
 
     private Capture capture;
-
-    private CaptureMethod captureMethod;
 
     private String customer;
 
@@ -188,10 +169,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     public OffSessionPaymentCreateParams build() {
       return new OffSessionPaymentCreateParams(
           this.amount,
-          this.amountDetails,
           this.cadence,
           this.capture,
-          this.captureMethod,
           this.customer,
           this.extraParams,
           this.metadata,
@@ -207,14 +186,8 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     }
 
     /** <strong>Required.</strong> The “presentment amount” to be collected from the customer. */
-    public Builder setAmount(Amount amount) {
+    public Builder setAmount(OffSessionPaymentCreateParams.Amount amount) {
       this.amount = amount;
-      return this;
-    }
-
-    /** Provides industry-specific information about the amount. */
-    public Builder setAmountDetails(OffSessionPaymentCreateParams.AmountDetails amountDetails) {
-      this.amountDetails = amountDetails;
       return this;
     }
 
@@ -227,12 +200,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     /** Details about the capture configuration for the OffSessionPayment. */
     public Builder setCapture(OffSessionPaymentCreateParams.Capture capture) {
       this.capture = capture;
-      return this;
-    }
-
-    /** Whether the OffSessionPayment should be captured automatically or manually. */
-    public Builder setCaptureMethod(OffSessionPaymentCreateParams.CaptureMethod captureMethod) {
-      this.captureMethod = captureMethod;
       return this;
     }
 
@@ -357,7 +324,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
     /**
      * The data that automatically creates a Transfer after the payment finalizes. Learn more about
-     * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+     * the use case for <a href="https://docs.stripe.com/payments/connected-accounts">connected
      * accounts</a>.
      */
     public Builder setTransferData(OffSessionPaymentCreateParams.TransferData transferData) {
@@ -368,10 +335,14 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
-  public static class AmountDetails {
-    /** The amount the total transaction was discounted for. */
-    @SerializedName("discount_amount")
-    Long discountAmount;
+  public static class Amount {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -383,31 +354,16 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * <strong>Required.</strong> A list of line items, each containing information about a product
-     * in the PaymentIntent. There is a maximum of 100 line items.
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
-    @SerializedName("line_items")
-    List<OffSessionPaymentCreateParams.AmountDetails.LineItem> lineItems;
+    @SerializedName("value")
+    Long value;
 
-    /** Contains information about the shipping portion of the amount. */
-    @SerializedName("shipping")
-    Shipping shipping;
-
-    /** Contains information about the tax portion of the amount. */
-    @SerializedName("tax")
-    Tax tax;
-
-    private AmountDetails(
-        Long discountAmount,
-        Map<String, Object> extraParams,
-        List<OffSessionPaymentCreateParams.AmountDetails.LineItem> lineItems,
-        Shipping shipping,
-        Tax tax) {
-      this.discountAmount = discountAmount;
+    private Amount(String currency, Map<String, Object> extraParams, Long value) {
+      this.currency = currency;
       this.extraParams = extraParams;
-      this.lineItems = lineItems;
-      this.shipping = shipping;
-      this.tax = tax;
+      this.value = value;
     }
 
     public static Builder builder() {
@@ -415,32 +371,32 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Long discountAmount;
+      private String currency;
 
       private Map<String, Object> extraParams;
 
-      private List<OffSessionPaymentCreateParams.AmountDetails.LineItem> lineItems;
-
-      private Shipping shipping;
-
-      private Tax tax;
+      private Long value;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public OffSessionPaymentCreateParams.AmountDetails build() {
-        return new OffSessionPaymentCreateParams.AmountDetails(
-            this.discountAmount, this.extraParams, this.lineItems, this.shipping, this.tax);
+      public OffSessionPaymentCreateParams.Amount build() {
+        return new OffSessionPaymentCreateParams.Amount(
+            this.currency, this.extraParams, this.value);
       }
 
-      /** The amount the total transaction was discounted for. */
-      public Builder setDiscountAmount(Long discountAmount) {
-        this.discountAmount = discountAmount;
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
         return this;
       }
 
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OffSessionPaymentCreateParams.AmountDetails#extraParams} for the field documentation.
+       * OffSessionPaymentCreateParams.Amount#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -453,8 +409,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OffSessionPaymentCreateParams.AmountDetails#extraParams} for the field
-       * documentation.
+       * See {@link OffSessionPaymentCreateParams.Amount#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -465,439 +420,12 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * OffSessionPaymentCreateParams.AmountDetails#lineItems} for the field documentation.
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
        */
-      public Builder addLineItem(OffSessionPaymentCreateParams.AmountDetails.LineItem element) {
-        if (this.lineItems == null) {
-          this.lineItems = new ArrayList<>();
-        }
-        this.lineItems.add(element);
+      public Builder setValue(Long value) {
+        this.value = value;
         return this;
-      }
-
-      /**
-       * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll`
-       * call, and subsequent calls adds additional elements to the original list. See {@link
-       * OffSessionPaymentCreateParams.AmountDetails#lineItems} for the field documentation.
-       */
-      public Builder addAllLineItem(
-          List<OffSessionPaymentCreateParams.AmountDetails.LineItem> elements) {
-        if (this.lineItems == null) {
-          this.lineItems = new ArrayList<>();
-        }
-        this.lineItems.addAll(elements);
-        return this;
-      }
-
-      /** Contains information about the shipping portion of the amount. */
-      public Builder setShipping(OffSessionPaymentCreateParams.AmountDetails.Shipping shipping) {
-        this.shipping = shipping;
-        return this;
-      }
-
-      /** Contains information about the tax portion of the amount. */
-      public Builder setTax(OffSessionPaymentCreateParams.AmountDetails.Tax tax) {
-        this.tax = tax;
-        return this;
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class LineItem {
-      /** The amount an item was discounted for. Positive integer. */
-      @SerializedName("discount_amount")
-      Long discountAmount;
-
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Unique identifier of the product. At most 12 characters long. */
-      @SerializedName("product_code")
-      String productCode;
-
-      /** <strong>Required.</strong> Name of the product. At most 100 characters long. */
-      @SerializedName("product_name")
-      String productName;
-
-      /** <strong>Required.</strong> Number of items of the product. Positive integer. */
-      @SerializedName("quantity")
-      Long quantity;
-
-      /** Contains information about the tax on the item. */
-      @SerializedName("tax")
-      Tax tax;
-
-      /** <strong>Required.</strong> Cost of the product. Non-negative integer. */
-      @SerializedName("unit_cost")
-      Long unitCost;
-
-      private LineItem(
-          Long discountAmount,
-          Map<String, Object> extraParams,
-          String productCode,
-          String productName,
-          Long quantity,
-          Tax tax,
-          Long unitCost) {
-        this.discountAmount = discountAmount;
-        this.extraParams = extraParams;
-        this.productCode = productCode;
-        this.productName = productName;
-        this.quantity = quantity;
-        this.tax = tax;
-        this.unitCost = unitCost;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Long discountAmount;
-
-        private Map<String, Object> extraParams;
-
-        private String productCode;
-
-        private String productName;
-
-        private Long quantity;
-
-        private Tax tax;
-
-        private Long unitCost;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public OffSessionPaymentCreateParams.AmountDetails.LineItem build() {
-          return new OffSessionPaymentCreateParams.AmountDetails.LineItem(
-              this.discountAmount,
-              this.extraParams,
-              this.productCode,
-              this.productName,
-              this.quantity,
-              this.tax,
-              this.unitCost);
-        }
-
-        /** The amount an item was discounted for. Positive integer. */
-        public Builder setDiscountAmount(Long discountAmount) {
-          this.discountAmount = discountAmount;
-          return this;
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.AmountDetails.LineItem#extraParams} for the
-         * field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.AmountDetails.LineItem#extraParams} for the
-         * field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Unique identifier of the product. At most 12 characters long. */
-        public Builder setProductCode(String productCode) {
-          this.productCode = productCode;
-          return this;
-        }
-
-        /** <strong>Required.</strong> Name of the product. At most 100 characters long. */
-        public Builder setProductName(String productName) {
-          this.productName = productName;
-          return this;
-        }
-
-        /** <strong>Required.</strong> Number of items of the product. Positive integer. */
-        public Builder setQuantity(Long quantity) {
-          this.quantity = quantity;
-          return this;
-        }
-
-        /** Contains information about the tax on the item. */
-        public Builder setTax(OffSessionPaymentCreateParams.AmountDetails.LineItem.Tax tax) {
-          this.tax = tax;
-          return this;
-        }
-
-        /** <strong>Required.</strong> Cost of the product. Non-negative integer. */
-        public Builder setUnitCost(Long unitCost) {
-          this.unitCost = unitCost;
-          return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class Tax {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /** Total portion of the amount that is for tax. */
-        @SerializedName("total_tax_amount")
-        Long totalTaxAmount;
-
-        private Tax(Map<String, Object> extraParams, Long totalTaxAmount) {
-          this.extraParams = extraParams;
-          this.totalTaxAmount = totalTaxAmount;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private Long totalTaxAmount;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public OffSessionPaymentCreateParams.AmountDetails.LineItem.Tax build() {
-            return new OffSessionPaymentCreateParams.AmountDetails.LineItem.Tax(
-                this.extraParams, this.totalTaxAmount);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link OffSessionPaymentCreateParams.AmountDetails.LineItem.Tax#extraParams}
-           * for the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link OffSessionPaymentCreateParams.AmountDetails.LineItem.Tax#extraParams}
-           * for the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** Total portion of the amount that is for tax. */
-          public Builder setTotalTaxAmount(Long totalTaxAmount) {
-            this.totalTaxAmount = totalTaxAmount;
-            return this;
-          }
-        }
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Shipping {
-      /** Portion of the amount that is for shipping. */
-      @SerializedName("amount")
-      Long amount;
-
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** The postal code that represents the shipping source. */
-      @SerializedName("from_postal_code")
-      String fromPostalCode;
-
-      /** The postal code that represents the shipping destination. */
-      @SerializedName("to_postal_code")
-      String toPostalCode;
-
-      private Shipping(
-          Long amount,
-          Map<String, Object> extraParams,
-          String fromPostalCode,
-          String toPostalCode) {
-        this.amount = amount;
-        this.extraParams = extraParams;
-        this.fromPostalCode = fromPostalCode;
-        this.toPostalCode = toPostalCode;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Long amount;
-
-        private Map<String, Object> extraParams;
-
-        private String fromPostalCode;
-
-        private String toPostalCode;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public OffSessionPaymentCreateParams.AmountDetails.Shipping build() {
-          return new OffSessionPaymentCreateParams.AmountDetails.Shipping(
-              this.amount, this.extraParams, this.fromPostalCode, this.toPostalCode);
-        }
-
-        /** Portion of the amount that is for shipping. */
-        public Builder setAmount(Long amount) {
-          this.amount = amount;
-          return this;
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.AmountDetails.Shipping#extraParams} for the
-         * field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.AmountDetails.Shipping#extraParams} for the
-         * field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** The postal code that represents the shipping source. */
-        public Builder setFromPostalCode(String fromPostalCode) {
-          this.fromPostalCode = fromPostalCode;
-          return this;
-        }
-
-        /** The postal code that represents the shipping destination. */
-        public Builder setToPostalCode(String toPostalCode) {
-          this.toPostalCode = toPostalCode;
-          return this;
-        }
-      }
-    }
-
-    @Getter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Tax {
-      /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
-       */
-      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-      Map<String, Object> extraParams;
-
-      /** Total portion of the amount that is for tax. */
-      @SerializedName("total_tax_amount")
-      Long totalTaxAmount;
-
-      private Tax(Map<String, Object> extraParams, Long totalTaxAmount) {
-        this.extraParams = extraParams;
-        this.totalTaxAmount = totalTaxAmount;
-      }
-
-      public static Builder builder() {
-        return new Builder();
-      }
-
-      public static class Builder {
-        private Map<String, Object> extraParams;
-
-        private Long totalTaxAmount;
-
-        /** Finalize and obtain parameter instance from this builder. */
-        public OffSessionPaymentCreateParams.AmountDetails.Tax build() {
-          return new OffSessionPaymentCreateParams.AmountDetails.Tax(
-              this.extraParams, this.totalTaxAmount);
-        }
-
-        /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.AmountDetails.Tax#extraParams} for the
-         * field documentation.
-         */
-        public Builder putExtraParam(String key, Object value) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.put(key, value);
-          return this;
-        }
-
-        /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OffSessionPaymentCreateParams.AmountDetails.Tax#extraParams} for the
-         * field documentation.
-         */
-        public Builder putAllExtraParam(Map<String, Object> map) {
-          if (this.extraParams == null) {
-            this.extraParams = new HashMap<>();
-          }
-          this.extraParams.putAll(map);
-          return this;
-        }
-
-        /** Total portion of the amount that is for tax. */
-        public Builder setTotalTaxAmount(Long totalTaxAmount) {
-          this.totalTaxAmount = totalTaxAmount;
-          return this;
-        }
       }
     }
   }
@@ -1244,10 +772,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     @SerializedName("retry_policy")
     String retryPolicy;
 
-    /**
-     * <strong>Required.</strong> Indicates the strategy for how you want Stripe to retry the
-     * payment.
-     */
+    /** Indicates the strategy for how you want Stripe to retry the payment. */
     @SerializedName("retry_strategy")
     RetryStrategy retryStrategy;
 
@@ -1308,10 +833,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * <strong>Required.</strong> Indicates the strategy for how you want Stripe to retry the
-       * payment.
-       */
+      /** Indicates the strategy for how you want Stripe to retry the payment. */
       public Builder setRetryStrategy(
           OffSessionPaymentCreateParams.RetryDetails.RetryStrategy retryStrategy) {
         this.retryStrategy = retryStrategy;
@@ -1320,17 +842,11 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     }
 
     public enum RetryStrategy implements ApiRequestParams.EnumParam {
-      @SerializedName("heuristic")
-      HEURISTIC("heuristic"),
+      @SerializedName("best_available")
+      BEST_AVAILABLE("best_available"),
 
       @SerializedName("none")
-      NONE("none"),
-
-      @SerializedName("scheduled")
-      SCHEDULED("scheduled"),
-
-      @SerializedName("smart")
-      SMART("smart");
+      NONE("none");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -1348,7 +864,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
      * The amount transferred to the destination account. This transfer will occur automatically
      * after the payment succeeds. If no amount is specified, by default the entire payment amount
      * is transferred to the destination account. The amount must be less than or equal to the <a
-     * href="https://docs.corp.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
+     * href="https://docs.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
      * and must be a positive integer representing how much to transfer in the smallest currency
      * unit (e.g., 100 cents to charge $1.00).
      */
@@ -1398,7 +914,7 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
        * The amount transferred to the destination account. This transfer will occur automatically
        * after the payment succeeds. If no amount is specified, by default the entire payment amount
        * is transferred to the destination account. The amount must be less than or equal to the <a
-       * href="https://docs.corp.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
+       * href="https://docs.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
        * and must be a positive integer representing how much to transfer in the smallest currency
        * unit (e.g., 100 cents to charge $1.00).
        */
@@ -1456,21 +972,6 @@ public class OffSessionPaymentCreateParams extends ApiRequestParams {
     private final String value;
 
     Cadence(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum CaptureMethod implements ApiRequestParams.EnumParam {
-    @SerializedName("automatic")
-    AUTOMATIC("automatic"),
-
-    @SerializedName("manual")
-    MANUAL("manual");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    CaptureMethod(String value) {
       this.value = value;
     }
   }

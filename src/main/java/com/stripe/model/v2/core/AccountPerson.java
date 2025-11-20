@@ -526,12 +526,13 @@ public class AccountPerson extends StripeObject implements HasId {
     /**
      * The ID number type of an individual.
      *
-     * <p>One of {@code ae_eid}, {@code ao_nif}, {@code az_tin}, {@code bd_brc}, {@code bd_etin},
-     * {@code bd_nid}, {@code br_cpf}, {@code cr_cpf}, {@code cr_dimex}, {@code cr_nite}, {@code
-     * de_stn}, {@code do_rcn}, {@code gt_nit}, {@code hk_id}, {@code kz_iin}, {@code mx_rfc},
-     * {@code my_nric}, {@code mz_nuit}, {@code nl_bsn}, {@code pe_dni}, {@code pk_cnic}, {@code
-     * pk_snic}, {@code sa_tin}, {@code sg_fin}, {@code sg_nric}, {@code th_lc}, {@code th_pin},
-     * {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, or {@code us_ssn_last_4}.
+     * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_dni}, {@code az_tin}, {@code bd_brc},
+     * {@code bd_etin}, {@code bd_nid}, {@code br_cpf}, {@code cr_cpf}, {@code cr_dimex}, {@code
+     * cr_nite}, {@code de_stn}, {@code do_rcn}, {@code gt_nit}, {@code hk_id}, {@code kz_iin},
+     * {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code nl_bsn}, {@code pe_dni}, {@code
+     * pk_cnic}, {@code pk_snic}, {@code sa_tin}, {@code sg_fin}, {@code sg_nric}, {@code th_lc},
+     * {@code th_pin}, {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, or {@code
+     * us_ssn_last_4}.
      */
     @SerializedName("type")
     String type;

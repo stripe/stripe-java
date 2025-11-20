@@ -312,22 +312,22 @@ public final class PaymentMethodService extends ApiService {
             options);
     return this.request(request, PaymentMethod.class);
   }
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(
       String paymentMethod, PaymentMethodCheckBalanceParams params) throws StripeException {
     return checkBalance(paymentMethod, params, (RequestOptions) null);
   }
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(String paymentMethod, RequestOptions options)
       throws StripeException {
     return checkBalance(paymentMethod, (PaymentMethodCheckBalanceParams) null, options);
   }
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(String paymentMethod) throws StripeException {
     return checkBalance(
         paymentMethod, (PaymentMethodCheckBalanceParams) null, (RequestOptions) null);
   }
-  /** Retrieves a payment method’s balance. */
+  /** Retrieves a PaymentMethod’s Balance. */
   public PaymentMethodBalance checkBalance(
       String paymentMethod, PaymentMethodCheckBalanceParams params, RequestOptions options)
       throws StripeException {

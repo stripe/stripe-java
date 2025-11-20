@@ -528,6 +528,22 @@ public class RequestedSession extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class LineItemDetail extends StripeObject {
+    /** The total discount for this line item. If no discount were applied, defaults to 0. */
+    @SerializedName("amount_discount")
+    Long amountDiscount;
+
+    /** The total before any discounts or taxes are applied. */
+    @SerializedName("amount_subtotal")
+    Long amountSubtotal;
+
+    /** The total after discounts but before taxes are applied. */
+    @SerializedName("amount_subtotal_after_discount")
+    Long amountSubtotalAfterDiscount;
+
+    /** The total after discounts and taxes. */
+    @SerializedName("amount_total")
+    Long amountTotal;
+
     /** The description of the line item. */
     @SerializedName("description")
     String description;
@@ -552,9 +568,17 @@ public class RequestedSession extends ApiResource
     @SerializedName("sku_id")
     String skuId;
 
-    /** The unit amount of the line item. */
+    /** The per-unit amount of the item before any discounts or taxes are applied. */
     @SerializedName("unit_amount")
     Long unitAmount;
+
+    /** The per-unit amount of the item after discounts but before taxes are applied. */
+    @SerializedName("unit_amount_after_discount")
+    Long unitAmountAfterDiscount;
+
+    /** The per-unit discount amount. If no discount were applied, defaults to 0. */
+    @SerializedName("unit_discount")
+    Long unitDiscount;
   }
 
   /**
@@ -701,6 +725,10 @@ public class RequestedSession extends ApiResource
     /** The amount fulfillment of the total details. */
     @SerializedName("amount_fulfillment")
     Long amountFulfillment;
+
+    /** Total of all items after discounts but before taxes are applied. */
+    @SerializedName("amount_subtotal_after_discount")
+    Long amountSubtotalAfterDiscount;
 
     /** The amount tax of the total details. */
     @SerializedName("amount_tax")

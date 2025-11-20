@@ -3521,7 +3521,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     /** Sets the billing schedules for the subscription schedule. */
     @SerializedName("billing_schedules")
-    List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules;
+    Object billingSchedules;
 
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
@@ -3564,7 +3564,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment> amendments,
         BillingBehavior billingBehavior,
         BillingMode billingMode,
-        List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules,
+        Object billingSchedules,
         EndBehavior endBehavior,
         Map<String, Object> extraParams,
         List<InvoiceCreatePreviewParams.ScheduleDetails.Phase> phases,
@@ -3592,7 +3592,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private BillingMode billingMode;
 
-      private List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules;
+      private Object billingSchedules;
 
       private EndBehavior endBehavior;
 
@@ -3670,12 +3670,15 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * InvoiceCreatePreviewParams.ScheduleDetails#billingSchedules} for the field documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addBillingSchedule(
           InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule element) {
-        if (this.billingSchedules == null) {
-          this.billingSchedules = new ArrayList<>();
+        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
+          this.billingSchedules =
+              new ArrayList<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule>();
         }
-        this.billingSchedules.add(element);
+        ((List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule>) this.billingSchedules)
+            .add(element);
         return this;
       }
 
@@ -3685,12 +3688,28 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * {@link InvoiceCreatePreviewParams.ScheduleDetails#billingSchedules} for the field
        * documentation.
        */
+      @SuppressWarnings("unchecked")
       public Builder addAllBillingSchedule(
           List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> elements) {
-        if (this.billingSchedules == null) {
-          this.billingSchedules = new ArrayList<>();
+        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
+          this.billingSchedules =
+              new ArrayList<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule>();
         }
-        this.billingSchedules.addAll(elements);
+        ((List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule>) this.billingSchedules)
+            .addAll(elements);
+        return this;
+      }
+
+      /** Sets the billing schedules for the subscription schedule. */
+      public Builder setBillingSchedules(EmptyParam billingSchedules) {
+        this.billingSchedules = billingSchedules;
+        return this;
+      }
+
+      /** Sets the billing schedules for the subscription schedule. */
+      public Builder setBillingSchedules(
+          List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules) {
+        this.billingSchedules = billingSchedules;
         return this;
       }
 
@@ -3857,6 +3876,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction> discountActions;
 
       /**
+       * Configures how the subscription schedule handles billing for phase transitions. Possible
+       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+       * phase_start} bills based on the current state of the subscription, ignoring changes
+       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+       * phase transitions within the current billing cycle, including pricing changes and service
+       * period adjustments that will occur before the next invoice.
+       */
+      @SerializedName("effective_at")
+      EffectiveAt effectiveAt;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -3908,6 +3938,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.BillingSchedulesAction>
               billingSchedulesActions,
           List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction> discountActions,
+          EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction> itemActions,
           List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.MetadataAction> metadataActions,
@@ -3920,6 +3951,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         this.billingCycleAnchor = billingCycleAnchor;
         this.billingSchedulesActions = billingSchedulesActions;
         this.discountActions = discountActions;
+        this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.itemActions = itemActions;
         this.metadataActions = metadataActions;
@@ -3946,6 +3978,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         private List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction>
             discountActions;
 
+        private EffectiveAt effectiveAt;
+
         private Map<String, Object> extraParams;
 
         private List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction> itemActions;
@@ -3969,6 +4003,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               this.billingCycleAnchor,
               this.billingSchedulesActions,
               this.discountActions,
+              this.effectiveAt,
               this.extraParams,
               this.itemActions,
               this.metadataActions,
@@ -4073,6 +4108,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.discountActions = new ArrayList<>();
           }
           this.discountActions.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Configures how the subscription schedule handles billing for phase transitions. Possible
+         * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+         * phase_start} bills based on the current state of the subscription, ignoring changes
+         * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+         * phase transitions within the current billing cycle, including pricing changes and service
+         * period adjustments that will occur before the next invoice.
+         */
+        public Builder setEffectiveAt(
+            InvoiceCreatePreviewParams.ScheduleDetails.Amendment.EffectiveAt effectiveAt) {
+          this.effectiveAt = effectiveAt;
           return this;
         }
 
@@ -5928,6 +5977,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName("trial")
           Trial trial;
 
+          /** The ID of the trial offer to apply to the configuration item. */
+          @SerializedName("trial_offer")
+          String trialOffer;
+
           private Add(
               List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount>
                   discounts,
@@ -5936,7 +5989,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               String price,
               Long quantity,
               List<String> taxRates,
-              Trial trial) {
+              Trial trial,
+              String trialOffer) {
             this.discounts = discounts;
             this.extraParams = extraParams;
             this.metadata = metadata;
@@ -5944,6 +5998,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.quantity = quantity;
             this.taxRates = taxRates;
             this.trial = trial;
+            this.trialOffer = trialOffer;
           }
 
           public static Builder builder() {
@@ -5967,6 +6022,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             private Trial trial;
 
+            private String trialOffer;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add build() {
               return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add(
@@ -5976,7 +6033,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                   this.price,
                   this.quantity,
                   this.taxRates,
-                  this.trial);
+                  this.trial,
+                  this.trialOffer);
             }
 
             /**
@@ -6116,6 +6174,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             public Builder setTrial(
                 InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Trial trial) {
               this.trial = trial;
+              return this;
+            }
+
+            /** The ID of the trial offer to apply to the configuration item. */
+            public Builder setTrialOffer(String trialOffer) {
+              this.trialOffer = trialOffer;
               return this;
             }
           }
@@ -6780,6 +6844,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName("trial")
           Trial trial;
 
+          /** The ID of the trial offer to apply to the configuration item. */
+          @SerializedName("trial_offer")
+          String trialOffer;
+
           private Set(
               List<InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount>
                   discounts,
@@ -6788,7 +6856,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               String price,
               Long quantity,
               List<String> taxRates,
-              Trial trial) {
+              Trial trial,
+              String trialOffer) {
             this.discounts = discounts;
             this.extraParams = extraParams;
             this.metadata = metadata;
@@ -6796,6 +6865,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.quantity = quantity;
             this.taxRates = taxRates;
             this.trial = trial;
+            this.trialOffer = trialOffer;
           }
 
           public static Builder builder() {
@@ -6819,6 +6889,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             private Trial trial;
 
+            private String trialOffer;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set build() {
               return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set(
@@ -6828,7 +6900,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                   this.price,
                   this.quantity,
                   this.taxRates,
-                  this.trial);
+                  this.trial,
+                  this.trialOffer);
             }
 
             /**
@@ -6978,6 +7051,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             public Builder setTrial(
                 InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Trial trial) {
               this.trial = trial;
+              return this;
+            }
+
+            /** The ID of the trial offer to apply to the configuration item. */
+            public Builder setTrialOffer(String trialOffer) {
+              this.trialOffer = trialOffer;
               return this;
             }
           }
@@ -8162,6 +8241,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
       }
 
+      public enum EffectiveAt implements ApiRequestParams.EnumParam {
+        @SerializedName("amendment_start")
+        AMENDMENT_START("amendment_start"),
+
+        @SerializedName("billing_period_start")
+        BILLING_PERIOD_START("billing_period_start");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        EffectiveAt(String value) {
+          this.value = value;
+        }
+      }
+
       public enum ProrationBehavior implements ApiRequestParams.EnumParam {
         @SerializedName("always_invoice")
         ALWAYS_INVOICE("always_invoice"),
@@ -8869,23 +8963,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
-          @SerializedName("amendment_end")
-          AMENDMENT_END("amendment_end"),
-
           @SerializedName("duration")
           DURATION("duration"),
 
-          @SerializedName("line_ends_at")
-          LINE_ENDS_AT("line_ends_at"),
-
-          @SerializedName("schedule_end")
-          SCHEDULE_END("schedule_end"),
-
           @SerializedName("timestamp")
-          TIMESTAMP("timestamp"),
-
-          @SerializedName("upcoming_invoice")
-          UPCOMING_INVOICE("upcoming_invoice");
+          TIMESTAMP("timestamp");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -8996,6 +9078,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        */
       @SerializedName("duration")
       Duration duration;
+
+      /**
+       * Configures how the subscription schedule handles billing for phase transitions. Possible
+       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+       * phase_start} bills based on the current state of the subscription, ignoring changes
+       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+       * phase transitions within the current billing cycle, including pricing changes and service
+       * period adjustments that will occur before the next invoice.
+       */
+      @SerializedName("effective_at")
+      EffectiveAt effectiveAt;
 
       /**
        * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
@@ -9113,6 +9206,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           Object description,
           Object discounts,
           Duration duration,
+          EffectiveAt effectiveAt,
           Object endDate,
           Map<String, Object> extraParams,
           InvoiceSettings invoiceSettings,
@@ -9139,6 +9233,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         this.description = description;
         this.discounts = discounts;
         this.duration = duration;
+        this.effectiveAt = effectiveAt;
         this.endDate = endDate;
         this.extraParams = extraParams;
         this.invoiceSettings = invoiceSettings;
@@ -9185,6 +9280,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         private Duration duration;
 
+        private EffectiveAt effectiveAt;
+
         private Object endDate;
 
         private Map<String, Object> extraParams;
@@ -9228,6 +9325,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               this.description,
               this.discounts,
               this.duration,
+              this.effectiveAt,
               this.endDate,
               this.extraParams,
               this.invoiceSettings,
@@ -9496,6 +9594,20 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         public Builder setDuration(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.Duration duration) {
           this.duration = duration;
+          return this;
+        }
+
+        /**
+         * Configures how the subscription schedule handles billing for phase transitions. Possible
+         * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
+         * phase_start} bills based on the current state of the subscription, ignoring changes
+         * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
+         * phase transitions within the current billing cycle, including pricing changes and service
+         * period adjustments that will occur before the next invoice.
+         */
+        public Builder setEffectiveAt(
+            InvoiceCreatePreviewParams.ScheduleDetails.Phase.EffectiveAt effectiveAt) {
+          this.effectiveAt = effectiveAt;
           return this;
         }
 
@@ -12063,6 +12175,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("trial")
         Trial trial;
 
+        /** The ID of the trial offer to apply to the configuration item. */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
         private Item(
             Object billingThresholds,
             Object discounts,
@@ -12073,7 +12189,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             PriceData priceData,
             Long quantity,
             Object taxRates,
-            Trial trial) {
+            Trial trial,
+            String trialOffer) {
           this.billingThresholds = billingThresholds;
           this.discounts = discounts;
           this.extraParams = extraParams;
@@ -12084,6 +12201,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           this.quantity = quantity;
           this.taxRates = taxRates;
           this.trial = trial;
+          this.trialOffer = trialOffer;
         }
 
         public static Builder builder() {
@@ -12111,6 +12229,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           private Trial trial;
 
+          private String trialOffer;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item build() {
             return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item(
@@ -12123,7 +12243,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                 this.priceData,
                 this.quantity,
                 this.taxRates,
-                this.trial);
+                this.trial,
+                this.trialOffer);
           }
 
           /**
@@ -12343,6 +12464,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           public Builder setTrial(
               InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Trial trial) {
             this.trial = trial;
+            return this;
+          }
+
+          /** The ID of the trial offer to apply to the configuration item. */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
@@ -13700,6 +13827,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         private final String value;
 
         CollectionMethod(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum EffectiveAt implements ApiRequestParams.EnumParam {
+        @SerializedName("billing_period_start")
+        BILLING_PERIOD_START("billing_period_start"),
+
+        @SerializedName("phase_start")
+        PHASE_START("phase_start");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        EffectiveAt(String value) {
           this.value = value;
         }
       }
@@ -15448,23 +15590,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         public enum Type implements ApiRequestParams.EnumParam {
-          @SerializedName("amendment_end")
-          AMENDMENT_END("amendment_end"),
-
           @SerializedName("duration")
           DURATION("duration"),
 
-          @SerializedName("line_ends_at")
-          LINE_ENDS_AT("line_ends_at"),
-
-          @SerializedName("schedule_end")
-          SCHEDULE_END("schedule_end"),
-
           @SerializedName("timestamp")
-          TIMESTAMP("timestamp"),
-
-          @SerializedName("upcoming_invoice")
-          UPCOMING_INVOICE("upcoming_invoice");
+          TIMESTAMP("timestamp");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -15493,6 +15623,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        */
       @SerializedName("clear_usage")
       Boolean clearUsage;
+
+      /** The trial offer to apply to this subscription item. */
+      @SerializedName("current_trial")
+      CurrentTrial currentTrial;
 
       /** A flag that, if set to {@code true}, will delete the specified item. */
       @SerializedName("deleted")
@@ -15560,6 +15694,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       private Item(
           Object billingThresholds,
           Boolean clearUsage,
+          CurrentTrial currentTrial,
           Boolean deleted,
           Object discounts,
           Map<String, Object> extraParams,
@@ -15572,6 +15707,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           Object taxRates) {
         this.billingThresholds = billingThresholds;
         this.clearUsage = clearUsage;
+        this.currentTrial = currentTrial;
         this.deleted = deleted;
         this.discounts = discounts;
         this.extraParams = extraParams;
@@ -15592,6 +15728,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         private Object billingThresholds;
 
         private Boolean clearUsage;
+
+        private CurrentTrial currentTrial;
 
         private Boolean deleted;
 
@@ -15618,6 +15756,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return new InvoiceCreatePreviewParams.SubscriptionDetails.Item(
               this.billingThresholds,
               this.clearUsage,
+              this.currentTrial,
               this.deleted,
               this.discounts,
               this.extraParams,
@@ -15657,6 +15796,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          */
         public Builder setClearUsage(Boolean clearUsage) {
           this.clearUsage = clearUsage;
+          return this;
+        }
+
+        /** The trial offer to apply to this subscription item. */
+        public Builder setCurrentTrial(
+            InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial currentTrial) {
+          this.currentTrial = currentTrial;
           return this;
         }
 
@@ -15968,6 +16114,106 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
            */
           public Builder setUsageGte(Long usageGte) {
             this.usageGte = usageGte;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CurrentTrial {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Unix timestamp representing the end of the trial offer period. Required when the trial
+         * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+         * duration.type=relative}.
+         */
+        @SerializedName("trial_end")
+        Long trialEnd;
+
+        /**
+         * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+         */
+        @SerializedName("trial_offer")
+        String trialOffer;
+
+        private CurrentTrial(Map<String, Object> extraParams, Long trialEnd, String trialOffer) {
+          this.extraParams = extraParams;
+          this.trialEnd = trialEnd;
+          this.trialOffer = trialOffer;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Long trialEnd;
+
+          private String trialOffer;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial build() {
+            return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial(
+                this.extraParams, this.trialEnd, this.trialOffer);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.SubscriptionDetails.Item.CurrentTrial#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Unix timestamp representing the end of the trial offer period. Required when the trial
+           * offer has {@code duration.type=timestamp}. Cannot be specified when {@code
+           * duration.type=relative}.
+           */
+          public Builder setTrialEnd(Long trialEnd) {
+            this.trialEnd = trialEnd;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> The ID of the trial offer to apply to the subscription item.
+           */
+          public Builder setTrialOffer(String trialOffer) {
+            this.trialOffer = trialOffer;
             return this;
           }
         }
