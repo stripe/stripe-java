@@ -4,7 +4,6 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,7 +48,7 @@ public class ReceivedCredit extends StripeObject implements HasId {
 
   /** The amount and currency of the original/external credit request. */
   @SerializedName("external_amount")
-  Amount externalAmount;
+  ExternalAmount externalAmount;
 
   /** Financial Account ID on which funds for ReceivedCredit were received. */
   @SerializedName("financial_account")
@@ -109,6 +108,27 @@ public class ReceivedCredit extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
+
+  /** The amount and currency of the ReceivedCredit. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Amount extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
+  }
 
   /**
    * This object stores details about the originating Stripe transaction that resulted in the
@@ -286,6 +306,27 @@ public class ReceivedCredit extends StripeObject implements HasId {
       @SerializedName("routing_number")
       String routingNumber;
     }
+  }
+
+  /** The amount and currency of the original/external credit request. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ExternalAmount extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
   }
 
   /**

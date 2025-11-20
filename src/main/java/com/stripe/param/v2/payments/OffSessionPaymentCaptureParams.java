@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class OffSessionPaymentCaptureParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The amount to capture. */
+  /** The amount to capture. */
   @SerializedName("amount_to_capture")
   Long amountToCapture;
 
@@ -25,10 +25,10 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> Set of <a href="https://docs.corp.stripe.com/api/metadata">key-value
+   * <strong>Required.</strong> Set of <a href="https://docs.stripe.com/api/metadata">key-value
    * pairs</a> that you can attach to an object. This can be useful for storing additional
    * information about the object in a structured format. Learn more about <a
-   * href="https://docs.corp.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
+   * href="https://docs.stripe.com/payments/payment-intents#storing-information-in-metadata">storing
    * information in metadata</a>.
    */
   @SerializedName("metadata")
@@ -55,7 +55,7 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
 
   /**
    * The data that automatically creates a Transfer after the payment finalizes. Learn more about
-   * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+   * the use case for <a href="https://docs.stripe.com/payments/connected-accounts">connected
    * accounts</a>.
    */
   @SerializedName("transfer_data")
@@ -104,7 +104,7 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
           this.transferData);
     }
 
-    /** <strong>Required.</strong> The amount to capture. */
+    /** The amount to capture. */
     public Builder setAmountToCapture(Long amountToCapture) {
       this.amountToCapture = amountToCapture;
       return this;
@@ -187,7 +187,7 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
 
     /**
      * The data that automatically creates a Transfer after the payment finalizes. Learn more about
-     * the use case for <a href="https://docs.corp.stripe.com/payments/connected-accounts">connected
+     * the use case for <a href="https://docs.stripe.com/payments/connected-accounts">connected
      * accounts</a>.
      */
     public Builder setTransferData(OffSessionPaymentCaptureParams.TransferData transferData) {
@@ -203,19 +203,12 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
      * The amount transferred to the destination account. This transfer will occur automatically
      * after the payment succeeds. If no amount is specified, by default the entire payment amount
      * is transferred to the destination account. The amount must be less than or equal to the <a
-     * href="https://docs.corp.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
+     * href="https://docs.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
      * and must be a positive integer representing how much to transfer in the smallest currency
      * unit (e.g., 100 cents to charge $1.00).
      */
     @SerializedName("amount")
     Long amount;
-
-    /**
-     * <strong>Required.</strong> The account (if any) that the payment is attributed to for tax
-     * reporting, and where funds from the payment are transferred to after payment success.
-     */
-    @SerializedName("destination")
-    String destination;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -226,9 +219,8 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(Long amount, String destination, Map<String, Object> extraParams) {
+    private TransferData(Long amount, Map<String, Object> extraParams) {
       this.amount = amount;
-      this.destination = destination;
       this.extraParams = extraParams;
     }
 
@@ -239,35 +231,23 @@ public class OffSessionPaymentCaptureParams extends ApiRequestParams {
     public static class Builder {
       private Long amount;
 
-      private String destination;
-
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public OffSessionPaymentCaptureParams.TransferData build() {
-        return new OffSessionPaymentCaptureParams.TransferData(
-            this.amount, this.destination, this.extraParams);
+        return new OffSessionPaymentCaptureParams.TransferData(this.amount, this.extraParams);
       }
 
       /**
        * The amount transferred to the destination account. This transfer will occur automatically
        * after the payment succeeds. If no amount is specified, by default the entire payment amount
        * is transferred to the destination account. The amount must be less than or equal to the <a
-       * href="https://docs.corp.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
+       * href="https://docs.stripe.com/api/v2/off-session-payments/object?api-version=2025-05-28.preview#v2_off_session_payment_object-amount_requested">amount_requested</a>,
        * and must be a positive integer representing how much to transfer in the smallest currency
        * unit (e.g., 100 cents to charge $1.00).
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
-        return this;
-      }
-
-      /**
-       * <strong>Required.</strong> The account (if any) that the payment is attributed to for tax
-       * reporting, and where funds from the payment are transferred to after payment success.
-       */
-      public Builder setDestination(String destination) {
-        this.destination = destination;
         return this;
       }
 
