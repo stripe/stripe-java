@@ -4,7 +4,6 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -118,15 +117,87 @@ public class FinancialAccount extends StripeObject implements HasId {
   public static class Balance extends StripeObject {
     /** Balance that can be used for money movement. */
     @SerializedName("available")
-    Map<String, Amount> available;
+    Map<String, FinancialAccount.Balance.Available> available;
 
     /** Balance of inbound funds that will later transition to the {@code available} balance. */
     @SerializedName("inbound_pending")
-    Map<String, Amount> inboundPending;
+    Map<String, FinancialAccount.Balance.InboundPending> inboundPending;
 
     /** Balance of funds that are being used for a pending outbound money movement. */
     @SerializedName("outbound_pending")
-    Map<String, Amount> outboundPending;
+    Map<String, FinancialAccount.Balance.OutboundPending> outboundPending;
+
+    /**
+     * For more details about Available, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Available extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
+
+    /**
+     * For more details about InboundPending, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class InboundPending extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
+
+    /**
+     * For more details about OutboundPending, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class OutboundPending extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
   }
 
   /**

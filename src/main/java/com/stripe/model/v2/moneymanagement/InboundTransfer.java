@@ -4,7 +4,6 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +74,27 @@ public class InboundTransfer extends StripeObject implements HasId {
   @SerializedName("transfer_history")
   List<InboundTransfer.TransferHistory> transferHistory;
 
+  /** The amount in specified currency that will land in the FinancialAccount balance. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Amount extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
+  }
+
   /** A nested object containing information about the origin of the InboundTransfer. */
   @Getter
   @Setter
@@ -82,11 +102,32 @@ public class InboundTransfer extends StripeObject implements HasId {
   public static class From extends StripeObject {
     /** The amount in specified currency that was debited from the Payment Method. */
     @SerializedName("debited")
-    Amount debited;
+    Debited debited;
 
     /** The Payment Method object used to create the InboundTransfer. */
     @SerializedName("payment_method")
     PaymentMethod paymentMethod;
+
+    /** The amount in specified currency that was debited from the Payment Method. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Debited extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
 
     /** The Payment Method object used to create the InboundTransfer. */
     @Getter
@@ -113,11 +154,32 @@ public class InboundTransfer extends StripeObject implements HasId {
   public static class To extends StripeObject {
     /** The amount by which the FinancialAccount balance is credited. */
     @SerializedName("credited")
-    Amount credited;
+    Credited credited;
 
     /** The FinancialAccount that funds will land in. */
     @SerializedName("financial_account")
     String financialAccount;
+
+    /** The amount by which the FinancialAccount balance is credited. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Credited extends StripeObject {
+      /**
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
+       */
+      @SerializedName("currency")
+      String currency;
+
+      /**
+       * A non-negative integer representing how much to charge in the <a
+       * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+       */
+      @SerializedName("value")
+      Long value;
+    }
   }
 
   /**
