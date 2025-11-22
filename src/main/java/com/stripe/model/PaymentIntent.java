@@ -303,6 +303,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  /**
+   * When you enable this parameter, this PaymentIntent will route your payment to processors that
+   * you configure in the dashboard.
+   */
+  @SerializedName("payments_orchestration")
+  PaymentsOrchestration paymentsOrchestration;
+
   @SerializedName("presentment_details")
   PresentmentDetails presentmentDetails;
 
@@ -6343,6 +6350,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
+   * For more details about PaymentsOrchestration, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentsOrchestration extends StripeObject {
+    /** Whether this feature is enabled. */
+    @SerializedName("enabled")
+    Boolean enabled;
+  }
+
+  /**
    * For more details about PresentmentDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -6477,6 +6497,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(paymentMethod, responseGetter);
     trySetResponseGetter(paymentMethodConfigurationDetails, responseGetter);
     trySetResponseGetter(paymentMethodOptions, responseGetter);
+    trySetResponseGetter(paymentsOrchestration, responseGetter);
     trySetResponseGetter(presentmentDetails, responseGetter);
     trySetResponseGetter(processing, responseGetter);
     trySetResponseGetter(review, responseGetter);
