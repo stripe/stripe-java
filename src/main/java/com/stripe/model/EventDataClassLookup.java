@@ -214,6 +214,9 @@ public final class EventDataClassLookup {
         "privacy.redaction_job_validation_error",
         com.stripe.model.privacy.RedactionJobValidationError.class);
 
+    classLookup.put(
+        "product_catalog.trial_offer", com.stripe.model.productcatalog.TrialOffer.class);
+
     classLookup.put("radar.account_evaluation", com.stripe.model.radar.AccountEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);

@@ -762,6 +762,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.productCatalog() is deprecated, use StripeClient.v1().productCatalog()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().productCatalog(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.ProductCatalogService productCatalog() {
+    return new com.stripe.service.ProductCatalogService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.products() is deprecated, use StripeClient.v1().products() instead.
    *     All functionality under it has been copied over to StripeClient.v1().products(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
