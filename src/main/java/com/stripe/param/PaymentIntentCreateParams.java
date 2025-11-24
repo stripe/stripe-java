@@ -262,6 +262,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   List<String> paymentMethodTypes;
 
   /**
+   * When you enable this parameter, this PaymentIntent will route your payment to processors that
+   * you configure in the dashboard.
+   */
+  @SerializedName("payments_orchestration")
+  PaymentsOrchestration paymentsOrchestration;
+
+  /**
    * Options to configure Radar. Learn more about <a
    * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
    */
@@ -395,6 +402,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       PaymentMethodData paymentMethodData,
       PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes,
+      PaymentsOrchestration paymentsOrchestration,
       RadarOptions radarOptions,
       String receiptEmail,
       String returnUrl,
@@ -436,6 +444,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.paymentMethodData = paymentMethodData;
     this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.paymentsOrchestration = paymentsOrchestration;
     this.radarOptions = radarOptions;
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
@@ -514,6 +523,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private List<String> paymentMethodTypes;
 
+    private PaymentsOrchestration paymentsOrchestration;
+
     private RadarOptions radarOptions;
 
     private String receiptEmail;
@@ -569,6 +580,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.paymentMethodData,
           this.paymentMethodOptions,
           this.paymentMethodTypes,
+          this.paymentsOrchestration,
           this.radarOptions,
           this.receiptEmail,
           this.returnUrl,
@@ -1003,6 +1015,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.paymentMethodTypes = new ArrayList<>();
       }
       this.paymentMethodTypes.addAll(elements);
+      return this;
+    }
+
+    /**
+     * When you enable this parameter, this PaymentIntent will route your payment to processors that
+     * you configure in the dashboard.
+     */
+    public Builder setPaymentsOrchestration(
+        PaymentIntentCreateParams.PaymentsOrchestration paymentsOrchestration) {
+      this.paymentsOrchestration = paymentsOrchestration;
       return this;
     }
 
@@ -44175,6 +44197,76 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         SetupFutureUsage(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentsOrchestration {
+    /** <strong>Required.</strong> Whether this feature is enabled. */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentsOrchestration(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentIntentCreateParams.PaymentsOrchestration build() {
+        return new PaymentIntentCreateParams.PaymentsOrchestration(this.enabled, this.extraParams);
+      }
+
+      /** <strong>Required.</strong> Whether this feature is enabled. */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentCreateParams.PaymentsOrchestration#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentCreateParams.PaymentsOrchestration#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }
