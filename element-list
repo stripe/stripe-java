@@ -19,6 +19,7 @@ com.stripe.model.identity
 com.stripe.model.issuing
 com.stripe.model.oauth
 com.stripe.model.privacy
+com.stripe.model.productcatalog
 com.stripe.model.radar
 com.stripe.model.reporting
 com.stripe.model.sigma
@@ -50,6 +51,7 @@ com.stripe.param.forwarding
 com.stripe.param.identity
 com.stripe.param.issuing
 com.stripe.param.privacy
+com.stripe.param.productcatalog
 com.stripe.param.radar
 com.stripe.param.reporting
 com.stripe.param.sigma
@@ -86,6 +88,7 @@ com.stripe.service.forwarding
 com.stripe.service.identity
 com.stripe.service.issuing
 com.stripe.service.privacy
+com.stripe.service.productcatalog
 com.stripe.service.radar
 com.stripe.service.reporting
 com.stripe.service.sigma
