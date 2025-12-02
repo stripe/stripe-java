@@ -850,7 +850,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SelfReportedIncome extends StripeObject {
-    /** Amount in the minor currency unit (e.g., cents for USD). */
+    /** The amount in the minor currency unit (for example, cents for USD). */
     @SerializedName("amount")
     Long amount;
 
@@ -871,7 +871,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class SelfReportedMonthlyHousingPayment extends StripeObject {
-    /** Amount in the minor currency unit (e.g., cents for USD). */
+    /** The amount in the minor currency unit (for example, cents for USD). */
     @SerializedName("amount")
     Long amount;
 

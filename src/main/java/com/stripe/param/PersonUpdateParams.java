@@ -2531,11 +2531,18 @@ public class PersonUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class SelfReportedIncome {
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> The amount in the minor currency unit (for example, cents for
+     * USD).
+     */
     @SerializedName("amount")
     Long amount;
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
     @SerializedName("currency")
     Object currency;
 
@@ -2571,19 +2578,30 @@ public class PersonUpdateParams extends ApiRequestParams {
             this.amount, this.currency, this.extraParams);
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> The amount in the minor currency unit (for example, cents for
+       * USD).
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
       public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
         return this;
@@ -2620,11 +2638,18 @@ public class PersonUpdateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class SelfReportedMonthlyHousingPayment {
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> The amount in the minor currency unit (for example, cents for
+     * USD).
+     */
     @SerializedName("amount")
     Long amount;
 
-    /** <strong>Required.</strong> */
+    /**
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+     */
     @SerializedName("currency")
     Object currency;
 
@@ -2661,19 +2686,30 @@ public class PersonUpdateParams extends ApiRequestParams {
             this.amount, this.currency, this.extraParams);
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> The amount in the minor currency unit (for example, cents for
+       * USD).
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
-      /** <strong>Required.</strong> */
+      /**
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+       */
       public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
         return this;
