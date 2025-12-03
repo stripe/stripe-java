@@ -144,6 +144,14 @@ public class AccountSession extends ApiResource {
     @SerializedName("capital_financing_promotion")
     CapitalFinancingPromotion capitalFinancingPromotion;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/check-scanning/">check
+     * scanning</a> embedded component.
+     */
+    @SerializedName("check_scanning")
+    CheckScanning checkScanning;
+
     @SerializedName("disputes_list")
     DisputesList disputesList;
 
@@ -406,6 +414,31 @@ public class AccountSession extends ApiResource {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class CapitalFinancingPromotion extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
+    }
+
+    /**
+     * For more details about CheckScanning, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CheckScanning extends StripeObject {
       /** Whether the embedded component is enabled. */
       @SerializedName("enabled")
       Boolean enabled;
