@@ -13,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.core.EventListParams;
+import com.stripe.param.v2.core.EventRetrieveParams;
 
 public final class EventService extends ApiService {
   public EventService(StripeResponseGetter responseGetter) {
@@ -45,14 +46,28 @@ public final class EventService extends ApiService {
     return this.request(request, new TypeToken<StripeCollection<Event>>() {}.getType());
   }
   /** Retrieves the details of an event. */
-  public Event retrieve(String id) throws StripeException {
-    return retrieve(id, (RequestOptions) null);
+  public Event retrieve(String id, EventRetrieveParams params) throws StripeException {
+    return retrieve(id, params, (RequestOptions) null);
   }
   /** Retrieves the details of an event. */
   public Event retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (EventRetrieveParams) null, options);
+  }
+  /** Retrieves the details of an event. */
+  public Event retrieve(String id) throws StripeException {
+    return retrieve(id, (EventRetrieveParams) null, (RequestOptions) null);
+  }
+  /** Retrieves the details of an event. */
+  public Event retrieve(String id, EventRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String path = String.format("/v2/core/events/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return this.request(request, Event.class);
   }
 }

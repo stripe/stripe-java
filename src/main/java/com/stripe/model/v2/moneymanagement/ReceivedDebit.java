@@ -19,6 +19,13 @@ public class ReceivedDebit extends StripeObject implements HasId {
   Amount amount;
 
   /**
+   * This object stores details about the balance transfer object that resulted in the
+   * ReceivedDebit.
+   */
+  @SerializedName("balance_transfer")
+  BalanceTransfer balanceTransfer;
+
+  /**
    * This object stores details about the originating banking transaction that resulted in the
    * ReceivedDebit. Present if {@code type} field value is {@code bank_transfer}.
    */
@@ -87,9 +94,16 @@ public class ReceivedDebit extends StripeObject implements HasId {
   StatusTransitions statusTransitions;
 
   /**
-   * Open Enum. The type of the ReceivedDebit.
+   * This object stores details about the Stripe Balance Payment that resulted in the ReceivedDebit.
+   */
+  @SerializedName("stripe_balance_payment")
+  StripeBalancePayment stripeBalancePayment;
+
+  /**
+   * Open enum, the type of the received debit.
    *
-   * <p>One of {@code bank_transfer}, or {@code external_debit}.
+   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code external_debit}, or {@code
+   * stripe_balance_payment}.
    */
   @SerializedName("type")
   String type;
@@ -113,6 +127,27 @@ public class ReceivedDebit extends StripeObject implements HasId {
      */
     @SerializedName("value")
     Long value;
+  }
+
+  /**
+   * This object stores details about the balance transfer object that resulted in the
+   * ReceivedDebit.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BalanceTransfer extends StripeObject {
+    /** The ID of the topup object that originated the ReceivedDebit. */
+    @SerializedName("topup")
+    String topup;
+
+    /**
+     * Open Enum. The type of balance transfer that originated the ReceivedDebit.
+     *
+     * <p>Equal to {@code topup}.
+     */
+    @SerializedName("type")
+    String type;
   }
 
   /**
@@ -253,5 +288,21 @@ public class ReceivedDebit extends StripeObject implements HasId {
      */
     @SerializedName("succeeded_at")
     Instant succeededAt;
+  }
+
+  /**
+   * This object stores details about the Stripe Balance Payment that resulted in the ReceivedDebit.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeBalancePayment extends StripeObject {
+    /** ID of the debit agreement associated with this payment. */
+    @SerializedName("debit_agreement")
+    String debitAgreement;
+
+    /** Statement descriptor for the Stripe Balance Payment. */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
   }
 }
