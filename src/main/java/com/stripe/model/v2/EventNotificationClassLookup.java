@@ -286,6 +286,20 @@ public final class EventNotificationClassLookup {
         "v2.core.health.webhook_latency.resolved",
         com.stripe.events.V2CoreHealthWebhookLatencyResolvedEventNotification.class);
     eventClassLookup.put(
+        "v2.iam.api_key.created", com.stripe.events.V2IamApiKeyCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.iam.api_key.default_secret_revealed",
+        com.stripe.events.V2IamApiKeyDefaultSecretRevealedEventNotification.class);
+    eventClassLookup.put(
+        "v2.iam.api_key.expired", com.stripe.events.V2IamApiKeyExpiredEventNotification.class);
+    eventClassLookup.put(
+        "v2.iam.api_key.permissions_updated",
+        com.stripe.events.V2IamApiKeyPermissionsUpdatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.iam.api_key.rotated", com.stripe.events.V2IamApiKeyRotatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.iam.api_key.updated", com.stripe.events.V2IamApiKeyUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEventNotification.class);
     eventClassLookup.put(
