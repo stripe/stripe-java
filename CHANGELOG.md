@@ -1,5 +1,15 @@
 # Changelog
 
+## 31.1.0-alpha.4 - 2025-12-04
+* [#2123](https://github.com/stripe/stripe-java/pull/2123) Update generated code for private-preview
+  * Add support for event notifications `V2IamApiKeyCreatedEvent`, `V2IamApiKeyDefaultSecretRevealedEvent`, `V2IamApiKeyExpiredEvent`, `V2IamApiKeyPermissionsUpdatedEvent`, `V2IamApiKeyRotatedEvent`, and `V2IamApiKeyUpdatedEvent`
+* [#2122](https://github.com/stripe/stripe-java/pull/2122) Update generated code for private-preview
+  * Add support for `checkScanning` on `AccountSession.components`
+  * Add support for `client` on `v2.core.Event.reason.request`
+  * Add support for `stripeBalancePayment` on `v2.moneymanagement.ReceivedCredit` and `v2.moneymanagement.ReceivedDebit`
+  * Add support for `balanceTransfer` on `v2.moneymanagement.ReceivedDebit`
+  * Add support for `include` on `v2.core.EventListParams` and `v2.core.EventRetrieveParams`
+
 ## 31.1.0-alpha.3 - 2025-11-24
 * [#2119](https://github.com/stripe/stripe-java/pull/2119) Update generated code for private-preview
   * Add support for new resource `productcatalog.TrialOffer`

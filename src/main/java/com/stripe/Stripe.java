@@ -15,7 +15,7 @@ public abstract class Stripe {
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
   public static final String METER_EVENTS_API_BASE = "https://meter-events.stripe.com";
-  public static final String VERSION = "31.1.0-alpha.3";
+  public static final String VERSION = "31.1.0-alpha.4";
 
   public static volatile String apiKey;
   public static volatile String clientId;
