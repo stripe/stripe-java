@@ -450,7 +450,10 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       Object postalCode;
 
-      /** <strong>Required.</strong> State, county, province, or region. */
+      /**
+       * <strong>Required.</strong> State, county, province, or region (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+       */
       @SerializedName("state")
       Object state;
 
@@ -600,13 +603,19 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> State, county, province, or region. */
+        /**
+         * <strong>Required.</strong> State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
         }
 
-        /** <strong>Required.</strong> State, county, province, or region. */
+        /**
+         * <strong>Required.</strong> State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
@@ -1155,7 +1164,10 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         Object postalCode;
 
-        /** <strong>Required.</strong> State, county, province, or region. */
+        /**
+         * <strong>Required.</strong> State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         Object state;
 
@@ -1307,13 +1319,19 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> State, county, province, or region. */
+          /**
+           * <strong>Required.</strong> State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
           }
 
-          /** <strong>Required.</strong> State, county, province, or region. */
+          /**
+           * <strong>Required.</strong> State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(EmptyParam state) {
             this.state = state;
             return this;

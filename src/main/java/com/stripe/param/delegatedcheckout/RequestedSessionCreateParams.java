@@ -461,7 +461,10 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** <strong>Required.</strong> State, county, province, or region. */
+      /**
+       * <strong>Required.</strong> State, county, province, or region (<a
+       * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -576,7 +579,10 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> State, county, province, or region. */
+        /**
+         * <strong>Required.</strong> State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
@@ -923,7 +929,10 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** <strong>Required.</strong> State, county, province, or region. */
+        /**
+         * <strong>Required.</strong> State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -1040,7 +1049,10 @@ public class RequestedSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** <strong>Required.</strong> State, county, province, or region. */
+          /**
+           * <strong>Required.</strong> State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;

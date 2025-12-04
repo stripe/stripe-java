@@ -99,7 +99,8 @@ jar {
                    "Implementation-Version": VERSION_NAME,
                    "Implementation-Vendor": VENDOR_NAME,
                    "Bundle-SymbolicName": POM_ARTIFACT_ID,
-                   "Export-Package": "com.stripe.*")
+                   "Export-Package": "com.stripe.*",
+                   "Automatic-Module-Name": "stripe.java")
 
         archiveVersion = VERSION_NAME
     }

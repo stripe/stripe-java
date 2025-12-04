@@ -27,6 +27,10 @@ public class EventListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Additional fields to include in the response. */
+  @SerializedName("include")
+  List<EventListParams.Include> include;
+
   /** The page size. */
   @SerializedName("limit")
   Long limit;
@@ -42,11 +46,13 @@ public class EventListParams extends ApiRequestParams {
   private EventListParams(
       Created created,
       Map<String, Object> extraParams,
+      List<EventListParams.Include> include,
       Long limit,
       String objectId,
       List<String> types) {
     this.created = created;
     this.extraParams = extraParams;
+    this.include = include;
     this.limit = limit;
     this.objectId = objectId;
     this.types = types;
@@ -61,6 +67,8 @@ public class EventListParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private List<EventListParams.Include> include;
+
     private Long limit;
 
     private String objectId;
@@ -70,7 +78,7 @@ public class EventListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public EventListParams build() {
       return new EventListParams(
-          this.created, this.extraParams, this.limit, this.objectId, this.types);
+          this.created, this.extraParams, this.include, this.limit, this.objectId, this.types);
     }
 
     /** Set of filters to query events within a range of {@code created} timestamps. */
@@ -102,6 +110,32 @@ public class EventListParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `include` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * EventListParams#include} for the field documentation.
+     */
+    public Builder addInclude(EventListParams.Include element) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `include` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * EventListParams#include} for the field documentation.
+     */
+    public Builder addAllInclude(List<EventListParams.Include> elements) {
+      if (this.include == null) {
+        this.include = new ArrayList<>();
+      }
+      this.include.addAll(elements);
       return this;
     }
 
@@ -250,6 +284,18 @@ public class EventListParams extends ApiRequestParams {
         this.lte = lte;
         return this;
       }
+    }
+  }
+
+  public enum Include implements ApiRequestParams.EnumParam {
+    @SerializedName("reason.request.client")
+    REASON__REQUEST__CLIENT("reason.request.client");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Include(String value) {
+      this.value = value;
     }
   }
 }

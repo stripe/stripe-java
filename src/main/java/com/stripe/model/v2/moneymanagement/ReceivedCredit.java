@@ -102,9 +102,17 @@ public class ReceivedCredit extends StripeObject implements HasId {
   StatusTransitions statusTransitions;
 
   /**
+   * This object stores details about the stripe balance pay refund that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code stripe_balance_payment}.
+   */
+  @SerializedName("stripe_balance_payment")
+  StripeBalancePayment stripeBalancePayment;
+
+  /**
    * Open Enum. The type of flow that caused the ReceivedCredit.
    *
-   * <p>One of {@code balance_transfer}, {@code bank_transfer}, or {@code external_credit}.
+   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code external_credit}, or {@code
+   * stripe_balance_payment}.
    */
   @SerializedName("type")
   String type;
@@ -415,5 +423,18 @@ public class ReceivedCredit extends StripeObject implements HasId {
      */
     @SerializedName("succeeded_at")
     Instant succeededAt;
+  }
+
+  /**
+   * This object stores details about the stripe balance pay refund that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code stripe_balance_payment}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StripeBalancePayment extends StripeObject {
+    /** Statement descriptor for the Stripe Balance Payment. */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
   }
 }

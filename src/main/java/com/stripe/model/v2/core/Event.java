@@ -161,6 +161,10 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Request extends StripeObject implements HasId {
+      /** The client details that made the request. */
+      @SerializedName("client")
+      Client client;
+
       /** ID of the API request that caused the event. */
       @Getter(onMethod_ = {@Override})
       @SerializedName("id")
@@ -169,6 +173,61 @@ public class Event extends StripeObject implements HasId, StripeActiveObject {
       /** The idempotency key transmitted during the request. */
       @SerializedName("idempotency_key")
       String idempotencyKey;
+
+      /** The client details that made the request. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Client extends StripeObject {
+        /** API key that triggered the event. */
+        @SerializedName("api_key")
+        ApiKey apiKey;
+
+        /** Dashboard user that triggered the event. */
+        @SerializedName("dashboard_user")
+        DashboardUser dashboardUser;
+
+        /** Stripe action that triggered the event. */
+        @SerializedName("stripe_action")
+        Map<String, Object> stripeAction;
+
+        /**
+         * The type of the client.
+         *
+         * <p>One of {@code api_key}, {@code dashboard_user}, or {@code stripe_action}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /** API key that triggered the event. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ApiKey extends StripeObject implements HasId {
+          /** The ID of the API key. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+        }
+
+        /** Dashboard user that triggered the event. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class DashboardUser extends StripeObject {
+          /** The email of the dashboard user. */
+          @SerializedName("email")
+          String email;
+
+          /** The IP address of the user. */
+          @SerializedName("ip_address")
+          String ipAddress;
+
+          /** The machine identifier of the user. */
+          @SerializedName("machine_identifier")
+          String machineIdentifier;
+        }
+      }
     }
   }
 }
