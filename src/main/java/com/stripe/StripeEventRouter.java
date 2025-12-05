@@ -147,6 +147,8 @@ public class StripeEventRouter {
    */
   @SuppressWarnings("unchecked")
   public void handle(String webhookBody, String sigHeader) throws SignatureVerificationException {
+    // setting this naiively isn't technically thread-safe, but we expect the all callbacks to be
+    // registered syncronously on startup, so this should be fine
     hasHandledEvent = true;
 
     EventNotification eventNotification =
@@ -155,26 +157,18 @@ public class StripeEventRouter {
     EventHandler<? extends EventNotification> handler =
         registeredHandlers.get(eventNotification.getType());
 
-    String originalContext = this.client.getContext();
-    try {
-      if (eventNotification.context == null) {
-        this.client.setContext((String) null);
-      } else {
-        this.client.setContext(eventNotification.context);
-      }
+    // Create a new client with the event's context for thread-safe processing
+    StripeClient eventClient = this.client.withStripeContext(eventNotification.context);
 
-      if (handler == null) {
-        boolean isKnownEventType =
-            !(eventNotification instanceof com.stripe.events.UnknownEventNotification);
-        UnhandledNotificationDetails details = new UnhandledNotificationDetails(isKnownEventType);
+    if (handler == null) {
+      boolean isKnownEventType =
+          !(eventNotification instanceof com.stripe.events.UnknownEventNotification);
+      UnhandledNotificationDetails details = new UnhandledNotificationDetails(isKnownEventType);
 
-        this.onUnhandledHandler.process(eventNotification, this.client, details);
-      } else {
-        // this is technically unsafe but we control the registration API so should be ok
-        ((EventHandler<EventNotification>) handler).process(eventNotification, this.client);
-      }
-    } finally {
-      this.client.setContext(originalContext);
+      this.onUnhandledHandler.process(eventNotification, eventClient, details);
+    } else {
+      // this is technically unsafe but we control the registration API so should be ok
+      ((EventHandler<EventNotification>) handler).process(eventNotification, eventClient);
     }
   }
 

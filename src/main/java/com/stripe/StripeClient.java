@@ -59,30 +59,57 @@ public class StripeClient {
   }
 
   /**
-   * Sets the StripeContext for this client. This updates the client configuration to use the
-   * provided context for all subsequent requests.
+   * Creates a new StripeClient with the same configuration as this client but with a custom
+   * StripeContext. This method is useful for creating thread-safe clients with different contexts,
+   * such as when processing webhooks in parallel where each webhook has its own context.
+   *
+   * <p>The new client will share the same configuration (API key, timeouts, proxy settings, etc.)
+   * and HTTP client as this client, but will have the specified context. This allows for efficient
+   * parallel processing without reinitializing HTTP connections.
+   *
+   * @param context the custom stripe_context to use for the new client
+   * @return a new StripeClient with the custom context
+   * @throws IllegalStateException if this client doesn't use a LiveStripeResponseGetter
    */
-  protected void setContext(String context) {
-    // TODO(major): add getOptions to the StripeResponseGetter interface? that would simplify this
+  public StripeClient withStripeContext(StripeContext context) {
+    // Convert StripeContext to String
+    String contextString = (context == null) ? null : context.toString();
+
+    StripeResponseGetter responseGetter = this.getResponseGetter();
+
+    // We can only create a new client for LiveStripeResponseGetter
     if (!(responseGetter instanceof LiveStripeResponseGetter)) {
       throw new IllegalStateException(
-          "Cannot set context on a StripeClient with a non-Live response getter");
+          "Cannot create a client with custom context for non-Live response getters");
     }
 
     LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
-    StripeResponseGetterOptions options = liveGetter.getOptions();
 
-    if (!(options instanceof ClientStripeResponseGetterOptions)) {
-      throw new IllegalStateException(
-          "Cannot set context on a StripeClient with non-standard options");
-    }
+    // Create a new LiveStripeResponseGetter with updated context, reusing the HTTP client
+    LiveStripeResponseGetter newResponseGetter =
+        liveGetter.withNewOptions(
+            options -> {
+              ClientStripeResponseGetterOptions existingOptions =
+                  (ClientStripeResponseGetterOptions) options;
 
-    ClientStripeResponseGetterOptions clientOptions = (ClientStripeResponseGetterOptions) options;
-    clientOptions.setStripeContext(context);
-  }
+              return new ClientStripeResponseGetterOptions(
+                  existingOptions.getAuthenticator(),
+                  existingOptions.getClientId(),
+                  existingOptions.getConnectTimeout(),
+                  existingOptions.getReadTimeout(),
+                  existingOptions.getMaxNetworkRetries(),
+                  existingOptions.getConnectionProxy(),
+                  existingOptions.getProxyCredential(),
+                  existingOptions.getApiBase(),
+                  existingOptions.getFilesBase(),
+                  existingOptions.getConnectBase(),
+                  existingOptions.getMeterEventsBase(),
+                  existingOptions.getStripeAccount(),
+                  contextString);
+            });
 
-  protected void setContext(StripeContext context) {
-    setContext(context.toString());
+    // Create and return a new StripeClient with the new response getter
+    return new StripeClient(newResponseGetter);
   }
 
   /**
@@ -1117,7 +1144,7 @@ public class StripeClient {
     private final String stripeAccount;
 
     @Getter(onMethod_ = {@Override})
-    private volatile String stripeContext;
+    private final String stripeContext;
 
     ClientStripeResponseGetterOptions(
         Authenticator authenticator,
@@ -1145,15 +1172,6 @@ public class StripeClient {
       this.connectBase = connectBase;
       this.meterEventsBase = meterEventsBase;
       this.stripeAccount = stripeAccount;
-      this.stripeContext = stripeContext;
-    }
-
-    /**
-     * Updates the stripe context.
-     *
-     * @param stripeContext the new stripe context value
-     */
-    protected void setStripeContext(String stripeContext) {
       this.stripeContext = stripeContext;
     }
   }

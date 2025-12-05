@@ -76,6 +76,23 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
   }
 
+  /**
+   * Creates a new LiveStripeResponseGetter with the same configuration and HTTP client as this
+   * instance, but with a different stripe_context. This allows for efficient cloning when you need
+   * to make requests with different contexts (e.g., webhook processing) without reinitializing HTTP
+   * connections.
+   *
+   * @param contextCreator a function that takes the existing options and returns new options with
+   *     the desired context
+   * @return a new LiveStripeResponseGetter with the updated options and the same HTTP client
+   */
+  public LiveStripeResponseGetter withNewOptions(
+      java.util.function.Function<StripeResponseGetterOptions, StripeResponseGetterOptions>
+          contextCreator) {
+    StripeResponseGetterOptions newOptions = contextCreator.apply(this.options);
+    return new LiveStripeResponseGetter(newOptions, this.httpClient);
+  }
+
   public StripeResponseGetterOptions getOptions() {
     return this.options;
   }
