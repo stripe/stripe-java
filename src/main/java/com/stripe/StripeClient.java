@@ -41,11 +41,7 @@ public class StripeClient {
     return responseGetter;
   }
 
-  /**
-   * Gets the current StripeContext from the client's configuration.
-   *
-   * @return the current StripeContext, or null if none is set
-   */
+  /** Gets the current StripeContext from the client's configuration. Used in unit testing. */
   protected String getContext() {
     // TODO(major): add getOptions to the StripeResponseGetter interface? that would simplify this
     if (!(responseGetter instanceof LiveStripeResponseGetter)) {
@@ -1484,8 +1480,8 @@ public class StripeClient {
     return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter(), apiMode);
   }
 
-  public StripeEventRouter router(
-      String webhookSecret, StripeEventRouter.UnhandledEventHandler handler) {
-    return new StripeEventRouter(webhookSecret, this, handler);
+  public StripeEventNotificationHandler notificationHandler(
+      String webhookSecret, StripeEventNotificationHandler.FallbackCallback handler) {
+    return new StripeEventNotificationHandler(webhookSecret, this, handler);
   }
 }
