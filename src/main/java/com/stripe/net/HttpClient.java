@@ -1,13 +1,17 @@
 package com.stripe.net;
 
+import com.google.gson.Gson;
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
+import java.io.InputStream;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
 /** Base abstract class for HTTP clients used to send requests to Stripe's API. */
@@ -176,8 +180,29 @@ public abstract class HttpClient {
     if (Stripe.getAppInfo() != null) {
       propertyMap.put("application", ApiResource.INTERNAL_GSON.toJson(Stripe.getAppInfo()));
     }
+    getGsonVersion().ifPresent(ver -> propertyMap.put("gson.version", ver));
 
     return ApiResource.INTERNAL_GSON.toJson(propertyMap);
+  }
+
+  /**
+   * Gets the Gson version being used at runtime.
+   *
+   * @return the Gson version string, or Optional.empty() if it cannot be determined
+   */
+  private static Optional<String> getGsonVersion() {
+    try (InputStream in =
+        Gson.class.getResourceAsStream(
+            "/META-INF/maven/com.google.code.gson/gson/pom.properties")) {
+      if (in != null) {
+        Properties props = new Properties();
+        props.load(in);
+        return Optional.ofNullable(props.getProperty("version"));
+      }
+    } catch (Exception ignore) {
+      // Silently ignore - we'll just not include the version
+    }
+    return Optional.empty();
   }
 
   private static String formatAppInfo(Map<String, String> info) {
