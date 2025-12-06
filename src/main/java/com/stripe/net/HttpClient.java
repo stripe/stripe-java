@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
-
 import java.io.InputStream;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -192,7 +191,8 @@ public abstract class HttpClient {
    * @return the Gson version string, or Optional.empty() if it cannot be determined
    */
   private static Optional<String> getGsonVersion() {
-    try (InputStream in = Gson.class.getResourceAsStream(
+    try (InputStream in =
+        Gson.class.getResourceAsStream(
             "/META-INF/maven/com.google.code.gson/gson/pom.properties")) {
       if (in != null) {
         Properties props = new Properties();
