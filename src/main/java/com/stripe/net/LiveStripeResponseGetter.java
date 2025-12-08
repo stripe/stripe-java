@@ -21,6 +21,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private final HttpClient httpClient;
@@ -87,8 +88,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    * @return a new LiveStripeResponseGetter with the updated options and the same HTTP client
    */
   public LiveStripeResponseGetter withNewOptions(
-      java.util.function.Function<StripeResponseGetterOptions, StripeResponseGetterOptions>
-          contextCreator) {
+      Function<StripeResponseGetterOptions, StripeResponseGetterOptions> contextCreator) {
     StripeResponseGetterOptions newOptions = contextCreator.apply(this.options);
     return new LiveStripeResponseGetter(newOptions, this.httpClient);
   }
