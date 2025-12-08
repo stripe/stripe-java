@@ -63,7 +63,10 @@ import com.stripe.events.V2MoneyManagementTransactionCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementTransactionUpdatedEventNotification;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.v2.core.EventNotification;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 // event-notification-class-imports: The end of the section generated from our OpenAPI spec
 
@@ -109,6 +112,9 @@ public class StripeEventNotificationHandler {
     }
   }
 
+  // this is intentionally naiive to avoid the performance cost of interacting with `volatile`. We
+  // expect that registrations are done synchronously at startup time and handling will happen
+  // async, so thread-safe reads aren't important here.
   private boolean hasHandledEvent = false;
 
   private final String webhookSecret;
@@ -533,9 +539,9 @@ public class StripeEventNotificationHandler {
    *
    * @return A sorted list of event type strings
    */
-  public java.util.List<String> getRegisteredEventTypes() {
-    java.util.List<String> eventTypes = new java.util.ArrayList<>(this.registeredHandlers.keySet());
-    java.util.Collections.sort(eventTypes);
+  public List<String> getRegisteredEventTypes() {
+    List<String> eventTypes = new ArrayList<>(this.registeredHandlers.keySet());
+    Collections.sort(eventTypes);
     return eventTypes;
   }
 }

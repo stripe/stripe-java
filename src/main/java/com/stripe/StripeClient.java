@@ -8,6 +8,7 @@ import com.stripe.net.*;
 import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
+import lombok.Builder;
 import lombok.Getter;
 
 /**
@@ -73,7 +74,9 @@ public class StripeClient {
 
     StripeResponseGetter responseGetter = this.getResponseGetter();
 
-    // We can only create a new client for LiveStripeResponseGetter
+    // We can only create a new client for LiveStripeResponseGetter because it's the only class with
+    // `getOptions()`. If we add that method to the interface in a later major, we could remove this
+    // check.
     if (!(responseGetter instanceof LiveStripeResponseGetter)) {
       throw new IllegalStateException(
           "Cannot create a client with custom context for non-Live response getters");
@@ -88,20 +91,7 @@ public class StripeClient {
               ClientStripeResponseGetterOptions existingOptions =
                   (ClientStripeResponseGetterOptions) options;
 
-              return new ClientStripeResponseGetterOptions(
-                  existingOptions.getAuthenticator(),
-                  existingOptions.getClientId(),
-                  existingOptions.getConnectTimeout(),
-                  existingOptions.getReadTimeout(),
-                  existingOptions.getMaxNetworkRetries(),
-                  existingOptions.getConnectionProxy(),
-                  existingOptions.getProxyCredential(),
-                  existingOptions.getApiBase(),
-                  existingOptions.getFilesBase(),
-                  existingOptions.getConnectBase(),
-                  existingOptions.getMeterEventsBase(),
-                  existingOptions.getStripeAccount(),
-                  contextString);
+              return existingOptions.toBuilder().stripeContext(contextString).build();
             });
 
     // Create and return a new StripeClient with the new response getter
@@ -1100,6 +1090,8 @@ public class StripeClient {
   }
 
   // The end of the section generated from our OpenAPI spec
+  @SuppressWarnings("ObjectToString")
+  @Builder(toBuilder = true)
   static class ClientStripeResponseGetterOptions extends StripeResponseGetterOptions {
     // When adding setting here keep them in sync with settings in RequestOptions and
     // in the RequestOptions.merge method
