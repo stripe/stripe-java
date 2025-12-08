@@ -212,6 +212,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
     /**
      * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/check-scanning/">check
+     * scanning</a> embedded component.
+     */
+    @SerializedName("check_scanning")
+    CheckScanning checkScanning;
+
+    /**
+     * Configuration for the <a
      * href="https://stripe.com/connect/supported-embedded-components/disputes-list/">disputes
      * list</a> embedded component.
      */
@@ -405,6 +413,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         CapitalFinancingApplication capitalFinancingApplication,
         CapitalFinancingPromotion capitalFinancingPromotion,
         CapitalOverview capitalOverview,
+        CheckScanning checkScanning,
         DisputesList disputesList,
         Documents documents,
         ExportTaxTransactions exportTaxTransactions,
@@ -437,6 +446,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       this.capitalFinancingApplication = capitalFinancingApplication;
       this.capitalFinancingPromotion = capitalFinancingPromotion;
       this.capitalOverview = capitalOverview;
+      this.checkScanning = checkScanning;
       this.disputesList = disputesList;
       this.documents = documents;
       this.exportTaxTransactions = exportTaxTransactions;
@@ -484,6 +494,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       private CapitalFinancingPromotion capitalFinancingPromotion;
 
       private CapitalOverview capitalOverview;
+
+      private CheckScanning checkScanning;
 
       private DisputesList disputesList;
 
@@ -543,6 +555,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             this.capitalFinancingApplication,
             this.capitalFinancingPromotion,
             this.capitalOverview,
+            this.checkScanning,
             this.disputesList,
             this.documents,
             this.exportTaxTransactions,
@@ -663,6 +676,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       public Builder setCapitalOverview(
           AccountSessionCreateParams.Components.CapitalOverview capitalOverview) {
         this.capitalOverview = capitalOverview;
+        return this;
+      }
+
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/check-scanning/">check
+       * scanning</a> embedded component.
+       */
+      public Builder setCheckScanning(
+          AccountSessionCreateParams.Components.CheckScanning checkScanning) {
+        this.checkScanning = checkScanning;
         return this;
       }
 
@@ -2585,6 +2609,154 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            * map. See {@link
            * AccountSessionCreateParams.Components.CapitalOverview.Features#extraParams} for the
            * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CheckScanning {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** An empty list, because this embedded component has no features. */
+      @SerializedName("features")
+      Features features;
+
+      private CheckScanning(Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.CheckScanning build() {
+          return new AccountSessionCreateParams.Components.CheckScanning(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.CheckScanning#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountSessionCreateParams.Components.CheckScanning#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** An empty list, because this embedded component has no features. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.CheckScanning.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.CheckScanning.Features build() {
+            return new AccountSessionCreateParams.Components.CheckScanning.Features(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.CheckScanning.Features#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.CheckScanning.Features#extraParams} for the field
+           * documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {

@@ -711,6 +711,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("ineligible_reason")
       String ineligibleReason;
+
+      /** Unique identifier for the card in Apple Pay. */
+      @SerializedName("primary_account_identifier")
+      String primaryAccountIdentifier;
     }
 
     /**
@@ -733,6 +737,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("ineligible_reason")
       String ineligibleReason;
+
+      /** Unique identifier for the card in Google Pay. */
+      @SerializedName("primary_account_identifier")
+      String primaryAccountIdentifier;
     }
   }
 

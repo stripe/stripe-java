@@ -27,7 +27,7 @@ import lombok.Setter;
  * details or facial biometrics. This allows us to compare future verification attempts against
  * these entries. If a match is found, we categorize the new verification as unverified.
  *
- * <p>To learn more, see <a href="https://stripe.com/docs/identity/review-tools#block-list">Identity
+ * <p>To learn more, see <a href="https://docs.stripe.com/identity/review-tools#block-list">Identity
  * Verification Blocklist</a>
  */
 @Getter
