@@ -17,7 +17,7 @@ public class CreditGrantListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
-  /** Only return credit grants for this account. */
+  /** Only return credit grants for this account representing the customer. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -113,7 +113,7 @@ public class CreditGrantListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return credit grants for this account. */
+    /** Only return credit grants for this account representing the customer. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

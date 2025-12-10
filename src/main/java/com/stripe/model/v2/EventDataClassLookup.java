@@ -229,6 +229,9 @@ public final class EventDataClassLookup {
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.money_management.payout_method.created",
+        com.stripe.events.V2MoneyManagementPayoutMethodCreatedEvent.class);
+    eventClassLookup.put(
         "v2.money_management.payout_method.updated",
         com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEvent.class);
     eventClassLookup.put(

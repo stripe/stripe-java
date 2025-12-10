@@ -44,6 +44,10 @@ public class UsBankAccount extends StripeObject implements HasId {
   @SerializedName("fedwire_routing_number")
   String fedwireRoutingNumber;
 
+  /** The ID of the Financial Connections Account used to create the bank account. */
+  @SerializedName("financial_connections_account")
+  String financialConnectionsAccount;
+
   /** The ID of the USBankAccount object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")

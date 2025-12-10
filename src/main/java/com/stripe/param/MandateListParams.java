@@ -44,7 +44,7 @@ public class MandateListParams extends ApiRequestParams {
 
   /**
    * The Stripe account ID that the mandates are intended for. Learn more about the <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts
+   * href="https://docs.stripe.com/payments/connected-accounts">use case for connected accounts
    * payments</a>.
    */
   @SerializedName("on_behalf_of")
@@ -198,7 +198,7 @@ public class MandateListParams extends ApiRequestParams {
 
     /**
      * The Stripe account ID that the mandates are intended for. Learn more about the <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts
+     * href="https://docs.stripe.com/payments/connected-accounts">use case for connected accounts
      * payments</a>.
      */
     public Builder setOnBehalfOf(String onBehalfOf) {

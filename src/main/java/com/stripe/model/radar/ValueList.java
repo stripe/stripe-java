@@ -23,7 +23,7 @@ import lombok.Setter;
 /**
  * Value lists allow you to group values together which can then be referenced in rules.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/radar/lists#managing-list-items">Default
+ * <p>Related guide: <a href="https://docs.stripe.com/radar/lists#managing-list-items">Default
  * Stripe lists</a>
  */
 @Getter
@@ -71,7 +71,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

@@ -110,8 +110,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   String currency;
 
   /**
-   * The customer which this quote belongs to. A customer is required before finalizing the quote.
-   * Once specified, it cannot be changed.
+   * The customer who received this quote. A customer is required to finalize the quote. Once
+   * specified, you can't change it.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -119,8 +119,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   ExpandableField<Customer> customer;
 
   /**
-   * The account which this quote belongs to. A customer or account is required before finalizing
-   * the quote. Once specified, it cannot be changed.
+   * The account representing the customer who received this quote. A customer or account is
+   * required to finalize the quote. Once specified, you can't change it.
    */
   @SerializedName("customer_account")
   String customerAccount;
@@ -150,7 +150,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /**
    * Details of the quote that was cloned. See the <a
-   * href="https://stripe.com/docs/quotes/clone">cloning documentation</a> for more details.
+   * href="https://docs.stripe.com/quotes/clone">cloning documentation</a> for more details.
    */
   @SerializedName("from_quote")
   FromQuote fromQuote;
@@ -193,7 +193,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -203,7 +203,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
   /**
    * A unique number that identifies this particular quote. This number is assigned once the quote
-   * is <a href="https://stripe.com/docs/quotes/overview#finalize">finalized</a>.
+   * is <a href="https://docs.stripe.com/quotes/overview#finalize">finalized</a>.
    */
   @SerializedName("number")
   String number;
@@ -1460,13 +1460,13 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
             /**
              * A discount represents the actual application of a <a
-             * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
-             * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
+             * href="https://api.stripe.com#coupons">coupon</a> or <a
+             * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains
              * information about when the discount began, when it will end, and what it is applied
              * to.
              *
              * <p>Related guide: <a
-             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+             * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to
              * subscriptions</a>
              */
             @SerializedName("discount")
@@ -1599,13 +1599,13 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
             /**
              * A discount represents the actual application of a <a
-             * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
-             * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
+             * href="https://api.stripe.com#coupons">coupon</a> or <a
+             * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains
              * information about when the discount began, when it will end, and what it is applied
              * to.
              *
              * <p>Related guide: <a
-             * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+             * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to
              * subscriptions</a>
              */
             @SerializedName("discount")
@@ -2008,7 +2008,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     ExpandableField<Subscription> fromSubscription;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that will set
      * metadata on the subscription or subscription schedule when the quote is accepted. If a
      * recurring price is included in {@code line_items}, this field will be passed to the resulting
      * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,
@@ -2028,7 +2028,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * href="https://docs.stripe.com/subscriptions/billing-cycle#prorations">prorations</a> when the
      * quote is accepted.
      *
      * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
@@ -2271,8 +2271,8 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     String billingBehavior;
 
     /**
-     * The customer which this quote belongs to. A customer is required before finalizing the quote.
-     * Once specified, it cannot be changed.
+     * The customer who received this quote. A customer is required to finalize the quote. Once
+     * specified, you can't change it.
      */
     @SerializedName("customer")
     String customer;
@@ -2295,7 +2295,7 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a> when the
+     * href="https://docs.stripe.com/subscriptions/billing-cycle#prorations">prorations</a> when the
      * quote is accepted.
      *
      * <p>One of {@code always_invoice}, {@code create_prorations}, or {@code none}.
@@ -2565,12 +2565,12 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
 
         /**
          * A discount represents the actual application of a <a
-         * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
-         * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
-         * information about when the discount began, when it will end, and what it is applied to.
+         * href="https://api.stripe.com#coupons">coupon</a> or <a
+         * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains information
+         * about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
-         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+         * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to
          * subscriptions</a>
          */
         @SerializedName("discount")

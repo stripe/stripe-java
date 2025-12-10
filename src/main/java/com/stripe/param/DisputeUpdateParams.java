@@ -40,7 +40,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
   IntendedSubmissionMethod intendedSubmissionMethod;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -197,7 +197,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -208,7 +208,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -1613,7 +1613,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
             @SerializedName("postal_code")
             Object postalCode;
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             @SerializedName("state")
             Object state;
 
@@ -1764,13 +1767,19 @@ public class DisputeUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** State, county, province, or region. */
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
               public Builder setState(String state) {
                 this.state = state;
                 return this;
               }
 
-              /** State, county, province, or region. */
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
               public Builder setState(EmptyParam state) {
                 this.state = state;
                 return this;
@@ -2099,7 +2108,10 @@ public class DisputeUpdateParams extends ApiRequestParams {
             @SerializedName("postal_code")
             Object postalCode;
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             @SerializedName("state")
             Object state;
 
@@ -2250,13 +2262,19 @@ public class DisputeUpdateParams extends ApiRequestParams {
                 return this;
               }
 
-              /** State, county, province, or region. */
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
               public Builder setState(String state) {
                 this.state = state;
                 return this;
               }
 
-              /** State, county, province, or region. */
+              /**
+               * State, county, province, or region (<a
+               * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+               */
               public Builder setState(EmptyParam state) {
                 this.state = state;
                 return this;

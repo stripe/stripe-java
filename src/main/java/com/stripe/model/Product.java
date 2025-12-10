@@ -25,15 +25,15 @@ import lombok.Setter;
  * Products describe the specific goods or services you offer to your customers. For example, you
  * might offer a Standard and Premium version of your goods or service; each version would be a
  * separate Product. They can be used in conjunction with <a
- * href="https://stripe.com/docs/api#prices">Prices</a> to configure pricing in Payment Links,
- * Checkout, and Subscriptions.
+ * href="https://api.stripe.com#prices">Prices</a> to configure pricing in Payment Links, Checkout,
+ * and Subscriptions.
  *
  * <p>Related guides: <a
- * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
- * subscription</a>, <a href="https://stripe.com/docs/payment-links">share a Payment Link</a>, <a
- * href="https://stripe.com/docs/payments/accept-a-payment#create-product-prices-upfront">accept
+ * href="https://docs.stripe.com/billing/subscriptions/set-up-subscription">Set up a
+ * subscription</a>, <a href="https://docs.stripe.com/payment-links">share a Payment Link</a>, <a
+ * href="https://docs.stripe.com/payments/accept-a-payment#create-product-prices-upfront">accept
  * payments with Checkout</a>, and more about <a
- * href="https://stripe.com/docs/products-prices/overview">Products and Prices</a>
+ * href="https://docs.stripe.com/products-prices/overview">Products and Prices</a>
  */
 @Getter
 @Setter
@@ -48,7 +48,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   Long created;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the default
+   * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> object that is the default
    * price for this product.
    */
   @SerializedName("default_price")
@@ -86,13 +86,13 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * A list of up to 15 marketing features for this product. These are displayed in <a
-   * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+   * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("marketing_features")
   List<Product.MarketingFeature> marketingFeatures;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -128,7 +128,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
-  /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+  /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
   @SerializedName("tax_code")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

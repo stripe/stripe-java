@@ -173,7 +173,7 @@ public class BalanceSettings extends ApiResource {
       /**
        * Details on when funds from charges are available, and when they are paid out to an external
        * account. See our <a
-       * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
+       * href="https://docs.stripe.com/connect/bank-transfers#payout-information">Setting Bank and
        * Debit Card Payouts</a> documentation for details.
        */
       @SerializedName("schedule")

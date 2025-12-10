@@ -29,14 +29,14 @@ public class AuthorizationIncrementParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The amount to increment the authorization by. This amount is in the
    * authorization currency and in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("increment_amount")
   Long incrementAmount;
 
   /**
    * If set {@code true}, you may provide <a
-   * href="https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
+   * href="https://docs.stripe.com/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
    * to control how much to hold for the authorization.
    */
   @SerializedName("is_amount_controllable")
@@ -127,7 +127,7 @@ public class AuthorizationIncrementParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> The amount to increment the authorization by. This amount is in
      * the authorization currency and in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     public Builder setIncrementAmount(Long incrementAmount) {
       this.incrementAmount = incrementAmount;
@@ -136,7 +136,7 @@ public class AuthorizationIncrementParams extends ApiRequestParams {
 
     /**
      * If set {@code true}, you may provide <a
-     * href="https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
+     * href="https://docs.stripe.com/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
      * to control how much to hold for the authorization.
      */
     public Builder setIsAmountControllable(Boolean isAmountControllable) {

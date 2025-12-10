@@ -17,7 +17,7 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   /**
    * If the authorization's {@code pending_request.is_amount_controllable} property is {@code true},
    * you may provide this value to control how much to hold for the authorization. Must be positive
-   * (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code decline}</a>
+   * (use <a href="https://docs.stripe.com/api/issuing/authorizations/decline">{@code decline}</a>
    * to decline an authorization request).
    */
   @SerializedName("amount")
@@ -37,7 +37,7 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -75,7 +75,7 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     /**
      * If the authorization's {@code pending_request.is_amount_controllable} property is {@code
      * true}, you may provide this value to control how much to hold for the authorization. Must be
-     * positive (use <a href="https://stripe.com/docs/api/issuing/authorizations/decline">{@code
+     * positive (use <a href="https://docs.stripe.com/api/issuing/authorizations/decline">{@code
      * decline}</a> to decline an authorization request).
      */
     public Builder setAmount(Long amount) {
@@ -164,7 +164,7 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -175,7 +175,7 @@ public class AuthorizationApproveParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.

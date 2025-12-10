@@ -26,7 +26,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Association extends ApiResource implements HasId {
   /**
-   * The <a href="https://stripe.com/docs/api/tax/calculations/object">Tax Calculation</a> that was
+   * The <a href="https://docs.stripe.com/api/tax/calculations/object">Tax Calculation</a> that was
    * included in PaymentIntent.
    */
   @SerializedName("calculation")
@@ -46,7 +46,7 @@ public class Association extends ApiResource implements HasId {
   String object;
 
   /**
-   * The <a href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a> that this
+   * The <a href="https://docs.stripe.com/api/payment_intents/object">PaymentIntent</a> that this
    * Tax Association is tracking.
    */
   @SerializedName("payment_intent")
@@ -120,7 +120,7 @@ public class Association extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Committed extends StripeObject {
-      /** The <a href="https://stripe.com/docs/api/tax/transaction/object">Tax Transaction.</a> */
+      /** The <a href="https://docs.stripe.com/api/tax/transaction/object">Tax Transaction.</a> */
       @SerializedName("transaction")
       String transaction;
     }

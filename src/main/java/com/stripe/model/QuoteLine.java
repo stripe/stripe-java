@@ -280,7 +280,7 @@ public class QuoteLine extends StripeObject implements HasId {
       List<QuoteLine.Action.AddItem.Discount> discounts;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an item. Metadata on this item will update the underlying subscription item's
        * {@code metadata} when the phase is entered.
        */
@@ -727,7 +727,7 @@ public class QuoteLine extends StripeObject implements HasId {
       List<QuoteLine.Action.SetItem.Discount> discounts;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an item. Metadata on this item will update the underlying subscription item's
        * {@code metadata} when the phase is entered.
        */
@@ -1054,7 +1054,7 @@ public class QuoteLine extends StripeObject implements HasId {
     /**
      * If specified, payment collection for this subscription will be paused. Note that the
      * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+     * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
      * collection</a>.
      */
     @SerializedName("set")

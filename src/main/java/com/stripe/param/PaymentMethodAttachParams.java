@@ -17,7 +17,7 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
-  /** The ID of the account to which to attach the PaymentMethod. */
+  /** The ID of the Account representing the customer to which to attach the PaymentMethod. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -70,7 +70,7 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the account to which to attach the PaymentMethod. */
+    /** The ID of the Account representing the customer to which to attach the PaymentMethod. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

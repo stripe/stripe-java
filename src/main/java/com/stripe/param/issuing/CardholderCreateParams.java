@@ -44,7 +44,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   Individual individual;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -66,7 +66,7 @@ public class CardholderCreateParams extends ApiRequestParams {
    * already. This is required for all cardholders who will be creating EU cards. While phone number
    * is optional if the cardholder will not be creating EU cards, note that this cardholder will not
    * be eligible for 3DS without a phone number. See the <a
-   * href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
+   * href="https://docs.stripe.com/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
    * documentation</a> for more details.
    */
   @SerializedName("phone_number")
@@ -75,7 +75,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   /**
    * The cardholder’s preferred locales (languages), ordered by preference. Locales can be {@code
    * de}, {@code en}, {@code es}, {@code fr}, or {@code it}. This changes the language of the <a
-   * href="https://stripe.com/docs/issuing/3d-secure">3D Secure flow</a> and one-time password
+   * href="https://docs.stripe.com/issuing/3d-secure">3D Secure flow</a> and one-time password
    * messages sent to the cardholder.
    */
   @SerializedName("preferred_locales")
@@ -83,7 +83,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
   /**
    * Rules that control spending across this cardholder's cards. Refer to our <a
-   * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
+   * href="https://docs.stripe.com/issuing/controls/spending-controls">documentation</a> for more
    * details.
    */
   @SerializedName("spending_controls")
@@ -98,7 +98,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
   /**
    * One of {@code individual} or {@code company}. See <a
-   * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a> for
+   * href="https://docs.stripe.com/issuing/other/choose-cardholder">Choose a cardholder type</a> for
    * more details.
    */
   @SerializedName("type")
@@ -300,7 +300,7 @@ public class CardholderCreateParams extends ApiRequestParams {
      * already. This is required for all cardholders who will be creating EU cards. While phone
      * number is optional if the cardholder will not be creating EU cards, note that this cardholder
      * will not be eligible for 3DS without a phone number. See the <a
-     * href="https://stripe.com/docs/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
+     * href="https://docs.stripe.com/issuing/3d-secure#when-is-3d-secure-applied">3D Secure
      * documentation</a> for more details.
      */
     public Builder setPhoneNumber(String phoneNumber) {
@@ -336,7 +336,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     /**
      * Rules that control spending across this cardholder's cards. Refer to our <a
-     * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
+     * href="https://docs.stripe.com/issuing/controls/spending-controls">documentation</a> for more
      * details.
      */
     public Builder setSpendingControls(CardholderCreateParams.SpendingControls spendingControls) {
@@ -355,7 +355,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     /**
      * One of {@code individual} or {@code company}. See <a
-     * href="https://stripe.com/docs/issuing/other/choose-cardholder">Choose a cardholder type</a>
+     * href="https://docs.stripe.com/issuing/other/choose-cardholder">Choose a cardholder type</a>
      * for more details.
      */
     public Builder setType(CardholderCreateParams.Type type) {
@@ -467,7 +467,10 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -582,7 +585,10 @@ public class CardholderCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
@@ -1193,7 +1199,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
-         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}.
          */
         @SerializedName("back")
@@ -1210,7 +1216,7 @@ public class CardholderCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}.
          */
         @SerializedName("front")
@@ -1240,7 +1246,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setBack(String back) {
@@ -1277,7 +1283,7 @@ public class CardholderCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}.
            */
           public Builder setFront(String front) {
@@ -1294,7 +1300,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   public static class SpendingControls {
     /**
      * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
      * blocked_categories}.
      */
@@ -1312,7 +1318,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     /**
      * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to decline. All other categories will be allowed. Cannot be set with {@code
      * allowed_categories}.
      */
@@ -1585,7 +1591,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       /**
        * Array of strings containing <a
-       * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+       * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
        * this limit applies to. Omitting this field will apply the limit to all categories.
        */
       @SerializedName("categories")

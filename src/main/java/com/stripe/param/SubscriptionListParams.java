@@ -42,11 +42,11 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("current_period_start")
   Object currentPeriodStart;
 
-  /** The ID of the customer whose subscriptions will be retrieved. */
+  /** The ID of the customer whose subscriptions you're retrieving. */
   @SerializedName("customer")
   String customer;
 
-  /** The ID of the account whose subscriptions will be retrieved. */
+  /** The ID of the account representing the customer whose subscriptions you're retrieving. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -100,7 +100,7 @@ public class SubscriptionListParams extends ApiRequestParams {
    * The status of the subscriptions to retrieve. Passing in a value of {@code canceled} will return
    * all canceled subscriptions, including those belonging to deleted customers. Pass {@code ended}
    * to find subscriptions that are canceled and subscriptions that are expired due to <a
-   * href="https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses">incomplete
+   * href="https://docs.stripe.com/billing/subscriptions/overview#subscription-statuses">incomplete
    * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses. If no
    * value is supplied, all subscriptions that have not been canceled are returned.
    */
@@ -271,13 +271,13 @@ public class SubscriptionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the customer whose subscriptions will be retrieved. */
+    /** The ID of the customer whose subscriptions you're retrieving. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /** The ID of the account whose subscriptions will be retrieved. */
+    /** The ID of the account representing the customer whose subscriptions you're retrieving. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;
@@ -383,7 +383,7 @@ public class SubscriptionListParams extends ApiRequestParams {
      * return all canceled subscriptions, including those belonging to deleted customers. Pass
      * {@code ended} to find subscriptions that are canceled and subscriptions that are expired due
      * to <a
-     * href="https://stripe.com/docs/billing/subscriptions/overview#subscription-statuses">incomplete
+     * href="https://docs.stripe.com/billing/subscriptions/overview#subscription-statuses">incomplete
      * payment</a>. Passing in a value of {@code all} will return subscriptions of all statuses. If
      * no value is supplied, all subscriptions that have not been canceled are returned.
      */

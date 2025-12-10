@@ -36,7 +36,7 @@ import lombok.Setter;
 public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
    * Order cost before any discounts or taxes are applied. A positive integer representing the
-   * subtotal of the order in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+   * subtotal of the order in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
    * currency unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal
    * currency).
    */
@@ -45,10 +45,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
   /**
    * Total order cost after discounts and taxes are applied. A positive integer representing the
-   * cost of the order in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+   * cost of the order in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
    * currency unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal
    * currency). To submit an order, the total must be either 0 or at least $0.50 USD or <a
-   * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+   * href="https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts">equivalent in
    * charge currency</a>.
    */
   @SerializedName("amount_total")
@@ -75,7 +75,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Make sure that you have TLS enabled on any page that includes the client secret.
    *
    * <p>Refer to our docs for <a
-   * href="https://stripe.com/docs/orders-beta/create-and-process">creating and processing an
+   * href="https://docs.stripe.com/orders-beta/create-and-process">creating and processing an
    * order</a> to learn about how client_secret should be handled.
    */
   @SerializedName("client_secret")
@@ -130,7 +130,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -742,7 +742,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       PaymentMethodOptions paymentMethodOptions;
 
       /**
-       * The list of <a href="https://stripe.com/docs/payments/payment-methods/overview">payment
+       * The list of <a href="https://docs.stripe.com/payments/payment-methods/overview">payment
        * method types</a> to provide to the order's PaymentIntent. Do not include this attribute if
        * you prefer to manage your payment methods from the <a
        * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
@@ -961,17 +961,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
            * Indicates that you intend to make future payments with the payment method.
            *
            * <p>Providing this parameter will <a
-           * href="https://stripe.com/docs/payments/save-during-payment">attach the payment
+           * href="https://docs.stripe.com/payments/save-during-payment">attach the payment
            * method</a> to the order's Customer, if present, after the order's PaymentIntent is
            * confirmed and any required actions from the user are complete. If no Customer was
            * provided, the payment method can still be <a
-           * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+           * href="https://docs.stripe.com/api/payment_methods/attach">attached</a> to a Customer
            * after the transaction completes.
            *
            * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
            * dynamically optimize your payment flow and comply with regional legislation and network
            * rules, such as <a
-           * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+           * href="https://docs.stripe.com/strong-customer-authentication">SCA</a>.
            *
            * <p>If {@code setup_future_usage} is already set and you are performing a request using
            * a publishable key, you may only update the value from {@code on_session} to {@code
@@ -1080,17 +1080,17 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
            * Indicates that you intend to make future payments with the payment method.
            *
            * <p>Providing this parameter will <a
-           * href="https://stripe.com/docs/payments/save-during-payment">attach the payment
+           * href="https://docs.stripe.com/payments/save-during-payment">attach the payment
            * method</a> to the order's Customer, if present, after the order's PaymentIntent is
            * confirmed and any required actions from the user are complete. If no Customer was
            * provided, the payment method can still be <a
-           * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+           * href="https://docs.stripe.com/api/payment_methods/attach">attached</a> to a Customer
            * after the transaction completes.
            *
            * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
            * dynamically optimize your payment flow and comply with regional legislation and network
            * rules, such as <a
-           * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+           * href="https://docs.stripe.com/strong-customer-authentication">SCA</a>.
            *
            * <p>If {@code setup_future_usage} is already set and you are performing a request using
            * a publishable key, you may only update the value from {@code on_session} to {@code
@@ -1974,12 +1974,12 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
         /**
          * A discount represents the actual application of a <a
-         * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
-         * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
-         * information about when the discount began, when it will end, and what it is applied to.
+         * href="https://api.stripe.com#coupons">coupon</a> or <a
+         * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains information
+         * about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
-         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+         * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to
          * subscriptions</a>
          */
         @SerializedName("discount")

@@ -26,7 +26,7 @@ import lombok.Setter;
  * A SetupIntent guides you through the process of setting up and saving a customer's payment
  * credentials for future payments. For example, you can use a SetupIntent to set up and save your
  * customer's card without immediately collecting a payment. Later, you can use <a
- * href="https://stripe.com/docs/api#payment_intents">PaymentIntents</a> to drive the payment flow.
+ * href="https://api.stripe.com#payment_intents">PaymentIntents</a> to drive the payment flow.
  *
  * <p>Create a SetupIntent when you're ready to collect your customer's payment credentials. Don't
  * maintain long-lived, unconfirmed SetupIntents because they might not be valid. The SetupIntent
@@ -40,13 +40,11 @@ import lombok.Setter;
  * be run through <a href="https://docs.stripe.com/strong-customer-authentication">Strong Customer
  * Authentication</a> during payment method collection to streamline later <a
  * href="https://docs.stripe.com/payments/setup-intents">off-session payments</a>. If you use the
- * SetupIntent with a <a
- * href="https://stripe.com/docs/api#setup_intent_object-customer">Customer</a>, it automatically
- * attaches the resulting payment method to that Customer after successful setup. We recommend using
- * SetupIntents or <a
- * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
- * on PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment
- * methods.
+ * SetupIntent with a <a href="https://api.stripe.com#setup_intent_object-customer">Customer</a>, it
+ * automatically attaches the resulting payment method to that Customer after successful setup. We
+ * recommend using SetupIntents or <a
+ * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a> on
+ * PaymentIntents to save payment methods to prevent saving invalid or unoptimized payment methods.
  *
  * <p>By using SetupIntents, you can reduce friction for your customers, even as regulations change
  * over time.
@@ -166,7 +164,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   ExpandableField<Mandate> mandate;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -208,7 +206,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * Information about the <a
-   * href="https://stripe.com/docs/api/payment_method_configurations">payment method
+   * href="https://docs.stripe.com/api/payment_method_configurations">payment method
    * configuration</a> used for this Setup Intent.
    */
   @SerializedName("payment_method_configuration_details")
@@ -233,7 +231,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   ExpandableField<Mandate> singleUseMandate;
 
   /**
-   * <a href="https://stripe.com/docs/payments/intents#intent-statuses">Status</a> of this
+   * <a href="https://docs.stripe.com/payments/intents#intent-statuses">Status</a> of this
    * SetupIntent, one of {@code requires_payment_method}, {@code requires_confirmation}, {@code
    * requires_action}, {@code processing}, {@code canceled}, or {@code succeeded}.
    */
@@ -852,7 +850,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
      *
      * <p>Redirect-based payment methods may require your customer to be redirected to a payment
      * method's app or site for authentication or additional steps. To <a
-     * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> this SetupIntent, you
+     * href="https://docs.stripe.com/api/setup_intents/confirm">confirm</a> this SetupIntent, you
      * may be required to provide a {@code return_url} to redirect customers back to your site after
      * they authenticate or complete the setup.
      *
@@ -1222,11 +1220,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
-       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
        * However, if you wish to request 3D Secure based on logic from your own fraud engine,
        * provide this option. If not provided, this value defaults to {@code automatic}. Read our
        * guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+       * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        *

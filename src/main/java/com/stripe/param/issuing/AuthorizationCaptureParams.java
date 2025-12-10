@@ -17,7 +17,7 @@ public class AuthorizationCaptureParams extends ApiRequestParams {
   /**
    * The amount to capture from the authorization. If not provided, the full amount of the
    * authorization will be captured. This amount is in the authorization currency and in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("capture_amount")
   Long captureAmount;
@@ -87,7 +87,7 @@ public class AuthorizationCaptureParams extends ApiRequestParams {
     /**
      * The amount to capture from the authorization. If not provided, the full amount of the
      * authorization will be captured. This amount is in the authorization currency and in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     public Builder setCaptureAmount(Long captureAmount) {
       this.captureAmount = captureAmount;

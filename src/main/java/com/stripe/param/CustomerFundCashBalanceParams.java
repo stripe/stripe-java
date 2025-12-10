@@ -16,7 +16,7 @@ public class CustomerFundCashBalanceParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Amount to be used for this test cash balance transaction. A positive
    * integer representing how much to fund in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
    * cents to fund $1.00 or 100 to fund ¥100, a zero-decimal currency).
    */
   @SerializedName("amount")
@@ -46,7 +46,7 @@ public class CustomerFundCashBalanceParams extends ApiRequestParams {
   /**
    * A description of the test funding. This simulates free-text references supplied by customers
    * when making bank transfers to their cash balance. You can use this to test how Stripe's <a
-   * href="https://stripe.com/docs/payments/customer-balance/reconciliation">reconciliation
+   * href="https://docs.stripe.com/payments/customer-balance/reconciliation">reconciliation
    * algorithm</a> applies to different user inputs.
    */
   @SerializedName("reference")
@@ -89,7 +89,7 @@ public class CustomerFundCashBalanceParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> Amount to be used for this test cash balance transaction. A
      * positive integer representing how much to fund in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
      * cents to fund $1.00 or 100 to fund ¥100, a zero-decimal currency).
      */
     public Builder setAmount(Long amount) {
@@ -162,7 +162,7 @@ public class CustomerFundCashBalanceParams extends ApiRequestParams {
     /**
      * A description of the test funding. This simulates free-text references supplied by customers
      * when making bank transfers to their cash balance. You can use this to test how Stripe's <a
-     * href="https://stripe.com/docs/payments/customer-balance/reconciliation">reconciliation
+     * href="https://docs.stripe.com/payments/customer-balance/reconciliation">reconciliation
      * algorithm</a> applies to different user inputs.
      */
     public Builder setReference(String reference) {

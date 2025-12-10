@@ -212,15 +212,15 @@ public class AccountListParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder {
-    /** The ID of the Stripe account whose accounts will be retrieved. */
+    /** The ID of the Stripe account whose accounts you will retrieve. */
     @SerializedName("account")
     String account;
 
-    /** The ID of the Stripe customer whose accounts will be retrieved. */
+    /** The ID of the Stripe customer whose accounts you will retrieve. */
     @SerializedName("customer")
     String customer;
 
-    /** The Account ID of the Stripe customer whose accounts will be retrieved. */
+    /** The ID of the Account representing a customer whose accounts you will retrieve. */
     @SerializedName("customer_account")
     String customerAccount;
 
@@ -260,19 +260,19 @@ public class AccountListParams extends ApiRequestParams {
             this.account, this.customer, this.customerAccount, this.extraParams);
       }
 
-      /** The ID of the Stripe account whose accounts will be retrieved. */
+      /** The ID of the Stripe account whose accounts you will retrieve. */
       public Builder setAccount(String account) {
         this.account = account;
         return this;
       }
 
-      /** The ID of the Stripe customer whose accounts will be retrieved. */
+      /** The ID of the Stripe customer whose accounts you will retrieve. */
       public Builder setCustomer(String customer) {
         this.customer = customer;
         return this;
       }
 
-      /** The Account ID of the Stripe customer whose accounts will be retrieved. */
+      /** The ID of the Account representing a customer whose accounts you will retrieve. */
       public Builder setCustomerAccount(String customerAccount) {
         this.customerAccount = customerAccount;
         return this;

@@ -29,9 +29,8 @@ import lombok.Setter;
 /**
  * Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
- * to add funds to your <a
- * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> via a PaymentMethod
- * that is owned by you. The funds will be transferred via an ACH debit.
+ * to add funds to your <a href="https://api.stripe.com#financial_accounts">FinancialAccount</a> via
+ * a PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
  *
  * <p>Related guide: <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">Moving
@@ -73,7 +72,7 @@ public class InboundTransfer extends ApiResource implements HasId {
   String financialAccount;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * A <a href="https://docs.stripe.com/treasury/moving-money/regulatory-receipts">hosted
    * transaction receipt</a> URL that is provided when money movement is considered regulated under
    * Stripe's money transmission licenses.
    */
@@ -96,7 +95,7 @@ public class InboundTransfer extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -449,7 +448,7 @@ public class InboundTransfer extends ApiResource implements HasId {
 
       /**
        * The network rails used. See the <a
-       * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
+       * href="https://docs.stripe.com/treasury/money-movement/timelines">docs</a> to learn more
        * about money movement timelines for each network type.
        *
        * <p>Equal to {@code ach}.

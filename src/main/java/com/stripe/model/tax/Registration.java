@@ -23,14 +23,14 @@ import lombok.Setter;
 
 /**
  * A Tax {@code Registration} lets us know that your business is registered to collect tax on
- * payments within a region, enabling you to <a href="https://stripe.com/docs/tax">automatically
+ * payments within a region, enabling you to <a href="https://docs.stripe.com/tax">automatically
  * collect tax</a>.
  *
  * <p>Stripe doesn't register on your behalf with the relevant authorities when you create a Tax
  * {@code Registration} object. For more information on how to register to collect tax, see <a
- * href="https://stripe.com/docs/tax/registering">our guide</a>.
+ * href="https://docs.stripe.com/tax/registering">our guide</a>.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/tax/registrations-api">Using the Registrations
+ * <p>Related guide: <a href="https://docs.stripe.com/tax/registrations-api">Using the Registrations
  * API</a>
  */
 @Getter

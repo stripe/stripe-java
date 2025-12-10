@@ -162,6 +162,9 @@ public final class EventNotificationClassLookup {
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.payout_method.created",
+        com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.payout_method.updated",
         com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEventNotification.class);
     eventClassLookup.put(

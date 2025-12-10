@@ -100,14 +100,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   /**
    * This hash contains details about the mandate to create. This parameter can only be used with <a
-   * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+   * href="https://docs.stripe.com/api/setup_intents/create#create_setup_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("mandate_data")
   Object mandateData;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -127,7 +127,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   String paymentMethod;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+   * The ID of the <a href="https://docs.stripe.com/api/payment_method_configurations">payment
    * method configuration</a> to use with this SetupIntent.
    */
   @SerializedName("payment_method_configuration")
@@ -135,7 +135,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   /**
    * When included, this hash creates a PaymentMethod that is set as the <a
-   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-payment_method">{@code
+   * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-payment_method">{@code
    * payment_method}</a> value in the SetupIntent.
    */
   @SerializedName("payment_method_data")
@@ -159,7 +159,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
    * the payment method's app or site. To redirect to a mobile application, you can alternatively
    * supply an application URI scheme. This parameter can only be used with <a
-   * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+   * href="https://docs.stripe.com/api/setup_intents/create#create_setup_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("return_url")
@@ -501,7 +501,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     /**
      * This hash contains details about the mandate to create. This parameter can only be used with
-     * <a href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+     * <a href="https://docs.stripe.com/api/setup_intents/create#create_setup_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setMandateData(SetupIntentCreateParams.MandateData mandateData) {
@@ -511,7 +511,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     /**
      * This hash contains details about the mandate to create. This parameter can only be used with
-     * <a href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+     * <a href="https://docs.stripe.com/api/setup_intents/create#create_setup_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setMandateData(EmptyParam mandateData) {
@@ -561,7 +561,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+     * The ID of the <a href="https://docs.stripe.com/api/payment_method_configurations">payment
      * method configuration</a> to use with this SetupIntent.
      */
     public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
@@ -571,7 +571,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     /**
      * When included, this hash creates a PaymentMethod that is set as the <a
-     * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-payment_method">{@code
+     * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-payment_method">{@code
      * payment_method}</a> value in the SetupIntent.
      */
     public Builder setPaymentMethodData(
@@ -617,7 +617,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
      * the payment method's app or site. To redirect to a mobile application, you can alternatively
      * supply an application URI scheme. This parameter can only be used with <a
-     * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/setup_intents/create#create_setup_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setReturnUrl(String returnUrl) {
@@ -665,7 +665,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      *
      * <p>Redirect-based payment methods may require your customer to be redirected to a payment
      * method's app or site for authentication or additional steps. To <a
-     * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> this SetupIntent, you
+     * href="https://docs.stripe.com/api/setup_intents/confirm">confirm</a> this SetupIntent, you
      * may be required to provide a {@code return_url} to redirect customers back to your site after
      * they authenticate or complete the setup.
      */
@@ -714,7 +714,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
        *
        * <p>Redirect-based payment methods may require your customer to be redirected to a payment
        * method's app or site for authentication or additional steps. To <a
-       * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> this SetupIntent, you
+       * href="https://docs.stripe.com/api/setup_intents/confirm">confirm</a> this SetupIntent, you
        * may be required to provide a {@code return_url} to redirect customers back to your site
        * after they authenticate or complete the setup.
        */
@@ -1393,7 +1393,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     MbWay mbWay;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -1507,7 +1507,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     Qris qris;
 
     /**
-     * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+     * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
      * Session</a> for more information.
      */
     @SerializedName("radar_options")
@@ -2415,7 +2415,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+       * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
        * Session</a> for more information.
        */
       public Builder setRadarOptions(
@@ -3427,7 +3427,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -3542,7 +3545,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -4570,6 +4576,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("knab")
         KNAB("knab"),
+
+        @SerializedName("mollie")
+        MOLLIE("mollie"),
 
         @SerializedName("moneyou")
         MONEYOU("moneyou"),
@@ -6284,7 +6293,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+       * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
        * the browser metadata and device details that help Radar make more accurate predictions on
        * your payments.
        */
@@ -6340,7 +6349,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot
+         * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot
          * of the browser metadata and device details that help Radar make more accurate predictions
          * on your payments.
          */
@@ -8602,11 +8611,11 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
-       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
        * However, if you wish to request 3D Secure based on logic from your own fraud engine,
        * provide this option. If not provided, this value defaults to {@code automatic}. Read our
        * guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+       * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        */
@@ -8721,11 +8730,11 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
-         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. If not provided, this value defaults to {@code automatic}. Read our
          * guide on <a
-         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
          * requesting 3D Secure</a> for more information on how this configuration interacts with
          * Radar and our SCA Engine.
          */
@@ -10799,7 +10808,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
          * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
          */
         @SerializedName("amount")
-        Long amount;
+        Object amount;
 
         /**
          * The type of amount that will be collected. The amount charged must be exact or up to the
@@ -10807,14 +10816,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
          * Defaults to {@code maximum}.
          */
         @SerializedName("amount_type")
-        AmountType amountType;
+        ApiRequestParams.EnumParam amountType;
 
         /**
          * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
          * end date.
          */
         @SerializedName("end_date")
-        String endDate;
+        Object endDate;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -10828,7 +10837,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
         @SerializedName("payment_schedule")
-        PaymentSchedule paymentSchedule;
+        ApiRequestParams.EnumParam paymentSchedule;
 
         /**
          * The number of payments that will be made during a payment period. Defaults to 1 except
@@ -10836,31 +10845,31 @@ public class SetupIntentCreateParams extends ApiRequestParams {
          * limit.
          */
         @SerializedName("payments_per_period")
-        Long paymentsPerPeriod;
+        Object paymentsPerPeriod;
 
         /**
          * The purpose for which payments are made. Has a default value based on your merchant
          * category code.
          */
         @SerializedName("purpose")
-        Purpose purpose;
+        ApiRequestParams.EnumParam purpose;
 
         /**
          * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
          * confirmation time.
          */
         @SerializedName("start_date")
-        String startDate;
+        Object startDate;
 
         private MandateOptions(
-            Long amount,
-            AmountType amountType,
-            String endDate,
+            Object amount,
+            ApiRequestParams.EnumParam amountType,
+            Object endDate,
             Map<String, Object> extraParams,
-            PaymentSchedule paymentSchedule,
-            Long paymentsPerPeriod,
-            Purpose purpose,
-            String startDate) {
+            ApiRequestParams.EnumParam paymentSchedule,
+            Object paymentsPerPeriod,
+            ApiRequestParams.EnumParam purpose,
+            Object startDate) {
           this.amount = amount;
           this.amountType = amountType;
           this.endDate = endDate;
@@ -10876,21 +10885,21 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Long amount;
+          private Object amount;
 
-          private AmountType amountType;
+          private ApiRequestParams.EnumParam amountType;
 
-          private String endDate;
+          private Object endDate;
 
           private Map<String, Object> extraParams;
 
-          private PaymentSchedule paymentSchedule;
+          private ApiRequestParams.EnumParam paymentSchedule;
 
-          private Long paymentsPerPeriod;
+          private Object paymentsPerPeriod;
 
-          private Purpose purpose;
+          private ApiRequestParams.EnumParam purpose;
 
-          private String startDate;
+          private Object startDate;
 
           /** Finalize and obtain parameter instance from this builder. */
           public SetupIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions build() {
@@ -10915,6 +10924,15 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           }
 
           /**
+           * Amount that will be collected. It is required when {@code amount_type} is {@code
+           * fixed}.
+           */
+          public Builder setAmount(EmptyParam amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
            * The type of amount that will be collected. The amount charged must be exact or up to
            * the value of {@code amount} param for {@code fixed} or {@code maximum} type
            * respectively. Defaults to {@code maximum}.
@@ -10927,10 +10945,29 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           }
 
           /**
+           * The type of amount that will be collected. The amount charged must be exact or up to
+           * the value of {@code amount} param for {@code fixed} or {@code maximum} type
+           * respectively. Defaults to {@code maximum}.
+           */
+          public Builder setAmountType(EmptyParam amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
            * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
            * end date.
            */
           public Builder setEndDate(String endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+           * end date.
+           */
+          public Builder setEndDate(EmptyParam endDate) {
             this.endDate = endDate;
             return this;
           }
@@ -10973,12 +11010,28 @@ public class SetupIntentCreateParams extends ApiRequestParams {
             return this;
           }
 
+          /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
+          public Builder setPaymentSchedule(EmptyParam paymentSchedule) {
+            this.paymentSchedule = paymentSchedule;
+            return this;
+          }
+
           /**
            * The number of payments that will be made during a payment period. Defaults to 1 except
            * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
            * limit.
            */
           public Builder setPaymentsPerPeriod(Long paymentsPerPeriod) {
+            this.paymentsPerPeriod = paymentsPerPeriod;
+            return this;
+          }
+
+          /**
+           * The number of payments that will be made during a payment period. Defaults to 1 except
+           * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+           * limit.
+           */
+          public Builder setPaymentsPerPeriod(EmptyParam paymentsPerPeriod) {
             this.paymentsPerPeriod = paymentsPerPeriod;
             return this;
           }
@@ -10994,10 +11047,28 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           }
 
           /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           */
+          public Builder setPurpose(EmptyParam purpose) {
+            this.purpose = purpose;
+            return this;
+          }
+
+          /**
            * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
            * confirmation time.
            */
           public Builder setStartDate(String startDate) {
+            this.startDate = startDate;
+            return this;
+          }
+
+          /**
+           * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to
+           * confirmation time.
+           */
+          public Builder setStartDate(EmptyParam startDate) {
             this.startDate = startDate;
             return this;
           }
@@ -12512,10 +12583,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> Amount the customer is granting permission to collect later. A
      * positive integer representing how much to charge in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
      * cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is
      * $0.50 US or <a
-     * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+     * href="https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts">equivalent in
      * charge currency</a>. The amount value supports up to eight digits (e.g., a value of 99999999
      * for a USD charge of $999,999.99).
      */
@@ -12564,10 +12635,10 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Amount the customer is granting permission to collect later. A
        * positive integer representing how much to charge in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g.,
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (e.g.,
        * 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum
        * amount is $0.50 US or <a
-       * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+       * href="https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts">equivalent in
        * charge currency</a>. The amount value supports up to eight digits (e.g., a value of
        * 99999999 for a USD charge of $999,999.99).
        */

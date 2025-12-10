@@ -15,7 +15,7 @@ import lombok.Getter;
 public class ProductFeatureCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> The ID of the <a
-   * href="https://stripe.com/docs/api/entitlements/feature">Feature</a> object attached to this
+   * href="https://docs.stripe.com/api/entitlements/feature">Feature</a> object attached to this
    * product.
    */
   @SerializedName("entitlement_feature")
@@ -59,7 +59,7 @@ public class ProductFeatureCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The ID of the <a
-     * href="https://stripe.com/docs/api/entitlements/feature">Feature</a> object attached to this
+     * href="https://docs.stripe.com/api/entitlements/feature">Feature</a> object attached to this
      * product.
      */
     public Builder setEntitlementFeature(String entitlementFeature) {

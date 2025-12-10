@@ -83,7 +83,7 @@ public class ReceivedDebit extends StripeObject implements HasId {
   StatusTransitions statusTransitions;
 
   /**
-   * Open Enum. The type of the ReceivedDebit.
+   * Open enum, the type of the received debit.
    *
    * <p>One of {@code bank_transfer}, or {@code external_debit}.
    */

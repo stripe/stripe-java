@@ -13,11 +13,11 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class QuoteListParams extends ApiRequestParams {
-  /** The ID of the customer whose quotes will be retrieved. */
+  /** The ID of the customer whose quotes you're retrieving. */
   @SerializedName("customer")
   String customer;
 
-  /** The ID of the account whose quotes will be retrieved. */
+  /** The ID of the account representing the customer whose quotes you're retrieving. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -137,13 +137,13 @@ public class QuoteListParams extends ApiRequestParams {
           this.testClock);
     }
 
-    /** The ID of the customer whose quotes will be retrieved. */
+    /** The ID of the customer whose quotes you're retrieving. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /** The ID of the account whose quotes will be retrieved. */
+    /** The ID of the account representing the customer whose quotes you're retrieving. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

@@ -71,7 +71,7 @@ public class SessionUpdateParams extends ApiRequestParams {
   List<SessionUpdateParams.LineItem> lineItems;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -325,7 +325,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -336,7 +336,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -778,7 +778,10 @@ public class SessionUpdateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         Object postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         Object state;
 
@@ -930,13 +933,19 @@ public class SessionUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(EmptyParam state) {
             this.state = state;
             return this;
@@ -950,14 +959,14 @@ public class SessionUpdateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Discount {
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/coupons">Coupon</a> to apply to this
+     * The ID of the <a href="https://docs.stripe.com/api/coupons">Coupon</a> to apply to this
      * Session. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
      */
     @SerializedName("coupon")
     Object coupon;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/coupon">Coupon</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/coupon">Coupon</a> object
      * inline. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
      */
     @SerializedName("coupon_data")
@@ -995,7 +1004,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the <a href="https://stripe.com/docs/api/coupons">Coupon</a> to apply to this
+       * The ID of the <a href="https://docs.stripe.com/api/coupons">Coupon</a> to apply to this
        * Session. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
        */
       public Builder setCoupon(String coupon) {
@@ -1004,7 +1013,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the <a href="https://stripe.com/docs/api/coupons">Coupon</a> to apply to this
+       * The ID of the <a href="https://docs.stripe.com/api/coupons">Coupon</a> to apply to this
        * Session. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
        */
       public Builder setCoupon(EmptyParam coupon) {
@@ -1013,7 +1022,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/coupon">Coupon</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/coupon">Coupon</a> object
        * inline. One of {@code coupon} or {@code coupon_data} is required when updating discounts.
        */
       public Builder setCouponData(SessionUpdateParams.Discount.CouponData couponData) {
@@ -1082,7 +1091,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -1246,7 +1255,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -1257,7 +1266,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -1592,7 +1601,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     Object id;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -1601,14 +1610,14 @@ public class SessionUpdateParams extends ApiRequestParams {
     Object metadata;
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a>. One of {@code price} or
+     * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code price} or
      * {@code price_data} is required when creating a new line item.
      */
     @SerializedName("price")
     Object price;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline. One of {@code price} or {@code price_data} is required when creating a new line item.
      */
     @SerializedName("price_data")
@@ -1622,7 +1631,7 @@ public class SessionUpdateParams extends ApiRequestParams {
     Long quantity;
 
     /**
-     * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
+     * The <a href="https://docs.stripe.com/api/tax_rates">tax rates</a> which apply to this line
      * item.
      */
     @SerializedName("tax_rates")
@@ -1758,7 +1767,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -1769,7 +1778,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -1780,7 +1789,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a>. One of {@code price}
+       * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code price}
        * or {@code price_data} is required when creating a new line item.
        */
       public Builder setPrice(String price) {
@@ -1789,7 +1798,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a>. One of {@code price}
+       * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a>. One of {@code price}
        * or {@code price_data} is required when creating a new line item.
        */
       public Builder setPrice(EmptyParam price) {
@@ -1798,7 +1807,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required when creating a new line
        * item.
        */
@@ -1845,7 +1854,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
+       * The <a href="https://docs.stripe.com/api/tax_rates">tax rates</a> which apply to this line
        * item.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
@@ -1854,7 +1863,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The <a href="https://stripe.com/docs/api/tax_rates">tax rates</a> which apply to this line
+       * The <a href="https://docs.stripe.com/api/tax_rates">tax rates</a> which apply to this line
        * item.
        */
       public Builder setTaxRates(List<String> taxRates) {
@@ -2023,7 +2032,7 @@ public class SessionUpdateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -2188,7 +2197,7 @@ public class SessionUpdateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -2259,7 +2268,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         List<String> images;
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -2273,7 +2282,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         @SerializedName("name")
         Object name;
 
-        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
         @SerializedName("tax_code")
         Object taxCode;
 
@@ -2450,13 +2459,13 @@ public class SessionUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(String taxCode) {
             this.taxCode = taxCode;
             return this;
           }
 
-          /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(EmptyParam taxCode) {
             this.taxCode = taxCode;
             return this;
@@ -2748,7 +2757,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       FixedAmount fixedAmount;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -2764,7 +2773,7 @@ public class SessionUpdateParams extends ApiRequestParams {
       TaxBehavior taxBehavior;
 
       /**
-       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+       * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax
        * code is {@code txcd_92010001}.
        */
       @SerializedName("tax_code")
@@ -2932,7 +2941,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+         * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax
          * code is {@code txcd_92010001}.
          */
         public Builder setTaxCode(String taxCode) {
@@ -2941,7 +2950,7 @@ public class SessionUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+         * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax
          * code is {@code txcd_92010001}.
          */
         public Builder setTaxCode(EmptyParam taxCode) {

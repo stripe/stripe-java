@@ -19,7 +19,7 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
    * regardless of this parameter.
    *
    * <p>A positive integer representing how much to charge in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for example,
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (for example,
    * 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency). The maximum
    * amount is the amount of the PaymentIntent.
    *
@@ -82,7 +82,7 @@ public class PaymentIntentApplyCustomerBalanceParams extends ApiRequestParams {
      * regardless of this parameter.
      *
      * <p>A positive integer representing how much to charge in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (for
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (for
      * example, 100 cents to charge 1 USD or 100 to charge 100 JPY, a zero-decimal currency). The
      * maximum amount is the amount of the PaymentIntent.
      *

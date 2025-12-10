@@ -119,6 +119,9 @@ public abstract class StripeException extends Exception {
       case "blocked_by_stripe":
         return com.stripe.exception.BlockedByStripeException.parse(
             body, statusCode, requestId, responseGetter);
+      case "controlled_by_alternate_resource":
+        return com.stripe.exception.ControlledByAlternateResourceException.parse(
+            body, statusCode, requestId, responseGetter);
       case "controlled_by_dashboard":
         return com.stripe.exception.ControlledByDashboardException.parse(
             body, statusCode, requestId, responseGetter);
@@ -145,9 +148,6 @@ public abstract class StripeException extends Exception {
             body, statusCode, requestId, responseGetter);
       case "quota_exceeded":
         return com.stripe.exception.QuotaExceededException.parse(
-            body, statusCode, requestId, responseGetter);
-      case "rate_limit":
-        return com.stripe.exception.RateLimitException.parse(
             body, statusCode, requestId, responseGetter);
       case "recipient_not_notifiable":
         return com.stripe.exception.RecipientNotNotifiableException.parse(

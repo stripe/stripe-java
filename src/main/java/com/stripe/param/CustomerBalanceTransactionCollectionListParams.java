@@ -39,6 +39,10 @@ public class CustomerBalanceTransactionCollectionListParams extends ApiRequestPa
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** Only return transactions that are related to the specified invoice. */
+  @SerializedName("invoice")
+  String invoice;
+
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
@@ -60,12 +64,14 @@ public class CustomerBalanceTransactionCollectionListParams extends ApiRequestPa
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
+      String invoice,
       Long limit,
       String startingAfter) {
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.invoice = invoice;
     this.limit = limit;
     this.startingAfter = startingAfter;
   }
@@ -83,6 +89,8 @@ public class CustomerBalanceTransactionCollectionListParams extends ApiRequestPa
 
     private Map<String, Object> extraParams;
 
+    private String invoice;
+
     private Long limit;
 
     private String startingAfter;
@@ -94,6 +102,7 @@ public class CustomerBalanceTransactionCollectionListParams extends ApiRequestPa
           this.endingBefore,
           this.expand,
           this.extraParams,
+          this.invoice,
           this.limit,
           this.startingAfter);
     }
@@ -175,6 +184,12 @@ public class CustomerBalanceTransactionCollectionListParams extends ApiRequestPa
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Only return transactions that are related to the specified invoice. */
+    public Builder setInvoice(String invoice) {
+      this.invoice = invoice;
       return this;
     }
 

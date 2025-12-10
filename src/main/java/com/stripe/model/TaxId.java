@@ -19,12 +19,12 @@ import lombok.Setter;
 
 /**
  * You can add one or multiple tax IDs to a <a
- * href="https://stripe.com/docs/api/customers">customer</a> or account. Customer and account tax
+ * href="https://docs.stripe.com/api/customers">customer</a> or account. Customer and account tax
  * IDs get displayed on related invoices and credit notes.
  *
- * <p>Related guides: <a href="https://stripe.com/docs/billing/taxes/tax-ids">Customer tax
+ * <p>Related guides: <a href="https://docs.stripe.com/billing/taxes/tax-ids">Customer tax
  * identification numbers</a>, <a
- * href="https://stripe.com/docs/invoicing/connect#account-tax-ids">Account tax IDs</a>
+ * href="https://docs.stripe.com/invoicing/connect#account-tax-ids">Account tax IDs</a>
  */
 @Getter
 @Setter
@@ -44,7 +44,7 @@ public class TaxId extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** ID of the account. */
+  /** ID of the Account representing the customer. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -309,7 +309,9 @@ public class TaxId extends ApiResource implements HasId {
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Customer> customer;
 
-    /** The account being referenced when {@code type} is {@code customer}. */
+    /**
+     * The Account representing the customer being referenced when {@code type} is {@code customer}.
+     */
     @SerializedName("customer_account")
     String customerAccount;
 

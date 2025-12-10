@@ -23,8 +23,8 @@ import lombok.Setter;
 
 /**
  * Prices define the unit cost, currency, and (optional) billing cycle for both recurring and
- * one-time purchases of products. <a href="https://stripe.com/docs/api#products">Products</a> help
- * you track inventory or provisioning, and prices help you track payment terms. Different physical
+ * one-time purchases of products. <a href="https://api.stripe.com#products">Products</a> help you
+ * track inventory or provisioning, and prices help you track payment terms. Different physical
  * goods or levels of service should be represented by products, and pricing options should be
  * represented by prices. This approach lets you change prices without having to change your
  * provisioning scheme.
@@ -33,9 +33,9 @@ import lombok.Setter;
  * $100/year, and €9 once.
  *
  * <p>Related guides: <a
- * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
- * subscription</a>, <a href="https://stripe.com/docs/billing/invoices/create">create an
- * invoice</a>, and more about <a href="https://stripe.com/docs/products-prices/overview">products
+ * href="https://docs.stripe.com/billing/subscriptions/set-up-subscription">Set up a
+ * subscription</a>, <a href="https://docs.stripe.com/billing/invoices/create">create an
+ * invoice</a>, and more about <a href="https://docs.stripe.com/products-prices/overview">products
  * and prices</a>.
  */
 @Getter
@@ -109,7 +109,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   String lookupKey;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -145,7 +145,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
   /**
    * Only required if a <a
-   * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+   * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
    * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
    * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
    * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -476,7 +476,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
     /**
      * Only required if a <a
-     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
      * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
      * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
      * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -642,7 +642,7 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
 
     /**
      * Default number of trial days when subscribing a customer to this price using <a
-     * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+     * href="https://docs.stripe.com/api#create_subscription-trial_from_plan">{@code
      * trial_from_plan=true}</a>.
      */
     @SerializedName("trial_period_days")
