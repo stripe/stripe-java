@@ -23,7 +23,7 @@ import lombok.Setter;
 /**
  * A Tax Calculation allows you to calculate the tax to collect from your customer.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/tax/custom">Calculate tax in your custom
+ * <p>Related guide: <a href="https://docs.stripe.com/tax/custom">Calculate tax in your custom
  * payment flow</a>
  */
 @Getter
@@ -32,7 +32,7 @@ import lombok.Setter;
 public class Calculation extends ApiResource implements HasId {
   /**
    * Total amount after taxes in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("amount_total")
   Long amountTotal;
@@ -45,7 +45,7 @@ public class Calculation extends ApiResource implements HasId {
   String currency;
 
   /**
-   * The ID of an existing <a href="https://stripe.com/docs/api/customers/object">Customer</a> used
+   * The ID of an existing <a href="https://docs.stripe.com/api/customers/object">Customer</a> used
    * for the resource.
    */
   @SerializedName("customer")
@@ -410,7 +410,7 @@ public class Calculation extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost extends StripeObject {
     /**
-     * The shipping amount in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * The shipping amount in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
      * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
      * Otherwise, taxes were calculated on top of this amount.
      */
@@ -419,14 +419,14 @@ public class Calculation extends ApiResource implements HasId {
 
     /**
      * The amount of tax calculated for shipping, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     @SerializedName("amount_tax")
     Long amountTax;
 
     /**
      * The ID of an existing <a
-     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate</a>.
+     * href="https://docs.stripe.com/api/shipping_rates/object">ShippingRate</a>.
      */
     @SerializedName("shipping_rate")
     String shippingRate;
@@ -445,7 +445,7 @@ public class Calculation extends ApiResource implements HasId {
     List<Calculation.ShippingCost.TaxBreakdown> taxBreakdown;
 
     /**
-     * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID used for shipping.
+     * The <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID used for shipping.
      */
     @SerializedName("tax_code")
     String taxCode;
@@ -460,7 +460,7 @@ public class Calculation extends ApiResource implements HasId {
     public static class TaxBreakdown extends StripeObject {
       /**
        * The amount of tax, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -499,7 +499,7 @@ public class Calculation extends ApiResource implements HasId {
 
       /**
        * The amount on which tax is calculated, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("taxable_amount")
       Long taxableAmount;
@@ -585,7 +585,7 @@ public class Calculation extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class TaxBreakdown extends StripeObject {
     /**
-     * The amount of tax, in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * The amount of tax, in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
      * currency unit</a>.
      */
     @SerializedName("amount")
@@ -613,7 +613,7 @@ public class Calculation extends ApiResource implements HasId {
 
     /**
      * The amount on which tax is calculated, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     @SerializedName("taxable_amount")
     Long taxableAmount;
@@ -656,7 +656,10 @@ public class Calculation extends ApiResource implements HasId {
       @SerializedName("rate_type")
       String rateType;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 

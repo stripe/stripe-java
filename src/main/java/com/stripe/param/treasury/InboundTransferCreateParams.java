@@ -47,7 +47,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   String financialAccount;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -59,7 +59,10 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @SerializedName("origin_payment_method")
   String originPaymentMethod;
 
-  /** The complete description that appears on your customers' statements. Maximum 10 characters. */
+  /**
+   * The complete description that appears on your customers' statements. Maximum 10 characters. Can
+   * only include -#.$&amp;*, spaces, and alphanumeric characters.
+   */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
@@ -237,6 +240,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
 
     /**
      * The complete description that appears on your customers' statements. Maximum 10 characters.
+     * Can only include -#.$&amp;*, spaces, and alphanumeric characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;

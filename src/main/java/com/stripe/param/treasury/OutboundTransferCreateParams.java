@@ -63,7 +63,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   String financialAccount;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -74,7 +74,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
   /**
    * Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10
    * characters for {@code ach} transfers or 140 characters for {@code us_domestic_wire} transfers.
-   * The default value is &quot;transfer&quot;.
+   * The default value is &quot;transfer&quot;. Can only include -#.$&amp;*, spaces, and
+   * alphanumeric characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -280,7 +281,8 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
     /**
      * Statement descriptor to be shown on the receiving end of an OutboundTransfer. Maximum 10
      * characters for {@code ach} transfers or 140 characters for {@code us_domestic_wire}
-     * transfers. The default value is &quot;transfer&quot;.
+     * transfers. The default value is &quot;transfer&quot;. Can only include -#.$&amp;*, spaces,
+     * and alphanumeric characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -486,7 +488,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
       /**
        * Specifies the network rails to be used. If not set, will default to the PaymentMethod's
        * preferred network. See the <a
-       * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
+       * href="https://docs.stripe.com/treasury/money-movement/timelines">docs</a> to learn more
        * about money movement timelines for each network type.
        */
       @SerializedName("network")
@@ -545,7 +547,7 @@ public class OutboundTransferCreateParams extends ApiRequestParams {
         /**
          * Specifies the network rails to be used. If not set, will default to the PaymentMethod's
          * preferred network. See the <a
-         * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
+         * href="https://docs.stripe.com/treasury/money-movement/timelines">docs</a> to learn more
          * about money movement timelines for each network type.
          */
         public Builder setNetwork(

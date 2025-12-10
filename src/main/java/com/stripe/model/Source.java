@@ -27,12 +27,12 @@ import lombok.Setter;
  * object: once chargeable, they can be charged, or can be attached to customers.
  *
  * <p>Stripe doesn't recommend using the deprecated <a
- * href="https://stripe.com/docs/api/sources">Sources API</a>. We recommend that you adopt the <a
- * href="https://stripe.com/docs/api/payment_methods">PaymentMethods API</a>. This newer API
+ * href="https://docs.stripe.com/api/sources">Sources API</a>. We recommend that you adopt the <a
+ * href="https://docs.stripe.com/api/payment_methods">PaymentMethods API</a>. This newer API
  * provides access to our latest features and payment method types.
  *
- * <p>Related guides: <a href="https://stripe.com/docs/sources">Sources API</a> and <a
- * href="https://stripe.com/docs/sources/customers">Sources &amp; Customers</a>.
+ * <p>Related guides: <a href="https://docs.stripe.com/sources">Sources API</a> and <a
+ * href="https://docs.stripe.com/sources/customers">Sources &amp; Customers</a>.
  */
 @Getter
 @Setter
@@ -140,7 +140,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -211,7 +211,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
    * klarna}, {@code p24}, {@code sepa_debit}, {@code sofort}, {@code three_d_secure}, or {@code
    * wechat}. An additional hash is included on the source with a name matching this value. It
    * contains additional information specific to the <a
-   * href="https://stripe.com/docs/sources">payment method</a> used.
+   * href="https://docs.stripe.com/sources">payment method</a> used.
    */
   @SerializedName("type")
   String type;

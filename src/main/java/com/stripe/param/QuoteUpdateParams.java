@@ -53,6 +53,13 @@ public class QuoteUpdateParams extends ApiRequestParams {
   @SerializedName("customer")
   Object customer;
 
+  /**
+   * The account for which this quote belongs to. A customer or account is required before
+   * finalizing the quote. Once specified, it cannot be changed.
+   */
+  @SerializedName("customer_account")
+  Object customerAccount;
+
   /** The tax rates that will apply to any line item that does not have {@code tax_rates} set. */
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
@@ -105,7 +112,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
   List<QuoteUpdateParams.LineItem> lineItems;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -137,6 +144,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       AutomaticTax automaticTax,
       CollectionMethod collectionMethod,
       Object customer,
+      Object customerAccount,
       Object defaultTaxRates,
       Object description,
       Object discounts,
@@ -156,6 +164,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     this.automaticTax = automaticTax;
     this.collectionMethod = collectionMethod;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.defaultTaxRates = defaultTaxRates;
     this.description = description;
     this.discounts = discounts;
@@ -186,6 +195,8 @@ public class QuoteUpdateParams extends ApiRequestParams {
     private CollectionMethod collectionMethod;
 
     private Object customer;
+
+    private Object customerAccount;
 
     private Object defaultTaxRates;
 
@@ -223,6 +234,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
           this.automaticTax,
           this.collectionMethod,
           this.customer,
+          this.customerAccount,
           this.defaultTaxRates,
           this.description,
           this.discounts,
@@ -316,6 +328,24 @@ public class QuoteUpdateParams extends ApiRequestParams {
      */
     public Builder setCustomer(EmptyParam customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * The account for which this quote belongs to. A customer or account is required before
+     * finalizing the quote. Once specified, it cannot be changed.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
+      return this;
+    }
+
+    /**
+     * The account for which this quote belongs to. A customer or account is required before
+     * finalizing the quote. Once specified, it cannot be changed.
+     */
+    public Builder setCustomerAccount(EmptyParam customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -1134,7 +1164,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     Object price;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
@@ -1290,7 +1320,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(QuoteUpdateParams.LineItem.PriceData priceData) {
@@ -1504,7 +1534,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1654,7 +1684,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1867,7 +1897,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that will set
      * metadata on the subscription or subscription schedule when the quote is accepted. If a
      * recurring price is included in {@code line_items}, this field will be passed to the resulting
      * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,

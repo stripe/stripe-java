@@ -21,7 +21,7 @@ import lombok.Setter;
  * fee was originally collected.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/connect/destination-charges#refunding-app-fee">Refunding
+ * href="https://docs.stripe.com/connect/destination-charges#refunding-app-fee">Refunding
  * application fees</a>
  */
 @Getter
@@ -62,7 +62,7 @@ public class FeeRefund extends ApiResource
   String id;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

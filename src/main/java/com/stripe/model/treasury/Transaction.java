@@ -21,7 +21,7 @@ import lombok.Setter;
 
 /**
  * Transactions represent changes to a <a
- * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount's</a> balance.
+ * href="https://api.stripe.com#financial_accounts">FinancialAccount's</a> balance.
  */
 @Getter
 @Setter
@@ -211,16 +211,15 @@ public class Transaction extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class FlowDetails extends StripeObject {
     /**
-     * You can reverse some <a
-     * href="https://stripe.com/docs/api#received_credits">ReceivedCredits</a> depending on their
-     * network and source flow. Reversing a ReceivedCredit leads to the creation of a new object
-     * known as a CreditReversal.
+     * You can reverse some <a href="https://api.stripe.com#received_credits">ReceivedCredits</a>
+     * depending on their network and source flow. Reversing a ReceivedCredit leads to the creation
+     * of a new object known as a CreditReversal.
      */
     @SerializedName("credit_reversal")
     CreditReversal creditReversal;
 
     /**
-     * You can reverse some <a href="https://stripe.com/docs/api#received_debits">ReceivedDebits</a>
+     * You can reverse some <a href="https://api.stripe.com#received_debits">ReceivedDebits</a>
      * depending on their network and source flow. Reversing a ReceivedDebit leads to the creation
      * of a new object known as a DebitReversal.
      */
@@ -230,9 +229,8 @@ public class Transaction extends ApiResource implements HasId {
     /**
      * Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">InboundTransfers</a>
-     * to add funds to your <a
-     * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> via a
-     * PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
+     * to add funds to your <a href="https://api.stripe.com#financial_accounts">FinancialAccount</a>
+     * via a PaymentMethod that is owned by you. The funds will be transferred via an ACH debit.
      *
      * <p>Related guide: <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/into/inbound-transfers">Moving
@@ -242,12 +240,12 @@ public class Transaction extends ApiResource implements HasId {
     InboundTransfer inboundTransfer;
 
     /**
-     * When an <a href="https://stripe.com/docs/issuing">issued card</a> is used to make a purchase,
+     * When an <a href="https://docs.stripe.com/issuing">issued card</a> is used to make a purchase,
      * an Issuing {@code Authorization} object is created. <a
-     * href="https://stripe.com/docs/issuing/purchases/authorizations">Authorizations</a> must be
+     * href="https://docs.stripe.com/issuing/purchases/authorizations">Authorizations</a> must be
      * approved for the purchase to be completed successfully.
      *
-     * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/authorizations">Issued
+     * <p>Related guide: <a href="https://docs.stripe.com/issuing/purchases/authorizations">Issued
      * card authorizations</a>
      */
     @SerializedName("issuing_authorization")
@@ -257,9 +255,9 @@ public class Transaction extends ApiResource implements HasId {
      * Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a>
      * to send funds to another party's external bank account or <a
-     * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. To send money to
-     * an account belonging to the same user, use an <a
-     * href="https://stripe.com/docs/api#outbound_transfers">OutboundTransfer</a>.
+     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a>. To send money to an
+     * account belonging to the same user, use an <a
+     * href="https://api.stripe.com#outbound_transfers">OutboundTransfer</a>.
      *
      * <p>Simulate OutboundPayment state changes with the {@code
      * /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on
@@ -276,10 +274,10 @@ public class Transaction extends ApiResource implements HasId {
      * Use <a
      * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
      * to transfer funds from a <a
-     * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> to a PaymentMethod
+     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a> to a PaymentMethod
      * belonging to the same entity. To send funds to a different party, use <a
-     * href="https://stripe.com/docs/api#outbound_payments">OutboundPayments</a> instead. You can
-     * send funds over ACH rails or through a domestic wire transfer to a user's own external bank
+     * href="https://api.stripe.com#outbound_payments">OutboundPayments</a> instead. You can send
+     * funds over ACH rails or through a domestic wire transfer to a user's own external bank
      * account.
      *
      * <p>Simulate OutboundTransfer state changes with the {@code
@@ -295,15 +293,15 @@ public class Transaction extends ApiResource implements HasId {
 
     /**
      * ReceivedCredits represent funds sent to a <a
-     * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> (for example, via
-     * ACH or wire). These money movements are not initiated from the FinancialAccount.
+     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a> (for example, via ACH
+     * or wire). These money movements are not initiated from the FinancialAccount.
      */
     @SerializedName("received_credit")
     ReceivedCredit receivedCredit;
 
     /**
      * ReceivedDebits represent funds pulled from a <a
-     * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. These are not
+     * href="https://api.stripe.com#financial_accounts">FinancialAccount</a>. These are not
      * initiated from the FinancialAccount.
      */
     @SerializedName("received_debit")

@@ -66,7 +66,7 @@ public class SubscriptionItem extends ApiResource
   String id;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -84,48 +84,48 @@ public class SubscriptionItem extends ApiResource
 
   /**
    * You can now model subscriptions more flexibly using the <a
-   * href="https://stripe.com/docs/api#prices">Prices API</a>. It replaces the Plans API and is
-   * backwards compatible to simplify your migration.
+   * href="https://api.stripe.com#prices">Prices API</a>. It replaces the Plans API and is backwards
+   * compatible to simplify your migration.
    *
    * <p>Plans define the base price, currency, and billing cycle for recurring purchases of
-   * products. <a href="https://stripe.com/docs/api#products">Products</a> help you track inventory
-   * or provisioning, and plans help you track pricing. Different physical goods or levels of
-   * service should be represented by products, and pricing options should be represented by plans.
-   * This approach lets you change prices without having to change your provisioning scheme.
+   * products. <a href="https://api.stripe.com#products">Products</a> help you track inventory or
+   * provisioning, and plans help you track pricing. Different physical goods or levels of service
+   * should be represented by products, and pricing options should be represented by plans. This
+   * approach lets you change prices without having to change your provisioning scheme.
    *
    * <p>For example, you might have a single &quot;gold&quot; product that has plans for $10/month,
    * $100/year, €9/month, and €90/year.
    *
    * <p>Related guides: <a
-   * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
+   * href="https://docs.stripe.com/billing/subscriptions/set-up-subscription">Set up a
    * subscription</a> and more about <a
-   * href="https://stripe.com/docs/products-prices/overview">products and prices</a>.
+   * href="https://docs.stripe.com/products-prices/overview">products and prices</a>.
    */
   @SerializedName("plan")
   Plan plan;
 
   /**
    * Prices define the unit cost, currency, and (optional) billing cycle for both recurring and
-   * one-time purchases of products. <a href="https://stripe.com/docs/api#products">Products</a>
-   * help you track inventory or provisioning, and prices help you track payment terms. Different
-   * physical goods or levels of service should be represented by products, and pricing options
-   * should be represented by prices. This approach lets you change prices without having to change
-   * your provisioning scheme.
+   * one-time purchases of products. <a href="https://api.stripe.com#products">Products</a> help you
+   * track inventory or provisioning, and prices help you track payment terms. Different physical
+   * goods or levels of service should be represented by products, and pricing options should be
+   * represented by prices. This approach lets you change prices without having to change your
+   * provisioning scheme.
    *
    * <p>For example, you might have a single &quot;gold&quot; product that has prices for $10/month,
    * $100/year, and €9 once.
    *
    * <p>Related guides: <a
-   * href="https://stripe.com/docs/billing/subscriptions/set-up-subscription">Set up a
-   * subscription</a>, <a href="https://stripe.com/docs/billing/invoices/create">create an
-   * invoice</a>, and more about <a href="https://stripe.com/docs/products-prices/overview">products
+   * href="https://docs.stripe.com/billing/subscriptions/set-up-subscription">Set up a
+   * subscription</a>, <a href="https://docs.stripe.com/billing/invoices/create">create an
+   * invoice</a>, and more about <a href="https://docs.stripe.com/products-prices/overview">products
    * and prices</a>.
    */
   @SerializedName("price")
   Price price;
 
   /**
-   * The <a href="https://stripe.com/docs/subscriptions/quantities">quantity</a> of the plan to
+   * The <a href="https://docs.stripe.com/subscriptions/quantities">quantity</a> of the plan to
    * which the customer should be subscribed.
    */
   @SerializedName("quantity")

@@ -17,14 +17,14 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   /**
    * The total amount to attempt to authorize. This amount is in the provided currency, or defaults
    * to the card's currency, and in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
    * Detailed breakdown of amount components. These amounts are denominated in {@code currency} and
-   * in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("amount_details")
   AmountDetails amountDetails;
@@ -75,7 +75,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
   /**
    * If set {@code true}, you may provide <a
-   * href="https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
+   * href="https://docs.stripe.com/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
    * to control how much to hold for the authorization.
    */
   @SerializedName("is_amount_controllable")
@@ -83,7 +83,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
   /**
    * The total amount to attempt to authorize. This amount is in the provided merchant currency, and
-   * in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("merchant_amount")
   Long merchantAmount;
@@ -231,7 +231,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
     /**
      * The total amount to attempt to authorize. This amount is in the provided currency, or
      * defaults to the card's currency, and in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -240,7 +240,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     /**
      * Detailed breakdown of amount components. These amounts are denominated in {@code currency}
-     * and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+     * and in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
      * unit</a>.
      */
     public Builder setAmountDetails(AuthorizationCreateParams.AmountDetails amountDetails) {
@@ -348,7 +348,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     /**
      * If set {@code true}, you may provide <a
-     * href="https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
+     * href="https://docs.stripe.com/api/issuing/authorizations/approve#approve_issuing_authorization-amount">amount</a>
      * to control how much to hold for the authorization.
      */
     public Builder setIsAmountControllable(Boolean isAmountControllable) {
@@ -358,7 +358,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
     /**
      * The total amount to attempt to authorize. This amount is in the provided merchant currency,
-     * and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+     * and in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
      * unit</a>.
      */
     public Builder setMerchantAmount(Long merchantAmount) {
@@ -1411,7 +1411,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
   public static class MerchantData {
     /**
      * A categorization of the seller's type of business. See our <a
-     * href="https://stripe.com/docs/issuing/merchant-categories">merchant categories guide</a> for
+     * href="https://docs.stripe.com/issuing/merchant-categories">merchant categories guide</a> for
      * a list of possible values.
      */
     @SerializedName("category")
@@ -1526,7 +1526,7 @@ public class AuthorizationCreateParams extends ApiRequestParams {
 
       /**
        * A categorization of the seller's type of business. See our <a
-       * href="https://stripe.com/docs/issuing/merchant-categories">merchant categories guide</a>
+       * href="https://docs.stripe.com/issuing/merchant-categories">merchant categories guide</a>
        * for a list of possible values.
        */
       public Builder setCategory(AuthorizationCreateParams.MerchantData.Category category) {

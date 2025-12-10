@@ -24,8 +24,8 @@ import lombok.Setter;
 
 /**
  * ReceivedCredits represent funds sent to a <a
- * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> (for example, via ACH
- * or wire). These money movements are not initiated from the FinancialAccount.
+ * href="https://api.stripe.com#financial_accounts">FinancialAccount</a> (for example, via ACH or
+ * wire). These money movements are not initiated from the FinancialAccount.
  */
 @Getter
 @Setter
@@ -65,7 +65,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
   String financialAccount;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * A <a href="https://docs.stripe.com/treasury/moving-money/regulatory-receipts">hosted
    * transaction receipt</a> URL that is provided when money movement is considered regulated under
    * Stripe's money transmission licenses.
    */
@@ -250,7 +250,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
 
     /**
      * Set when {@code type} is {@code issuing_card}. This is an <a
-     * href="https://stripe.com/docs/api#issuing_cards">Issuing Card</a> ID.
+     * href="https://api.stripe.com#issuing_cards">Issuing Card</a> ID.
      */
     @SerializedName("issuing_card")
     String issuingCard;
@@ -347,14 +347,14 @@ public class ReceivedCredit extends ApiResource implements HasId {
 
     /**
      * Set if the ReceivedCredit was created due to an <a
-     * href="https://stripe.com/docs/api#issuing_authorizations">Issuing Authorization</a> object.
+     * href="https://api.stripe.com#issuing_authorizations">Issuing Authorization</a> object.
      */
     @SerializedName("issuing_authorization")
     String issuingAuthorization;
 
     /**
      * Set if the ReceivedCredit is also viewable as an <a
-     * href="https://stripe.com/docs/api#issuing_transactions">Issuing transaction</a> object.
+     * href="https://api.stripe.com#issuing_transactions">Issuing transaction</a> object.
      */
     @SerializedName("issuing_transaction")
     String issuingTransaction;
@@ -386,10 +386,9 @@ public class ReceivedCredit extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class SourceFlowDetails extends StripeObject {
       /**
-       * You can reverse some <a
-       * href="https://stripe.com/docs/api#received_credits">ReceivedCredits</a> depending on their
-       * network and source flow. Reversing a ReceivedCredit leads to the creation of a new object
-       * known as a CreditReversal.
+       * You can reverse some <a href="https://api.stripe.com#received_credits">ReceivedCredits</a>
+       * depending on their network and source flow. Reversing a ReceivedCredit leads to the
+       * creation of a new object known as a CreditReversal.
        */
       @SerializedName("credit_reversal")
       CreditReversal creditReversal;
@@ -398,9 +397,9 @@ public class ReceivedCredit extends ApiResource implements HasId {
        * Use <a
        * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-payments">OutboundPayments</a>
        * to send funds to another party's external bank account or <a
-       * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. To send money
-       * to an account belonging to the same user, use an <a
-       * href="https://stripe.com/docs/api#outbound_transfers">OutboundTransfer</a>.
+       * href="https://api.stripe.com#financial_accounts">FinancialAccount</a>. To send money to an
+       * account belonging to the same user, use an <a
+       * href="https://api.stripe.com#outbound_transfers">OutboundTransfer</a>.
        *
        * <p>Simulate OutboundPayment state changes with the {@code
        * /v1/test_helpers/treasury/outbound_payments} endpoints. These methods can only be called on
@@ -417,10 +416,10 @@ public class ReceivedCredit extends ApiResource implements HasId {
        * Use <a
        * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
        * to transfer funds from a <a
-       * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> to a
-       * PaymentMethod belonging to the same entity. To send funds to a different party, use <a
-       * href="https://stripe.com/docs/api#outbound_payments">OutboundPayments</a> instead. You can
-       * send funds over ACH rails or through a domestic wire transfer to a user's own external bank
+       * href="https://api.stripe.com#financial_accounts">FinancialAccount</a> to a PaymentMethod
+       * belonging to the same entity. To send funds to a different party, use <a
+       * href="https://api.stripe.com#outbound_payments">OutboundPayments</a> instead. You can send
+       * funds over ACH rails or through a domestic wire transfer to a user's own external bank
        * account.
        *
        * <p>Simulate OutboundTransfer state changes with the {@code
@@ -442,7 +441,7 @@ public class ReceivedCredit extends ApiResource implements HasId {
        * <a href="https://stripe.com/docs/connect/manage-payout-schedule">varying schedules</a>,
        * depending on your country and industry.
        *
-       * <p>Related guide: <a href="https://stripe.com/docs/payouts">Receiving payouts</a>
+       * <p>Related guide: <a href="https://docs.stripe.com/payouts">Receiving payouts</a>
        */
       @SerializedName("payout")
       Payout payout;

@@ -24,7 +24,7 @@ import lombok.Setter;
  * you have the opportunity to respond to the dispute with evidence that shows that the charge is
  * legitimate.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/disputes">Disputes and fraud</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/disputes">Disputes and fraud</a>
  */
 @Getter
 @Setter
@@ -92,7 +92,7 @@ public class Dispute extends ApiResource
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -127,7 +127,7 @@ public class Dispute extends ApiResource
    * debit_not_authorized}, {@code duplicate}, {@code fraudulent}, {@code general}, {@code
    * incorrect_account_details}, {@code insufficient_funds}, {@code noncompliant}, {@code
    * product_not_received}, {@code product_unacceptable}, {@code subscription_canceled}, or {@code
-   * unrecognized}. Learn more about <a href="https://stripe.com/docs/disputes/categories">dispute
+   * unrecognized}. Learn more about <a href="https://docs.stripe.com/disputes/categories">dispute
    * reasons</a>.
    */
   @SerializedName("reason")
@@ -890,7 +890,10 @@ public class Dispute extends ApiResource
             @SerializedName("postal_code")
             String postalCode;
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             @SerializedName("state")
             String state;
           }
@@ -978,7 +981,10 @@ public class Dispute extends ApiResource
             @SerializedName("postal_code")
             String postalCode;
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             @SerializedName("state")
             String state;
           }

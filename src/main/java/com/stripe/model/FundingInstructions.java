@@ -9,11 +9,11 @@ import lombok.Setter;
 
 /**
  * Each customer has a <a
- * href="https://stripe.com/docs/api/customers/object#customer_object-balance">{@code balance}</a>
+ * href="https://docs.stripe.com/api/customers/object#customer_object-balance">{@code balance}</a>
  * that is automatically applied to future invoices and payments using the {@code customer_balance}
  * payment method. Customers can fund this balance by initiating a bank transfer to any account in
  * the {@code financial_addresses} field. Related guide: <a
- * href="https://stripe.com/docs/payments/customer-balance/funding-instructions">Customer balance
+ * href="https://docs.stripe.com/payments/customer-balance/funding-instructions">Customer balance
  * funding instructions</a>
  */
 @Getter

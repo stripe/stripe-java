@@ -143,7 +143,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   Person individual;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -1244,6 +1244,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String paynowPayments;
 
     /**
+     * The status of the PayTo capability of the account, or whether the account can directly
+     * process PayTo charges.
+     *
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
+     */
+    @SerializedName("payto_payments")
+    String paytoPayments;
+
+    /**
      * The status of the pix payments capability of the account, or whether the account can directly
      * process pix charges.
      *
@@ -1416,7 +1425,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * Whether the company's directors have been provided. This Boolean will be {@code true} if
      * you've manually indicated that all directors are provided via <a
-     * href="https://stripe.com/docs/api/accounts/update#update_account-company-directors_provided">the
+     * href="https://docs.stripe.com/api/accounts/update#update_account-company-directors_provided">the
      * {@code directors_provided} parameter</a>.
      */
     @SerializedName("directors_provided")
@@ -1432,7 +1441,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * Whether the company's executives have been provided. This Boolean will be {@code true} if
      * you've manually indicated that all executives are provided via <a
-     * href="https://stripe.com/docs/api/accounts/update#update_account-company-executives_provided">the
+     * href="https://docs.stripe.com/api/accounts/update#update_account-company-executives_provided">the
      * {@code executives_provided} parameter</a>, or if Stripe determined that sufficient executives
      * were provided.
      */
@@ -1479,7 +1488,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * Whether the company's owners have been provided. This Boolean will be {@code true} if you've
      * manually indicated that all owners are provided via <a
-     * href="https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided">the
+     * href="https://docs.stripe.com/api/accounts/update#update_account-company-owners_provided">the
      * {@code owners_provided} parameter</a>, or if Stripe determined that sufficient owners were
      * provided. Stripe determines ownership requirements using both the number of owners provided
      * and their total percent ownership (calculated by adding the {@code percent_ownership} of each
@@ -1528,7 +1537,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * for accounts where <a
      * href="https://stripe.com/api/accounts/object#account_object-controller-requirement_collection">controller.requirement_collection</a>
      * is {@code stripe}. See <a
-     * href="https://stripe.com/docs/connect/identity-verification#business-structure">Business
+     * href="https://docs.stripe.com/connect/identity-verification#business-structure">Business
      * structure</a> for more details.
      *
      * <p>One of {@code free_zone_establishment}, {@code free_zone_llc}, {@code
@@ -1752,10 +1761,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @EqualsAndHashCode(callSuper = false)
       public static class Document extends StripeObject {
         /**
-         * The back of a document returned by a <a
-         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code additional_verification}. Note that {@code additional_verification} files
-         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
+         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
+         * {@code additional_verification} files are <a
+         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -1779,10 +1788,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String detailsCode;
 
         /**
-         * The front of a document returned by a <a
-         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code additional_verification}. Note that {@code additional_verification} files
-         * are <a href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
+         * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
+         * upload</a> with a {@code purpose} value of {@code additional_verification}. Note that
+         * {@code additional_verification} files are <a
+         * href="https://stripe.com/file-upload#uploading-a-file">not downloadable</a>.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)
@@ -1842,7 +1851,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * {@code true} if the Connect application retrieving the resource controls the account and can
      * therefore exercise <a
-     * href="https://stripe.com/docs/connect/platform-controls-for-standard-accounts">platform
+     * href="https://docs.stripe.com/connect/platform-controls-for-standard-accounts">platform
      * controls</a>. Otherwise, this field is null.
      */
     @SerializedName("is_controller")
@@ -1937,8 +1946,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class FutureRequirements extends StripeObject {
     /**
-     * Fields that are due and can be satisfied by providing the corresponding alternative fields
-     * instead.
+     * Fields that are due and can be resolved by providing the corresponding alternative fields
+     * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
+     * alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing
+     * {@code original_fields_due} also serves as a pathway for attempting to resolve the fields
+     * again.
      */
     @SerializedName("alternatives")
     List<Account.FutureRequirements.Alternative> alternatives;
@@ -1953,7 +1965,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Long currentDeadline;
 
     /**
-     * Fields that need to be collected to keep the account enabled. If not collected by {@code
+     * Fields that need to be resolved to keep the account enabled. If not resolved by {@code
      * future_requirements[current_deadline]}, these fields will transition to the main {@code
      * requirements} hash.
      */
@@ -1974,8 +1986,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String disabledReason;
 
     /**
-     * Fields that are {@code currently_due} and need to be collected again because validation or
-     * verification failed.
+     * Details about validation and verification failures for {@code due} requirements that must be
+     * resolved.
      */
     @SerializedName("errors")
     List<Account.FutureRequirements.Errors> errors;
@@ -1988,20 +2000,19 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> eventuallyDue;
 
     /**
-     * Fields that weren't collected by {@code requirements.current_deadline}. These fields need to
-     * be collected to enable the capability on the account. New fields will never appear here;
-     * {@code future_requirements.past_due} will always be a subset of {@code
-     * requirements.past_due}.
+     * Fields that haven't been resolved by {@code requirements.current_deadline}. These fields need
+     * to be resolved to enable the capability on the account. {@code future_requirements.past_due}
+     * is a subset of {@code requirements.past_due}.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that might become required depending on the results of verification or review. It's an
-     * empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due} or {@code currently_due}. Fields might appear in {@code
-     * eventually_due} or {@code currently_due} and in {@code pending_verification} if verification
-     * fails but another verification is still pending.
+     * Fields that are being reviewed, or might become required depending on the results of a
+     * review. If the review fails, these fields can move to {@code eventually_due}, {@code
+     * currently_due}, {@code past_due} or {@code alternatives}. Fields might appear in {@code
+     * eventually_due}, {@code currently_due}, {@code past_due} or {@code alternatives} and in
+     * {@code pending_verification} if one verification fails but another is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -2014,12 +2025,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alternative extends StripeObject {
-      /** Fields that can be provided to satisfy all fields in {@code original_fields_due}. */
+      /** Fields that can be provided to resolve all fields in {@code original_fields_due}. */
       @SerializedName("alternative_fields_due")
       List<String> alternativeFieldsDue;
 
       /**
-       * Fields that are due and can be satisfied by providing all fields in {@code
+       * Fields that are due and can be resolved by providing all fields in {@code
        * alternative_fields_due}.
        */
       @SerializedName("original_fields_due")
@@ -2125,7 +2136,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public static class Groups extends StripeObject {
     /**
      * The group the account is in to determine their payments pricing, and null if the account is
-     * on customized pricing. <a href="https://stripe.com/docs/connect/platform-pricing-tools">See
+     * on customized pricing. <a href="https://docs.stripe.com/connect/platform-pricing-tools">See
      * the Platform pricing tool documentation</a> for details.
      */
     @SerializedName("payments_pricing")
@@ -2141,8 +2152,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * Fields that are due and can be satisfied by providing the corresponding alternative fields
-     * instead.
+     * Fields that are due and can be resolved by providing the corresponding alternative fields
+     * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
+     * alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing
+     * {@code original_fields_due} also serves as a pathway for attempting to resolve the fields
+     * again.
      */
     @SerializedName("alternatives")
     List<Account.Requirements.Alternative> alternatives;
@@ -2156,8 +2170,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Long currentDeadline;
 
     /**
-     * Fields that need to be collected to keep the account enabled. If not collected by {@code
-     * current_deadline}, these fields appear in {@code past_due} as well, and the account is
+     * Fields that need to be resolved to keep the account enabled. If not resolved by {@code
+     * current_deadline}, these fields will appear in {@code past_due} as well, and the account is
      * disabled.
      */
     @SerializedName("currently_due")
@@ -2165,7 +2179,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     /**
      * If the account is disabled, this enum describes why. <a
-     * href="https://stripe.com/docs/connect/handling-api-verification">Learn more about handling
+     * href="https://docs.stripe.com/connect/handling-api-verification">Learn more about handling
      * verification issues</a>.
      *
      * <p>One of {@code action_required.requested_capabilities}, {@code listed}, {@code other},
@@ -2179,8 +2193,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String disabledReason;
 
     /**
-     * Fields that are {@code currently_due} and need to be collected again because validation or
-     * verification failed.
+     * Details about validation and verification failures for {@code due} requirements that must be
+     * resolved.
      */
     @SerializedName("errors")
     List<Account.Requirements.Errors> errors;
@@ -2193,18 +2207,18 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> eventuallyDue;
 
     /**
-     * Fields that weren't collected by {@code current_deadline}. These fields need to be collected
-     * to enable the account.
+     * Fields that haven't been resolved by {@code current_deadline}. These fields need to be
+     * resolved to enable the account.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that might become required depending on the results of verification or review. It's an
-     * empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}. Fields
-     * might appear in {@code eventually_due}, {@code currently_due}, or {@code past_due} and in
-     * {@code pending_verification} if verification fails but another verification is still pending.
+     * Fields that are being reviewed, or might become required depending on the results of a
+     * review. If the review fails, these fields can move to {@code eventually_due}, {@code
+     * currently_due}, {@code past_due} or {@code alternatives}. Fields might appear in {@code
+     * eventually_due}, {@code currently_due}, {@code past_due} or {@code alternatives} and in
+     * {@code pending_verification} if one verification fails but another is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -2217,12 +2231,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alternative extends StripeObject {
-      /** Fields that can be provided to satisfy all fields in {@code original_fields_due}. */
+      /** Fields that can be provided to resolve all fields in {@code original_fields_due}. */
       @SerializedName("alternative_fields_due")
       List<String> alternativeFieldsDue;
 
       /**
-       * Fields that are due and can be satisfied by providing all fields in {@code
+       * Fields that are due and can be resolved by providing all fields in {@code
        * alternative_fields_due}.
        */
       @SerializedName("original_fields_due")

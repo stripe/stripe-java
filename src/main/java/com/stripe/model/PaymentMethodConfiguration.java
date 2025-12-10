@@ -24,7 +24,7 @@ import lombok.Setter;
  * different sets of payment methods for different scenarios.
  *
  * <p>There are two types of PaymentMethodConfigurations. Which is used depends on the <a
- * href="https://stripe.com/docs/connect/charges">charge type</a>:
+ * href="https://docs.stripe.com/connect/charges">charge type</a>:
  *
  * <p><strong>Direct</strong> configurations apply to payments created on your account, including
  * Connect destination charges, Connect separate charges and transfers, and payments not involving
@@ -41,11 +41,11 @@ import lombok.Setter;
  * dashboard</a> and are not available in this API.
  *
  * <p>Related guides: - <a
- * href="https://stripe.com/docs/connect/payment-method-configurations">Payment Method
+ * href="https://docs.stripe.com/connect/payment-method-configurations">Payment Method
  * Configurations API</a> - <a
- * href="https://stripe.com/docs/payments/multiple-payment-method-configs">Multiple configurations
+ * href="https://docs.stripe.com/payments/multiple-payment-method-configs">Multiple configurations
  * on dynamic payment methods</a> - <a
- * href="https://stripe.com/docs/connect/multiple-payment-method-configurations">Multiple
+ * href="https://docs.stripe.com/connect/multiple-payment-method-configurations">Multiple
  * configurations for your Connect accounts</a>
  */
 @Getter
@@ -214,6 +214,9 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
 
   @SerializedName("paypal")
   Paypal paypal;
+
+  @SerializedName("payto")
+  Payto payto;
 
   @SerializedName("pix")
   Pix pix;
@@ -2497,6 +2500,57 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Payto extends StripeObject {
+    /**
+     * Whether this payment method may be offered at checkout. True if {@code display_preference} is
+     * {@code on} and the payment method's capability is active.
+     */
+    @SerializedName("available")
+    Boolean available;
+
+    @SerializedName("display_preference")
+    DisplayPreference displayPreference;
+
+    /**
+     * For more details about DisplayPreference, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DisplayPreference extends StripeObject {
+      /**
+       * For child configs, whether or not the account's preference will be observed. If {@code
+       * false}, the parent configuration's default is used.
+       */
+      @SerializedName("overridable")
+      Boolean overridable;
+
+      /**
+       * The account's display preference.
+       *
+       * <p>One of {@code none}, {@code off}, or {@code on}.
+       */
+      @SerializedName("preference")
+      String preference;
+
+      /**
+       * The effective display preference value.
+       *
+       * <p>One of {@code off}, or {@code on}.
+       */
+      @SerializedName("value")
+      String value;
+    }
+  }
+
+  /**
    * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -3152,6 +3206,7 @@ public class PaymentMethodConfiguration extends ApiResource implements HasId {
     trySetResponseGetter(payco, responseGetter);
     trySetResponseGetter(paynow, responseGetter);
     trySetResponseGetter(paypal, responseGetter);
+    trySetResponseGetter(payto, responseGetter);
     trySetResponseGetter(pix, responseGetter);
     trySetResponseGetter(promptpay, responseGetter);
     trySetResponseGetter(revolutPay, responseGetter);

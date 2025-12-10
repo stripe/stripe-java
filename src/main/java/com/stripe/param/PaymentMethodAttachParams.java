@@ -13,9 +13,13 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentMethodAttachParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The ID of the customer to which to attach the PaymentMethod. */
+  /** The ID of the customer to which to attach the PaymentMethod. */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of the Account representing the customer to which to attach the PaymentMethod. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -31,8 +35,12 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   private PaymentMethodAttachParams(
-      String customer, List<String> expand, Map<String, Object> extraParams) {
+      String customer,
+      String customerAccount,
+      List<String> expand,
+      Map<String, Object> extraParams) {
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -44,18 +52,27 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
   public static class Builder {
     private String customer;
 
+    private String customerAccount;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodAttachParams build() {
-      return new PaymentMethodAttachParams(this.customer, this.expand, this.extraParams);
+      return new PaymentMethodAttachParams(
+          this.customer, this.customerAccount, this.expand, this.extraParams);
     }
 
-    /** <strong>Required.</strong> The ID of the customer to which to attach the PaymentMethod. */
+    /** The ID of the customer to which to attach the PaymentMethod. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of the Account representing the customer to which to attach the PaymentMethod. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

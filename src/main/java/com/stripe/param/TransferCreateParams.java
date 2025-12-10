@@ -51,7 +51,7 @@ public class TransferCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -63,7 +63,7 @@ public class TransferCreateParams extends ApiRequestParams {
    * You can use this parameter to transfer funds from a charge before they are added to your
    * available balance. A pending balance will transfer immediately but the funds will not become
    * available until the original charge becomes available. <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-availability">See
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-availability">See
    * the Connect documentation</a> for details.
    */
   @SerializedName("source_transaction")
@@ -78,7 +78,7 @@ public class TransferCreateParams extends ApiRequestParams {
 
   /**
    * A string that identifies this transaction as part of a group. See the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")
@@ -261,7 +261,7 @@ public class TransferCreateParams extends ApiRequestParams {
      * You can use this parameter to transfer funds from a charge before they are added to your
      * available balance. A pending balance will transfer immediately but the funds will not become
      * available until the original charge becomes available. <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-availability">See
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-availability">See
      * the Connect documentation</a> for details.
      */
     public Builder setSourceTransaction(String sourceTransaction) {
@@ -280,7 +280,7 @@ public class TransferCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies this transaction as part of a group. See the <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">Connect
      * documentation</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {

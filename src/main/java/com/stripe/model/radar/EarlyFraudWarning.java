@@ -24,7 +24,7 @@ import lombok.Setter;
  * An early fraud warning indicates that the card issuer has notified us that a charge may be
  * fraudulent.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/disputes/measuring#early-fraud-warnings">Early
+ * <p>Related guide: <a href="https://docs.stripe.com/disputes/measuring#early-fraud-warnings">Early
  * fraud warnings</a>
  */
 @Getter

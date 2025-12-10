@@ -73,7 +73,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
   /**
    * An optional dictionary including the account to automatically transfer to as part of a
-   * destination charge. <a href="https://stripe.com/docs/connect/destination-charges">See the
+   * destination charge. <a href="https://docs.stripe.com/connect/destination-charges">See the
    * Connect documentation</a> for details.
    */
   @SerializedName("transfer_data")
@@ -82,7 +82,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
   /**
    * A string that identifies this transaction as part of a group. {@code transfer_group} may only
    * be provided if it has not been set. See the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")
@@ -263,7 +263,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
     /**
      * An optional dictionary including the account to automatically transfer to as part of a
-     * destination charge. <a href="https://stripe.com/docs/connect/destination-charges">See the
+     * destination charge. <a href="https://docs.stripe.com/connect/destination-charges">See the
      * Connect documentation</a> for details.
      */
     public Builder setTransferData(ChargeCaptureParams.TransferData transferData) {
@@ -274,7 +274,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
     /**
      * A string that identifies this transaction as part of a group. {@code transfer_group} may only
      * be provided if it has not been set. See the <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">Connect
      * documentation</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {

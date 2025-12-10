@@ -33,9 +33,9 @@ public class TokenCreateParams extends ApiRequestParams {
 
   /**
    * Create a token for the customer, which is owned by the application's account. You can only use
-   * this with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access token</a>
-   * or <a href="https://stripe.com/docs/connect/authentication">Stripe-Account header</a>. Learn
-   * more about <a href="https://stripe.com/docs/connect/cloning-saved-payment-methods">cloning
+   * this with an <a href="https://docs.stripe.com/connect/standard-accounts">OAuth access token</a>
+   * or <a href="https://docs.stripe.com/connect/authentication">Stripe-Account header</a>. Learn
+   * more about <a href="https://docs.stripe.com/connect/cloning-saved-payment-methods">cloning
    * saved payment methods</a>.
    */
   @SerializedName("customer")
@@ -158,10 +158,10 @@ public class TokenCreateParams extends ApiRequestParams {
 
     /**
      * Create a token for the customer, which is owned by the application's account. You can only
-     * use this with an <a href="https://stripe.com/docs/connect/standard-accounts">OAuth access
-     * token</a> or <a href="https://stripe.com/docs/connect/authentication">Stripe-Account
+     * use this with an <a href="https://docs.stripe.com/connect/standard-accounts">OAuth access
+     * token</a> or <a href="https://docs.stripe.com/connect/authentication">Stripe-Account
      * header</a>. Learn more about <a
-     * href="https://stripe.com/docs/connect/cloning-saved-payment-methods">cloning saved payment
+     * href="https://docs.stripe.com/connect/cloning-saved-payment-methods">cloning saved payment
      * methods</a>.
      */
     public Builder setCustomer(String customer) {
@@ -964,7 +964,10 @@ public class TokenCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -1077,7 +1080,10 @@ public class TokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -1921,11 +1927,10 @@ public class TokenCreateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class Document {
           /**
-           * The back of a document returned by a <a
-           * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-           * value of {@code additional_verification}. The uploaded file needs to be a color image
-           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-           * size.
+           * The back of a document returned by a <a href="https://api.stripe.com#create_file">file
+           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
+           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
+           * or PDF format, and less than 10 MB in size.
            */
           @SerializedName("back")
           String back;
@@ -1941,11 +1946,10 @@ public class TokenCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * The front of a document returned by a <a
-           * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-           * value of {@code additional_verification}. The uploaded file needs to be a color image
-           * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-           * size.
+           * The front of a document returned by a <a href="https://api.stripe.com#create_file">file
+           * upload</a> with a {@code purpose} value of {@code additional_verification}. The
+           * uploaded file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG,
+           * or PDF format, and less than 10 MB in size.
            */
           @SerializedName("front")
           String front;
@@ -1975,7 +1979,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
             /**
              * The back of a document returned by a <a
-             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * href="https://api.stripe.com#create_file">file upload</a> with a {@code purpose}
              * value of {@code additional_verification}. The uploaded file needs to be a color image
              * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
              * size.
@@ -2017,7 +2021,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
             /**
              * The front of a document returned by a <a
-             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+             * href="https://api.stripe.com#create_file">file upload</a> with a {@code purpose}
              * value of {@code additional_verification}. The uploaded file needs to be a color image
              * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
              * size.
@@ -2214,7 +2218,7 @@ public class TokenCreateParams extends ApiRequestParams {
       String maidenName;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -2594,7 +2598,7 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -2605,7 +2609,7 @@ public class TokenCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -2696,7 +2700,10 @@ public class TokenCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -2809,7 +2816,10 @@ public class TokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -3296,7 +3306,10 @@ public class TokenCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -3409,7 +3422,10 @@ public class TokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -3674,7 +3690,7 @@ public class TokenCreateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class AdditionalDocument {
           /**
-           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -3693,7 +3709,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -3725,11 +3741,10 @@ public class TokenCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The back of an ID returned by a <a
-             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-             * value of {@code identity_document}. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+             * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded
+             * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+             * format, and less than 10 MB in size.
              */
             public Builder setBack(String back) {
               this.back = back;
@@ -3767,11 +3782,10 @@ public class TokenCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The front of an ID returned by a <a
-             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-             * value of {@code identity_document}. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+             * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded
+             * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+             * format, and less than 10 MB in size.
              */
             public Builder setFront(String front) {
               this.front = front;
@@ -3784,7 +3798,7 @@ public class TokenCreateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class Document {
           /**
-           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -3803,7 +3817,7 @@ public class TokenCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -3835,11 +3849,10 @@ public class TokenCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The back of an ID returned by a <a
-             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-             * value of {@code identity_document}. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
+             * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded
+             * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+             * format, and less than 10 MB in size.
              */
             public Builder setBack(String back) {
               this.back = back;
@@ -3877,11 +3890,10 @@ public class TokenCreateParams extends ApiRequestParams {
             }
 
             /**
-             * The front of an ID returned by a <a
-             * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-             * value of {@code identity_document}. The uploaded file needs to be a color image
-             * (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format, and less than 10 MB in
-             * size.
+             * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
+             * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded
+             * file needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
+             * format, and less than 10 MB in size.
              */
             public Builder setFront(String front) {
               this.front = front;
@@ -3966,7 +3978,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
     /**
      * The currency the bank account is in. This must be a country/currency pairing that <a
-     * href="https://stripe.com/docs/payouts">Stripe supports.</a>
+     * href="https://docs.stripe.com/payouts">Stripe supports.</a>
      */
     @SerializedName("currency")
     String currency;
@@ -4104,7 +4116,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       /**
        * The currency the bank account is in. This must be a country/currency pairing that <a
-       * href="https://stripe.com/docs/payouts">Stripe supports.</a>
+       * href="https://docs.stripe.com/payouts">Stripe supports.</a>
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -4731,7 +4743,7 @@ public class TokenCreateParams extends ApiRequestParams {
     String maidenName;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -5154,7 +5166,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -5165,7 +5177,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -5464,7 +5476,10 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -5577,7 +5592,10 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
@@ -6153,9 +6171,8 @@ public class TokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * One or more document ids returned by a <a
-         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code account_requirement}.
+         * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
+         * upload</a> with a {@code purpose} value of {@code account_requirement}.
          */
         @SerializedName("files")
         List<String> files;
@@ -6252,9 +6269,8 @@ public class TokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * One or more document ids returned by a <a
-         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code account_requirement}.
+         * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
+         * upload</a> with a {@code purpose} value of {@code account_requirement}.
          */
         @SerializedName("files")
         List<String> files;
@@ -6348,9 +6364,8 @@ public class TokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * One or more document ids returned by a <a
-         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
-         * value of {@code account_requirement}.
+         * One or more document ids returned by a <a href="https://api.stripe.com#create_file">file
+         * upload</a> with a {@code purpose} value of {@code account_requirement}.
          */
         @SerializedName("files")
         List<String> files;
@@ -6466,7 +6481,10 @@ public class TokenCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -6579,7 +6597,10 @@ public class TokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
@@ -7334,7 +7355,7 @@ public class TokenCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class AdditionalDocument {
         /**
-         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -7353,7 +7374,7 @@ public class TokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -7385,7 +7406,7 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -7424,7 +7445,7 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -7440,7 +7461,7 @@ public class TokenCreateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Document {
         /**
-         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -7459,7 +7480,7 @@ public class TokenCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
          * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
          * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF format,
          * and less than 10 MB in size.
@@ -7491,7 +7512,7 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.
@@ -7530,7 +7551,7 @@ public class TokenCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
            * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
            * needs to be a color image (smaller than 8,000px by 8,000px), in JPG, PNG, or PDF
            * format, and less than 10 MB in size.

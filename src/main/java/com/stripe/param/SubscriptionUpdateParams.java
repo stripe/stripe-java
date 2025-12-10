@@ -44,7 +44,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
    * subscription's billing cycle anchor to the current time (in UTC). For more information, see the
    * billing cycle <a
-   * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+   * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
    */
   @SerializedName("billing_cycle_anchor")
   BillingCycleAnchor billingCycleAnchor;
@@ -97,9 +97,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * ID of the default payment method for the subscription. It must belong to the customer
    * associated with the subscription. This takes precedence over {@code default_source}. If neither
    * are set, invoices will use the customer's <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * or <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+   * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_payment_method")
   Object defaultPaymentMethod;
@@ -109,9 +109,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * associated with the subscription and be in a chargeable state. If {@code
    * default_payment_method} is also set, {@code default_payment_method} will take precedence. If
    * neither are set, invoices will use the customer's <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * or <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+   * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_source")
   Object defaultSource;
@@ -161,7 +161,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   List<SubscriptionUpdateParams.Item> items;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -183,7 +183,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * If specified, payment collection for this subscription will be paused. Note that the
    * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-   * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+   * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
    * collection</a>.
    */
   @SerializedName("pause_collection")
@@ -194,20 +194,20 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * payment is required but cannot be paid. This allows you to manage scenarios where additional
    * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
    * require 3DS authentication to complete payment. See the <a
-   * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
+   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
    * Guide</a> for Billing to learn more. This is the default behavior.
    *
    * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
    * when payment is required and await explicit confirmation of the invoice's payment intent. This
    * allows simpler management of scenarios where additional user actions are needed to pay a
    * subscription’s invoice. Such as failed payments, <a
-   * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
+   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
    * regulation</a>, or collecting a mandate for a bank debit payment method.
    *
    * <p>Use {@code pending_if_incomplete} to update the subscription using <a
-   * href="https://stripe.com/docs/billing/subscriptions/pending-updates">pending updates</a>. When
+   * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>. When
    * you use {@code pending_if_incomplete} you can only pass the parameters <a
-   * href="https://stripe.com/docs/billing/pending-updates-reference#supported-attributes">supported
+   * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
    * by pending updates</a>.
    *
    * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
@@ -226,7 +226,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://stripe.com/docs/api#create_invoice">Create an invoice</a> for the
+   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
    * given subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
@@ -234,7 +234,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * Determines how to handle <a
-   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the billing
+   * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the billing
    * cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now}, or
    * starting a trial), or if an item's {@code quantity} changes. The default value is {@code
    * create_prorations}.
@@ -275,7 +275,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * Indicates if a plan's {@code trial_period_days} should be applied to the subscription. Setting
    * {@code trial_end} per subscription is preferred, and this defaults to {@code false}. Setting
    * this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-   * href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
+   * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
    * subscriptions</a> to learn more.
    */
   @SerializedName("trial_from_plan")
@@ -523,7 +523,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * Either {@code now} or {@code unchanged}. Setting the value to {@code now} resets the
      * subscription's billing cycle anchor to the current time (in UTC). For more information, see
      * the billing cycle <a
-     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      */
     public Builder setBillingCycleAnchor(
         SubscriptionUpdateParams.BillingCycleAnchor billingCycleAnchor) {
@@ -624,9 +624,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * ID of the default payment method for the subscription. It must belong to the customer
      * associated with the subscription. This takes precedence over {@code default_source}. If
      * neither are set, invoices will use the customer's <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+     * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
      */
     public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
@@ -637,9 +637,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * ID of the default payment method for the subscription. It must belong to the customer
      * associated with the subscription. This takes precedence over {@code default_source}. If
      * neither are set, invoices will use the customer's <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+     * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
      */
     public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;
@@ -651,9 +651,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * associated with the subscription and be in a chargeable state. If {@code
      * default_payment_method} is also set, {@code default_payment_method} will take precedence. If
      * neither are set, invoices will use the customer's <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+     * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
@@ -665,9 +665,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * associated with the subscription and be in a chargeable state. If {@code
      * default_payment_method} is also set, {@code default_payment_method} will take precedence. If
      * neither are set, invoices will use the customer's <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * or <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+     * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
      */
     public Builder setDefaultSource(EmptyParam defaultSource) {
       this.defaultSource = defaultSource;
@@ -901,7 +901,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -912,7 +912,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -946,7 +946,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * If specified, payment collection for this subscription will be paused. Note that the
      * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+     * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
      * collection</a>.
      */
     public Builder setPauseCollection(SubscriptionUpdateParams.PauseCollection pauseCollection) {
@@ -957,7 +957,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     /**
      * If specified, payment collection for this subscription will be paused. Note that the
      * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+     * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
      * collection</a>.
      */
     public Builder setPauseCollection(EmptyParam pauseCollection) {
@@ -970,20 +970,20 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * payment is required but cannot be paid. This allows you to manage scenarios where additional
      * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
      * require 3DS authentication to complete payment. See the <a
-     * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA Migration
+     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
      * Guide</a> for Billing to learn more. This is the default behavior.
      *
      * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
      * when payment is required and await explicit confirmation of the invoice's payment intent.
      * This allows simpler management of scenarios where additional user actions are needed to pay a
      * subscription’s invoice. Such as failed payments, <a
-     * href="https://stripe.com/docs/billing/migration/strong-customer-authentication">SCA
+     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
      * regulation</a>, or collecting a mandate for a bank debit payment method.
      *
      * <p>Use {@code pending_if_incomplete} to update the subscription using <a
-     * href="https://stripe.com/docs/billing/subscriptions/pending-updates">pending updates</a>.
+     * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>.
      * When you use {@code pending_if_incomplete} you can only pass the parameters <a
-     * href="https://stripe.com/docs/billing/pending-updates-reference#supported-attributes">supported
+     * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
      * by pending updates</a>.
      *
      * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
@@ -1006,7 +1006,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://stripe.com/docs/api#create_invoice">Create an invoice</a> for the
+     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
      * given subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(
@@ -1017,7 +1017,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-     * calling <a href="https://stripe.com/docs/api#create_invoice">Create an invoice</a> for the
+     * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
      * given subscription at the specified interval.
      */
     public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
@@ -1027,7 +1027,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
+     * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      * The default value is {@code create_prorations}.
@@ -1101,7 +1101,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
      * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-     * href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
+     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
      * subscriptions</a> to learn more.
      */
     public Builder setTrialFromPlan(Boolean trialFromPlan) {
@@ -1133,7 +1133,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -1154,7 +1154,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object price;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
@@ -1327,7 +1327,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(SubscriptionUpdateParams.AddInvoiceItem.PriceData priceData) {
@@ -1846,7 +1846,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1983,7 +1983,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -2884,7 +2884,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object id;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -2905,7 +2905,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Object price;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
@@ -2916,9 +2916,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     Long quantity;
 
     /**
-     * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+     * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
      * will override the <a
-     * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+     * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
      * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
      * previously-defined tax rates.
      */
@@ -3140,7 +3140,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -3151,7 +3151,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -3194,7 +3194,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(SubscriptionUpdateParams.Item.PriceData priceData) {
@@ -3237,9 +3237,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
        * will override the <a
-       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
        * previously-defined tax rates.
        */
@@ -3249,9 +3249,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
        * will override the <a
-       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
        * previously-defined tax rates.
        */
@@ -3276,7 +3276,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Number of units that meets the billing threshold to advance the
        * subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-       * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+       * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
        * threshold</a>)
        */
       @SerializedName("usage_gte")
@@ -3333,7 +3333,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> Number of units that meets the billing threshold to advance
          * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+         * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
          * threshold</a>)
          */
         public Builder setUsageGte(Long usageGte) {
@@ -3497,7 +3497,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -3648,7 +3648,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -4166,6 +4166,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object konbini;
 
       /**
+       * This sub-hash contains details about the PayTo payment method options to pass to the
+       * invoice’s PaymentIntent.
+       */
+      @SerializedName("payto")
+      Object payto;
+
+      /**
        * This sub-hash contains details about the SEPA Direct Debit payment method options to pass
        * to the invoice’s PaymentIntent.
        */
@@ -4186,6 +4193,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           Object customerBalance,
           Map<String, Object> extraParams,
           Object konbini,
+          Object payto,
           Object sepaDebit,
           Object usBankAccount) {
         this.acssDebit = acssDebit;
@@ -4194,6 +4202,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         this.customerBalance = customerBalance;
         this.extraParams = extraParams;
         this.konbini = konbini;
+        this.payto = payto;
         this.sepaDebit = sepaDebit;
         this.usBankAccount = usBankAccount;
       }
@@ -4215,6 +4224,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         private Object konbini;
 
+        private Object payto;
+
         private Object sepaDebit;
 
         private Object usBankAccount;
@@ -4228,6 +4239,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
               this.customerBalance,
               this.extraParams,
               this.konbini,
+              this.payto,
               this.sepaDebit,
               this.usBankAccount);
         }
@@ -4355,6 +4367,25 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
          */
         public Builder setKonbini(EmptyParam konbini) {
           this.konbini = konbini;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the PayTo payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setPayto(
+            SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto payto) {
+          this.payto = payto;
+          return this;
+        }
+
+        /**
+         * This sub-hash contains details about the PayTo payment method options to pass to the
+         * invoice’s PaymentIntent.
+         */
+        public Builder setPayto(EmptyParam payto) {
+          this.payto = payto;
           return this;
         }
 
@@ -4739,10 +4770,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
-         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. Read our guide on <a
-         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
          * requesting 3D Secure</a> for more information on how this configuration interacts with
          * Radar and our SCA Engine.
          */
@@ -4830,10 +4861,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           /**
            * We strongly recommend that you rely on our SCA Engine to automatically prompt your
            * customers for authentication based on risk level and <a
-           * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+           * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
            * However, if you wish to request 3D Secure based on logic from your own fraud engine,
            * provide this option. Read our guide on <a
-           * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+           * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
            * requesting 3D Secure</a> for more information on how this configuration interacts with
            * Radar and our SCA Engine.
            */
@@ -5438,6 +5469,230 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Payto {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Additional fields for Mandate creation. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Payto(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto build() {
+            return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Additional fields for Mandate creation. */
+          public Builder setMandateOptions(
+              SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /**
+           * The maximum amount that can be collected in a single invoice. If you don't specify a
+           * maximum, then there is no limit.
+           */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           */
+          @SerializedName("purpose")
+          Purpose purpose;
+
+          private MandateOptions(Long amount, Map<String, Object> extraParams, Purpose purpose) {
+            this.amount = amount;
+            this.extraParams = extraParams;
+            this.purpose = purpose;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private Map<String, Object> extraParams;
+
+            private Purpose purpose;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto
+                    .MandateOptions
+                build() {
+              return new SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto
+                  .MandateOptions(this.amount, this.extraParams, this.purpose);
+            }
+
+            /**
+             * The maximum amount that can be collected in a single invoice. If you don't specify a
+             * maximum, then there is no limit.
+             */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The purpose for which payments are made. Has a default value based on your merchant
+             * category code.
+             */
+            public Builder setPurpose(
+                SubscriptionUpdateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions
+                        .Purpose
+                    purpose) {
+              this.purpose = purpose;
+              return this;
+            }
+          }
+
+          public enum Purpose implements ApiRequestParams.EnumParam {
+            @SerializedName("dependant_support")
+            DEPENDANT_SUPPORT("dependant_support"),
+
+            @SerializedName("government")
+            GOVERNMENT("government"),
+
+            @SerializedName("loan")
+            LOAN("loan"),
+
+            @SerializedName("mortgage")
+            MORTGAGE("mortgage"),
+
+            @SerializedName("other")
+            OTHER("other"),
+
+            @SerializedName("pension")
+            PENSION("pension"),
+
+            @SerializedName("personal")
+            PERSONAL("personal"),
+
+            @SerializedName("retail")
+            RETAIL("retail"),
+
+            @SerializedName("salary")
+            SALARY("salary"),
+
+            @SerializedName("tax")
+            TAX("tax"),
+
+            @SerializedName("utility")
+            UTILITY("utility");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Purpose(String value) {
+              this.value = value;
+            }
           }
         }
       }
@@ -6093,6 +6348,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       @SerializedName("paypal")
       PAYPAL("paypal"),
+
+      @SerializedName("payto")
+      PAYTO("payto"),
 
       @SerializedName("promptpay")
       PROMPTPAY("promptpay"),

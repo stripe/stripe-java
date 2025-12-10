@@ -454,6 +454,40 @@ public final class SubscriptionService extends ApiService {
    * schedules</a> instead. Schedules provide the flexibility to model more complex billing
    * configurations that change over time.
    */
+  public Subscription create(RequestOptions options) throws StripeException {
+    return create((SubscriptionCreateParams) null, options);
+  }
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   *
+   * <p>When you create a subscription with {@code collection_method=charge_automatically}, the
+   * first invoice is finalized as part of the request. The {@code payment_behavior} parameter
+   * determines the exact behavior of the initial payment.
+   *
+   * <p>To start subscriptions where the first invoice always begins in a {@code draft} status, use
+   * <a
+   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
+   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
+   * configurations that change over time.
+   */
+  public Subscription create() throws StripeException {
+    return create((SubscriptionCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 500 active or
+   * scheduled subscriptions.
+   *
+   * <p>When you create a subscription with {@code collection_method=charge_automatically}, the
+   * first invoice is finalized as part of the request. The {@code payment_behavior} parameter
+   * determines the exact behavior of the initial payment.
+   *
+   * <p>To start subscriptions where the first invoice always begins in a {@code draft} status, use
+   * <a
+   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules#managing">subscription
+   * schedules</a> instead. Schedules provide the flexibility to model more complex billing
+   * configurations that change over time.
+   */
   public Subscription create(SubscriptionCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/subscriptions";

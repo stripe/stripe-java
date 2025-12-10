@@ -30,11 +30,10 @@ import lombok.Setter;
 /**
  * Use <a
  * href="https://docs.stripe.com/docs/treasury/moving-money/financial-accounts/out-of/outbound-transfers">OutboundTransfers</a>
- * to transfer funds from a <a
- * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a> to a PaymentMethod
- * belonging to the same entity. To send funds to a different party, use <a
- * href="https://stripe.com/docs/api#outbound_payments">OutboundPayments</a> instead. You can send
- * funds over ACH rails or through a domestic wire transfer to a user's own external bank account.
+ * to transfer funds from a <a href="https://api.stripe.com#financial_accounts">FinancialAccount</a>
+ * to a PaymentMethod belonging to the same entity. To send funds to a different party, use <a
+ * href="https://api.stripe.com#outbound_payments">OutboundPayments</a> instead. You can send funds
+ * over ACH rails or through a domestic wire transfer to a user's own external bank account.
  *
  * <p>Simulate OutboundTransfer state changes with the {@code
  * /v1/test_helpers/treasury/outbound_transfers} endpoints. These methods can only be called on test
@@ -87,7 +86,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
   String financialAccount;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * A <a href="https://docs.stripe.com/treasury/moving-money/regulatory-receipts">hosted
    * transaction receipt</a> URL that is provided when money movement is considered regulated under
    * Stripe's money transmission licenses.
    */
@@ -107,7 +106,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -460,7 +459,7 @@ public class OutboundTransfer extends ApiResource implements HasId {
 
       /**
        * The network rails used. See the <a
-       * href="https://stripe.com/docs/treasury/money-movement/timelines">docs</a> to learn more
+       * href="https://docs.stripe.com/treasury/money-movement/timelines">docs</a> to learn more
        * about money movement timelines for each network type.
        *
        * <p>One of {@code ach}, or {@code us_domestic_wire}.

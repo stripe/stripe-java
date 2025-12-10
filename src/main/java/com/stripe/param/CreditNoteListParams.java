@@ -22,6 +22,13 @@ public class CreditNoteListParams extends ApiRequestParams {
   String customer;
 
   /**
+   * Only return credit notes for the account representing the customer specified by this account
+   * ID.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
    * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
@@ -66,6 +73,7 @@ public class CreditNoteListParams extends ApiRequestParams {
   private CreditNoteListParams(
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -74,6 +82,7 @@ public class CreditNoteListParams extends ApiRequestParams {
       String startingAfter) {
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -90,6 +99,8 @@ public class CreditNoteListParams extends ApiRequestParams {
     private Object created;
 
     private String customer;
+
+    private String customerAccount;
 
     private String endingBefore;
 
@@ -108,6 +119,7 @@ public class CreditNoteListParams extends ApiRequestParams {
       return new CreditNoteListParams(
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -131,6 +143,15 @@ public class CreditNoteListParams extends ApiRequestParams {
     /** Only return credit notes for the customer specified by this customer ID. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * Only return credit notes for the account representing the customer specified by this account
+     * ID.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

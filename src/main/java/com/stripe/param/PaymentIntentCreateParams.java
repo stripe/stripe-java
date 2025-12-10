@@ -17,10 +17,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * <strong>Required.</strong> Amount intended to be collected by this PaymentIntent. A positive
    * integer representing how much to charge in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
    * cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is
    * $0.50 US or <a
-   * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+   * href="https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts">equivalent in
    * charge currency</a>. The amount value supports up to eight digits (e.g., a value of 99999999
    * for a USD charge of $999,999.99).
    */
@@ -35,7 +35,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
    * collected will be capped at the total amount captured. For more information, see the
-   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
   @SerializedName("application_fee_amount")
@@ -54,10 +54,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * Set to {@code true} to attempt to <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">confirm this PaymentIntent</a>
+   * href="https://docs.stripe.com/api/payment_intents/confirm">confirm this PaymentIntent</a>
    * immediately. This parameter defaults to {@code false}. When creating and confirming a
    * PaymentIntent at the same time, you can also provide the parameters available in the <a
-   * href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
+   * href="https://docs.stripe.com/api/payment_intents/confirm">Confirm API</a>.
    */
   @SerializedName("confirm")
   Boolean confirm;
@@ -92,7 +92,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
    *
    * <p>If <a
-   * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
    * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
    * method attaches to the Customer after the PaymentIntent has been confirmed and any required
    * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -103,6 +103,23 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * ID of the Account representing the customer that this PaymentIntent belongs to, if one exists.
+   *
+   * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
+   *
+   * <p>If <a
+   * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+   * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
+   * method attaches to the Account after the PaymentIntent has been confirmed and any required
+   * actions from the user are complete. If the payment method is {@code card_present} and isn't a
+   * digital wallet, then a <a
+   * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+   * payment method representing the card is created and attached to the Account instead.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -111,9 +128,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
    * requires_action}. Use this parameter for simpler integrations that don't handle customer
    * actions, such as <a
-   * href="https://stripe.com/docs/payments/save-card-without-authentication">saving cards without
+   * href="https://docs.stripe.com/payments/save-card-without-authentication">saving cards without
    * authentication</a>. This parameter can only be used with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+   * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("error_on_requires_action")
@@ -142,7 +159,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * ID of the mandate that's used for this payment. This parameter can only be used with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+   * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("mandate")
@@ -150,14 +167,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * This hash contains details about the Mandate to create. This parameter can only be used with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+   * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("mandate_data")
   Object mandateData;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -168,9 +185,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
    * payment attempt and can't authenticate. Use this parameter in scenarios where you collect card
-   * details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge them
+   * details and <a href="https://docs.stripe.com/payments/cards/charging-saved-cards">charge them
    * later</a>. This parameter can only be used with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+   * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("off_session")
@@ -178,7 +195,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The Stripe account ID that these funds are intended for. Learn more about the <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
+   * href="https://docs.stripe.com/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
@@ -189,7 +206,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * ID of the payment method (a PaymentMethod, Card, or <a
-   * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
+   * href="https://docs.stripe.com/payments/payment-methods#compatibility">compatible Source</a>
    * object) to attach to this PaymentIntent.
    *
    * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
@@ -197,14 +214,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * customer.default_source} to improve migration for users of the Charges API. We recommend that
    * you explicitly provide the {@code payment_method} moving forward. If the payment method is
    * attached to a Customer, you must also provide the ID of that Customer as the <a
-   * href="https://stripe.com/docs/api#create_payment_intent-customer">customer</a> parameter of
-   * this PaymentIntent. end
+   * href="https://api.stripe.com#create_payment_intent-customer">customer</a> parameter of this
+   * PaymentIntent. end
    */
   @SerializedName("payment_method")
   String paymentMethod;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+   * The ID of the <a href="https://docs.stripe.com/api/payment_method_configurations">payment
    * method configuration</a> to use with this PaymentIntent.
    */
   @SerializedName("payment_method_configuration")
@@ -213,7 +230,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * If provided, this hash will be used to create a PaymentMethod. The new PaymentMethod will
    * appear in the <a
-   * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-payment_method">payment_method</a>
+   * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-payment_method">payment_method</a>
    * property on the PaymentIntent.
    */
   @SerializedName("payment_method_data")
@@ -235,7 +252,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * Options to configure Radar. Learn more about <a
-   * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
+   * href="https://docs.stripe.com/radar/radar-session">Radar Sessions</a>.
    */
   @SerializedName("radar_options")
   RadarOptions radarOptions;
@@ -252,7 +269,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
    * the payment method's app or site. If you'd prefer to redirect to a mobile application, you can
    * alternatively supply an application URI scheme. This parameter can only be used with <a
-   * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+   * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
    * confirm=true}</a>.
    */
   @SerializedName("return_url")
@@ -309,14 +326,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The parameters that you can use to automatically create a Transfer. Learn more about the <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
+   * href="https://docs.stripe.com/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies the resulting payment as part of a group. Learn more about the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers">use case for connected
    * accounts</a>.
    */
   @SerializedName("transfer_group")
@@ -340,6 +357,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String confirmationToken,
       String currency,
       String customer,
+      String customerAccount,
       String description,
       Boolean errorOnRequiresAction,
       List<PaymentIntentCreateParams.ExcludedPaymentMethodType> excludedPaymentMethodTypes,
@@ -377,6 +395,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.confirmationToken = confirmationToken;
     this.currency = currency;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.description = description;
     this.errorOnRequiresAction = errorOnRequiresAction;
     this.excludedPaymentMethodTypes = excludedPaymentMethodTypes;
@@ -430,6 +449,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private String currency;
 
     private String customer;
+
+    private String customerAccount;
 
     private String description;
 
@@ -498,6 +519,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.confirmationToken,
           this.currency,
           this.customer,
+          this.customerAccount,
           this.description,
           this.errorOnRequiresAction,
           this.excludedPaymentMethodTypes,
@@ -530,10 +552,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> Amount intended to be collected by this PaymentIntent. A positive
      * integer representing how much to charge in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> (e.g., 100
      * cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum amount is
      * $0.50 US or <a
-     * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+     * href="https://docs.stripe.com/currencies#minimum-and-maximum-charge-amounts">equivalent in
      * charge currency</a>. The amount value supports up to eight digits (e.g., a value of 99999999
      * for a USD charge of $999,999.99).
      */
@@ -552,7 +574,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
      * application fee collected will be capped at the total amount captured. For more information,
-     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
+     * see the PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case
      * for connected accounts</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -578,10 +600,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * Set to {@code true} to attempt to <a
-     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm this PaymentIntent</a>
+     * href="https://docs.stripe.com/api/payment_intents/confirm">confirm this PaymentIntent</a>
      * immediately. This parameter defaults to {@code false}. When creating and confirming a
      * PaymentIntent at the same time, you can also provide the parameters available in the <a
-     * href="https://stripe.com/docs/api/payment_intents/confirm">Confirm API</a>.
+     * href="https://docs.stripe.com/api/payment_intents/confirm">Confirm API</a>.
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
@@ -626,7 +648,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * <p>Payment methods attached to other Customers cannot be used with this PaymentIntent.
      *
      * <p>If <a
-     * href="https://stripe.com/docs/api#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
      * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
      * method attaches to the Customer after the PaymentIntent has been confirmed and any required
      * actions from the user are complete. If the payment method is {@code card_present} and isn't a
@@ -636,6 +658,26 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * ID of the Account representing the customer that this PaymentIntent belongs to, if one
+     * exists.
+     *
+     * <p>Payment methods attached to other Accounts cannot be used with this PaymentIntent.
+     *
+     * <p>If <a
+     * href="https://api.stripe.com#payment_intent_object-setup_future_usage">setup_future_usage</a>
+     * is set and this PaymentIntent's payment method is not {@code card_present}, then the payment
+     * method attaches to the Account after the PaymentIntent has been confirmed and any required
+     * actions from the user are complete. If the payment method is {@code card_present} and isn't a
+     * digital wallet, then a <a
+     * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+     * payment method representing the card is created and attached to the Account instead.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -649,9 +691,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * Set to {@code true} to fail the payment attempt if the PaymentIntent transitions into {@code
      * requires_action}. Use this parameter for simpler integrations that don't handle customer
      * actions, such as <a
-     * href="https://stripe.com/docs/payments/save-card-without-authentication">saving cards without
+     * href="https://docs.stripe.com/payments/save-card-without-authentication">saving cards without
      * authentication</a>. This parameter can only be used with <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setErrorOnRequiresAction(Boolean errorOnRequiresAction) {
@@ -747,7 +789,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * ID of the mandate that's used for this payment. This parameter can only be used with <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setMandate(String mandate) {
@@ -758,7 +800,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * This hash contains details about the Mandate to create. This parameter can only be used with
      * <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setMandateData(PaymentIntentCreateParams.MandateData mandateData) {
@@ -769,7 +811,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * This hash contains details about the Mandate to create. This parameter can only be used with
      * <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setMandateData(EmptyParam mandateData) {
@@ -806,9 +848,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
      * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
-     * card details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge
+     * card details and <a href="https://docs.stripe.com/payments/cards/charging-saved-cards">charge
      * them later</a>. This parameter can only be used with <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setOffSession(Boolean offSession) {
@@ -819,9 +861,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * Set to {@code true} to indicate that the customer isn't in your checkout flow during this
      * payment attempt and can't authenticate. Use this parameter in scenarios where you collect
-     * card details and <a href="https://stripe.com/docs/payments/cards/charging-saved-cards">charge
+     * card details and <a href="https://docs.stripe.com/payments/cards/charging-saved-cards">charge
      * them later</a>. This parameter can only be used with <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setOffSession(PaymentIntentCreateParams.OffSession offSession) {
@@ -831,7 +873,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * The Stripe account ID that these funds are intended for. Learn more about the <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * href="https://docs.stripe.com/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
@@ -847,7 +889,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * ID of the payment method (a PaymentMethod, Card, or <a
-     * href="https://stripe.com/docs/payments/payment-methods#compatibility">compatible Source</a>
+     * href="https://docs.stripe.com/payments/payment-methods#compatibility">compatible Source</a>
      * object) to attach to this PaymentIntent.
      *
      * <p>If you don't provide the {@code payment_method} parameter or the {@code source} parameter
@@ -855,8 +897,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * customer.default_source} to improve migration for users of the Charges API. We recommend that
      * you explicitly provide the {@code payment_method} moving forward. If the payment method is
      * attached to a Customer, you must also provide the ID of that Customer as the <a
-     * href="https://stripe.com/docs/api#create_payment_intent-customer">customer</a> parameter of
-     * this PaymentIntent. end
+     * href="https://api.stripe.com#create_payment_intent-customer">customer</a> parameter of this
+     * PaymentIntent. end
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -864,7 +906,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/payment_method_configurations">payment
+     * The ID of the <a href="https://docs.stripe.com/api/payment_method_configurations">payment
      * method configuration</a> to use with this PaymentIntent.
      */
     public Builder setPaymentMethodConfiguration(String paymentMethodConfiguration) {
@@ -875,7 +917,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * If provided, this hash will be used to create a PaymentMethod. The new PaymentMethod will
      * appear in the <a
-     * href="https://stripe.com/docs/api/payment_intents/object#payment_intent_object-payment_method">payment_method</a>
+     * href="https://docs.stripe.com/api/payment_intents/object#payment_intent_object-payment_method">payment_method</a>
      * property on the PaymentIntent.
      */
     public Builder setPaymentMethodData(
@@ -919,7 +961,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * Options to configure Radar. Learn more about <a
-     * href="https://stripe.com/docs/radar/radar-session">Radar Sessions</a>.
+     * href="https://docs.stripe.com/radar/radar-session">Radar Sessions</a>.
      */
     public Builder setRadarOptions(PaymentIntentCreateParams.RadarOptions radarOptions) {
       this.radarOptions = radarOptions;
@@ -940,7 +982,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
      * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
      * can alternatively supply an application URI scheme. This parameter can only be used with <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm">{@code
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-confirm">{@code
      * confirm=true}</a>.
      */
     public Builder setReturnUrl(String returnUrl) {
@@ -1008,7 +1050,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * The parameters that you can use to automatically create a Transfer. Learn more about the <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * href="https://docs.stripe.com/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
     public Builder setTransferData(PaymentIntentCreateParams.TransferData transferData) {
@@ -1018,7 +1060,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. Learn more about the <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers">use case for connected
      * accounts</a>.
      */
     public Builder setTransferGroup(String transferGroup) {
@@ -1041,7 +1083,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   public static class AmountDetails {
     /**
      * The total discount applied on the transaction represented in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An integer
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An integer
      * greater than 0.
      *
      * <p>This field is mutually exclusive with the {@code
@@ -1110,7 +1152,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * The total discount applied on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -1123,7 +1165,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * The total discount applied on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -1239,7 +1281,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public static class LineItem {
       /**
        * The discount applied on this line item represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]} field.
@@ -1290,7 +1332,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The unit cost of the line item represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
        * for L3 rates. An integer greater than or equal to 0.
        */
       @SerializedName("unit_cost")
@@ -1360,7 +1402,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * The discount applied on this line item represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than 0.
          *
          * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]}
@@ -1445,7 +1487,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The unit cost of the line item represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L3 rates. An integer greater than or equal to 0.
          */
         public Builder setUnitCost(Long unitCost) {
@@ -2045,7 +2087,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The total amount of tax on a single line item represented in
-         * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L3 rates. An integer greater than or equal to 0.
          *
          * <p>This field is mutually exclusive with the {@code
@@ -2104,7 +2146,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The total amount of tax on a single line item represented in
-           * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+           * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
            * unit</a>. Required for L3 rates. An integer greater than or equal to 0.
            *
            * <p>This field is mutually exclusive with the {@code
@@ -2123,7 +2165,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public static class Shipping {
       /**
        * If a physical good is being shipped, the cost of shipping represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than or equal to 0.
        */
       @SerializedName("amount")
@@ -2184,7 +2226,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * If a physical good is being shipped, the cost of shipping represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than or equal to 0.
          */
         public Builder setAmount(Long amount) {
@@ -2194,7 +2236,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * If a physical good is being shipped, the cost of shipping represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than or equal to 0.
          */
         public Builder setAmount(EmptyParam amount) {
@@ -2282,7 +2324,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The total amount of tax on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
        * for L2 rates. An integer greater than or equal to 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -2341,7 +2383,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The total amount of tax on the transaction represented in the
-         * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L2 rates. An integer greater than or equal to 0.
          *
          * <p>This field is mutually exclusive with the {@code
@@ -2363,7 +2405,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      *
      * <p>Redirect-based payment methods may require your customer to be redirected to a payment
      * method's app or site for authentication or additional steps. To <a
-     * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent,
+     * href="https://docs.stripe.com/api/payment_intents/confirm">confirm</a> this PaymentIntent,
      * you may be required to provide a {@code return_url} to redirect customers back to your site
      * after they authenticate or complete the payment.
      */
@@ -2412,7 +2454,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        *
        * <p>Redirect-based payment methods may require your customer to be redirected to a payment
        * method's app or site for authentication or additional steps. To <a
-       * href="https://stripe.com/docs/api/payment_intents/confirm">confirm</a> this PaymentIntent,
+       * href="https://docs.stripe.com/api/payment_intents/confirm">confirm</a> this PaymentIntent,
        * you may be required to provide a {@code return_url} to redirect customers back to your site
        * after they authenticate or complete the payment.
        */
@@ -2615,7 +2657,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public static class Tax {
         /**
          * <strong>Required.</strong> The <a
-         * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+         * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
          */
         @SerializedName("calculation")
         Object calculation;
@@ -2652,7 +2694,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(String calculation) {
             this.calculation = calculation;
@@ -2661,7 +2703,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(EmptyParam calculation) {
             this.calculation = calculation;
@@ -3451,7 +3493,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     MbWay mbWay;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -3530,6 +3572,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Paypal paypal;
 
     /**
+     * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo payment
+     * method.
+     */
+    @SerializedName("payto")
+    Payto payto;
+
+    /**
      * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
      * method.
      */
@@ -3544,7 +3593,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Promptpay promptpay;
 
     /**
-     * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+     * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
      * Session</a> for more information.
      */
     @SerializedName("radar_options")
@@ -3669,6 +3718,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Payco payco,
         Paynow paynow,
         Paypal paypal,
+        Payto payto,
         Pix pix,
         Promptpay promptpay,
         RadarOptions radarOptions,
@@ -3724,6 +3774,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.payco = payco;
       this.paynow = paynow;
       this.paypal = paypal;
+      this.payto = payto;
       this.pix = pix;
       this.promptpay = promptpay;
       this.radarOptions = radarOptions;
@@ -3827,6 +3878,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Paypal paypal;
 
+      private Payto payto;
+
       private Pix pix;
 
       private Promptpay promptpay;
@@ -3899,6 +3952,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.payco,
             this.paynow,
             this.paypal,
+            this.payto,
             this.pix,
             this.promptpay,
             this.radarOptions,
@@ -4331,6 +4385,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
+       * If this is a {@code payto} PaymentMethod, this hash contains details about the PayTo
+       * payment method.
+       */
+      public Builder setPayto(PaymentIntentCreateParams.PaymentMethodData.Payto payto) {
+        this.payto = payto;
+        return this;
+      }
+
+      /**
        * If this is a {@code pix} PaymentMethod, this hash contains details about the Pix payment
        * method.
        */
@@ -4349,7 +4412,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+       * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
        * Session</a> for more information.
        */
       public Builder setRadarOptions(
@@ -5336,7 +5399,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -5451,7 +5517,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -6326,6 +6395,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         @SerializedName("knab")
         KNAB("knab"),
+
+        @SerializedName("mollie")
+        MOLLIE("mollie"),
 
         @SerializedName("moneyou")
         MONEYOU("moneyou"),
@@ -7698,6 +7770,105 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     @Getter
     @EqualsAndHashCode(callSuper = false)
+    public static class Payto {
+      /** The account number for the bank account. */
+      @SerializedName("account_number")
+      String accountNumber;
+
+      /** Bank-State-Branch number of the bank account. */
+      @SerializedName("bsb_number")
+      String bsbNumber;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The PayID alias for the bank account. */
+      @SerializedName("pay_id")
+      String payId;
+
+      private Payto(
+          String accountNumber, String bsbNumber, Map<String, Object> extraParams, String payId) {
+        this.accountNumber = accountNumber;
+        this.bsbNumber = bsbNumber;
+        this.extraParams = extraParams;
+        this.payId = payId;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String accountNumber;
+
+        private String bsbNumber;
+
+        private Map<String, Object> extraParams;
+
+        private String payId;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodData.Payto build() {
+          return new PaymentIntentCreateParams.PaymentMethodData.Payto(
+              this.accountNumber, this.bsbNumber, this.extraParams, this.payId);
+        }
+
+        /** The account number for the bank account. */
+        public Builder setAccountNumber(String accountNumber) {
+          this.accountNumber = accountNumber;
+          return this;
+        }
+
+        /** Bank-State-Branch number of the bank account. */
+        public Builder setBsbNumber(String bsbNumber) {
+          this.bsbNumber = bsbNumber;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodData.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The PayID alias for the bank account. */
+        public Builder setPayId(String payId) {
+          this.payId = payId;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
     public static class Pix {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -7825,7 +7996,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+       * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
        * the browser metadata and device details that help Radar make more accurate predictions on
        * your payments.
        */
@@ -7881,7 +8052,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot
+         * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot
          * of the browser metadata and device details that help Radar make more accurate predictions
          * on your payments.
          */
@@ -8771,6 +8942,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("paypal")
       PAYPAL("paypal"),
 
+      @SerializedName("payto")
+      PAYTO("payto"),
+
       @SerializedName("pix")
       PIX("pix"),
 
@@ -9099,6 +9273,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object paypal;
 
     /**
+     * If this is a {@code payto} PaymentMethod, this sub-hash contains details about the PayTo
+     * payment method options.
+     */
+    @SerializedName("payto")
+    Object payto;
+
+    /**
      * If this is a {@code pix} PaymentMethod, this sub-hash contains details about the Pix payment
      * method options.
      */
@@ -9223,6 +9404,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         Object payco,
         Object paynow,
         Object paypal,
+        Object payto,
         Object pix,
         Object promptpay,
         Object revolutPay,
@@ -9275,6 +9457,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       this.payco = payco;
       this.paynow = paynow;
       this.paypal = paypal;
+      this.payto = payto;
       this.pix = pix;
       this.promptpay = promptpay;
       this.revolutPay = revolutPay;
@@ -9374,6 +9557,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Object paypal;
 
+      private Object payto;
+
       private Object pix;
 
       private Object promptpay;
@@ -9441,6 +9626,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
             this.payco,
             this.paynow,
             this.paypal,
+            this.payto,
             this.pix,
             this.promptpay,
             this.revolutPay,
@@ -10188,6 +10374,24 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setPaypal(EmptyParam paypal) {
         this.paypal = paypal;
+        return this;
+      }
+
+      /**
+       * If this is a {@code payto} PaymentMethod, this sub-hash contains details about the PayTo
+       * payment method options.
+       */
+      public Builder setPayto(PaymentIntentCreateParams.PaymentMethodOptions.Payto payto) {
+        this.payto = payto;
+        return this;
+      }
+
+      /**
+       * If this is a {@code payto} PaymentMethod, this sub-hash contains details about the PayTo
+       * payment method options.
+       */
+      public Builder setPayto(EmptyParam payto) {
+        this.payto = payto;
         return this;
       }
 
@@ -12990,7 +13194,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        * Installment configuration for payments attempted on this PaymentIntent.
        *
        * <p>For more information, see the <a
-       * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
+       * href="https://docs.stripe.com/payments/installments">installments integration guide</a>.
        */
       @SerializedName("installments")
       Installments installments;
@@ -13016,7 +13220,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
-       * href="https://stripe.com/docs/payments/extended-authorization">capture beyond the standard
+       * href="https://docs.stripe.com/payments/extended-authorization">capture beyond the standard
        * authorization validity window</a> for this PaymentIntent.
        */
       @SerializedName("request_extended_authorization")
@@ -13024,21 +13228,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
-       * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+       * href="https://docs.stripe.com/payments/incremental-authorization">increment the
        * authorization</a> for this PaymentIntent.
        */
       @SerializedName("request_incremental_authorization")
       RequestIncrementalAuthorization requestIncrementalAuthorization;
 
       /**
-       * Request ability to make <a href="https://stripe.com/docs/payments/multicapture">multiple
+       * Request ability to make <a href="https://docs.stripe.com/payments/multicapture">multiple
        * captures</a> for this PaymentIntent.
        */
       @SerializedName("request_multicapture")
       RequestMulticapture requestMulticapture;
 
       /**
-       * Request ability to <a href="https://stripe.com/docs/payments/overcapture">overcapture</a>
+       * Request ability to <a href="https://docs.stripe.com/payments/overcapture">overcapture</a>
        * for this PaymentIntent.
        */
       @SerializedName("request_overcapture")
@@ -13047,11 +13251,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
-       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
        * However, if you wish to request 3D Secure based on logic from your own fraud engine,
        * provide this option. If not provided, this value defaults to {@code automatic}. Read our
        * guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+       * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        */
@@ -13289,7 +13493,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
          * Installment configuration for payments attempted on this PaymentIntent.
          *
          * <p>For more information, see the <a
-         * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
+         * href="https://docs.stripe.com/payments/installments">installments integration guide</a>.
          */
         public Builder setInstallments(
             PaymentIntentCreateParams.PaymentMethodOptions.Card.Installments installments) {
@@ -13326,7 +13530,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * Request ability to <a
-         * href="https://stripe.com/docs/payments/extended-authorization">capture beyond the
+         * href="https://docs.stripe.com/payments/extended-authorization">capture beyond the
          * standard authorization validity window</a> for this PaymentIntent.
          */
         public Builder setRequestExtendedAuthorization(
@@ -13338,7 +13542,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * Request ability to <a
-         * href="https://stripe.com/docs/payments/incremental-authorization">increment the
+         * href="https://docs.stripe.com/payments/incremental-authorization">increment the
          * authorization</a> for this PaymentIntent.
          */
         public Builder setRequestIncrementalAuthorization(
@@ -13349,7 +13553,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Request ability to make <a href="https://stripe.com/docs/payments/multicapture">multiple
+         * Request ability to make <a href="https://docs.stripe.com/payments/multicapture">multiple
          * captures</a> for this PaymentIntent.
          */
         public Builder setRequestMulticapture(
@@ -13360,7 +13564,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Request ability to <a href="https://stripe.com/docs/payments/overcapture">overcapture</a>
+         * Request ability to <a href="https://docs.stripe.com/payments/overcapture">overcapture</a>
          * for this PaymentIntent.
          */
         public Builder setRequestOvercapture(
@@ -13373,11 +13577,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
-         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. If not provided, this value defaults to {@code automatic}. Read our
          * guide on <a
-         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
          * requesting 3D Secure</a> for more information on how this configuration interacts with
          * Radar and our SCA Engine.
          */
@@ -14850,7 +15054,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * Request ability to capture this payment beyond the standard <a
-       * href="https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity">authorization
+       * href="https://docs.stripe.com/terminal/features/extended-authorizations#authorization-validity">authorization
        * validity window.</a>
        */
       @SerializedName("request_extended_authorization")
@@ -14858,10 +15062,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * Request ability to <a
-       * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
+       * href="https://docs.stripe.com/terminal/features/incremental-authorizations">increment</a>
        * this PaymentIntent if the combination of MCC and card brand is eligible. Check <a
-       * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
-       * in the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm</a> response
+       * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+       * in the <a href="https://docs.stripe.com/api/payment_intents/confirm">Confirm</a> response
        * to verify support.
        */
       @SerializedName("request_incremental_authorization_support")
@@ -14959,7 +15163,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * Request ability to capture this payment beyond the standard <a
-         * href="https://stripe.com/docs/terminal/features/extended-authorizations#authorization-validity">authorization
+         * href="https://docs.stripe.com/terminal/features/extended-authorizations#authorization-validity">authorization
          * validity window.</a>
          */
         public Builder setRequestExtendedAuthorization(Boolean requestExtendedAuthorization) {
@@ -14969,10 +15173,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * Request ability to <a
-         * href="https://stripe.com/docs/terminal/features/incremental-authorizations">increment</a>
+         * href="https://docs.stripe.com/terminal/features/incremental-authorizations">increment</a>
          * this PaymentIntent if the combination of MCC and card brand is eligible. Check <a
-         * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
-         * in the <a href="https://stripe.com/docs/api/payment_intents/confirm">Confirm</a> response
+         * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-card_present-incremental_authorization_supported">incremental_authorization_supported</a>
+         * in the <a href="https://docs.stripe.com/api/payment_intents/confirm">Confirm</a> response
          * to verify support.
          */
         public Builder setRequestIncrementalAuthorizationSupport(
@@ -20007,7 +20211,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred locale</a> of
+       * <a href="https://docs.stripe.com/payments/paypal/supported-locales">Preferred locale</a> of
        * the PayPal checkout page that the customer is redirected to.
        */
       @SerializedName("preferred_locale")
@@ -20136,7 +20340,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred locale</a>
+         * <a href="https://docs.stripe.com/payments/paypal/supported-locales">Preferred locale</a>
          * of the PayPal checkout page that the customer is redirected to.
          */
         public Builder setPreferredLocale(
@@ -20305,6 +20509,528 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         PreferredLocale(String value) {
           this.value = value;
+        }
+      }
+
+      public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+        @SerializedName("none")
+        NONE("none"),
+
+        @SerializedName("off_session")
+        OFF_SESSION("off_session");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Additional fields for Mandate creation. Only {@code purpose} field is configurable for
+       * PayTo PaymentIntent with {@code setup_future_usage=none}. Other fields are only applicable
+       * to PayTo PaymentIntent with {@code setup_future_usage=off_session}
+       */
+      @SerializedName("mandate_options")
+      MandateOptions mandateOptions;
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+       * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to the
+       * Customer after the PaymentIntent is confirmed and the customer completes any required
+       * actions. If you don't provide a Customer, you can still <a
+       * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+       * Customer after the transaction completes.
+       *
+       * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe creates
+       * and attaches a <a
+       * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+       * payment method representing the card to the Customer instead.
+       *
+       * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you comply
+       * with regional legislation and network rules, such as <a
+       * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+       *
+       * <p>If you've already set {@code setup_future_usage} and you're performing a request using a
+       * publishable key, you can only update the value from {@code on_session} to {@code
+       * off_session}.
+       */
+      @SerializedName("setup_future_usage")
+      ApiRequestParams.EnumParam setupFutureUsage;
+
+      private Payto(
+          Map<String, Object> extraParams,
+          MandateOptions mandateOptions,
+          ApiRequestParams.EnumParam setupFutureUsage) {
+        this.extraParams = extraParams;
+        this.mandateOptions = mandateOptions;
+        this.setupFutureUsage = setupFutureUsage;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private MandateOptions mandateOptions;
+
+        private ApiRequestParams.EnumParam setupFutureUsage;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public PaymentIntentCreateParams.PaymentMethodOptions.Payto build() {
+          return new PaymentIntentCreateParams.PaymentMethodOptions.Payto(
+              this.extraParams, this.mandateOptions, this.setupFutureUsage);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Payto#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Additional fields for Mandate creation. Only {@code purpose} field is configurable for
+         * PayTo PaymentIntent with {@code setup_future_usage=none}. Other fields are only
+         * applicable to PayTo PaymentIntent with {@code setup_future_usage=off_session}
+         */
+        public Builder setMandateOptions(
+            PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions mandateOptions) {
+          this.mandateOptions = mandateOptions;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(
+            PaymentIntentCreateParams.PaymentMethodOptions.Payto.SetupFutureUsage
+                setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+
+        /**
+         * Indicates that you intend to make future payments with this PaymentIntent's payment
+         * method.
+         *
+         * <p>If you provide a Customer with the PaymentIntent, you can use this parameter to <a
+         * href="https://stripe.com/payments/save-during-payment">attach the payment method</a> to
+         * the Customer after the PaymentIntent is confirmed and the customer completes any required
+         * actions. If you don't provide a Customer, you can still <a
+         * href="https://stripe.com/api/payment_methods/attach">attach</a> the payment method to a
+         * Customer after the transaction completes.
+         *
+         * <p>If the payment method is {@code card_present} and isn't a digital wallet, Stripe
+         * creates and attaches a <a
+         * href="https://stripe.com/api/charges/object#charge_object-payment_method_details-card_present-generated_card">generated_card</a>
+         * payment method representing the card to the Customer instead.
+         *
+         * <p>When processing card payments, Stripe uses {@code setup_future_usage} to help you
+         * comply with regional legislation and network rules, such as <a
+         * href="https://stripe.com/strong-customer-authentication">SCA</a>.
+         *
+         * <p>If you've already set {@code setup_future_usage} and you're performing a request using
+         * a publishable key, you can only update the value from {@code on_session} to {@code
+         * off_session}.
+         */
+        public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+          this.setupFutureUsage = setupFutureUsage;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MandateOptions {
+        /**
+         * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
+         */
+        @SerializedName("amount")
+        Object amount;
+
+        /**
+         * The type of amount that will be collected. The amount charged must be exact or up to the
+         * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+         * Defaults to {@code maximum}.
+         */
+        @SerializedName("amount_type")
+        ApiRequestParams.EnumParam amountType;
+
+        /**
+         * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+         * end date.
+         */
+        @SerializedName("end_date")
+        Object endDate;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
+        @SerializedName("payment_schedule")
+        ApiRequestParams.EnumParam paymentSchedule;
+
+        /**
+         * The number of payments that will be made during a payment period. Defaults to 1 except
+         * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+         * limit.
+         */
+        @SerializedName("payments_per_period")
+        Object paymentsPerPeriod;
+
+        /**
+         * The purpose for which payments are made. Has a default value based on your merchant
+         * category code.
+         */
+        @SerializedName("purpose")
+        ApiRequestParams.EnumParam purpose;
+
+        private MandateOptions(
+            Object amount,
+            ApiRequestParams.EnumParam amountType,
+            Object endDate,
+            Map<String, Object> extraParams,
+            ApiRequestParams.EnumParam paymentSchedule,
+            Object paymentsPerPeriod,
+            ApiRequestParams.EnumParam purpose) {
+          this.amount = amount;
+          this.amountType = amountType;
+          this.endDate = endDate;
+          this.extraParams = extraParams;
+          this.paymentSchedule = paymentSchedule;
+          this.paymentsPerPeriod = paymentsPerPeriod;
+          this.purpose = purpose;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object amount;
+
+          private ApiRequestParams.EnumParam amountType;
+
+          private Object endDate;
+
+          private Map<String, Object> extraParams;
+
+          private ApiRequestParams.EnumParam paymentSchedule;
+
+          private Object paymentsPerPeriod;
+
+          private ApiRequestParams.EnumParam purpose;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions build() {
+            return new PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions(
+                this.amount,
+                this.amountType,
+                this.endDate,
+                this.extraParams,
+                this.paymentSchedule,
+                this.paymentsPerPeriod,
+                this.purpose);
+          }
+
+          /**
+           * Amount that will be collected. It is required when {@code amount_type} is {@code
+           * fixed}.
+           */
+          public Builder setAmount(Long amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * Amount that will be collected. It is required when {@code amount_type} is {@code
+           * fixed}.
+           */
+          public Builder setAmount(EmptyParam amount) {
+            this.amount = amount;
+            return this;
+          }
+
+          /**
+           * The type of amount that will be collected. The amount charged must be exact or up to
+           * the value of {@code amount} param for {@code fixed} or {@code maximum} type
+           * respectively. Defaults to {@code maximum}.
+           */
+          public Builder setAmountType(
+              PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions.AmountType
+                  amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * The type of amount that will be collected. The amount charged must be exact or up to
+           * the value of {@code amount} param for {@code fixed} or {@code maximum} type
+           * respectively. Defaults to {@code maximum}.
+           */
+          public Builder setAmountType(EmptyParam amountType) {
+            this.amountType = amountType;
+            return this;
+          }
+
+          /**
+           * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+           * end date.
+           */
+          public Builder setEndDate(String endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no
+           * end date.
+           */
+          public Builder setEndDate(EmptyParam endDate) {
+            this.endDate = endDate;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
+          public Builder setPaymentSchedule(
+              PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions.PaymentSchedule
+                  paymentSchedule) {
+            this.paymentSchedule = paymentSchedule;
+            return this;
+          }
+
+          /** The periodicity at which payments will be collected. Defaults to {@code adhoc}. */
+          public Builder setPaymentSchedule(EmptyParam paymentSchedule) {
+            this.paymentSchedule = paymentSchedule;
+            return this;
+          }
+
+          /**
+           * The number of payments that will be made during a payment period. Defaults to 1 except
+           * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+           * limit.
+           */
+          public Builder setPaymentsPerPeriod(Long paymentsPerPeriod) {
+            this.paymentsPerPeriod = paymentsPerPeriod;
+            return this;
+          }
+
+          /**
+           * The number of payments that will be made during a payment period. Defaults to 1 except
+           * for when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no
+           * limit.
+           */
+          public Builder setPaymentsPerPeriod(EmptyParam paymentsPerPeriod) {
+            this.paymentsPerPeriod = paymentsPerPeriod;
+            return this;
+          }
+
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           */
+          public Builder setPurpose(
+              PaymentIntentCreateParams.PaymentMethodOptions.Payto.MandateOptions.Purpose purpose) {
+            this.purpose = purpose;
+            return this;
+          }
+
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           */
+          public Builder setPurpose(EmptyParam purpose) {
+            this.purpose = purpose;
+            return this;
+          }
+        }
+
+        public enum AmountType implements ApiRequestParams.EnumParam {
+          @SerializedName("fixed")
+          FIXED("fixed"),
+
+          @SerializedName("maximum")
+          MAXIMUM("maximum");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AmountType(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum PaymentSchedule implements ApiRequestParams.EnumParam {
+          @SerializedName("adhoc")
+          ADHOC("adhoc"),
+
+          @SerializedName("annual")
+          ANNUAL("annual"),
+
+          @SerializedName("daily")
+          DAILY("daily"),
+
+          @SerializedName("fortnightly")
+          FORTNIGHTLY("fortnightly"),
+
+          @SerializedName("monthly")
+          MONTHLY("monthly"),
+
+          @SerializedName("quarterly")
+          QUARTERLY("quarterly"),
+
+          @SerializedName("semi_annual")
+          SEMI_ANNUAL("semi_annual"),
+
+          @SerializedName("weekly")
+          WEEKLY("weekly");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          PaymentSchedule(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Purpose implements ApiRequestParams.EnumParam {
+          @SerializedName("dependant_support")
+          DEPENDANT_SUPPORT("dependant_support"),
+
+          @SerializedName("government")
+          GOVERNMENT("government"),
+
+          @SerializedName("loan")
+          LOAN("loan"),
+
+          @SerializedName("mortgage")
+          MORTGAGE("mortgage"),
+
+          @SerializedName("other")
+          OTHER("other"),
+
+          @SerializedName("pension")
+          PENSION("pension"),
+
+          @SerializedName("personal")
+          PERSONAL("personal"),
+
+          @SerializedName("retail")
+          RETAIL("retail"),
+
+          @SerializedName("salary")
+          SALARY("salary"),
+
+          @SerializedName("tax")
+          TAX("tax"),
+
+          @SerializedName("utility")
+          UTILITY("utility");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Purpose(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -23162,7 +23888,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+     * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
      * the browser metadata and device details that help Radar make more accurate predictions on
      * your payments.
      */
@@ -23215,7 +23941,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+       * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
        * the browser metadata and device details that help Radar make more accurate predictions on
        * your payments.
        */
@@ -23399,7 +24125,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -23512,7 +24241,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
@@ -23530,7 +24262,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * transferred.
      *
      * <p>If you intend to collect a fee and you need a more robust reporting experience, using <a
-     * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-application_fee_amount">application_fee_amount</a>
+     * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-application_fee_amount">application_fee_amount</a>
      * might be a better fit for your integration.
      */
     @SerializedName("amount")
@@ -23583,7 +24315,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        * transferred.
        *
        * <p>If you intend to collect a fee and you need a more robust reporting experience, using <a
-       * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-application_fee_amount">application_fee_amount</a>
+       * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-application_fee_amount">application_fee_amount</a>
        * might be a better fit for your integration.
        */
       public Builder setAmount(Long amount) {
@@ -23771,6 +24503,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     @SerializedName("paypal")
     PAYPAL("paypal"),
+
+    @SerializedName("payto")
+    PAYTO("payto"),
 
     @SerializedName("pix")
     PIX("pix"),

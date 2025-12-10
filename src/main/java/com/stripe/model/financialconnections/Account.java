@@ -139,7 +139,7 @@ public class Account extends ApiResource implements HasId {
 
   /**
    * The <a
-   * href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod
+   * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">PaymentMethod
    * type</a>(s) that can be created from this account.
    */
   @SerializedName("supported_payment_method_types")
@@ -516,7 +516,7 @@ public class Account extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder extends StripeObject {
     /**
-     * The ID of the Stripe account this account belongs to. Should only be present if {@code
+     * The ID of the Stripe account that this account belongs to. Only available when {@code
      * account_holder.type} is {@code account}.
      */
     @SerializedName("account")
@@ -525,13 +525,16 @@ public class Account extends ApiResource implements HasId {
     ExpandableField<com.stripe.model.Account> account;
 
     /**
-     * ID of the Stripe customer this account belongs to. Present if and only if {@code
-     * account_holder.type} is {@code customer}.
+     * The ID for an Account representing a customer that this account belongs to. Only available
+     * when {@code account_holder.type} is {@code customer}.
      */
     @SerializedName("customer")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Customer> customer;
+
+    @SerializedName("customer_account")
+    String customerAccount;
 
     /**
      * Type of account holder that this account belongs to.

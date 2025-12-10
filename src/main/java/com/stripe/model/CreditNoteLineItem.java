@@ -265,6 +265,7 @@ public class CreditNoteLineItem extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxRateDetails extends StripeObject {
+      /** ID of the tax rate. */
       @SerializedName("tax_rate")
       String taxRate;
     }

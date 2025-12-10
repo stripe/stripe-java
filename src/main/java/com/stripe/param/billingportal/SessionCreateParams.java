@@ -15,16 +15,20 @@ import lombok.Getter;
 public class SessionCreateParams extends ApiRequestParams {
   /**
    * The ID of an existing <a
-   * href="https://stripe.com/docs/api/customer_portal/configuration">configuration</a> to use for
+   * href="https://docs.stripe.com/api/customer_portal/configuration">configuration</a> to use for
    * this session, describing its functionality and features. If not specified, the session uses the
    * default configuration.
    */
   @SerializedName("configuration")
   String configuration;
 
-  /** <strong>Required.</strong> The ID of an existing customer. */
+  /** The ID of an existing customer. */
   @SerializedName("customer")
   String customer;
+
+  /** The ID of an existing account. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -41,7 +45,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * Information about a specific flow for the customer to go through. See the <a
-   * href="https://stripe.com/docs/customer-management/portal-deep-links">docs</a> to learn more
+   * href="https://docs.stripe.com/customer-management/portal-deep-links">docs</a> to learn more
    * about using customer portal deep links and flows.
    */
   @SerializedName("flow_data")
@@ -58,9 +62,9 @@ public class SessionCreateParams extends ApiRequestParams {
    * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
    * and invoices with this {@code on_behalf_of} account appear in the portal. For more information,
    * see the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
    * Use the <a
-   * href="https://stripe.com/docs/api/accounts/object#account_object-settings-branding">Accounts
+   * href="https://docs.stripe.com/api/accounts/object#account_object-settings-branding">Accounts
    * API</a> to modify the {@code on_behalf_of} account's branding settings, which the portal
    * displays.
    */
@@ -77,6 +81,7 @@ public class SessionCreateParams extends ApiRequestParams {
   private SessionCreateParams(
       String configuration,
       String customer,
+      String customerAccount,
       List<String> expand,
       Map<String, Object> extraParams,
       FlowData flowData,
@@ -85,6 +90,7 @@ public class SessionCreateParams extends ApiRequestParams {
       String returnUrl) {
     this.configuration = configuration;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.extraParams = extraParams;
     this.flowData = flowData;
@@ -101,6 +107,8 @@ public class SessionCreateParams extends ApiRequestParams {
     private String configuration;
 
     private String customer;
+
+    private String customerAccount;
 
     private List<String> expand;
 
@@ -119,6 +127,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return new SessionCreateParams(
           this.configuration,
           this.customer,
+          this.customerAccount,
           this.expand,
           this.extraParams,
           this.flowData,
@@ -129,7 +138,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The ID of an existing <a
-     * href="https://stripe.com/docs/api/customer_portal/configuration">configuration</a> to use for
+     * href="https://docs.stripe.com/api/customer_portal/configuration">configuration</a> to use for
      * this session, describing its functionality and features. If not specified, the session uses
      * the default configuration.
      */
@@ -138,9 +147,15 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** <strong>Required.</strong> The ID of an existing customer. */
+    /** The ID of an existing customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** The ID of an existing account. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -198,7 +213,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Information about a specific flow for the customer to go through. See the <a
-     * href="https://stripe.com/docs/customer-management/portal-deep-links">docs</a> to learn more
+     * href="https://docs.stripe.com/customer-management/portal-deep-links">docs</a> to learn more
      * about using customer portal deep links and flows.
      */
     public Builder setFlowData(SessionCreateParams.FlowData flowData) {
@@ -219,9 +234,9 @@ public class SessionCreateParams extends ApiRequestParams {
      * The {@code on_behalf_of} account to use for this session. When specified, only subscriptions
      * and invoices with this {@code on_behalf_of} account appear in the portal. For more
      * information, see the <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
      * Use the <a
-     * href="https://stripe.com/docs/api/accounts/object#account_object-settings-branding">Accounts
+     * href="https://docs.stripe.com/api/accounts/object#account_object-settings-branding">Accounts
      * API</a> to modify the {@code on_behalf_of} account's branding settings, which the portal
      * displays.
      */
@@ -1003,7 +1018,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The <a
-       * href="https://stripe.com/docs/api/subscription_items">subscription item</a> to be updated
+       * href="https://docs.stripe.com/api/subscription_items">subscription item</a> to be updated
        * through this flow. Currently, only up to one may be specified and subscriptions with
        * multiple items are not updatable.
        */
@@ -1242,7 +1257,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The ID of the <a
-         * href="https://stripe.com/docs/api/subscriptions/object#subscription_object-items-data-id">subscription
+         * href="https://docs.stripe.com/api/subscriptions/object#subscription_object-items-data-id">subscription
          * item</a> to be updated.
          */
         @SerializedName("id")
@@ -1251,14 +1266,14 @@ public class SessionCreateParams extends ApiRequestParams {
         /**
          * The price the customer should subscribe to through this flow. The price must also be
          * included in the configuration's <a
-         * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
+         * href="https://docs.stripe.com/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
          * features.subscription_update.products}</a>.
          */
         @SerializedName("price")
         String price;
 
         /**
-         * <a href="https://stripe.com/docs/subscriptions/quantities">Quantity</a> for this item
+         * <a href="https://docs.stripe.com/subscriptions/quantities">Quantity</a> for this item
          * that the customer should subscribe to through this flow.
          */
         @SerializedName("quantity")
@@ -1322,7 +1337,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The ID of the <a
-           * href="https://stripe.com/docs/api/subscriptions/object#subscription_object-items-data-id">subscription
+           * href="https://docs.stripe.com/api/subscriptions/object#subscription_object-items-data-id">subscription
            * item</a> to be updated.
            */
           public Builder setId(String id) {
@@ -1333,7 +1348,7 @@ public class SessionCreateParams extends ApiRequestParams {
           /**
            * The price the customer should subscribe to through this flow. The price must also be
            * included in the configuration's <a
-           * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
+           * href="https://docs.stripe.com/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
            * features.subscription_update.products}</a>.
            */
           public Builder setPrice(String price) {
@@ -1342,7 +1357,7 @@ public class SessionCreateParams extends ApiRequestParams {
           }
 
           /**
-           * <a href="https://stripe.com/docs/subscriptions/quantities">Quantity</a> for this item
+           * <a href="https://docs.stripe.com/subscriptions/quantities">Quantity</a> for this item
            * that the customer should subscribe to through this flow.
            */
           public Builder setQuantity(Long quantity) {

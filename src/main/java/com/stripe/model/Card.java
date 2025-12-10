@@ -21,7 +21,7 @@ import lombok.Setter;
  * You can store multiple cards on a customer in order to charge the customer later. You can also
  * store multiple debit cards on a recipient in order to transfer to those cards later.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/sources/cards">Card payments with Sources</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/sources/cards">Card payments with Sources</a>
  */
 @Getter
 @Setter
@@ -211,7 +211,7 @@ public class Card extends ApiResource
   String last4;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

@@ -23,7 +23,7 @@ import lombok.Setter;
  * create multiple codes for a single promotion.
  *
  * <p>If you enable promotion codes in your <a
- * href="https://stripe.com/docs/customer-management/configure-portal">customer portal
+ * href="https://docs.stripe.com/customer-management/configure-portal">customer portal
  * configuration</a>, then customers can redeem a code themselves when updating a subscription in
  * the portal. Customers can also view the currently active promotion codes and coupons on each of
  * their subscriptions in the portal.
@@ -51,11 +51,15 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("created")
   Long created;
 
-  /** The customer that this promotion code can be used by. */
+  /** The customer who can use this promotion code. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
+
+  /** The account representing the customer who can use this promotion code. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Date at which the promotion code can no longer be redeemed. */
   @SerializedName("expires_at")
@@ -78,7 +82,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   Long maxRedemptions;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

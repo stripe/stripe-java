@@ -25,6 +25,12 @@ public class PaymentIntentListParams extends ApiRequestParams {
   String customer;
 
   /**
+   * Only return PaymentIntents for the account representing the customer that this ID specifies.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
    * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
@@ -65,6 +71,7 @@ public class PaymentIntentListParams extends ApiRequestParams {
   private PaymentIntentListParams(
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -72,6 +79,7 @@ public class PaymentIntentListParams extends ApiRequestParams {
       String startingAfter) {
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -88,6 +96,8 @@ public class PaymentIntentListParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -103,6 +113,7 @@ public class PaymentIntentListParams extends ApiRequestParams {
       return new PaymentIntentListParams(
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -131,6 +142,14 @@ public class PaymentIntentListParams extends ApiRequestParams {
     /** Only return PaymentIntents for the customer that this customer ID specifies. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * Only return PaymentIntents for the account representing the customer that this ID specifies.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

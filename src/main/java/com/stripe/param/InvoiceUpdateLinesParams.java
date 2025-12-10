@@ -29,11 +29,11 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}. For <a
-   * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+   * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
    * line items, the incoming metadata specified on the request is directly used to set this value,
    * in contrast to <a
    * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
@@ -157,11 +157,11 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}. For <a
-     * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+     * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
      * line items, the incoming metadata specified on the request is directly used to set this
      * value, in contrast to <a
      * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
@@ -173,11 +173,11 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}. For <a
-     * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+     * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
      * line items, the incoming metadata specified on the request is directly used to set this
      * value, in contrast to <a
      * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
@@ -261,11 +261,11 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
     String id;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}. For <a
-     * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+     * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
      * line items, the incoming metadata specified on the request is directly used to set this
      * value, in contrast to <a
      * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line items,
@@ -277,16 +277,16 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
     /**
      * The period associated with this invoice item. When set to different values, the period will
      * be rendered on the invoice. If you have <a
-     * href="https://stripe.com/docs/revenue-recognition">Stripe Revenue Recognition</a> enabled,
+     * href="https://docs.stripe.com/revenue-recognition">Stripe Revenue Recognition</a> enabled,
      * the period will be used to recognize and defer revenue. See the <a
-     * href="https://stripe.com/docs/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
+     * href="https://docs.stripe.com/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
      * Recognition documentation</a> for details.
      */
     @SerializedName("period")
     Period period;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline.
      */
     @SerializedName("price_data")
@@ -304,10 +304,10 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
      * A list of up to 10 tax amounts for this line item. This can be useful if you calculate taxes
      * on your own or use a third-party to calculate them. You cannot set tax amounts if any line
      * item has <a
-     * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-tax_rates">tax_rates</a>
+     * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-tax_rates">tax_rates</a>
      * or if the invoice has <a
-     * href="https://stripe.com/docs/api/invoices/object#invoice_object-default_tax_rates">default_tax_rates</a>
-     * or uses <a href="https://stripe.com/docs/tax/invoicing">automatic tax</a>. Pass an empty
+     * href="https://docs.stripe.com/api/invoices/object#invoice_object-default_tax_rates">default_tax_rates</a>
+     * or uses <a href="https://docs.stripe.com/tax/invoicing">automatic tax</a>. Pass an empty
      * string to remove previously defined tax amounts.
      */
     @SerializedName("tax_amounts")
@@ -537,11 +537,11 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}. For <a
-       * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+       * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
        * line items, the incoming metadata specified on the request is directly used to set this
        * value, in contrast to <a
        * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line
@@ -553,11 +553,11 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}. For <a
-       * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
+       * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-type">type=subscription</a>
        * line items, the incoming metadata specified on the request is directly used to set this
        * value, in contrast to <a
        * href="api/invoices/line_item#invoice_line_item_object-type">type=invoiceitem</a> line
@@ -571,9 +571,9 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
       /**
        * The period associated with this invoice item. When set to different values, the period will
        * be rendered on the invoice. If you have <a
-       * href="https://stripe.com/docs/revenue-recognition">Stripe Revenue Recognition</a> enabled,
+       * href="https://docs.stripe.com/revenue-recognition">Stripe Revenue Recognition</a> enabled,
        * the period will be used to recognize and defer revenue. See the <a
-       * href="https://stripe.com/docs/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
+       * href="https://docs.stripe.com/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
        * Recognition documentation</a> for details.
        */
       public Builder setPeriod(InvoiceUpdateLinesParams.Line.Period period) {
@@ -582,7 +582,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline.
        */
       public Builder setPriceData(InvoiceUpdateLinesParams.Line.PriceData priceData) {
@@ -634,10 +634,10 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
        * A list of up to 10 tax amounts for this line item. This can be useful if you calculate
        * taxes on your own or use a third-party to calculate them. You cannot set tax amounts if any
        * line item has <a
-       * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-tax_rates">tax_rates</a>
+       * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-tax_rates">tax_rates</a>
        * or if the invoice has <a
-       * href="https://stripe.com/docs/api/invoices/object#invoice_object-default_tax_rates">default_tax_rates</a>
-       * or uses <a href="https://stripe.com/docs/tax/invoicing">automatic tax</a>. Pass an empty
+       * href="https://docs.stripe.com/api/invoices/object#invoice_object-default_tax_rates">default_tax_rates</a>
+       * or uses <a href="https://docs.stripe.com/tax/invoicing">automatic tax</a>. Pass an empty
        * string to remove previously defined tax amounts.
        */
       public Builder setTaxAmounts(EmptyParam taxAmounts) {
@@ -649,10 +649,10 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
        * A list of up to 10 tax amounts for this line item. This can be useful if you calculate
        * taxes on your own or use a third-party to calculate them. You cannot set tax amounts if any
        * line item has <a
-       * href="https://stripe.com/docs/api/invoices/line_item#invoice_line_item_object-tax_rates">tax_rates</a>
+       * href="https://docs.stripe.com/api/invoices/line_item#invoice_line_item_object-tax_rates">tax_rates</a>
        * or if the invoice has <a
-       * href="https://stripe.com/docs/api/invoices/object#invoice_object-default_tax_rates">default_tax_rates</a>
-       * or uses <a href="https://stripe.com/docs/tax/invoicing">automatic tax</a>. Pass an empty
+       * href="https://docs.stripe.com/api/invoices/object#invoice_object-default_tax_rates">default_tax_rates</a>
+       * or uses <a href="https://docs.stripe.com/tax/invoicing">automatic tax</a>. Pass an empty
        * string to remove previously defined tax amounts.
        */
       public Builder setTaxAmounts(List<InvoiceUpdateLinesParams.Line.TaxAmount> taxAmounts) {
@@ -935,7 +935,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1067,7 +1067,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1128,7 +1128,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
         List<String> images;
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -1142,7 +1142,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
         @SerializedName("name")
         String name;
 
-        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
         @SerializedName("tax_code")
         String taxCode;
 
@@ -1303,7 +1303,7 @@ public class InvoiceUpdateLinesParams extends ApiRequestParams {
             return this;
           }
 
-          /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(String taxCode) {
             this.taxCode = taxCode;
             return this;

@@ -153,6 +153,20 @@ public final class InvoiceItemService extends ApiService {
    * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
    * specified, the item will be on the next invoice created for the customer specified.
    */
+  public InvoiceItem create(RequestOptions options) throws StripeException {
+    return create((InvoiceItemCreateParams) null, options);
+  }
+  /**
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
+   */
+  public InvoiceItem create() throws StripeException {
+    return create((InvoiceItemCreateParams) null, (RequestOptions) null);
+  }
+  /**
+   * Creates an item to be added to a draft invoice (up to 250 items per invoice). If no invoice is
+   * specified, the item will be on the next invoice created for the customer specified.
+   */
   public InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/invoiceitems";

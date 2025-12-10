@@ -24,7 +24,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ActiveEntitlement extends ApiResource implements HasId {
   /**
-   * The <a href="https://stripe.com/docs/api/entitlements/feature">Feature</a> that the customer is
+   * The <a href="https://docs.stripe.com/api/entitlements/feature">Feature</a> that the customer is
    * entitled to.
    */
   @SerializedName("feature")

@@ -245,6 +245,9 @@ public class Mandate extends ApiResource implements HasId {
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("payto")
+    Payto payto;
+
     @SerializedName("revolut_pay")
     RevolutPay revolutPay;
 
@@ -447,6 +450,72 @@ public class Mandate extends ApiResource implements HasId {
       /** PayPal account PayerID. This identifier uniquely identifies the PayPal customer. */
       @SerializedName("payer_id")
       String payerId;
+    }
+
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      /**
+       * Amount that will be collected. It is required when {@code amount_type} is {@code fixed}.
+       */
+      @SerializedName("amount")
+      Long amount;
+
+      /**
+       * The type of amount that will be collected. The amount charged must be exact or up to the
+       * value of {@code amount} param for {@code fixed} or {@code maximum} type respectively.
+       * Defaults to {@code maximum}.
+       *
+       * <p>One of {@code fixed}, or {@code maximum}.
+       */
+      @SerializedName("amount_type")
+      String amountType;
+
+      /**
+       * Date, in YYYY-MM-DD format, after which payments will not be collected. Defaults to no end
+       * date.
+       */
+      @SerializedName("end_date")
+      String endDate;
+
+      /**
+       * The periodicity at which payments will be collected. Defaults to {@code adhoc}.
+       *
+       * <p>One of {@code adhoc}, {@code annual}, {@code daily}, {@code fortnightly}, {@code
+       * monthly}, {@code quarterly}, {@code semi_annual}, or {@code weekly}.
+       */
+      @SerializedName("payment_schedule")
+      String paymentSchedule;
+
+      /**
+       * The number of payments that will be made during a payment period. Defaults to 1 except for
+       * when {@code payment_schedule} is {@code adhoc}. In that case, it defaults to no limit.
+       */
+      @SerializedName("payments_per_period")
+      Long paymentsPerPeriod;
+
+      /**
+       * The purpose for which payments are made. Has a default value based on your merchant
+       * category code.
+       *
+       * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code mortgage},
+       * {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code salary}, {@code
+       * tax}, or {@code utility}.
+       */
+      @SerializedName("purpose")
+      String purpose;
+
+      /**
+       * Date, in YYYY-MM-DD format, from which payments will be collected. Defaults to confirmation
+       * time.
+       */
+      @SerializedName("start_date")
+      String startDate;
     }
 
     /**
