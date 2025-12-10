@@ -262,22 +262,22 @@ public class SessionCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder {
     /**
-     * The ID of the Stripe account whose accounts will be retrieved. Should only be present if
-     * {@code type} is {@code account}.
+     * The ID of the Stripe account whose accounts you will retrieve. Only available when {@code
+     * type} is {@code account}.
      */
     @SerializedName("account")
     String account;
 
     /**
-     * The ID of the Stripe customer whose accounts will be retrieved. Should only be present if
-     * {@code type} is {@code customer}.
+     * The ID of the Stripe customer whose accounts you will retrieve. Only available when {@code
+     * type} is {@code customer}.
      */
     @SerializedName("customer")
     String customer;
 
     /**
-     * The ID of the Stripe customer Account whose accounts will be retrieved. Should only be
-     * present if {@code type} is {@code customer}.
+     * The ID of Account representing a customer whose accounts you will retrieve. Only available
+     * when {@code type} is {@code customer}.
      */
     @SerializedName("customer_account")
     String customerAccount;
@@ -330,8 +330,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the Stripe account whose accounts will be retrieved. Should only be present if
-       * {@code type} is {@code account}.
+       * The ID of the Stripe account whose accounts you will retrieve. Only available when {@code
+       * type} is {@code account}.
        */
       public Builder setAccount(String account) {
         this.account = account;
@@ -339,8 +339,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the Stripe customer whose accounts will be retrieved. Should only be present if
-       * {@code type} is {@code customer}.
+       * The ID of the Stripe customer whose accounts you will retrieve. Only available when {@code
+       * type} is {@code customer}.
        */
       public Builder setCustomer(String customer) {
         this.customer = customer;
@@ -348,8 +348,8 @@ public class SessionCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the Stripe customer Account whose accounts will be retrieved. Should only be
-       * present if {@code type} is {@code customer}.
+       * The ID of Account representing a customer whose accounts you will retrieve. Only available
+       * when {@code type} is {@code customer}.
        */
       public Builder setCustomerAccount(String customerAccount) {
         this.customerAccount = customerAccount;

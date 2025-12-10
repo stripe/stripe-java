@@ -26,7 +26,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
    * collected will be capped at the total amount captured. For more information, see the
-   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
   @SerializedName("application_fee_amount")
@@ -54,7 +54,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
   Hooks hooks;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -64,7 +64,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
   /**
    * The parameters used to automatically create a transfer after the payment is captured. Learn
-   * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * more about the <a href="https://docs.stripe.com/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
   @SerializedName("transfer_data")
@@ -137,7 +137,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
      * application fee collected will be capped at the total amount captured. For more information,
-     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
+     * see the PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case
      * for connected accounts</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -238,7 +238,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
     /**
      * The parameters used to automatically create a transfer after the payment is captured. Learn
-     * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+     * more about the <a href="https://docs.stripe.com/payments/connected-accounts">use case for
      * connected accounts</a>.
      */
     public Builder setTransferData(
@@ -393,7 +393,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
       public static class Tax {
         /**
          * <strong>Required.</strong> The <a
-         * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+         * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
          */
         @SerializedName("calculation")
         Object calculation;
@@ -430,7 +430,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(String calculation) {
             this.calculation = calculation;
@@ -439,7 +439,7 @@ public class PaymentIntentDecrementAuthorizationParams extends ApiRequestParams 
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(EmptyParam calculation) {
             this.calculation = calculation;

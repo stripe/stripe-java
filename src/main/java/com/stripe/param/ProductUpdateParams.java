@@ -20,7 +20,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   Boolean active;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the default
+   * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> object that is the default
    * price for this product.
    */
   @SerializedName("default_price")
@@ -53,13 +53,13 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /**
    * A list of up to 15 marketing features for this product. These are displayed in <a
-   * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+   * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("marketing_features")
   Object marketingFeatures;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -92,7 +92,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
 
-  /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+  /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
   @SerializedName("tax_code")
   Object taxCode;
 
@@ -214,7 +214,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the
+     * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> object that is the
      * default price for this product.
      */
     public Builder setDefaultPrice(String defaultPrice) {
@@ -223,7 +223,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the
+     * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> object that is the
      * default price for this product.
      */
     public Builder setDefaultPrice(EmptyParam defaultPrice) {
@@ -377,7 +377,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 15 marketing features for this product. These are displayed in <a
-     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+     * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setMarketingFeatures(EmptyParam marketingFeatures) {
       this.marketingFeatures = marketingFeatures;
@@ -386,7 +386,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 15 marketing features for this product. These are displayed in <a
-     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+     * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setMarketingFeatures(
         List<ProductUpdateParams.MarketingFeature> marketingFeatures) {
@@ -423,7 +423,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -434,7 +434,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -506,13 +506,13 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(String taxCode) {
       this.taxCode = taxCode;
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(EmptyParam taxCode) {
       this.taxCode = taxCode;
       return this;

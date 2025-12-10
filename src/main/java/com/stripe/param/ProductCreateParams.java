@@ -19,7 +19,7 @@ public class ProductCreateParams extends ApiRequestParams {
   Boolean active;
 
   /**
-   * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object. This
+   * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object. This
    * Price will be set as the default price for this product.
    */
   @SerializedName("default_price_data")
@@ -59,13 +59,13 @@ public class ProductCreateParams extends ApiRequestParams {
 
   /**
    * A list of up to 15 marketing features for this product. These are displayed in <a
-   * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+   * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("marketing_features")
   List<ProductCreateParams.MarketingFeature> marketingFeatures;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -98,7 +98,7 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
-  /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+  /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
   @SerializedName("tax_code")
   String taxCode;
 
@@ -239,7 +239,7 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object.
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object.
      * This Price will be set as the default price for this product.
      */
     public Builder setDefaultPriceData(ProductCreateParams.DefaultPriceData defaultPriceData) {
@@ -429,7 +429,7 @@ public class ProductCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(String taxCode) {
       this.taxCode = taxCode;
       return this;
@@ -507,7 +507,7 @@ public class ProductCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -521,7 +521,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
     /**
      * Only required if a <a
-     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
      * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
      * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
      * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -716,7 +716,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -769,7 +769,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -883,7 +883,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code

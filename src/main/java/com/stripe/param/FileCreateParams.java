@@ -38,14 +38,14 @@ public class FileCreateParams extends ApiRequestParams {
 
   /**
    * Optional parameters that automatically create a <a
-   * href="https://stripe.com/docs/api#file_links">file link</a> for the newly created file.
+   * href="https://api.stripe.com#file_links">file link</a> for the newly created file.
    */
   @SerializedName("file_link_data")
   FileLinkData fileLinkData;
 
   /**
    * <strong>Required.</strong> The <a
-   * href="https://stripe.com/docs/file-upload#uploading-a-file">purpose</a> of the uploaded file.
+   * href="https://docs.stripe.com/file-upload#uploading-a-file">purpose</a> of the uploaded file.
    */
   @SerializedName("purpose")
   Purpose purpose;
@@ -156,7 +156,7 @@ public class FileCreateParams extends ApiRequestParams {
 
     /**
      * Optional parameters that automatically create a <a
-     * href="https://stripe.com/docs/api#file_links">file link</a> for the newly created file.
+     * href="https://api.stripe.com#file_links">file link</a> for the newly created file.
      */
     public Builder setFileLinkData(FileCreateParams.FileLinkData fileLinkData) {
       this.fileLinkData = fileLinkData;
@@ -165,7 +165,7 @@ public class FileCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The <a
-     * href="https://stripe.com/docs/file-upload#uploading-a-file">purpose</a> of the uploaded file.
+     * href="https://docs.stripe.com/file-upload#uploading-a-file">purpose</a> of the uploaded file.
      */
     public Builder setPurpose(FileCreateParams.Purpose purpose) {
       this.purpose = purpose;
@@ -201,7 +201,7 @@ public class FileCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -310,7 +310,7 @@ public class FileCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -321,7 +321,7 @@ public class FileCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.

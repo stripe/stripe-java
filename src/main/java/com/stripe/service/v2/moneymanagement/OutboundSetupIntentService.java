@@ -3,6 +3,7 @@ package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.BlockedByStripeException;
+import com.stripe.exception.ControlledByAlternateResourceException;
 import com.stripe.exception.InvalidPayoutMethodException;
 import com.stripe.exception.QuotaExceededException;
 import com.stripe.exception.StripeException;
@@ -54,25 +55,25 @@ public final class OutboundSetupIntentService extends ApiService {
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create(OutboundSetupIntentCreateParams params)
       throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException {
+          QuotaExceededException, ControlledByAlternateResourceException {
     return create(params, (RequestOptions) null);
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create(RequestOptions options)
       throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException {
+          QuotaExceededException, ControlledByAlternateResourceException {
     return create((OutboundSetupIntentCreateParams) null, options);
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create()
       throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException {
+          QuotaExceededException, ControlledByAlternateResourceException {
     return create((OutboundSetupIntentCreateParams) null, (RequestOptions) null);
   }
   /** Create an OutboundSetupIntent object. */
   public OutboundSetupIntent create(OutboundSetupIntentCreateParams params, RequestOptions options)
       throws StripeException, BlockedByStripeException, InvalidPayoutMethodException,
-          QuotaExceededException {
+          QuotaExceededException, ControlledByAlternateResourceException {
     String path = "/v2/money_management/outbound_setup_intents";
     ApiRequest request =
         new ApiRequest(
@@ -99,26 +100,26 @@ public final class OutboundSetupIntentService extends ApiService {
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(String id, OutboundSetupIntentUpdateParams params)
       throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException {
+          InvalidPayoutMethodException, ControlledByAlternateResourceException {
     return update(id, params, (RequestOptions) null);
   }
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(String id, RequestOptions options)
       throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException {
+          InvalidPayoutMethodException, ControlledByAlternateResourceException {
     return update(id, (OutboundSetupIntentUpdateParams) null, options);
   }
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(String id)
       throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException {
+          InvalidPayoutMethodException, ControlledByAlternateResourceException {
     return update(id, (OutboundSetupIntentUpdateParams) null, (RequestOptions) null);
   }
   /** Update an OutboundSetupIntent object. */
   public OutboundSetupIntent update(
       String id, OutboundSetupIntentUpdateParams params, RequestOptions options)
       throws StripeException, QuotaExceededException, BlockedByStripeException,
-          InvalidPayoutMethodException {
+          InvalidPayoutMethodException, ControlledByAlternateResourceException {
     String path =
         String.format(
             "/v2/money_management/outbound_setup_intents/%s", ApiResource.urlEncodeId(id));

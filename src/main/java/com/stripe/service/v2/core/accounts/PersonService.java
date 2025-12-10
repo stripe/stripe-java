@@ -22,21 +22,21 @@ public final class PersonService extends ApiService {
     super(responseGetter);
   }
 
-  /** Returns a list of Persons associated with an Account. */
+  /** Returns a paginated list of Persons associated with an Account. */
   public StripeCollection<AccountPerson> list(String accountId, PersonListParams params)
       throws StripeException {
     return list(accountId, params, (RequestOptions) null);
   }
-  /** Returns a list of Persons associated with an Account. */
+  /** Returns a paginated list of Persons associated with an Account. */
   public StripeCollection<AccountPerson> list(String accountId, RequestOptions options)
       throws StripeException {
     return list(accountId, (PersonListParams) null, options);
   }
-  /** Returns a list of Persons associated with an Account. */
+  /** Returns a paginated list of Persons associated with an Account. */
   public StripeCollection<AccountPerson> list(String accountId) throws StripeException {
     return list(accountId, (PersonListParams) null, (RequestOptions) null);
   }
-  /** Returns a list of Persons associated with an Account. */
+  /** Returns a paginated list of Persons associated with an Account. */
   public StripeCollection<AccountPerson> list(
       String accountId, PersonListParams params, RequestOptions options) throws StripeException {
     String path = String.format("/v2/core/accounts/%s/persons", ApiResource.urlEncodeId(accountId));
@@ -49,19 +49,31 @@ public final class PersonService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeCollection<AccountPerson>>() {}.getType());
   }
-  /** Create a Person associated with an Account. */
+  /**
+   * Create a Person. Adds an individual to an Account's identity. You can set relationship
+   * attributes and identity information at creation.
+   */
   public AccountPerson create(String accountId, PersonCreateParams params) throws StripeException {
     return create(accountId, params, (RequestOptions) null);
   }
-  /** Create a Person associated with an Account. */
+  /**
+   * Create a Person. Adds an individual to an Account's identity. You can set relationship
+   * attributes and identity information at creation.
+   */
   public AccountPerson create(String accountId, RequestOptions options) throws StripeException {
     return create(accountId, (PersonCreateParams) null, options);
   }
-  /** Create a Person associated with an Account. */
+  /**
+   * Create a Person. Adds an individual to an Account's identity. You can set relationship
+   * attributes and identity information at creation.
+   */
   public AccountPerson create(String accountId) throws StripeException {
     return create(accountId, (PersonCreateParams) null, (RequestOptions) null);
   }
-  /** Create a Person associated with an Account. */
+  /**
+   * Create a Person. Adds an individual to an Account's identity. You can set relationship
+   * attributes and identity information at creation.
+   */
   public AccountPerson create(String accountId, PersonCreateParams params, RequestOptions options)
       throws StripeException {
     String path = String.format("/v2/core/accounts/%s/persons", ApiResource.urlEncodeId(accountId));

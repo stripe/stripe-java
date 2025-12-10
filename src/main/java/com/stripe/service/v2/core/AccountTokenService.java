@@ -22,6 +22,14 @@ public final class AccountTokenService extends ApiService {
     return create(params, (RequestOptions) null);
   }
   /** Creates an Account Token. */
+  public AccountToken create(RequestOptions options) throws StripeException {
+    return create((AccountTokenCreateParams) null, options);
+  }
+  /** Creates an Account Token. */
+  public AccountToken create() throws StripeException {
+    return create((AccountTokenCreateParams) null, (RequestOptions) null);
+  }
+  /** Creates an Account Token. */
   public AccountToken create(AccountTokenCreateParams params, RequestOptions options)
       throws StripeException {
     String path = "/v2/core/account_tokens";

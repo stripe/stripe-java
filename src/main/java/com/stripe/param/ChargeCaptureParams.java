@@ -78,7 +78,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
   /**
    * An optional dictionary including the account to automatically transfer to as part of a
-   * destination charge. <a href="https://stripe.com/docs/connect/destination-charges">See the
+   * destination charge. <a href="https://docs.stripe.com/connect/destination-charges">See the
    * Connect documentation</a> for details.
    */
   @SerializedName("transfer_data")
@@ -87,7 +87,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
   /**
    * A string that identifies this transaction as part of a group. {@code transfer_group} may only
    * be provided if it has not been set. See the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")
@@ -279,7 +279,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
     /**
      * An optional dictionary including the account to automatically transfer to as part of a
-     * destination charge. <a href="https://stripe.com/docs/connect/destination-charges">See the
+     * destination charge. <a href="https://docs.stripe.com/connect/destination-charges">See the
      * Connect documentation</a> for details.
      */
     public Builder setTransferData(ChargeCaptureParams.TransferData transferData) {
@@ -290,7 +290,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
     /**
      * A string that identifies this transaction as part of a group. {@code transfer_group} may only
      * be provided if it has not been set. See the <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">Connect
      * documentation</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {
@@ -1679,7 +1679,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -1792,7 +1795,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -1836,7 +1842,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -1949,7 +1958,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -2871,7 +2883,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
           @SerializedName("postal_code")
           String postalCode;
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           @SerializedName("state")
           String state;
 
@@ -2989,7 +3004,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
               return this;
             }
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             public Builder setState(String state) {
               this.state = state;
               return this;
@@ -3286,7 +3304,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
           @SerializedName("postal_code")
           String postalCode;
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           @SerializedName("state")
           String state;
 
@@ -3404,7 +3425,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
               return this;
             }
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             public Builder setState(String state) {
               this.state = state;
               return this;
@@ -4601,7 +4625,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -4714,7 +4741,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -8053,7 +8083,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -8166,7 +8199,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -9475,7 +9511,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
           @SerializedName("postal_code")
           String postalCode;
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           @SerializedName("state")
           String state;
 
@@ -9593,7 +9632,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
               return this;
             }
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             public Builder setState(String state) {
               this.state = state;
               return this;

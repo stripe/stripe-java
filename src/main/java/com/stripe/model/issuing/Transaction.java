@@ -28,11 +28,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Any use of an <a href="https://stripe.com/docs/issuing">issued card</a> that results in funds
+ * Any use of an <a href="https://docs.stripe.com/issuing">issued card</a> that results in funds
  * entering or leaving your Stripe account, such as a completed purchase or refund, is represented
  * by an Issuing {@code Transaction} object.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/transactions">Issued card
+ * <p>Related guide: <a href="https://docs.stripe.com/issuing/purchases/transactions">Issued card
  * transactions</a>
  */
 @Getter
@@ -42,7 +42,7 @@ public class Transaction extends ApiResource
     implements MetadataStore<Transaction>, BalanceTransactionSource {
   /**
    * The transaction amount, which will be reflected in your balance. This amount is in your
-   * currency and in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+   * currency and in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
    * unit</a>.
    */
   @SerializedName("amount")
@@ -50,7 +50,7 @@ public class Transaction extends ApiResource
 
   /**
    * Detailed breakdown of amount components. These amounts are denominated in {@code currency} and
-   * in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("amount_details")
   AmountDetails amountDetails;
@@ -62,7 +62,7 @@ public class Transaction extends ApiResource
   ExpandableField<Authorization> authorization;
 
   /**
-   * ID of the <a href="https://stripe.com/docs/api/balance_transactions">balance transaction</a>
+   * ID of the <a href="https://docs.stripe.com/api/balance_transactions">balance transaction</a>
    * associated with this transaction.
    */
   @SerializedName("balance_transaction")
@@ -113,7 +113,7 @@ public class Transaction extends ApiResource
 
   /**
    * The amount that the merchant will receive, denominated in {@code merchant_currency} and in the
-   * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. It will
+   * <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. It will
    * be different from {@code amount} if the merchant is taking payment in a different currency.
    */
   @SerializedName("merchant_amount")
@@ -127,7 +127,7 @@ public class Transaction extends ApiResource
   MerchantData merchantData;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -152,7 +152,7 @@ public class Transaction extends ApiResource
   PurchaseDetails purchaseDetails;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/issuing/settlements">settlement</a> to which
+   * The ID of the <a href="https://docs.stripe.com/api/issuing/settlements">settlement</a> to which
    * this transaction belongs.
    */
   @SerializedName("settlement")
@@ -161,7 +161,7 @@ public class Transaction extends ApiResource
   ExpandableField<Settlement> settlement;
 
   /**
-   * <a href="https://stripe.com/docs/api/issuing/tokens/object">Token</a> object used for this
+   * <a href="https://docs.stripe.com/api/issuing/tokens/object">Token</a> object used for this
    * transaction. If a network token was not used for this transaction, this field will be null.
    */
   @SerializedName("token")
@@ -170,7 +170,7 @@ public class Transaction extends ApiResource
   ExpandableField<Token> token;
 
   /**
-   * <a href="https://stripe.com/docs/api/treasury">Treasury</a> details related to this transaction
+   * <a href="https://docs.stripe.com/api/treasury">Treasury</a> details related to this transaction
    * if it was created on a [FinancialAccount](/docs/api/treasury/financial_accounts
    */
   @SerializedName("treasury")
@@ -481,7 +481,7 @@ public class Transaction extends ApiResource
   public static class MerchantData extends StripeObject {
     /**
      * A categorization of the seller's type of business. See our <a
-     * href="https://stripe.com/docs/issuing/merchant-categories">merchant categories guide</a> for
+     * href="https://docs.stripe.com/issuing/merchant-categories">merchant categories guide</a> for
      * a list of possible values.
      */
     @SerializedName("category")
@@ -899,14 +899,14 @@ public class Transaction extends ApiResource
   public static class Treasury extends StripeObject {
     /**
      * The Treasury <a
-     * href="https://stripe.com/docs/api/treasury/received_credits">ReceivedCredit</a> representing
+     * href="https://docs.stripe.com/api/treasury/received_credits">ReceivedCredit</a> representing
      * this Issuing transaction if it is a refund
      */
     @SerializedName("received_credit")
     String receivedCredit;
 
     /**
-     * The Treasury <a href="https://stripe.com/docs/api/treasury/received_debits">ReceivedDebit</a>
+     * The Treasury <a href="https://docs.stripe.com/api/treasury/received_debits">ReceivedDebit</a>
      * representing this Issuing transaction if it is a capture
      */
     @SerializedName("received_debit")

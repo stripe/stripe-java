@@ -28,15 +28,15 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   String code;
 
   /**
-   * The customer that this promotion code can be used by. If not set, the promotion code can be
-   * used by all customers.
+   * The customer who can use this promotion code. If not set, all customers can use the promotion
+   * code.
    */
   @SerializedName("customer")
   String customer;
 
   /**
-   * The account that this promotion code can be used by. If not set, the promotion code can be used
-   * by all accounts.
+   * The account representing the customer who can use this promotion code. If not set, all
+   * customers can use the promotion code.
    */
   @SerializedName("customer_account")
   String customerAccount;
@@ -70,7 +70,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   Long maxRedemptions;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -173,8 +173,8 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The customer that this promotion code can be used by. If not set, the promotion code can be
-     * used by all customers.
+     * The customer who can use this promotion code. If not set, all customers can use the promotion
+     * code.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -182,8 +182,8 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The account that this promotion code can be used by. If not set, the promotion code can be
-     * used by all accounts.
+     * The account representing the customer who can use this promotion code. If not set, all
+     * customers can use the promotion code.
      */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;

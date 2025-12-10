@@ -24,7 +24,7 @@ import lombok.Setter;
  * different sets of payment methods for different scenarios.
  *
  * <p>There are two types of PaymentMethodConfigurations. Which is used depends on the <a
- * href="https://stripe.com/docs/connect/charges">charge type</a>:
+ * href="https://docs.stripe.com/connect/charges">charge type</a>:
  *
  * <p><strong>Direct</strong> configurations apply to payments created on your account, including
  * Connect destination charges, Connect separate charges and transfers, and payments not involving
@@ -41,11 +41,11 @@ import lombok.Setter;
  * dashboard</a> and are not available in this API.
  *
  * <p>Related guides: - <a
- * href="https://stripe.com/docs/connect/payment-method-configurations">Payment Method
+ * href="https://docs.stripe.com/connect/payment-method-configurations">Payment Method
  * Configurations API</a> - <a
- * href="https://stripe.com/docs/payments/multiple-payment-method-configs">Multiple configurations
+ * href="https://docs.stripe.com/payments/multiple-payment-method-configs">Multiple configurations
  * on dynamic payment methods</a> - <a
- * href="https://stripe.com/docs/connect/multiple-payment-method-configurations">Multiple
+ * href="https://docs.stripe.com/connect/multiple-payment-method-configurations">Multiple
  * configurations for your Connect accounts</a>
  */
 @Getter

@@ -29,7 +29,7 @@ public class TransactionRefundParams extends ApiRequestParams {
   /**
    * The total amount to attempt to refund. This amount is in the provided currency, or defaults to
    * the cards currency, and in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("refund_amount")
   Long refundAmount;
@@ -112,7 +112,7 @@ public class TransactionRefundParams extends ApiRequestParams {
     /**
      * The total amount to attempt to refund. This amount is in the provided currency, or defaults
      * to the cards currency, and in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     public Builder setRefundAmount(Long refundAmount) {
       this.refundAmount = refundAmount;

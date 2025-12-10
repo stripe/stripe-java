@@ -26,40 +26,20 @@ public final class PaymentMethodService extends ApiService {
     super(responseGetter);
   }
 
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public StripeCollection<PaymentMethod> list(PaymentMethodListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public StripeCollection<PaymentMethod> list(RequestOptions options) throws StripeException {
     return list((PaymentMethodListParams) null, options);
   }
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public StripeCollection<PaymentMethod> list() throws StripeException {
     return list((PaymentMethodListParams) null, (RequestOptions) null);
   }
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public StripeCollection<PaymentMethod> list(
       PaymentMethodListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/payment_methods";

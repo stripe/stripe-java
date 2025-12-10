@@ -129,7 +129,7 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Name for the sandbox. If not provided, this will be generated. */
+    /** Name for the sandbox. */
     @SerializedName("name")
     String name;
 
@@ -204,7 +204,7 @@ public class ClaimableSandboxCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Name for the sandbox. If not provided, this will be generated. */
+      /** Name for the sandbox. */
       public Builder setName(String name) {
         this.name = name;
         return this;

@@ -48,7 +48,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
   FixedAmount fixedAmount;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -64,7 +64,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
   TaxBehavior taxBehavior;
 
   /**
-   * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code
+   * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax code
    * is {@code txcd_92010001}.
    */
   @SerializedName("tax_code")
@@ -247,7 +247,7 @@ public class ShippingRateCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code
+     * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax code
      * is {@code txcd_92010001}.
      */
     public Builder setTaxCode(String taxCode) {

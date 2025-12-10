@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * <a href="https://stripe.com/docs/connect">Stripe Connect</a> platforms can reverse transfers made
+ * <a href="https://docs.stripe.com/connect">Stripe Connect</a> platforms can reverse transfers made
  * to a connected account, either entirely or partially, and can also specify whether to refund any
  * related application fees. Transfer reversals add to the platform's balance and subtract from the
  * destination account's balance.
@@ -24,11 +24,11 @@ import lombok.Setter;
  * <p>Reversing a transfer that was made for a <a
  * href="https://stripe.com/docs/connect/destination-charges">destination charge</a> is allowed only
  * up to the amount of the charge. It is possible to reverse a <a
- * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">transfer_group</a>
+ * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">transfer_group</a>
  * transfer only if the destination account has enough balance to cover the reversal.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/connect/separate-charges-and-transfers#reverse-transfers">Reverse
+ * href="https://docs.stripe.com/connect/separate-charges-and-transfers#reverse-transfers">Reverse
  * transfers</a>
  */
 @Getter
@@ -69,7 +69,7 @@ public class TransferReversal extends ApiResource
   String id;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

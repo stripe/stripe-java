@@ -18,7 +18,7 @@ public class AccountListParams extends ApiRequestParams {
    * accounts regardless of which configurations they have.
    */
   @SerializedName("applied_configurations")
-  List<String> appliedConfigurations;
+  List<AccountListParams.AppliedConfiguration> appliedConfigurations;
 
   /**
    * Filter by whether the account is closed. If omitted, returns only Accounts that are not closed.
@@ -40,7 +40,7 @@ public class AccountListParams extends ApiRequestParams {
   Long limit;
 
   private AccountListParams(
-      List<String> appliedConfigurations,
+      List<AccountListParams.AppliedConfiguration> appliedConfigurations,
       Boolean closed,
       Map<String, Object> extraParams,
       Long limit) {
@@ -55,7 +55,7 @@ public class AccountListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private List<String> appliedConfigurations;
+    private List<AccountListParams.AppliedConfiguration> appliedConfigurations;
 
     private Boolean closed;
 
@@ -74,7 +74,7 @@ public class AccountListParams extends ApiRequestParams {
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
      * {@link AccountListParams#appliedConfigurations} for the field documentation.
      */
-    public Builder addAppliedConfiguration(String element) {
+    public Builder addAppliedConfiguration(AccountListParams.AppliedConfiguration element) {
       if (this.appliedConfigurations == null) {
         this.appliedConfigurations = new ArrayList<>();
       }
@@ -87,7 +87,8 @@ public class AccountListParams extends ApiRequestParams {
      * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
      * {@link AccountListParams#appliedConfigurations} for the field documentation.
      */
-    public Builder addAllAppliedConfiguration(List<String> elements) {
+    public Builder addAllAppliedConfiguration(
+        List<AccountListParams.AppliedConfiguration> elements) {
       if (this.appliedConfigurations == null) {
         this.appliedConfigurations = new ArrayList<>();
       }
@@ -134,6 +135,30 @@ public class AccountListParams extends ApiRequestParams {
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
+    }
+  }
+
+  public enum AppliedConfiguration implements ApiRequestParams.EnumParam {
+    @SerializedName("card_creator")
+    CARD_CREATOR("card_creator"),
+
+    @SerializedName("customer")
+    CUSTOMER("customer"),
+
+    @SerializedName("merchant")
+    MERCHANT("merchant"),
+
+    @SerializedName("recipient")
+    RECIPIENT("recipient"),
+
+    @SerializedName("storer")
+    STORER("storer");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    AppliedConfiguration(String value) {
+      this.value = value;
     }
   }
 }

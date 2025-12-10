@@ -29,12 +29,12 @@ import lombok.Setter;
  *
  * <p>Each VerificationReport contains a copy of any data collected by the user as well as reference
  * IDs which can be used to access collected images through the <a
- * href="https://stripe.com/docs/api/files">FileUpload</a> API. To configure and create
+ * href="https://docs.stripe.com/api/files">FileUpload</a> API. To configure and create
  * VerificationReports, use the <a
- * href="https://stripe.com/docs/api/identity/verification_sessions">VerificationSession</a> API.
+ * href="https://docs.stripe.com/api/identity/verification_sessions">VerificationSession</a> API.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/identity/verification-sessions#results">Accessing verification
+ * href="https://docs.stripe.com/identity/verification-sessions#results">Accessing verification
  * results</a>.
  */
 @Getter
@@ -216,7 +216,7 @@ public class VerificationReport extends ApiResource implements HasId {
     ExpirationDate expirationDate;
 
     /**
-     * Array of <a href="https://stripe.com/docs/api/files">File</a> ids containing images for this
+     * Array of <a href="https://docs.stripe.com/api/files">File</a> ids containing images for this
      * document.
      */
     @SerializedName("files")
@@ -538,7 +538,7 @@ public class VerificationReport extends ApiResource implements HasId {
 
       /**
        * Collect an ID number and perform an <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+       * href="https://docs.stripe.com/identity/verification-checks?type=id-number">ID number
        * check</a> with the document’s extracted name and date of birth.
        */
       @SerializedName("require_id_number")
@@ -553,9 +553,9 @@ public class VerificationReport extends ApiResource implements HasId {
 
       /**
        * Capture a face image and perform a <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+       * href="https://docs.stripe.com/identity/verification-checks?type=selfie">selfie check</a>
        * comparing a photo ID and a picture of your user’s face. <a
-       * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+       * href="https://docs.stripe.com/identity/selfie">Learn more</a>.
        */
       @SerializedName("require_matching_selfie")
       Boolean requireMatchingSelfie;
@@ -632,7 +632,7 @@ public class VerificationReport extends ApiResource implements HasId {
     ExpandableField<BlocklistEntry> blockedByEntry;
 
     /**
-     * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the
+     * ID of the <a href="https://docs.stripe.com/api/files">File</a> holding the image of the
      * identity document used in this check.
      */
     @SerializedName("document")
@@ -643,7 +643,7 @@ public class VerificationReport extends ApiResource implements HasId {
     Errors error;
 
     /**
-     * ID of the <a href="https://stripe.com/docs/api/files">File</a> holding the image of the
+     * ID of the <a href="https://docs.stripe.com/api/files">File</a> holding the image of the
      * selfie used in this check.
      */
     @SerializedName("selfie")

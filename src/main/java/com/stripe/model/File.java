@@ -19,11 +19,11 @@ import lombok.Setter;
 
 /**
  * This object represents files hosted on Stripe's servers. You can upload files with the <a
- * href="https://stripe.com/docs/api#create_file">create file</a> request (for example, when
- * uploading dispute evidence). Stripe also creates files independently (for example, the results of
- * a <a href="https://stripe.com/docs/api#scheduled_queries">Sigma scheduled query</a>).
+ * href="https://api.stripe.com#create_file">create file</a> request (for example, when uploading
+ * dispute evidence). Stripe also creates files independently (for example, the results of a <a
+ * href="https://stripe.com/docs/api#scheduled_queries">Sigma scheduled query</a>).
  *
- * <p>Related guide: <a href="https://stripe.com/docs/file-upload">File upload guide</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/file-upload">File upload guide</a>
  */
 @Getter
 @Setter
@@ -47,8 +47,7 @@ public class File extends ApiResource implements HasId {
   String id;
 
   /**
-   * A list of <a href="https://stripe.com/docs/api#file_links">file links</a> that point at this
-   * file.
+   * A list of <a href="https://api.stripe.com#file_links">file links</a> that point at this file.
    */
   @SerializedName("links")
   FileLinkCollection links;
@@ -62,7 +61,7 @@ public class File extends ApiResource implements HasId {
   String object;
 
   /**
-   * The <a href="https://stripe.com/docs/file-upload#uploading-a-file">purpose</a> of the uploaded
+   * The <a href="https://docs.stripe.com/file-upload#uploading-a-file">purpose</a> of the uploaded
    * file.
    *
    * <p>One of {@code account_requirement}, {@code additional_verification}, {@code business_icon},

@@ -22,7 +22,7 @@ import lombok.Setter;
  * send the notices yourself.
  *
  * <p>See the <a
- * href="https://stripe.com/docs/issuing/compliance-us/issuing-regulated-customer-notices">guide to
+ * href="https://docs.stripe.com/issuing/compliance-us/issuing-regulated-customer-notices">guide to
  * send notices</a> to your connected accounts.
  */
 @Getter
@@ -58,7 +58,7 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -77,7 +77,7 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
   /**
    * Reason the notice is being sent. The reason determines what copy the notice must contain. See
    * the <a
-   * href="https://stripe.com/docs/issuing/compliance-us/issuing-regulated-customer-notices">regulated
+   * href="https://docs.stripe.com/issuing/compliance-us/issuing-regulated-customer-notices">regulated
    * customer notices</a> guide. All reasons might not apply to your integration, and Stripe might
    * add new reasons in the future, so we recommend an internal warning when you receive an unknown
    * reason.
@@ -254,18 +254,18 @@ public class AccountNotice extends ApiResource implements HasId, MetadataStore<A
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class LinkedObjects extends StripeObject {
-    /** Associated <a href="https://stripe.com/docs/api/capabilities">Capability.</a> */
+    /** Associated <a href="https://docs.stripe.com/api/capabilities">Capability.</a> */
     @SerializedName("capability")
     String capability;
 
     /**
-     * Associated <a href="https://stripe.com/docs/api/issuing/credit_underwriting_record">Credit
+     * Associated <a href="https://docs.stripe.com/api/issuing/credit_underwriting_record">Credit
      * Underwriting Record.</a>
      */
     @SerializedName("issuing_credit_underwriting_record")
     String issuingCreditUnderwritingRecord;
 
-    /** Associated <a href="https://stripe.com/docs/api/issuing/disputes">Issuing Dispute.</a> */
+    /** Associated <a href="https://docs.stripe.com/api/issuing/disputes">Issuing Dispute.</a> */
     @SerializedName("issuing_dispute")
     String issuingDispute;
   }

@@ -14,7 +14,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class TransactionLineItem extends StripeObject implements HasId {
   /**
-   * The line item amount in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+   * The line item amount in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
    * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
    * Otherwise, taxes were calculated on top of this amount.
    */
@@ -23,7 +23,7 @@ public class TransactionLineItem extends StripeObject implements HasId {
 
   /**
    * The amount of tax calculated for this line item, in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("amount_tax")
   Long amountTax;
@@ -41,7 +41,7 @@ public class TransactionLineItem extends StripeObject implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -56,7 +56,7 @@ public class TransactionLineItem extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of an existing <a href="https://stripe.com/docs/api/products/object">Product</a>. */
+  /** The ID of an existing <a href="https://docs.stripe.com/api/products/object">Product</a>. */
   @SerializedName("product")
   String product;
 
@@ -84,7 +84,7 @@ public class TransactionLineItem extends StripeObject implements HasId {
   String taxBehavior;
 
   /**
-   * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID used for this
+   * The <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID used for this
    * resource.
    */
   @SerializedName("tax_code")

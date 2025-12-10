@@ -27,12 +27,12 @@ import lombok.Setter;
  * payment link can be shared and used multiple times.
  *
  * <p>When a customer opens a payment link it will open a new <a
- * href="https://stripe.com/docs/api/checkout/sessions">checkout session</a> to render the payment
+ * href="https://docs.stripe.com/api/checkout/sessions">checkout session</a> to render the payment
  * page. You can use <a
- * href="https://stripe.com/docs/api/events/types#event_types-checkout.session.completed">checkout
+ * href="https://docs.stripe.com/api/events/types#event_types-checkout.session.completed">checkout
  * session events</a> to track payments through payment links.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/payment-links">Payment Links API</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/payment-links">Payment Links API</a>
  */
 @Getter
 @Setter
@@ -137,7 +137,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -909,7 +909,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
       Issuer issuer;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format.
        */
@@ -1165,8 +1165,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     String description;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
-     * metadata on <a href="https://stripe.com/docs/api/payment_intents">Payment Intents</a>
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that will set
+     * metadata on <a href="https://docs.stripe.com/api/payment_intents">Payment Intents</a>
      * generated from this payment link.
      */
     @SerializedName("metadata")
@@ -1198,7 +1198,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers">use case for connected
      * accounts</a> for details.
      */
     @SerializedName("transfer_group")
@@ -1328,8 +1328,8 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
     InvoiceSettings invoiceSettings;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
-     * metadata on <a href="https://stripe.com/docs/api/subscriptions">Subscriptions</a> generated
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that will set
+     * metadata on <a href="https://docs.stripe.com/api/subscriptions">Subscriptions</a> generated
      * from this payment link.
      */
     @SerializedName("metadata")

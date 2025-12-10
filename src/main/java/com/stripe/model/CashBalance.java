@@ -28,7 +28,7 @@ public class CashBalance extends ApiResource {
   /**
    * A hash of all cash balances available to this customer. You cannot delete a customer with any
    * cash balances, even if the balance is 0. Amounts are represented in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("available")
   Map<String, Long> available;
@@ -37,7 +37,7 @@ public class CashBalance extends ApiResource {
   @SerializedName("customer")
   String customer;
 
-  /** The ID of the account whose cash balance this object represents. */
+  /** The ID of an Account representing a customer whose cash balance this object represents. */
   @SerializedName("customer_account")
   String customerAccount;
 

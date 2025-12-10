@@ -78,7 +78,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   String fromSubscription;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -358,7 +358,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -369,7 +369,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -1123,7 +1123,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
      * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if this
      * phase specifies a trial. For more information, see the billing cycle <a
-     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      */
     @SerializedName("billing_cycle_anchor")
     BillingCycleAnchor billingCycleAnchor;
@@ -1295,7 +1295,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
        * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if
        * this phase specifies a trial. For more information, see the billing cycle <a
-       * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+       * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
        */
       public Builder setBillingCycleAnchor(
           SubscriptionScheduleCreateParams.DefaultSettings.BillingCycleAnchor billingCycleAnchor) {
@@ -2190,7 +2190,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
      * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if this
      * phase specifies a trial. For more information, see the billing cycle <a
-     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      */
     @SerializedName("billing_cycle_anchor")
     BillingCycleAnchor billingCycleAnchor;
@@ -2229,11 +2229,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     String defaultPaymentMethod;
 
     /**
-     * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+     * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
      * will set the Subscription's <a
-     * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+     * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
      * default_tax_rates}</a>, which means they will be the Invoice's <a
-     * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+     * href="https://docs.stripe.com/api/invoices/create#create_invoice-default_tax_rates">{@code
      * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
      */
     @SerializedName("default_tax_rates")
@@ -2271,8 +2271,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     EffectiveAt effectiveAt;
 
     /**
-     * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
-     * must not be set.
+     * The date at which this phase of the subscription schedule ends. If set, {@code duration} must
+     * not be set.
      */
     @SerializedName("end_date")
     Long endDate;
@@ -2298,7 +2298,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     List<SubscriptionScheduleCreateParams.Phase.Item> items;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to a phase. Metadata on a schedule's phase will update the underlying subscription's {@code
      * metadata} when the phase is entered, adding new keys and replacing existing keys in the
      * subscription's {@code metadata}. Individual keys in the subscription's {@code metadata} can
@@ -2318,7 +2318,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     /**
      * If specified, payment collection for this subscription will be paused. Note that the
      * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+     * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
      * collection</a>.
      */
     @SerializedName("pause_collection")
@@ -2326,10 +2326,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     /**
      * Controls whether the subscription schedule should create <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
+     * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when
      * transitioning to this phase if there is a difference in billing configuration. It's different
      * from the request-level <a
-     * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
+     * href="https://docs.stripe.com/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
      * parameter which controls what happens if the update request affects the billing configuration
      * (item price, quantity, etc.) of the current phase.
      */
@@ -2560,7 +2560,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
        * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if
        * this phase specifies a trial. For more information, see the billing cycle <a
-       * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+       * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
        */
       public Builder setBillingCycleAnchor(
           SubscriptionScheduleCreateParams.Phase.BillingCycleAnchor billingCycleAnchor) {
@@ -2649,11 +2649,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
        * will set the Subscription's <a
-       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a>, which means they will be the Invoice's <a
-       * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/invoices/create#create_invoice-default_tax_rates">{@code
        * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
        */
       public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
@@ -2662,11 +2662,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
        * will set the Subscription's <a
-       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a>, which means they will be the Invoice's <a
-       * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/invoices/create#create_invoice-default_tax_rates">{@code
        * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
        */
       public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
@@ -2766,7 +2766,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
+       * The date at which this phase of the subscription schedule ends. If set, {@code duration}
        * must not be set.
        */
       public Builder setEndDate(Long endDate) {
@@ -2871,7 +2871,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       /**
        * If specified, payment collection for this subscription will be paused. Note that the
        * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-       * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+       * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
        * collection</a>.
        */
       public Builder setPauseCollection(
@@ -2882,10 +2882,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       /**
        * Controls whether the subscription schedule should create <a
-       * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
+       * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when
        * transitioning to this phase if there is a difference in billing configuration. It's
        * different from the request-level <a
-       * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
+       * href="https://docs.stripe.com/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
        * parameter which controls what happens if the update request affects the billing
        * configuration (item price, quantity, etc.) of the current phase.
        */
@@ -2955,7 +2955,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -2976,7 +2976,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       String price;
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       @SerializedName("price_data")
@@ -3150,7 +3150,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+         * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
          * inline. One of {@code price} or {@code price_data} is required.
          */
         public Builder setPriceData(
@@ -3948,7 +3948,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -4069,7 +4069,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
           /**
            * Only required if a <a
-           * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
            * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
            * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
            * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}
@@ -5186,7 +5186,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to a configuration item. Metadata on a configuration item will update the underlying
        * subscription item's {@code metadata} when the phase is entered, adding new keys and
        * replacing existing keys. Individual keys in the subscription item's {@code metadata} can be
@@ -5208,7 +5208,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       String price;
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline.
        */
       @SerializedName("price_data")
@@ -5222,9 +5222,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Long quantity;
 
       /**
-       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
        * will override the <a
-       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
        * previously-defined tax rates.
        */
@@ -5441,7 +5441,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+         * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
          * inline.
          */
         public Builder setPriceData(
@@ -5488,9 +5488,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
          * Rates will override the <a
-         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
          * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
          * previously-defined tax rates.
          */
@@ -5500,9 +5500,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
          * Rates will override the <a
-         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
          * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
          * previously-defined tax rates.
          */
@@ -5540,7 +5540,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> Number of units that meets the billing threshold to advance
          * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+         * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
          * threshold</a>)
          */
         @SerializedName("usage_gte")
@@ -5599,7 +5599,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           /**
            * <strong>Required.</strong> Number of units that meets the billing threshold to advance
            * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+           * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
            * threshold</a>)
            */
           public Builder setUsageGte(Long usageGte) {
@@ -6016,7 +6016,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -6149,7 +6149,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
           /**
            * Only required if a <a
-           * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
            * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
            * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
            * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}

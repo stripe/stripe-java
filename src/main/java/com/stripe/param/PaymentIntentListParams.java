@@ -24,7 +24,9 @@ public class PaymentIntentListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
-  /** Only return PaymentIntents for the account that this ID specifies. */
+  /**
+   * Only return PaymentIntents for the account representing the customer that this ID specifies.
+   */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -143,7 +145,9 @@ public class PaymentIntentListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return PaymentIntents for the account that this ID specifies. */
+    /**
+     * Only return PaymentIntents for the account representing the customer that this ID specifies.
+     */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

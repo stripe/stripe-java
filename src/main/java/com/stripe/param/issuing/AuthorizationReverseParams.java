@@ -29,7 +29,7 @@ public class AuthorizationReverseParams extends ApiRequestParams {
   /**
    * The amount to reverse from the authorization. If not provided, the full amount of the
    * authorization will be reversed. This amount is in the authorization currency and in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
    */
   @SerializedName("reverse_amount")
   Long reverseAmount;
@@ -112,7 +112,7 @@ public class AuthorizationReverseParams extends ApiRequestParams {
     /**
      * The amount to reverse from the authorization. If not provided, the full amount of the
      * authorization will be reversed. This amount is in the authorization currency and in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     public Builder setReverseAmount(Long reverseAmount) {
       this.reverseAmount = reverseAmount;

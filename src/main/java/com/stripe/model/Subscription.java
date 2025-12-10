@@ -30,7 +30,7 @@ import lombok.Setter;
 /**
  * Subscriptions allow you to charge a customer on a recurring basis.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/billing/subscriptions/creating">Creating
+ * <p>Related guide: <a href="https://docs.stripe.com/billing/subscriptions/creating">Creating
  * subscriptions</a>
  */
 @Getter
@@ -65,7 +65,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * The reference point that aligns future <a
-   * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a> dates. It sets the
+   * href="https://docs.stripe.com/subscriptions/billing-cycle">billing cycle</a> dates. It sets the
    * day of week for {@code week} intervals, the day of month for {@code month} and {@code year}
    * intervals, and the month of year for {@code year} intervals. The timestamp is in UTC format.
    */
@@ -143,7 +143,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** ID of the account who owns the subscription. */
+  /** ID of the account representing the customer who owns the subscription. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -158,9 +158,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * ID of the default payment method for the subscription. It must belong to the customer
    * associated with the subscription. This takes precedence over {@code default_source}. If neither
    * are set, invoices will use the customer's <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * or <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+   * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_payment_method")
   @Getter(lombok.AccessLevel.NONE)
@@ -172,9 +172,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * associated with the subscription and be in a chargeable state. If {@code
    * default_payment_method} is also set, {@code default_payment_method} will take precedence. If
    * neither are set, invoices will use the customer's <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * or <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-default_source">default_source</a>.
+   * href="https://docs.stripe.com/api/customers/object#customer_object-default_source">default_source</a>.
    */
   @SerializedName("default_source")
   @Getter(lombok.AccessLevel.NONE)
@@ -238,7 +238,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -264,7 +264,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   /**
    * The account (if any) the charge was made on behalf of for charges associated with this
    * subscription. See the <a
-   * href="https://stripe.com/docs/connect/subscriptions#on-behalf-of">Connect documentation</a> for
+   * href="https://docs.stripe.com/connect/subscriptions#on-behalf-of">Connect documentation</a> for
    * details.
    */
   @SerializedName("on_behalf_of")
@@ -275,7 +275,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   /**
    * If specified, payment collection for this subscription will be paused. Note that the
    * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-   * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+   * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
    * collection</a>.
    */
   @SerializedName("pause_collection")
@@ -287,18 +287,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /**
    * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
-   * calling <a href="https://stripe.com/docs/api#create_invoice">Create an invoice</a> for the
+   * calling <a href="https://docs.stripe.com/api#create_invoice">Create an invoice</a> for the
    * given subscription at the specified interval.
    */
   @SerializedName("pending_invoice_item_interval")
   PendingInvoiceItemInterval pendingInvoiceItemInterval;
 
   /**
-   * You can use this <a href="https://stripe.com/docs/api/setup_intents">SetupIntent</a> to collect
+   * You can use this <a href="https://docs.stripe.com/api/setup_intents">SetupIntent</a> to collect
    * user authentication when creating a subscription without immediate payment or updating a
    * subscription's payment method, allowing you to optimize for off-session payments. Learn more in
    * the <a
-   * href="https://stripe.com/docs/billing/migration/strong-customer-authentication#scenario-2">SCA
+   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication#scenario-2">SCA
    * Migration Guide</a>.
    */
   @SerializedName("pending_setup_intent")
@@ -307,7 +307,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   ExpandableField<SetupIntent> pendingSetupIntent;
 
   /**
-   * If specified, <a href="https://stripe.com/docs/billing/subscriptions/pending-updates">pending
+   * If specified, <a href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending
    * updates</a> that will be applied to the subscription once the {@code latest_invoice} has been
    * paid.
    */
@@ -346,11 +346,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * active} when the trial period is over.
    *
    * <p>A subscription can only enter a {@code paused} status <a
-   * href="https://stripe.com/docs/billing/subscriptions/trials#create-free-trials-without-payment">when
+   * href="https://docs.stripe.com/billing/subscriptions/trials#create-free-trials-without-payment">when
    * a trial ends without a payment method</a>. A {@code paused} subscription doesn't generate
    * invoices and can be resumed after your customer adds their payment method. The {@code paused}
    * status is different from <a
-   * href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing collection</a>,
+   * href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing collection</a>,
    * which still generates invoices and leaves the subscription's status unchanged.
    *
    * <p>If subscription {@code collection_method=charge_automatically}, it becomes {@code past_due}
@@ -1954,6 +1954,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       Konbini konbini;
 
       /**
+       * This sub-hash contains details about the PayTo payment method options to pass to invoices
+       * created by the subscription.
+       */
+      @SerializedName("payto")
+      Payto payto;
+
+      /**
        * This sub-hash contains details about the Pix payment method options to pass to invoices
        * created by the subscription.
        */
@@ -2057,10 +2064,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
-         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. Read our guide on <a
-         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
          * requesting 3D Secure</a> for more information on how this configuration interacts with
          * Radar and our SCA Engine.
          *
@@ -2174,6 +2181,53 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
+
+      /**
+       * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Payto extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /**
+           * The maximum amount that can be collected in a single invoice. If you don't specify a
+           * maximum, then there is no limit.
+           */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Only {@code maximum} is supported.
+           *
+           * <p>One of {@code fixed}, or {@code maximum}.
+           */
+          @SerializedName("amount_type")
+          String amountType;
+
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           *
+           * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code
+           * mortgage}, {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code
+           * salary}, {@code tax}, or {@code utility}.
+           */
+          @SerializedName("purpose")
+          String purpose;
+        }
+      }
 
       /**
        * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2416,7 +2470,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      * Indicates if a plan's {@code trial_period_days} should be applied to the subscription.
      * Setting {@code trial_end} per subscription is preferred, and this defaults to {@code false}.
      * Setting this flag to {@code true} together with {@code trial_end} is not allowed. See <a
-     * href="https://stripe.com/docs/billing/subscriptions/trials">Using trial periods on
+     * href="https://docs.stripe.com/billing/subscriptions/trials">Using trial periods on
      * subscriptions</a> to learn more.
      */
     @SerializedName("trial_from_plan")

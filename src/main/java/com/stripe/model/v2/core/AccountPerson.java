@@ -11,7 +11,11 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-/** Person retrieval response schema. */
+/**
+ * A Person represents an individual associated with an Account's identity (for example, an owner,
+ * director, executive, or representative). Use Persons to provide and update identity information
+ * for verification and compliance.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
@@ -185,7 +189,7 @@ public class AccountPerson extends StripeObject implements HasId {
     @SerializedName("state")
     String state;
 
-    /** Town or cho-me. */
+    /** Town or district. */
     @SerializedName("town")
     String town;
   }
@@ -286,7 +290,7 @@ public class AccountPerson extends StripeObject implements HasId {
     @SerializedName("state")
     String state;
 
-    /** Town or cho-me. */
+    /** Town or district. */
     @SerializedName("town")
     String town;
   }
@@ -526,13 +530,21 @@ public class AccountPerson extends StripeObject implements HasId {
     /**
      * The ID number type of an individual.
      *
-     * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_dni}, {@code az_tin}, {@code bd_brc},
-     * {@code bd_etin}, {@code bd_nid}, {@code br_cpf}, {@code cr_cpf}, {@code cr_dimex}, {@code
-     * cr_nite}, {@code de_stn}, {@code do_rcn}, {@code gt_nit}, {@code hk_id}, {@code kz_iin},
-     * {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code nl_bsn}, {@code pe_dni}, {@code
-     * pk_cnic}, {@code pk_snic}, {@code sa_tin}, {@code sg_fin}, {@code sg_nric}, {@code th_lc},
-     * {@code th_pin}, {@code us_itin}, {@code us_itin_last_4}, {@code us_ssn}, or {@code
-     * us_ssn_last_4}.
+     * <p>One of {@code ae_eid}, {@code ao_nif}, {@code ar_cuil}, {@code ar_dni}, {@code at_stn},
+     * {@code az_tin}, {@code bd_brc}, {@code bd_etin}, {@code bd_nid}, {@code be_nrn}, {@code
+     * bg_ucn}, {@code bn_nric}, {@code br_cpf}, {@code ca_sin}, {@code ch_oasi}, {@code cl_rut},
+     * {@code cn_pp}, {@code co_nuip}, {@code cr_ci}, {@code cr_cpf}, {@code cr_dimex}, {@code
+     * cr_nite}, {@code cy_tic}, {@code cz_rc}, {@code de_stn}, {@code dk_cpr}, {@code do_cie},
+     * {@code do_rcn}, {@code ec_ci}, {@code ee_ik}, {@code es_nif}, {@code fi_hetu}, {@code
+     * fr_nir}, {@code gb_nino}, {@code gr_afm}, {@code gt_nit}, {@code hk_id}, {@code hr_oib},
+     * {@code hu_ad}, {@code id_nik}, {@code ie_ppsn}, {@code is_kt}, {@code it_cf}, {@code jp_inc},
+     * {@code ke_pin}, {@code kz_iin}, {@code li_peid}, {@code lt_ak}, {@code lu_nif}, {@code
+     * lv_pk}, {@code mx_rfc}, {@code my_nric}, {@code mz_nuit}, {@code ng_nin}, {@code nl_bsn},
+     * {@code no_nin}, {@code nz_ird}, {@code pe_dni}, {@code pk_cnic}, {@code pk_snic}, {@code
+     * pl_pesel}, {@code pt_nif}, {@code ro_cnp}, {@code sa_tin}, {@code se_pin}, {@code sg_fin},
+     * {@code sg_nric}, {@code sk_dic}, {@code th_lc}, {@code th_pin}, {@code tr_tin}, {@code
+     * us_itin}, {@code us_itin_last_4}, {@code us_ssn}, {@code us_ssn_last_4}, {@code uy_dni}, or
+     * {@code za_id}.
      */
     @SerializedName("type")
     String type;
@@ -543,14 +555,14 @@ public class AccountPerson extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Relationship extends StripeObject {
-    /** Whether the individual is an authorizer of the Account’s legal entity. */
+    /** Whether the individual is an authorizer of the Account's identity. */
     @SerializedName("authorizer")
     Boolean authorizer;
 
     /**
-     * Whether the individual is a director of the Account’s legal entity. Directors are typically
-     * members of the governing board of the company, or responsible for ensuring the company meets
-     * its regulatory obligations.
+     * Whether the individual is a director of the Account's identity. Directors are typically
+     * members of the governing board of the company or are responsible for making sure that the
+     * company meets its regulatory obligations.
      */
     @SerializedName("director")
     Boolean director;
@@ -562,15 +574,15 @@ public class AccountPerson extends StripeObject implements HasId {
     @SerializedName("executive")
     Boolean executive;
 
-    /** Whether the individual is the legal guardian of the Account’s representative. */
+    /** Whether the individual is the legal guardian of the Account's representative. */
     @SerializedName("legal_guardian")
     Boolean legalGuardian;
 
-    /** Whether the individual is an owner of the Account’s legal entity. */
+    /** Whether the individual is an owner of the Account's identity. */
     @SerializedName("owner")
     Boolean owner;
 
-    /** The percent owned by the individual of the Account’s legal entity. */
+    /** The percentage of the Account's identity that the individual owns. */
     @SerializedName("percent_ownership")
     String percentOwnership;
 
@@ -634,7 +646,7 @@ public class AccountPerson extends StripeObject implements HasId {
       @SerializedName("state")
       String state;
 
-      /** Town or cho-me. */
+      /** Town or district. */
       @SerializedName("town")
       String town;
     }
@@ -671,7 +683,7 @@ public class AccountPerson extends StripeObject implements HasId {
       @SerializedName("state")
       String state;
 
-      /** Town or cho-me. */
+      /** Town or district. */
       @SerializedName("town")
       String town;
     }

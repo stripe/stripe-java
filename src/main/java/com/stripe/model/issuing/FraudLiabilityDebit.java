@@ -35,7 +35,7 @@ public class FraudLiabilityDebit extends ApiResource implements HasId {
   Long amount;
 
   /**
-   * ID of the <a href="https://stripe.com/docs/api/balance_transactions">balance transaction</a>
+   * ID of the <a href="https://docs.stripe.com/api/balance_transactions">balance transaction</a>
    * associated with this debit.
    */
   @SerializedName("balance_transaction")

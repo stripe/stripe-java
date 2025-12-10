@@ -4,6 +4,7 @@ package com.stripe.events;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.v2.core.Event;
 import java.time.Instant;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -52,6 +53,22 @@ public final class V2CoreHealthApiLatencyFiringEvent extends Event {
       /** The percentage of impacted requests. */
       @SerializedName("impacted_requests_percentage")
       String impactedRequestsPercentage;
+      /** The top impacted connected accounts (only for platforms). */
+      @SerializedName("top_impacted_accounts")
+      List<V2CoreHealthApiLatencyFiringEvent.EventData.Impact.TopImpactedAccount>
+          topImpactedAccounts;
+
+      public static final class TopImpactedAccount {
+        /** The account ID of the impacted connected account. */
+        @SerializedName("account")
+        String account;
+        /** The number of impacted requests. */
+        @SerializedName("impacted_requests")
+        Long impactedRequests;
+        /** The percentage of impacted requests. */
+        @SerializedName("impacted_requests_percentage")
+        String impactedRequestsPercentage;
+      }
     }
   }
 }

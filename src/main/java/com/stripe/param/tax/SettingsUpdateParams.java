@@ -151,7 +151,7 @@ public class SettingsUpdateParams extends ApiRequestParams {
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     @SerializedName("tax_code")
     Object taxCode;
 
@@ -215,13 +215,13 @@ public class SettingsUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(EmptyParam taxCode) {
         this.taxCode = taxCode;
         return this;
