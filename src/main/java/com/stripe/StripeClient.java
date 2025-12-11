@@ -805,6 +805,17 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.reserve() is deprecated, use StripeClient.v1().reserve() instead. All
+   *     functionality under it has been copied over to StripeClient.v1().reserve(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.ReserveService reserve() {
+    return new com.stripe.service.ReserveService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.reviews() is deprecated, use StripeClient.v1().reviews() instead. All
    *     functionality under it has been copied over to StripeClient.v1().reviews(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration

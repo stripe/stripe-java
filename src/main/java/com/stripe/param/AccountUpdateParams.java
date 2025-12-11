@@ -11487,6 +11487,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("files")
       List<String> files;
 
+      /** Information regarding the person signing the document if applicable. */
       @SerializedName("signer")
       Signer signer;
 
@@ -11568,6 +11569,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Information regarding the person signing the document if applicable. */
         public Builder setSigner(AccountUpdateParams.Documents.ProofOfRegistration.Signer signer) {
           this.signer = signer;
           return this;
@@ -11673,6 +11675,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("files")
       List<String> files;
 
+      /** Information regarding the person signing the document if applicable. */
       @SerializedName("signer")
       Signer signer;
 
@@ -11758,6 +11761,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Information regarding the person signing the document if applicable. */
         public Builder setSigner(
             AccountUpdateParams.Documents.ProofOfUltimateBeneficialOwnership.Signer signer) {
           this.signer = signer;

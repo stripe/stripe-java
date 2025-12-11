@@ -1431,6 +1431,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String bankName;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -1654,6 +1660,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String bsbNumber;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -1677,6 +1689,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
       /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
@@ -3522,6 +3540,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("branch_code")
       String branchCode;
 
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
       /** Last four digits of the bank account number. */
       @SerializedName("last4")
       String last4;
@@ -3973,6 +3997,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String country;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -4193,6 +4223,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Name of the bank associated with the bank account. */
       @SerializedName("bank_name")
       String bankName;
+
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
 
       /**
        * Uniquely identifies this particular bank account. You can use this attribute to check

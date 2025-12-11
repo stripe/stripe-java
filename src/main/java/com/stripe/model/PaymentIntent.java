@@ -35,9 +35,9 @@ import lombok.Setter;
  * particular session.
  *
  * <p>A PaymentIntent transitions through <a
- * href="https://docs.stripe.com/payments/intents#intent-statuses">multiple statuses</a> throughout
- * its lifetime as it interfaces with Stripe.js to perform authentication flows and ultimately
- * creates at most one successful charge.
+ * href="https://stripe.com/payments/paymentintents/lifecycle">multiple statuses</a> throughout its
+ * lifetime as it interfaces with Stripe.js to perform authentication flows and ultimately creates
+ * at most one successful charge.
  *
  * <p>Related guide: <a href="https://docs.stripe.com/payments/payment-intents">Payment Intents
  * API</a>
@@ -1726,7 +1726,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     /**
      * A list of line items, each containing information about a product in the PaymentIntent. There
-     * is a maximum of 100 line items.
+     * is a maximum of 200 line items.
      */
     @SerializedName("line_items")
     PaymentIntentAmountDetailsLineItemCollection lineItems;
