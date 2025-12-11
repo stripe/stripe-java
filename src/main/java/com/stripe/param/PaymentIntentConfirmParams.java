@@ -700,7 +700,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     /**
      * A list of line items, each containing information about a product in the PaymentIntent. There
-     * is a maximum of 100 line items.
+     * is a maximum of 200 line items.
      */
     @SerializedName("line_items")
     Object lineItems;
@@ -831,7 +831,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(EmptyParam lineItems) {
         this.lineItems = lineItems;
@@ -840,7 +840,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(
           List<PaymentIntentConfirmParams.AmountDetails.LineItem> lineItems) {

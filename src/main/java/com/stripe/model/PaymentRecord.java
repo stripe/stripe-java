@@ -963,6 +963,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       String bankName;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -1178,6 +1184,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       String bsbNumber;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -1201,6 +1213,12 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
       /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
@@ -2747,6 +2765,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("branch_code")
       String branchCode;
 
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
       /** Last four digits of the bank account number. */
       @SerializedName("last4")
       String last4;
@@ -3125,6 +3149,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       String country;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -3313,6 +3343,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       /** Name of the bank associated with the bank account. */
       @SerializedName("bank_name")
       String bankName;
+
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
 
       /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
