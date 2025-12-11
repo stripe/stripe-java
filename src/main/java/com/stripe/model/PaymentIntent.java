@@ -368,6 +368,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("setup_future_usage")
   String setupFutureUsage;
 
+  /** ID of the shared payment token granted to be used in this PaymentIntent. */
+  @SerializedName("shared_payment_granted_token")
+  String sharedPaymentGrantedToken;
+
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   ShippingDetails shipping;

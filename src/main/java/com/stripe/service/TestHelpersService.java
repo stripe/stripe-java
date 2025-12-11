@@ -29,6 +29,10 @@ public final class TestHelpersService extends ApiService {
     return new com.stripe.service.testhelpers.RefundService(this.getResponseGetter());
   }
 
+  public com.stripe.service.testhelpers.SharedPaymentService sharedPayment() {
+    return new com.stripe.service.testhelpers.SharedPaymentService(this.getResponseGetter());
+  }
+
   public com.stripe.service.testhelpers.TerminalService terminal() {
     return new com.stripe.service.testhelpers.TerminalService(this.getResponseGetter());
   }

@@ -876,6 +876,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.sharedPayment() is deprecated, use StripeClient.v1().sharedPayment()
+   *     instead. All functionality under it has been copied over to
+   *     StripeClient.v1().sharedPayment(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.SharedPaymentService sharedPayment() {
+    return new com.stripe.service.SharedPaymentService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.shippingRates() is deprecated, use StripeClient.v1().shippingRates()
    *     instead. All functionality under it has been copied over to
    *     StripeClient.v1().shippingRates(). See <a

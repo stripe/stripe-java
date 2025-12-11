@@ -227,6 +227,9 @@ public final class EventDataClassLookup {
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
+    classLookup.put(
+        "shared_payment.granted_token", com.stripe.model.sharedpayment.GrantedToken.class);
+
     classLookup.put("tax.association", com.stripe.model.tax.Association.class);
     classLookup.put("tax.calculation", com.stripe.model.tax.Calculation.class);
     classLookup.put("tax.calculation_line_item", com.stripe.model.tax.CalculationLineItem.class);

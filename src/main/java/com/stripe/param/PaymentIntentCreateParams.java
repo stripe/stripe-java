@@ -322,6 +322,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("setup_future_usage")
   SetupFutureUsage setupFutureUsage;
 
+  /** ID of the SharedPaymentToken used to confirm this PaymentIntent. */
+  @SerializedName("shared_payment_granted_token")
+  String sharedPaymentGrantedToken;
+
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Shipping shipping;
@@ -408,6 +412,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String returnUrl,
       SecretKeyConfirmation secretKeyConfirmation,
       SetupFutureUsage setupFutureUsage,
+      String sharedPaymentGrantedToken,
       Shipping shipping,
       String statementDescriptor,
       String statementDescriptorSuffix,
@@ -450,6 +455,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.returnUrl = returnUrl;
     this.secretKeyConfirmation = secretKeyConfirmation;
     this.setupFutureUsage = setupFutureUsage;
+    this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
     this.shipping = shipping;
     this.statementDescriptor = statementDescriptor;
     this.statementDescriptorSuffix = statementDescriptorSuffix;
@@ -535,6 +541,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private SetupFutureUsage setupFutureUsage;
 
+    private String sharedPaymentGrantedToken;
+
     private Shipping shipping;
 
     private String statementDescriptor;
@@ -586,6 +594,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.returnUrl,
           this.secretKeyConfirmation,
           this.setupFutureUsage,
+          this.sharedPaymentGrantedToken,
           this.shipping,
           this.statementDescriptor,
           this.statementDescriptorSuffix,
@@ -1092,6 +1101,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public Builder setSetupFutureUsage(
         PaymentIntentCreateParams.SetupFutureUsage setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
+      return this;
+    }
+
+    /** ID of the SharedPaymentToken used to confirm this PaymentIntent. */
+    public Builder setSharedPaymentGrantedToken(String sharedPaymentGrantedToken) {
+      this.sharedPaymentGrantedToken = sharedPaymentGrantedToken;
       return this;
     }
 
