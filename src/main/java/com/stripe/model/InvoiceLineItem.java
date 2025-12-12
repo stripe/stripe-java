@@ -123,6 +123,12 @@ public class InvoiceLineItem extends ApiResource implements HasId, MetadataStore
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
+  /**
+   * The subtotal of the line item, in cents (or local equivalent), before any discounts or taxes.
+   */
+  @SerializedName("subtotal")
+  Long subtotal;
+
   /** The tax information of the line item. */
   @SerializedName("taxes")
   List<InvoiceLineItem.Tax> taxes;
