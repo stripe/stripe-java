@@ -28,7 +28,10 @@ public class ApiKey extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
-  /** List of IP addresses allowed to use this API key. */
+  /**
+   * List of IP addresses allowed to use this API key. Addresses use IPv4 protocol, and may be a
+   * CIDR range (e.g., [100.10.38.255, 100.10.38.0/24]).
+   */
   @SerializedName("ip_allowlist")
   List<String> ipAllowlist;
 
@@ -45,7 +48,7 @@ public class ApiKey extends StripeObject implements HasId {
 
   /** Account that manages this API key (for keys managed by platforms). */
   @SerializedName("managed_by")
-  String managedBy;
+  ManagedBy managedBy;
 
   /** Name of the API key. */
   @SerializedName("name")
@@ -87,6 +90,35 @@ public class ApiKey extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
+
+  /** Account that manages this API key (for keys managed by platforms). */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedBy extends StripeObject {
+    /** An application. */
+    @SerializedName("application")
+    Application application;
+
+    /**
+     * The type of entity.
+     *
+     * <p>Equal to {@code application}.
+     */
+    @SerializedName("type")
+    String type;
+
+    /** An application. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Application extends StripeObject implements HasId {
+      /** Identifier of the application. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+    }
+  }
 
   /** Token set for a publishable key. */
   @Getter

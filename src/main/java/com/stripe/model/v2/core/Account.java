@@ -4,7 +4,6 @@ package com.stripe.model.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -48,7 +47,7 @@ public class Account extends StripeObject implements HasId {
    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
    */
   @SerializedName("created")
-  Instant created;
+  java.time.Instant created;
 
   /**
    * A value indicating the Stripe dashboard this Account has access to. This will depend on which
@@ -3877,6 +3876,14 @@ public class Account extends StripeObject implements HasId {
         @EqualsAndHashCode(callSuper = false)
         public static class BankAccounts extends StripeObject {
           /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over real time
+           * rails.
+           */
+          @SerializedName("instant")
+          com.stripe.model.v2.core.Account.Configuration.Recipient.Capabilities.BankAccounts.Instant
+              instant;
+
+          /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over local
            * networks.
            */
@@ -3886,6 +3893,61 @@ public class Account extends StripeObject implements HasId {
           /** Enables this Account to receive OutboundPayments to linked bank accounts over wire. */
           @SerializedName("wire")
           Wire wire;
+
+          /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over real time
+           * rails.
+           */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Instant extends StripeObject {
+            /**
+             * The status of the Capability.
+             *
+             * <p>One of {@code active}, {@code pending}, {@code restricted}, or {@code
+             * unsupported}.
+             */
+            @SerializedName("status")
+            String status;
+
+            /**
+             * Additional details about the capability's status. This value is empty when {@code
+             * status} is {@code active}.
+             */
+            @SerializedName("status_details")
+            List<Account.Configuration.Recipient.Capabilities.BankAccounts.Instant.StatusDetail>
+                statusDetails;
+
+            /**
+             * For more details about StatusDetail, please refer to the <a
+             * href="https://docs.stripe.com/api">API Reference.</a>
+             */
+            @Getter
+            @Setter
+            @EqualsAndHashCode(callSuper = false)
+            public static class StatusDetail extends StripeObject {
+              /**
+               * Machine-readable code explaining the reason for the Capability to be in its current
+               * status.
+               *
+               * <p>One of {@code determining_status}, {@code requirements_past_due}, {@code
+               * requirements_pending_verification}, {@code restricted_other}, {@code
+               * unsupported_business}, {@code unsupported_country}, or {@code
+               * unsupported_entity_type}.
+               */
+              @SerializedName("code")
+              String code;
+
+              /**
+               * Machine-readable code explaining how to make the Capability active.
+               *
+               * <p>One of {@code contact_stripe}, {@code no_resolution}, or {@code provide_info}.
+               */
+              @SerializedName("resolution")
+              String resolution;
+            }
+          }
 
           /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over local
@@ -5377,7 +5439,7 @@ public class Account extends StripeObject implements HasId {
 
     /** The time at which the future requirements become effective. */
     @SerializedName("minimum_transition_date")
-    Instant minimumTransitionDate;
+    java.time.Instant minimumTransitionDate;
 
     /** An object containing an overview of requirements for the Account. */
     @SerializedName("summary")
@@ -5538,11 +5600,12 @@ public class Account extends StripeObject implements HasId {
            * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
-           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
-           * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
-           * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
-           * cashapp_payments}, {@code commercial.celtic.charge_card}, {@code
-           * commercial.celtic.spend_card}, {@code commercial.cross_river_bank.charge_card}, {@code
+           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code
+           * bank_accounts.instant}, {@code bank_accounts.local}, {@code bank_accounts.wire}, {@code
+           * blik_payments}, {@code boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code
+           * commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
+           * commercial.cross_river_bank.charge_card}, {@code
            * commercial.cross_river_bank.spend_card}, {@code commercial.lead.prepaid_card}, {@code
            * commercial.stripe.charge_card}, {@code commercial.stripe.prepaid_card}, {@code crypto},
            * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
@@ -5689,7 +5752,7 @@ public class Account extends StripeObject implements HasId {
 
         /** The soonest RFC3339 date &amp; time UTC value a requirement can impact the Account. */
         @SerializedName("time")
-        Instant time;
+        java.time.Instant time;
       }
     }
   }
@@ -5784,7 +5847,7 @@ public class Account extends StripeObject implements HasId {
          * &amp; time UTC value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /** The IP address from which the director attestation was made. */
         @SerializedName("ip")
@@ -5809,7 +5872,7 @@ public class Account extends StripeObject implements HasId {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /** The IP address from which the beneficial owner attestation was made. */
         @SerializedName("ip")
@@ -5873,7 +5936,7 @@ public class Account extends StripeObject implements HasId {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /** The IP address from which the representative attestation was made. */
         @SerializedName("ip")
@@ -5961,7 +6024,7 @@ public class Account extends StripeObject implements HasId {
                * example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              Instant date;
+              java.time.Instant date;
 
               /**
                * The IP address from which the Account's representative accepted the terms of
@@ -6024,7 +6087,7 @@ public class Account extends StripeObject implements HasId {
                  * example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * The IP address from which the Account's representative accepted the terms of
@@ -6081,7 +6144,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6116,7 +6179,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6181,7 +6244,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6216,7 +6279,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6251,7 +6314,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6317,7 +6380,7 @@ public class Account extends StripeObject implements HasId {
                  * example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * The IP address from which the Account's representative accepted the terms of
@@ -6381,7 +6444,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6416,7 +6479,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6451,7 +6514,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6509,7 +6572,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6544,7 +6607,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6578,7 +6641,7 @@ public class Account extends StripeObject implements HasId {
                * example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              Instant date;
+              java.time.Instant date;
 
               /**
                * The IP address from which the Account's representative accepted the terms of
@@ -6634,7 +6697,7 @@ public class Account extends StripeObject implements HasId {
                  * example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * The IP address from which the Account's representative accepted the terms of
@@ -6691,7 +6754,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6726,7 +6789,7 @@ public class Account extends StripeObject implements HasId {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * The IP address from which the Account's representative accepted the terms of
@@ -6762,7 +6825,7 @@ public class Account extends StripeObject implements HasId {
            * 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * The IP address from which the Account's representative accepted the terms of service.
@@ -6793,7 +6856,7 @@ public class Account extends StripeObject implements HasId {
            * 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * The IP address from which the Account's representative accepted the terms of service.
@@ -6820,7 +6883,7 @@ public class Account extends StripeObject implements HasId {
            * 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * The IP address from which the Account's representative accepted the terms of service.
@@ -7546,7 +7609,7 @@ public class Account extends StripeObject implements HasId {
        * in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
        */
       @SerializedName("created")
-      Instant created;
+      java.time.Instant created;
 
       /** The individual's date of birth. */
       @SerializedName("date_of_birth")
@@ -7632,7 +7695,7 @@ public class Account extends StripeObject implements HasId {
 
       /** Time at which the object was last updated. */
       @SerializedName("updated")
-      Instant updated;
+      java.time.Instant updated;
 
       /**
        * For more details about AdditionalAddress, please refer to the <a
@@ -7731,7 +7794,7 @@ public class Account extends StripeObject implements HasId {
            * 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * The IP address from which the Account's representative accepted the terms of service.
@@ -8406,11 +8469,12 @@ public class Account extends StripeObject implements HasId {
            * <p>One of {@code ach_debit_payments}, {@code acss_debit_payments}, {@code
            * affirm_payments}, {@code afterpay_clearpay_payments}, {@code alma_payments}, {@code
            * amazon_pay_payments}, {@code automatic_indirect_tax}, {@code au_becs_debit_payments},
-           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code bank_accounts.local},
-           * {@code bank_accounts.wire}, {@code blik_payments}, {@code boleto_payments}, {@code
-           * cards}, {@code card_payments}, {@code cartes_bancaires_payments}, {@code
-           * cashapp_payments}, {@code commercial.celtic.charge_card}, {@code
-           * commercial.celtic.spend_card}, {@code commercial.cross_river_bank.charge_card}, {@code
+           * {@code bacs_debit_payments}, {@code bancontact_payments}, {@code
+           * bank_accounts.instant}, {@code bank_accounts.local}, {@code bank_accounts.wire}, {@code
+           * blik_payments}, {@code boleto_payments}, {@code cards}, {@code card_payments}, {@code
+           * cartes_bancaires_payments}, {@code cashapp_payments}, {@code
+           * commercial.celtic.charge_card}, {@code commercial.celtic.spend_card}, {@code
+           * commercial.cross_river_bank.charge_card}, {@code
            * commercial.cross_river_bank.spend_card}, {@code commercial.lead.prepaid_card}, {@code
            * commercial.stripe.charge_card}, {@code commercial.stripe.prepaid_card}, {@code crypto},
            * {@code eps_payments}, {@code financial_addresses.bank_accounts}, {@code fpx_payments},
@@ -8557,7 +8621,7 @@ public class Account extends StripeObject implements HasId {
 
         /** The soonest RFC3339 date &amp; time UTC value a requirement can impact the Account. */
         @SerializedName("time")
-        Instant time;
+        java.time.Instant time;
       }
     }
   }

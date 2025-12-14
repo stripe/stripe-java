@@ -20,15 +20,15 @@ public class SettlementAllocationIntent extends StripeObject implements HasId {
   @SerializedName("amount")
   Amount amount;
 
-  /** Timestamp at which Settlement Intent was created . */
+  /** Timestamp at which SettlementAllocationIntent was created . */
   @SerializedName("created")
   Instant created;
 
-  /** Expected date when we expect to receive the funds. */
+  /** Date when we expect to receive the funds. */
   @SerializedName("expected_settlement_date")
   Instant expectedSettlementDate;
 
-  /** Financial Account Id where the funds are expected. */
+  /** FinancialAccount ID where the funds are expected. */
   @SerializedName("financial_account")
   String financialAccount;
 
@@ -61,12 +61,15 @@ public class SettlementAllocationIntent extends StripeObject implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Reference for the settlement intent . The reference used by PSP to send funds to Stripe . */
+  /**
+   * Reference for the SettlementAllocationIntent. This is the transaction reference used by
+   * payments processor to send funds to Stripe .
+   */
   @SerializedName("reference")
   String reference;
 
   /**
-   * Settlement Intent status.
+   * SettlementAllocationIntent status.
    *
    * <p>One of {@code canceled}, {@code errored}, {@code matched}, {@code pending}, {@code settled},
    * or {@code submitted}.
@@ -74,11 +77,7 @@ public class SettlementAllocationIntent extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /**
-   * This hash contains detailed information that elaborates on the specific status of the
-   * SettlementAllocationIntent. e.g the reason behind the error failure if the status is marked as
-   * {@code errored}.
-   */
+  /** Status details for a SettlementAllocationIntent in {@code errored} state. */
   @SerializedName("status_details")
   StatusDetails statusDetails;
 
@@ -103,11 +102,7 @@ public class SettlementAllocationIntent extends StripeObject implements HasId {
     Long value;
   }
 
-  /**
-   * This hash contains detailed information that elaborates on the specific status of the
-   * SettlementAllocationIntent. e.g the reason behind the error failure if the status is marked as
-   * {@code errored}.
-   */
+  /** Status details for a SettlementAllocationIntent in {@code errored} state. */
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

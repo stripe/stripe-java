@@ -18,12 +18,12 @@ public final class SettlementAllocationIntentService extends ApiService {
     super(responseGetter);
   }
 
-  /** Create SettlementAllocationIntent API. */
+  /** Create a new SettlementAllocationIntent. */
   public SettlementAllocationIntent create(SettlementAllocationIntentCreateParams params)
       throws StripeException {
     return create(params, (RequestOptions) null);
   }
-  /** Create SettlementAllocationIntent API. */
+  /** Create a new SettlementAllocationIntent. */
   public SettlementAllocationIntent create(
       SettlementAllocationIntentCreateParams params, RequestOptions options)
       throws StripeException {
@@ -37,11 +37,11 @@ public final class SettlementAllocationIntentService extends ApiService {
             options);
     return this.request(request, SettlementAllocationIntent.class);
   }
-  /** Retrieve SettlementAllocationIntent API. */
+  /** Retrieve an existing SettlementAllocationIntent. */
   public SettlementAllocationIntent retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
-  /** Retrieve SettlementAllocationIntent API. */
+  /** Retrieve an existing SettlementAllocationIntent. */
   public SettlementAllocationIntent retrieve(String id, RequestOptions options)
       throws StripeException {
     String path =
@@ -50,21 +50,49 @@ public final class SettlementAllocationIntentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);
     return this.request(request, SettlementAllocationIntent.class);
   }
-  /** Update SettlementAllocationIntent API. */
+  /**
+   * Updates SettlementAllocationIntent. Only SettlementAllocationIntent with status {@code
+   * pending}, {@code submitted} and {@code errored} can be updated. Only amount and reference
+   * fields can be updated for a SettlementAllocationIntent and at least one must be present.
+   * Updating an {@code amount} moves the SettlementAllocationIntent {@code pending} status and
+   * updating the {@code reference} for {@code errored} SettlementAllocationIntent moves it to
+   * {@code submitted}.
+   */
   public SettlementAllocationIntent update(String id, SettlementAllocationIntentUpdateParams params)
       throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Update SettlementAllocationIntent API. */
+  /**
+   * Updates SettlementAllocationIntent. Only SettlementAllocationIntent with status {@code
+   * pending}, {@code submitted} and {@code errored} can be updated. Only amount and reference
+   * fields can be updated for a SettlementAllocationIntent and at least one must be present.
+   * Updating an {@code amount} moves the SettlementAllocationIntent {@code pending} status and
+   * updating the {@code reference} for {@code errored} SettlementAllocationIntent moves it to
+   * {@code submitted}.
+   */
   public SettlementAllocationIntent update(String id, RequestOptions options)
       throws StripeException {
     return update(id, (SettlementAllocationIntentUpdateParams) null, options);
   }
-  /** Update SettlementAllocationIntent API. */
+  /**
+   * Updates SettlementAllocationIntent. Only SettlementAllocationIntent with status {@code
+   * pending}, {@code submitted} and {@code errored} can be updated. Only amount and reference
+   * fields can be updated for a SettlementAllocationIntent and at least one must be present.
+   * Updating an {@code amount} moves the SettlementAllocationIntent {@code pending} status and
+   * updating the {@code reference} for {@code errored} SettlementAllocationIntent moves it to
+   * {@code submitted}.
+   */
   public SettlementAllocationIntent update(String id) throws StripeException {
     return update(id, (SettlementAllocationIntentUpdateParams) null, (RequestOptions) null);
   }
-  /** Update SettlementAllocationIntent API. */
+  /**
+   * Updates SettlementAllocationIntent. Only SettlementAllocationIntent with status {@code
+   * pending}, {@code submitted} and {@code errored} can be updated. Only amount and reference
+   * fields can be updated for a SettlementAllocationIntent and at least one must be present.
+   * Updating an {@code amount} moves the SettlementAllocationIntent {@code pending} status and
+   * updating the {@code reference} for {@code errored} SettlementAllocationIntent moves it to
+   * {@code submitted}.
+   */
   public SettlementAllocationIntent update(
       String id, SettlementAllocationIntentUpdateParams params, RequestOptions options)
       throws StripeException {
@@ -79,11 +107,17 @@ public final class SettlementAllocationIntentService extends ApiService {
             options);
     return this.request(request, SettlementAllocationIntent.class);
   }
-  /** Cancel SettlementAllocationIntent API. */
+  /**
+   * Cancels an existing SettlementAllocationIntent. Only SettlementAllocationIntent with status
+   * {@code pending}, {@code submitted} and {@code errored} can be {@code canceled}.
+   */
   public SettlementAllocationIntent cancel(String id) throws StripeException {
     return cancel(id, (RequestOptions) null);
   }
-  /** Cancel SettlementAllocationIntent API. */
+  /**
+   * Cancels an existing SettlementAllocationIntent. Only SettlementAllocationIntent with status
+   * {@code pending}, {@code submitted} and {@code errored} can be {@code canceled}.
+   */
   public SettlementAllocationIntent cancel(String id, RequestOptions options)
       throws StripeException {
     String path =
@@ -93,11 +127,19 @@ public final class SettlementAllocationIntentService extends ApiService {
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, SettlementAllocationIntent.class);
   }
-  /** Submit SettlementAllocationIntent API. */
+  /**
+   * Submits a SettlementAllocationIntent. Only SettlementAllocationIntent with status {@code
+   * pending} can be {@code submitted}. The net sum of SettlementAllocationIntentSplit amount must
+   * be equal to SettlementAllocationIntent amount to be eligible to be submitted.
+   */
   public SettlementAllocationIntent submit(String id) throws StripeException {
     return submit(id, (RequestOptions) null);
   }
-  /** Submit SettlementAllocationIntent API. */
+  /**
+   * Submits a SettlementAllocationIntent. Only SettlementAllocationIntent with status {@code
+   * pending} can be {@code submitted}. The net sum of SettlementAllocationIntentSplit amount must
+   * be equal to SettlementAllocationIntent amount to be eligible to be submitted.
+   */
   public SettlementAllocationIntent submit(String id, RequestOptions options)
       throws StripeException {
     String path =

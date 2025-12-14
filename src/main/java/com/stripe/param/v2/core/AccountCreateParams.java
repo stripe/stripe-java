@@ -3,7 +3,6 @@ package com.stripe.param.v2.core;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9098,6 +9097,15 @@ public class AccountCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over real time
+           * rails.
+           */
+          @SerializedName("instant")
+          com.stripe.param.v2.core.AccountCreateParams.Configuration.Recipient.Capabilities
+                  .BankAccounts.Instant
+              instant;
+
+          /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over local
            * networks.
            */
@@ -9108,8 +9116,15 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("wire")
           Wire wire;
 
-          private BankAccounts(Map<String, Object> extraParams, Local local, Wire wire) {
+          private BankAccounts(
+              Map<String, Object> extraParams,
+              com.stripe.param.v2.core.AccountCreateParams.Configuration.Recipient.Capabilities
+                      .BankAccounts.Instant
+                  instant,
+              Local local,
+              Wire wire) {
             this.extraParams = extraParams;
+            this.instant = instant;
             this.local = local;
             this.wire = wire;
           }
@@ -9121,6 +9136,10 @@ public class AccountCreateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
+            private com.stripe.param.v2.core.AccountCreateParams.Configuration.Recipient
+                    .Capabilities.BankAccounts.Instant
+                instant;
+
             private Local local;
 
             private Wire wire;
@@ -9128,7 +9147,7 @@ public class AccountCreateParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts build() {
               return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts(
-                  this.extraParams, this.local, this.wire);
+                  this.extraParams, this.instant, this.local, this.wire);
             }
 
             /**
@@ -9162,6 +9181,17 @@ public class AccountCreateParams extends ApiRequestParams {
             }
 
             /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over real
+             * time rails.
+             */
+            public Builder setInstant(
+                AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
+                    instant) {
+              this.instant = instant;
+              return this;
+            }
+
+            /**
              * Enables this Account to receive OutboundPayments to linked bank accounts over local
              * networks.
              */
@@ -9178,6 +9208,88 @@ public class AccountCreateParams extends ApiRequestParams {
                 AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire wire) {
               this.wire = wire;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Instant {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * <strong>Required.</strong> To request a new Capability for an account, pass true.
+             * There can be a delay before the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Instant(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
+                  build() {
+                return new AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Instant(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountCreateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * <strong>Required.</strong> To request a new Capability for an account, pass true.
+               * There can be a delay before the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
             }
           }
 
@@ -13049,7 +13161,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * &amp; time UTC value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -13070,7 +13182,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String userAgent;
 
         private DirectorshipDeclaration(
-            Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+            java.time.Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -13082,7 +13194,7 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Instant date;
+          private java.time.Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -13100,7 +13212,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * The time marking when the director attestation was made. Represented as a RFC 3339 date
            * &amp; time UTC value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(Instant date) {
+          public Builder setDate(java.time.Instant date) {
             this.date = date;
             return this;
           }
@@ -13158,7 +13270,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -13179,7 +13291,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String userAgent;
 
         private OwnershipDeclaration(
-            Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+            java.time.Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -13191,7 +13303,7 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Instant date;
+          private java.time.Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -13210,7 +13322,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * 3339 date &amp; time UTC value in millisecond precision, for example:
            * 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(Instant date) {
+          public Builder setDate(java.time.Instant date) {
             this.date = date;
             return this;
           }
@@ -13431,7 +13543,7 @@ public class AccountCreateParams extends ApiRequestParams {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -13452,7 +13564,7 @@ public class AccountCreateParams extends ApiRequestParams {
         String userAgent;
 
         private RepresentativeDeclaration(
-            Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+            java.time.Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -13464,7 +13576,7 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Instant date;
+          private java.time.Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -13483,7 +13595,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * 3339 date &amp; time UTC value in millisecond precision, for example:
            * 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(Instant date) {
+          public Builder setDate(java.time.Instant date) {
             this.date = date;
             return this;
           }
@@ -13669,7 +13781,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -13696,7 +13808,10 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private Account(
-              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              String ip,
+              String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -13708,7 +13823,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Instant date;
+            private java.time.Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -13727,7 +13842,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(Instant date) {
+            public Builder setDate(java.time.Instant date) {
               this.date = date;
               return this;
             }
@@ -14036,7 +14151,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              Instant date;
+              java.time.Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -14063,7 +14178,10 @@ public class AccountCreateParams extends ApiRequestParams {
               String userAgent;
 
               private AccountHolder(
-                  Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                  java.time.Instant date,
+                  Map<String, Object> extraParams,
+                  String ip,
+                  String userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -14075,7 +14193,7 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private Instant date;
+                private java.time.Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -14097,7 +14215,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(Instant date) {
+                public Builder setDate(java.time.Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -14295,7 +14413,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -14322,7 +14440,10 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    java.time.Instant date,
+                    Map<String, Object> extraParams,
+                    String ip,
+                    String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -14334,7 +14455,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private Instant date;
+                  private java.time.Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -14356,7 +14477,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(Instant date) {
+                  public Builder setDate(java.time.Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -14529,7 +14650,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -14556,7 +14677,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -14568,7 +14692,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -14590,7 +14714,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -14654,7 +14778,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -14681,7 +14805,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -14693,7 +14820,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -14715,7 +14842,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -14914,7 +15041,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -14941,7 +15068,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -14953,7 +15083,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -14975,7 +15105,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15039,7 +15169,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15066,7 +15196,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15078,7 +15211,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15100,7 +15233,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15164,7 +15297,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15191,7 +15324,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15203,7 +15339,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15225,7 +15361,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15425,7 +15561,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -15452,7 +15588,10 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    java.time.Instant date,
+                    Map<String, Object> extraParams,
+                    String ip,
+                    String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -15464,7 +15603,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private Instant date;
+                  private java.time.Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -15486,7 +15625,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(Instant date) {
+                  public Builder setDate(java.time.Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -15684,7 +15823,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15711,7 +15850,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15723,7 +15865,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15745,7 +15887,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15809,7 +15951,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15836,7 +15978,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15848,7 +15993,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15870,7 +16015,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15934,7 +16079,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15961,7 +16106,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15973,7 +16121,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15995,7 +16143,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -16171,7 +16319,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -16198,7 +16346,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -16210,7 +16361,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -16232,7 +16383,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -16296,7 +16447,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -16323,7 +16474,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private FinancingDisclosures(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -16335,7 +16489,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -16357,7 +16511,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -16423,7 +16577,7 @@ public class AccountCreateParams extends ApiRequestParams {
                * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              Instant date;
+              java.time.Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -16450,7 +16604,10 @@ public class AccountCreateParams extends ApiRequestParams {
               String userAgent;
 
               private GlobalAccountHolder(
-                  Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                  java.time.Instant date,
+                  Map<String, Object> extraParams,
+                  String ip,
+                  String userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -16462,7 +16619,7 @@ public class AccountCreateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private Instant date;
+                private java.time.Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -16484,7 +16641,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(Instant date) {
+                public Builder setDate(java.time.Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -16656,7 +16813,7 @@ public class AccountCreateParams extends ApiRequestParams {
                  * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -16683,7 +16840,10 @@ public class AccountCreateParams extends ApiRequestParams {
                 String userAgent;
 
                 private ApplePay(
-                    Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                    java.time.Instant date,
+                    Map<String, Object> extraParams,
+                    String ip,
+                    String userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -16695,7 +16855,7 @@ public class AccountCreateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private Instant date;
+                  private java.time.Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -16717,7 +16877,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * the terms of service. Represented as a RFC 3339 date &amp; time UTC value in
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(Instant date) {
+                  public Builder setDate(java.time.Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -16890,7 +17050,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -16917,7 +17077,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -16929,7 +17092,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -16951,7 +17114,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -17015,7 +17178,7 @@ public class AccountCreateParams extends ApiRequestParams {
                    * millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -17042,7 +17205,10 @@ public class AccountCreateParams extends ApiRequestParams {
                   String userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      String ip,
+                      String userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -17054,7 +17220,7 @@ public class AccountCreateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -17076,7 +17242,7 @@ public class AccountCreateParams extends ApiRequestParams {
                      * accepted the terms of service. Represented as a RFC 3339 date &amp; time UTC
                      * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -17144,7 +17310,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -17171,7 +17337,10 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private CryptoStorer(
-              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              String ip,
+              String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -17183,7 +17352,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Instant date;
+            private java.time.Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -17202,7 +17371,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(Instant date) {
+            public Builder setDate(java.time.Instant date) {
               this.date = date;
               return this;
             }
@@ -17266,7 +17435,7 @@ public class AccountCreateParams extends ApiRequestParams {
            * precision, for example: 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -17293,7 +17462,10 @@ public class AccountCreateParams extends ApiRequestParams {
           String userAgent;
 
           private Storer(
-              Instant date, Map<String, Object> extraParams, String ip, String userAgent) {
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              String ip,
+              String userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -17305,7 +17477,7 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Instant date;
+            private java.time.Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -17324,7 +17496,7 @@ public class AccountCreateParams extends ApiRequestParams {
              * terms of service. Represented as a RFC 3339 date &amp; time UTC value in millisecond
              * precision, for example: 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(Instant date) {
+            public Builder setDate(java.time.Instant date) {
               this.date = date;
               return this;
             }

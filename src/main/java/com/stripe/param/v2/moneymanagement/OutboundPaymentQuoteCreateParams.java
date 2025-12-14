@@ -240,9 +240,14 @@ public class OutboundPaymentQuoteCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private DeliveryOptions(BankAccount bankAccount, Map<String, Object> extraParams) {
+    /** Open Enum. Speed of the payout. */
+    @SerializedName("speed")
+    Speed speed;
+
+    private DeliveryOptions(BankAccount bankAccount, Map<String, Object> extraParams, Speed speed) {
       this.bankAccount = bankAccount;
       this.extraParams = extraParams;
+      this.speed = speed;
     }
 
     public static Builder builder() {
@@ -254,10 +259,12 @@ public class OutboundPaymentQuoteCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private Speed speed;
+
       /** Finalize and obtain parameter instance from this builder. */
       public OutboundPaymentQuoteCreateParams.DeliveryOptions build() {
         return new OutboundPaymentQuoteCreateParams.DeliveryOptions(
-            this.bankAccount, this.extraParams);
+            this.bankAccount, this.extraParams, this.speed);
       }
 
       /** Open Enum. Method for bank account. */
@@ -293,6 +300,12 @@ public class OutboundPaymentQuoteCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+
+      /** Open Enum. Speed of the payout. */
+      public Builder setSpeed(OutboundPaymentQuoteCreateParams.DeliveryOptions.Speed speed) {
+        this.speed = speed;
+        return this;
+      }
     }
 
     public enum BankAccount implements ApiRequestParams.EnumParam {
@@ -309,6 +322,24 @@ public class OutboundPaymentQuoteCreateParams extends ApiRequestParams {
       private final String value;
 
       BankAccount(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Speed implements ApiRequestParams.EnumParam {
+      @SerializedName("instant")
+      INSTANT("instant"),
+
+      @SerializedName("next_business_day")
+      NEXT_BUSINESS_DAY("next_business_day"),
+
+      @SerializedName("standard")
+      STANDARD("standard");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Speed(String value) {
         this.value = value;
       }
     }

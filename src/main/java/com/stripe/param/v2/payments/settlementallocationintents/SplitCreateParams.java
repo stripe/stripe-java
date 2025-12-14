@@ -11,7 +11,9 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class SplitCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The account to target for this credit/debit. */
+  /**
+   * <strong>Required.</strong> The target account for settling the SettlementAllocationIntentSplit.
+   */
   @SerializedName("account")
   String account;
 
@@ -70,7 +72,10 @@ public class SplitCreateParams extends ApiRequestParams {
           this.account, this.amount, this.extraParams, this.metadata, this.type);
     }
 
-    /** <strong>Required.</strong> The account to target for this credit/debit. */
+    /**
+     * <strong>Required.</strong> The target account for settling the
+     * SettlementAllocationIntentSplit.
+     */
     public Builder setAccount(String account) {
       this.account = account;
       return this;

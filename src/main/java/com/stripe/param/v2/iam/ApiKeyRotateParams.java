@@ -11,7 +11,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class ApiKeyRotateParams extends ApiRequestParams {
-  /** Duration in minutes before the current key expires. */
+  /**
+   * Duration in minutes before the current key expires, with a maximum of 7 days (10080 minutes).
+   * If not provided, the current key expires immediately.
+   */
   @SerializedName("expire_current_key_in_minutes")
   Long expireCurrentKeyInMinutes;
 
@@ -56,7 +59,10 @@ public class ApiKeyRotateParams extends ApiRequestParams {
           this.expireCurrentKeyInMinutes, this.extraParams, this.publicKey);
     }
 
-    /** Duration in minutes before the current key expires. */
+    /**
+     * Duration in minutes before the current key expires, with a maximum of 7 days (10080 minutes).
+     * If not provided, the current key expires immediately.
+     */
     public Builder setExpireCurrentKeyInMinutes(Long expireCurrentKeyInMinutes) {
       this.expireCurrentKeyInMinutes = expireCurrentKeyInMinutes;
       return this;

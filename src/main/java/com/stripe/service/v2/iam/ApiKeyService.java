@@ -13,7 +13,6 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.iam.ApiKeyCreateParams;
-import com.stripe.param.v2.iam.ApiKeyExpireParams;
 import com.stripe.param.v2.iam.ApiKeyListParams;
 import com.stripe.param.v2.iam.ApiKeyRotateParams;
 import com.stripe.param.v2.iam.ApiKeyUpdateParams;
@@ -101,28 +100,14 @@ public final class ApiKeyService extends ApiService {
     return this.request(request, ApiKey.class);
   }
   /** Expire an API key. */
-  public ApiKey expire(String id, ApiKeyExpireParams params) throws StripeException {
-    return expire(id, params, (RequestOptions) null);
+  public ApiKey expire(String id) throws StripeException {
+    return expire(id, (RequestOptions) null);
   }
   /** Expire an API key. */
   public ApiKey expire(String id, RequestOptions options) throws StripeException {
-    return expire(id, (ApiKeyExpireParams) null, options);
-  }
-  /** Expire an API key. */
-  public ApiKey expire(String id) throws StripeException {
-    return expire(id, (ApiKeyExpireParams) null, (RequestOptions) null);
-  }
-  /** Expire an API key. */
-  public ApiKey expire(String id, ApiKeyExpireParams params, RequestOptions options)
-      throws StripeException {
     String path = String.format("/v2/iam/api_keys/%s/expire", ApiResource.urlEncodeId(id));
     ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, null, options);
     return this.request(request, ApiKey.class);
   }
   /** Rotate an API key. */

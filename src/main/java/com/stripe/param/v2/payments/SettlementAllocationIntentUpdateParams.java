@@ -12,7 +12,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class SettlementAllocationIntentUpdateParams extends ApiRequestParams {
-  /** The new amount for the SettlementAllocationIntent. */
+  /**
+   * The new amount for the SettlementAllocationIntent. Only amount.value can be updated and
+   * currency must remain same.
+   */
   @SerializedName("amount")
   Amount amount;
 
@@ -53,7 +56,10 @@ public class SettlementAllocationIntentUpdateParams extends ApiRequestParams {
           this.amount, this.extraParams, this.reference);
     }
 
-    /** The new amount for the SettlementAllocationIntent. */
+    /**
+     * The new amount for the SettlementAllocationIntent. Only amount.value can be updated and
+     * currency must remain same.
+     */
     public Builder setAmount(SettlementAllocationIntentUpdateParams.Amount amount) {
       this.amount = amount;
       return this;

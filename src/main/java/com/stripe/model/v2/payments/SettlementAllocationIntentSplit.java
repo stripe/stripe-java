@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SettlementAllocationIntentSplit extends StripeObject implements HasId {
-  /** The ID of the account that will be used for the debit/credit. */
+  /** The account id against which the SettlementAllocationIntentSplit should be settled. */
   @SerializedName("account")
   String account;
 
@@ -97,21 +97,21 @@ public class SettlementAllocationIntentSplit extends StripeObject implements Has
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Flow extends StripeObject {
-    /** If applicable, the ID of the OutboundPayment that created this Transaction. */
+    /** If applicable, the ID of the OutboundPayment that created this transaction. */
     @SerializedName("outbound_payment")
     String outboundPayment;
 
-    /** If applicable, the ID of the OutboundTransfer that created this Transaction. */
+    /** If applicable, the ID of the OutboundTransfer that created this transaction. */
     @SerializedName("outbound_transfer")
     String outboundTransfer;
 
-    /** If applicable, the ID of the ReceivedCredit that created this Transaction. */
+    /** If applicable, the ID of the ReceivedCredit that created this transaction. */
     @SerializedName("received_credit")
     String receivedCredit;
 
     /**
-     * Type of the flow linked to the transaction which settled the split. The field matching this
-     * value will contain the ID of the flow.
+     * Type of the flow linked to the transaction which settled the SettlementAllocationIntentSplit.
+     * The field matching this value will contain the ID of the flow.
      *
      * <p>One of {@code outbound_payment}, {@code outbound_transfer}, or {@code received_credit}.
      */

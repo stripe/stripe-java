@@ -104,6 +104,14 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
      */
     @SerializedName("bank_account")
     String bankAccount;
+
+    /**
+     * Open Enum. Speed of the payout.
+     *
+     * <p>One of {@code instant}, {@code next_business_day}, or {@code standard}.
+     */
+    @SerializedName("speed")
+    String speed;
   }
 
   /**
@@ -122,7 +130,8 @@ public class OutboundPaymentQuote extends StripeObject implements HasId {
      * The fee type.
      *
      * <p>One of {@code cross_border_payout_fee}, {@code foreign_exchange_fee}, {@code
-     * instant_payout_fee}, {@code standard_payout_fee}, or {@code wire_payout_fee}.
+     * instant_payout_fee}, {@code real_time_payout_fee}, {@code standard_payout_fee}, or {@code
+     * wire_payout_fee}.
      */
     @SerializedName("type")
     String type;

@@ -12,11 +12,14 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class SettlementAllocationIntentCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The amount and currency of the SettlementAllocationIntent. */
+  /**
+   * <strong>Required.</strong> The amount and currency of the SettlementAllocationIntent. Allowed
+   * Currencies are {@code gbp} | {@code eur}.
+   */
   @SerializedName("amount")
   Amount amount;
 
-  /** <strong>Required.</strong> Expected date when we expect to receive the funds. */
+  /** <strong>Required.</strong> Date when we expect to receive the funds. Must be in future . */
   @SerializedName("expected_settlement_date")
   Instant expectedSettlementDate;
 
@@ -30,8 +33,8 @@ public class SettlementAllocationIntentCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * <strong>Required.</strong> FinancialAccount where the funds are expected to land /
-   * FinancialAccount to map this SettlementAllocationIntent to.
+   * <strong>Required.</strong> Financial Account Id where the funds are expected for this
+   * SettlementAllocationIntent.
    */
   @SerializedName("financial_account")
   String financialAccount;
@@ -41,8 +44,11 @@ public class SettlementAllocationIntentCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * <strong>Required.</strong> Reference for the settlement intent . Max 255 characters . The
-   * reference used by PSP to send funds to Stripe .
+   * <strong>Required.</strong> Reference for the SettlementAllocationIntent. This should be same as
+   * the transaction reference used by payments processor to send funds to Stripe. Must have length
+   * between 5 and 255 characters and it must be unique among existing SettlementAllocationIntents
+   * that have a non-terminal status ({@code pending}, {@code submitted}, {@code matched}, {@code
+   * errored}).
    */
   @SerializedName("reference")
   String reference;
@@ -90,13 +96,16 @@ public class SettlementAllocationIntentCreateParams extends ApiRequestParams {
           this.reference);
     }
 
-    /** <strong>Required.</strong> The amount and currency of the SettlementAllocationIntent. */
+    /**
+     * <strong>Required.</strong> The amount and currency of the SettlementAllocationIntent. Allowed
+     * Currencies are {@code gbp} | {@code eur}.
+     */
     public Builder setAmount(SettlementAllocationIntentCreateParams.Amount amount) {
       this.amount = amount;
       return this;
     }
 
-    /** <strong>Required.</strong> Expected date when we expect to receive the funds. */
+    /** <strong>Required.</strong> Date when we expect to receive the funds. Must be in future . */
     public Builder setExpectedSettlementDate(Instant expectedSettlementDate) {
       this.expectedSettlementDate = expectedSettlementDate;
       return this;
@@ -129,8 +138,8 @@ public class SettlementAllocationIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> FinancialAccount where the funds are expected to land /
-     * FinancialAccount to map this SettlementAllocationIntent to.
+     * <strong>Required.</strong> Financial Account Id where the funds are expected for this
+     * SettlementAllocationIntent.
      */
     public Builder setFinancialAccount(String financialAccount) {
       this.financialAccount = financialAccount;
@@ -164,8 +173,11 @@ public class SettlementAllocationIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * <strong>Required.</strong> Reference for the settlement intent . Max 255 characters . The
-     * reference used by PSP to send funds to Stripe .
+     * <strong>Required.</strong> Reference for the SettlementAllocationIntent. This should be same
+     * as the transaction reference used by payments processor to send funds to Stripe. Must have
+     * length between 5 and 255 characters and it must be unique among existing
+     * SettlementAllocationIntents that have a non-terminal status ({@code pending}, {@code
+     * submitted}, {@code matched}, {@code errored}).
      */
     public Builder setReference(String reference) {
       this.reference = reference;

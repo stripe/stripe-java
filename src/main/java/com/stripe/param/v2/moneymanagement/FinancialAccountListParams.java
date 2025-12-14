@@ -3,7 +3,9 @@ package com.stripe.param.v2.moneymanagement;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,10 +33,22 @@ public class FinancialAccountListParams extends ApiRequestParams {
   @SerializedName("status")
   Status status;
 
-  private FinancialAccountListParams(Map<String, Object> extraParams, Long limit, Status status) {
+  /**
+   * Filter for FinancialAccount {@code type}. By default, FinancialAccounts of any {@code type} are
+   * returned.
+   */
+  @SerializedName("types")
+  List<FinancialAccountListParams.Type> types;
+
+  private FinancialAccountListParams(
+      Map<String, Object> extraParams,
+      Long limit,
+      Status status,
+      List<FinancialAccountListParams.Type> types) {
     this.extraParams = extraParams;
     this.limit = limit;
     this.status = status;
+    this.types = types;
   }
 
   public static Builder builder() {
@@ -48,9 +62,11 @@ public class FinancialAccountListParams extends ApiRequestParams {
 
     private Status status;
 
+    private List<FinancialAccountListParams.Type> types;
+
     /** Finalize and obtain parameter instance from this builder. */
     public FinancialAccountListParams build() {
-      return new FinancialAccountListParams(this.extraParams, this.limit, this.status);
+      return new FinancialAccountListParams(this.extraParams, this.limit, this.status, this.types);
     }
 
     /**
@@ -93,6 +109,32 @@ public class FinancialAccountListParams extends ApiRequestParams {
       this.status = status;
       return this;
     }
+
+    /**
+     * Add an element to `types` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#types} for the field documentation.
+     */
+    public Builder addType(FinancialAccountListParams.Type element) {
+      if (this.types == null) {
+        this.types = new ArrayList<>();
+      }
+      this.types.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `types` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FinancialAccountListParams#types} for the field documentation.
+     */
+    public Builder addAllType(List<FinancialAccountListParams.Type> elements) {
+      if (this.types == null) {
+        this.types = new ArrayList<>();
+      }
+      this.types.addAll(elements);
+      return this;
+    }
   }
 
   public enum Status implements ApiRequestParams.EnumParam {
@@ -109,6 +151,21 @@ public class FinancialAccountListParams extends ApiRequestParams {
     private final String value;
 
     Status(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("payments")
+    PAYMENTS("payments"),
+
+    @SerializedName("storage")
+    STORAGE("storage");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Type(String value) {
       this.value = value;
     }
   }
