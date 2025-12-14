@@ -24,12 +24,12 @@ import lombok.Setter;
  *
  * <p>Before April 6, 2017, transfers also represented movement of funds from a Stripe account to a
  * card or bank account. This behavior has since been split out into a <a
- * href="https://stripe.com/docs/api#payout_object">Payout</a> object, with corresponding payout
+ * href="https://api.stripe.com#payout_object">Payout</a> object, with corresponding payout
  * endpoints. For more information, read about the <a
- * href="https://stripe.com/docs/transfer-payout-split">transfer/payout split</a>.
+ * href="https://docs.stripe.com/transfer-payout-split">transfer/payout split</a>.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/connect/separate-charges-and-transfers">Creating separate charges
+ * href="https://docs.stripe.com/connect/separate-charges-and-transfers">Creating separate charges
  * and transfers</a>
  */
 @Getter
@@ -109,7 +109,7 @@ public class Transfer extends ApiResource
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -154,7 +154,7 @@ public class Transfer extends ApiResource
 
   /**
    * A string that identifies this transaction as part of a group. See the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#transfer-options">Connect
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers#transfer-options">Connect
    * documentation</a> for details.
    */
   @SerializedName("transfer_group")

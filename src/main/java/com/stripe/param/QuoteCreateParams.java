@@ -149,7 +149,7 @@ public class QuoteCreateParams extends ApiRequestParams {
   List<QuoteCreateParams.Line> lines;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -2504,7 +2504,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -5633,7 +5633,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     String price;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
@@ -5766,7 +5766,7 @@ public class QuoteCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(QuoteCreateParams.LineItem.PriceData priceData) {
@@ -6223,7 +6223,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -6353,7 +6353,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -6602,7 +6602,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     String fromSubscription;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will set
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that will set
      * metadata on the subscription or subscription schedule when the quote is accepted. If a
      * recurring price is included in {@code line_items}, this field will be passed to the resulting
      * subscription's {@code metadata} field. If {@code subscription_data.effective_date} is used,
@@ -6633,7 +6633,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>. When
+     * href="https://docs.stripe.com/subscriptions/billing-cycle#prorations">prorations</a>. When
      * creating a subscription, valid values are {@code create_prorations} or {@code none}.
      *
      * <p>When updating a subscription, valid values are {@code create_prorations}, {@code none}, or
@@ -6641,7 +6641,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      *
      * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
      * applicable. These proration items will only be invoiced immediately under <a
-     * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+     * href="https://docs.stripe.com/subscriptions/upgrading-downgrading#immediate-payment">certain
      * conditions</a>. In order to always invoice immediately for prorations, pass {@code
      * always_invoice}.
      *
@@ -6971,7 +6971,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * Determines how to handle <a
-       * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>. When
+       * href="https://docs.stripe.com/subscriptions/billing-cycle#prorations">prorations</a>. When
        * creating a subscription, valid values are {@code create_prorations} or {@code none}.
        *
        * <p>When updating a subscription, valid values are {@code create_prorations}, {@code none},
@@ -6979,7 +6979,7 @@ public class QuoteCreateParams extends ApiRequestParams {
        *
        * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
        * applicable. These proration items will only be invoiced immediately under <a
-       * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+       * href="https://docs.stripe.com/subscriptions/upgrading-downgrading#immediate-payment">certain
        * conditions</a>. In order to always invoice immediately for prorations, pass {@code
        * always_invoice}.
        *
@@ -8993,7 +8993,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>. When
+     * href="https://docs.stripe.com/subscriptions/billing-cycle#prorations">prorations</a>. When
      * creating a subscription, valid values are {@code create_prorations} or {@code none}.
      *
      * <p>When updating a subscription, valid values are {@code create_prorations}, {@code none}, or
@@ -9001,7 +9001,7 @@ public class QuoteCreateParams extends ApiRequestParams {
      *
      * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
      * applicable. These proration items will only be invoiced immediately under <a
-     * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+     * href="https://docs.stripe.com/subscriptions/upgrading-downgrading#immediate-payment">certain
      * conditions</a>. In order to always invoice immediately for prorations, pass {@code
      * always_invoice}.
      *
@@ -9201,7 +9201,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * Determines how to handle <a
-       * href="https://stripe.com/docs/subscriptions/billing-cycle#prorations">prorations</a>. When
+       * href="https://docs.stripe.com/subscriptions/billing-cycle#prorations">prorations</a>. When
        * creating a subscription, valid values are {@code create_prorations} or {@code none}.
        *
        * <p>When updating a subscription, valid values are {@code create_prorations}, {@code none},
@@ -9209,7 +9209,7 @@ public class QuoteCreateParams extends ApiRequestParams {
        *
        * <p>Passing {@code create_prorations} will cause proration invoice items to be created when
        * applicable. These proration items will only be invoiced immediately under <a
-       * href="https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment">certain
+       * href="https://docs.stripe.com/subscriptions/upgrading-downgrading#immediate-payment">certain
        * conditions</a>. In order to always invoice immediately for prorations, pass {@code
        * always_invoice}.
        *

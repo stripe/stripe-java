@@ -20,9 +20,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The identifier of the billing cadence for which you’d like to retrieve the upcoming
-   * invoice.Cannot be provided when {@code subscription}, {@code schedule}, {@code
-   * subscription_details} or {@code schedule_details} are provided.
+   * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
+   * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details} or
+   * {@code schedule_details} are provided.
    */
   @SerializedName("billing_cadence")
   String billingCadence;
@@ -34,7 +34,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   String currency;
 
   /**
-   * The identifier of the customer whose upcoming invoice you'd like to retrieve. If {@code
+   * The identifier of the customer whose upcoming invoice you're retrieving. If {@code
    * automatic_tax} is enabled then one of {@code customer}, {@code customer_details}, {@code
    * subscription}, or {@code schedule} must be set.
    */
@@ -42,9 +42,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   String customer;
 
   /**
-   * The identifier of the account whose upcoming invoice you'd like to retrieve. If {@code
-   * automatic_tax} is enabled then one of {@code customer}, {@code customer_account}, {@code
-   * customer_details}, {@code subscription}, or {@code schedule} must be set.
+   * The identifier of the account representing the customer whose upcoming invoice you're
+   * retrieving. If {@code automatic_tax} is enabled then one of {@code customer}, {@code
+   * customer_account}, {@code customer_details}, {@code subscription}, or {@code schedule} must be
+   * set.
    */
   @SerializedName("customer_account")
   String customerAccount;
@@ -93,7 +94,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   /**
    * The account (if any) for which the funds of the invoice payment are intended. If set, the
    * invoice will be presented with the branding and support information of the specified account.
-   * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+   * See the <a href="https://docs.stripe.com/billing/invoices/connect">Invoices with Connect</a>
    * documentation for details.
    */
   @SerializedName("on_behalf_of")
@@ -242,9 +243,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the billing cadence for which you’d like to retrieve the upcoming
-     * invoice.Cannot be provided when {@code subscription}, {@code schedule}, {@code
-     * subscription_details} or {@code schedule_details} are provided.
+     * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
+     * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details}
+     * or {@code schedule_details} are provided.
      */
     public Builder setBillingCadence(String billingCadence) {
       this.billingCadence = billingCadence;
@@ -261,7 +262,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the customer whose upcoming invoice you'd like to retrieve. If {@code
+     * The identifier of the customer whose upcoming invoice you're retrieving. If {@code
      * automatic_tax} is enabled then one of {@code customer}, {@code customer_details}, {@code
      * subscription}, or {@code schedule} must be set.
      */
@@ -271,9 +272,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the account whose upcoming invoice you'd like to retrieve. If {@code
-     * automatic_tax} is enabled then one of {@code customer}, {@code customer_account}, {@code
-     * customer_details}, {@code subscription}, or {@code schedule} must be set.
+     * The identifier of the account representing the customer whose upcoming invoice you're
+     * retrieving. If {@code automatic_tax} is enabled then one of {@code customer}, {@code
+     * customer_account}, {@code customer_details}, {@code subscription}, or {@code schedule} must
+     * be set.
      */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
@@ -430,7 +432,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     /**
      * The account (if any) for which the funds of the invoice payment are intended. If set, the
      * invoice will be presented with the branding and support information of the specified account.
-     * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+     * See the <a href="https://docs.stripe.com/billing/invoices/connect">Invoices with Connect</a>
      * documentation for details.
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
@@ -441,7 +443,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     /**
      * The account (if any) for which the funds of the invoice payment are intended. If set, the
      * invoice will be presented with the branding and support information of the specified account.
-     * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+     * See the <a href="https://docs.stripe.com/billing/invoices/connect">Invoices with Connect</a>
      * documentation for details.
      */
     public Builder setOnBehalfOf(EmptyParam onBehalfOf) {
@@ -505,7 +507,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
      * that incompatible invoice items (invoice items with manually specified <a
-     * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+     * href="https://docs.stripe.com/api/tax_rates">tax rates</a>, negative amounts, or {@code
      * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
      */
     @SerializedName("enabled")
@@ -554,7 +556,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
        * that incompatible invoice items (invoice items with manually specified <a
-       * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+       * href="https://docs.stripe.com/api/tax_rates">tax rates</a>, negative amounts, or {@code
        * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
        */
       public Builder setEnabled(Boolean enabled) {
@@ -704,7 +706,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerDetails {
-    /** The customer's address. */
+    /**
+     * The customer's address. Learn about <a
+     * href="https://stripe.com/invoicing/taxes?dashboard-or-api=dashboard#set-up-customer">country-specific
+     * requirements for calculating tax</a>.
+     */
     @SerializedName("address")
     Object address;
 
@@ -771,13 +777,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.address, this.extraParams, this.shipping, this.tax, this.taxExempt, this.taxIds);
       }
 
-      /** The customer's address. */
+      /**
+       * The customer's address. Learn about <a
+       * href="https://stripe.com/invoicing/taxes?dashboard-or-api=dashboard#set-up-customer">country-specific
+       * requirements for calculating tax</a>.
+       */
       public Builder setAddress(InvoiceCreatePreviewParams.CustomerDetails.Address address) {
         this.address = address;
         return this;
       }
 
-      /** The customer's address. */
+      /**
+       * The customer's address. Learn about <a
+       * href="https://stripe.com/invoicing/taxes?dashboard-or-api=dashboard#set-up-customer">country-specific
+       * requirements for calculating tax</a>.
+       */
       public Builder setAddress(EmptyParam address) {
         this.address = address;
         return this;
@@ -902,7 +916,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -1015,7 +1032,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
@@ -1159,7 +1179,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -1275,7 +1298,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -2270,7 +2296,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     String invoiceitem;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -2281,9 +2307,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     /**
      * The period associated with this invoice item. When set to different values, the period will
      * be rendered on the invoice. If you have <a
-     * href="https://stripe.com/docs/revenue-recognition">Stripe Revenue Recognition</a> enabled,
+     * href="https://docs.stripe.com/revenue-recognition">Stripe Revenue Recognition</a> enabled,
      * the period will be used to recognize and defer revenue. See the <a
-     * href="https://stripe.com/docs/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
+     * href="https://docs.stripe.com/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
      * Recognition documentation</a> for details.
      */
     @SerializedName("period")
@@ -2294,7 +2320,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     String price;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
@@ -2306,7 +2332,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     /**
      * Only required if a <a
-     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
      * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
      * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
      * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -2315,7 +2341,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("tax_behavior")
     TaxBehavior taxBehavior;
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     @SerializedName("tax_code")
     Object taxCode;
 
@@ -2579,7 +2605,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -2590,7 +2616,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -2603,9 +2629,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /**
        * The period associated with this invoice item. When set to different values, the period will
        * be rendered on the invoice. If you have <a
-       * href="https://stripe.com/docs/revenue-recognition">Stripe Revenue Recognition</a> enabled,
+       * href="https://docs.stripe.com/revenue-recognition">Stripe Revenue Recognition</a> enabled,
        * the period will be used to recognize and defer revenue. See the <a
-       * href="https://stripe.com/docs/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
+       * href="https://docs.stripe.com/revenue-recognition/methodology/subscriptions-and-invoicing">Revenue
        * Recognition documentation</a> for details.
        */
       public Builder setPeriod(InvoiceCreatePreviewParams.InvoiceItem.Period period) {
@@ -2620,7 +2646,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(InvoiceCreatePreviewParams.InvoiceItem.PriceData priceData) {
@@ -2636,7 +2662,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -2648,13 +2674,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(EmptyParam taxCode) {
         this.taxCode = taxCode;
         return this;
@@ -3214,7 +3240,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -3331,7 +3357,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -5950,7 +5976,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+           * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
            * attach to an object. This can be useful for storing additional information about the
            * object in a structured format. Individual keys can be unset by posting an empty value
            * to them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -9008,7 +9034,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
        * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if
        * this phase specifies a trial. For more information, see the billing cycle <a
-       * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+       * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
        */
       @SerializedName("billing_cycle_anchor")
       BillingCycleAnchor billingCycleAnchor;
@@ -9047,11 +9073,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String defaultPaymentMethod;
 
       /**
-       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
        * will set the Subscription's <a
-       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a>, which means they will be the Invoice's <a
-       * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/invoices/create#create_invoice-default_tax_rates">{@code
        * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
        */
       @SerializedName("default_tax_rates")
@@ -9091,7 +9117,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       EffectiveAt effectiveAt;
 
       /**
-       * The date at which this phase of the subscription schedule ends. If set, {@code iterations}
+       * The date at which this phase of the subscription schedule ends. If set, {@code duration}
        * must not be set.
        */
       @SerializedName("end_date")
@@ -9118,7 +9144,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       List<InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item> items;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to a phase. Metadata on a schedule's phase will update the underlying subscription's
        * {@code metadata} when the phase is entered, adding new keys and replacing existing keys in
        * the subscription's {@code metadata}. Individual keys in the subscription's {@code metadata}
@@ -9139,7 +9165,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /**
        * If specified, payment collection for this subscription will be paused. Note that the
        * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-       * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+       * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
        * collection</a>.
        */
       @SerializedName("pause_collection")
@@ -9147,10 +9173,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * Controls whether the subscription schedule should create <a
-       * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
+       * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when
        * transitioning to this phase if there is a difference in billing configuration. It's
        * different from the request-level <a
-       * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
+       * href="https://docs.stripe.com/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
        * parameter which controls what happens if the update request affects the billing
        * configuration (item price, quantity, etc.) of the current phase.
        */
@@ -9396,7 +9422,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          * Can be set to {@code phase_start} to set the anchor to the start of the phase or {@code
          * automatic} to automatically change it if needed. Cannot be set to {@code phase_start} if
          * this phase specifies a trial. For more information, see the billing cycle <a
-         * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+         * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
          */
         public Builder setBillingCycleAnchor(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.BillingCycleAnchor
@@ -9488,11 +9514,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
          * Rates will set the Subscription's <a
-         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
          * default_tax_rates}</a>, which means they will be the Invoice's <a
-         * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/invoices/create#create_invoice-default_tax_rates">{@code
          * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
          */
         public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
@@ -9501,11 +9527,11 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
          * Rates will set the Subscription's <a
-         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
          * default_tax_rates}</a>, which means they will be the Invoice's <a
-         * href="https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/invoices/create#create_invoice-default_tax_rates">{@code
          * default_tax_rates}</a> for any Invoices issued by the Subscription during this Phase.
          */
         public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
@@ -9612,8 +9638,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * The date at which this phase of the subscription schedule ends. If set, {@code
-         * iterations} must not be set.
+         * The date at which this phase of the subscription schedule ends. If set, {@code duration}
+         * must not be set.
          */
         public Builder setEndDate(Long endDate) {
           this.endDate = endDate;
@@ -9621,8 +9647,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * The date at which this phase of the subscription schedule ends. If set, {@code
-         * iterations} must not be set.
+         * The date at which this phase of the subscription schedule ends. If set, {@code duration}
+         * must not be set.
          */
         public Builder setEndDate(
             InvoiceCreatePreviewParams.ScheduleDetails.Phase.EndDate endDate) {
@@ -9731,7 +9757,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         /**
          * If specified, payment collection for this subscription will be paused. Note that the
          * subscription status will be unchanged and will not be updated to {@code paused}. Learn
-         * more about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+         * more about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
          * collection</a>.
          */
         public Builder setPauseCollection(
@@ -9742,10 +9768,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * Controls whether the subscription schedule should create <a
-         * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when
+         * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when
          * transitioning to this phase if there is a difference in billing configuration. It's
          * different from the request-level <a
-         * href="https://stripe.com/docs/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
+         * href="https://docs.stripe.com/api/subscription_schedules/update#update_subscription_schedule-proration_behavior">proration_behavior</a>
          * parameter which controls what happens if the update request affects the billing
          * configuration (item price, quantity, etc.) of the current phase.
          */
@@ -9845,7 +9871,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -9866,7 +9892,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         String price;
 
         /**
-         * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+         * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
          * inline. One of {@code price} or {@code price_data} is required.
          */
         @SerializedName("price_data")
@@ -10046,7 +10072,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           /**
-           * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a>
+           * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a>
            * object inline. One of {@code price} or {@code price_data} is required.
            */
           public Builder setPriceData(
@@ -10860,7 +10886,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           /**
            * Only required if a <a
-           * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
            * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
            * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
            * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}
@@ -10982,7 +11008,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             /**
              * Only required if a <a
-             * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+             * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
              * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
              * price is considered inclusive of taxes or exclusive of taxes. One of {@code
              * inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
@@ -12124,7 +12150,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to a configuration item. Metadata on a configuration item will update the
          * underlying subscription item's {@code metadata} when the phase is entered, adding new
          * keys and replacing existing keys. Individual keys in the subscription item's {@code
@@ -12148,7 +12174,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         String price;
 
         /**
-         * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+         * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
          * inline.
          */
         @SerializedName("price_data")
@@ -12162,9 +12188,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         Long quantity;
 
         /**
-         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
          * Rates will override the <a
-         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
          * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
          * previously-defined tax rates.
          */
@@ -12388,7 +12414,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           /**
-           * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a>
+           * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a>
            * object inline.
            */
           public Builder setPriceData(
@@ -12437,9 +12463,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           /**
-           * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+           * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
            * Rates will override the <a
-           * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+           * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
            * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to
            * remove previously-defined tax rates.
            */
@@ -12449,9 +12475,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           }
 
           /**
-           * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+           * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
            * Rates will override the <a
-           * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+           * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
            * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to
            * remove previously-defined tax rates.
            */
@@ -12490,7 +12516,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           /**
            * <strong>Required.</strong> Number of units that meets the billing threshold to advance
            * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+           * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
            * threshold</a>)
            */
           @SerializedName("usage_gte")
@@ -12550,7 +12576,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
              * <strong>Required.</strong> Number of units that meets the billing threshold to
              * advance the subscription to a new billing period (e.g., it takes 10 $5 units to meet
              * a $50 <a
-             * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+             * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
              * threshold</a>)
              */
             public Builder setUsageGte(Long usageGte) {
@@ -12980,7 +13006,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           /**
            * Only required if a <a
-           * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
            * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
            * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
            * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}
@@ -13116,7 +13142,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             /**
              * Only required if a <a
-             * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+             * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
              * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
              * price is considered inclusive of taxes or exclusive of taxes. One of {@code
              * inclusive}, {@code exclusive}, or {@code unspecified}. Once specified as either
@@ -14418,7 +14444,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   public static class SubscriptionDetails {
     /**
      * For new subscriptions, a future timestamp to anchor the subscription's <a
-     * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used to
+     * href="https://docs.stripe.com/subscriptions/billing-cycle">billing cycle</a>. This is used to
      * determine the date of the first full invoice, and, for plans with {@code month} or {@code
      * year} intervals, the day of the month for subsequent invoices. For existing subscriptions,
      * the value can only be set to {@code now} or {@code unchanged}.
@@ -14481,7 +14507,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
+     * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      * The default value is {@code create_prorations}.
@@ -14610,7 +14636,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * For new subscriptions, a future timestamp to anchor the subscription's <a
-       * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used
+       * href="https://docs.stripe.com/subscriptions/billing-cycle">billing cycle</a>. This is used
        * to determine the date of the first full invoice, and, for plans with {@code month} or
        * {@code year} intervals, the day of the month for subsequent invoices. For existing
        * subscriptions, the value can only be set to {@code now} or {@code unchanged}.
@@ -14623,7 +14649,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * For new subscriptions, a future timestamp to anchor the subscription's <a
-       * href="https://stripe.com/docs/subscriptions/billing-cycle">billing cycle</a>. This is used
+       * href="https://docs.stripe.com/subscriptions/billing-cycle">billing cycle</a>. This is used
        * to determine the date of the first full invoice, and, for plans with {@code month} or
        * {@code year} intervals, the day of the month for subsequent invoices. For existing
        * subscriptions, the value can only be set to {@code now} or {@code unchanged}.
@@ -14852,7 +14878,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       /**
        * Determines how to handle <a
-       * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
+       * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the
        * billing cycle changes (e.g., when switching plans, resetting {@code
        * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
        * The default value is {@code create_prorations}.
@@ -15650,7 +15676,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String id;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -15671,7 +15697,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String price;
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       @SerializedName("price_data")
@@ -15682,9 +15708,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       Long quantity;
 
       /**
-       * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax Rates
+       * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax Rates
        * will override the <a
-       * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+       * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
        * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
        * previously-defined tax rates.
        */
@@ -15926,7 +15952,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -15937,7 +15963,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -15964,7 +15990,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+         * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
          * inline. One of {@code price} or {@code price_data} is required.
          */
         public Builder setPriceData(
@@ -16010,9 +16036,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
          * Rates will override the <a
-         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
          * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
          * previously-defined tax rates.
          */
@@ -16022,9 +16048,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         }
 
         /**
-         * A list of <a href="https://stripe.com/docs/api/tax_rates">Tax Rate</a> ids. These Tax
+         * A list of <a href="https://docs.stripe.com/api/tax_rates">Tax Rate</a> ids. These Tax
          * Rates will override the <a
-         * href="https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates">{@code
+         * href="https://docs.stripe.com/api/subscriptions/create#create_subscription-default_tax_rates">{@code
          * default_tax_rates}</a> on the Subscription. When updating, pass an empty string to remove
          * previously-defined tax rates.
          */
@@ -16050,7 +16076,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         /**
          * <strong>Required.</strong> Number of units that meets the billing threshold to advance
          * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-         * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+         * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
          * threshold</a>)
          */
         @SerializedName("usage_gte")
@@ -16109,7 +16135,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           /**
            * <strong>Required.</strong> Number of units that meets the billing threshold to advance
            * the subscription to a new billing period (e.g., it takes 10 $5 units to meet a $50 <a
-           * href="https://stripe.com/docs/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
+           * href="https://docs.stripe.com/api/subscriptions/update#update_subscription-billing_thresholds-amount_gte">monetary
            * threshold</a>)
            */
           public Builder setUsageGte(Long usageGte) {
@@ -16633,7 +16659,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -16768,7 +16794,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           /**
            * Only required if a <a
-           * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+           * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
            * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the
            * price is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive},
            * {@code exclusive}, or {@code unspecified}. Once specified as either {@code inclusive}

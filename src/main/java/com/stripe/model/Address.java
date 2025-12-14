@@ -33,7 +33,10 @@ public class Address extends StripeObject {
   @SerializedName("postal_code")
   String postalCode;
 
-  /** State, county, province, or region. */
+  /**
+   * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+   * 3166-2</a>).
+   */
   @SerializedName("state")
   String state;
 }

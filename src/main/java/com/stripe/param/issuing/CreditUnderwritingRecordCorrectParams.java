@@ -43,7 +43,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -54,7 +54,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
   /**
    * File containing regulatory reporting data for the decision. Required if you are subject to this
    * <a
-   * href="https://stripe.com/docs/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
+   * href="https://docs.stripe.com/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
    * requirement</a>. Optional if previously provided and no changes are needed.
    */
   @SerializedName("regulatory_reporting_file")
@@ -231,7 +231,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     /**
      * File containing regulatory reporting data for the decision. Required if you are subject to
      * this <a
-     * href="https://stripe.com/docs/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
+     * href="https://docs.stripe.com/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
      * requirement</a>. Optional if previously provided and no changes are needed.
      */
     public Builder setRegulatoryReportingFile(String regulatoryReportingFile) {
@@ -489,7 +489,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     /**
      * Details about the credit limit approved. An approved credit limit is required before you can
      * set a {@code credit_limit_amount} in the <a
-     * href="https://stripe.com/docs/api/issuing/credit_policy/">CreditPolicy API</a>
+     * href="https://docs.stripe.com/api/issuing/credit_policy/">CreditPolicy API</a>
      */
     @SerializedName("credit_limit_approved")
     CreditLimitApproved creditLimitApproved;
@@ -568,7 +568,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
       /**
        * Details about the credit limit approved. An approved credit limit is required before you
        * can set a {@code credit_limit_amount} in the <a
-       * href="https://stripe.com/docs/api/issuing/credit_policy/">CreditPolicy API</a>
+       * href="https://docs.stripe.com/api/issuing/credit_policy/">CreditPolicy API</a>
        */
       public Builder setCreditLimitApproved(
           CreditUnderwritingRecordCorrectParams.Decision.CreditLimitApproved creditLimitApproved) {
@@ -947,7 +947,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     public static class CreditLimitApproved {
       /**
        * <strong>Required.</strong> The credit approved, in the currency of the account and <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -990,7 +990,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The credit approved, in the currency of the account and <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          */
         public Builder setAmount(Long amount) {
           this.amount = amount;
@@ -1040,7 +1040,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
     public static class CreditLimitDecreased {
       /**
        * <strong>Required.</strong> The credit approved, in the currency of the account and <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -1111,7 +1111,7 @@ public class CreditUnderwritingRecordCorrectParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The credit approved, in the currency of the account and <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          */
         public Builder setAmount(Long amount) {
           this.amount = amount;

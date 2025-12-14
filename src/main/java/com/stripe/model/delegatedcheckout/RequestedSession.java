@@ -77,7 +77,7 @@ public class RequestedSession extends ApiResource
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -555,6 +555,9 @@ public class RequestedSession extends ApiResource
     @SerializedName("name")
     String name;
 
+    @SerializedName("product_details")
+    ProductDetails productDetails;
+
     /** The quantity of the line item. */
     @SerializedName("quantity")
     Long quantity;
@@ -566,6 +569,81 @@ public class RequestedSession extends ApiResource
     /** The per-unit amount of the item before any discounts or taxes are applied. */
     @SerializedName("unit_amount")
     Long unitAmount;
+
+    /**
+     * For more details about ProductDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ProductDetails extends StripeObject {
+      /** Custom attributes for the product. */
+      @SerializedName("custom_attributes")
+      List<RequestedSession.LineItemDetail.ProductDetails.CustomAttribute> customAttributes;
+
+      /** The description of the product. */
+      @SerializedName("description")
+      String description;
+
+      /** Disclosures for the product. */
+      @SerializedName("disclosures")
+      List<RequestedSession.LineItemDetail.ProductDetails.Disclosure> disclosures;
+
+      /** The images of the product. */
+      @SerializedName("images")
+      List<String> images;
+
+      /** The title of the product. */
+      @SerializedName("title")
+      String title;
+
+      /**
+       * For more details about CustomAttribute, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomAttribute extends StripeObject {
+        /** The display name of the custom attribute. */
+        @SerializedName("display_name")
+        String displayName;
+
+        /** The value of the custom attribute. */
+        @SerializedName("value")
+        String value;
+      }
+
+      /**
+       * For more details about Disclosure, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Disclosure extends StripeObject {
+        /** The content of the disclosure. */
+        @SerializedName("content")
+        String content;
+
+        /**
+         * The content type of the disclosure.
+         *
+         * <p>One of {@code link}, {@code markdown}, or {@code plain}.
+         */
+        @SerializedName("content_type")
+        String contentType;
+
+        /**
+         * The type of disclosure.
+         *
+         * <p>Equal to {@code disclaimer}.
+         */
+        @SerializedName("type")
+        String type;
+      }
+    }
   }
 
   /**

@@ -182,6 +182,14 @@ public class OutboundPayment extends StripeObject implements HasId {
      */
     @SerializedName("bank_account")
     String bankAccount;
+
+    /**
+     * Open Enum. Speed of the payout.
+     *
+     * <p>One of {@code instant}, {@code next_business_day}, or {@code standard}.
+     */
+    @SerializedName("speed")
+    String speed;
   }
 
   /** The FinancialAccount that funds were pulled from. */

@@ -269,6 +269,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.SetupIntentService(this.getResponseGetter());
   }
 
+  public com.stripe.service.SharedPaymentService sharedPayment() {
+    return new com.stripe.service.SharedPaymentService(this.getResponseGetter());
+  }
+
   public com.stripe.service.ShippingRateService shippingRates() {
     return new com.stripe.service.ShippingRateService(this.getResponseGetter());
   }

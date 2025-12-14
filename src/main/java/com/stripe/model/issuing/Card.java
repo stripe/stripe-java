@@ -30,7 +30,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * You can <a href="https://stripe.com/docs/issuing">create physical or virtual cards</a> that are
+ * You can <a href="https://docs.stripe.com/issuing">create physical or virtual cards</a> that are
  * issued to cardholders.
  */
 @Getter
@@ -51,10 +51,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
   /**
    * An Issuing {@code Cardholder} object represents an individual or business entity who is <a
-   * href="https://stripe.com/docs/issuing">issued</a> cards.
+   * href="https://docs.stripe.com/issuing">issued</a> cards.
    *
    * <p>Related guide: <a
-   * href="https://stripe.com/docs/issuing/cards/virtual/issue-cards#create-cardholder">How to
+   * href="https://docs.stripe.com/issuing/cards/virtual/issue-cards#create-cardholder">How to
    * create a cardholder</a>
    */
   @SerializedName("cardholder")
@@ -75,9 +75,9 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /**
    * The card's CVC. For security reasons, this is only available for virtual cards, and will be
    * omitted unless you explicitly request it with <a
-   * href="https://stripe.com/docs/api/expanding_objects">the {@code expand} parameter</a>.
+   * href="https://docs.stripe.com/api/expanding_objects">the {@code expand} parameter</a>.
    * Additionally, it's only available via the <a
-   * href="https://stripe.com/docs/api/issuing/cards/retrieve">&quot;Retrieve a card&quot;
+   * href="https://docs.stripe.com/api/issuing/cards/retrieve">&quot;Retrieve a card&quot;
    * endpoint</a>, not via &quot;List all cards&quot; or any other endpoint.
    */
   @SerializedName("cvc")
@@ -119,7 +119,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -130,9 +130,9 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /**
    * The full unredacted card number. For security reasons, this is only available for virtual
    * cards, and will be omitted unless you explicitly request it with <a
-   * href="https://stripe.com/docs/api/expanding_objects">the {@code expand} parameter</a>.
+   * href="https://docs.stripe.com/api/expanding_objects">the {@code expand} parameter</a>.
    * Additionally, it's only available via the <a
-   * href="https://stripe.com/docs/api/issuing/cards/retrieve">&quot;Retrieve a card&quot;
+   * href="https://docs.stripe.com/api/issuing/cards/retrieve">&quot;Retrieve a card&quot;
    * endpoint</a>, not via &quot;List all cards&quot; or any other endpoint.
    */
   @SerializedName("number")
@@ -591,7 +591,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static class SpendingControls extends StripeObject {
     /**
      * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
      * blocked_categories}.
      */
@@ -609,7 +609,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
 
     /**
      * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to decline. All other categories will be allowed. Cannot be set with {@code
      * allowed_categories}.
      */
@@ -649,14 +649,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     public static class SpendingLimit extends StripeObject {
       /**
        * Maximum amount allowed to spend per interval. This amount is in the card's currency and in
-       * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
 
       /**
        * Array of strings containing <a
-       * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+       * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
        * this limit applies to. Omitting this field will apply the limit to all categories.
        */
       @SerializedName("categories")
@@ -711,6 +711,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("ineligible_reason")
       String ineligibleReason;
+
+      /** Unique identifier for the card in Apple Pay. */
+      @SerializedName("primary_account_identifier")
+      String primaryAccountIdentifier;
     }
 
     /**
@@ -733,6 +737,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
        */
       @SerializedName("ineligible_reason")
       String ineligibleReason;
+
+      /** Unique identifier for the card in Google Pay. */
+      @SerializedName("primary_account_identifier")
+      String primaryAccountIdentifier;
     }
   }
 

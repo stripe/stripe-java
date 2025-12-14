@@ -714,9 +714,9 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Deactivate {
-      /** Configuration for the billing details. */
-      @SerializedName("billing_details")
-      BillingDetails billingDetails;
+      /** Allows users to override the collect at behavior. */
+      @SerializedName("collect_at")
+      CollectAt collectAt;
 
       /**
        * When the deactivate action will take effect. If not specified, the default behavior is
@@ -743,12 +743,12 @@ public class IntentCreateParams extends ApiRequestParams {
       Type type;
 
       private Deactivate(
-          BillingDetails billingDetails,
+          CollectAt collectAt,
           EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails,
           Type type) {
-        this.billingDetails = billingDetails;
+        this.collectAt = collectAt;
         this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.pricingPlanSubscriptionDetails = pricingPlanSubscriptionDetails;
@@ -760,7 +760,7 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private BillingDetails billingDetails;
+        private CollectAt collectAt;
 
         private EffectiveAt effectiveAt;
 
@@ -773,17 +773,16 @@ public class IntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Deactivate build() {
           return new IntentCreateParams.Action.Deactivate(
-              this.billingDetails,
+              this.collectAt,
               this.effectiveAt,
               this.extraParams,
               this.pricingPlanSubscriptionDetails,
               this.type);
         }
 
-        /** Configuration for the billing details. */
-        public Builder setBillingDetails(
-            IntentCreateParams.Action.Deactivate.BillingDetails billingDetails) {
-          this.billingDetails = billingDetails;
+        /** Allows users to override the collect at behavior. */
+        public Builder setCollectAt(IntentCreateParams.Action.Deactivate.CollectAt collectAt) {
+          this.collectAt = collectAt;
           return this;
         }
 
@@ -837,97 +836,6 @@ public class IntentCreateParams extends ApiRequestParams {
         public Builder setType(IntentCreateParams.Action.Deactivate.Type type) {
           this.type = type;
           return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillingDetails {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /** This controls the proration adjustment for the partial servicing period. */
-        @SerializedName("proration_behavior")
-        ProrationBehavior prorationBehavior;
-
-        private BillingDetails(
-            Map<String, Object> extraParams, ProrationBehavior prorationBehavior) {
-          this.extraParams = extraParams;
-          this.prorationBehavior = prorationBehavior;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private ProrationBehavior prorationBehavior;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public IntentCreateParams.Action.Deactivate.BillingDetails build() {
-            return new IntentCreateParams.Action.Deactivate.BillingDetails(
-                this.extraParams, this.prorationBehavior);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link IntentCreateParams.Action.Deactivate.BillingDetails#extraParams} for
-           * the field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link IntentCreateParams.Action.Deactivate.BillingDetails#extraParams} for
-           * the field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** This controls the proration adjustment for the partial servicing period. */
-          public Builder setProrationBehavior(
-              IntentCreateParams.Action.Deactivate.BillingDetails.ProrationBehavior
-                  prorationBehavior) {
-            this.prorationBehavior = prorationBehavior;
-            return this;
-          }
-        }
-
-        public enum ProrationBehavior implements ApiRequestParams.EnumParam {
-          @SerializedName("no_adjustment")
-          NO_ADJUSTMENT("no_adjustment"),
-
-          @SerializedName("prorated_adjustment")
-          PRORATED_ADJUSTMENT("prorated_adjustment");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          ProrationBehavior(String value) {
-            this.value = value;
-          }
         }
       }
 
@@ -1057,13 +965,18 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
+        /** Allows users to override the partial period behavior. */
+        @SerializedName("overrides")
+        Overrides overrides;
+
         /** <strong>Required.</strong> ID of the pricing plan subscription to deactivate. */
         @SerializedName("pricing_plan_subscription")
         String pricingPlanSubscription;
 
         private PricingPlanSubscriptionDetails(
-            Map<String, Object> extraParams, String pricingPlanSubscription) {
+            Map<String, Object> extraParams, Overrides overrides, String pricingPlanSubscription) {
           this.extraParams = extraParams;
+          this.overrides = overrides;
           this.pricingPlanSubscription = pricingPlanSubscription;
         }
 
@@ -1074,12 +987,14 @@ public class IntentCreateParams extends ApiRequestParams {
         public static class Builder {
           private Map<String, Object> extraParams;
 
+          private Overrides overrides;
+
           private String pricingPlanSubscription;
 
           /** Finalize and obtain parameter instance from this builder. */
           public IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails build() {
             return new IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails(
-                this.extraParams, this.pricingPlanSubscription);
+                this.extraParams, this.overrides, this.pricingPlanSubscription);
           }
 
           /**
@@ -1112,11 +1027,365 @@ public class IntentCreateParams extends ApiRequestParams {
             return this;
           }
 
+          /** Allows users to override the partial period behavior. */
+          public Builder setOverrides(
+              IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                  overrides) {
+            this.overrides = overrides;
+            return this;
+          }
+
           /** <strong>Required.</strong> ID of the pricing plan subscription to deactivate. */
           public Builder setPricingPlanSubscription(String pricingPlanSubscription) {
             this.pricingPlanSubscription = pricingPlanSubscription;
             return this;
           }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Overrides {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> Override for the partial period behavior. */
+          @SerializedName("partial_period_behaviors")
+          List<
+                  IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                      .PartialPeriodBehavior>
+              partialPeriodBehaviors;
+
+          private Overrides(
+              Map<String, Object> extraParams,
+              List<
+                      IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior>
+                  partialPeriodBehaviors) {
+            this.extraParams = extraParams;
+            this.partialPeriodBehaviors = partialPeriodBehaviors;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private List<
+                    IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior>
+                partialPeriodBehaviors;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                build() {
+              return new IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails
+                  .Overrides(this.extraParams, this.partialPeriodBehaviors);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `partialPeriodBehaviors` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides#partialPeriodBehaviors}
+             * for the field documentation.
+             */
+            public Builder addPartialPeriodBehavior(
+                IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior
+                    element) {
+              if (this.partialPeriodBehaviors == null) {
+                this.partialPeriodBehaviors = new ArrayList<>();
+              }
+              this.partialPeriodBehaviors.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `partialPeriodBehaviors` list. A list is initialized for the
+             * first `add/addAll` call, and subsequent calls adds additional elements to the
+             * original list. See {@link
+             * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides#partialPeriodBehaviors}
+             * for the field documentation.
+             */
+            public Builder addAllPartialPeriodBehavior(
+                List<
+                        IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails
+                            .Overrides.PartialPeriodBehavior>
+                    elements) {
+              if (this.partialPeriodBehaviors == null) {
+                this.partialPeriodBehaviors = new ArrayList<>();
+              }
+              this.partialPeriodBehaviors.addAll(elements);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PartialPeriodBehavior {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Override for the license fee. */
+            @SerializedName("license_fee")
+            LicenseFee licenseFee;
+
+            /** <strong>Required.</strong> Type of the partial period behavior override. */
+            @SerializedName("type")
+            Type type;
+
+            private PartialPeriodBehavior(
+                Map<String, Object> extraParams, LicenseFee licenseFee, Type type) {
+              this.extraParams = extraParams;
+              this.licenseFee = licenseFee;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private LicenseFee licenseFee;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                      .PartialPeriodBehavior
+                  build() {
+                return new IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails
+                    .Overrides.PartialPeriodBehavior(this.extraParams, this.licenseFee, this.type);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Override for the license fee. */
+              public Builder setLicenseFee(
+                  IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.LicenseFee
+                      licenseFee) {
+                this.licenseFee = licenseFee;
+                return this;
+              }
+
+              /** <strong>Required.</strong> Type of the partial period behavior override. */
+              public Builder setType(
+                  IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class LicenseFee {
+              /**
+               * <strong>Required.</strong> The proration behavior for the partial servicing period.
+               * Defines how we prorate the license fee when the user is deactivating.
+               */
+              @SerializedName("credit_proration_behavior")
+              CreditProrationBehavior creditProrationBehavior;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              private LicenseFee(
+                  CreditProrationBehavior creditProrationBehavior,
+                  Map<String, Object> extraParams) {
+                this.creditProrationBehavior = creditProrationBehavior;
+                this.extraParams = extraParams;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private CreditProrationBehavior creditProrationBehavior;
+
+                private Map<String, Object> extraParams;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior.LicenseFee
+                    build() {
+                  return new IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails
+                      .Overrides.PartialPeriodBehavior.LicenseFee(
+                      this.creditProrationBehavior, this.extraParams);
+                }
+
+                /**
+                 * <strong>Required.</strong> The proration behavior for the partial servicing
+                 * period. Defines how we prorate the license fee when the user is deactivating.
+                 */
+                public Builder setCreditProrationBehavior(
+                    IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior.LicenseFee.CreditProrationBehavior
+                        creditProrationBehavior) {
+                  this.creditProrationBehavior = creditProrationBehavior;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.LicenseFee#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * IntentCreateParams.Action.Deactivate.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.LicenseFee#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+              }
+
+              public enum CreditProrationBehavior implements ApiRequestParams.EnumParam {
+                @SerializedName("none")
+                NONE("none"),
+
+                @SerializedName("prorated")
+                PRORATED("prorated");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                CreditProrationBehavior(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("license_fee")
+              LICENSE_FEE("license_fee");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+        }
+      }
+
+      public enum CollectAt implements ApiRequestParams.EnumParam {
+        @SerializedName("next_billing_date")
+        NEXT_BILLING_DATE("next_billing_date"),
+
+        @SerializedName("on_effective_at")
+        ON_EFFECTIVE_AT("on_effective_at");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CollectAt(String value) {
+          this.value = value;
         }
       }
 
@@ -1139,9 +1408,9 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Modify {
-      /** Configuration for the billing details. */
-      @SerializedName("billing_details")
-      BillingDetails billingDetails;
+      /** Allows users to override the collect at behavior. */
+      @SerializedName("collect_at")
+      CollectAt collectAt;
 
       /**
        * When the modify action will take effect. If not specified, the default behavior is
@@ -1168,12 +1437,12 @@ public class IntentCreateParams extends ApiRequestParams {
       Type type;
 
       private Modify(
-          BillingDetails billingDetails,
+          CollectAt collectAt,
           EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails,
           Type type) {
-        this.billingDetails = billingDetails;
+        this.collectAt = collectAt;
         this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.pricingPlanSubscriptionDetails = pricingPlanSubscriptionDetails;
@@ -1185,7 +1454,7 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private BillingDetails billingDetails;
+        private CollectAt collectAt;
 
         private EffectiveAt effectiveAt;
 
@@ -1198,17 +1467,16 @@ public class IntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Modify build() {
           return new IntentCreateParams.Action.Modify(
-              this.billingDetails,
+              this.collectAt,
               this.effectiveAt,
               this.extraParams,
               this.pricingPlanSubscriptionDetails,
               this.type);
         }
 
-        /** Configuration for the billing details. */
-        public Builder setBillingDetails(
-            IntentCreateParams.Action.Modify.BillingDetails billingDetails) {
-          this.billingDetails = billingDetails;
+        /** Allows users to override the collect at behavior. */
+        public Builder setCollectAt(IntentCreateParams.Action.Modify.CollectAt collectAt) {
+          this.collectAt = collectAt;
           return this;
         }
 
@@ -1261,96 +1529,6 @@ public class IntentCreateParams extends ApiRequestParams {
         public Builder setType(IntentCreateParams.Action.Modify.Type type) {
           this.type = type;
           return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillingDetails {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /** This controls the proration adjustment for the partial servicing period. */
-        @SerializedName("proration_behavior")
-        ProrationBehavior prorationBehavior;
-
-        private BillingDetails(
-            Map<String, Object> extraParams, ProrationBehavior prorationBehavior) {
-          this.extraParams = extraParams;
-          this.prorationBehavior = prorationBehavior;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private ProrationBehavior prorationBehavior;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public IntentCreateParams.Action.Modify.BillingDetails build() {
-            return new IntentCreateParams.Action.Modify.BillingDetails(
-                this.extraParams, this.prorationBehavior);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link IntentCreateParams.Action.Modify.BillingDetails#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link IntentCreateParams.Action.Modify.BillingDetails#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** This controls the proration adjustment for the partial servicing period. */
-          public Builder setProrationBehavior(
-              IntentCreateParams.Action.Modify.BillingDetails.ProrationBehavior prorationBehavior) {
-            this.prorationBehavior = prorationBehavior;
-            return this;
-          }
-        }
-
-        public enum ProrationBehavior implements ApiRequestParams.EnumParam {
-          @SerializedName("no_adjustment")
-          NO_ADJUSTMENT("no_adjustment"),
-
-          @SerializedName("prorated_adjustment")
-          PRORATED_ADJUSTMENT("prorated_adjustment");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          ProrationBehavior(String value) {
-            this.value = value;
-          }
         }
       }
 
@@ -1490,6 +1668,10 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName("new_pricing_plan_version")
         String newPricingPlanVersion;
 
+        /** Allows users to override the partial period behavior. */
+        @SerializedName("overrides")
+        Overrides overrides;
+
         /** <strong>Required.</strong> The ID of the Pricing Plan Subscription to modify. */
         @SerializedName("pricing_plan_subscription")
         String pricingPlanSubscription;
@@ -1502,11 +1684,13 @@ public class IntentCreateParams extends ApiRequestParams {
             Map<String, Object> extraParams,
             String newPricingPlan,
             String newPricingPlanVersion,
+            Overrides overrides,
             String pricingPlanSubscription) {
           this.componentConfigurations = componentConfigurations;
           this.extraParams = extraParams;
           this.newPricingPlan = newPricingPlan;
           this.newPricingPlanVersion = newPricingPlanVersion;
+          this.overrides = overrides;
           this.pricingPlanSubscription = pricingPlanSubscription;
         }
 
@@ -1526,6 +1710,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
           private String newPricingPlanVersion;
 
+          private Overrides overrides;
+
           private String pricingPlanSubscription;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -1535,6 +1721,7 @@ public class IntentCreateParams extends ApiRequestParams {
                 this.extraParams,
                 this.newPricingPlan,
                 this.newPricingPlanVersion,
+                this.overrides,
                 this.pricingPlanSubscription);
           }
 
@@ -1613,6 +1800,13 @@ public class IntentCreateParams extends ApiRequestParams {
           /** The ID of the new Pricing Plan Version to use. */
           public Builder setNewPricingPlanVersion(String newPricingPlanVersion) {
             this.newPricingPlanVersion = newPricingPlanVersion;
+            return this;
+          }
+
+          /** Allows users to override the partial period behavior. */
+          public Builder setOverrides(
+              IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides overrides) {
+            this.overrides = overrides;
             return this;
           }
 
@@ -1729,6 +1923,390 @@ public class IntentCreateParams extends ApiRequestParams {
               return this;
             }
           }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Overrides {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> Override for the partial period behavior. */
+          @SerializedName("partial_period_behaviors")
+          List<
+                  IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                      .PartialPeriodBehavior>
+              partialPeriodBehaviors;
+
+          private Overrides(
+              Map<String, Object> extraParams,
+              List<
+                      IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior>
+                  partialPeriodBehaviors) {
+            this.extraParams = extraParams;
+            this.partialPeriodBehaviors = partialPeriodBehaviors;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private List<
+                    IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior>
+                partialPeriodBehaviors;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                build() {
+              return new IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides(
+                  this.extraParams, this.partialPeriodBehaviors);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `partialPeriodBehaviors` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides#partialPeriodBehaviors}
+             * for the field documentation.
+             */
+            public Builder addPartialPeriodBehavior(
+                IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior
+                    element) {
+              if (this.partialPeriodBehaviors == null) {
+                this.partialPeriodBehaviors = new ArrayList<>();
+              }
+              this.partialPeriodBehaviors.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `partialPeriodBehaviors` list. A list is initialized for the
+             * first `add/addAll` call, and subsequent calls adds additional elements to the
+             * original list. See {@link
+             * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides#partialPeriodBehaviors}
+             * for the field documentation.
+             */
+            public Builder addAllPartialPeriodBehavior(
+                List<
+                        IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior>
+                    elements) {
+              if (this.partialPeriodBehaviors == null) {
+                this.partialPeriodBehaviors = new ArrayList<>();
+              }
+              this.partialPeriodBehaviors.addAll(elements);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PartialPeriodBehavior {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Override for the license fee. */
+            @SerializedName("license_fee")
+            LicenseFee licenseFee;
+
+            /** <strong>Required.</strong> Type of the partial period behavior override. */
+            @SerializedName("type")
+            Type type;
+
+            private PartialPeriodBehavior(
+                Map<String, Object> extraParams, LicenseFee licenseFee, Type type) {
+              this.extraParams = extraParams;
+              this.licenseFee = licenseFee;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private LicenseFee licenseFee;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                      .PartialPeriodBehavior
+                  build() {
+                return new IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                    .PartialPeriodBehavior(this.extraParams, this.licenseFee, this.type);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Override for the license fee. */
+              public Builder setLicenseFee(
+                  IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.LicenseFee
+                      licenseFee) {
+                this.licenseFee = licenseFee;
+                return this;
+              }
+
+              /** <strong>Required.</strong> Type of the partial period behavior override. */
+              public Builder setType(
+                  IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class LicenseFee {
+              /**
+               * <strong>Required.</strong> The proration behavior for the partial servicing period.
+               * Defines how we prorate the license fee when the user is upgrading.
+               */
+              @SerializedName("credit_proration_behavior")
+              CreditProrationBehavior creditProrationBehavior;
+
+              /**
+               * <strong>Required.</strong> The proration behavior for the partial servicing period.
+               * Defines how we prorate the license fee when the user is downgrading.
+               */
+              @SerializedName("debit_proration_behavior")
+              DebitProrationBehavior debitProrationBehavior;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              private LicenseFee(
+                  CreditProrationBehavior creditProrationBehavior,
+                  DebitProrationBehavior debitProrationBehavior,
+                  Map<String, Object> extraParams) {
+                this.creditProrationBehavior = creditProrationBehavior;
+                this.debitProrationBehavior = debitProrationBehavior;
+                this.extraParams = extraParams;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private CreditProrationBehavior creditProrationBehavior;
+
+                private DebitProrationBehavior debitProrationBehavior;
+
+                private Map<String, Object> extraParams;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior.LicenseFee
+                    build() {
+                  return new IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails
+                      .Overrides.PartialPeriodBehavior.LicenseFee(
+                      this.creditProrationBehavior, this.debitProrationBehavior, this.extraParams);
+                }
+
+                /**
+                 * <strong>Required.</strong> The proration behavior for the partial servicing
+                 * period. Defines how we prorate the license fee when the user is upgrading.
+                 */
+                public Builder setCreditProrationBehavior(
+                    IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior.LicenseFee.CreditProrationBehavior
+                        creditProrationBehavior) {
+                  this.creditProrationBehavior = creditProrationBehavior;
+                  return this;
+                }
+
+                /**
+                 * <strong>Required.</strong> The proration behavior for the partial servicing
+                 * period. Defines how we prorate the license fee when the user is downgrading.
+                 */
+                public Builder setDebitProrationBehavior(
+                    IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior.LicenseFee.DebitProrationBehavior
+                        debitProrationBehavior) {
+                  this.debitProrationBehavior = debitProrationBehavior;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.LicenseFee#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * IntentCreateParams.Action.Modify.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.LicenseFee#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+              }
+
+              public enum CreditProrationBehavior implements ApiRequestParams.EnumParam {
+                @SerializedName("none")
+                NONE("none"),
+
+                @SerializedName("prorated")
+                PRORATED("prorated");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                CreditProrationBehavior(String value) {
+                  this.value = value;
+                }
+              }
+
+              public enum DebitProrationBehavior implements ApiRequestParams.EnumParam {
+                @SerializedName("none")
+                NONE("none"),
+
+                @SerializedName("prorated")
+                PRORATED("prorated");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                DebitProrationBehavior(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("license_fee")
+              LICENSE_FEE("license_fee");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+        }
+      }
+
+      public enum CollectAt implements ApiRequestParams.EnumParam {
+        @SerializedName("next_billing_date")
+        NEXT_BILLING_DATE("next_billing_date"),
+
+        @SerializedName("on_effective_at")
+        ON_EFFECTIVE_AT("on_effective_at");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CollectAt(String value) {
+          this.value = value;
         }
       }
 
@@ -1848,12 +2426,9 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Subscribe {
-      /**
-       * Configuration for the billing details. If not specified, see the default behavior for
-       * individual attributes.
-       */
-      @SerializedName("billing_details")
-      BillingDetails billingDetails;
+      /** Allows users to override the collect at behavior. */
+      @SerializedName("collect_at")
+      CollectAt collectAt;
 
       /**
        * When the subscribe action will take effect. If not specified, the default behavior is
@@ -1884,13 +2459,13 @@ public class IntentCreateParams extends ApiRequestParams {
       V1SubscriptionDetails v1SubscriptionDetails;
 
       private Subscribe(
-          BillingDetails billingDetails,
+          CollectAt collectAt,
           EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails,
           Type type,
           V1SubscriptionDetails v1SubscriptionDetails) {
-        this.billingDetails = billingDetails;
+        this.collectAt = collectAt;
         this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.pricingPlanSubscriptionDetails = pricingPlanSubscriptionDetails;
@@ -1903,7 +2478,7 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private BillingDetails billingDetails;
+        private CollectAt collectAt;
 
         private EffectiveAt effectiveAt;
 
@@ -1918,7 +2493,7 @@ public class IntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Subscribe build() {
           return new IntentCreateParams.Action.Subscribe(
-              this.billingDetails,
+              this.collectAt,
               this.effectiveAt,
               this.extraParams,
               this.pricingPlanSubscriptionDetails,
@@ -1926,13 +2501,9 @@ public class IntentCreateParams extends ApiRequestParams {
               this.v1SubscriptionDetails);
         }
 
-        /**
-         * Configuration for the billing details. If not specified, see the default behavior for
-         * individual attributes.
-         */
-        public Builder setBillingDetails(
-            IntentCreateParams.Action.Subscribe.BillingDetails billingDetails) {
-          this.billingDetails = billingDetails;
+        /** Allows users to override the collect at behavior. */
+        public Builder setCollectAt(IntentCreateParams.Action.Subscribe.CollectAt collectAt) {
+          this.collectAt = collectAt;
           return this;
         }
 
@@ -1992,97 +2563,6 @@ public class IntentCreateParams extends ApiRequestParams {
             IntentCreateParams.Action.Subscribe.V1SubscriptionDetails v1SubscriptionDetails) {
           this.v1SubscriptionDetails = v1SubscriptionDetails;
           return this;
-        }
-      }
-
-      @Getter
-      @EqualsAndHashCode(callSuper = false)
-      public static class BillingDetails {
-        /**
-         * Map of extra parameters for custom features not available in this client library. The
-         * content in this map is not serialized under this field's {@code @SerializedName} value.
-         * Instead, each key/value pair is serialized as if the key is a root-level field
-         * (serialized) name in this param object. Effectively, this map is flattened to its parent
-         * instance.
-         */
-        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-        Map<String, Object> extraParams;
-
-        /** This controls the proration adjustment for the partial servicing period. */
-        @SerializedName("proration_behavior")
-        ProrationBehavior prorationBehavior;
-
-        private BillingDetails(
-            Map<String, Object> extraParams, ProrationBehavior prorationBehavior) {
-          this.extraParams = extraParams;
-          this.prorationBehavior = prorationBehavior;
-        }
-
-        public static Builder builder() {
-          return new Builder();
-        }
-
-        public static class Builder {
-          private Map<String, Object> extraParams;
-
-          private ProrationBehavior prorationBehavior;
-
-          /** Finalize and obtain parameter instance from this builder. */
-          public IntentCreateParams.Action.Subscribe.BillingDetails build() {
-            return new IntentCreateParams.Action.Subscribe.BillingDetails(
-                this.extraParams, this.prorationBehavior);
-          }
-
-          /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link IntentCreateParams.Action.Subscribe.BillingDetails#extraParams} for the
-           * field documentation.
-           */
-          public Builder putExtraParam(String key, Object value) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.put(key, value);
-            return this;
-          }
-
-          /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-           * map. See {@link IntentCreateParams.Action.Subscribe.BillingDetails#extraParams} for the
-           * field documentation.
-           */
-          public Builder putAllExtraParam(Map<String, Object> map) {
-            if (this.extraParams == null) {
-              this.extraParams = new HashMap<>();
-            }
-            this.extraParams.putAll(map);
-            return this;
-          }
-
-          /** This controls the proration adjustment for the partial servicing period. */
-          public Builder setProrationBehavior(
-              IntentCreateParams.Action.Subscribe.BillingDetails.ProrationBehavior
-                  prorationBehavior) {
-            this.prorationBehavior = prorationBehavior;
-            return this;
-          }
-        }
-
-        public enum ProrationBehavior implements ApiRequestParams.EnumParam {
-          @SerializedName("no_adjustment")
-          NO_ADJUSTMENT("no_adjustment"),
-
-          @SerializedName("prorated_adjustment")
-          PRORATED_ADJUSTMENT("prorated_adjustment");
-
-          @Getter(onMethod_ = {@Override})
-          private final String value;
-
-          ProrationBehavior(String value) {
-            this.value = value;
-          }
         }
       }
 
@@ -2224,6 +2704,10 @@ public class IntentCreateParams extends ApiRequestParams {
         @SerializedName("metadata")
         Map<String, String> metadata;
 
+        /** Allows users to override the partial period behavior. */
+        @SerializedName("overrides")
+        Overrides overrides;
+
         /** <strong>Required.</strong> ID of the Pricing Plan to subscribe to. */
         @SerializedName("pricing_plan")
         String pricingPlan;
@@ -2239,11 +2723,13 @@ public class IntentCreateParams extends ApiRequestParams {
                 componentConfigurations,
             Map<String, Object> extraParams,
             Map<String, String> metadata,
+            Overrides overrides,
             String pricingPlan,
             String pricingPlanVersion) {
           this.componentConfigurations = componentConfigurations;
           this.extraParams = extraParams;
           this.metadata = metadata;
+          this.overrides = overrides;
           this.pricingPlan = pricingPlan;
           this.pricingPlanVersion = pricingPlanVersion;
         }
@@ -2262,6 +2748,8 @@ public class IntentCreateParams extends ApiRequestParams {
 
           private Map<String, String> metadata;
 
+          private Overrides overrides;
+
           private String pricingPlan;
 
           private String pricingPlanVersion;
@@ -2272,6 +2760,7 @@ public class IntentCreateParams extends ApiRequestParams {
                 this.componentConfigurations,
                 this.extraParams,
                 this.metadata,
+                this.overrides,
                 this.pricingPlan,
                 this.pricingPlanVersion);
           }
@@ -2369,6 +2858,14 @@ public class IntentCreateParams extends ApiRequestParams {
               this.metadata = new HashMap<>();
             }
             this.metadata.putAll(map);
+            return this;
+          }
+
+          /** Allows users to override the partial period behavior. */
+          public Builder setOverrides(
+              IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                  overrides) {
+            this.overrides = overrides;
             return this;
           }
 
@@ -2489,6 +2986,336 @@ public class IntentCreateParams extends ApiRequestParams {
             public Builder setQuantity(Long quantity) {
               this.quantity = quantity;
               return this;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Overrides {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** <strong>Required.</strong> Override for the partial period behavior. */
+          @SerializedName("partial_period_behaviors")
+          List<
+                  IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                      .PartialPeriodBehavior>
+              partialPeriodBehaviors;
+
+          private Overrides(
+              Map<String, Object> extraParams,
+              List<
+                      IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior>
+                  partialPeriodBehaviors) {
+            this.extraParams = extraParams;
+            this.partialPeriodBehaviors = partialPeriodBehaviors;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private List<
+                    IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior>
+                partialPeriodBehaviors;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                build() {
+              return new IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails
+                  .Overrides(this.extraParams, this.partialPeriodBehaviors);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * Add an element to `partialPeriodBehaviors` list. A list is initialized for the first
+             * `add/addAll` call, and subsequent calls adds additional elements to the original
+             * list. See {@link
+             * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides#partialPeriodBehaviors}
+             * for the field documentation.
+             */
+            public Builder addPartialPeriodBehavior(
+                IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior
+                    element) {
+              if (this.partialPeriodBehaviors == null) {
+                this.partialPeriodBehaviors = new ArrayList<>();
+              }
+              this.partialPeriodBehaviors.add(element);
+              return this;
+            }
+
+            /**
+             * Add all elements to `partialPeriodBehaviors` list. A list is initialized for the
+             * first `add/addAll` call, and subsequent calls adds additional elements to the
+             * original list. See {@link
+             * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides#partialPeriodBehaviors}
+             * for the field documentation.
+             */
+            public Builder addAllPartialPeriodBehavior(
+                List<
+                        IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior>
+                    elements) {
+              if (this.partialPeriodBehaviors == null) {
+                this.partialPeriodBehaviors = new ArrayList<>();
+              }
+              this.partialPeriodBehaviors.addAll(elements);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class PartialPeriodBehavior {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Override for the license fee. */
+            @SerializedName("license_fee")
+            LicenseFee licenseFee;
+
+            /** <strong>Required.</strong> Type of the partial period behavior override. */
+            @SerializedName("type")
+            Type type;
+
+            private PartialPeriodBehavior(
+                Map<String, Object> extraParams, LicenseFee licenseFee, Type type) {
+              this.extraParams = extraParams;
+              this.licenseFee = licenseFee;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private LicenseFee licenseFee;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                      .PartialPeriodBehavior
+                  build() {
+                return new IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails
+                    .Overrides.PartialPeriodBehavior(this.extraParams, this.licenseFee, this.type);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Override for the license fee. */
+              public Builder setLicenseFee(
+                  IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.LicenseFee
+                      licenseFee) {
+                this.licenseFee = licenseFee;
+                return this;
+              }
+
+              /** <strong>Required.</strong> Type of the partial period behavior override. */
+              public Builder setType(
+                  IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                          .PartialPeriodBehavior.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class LicenseFee {
+              /**
+               * <strong>Required.</strong> The proration behavior for the partial servicing period.
+               * Defines how we prorate the license fee when the user is subscribing.
+               */
+              @SerializedName("debit_proration_behavior")
+              DebitProrationBehavior debitProrationBehavior;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              private LicenseFee(
+                  DebitProrationBehavior debitProrationBehavior, Map<String, Object> extraParams) {
+                this.debitProrationBehavior = debitProrationBehavior;
+                this.extraParams = extraParams;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private DebitProrationBehavior debitProrationBehavior;
+
+                private Map<String, Object> extraParams;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                        .PartialPeriodBehavior.LicenseFee
+                    build() {
+                  return new IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails
+                      .Overrides.PartialPeriodBehavior.LicenseFee(
+                      this.debitProrationBehavior, this.extraParams);
+                }
+
+                /**
+                 * <strong>Required.</strong> The proration behavior for the partial servicing
+                 * period. Defines how we prorate the license fee when the user is subscribing.
+                 */
+                public Builder setDebitProrationBehavior(
+                    IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides
+                            .PartialPeriodBehavior.LicenseFee.DebitProrationBehavior
+                        debitProrationBehavior) {
+                  this.debitProrationBehavior = debitProrationBehavior;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.LicenseFee#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * IntentCreateParams.Action.Subscribe.PricingPlanSubscriptionDetails.Overrides.PartialPeriodBehavior.LicenseFee#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+              }
+
+              public enum DebitProrationBehavior implements ApiRequestParams.EnumParam {
+                @SerializedName("none")
+                NONE("none"),
+
+                @SerializedName("prorated")
+                PRORATED("prorated");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                DebitProrationBehavior(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("license_fee")
+              LICENSE_FEE("license_fee");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
             }
           }
         }
@@ -2786,6 +3613,21 @@ public class IntentCreateParams extends ApiRequestParams {
               return this;
             }
           }
+        }
+      }
+
+      public enum CollectAt implements ApiRequestParams.EnumParam {
+        @SerializedName("next_billing_date")
+        NEXT_BILLING_DATE("next_billing_date"),
+
+        @SerializedName("on_effective_at")
+        ON_EFFECTIVE_AT("on_effective_at");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        CollectAt(String value) {
+          this.value = value;
         }
       }
 

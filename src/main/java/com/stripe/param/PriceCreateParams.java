@@ -73,7 +73,7 @@ public class PriceCreateParams extends ApiRequestParams {
   String lookupKey;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -102,7 +102,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
   /**
    * Only required if a <a
-   * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+   * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
    * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
    * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
    * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -449,7 +449,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
     /**
      * Only required if a <a
-     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
      * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
      * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
      * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -556,7 +556,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
     /**
      * Only required if a <a
-     * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+     * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
      * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price is
      * considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
      * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -668,7 +668,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1204,7 +1204,7 @@ public class PriceCreateParams extends ApiRequestParams {
     String id;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -1228,7 +1228,7 @@ public class PriceCreateParams extends ApiRequestParams {
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     @SerializedName("tax_code")
     String taxCode;
 
@@ -1379,7 +1379,7 @@ public class PriceCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       public Builder setTaxCode(String taxCode) {
         this.taxCode = taxCode;
         return this;
@@ -1429,7 +1429,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
     /**
      * Default number of trial days when subscribing a customer to this price using <a
-     * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+     * href="https://docs.stripe.com/api#create_subscription-trial_from_plan">{@code
      * trial_from_plan=true}</a>.
      */
     @SerializedName("trial_period_days")
@@ -1540,7 +1540,7 @@ public class PriceCreateParams extends ApiRequestParams {
 
       /**
        * Default number of trial days when subscribing a customer to this price using <a
-       * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+       * href="https://docs.stripe.com/api#create_subscription-trial_from_plan">{@code
        * trial_from_plan=true}</a>.
        */
       public Builder setTrialPeriodDays(Long trialPeriodDays) {

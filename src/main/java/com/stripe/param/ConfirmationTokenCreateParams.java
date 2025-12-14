@@ -47,7 +47,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
    * Indicates that you intend to make future payments with this ConfirmationToken's payment method.
    *
    * <p>The presence of this property will <a
-   * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a> to
+   * href="https://docs.stripe.com/payments/save-during-payment">attach the payment method</a> to
    * the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required
    * actions from the user are complete.
    */
@@ -194,7 +194,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
      * method.
      *
      * <p>The presence of this property will <a
-     * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a> to
+     * href="https://docs.stripe.com/payments/save-during-payment">attach the payment method</a> to
      * the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any
      * required actions from the user are complete.
      */
@@ -441,7 +441,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     MbWay mbWay;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -555,7 +555,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
     Qris qris;
 
     /**
-     * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+     * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
      * Session</a> for more information.
      */
     @SerializedName("radar_options")
@@ -1472,7 +1472,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+       * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
        * Session</a> for more information.
        */
       public Builder setRadarOptions(
@@ -2494,7 +2494,10 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -2609,7 +2612,10 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -3647,6 +3653,9 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
 
         @SerializedName("knab")
         KNAB("knab"),
+
+        @SerializedName("mollie")
+        MOLLIE("mollie"),
 
         @SerializedName("moneyou")
         MONEYOU("moneyou"),
@@ -5368,7 +5377,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+       * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
        * the browser metadata and device details that help Radar make more accurate predictions on
        * your payments.
        */
@@ -5424,7 +5433,7 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot
+         * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot
          * of the browser metadata and device details that help Radar make more accurate predictions
          * on your payments.
          */
@@ -7249,7 +7258,10 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -7362,7 +7374,10 @@ public class ConfirmationTokenCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;

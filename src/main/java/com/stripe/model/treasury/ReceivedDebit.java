@@ -23,8 +23,8 @@ import lombok.Setter;
 
 /**
  * ReceivedDebits represent funds pulled from a <a
- * href="https://stripe.com/docs/api#financial_accounts">FinancialAccount</a>. These are not
- * initiated from the FinancialAccount.
+ * href="https://api.stripe.com#financial_accounts">FinancialAccount</a>. These are not initiated
+ * from the FinancialAccount.
  */
 @Getter
 @Setter
@@ -64,7 +64,7 @@ public class ReceivedDebit extends ApiResource implements HasId {
   String financialAccount;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * A <a href="https://docs.stripe.com/treasury/moving-money/regulatory-receipts">hosted
    * transaction receipt</a> URL that is provided when money movement is considered regulated under
    * Stripe's money transmission licenses.
    */
@@ -253,7 +253,7 @@ public class ReceivedDebit extends ApiResource implements HasId {
 
     /**
      * Set when {@code type} is {@code issuing_card}. This is an <a
-     * href="https://stripe.com/docs/api#issuing_cards">Issuing Card</a> ID.
+     * href="https://api.stripe.com#issuing_cards">Issuing Card</a> ID.
      */
     @SerializedName("issuing_card")
     String issuingCard;
@@ -354,21 +354,21 @@ public class ReceivedDebit extends ApiResource implements HasId {
 
     /**
      * Set if the ReceivedDebit was created due to an <a
-     * href="https://stripe.com/docs/api#issuing_authorizations">Issuing Authorization</a> object.
+     * href="https://api.stripe.com#issuing_authorizations">Issuing Authorization</a> object.
      */
     @SerializedName("issuing_authorization")
     String issuingAuthorization;
 
     /**
      * Set if the ReceivedDebit is also viewable as an <a
-     * href="https://stripe.com/docs/api#issuing_disputes">Issuing Dispute</a> object.
+     * href="https://api.stripe.com#issuing_disputes">Issuing Dispute</a> object.
      */
     @SerializedName("issuing_transaction")
     String issuingTransaction;
 
     /**
      * Set if the ReceivedDebit was created due to a <a
-     * href="https://stripe.com/docs/api#payouts">Payout</a> object.
+     * href="https://api.stripe.com#payouts">Payout</a> object.
      */
     @SerializedName("payout")
     String payout;

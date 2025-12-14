@@ -37,7 +37,7 @@ import lombok.Setter;
  * lifetime as it progresses through the verification flow. The VerificationSession contains the
  * user's verified data after verification checks are complete.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/identity/verification-sessions">The
+ * <p>Related guide: <a href="https://docs.stripe.com/identity/verification-sessions">The
  * Verification Sessions API</a>
  */
 @Getter
@@ -54,11 +54,11 @@ public class VerificationSession extends ApiResource
 
   /**
    * The short-lived client secret used by Stripe.js to <a
-   * href="https://stripe.com/docs/js/identity/modal">show a verification modal</a> inside your app.
+   * href="https://docs.stripe.com/js/identity/modal">show a verification modal</a> inside your app.
    * This client secret expires after 24 hours and can only be used once. Don’t store it, log it,
    * embed it in a URL, or expose it to anyone other than the user. Make sure that you have TLS
    * enabled on any page that includes the client secret. Refer to our docs on <a
-   * href="https://stripe.com/docs/identity/verification-sessions#client-secret">passing the client
+   * href="https://docs.stripe.com/identity/verification-sessions#client-secret">passing the client
    * secret to the frontend</a> to learn more.
    */
   @SerializedName("client_secret")
@@ -82,7 +82,7 @@ public class VerificationSession extends ApiResource
 
   /**
    * ID of the most recent VerificationReport. <a
-   * href="https://stripe.com/docs/identity/verification-sessions#results">Learn more about
+   * href="https://docs.stripe.com/identity/verification-sessions#results">Learn more about
    * accessing detailed verification results.</a>
    */
   @SerializedName("last_verification_report")
@@ -98,7 +98,7 @@ public class VerificationSession extends ApiResource
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -133,7 +133,7 @@ public class VerificationSession extends ApiResource
   @SerializedName("related_customer")
   String relatedCustomer;
 
-  /** Token referencing a Customer Account resource. */
+  /** The ID of the Account representing a customer. */
   @SerializedName("related_customer_account")
   String relatedCustomerAccount;
 
@@ -142,7 +142,7 @@ public class VerificationSession extends ApiResource
 
   /**
    * Status of this VerificationSession. <a
-   * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
+   * href="https://docs.stripe.com/identity/how-sessions-work">Learn more about the lifecycle of
    * sessions</a>.
    *
    * <p>One of {@code canceled}, {@code processing}, {@code requires_input}, or {@code verified}.
@@ -151,7 +151,7 @@ public class VerificationSession extends ApiResource
   String status;
 
   /**
-   * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
+   * The type of <a href="https://docs.stripe.com/identity/verification-checks">verification
    * check</a> to be performed.
    *
    * <p>One of {@code document}, {@code id_number}, or {@code verification_flow}.
@@ -163,7 +163,7 @@ public class VerificationSession extends ApiResource
    * The short-lived URL that you use to redirect a user to Stripe to submit their identity
    * information. This URL expires after 48 hours and can only be used once. Don’t store it, log it,
    * send it in emails or expose it to anyone other than the user. Refer to our docs on <a
-   * href="https://stripe.com/docs/identity/verify-identity-documents?platform=web&amp;type=redirect">verifying
+   * href="https://docs.stripe.com/identity/verify-identity-documents?platform=web&amp;type=redirect">verifying
    * identity documents</a> to learn how to redirect users to Stripe.
    */
   @SerializedName("url")
@@ -748,7 +748,7 @@ public class VerificationSession extends ApiResource
 
       /**
        * Collect an ID number and perform an <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+       * href="https://docs.stripe.com/identity/verification-checks?type=id-number">ID number
        * check</a> with the document’s extracted name and date of birth.
        */
       @SerializedName("require_id_number")
@@ -763,9 +763,9 @@ public class VerificationSession extends ApiResource
 
       /**
        * Capture a face image and perform a <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+       * href="https://docs.stripe.com/identity/verification-checks?type=selfie">selfie check</a>
        * comparing a photo ID and a picture of your user’s face. <a
-       * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+       * href="https://docs.stripe.com/identity/selfie">Learn more</a>.
        */
       @SerializedName("require_matching_selfie")
       Boolean requireMatchingSelfie;

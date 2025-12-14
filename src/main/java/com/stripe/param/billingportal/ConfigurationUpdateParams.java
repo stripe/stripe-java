@@ -25,7 +25,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   /**
    * The default URL to redirect customers to when they click on the portal's link to return to your
    * website. This can be <a
-   * href="https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
+   * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
    * when creating the session.
    */
   @SerializedName("default_return_url")
@@ -57,7 +57,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   LoginPage loginPage;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -142,7 +142,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /**
      * The default URL to redirect customers to when they click on the portal's link to return to
      * your website. This can be <a
-     * href="https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
+     * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
      * when creating the session.
      */
     public Builder setDefaultReturnUrl(String defaultReturnUrl) {
@@ -153,7 +153,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /**
      * The default URL to redirect customers to when they click on the portal's link to return to
      * your website. This can be <a
-     * href="https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
+     * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
      * when creating the session.
      */
     public Builder setDefaultReturnUrl(EmptyParam defaultReturnUrl) {
@@ -259,7 +259,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -270,7 +270,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -1248,6 +1248,16 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionUpdate {
       /**
+       * Determines the value to use for the billing cycle anchor on subscription updates. Valid
+       * values are {@code now} or {@code unchanged}, and the default value is {@code unchanged}.
+       * Setting the value to {@code now} resets the subscription's billing cycle anchor to the
+       * current time (in UTC). For more information, see the billing cycle <a
+       * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
+       */
+      @SerializedName("billing_cycle_anchor")
+      BillingCycleAnchor billingCycleAnchor;
+
+      /**
        * The types of subscription updates that are supported. When empty, subscriptions are not
        * updateable.
        */
@@ -1290,6 +1300,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       TrialUpdateBehavior trialUpdateBehavior;
 
       private SubscriptionUpdate(
+          BillingCycleAnchor billingCycleAnchor,
           Object defaultAllowedUpdates,
           Boolean enabled,
           Map<String, Object> extraParams,
@@ -1297,6 +1308,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
           ProrationBehavior prorationBehavior,
           ScheduleAtPeriodEnd scheduleAtPeriodEnd,
           TrialUpdateBehavior trialUpdateBehavior) {
+        this.billingCycleAnchor = billingCycleAnchor;
         this.defaultAllowedUpdates = defaultAllowedUpdates;
         this.enabled = enabled;
         this.extraParams = extraParams;
@@ -1311,6 +1323,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private BillingCycleAnchor billingCycleAnchor;
+
         private Object defaultAllowedUpdates;
 
         private Boolean enabled;
@@ -1328,6 +1342,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public ConfigurationUpdateParams.Features.SubscriptionUpdate build() {
           return new ConfigurationUpdateParams.Features.SubscriptionUpdate(
+              this.billingCycleAnchor,
               this.defaultAllowedUpdates,
               this.enabled,
               this.extraParams,
@@ -1335,6 +1350,20 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
               this.prorationBehavior,
               this.scheduleAtPeriodEnd,
               this.trialUpdateBehavior);
+        }
+
+        /**
+         * Determines the value to use for the billing cycle anchor on subscription updates. Valid
+         * values are {@code now} or {@code unchanged}, and the default value is {@code unchanged}.
+         * Setting the value to {@code now} resets the subscription's billing cycle anchor to the
+         * current time (in UTC). For more information, see the billing cycle <a
+         * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
+         */
+        public Builder setBillingCycleAnchor(
+            ConfigurationUpdateParams.Features.SubscriptionUpdate.BillingCycleAnchor
+                billingCycleAnchor) {
+          this.billingCycleAnchor = billingCycleAnchor;
+          return this;
         }
 
         /**
@@ -2000,6 +2029,21 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
         }
       }
 
+      public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
+        @SerializedName("now")
+        NOW("now"),
+
+        @SerializedName("unchanged")
+        UNCHANGED("unchanged");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        BillingCycleAnchor(String value) {
+          this.value = value;
+        }
+      }
+
       public enum DefaultAllowedUpdate implements ApiRequestParams.EnumParam {
         @SerializedName("price")
         PRICE("price"),
@@ -2058,7 +2102,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   public static class LoginPage {
     /**
      * <strong>Required.</strong> Set to {@code true} to generate a shareable URL <a
-     * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
+     * href="https://docs.stripe.com/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
      * login_page.url}</a> that will take your customers to a hosted login page for the customer
      * portal.
      *
@@ -2097,7 +2141,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Set to {@code true} to generate a shareable URL <a
-       * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
+       * href="https://docs.stripe.com/api/customer_portal/configuration#portal_configuration_object-login_page-url">{@code
        * login_page.url}</a> that will take your customers to a hosted login page for the customer
        * portal.
        *

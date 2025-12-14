@@ -23,12 +23,12 @@ import lombok.Setter;
  * Invoices are statements of amounts owed by a customer, and are either generated one-off, or
  * generated periodically from a subscription.
  *
- * <p>They contain <a href="https://stripe.com/docs/api#invoiceitems">invoice items</a>, and
- * proration adjustments that may be caused by subscription upgrades/downgrades (if necessary).
+ * <p>They contain <a href="https://api.stripe.com#invoiceitems">invoice items</a>, and proration
+ * adjustments that may be caused by subscription upgrades/downgrades (if necessary).
  *
  * <p>If your invoice is configured to be billed through automatic charges, Stripe automatically
  * finalizes your invoice and attempts payment. Note that finalizing the invoice, <a
- * href="https://stripe.com/docs/invoicing/integration/automatic-advancement-collection">when
+ * href="https://docs.stripe.com/invoicing/integration/automatic-advancement-collection">when
  * automatic</a>, does not happen immediately as the invoice is created. Stripe waits until one hour
  * after the last webhook was successfully sent (or the last webhook timed out after failing). If
  * you (and the platforms you may have connected to) have no webhooks configured, Stripe waits one
@@ -47,9 +47,9 @@ import lombok.Setter;
  * the customer's credit balance which is applied to the next invoice.
  *
  * <p>More details on the customer's credit balance are <a
- * href="https://stripe.com/docs/billing/customer/balance">here</a>.
+ * href="https://docs.stripe.com/billing/customer/balance">here</a>.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/billing/invoices/sending">Send invoices to
+ * <p>Related guide: <a href="https://docs.stripe.com/billing/invoices/sending">Send invoices to
  * customers</a>
  */
 @Getter
@@ -203,7 +203,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   @SerializedName("custom_fields")
   List<QuotePreviewInvoice.CustomField> customFields;
 
-  /** The ID of the account who will be billed. */
+  /** The ID of the account representing the customer to bill. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -333,7 +333,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
 
   /**
    * Details of the invoice that was cloned. See the <a
-   * href="https://stripe.com/docs/invoicing/invoice-revisions">revision documentation</a> for more
+   * href="https://docs.stripe.com/invoicing/invoice-revisions">revision documentation</a> for more
    * details.
    */
   @SerializedName("from_invoice")
@@ -381,7 +381,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -413,7 +413,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   /**
    * The account (if any) for which the funds of the invoice payment are intended. If set, the
    * invoice will be presented with the branding and support information of the specified account.
-   * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+   * See the <a href="https://docs.stripe.com/billing/invoices/connect">Invoices with Connect</a>
    * documentation for details.
    */
   @SerializedName("on_behalf_of")
@@ -495,7 +495,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   /**
    * The status of the invoice, one of {@code draft}, {@code open}, {@code paid}, {@code
    * uncollectible}, or {@code void}. <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
+   * href="https://docs.stripe.com/billing/invoices/workflow#workflow-overview">Learn more</a>
    */
   @SerializedName("status")
   String status;
@@ -564,7 +564,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
   /**
    * Invoices are automatically paid or sent 1 hour after webhooks are delivered, or until all
    * webhook delivery attempts have <a
-   * href="https://stripe.com/docs/billing/webhooks#understand">been exhausted</a>. This field
+   * href="https://docs.stripe.com/billing/webhooks#understand">been exhausted</a>. This field
    * tracks the time when webhooks for this invoice were successfully delivered. If the invoice had
    * no webhooks to deliver, this will be set while the invoice is being created.
    */
@@ -958,7 +958,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     /**
      * Whether Stripe automatically computes tax on this invoice. Note that incompatible invoice
      * items (invoice items with manually specified <a
-     * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+     * href="https://docs.stripe.com/api/tax_rates">tax rates</a>, negative amounts, or {@code
      * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
      */
     @SerializedName("enabled")
@@ -1261,7 +1261,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionDetails extends StripeObject {
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> defined as
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> defined as
        * subscription metadata when an invoice is created. Becomes an immutable snapshot of the
        * subscription metadata at the time of invoice finalization. <em>Note: This attribute is
        * populated only for invoices created on or after June 29, 2023.</em>
@@ -1272,7 +1272,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       /**
        * If specified, payment collection for this subscription will be paused. Note that the
        * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-       * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+       * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
        * collection</a>.
        */
       @SerializedName("pause_collection")
@@ -1412,6 +1412,13 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       Konbini konbini;
 
       /**
+       * If paying by {@code payto}, this sub-hash contains details about the PayTo payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("payto")
+      Payto payto;
+
+      /**
        * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
        * options to pass to the invoice’s PaymentIntent.
        */
@@ -1508,10 +1515,10 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
-         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. Read our guide on <a
-         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
          * requesting 3D Secure</a> for more information on how this configuration interacts with
          * Radar and our SCA Engine.
          *
@@ -1610,6 +1617,53 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Konbini extends StripeObject {}
+
+      /**
+       * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Payto extends StripeObject {
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        /**
+         * For more details about MandateOptions, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions extends StripeObject {
+          /**
+           * The maximum amount that can be collected in a single invoice. If you don't specify a
+           * maximum, then there is no limit.
+           */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Only {@code maximum} is supported.
+           *
+           * <p>One of {@code fixed}, or {@code maximum}.
+           */
+          @SerializedName("amount_type")
+          String amountType;
+
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           *
+           * <p>One of {@code dependant_support}, {@code government}, {@code loan}, {@code
+           * mortgage}, {@code other}, {@code pension}, {@code personal}, {@code retail}, {@code
+           * salary}, {@code tax}, or {@code utility}.
+           */
+          @SerializedName("purpose")
+          String purpose;
+        }
+      }
 
       /**
        * For more details about Pix, please refer to the <a href="https://docs.stripe.com/api">API
@@ -2175,6 +2229,7 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxRateDetails extends StripeObject {
+      /** ID of the tax rate. */
       @SerializedName("tax_rate")
       String taxRate;
     }

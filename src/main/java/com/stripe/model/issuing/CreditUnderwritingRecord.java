@@ -30,7 +30,7 @@ import lombok.Setter;
  * account.
  *
  * <p><a
- * href="https://stripe.com/docs/issuing/credit/report-credit-decisions-and-manage-aans">Follow the
+ * href="https://docs.stripe.com/issuing/credit/report-credit-decisions-and-manage-aans">Follow the
  * guide</a> to learn about your requirements as a platform.
  */
 @Getter
@@ -84,7 +84,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -102,7 +102,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
   /**
    * File containing regulatory reporting data for the decision. Required if you are subject to this
    * <a
-   * href="https://stripe.com/docs/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
+   * href="https://docs.stripe.com/issuing/credit/report-required-regulatory-data-for-credit-decisions">reporting
    * requirement</a>.
    */
   @SerializedName("regulatory_reporting_file")
@@ -519,7 +519,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
     public static class CreditLimitApproved extends StripeObject {
       /**
        * Credit amount approved. An approved credit limit is required before you can set a amount in
-       * the <a href="https://stripe.com/docs/api/issuing/credit_policy">CreditPolicy API</a>.
+       * the <a href="https://docs.stripe.com/api/issuing/credit_policy">CreditPolicy API</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -544,7 +544,7 @@ public class CreditUnderwritingRecord extends ApiResource implements HasId {
       /**
        * Credit amount approved after decrease. An approved credit limit is required before you can
        * set a amount in the <a
-       * href="https://stripe.com/docs/api/issuing/credit_policy">CreditPolicy API</a>.
+       * href="https://docs.stripe.com/api/issuing/credit_policy">CreditPolicy API</a>.
        */
       @SerializedName("amount")
       Long amount;

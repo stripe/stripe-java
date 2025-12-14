@@ -24,7 +24,7 @@ import lombok.Setter;
  * Refund objects allow you to refund a previously created charge that isn't refunded yet. Funds are
  * refunded to the credit or debit card that's initially charged.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/refunds">Refunds</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/refunds">Refunds</a>
  */
 @Getter
 @Setter
@@ -97,7 +97,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   String instructionsEmail;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -161,7 +161,7 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   /**
    * Status of the refund. This can be {@code pending}, {@code requires_action}, {@code succeeded},
    * {@code failed}, or {@code canceled}. Learn more about <a
-   * href="https://stripe.com/docs/refunds#failed-refunds">failed refunds</a>.
+   * href="https://docs.stripe.com/refunds#failed-refunds">failed refunds</a>.
    */
   @SerializedName("status")
   String status;

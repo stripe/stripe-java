@@ -4,7 +4,6 @@ package com.stripe.param.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -334,14 +333,20 @@ public class AccountUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The Merchant configuration allows the Account to act as a connected account and collect
-     * payments facilitated by a Connect platform. You can add this configuration to your connected
-     * accounts only if you’ve completed onboarding as a Connect platform.
+     * Enables the Account to act as a connected account and collect payments facilitated by a
+     * Connect platform. You must onboard your platform to Connect before you can add this
+     * configuration to your connected accounts. Utilize this configuration when the Account will be
+     * the Merchant of Record, like with Direct charges or Destination Charges with on_behalf_of
+     * set.
      */
     @SerializedName("merchant")
     Merchant merchant;
 
-    /** The Recipient Configuration allows the Account to receive funds. */
+    /**
+     * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
+     * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
+     * Transfers, or Destination Charges without on_behalf_of set.
+     */
     @SerializedName("recipient")
     Recipient recipient;
 
@@ -434,16 +439,22 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The Merchant configuration allows the Account to act as a connected account and collect
-       * payments facilitated by a Connect platform. You can add this configuration to your
-       * connected accounts only if you’ve completed onboarding as a Connect platform.
+       * Enables the Account to act as a connected account and collect payments facilitated by a
+       * Connect platform. You must onboard your platform to Connect before you can add this
+       * configuration to your connected accounts. Utilize this configuration when the Account will
+       * be the Merchant of Record, like with Direct charges or Destination Charges with
+       * on_behalf_of set.
        */
       public Builder setMerchant(AccountUpdateParams.Configuration.Merchant merchant) {
         this.merchant = merchant;
         return this;
       }
 
-      /** The Recipient Configuration allows the Account to receive funds. */
+      /**
+       * The Recipient Configuration allows the Account to receive funds. Utilize this configuration
+       * if the Account will not be the Merchant of Record, like with Separate Charges &amp;
+       * Transfers, or Destination Charges without on_behalf_of set.
+       */
       public Builder setRecipient(AccountUpdateParams.Configuration.Recipient recipient) {
         this.recipient = recipient;
         return this;
@@ -1893,9 +1904,9 @@ public class AccountUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class AutomaticIndirectTax {
         /**
-         * Describes the customer's tax exemption status, which is {@code none}, {@code exempt}, or
-         * {@code reverse}. When set to reverse, invoice and receipt PDFs include the following
-         * text: “Reverse charge”.
+         * The customer account's tax exemption status: {@code none}, {@code exempt}, or {@code
+         * reverse}. When {@code reverse}, invoice and receipt PDFs include &quot;Reverse
+         * charge&quot;.
          */
         @SerializedName("exempt")
         Exempt exempt;
@@ -1917,16 +1928,15 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object ipAddress;
 
         /**
-         * The data source used to identify the customer's tax location - defaults to {@code
-         * identity_address}. Will only be used for automatic tax calculation on the customer's
-         * Invoices and Subscriptions. This behavior is now deprecated for new users.
+         * Data source used to identify the customer account's tax location. Defaults to {@code
+         * identity_address}. Used for automatic indirect tax calculation.
          */
         @SerializedName("location_source")
         LocationSource locationSource;
 
         /**
          * A per-request flag that indicates when Stripe should validate the customer tax location -
-         * defaults to 'auto'.
+         * defaults to {@code auto}.
          */
         @SerializedName("validate_location")
         ValidateLocation validateLocation;
@@ -1970,9 +1980,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * Describes the customer's tax exemption status, which is {@code none}, {@code exempt},
-           * or {@code reverse}. When set to reverse, invoice and receipt PDFs include the following
-           * text: “Reverse charge”.
+           * The customer account's tax exemption status: {@code none}, {@code exempt}, or {@code
+           * reverse}. When {@code reverse}, invoice and receipt PDFs include &quot;Reverse
+           * charge&quot;.
            */
           public Builder setExempt(
               AccountUpdateParams.Configuration.Customer.AutomaticIndirectTax.Exempt exempt) {
@@ -2027,9 +2037,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The data source used to identify the customer's tax location - defaults to {@code
-           * identity_address}. Will only be used for automatic tax calculation on the customer's
-           * Invoices and Subscriptions. This behavior is now deprecated for new users.
+           * Data source used to identify the customer account's tax location. Defaults to {@code
+           * identity_address}. Used for automatic indirect tax calculation.
            */
           public Builder setLocationSource(
               AccountUpdateParams.Configuration.Customer.AutomaticIndirectTax.LocationSource
@@ -2040,7 +2049,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * A per-request flag that indicates when Stripe should validate the customer tax location
-           * - defaults to 'auto'.
+           * - defaults to {@code auto}.
            */
           public Builder setValidateLocation(
               AccountUpdateParams.Configuration.Customer.AutomaticIndirectTax.ValidateLocation
@@ -2112,8 +2121,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class Billing {
         /**
-         * ID of a payment method that’s attached to the customer, to be used as the customer’s
-         * default payment method for invoices and subscriptions.
+         * ID of a PaymentMethod attached to the customer account to use as the default for invoices
+         * and subscriptions.
          */
         @SerializedName("default_payment_method")
         Object defaultPaymentMethod;
@@ -2128,7 +2137,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /** Default settings used on invoices for this customer. */
+        /** Default invoice settings for the customer account. */
         @SerializedName("invoice")
         Invoice invoice;
 
@@ -2157,8 +2166,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a payment method that’s attached to the customer, to be used as the customer’s
-           * default payment method for invoices and subscriptions.
+           * ID of a PaymentMethod attached to the customer account to use as the default for
+           * invoices and subscriptions.
            */
           public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
             this.defaultPaymentMethod = defaultPaymentMethod;
@@ -2166,8 +2175,8 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * ID of a payment method that’s attached to the customer, to be used as the customer’s
-           * default payment method for invoices and subscriptions.
+           * ID of a PaymentMethod attached to the customer account to use as the default for
+           * invoices and subscriptions.
            */
           public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
             this.defaultPaymentMethod = defaultPaymentMethod;
@@ -2202,7 +2211,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Default settings used on invoices for this customer. */
+          /** Default invoice settings for the customer account. */
           public Builder setInvoice(
               AccountUpdateParams.Configuration.Customer.Billing.Invoice invoice) {
             this.invoice = invoice;
@@ -2230,22 +2239,22 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
           Map<String, Object> extraParams;
 
-          /** Default footer to be displayed on invoices for this customer. */
+          /** Default invoice footer. */
           @SerializedName("footer")
           Object footer;
 
-          /** The sequence to be used on the customer's next invoice. Defaults to 1. */
+          /** Sequence number to use on the customer account's next invoice. Defaults to 1. */
           @SerializedName("next_sequence")
           Long nextSequence;
 
           /**
-           * The prefix for the customer used to generate unique invoice numbers. Must be 3–12
-           * uppercase letters or numbers.
+           * Prefix used to generate unique invoice numbers. Must be 3-12 uppercase letters or
+           * numbers.
            */
           @SerializedName("prefix")
           Object prefix;
 
-          /** Default options for invoice PDF rendering for this customer. */
+          /** Default invoice PDF rendering options. */
           @SerializedName("rendering")
           Rendering rendering;
 
@@ -2357,27 +2366,27 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Default footer to be displayed on invoices for this customer. */
+            /** Default invoice footer. */
             public Builder setFooter(String footer) {
               this.footer = footer;
               return this;
             }
 
-            /** Default footer to be displayed on invoices for this customer. */
+            /** Default invoice footer. */
             public Builder setFooter(EmptyParam footer) {
               this.footer = footer;
               return this;
             }
 
-            /** The sequence to be used on the customer's next invoice. Defaults to 1. */
+            /** Sequence number to use on the customer account's next invoice. Defaults to 1. */
             public Builder setNextSequence(Long nextSequence) {
               this.nextSequence = nextSequence;
               return this;
             }
 
             /**
-             * The prefix for the customer used to generate unique invoice numbers. Must be 3–12
-             * uppercase letters or numbers.
+             * Prefix used to generate unique invoice numbers. Must be 3-12 uppercase letters or
+             * numbers.
              */
             public Builder setPrefix(String prefix) {
               this.prefix = prefix;
@@ -2385,15 +2394,15 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * The prefix for the customer used to generate unique invoice numbers. Must be 3–12
-             * uppercase letters or numbers.
+             * Prefix used to generate unique invoice numbers. Must be 3-12 uppercase letters or
+             * numbers.
              */
             public Builder setPrefix(EmptyParam prefix) {
               this.prefix = prefix;
               return this;
             }
 
-            /** Default options for invoice PDF rendering for this customer. */
+            /** Default invoice PDF rendering options. */
             public Builder setRendering(
                 AccountUpdateParams.Configuration.Customer.Billing.Invoice.Rendering rendering) {
               this.rendering = rendering;
@@ -2526,10 +2535,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @EqualsAndHashCode(callSuper = false)
           public static class Rendering {
             /**
-             * How line-item prices and amounts will be displayed with respect to tax on invoice
-             * PDFs. One of exclude_tax or include_inclusive_tax. include_inclusive_tax will include
-             * inclusive tax (and exclude exclusive tax) in invoice PDF amounts. exclude_tax will
-             * exclude all tax (inclusive and exclusive alike) from invoice PDF amounts.
+             * Indicates whether displayed line item prices and amounts on invoice PDFs include
+             * inclusive tax amounts. Must be either {@code include_inclusive_tax} or {@code
+             * exclude_tax}.
              */
             @SerializedName("amount_tax_display")
             AmountTaxDisplay amountTaxDisplay;
@@ -2575,11 +2583,9 @@ public class AccountUpdateParams extends ApiRequestParams {
               }
 
               /**
-               * How line-item prices and amounts will be displayed with respect to tax on invoice
-               * PDFs. One of exclude_tax or include_inclusive_tax. include_inclusive_tax will
-               * include inclusive tax (and exclude exclusive tax) in invoice PDF amounts.
-               * exclude_tax will exclude all tax (inclusive and exclusive alike) from invoice PDF
-               * amounts.
+               * Indicates whether displayed line item prices and amounts on invoice PDFs include
+               * inclusive tax amounts. Must be either {@code include_inclusive_tax} or {@code
+               * exclude_tax}.
                */
               public Builder setAmountTaxDisplay(
                   AccountUpdateParams.Configuration.Customer.Billing.Invoice.Rendering
@@ -3139,7 +3145,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("applied")
       Boolean applied;
 
-      /** Settings used for Bacs debit payments. */
+      /** Settings for Bacs Direct Debit payments. */
       @SerializedName("bacs_debit_payments")
       BacsDebitPayments bacsDebitPayments;
 
@@ -3172,8 +3178,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       KonbiniPayments konbiniPayments;
 
       /**
-       * The merchant category code for the merchant. MCCs are used to classify businesses based on
-       * the goods or services they provide.
+       * The Merchant Category Code (MCC) for the merchant. MCCs classify businesses based on the
+       * goods or services they provide.
        */
       @SerializedName("mcc")
       Object mcc;
@@ -3182,7 +3188,10 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("script_statement_descriptor")
       ScriptStatementDescriptor scriptStatementDescriptor;
 
-      /** Statement descriptor. */
+      /**
+       * Settings for the default <a
+       * href="https://stripe.com/connect/statement-descriptors">statement descriptor</a> text.
+       */
       @SerializedName("statement_descriptor")
       StatementDescriptor statementDescriptor;
 
@@ -3267,7 +3276,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Settings used for Bacs debit payments. */
+        /** Settings for Bacs Direct Debit payments. */
         public Builder setBacsDebitPayments(
             AccountUpdateParams.Configuration.Merchant.BacsDebitPayments bacsDebitPayments) {
           this.bacsDebitPayments = bacsDebitPayments;
@@ -3333,8 +3342,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The merchant category code for the merchant. MCCs are used to classify businesses based
-         * on the goods or services they provide.
+         * The Merchant Category Code (MCC) for the merchant. MCCs classify businesses based on the
+         * goods or services they provide.
          */
         public Builder setMcc(String mcc) {
           this.mcc = mcc;
@@ -3342,8 +3351,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The merchant category code for the merchant. MCCs are used to classify businesses based
-         * on the goods or services they provide.
+         * The Merchant Category Code (MCC) for the merchant. MCCs classify businesses based on the
+         * goods or services they provide.
          */
         public Builder setMcc(EmptyParam mcc) {
           this.mcc = mcc;
@@ -3358,7 +3367,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Statement descriptor. */
+        /**
+         * Settings for the default <a
+         * href="https://stripe.com/connect/statement-descriptors">statement descriptor</a> text.
+         */
         public Builder setStatementDescriptor(
             AccountUpdateParams.Configuration.Merchant.StatementDescriptor statementDescriptor) {
           this.statementDescriptor = statementDescriptor;
@@ -3375,7 +3387,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @Getter
       @EqualsAndHashCode(callSuper = false)
       public static class BacsDebitPayments {
-        /** Display name for Bacs debit payments. */
+        /** Display name for Bacs Direct Debit payments. */
         @SerializedName("display_name")
         Object displayName;
 
@@ -3409,13 +3421,13 @@ public class AccountUpdateParams extends ApiRequestParams {
                 this.displayName, this.extraParams);
           }
 
-          /** Display name for Bacs debit payments. */
+          /** Display name for Bacs Direct Debit payments. */
           public Builder setDisplayName(String displayName) {
             this.displayName = displayName;
             return this;
           }
 
-          /** Display name for Bacs debit payments. */
+          /** Display name for Bacs Direct Debit payments. */
           public Builder setDisplayName(EmptyParam displayName) {
             this.displayName = displayName;
             return this;
@@ -9192,7 +9204,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("state")
           Object state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           Object town;
 
@@ -9357,13 +9369,13 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(EmptyParam town) {
               this.town = town;
               return this;
@@ -9652,6 +9664,15 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
+           * Enables this Account to receive OutboundPayments to linked bank accounts over real time
+           * rails.
+           */
+          @SerializedName("instant")
+          com.stripe.param.v2.core.AccountUpdateParams.Configuration.Recipient.Capabilities
+                  .BankAccounts.Instant
+              instant;
+
+          /**
            * Enables this Account to receive OutboundPayments to linked bank accounts over local
            * networks.
            */
@@ -9662,8 +9683,15 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("wire")
           Wire wire;
 
-          private BankAccounts(Map<String, Object> extraParams, Local local, Wire wire) {
+          private BankAccounts(
+              Map<String, Object> extraParams,
+              com.stripe.param.v2.core.AccountUpdateParams.Configuration.Recipient.Capabilities
+                      .BankAccounts.Instant
+                  instant,
+              Local local,
+              Wire wire) {
             this.extraParams = extraParams;
+            this.instant = instant;
             this.local = local;
             this.wire = wire;
           }
@@ -9675,6 +9703,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           public static class Builder {
             private Map<String, Object> extraParams;
 
+            private com.stripe.param.v2.core.AccountUpdateParams.Configuration.Recipient
+                    .Capabilities.BankAccounts.Instant
+                instant;
+
             private Local local;
 
             private Wire wire;
@@ -9682,7 +9714,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             /** Finalize and obtain parameter instance from this builder. */
             public AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts build() {
               return new AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts(
-                  this.extraParams, this.local, this.wire);
+                  this.extraParams, this.instant, this.local, this.wire);
             }
 
             /**
@@ -9716,6 +9748,17 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
+             * Enables this Account to receive OutboundPayments to linked bank accounts over real
+             * time rails.
+             */
+            public Builder setInstant(
+                AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
+                    instant) {
+              this.instant = instant;
+              return this;
+            }
+
+            /**
              * Enables this Account to receive OutboundPayments to linked bank accounts over local
              * networks.
              */
@@ -9732,6 +9775,88 @@ public class AccountUpdateParams extends ApiRequestParams {
                 AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts.Wire wire) {
               this.wire = wire;
               return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Instant {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * To request a new Capability for an account, pass true. There can be a delay before
+             * the requested Capability becomes active.
+             */
+            @SerializedName("requested")
+            Boolean requested;
+
+            private Instant(Map<String, Object> extraParams, Boolean requested) {
+              this.extraParams = extraParams;
+              this.requested = requested;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private Boolean requested;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant
+                  build() {
+                return new AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts
+                    .Instant(this.extraParams, this.requested);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * AccountUpdateParams.Configuration.Recipient.Capabilities.BankAccounts.Instant#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * To request a new Capability for an account, pass true. There can be a delay before
+               * the requested Capability becomes active.
+               */
+              public Builder setRequested(Boolean requested) {
+                this.requested = requested;
+                return this;
+              }
             }
           }
 
@@ -10076,7 +10201,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * Allows the account to receive /v1/transfers into their Stripe Balance (/v1/balance).
+           * Enables this Account to receive /v1/transfers into their Stripe Balance (/v1/balance).
            */
           @SerializedName("stripe_transfers")
           StripeTransfers stripeTransfers;
@@ -10132,7 +10257,8 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Allows the account to receive /v1/transfers into their Stripe Balance (/v1/balance).
+             * Enables this Account to receive /v1/transfers into their Stripe Balance
+             * (/v1/balance).
              */
             public Builder setStripeTransfers(
                 AccountUpdateParams.Configuration.Recipient.Capabilities.StripeBalance
@@ -10256,7 +10382,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("high_risk_activities")
       List<AccountUpdateParams.Configuration.Storer.HighRiskActivity> highRiskActivities;
 
-      /** An explanation of the high risk activities that the business performs. */
+      /** Description of the high-risk activities the business offers. */
       @SerializedName("high_risk_activities_description")
       Object highRiskActivitiesDescription;
 
@@ -10268,7 +10394,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("operates_in_prohibited_countries")
       Boolean operatesInProhibitedCountries;
 
-      /** Does the business participate in any regulated activity. */
+      /** Indicates whether the business participates in any regulated activity. */
       @SerializedName("participates_in_regulated_activity")
       Boolean participatesInRegulatedActivity;
 
@@ -10444,13 +10570,13 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** An explanation of the high risk activities that the business performs. */
+        /** Description of the high-risk activities the business offers. */
         public Builder setHighRiskActivitiesDescription(String highRiskActivitiesDescription) {
           this.highRiskActivitiesDescription = highRiskActivitiesDescription;
           return this;
         }
 
-        /** An explanation of the high risk activities that the business performs. */
+        /** Description of the high-risk activities the business offers. */
         public Builder setHighRiskActivitiesDescription(EmptyParam highRiskActivitiesDescription) {
           this.highRiskActivitiesDescription = highRiskActivitiesDescription;
           return this;
@@ -10474,7 +10600,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Does the business participate in any regulated activity. */
+        /** Indicates whether the business participates in any regulated activity. */
         public Builder setParticipatesInRegulatedActivity(Boolean participatesInRegulatedActivity) {
           this.participatesInRegulatedActivity = participatesInRegulatedActivity;
           return this;
@@ -13731,7 +13857,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * &amp; time UTC value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -13752,7 +13878,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object userAgent;
 
         private DirectorshipDeclaration(
-            Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+            java.time.Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -13764,7 +13890,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Instant date;
+          private java.time.Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -13782,7 +13908,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * The time marking when the director attestation was made. Represented as a RFC 3339 date
            * &amp; time UTC value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(Instant date) {
+          public Builder setDate(java.time.Instant date) {
             this.date = date;
             return this;
           }
@@ -13852,7 +13978,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -13873,7 +13999,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object userAgent;
 
         private OwnershipDeclaration(
-            Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+            java.time.Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -13885,7 +14011,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Instant date;
+          private java.time.Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -13904,7 +14030,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3339 date &amp; time UTC value in millisecond precision, for example:
            * 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(Instant date) {
+          public Builder setDate(java.time.Instant date) {
             this.date = date;
             return this;
           }
@@ -14137,7 +14263,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 2022-09-18T13:22:18.123Z.
          */
         @SerializedName("date")
-        Instant date;
+        java.time.Instant date;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -14158,7 +14284,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object userAgent;
 
         private RepresentativeDeclaration(
-            Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+            java.time.Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -14170,7 +14296,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private Instant date;
+          private java.time.Instant date;
 
           private Map<String, Object> extraParams;
 
@@ -14189,7 +14315,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 3339 date &amp; time UTC value in millisecond precision, for example:
            * 2022-09-18T13:22:18.123Z.
            */
-          public Builder setDate(Instant date) {
+          public Builder setDate(java.time.Instant date) {
             this.date = date;
             return this;
           }
@@ -14387,7 +14513,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -14413,7 +14539,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           Object userAgent;
 
           private Account(
-              Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              Object ip,
+              Object userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -14425,7 +14554,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Instant date;
+            private java.time.Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -14444,7 +14573,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
              * 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(Instant date) {
+            public Builder setDate(java.time.Instant date) {
               this.date = date;
               return this;
             }
@@ -14769,7 +14898,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                * example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              Instant date;
+              java.time.Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -14796,7 +14925,10 @@ public class AccountUpdateParams extends ApiRequestParams {
               Object userAgent;
 
               private AccountHolder(
-                  Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                  java.time.Instant date,
+                  Map<String, Object> extraParams,
+                  Object ip,
+                  Object userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -14808,7 +14940,7 @@ public class AccountUpdateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private Instant date;
+                private java.time.Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -14830,7 +14962,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                  * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for
                  * example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(Instant date) {
+                public Builder setDate(java.time.Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -15046,7 +15178,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                  * example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -15073,7 +15205,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                 Object userAgent;
 
                 private ApplePay(
-                    Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                    java.time.Instant date,
+                    Map<String, Object> extraParams,
+                    Object ip,
+                    Object userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -15085,7 +15220,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private Instant date;
+                  private java.time.Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -15107,7 +15242,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(Instant date) {
+                  public Builder setDate(java.time.Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -15298,7 +15433,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15325,7 +15460,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15337,7 +15475,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15359,7 +15497,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15441,7 +15579,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15468,7 +15606,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15480,7 +15621,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15502,7 +15643,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15719,7 +15860,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15746,7 +15887,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15758,7 +15902,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15780,7 +15924,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -15862,7 +16006,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -15889,7 +16033,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private FinancingDisclosures(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -15901,7 +16048,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -15923,7 +16070,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -16005,7 +16152,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -16032,7 +16179,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -16044,7 +16194,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -16066,7 +16216,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -16284,7 +16434,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                  * example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -16311,7 +16461,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                 Object userAgent;
 
                 private ApplePay(
-                    Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                    java.time.Instant date,
+                    Map<String, Object> extraParams,
+                    Object ip,
+                    Object userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -16323,7 +16476,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private Instant date;
+                  private java.time.Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -16345,7 +16498,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(Instant date) {
+                  public Builder setDate(java.time.Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -16561,7 +16714,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -16588,7 +16741,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -16600,7 +16756,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -16622,7 +16778,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -16704,7 +16860,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -16731,7 +16887,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private FinancingDisclosures(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -16743,7 +16902,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -16765,7 +16924,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -16847,7 +17006,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -16874,7 +17033,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -16886,7 +17048,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -16908,7 +17070,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -17102,7 +17264,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -17129,7 +17291,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -17141,7 +17306,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -17163,7 +17328,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -17245,7 +17410,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -17272,7 +17437,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private FinancingDisclosures(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -17284,7 +17452,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -17306,7 +17474,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -17390,7 +17558,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                * example: 2022-09-18T13:22:18.123Z.
                */
               @SerializedName("date")
-              Instant date;
+              java.time.Instant date;
 
               /**
                * Map of extra parameters for custom features not available in this client library.
@@ -17417,7 +17585,10 @@ public class AccountUpdateParams extends ApiRequestParams {
               Object userAgent;
 
               private GlobalAccountHolder(
-                  Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                  java.time.Instant date,
+                  Map<String, Object> extraParams,
+                  Object ip,
+                  Object userAgent) {
                 this.date = date;
                 this.extraParams = extraParams;
                 this.ip = ip;
@@ -17429,7 +17600,7 @@ public class AccountUpdateParams extends ApiRequestParams {
               }
 
               public static class Builder {
-                private Instant date;
+                private java.time.Instant date;
 
                 private Map<String, Object> extraParams;
 
@@ -17451,7 +17622,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                  * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision, for
                  * example: 2022-09-18T13:22:18.123Z.
                  */
-                public Builder setDate(Instant date) {
+                public Builder setDate(java.time.Instant date) {
                   this.date = date;
                   return this;
                 }
@@ -17641,7 +17812,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                  * example: 2022-09-18T13:22:18.123Z.
                  */
                 @SerializedName("date")
-                Instant date;
+                java.time.Instant date;
 
                 /**
                  * Map of extra parameters for custom features not available in this client library.
@@ -17668,7 +17839,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                 Object userAgent;
 
                 private ApplePay(
-                    Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                    java.time.Instant date,
+                    Map<String, Object> extraParams,
+                    Object ip,
+                    Object userAgent) {
                   this.date = date;
                   this.extraParams = extraParams;
                   this.ip = ip;
@@ -17680,7 +17854,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                 }
 
                 public static class Builder {
-                  private Instant date;
+                  private java.time.Instant date;
 
                   private Map<String, Object> extraParams;
 
@@ -17702,7 +17876,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
-                  public Builder setDate(Instant date) {
+                  public Builder setDate(java.time.Instant date) {
                     this.date = date;
                     return this;
                   }
@@ -17893,7 +18067,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -17920,7 +18094,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private BankTerms(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -17932,7 +18109,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -17954,7 +18131,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -18036,7 +18213,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                    * for example: 2022-09-18T13:22:18.123Z.
                    */
                   @SerializedName("date")
-                  Instant date;
+                  java.time.Instant date;
 
                   /**
                    * Map of extra parameters for custom features not available in this client
@@ -18063,7 +18240,10 @@ public class AccountUpdateParams extends ApiRequestParams {
                   Object userAgent;
 
                   private Platform(
-                      Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+                      java.time.Instant date,
+                      Map<String, Object> extraParams,
+                      Object ip,
+                      Object userAgent) {
                     this.date = date;
                     this.extraParams = extraParams;
                     this.ip = ip;
@@ -18075,7 +18255,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                   }
 
                   public static class Builder {
-                    private Instant date;
+                    private java.time.Instant date;
 
                     private Map<String, Object> extraParams;
 
@@ -18097,7 +18277,7 @@ public class AccountUpdateParams extends ApiRequestParams {
                      * Represented as a RFC 3339 date &amp; time UTC value in millisecond precision,
                      * for example: 2022-09-18T13:22:18.123Z.
                      */
-                    public Builder setDate(Instant date) {
+                    public Builder setDate(java.time.Instant date) {
                       this.date = date;
                       return this;
                     }
@@ -18183,7 +18363,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -18209,7 +18389,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           Object userAgent;
 
           private CryptoStorer(
-              Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              Object ip,
+              Object userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -18221,7 +18404,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Instant date;
+            private java.time.Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -18240,7 +18423,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
              * 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(Instant date) {
+            public Builder setDate(java.time.Instant date) {
               this.date = date;
               return this;
             }
@@ -18320,7 +18503,7 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 2022-09-18T13:22:18.123Z.
            */
           @SerializedName("date")
-          Instant date;
+          java.time.Instant date;
 
           /**
            * Map of extra parameters for custom features not available in this client library. The
@@ -18346,7 +18529,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           Object userAgent;
 
           private Storer(
-              Instant date, Map<String, Object> extraParams, Object ip, Object userAgent) {
+              java.time.Instant date,
+              Map<String, Object> extraParams,
+              Object ip,
+              Object userAgent) {
             this.date = date;
             this.extraParams = extraParams;
             this.ip = ip;
@@ -18358,7 +18544,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           public static class Builder {
-            private Instant date;
+            private java.time.Instant date;
 
             private Map<String, Object> extraParams;
 
@@ -18377,7 +18563,7 @@ public class AccountUpdateParams extends ApiRequestParams {
              * as a RFC 3339 date &amp; time UTC value in millisecond precision, for example:
              * 2022-09-18T13:22:18.123Z.
              */
-            public Builder setDate(Instant date) {
+            public Builder setDate(java.time.Instant date) {
               this.date = date;
               return this;
             }
@@ -18473,8 +18659,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       Documents documents;
 
       /**
-       * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
-       * business.
+       * Estimated maximum number of workers currently engaged by the business (including employees,
+       * contractors, and vendors).
        */
       @SerializedName("estimated_worker_count")
       Long estimatedWorkerCount;
@@ -18634,8 +18820,8 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * An estimated upper bound of employees, contractors, vendors, etc. currently working for
-         * the business.
+         * Estimated maximum number of workers currently engaged by the business (including
+         * employees, contractors, and vendors).
          */
         public Builder setEstimatedWorkerCount(Long estimatedWorkerCount) {
           this.estimatedWorkerCount = estimatedWorkerCount;
@@ -18791,7 +18977,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("state")
         Object state;
 
-        /** Town or cho-me. */
+        /** Town or district. */
         @SerializedName("town")
         Object town;
 
@@ -18954,13 +19140,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(String town) {
             this.town = town;
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(EmptyParam town) {
             this.town = town;
             return this;
@@ -21053,6 +21239,12 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("at_fn")
           AT_FN("at_fn"),
 
+          @SerializedName("at_stn")
+          AT_STN("at_stn"),
+
+          @SerializedName("at_vat")
+          AT_VAT("at_vat"),
+
           @SerializedName("au_abn")
           AU_ABN("au_abn"),
 
@@ -21071,8 +21263,14 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("be_cbe")
           BE_CBE("be_cbe"),
 
+          @SerializedName("be_vat")
+          BE_VAT("be_vat"),
+
           @SerializedName("bg_uic")
           BG_UIC("bg_uic"),
+
+          @SerializedName("bg_vat")
+          BG_VAT("bg_vat"),
 
           @SerializedName("br_cnpj")
           BR_CNPJ("br_cnpj"),
@@ -21082,6 +21280,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           @SerializedName("ca_crarr")
           CA_CRARR("ca_crarr"),
+
+          @SerializedName("ca_gst_hst")
+          CA_GST_HST("ca_gst_hst"),
 
           @SerializedName("ca_neq")
           CA_NEQ("ca_neq"),
@@ -21101,14 +21302,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("cr_nite")
           CR_NITE("cr_nite"),
 
+          @SerializedName("cy_he")
+          CY_HE("cy_he"),
+
           @SerializedName("cy_tic")
           CY_TIC("cy_tic"),
+
+          @SerializedName("cy_vat")
+          CY_VAT("cy_vat"),
 
           @SerializedName("cz_ico")
           CZ_ICO("cz_ico"),
 
+          @SerializedName("cz_vat")
+          CZ_VAT("cz_vat"),
+
           @SerializedName("de_hrn")
           DE_HRN("de_hrn"),
+
+          @SerializedName("de_stn")
+          DE_STN("de_stn"),
 
           @SerializedName("de_vat")
           DE_VAT("de_vat"),
@@ -21116,17 +21329,32 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("dk_cvr")
           DK_CVR("dk_cvr"),
 
+          @SerializedName("dk_vat")
+          DK_VAT("dk_vat"),
+
           @SerializedName("do_rcn")
           DO_RCN("do_rcn"),
 
           @SerializedName("ee_rk")
           EE_RK("ee_rk"),
 
+          @SerializedName("ee_vat")
+          EE_VAT("ee_vat"),
+
           @SerializedName("es_cif")
           ES_CIF("es_cif"),
 
+          @SerializedName("es_vat")
+          ES_VAT("es_vat"),
+
+          @SerializedName("fi_vat")
+          FI_VAT("fi_vat"),
+
           @SerializedName("fi_yt")
           FI_YT("fi_yt"),
+
+          @SerializedName("fr_rna")
+          FR_RNA("fr_rna"),
 
           @SerializedName("fr_siren")
           FR_SIREN("fr_siren"),
@@ -21140,8 +21368,14 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("gi_crn")
           GI_CRN("gi_crn"),
 
+          @SerializedName("gr_afm")
+          GR_AFM("gr_afm"),
+
           @SerializedName("gr_gemi")
           GR_GEMI("gr_gemi"),
+
+          @SerializedName("gr_vat")
+          GR_VAT("gr_vat"),
 
           @SerializedName("gt_nit")
           GT_NIT("gt_nit"),
@@ -21152,14 +21386,32 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("hk_cr")
           HK_CR("hk_cr"),
 
-          @SerializedName("hk_mbs")
-          HK_MBS("hk_mbs"),
+          @SerializedName("hr_mbs")
+          HR_MBS("hr_mbs"),
+
+          @SerializedName("hr_oib")
+          HR_OIB("hr_oib"),
+
+          @SerializedName("hr_vat")
+          HR_VAT("hr_vat"),
 
           @SerializedName("hu_cjs")
           HU_CJS("hu_cjs"),
 
+          @SerializedName("hu_tin")
+          HU_TIN("hu_tin"),
+
+          @SerializedName("hu_vat")
+          HU_VAT("hu_vat"),
+
           @SerializedName("ie_crn")
           IE_CRN("ie_crn"),
+
+          @SerializedName("ie_trn")
+          IE_TRN("ie_trn"),
+
+          @SerializedName("ie_vat")
+          IE_VAT("ie_vat"),
 
           @SerializedName("it_rea")
           IT_REA("it_rea"),
@@ -21179,14 +21431,32 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("lt_ccrn")
           LT_CCRN("lt_ccrn"),
 
+          @SerializedName("lt_vat")
+          LT_VAT("lt_vat"),
+
+          @SerializedName("lu_nif")
+          LU_NIF("lu_nif"),
+
           @SerializedName("lu_rcs")
           LU_RCS("lu_rcs"),
+
+          @SerializedName("lu_vat")
+          LU_VAT("lu_vat"),
 
           @SerializedName("lv_urn")
           LV_URN("lv_urn"),
 
+          @SerializedName("lv_vat")
+          LV_VAT("lv_vat"),
+
           @SerializedName("mt_crn")
           MT_CRN("mt_crn"),
+
+          @SerializedName("mt_tin")
+          MT_TIN("mt_tin"),
+
+          @SerializedName("mt_vat")
+          MT_VAT("mt_vat"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -21197,6 +21467,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("my_coid")
           MY_COID("my_coid"),
 
+          @SerializedName("my_itn")
+          MY_ITN("my_itn"),
+
           @SerializedName("my_sst")
           MY_SST("my_sst"),
 
@@ -21206,11 +21479,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("nl_kvk")
           NL_KVK("nl_kvk"),
 
+          @SerializedName("nl_rsin")
+          NL_RSIN("nl_rsin"),
+
+          @SerializedName("nl_vat")
+          NL_VAT("nl_vat"),
+
           @SerializedName("no_orgnr")
           NO_ORGNR("no_orgnr"),
 
           @SerializedName("nz_bn")
           NZ_BN("nz_bn"),
+
+          @SerializedName("nz_ird")
+          NZ_IRD("nz_ird"),
 
           @SerializedName("pe_ruc")
           PE_RUC("pe_ruc"),
@@ -21218,14 +21500,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("pk_ntn")
           PK_NTN("pk_ntn"),
 
+          @SerializedName("pl_nip")
+          PL_NIP("pl_nip"),
+
           @SerializedName("pl_regon")
           PL_REGON("pl_regon"),
+
+          @SerializedName("pl_vat")
+          PL_VAT("pl_vat"),
 
           @SerializedName("pt_vat")
           PT_VAT("pt_vat"),
 
           @SerializedName("ro_cui")
           RO_CUI("ro_cui"),
+
+          @SerializedName("ro_orc")
+          RO_ORC("ro_orc"),
+
+          @SerializedName("ro_vat")
+          RO_VAT("ro_vat"),
 
           @SerializedName("sa_crn")
           SA_CRN("sa_crn"),
@@ -21236,14 +21530,29 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("se_orgnr")
           SE_ORGNR("se_orgnr"),
 
+          @SerializedName("se_vat")
+          SE_VAT("se_vat"),
+
           @SerializedName("sg_uen")
           SG_UEN("sg_uen"),
 
           @SerializedName("si_msp")
           SI_MSP("si_msp"),
 
+          @SerializedName("si_tin")
+          SI_TIN("si_tin"),
+
+          @SerializedName("si_vat")
+          SI_VAT("si_vat"),
+
+          @SerializedName("sk_dic")
+          SK_DIC("sk_dic"),
+
           @SerializedName("sk_ico")
           SK_ICO("sk_ico"),
+
+          @SerializedName("sk_vat")
+          SK_VAT("sk_vat"),
 
           @SerializedName("th_crn")
           TH_CRN("th_crn"),
@@ -21584,7 +21893,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("state")
           Object state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           Object town;
 
@@ -21749,13 +22058,13 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(EmptyParam town) {
               this.town = town;
               return this;
@@ -21803,7 +22112,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("state")
           Object state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           Object town;
 
@@ -21968,13 +22277,13 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(EmptyParam town) {
               this.town = town;
               return this;
@@ -22853,7 +23162,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("state")
         Object state;
 
-        /** Town or cho-me. */
+        /** Town or district. */
         @SerializedName("town")
         Object town;
 
@@ -23028,13 +23337,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(String town) {
             this.town = town;
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(EmptyParam town) {
             this.town = town;
             return this;
@@ -23245,7 +23554,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         @SerializedName("state")
         Object state;
 
-        /** Town or cho-me. */
+        /** Town or district. */
         @SerializedName("town")
         Object town;
 
@@ -23408,13 +23717,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(String town) {
             this.town = town;
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(EmptyParam town) {
             this.town = town;
             return this;
@@ -24699,8 +25008,14 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("ao_nif")
           AO_NIF("ao_nif"),
 
+          @SerializedName("ar_cuil")
+          AR_CUIL("ar_cuil"),
+
           @SerializedName("ar_dni")
           AR_DNI("ar_dni"),
+
+          @SerializedName("at_stn")
+          AT_STN("at_stn"),
 
           @SerializedName("az_tin")
           AZ_TIN("az_tin"),
@@ -24714,8 +25029,35 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("bd_nid")
           BD_NID("bd_nid"),
 
+          @SerializedName("be_nrn")
+          BE_NRN("be_nrn"),
+
+          @SerializedName("bg_ucn")
+          BG_UCN("bg_ucn"),
+
+          @SerializedName("bn_nric")
+          BN_NRIC("bn_nric"),
+
           @SerializedName("br_cpf")
           BR_CPF("br_cpf"),
+
+          @SerializedName("ca_sin")
+          CA_SIN("ca_sin"),
+
+          @SerializedName("ch_oasi")
+          CH_OASI("ch_oasi"),
+
+          @SerializedName("cl_rut")
+          CL_RUT("cl_rut"),
+
+          @SerializedName("cn_pp")
+          CN_PP("cn_pp"),
+
+          @SerializedName("co_nuip")
+          CO_NUIP("co_nuip"),
+
+          @SerializedName("cr_ci")
+          CR_CI("cr_ci"),
 
           @SerializedName("cr_cpf")
           CR_CPF("cr_cpf"),
@@ -24726,11 +25068,44 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("cr_nite")
           CR_NITE("cr_nite"),
 
+          @SerializedName("cy_tic")
+          CY_TIC("cy_tic"),
+
+          @SerializedName("cz_rc")
+          CZ_RC("cz_rc"),
+
           @SerializedName("de_stn")
           DE_STN("de_stn"),
 
+          @SerializedName("dk_cpr")
+          DK_CPR("dk_cpr"),
+
+          @SerializedName("do_cie")
+          DO_CIE("do_cie"),
+
           @SerializedName("do_rcn")
           DO_RCN("do_rcn"),
+
+          @SerializedName("ec_ci")
+          EC_CI("ec_ci"),
+
+          @SerializedName("ee_ik")
+          EE_IK("ee_ik"),
+
+          @SerializedName("es_nif")
+          ES_NIF("es_nif"),
+
+          @SerializedName("fi_hetu")
+          FI_HETU("fi_hetu"),
+
+          @SerializedName("fr_nir")
+          FR_NIR("fr_nir"),
+
+          @SerializedName("gb_nino")
+          GB_NINO("gb_nino"),
+
+          @SerializedName("gr_afm")
+          GR_AFM("gr_afm"),
 
           @SerializedName("gt_nit")
           GT_NIT("gt_nit"),
@@ -24738,8 +25113,44 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("hk_id")
           HK_ID("hk_id"),
 
+          @SerializedName("hr_oib")
+          HR_OIB("hr_oib"),
+
+          @SerializedName("hu_ad")
+          HU_AD("hu_ad"),
+
+          @SerializedName("id_nik")
+          ID_NIK("id_nik"),
+
+          @SerializedName("ie_ppsn")
+          IE_PPSN("ie_ppsn"),
+
+          @SerializedName("is_kt")
+          IS_KT("is_kt"),
+
+          @SerializedName("it_cf")
+          IT_CF("it_cf"),
+
+          @SerializedName("jp_inc")
+          JP_INC("jp_inc"),
+
+          @SerializedName("ke_pin")
+          KE_PIN("ke_pin"),
+
           @SerializedName("kz_iin")
           KZ_IIN("kz_iin"),
+
+          @SerializedName("li_peid")
+          LI_PEID("li_peid"),
+
+          @SerializedName("lt_ak")
+          LT_AK("lt_ak"),
+
+          @SerializedName("lu_nif")
+          LU_NIF("lu_nif"),
+
+          @SerializedName("lv_pk")
+          LV_PK("lv_pk"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -24750,8 +25161,17 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("mz_nuit")
           MZ_NUIT("mz_nuit"),
 
+          @SerializedName("ng_nin")
+          NG_NIN("ng_nin"),
+
           @SerializedName("nl_bsn")
           NL_BSN("nl_bsn"),
+
+          @SerializedName("no_nin")
+          NO_NIN("no_nin"),
+
+          @SerializedName("nz_ird")
+          NZ_IRD("nz_ird"),
 
           @SerializedName("pe_dni")
           PE_DNI("pe_dni"),
@@ -24762,8 +25182,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("pk_snic")
           PK_SNIC("pk_snic"),
 
+          @SerializedName("pl_pesel")
+          PL_PESEL("pl_pesel"),
+
+          @SerializedName("pt_nif")
+          PT_NIF("pt_nif"),
+
+          @SerializedName("ro_cnp")
+          RO_CNP("ro_cnp"),
+
           @SerializedName("sa_tin")
           SA_TIN("sa_tin"),
+
+          @SerializedName("se_pin")
+          SE_PIN("se_pin"),
 
           @SerializedName("sg_fin")
           SG_FIN("sg_fin"),
@@ -24771,11 +25203,17 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("sg_nric")
           SG_NRIC("sg_nric"),
 
+          @SerializedName("sk_dic")
+          SK_DIC("sk_dic"),
+
           @SerializedName("th_lc")
           TH_LC("th_lc"),
 
           @SerializedName("th_pin")
           TH_PIN("th_pin"),
+
+          @SerializedName("tr_tin")
+          TR_TIN("tr_tin"),
 
           @SerializedName("us_itin")
           US_ITIN("us_itin"),
@@ -24787,7 +25225,13 @@ public class AccountUpdateParams extends ApiRequestParams {
           US_SSN("us_ssn"),
 
           @SerializedName("us_ssn_last_4")
-          US_SSN_LAST_4("us_ssn_last_4");
+          US_SSN_LAST_4("us_ssn_last_4"),
+
+          @SerializedName("uy_dni")
+          UY_DNI("uy_dni"),
+
+          @SerializedName("za_id")
+          ZA_ID("za_id");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -25087,7 +25531,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("state")
           Object state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           Object town;
 
@@ -25252,13 +25696,13 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(EmptyParam town) {
               this.town = town;
               return this;
@@ -25306,7 +25750,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           @SerializedName("state")
           Object state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           Object town;
 
@@ -25471,13 +25915,13 @@ public class AccountUpdateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(EmptyParam town) {
               this.town = town;
               return this;

@@ -24,11 +24,11 @@ import lombok.Setter;
 
 /**
  * PaymentMethod objects represent your customer's payment instruments. You can use them with <a
- * href="https://stripe.com/docs/payments/payment-intents">PaymentIntents</a> to collect payments or
+ * href="https://docs.stripe.com/payments/payment-intents">PaymentIntents</a> to collect payments or
  * save them to Customer objects to store instrument details for future payments.
  *
- * <p>Related guides: <a href="https://stripe.com/docs/payments/payment-methods">Payment Methods</a>
- * and <a href="https://stripe.com/docs/payments/more-payment-scenarios">More Payment Scenarios</a>.
+ * <p>Related guides: <a href="https://docs.stripe.com/payments/payment-methods">Payment Methods</a>
+ * and <a href="https://docs.stripe.com/payments/more-payment-scenarios">More Payment Scenarios</a>.
  */
 @Getter
 @Setter
@@ -179,7 +179,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   MbWay mbWay;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -241,7 +241,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   Qris qris;
 
   /**
-   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+   * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
    * Session</a> for more information.
    */
   @SerializedName("radar_options")
@@ -653,22 +653,12 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return getResponseGetter().request(request, PaymentMethod.class);
   }
 
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public static PaymentMethodCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_methods";
@@ -677,23 +667,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return getGlobalResponseGetter().request(request, PaymentMethodCollection.class);
   }
 
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public static PaymentMethodCollection list(PaymentMethodListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * Returns a list of PaymentMethods for Treasury flows. If you want to list the PaymentMethods
-   * attached to a Customer for payments, you should use the <a
-   * href="https://stripe.com/docs/api/payment_methods/customer_list">List a Customer’s
-   * PaymentMethods</a> API instead.
-   */
+  /** Returns a list of all PaymentMethods. */
   public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/payment_methods";
@@ -1337,9 +1317,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
           String iin;
 
           /**
-           * Whether this <a href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> is
+           * Whether this <a href="https://docs.stripe.com/api/payment_intents">PaymentIntent</a> is
            * eligible for incremental authorizations. Request support using <a
-           * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
+           * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
            */
           @SerializedName("incremental_authorization_supported")
           Boolean incrementalAuthorizationSupported;
@@ -2078,8 +2058,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /**
      * The customer's bank, if provided. Can be one of {@code abn_amro}, {@code asn_bank}, {@code
      * bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code
-     * moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code revolut},
-     * {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code yoursafe}.
+     * mollie}, {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank},
+     * {@code revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code
+     * yoursafe}.
      */
     @SerializedName("bank")
     String bank;
@@ -2089,8 +2070,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
      *
      * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
      * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
-     * KNABNL2H}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code
-     * RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
+     * KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code
+     * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code
+     * TRIONL2U}.
      */
     @SerializedName("bic")
     String bic;
@@ -2558,7 +2540,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   public static class Qris extends StripeObject {}
 
   /**
-   * Options to configure Radar. See <a href="https://stripe.com/docs/radar/radar-session">Radar
+   * Options to configure Radar. See <a href="https://docs.stripe.com/radar/radar-session">Radar
    * Session</a> for more information.
    */
   @Getter
@@ -2566,7 +2548,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class RadarOptions extends StripeObject {
     /**
-     * A <a href="https://stripe.com/docs/radar/radar-session">Radar Session</a> is a snapshot of
+     * A <a href="https://docs.stripe.com/radar/radar-session">Radar Session</a> is a snapshot of
      * the browser metadata and device details that help Radar make more accurate predictions on
      * your payments.
      */

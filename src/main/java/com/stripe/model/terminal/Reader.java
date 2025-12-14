@@ -42,7 +42,7 @@ import lombok.Setter;
 /**
  * A Reader represents a physical device for accepting payment details.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/terminal/payments/connect-reader">Connecting
+ * <p>Related guide: <a href="https://docs.stripe.com/terminal/payments/connect-reader">Connecting
  * to a reader</a>
  */
 @Getter
@@ -84,7 +84,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @SerializedName("label")
   String label;
 
-  /** The last time this reader reported to Stripe backend. */
+  /**
+   * The last time this reader reported to Stripe backend. Timestamp is measured in milliseconds
+   * since the Unix epoch. Unlike most other Stripe timestamp fields which use seconds, this field
+   * uses milliseconds.
+   */
   @SerializedName("last_seen_at")
   Long lastSeenAt;
 
@@ -102,7 +106,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   ExpandableField<Location> location;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -866,7 +870,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       List<Reader.Action.CollectInputs.Input> inputs;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format.
        */
@@ -1082,11 +1086,11 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
       /**
        * PaymentMethod objects represent your customer's payment instruments. You can use them with
-       * <a href="https://stripe.com/docs/payments/payment-intents">PaymentIntents</a> to collect
+       * <a href="https://docs.stripe.com/payments/payment-intents">PaymentIntents</a> to collect
        * payments or save them to Customer objects to store instrument details for future payments.
        *
-       * <p>Related guides: <a href="https://stripe.com/docs/payments/payment-methods">Payment
-       * Methods</a> and <a href="https://stripe.com/docs/payments/more-payment-scenarios">More
+       * <p>Related guides: <a href="https://docs.stripe.com/payments/payment-methods">Payment
+       * Methods</a> and <a href="https://docs.stripe.com/payments/more-payment-scenarios">More
        * Payment Scenarios</a>.
        */
       @SerializedName("payment_method")
@@ -1347,7 +1351,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
       ExpandableField<Charge> charge;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format.
        */
@@ -1500,14 +1504,14 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
         /**
          * Tax amount for the entire cart. A positive integer in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          */
         @SerializedName("tax")
         Long tax;
 
         /**
          * Total amount for the entire cart, including tax. A positive integer in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          */
         @SerializedName("total")
         Long total;
@@ -1519,7 +1523,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
         public static class LineItem extends StripeObject {
           /**
            * The amount of the line item. A positive integer in the <a
-           * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+           * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
            */
           @SerializedName("amount")
           Long amount;

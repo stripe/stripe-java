@@ -24,21 +24,21 @@ import lombok.Setter;
 
 /**
  * Invoice Items represent the component lines of an <a
- * href="https://stripe.com/docs/api/invoices">invoice</a>. When you create an invoice item with an
+ * href="https://docs.stripe.com/api/invoices">invoice</a>. When you create an invoice item with an
  * {@code invoice} field, it is attached to the specified invoice and included as <a
- * href="https://stripe.com/docs/api/invoices/line_item">an invoice line item</a> within <a
- * href="https://stripe.com/docs/api/invoices/object#invoice_object-lines">invoice.lines</a>.
+ * href="https://docs.stripe.com/api/invoices/line_item">an invoice line item</a> within <a
+ * href="https://docs.stripe.com/api/invoices/object#invoice_object-lines">invoice.lines</a>.
  *
  * <p>Invoice Items can be created before you are ready to actually send the invoice. This can be
  * particularly useful when combined with a <a
- * href="https://stripe.com/docs/api/subscriptions">subscription</a>. Sometimes you want to add a
+ * href="https://docs.stripe.com/api/subscriptions">subscription</a>. Sometimes you want to add a
  * charge or credit to a customer, but actually charge or credit the customer's card only at the end
  * of a regular billing cycle. This is useful for combining several charges (to minimize
  * per-transaction fees), or for having Stripe tabulate your usage-based billing totals.
  *
- * <p>Related guides: <a href="https://stripe.com/docs/invoicing/integration">Integrate with the
+ * <p>Related guides: <a href="https://docs.stripe.com/invoicing/integration">Integrate with the
  * Invoicing API</a>, <a
- * href="https://stripe.com/docs/billing/invoices/subscription#adding-upcoming-invoice-items">Subscription
+ * href="https://docs.stripe.com/billing/invoices/subscription#adding-upcoming-invoice-items">Subscription
  * Invoices</a>.
  */
 @Getter
@@ -59,13 +59,13 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("currency")
   String currency;
 
-  /** The ID of the customer who will be billed when this invoice item is billed. */
+  /** The ID of the customer to bill for this invoice item. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** The ID of the account who will be billed when this invoice item is billed. */
+  /** The ID of the account to bill for this invoice item. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -118,7 +118,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   List<ExpandableField<Margin>> margins;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

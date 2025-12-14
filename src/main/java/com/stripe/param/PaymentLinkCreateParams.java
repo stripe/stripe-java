@@ -72,9 +72,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   CustomText customText;
 
   /**
-   * Configures whether <a href="https://stripe.com/docs/api/checkout/sessions">checkout
+   * Configures whether <a href="https://docs.stripe.com/api/checkout/sessions">checkout
    * sessions</a> created by this payment link create a <a
-   * href="https://stripe.com/docs/api/customers">Customer</a>.
+   * href="https://docs.stripe.com/api/customers">Customer</a>.
    */
   @SerializedName("customer_creation")
   CustomerCreation customerCreation;
@@ -108,12 +108,12 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   List<PaymentLinkCreateParams.LineItem> lineItems;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}. Metadata associated with this Payment
    * Link will automatically be copied to <a
-   * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a> created by this
+   * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a> created by this
    * payment link.
    */
   @SerializedName("metadata")
@@ -129,7 +129,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   /**
    * A list of optional items the customer can add to their order at checkout. Use this parameter to
-   * pass one-time or recurring <a href="https://stripe.com/docs/api/prices">Prices</a>. There is a
+   * pass one-time or recurring <a href="https://docs.stripe.com/api/prices">Prices</a>. There is a
    * maximum of 10 optional items allowed on a payment link, and the existing limits on the number
    * of line items allowed on a payment link apply to the combined number of line items and optional
    * items. There is a maximum of 20 combined line items and optional items.
@@ -152,7 +152,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
    * <p>Can only be set in {@code subscription} mode. Defaults to {@code always}.
    *
    * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
-   * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
+   * guide on <a href="https://docs.stripe.com/payments/checkout/free-trials">configuring
    * subscriptions with a free trial</a>.
    */
   @SerializedName("payment_method_collection")
@@ -163,7 +163,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
    * dynamically show relevant payment methods from your <a
    * href="https://dashboard.stripe.com/settings/payment_methods">payment method settings</a> (20+
    * payment methods <a
-   * href="https://stripe.com/docs/payments/payment-methods/integration-options#payment-method-product-support">supported</a>).
+   * href="https://docs.stripe.com/payments/payment-methods/integration-options#payment-method-product-support">supported</a>).
    */
   @SerializedName("payment_method_types")
   List<PaymentLinkCreateParams.PaymentMethodType> paymentMethodTypes;
@@ -186,7 +186,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
   /**
    * The shipping rate options to apply to <a
-   * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a> created by this
+   * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a> created by this
    * payment link.
    */
   @SerializedName("shipping_options")
@@ -195,7 +195,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
   /**
    * Describes the type of transaction being performed in order to customize relevant text on the
    * page, such as the submit button. Changing this value will also affect the hostname in the <a
-   * href="https://stripe.com/docs/api/payment_links/payment_links/object#url">url</a> property
+   * href="https://docs.stripe.com/api/payment_links/payment_links/object#url">url</a> property
    * (example: {@code donate.stripe.com}).
    */
   @SerializedName("submit_type")
@@ -483,9 +483,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Configures whether <a href="https://stripe.com/docs/api/checkout/sessions">checkout
+     * Configures whether <a href="https://docs.stripe.com/api/checkout/sessions">checkout
      * sessions</a> created by this payment link create a <a
-     * href="https://stripe.com/docs/api/customers">Customer</a>.
+     * href="https://docs.stripe.com/api/customers">Customer</a>.
      */
     public Builder setCustomerCreation(PaymentLinkCreateParams.CustomerCreation customerCreation) {
       this.customerCreation = customerCreation;
@@ -664,7 +664,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
      * <p>Can only be set in {@code subscription} mode. Defaults to {@code always}.
      *
      * <p>If you'd like information on how to collect a payment method outside of Checkout, read the
-     * guide on <a href="https://stripe.com/docs/payments/checkout/free-trials">configuring
+     * guide on <a href="https://docs.stripe.com/payments/checkout/free-trials">configuring
      * subscriptions with a free trial</a>.
      */
     public Builder setPaymentMethodCollection(
@@ -753,7 +753,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     /**
      * Describes the type of transaction being performed in order to customize relevant text on the
      * page, such as the submit button. Changing this value will also affect the hostname in the <a
-     * href="https://stripe.com/docs/api/payment_links/payment_links/object#url">url</a> property
+     * href="https://docs.stripe.com/api/payment_links/payment_links/object#url">url</a> property
      * (example: {@code donate.stripe.com}).
      */
     public Builder setSubmitType(PaymentLinkCreateParams.SubmitType submitType) {
@@ -981,7 +981,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
        * <strong>Required.</strong> The URL the customer will be redirected to after the purchase is
        * complete. You can embed {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code id}
        * of the completed <a
-       * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-id">checkout
+       * href="https://docs.stripe.com/api/checkout/sessions/object#checkout_session_object-id">checkout
        * session</a> included.
        */
       @SerializedName("url")
@@ -1038,7 +1038,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
          * <strong>Required.</strong> The URL the customer will be redirected to after the purchase
          * is complete. You can embed {@code {CHECKOUT_SESSION_ID}} into the URL to have the {@code
          * id} of the completed <a
-         * href="https://stripe.com/docs/api/checkout/sessions/object#checkout_session_object-id">checkout
+         * href="https://docs.stripe.com/api/checkout/sessions/object#checkout_session_object-id">checkout
          * session</a> included.
          */
         public Builder setUrl(String url) {
@@ -2809,7 +2809,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       Issuer issuer;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -3048,7 +3048,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -3059,7 +3059,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -3438,15 +3438,15 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
-     * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price} or {@code
+     * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> or <a
+     * href="https://docs.stripe.com/api/plans">Plan</a> object. One of {@code price} or {@code
      * price_data} is required.
      */
     @SerializedName("price")
     String price;
 
     /**
-     * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+     * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
      * inline. One of {@code price} or {@code price_data} is required.
      */
     @SerializedName("price_data")
@@ -3527,8 +3527,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> or <a
-       * href="https://stripe.com/docs/api/plans">Plan</a> object. One of {@code price} or {@code
+       * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> or <a
+       * href="https://docs.stripe.com/api/plans">Plan</a> object. One of {@code price} or {@code
        * price_data} is required.
        */
       public Builder setPrice(String price) {
@@ -3537,7 +3537,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Data used to generate a new <a href="https://stripe.com/docs/api/prices">Price</a> object
+       * Data used to generate a new <a href="https://docs.stripe.com/api/prices">Price</a> object
        * inline. One of {@code price} or {@code price_data} is required.
        */
       public Builder setPriceData(PaymentLinkCreateParams.LineItem.PriceData priceData) {
@@ -3712,7 +3712,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -3858,7 +3858,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -3919,7 +3919,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         List<String> images;
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -3933,9 +3933,17 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         @SerializedName("name")
         String name;
 
-        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
         @SerializedName("tax_code")
         String taxCode;
+
+        /**
+         * Tax details for this product, including the <a
+         * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+         * location.
+         */
+        @SerializedName("tax_details")
+        TaxDetails taxDetails;
 
         /**
          * A label that represents units of this product. When set, this will be included in
@@ -3951,6 +3959,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
             Map<String, String> metadata,
             String name,
             String taxCode,
+            TaxDetails taxDetails,
             String unitLabel) {
           this.description = description;
           this.extraParams = extraParams;
@@ -3958,6 +3967,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           this.metadata = metadata;
           this.name = name;
           this.taxCode = taxCode;
+          this.taxDetails = taxDetails;
           this.unitLabel = unitLabel;
         }
 
@@ -3978,6 +3988,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
           private String taxCode;
 
+          private TaxDetails taxDetails;
+
           private String unitLabel;
 
           /** Finalize and obtain parameter instance from this builder. */
@@ -3989,6 +4001,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
                 this.metadata,
                 this.name,
                 this.taxCode,
+                this.taxDetails,
                 this.unitLabel);
           }
 
@@ -4094,9 +4107,20 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+          /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
           public Builder setTaxCode(String taxCode) {
             this.taxCode = taxCode;
+            return this;
+          }
+
+          /**
+           * Tax details for this product, including the <a
+           * href="https://stripe.com/tax/tax-codes">tax code</a> and an optional performance
+           * location.
+           */
+          public Builder setTaxDetails(
+              PaymentLinkCreateParams.LineItem.PriceData.ProductData.TaxDetails taxDetails) {
+            this.taxDetails = taxDetails;
             return this;
           }
 
@@ -4107,6 +4131,87 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           public Builder setUnitLabel(String unitLabel) {
             this.unitLabel = unitLabel;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class TaxDetails {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
+           * code</a> ID.
+           */
+          @SerializedName("tax_code")
+          String taxCode;
+
+          private TaxDetails(Map<String, Object> extraParams, String taxCode) {
+            this.extraParams = extraParams;
+            this.taxCode = taxCode;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private String taxCode;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public PaymentLinkCreateParams.LineItem.PriceData.ProductData.TaxDetails build() {
+              return new PaymentLinkCreateParams.LineItem.PriceData.ProductData.TaxDetails(
+                  this.extraParams, this.taxCode);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentLinkCreateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * PaymentLinkCreateParams.LineItem.PriceData.ProductData.TaxDetails#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
+             * code</a> ID.
+             */
+            public Builder setTaxCode(String taxCode) {
+              this.taxCode = taxCode;
+              return this;
+            }
           }
         }
       }
@@ -4552,8 +4657,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The ID of the <a
-     * href="https://stripe.com/docs/api/prices">Price</a> or <a
-     * href="https://stripe.com/docs/api/plans">Plan</a> object.
+     * href="https://docs.stripe.com/api/prices">Price</a> or <a
+     * href="https://docs.stripe.com/api/plans">Plan</a> object.
      */
     @SerializedName("price")
     String price;
@@ -4633,8 +4738,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The ID of the <a
-       * href="https://stripe.com/docs/api/prices">Price</a> or <a
-       * href="https://stripe.com/docs/api/plans">Plan</a> object.
+       * href="https://docs.stripe.com/api/prices">Price</a> or <a
+       * href="https://docs.stripe.com/api/plans">Plan</a> object.
        */
       public Builder setPrice(String price) {
         this.price = price;
@@ -4792,8 +4897,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
-     * declaratively set metadata on <a href="https://stripe.com/docs/api/payment_intents">Payment
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that will
+     * declaratively set metadata on <a href="https://docs.stripe.com/api/payment_intents">Payment
      * Intents</a> generated from this payment link. Unlike object-level metadata, this field is
      * declarative. Updates will clear prior values.
      */
@@ -4802,7 +4907,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * Indicates that you intend to <a
-     * href="https://stripe.com/docs/payments/payment-intents#future-usage">make future payments</a>
+     * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future payments</a>
      * with the payment method collected by this Checkout Session.
      *
      * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer that
@@ -4849,7 +4954,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents <a
-     * href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for connected
+     * href="https://docs.stripe.com/connect/separate-charges-and-transfers">use case for connected
      * accounts</a> for details.
      */
     @SerializedName("transfer_group")
@@ -4976,7 +5081,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * Indicates that you intend to <a
-       * href="https://stripe.com/docs/payments/payment-intents#future-usage">make future
+       * href="https://docs.stripe.com/payments/payment-intents#future-usage">make future
        * payments</a> with the payment method collected by this Checkout Session.
        *
        * <p>When setting this to {@code on_session}, Checkout will show a notice to the customer
@@ -5031,7 +5136,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
 
       /**
        * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-       * <a href="https://stripe.com/docs/connect/separate-charges-and-transfers">use case for
+       * <a href="https://docs.stripe.com/connect/separate-charges-and-transfers">use case for
        * connected accounts</a> for details.
        */
       public Builder setTransferGroup(String transferGroup) {
@@ -6215,9 +6320,9 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     InvoiceSettings invoiceSettings;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that will
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that will
      * declaratively set metadata on <a
-     * href="https://stripe.com/docs/api/subscriptions">Subscriptions</a> generated from this
+     * href="https://docs.stripe.com/api/subscriptions">Subscriptions</a> generated from this
      * payment link. Unlike object-level metadata, this field is declarative. Updates will clear
      * prior values.
      */

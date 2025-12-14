@@ -17,6 +17,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class UsBankAccount extends StripeObject implements HasId {
+  /** The alternative reference for this payout method, if it's a projected payout method. */
+  @SerializedName("alternative_reference")
+  AlternativeReference alternativeReference;
+
   /** Whether this USBankAccount object was archived. */
   @SerializedName("archived")
   Boolean archived;
@@ -43,6 +47,10 @@ public class UsBankAccount extends StripeObject implements HasId {
   /** The fedwire routing number of the bank account. */
   @SerializedName("fedwire_routing_number")
   String fedwireRoutingNumber;
+
+  /** The ID of the Financial Connections Account used to create the bank account. */
+  @SerializedName("financial_connections_account")
+  String financialConnectionsAccount;
 
   /** The ID of the USBankAccount object. */
   @Getter(onMethod_ = {@Override})
@@ -76,6 +84,25 @@ public class UsBankAccount extends StripeObject implements HasId {
   /** The bank account verification details. */
   @SerializedName("verification")
   Verification verification;
+
+  /** The alternative reference for this payout method, if it's a projected payout method. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AlternativeReference extends StripeObject implements HasId {
+    /** The ID of the alternative resource being referenced. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /**
+     * The type of the alternative reference (e.g., external_account for V1 external accounts).
+     *
+     * <p>One of {@code external_account}, or {@code payment_method}.
+     */
+    @SerializedName("type")
+    String type;
+  }
 
   /** The bank account verification details. */
   @Getter

@@ -85,6 +85,10 @@ public class CardListParams extends ApiRequestParams {
   @SerializedName("type")
   Type type;
 
+  /** Filter cards by wallet settings. */
+  @SerializedName("wallets")
+  Wallets wallets;
+
   private CardListParams(
       String cardholder,
       Object created,
@@ -98,7 +102,8 @@ public class CardListParams extends ApiRequestParams {
       String personalizationDesign,
       String startingAfter,
       Status status,
-      Type type) {
+      Type type,
+      Wallets wallets) {
     this.cardholder = cardholder;
     this.created = created;
     this.endingBefore = endingBefore;
@@ -112,6 +117,7 @@ public class CardListParams extends ApiRequestParams {
     this.startingAfter = startingAfter;
     this.status = status;
     this.type = type;
+    this.wallets = wallets;
   }
 
   public static Builder builder() {
@@ -145,6 +151,8 @@ public class CardListParams extends ApiRequestParams {
 
     private Type type;
 
+    private Wallets wallets;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CardListParams build() {
       return new CardListParams(
@@ -160,7 +168,8 @@ public class CardListParams extends ApiRequestParams {
           this.personalizationDesign,
           this.startingAfter,
           this.status,
-          this.type);
+          this.type,
+          this.wallets);
     }
 
     /** Only return cards belonging to the Cardholder with the provided ID. */
@@ -301,6 +310,12 @@ public class CardListParams extends ApiRequestParams {
       this.type = type;
       return this;
     }
+
+    /** Filter cards by wallet settings. */
+    public Builder setWallets(CardListParams.Wallets wallets) {
+      this.wallets = wallets;
+      return this;
+    }
   }
 
   @Getter
@@ -407,6 +422,230 @@ public class CardListParams extends ApiRequestParams {
       public Builder setLte(Long lte) {
         this.lte = lte;
         return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Wallets {
+    /** Filter cards by Apple Pay wallet details. */
+    @SerializedName("apple_pay")
+    ApplePay applePay;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Filter cards by Google Pay wallet details. */
+    @SerializedName("google_pay")
+    GooglePay googlePay;
+
+    private Wallets(ApplePay applePay, Map<String, Object> extraParams, GooglePay googlePay) {
+      this.applePay = applePay;
+      this.extraParams = extraParams;
+      this.googlePay = googlePay;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private ApplePay applePay;
+
+      private Map<String, Object> extraParams;
+
+      private GooglePay googlePay;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CardListParams.Wallets build() {
+        return new CardListParams.Wallets(this.applePay, this.extraParams, this.googlePay);
+      }
+
+      /** Filter cards by Apple Pay wallet details. */
+      public Builder setApplePay(CardListParams.Wallets.ApplePay applePay) {
+        this.applePay = applePay;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardListParams.Wallets#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardListParams.Wallets#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Filter cards by Google Pay wallet details. */
+      public Builder setGooglePay(CardListParams.Wallets.GooglePay googlePay) {
+        this.googlePay = googlePay;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ApplePay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Query by Apple Pay primary account identifier. */
+      @SerializedName("primary_account_identifier")
+      String primaryAccountIdentifier;
+
+      private ApplePay(Map<String, Object> extraParams, String primaryAccountIdentifier) {
+        this.extraParams = extraParams;
+        this.primaryAccountIdentifier = primaryAccountIdentifier;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String primaryAccountIdentifier;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardListParams.Wallets.ApplePay build() {
+          return new CardListParams.Wallets.ApplePay(
+              this.extraParams, this.primaryAccountIdentifier);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardListParams.Wallets.ApplePay#extraParams} for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardListParams.Wallets.ApplePay#extraParams} for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Query by Apple Pay primary account identifier. */
+        public Builder setPrimaryAccountIdentifier(String primaryAccountIdentifier) {
+          this.primaryAccountIdentifier = primaryAccountIdentifier;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class GooglePay {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Query by Google Pay primary account identifier. */
+      @SerializedName("primary_account_identifier")
+      String primaryAccountIdentifier;
+
+      private GooglePay(Map<String, Object> extraParams, String primaryAccountIdentifier) {
+        this.extraParams = extraParams;
+        this.primaryAccountIdentifier = primaryAccountIdentifier;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String primaryAccountIdentifier;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CardListParams.Wallets.GooglePay build() {
+          return new CardListParams.Wallets.GooglePay(
+              this.extraParams, this.primaryAccountIdentifier);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardListParams.Wallets.GooglePay#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardListParams.Wallets.GooglePay#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Query by Google Pay primary account identifier. */
+        public Builder setPrimaryAccountIdentifier(String primaryAccountIdentifier) {
+          this.primaryAccountIdentifier = primaryAccountIdentifier;
+          return this;
+        }
       }
     }
   }

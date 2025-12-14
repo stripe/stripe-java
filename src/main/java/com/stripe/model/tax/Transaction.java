@@ -24,7 +24,7 @@ import lombok.Setter;
 /**
  * A Tax Transaction records the tax collected from or refunded to your customer.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/tax/custom#tax-transaction">Calculate tax in
+ * <p>Related guide: <a href="https://docs.stripe.com/tax/custom#tax-transaction">Calculate tax in
  * your custom payment flow</a>
  */
 @Getter
@@ -43,7 +43,7 @@ public class Transaction extends ApiResource implements HasId {
   String currency;
 
   /**
-   * The ID of an existing <a href="https://stripe.com/docs/api/customers/object">Customer</a> used
+   * The ID of an existing <a href="https://docs.stripe.com/api/customers/object">Customer</a> used
    * for the resource.
    */
   @SerializedName("customer")
@@ -69,7 +69,7 @@ public class Transaction extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -468,7 +468,7 @@ public class Transaction extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost extends StripeObject {
     /**
-     * The shipping amount in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * The shipping amount in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
      * currency unit</a>. If {@code tax_behavior=inclusive}, then this amount includes taxes.
      * Otherwise, taxes were calculated on top of this amount.
      */
@@ -477,14 +477,14 @@ public class Transaction extends ApiResource implements HasId {
 
     /**
      * The amount of tax calculated for shipping, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     @SerializedName("amount_tax")
     Long amountTax;
 
     /**
      * The ID of an existing <a
-     * href="https://stripe.com/docs/api/shipping_rates/object">ShippingRate</a>.
+     * href="https://docs.stripe.com/api/shipping_rates/object">ShippingRate</a>.
      */
     @SerializedName("shipping_rate")
     String shippingRate;
@@ -506,7 +506,7 @@ public class Transaction extends ApiResource implements HasId {
     List<Transaction.ShippingCost.TaxBreakdown> taxBreakdown;
 
     /**
-     * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID used for shipping.
+     * The <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID used for shipping.
      */
     @SerializedName("tax_code")
     String taxCode;
@@ -521,7 +521,7 @@ public class Transaction extends ApiResource implements HasId {
     public static class TaxBreakdown extends StripeObject {
       /**
        * The amount of tax, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -560,7 +560,7 @@ public class Transaction extends ApiResource implements HasId {
 
       /**
        * The amount on which tax is calculated, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("taxable_amount")
       Long taxableAmount;

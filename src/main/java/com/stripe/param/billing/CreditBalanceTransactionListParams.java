@@ -17,11 +17,11 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
   @SerializedName("credit_grant")
   String creditGrant;
 
-  /** The customer for which to fetch credit balance transactions. */
+  /** The customer whose credit balance transactions you're retrieving. */
   @SerializedName("customer")
   String customer;
 
-  /** The account for which to fetch credit balance transactions. */
+  /** The account representing the customer whose credit balance transactions you're retrieving. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -122,13 +122,15 @@ public class CreditBalanceTransactionListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The customer for which to fetch credit balance transactions. */
+    /** The customer whose credit balance transactions you're retrieving. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /** The account for which to fetch credit balance transactions. */
+    /**
+     * The account representing the customer whose credit balance transactions you're retrieving.
+     */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

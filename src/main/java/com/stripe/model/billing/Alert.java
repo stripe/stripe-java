@@ -81,7 +81,7 @@ public class Alert extends ApiResource implements HasId {
 
   /**
    * Encapsulates configuration of the alert to monitor usage on a specific <a
-   * href="https://stripe.com/docs/api/billing/meter">Billing Meter</a>.
+   * href="https://docs.stripe.com/api/billing/meter">Billing Meter</a>.
    */
   @SerializedName("usage_threshold")
   UsageThreshold usageThreshold;
@@ -447,7 +447,7 @@ public class Alert extends ApiResource implements HasId {
           String lookupKey;
 
           /**
-           * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+           * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
            * attach to an object. This can be useful for storing additional information about the
            * object in a structured format.
            */

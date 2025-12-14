@@ -28,7 +28,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -45,7 +45,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   ProvidedDetails providedDetails;
 
   /**
-   * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
+   * The type of <a href="https://docs.stripe.com/identity/verification-checks">verification
    * check</a> to be performed.
    */
   @SerializedName("type")
@@ -186,7 +186,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of <a href="https://stripe.com/docs/identity/verification-checks">verification
+     * The type of <a href="https://docs.stripe.com/identity/verification-checks">verification
      * check</a> to be performed.
      */
     public Builder setType(VerificationSessionUpdateParams.Type type) {
@@ -200,7 +200,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
   public static class Options {
     /**
      * Options that apply to the <a
-     * href="https://stripe.com/docs/identity/verification-checks?type=document">document check</a>.
+     * href="https://docs.stripe.com/identity/verification-checks?type=document">document check</a>.
      */
     @SerializedName("document")
     Object document;
@@ -235,7 +235,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
       /**
        * Options that apply to the <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=document">document
+       * href="https://docs.stripe.com/identity/verification-checks?type=document">document
        * check</a>.
        */
       public Builder setDocument(VerificationSessionUpdateParams.Options.Document document) {
@@ -245,7 +245,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
       /**
        * Options that apply to the <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=document">document
+       * href="https://docs.stripe.com/identity/verification-checks?type=document">document
        * check</a>.
        */
       public Builder setDocument(EmptyParam document) {
@@ -303,7 +303,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
       /**
        * Collect an ID number and perform an <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+       * href="https://docs.stripe.com/identity/verification-checks?type=id-number">ID number
        * check</a> with the document’s extracted name and date of birth.
        */
       @SerializedName("require_id_number")
@@ -318,9 +318,9 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
       /**
        * Capture a face image and perform a <a
-       * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+       * href="https://docs.stripe.com/identity/verification-checks?type=selfie">selfie check</a>
        * comparing a photo ID and a picture of your user’s face. <a
-       * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+       * href="https://docs.stripe.com/identity/selfie">Learn more</a>.
        */
       @SerializedName("require_matching_selfie")
       Boolean requireMatchingSelfie;
@@ -423,7 +423,7 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
         /**
          * Collect an ID number and perform an <a
-         * href="https://stripe.com/docs/identity/verification-checks?type=id-number">ID number
+         * href="https://docs.stripe.com/identity/verification-checks?type=id-number">ID number
          * check</a> with the document’s extracted name and date of birth.
          */
         public Builder setRequireIdNumber(Boolean requireIdNumber) {
@@ -442,9 +442,9 @@ public class VerificationSessionUpdateParams extends ApiRequestParams {
 
         /**
          * Capture a face image and perform a <a
-         * href="https://stripe.com/docs/identity/verification-checks?type=selfie">selfie check</a>
+         * href="https://docs.stripe.com/identity/verification-checks?type=selfie">selfie check</a>
          * comparing a photo ID and a picture of your user’s face. <a
-         * href="https://stripe.com/docs/identity/selfie">Learn more</a>.
+         * href="https://docs.stripe.com/identity/selfie">Learn more</a>.
          */
         public Builder setRequireMatchingSelfie(Boolean requireMatchingSelfie) {
           this.requireMatchingSelfie = requireMatchingSelfie;

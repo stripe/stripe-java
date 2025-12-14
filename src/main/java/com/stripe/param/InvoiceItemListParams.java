@@ -18,15 +18,15 @@ public class InvoiceItemListParams extends ApiRequestParams {
   Object created;
 
   /**
-   * The identifier of the customer whose invoice items to return. If none is provided, all invoice
-   * items will be returned.
+   * The identifier of the customer whose invoice items to return. If none is provided, returns all
+   * invoice items.
    */
   @SerializedName("customer")
   String customer;
 
   /**
-   * The identifier of the account whose invoice items to return. If none is provided, all invoice
-   * items will be returned.
+   * The identifier of the account representing the customer whose invoice items to return. If none
+   * is provided, returns all invoice items.
    */
   @SerializedName("customer_account")
   String customerAccount;
@@ -160,8 +160,8 @@ public class InvoiceItemListParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the customer whose invoice items to return. If none is provided, all
-     * invoice items will be returned.
+     * The identifier of the customer whose invoice items to return. If none is provided, returns
+     * all invoice items.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -169,8 +169,8 @@ public class InvoiceItemListParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the account whose invoice items to return. If none is provided, all invoice
-     * items will be returned.
+     * The identifier of the account representing the customer whose invoice items to return. If
+     * none is provided, returns all invoice items.
      */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;

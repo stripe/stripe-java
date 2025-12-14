@@ -18,8 +18,8 @@ import lombok.Setter;
 /**
  * Balance transfers represent funds moving between balance types on your Stripe account. They
  * currently support moving funds between your Stripe balance and your <a
- * href="https://stripe.com/docs/issuing">Issuing</a> balance and between your <a
- * href="https://stripe.com/docs/connect/funds-segregation">Allocated Funds</a> balance and your
+ * href="https://docs.stripe.com/issuing">Issuing</a> balance and between your <a
+ * href="https://docs.stripe.com/connect/funds-segregation">Allocated Funds</a> balance and your
  * Stripe balance.
  */
 @Getter
@@ -46,7 +46,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
   DestinationBalance destinationBalance;
 
   /**
-   * A <a href="https://stripe.com/docs/treasury/moving-money/regulatory-receipts">hosted
+   * A <a href="https://docs.stripe.com/treasury/moving-money/regulatory-receipts">hosted
    * transaction receipt</a> URL that is provided when money movement is considered regulated under
    * Stripe's money transmission licenses.
    */
@@ -66,7 +66,7 @@ public class BalanceTransfer extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

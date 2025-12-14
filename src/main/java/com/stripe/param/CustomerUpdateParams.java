@@ -14,7 +14,11 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class CustomerUpdateParams extends ApiRequestParams {
-  /** The customer's address. */
+  /**
+   * The customer's address. Learn about <a
+   * href="https://docs.stripe.com/invoicing/taxes?dashboard-or-api=dashboard#set-up-customer">country-specific
+   * requirements for calculating tax</a>.
+   */
   @SerializedName("address")
   Object address;
 
@@ -37,14 +41,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   /**
    * If you are using payment methods created via the PaymentMethods API, see the <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * href="https://docs.stripe.com/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * parameter.
    *
    * <p>Provide the ID of a payment source already attached to this customer to make it this
    * customer's default payment source.
    *
    * <p>If you want to add a new payment source and make it the default, see the <a
-   * href="https://stripe.com/docs/api/customers/update#update_customer-source">source</a> property.
+   * href="https://docs.stripe.com/api/customers/update#update_customer-source">source</a> property.
    */
   @SerializedName("default_source")
   Object defaultSource;
@@ -92,7 +96,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
   InvoiceSettings invoiceSettings;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -257,13 +261,21 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.validate);
     }
 
-    /** The customer's address. */
+    /**
+     * The customer's address. Learn about <a
+     * href="https://docs.stripe.com/invoicing/taxes?dashboard-or-api=dashboard#set-up-customer">country-specific
+     * requirements for calculating tax</a>.
+     */
     public Builder setAddress(CustomerUpdateParams.Address address) {
       this.address = address;
       return this;
     }
 
-    /** The customer's address. */
+    /**
+     * The customer's address. Learn about <a
+     * href="https://docs.stripe.com/invoicing/taxes?dashboard-or-api=dashboard#set-up-customer">country-specific
+     * requirements for calculating tax</a>.
+     */
     public Builder setAddress(EmptyParam address) {
       this.address = address;
       return this;
@@ -300,14 +312,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /**
      * If you are using payment methods created via the PaymentMethods API, see the <a
-     * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * href="https://docs.stripe.com/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * parameter.
      *
      * <p>Provide the ID of a payment source already attached to this customer to make it this
      * customer's default payment source.
      *
      * <p>If you want to add a new payment source and make it the default, see the <a
-     * href="https://stripe.com/docs/api/customers/update#update_customer-source">source</a>
+     * href="https://docs.stripe.com/api/customers/update#update_customer-source">source</a>
      * property.
      */
     public Builder setDefaultSource(String defaultSource) {
@@ -317,14 +329,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /**
      * If you are using payment methods created via the PaymentMethods API, see the <a
-     * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+     * href="https://docs.stripe.com/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * parameter.
      *
      * <p>Provide the ID of a payment source already attached to this customer to make it this
      * customer's default payment source.
      *
      * <p>If you want to add a new payment source and make it the default, see the <a
-     * href="https://stripe.com/docs/api/customers/update#update_customer-source">source</a>
+     * href="https://docs.stripe.com/api/customers/update#update_customer-source">source</a>
      * property.
      */
     public Builder setDefaultSource(EmptyParam defaultSource) {
@@ -485,7 +497,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -496,7 +508,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -644,7 +656,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("postal_code")
     Object postalCode;
 
-    /** State, county, province, or region. */
+    /**
+     * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+     * 3166-2</a>).
+     */
     @SerializedName("state")
     Object state;
 
@@ -790,13 +805,19 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       public Builder setState(String state) {
         this.state = state;
         return this;
       }
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       public Builder setState(EmptyParam state) {
         this.state = state;
         return this;
@@ -894,7 +915,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
        * Controls how funds transferred by the customer are applied to payment intents and invoices.
        * Valid options are {@code automatic}, {@code manual}, or {@code merchant_default}. For more
        * information about these reconciliation modes, see <a
-       * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
+       * href="https://docs.stripe.com/payments/customer-balance/reconciliation">Reconciliation</a>.
        */
       @SerializedName("reconciliation_mode")
       ReconciliationMode reconciliationMode;
@@ -951,7 +972,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
          * Controls how funds transferred by the customer are applied to payment intents and
          * invoices. Valid options are {@code automatic}, {@code manual}, or {@code
          * merchant_default}. For more information about these reconciliation modes, see <a
-         * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
+         * href="https://docs.stripe.com/payments/customer-balance/reconciliation">Reconciliation</a>.
          */
         public Builder setReconciliationMode(
             CustomerUpdateParams.CashBalance.Settings.ReconciliationMode reconciliationMode) {
@@ -1560,7 +1581,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       Object postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       Object state;
 
@@ -1708,13 +1732,19 @@ public class CustomerUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(EmptyParam state) {
           this.state = state;
           return this;

@@ -20,7 +20,7 @@ public class ProductUpdateParams extends ApiRequestParams {
   Boolean active;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the default
+   * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> object that is the default
    * price for this product.
    */
   @SerializedName("default_price")
@@ -53,13 +53,13 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /**
    * A list of up to 15 marketing features for this product. These are displayed in <a
-   * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+   * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
    */
   @SerializedName("marketing_features")
   Object marketingFeatures;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -92,9 +92,16 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
 
-  /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+  /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
   @SerializedName("tax_code")
   Object taxCode;
+
+  /**
+   * Tax details for this product, including the <a href="https://stripe.com/tax/tax-codes">tax
+   * code</a> and an optional performance location.
+   */
+  @SerializedName("tax_details")
+  Object taxDetails;
 
   /**
    * A label that represents units of this product. When set, this will be included in customers'
@@ -121,6 +128,7 @@ public class ProductUpdateParams extends ApiRequestParams {
       Boolean shippable,
       Object statementDescriptor,
       Object taxCode,
+      Object taxDetails,
       Object unitLabel,
       Object url) {
     this.active = active;
@@ -136,6 +144,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     this.shippable = shippable;
     this.statementDescriptor = statementDescriptor;
     this.taxCode = taxCode;
+    this.taxDetails = taxDetails;
     this.unitLabel = unitLabel;
     this.url = url;
   }
@@ -171,6 +180,8 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private Object taxCode;
 
+    private Object taxDetails;
+
     private Object unitLabel;
 
     private Object url;
@@ -191,6 +202,7 @@ public class ProductUpdateParams extends ApiRequestParams {
           this.shippable,
           this.statementDescriptor,
           this.taxCode,
+          this.taxDetails,
           this.unitLabel,
           this.url);
     }
@@ -202,7 +214,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the
+     * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> object that is the
      * default price for this product.
      */
     public Builder setDefaultPrice(String defaultPrice) {
@@ -211,7 +223,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the <a href="https://stripe.com/docs/api/prices">Price</a> object that is the
+     * The ID of the <a href="https://docs.stripe.com/api/prices">Price</a> object that is the
      * default price for this product.
      */
     public Builder setDefaultPrice(EmptyParam defaultPrice) {
@@ -365,7 +377,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 15 marketing features for this product. These are displayed in <a
-     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+     * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setMarketingFeatures(EmptyParam marketingFeatures) {
       this.marketingFeatures = marketingFeatures;
@@ -374,7 +386,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 15 marketing features for this product. These are displayed in <a
-     * href="https://stripe.com/docs/payments/checkout/pricing-table">pricing tables</a>.
+     * href="https://docs.stripe.com/payments/checkout/pricing-table">pricing tables</a>.
      */
     public Builder setMarketingFeatures(
         List<ProductUpdateParams.MarketingFeature> marketingFeatures) {
@@ -411,7 +423,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -422,7 +434,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -494,15 +506,33 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(String taxCode) {
       this.taxCode = taxCode;
       return this;
     }
 
-    /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+    /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
     public Builder setTaxCode(EmptyParam taxCode) {
       this.taxCode = taxCode;
+      return this;
+    }
+
+    /**
+     * Tax details for this product, including the <a href="https://stripe.com/tax/tax-codes">tax
+     * code</a> and an optional performance location.
+     */
+    public Builder setTaxDetails(ProductUpdateParams.TaxDetails taxDetails) {
+      this.taxDetails = taxDetails;
+      return this;
+    }
+
+    /**
+     * Tax details for this product, including the <a href="https://stripe.com/tax/tax-codes">tax
+     * code</a> and an optional performance location.
+     */
+    public Builder setTaxDetails(EmptyParam taxDetails) {
+      this.taxDetails = taxDetails;
       return this;
     }
 
@@ -723,6 +753,90 @@ public class ProductUpdateParams extends ApiRequestParams {
       /** <strong>Required.</strong> Width, in inches. Maximum precision is 2 decimal places. */
       public Builder setWidth(BigDecimal width) {
         this.width = width;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxDetails {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
+     * code</a> ID.
+     */
+    @SerializedName("tax_code")
+    Object taxCode;
+
+    private TaxDetails(Map<String, Object> extraParams, Object taxCode) {
+      this.extraParams = extraParams;
+      this.taxCode = taxCode;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object taxCode;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ProductUpdateParams.TaxDetails build() {
+        return new ProductUpdateParams.TaxDetails(this.extraParams, this.taxCode);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ProductUpdateParams.TaxDetails#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ProductUpdateParams.TaxDetails#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
+       * code</a> ID.
+       */
+      public Builder setTaxCode(String taxCode) {
+        this.taxCode = taxCode;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> A <a href="https://docs.stripe.com/tax/tax-categories">tax
+       * code</a> ID.
+       */
+      public Builder setTaxCode(EmptyParam taxCode) {
+        this.taxCode = taxCode;
         return this;
       }
     }

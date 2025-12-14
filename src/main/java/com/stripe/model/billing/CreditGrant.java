@@ -65,7 +65,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** ID of the account receiving the billing credits. */
+  /** ID of the account representing the customer receiving the billing credits. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -90,7 +90,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -472,7 +472,7 @@ public class CreditGrant extends ApiResource implements HasId, MetadataStore<Cre
         String lookupKey;
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format.
          */

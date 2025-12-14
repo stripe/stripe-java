@@ -29,7 +29,7 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
 
   /**
    * Determines how to handle <a
-   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the billing
+   * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the billing
    * cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now}, or
    * starting a trial), or if an item's {@code quantity} changes. The default value is {@code
    * create_prorations}.
@@ -40,7 +40,7 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   /**
    * If set, the proration will be calculated as though the subscription was updated at the given
    * time. This can be used to apply the same proration that was previewed with the <a
-   * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
+   * href="https://api.stripe.com#retrieve_customer_invoice">upcoming invoice</a> endpoint.
    */
   @SerializedName("proration_date")
   Long prorationDate;
@@ -112,7 +112,7 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> when the
+     * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
      * billing_cycle_anchor=now}, or starting a trial), or if an item's {@code quantity} changes.
      * The default value is {@code create_prorations}.
@@ -126,7 +126,7 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     /**
      * If set, the proration will be calculated as though the subscription was updated at the given
      * time. This can be used to apply the same proration that was previewed with the <a
-     * href="https://stripe.com/docs/api#retrieve_customer_invoice">upcoming invoice</a> endpoint.
+     * href="https://api.stripe.com#retrieve_customer_invoice">upcoming invoice</a> endpoint.
      */
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;

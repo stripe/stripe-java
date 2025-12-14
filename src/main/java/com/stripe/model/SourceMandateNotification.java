@@ -69,12 +69,12 @@ public class SourceMandateNotification extends StripeObject implements HasId {
    * object: once chargeable, they can be charged, or can be attached to customers.
    *
    * <p>Stripe doesn't recommend using the deprecated <a
-   * href="https://stripe.com/docs/api/sources">Sources API</a>. We recommend that you adopt the <a
-   * href="https://stripe.com/docs/api/payment_methods">PaymentMethods API</a>. This newer API
+   * href="https://docs.stripe.com/api/sources">Sources API</a>. We recommend that you adopt the <a
+   * href="https://docs.stripe.com/api/payment_methods">PaymentMethods API</a>. This newer API
    * provides access to our latest features and payment method types.
    *
-   * <p>Related guides: <a href="https://stripe.com/docs/sources">Sources API</a> and <a
-   * href="https://stripe.com/docs/sources/customers">Sources &amp; Customers</a>.
+   * <p>Related guides: <a href="https://docs.stripe.com/sources">Sources API</a> and <a
+   * href="https://docs.stripe.com/sources/customers">Sources &amp; Customers</a>.
    */
   @SerializedName("source")
   Source source;

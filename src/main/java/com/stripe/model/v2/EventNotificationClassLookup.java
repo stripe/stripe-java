@@ -274,6 +274,12 @@ public final class EventNotificationClassLookup {
         "v2.core.health.payment_method_error.resolved",
         com.stripe.events.V2CoreHealthPaymentMethodErrorResolvedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.health.sepa_debit_delayed.firing",
+        com.stripe.events.V2CoreHealthSepaDebitDelayedFiringEventNotification.class);
+    eventClassLookup.put(
+        "v2.core.health.sepa_debit_delayed.resolved",
+        com.stripe.events.V2CoreHealthSepaDebitDelayedResolvedEventNotification.class);
+    eventClassLookup.put(
         "v2.core.health.traffic_volume_drop.firing",
         com.stripe.events.V2CoreHealthTrafficVolumeDropFiringEventNotification.class);
     eventClassLookup.put(
@@ -371,6 +377,9 @@ public final class EventNotificationClassLookup {
         "v2.money_management.outbound_transfer.updated",
         com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.money_management.payout_method.created",
+        com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification.class);
+    eventClassLookup.put(
         "v2.money_management.payout_method.updated",
         com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEventNotification.class);
     eventClassLookup.put(
@@ -441,6 +450,40 @@ public final class EventNotificationClassLookup {
     eventClassLookup.put(
         "v2.payments.off_session_payment.succeeded",
         com.stripe.events.V2PaymentsOffSessionPaymentSucceededEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.canceled",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.created",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.errored",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentErroredEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.funds_not_received",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentFundsNotReceivedEventNotification
+            .class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.matched",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentMatchedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.not_found",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentNotFoundEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.settled",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentSettledEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent.submitted",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentSubmittedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent_split.canceled",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentSplitCanceledEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent_split.created",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentSplitCreatedEventNotification.class);
+    eventClassLookup.put(
+        "v2.payments.settlement_allocation_intent_split.settled",
+        com.stripe.events.V2PaymentsSettlementAllocationIntentSplitSettledEventNotification.class);
     eventClassLookup.put(
         "v2.reporting.report_run.created",
         com.stripe.events.V2ReportingReportRunCreatedEventNotification.class);

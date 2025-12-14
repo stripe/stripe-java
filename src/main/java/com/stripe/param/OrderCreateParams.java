@@ -71,7 +71,7 @@ public class OrderCreateParams extends ApiRequestParams {
   List<OrderCreateParams.LineItem> lineItems;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -1294,7 +1294,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
       /**
        * Only required if a <a
-       * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+       * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
        * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
        * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
        * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1413,7 +1413,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
         /**
          * Only required if a <a
-         * href="https://stripe.com/docs/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
+         * href="https://docs.stripe.com/tax/products-prices-tax-categories-tax-behavior#setting-a-default-tax-behavior-(recommended)">default
          * tax behavior</a> was not provided in the Stripe Tax settings. Specifies whether the price
          * is considered inclusive of taxes or exclusive of taxes. One of {@code inclusive}, {@code
          * exclusive}, or {@code unspecified}. Once specified as either {@code inclusive} or {@code
@@ -1504,7 +1504,7 @@ public class OrderCreateParams extends ApiRequestParams {
       Object images;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -1524,7 +1524,7 @@ public class OrderCreateParams extends ApiRequestParams {
       @SerializedName("shippable")
       Boolean shippable;
 
-      /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+      /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
       @SerializedName("tax_code")
       Object taxCode;
 
@@ -1734,7 +1734,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -1745,7 +1745,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+         * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
          * attach to an object. This can be useful for storing additional information about the
          * object in a structured format. Individual keys can be unset by posting an empty value to
          * them. All keys can be unset by posting an empty value to {@code metadata}.
@@ -1782,13 +1782,13 @@ public class OrderCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
         public Builder setTaxCode(String taxCode) {
           this.taxCode = taxCode;
           return this;
         }
 
-        /** A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. */
+        /** A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. */
         public Builder setTaxCode(EmptyParam taxCode) {
           this.taxCode = taxCode;
           return this;
@@ -2030,7 +2030,7 @@ public class OrderCreateParams extends ApiRequestParams {
       PaymentMethodOptions paymentMethodOptions;
 
       /**
-       * The list of <a href="https://stripe.com/docs/payments/payment-methods/overview">payment
+       * The list of <a href="https://docs.stripe.com/payments/payment-methods/overview">payment
        * method types</a> to provide to the order's PaymentIntent. Do not include this attribute if
        * you prefer to manage your payment methods from the <a
        * href="https://dashboard.stripe.com/settings/payment_methods">Stripe Dashboard</a>.
@@ -3094,17 +3094,17 @@ public class OrderCreateParams extends ApiRequestParams {
            * Indicates that you intend to make future payments with the payment method.
            *
            * <p>Providing this parameter will <a
-           * href="https://stripe.com/docs/payments/save-during-payment">attach the payment
+           * href="https://docs.stripe.com/payments/save-during-payment">attach the payment
            * method</a> to the order's Customer, if present, after the order's PaymentIntent is
            * confirmed and any required actions from the user are complete. If no Customer was
            * provided, the payment method can still be <a
-           * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+           * href="https://docs.stripe.com/api/payment_methods/attach">attached</a> to a Customer
            * after the transaction completes.
            *
            * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
            * dynamically optimize your payment flow and comply with regional legislation and network
            * rules, such as <a
-           * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+           * href="https://docs.stripe.com/strong-customer-authentication">SCA</a>.
            *
            * <p>If {@code setup_future_usage} is already set and you are performing a request using
            * a publishable key, you may only update the value from {@code on_session} to {@code
@@ -3207,17 +3207,17 @@ public class OrderCreateParams extends ApiRequestParams {
              * Indicates that you intend to make future payments with the payment method.
              *
              * <p>Providing this parameter will <a
-             * href="https://stripe.com/docs/payments/save-during-payment">attach the payment
+             * href="https://docs.stripe.com/payments/save-during-payment">attach the payment
              * method</a> to the order's Customer, if present, after the order's PaymentIntent is
              * confirmed and any required actions from the user are complete. If no Customer was
              * provided, the payment method can still be <a
-             * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+             * href="https://docs.stripe.com/api/payment_methods/attach">attached</a> to a Customer
              * after the transaction completes.
              *
              * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
              * dynamically optimize your payment flow and comply with regional legislation and
              * network rules, such as <a
-             * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+             * href="https://docs.stripe.com/strong-customer-authentication">SCA</a>.
              *
              * <p>If {@code setup_future_usage} is already set and you are performing a request
              * using a publishable key, you may only update the value from {@code on_session} to
@@ -3664,17 +3664,17 @@ public class OrderCreateParams extends ApiRequestParams {
            * Indicates that you intend to make future payments with the payment method.
            *
            * <p>Providing this parameter will <a
-           * href="https://stripe.com/docs/payments/save-during-payment">attach the payment
+           * href="https://docs.stripe.com/payments/save-during-payment">attach the payment
            * method</a> to the order's Customer, if present, after the order's PaymentIntent is
            * confirmed and any required actions from the user are complete. If no Customer was
            * provided, the payment method can still be <a
-           * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+           * href="https://docs.stripe.com/api/payment_methods/attach">attached</a> to a Customer
            * after the transaction completes.
            *
            * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
            * dynamically optimize your payment flow and comply with regional legislation and network
            * rules, such as <a
-           * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+           * href="https://docs.stripe.com/strong-customer-authentication">SCA</a>.
            *
            * <p>If {@code setup_future_usage} is already set and you are performing a request using
            * a publishable key, you may only update the value from {@code on_session} to {@code
@@ -3751,17 +3751,17 @@ public class OrderCreateParams extends ApiRequestParams {
              * Indicates that you intend to make future payments with the payment method.
              *
              * <p>Providing this parameter will <a
-             * href="https://stripe.com/docs/payments/save-during-payment">attach the payment
+             * href="https://docs.stripe.com/payments/save-during-payment">attach the payment
              * method</a> to the order's Customer, if present, after the order's PaymentIntent is
              * confirmed and any required actions from the user are complete. If no Customer was
              * provided, the payment method can still be <a
-             * href="https://stripe.com/docs/api/payment_methods/attach">attached</a> to a Customer
+             * href="https://docs.stripe.com/api/payment_methods/attach">attached</a> to a Customer
              * after the transaction completes.
              *
              * <p>When processing card payments, Stripe also uses {@code setup_future_usage} to
              * dynamically optimize your payment flow and comply with regional legislation and
              * network rules, such as <a
-             * href="https://stripe.com/docs/strong-customer-authentication">SCA</a>.
+             * href="https://docs.stripe.com/strong-customer-authentication">SCA</a>.
              *
              * <p>If {@code setup_future_usage} is already set and you are performing a request
              * using a publishable key, you may only update the value from {@code on_session} to
@@ -12565,7 +12565,7 @@ public class OrderCreateParams extends ApiRequestParams {
           List<OrderCreateParams.Payment.Settings.PaymentMethodOptions.Paypal.LineItem> lineItems;
 
           /**
-           * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred
+           * <a href="https://docs.stripe.com/payments/paypal/supported-locales">Preferred
            * locale</a> of the PayPal checkout page that the customer is redirected to.
            */
           @SerializedName("preferred_locale")
@@ -12766,7 +12766,7 @@ public class OrderCreateParams extends ApiRequestParams {
             }
 
             /**
-             * <a href="https://stripe.com/docs/payments/paypal/supported-locales">Preferred
+             * <a href="https://docs.stripe.com/payments/paypal/supported-locales">Preferred
              * locale</a> of the PayPal checkout page that the customer is redirected to.
              */
             public Builder setPreferredLocale(
@@ -14320,7 +14320,7 @@ public class OrderCreateParams extends ApiRequestParams {
       FixedAmount fixedAmount;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -14336,7 +14336,7 @@ public class OrderCreateParams extends ApiRequestParams {
       TaxBehavior taxBehavior;
 
       /**
-       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+       * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax
        * code is {@code txcd_92010001}.
        */
       @SerializedName("tax_code")
@@ -14494,7 +14494,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+         * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax
          * code is {@code txcd_92010001}.
          */
         public Builder setTaxCode(String taxCode) {

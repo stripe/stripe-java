@@ -17,6 +17,10 @@ public final class V2Services extends ApiService {
     return new com.stripe.service.v2.CoreService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.IamService iam() {
+    return new com.stripe.service.v2.IamService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.MoneyManagementService moneyManagement() {
     return new com.stripe.service.v2.MoneyManagementService(this.getResponseGetter());
   }
@@ -27,6 +31,10 @@ public final class V2Services extends ApiService {
 
   public com.stripe.service.v2.ReportingService reporting() {
     return new com.stripe.service.v2.ReportingService(this.getResponseGetter());
+  }
+
+  public com.stripe.service.v2.TaxService tax() {
+    return new com.stripe.service.v2.TaxService(this.getResponseGetter());
   }
 
   public com.stripe.service.v2.TestHelperService testHelpers() {

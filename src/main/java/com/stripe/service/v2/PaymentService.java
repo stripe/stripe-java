@@ -12,4 +12,10 @@ public final class PaymentService extends ApiService {
   public com.stripe.service.v2.payments.OffSessionPaymentService offSessionPayments() {
     return new com.stripe.service.v2.payments.OffSessionPaymentService(this.getResponseGetter());
   }
+
+  public com.stripe.service.v2.payments.SettlementAllocationIntentService
+      settlementAllocationIntents() {
+    return new com.stripe.service.v2.payments.SettlementAllocationIntentService(
+        this.getResponseGetter());
+  }
 }

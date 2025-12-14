@@ -57,7 +57,7 @@ public class Session extends ApiResource implements HasId {
 
   /**
    * Information about a specific flow for the customer to go through. See the <a
-   * href="https://stripe.com/docs/customer-management/portal-deep-links">docs</a> to learn more
+   * href="https://docs.stripe.com/customer-management/portal-deep-links">docs</a> to learn more
    * about using customer portal deep links and flows.
    */
   @SerializedName("flow")
@@ -102,9 +102,9 @@ public class Session extends ApiResource implements HasId {
    * The account for which the session was created on behalf of. When specified, only subscriptions
    * and invoices with this {@code on_behalf_of} account appear in the portal. For more information,
    * see the <a
-   * href="https://stripe.com/docs/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
+   * href="https://docs.stripe.com/connect/separate-charges-and-transfers#settlement-merchant">docs</a>.
    * Use the <a
-   * href="https://stripe.com/docs/api/accounts/object#account_object-settings-branding">Accounts
+   * href="https://docs.stripe.com/api/accounts/object#account_object-settings-branding">Accounts
    * API</a> to modify the {@code on_behalf_of} account's branding settings, which the portal
    * displays.
    */
@@ -335,7 +335,7 @@ public class Session extends ApiResource implements HasId {
       List<Session.Flow.SubscriptionUpdateConfirm.Discount> discounts;
 
       /**
-       * The <a href="https://stripe.com/docs/api/subscription_items">subscription item</a> to be
+       * The <a href="https://docs.stripe.com/api/subscription_items">subscription item</a> to be
        * updated through this flow. Currently, only up to one may be specified and subscriptions
        * with multiple items are not updatable.
        */
@@ -373,7 +373,7 @@ public class Session extends ApiResource implements HasId {
       public static class Item extends StripeObject implements HasId {
         /**
          * The ID of the <a
-         * href="https://stripe.com/docs/api/subscriptions/object#subscription_object-items-data-id">subscription
+         * href="https://docs.stripe.com/api/subscriptions/object#subscription_object-items-data-id">subscription
          * item</a> to be updated.
          */
         @Getter(onMethod_ = {@Override})
@@ -383,14 +383,14 @@ public class Session extends ApiResource implements HasId {
         /**
          * The price the customer should subscribe to through this flow. The price must also be
          * included in the configuration's <a
-         * href="https://stripe.com/docs/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
+         * href="https://docs.stripe.com/api/customer_portal/configuration#portal_configuration_object-features-subscription_update-products">{@code
          * features.subscription_update.products}</a>.
          */
         @SerializedName("price")
         String price;
 
         /**
-         * <a href="https://stripe.com/docs/subscriptions/quantities">Quantity</a> for this item
+         * <a href="https://docs.stripe.com/subscriptions/quantities">Quantity</a> for this item
          * that the customer should subscribe to through this flow.
          */
         @SerializedName("quantity")

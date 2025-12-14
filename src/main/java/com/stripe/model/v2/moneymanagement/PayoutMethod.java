@@ -15,6 +15,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PayoutMethod extends StripeObject implements HasId {
+  /** The alternative reference for this payout method, if it's a projected payout method. */
+  @SerializedName("alternative_reference")
+  AlternativeReference alternativeReference;
+
   /** A set of available payout speeds for this payout method. */
   @SerializedName("available_payout_speeds")
   List<String> availablePayoutSpeeds;
@@ -75,6 +79,25 @@ public class PayoutMethod extends StripeObject implements HasId {
   @SerializedName("usage_status")
   UsageStatus usageStatus;
 
+  /** The alternative reference for this payout method, if it's a projected payout method. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AlternativeReference extends StripeObject implements HasId {
+    /** The ID of the alternative resource being referenced. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /**
+     * The type of the alternative reference (e.g., external_account for V1 external accounts).
+     *
+     * <p>One of {@code external_account}, or {@code payment_method}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
   /** The PayoutMethodBankAccount object details. */
   @Getter
   @Setter
@@ -111,6 +134,10 @@ public class PayoutMethod extends StripeObject implements HasId {
     /** List of enabled flows for this bank account (wire or local). */
     @SerializedName("enabled_delivery_options")
     List<String> enabledDeliveryOptions;
+
+    /** The ID of the Financial Connections Account used to create the bank account. */
+    @SerializedName("financial_connections_account")
+    String financialConnectionsAccount;
 
     /** The last 4 digits of the account number. */
     @SerializedName("last4")

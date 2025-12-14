@@ -109,7 +109,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /**
    * Information about the <a
-   * href="https://stripe.com/docs/connect/custom-accounts/future-requirements">upcoming new
+   * href="https://docs.stripe.com/connect/custom-accounts/future-requirements">upcoming new
    * requirements for this person</a>, including what information needs to be collected, and by
    * when.
    */
@@ -167,7 +167,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   String maidenName;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -466,25 +466,28 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @EqualsAndHashCode(callSuper = false)
   public static class FutureRequirements extends StripeObject {
     /**
-     * Fields that are due and can be satisfied by providing the corresponding alternative fields
-     * instead.
+     * Fields that are due and can be resolved by providing the corresponding alternative fields
+     * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
+     * alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing
+     * {@code original_fields_due} also serves as a pathway for attempting to resolve the fields
+     * again.
      */
     @SerializedName("alternatives")
     List<Person.FutureRequirements.Alternative> alternatives;
 
     /**
-     * Fields that need to be collected to keep the person's account enabled. If not collected by
-     * the account's {@code future_requirements[current_deadline]}, these fields will transition to
-     * the main {@code requirements} hash, and may immediately become {@code past_due}, but the
-     * account may also be given a grace period depending on the account's enablement state prior to
+     * Fields that need to be resolved to keep the person's account enabled. If not resolved by the
+     * account's {@code future_requirements[current_deadline]}, these fields will transition to the
+     * main {@code requirements} hash, and may immediately become {@code past_due}, but the account
+     * may also be given a grace period depending on the account's enablement state prior to
      * transition.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
-     * Fields that are {@code currently_due} and need to be collected again because validation or
-     * verification failed.
+     * Details about validation and verification failures for {@code due} requirements that must be
+     * resolved.
      */
     @SerializedName("errors")
     List<Person.FutureRequirements.Errors> errors;
@@ -498,20 +501,19 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> eventuallyDue;
 
     /**
-     * Fields that weren't collected by the account's {@code requirements.current_deadline}. These
-     * fields need to be collected to enable the person's account. New fields will never appear
-     * here; {@code future_requirements.past_due} will always be a subset of {@code
-     * requirements.past_due}.
+     * Fields that haven't been resolved by the account's {@code requirements.current_deadline}.
+     * These fields need to be resolved to enable the person's account. {@code
+     * future_requirements.past_due} is a subset of {@code requirements.past_due}.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that might become required depending on the results of verification or review. It's an
-     * empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due} or {@code currently_due}. Fields might appear in {@code
-     * eventually_due} or {@code currently_due} and in {@code pending_verification} if verification
-     * fails but another verification is still pending.
+     * Fields that are being reviewed, or might become required depending on the results of a
+     * review. If the review fails, these fields can move to {@code eventually_due}, {@code
+     * currently_due}, {@code past_due} or {@code alternatives}. Fields might appear in {@code
+     * eventually_due}, {@code currently_due}, {@code past_due} or {@code alternatives} and in
+     * {@code pending_verification} if one verification fails but another is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -524,12 +526,12 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alternative extends StripeObject {
-      /** Fields that can be provided to satisfy all fields in {@code original_fields_due}. */
+      /** Fields that can be provided to resolve all fields in {@code original_fields_due}. */
       @SerializedName("alternative_fields_due")
       List<String> alternativeFieldsDue;
 
       /**
-       * Fields that are due and can be satisfied by providing all fields in {@code
+       * Fields that are due and can be resolved by providing all fields in {@code
        * alternative_fields_due}.
        */
       @SerializedName("original_fields_due")
@@ -688,23 +690,26 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * Fields that are due and can be satisfied by providing the corresponding alternative fields
-     * instead.
+     * Fields that are due and can be resolved by providing the corresponding alternative fields
+     * instead. Many alternatives can list the same {@code original_fields_due}, and any of these
+     * alternatives can serve as a pathway for attempting to resolve the fields again. Re-providing
+     * {@code original_fields_due} also serves as a pathway for attempting to resolve the fields
+     * again.
      */
     @SerializedName("alternatives")
     List<Person.Requirements.Alternative> alternatives;
 
     /**
-     * Fields that need to be collected to keep the person's account enabled. If not collected by
-     * the account's {@code current_deadline}, these fields appear in {@code past_due} as well, and
+     * Fields that need to be resolved to keep the person's account enabled. If not resolved by the
+     * account's {@code current_deadline}, these fields will appear in {@code past_due} as well, and
      * the account is disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
-     * Fields that are {@code currently_due} and need to be collected again because validation or
-     * verification failed.
+     * Details about validation and verification failures for {@code due} requirements that must be
+     * resolved.
      */
     @SerializedName("errors")
     List<Person.Requirements.Errors> errors;
@@ -717,18 +722,18 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> eventuallyDue;
 
     /**
-     * Fields that weren't collected by the account's {@code current_deadline}. These fields need to
-     * be collected to enable the person's account.
+     * Fields that haven't been resolved by {@code current_deadline}. These fields need to be
+     * resolved to enable the person's account.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that might become required depending on the results of verification or review. It's an
-     * empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}. Fields
-     * might appear in {@code eventually_due}, {@code currently_due}, or {@code past_due} and in
-     * {@code pending_verification} if verification fails but another verification is still pending.
+     * Fields that are being reviewed, or might become required depending on the results of a
+     * review. If the review fails, these fields can move to {@code eventually_due}, {@code
+     * currently_due}, {@code past_due} or {@code alternatives}. Fields might appear in {@code
+     * eventually_due}, {@code currently_due}, {@code past_due} or {@code alternatives} and in
+     * {@code pending_verification} if one verification fails but another is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -741,12 +746,12 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alternative extends StripeObject {
-      /** Fields that can be provided to satisfy all fields in {@code original_fields_due}. */
+      /** Fields that can be provided to resolve all fields in {@code original_fields_due}. */
       @SerializedName("alternative_fields_due")
       List<String> alternativeFieldsDue;
 
       /**
-       * Fields that are due and can be satisfied by providing all fields in {@code
+       * Fields that are due and can be resolved by providing all fields in {@code
        * alternative_fields_due}.
        */
       @SerializedName("original_fields_due")
@@ -977,7 +982,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     /**
      * The state of verification for the person. Possible values are {@code unverified}, {@code
      * pending}, or {@code verified}. Please refer <a
-     * href="https://stripe.com/docs/connect/handling-api-verification">guide</a> to handle
+     * href="https://docs.stripe.com/connect/handling-api-verification">guide</a> to handle
      * verification updates.
      */
     @SerializedName("status")
@@ -992,7 +997,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @EqualsAndHashCode(callSuper = false)
     public static class AdditionalDocument extends StripeObject {
       /**
-       * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("back")
@@ -1022,7 +1027,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       String detailsCode;
 
       /**
-       * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("front")
@@ -1076,7 +1081,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @EqualsAndHashCode(callSuper = false)
     public static class Document extends StripeObject {
       /**
-       * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * The back of an ID returned by a <a href="https://api.stripe.com#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("back")
@@ -1106,7 +1111,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       String detailsCode;
 
       /**
-       * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+       * The front of an ID returned by a <a href="https://api.stripe.com#create_file">file
        * upload</a> with a {@code purpose} value of {@code identity_document}.
        */
       @SerializedName("front")

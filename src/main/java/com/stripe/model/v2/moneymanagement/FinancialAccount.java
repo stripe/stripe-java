@@ -57,6 +57,14 @@ public class FinancialAccount extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  /**
+   * If this is a managed FinancialAccount, {@code managed_by} indicates the product that created
+   * and manages this FinancialAccount. For managed FinancialAccounts, creation of money management
+   * resources can only be orchestrated by the managing product.
+   */
+  @SerializedName("managed_by")
+  ManagedBy managedBy;
+
   /** Metadata associated with the FinancialAccount. */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -76,6 +84,13 @@ public class FinancialAccount extends StripeObject implements HasId {
    */
   @SerializedName("other")
   Other other;
+
+  /**
+   * If this is a {@code payments} FinancialAccount, this hash include details specific to {@code
+   * payments} FinancialAccount.
+   */
+  @SerializedName("payments")
+  Payments payments;
 
   /**
    * Closed Enum. An enum representing the status of the FinancialAccount. This indicates whether or
@@ -101,7 +116,7 @@ public class FinancialAccount extends StripeObject implements HasId {
    * name matching this value. It contains additional information specific to the FinancialAccount
    * type.
    *
-   * <p>One of {@code other}, or {@code storage}.
+   * <p>One of {@code other}, {@code payments}, or {@code storage}.
    */
   @SerializedName("type")
   String type;
@@ -201,6 +216,24 @@ public class FinancialAccount extends StripeObject implements HasId {
   }
 
   /**
+   * If this is a managed FinancialAccount, {@code managed_by} indicates the product that created
+   * and manages this FinancialAccount. For managed FinancialAccounts, creation of money management
+   * resources can only be orchestrated by the managing product.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedBy extends StripeObject {
+    /**
+     * Enum describing the Stripe product that is managing this FinancialAccount.
+     *
+     * <p>Equal to {@code multiprocessor_settlement}.
+     */
+    @SerializedName("type")
+    String type;
+  }
+
+  /**
    * If this is a {@code other} FinancialAccount, this hash indicates what the actual type is.
    * Upgrade your API version to see it reflected in {@code type}.
    */
@@ -214,6 +247,26 @@ public class FinancialAccount extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+  }
+
+  /**
+   * If this is a {@code payments} FinancialAccount, this hash include details specific to {@code
+   * payments} FinancialAccount.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Payments extends StripeObject {
+    /** The currency that non-settlement currency payments will be converted to. */
+    @SerializedName("default_currency")
+    String defaultCurrency;
+
+    /**
+     * Settlement currencies enabled for this FinancialAccount. Payments in other currencies will be
+     * automatically converted to {@code default_currency}.
+     */
+    @SerializedName("settlement_currencies")
+    List<String> settlementCurrencies;
   }
 
   /**

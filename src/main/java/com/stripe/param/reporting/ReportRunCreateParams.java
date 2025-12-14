@@ -29,7 +29,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
   /**
    * Parameters specifying how the report should be run. Different Report Types have different
    * required and optional parameters, listed in the <a
-   * href="https://stripe.com/docs/reporting/statements/api">API Access to Reports</a>
+   * href="https://docs.stripe.com/reporting/statements/api">API Access to Reports</a>
    * documentation.
    */
   @SerializedName("parameters")
@@ -37,7 +37,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The ID of the <a
-   * href="https://stripe.com/docs/reporting/statements/api#report-types">report type</a> to run,
+   * href="https://docs.stripe.com/reporting/statements/api#report-types">report type</a> to run,
    * such as {@code "balance.summary.1"}.
    */
   @SerializedName("report_type")
@@ -128,7 +128,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
     /**
      * Parameters specifying how the report should be run. Different Report Types have different
      * required and optional parameters, listed in the <a
-     * href="https://stripe.com/docs/reporting/statements/api">API Access to Reports</a>
+     * href="https://docs.stripe.com/reporting/statements/api">API Access to Reports</a>
      * documentation.
      */
     public Builder setParameters(ReportRunCreateParams.Parameters parameters) {
@@ -138,7 +138,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The ID of the <a
-     * href="https://stripe.com/docs/reporting/statements/api#report-types">report type</a> to run,
+     * href="https://docs.stripe.com/reporting/statements/api#report-types">report type</a> to run,
      * such as {@code "balance.summary.1"}.
      */
     public Builder setReportType(String reportType) {

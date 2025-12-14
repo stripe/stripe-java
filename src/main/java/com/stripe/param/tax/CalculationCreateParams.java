@@ -1125,7 +1125,7 @@ public class CalculationCreateParams extends ApiRequestParams {
   public static class LineItem {
     /**
      * <strong>Required.</strong> A positive integer representing the line item's total price in the
-     * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. If
+     * <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. If
      * {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are
      * calculated on top of this amount.
      */
@@ -1142,7 +1142,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format.
      */
@@ -1166,7 +1166,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     /**
      * A custom identifier for this line item, which must be unique across the line items in the
      * calculation. The reference helps identify each line item in exported <a
-     * href="https://stripe.com/docs/tax/reports">tax reports</a>.
+     * href="https://docs.stripe.com/tax/reports">tax reports</a>.
      */
     @SerializedName("reference")
     String reference;
@@ -1176,7 +1176,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     TaxBehavior taxBehavior;
 
     /**
-     * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID to use for this line
+     * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID to use for this line
      * item. If not provided, we will use the tax code from the provided {@code product} param. If
      * neither {@code tax_code} nor {@code product} is provided, we will use the default tax code
      * from your Tax Settings.
@@ -1239,7 +1239,7 @@ public class CalculationCreateParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> A positive integer representing the line item's total price in
-       * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        * If {@code tax_behavior=inclusive}, then this amount includes taxes. Otherwise, taxes are
        * calculated on top of this amount.
        */
@@ -1322,7 +1322,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       /**
        * A custom identifier for this line item, which must be unique across the line items in the
        * calculation. The reference helps identify each line item in exported <a
-       * href="https://stripe.com/docs/tax/reports">tax reports</a>.
+       * href="https://docs.stripe.com/tax/reports">tax reports</a>.
        */
       public Builder setReference(String reference) {
         this.reference = reference;
@@ -1336,7 +1336,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID to use for this line
+       * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID to use for this line
        * item. If not provided, we will use the tax code from the provided {@code product} param. If
        * neither {@code tax_code} nor {@code product} is provided, we will use the default tax code
        * from your Tax Settings.
@@ -1632,7 +1632,7 @@ public class CalculationCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingCost {
     /**
-     * A positive integer in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * A positive integer in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
      * currency unit</a> representing the shipping charge. If {@code tax_behavior=inclusive}, then
      * this amount includes taxes. Otherwise, taxes are calculated on top of this amount.
      */
@@ -1649,7 +1649,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * If provided, the <a href="https://stripe.com/docs/api/shipping_rates/object">shipping
+     * If provided, the <a href="https://docs.stripe.com/api/shipping_rates/object">shipping
      * rate</a>'s {@code amount}, {@code tax_code} and {@code tax_behavior} are used. If you provide
      * a shipping rate, then you cannot pass the {@code amount}, {@code tax_code}, or {@code
      * tax_behavior} parameters.
@@ -1665,7 +1665,7 @@ public class CalculationCreateParams extends ApiRequestParams {
     TaxBehavior taxBehavior;
 
     /**
-     * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> used to calculate tax
+     * The <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> used to calculate tax
      * on shipping. If not provided, the default shipping tax code from your <a
      * href="https://dashboard.stripe.com/settings/tax">Tax Settings</a> is used.
      */
@@ -1708,7 +1708,7 @@ public class CalculationCreateParams extends ApiRequestParams {
 
       /**
        * A positive integer in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>
        * representing the shipping charge. If {@code tax_behavior=inclusive}, then this amount
        * includes taxes. Otherwise, taxes are calculated on top of this amount.
        */
@@ -1744,7 +1744,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * If provided, the <a href="https://stripe.com/docs/api/shipping_rates/object">shipping
+       * If provided, the <a href="https://docs.stripe.com/api/shipping_rates/object">shipping
        * rate</a>'s {@code amount}, {@code tax_code} and {@code tax_behavior} are used. If you
        * provide a shipping rate, then you cannot pass the {@code amount}, {@code tax_code}, or
        * {@code tax_behavior} parameters.
@@ -1764,7 +1764,7 @@ public class CalculationCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> used to calculate tax
+       * The <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> used to calculate tax
        * on shipping. If not provided, the default shipping tax code from your <a
        * href="https://dashboard.stripe.com/settings/tax">Tax Settings</a> is used.
        */

@@ -30,14 +30,14 @@ public class InvoiceCreateParams extends ApiRequestParams {
    * application owner's Stripe account. The request must be made with an OAuth key or the
    * Stripe-Account header in order to take an application fee. For more information, see the
    * application fees <a
-   * href="https://stripe.com/docs/billing/invoices/connect#collecting-fees">documentation</a>.
+   * href="https://docs.stripe.com/billing/invoices/connect#collecting-fees">documentation</a>.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
   /**
    * Controls whether Stripe performs <a
-   * href="https://stripe.com/docs/invoicing/integration/automatic-advancement-collection">automatic
+   * href="https://docs.stripe.com/invoicing/integration/automatic-advancement-collection">automatic
    * collection</a> of the invoice. If {@code false}, the invoice's state doesn't automatically
    * advance without an explicit action. Defaults to false.
    */
@@ -74,11 +74,11 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("custom_fields")
   Object customFields;
 
-  /** The ID of the customer who will be billed. */
+  /** The ID of the customer to bill. */
   @SerializedName("customer")
   String customer;
 
-  /** The ID of the account who will be billed. */
+  /** The ID of the account to bill. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -164,7 +164,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   /**
    * Revise an existing invoice. The new invoice will be created in {@code status=draft}. See the <a
-   * href="https://stripe.com/docs/invoicing/invoice-revisions">revision documentation</a> for more
+   * href="https://docs.stripe.com/invoicing/invoice-revisions">revision documentation</a> for more
    * details.
    */
   @SerializedName("from_invoice")
@@ -178,7 +178,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Issuer issuer;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -200,7 +200,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
   /**
    * The account (if any) for which the funds of the invoice payment are intended. If set, the
    * invoice will be presented with the branding and support information of the specified account.
-   * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+   * See the <a href="https://docs.stripe.com/billing/invoices/connect">Invoices with Connect</a>
    * documentation for details.
    */
   @SerializedName("on_behalf_of")
@@ -549,7 +549,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
      * the application owner's Stripe account. The request must be made with an OAuth key or the
      * Stripe-Account header in order to take an application fee. For more information, see the
      * application fees <a
-     * href="https://stripe.com/docs/billing/invoices/connect#collecting-fees">documentation</a>.
+     * href="https://docs.stripe.com/billing/invoices/connect#collecting-fees">documentation</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -558,7 +558,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * Controls whether Stripe performs <a
-     * href="https://stripe.com/docs/invoicing/integration/automatic-advancement-collection">automatic
+     * href="https://docs.stripe.com/invoicing/integration/automatic-advancement-collection">automatic
      * collection</a> of the invoice. If {@code false}, the invoice's state doesn't automatically
      * advance without an explicit action. Defaults to false.
      */
@@ -642,13 +642,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the customer who will be billed. */
+    /** The ID of the customer to bill. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /** The ID of the account who will be billed. */
+    /** The ID of the account to bill. */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;
@@ -871,7 +871,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * Revise an existing invoice. The new invoice will be created in {@code status=draft}. See the
-     * <a href="https://stripe.com/docs/invoicing/invoice-revisions">revision documentation</a> for
+     * <a href="https://docs.stripe.com/invoicing/invoice-revisions">revision documentation</a> for
      * more details.
      */
     public Builder setFromInvoice(InvoiceCreateParams.FromInvoice fromInvoice) {
@@ -917,7 +917,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -928,7 +928,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -954,7 +954,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /**
      * The account (if any) for which the funds of the invoice payment are intended. If set, the
      * invoice will be presented with the branding and support information of the specified account.
-     * See the <a href="https://stripe.com/docs/billing/invoices/connect">Invoices with Connect</a>
+     * See the <a href="https://docs.stripe.com/billing/invoices/connect">Invoices with Connect</a>
      * documentation for details.
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
@@ -1161,7 +1161,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /**
      * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
      * that incompatible invoice items (invoice items with manually specified <a
-     * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+     * href="https://docs.stripe.com/api/tax_rates">tax rates</a>, negative amounts, or {@code
      * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
      */
     @SerializedName("enabled")
@@ -1209,7 +1209,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       /**
        * <strong>Required.</strong> Whether Stripe automatically computes tax on this invoice. Note
        * that incompatible invoice items (invoice items with manually specified <a
-       * href="https://stripe.com/docs/api/tax_rates">tax rates</a>, negative amounts, or {@code
+       * href="https://docs.stripe.com/api/tax_rates">tax rates</a>, negative amounts, or {@code
        * tax_behavior=unspecified}) cannot be added to automatic tax invoices.
        */
       public Builder setEnabled(Boolean enabled) {
@@ -2228,6 +2228,13 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Object konbini;
 
       /**
+       * If paying by {@code payto}, this sub-hash contains details about the PayTo payment method
+       * options to pass to the invoice’s PaymentIntent.
+       */
+      @SerializedName("payto")
+      Object payto;
+
+      /**
        * If paying by {@code pix}, this sub-hash contains details about the Pix payment method
        * options to pass to the invoice’s PaymentIntent.
        */
@@ -2263,6 +2270,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           Map<String, Object> extraParams,
           Object idBankTransfer,
           Object konbini,
+          Object payto,
           Object pix,
           Object sepaDebit,
           Object upi,
@@ -2274,6 +2282,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.idBankTransfer = idBankTransfer;
         this.konbini = konbini;
+        this.payto = payto;
         this.pix = pix;
         this.sepaDebit = sepaDebit;
         this.upi = upi;
@@ -2299,6 +2308,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
         private Object konbini;
 
+        private Object payto;
+
         private Object pix;
 
         private Object sepaDebit;
@@ -2317,6 +2328,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
               this.extraParams,
               this.idBankTransfer,
               this.konbini,
+              this.payto,
               this.pix,
               this.sepaDebit,
               this.upi,
@@ -2463,6 +2475,25 @@ public class InvoiceCreateParams extends ApiRequestParams {
          */
         public Builder setKonbini(EmptyParam konbini) {
           this.konbini = konbini;
+          return this;
+        }
+
+        /**
+         * If paying by {@code payto}, this sub-hash contains details about the PayTo payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setPayto(
+            InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto payto) {
+          this.payto = payto;
+          return this;
+        }
+
+        /**
+         * If paying by {@code payto}, this sub-hash contains details about the PayTo payment method
+         * options to pass to the invoice’s PaymentIntent.
+         */
+        public Builder setPayto(EmptyParam payto) {
+          this.payto = payto;
           return this;
         }
 
@@ -2869,7 +2900,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
          * Installment configuration for payments attempted on this invoice.
          *
          * <p>For more information, see the <a
-         * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
+         * href="https://docs.stripe.com/payments/installments">installments integration guide</a>.
          */
         @SerializedName("installments")
         Installments installments;
@@ -2877,10 +2908,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
          * customers for authentication based on risk level and <a
-         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
          * However, if you wish to request 3D Secure based on logic from your own fraud engine,
          * provide this option. Read our guide on <a
-         * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+         * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
          * requesting 3D Secure</a> for more information on how this configuration interacts with
          * Radar and our SCA Engine.
          */
@@ -2947,7 +2978,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
            * Installment configuration for payments attempted on this invoice.
            *
            * <p>For more information, see the <a
-           * href="https://stripe.com/docs/payments/installments">installments integration
+           * href="https://docs.stripe.com/payments/installments">installments integration
            * guide</a>.
            */
           public Builder setInstallments(
@@ -2960,10 +2991,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
           /**
            * We strongly recommend that you rely on our SCA Engine to automatically prompt your
            * customers for authentication based on risk level and <a
-           * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+           * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
            * However, if you wish to request 3D Secure based on logic from your own fraud engine,
            * provide this option. Read our guide on <a
-           * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+           * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
            * requesting 3D Secure</a> for more information on how this configuration interacts with
            * Radar and our SCA Engine.
            */
@@ -3666,6 +3697,229 @@ public class InvoiceCreateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Payto {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** Additional fields for Mandate creation. */
+        @SerializedName("mandate_options")
+        MandateOptions mandateOptions;
+
+        private Payto(Map<String, Object> extraParams, MandateOptions mandateOptions) {
+          this.extraParams = extraParams;
+          this.mandateOptions = mandateOptions;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private MandateOptions mandateOptions;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto build() {
+            return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto(
+                this.extraParams, this.mandateOptions);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** Additional fields for Mandate creation. */
+          public Builder setMandateOptions(
+              InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions
+                  mandateOptions) {
+            this.mandateOptions = mandateOptions;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MandateOptions {
+          /**
+           * The maximum amount that can be collected in a single invoice. If you don't specify a
+           * maximum, then there is no limit.
+           */
+          @SerializedName("amount")
+          Long amount;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * The purpose for which payments are made. Has a default value based on your merchant
+           * category code.
+           */
+          @SerializedName("purpose")
+          Purpose purpose;
+
+          private MandateOptions(Long amount, Map<String, Object> extraParams, Purpose purpose) {
+            this.amount = amount;
+            this.extraParams = extraParams;
+            this.purpose = purpose;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long amount;
+
+            private Map<String, Object> extraParams;
+
+            private Purpose purpose;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions
+                build() {
+              return new InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto
+                  .MandateOptions(this.amount, this.extraParams, this.purpose);
+            }
+
+            /**
+             * The maximum amount that can be collected in a single invoice. If you don't specify a
+             * maximum, then there is no limit.
+             */
+            public Builder setAmount(Long amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * The purpose for which payments are made. Has a default value based on your merchant
+             * category code.
+             */
+            public Builder setPurpose(
+                InvoiceCreateParams.PaymentSettings.PaymentMethodOptions.Payto.MandateOptions
+                        .Purpose
+                    purpose) {
+              this.purpose = purpose;
+              return this;
+            }
+          }
+
+          public enum Purpose implements ApiRequestParams.EnumParam {
+            @SerializedName("dependant_support")
+            DEPENDANT_SUPPORT("dependant_support"),
+
+            @SerializedName("government")
+            GOVERNMENT("government"),
+
+            @SerializedName("loan")
+            LOAN("loan"),
+
+            @SerializedName("mortgage")
+            MORTGAGE("mortgage"),
+
+            @SerializedName("other")
+            OTHER("other"),
+
+            @SerializedName("pension")
+            PENSION("pension"),
+
+            @SerializedName("personal")
+            PERSONAL("personal"),
+
+            @SerializedName("retail")
+            RETAIL("retail"),
+
+            @SerializedName("salary")
+            SALARY("salary"),
+
+            @SerializedName("tax")
+            TAX("tax"),
+
+            @SerializedName("utility")
+            UTILITY("utility");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Purpose(String value) {
+              this.value = value;
+            }
           }
         }
       }
@@ -4669,6 +4923,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("paypal")
       PAYPAL("paypal"),
 
+      @SerializedName("payto")
+      PAYTO("payto"),
+
       @SerializedName("pix")
       PIX("pix"),
 
@@ -5083,7 +5340,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       FixedAmount fixedAmount;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format. Individual keys can be unset by posting an empty value to them. All
        * keys can be unset by posting an empty value to {@code metadata}.
@@ -5099,7 +5356,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       TaxBehavior taxBehavior;
 
       /**
-       * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+       * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax
        * code is {@code txcd_92010001}.
        */
       @SerializedName("tax_code")
@@ -5257,7 +5514,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax
+         * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax
          * code is {@code txcd_92010001}.
          */
         public Builder setTaxCode(String taxCode) {
@@ -6052,7 +6309,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -6165,7 +6425,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
