@@ -1180,14 +1180,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("on_behalf_of")
     Object onBehalfOf;
 
-    /**
-     * Configures how the subscription schedule handles billing for phase transitions. Possible
-     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
-     * bills based on the current state of the subscription, ignoring changes scheduled in future
-     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
-     * the current billing cycle, including pricing changes and service period adjustments that will
-     * occur before the next invoice.
-     */
+    /** Configures how the subscription schedule handles billing for phase transitions. */
     @SerializedName("phase_effective_at")
     PhaseEffectiveAt phaseEffectiveAt;
 
@@ -1417,14 +1410,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configures how the subscription schedule handles billing for phase transitions. Possible
-       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
-       * phase_start} bills based on the current state of the subscription, ignoring changes
-       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
-       * phase transitions within the current billing cycle, including pricing changes and service
-       * period adjustments that will occur before the next invoice.
-       */
+      /** Configures how the subscription schedule handles billing for phase transitions. */
       public Builder setPhaseEffectiveAt(
           SubscriptionScheduleCreateParams.DefaultSettings.PhaseEffectiveAt phaseEffectiveAt) {
         this.phaseEffectiveAt = phaseEffectiveAt;
@@ -2259,14 +2245,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("duration")
     Duration duration;
 
-    /**
-     * Configures how the subscription schedule handles billing for phase transitions. Possible
-     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
-     * bills based on the current state of the subscription, ignoring changes scheduled in future
-     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
-     * the current billing cycle, including pricing changes and service period adjustments that will
-     * occur before the next invoice.
-     */
+    /** Configures how the subscription schedule handles billing for phase transitions. */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
 
@@ -2751,14 +2730,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configures how the subscription schedule handles billing for phase transitions. Possible
-       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
-       * phase_start} bills based on the current state of the subscription, ignoring changes
-       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
-       * phase transitions within the current billing cycle, including pricing changes and service
-       * period adjustments that will occur before the next invoice.
-       */
+      /** Configures how the subscription schedule handles billing for phase transitions. */
       public Builder setEffectiveAt(
           SubscriptionScheduleCreateParams.Phase.EffectiveAt effectiveAt) {
         this.effectiveAt = effectiveAt;
