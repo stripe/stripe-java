@@ -17,19 +17,19 @@ public final class FinancingSummaryService extends ApiService {
     super(responseGetter);
   }
 
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public FinancingSummary retrieve(FinancingSummaryRetrieveParams params) throws StripeException {
     return retrieve(params, (RequestOptions) null);
   }
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public FinancingSummary retrieve(RequestOptions options) throws StripeException {
     return retrieve((FinancingSummaryRetrieveParams) null, options);
   }
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public FinancingSummary retrieve() throws StripeException {
     return retrieve((FinancingSummaryRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public FinancingSummary retrieve(FinancingSummaryRetrieveParams params, RequestOptions options)
       throws StripeException {
     String path = "/v1/capital/financing_summary";

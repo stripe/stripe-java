@@ -26,14 +26,14 @@ import lombok.Setter;
  * are various reasons why you might want to know the current rate (for example, to dynamically
  * price an item for a user with a default payment in a foreign currency).
  *
- * <p>Please refer to our <a href="https://stripe.com/docs/fx-rates">Exchange Rates API</a> guide
+ * <p>Please refer to our <a href="https://docs.stripe.com/fx-rates">Exchange Rates API</a> guide
  * for more details.
  *
  * <p><em>[Note: this integration path is supported but no longer recommended]</em> Additionally,
  * you can guarantee that a charge is made with an exchange rate that you expect is current. To do
  * so, you must pass in the exchange_rate to charges endpoints. If the value is no longer up to
  * date, the charge won't go through. Please refer to our <a
- * href="https://stripe.com/docs/exchange-rates">Using with charges</a> guide for more details.
+ * href="https://docs.stripe.com/exchange-rates">Using with charges</a> guide for more details.
  *
  * <p>-----
  *

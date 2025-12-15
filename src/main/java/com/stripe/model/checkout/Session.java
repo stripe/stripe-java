@@ -42,18 +42,18 @@ import lombok.Setter;
 
 /**
  * A Checkout Session represents your customer's session as they pay for one-time purchases or
- * subscriptions through <a href="https://stripe.com/docs/payments/checkout">Checkout</a> or <a
- * href="https://stripe.com/docs/payments/payment-links">Payment Links</a>. We recommend creating a
+ * subscriptions through <a href="https://docs.stripe.com/payments/checkout">Checkout</a> or <a
+ * href="https://docs.stripe.com/payments/payment-links">Payment Links</a>. We recommend creating a
  * new Session each time your customer attempts to pay.
  *
  * <p>Once payment is successful, the Checkout Session will contain a reference to the <a
- * href="https://stripe.com/docs/api/customers">Customer</a>, and either the successful <a
- * href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> or an active <a
- * href="https://stripe.com/docs/api/subscriptions">Subscription</a>.
+ * href="https://docs.stripe.com/api/customers">Customer</a>, and either the successful <a
+ * href="https://docs.stripe.com/api/payment_intents">PaymentIntent</a> or an active <a
+ * href="https://docs.stripe.com/api/subscriptions">Subscription</a>.
  *
  * <p>You can create a Checkout Session on your server and redirect to its URL to begin Checkout.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/checkout/quickstart">Checkout quickstart</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/checkout/quickstart">Checkout quickstart</a>
  */
 @Getter
 @Setter
@@ -115,7 +115,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
    * The client secret of your Checkout Session. Applies to Checkout Sessions with {@code ui_mode:
    * embedded} or {@code ui_mode: custom}. For {@code ui_mode: embedded}, the client secret is to be
    * used when initializing Stripe.js embedded checkout. For {@code ui_mode: custom}, use the client
-   * secret with <a href="https://stripe.com/docs/js/custom_checkout/init">initCheckout</a> on your
+   * secret with <a href="https://docs.stripe.com/js/custom_checkout/init">initCheckout</a> on your
    * front end.
    */
   @SerializedName("client_secret")
@@ -262,7 +262,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String locale;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -304,7 +304,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * The ID of the PaymentIntent for Checkout Sessions in {@code payment} mode. You can't confirm or
    * cancel the PaymentIntent for a Checkout Session. To cancel, <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>
+   * href="https://docs.stripe.com/api/checkout/sessions/expire">expire the Checkout Session</a>
    * instead.
    */
   @SerializedName("payment_intent")
@@ -376,7 +376,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
   /**
    * This parameter applies to {@code ui_mode: embedded}. Learn more about the <a
-   * href="https://stripe.com/docs/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
+   * href="https://docs.stripe.com/payments/checkout/custom-success-page?payment-ui=embedded-form">redirect
    * behavior</a> of embedded sessions. Defaults to {@code always}.
    *
    * <p>One of {@code always}, {@code if_required}, or {@code never}.
@@ -402,7 +402,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * The ID of the SetupIntent for Checkout Sessions in {@code setup} mode. You can't confirm or
    * cancel the SetupIntent for a Checkout Session. To cancel, <a
-   * href="https://stripe.com/docs/api/checkout/sessions/expire">expire the Checkout Session</a>
+   * href="https://docs.stripe.com/api/checkout/sessions/expire">expire the Checkout Session</a>
    * instead.
    */
   @SerializedName("setup_intent")
@@ -441,7 +441,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   String submitType;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/api/subscriptions">Subscription</a> for Checkout
+   * The ID of the <a href="https://docs.stripe.com/api/subscriptions">Subscription</a> for Checkout
    * Sessions in {@code subscription} mode.
    */
   @SerializedName("subscription")
@@ -474,7 +474,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
   /**
    * The URL to the Checkout Session. Applies to Checkout Sessions with {@code ui_mode: hosted}.
    * Redirect customers to this URL to take them to Checkout. If you’re using <a
-   * href="https://stripe.com/docs/payments/checkout/custom-domains">Custom Domains</a>, the URL
+   * href="https://docs.stripe.com/payments/checkout/custom-domains">Custom Domains</a>, the URL
    * will use your subdomain. Otherwise, it’ll use {@code checkout.stripe.com.} This value is only
    * present when the session is active.
    */
@@ -1757,7 +1757,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       Issuer issuer;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format.
        */
@@ -2682,11 +2682,11 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and <a
-       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * href="https://docs.stripe.com/strong-customer-authentication">other requirements</a>.
        * However, if you wish to request 3D Secure based on logic from your own fraud engine,
        * provide this option. If not provided, this value defaults to {@code automatic}. Read our
        * guide on <a
-       * href="https://stripe.com/docs/payments/3d-secure/authentication-flow#manual-three-ds">manually
+       * href="https://docs.stripe.com/payments/3d-secure/authentication-flow#manual-three-ds">manually
        * requesting 3D Secure</a> for more information on how this configuration interacts with
        * Radar and our SCA Engine.
        *
@@ -4506,12 +4506,12 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
 
         /**
          * A discount represents the actual application of a <a
-         * href="https://stripe.com/docs/api#coupons">coupon</a> or <a
-         * href="https://stripe.com/docs/api#promotion_codes">promotion code</a>. It contains
-         * information about when the discount began, when it will end, and what it is applied to.
+         * href="https://api.stripe.com#coupons">coupon</a> or <a
+         * href="https://api.stripe.com#promotion_codes">promotion code</a>. It contains information
+         * about when the discount began, when it will end, and what it is applied to.
          *
          * <p>Related guide: <a
-         * href="https://stripe.com/docs/billing/subscriptions/discounts">Applying discounts to
+         * href="https://docs.stripe.com/billing/subscriptions/discounts">Applying discounts to
          * subscriptions</a>
          */
         @SerializedName("discount")

@@ -43,8 +43,8 @@ public class PriceSearchParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The search query string. See <a
-   * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
-   * list of supported <a href="https://stripe.com/docs/search#query-fields-for-prices">query fields
+   * href="https://docs.stripe.com/search#search-query-language">search query language</a> and the
+   * list of supported <a href="https://docs.stripe.com/search#query-fields-for-prices">query fields
    * for prices</a>.
    */
   @SerializedName("query")
@@ -153,8 +153,8 @@ public class PriceSearchParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The search query string. See <a
-     * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
-     * list of supported <a href="https://stripe.com/docs/search#query-fields-for-prices">query
+     * href="https://docs.stripe.com/search#search-query-language">search query language</a> and the
+     * list of supported <a href="https://docs.stripe.com/search#query-fields-for-prices">query
      * fields for prices</a>.
      */
     public Builder setQuery(String query) {

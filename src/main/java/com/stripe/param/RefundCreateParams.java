@@ -53,7 +53,7 @@ public class RefundCreateParams extends ApiRequestParams {
   String instructionsEmail;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -73,7 +73,7 @@ public class RefundCreateParams extends ApiRequestParams {
    * String indicating the reason for the refund. If set, possible values are {@code duplicate},
    * {@code fraudulent}, and {@code requested_by_customer}. If you believe the charge to be
    * fraudulent, specifying {@code fraudulent} as the reason will add the associated card and email
-   * to your <a href="https://stripe.com/docs/radar/lists">block lists</a>, and will also help us
+   * to your <a href="https://docs.stripe.com/radar/lists">block lists</a>, and will also help us
    * improve our fraud detection algorithms.
    */
   @SerializedName("reason")
@@ -293,7 +293,7 @@ public class RefundCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -304,7 +304,7 @@ public class RefundCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -330,7 +330,7 @@ public class RefundCreateParams extends ApiRequestParams {
      * String indicating the reason for the refund. If set, possible values are {@code duplicate},
      * {@code fraudulent}, and {@code requested_by_customer}. If you believe the charge to be
      * fraudulent, specifying {@code fraudulent} as the reason will add the associated card and
-     * email to your <a href="https://stripe.com/docs/radar/lists">block lists</a>, and will also
+     * email to your <a href="https://docs.stripe.com/radar/lists">block lists</a>, and will also
      * help us improve our fraud detection algorithms.
      */
     public Builder setReason(RefundCreateParams.Reason reason) {

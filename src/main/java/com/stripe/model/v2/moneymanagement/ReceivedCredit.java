@@ -4,7 +4,6 @@ package com.stripe.model.v2.moneymanagement;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.time.Instant;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -106,6 +105,27 @@ public class ReceivedCredit extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
+  /** The amount and currency of the ReceivedCredit. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Amount extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
+  }
+
   /**
    * This object stores details about the originating Stripe transaction that resulted in the
    * ReceivedCredit. Present if {@code type} field value is {@code balance_transfer}.
@@ -130,10 +150,15 @@ public class ReceivedCredit extends StripeObject implements HasId {
     @SerializedName("payout_v1")
     String payoutV1;
 
+    /** The ID of the v1 transfer object that originated the ReceivedCredit. */
+    @SerializedName("transfer")
+    String transfer;
+
     /**
      * Open Enum. The type of Stripe Money Movement that originated the ReceivedCredit.
      *
-     * <p>One of {@code outbound_payment}, {@code outbound_transfer}, or {@code payout_v1}.
+     * <p>One of {@code outbound_payment}, {@code outbound_transfer}, {@code transfer}, or {@code
+     * payout_v1}.
      */
     @SerializedName("type")
     String type;

@@ -3,7 +3,6 @@ package com.stripe.model.v2;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.model.StripeObject;
-import com.stripe.v2.Amount;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,7 +14,7 @@ import lombok.Setter;
 public class FinancialAddressGeneratedMicrodeposits extends StripeObject {
   /** The amounts of the microdeposits that were generated. */
   @SerializedName("amounts")
-  List<Amount> amounts;
+  List<FinancialAddressGeneratedMicrodeposits.Amount> amounts;
 
   /**
    * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
@@ -40,4 +39,28 @@ public class FinancialAddressGeneratedMicrodeposits extends StripeObject {
    */
   @SerializedName("status")
   String status;
+
+  /**
+   * For more details about Amount, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Amount extends StripeObject {
+    /**
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * A non-negative integer representing how much to charge in the <a
+     * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+     */
+    @SerializedName("value")
+    Long value;
+  }
 }

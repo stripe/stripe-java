@@ -18,8 +18,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A financing object describes an account's current financing state. Used by Connect platforms to
- * read the state of Capital offered to their connected accounts.
+ * A financing summary object describes a connected account's financing status in real time. A
+ * financing status is either {@code accepted}, {@code delivered}, or {@code none}. You can read the
+ * status of your connected accounts.
  */
 @Getter
 @Setter
@@ -29,11 +30,16 @@ public class FinancingSummary extends ApiResource {
    * Additional information about the financing summary. Describes currency, advance amount, fee
    * amount, withhold rate, remaining amount, paid amount, current repayment interval, repayment
    * start date, and advance payout date.
+   *
+   * <p>Only present for financing offers with the {@code paid_out} status.
    */
   @SerializedName("details")
   Details details;
 
-  /** The Financing Offer ID this Financing Summary corresponds to. */
+  /**
+   * The unique identifier of the Financing Offer object that corresponds to the Financing Summary
+   * object.
+   */
   @SerializedName("financing_offer")
   String financingOffer;
 
@@ -46,26 +52,24 @@ public class FinancingSummary extends ApiResource {
   String object;
 
   /**
-   * Status of the Connected Account's financing. <a
-   * href="https://stripe.com/docs/api/capital/financing_summary">/v1/capital/financing_summary</a>
-   * will only return {@code details} for {@code paid_out} financing.
+   * The financing status of the connected account.
    *
    * <p>One of {@code accepted}, {@code delivered}, or {@code none}.
    */
   @SerializedName("status")
   String status;
 
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public static FinancingSummary retrieve() throws StripeException {
     return retrieve((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public static FinancingSummary retrieve(RequestOptions options) throws StripeException {
     return retrieve((Map<String, Object>) null, options);
   }
 
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public static FinancingSummary retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String path = "/v1/capital/financing_summary";
@@ -74,7 +78,7 @@ public class FinancingSummary extends ApiResource {
     return getGlobalResponseGetter().request(request, FinancingSummary.class);
   }
 
-  /** Retrieve the financing state for the account that was authenticated in the request. */
+  /** Retrieve the financing summary object for the account. */
   public static FinancingSummary retrieve(
       FinancingSummaryRetrieveParams params, RequestOptions options) throws StripeException {
     String path = "/v1/capital/financing_summary";

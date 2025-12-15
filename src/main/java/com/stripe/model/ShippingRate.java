@@ -21,7 +21,7 @@ import lombok.Setter;
 /**
  * Shipping rates describe the price of shipping presented to your customers and applied to a
  * purchase. For more information, see <a
- * href="https://stripe.com/docs/payments/during-payment/charge-shipping">Charge for shipping</a>.
+ * href="https://docs.stripe.com/payments/during-payment/charge-shipping">Charge for shipping</a>.
  */
 @Getter
 @Setter
@@ -65,7 +65,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -89,7 +89,7 @@ public class ShippingRate extends ApiResource implements HasId, MetadataStore<Sh
   String taxBehavior;
 
   /**
-   * A <a href="https://stripe.com/docs/tax/tax-categories">tax code</a> ID. The Shipping tax code
+   * A <a href="https://docs.stripe.com/tax/tax-categories">tax code</a> ID. The Shipping tax code
    * is {@code txcd_92010001}.
    */
   @SerializedName("tax_code")

@@ -18,17 +18,15 @@ public final class AccountLinkService extends ApiService {
   }
 
   /**
-   * Creates an AccountLink object that includes a single-use Stripe URL that the merchant can
-   * redirect their user to in order to take them to a Stripe-hosted application such as Recipient
-   * Onboarding.
+   * Creates an AccountLink object that includes a single-use URL that an account can use to access
+   * a Stripe-hosted flow for collecting or updating required information.
    */
   public AccountLink create(AccountLinkCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Creates an AccountLink object that includes a single-use Stripe URL that the merchant can
-   * redirect their user to in order to take them to a Stripe-hosted application such as Recipient
-   * Onboarding.
+   * Creates an AccountLink object that includes a single-use URL that an account can use to access
+   * a Stripe-hosted flow for collecting or updating required information.
    */
   public AccountLink create(AccountLinkCreateParams params, RequestOptions options)
       throws StripeException {

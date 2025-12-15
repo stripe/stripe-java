@@ -30,7 +30,7 @@ import lombok.Setter;
  * predefining expected changes.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules">Subscription
+ * href="https://docs.stripe.com/billing/subscriptions/subscription-schedules">Subscription
  * schedules</a>
  */
 @Getter
@@ -125,7 +125,7 @@ public class SubscriptionSchedule extends ApiResource
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -163,7 +163,7 @@ public class SubscriptionSchedule extends ApiResource
    * The present status of the subscription schedule. Possible values are {@code not_started},
    * {@code active}, {@code completed}, {@code released}, and {@code canceled}. You can read more
    * about the different states in our <a
-   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules">behavior guide</a>.
+   * href="https://docs.stripe.com/billing/subscriptions/subscription-schedules">behavior guide</a>.
    *
    * <p>One of {@code active}, {@code canceled}, {@code completed}, {@code not_started}, or {@code
    * released}.
@@ -710,7 +710,7 @@ public class SubscriptionSchedule extends ApiResource
      * billing cycle anchor of the subscription is set to the start of the phase when entering the
      * phase. If {@code automatic} then the billing cycle anchor is automatically modified as needed
      * when entering the phase. For more information, see the billing cycle <a
-     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      *
      * <p>One of {@code automatic}, or {@code phase_start}.
      */
@@ -1129,7 +1129,7 @@ public class SubscriptionSchedule extends ApiResource
      * billing cycle anchor of the subscription is set to the start of the phase when entering the
      * phase. If {@code automatic} then the billing cycle anchor is automatically modified as needed
      * when entering the phase. For more information, see the billing cycle <a
-     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      *
      * <p>One of {@code automatic}, or {@code phase_start}.
      */
@@ -1210,7 +1210,7 @@ public class SubscriptionSchedule extends ApiResource
     List<SubscriptionSchedule.Phase.Item> items;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to a phase. Metadata on a schedule's phase will update the underlying subscription's {@code
      * metadata} when the phase is entered. Updating the underlying subscription's {@code metadata}
      * directly will not affect the current phase's {@code metadata}.
@@ -1230,7 +1230,7 @@ public class SubscriptionSchedule extends ApiResource
     /**
      * If specified, payment collection for this subscription will be paused. Note that the
      * subscription status will be unchanged and will not be updated to {@code paused}. Learn more
-     * about <a href="https://stripe.com/docs/billing/subscriptions/pause-payment">pausing
+     * about <a href="https://docs.stripe.com/billing/subscriptions/pause-payment">pausing
      * collection</a>.
      */
     @SerializedName("pause_collection")
@@ -1323,7 +1323,7 @@ public class SubscriptionSchedule extends ApiResource
       List<SubscriptionSchedule.Phase.AddInvoiceItem.Discount> discounts;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an object. This can be useful for storing additional information about the object
        * in a structured format.
        */
@@ -1879,7 +1879,7 @@ public class SubscriptionSchedule extends ApiResource
       List<SubscriptionSchedule.Phase.Item.Discount> discounts;
 
       /**
-       * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can
+       * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
        * attach to an item. Metadata on this item will update the underlying subscription item's
        * {@code metadata} when the phase is entered.
        */

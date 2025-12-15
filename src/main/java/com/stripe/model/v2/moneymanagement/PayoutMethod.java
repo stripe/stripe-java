@@ -108,6 +108,10 @@ public class PayoutMethod extends StripeObject implements HasId {
     @SerializedName("enabled_delivery_options")
     List<String> enabledDeliveryOptions;
 
+    /** The ID of the Financial Connections Account used to create the bank account. */
+    @SerializedName("financial_connections_account")
+    String financialConnectionsAccount;
+
     /** The last 4 digits of the account number. */
     @SerializedName("last4")
     String last4;

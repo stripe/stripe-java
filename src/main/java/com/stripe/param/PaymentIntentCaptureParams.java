@@ -29,7 +29,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
    * collected will be capped at the total amount captured. For more information, see the
-   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
   @SerializedName("application_fee_amount")
@@ -52,7 +52,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
    * Defaults to {@code true}. When capturing a PaymentIntent, setting {@code final_capture} to
    * {@code false} notifies Stripe to not release the remaining uncaptured funds to make sure that
    * they're captured in future requests. You can only use this setting when <a
-   * href="https://stripe.com/docs/payments/multicapture">multicapture</a> is available for
+   * href="https://docs.stripe.com/payments/multicapture">multicapture</a> is available for
    * PaymentIntents.
    */
   @SerializedName("final_capture")
@@ -63,7 +63,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   Hooks hooks;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -101,7 +101,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The parameters that you can use to automatically create a transfer after the payment is
    * captured. Learn more about the <a
-   * href="https://stripe.com/docs/payments/connected-accounts">use case for connected accounts</a>.
+   * href="https://docs.stripe.com/payments/connected-accounts">use case for connected accounts</a>.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -198,7 +198,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
      * application fee collected will be capped at the total amount captured. For more information,
-     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
+     * see the PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case
      * for connected accounts</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -262,7 +262,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
      * Defaults to {@code true}. When capturing a PaymentIntent, setting {@code final_capture} to
      * {@code false} notifies Stripe to not release the remaining uncaptured funds to make sure that
      * they're captured in future requests. You can only use this setting when <a
-     * href="https://stripe.com/docs/payments/multicapture">multicapture</a> is available for
+     * href="https://docs.stripe.com/payments/multicapture">multicapture</a> is available for
      * PaymentIntents.
      */
     public Builder setFinalCapture(Boolean finalCapture) {
@@ -305,7 +305,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -316,7 +316,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -368,7 +368,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     /**
      * The parameters that you can use to automatically create a transfer after the payment is
      * captured. Learn more about the <a
-     * href="https://stripe.com/docs/payments/connected-accounts">use case for connected
+     * href="https://docs.stripe.com/payments/connected-accounts">use case for connected
      * accounts</a>.
      */
     public Builder setTransferData(PaymentIntentCaptureParams.TransferData transferData) {
@@ -382,7 +382,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   public static class AmountDetails {
     /**
      * The total discount applied on the transaction represented in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An integer
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An integer
      * greater than 0.
      *
      * <p>This field is mutually exclusive with the {@code
@@ -402,7 +402,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     /**
      * A list of line items, each containing information about a product in the PaymentIntent. There
-     * is a maximum of 100 line items.
+     * is a maximum of 200 line items.
      */
     @SerializedName("line_items")
     Object lineItems;
@@ -451,7 +451,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
       /**
        * The total discount applied on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -464,7 +464,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
       /**
        * The total discount applied on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -533,7 +533,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(EmptyParam lineItems) {
         this.lineItems = lineItems;
@@ -542,7 +542,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(
           List<PaymentIntentCaptureParams.AmountDetails.LineItem> lineItems) {
@@ -580,7 +580,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     public static class LineItem {
       /**
        * The discount applied on this line item represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]} field.
@@ -631,7 +631,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The unit cost of the line item represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
        * for L3 rates. An integer greater than or equal to 0.
        */
       @SerializedName("unit_cost")
@@ -701,7 +701,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
         /**
          * The discount applied on this line item represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than 0.
          *
          * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]}
@@ -786,7 +786,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The unit cost of the line item represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L3 rates. An integer greater than or equal to 0.
          */
         public Builder setUnitCost(Long unitCost) {
@@ -1389,7 +1389,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The total amount of tax on a single line item represented in
-         * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L3 rates. An integer greater than or equal to 0.
          *
          * <p>This field is mutually exclusive with the {@code
@@ -1448,7 +1448,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The total amount of tax on a single line item represented in
-           * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+           * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
            * unit</a>. Required for L3 rates. An integer greater than or equal to 0.
            *
            * <p>This field is mutually exclusive with the {@code
@@ -1467,7 +1467,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     public static class Shipping {
       /**
        * If a physical good is being shipped, the cost of shipping represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than or equal to 0.
        */
       @SerializedName("amount")
@@ -1528,7 +1528,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
         /**
          * If a physical good is being shipped, the cost of shipping represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than or equal to 0.
          */
         public Builder setAmount(Long amount) {
@@ -1538,7 +1538,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
         /**
          * If a physical good is being shipped, the cost of shipping represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than or equal to 0.
          */
         public Builder setAmount(EmptyParam amount) {
@@ -1626,7 +1626,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The total amount of tax on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
        * for L2 rates. An integer greater than or equal to 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -1685,7 +1685,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The total amount of tax on the transaction represented in the
-         * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L2 rates. An integer greater than or equal to 0.
          *
          * <p>This field is mutually exclusive with the {@code
@@ -1842,7 +1842,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       public static class Tax {
         /**
          * <strong>Required.</strong> The <a
-         * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+         * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
          */
         @SerializedName("calculation")
         Object calculation;
@@ -1879,7 +1879,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(String calculation) {
             this.calculation = calculation;
@@ -1888,7 +1888,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(EmptyParam calculation) {
             this.calculation = calculation;
@@ -3331,7 +3331,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -3446,7 +3449,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -3490,7 +3496,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -3605,7 +3614,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -4544,7 +4556,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           @SerializedName("postal_code")
           String postalCode;
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           @SerializedName("state")
           String state;
 
@@ -4662,7 +4677,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               return this;
             }
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             public Builder setState(String state) {
               this.state = state;
               return this;
@@ -4963,7 +4981,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           @SerializedName("postal_code")
           String postalCode;
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           @SerializedName("state")
           String state;
 
@@ -5081,7 +5102,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               return this;
             }
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             public Builder setState(String state) {
               this.state = state;
               return this;
@@ -6294,7 +6318,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -6409,7 +6436,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -9790,7 +9820,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -9903,7 +9936,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;
@@ -11226,7 +11262,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           @SerializedName("postal_code")
           String postalCode;
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           @SerializedName("state")
           String state;
 
@@ -11344,7 +11383,10 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
               return this;
             }
 
-            /** State, county, province, or region. */
+            /**
+             * State, county, province, or region (<a
+             * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+             */
             public Builder setState(String state) {
               this.state = state;
               return this;

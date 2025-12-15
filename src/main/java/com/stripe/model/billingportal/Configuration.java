@@ -53,7 +53,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   /**
    * The default URL to redirect customers to when they click on the portal's link to return to your
    * website. This can be <a
-   * href="https://stripe.com/docs/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
+   * href="https://docs.stripe.com/api/customer_portal/sessions/create#create_portal_session-return_url">overriden</a>
    * when creating the session.
    */
   @SerializedName("default_return_url")
@@ -86,7 +86,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
   LoginPage loginPage;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -435,6 +435,18 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
     @EqualsAndHashCode(callSuper = false)
     public static class SubscriptionUpdate extends StripeObject {
       /**
+       * Determines the value to use for the billing cycle anchor on subscription updates. Valid
+       * values are {@code now} or {@code unchanged}, and the default value is {@code unchanged}.
+       * Setting the value to {@code now} resets the subscription's billing cycle anchor to the
+       * current time (in UTC). For more information, see the billing cycle <a
+       * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
+       *
+       * <p>One of {@code now}, or {@code unchanged}.
+       */
+      @SerializedName("billing_cycle_anchor")
+      String billingCycleAnchor;
+
+      /**
        * The types of subscription updates that are supported for items listed in the {@code
        * products} attribute. When empty, subscriptions are not updateable.
        */
@@ -567,7 +579,7 @@ public class Configuration extends ApiResource implements HasId, MetadataStore<C
 
     /**
      * A shareable URL to the hosted portal login page. Your customers will be able to log in with
-     * their <a href="https://stripe.com/docs/api/customers/object#customer_object-email">email</a>
+     * their <a href="https://docs.stripe.com/api/customers/object#customer_object-email">email</a>
      * and receive a link to their customer portal.
      */
     @SerializedName("url")

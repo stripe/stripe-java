@@ -27,10 +27,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * As a <a href="https://stripe.com/docs/issuing">card issuer</a>, you can dispute transactions that
+ * As a <a href="https://docs.stripe.com/issuing">card issuer</a>, you can dispute transactions that
  * the cardholder does not recognize, suspects to be fraudulent, or has other issues with.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/issuing/purchases/disputes">Issuing
+ * <p>Related guide: <a href="https://docs.stripe.com/issuing/purchases/disputes">Issuing
  * disputes</a>
  */
 @Getter
@@ -40,7 +40,7 @@ public class Dispute extends ApiResource
     implements MetadataStore<Dispute>, BalanceTransactionSource {
   /**
    * Disputed amount in the card's currency and in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Usually the
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Usually the
    * amount of the {@code transaction}, but can differ (usually because of currency fluctuation).
    */
   @SerializedName("amount")
@@ -92,7 +92,7 @@ public class Dispute extends ApiResource
   String lossReason;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -124,7 +124,7 @@ public class Dispute extends ApiResource
   ExpandableField<Transaction> transaction;
 
   /**
-   * <a href="https://stripe.com/docs/api/treasury">Treasury</a> details related to this dispute if
+   * <a href="https://docs.stripe.com/api/treasury">Treasury</a> details related to this dispute if
    * it was created on a [FinancialAccount](/docs/api/treasury/financial_accounts
    */
   @SerializedName("treasury")
@@ -1002,14 +1002,14 @@ public class Dispute extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class Treasury extends StripeObject {
     /**
-     * The Treasury <a href="https://stripe.com/docs/api/treasury/debit_reversals">DebitReversal</a>
+     * The Treasury <a href="https://docs.stripe.com/api/treasury/debit_reversals">DebitReversal</a>
      * representing this Issuing dispute
      */
     @SerializedName("debit_reversal")
     String debitReversal;
 
     /**
-     * The Treasury <a href="https://stripe.com/docs/api/treasury/received_debits">ReceivedDebit</a>
+     * The Treasury <a href="https://docs.stripe.com/api/treasury/received_debits">ReceivedDebit</a>
      * that is being disputed.
      */
     @SerializedName("received_debit")

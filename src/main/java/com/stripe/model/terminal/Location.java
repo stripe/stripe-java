@@ -25,7 +25,7 @@ import lombok.Setter;
 /**
  * A Location represents a grouping of readers.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/terminal/fleet/locations">Fleet management</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/terminal/fleet/locations">Fleet management</a>
  */
 @Getter
 @Setter
@@ -73,7 +73,7 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

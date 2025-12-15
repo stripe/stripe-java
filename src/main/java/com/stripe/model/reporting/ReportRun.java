@@ -25,12 +25,12 @@ import lombok.Setter;
  * The Report Run object represents an instance of a report type generated with specific run
  * parameters. Once the object is created, Stripe begins processing the report. When the report has
  * finished running, it will give you a reference to a file where you can retrieve your results. For
- * an overview, see <a href="https://stripe.com/docs/reporting/statements/api">API Access to
+ * an overview, see <a href="https://docs.stripe.com/reporting/statements/api">API Access to
  * Reports</a>.
  *
  * <p>Note that certain report types can only be run based on your live-mode data (not test-mode
  * data), and will error when queried without a <a
- * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.
+ * href="https://docs.stripe.com/keys#test-live-modes">live-mode API key</a>.
  */
 @Getter
 @Setter
@@ -71,7 +71,7 @@ public class ReportRun extends ApiResource implements HasId {
   Parameters parameters;
 
   /**
-   * The ID of the <a href="https://stripe.com/docs/reports/report-types">report type</a> to run,
+   * The ID of the <a href="https://docs.stripe.com/reports/report-types">report type</a> to run,
    * such as {@code "balance.summary.1"}.
    */
   @SerializedName("report_type")

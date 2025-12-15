@@ -23,8 +23,8 @@ import lombok.Setter;
  * the ConfirmationToken are written onto the Intent.
  *
  * <p>To learn more about how to use ConfirmationToken, visit the related guides: - <a
- * href="https://stripe.com/docs/payments/finalize-payments-on-the-server">Finalize payments on the
- * server</a> - <a href="https://stripe.com/docs/payments/build-a-two-step-confirmation">Build
+ * href="https://docs.stripe.com/payments/finalize-payments-on-the-server">Finalize payments on the
+ * server</a> - <a href="https://docs.stripe.com/payments/build-a-two-step-confirmation">Build
  * two-step confirmation</a>.
  */
 @Getter
@@ -92,7 +92,7 @@ public class ConfirmationToken extends ApiResource implements HasId {
    * Indicates that you intend to make future payments with this ConfirmationToken's payment method.
    *
    * <p>The presence of this property will <a
-   * href="https://stripe.com/docs/payments/save-during-payment">attach the payment method</a> to
+   * href="https://docs.stripe.com/payments/save-during-payment">attach the payment method</a> to
    * the PaymentIntent's Customer, if present, after the PaymentIntent is confirmed and any required
    * actions from the user are complete.
    *
@@ -1020,9 +1020,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
             String iin;
 
             /**
-             * Whether this <a href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a>
+             * Whether this <a href="https://docs.stripe.com/api/payment_intents">PaymentIntent</a>
              * is eligible for incremental authorizations. Request support using <a
-             * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
+             * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
              */
             @SerializedName("incremental_authorization_supported")
             Boolean incrementalAuthorizationSupported;
@@ -1729,9 +1729,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
       /**
        * The customer's bank, if provided. Can be one of {@code abn_amro}, {@code asn_bank}, {@code
        * bunq}, {@code buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab},
-       * {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code
-       * revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code
-       * yoursafe}.
+       * {@code mollie}, {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code
+       * regiobank}, {@code revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot},
+       * or {@code yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -1741,8 +1741,9 @@ public class ConfirmationToken extends ApiResource implements HasId {
        *
        * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
        * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
-       * KNABNL2H}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code
-       * RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
+       * KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code
+       * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or
+       * {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;

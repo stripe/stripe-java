@@ -158,7 +158,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     List<ReaderSetReaderDisplayParams.Cart.LineItem> lineItems;
 
     /**
-     * The amount of tax in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * The amount of tax in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
      * currency unit</a>.
      */
     @SerializedName("tax")
@@ -166,7 +166,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Total balance of cart due in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
      */
     @SerializedName("total")
     Long total;
@@ -268,7 +268,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
       }
 
       /**
-       * The amount of tax in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+       * The amount of tax in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest
        * currency unit</a>.
        */
       public Builder setTax(Long tax) {
@@ -278,7 +278,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Total balance of cart due in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       public Builder setTotal(Long total) {
         this.total = total;
@@ -291,7 +291,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
     public static class LineItem {
       /**
        * <strong>Required.</strong> The price of the item in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
        */
       @SerializedName("amount")
       Long amount;
@@ -342,7 +342,7 @@ public class ReaderSetReaderDisplayParams extends ApiRequestParams {
 
         /**
          * <strong>Required.</strong> The price of the item in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          */
         public Builder setAmount(Long amount) {
           this.amount = amount;

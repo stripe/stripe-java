@@ -2,6 +2,7 @@
 package com.stripe.service.v2.moneymanagement;
 
 import com.google.gson.reflect.TypeToken;
+import com.stripe.exception.ControlledByAlternateResourceException;
 import com.stripe.exception.ControlledByDashboardException;
 import com.stripe.exception.InvalidPayoutMethodException;
 import com.stripe.exception.StripeException;
@@ -64,7 +65,8 @@ public final class PayoutMethodService extends ApiService {
    * appear in the payout method list.
    */
   public PayoutMethod archive(String id)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
+      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     return archive(id, (RequestOptions) null);
   }
   /**
@@ -72,7 +74,8 @@ public final class PayoutMethodService extends ApiService {
    * appear in the payout method list.
    */
   public PayoutMethod archive(String id, RequestOptions options)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
+      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     String path =
         String.format(
             "/v2/money_management/payout_methods/%s/archive", ApiResource.urlEncodeId(id));
@@ -82,12 +85,14 @@ public final class PayoutMethodService extends ApiService {
   }
   /** Unarchive an PayoutMethod object. */
   public PayoutMethod unarchive(String id)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
+      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     return unarchive(id, (RequestOptions) null);
   }
   /** Unarchive an PayoutMethod object. */
   public PayoutMethod unarchive(String id, RequestOptions options)
-      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException {
+      throws StripeException, ControlledByDashboardException, InvalidPayoutMethodException,
+          ControlledByAlternateResourceException {
     String path =
         String.format(
             "/v2/money_management/payout_methods/%s/unarchive", ApiResource.urlEncodeId(id));

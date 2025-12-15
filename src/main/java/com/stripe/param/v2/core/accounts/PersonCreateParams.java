@@ -506,7 +506,7 @@ public class PersonCreateParams extends ApiRequestParams {
     @SerializedName("state")
     String state;
 
-    /** Town or cho-me. */
+    /** Town or district. */
     @SerializedName("town")
     String town;
 
@@ -639,7 +639,7 @@ public class PersonCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Town or cho-me. */
+      /** Town or district. */
       public Builder setTown(String town) {
         this.town = town;
         return this;
@@ -1015,7 +1015,7 @@ public class PersonCreateParams extends ApiRequestParams {
     @SerializedName("state")
     String state;
 
-    /** Town or cho-me. */
+    /** Town or district. */
     @SerializedName("town")
     String town;
 
@@ -1137,7 +1137,7 @@ public class PersonCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Town or cho-me. */
+      /** Town or district. */
       public Builder setTown(String town) {
         this.town = town;
         return this;
@@ -2307,8 +2307,14 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("ao_nif")
       AO_NIF("ao_nif"),
 
+      @SerializedName("ar_cuil")
+      AR_CUIL("ar_cuil"),
+
       @SerializedName("ar_dni")
       AR_DNI("ar_dni"),
+
+      @SerializedName("at_stn")
+      AT_STN("at_stn"),
 
       @SerializedName("az_tin")
       AZ_TIN("az_tin"),
@@ -2322,8 +2328,35 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("bd_nid")
       BD_NID("bd_nid"),
 
+      @SerializedName("be_nrn")
+      BE_NRN("be_nrn"),
+
+      @SerializedName("bg_ucn")
+      BG_UCN("bg_ucn"),
+
+      @SerializedName("bn_nric")
+      BN_NRIC("bn_nric"),
+
       @SerializedName("br_cpf")
       BR_CPF("br_cpf"),
+
+      @SerializedName("ca_sin")
+      CA_SIN("ca_sin"),
+
+      @SerializedName("ch_oasi")
+      CH_OASI("ch_oasi"),
+
+      @SerializedName("cl_rut")
+      CL_RUT("cl_rut"),
+
+      @SerializedName("cn_pp")
+      CN_PP("cn_pp"),
+
+      @SerializedName("co_nuip")
+      CO_NUIP("co_nuip"),
+
+      @SerializedName("cr_ci")
+      CR_CI("cr_ci"),
 
       @SerializedName("cr_cpf")
       CR_CPF("cr_cpf"),
@@ -2334,11 +2367,44 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("cr_nite")
       CR_NITE("cr_nite"),
 
+      @SerializedName("cy_tic")
+      CY_TIC("cy_tic"),
+
+      @SerializedName("cz_rc")
+      CZ_RC("cz_rc"),
+
       @SerializedName("de_stn")
       DE_STN("de_stn"),
 
+      @SerializedName("dk_cpr")
+      DK_CPR("dk_cpr"),
+
+      @SerializedName("do_cie")
+      DO_CIE("do_cie"),
+
       @SerializedName("do_rcn")
       DO_RCN("do_rcn"),
+
+      @SerializedName("ec_ci")
+      EC_CI("ec_ci"),
+
+      @SerializedName("ee_ik")
+      EE_IK("ee_ik"),
+
+      @SerializedName("es_nif")
+      ES_NIF("es_nif"),
+
+      @SerializedName("fi_hetu")
+      FI_HETU("fi_hetu"),
+
+      @SerializedName("fr_nir")
+      FR_NIR("fr_nir"),
+
+      @SerializedName("gb_nino")
+      GB_NINO("gb_nino"),
+
+      @SerializedName("gr_afm")
+      GR_AFM("gr_afm"),
 
       @SerializedName("gt_nit")
       GT_NIT("gt_nit"),
@@ -2346,8 +2412,44 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("hk_id")
       HK_ID("hk_id"),
 
+      @SerializedName("hr_oib")
+      HR_OIB("hr_oib"),
+
+      @SerializedName("hu_ad")
+      HU_AD("hu_ad"),
+
+      @SerializedName("id_nik")
+      ID_NIK("id_nik"),
+
+      @SerializedName("ie_ppsn")
+      IE_PPSN("ie_ppsn"),
+
+      @SerializedName("is_kt")
+      IS_KT("is_kt"),
+
+      @SerializedName("it_cf")
+      IT_CF("it_cf"),
+
+      @SerializedName("jp_inc")
+      JP_INC("jp_inc"),
+
+      @SerializedName("ke_pin")
+      KE_PIN("ke_pin"),
+
       @SerializedName("kz_iin")
       KZ_IIN("kz_iin"),
+
+      @SerializedName("li_peid")
+      LI_PEID("li_peid"),
+
+      @SerializedName("lt_ak")
+      LT_AK("lt_ak"),
+
+      @SerializedName("lu_nif")
+      LU_NIF("lu_nif"),
+
+      @SerializedName("lv_pk")
+      LV_PK("lv_pk"),
 
       @SerializedName("mx_rfc")
       MX_RFC("mx_rfc"),
@@ -2358,8 +2460,17 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("mz_nuit")
       MZ_NUIT("mz_nuit"),
 
+      @SerializedName("ng_nin")
+      NG_NIN("ng_nin"),
+
       @SerializedName("nl_bsn")
       NL_BSN("nl_bsn"),
+
+      @SerializedName("no_nin")
+      NO_NIN("no_nin"),
+
+      @SerializedName("nz_ird")
+      NZ_IRD("nz_ird"),
 
       @SerializedName("pe_dni")
       PE_DNI("pe_dni"),
@@ -2370,8 +2481,20 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("pk_snic")
       PK_SNIC("pk_snic"),
 
+      @SerializedName("pl_pesel")
+      PL_PESEL("pl_pesel"),
+
+      @SerializedName("pt_nif")
+      PT_NIF("pt_nif"),
+
+      @SerializedName("ro_cnp")
+      RO_CNP("ro_cnp"),
+
       @SerializedName("sa_tin")
       SA_TIN("sa_tin"),
+
+      @SerializedName("se_pin")
+      SE_PIN("se_pin"),
 
       @SerializedName("sg_fin")
       SG_FIN("sg_fin"),
@@ -2379,11 +2502,17 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("sg_nric")
       SG_NRIC("sg_nric"),
 
+      @SerializedName("sk_dic")
+      SK_DIC("sk_dic"),
+
       @SerializedName("th_lc")
       TH_LC("th_lc"),
 
       @SerializedName("th_pin")
       TH_PIN("th_pin"),
+
+      @SerializedName("tr_tin")
+      TR_TIN("tr_tin"),
 
       @SerializedName("us_itin")
       US_ITIN("us_itin"),
@@ -2395,7 +2524,13 @@ public class PersonCreateParams extends ApiRequestParams {
       US_SSN("us_ssn"),
 
       @SerializedName("us_ssn_last_4")
-      US_SSN_LAST_4("us_ssn_last_4");
+      US_SSN_LAST_4("us_ssn_last_4"),
+
+      @SerializedName("uy_dni")
+      UY_DNI("uy_dni"),
+
+      @SerializedName("za_id")
+      ZA_ID("za_id");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -2409,7 +2544,7 @@ public class PersonCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Relationship {
-    /** Whether the individual is an authorizer of the Account’s legal entity. */
+    /** Whether the individual is an authorizer of the Account's identity. */
     @SerializedName("authorizer")
     Boolean authorizer;
 
@@ -2508,7 +2643,7 @@ public class PersonCreateParams extends ApiRequestParams {
             this.title);
       }
 
-      /** Whether the individual is an authorizer of the Account’s legal entity. */
+      /** Whether the individual is an authorizer of the Account's identity. */
       public Builder setAuthorizer(Boolean authorizer) {
         this.authorizer = authorizer;
         return this;
@@ -2704,7 +2839,7 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("state")
       String state;
 
-      /** Town or cho-me. */
+      /** Town or district. */
       @SerializedName("town")
       String town;
 
@@ -2828,7 +2963,7 @@ public class PersonCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Town or cho-me. */
+        /** Town or district. */
         public Builder setTown(String town) {
           this.town = town;
           return this;
@@ -2875,7 +3010,7 @@ public class PersonCreateParams extends ApiRequestParams {
       @SerializedName("state")
       String state;
 
-      /** Town or cho-me. */
+      /** Town or district. */
       @SerializedName("town")
       String town;
 
@@ -2999,7 +3134,7 @@ public class PersonCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** Town or cho-me. */
+        /** Town or district. */
         public Builder setTown(String town) {
           this.town = town;
           return this;

@@ -36,7 +36,7 @@ public class PromotionCodeListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
-  /** Only return promotion codes that are restricted to this account. */
+  /** Only return promotion codes that are restricted to this account representing the customer. */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -190,7 +190,9 @@ public class PromotionCodeListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return promotion codes that are restricted to this account. */
+    /**
+     * Only return promotion codes that are restricted to this account representing the customer.
+     */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

@@ -25,7 +25,7 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
    * <strong>Required.</strong> Three-letter <a
    * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
    * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. Specifies the <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_credit_balance">{@code
+   * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_credit_balance">{@code
    * invoice_credit_balance}</a> that this transaction will apply to. If the customer's {@code
    * currency} is not set, it will be updated to this value.
    */
@@ -50,7 +50,7 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -115,7 +115,7 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
      * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
      * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. Specifies the
      * <a
-     * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_credit_balance">{@code
+     * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_credit_balance">{@code
      * invoice_credit_balance}</a> that this transaction will apply to. If the customer's {@code
      * currency} is not set, it will be updated to this value.
      */
@@ -213,7 +213,7 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -224,7 +224,7 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.

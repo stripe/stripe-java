@@ -21,7 +21,10 @@ public class CreditNoteListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
-  /** Only return credit notes for the account specified by this account ID. */
+  /**
+   * Only return credit notes for the account representing the customer specified by this account
+   * ID.
+   */
   @SerializedName("customer_account")
   String customerAccount;
 
@@ -143,7 +146,10 @@ public class CreditNoteListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return credit notes for the account specified by this account ID. */
+    /**
+     * Only return credit notes for the account representing the customer specified by this account
+     * ID.
+     */
     public Builder setCustomerAccount(String customerAccount) {
       this.customerAccount = customerAccount;
       return this;

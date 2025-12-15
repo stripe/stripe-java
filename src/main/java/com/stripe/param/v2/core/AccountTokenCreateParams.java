@@ -4,7 +4,6 @@ package com.stripe.param.v2.core;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
-import com.stripe.v2.Amount;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,10 +37,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * <strong>Required.</strong> Information about the company, individual, and business represented
-   * by the Account.
-   */
+  /** Information about the company, individual, and business represented by the Account. */
   @SerializedName("identity")
   Identity identity;
 
@@ -116,10 +112,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * <strong>Required.</strong> Information about the company, individual, and business
-     * represented by the Account.
-     */
+    /** Information about the company, individual, and business represented by the Account. */
     public Builder setIdentity(AccountTokenCreateParams.Identity identity) {
       this.identity = identity;
       return this;
@@ -1076,8 +1069,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
       Documents documents;
 
       /**
-       * An estimated upper bound of employees, contractors, vendors, etc. currently working for the
-       * business.
+       * Estimated maximum number of workers currently engaged by the business (including employees,
+       * contractors, and vendors).
        */
       @SerializedName("estimated_worker_count")
       Long estimatedWorkerCount;
@@ -1214,8 +1207,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         }
 
         /**
-         * An estimated upper bound of employees, contractors, vendors, etc. currently working for
-         * the business.
+         * Estimated maximum number of workers currently engaged by the business (including
+         * employees, contractors, and vendors).
          */
         public Builder setEstimatedWorkerCount(Long estimatedWorkerCount) {
           this.estimatedWorkerCount = estimatedWorkerCount;
@@ -1360,7 +1353,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         @SerializedName("state")
         String state;
 
-        /** Town or cho-me. */
+        /** Town or district. */
         @SerializedName("town")
         String town;
 
@@ -1484,7 +1477,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(String town) {
             this.town = town;
             return this;
@@ -1541,7 +1534,8 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           }
 
           /** A non-negative integer representing the amount in the smallest currency unit. */
-          public Builder setAmount(Amount amount) {
+          public Builder setAmount(
+              AccountTokenCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount amount) {
             this.amount = amount;
             return this;
           }
@@ -1583,6 +1577,108 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           public Builder setFiscalYearEnd(String fiscalYearEnd) {
             this.fiscalYearEnd = fiscalYearEnd;
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Amount {
+          /**
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Must be a <a
+           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           */
+          @SerializedName("currency")
+          String currency;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * A non-negative integer representing how much to charge in the <a
+           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+           */
+          @SerializedName("value")
+          Long value;
+
+          private Amount(String currency, Map<String, Object> extraParams, Long value) {
+            this.currency = currency;
+            this.extraParams = extraParams;
+            this.value = value;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private String currency;
+
+            private Map<String, Object> extraParams;
+
+            private Long value;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountTokenCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount build() {
+              return new AccountTokenCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount(
+                  this.currency, this.extraParams, this.value);
+            }
+
+            /**
+             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+             * code</a>, in lowercase. Must be a <a
+             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             */
+            public Builder setCurrency(String currency) {
+              this.currency = currency;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.AnnualRevenue.Amount#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * A non-negative integer representing how much to charge in the <a
+             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+             */
+            public Builder setValue(Long value) {
+              this.value = value;
+              return this;
+            }
           }
         }
       }
@@ -3435,6 +3531,12 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("at_fn")
           AT_FN("at_fn"),
 
+          @SerializedName("at_stn")
+          AT_STN("at_stn"),
+
+          @SerializedName("at_vat")
+          AT_VAT("at_vat"),
+
           @SerializedName("au_abn")
           AU_ABN("au_abn"),
 
@@ -3453,8 +3555,14 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("be_cbe")
           BE_CBE("be_cbe"),
 
+          @SerializedName("be_vat")
+          BE_VAT("be_vat"),
+
           @SerializedName("bg_uic")
           BG_UIC("bg_uic"),
+
+          @SerializedName("bg_vat")
+          BG_VAT("bg_vat"),
 
           @SerializedName("br_cnpj")
           BR_CNPJ("br_cnpj"),
@@ -3464,6 +3572,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
 
           @SerializedName("ca_crarr")
           CA_CRARR("ca_crarr"),
+
+          @SerializedName("ca_gst_hst")
+          CA_GST_HST("ca_gst_hst"),
 
           @SerializedName("ca_neq")
           CA_NEQ("ca_neq"),
@@ -3483,14 +3594,26 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("cr_nite")
           CR_NITE("cr_nite"),
 
+          @SerializedName("cy_he")
+          CY_HE("cy_he"),
+
           @SerializedName("cy_tic")
           CY_TIC("cy_tic"),
+
+          @SerializedName("cy_vat")
+          CY_VAT("cy_vat"),
 
           @SerializedName("cz_ico")
           CZ_ICO("cz_ico"),
 
+          @SerializedName("cz_vat")
+          CZ_VAT("cz_vat"),
+
           @SerializedName("de_hrn")
           DE_HRN("de_hrn"),
+
+          @SerializedName("de_stn")
+          DE_STN("de_stn"),
 
           @SerializedName("de_vat")
           DE_VAT("de_vat"),
@@ -3498,17 +3621,32 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("dk_cvr")
           DK_CVR("dk_cvr"),
 
+          @SerializedName("dk_vat")
+          DK_VAT("dk_vat"),
+
           @SerializedName("do_rcn")
           DO_RCN("do_rcn"),
 
           @SerializedName("ee_rk")
           EE_RK("ee_rk"),
 
+          @SerializedName("ee_vat")
+          EE_VAT("ee_vat"),
+
           @SerializedName("es_cif")
           ES_CIF("es_cif"),
 
+          @SerializedName("es_vat")
+          ES_VAT("es_vat"),
+
+          @SerializedName("fi_vat")
+          FI_VAT("fi_vat"),
+
           @SerializedName("fi_yt")
           FI_YT("fi_yt"),
+
+          @SerializedName("fr_rna")
+          FR_RNA("fr_rna"),
 
           @SerializedName("fr_siren")
           FR_SIREN("fr_siren"),
@@ -3522,8 +3660,14 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("gi_crn")
           GI_CRN("gi_crn"),
 
+          @SerializedName("gr_afm")
+          GR_AFM("gr_afm"),
+
           @SerializedName("gr_gemi")
           GR_GEMI("gr_gemi"),
+
+          @SerializedName("gr_vat")
+          GR_VAT("gr_vat"),
 
           @SerializedName("gt_nit")
           GT_NIT("gt_nit"),
@@ -3534,14 +3678,32 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("hk_cr")
           HK_CR("hk_cr"),
 
-          @SerializedName("hk_mbs")
-          HK_MBS("hk_mbs"),
+          @SerializedName("hr_mbs")
+          HR_MBS("hr_mbs"),
+
+          @SerializedName("hr_oib")
+          HR_OIB("hr_oib"),
+
+          @SerializedName("hr_vat")
+          HR_VAT("hr_vat"),
 
           @SerializedName("hu_cjs")
           HU_CJS("hu_cjs"),
 
+          @SerializedName("hu_tin")
+          HU_TIN("hu_tin"),
+
+          @SerializedName("hu_vat")
+          HU_VAT("hu_vat"),
+
           @SerializedName("ie_crn")
           IE_CRN("ie_crn"),
+
+          @SerializedName("ie_trn")
+          IE_TRN("ie_trn"),
+
+          @SerializedName("ie_vat")
+          IE_VAT("ie_vat"),
 
           @SerializedName("it_rea")
           IT_REA("it_rea"),
@@ -3561,14 +3723,32 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("lt_ccrn")
           LT_CCRN("lt_ccrn"),
 
+          @SerializedName("lt_vat")
+          LT_VAT("lt_vat"),
+
+          @SerializedName("lu_nif")
+          LU_NIF("lu_nif"),
+
           @SerializedName("lu_rcs")
           LU_RCS("lu_rcs"),
+
+          @SerializedName("lu_vat")
+          LU_VAT("lu_vat"),
 
           @SerializedName("lv_urn")
           LV_URN("lv_urn"),
 
+          @SerializedName("lv_vat")
+          LV_VAT("lv_vat"),
+
           @SerializedName("mt_crn")
           MT_CRN("mt_crn"),
+
+          @SerializedName("mt_tin")
+          MT_TIN("mt_tin"),
+
+          @SerializedName("mt_vat")
+          MT_VAT("mt_vat"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -3579,6 +3759,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("my_coid")
           MY_COID("my_coid"),
 
+          @SerializedName("my_itn")
+          MY_ITN("my_itn"),
+
           @SerializedName("my_sst")
           MY_SST("my_sst"),
 
@@ -3588,11 +3771,20 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("nl_kvk")
           NL_KVK("nl_kvk"),
 
+          @SerializedName("nl_rsin")
+          NL_RSIN("nl_rsin"),
+
+          @SerializedName("nl_vat")
+          NL_VAT("nl_vat"),
+
           @SerializedName("no_orgnr")
           NO_ORGNR("no_orgnr"),
 
           @SerializedName("nz_bn")
           NZ_BN("nz_bn"),
+
+          @SerializedName("nz_ird")
+          NZ_IRD("nz_ird"),
 
           @SerializedName("pe_ruc")
           PE_RUC("pe_ruc"),
@@ -3600,14 +3792,26 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("pk_ntn")
           PK_NTN("pk_ntn"),
 
+          @SerializedName("pl_nip")
+          PL_NIP("pl_nip"),
+
           @SerializedName("pl_regon")
           PL_REGON("pl_regon"),
+
+          @SerializedName("pl_vat")
+          PL_VAT("pl_vat"),
 
           @SerializedName("pt_vat")
           PT_VAT("pt_vat"),
 
           @SerializedName("ro_cui")
           RO_CUI("ro_cui"),
+
+          @SerializedName("ro_orc")
+          RO_ORC("ro_orc"),
+
+          @SerializedName("ro_vat")
+          RO_VAT("ro_vat"),
 
           @SerializedName("sa_crn")
           SA_CRN("sa_crn"),
@@ -3618,14 +3822,29 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("se_orgnr")
           SE_ORGNR("se_orgnr"),
 
+          @SerializedName("se_vat")
+          SE_VAT("se_vat"),
+
           @SerializedName("sg_uen")
           SG_UEN("sg_uen"),
 
           @SerializedName("si_msp")
           SI_MSP("si_msp"),
 
+          @SerializedName("si_tin")
+          SI_TIN("si_tin"),
+
+          @SerializedName("si_vat")
+          SI_VAT("si_vat"),
+
+          @SerializedName("sk_dic")
+          SK_DIC("sk_dic"),
+
           @SerializedName("sk_ico")
           SK_ICO("sk_ico"),
+
+          @SerializedName("sk_vat")
+          SK_VAT("sk_vat"),
 
           @SerializedName("th_crn")
           TH_CRN("th_crn"),
@@ -3686,7 +3905,9 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           }
 
           /** A non-negative integer representing the amount in the smallest currency unit. */
-          public Builder setAmount(Amount amount) {
+          public Builder setAmount(
+              AccountTokenCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount
+                  amount) {
             this.amount = amount;
             return this;
           }
@@ -3719,6 +3940,109 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             }
             this.extraParams.putAll(map);
             return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Amount {
+          /**
+           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+           * code</a>, in lowercase. Must be a <a
+           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           */
+          @SerializedName("currency")
+          String currency;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * A non-negative integer representing how much to charge in the <a
+           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+           */
+          @SerializedName("value")
+          Long value;
+
+          private Amount(String currency, Map<String, Object> extraParams, Long value) {
+            this.currency = currency;
+            this.extraParams = extraParams;
+            this.value = value;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private String currency;
+
+            private Map<String, Object> extraParams;
+
+            private Long value;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountTokenCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount
+                build() {
+              return new AccountTokenCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue
+                  .Amount(this.currency, this.extraParams, this.value);
+            }
+
+            /**
+             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+             * code</a>, in lowercase. Must be a <a
+             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             */
+            public Builder setCurrency(String currency) {
+              this.currency = currency;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountTokenCreateParams.Identity.BusinessDetails.MonthlyEstimatedRevenue.Amount#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * A non-negative integer representing how much to charge in the <a
+             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+             */
+            public Builder setValue(Long value) {
+              this.value = value;
+              return this;
+            }
           }
         }
       }
@@ -3852,7 +4176,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("state")
           String state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           String town;
 
@@ -3978,7 +4302,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
@@ -4026,7 +4350,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("state")
           String state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           String town;
 
@@ -4152,7 +4476,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
@@ -5000,7 +5324,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         @SerializedName("state")
         String state;
 
-        /** Town or cho-me. */
+        /** Town or district. */
         @SerializedName("town")
         String town;
 
@@ -5138,7 +5462,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(String town) {
             this.town = town;
             return this;
@@ -5333,7 +5657,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
         @SerializedName("state")
         String state;
 
-        /** Town or cho-me. */
+        /** Town or district. */
         @SerializedName("town")
         String town;
 
@@ -5457,7 +5781,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** Town or cho-me. */
+          /** Town or district. */
           public Builder setTown(String town) {
             this.town = town;
             return this;
@@ -6696,8 +7020,14 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("ao_nif")
           AO_NIF("ao_nif"),
 
+          @SerializedName("ar_cuil")
+          AR_CUIL("ar_cuil"),
+
           @SerializedName("ar_dni")
           AR_DNI("ar_dni"),
+
+          @SerializedName("at_stn")
+          AT_STN("at_stn"),
 
           @SerializedName("az_tin")
           AZ_TIN("az_tin"),
@@ -6711,8 +7041,35 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("bd_nid")
           BD_NID("bd_nid"),
 
+          @SerializedName("be_nrn")
+          BE_NRN("be_nrn"),
+
+          @SerializedName("bg_ucn")
+          BG_UCN("bg_ucn"),
+
+          @SerializedName("bn_nric")
+          BN_NRIC("bn_nric"),
+
           @SerializedName("br_cpf")
           BR_CPF("br_cpf"),
+
+          @SerializedName("ca_sin")
+          CA_SIN("ca_sin"),
+
+          @SerializedName("ch_oasi")
+          CH_OASI("ch_oasi"),
+
+          @SerializedName("cl_rut")
+          CL_RUT("cl_rut"),
+
+          @SerializedName("cn_pp")
+          CN_PP("cn_pp"),
+
+          @SerializedName("co_nuip")
+          CO_NUIP("co_nuip"),
+
+          @SerializedName("cr_ci")
+          CR_CI("cr_ci"),
 
           @SerializedName("cr_cpf")
           CR_CPF("cr_cpf"),
@@ -6723,11 +7080,44 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("cr_nite")
           CR_NITE("cr_nite"),
 
+          @SerializedName("cy_tic")
+          CY_TIC("cy_tic"),
+
+          @SerializedName("cz_rc")
+          CZ_RC("cz_rc"),
+
           @SerializedName("de_stn")
           DE_STN("de_stn"),
 
+          @SerializedName("dk_cpr")
+          DK_CPR("dk_cpr"),
+
+          @SerializedName("do_cie")
+          DO_CIE("do_cie"),
+
           @SerializedName("do_rcn")
           DO_RCN("do_rcn"),
+
+          @SerializedName("ec_ci")
+          EC_CI("ec_ci"),
+
+          @SerializedName("ee_ik")
+          EE_IK("ee_ik"),
+
+          @SerializedName("es_nif")
+          ES_NIF("es_nif"),
+
+          @SerializedName("fi_hetu")
+          FI_HETU("fi_hetu"),
+
+          @SerializedName("fr_nir")
+          FR_NIR("fr_nir"),
+
+          @SerializedName("gb_nino")
+          GB_NINO("gb_nino"),
+
+          @SerializedName("gr_afm")
+          GR_AFM("gr_afm"),
 
           @SerializedName("gt_nit")
           GT_NIT("gt_nit"),
@@ -6735,8 +7125,44 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("hk_id")
           HK_ID("hk_id"),
 
+          @SerializedName("hr_oib")
+          HR_OIB("hr_oib"),
+
+          @SerializedName("hu_ad")
+          HU_AD("hu_ad"),
+
+          @SerializedName("id_nik")
+          ID_NIK("id_nik"),
+
+          @SerializedName("ie_ppsn")
+          IE_PPSN("ie_ppsn"),
+
+          @SerializedName("is_kt")
+          IS_KT("is_kt"),
+
+          @SerializedName("it_cf")
+          IT_CF("it_cf"),
+
+          @SerializedName("jp_inc")
+          JP_INC("jp_inc"),
+
+          @SerializedName("ke_pin")
+          KE_PIN("ke_pin"),
+
           @SerializedName("kz_iin")
           KZ_IIN("kz_iin"),
+
+          @SerializedName("li_peid")
+          LI_PEID("li_peid"),
+
+          @SerializedName("lt_ak")
+          LT_AK("lt_ak"),
+
+          @SerializedName("lu_nif")
+          LU_NIF("lu_nif"),
+
+          @SerializedName("lv_pk")
+          LV_PK("lv_pk"),
 
           @SerializedName("mx_rfc")
           MX_RFC("mx_rfc"),
@@ -6747,8 +7173,17 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("mz_nuit")
           MZ_NUIT("mz_nuit"),
 
+          @SerializedName("ng_nin")
+          NG_NIN("ng_nin"),
+
           @SerializedName("nl_bsn")
           NL_BSN("nl_bsn"),
+
+          @SerializedName("no_nin")
+          NO_NIN("no_nin"),
+
+          @SerializedName("nz_ird")
+          NZ_IRD("nz_ird"),
 
           @SerializedName("pe_dni")
           PE_DNI("pe_dni"),
@@ -6759,8 +7194,20 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("pk_snic")
           PK_SNIC("pk_snic"),
 
+          @SerializedName("pl_pesel")
+          PL_PESEL("pl_pesel"),
+
+          @SerializedName("pt_nif")
+          PT_NIF("pt_nif"),
+
+          @SerializedName("ro_cnp")
+          RO_CNP("ro_cnp"),
+
           @SerializedName("sa_tin")
           SA_TIN("sa_tin"),
+
+          @SerializedName("se_pin")
+          SE_PIN("se_pin"),
 
           @SerializedName("sg_fin")
           SG_FIN("sg_fin"),
@@ -6768,11 +7215,17 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("sg_nric")
           SG_NRIC("sg_nric"),
 
+          @SerializedName("sk_dic")
+          SK_DIC("sk_dic"),
+
           @SerializedName("th_lc")
           TH_LC("th_lc"),
 
           @SerializedName("th_pin")
           TH_PIN("th_pin"),
+
+          @SerializedName("tr_tin")
+          TR_TIN("tr_tin"),
 
           @SerializedName("us_itin")
           US_ITIN("us_itin"),
@@ -6784,7 +7237,13 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           US_SSN("us_ssn"),
 
           @SerializedName("us_ssn_last_4")
-          US_SSN_LAST_4("us_ssn_last_4");
+          US_SSN_LAST_4("us_ssn_last_4"),
+
+          @SerializedName("uy_dni")
+          UY_DNI("uy_dni"),
+
+          @SerializedName("za_id")
+          ZA_ID("za_id");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -7074,7 +7533,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("state")
           String state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           String town;
 
@@ -7200,7 +7659,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;
@@ -7248,7 +7707,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
           @SerializedName("state")
           String state;
 
-          /** Town or cho-me. */
+          /** Town or district. */
           @SerializedName("town")
           String town;
 
@@ -7374,7 +7833,7 @@ public class AccountTokenCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /** Town or cho-me. */
+            /** Town or district. */
             public Builder setTown(String town) {
               this.town = town;
               return this;

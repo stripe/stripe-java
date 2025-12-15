@@ -95,11 +95,15 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class UseCase {
-    /** Indicates that the AccountLink provided should onboard an account. */
+    /**
+     * Hash containing configuration options for an Account Link object that onboards a new account.
+     */
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
-    /** Indicates that the AccountLink provided should update a previously onboarded account. */
+    /**
+     * Hash containing configuration options for an Account Link that updates an existing account.
+     */
     @SerializedName("account_update")
     AccountUpdate accountUpdate;
 
@@ -112,7 +116,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** <strong>Required.</strong> Open Enum. The type of AccountLink the user is requesting. */
+    /** <strong>Required.</strong> Open Enum. The type of Account Link the user is requesting. */
     @SerializedName("type")
     Type type;
 
@@ -146,14 +150,19 @@ public class AccountLinkCreateParams extends ApiRequestParams {
             this.accountOnboarding, this.accountUpdate, this.extraParams, this.type);
       }
 
-      /** Indicates that the AccountLink provided should onboard an account. */
+      /**
+       * Hash containing configuration options for an Account Link object that onboards a new
+       * account.
+       */
       public Builder setAccountOnboarding(
           AccountLinkCreateParams.UseCase.AccountOnboarding accountOnboarding) {
         this.accountOnboarding = accountOnboarding;
         return this;
       }
 
-      /** Indicates that the AccountLink provided should update a previously onboarded account. */
+      /**
+       * Hash containing configuration options for an Account Link that updates an existing account.
+       */
       public Builder setAccountUpdate(AccountLinkCreateParams.UseCase.AccountUpdate accountUpdate) {
         this.accountUpdate = accountUpdate;
         return this;
@@ -185,7 +194,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Open Enum. The type of AccountLink the user is requesting. */
+      /** <strong>Required.</strong> Open Enum. The type of Account Link the user is requesting. */
       public Builder setType(AccountLinkCreateParams.UseCase.Type type) {
         this.type = type;
         return this;
@@ -551,13 +560,13 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * <strong>Required.</strong> The URL the user will be redirected to if the AccountLink is
+       * <strong>Required.</strong> The URL the user will be redirected to if the Account Link is
        * expired, has been used, or is otherwise invalid. The URL you specify should attempt to
-       * generate a new AccountLink with the same parameters used to create the original
-       * AccountLink, then redirect the user to the new AccountLink’s URL so they can continue the
-       * flow. If a new AccountLink cannot be generated or the redirect fails you should display a
-       * useful error to the user. Please make sure to implement authentication before redirecting
-       * the user in case this URL is leaked to a third party.
+       * generate a new Account Link with the same parameters used to create the original Account
+       * Link, then redirect the user to the new Account Link URL so they can continue the flow.
+       * Make sure to authenticate the user before redirecting to the new Account Link, in case the
+       * URL leaks to a third party. If a new Account Link can't be generated, or if the redirect
+       * fails, you should display a useful error to the user.
        */
       @SerializedName("refresh_url")
       String refreshUrl;
@@ -673,13 +682,13 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * <strong>Required.</strong> The URL the user will be redirected to if the AccountLink is
+         * <strong>Required.</strong> The URL the user will be redirected to if the Account Link is
          * expired, has been used, or is otherwise invalid. The URL you specify should attempt to
-         * generate a new AccountLink with the same parameters used to create the original
-         * AccountLink, then redirect the user to the new AccountLink’s URL so they can continue the
-         * flow. If a new AccountLink cannot be generated or the redirect fails you should display a
-         * useful error to the user. Please make sure to implement authentication before redirecting
-         * the user in case this URL is leaked to a third party.
+         * generate a new Account Link with the same parameters used to create the original Account
+         * Link, then redirect the user to the new Account Link URL so they can continue the flow.
+         * Make sure to authenticate the user before redirecting to the new Account Link, in case
+         * the URL leaks to a third party. If a new Account Link can't be generated, or if the
+         * redirect fails, you should display a useful error to the user.
          */
         public Builder setRefreshUrl(String refreshUrl) {
           this.refreshUrl = refreshUrl;
@@ -709,8 +718,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
         /**
          * Specifies whether the platform collects only currently_due requirements ({@code
          * currently_due}) or both currently_due and eventually_due requirements ({@code
-         * eventually_due}). If you don’t specify collection_options, the default value is
-         * currently_due.
+         * eventually_due}). The default value is {@code currently_due}.
          */
         @SerializedName("fields")
         Fields fields;
@@ -779,8 +787,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
           /**
            * Specifies whether the platform collects only currently_due requirements ({@code
            * currently_due}) or both currently_due and eventually_due requirements ({@code
-           * eventually_due}). If you don’t specify collection_options, the default value is
-           * currently_due.
+           * eventually_due}). The default value is {@code currently_due}.
            */
           public Builder setFields(
               AccountLinkCreateParams.UseCase.AccountUpdate.CollectionOptions.Fields fields) {

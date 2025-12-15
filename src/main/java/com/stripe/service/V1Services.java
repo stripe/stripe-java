@@ -245,6 +245,10 @@ public final class V1Services extends ApiService {
     return new com.stripe.service.ReportingService(this.getResponseGetter());
   }
 
+  public com.stripe.service.ReserveService reserve() {
+    return new com.stripe.service.ReserveService(this.getResponseGetter());
+  }
+
   public com.stripe.service.ReviewService reviews() {
     return new com.stripe.service.ReviewService(this.getResponseGetter());
   }

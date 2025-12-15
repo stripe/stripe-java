@@ -27,7 +27,7 @@ import lombok.Setter;
 public class SetupAttempt extends ApiResource implements HasId {
   /**
    * The value of <a
-   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-application">application</a>
+   * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-application">application</a>
    * on the SetupIntent at the time of this confirmation.
    */
   @SerializedName("application")
@@ -51,7 +51,7 @@ public class SetupAttempt extends ApiResource implements HasId {
 
   /**
    * The value of <a
-   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-customer">customer</a>
+   * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-customer">customer</a>
    * on the SetupIntent at the time of this confirmation.
    */
   @SerializedName("customer")
@@ -61,7 +61,7 @@ public class SetupAttempt extends ApiResource implements HasId {
 
   /**
    * The value of <a
-   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-customer_account">customer_account</a>
+   * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-customer_account">customer_account</a>
    * on the SetupIntent at the time of this confirmation.
    */
   @SerializedName("customer_account")
@@ -100,7 +100,7 @@ public class SetupAttempt extends ApiResource implements HasId {
 
   /**
    * The value of <a
-   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-on_behalf_of">on_behalf_of</a>
+   * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-on_behalf_of">on_behalf_of</a>
    * on the SetupIntent at the time of this confirmation.
    */
   @SerializedName("on_behalf_of")
@@ -136,7 +136,7 @@ public class SetupAttempt extends ApiResource implements HasId {
 
   /**
    * The value of <a
-   * href="https://stripe.com/docs/api/setup_intents/object#setup_intent_object-usage">usage</a> on
+   * href="https://docs.stripe.com/api/setup_intents/object#setup_intent_object-usage">usage</a> on
    * the SetupIntent at the time of this confirmation, one of {@code off_session} or {@code
    * on_session}.
    */
@@ -840,9 +840,10 @@ public class SetupAttempt extends ApiResource implements HasId {
     public static class Ideal extends StripeObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code moneyou},
-       * {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code revolut}, {@code
-       * sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code yoursafe}.
+       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code mollie},
+       * {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code
+       * revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code
+       * yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -852,8 +853,9 @@ public class SetupAttempt extends ApiResource implements HasId {
        *
        * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
        * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
-       * KNABNL2H}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code
-       * RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
+       * KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code
+       * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or
+       * {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;

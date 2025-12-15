@@ -53,7 +53,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -255,7 +255,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -266,7 +266,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -636,7 +636,13 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_10_29_CLOVER("2025-10-29.clover"),
 
     @SerializedName("2025-11-17.clover")
-    VERSION_2025_11_17_CLOVER("2025-11-17.clover");
+    VERSION_2025_11_17_CLOVER("2025-11-17.clover"),
+
+    @SerializedName("2025-12-15.clover")
+    VERSION_2025_12_15_CLOVER("2025-12-15.clover"),
+
+    @SerializedName("2026-01-28.clover")
+    VERSION_2026_01_28_CLOVER("2026-01-28.clover");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

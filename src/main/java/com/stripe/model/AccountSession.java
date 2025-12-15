@@ -24,7 +24,7 @@ import lombok.Setter;
  * quickly, and cannot be used more than once.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/connect/get-started-connect-embedded-components">Connect embedded
+ * href="https://docs.stripe.com/connect/get-started-connect-embedded-components">Connect embedded
  * components</a>
  */
 @Getter
@@ -44,7 +44,7 @@ public class AccountSession extends ApiResource {
    * that you have TLS enabled on any page that includes the client secret.
    *
    * <p>Refer to our docs to <a
-   * href="https://stripe.com/docs/connect/get-started-connect-embedded-components">setup Connect
+   * href="https://docs.stripe.com/connect/get-started-connect-embedded-components">setup Connect
    * embedded components</a> and learn about how {@code client_secret} should be handled.
    */
   @SerializedName("client_secret")
