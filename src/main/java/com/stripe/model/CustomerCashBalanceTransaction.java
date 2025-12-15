@@ -42,8 +42,15 @@ public class CustomerCashBalanceTransaction extends StripeObject
   ExpandableField<Customer> customer;
 
   /**
+   * The ID of an Account representing a customer whose available cash balance changed as a result
+   * of this transaction.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * The total available cash balance for the specified currency after this transaction was applied.
-   * Represented in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+   * Represented in the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
    * unit</a>.
    */
   @SerializedName("ending_balance")
@@ -66,7 +73,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
 
   /**
    * The amount by which the cash balance changed, represented in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. A positive
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. A positive
    * value represents funds being added to the cash balance, a negative value represents funds being
    * removed from the cash balance.
    */
@@ -89,7 +96,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
 
   /**
    * The type of the cash balance transaction. New types may be added in future. See <a
-   * href="https://stripe.com/docs/payments/customer-balance#types">Customer Balance</a> to learn
+   * href="https://docs.stripe.com/payments/customer-balance#types">Customer Balance</a> to learn
    * more about these types.
    *
    * <p>One of {@code adjusted_for_overdraft}, {@code applied_to_payment}, {@code funded}, {@code
@@ -129,7 +136,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @EqualsAndHashCode(callSuper = false)
   public static class AdjustedForOverdraft extends StripeObject {
     /**
-     * The <a href="https://stripe.com/docs/api/balance_transactions/object">Balance Transaction</a>
+     * The <a href="https://docs.stripe.com/api/balance_transactions/object">Balance Transaction</a>
      * that corresponds to funds taken out of your Stripe balance.
      */
     @SerializedName("balance_transaction")
@@ -138,7 +145,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
     ExpandableField<BalanceTransaction> balanceTransaction;
 
     /**
-     * The <a href="https://stripe.com/docs/api/cash_balance_transactions/object">Cash Balance
+     * The <a href="https://docs.stripe.com/api/cash_balance_transactions/object">Cash Balance
      * Transaction</a> that brought the customer balance negative, triggering the clawback of funds.
      */
     @SerializedName("linked_transaction")
@@ -195,7 +202,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @EqualsAndHashCode(callSuper = false)
   public static class AppliedToPayment extends StripeObject {
     /**
-     * The <a href="https://stripe.com/docs/api/payment_intents/object">Payment Intent</a> that
+     * The <a href="https://docs.stripe.com/api/payment_intents/object">Payment Intent</a> that
      * funds were applied to.
      */
     @SerializedName("payment_intent")
@@ -364,7 +371,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @EqualsAndHashCode(callSuper = false)
   public static class RefundedFromPayment extends StripeObject {
     /**
-     * The <a href="https://stripe.com/docs/api/refunds/object">Refund</a> that moved these funds
+     * The <a href="https://docs.stripe.com/api/refunds/object">Refund</a> that moved these funds
      * into the customer's cash balance.
      */
     @SerializedName("refund")
@@ -400,7 +407,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @EqualsAndHashCode(callSuper = false)
   public static class TransferredToBalance extends StripeObject {
     /**
-     * The <a href="https://stripe.com/docs/api/balance_transactions/object">Balance Transaction</a>
+     * The <a href="https://docs.stripe.com/api/balance_transactions/object">Balance Transaction</a>
      * that corresponds to funds transferred to your Stripe balance.
      */
     @SerializedName("balance_transaction")
@@ -437,7 +444,7 @@ public class CustomerCashBalanceTransaction extends StripeObject
   @EqualsAndHashCode(callSuper = false)
   public static class UnappliedFromPayment extends StripeObject {
     /**
-     * The <a href="https://stripe.com/docs/api/payment_intents/object">Payment Intent</a> that
+     * The <a href="https://docs.stripe.com/api/payment_intents/object">Payment Intent</a> that
      * funds were unapplied from.
      */
     @SerializedName("payment_intent")

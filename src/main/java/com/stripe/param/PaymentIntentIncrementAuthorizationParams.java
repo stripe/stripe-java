@@ -29,7 +29,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
    * The amount of the application fee (if any) that will be requested to be applied to the payment
    * and transferred to the application owner's Stripe account. The amount of the application fee
    * collected will be capped at the total amount captured. For more information, see the
-   * PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
   @SerializedName("application_fee_amount")
@@ -57,7 +57,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   Hooks hooks;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -81,7 +81,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
   /**
    * The parameters used to automatically create a transfer after the payment is captured. Learn
-   * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+   * more about the <a href="https://docs.stripe.com/payments/connected-accounts">use case for
    * connected accounts</a>.
    */
   @SerializedName("transfer_data")
@@ -175,7 +175,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
      * The amount of the application fee (if any) that will be requested to be applied to the
      * payment and transferred to the application owner's Stripe account. The amount of the
      * application fee collected will be capped at the total amount captured. For more information,
-     * see the PaymentIntents <a href="https://stripe.com/docs/payments/connected-accounts">use case
+     * see the PaymentIntents <a href="https://docs.stripe.com/payments/connected-accounts">use case
      * for connected accounts</a>.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -295,7 +295,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
     /**
      * The parameters used to automatically create a transfer after the payment is captured. Learn
-     * more about the <a href="https://stripe.com/docs/payments/connected-accounts">use case for
+     * more about the <a href="https://docs.stripe.com/payments/connected-accounts">use case for
      * connected accounts</a>.
      */
     public Builder setTransferData(
@@ -310,7 +310,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
   public static class AmountDetails {
     /**
      * The total discount applied on the transaction represented in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An integer
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An integer
      * greater than 0.
      *
      * <p>This field is mutually exclusive with the {@code
@@ -330,7 +330,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
     /**
      * A list of line items, each containing information about a product in the PaymentIntent. There
-     * is a maximum of 100 line items.
+     * is a maximum of 200 line items.
      */
     @SerializedName("line_items")
     Object lineItems;
@@ -379,7 +379,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       /**
        * The total discount applied on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -392,7 +392,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       /**
        * The total discount applied on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -469,7 +469,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(EmptyParam lineItems) {
         this.lineItems = lineItems;
@@ -478,7 +478,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(
           List<PaymentIntentIncrementAuthorizationParams.AmountDetails.LineItem> lineItems) {
@@ -517,7 +517,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     public static class LineItem {
       /**
        * The discount applied on this line item represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than 0.
        *
        * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]} field.
@@ -568,7 +568,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       /**
        * <strong>Required.</strong> The unit cost of the line item represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
        * for L3 rates. An integer greater than or equal to 0.
        */
       @SerializedName("unit_cost")
@@ -638,7 +638,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * The discount applied on this line item represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than 0.
          *
          * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]}
@@ -726,7 +726,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * <strong>Required.</strong> The unit cost of the line item represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L3 rates. An integer greater than or equal to 0.
          */
         public Builder setUnitCost(Long unitCost) {
@@ -1341,7 +1341,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * <strong>Required.</strong> The total amount of tax on a single line item represented in
-         * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L3 rates. An integer greater than or equal to 0.
          *
          * <p>This field is mutually exclusive with the {@code
@@ -1402,7 +1402,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
           /**
            * <strong>Required.</strong> The total amount of tax on a single line item represented in
-           * the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+           * the <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency
            * unit</a>. Required for L3 rates. An integer greater than or equal to 0.
            *
            * <p>This field is mutually exclusive with the {@code
@@ -1421,7 +1421,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     public static class Shipping {
       /**
        * If a physical good is being shipped, the cost of shipping represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
        * integer greater than or equal to 0.
        */
       @SerializedName("amount")
@@ -1482,7 +1482,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * If a physical good is being shipped, the cost of shipping represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than or equal to 0.
          */
         public Builder setAmount(Long amount) {
@@ -1492,7 +1492,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * If a physical good is being shipped, the cost of shipping represented in the <a
-         * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An
+         * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An
          * integer greater than or equal to 0.
          */
         public Builder setAmount(EmptyParam amount) {
@@ -1582,7 +1582,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
       /**
        * <strong>Required.</strong> The total amount of tax on the transaction represented in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
        * for L2 rates. An integer greater than or equal to 0.
        *
        * <p>This field is mutually exclusive with the {@code
@@ -1641,7 +1641,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
         /**
          * <strong>Required.</strong> The total amount of tax on the transaction represented in the
-         * <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>.
+         * <a href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>.
          * Required for L2 rates. An integer greater than or equal to 0.
          *
          * <p>This field is mutually exclusive with the {@code
@@ -1800,7 +1800,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       public static class Tax {
         /**
          * <strong>Required.</strong> The <a
-         * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+         * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
          */
         @SerializedName("calculation")
         Object calculation;
@@ -1837,7 +1837,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(String calculation) {
             this.calculation = calculation;
@@ -1846,7 +1846,7 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
           /**
            * <strong>Required.</strong> The <a
-           * href="https://stripe.com/docs/api/tax/calculations">TaxCalculation</a> id
+           * href="https://docs.stripe.com/api/tax/calculations">TaxCalculation</a> id
            */
           public Builder setCalculation(EmptyParam calculation) {
             this.calculation = calculation;

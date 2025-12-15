@@ -57,6 +57,10 @@ public class CustomerSession extends ApiResource {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** The Account that the Customer Session was created for. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** The timestamp at which this Customer Session will expire. */
   @SerializedName("expires_at")
   Long expiresAt;

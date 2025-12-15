@@ -19,7 +19,7 @@ import lombok.Setter;
 /**
  * Invoice Payments represent payments made against invoices. Invoice Payments can be accessed in
  * two ways: 1. By expanding the {@code payments} field on the <a
- * href="https://stripe.com/docs/api#invoice">Invoice</a> resource. 2. By using the Invoice Payment
+ * href="https://api.stripe.com#invoice">Invoice</a> resource. 2. By using the Invoice Payment
  * retrieve and list endpoints.
  *
  * <p>Invoice Payments include the mapping between payment objects, such as Payment Intent, and

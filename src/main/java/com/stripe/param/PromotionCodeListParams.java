@@ -36,6 +36,10 @@ public class PromotionCodeListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** Only return promotion codes that are restricted to this account representing the customer. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -80,6 +84,7 @@ public class PromotionCodeListParams extends ApiRequestParams {
       String coupon,
       Object created,
       String customer,
+      String customerAccount,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -90,6 +95,7 @@ public class PromotionCodeListParams extends ApiRequestParams {
     this.coupon = coupon;
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -112,6 +118,8 @@ public class PromotionCodeListParams extends ApiRequestParams {
 
     private String customer;
 
+    private String customerAccount;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -130,6 +138,7 @@ public class PromotionCodeListParams extends ApiRequestParams {
           this.coupon,
           this.created,
           this.customer,
+          this.customerAccount,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -178,6 +187,14 @@ public class PromotionCodeListParams extends ApiRequestParams {
     /** Only return promotion codes that are restricted to this customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * Only return promotion codes that are restricted to this account representing the customer.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

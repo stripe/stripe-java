@@ -22,7 +22,7 @@ import lombok.Setter;
 /**
  * You can use Tax {@code Settings} to manage configurations used by Stripe Tax calculations.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/tax/settings-api">Using the Settings API</a>
+ * <p>Related guide: <a href="https://docs.stripe.com/tax/settings-api">Using the Settings API</a>
  */
 @Getter
 @Setter

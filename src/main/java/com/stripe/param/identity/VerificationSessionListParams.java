@@ -53,8 +53,13 @@ public class VerificationSessionListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** Customer ID. */
   @SerializedName("related_customer")
   String relatedCustomer;
+
+  /** The ID of the Account representing a customer. */
+  @SerializedName("related_customer_account")
+  String relatedCustomerAccount;
 
   /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
@@ -67,7 +72,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
 
   /**
    * Only return VerificationSessions with this status. <a
-   * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
+   * href="https://docs.stripe.com/identity/how-sessions-work">Learn more about the lifecycle of
    * sessions</a>.
    */
   @SerializedName("status")
@@ -81,6 +86,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Long limit,
       String relatedCustomer,
+      String relatedCustomerAccount,
       String startingAfter,
       Status status) {
     this.clientReferenceId = clientReferenceId;
@@ -90,6 +96,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.relatedCustomer = relatedCustomer;
+    this.relatedCustomerAccount = relatedCustomerAccount;
     this.startingAfter = startingAfter;
     this.status = status;
   }
@@ -113,6 +120,8 @@ public class VerificationSessionListParams extends ApiRequestParams {
 
     private String relatedCustomer;
 
+    private String relatedCustomerAccount;
+
     private String startingAfter;
 
     private Status status;
@@ -127,6 +136,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.relatedCustomer,
+          this.relatedCustomerAccount,
           this.startingAfter,
           this.status);
     }
@@ -224,8 +234,15 @@ public class VerificationSessionListParams extends ApiRequestParams {
       return this;
     }
 
+    /** Customer ID. */
     public Builder setRelatedCustomer(String relatedCustomer) {
       this.relatedCustomer = relatedCustomer;
+      return this;
+    }
+
+    /** The ID of the Account representing a customer. */
+    public Builder setRelatedCustomerAccount(String relatedCustomerAccount) {
+      this.relatedCustomerAccount = relatedCustomerAccount;
       return this;
     }
 
@@ -242,7 +259,7 @@ public class VerificationSessionListParams extends ApiRequestParams {
 
     /**
      * Only return VerificationSessions with this status. <a
-     * href="https://stripe.com/docs/identity/how-sessions-work">Learn more about the lifecycle of
+     * href="https://docs.stripe.com/identity/how-sessions-work">Learn more about the lifecycle of
      * sessions</a>.
      */
     public Builder setStatus(VerificationSessionListParams.Status status) {

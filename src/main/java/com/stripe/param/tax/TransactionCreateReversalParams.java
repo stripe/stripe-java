@@ -28,7 +28,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
   /**
    * A flat amount to reverse across the entire transaction, in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in negative.
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in negative.
    * This value represents the total amount to refund from the transaction, including taxes.
    */
   @SerializedName("flat_amount")
@@ -39,7 +39,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   List<TransactionCreateReversalParams.LineItem> lineItems;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -62,7 +62,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
    * <strong>Required.</strong> A custom identifier for this reversal, such as {@code
    * myOrder_123-refund_1}, which must be unique across all transactions. The reference helps
    * identify this reversal transaction in exported <a
-   * href="https://stripe.com/docs/tax/reports">tax reports</a>.
+   * href="https://docs.stripe.com/tax/reports">tax reports</a>.
    */
   @SerializedName("reference")
   String reference;
@@ -183,7 +183,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
     /**
      * A flat amount to reverse across the entire transaction, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
      * negative. This value represents the total amount to refund from the transaction, including
      * taxes.
      */
@@ -263,7 +263,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
      * <strong>Required.</strong> A custom identifier for this reversal, such as {@code
      * myOrder_123-refund_1}, which must be unique across all transactions. The reference helps
      * identify this reversal transaction in exported <a
-     * href="https://stripe.com/docs/tax/reports">tax reports</a>.
+     * href="https://docs.stripe.com/tax/reports">tax reports</a>.
      */
     public Builder setReference(String reference) {
       this.reference = reference;
@@ -282,7 +282,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   public static class LineItem {
     /**
      * <strong>Required.</strong> The amount to reverse, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
      * negative.
      */
     @SerializedName("amount")
@@ -290,7 +290,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The amount of tax to reverse, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
      * negative.
      */
     @SerializedName("amount_tax")
@@ -306,7 +306,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format.
      */
@@ -321,7 +321,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
     String originalLineItem;
 
     /**
-     * The quantity reversed. Appears in <a href="https://stripe.com/docs/tax/reports">tax
+     * The quantity reversed. Appears in <a href="https://docs.stripe.com/tax/reports">tax
      * exports</a>, but does not affect the amount of tax reversed.
      */
     @SerializedName("quantity")
@@ -384,7 +384,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The amount to reverse, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
        * negative.
        */
       public Builder setAmount(Long amount) {
@@ -394,7 +394,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The amount of tax to reverse, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
        * negative.
        */
       public Builder setAmountTax(Long amountTax) {
@@ -465,7 +465,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
       }
 
       /**
-       * The quantity reversed. Appears in <a href="https://stripe.com/docs/tax/reports">tax
+       * The quantity reversed. Appears in <a href="https://docs.stripe.com/tax/reports">tax
        * exports</a>, but does not affect the amount of tax reversed.
        */
       public Builder setQuantity(Long quantity) {
@@ -489,7 +489,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
   public static class ShippingCost {
     /**
      * <strong>Required.</strong> The amount to reverse, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
      * negative.
      */
     @SerializedName("amount")
@@ -497,7 +497,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The amount of tax to reverse, in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
      * negative.
      */
     @SerializedName("amount_tax")
@@ -537,7 +537,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The amount to reverse, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
        * negative.
        */
       public Builder setAmount(Long amount) {
@@ -547,7 +547,7 @@ public class TransactionCreateReversalParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> The amount of tax to reverse, in the <a
-       * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a> in
+       * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a> in
        * negative.
        */
       public Builder setAmountTax(Long amountTax) {

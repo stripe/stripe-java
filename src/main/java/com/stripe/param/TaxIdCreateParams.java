@@ -185,13 +185,20 @@ public class TaxIdCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class Owner {
-    /** Account the tax ID belongs to. Required when {@code type=account} */
+    /** Connected Account the tax ID belongs to. Required when {@code type=account} */
     @SerializedName("account")
     String account;
 
     /** Customer the tax ID belongs to. Required when {@code type=customer} */
     @SerializedName("customer")
     String customer;
+
+    /**
+     * ID of the Account representing the customer that the tax ID belongs to. Can be used in place
+     * of {@code customer} when {@code type=customer}
+     */
+    @SerializedName("customer_account")
+    String customerAccount;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -206,9 +213,15 @@ public class TaxIdCreateParams extends ApiRequestParams {
     @SerializedName("type")
     Type type;
 
-    private Owner(String account, String customer, Map<String, Object> extraParams, Type type) {
+    private Owner(
+        String account,
+        String customer,
+        String customerAccount,
+        Map<String, Object> extraParams,
+        Type type) {
       this.account = account;
       this.customer = customer;
+      this.customerAccount = customerAccount;
       this.extraParams = extraParams;
       this.type = type;
     }
@@ -222,6 +235,8 @@ public class TaxIdCreateParams extends ApiRequestParams {
 
       private String customer;
 
+      private String customerAccount;
+
       private Map<String, Object> extraParams;
 
       private Type type;
@@ -229,10 +244,10 @@ public class TaxIdCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public TaxIdCreateParams.Owner build() {
         return new TaxIdCreateParams.Owner(
-            this.account, this.customer, this.extraParams, this.type);
+            this.account, this.customer, this.customerAccount, this.extraParams, this.type);
       }
 
-      /** Account the tax ID belongs to. Required when {@code type=account} */
+      /** Connected Account the tax ID belongs to. Required when {@code type=account} */
       public Builder setAccount(String account) {
         this.account = account;
         return this;
@@ -241,6 +256,15 @@ public class TaxIdCreateParams extends ApiRequestParams {
       /** Customer the tax ID belongs to. Required when {@code type=customer} */
       public Builder setCustomer(String customer) {
         this.customer = customer;
+        return this;
+      }
+
+      /**
+       * ID of the Account representing the customer that the tax ID belongs to. Can be used in
+       * place of {@code customer} when {@code type=customer}
+       */
+      public Builder setCustomerAccount(String customerAccount) {
+        this.customerAccount = customerAccount;
         return this;
       }
 

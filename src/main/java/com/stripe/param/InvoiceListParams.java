@@ -28,6 +28,12 @@ public class InvoiceListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * Only return invoices for the account representing the customer specified by this account ID.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   @SerializedName("due_date")
   Object dueDate;
 
@@ -72,7 +78,7 @@ public class InvoiceListParams extends ApiRequestParams {
   /**
    * The status of the invoice, one of {@code draft}, {@code open}, {@code paid}, {@code
    * uncollectible}, or {@code void}. <a
-   * href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
+   * href="https://docs.stripe.com/billing/invoices/workflow#workflow-overview">Learn more</a>
    */
   @SerializedName("status")
   Status status;
@@ -85,6 +91,7 @@ public class InvoiceListParams extends ApiRequestParams {
       CollectionMethod collectionMethod,
       Object created,
       String customer,
+      String customerAccount,
       Object dueDate,
       String endingBefore,
       List<String> expand,
@@ -96,6 +103,7 @@ public class InvoiceListParams extends ApiRequestParams {
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.dueDate = dueDate;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -116,6 +124,8 @@ public class InvoiceListParams extends ApiRequestParams {
     private Object created;
 
     private String customer;
+
+    private String customerAccount;
 
     private Object dueDate;
 
@@ -139,6 +149,7 @@ public class InvoiceListParams extends ApiRequestParams {
           this.collectionMethod,
           this.created,
           this.customer,
+          this.customerAccount,
           this.dueDate,
           this.endingBefore,
           this.expand,
@@ -173,6 +184,14 @@ public class InvoiceListParams extends ApiRequestParams {
     /** Only return invoices for the customer specified by this customer ID. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * Only return invoices for the account representing the customer specified by this account ID.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 
@@ -272,7 +291,7 @@ public class InvoiceListParams extends ApiRequestParams {
     /**
      * The status of the invoice, one of {@code draft}, {@code open}, {@code paid}, {@code
      * uncollectible}, or {@code void}. <a
-     * href="https://stripe.com/docs/billing/invoices/workflow#workflow-overview">Learn more</a>
+     * href="https://docs.stripe.com/billing/invoices/workflow#workflow-overview">Learn more</a>
      */
     public Builder setStatus(InvoiceListParams.Status status) {
       this.status = status;

@@ -29,8 +29,8 @@ import lombok.Setter;
 
 /**
  * This object represents a customer of your business. Use it to <a
- * href="https://stripe.com/docs/invoicing/customer">create recurring charges</a>, <a
- * href="https://stripe.com/docs/payments/save-during-payment">save payment</a> and contact
+ * href="https://docs.stripe.com/invoicing/customer">create recurring charges</a>, <a
+ * href="https://docs.stripe.com/payments/save-during-payment">save payment</a> and contact
  * information, and track payments that belong to the same customer.
  */
 @Getter
@@ -47,7 +47,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * an amount owed that's added to their next invoice. The balance only considers amounts that
    * Stripe hasn't successfully applied to any invoice. It doesn't reflect unpaid invoices. This
    * balance is only taken into account after invoices finalize. For multi-currency balances, see <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_credit_balance">invoice_credit_balance</a>.
+   * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_credit_balance">invoice_credit_balance</a>.
    */
   @SerializedName("balance")
   Long balance;
@@ -77,10 +77,17 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   String currency;
 
   /**
+   * The ID of an Account representing a customer. You can use this ID with any v1 API that accepts
+   * a customer_account parameter.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
+
+  /**
    * ID of the default payment source for the customer.
    *
    * <p>If you use payment methods created through the PaymentMethods API, see the <a
-   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
+   * href="https://docs.stripe.com/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * field instead.
    */
   @SerializedName("default_source")
@@ -98,7 +105,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * failure or passing the {@code invoice.due_date} will set this field to {@code true}.
    *
    * <p>If an invoice becomes uncollectible by <a
-   * href="https://stripe.com/docs/billing/automatic-collection">dunning</a>, {@code delinquent}
+   * href="https://docs.stripe.com/billing/automatic-collection">dunning</a>, {@code delinquent}
    * doesn't reset to {@code false}.
    *
    * <p>If you care whether the customer has paid their most recent subscription invoice, use {@code
@@ -157,7 +164,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */

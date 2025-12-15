@@ -25,7 +25,7 @@ import lombok.Setter;
 /**
  * Issue a credit note to adjust an invoice's amount after the invoice is finalized.
  *
- * <p>Related guide: <a href="https://stripe.com/docs/billing/invoices/credit-notes">Credit
+ * <p>Related guide: <a href="https://docs.stripe.com/billing/invoices/credit-notes">Credit
  * notes</a>
  */
 @Getter
@@ -59,6 +59,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
+
+  /** ID of the account representing the customer. */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Customer balance transaction related to this credit note. */
   @SerializedName("customer_balance_transaction")
@@ -112,7 +116,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   String memo;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -178,7 +182,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * Status of this credit note, one of {@code issued} or {@code void}. Learn more about <a
-   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   * href="https://docs.stripe.com/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   @SerializedName("status")
   String status;
@@ -943,6 +947,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TaxRateDetails extends StripeObject {
+      /** ID of the tax rate. */
       @SerializedName("tax_rate")
       String taxRate;
     }

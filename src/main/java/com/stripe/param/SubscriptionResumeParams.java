@@ -16,7 +16,7 @@ public class SubscriptionResumeParams extends ApiRequestParams {
   /**
    * The billing cycle anchor that applies when the subscription is resumed. Either {@code now} or
    * {@code unchanged}. The default is {@code now}. For more information, see the billing cycle <a
-   * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+   * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
    */
   @SerializedName("billing_cycle_anchor")
   BillingCycleAnchor billingCycleAnchor;
@@ -36,7 +36,7 @@ public class SubscriptionResumeParams extends ApiRequestParams {
 
   /**
    * Determines how to handle <a
-   * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
+   * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> resulting from
    * the {@code billing_cycle_anchor} being {@code unchanged}. When the {@code billing_cycle_anchor}
    * is set to {@code now} (default value), no prorations are generated. If no value is passed, the
    * default is {@code create_prorations}.
@@ -93,7 +93,7 @@ public class SubscriptionResumeParams extends ApiRequestParams {
     /**
      * The billing cycle anchor that applies when the subscription is resumed. Either {@code now} or
      * {@code unchanged}. The default is {@code now}. For more information, see the billing cycle <a
-     * href="https://stripe.com/docs/billing/subscriptions/billing-cycle">documentation</a>.
+     * href="https://docs.stripe.com/billing/subscriptions/billing-cycle">documentation</a>.
      */
     public Builder setBillingCycleAnchor(
         SubscriptionResumeParams.BillingCycleAnchor billingCycleAnchor) {
@@ -155,7 +155,7 @@ public class SubscriptionResumeParams extends ApiRequestParams {
 
     /**
      * Determines how to handle <a
-     * href="https://stripe.com/docs/billing/subscriptions/prorations">prorations</a> resulting from
+     * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> resulting from
      * the {@code billing_cycle_anchor} being {@code unchanged}. When the {@code
      * billing_cycle_anchor} is set to {@code now} (default value), no prorations are generated. If
      * no value is passed, the default is {@code create_prorations}.

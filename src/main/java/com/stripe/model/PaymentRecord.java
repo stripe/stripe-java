@@ -103,7 +103,7 @@ public class PaymentRecord extends ApiResource implements HasId {
   Boolean livemode;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -125,6 +125,14 @@ public class PaymentRecord extends ApiResource implements HasId {
   /** Processor information associated with this payment. */
   @SerializedName("processor_details")
   ProcessorDetails processorDetails;
+
+  /**
+   * Indicates who reported the payment.
+   *
+   * <p>One of {@code self}, or {@code stripe}.
+   */
+  @SerializedName("reported_by")
+  String reportedBy;
 
   /** Shipping information for this payment. */
   @SerializedName("shipping_details")
@@ -512,7 +520,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * A positive integer representing the amount in the currency's <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
      * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
@@ -534,7 +542,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * A positive integer representing the amount in the currency's <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
      * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
@@ -556,7 +564,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * A positive integer representing the amount in the currency's <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
      * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
@@ -578,7 +586,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * A positive integer representing the amount in the currency's <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
      * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
@@ -600,7 +608,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * A positive integer representing the amount in the currency's <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
      * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
@@ -622,7 +630,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * A positive integer representing the amount in the currency's <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
      * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
@@ -644,7 +652,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * A positive integer representing the amount in the currency's <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">minor unit</a>. For example, {@code
+     * href="https://docs.stripe.com/currencies#zero-decimal">minor unit</a>. For example, {@code
      * 100} can represent 1 USD or 100 JPY.
      */
     @SerializedName("value")
@@ -818,6 +826,9 @@ public class PaymentRecord extends ApiResource implements HasId {
     @SerializedName("paypal")
     Paypal paypal;
 
+    @SerializedName("payto")
+    Payto payto;
+
     @SerializedName("pix")
     Pix pix;
 
@@ -853,7 +864,7 @@ public class PaymentRecord extends ApiResource implements HasId {
 
     /**
      * The type of transaction-specific details of the payment method used in the payment. See <a
-     * href="https://stripe.com/docs/api/payment_methods/object#payment_method_object-type">PaymentMethod.type</a>
+     * href="https://docs.stripe.com/api/payment_methods/object#payment_method_object-type">PaymentMethod.type</a>
      * for the full list of possible types. An additional hash is included on {@code
      * payment_method_details} with a name matching this value. It contains information specific to
      * the payment method.
@@ -952,6 +963,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       String bankName;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -984,14 +1001,14 @@ public class PaymentRecord extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {
       /**
-       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
        * transaction's reader is assigned to.
        */
       @SerializedName("location")
       String location;
 
       /**
-       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
        * transaction was made on.
        */
       @SerializedName("reader")
@@ -1167,6 +1184,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       String bsbNumber;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -1190,6 +1213,12 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
       /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
@@ -1366,7 +1395,10 @@ public class PaymentRecord extends ApiResource implements HasId {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
       }
@@ -1406,6 +1438,10 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
+      /** The authorization code of the payment. */
+      @SerializedName("authorization_code")
+      String authorizationCode;
+
       /**
        * Card brand. Can be {@code amex}, {@code cartes_bancaires}, {@code diners}, {@code
        * discover}, {@code eftpos_au}, {@code jcb}, {@code link}, {@code mastercard}, {@code
@@ -1431,6 +1467,10 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("country")
       String country;
+
+      /** A high-level description of the type of cards issued in this range. */
+      @SerializedName("description")
+      String description;
 
       /** Two-digit number representing the card's expiration month. */
       @SerializedName("exp_month")
@@ -1459,6 +1499,18 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("funding")
       String funding;
 
+      /** Issuer identification number of the card. */
+      @SerializedName("iin")
+      String iin;
+
+      /** Installment details for this payment. */
+      @SerializedName("installments")
+      Installments installments;
+
+      /** The name of the card's issuing bank. */
+      @SerializedName("issuer")
+      String issuer;
+
       /** The last four digits of the card. */
       @SerializedName("last4")
       String last4;
@@ -1476,6 +1528,14 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("network")
       String network;
 
+      /** Advice code from the card network for the failed payment. */
+      @SerializedName("network_advice_code")
+      String networkAdviceCode;
+
+      /** Decline code from the card network for the failed payment. */
+      @SerializedName("network_decline_code")
+      String networkDeclineCode;
+
       /**
        * If this card has network token credentials, this contains the details of the network token
        * credentials.
@@ -1491,6 +1551,13 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("network_transaction_id")
       String networkTransactionId;
+
+      /**
+       * The transaction type that was passed for an off-session, Merchant-Initiated transaction,
+       * one of {@code recurring} or {@code unscheduled}.
+       */
+      @SerializedName("stored_credential_usage")
+      String storedCredentialUsage;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
@@ -1516,6 +1583,48 @@ public class PaymentRecord extends ApiResource implements HasId {
 
         @SerializedName("cvc_check")
         String cvcCheck;
+      }
+
+      /**
+       * For more details about Installments, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        @SerializedName("plan")
+        Plan plan;
+
+        /**
+         * For more details about Plan, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Plan extends StripeObject {
+          /**
+           * For {@code fixed_count} installment plans, this is the number of installment payments
+           * your customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * For {@code fixed_count} installment plans, this is the interval between installment
+           * payments your customer will make to their credit card. One of {@code month}.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /**
+           * Type of installment plan, one of {@code fixed_count}, {@code revolving}, or {@code
+           * bonus}.
+           */
+          @SerializedName("type")
+          String type;
+        }
       }
 
       /**
@@ -1713,9 +1822,9 @@ public class PaymentRecord extends ApiResource implements HasId {
       String iin;
 
       /**
-       * Whether this <a href="https://stripe.com/docs/api/payment_intents">PaymentIntent</a> is
+       * Whether this <a href="https://docs.stripe.com/api/payment_intents">PaymentIntent</a> is
        * eligible for incremental authorizations. Request support using <a
-       * href="https://stripe.com/docs/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
+       * href="https://docs.stripe.com/api/payment_intents/create#create_payment_intent-payment_method_options-card_present-request_incremental_authorization_support">request_incremental_authorization_support</a>.
        */
       @SerializedName("incremental_authorization_supported")
       Boolean incrementalAuthorizationSupported;
@@ -2088,9 +2197,10 @@ public class PaymentRecord extends ApiResource implements HasId {
     public static class Ideal extends StripeObject {
       /**
        * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
-       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code moneyou},
-       * {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code revolut}, {@code
-       * sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code yoursafe}.
+       * buut}, {@code finom}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code mollie},
+       * {@code moneyou}, {@code n26}, {@code nn}, {@code rabobank}, {@code regiobank}, {@code
+       * revolut}, {@code sns_bank}, {@code triodos_bank}, {@code van_lanschot}, or {@code
+       * yoursafe}.
        */
       @SerializedName("bank")
       String bank;
@@ -2100,8 +2210,9 @@ public class PaymentRecord extends ApiResource implements HasId {
        *
        * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BITSNL2A}, {@code BUNQNL2A}, {@code
        * BUUTNL2A}, {@code FNOMNL22}, {@code FVLBNL22}, {@code HANDNL2A}, {@code INGBNL2A}, {@code
-       * KNABNL2H}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code RABONL2U}, {@code
-       * RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
+       * KNABNL2H}, {@code MLLENL2A}, {@code MOYONL21}, {@code NNBANL2G}, {@code NTSBDEB1}, {@code
+       * RABONL2U}, {@code RBRBNL21}, {@code REVOIE23}, {@code REVOLT21}, {@code SNSBNL2A}, or
+       * {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;
@@ -2654,6 +2765,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("branch_code")
       String branchCode;
 
+      /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
       /** Last four digits of the bank account number. */
       @SerializedName("last4")
       String last4;
@@ -2745,14 +2862,14 @@ public class PaymentRecord extends ApiResource implements HasId {
     @EqualsAndHashCode(callSuper = false)
     public static class Paynow extends StripeObject {
       /**
-       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
        * transaction's reader is assigned to.
        */
       @SerializedName("location")
       String location;
 
       /**
-       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
        * transaction was made on.
        */
       @SerializedName("reader")
@@ -2828,6 +2945,31 @@ public class PaymentRecord extends ApiResource implements HasId {
         @SerializedName("status")
         String status;
       }
+    }
+
+    /**
+     * For more details about Payto, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payto extends StripeObject {
+      /** Bank-State-Branch number of the bank account. */
+      @SerializedName("bsb_number")
+      String bsbNumber;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** ID of the mandate used to make this payment. */
+      @SerializedName("mandate")
+      String mandate;
+
+      /** The PayID alias for the bank account. */
+      @SerializedName("pay_id")
+      String payId;
     }
 
     /**
@@ -3007,6 +3149,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       String country;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -3019,9 +3167,9 @@ public class PaymentRecord extends ApiResource implements HasId {
 
       /**
        * Find the ID of the mandate used for this payment under the <a
-       * href="https://stripe.com/docs/api/charges/object#charge_object-payment_method_details-sepa_debit-mandate">payment_method_details.sepa_debit.mandate</a>
+       * href="https://docs.stripe.com/api/charges/object#charge_object-payment_method_details-sepa_debit-mandate">payment_method_details.sepa_debit.mandate</a>
        * property on the Charge. Use this mandate ID to <a
-       * href="https://stripe.com/docs/api/mandates/retrieve">retrieve the Mandate</a>.
+       * href="https://docs.stripe.com/api/mandates/retrieve">retrieve the Mandate</a>.
        */
       @SerializedName("mandate")
       String mandate;
@@ -3197,6 +3345,12 @@ public class PaymentRecord extends ApiResource implements HasId {
       String bankName;
 
       /**
+       * Estimated date to debit the customer's bank account. A date string in YYYY-MM-DD format.
+       */
+      @SerializedName("expected_debit_date")
+      String expectedDebitDate;
+
+      /**
        * Uniquely identifies this particular bank account. You can use this attribute to check
        * whether two bank accounts are the same.
        */
@@ -3265,14 +3419,14 @@ public class PaymentRecord extends ApiResource implements HasId {
       String fingerprint;
 
       /**
-       * ID of the <a href="https://stripe.com/docs/api/terminal/locations">location</a> that this
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
        * transaction's reader is assigned to.
        */
       @SerializedName("location")
       String location;
 
       /**
-       * ID of the <a href="https://stripe.com/docs/api/terminal/readers">reader</a> this
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
        * transaction was made on.
        */
       @SerializedName("reader")
@@ -3375,7 +3529,10 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
     }

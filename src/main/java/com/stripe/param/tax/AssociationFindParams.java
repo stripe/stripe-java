@@ -28,7 +28,7 @@ public class AssociationFindParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> Valid <a
-   * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a> id
+   * href="https://docs.stripe.com/api/payment_intents/object">PaymentIntent</a> id
    */
   @SerializedName("payment_intent")
   String paymentIntent;
@@ -110,7 +110,7 @@ public class AssociationFindParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> Valid <a
-     * href="https://stripe.com/docs/api/payment_intents/object">PaymentIntent</a> id
+     * href="https://docs.stripe.com/api/payment_intents/object">PaymentIntent</a> id
      */
     public Builder setPaymentIntent(String paymentIntent) {
       this.paymentIntent = paymentIntent;

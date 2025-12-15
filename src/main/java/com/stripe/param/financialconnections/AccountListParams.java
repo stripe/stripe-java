@@ -212,13 +212,17 @@ public class AccountListParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class AccountHolder {
-    /** The ID of the Stripe account whose accounts will be retrieved. */
+    /** The ID of the Stripe account whose accounts you will retrieve. */
     @SerializedName("account")
     String account;
 
-    /** The ID of the Stripe customer whose accounts will be retrieved. */
+    /** The ID of the Stripe customer whose accounts you will retrieve. */
     @SerializedName("customer")
     String customer;
+
+    /** The ID of the Account representing a customer whose accounts you will retrieve. */
+    @SerializedName("customer_account")
+    String customerAccount;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -229,9 +233,11 @@ public class AccountListParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private AccountHolder(String account, String customer, Map<String, Object> extraParams) {
+    private AccountHolder(
+        String account, String customer, String customerAccount, Map<String, Object> extraParams) {
       this.account = account;
       this.customer = customer;
+      this.customerAccount = customerAccount;
       this.extraParams = extraParams;
     }
 
@@ -244,22 +250,31 @@ public class AccountListParams extends ApiRequestParams {
 
       private String customer;
 
+      private String customerAccount;
+
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AccountListParams.AccountHolder build() {
-        return new AccountListParams.AccountHolder(this.account, this.customer, this.extraParams);
+        return new AccountListParams.AccountHolder(
+            this.account, this.customer, this.customerAccount, this.extraParams);
       }
 
-      /** The ID of the Stripe account whose accounts will be retrieved. */
+      /** The ID of the Stripe account whose accounts you will retrieve. */
       public Builder setAccount(String account) {
         this.account = account;
         return this;
       }
 
-      /** The ID of the Stripe customer whose accounts will be retrieved. */
+      /** The ID of the Stripe customer whose accounts you will retrieve. */
       public Builder setCustomer(String customer) {
         this.customer = customer;
+        return this;
+      }
+
+      /** The ID of the Account representing a customer whose accounts you will retrieve. */
+      public Builder setCustomerAccount(String customerAccount) {
+        this.customerAccount = customerAccount;
         return this;
       }
 

@@ -21,7 +21,7 @@ import lombok.Setter;
 public class PaymentIntentAmountDetailsLineItem extends ApiResource implements HasId {
   /**
    * The discount applied on this line item represented in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. An integer
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. An integer
    * greater than 0.
    *
    * <p>This field is mutually exclusive with the {@code amount_details[discount_amount]} field.
@@ -72,7 +72,7 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
 
   /**
    * The unit cost of the line item represented in the <a
-   * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required for
+   * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required for
    * L3 rates. An integer greater than or equal to 0.
    */
   @SerializedName("unit_cost")
@@ -234,7 +234,7 @@ public class PaymentIntentAmountDetailsLineItem extends ApiResource implements H
   public static class Tax extends StripeObject {
     /**
      * The total amount of tax on the transaction represented in the <a
-     * href="https://stripe.com/docs/currencies#zero-decimal">smallest currency unit</a>. Required
+     * href="https://docs.stripe.com/currencies#zero-decimal">smallest currency unit</a>. Required
      * for L2 rates. An integer greater than or equal to 0.
      *
      * <p>This field is mutually exclusive with the {@code

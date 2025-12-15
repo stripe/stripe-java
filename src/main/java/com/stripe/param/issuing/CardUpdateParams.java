@@ -32,7 +32,7 @@ public class CardUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -53,7 +53,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
   /**
    * Rules that control spending for this card. Refer to our <a
-   * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
+   * href="https://docs.stripe.com/issuing/controls/spending-controls">documentation</a> for more
    * details.
    */
   @SerializedName("spending_controls")
@@ -213,7 +213,7 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -224,7 +224,7 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+     * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
      * to an object. This can be useful for storing additional information about the object in a
      * structured format. Individual keys can be unset by posting an empty value to them. All keys
      * can be unset by posting an empty value to {@code metadata}.
@@ -258,7 +258,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
     /**
      * Rules that control spending for this card. Refer to our <a
-     * href="https://stripe.com/docs/issuing/controls/spending-controls">documentation</a> for more
+     * href="https://docs.stripe.com/issuing/controls/spending-controls">documentation</a> for more
      * details.
      */
     public Builder setSpendingControls(CardUpdateParams.SpendingControls spendingControls) {
@@ -582,7 +582,10 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       Object postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       Object state;
 
@@ -732,13 +735,19 @@ public class CardUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
@@ -960,7 +969,7 @@ public class CardUpdateParams extends ApiRequestParams {
   public static class SpendingControls {
     /**
      * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to allow. All other categories will be blocked. Cannot be set with {@code
      * blocked_categories}.
      */
@@ -978,7 +987,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
     /**
      * Array of strings containing <a
-     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+     * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to decline. All other categories will be allowed. Cannot be set with {@code
      * allowed_categories}.
      */
@@ -1226,7 +1235,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
       /**
        * Array of strings containing <a
-       * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
+       * href="https://docs.stripe.com/api#issuing_authorization_object-merchant_data-category">categories</a>
        * this limit applies to. Omitting this field will apply the limit to all categories.
        */
       @SerializedName("categories")

@@ -21,6 +21,10 @@ public class SessionListParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /** Only return the Checkout Sessions for the Account specified. */
+  @SerializedName("customer_account")
+  String customerAccount;
+
   /** Only return the Checkout Sessions for the Customer details specified. */
   @SerializedName("customer_details")
   CustomerDetails customerDetails;
@@ -82,6 +86,7 @@ public class SessionListParams extends ApiRequestParams {
   private SessionListParams(
       Object created,
       String customer,
+      String customerAccount,
       CustomerDetails customerDetails,
       String endingBefore,
       List<String> expand,
@@ -94,6 +99,7 @@ public class SessionListParams extends ApiRequestParams {
       String subscription) {
     this.created = created;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.customerDetails = customerDetails;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -114,6 +120,8 @@ public class SessionListParams extends ApiRequestParams {
     private Object created;
 
     private String customer;
+
+    private String customerAccount;
 
     private CustomerDetails customerDetails;
 
@@ -140,6 +148,7 @@ public class SessionListParams extends ApiRequestParams {
       return new SessionListParams(
           this.created,
           this.customer,
+          this.customerAccount,
           this.customerDetails,
           this.endingBefore,
           this.expand,
@@ -167,6 +176,12 @@ public class SessionListParams extends ApiRequestParams {
     /** Only return the Checkout Sessions for the Customer specified. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /** Only return the Checkout Sessions for the Account specified. */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

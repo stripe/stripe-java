@@ -119,7 +119,7 @@ public class SourceCreateParams extends ApiRequestParams {
   /**
    * The {@code type} of the source to create. Required unless {@code customer} and {@code
    * original_source} are specified (see the <a
-   * href="https://stripe.com/docs/sources/connect#cloning-card-sources">Cloning card Sources</a>
+   * href="https://docs.stripe.com/sources/connect#cloning-card-sources">Cloning card Sources</a>
    * guide)
    */
   @SerializedName("type")
@@ -417,7 +417,7 @@ public class SourceCreateParams extends ApiRequestParams {
     /**
      * The {@code type} of the source to create. Required unless {@code customer} and {@code
      * original_source} are specified (see the <a
-     * href="https://stripe.com/docs/sources/connect#cloning-card-sources">Cloning card Sources</a>
+     * href="https://docs.stripe.com/sources/connect#cloning-card-sources">Cloning card Sources</a>
      * guide)
      */
     public Builder setType(String type) {
@@ -1208,7 +1208,10 @@ public class SourceCreateParams extends ApiRequestParams {
       @SerializedName("postal_code")
       String postalCode;
 
-      /** State, county, province, or region. */
+      /**
+       * State, county, province, or region (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
+       * 3166-2</a>).
+       */
       @SerializedName("state")
       String state;
 
@@ -1321,7 +1324,10 @@ public class SourceCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         public Builder setState(String state) {
           this.state = state;
           return this;
@@ -1965,7 +1971,10 @@ public class SourceCreateParams extends ApiRequestParams {
         @SerializedName("postal_code")
         String postalCode;
 
-        /** State, county, province, or region. */
+        /**
+         * State, county, province, or region (<a
+         * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+         */
         @SerializedName("state")
         String state;
 
@@ -2080,7 +2089,10 @@ public class SourceCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /** State, county, province, or region. */
+          /**
+           * State, county, province, or region (<a
+           * href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a>).
+           */
           public Builder setState(String state) {
             this.state = state;
             return this;

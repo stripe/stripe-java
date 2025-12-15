@@ -25,7 +25,7 @@ import lombok.Setter;
  * shown.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/payments/payment-methods/pmd-registration">Payment method
+ * href="https://docs.stripe.com/payments/payment-methods/pmd-registration">Payment method
  * domains</a>.
  */
 @Getter

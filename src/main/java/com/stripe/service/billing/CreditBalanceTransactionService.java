@@ -26,6 +26,15 @@ public final class CreditBalanceTransactionService extends ApiService {
     return list(params, (RequestOptions) null);
   }
   /** Retrieve a list of credit balance transactions. */
+  public StripeCollection<CreditBalanceTransaction> list(RequestOptions options)
+      throws StripeException {
+    return list((CreditBalanceTransactionListParams) null, options);
+  }
+  /** Retrieve a list of credit balance transactions. */
+  public StripeCollection<CreditBalanceTransaction> list() throws StripeException {
+    return list((CreditBalanceTransactionListParams) null, (RequestOptions) null);
+  }
+  /** Retrieve a list of credit balance transactions. */
   public StripeCollection<CreditBalanceTransaction> list(
       CreditBalanceTransactionListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/billing/credit_balance_transactions";

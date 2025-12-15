@@ -35,7 +35,7 @@ import lombok.Setter;
  * might have different permissions.
  *
  * <p>Related guide: <a
- * href="https://stripe.com/docs/stripe-apps/store-auth-data-custom-objects">Store data between page
+ * href="https://docs.stripe.com/stripe-apps/store-auth-data-custom-objects">Store data between page
  * reloads</a>
  */
 @Getter

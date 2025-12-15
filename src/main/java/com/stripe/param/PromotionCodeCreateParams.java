@@ -28,11 +28,18 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   String code;
 
   /**
-   * The customer that this promotion code can be used by. If not set, the promotion code can be
-   * used by all customers.
+   * The customer who can use this promotion code. If not set, all customers can use the promotion
+   * code.
    */
   @SerializedName("customer")
   String customer;
+
+  /**
+   * The account representing the customer who can use this promotion code. If not set, all
+   * customers can use the promotion code.
+   */
+  @SerializedName("customer_account")
+  String customerAccount;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -63,7 +70,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
   Long maxRedemptions;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
    * be unset by posting an empty value to {@code metadata}.
@@ -83,6 +90,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
       Boolean active,
       String code,
       String customer,
+      String customerAccount,
       List<String> expand,
       Long expiresAt,
       Map<String, Object> extraParams,
@@ -93,6 +101,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     this.active = active;
     this.code = code;
     this.customer = customer;
+    this.customerAccount = customerAccount;
     this.expand = expand;
     this.expiresAt = expiresAt;
     this.extraParams = extraParams;
@@ -112,6 +121,8 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     private String code;
 
     private String customer;
+
+    private String customerAccount;
 
     private List<String> expand;
 
@@ -133,6 +144,7 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
           this.active,
           this.code,
           this.customer,
+          this.customerAccount,
           this.expand,
           this.expiresAt,
           this.extraParams,
@@ -161,11 +173,20 @@ public class PromotionCodeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The customer that this promotion code can be used by. If not set, the promotion code can be
-     * used by all customers.
+     * The customer who can use this promotion code. If not set, all customers can use the promotion
+     * code.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * The account representing the customer who can use this promotion code. If not set, all
+     * customers can use the promotion code.
+     */
+    public Builder setCustomerAccount(String customerAccount) {
+      this.customerAccount = customerAccount;
       return this;
     }
 

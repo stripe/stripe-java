@@ -110,7 +110,7 @@ public class BankAccount extends ApiResource
 
   /**
    * Information about the <a
-   * href="https://stripe.com/docs/connect/custom-accounts/future-requirements">upcoming new
+   * href="https://docs.stripe.com/connect/custom-accounts/future-requirements">upcoming new
    * requirements for the bank account</a>, including what information needs to be collected, and by
    * when.
    */
@@ -127,7 +127,7 @@ public class BankAccount extends ApiResource
   String last4;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
@@ -514,33 +514,33 @@ public class BankAccount extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class FutureRequirements extends StripeObject {
     /**
-     * Fields that need to be collected to keep the external account enabled. If not collected by
-     * {@code current_deadline}, these fields appear in {@code past_due} as well, and the account is
-     * disabled.
+     * Fields that need to be resolved to keep the external account enabled. If not resolved by
+     * {@code current_deadline}, these fields will appear in {@code past_due} as well, and the
+     * account is disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
-     * Fields that are {@code currently_due} and need to be collected again because validation or
-     * verification failed.
+     * Details about validation and verification failures for {@code due} requirements that must be
+     * resolved.
      */
     @SerializedName("errors")
     List<BankAccount.FutureRequirements.Errors> errors;
 
     /**
-     * Fields that weren't collected by {@code current_deadline}. These fields need to be collected
-     * to enable the external account.
+     * Fields that haven't been resolved by {@code current_deadline}. These fields need to be
+     * resolved to enable the external account.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that might become required depending on the results of verification or review. It's an
-     * empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}. Fields
-     * might appear in {@code eventually_due}, {@code currently_due}, or {@code past_due} and in
-     * {@code pending_verification} if verification fails but another verification is still pending.
+     * Fields that are being reviewed, or might become required depending on the results of a
+     * review. If the review fails, these fields can move to {@code eventually_due}, {@code
+     * currently_due}, {@code past_due} or {@code alternatives}. Fields might appear in {@code
+     * eventually_due}, {@code currently_due}, {@code past_due} or {@code alternatives} and in
+     * {@code pending_verification} if one verification fails but another is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -643,33 +643,33 @@ public class BankAccount extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * Fields that need to be collected to keep the external account enabled. If not collected by
-     * {@code current_deadline}, these fields appear in {@code past_due} as well, and the account is
-     * disabled.
+     * Fields that need to be resolved to keep the external account enabled. If not resolved by
+     * {@code current_deadline}, these fields will appear in {@code past_due} as well, and the
+     * account is disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
-     * Fields that are {@code currently_due} and need to be collected again because validation or
-     * verification failed.
+     * Details about validation and verification failures for {@code due} requirements that must be
+     * resolved.
      */
     @SerializedName("errors")
     List<BankAccount.Requirements.Errors> errors;
 
     /**
-     * Fields that weren't collected by {@code current_deadline}. These fields need to be collected
-     * to enable the external account.
+     * Fields that haven't been resolved by {@code current_deadline}. These fields need to be
+     * resolved to enable the external account.
      */
     @SerializedName("past_due")
     List<String> pastDue;
 
     /**
-     * Fields that might become required depending on the results of verification or review. It's an
-     * empty array unless an asynchronous verification is pending. If verification fails, these
-     * fields move to {@code eventually_due}, {@code currently_due}, or {@code past_due}. Fields
-     * might appear in {@code eventually_due}, {@code currently_due}, or {@code past_due} and in
-     * {@code pending_verification} if verification fails but another verification is still pending.
+     * Fields that are being reviewed, or might become required depending on the results of a
+     * review. If the review fails, these fields can move to {@code eventually_due}, {@code
+     * currently_due}, {@code past_due} or {@code alternatives}. Fields might appear in {@code
+     * eventually_due}, {@code currently_due}, {@code past_due} or {@code alternatives} and in
+     * {@code pending_verification} if one verification fails but another is still pending.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;

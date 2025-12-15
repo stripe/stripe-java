@@ -128,7 +128,7 @@ public class CustomerCashBalanceUpdateParams extends ApiRequestParams {
      * Controls how funds transferred by the customer are applied to payment intents and invoices.
      * Valid options are {@code automatic}, {@code manual}, or {@code merchant_default}. For more
      * information about these reconciliation modes, see <a
-     * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
+     * href="https://docs.stripe.com/payments/customer-balance/reconciliation">Reconciliation</a>.
      */
     @SerializedName("reconciliation_mode")
     ReconciliationMode reconciliationMode;
@@ -184,7 +184,7 @@ public class CustomerCashBalanceUpdateParams extends ApiRequestParams {
        * Controls how funds transferred by the customer are applied to payment intents and invoices.
        * Valid options are {@code automatic}, {@code manual}, or {@code merchant_default}. For more
        * information about these reconciliation modes, see <a
-       * href="https://stripe.com/docs/payments/customer-balance/reconciliation">Reconciliation</a>.
+       * href="https://docs.stripe.com/payments/customer-balance/reconciliation">Reconciliation</a>.
        */
       public Builder setReconciliationMode(
           CustomerCashBalanceUpdateParams.Settings.ReconciliationMode reconciliationMode) {

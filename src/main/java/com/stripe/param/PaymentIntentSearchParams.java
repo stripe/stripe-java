@@ -43,9 +43,9 @@ public class PaymentIntentSearchParams extends ApiRequestParams {
 
   /**
    * <strong>Required.</strong> The search query string. See <a
-   * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
+   * href="https://docs.stripe.com/search#search-query-language">search query language</a> and the
    * list of supported <a
-   * href="https://stripe.com/docs/search#query-fields-for-payment-intents">query fields for payment
+   * href="https://docs.stripe.com/search#query-fields-for-payment-intents">query fields for payment
    * intents</a>.
    */
   @SerializedName("query")
@@ -154,9 +154,9 @@ public class PaymentIntentSearchParams extends ApiRequestParams {
 
     /**
      * <strong>Required.</strong> The search query string. See <a
-     * href="https://stripe.com/docs/search#search-query-language">search query language</a> and the
+     * href="https://docs.stripe.com/search#search-query-language">search query language</a> and the
      * list of supported <a
-     * href="https://stripe.com/docs/search#query-fields-for-payment-intents">query fields for
+     * href="https://docs.stripe.com/search#query-fields-for-payment-intents">query fields for
      * payment intents</a>.
      */
     public Builder setQuery(String query) {

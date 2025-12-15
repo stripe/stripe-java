@@ -23,12 +23,12 @@ import lombok.Setter;
 /**
  * A coupon contains information about a percent-off or amount-off discount you might want to apply
  * to a customer. Coupons may be applied to <a
- * href="https://stripe.com/docs/api#subscriptions">subscriptions</a>, <a
- * href="https://stripe.com/docs/api#invoices">invoices</a>, <a
- * href="https://stripe.com/docs/api/checkout/sessions">checkout sessions</a>, <a
- * href="https://stripe.com/docs/api#quotes">quotes</a>, and more. Coupons do not work with
- * conventional one-off <a href="https://stripe.com/docs/api#create_charge">charges</a> or <a
- * href="https://stripe.com/docs/api/payment_intents">payment intents</a>.
+ * href="https://api.stripe.com#subscriptions">subscriptions</a>, <a
+ * href="https://api.stripe.com#invoices">invoices</a>, <a
+ * href="https://docs.stripe.com/api/checkout/sessions">checkout sessions</a>, <a
+ * href="https://api.stripe.com#quotes">quotes</a>, and more. Coupons do not work with conventional
+ * one-off <a href="https://api.stripe.com#create_charge">charges</a> or <a
+ * href="https://docs.stripe.com/api/payment_intents">payment intents</a>.
  */
 @Getter
 @Setter
@@ -102,7 +102,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   Long maxRedemptions;
 
   /**
-   * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
+   * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format.
    */
