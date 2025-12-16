@@ -4,6 +4,7 @@
 This release changes the pinned API version to `2025-12-15.preview`.
 
 * [#2104](https://github.com/stripe/stripe-java/pull/2104) Add EventNotificationHandler
+  * This is a new, simplified way to handle event notifications (AKA thin event webhooks). Learn more in the docs: https://docs.stripe.com/webhooks/event-notification-handlers
 * [#2117](https://github.com/stripe/stripe-java/pull/2117) Update generated code for beta
   * Add support for new resources `reserve.Hold`, `reserve.Plan`, and `reserve.Release`
   * Add support for `list` and `retrieve` methods on resources `reserve.Hold` and `reserve.Release`
