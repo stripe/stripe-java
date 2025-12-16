@@ -49,6 +49,7 @@ import com.stripe.events.V2MoneyManagementOutboundTransferFailedEventNotificatio
 import com.stripe.events.V2MoneyManagementOutboundTransferPostedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferReturnedEventNotification;
 import com.stripe.events.V2MoneyManagementOutboundTransferUpdatedEventNotification;
+import com.stripe.events.V2MoneyManagementPayoutMethodCreatedEventNotification;
 import com.stripe.events.V2MoneyManagementPayoutMethodUpdatedEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedCreditAvailableEventNotification;
 import com.stripe.events.V2MoneyManagementReceivedCreditFailedEventNotification;
@@ -458,6 +459,12 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2MoneyManagementOutboundTransferUpdated(
       Callback<V2MoneyManagementOutboundTransferUpdatedEventNotification> callback) {
     this.register("v2.money_management.outbound_transfer.updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2MoneyManagementPayoutMethodCreated(
+      Callback<V2MoneyManagementPayoutMethodCreatedEventNotification> callback) {
+    this.register("v2.money_management.payout_method.created", callback);
     return this;
   }
 
