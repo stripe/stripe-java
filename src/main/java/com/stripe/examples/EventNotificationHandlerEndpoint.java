@@ -10,6 +10,7 @@ import com.stripe.model.v2.core.EventNotification;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
@@ -69,11 +70,25 @@ public class EventNotificationHandlerEndpoint {
   }
 
   static class WebhookHandler implements HttpHandler {
+    // For Java 1.8 compatibility
+    public static byte[] readAllBytes(InputStream inputStream) throws IOException {
+      final int bufLen = 1024;
+      byte[] buf = new byte[bufLen];
+      int readLen;
+
+      ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+      while ((readLen = inputStream.read(buf, 0, bufLen)) != -1)
+        outputStream.write(buf, 0, readLen);
+
+      return outputStream.toByteArray();
+    }
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
       if ("POST".equals(exchange.getRequestMethod())) {
         InputStream requestBody = exchange.getRequestBody();
-        String webhookBody = new String(requestBody.readAllBytes(), StandardCharsets.UTF_8);
+        String webhookBody = new String(readAllBytes(requestBody), StandardCharsets.UTF_8);
         String sigHeader = exchange.getRequestHeaders().getFirst("Stripe-Signature");
 
         try {
