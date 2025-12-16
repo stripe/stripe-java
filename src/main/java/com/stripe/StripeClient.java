@@ -8,6 +8,7 @@ import com.stripe.net.*;
 import com.stripe.net.Webhook.Signature;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
+import lombok.Builder;
 import lombok.Getter;
 
 /**
@@ -39,6 +40,62 @@ public class StripeClient {
 
   protected StripeResponseGetter getResponseGetter() {
     return responseGetter;
+  }
+
+  /** Gets the current StripeContext from the client's configuration. Used in unit testing. */
+  protected String getContext() {
+    // TODO(major): add getOptions to the StripeResponseGetter interface? that would simplify this
+    if (!(responseGetter instanceof LiveStripeResponseGetter)) {
+      return null;
+    }
+
+    LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
+    StripeResponseGetterOptions options = liveGetter.getOptions();
+
+    return options.getStripeContext();
+  }
+
+  /**
+   * Creates a new StripeClient with the same configuration as this client but with a custom
+   * StripeContext. This method is useful for creating thread-safe clients with different contexts,
+   * such as when processing webhooks in parallel where each webhook has its own context.
+   *
+   * <p>The new client will share the same configuration (API key, timeouts, proxy settings, etc.)
+   * and HTTP client as this client, but will have the specified context. This allows for efficient
+   * parallel processing without reinitializing HTTP connections.
+   *
+   * @param context the custom stripe_context to use for the new client
+   * @return a new StripeClient with the custom context
+   * @throws IllegalStateException if this client doesn't use a LiveStripeResponseGetter
+   */
+  public StripeClient withStripeContext(StripeContext context) {
+    // Convert StripeContext to String
+    String contextString = (context == null) ? null : context.toString();
+
+    StripeResponseGetter responseGetter = this.getResponseGetter();
+
+    // We can only create a new client for LiveStripeResponseGetter because it's the only class with
+    // `getOptions()`. If we add that method to the interface in a later major, we could remove this
+    // check.
+    if (!(responseGetter instanceof LiveStripeResponseGetter)) {
+      throw new IllegalStateException(
+          "Cannot create a client with custom context for non-Live response getters");
+    }
+
+    LiveStripeResponseGetter liveGetter = (LiveStripeResponseGetter) responseGetter;
+
+    // Create a new LiveStripeResponseGetter with updated context, reusing the HTTP client
+    LiveStripeResponseGetter newResponseGetter =
+        liveGetter.withNewOptions(
+            options -> {
+              ClientStripeResponseGetterOptions existingOptions =
+                  (ClientStripeResponseGetterOptions) options;
+
+              return existingOptions.toBuilder().stripeContext(contextString).build();
+            });
+
+    // Create and return a new StripeClient with the new response getter
+    return new StripeClient(newResponseGetter);
   }
 
   /**
@@ -1044,6 +1101,8 @@ public class StripeClient {
   }
 
   // The end of the section generated from our OpenAPI spec
+  @SuppressWarnings("ObjectToString")
+  @Builder(toBuilder = true)
   static class ClientStripeResponseGetterOptions extends StripeResponseGetterOptions {
     // When adding setting here keep them in sync with settings in RequestOptions and
     // in the RequestOptions.merge method
@@ -1422,5 +1481,10 @@ public class StripeClient {
   /** Deserializes StripeResponse returned by rawRequest into a similar class. */
   public StripeObject deserialize(String rawJson, ApiMode apiMode) throws StripeException {
     return StripeObject.deserializeStripeObject(rawJson, this.getResponseGetter(), apiMode);
+  }
+
+  public StripeEventNotificationHandler notificationHandler(
+      String webhookSecret, StripeEventNotificationHandler.FallbackCallback fallbackCallback) {
+    return new StripeEventNotificationHandler(webhookSecret, this, fallbackCallback);
   }
 }
