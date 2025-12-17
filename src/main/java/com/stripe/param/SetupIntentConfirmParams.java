@@ -12143,9 +12143,9 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       /** French meal voucher benefit details for this SetupIntent. */
       @SerializedName("fr_meal_voucher")
-      FrMealVoucher frMealVoucher;
+      Object frMealVoucher;
 
-      private Benefit(Map<String, Object> extraParams, FrMealVoucher frMealVoucher) {
+      private Benefit(Map<String, Object> extraParams, Object frMealVoucher) {
         this.extraParams = extraParams;
         this.frMealVoucher = frMealVoucher;
       }
@@ -12157,7 +12157,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private FrMealVoucher frMealVoucher;
+        private Object frMealVoucher;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SetupIntentConfirmParams.SetupDetails.Benefit build() {
@@ -12196,6 +12196,12 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
         /** French meal voucher benefit details for this SetupIntent. */
         public Builder setFrMealVoucher(
             SetupIntentConfirmParams.SetupDetails.Benefit.FrMealVoucher frMealVoucher) {
+          this.frMealVoucher = frMealVoucher;
+          return this;
+        }
+
+        /** French meal voucher benefit details for this SetupIntent. */
+        public Builder setFrMealVoucher(EmptyParam frMealVoucher) {
           this.frMealVoucher = frMealVoucher;
           return this;
         }
