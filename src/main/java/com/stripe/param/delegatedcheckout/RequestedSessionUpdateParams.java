@@ -37,7 +37,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
   /** The metadata for this requested session. */
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   /** The payment method for this requested session. */
   @SerializedName("payment_method")
@@ -45,21 +45,21 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
   /** The payment method data for this requested session. */
   @SerializedName("payment_method_data")
-  PaymentMethodData paymentMethodData;
+  Object paymentMethodData;
 
   /** The shared metadata for this requested session. */
   @SerializedName("shared_metadata")
-  Map<String, String> sharedMetadata;
+  Object sharedMetadata;
 
   private RequestedSessionUpdateParams(
       List<String> expand,
       Map<String, Object> extraParams,
       FulfillmentDetails fulfillmentDetails,
       List<RequestedSessionUpdateParams.LineItemDetail> lineItemDetails,
-      Map<String, String> metadata,
+      Object metadata,
       Object paymentMethod,
-      PaymentMethodData paymentMethodData,
-      Map<String, String> sharedMetadata) {
+      Object paymentMethodData,
+      Object sharedMetadata) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.fulfillmentDetails = fulfillmentDetails;
@@ -83,13 +83,13 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
 
     private List<RequestedSessionUpdateParams.LineItemDetail> lineItemDetails;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     private Object paymentMethod;
 
-    private PaymentMethodData paymentMethodData;
+    private Object paymentMethodData;
 
-    private Map<String, String> sharedMetadata;
+    private Object sharedMetadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public RequestedSessionUpdateParams build() {
@@ -195,11 +195,12 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * RequestedSessionUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -208,11 +209,24 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link RequestedSessionUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /** The metadata for this requested session. */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /** The metadata for this requested session. */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 
@@ -235,16 +249,23 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The payment method data for this requested session. */
+    public Builder setPaymentMethodData(EmptyParam paymentMethodData) {
+      this.paymentMethodData = paymentMethodData;
+      return this;
+    }
+
     /**
      * Add a key/value pair to `sharedMetadata` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
      * RequestedSessionUpdateParams#sharedMetadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putSharedMetadata(String key, String value) {
-      if (this.sharedMetadata == null) {
-        this.sharedMetadata = new HashMap<>();
+      if (this.sharedMetadata == null || this.sharedMetadata instanceof EmptyParam) {
+        this.sharedMetadata = new HashMap<String, String>();
       }
-      this.sharedMetadata.put(key, value);
+      ((Map<String, String>) this.sharedMetadata).put(key, value);
       return this;
     }
 
@@ -253,11 +274,24 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link RequestedSessionUpdateParams#sharedMetadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllSharedMetadata(Map<String, String> map) {
-      if (this.sharedMetadata == null) {
-        this.sharedMetadata = new HashMap<>();
+      if (this.sharedMetadata == null || this.sharedMetadata instanceof EmptyParam) {
+        this.sharedMetadata = new HashMap<String, String>();
       }
-      this.sharedMetadata.putAll(map);
+      ((Map<String, String>) this.sharedMetadata).putAll(map);
+      return this;
+    }
+
+    /** The shared metadata for this requested session. */
+    public Builder setSharedMetadata(EmptyParam sharedMetadata) {
+      this.sharedMetadata = sharedMetadata;
+      return this;
+    }
+
+    /** The shared metadata for this requested session. */
+    public Builder setSharedMetadata(Map<String, String> sharedMetadata) {
+      this.sharedMetadata = sharedMetadata;
       return this;
     }
   }

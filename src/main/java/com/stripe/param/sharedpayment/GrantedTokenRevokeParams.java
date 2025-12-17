@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class GrantedTokenUpdateParams extends ApiRequestParams {
+public class GrantedTokenRevokeParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -26,7 +26,7 @@ public class GrantedTokenUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private GrantedTokenUpdateParams(List<String> expand, Map<String, Object> extraParams) {
+  private GrantedTokenRevokeParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
   }
@@ -41,14 +41,14 @@ public class GrantedTokenUpdateParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public GrantedTokenUpdateParams build() {
-      return new GrantedTokenUpdateParams(this.expand, this.extraParams);
+    public GrantedTokenRevokeParams build() {
+      return new GrantedTokenRevokeParams(this.expand, this.extraParams);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * GrantedTokenUpdateParams#expand} for the field documentation.
+     * GrantedTokenRevokeParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -61,7 +61,7 @@ public class GrantedTokenUpdateParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * GrantedTokenUpdateParams#expand} for the field documentation.
+     * GrantedTokenRevokeParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -74,7 +74,7 @@ public class GrantedTokenUpdateParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * GrantedTokenUpdateParams#extraParams} for the field documentation.
+     * GrantedTokenRevokeParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -87,7 +87,7 @@ public class GrantedTokenUpdateParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link GrantedTokenUpdateParams#extraParams} for the field documentation.
+     * See {@link GrantedTokenRevokeParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
