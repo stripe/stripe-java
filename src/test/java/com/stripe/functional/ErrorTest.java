@@ -24,7 +24,8 @@ public class ErrorTest extends BaseStripeTest {
   // ==================== V1 Error Tests ====================
 
   @Test
-  public void testV1Error400InvalidRequest() throws StripeException, IOException, InterruptedException {
+  public void testV1Error400InvalidRequest()
+      throws StripeException, IOException, InterruptedException {
     InvalidRequestException exception = null;
     Mockito.doAnswer(
             (Answer<StripeResponse>)
@@ -127,8 +128,7 @@ public class ErrorTest extends BaseStripeTest {
   }
 
   @Test
-  public void testV1Error403Permission()
-      throws StripeException, IOException, InterruptedException {
+  public void testV1Error403Permission() throws StripeException, IOException, InterruptedException {
     PermissionException exception = null;
     Mockito.doAnswer(
             (Answer<StripeResponse>)
@@ -177,8 +177,7 @@ public class ErrorTest extends BaseStripeTest {
   }
 
   @Test
-  public void testV1Error429RateLimit()
-      throws StripeException, IOException, InterruptedException {
+  public void testV1Error429RateLimit() throws StripeException, IOException, InterruptedException {
     RateLimitException exception = null;
     Mockito.doAnswer(
             (Answer<StripeResponse>)
@@ -279,7 +278,10 @@ public class ErrorTest extends BaseStripeTest {
     assertInstanceOf(ApiException.class, exception);
     assertNull(exception.getStripeError());
     assertNull(exception.getUserMessage());
-    assertTrue(exception.getMessage().contains("Invalid response object from API: {}. (HTTP response code was 404)"));
+    assertTrue(
+        exception
+            .getMessage()
+            .contains("Invalid response object from API: {}. (HTTP response code was 404)"));
   }
 
   @Test
@@ -374,8 +376,7 @@ public class ErrorTest extends BaseStripeTest {
   }
 
   @Test
-  public void testV2Error402CardError()
-      throws StripeException, IOException, InterruptedException {
+  public void testV2Error402CardError() throws StripeException, IOException, InterruptedException {
     CardException exception = null;
     @Cleanup MockWebServer server = new MockWebServer();
     Mockito.doAnswer(
@@ -405,8 +406,7 @@ public class ErrorTest extends BaseStripeTest {
   }
 
   @Test
-  public void testV2Error403Permission()
-      throws StripeException, IOException, InterruptedException {
+  public void testV2Error403Permission() throws StripeException, IOException, InterruptedException {
     PermissionException exception = null;
     @Cleanup MockWebServer server = new MockWebServer();
     Mockito.doAnswer(
@@ -434,8 +434,7 @@ public class ErrorTest extends BaseStripeTest {
   }
 
   @Test
-  public void testV2Error429RateLimit()
-      throws StripeException, IOException, InterruptedException {
+  public void testV2Error429RateLimit() throws StripeException, IOException, InterruptedException {
     RateLimitException exception = null;
     @Cleanup MockWebServer server = new MockWebServer();
     Mockito.doAnswer(
@@ -463,8 +462,7 @@ public class ErrorTest extends BaseStripeTest {
   }
 
   @Test
-  public void testV2Error500ApiError()
-      throws StripeException, IOException, InterruptedException {
+  public void testV2Error500ApiError() throws StripeException, IOException, InterruptedException {
     ApiException exception = null;
     @Cleanup MockWebServer server = new MockWebServer();
     Mockito.doAnswer(
