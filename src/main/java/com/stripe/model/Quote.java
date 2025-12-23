@@ -2027,14 +2027,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     Map<String, String> metadata;
 
     /**
-     * Configures how the quote handles billing for line transitions. Possible values are {@code
-     * line_start} (default) or {@code billing_period_start}. {@code line_start} bills based on the
-     * current state of the line, ignoring changes scheduled for future lines. {@code
-     * billing_period_start} bills predictively for upcoming line transitions within the current
-     * billing cycle, including pricing changes and service period adjustments that will occur
-     * before the next invoice.
+     * Configures how the subscription schedule handles billing for phase transitions when the quote
+     * is accepted.
      *
-     * <p>One of {@code billing_period_start}, or {@code line_start}.
+     * <p>One of {@code billing_period_start}, or {@code phase_start}.
      */
     @SerializedName("phase_effective_at")
     String phaseEffectiveAt;
@@ -2494,14 +2490,10 @@ public class Quote extends ApiResource implements HasId, MetadataStore<Quote> {
     String endBehavior;
 
     /**
-     * Configures how the quote handles billing for line transitions. Possible values are {@code
-     * line_start} (default) or {@code billing_period_start}. {@code line_start} bills based on the
-     * current state of the line, ignoring changes scheduled for future lines. {@code
-     * billing_period_start} bills predictively for upcoming line transitions within the current
-     * billing cycle, including pricing changes and service period adjustments that will occur
-     * before the next invoice.
+     * Configures how the subscription schedule handles billing for phase transitions when the quote
+     * is accepted.
      *
-     * <p>One of {@code billing_period_start}, or {@code line_start}.
+     * <p>One of {@code billing_period_start}, or {@code phase_start}.
      */
     @SerializedName("phase_effective_at")
     String phaseEffectiveAt;

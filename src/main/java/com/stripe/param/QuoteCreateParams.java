@@ -1640,14 +1640,7 @@ public class QuoteCreateParams extends ApiRequestParams {
     @SerializedName("cancel_subscription_schedule")
     CancelSubscriptionSchedule cancelSubscriptionSchedule;
 
-    /**
-     * Configures how the subscription schedule handles billing for phase transitions. Possible
-     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
-     * bills based on the current state of the subscription, ignoring changes scheduled in future
-     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
-     * the current billing cycle, including pricing changes and service period adjustments that will
-     * occur before the next invoice.
-     */
+    /** Configures how the quote handles billing for line transitions. */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
 
@@ -1830,14 +1823,7 @@ public class QuoteCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configures how the subscription schedule handles billing for phase transitions. Possible
-       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
-       * phase_start} bills based on the current state of the subscription, ignoring changes
-       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
-       * phase transitions within the current billing cycle, including pricing changes and service
-       * period adjustments that will occur before the next invoice.
-       */
+      /** Configures how the quote handles billing for line transitions. */
       public Builder setEffectiveAt(QuoteCreateParams.Line.EffectiveAt effectiveAt) {
         this.effectiveAt = effectiveAt;
         return this;
@@ -6615,11 +6601,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * Configures how the subscription schedule handles billing for phase transitions when the quote
-     * is accepted. Possible values are {@code phase_start} (default) or {@code
-     * billing_period_start}. {@code phase_start} bills based on the current state of the
-     * subscription, ignoring changes scheduled in future phases. {@code billing_period_start} bills
-     * predictively for upcoming phase transitions within the current billing cycle, including
-     * pricing changes and service period adjustments that will occur before the next invoice.
+     * is accepted.
      */
     @SerializedName("phase_effective_at")
     PhaseEffectiveAt phaseEffectiveAt;
@@ -6938,12 +6920,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * Configures how the subscription schedule handles billing for phase transitions when the
-       * quote is accepted. Possible values are {@code phase_start} (default) or {@code
-       * billing_period_start}. {@code phase_start} bills based on the current state of the
-       * subscription, ignoring changes scheduled in future phases. {@code billing_period_start}
-       * bills predictively for upcoming phase transitions within the current billing cycle,
-       * including pricing changes and service period adjustments that will occur before the next
-       * invoice.
+       * quote is accepted.
        */
       public Builder setPhaseEffectiveAt(
           QuoteCreateParams.SubscriptionData.PhaseEffectiveAt phaseEffectiveAt) {
@@ -8891,8 +8868,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName("billing_period_start")
       BILLING_PERIOD_START("billing_period_start"),
 
-      @SerializedName("line_start")
-      LINE_START("line_start");
+      @SerializedName("phase_start")
+      PHASE_START("phase_start");
 
       @Getter(onMethod_ = {@Override})
       private final String value;
@@ -8982,11 +8959,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
     /**
      * Configures how the subscription schedule handles billing for phase transitions when the quote
-     * is accepted. Possible values are {@code phase_start} (default) or {@code
-     * billing_period_start}. {@code phase_start} bills based on the current state of the
-     * subscription, ignoring changes scheduled in future phases. {@code billing_period_start} bills
-     * predictively for upcoming phase transitions within the current billing cycle, including
-     * pricing changes and service period adjustments that will occur before the next invoice.
+     * is accepted.
      */
     @SerializedName("phase_effective_at")
     PhaseEffectiveAt phaseEffectiveAt;
@@ -9186,12 +9159,7 @@ public class QuoteCreateParams extends ApiRequestParams {
 
       /**
        * Configures how the subscription schedule handles billing for phase transitions when the
-       * quote is accepted. Possible values are {@code phase_start} (default) or {@code
-       * billing_period_start}. {@code phase_start} bills based on the current state of the
-       * subscription, ignoring changes scheduled in future phases. {@code billing_period_start}
-       * bills predictively for upcoming phase transitions within the current billing cycle,
-       * including pricing changes and service period adjustments that will occur before the next
-       * invoice.
+       * quote is accepted.
        */
       public Builder setPhaseEffectiveAt(
           QuoteCreateParams.SubscriptionDataOverride.PhaseEffectiveAt phaseEffectiveAt) {
@@ -10941,8 +10909,8 @@ public class QuoteCreateParams extends ApiRequestParams {
       @SerializedName("billing_period_start")
       BILLING_PERIOD_START("billing_period_start"),
 
-      @SerializedName("line_start")
-      LINE_START("line_start");
+      @SerializedName("phase_start")
+      PHASE_START("phase_start");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

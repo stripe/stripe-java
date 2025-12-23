@@ -11,7 +11,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.sharedpayment.GrantedTokenCreateParams;
-import com.stripe.param.sharedpayment.GrantedTokenUpdateParams;
+import com.stripe.param.sharedpayment.GrantedTokenRevokeParams;
 
 public final class GrantedTokenService extends ApiService {
   public GrantedTokenService(StripeResponseGetter responseGetter) {
@@ -45,32 +45,32 @@ public final class GrantedTokenService extends ApiService {
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken update(String sharedPaymentGrantedToken, GrantedTokenUpdateParams params)
+  public GrantedToken revoke(String sharedPaymentGrantedToken, GrantedTokenRevokeParams params)
       throws StripeException {
-    return update(sharedPaymentGrantedToken, params, (RequestOptions) null);
+    return revoke(sharedPaymentGrantedToken, params, (RequestOptions) null);
   }
   /**
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken update(String sharedPaymentGrantedToken, RequestOptions options)
+  public GrantedToken revoke(String sharedPaymentGrantedToken, RequestOptions options)
       throws StripeException {
-    return update(sharedPaymentGrantedToken, (GrantedTokenUpdateParams) null, options);
+    return revoke(sharedPaymentGrantedToken, (GrantedTokenRevokeParams) null, options);
   }
   /**
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken update(String sharedPaymentGrantedToken) throws StripeException {
-    return update(
-        sharedPaymentGrantedToken, (GrantedTokenUpdateParams) null, (RequestOptions) null);
+  public GrantedToken revoke(String sharedPaymentGrantedToken) throws StripeException {
+    return revoke(
+        sharedPaymentGrantedToken, (GrantedTokenRevokeParams) null, (RequestOptions) null);
   }
   /**
    * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
    * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
    */
-  public GrantedToken update(
-      String sharedPaymentGrantedToken, GrantedTokenUpdateParams params, RequestOptions options)
+  public GrantedToken revoke(
+      String sharedPaymentGrantedToken, GrantedTokenRevokeParams params, RequestOptions options)
       throws StripeException {
     String path =
         String.format(

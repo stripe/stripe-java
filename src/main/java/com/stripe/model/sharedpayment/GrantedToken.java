@@ -13,7 +13,7 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.sharedpayment.GrantedTokenCreateParams;
 import com.stripe.param.sharedpayment.GrantedTokenRetrieveParams;
-import com.stripe.param.sharedpayment.GrantedTokenUpdateParams;
+import com.stripe.param.sharedpayment.GrantedTokenRevokeParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -237,15 +237,31 @@ public class GrantedToken extends ApiResource implements HasId {
      * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
      * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
      */
-    public GrantedToken update(Map<String, Object> params) throws StripeException {
-      return update(params, (RequestOptions) null);
+    public GrantedToken revoke() throws StripeException {
+      return revoke((Map<String, Object>) null, (RequestOptions) null);
     }
 
     /**
      * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
      * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
      */
-    public GrantedToken update(Map<String, Object> params, RequestOptions options)
+    public GrantedToken revoke(RequestOptions options) throws StripeException {
+      return revoke((Map<String, Object>) null, options);
+    }
+
+    /**
+     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
+     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     */
+    public GrantedToken revoke(Map<String, Object> params) throws StripeException {
+      return revoke(params, (RequestOptions) null);
+    }
+
+    /**
+     * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
+     * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
+     */
+    public GrantedToken revoke(Map<String, Object> params, RequestOptions options)
         throws StripeException {
       String path =
           String.format(
@@ -260,15 +276,15 @@ public class GrantedToken extends ApiResource implements HasId {
      * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
      * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
      */
-    public GrantedToken update(GrantedTokenUpdateParams params) throws StripeException {
-      return update(params, (RequestOptions) null);
+    public GrantedToken revoke(GrantedTokenRevokeParams params) throws StripeException {
+      return revoke(params, (RequestOptions) null);
     }
 
     /**
      * Revokes a test SharedPaymentGrantedToken object. This endpoint is only available in test mode
      * and allows sellers to revoke SharedPaymentGrantedTokens for testing their integration
      */
-    public GrantedToken update(GrantedTokenUpdateParams params, RequestOptions options)
+    public GrantedToken revoke(GrantedTokenRevokeParams params, RequestOptions options)
         throws StripeException {
       String path =
           String.format(

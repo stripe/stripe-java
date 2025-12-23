@@ -8,6 +8,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
+import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.TaxCodeListParams;
 import com.stripe.param.TaxCodeRetrieveParams;
 import java.util.Map;
@@ -43,6 +44,14 @@ public class TaxCode extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /**
+   * An object that describes more information about the tax location required for this tax code.
+   * Some <a href="https://stripe.com/tax/tax-for-tickets/integration-guide#types-of-products">tax
+   * codes</a> require a tax location of type {@code performance} to calculate tax correctly.
+   */
+  @SerializedName("requirements")
+  Requirements requirements;
 
   /**
    * A list of <a href="https://stripe.com/docs/tax/tax-categories">all tax codes available</a> to
@@ -134,5 +143,29 @@ public class TaxCode extends ApiResource implements HasId {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, TaxCode.class);
+  }
+
+  /**
+   * For more details about Requirements, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Requirements extends StripeObject {
+    /**
+     * Describes whether a performance location is required for a successful tax calculation with a
+     * tax code.
+     *
+     * <p>One of {@code optional}, or {@code required}.
+     */
+    @SerializedName("performance_location")
+    String performanceLocation;
+  }
+
+  @Override
+  public void setResponseGetter(StripeResponseGetter responseGetter) {
+    super.setResponseGetter(responseGetter);
+    trySetResponseGetter(requirements, responseGetter);
   }
 }

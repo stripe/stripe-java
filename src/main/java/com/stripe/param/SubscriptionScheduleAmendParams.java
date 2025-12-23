@@ -266,14 +266,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
     @SerializedName("discount_actions")
     List<SubscriptionScheduleAmendParams.Amendment.DiscountAction> discountActions;
 
-    /**
-     * Configures how the subscription schedule handles billing for phase transitions. Possible
-     * values are {@code phase_start} (default) or {@code billing_period_start}. {@code phase_start}
-     * bills based on the current state of the subscription, ignoring changes scheduled in future
-     * phases. {@code billing_period_start} bills predictively for upcoming phase transitions within
-     * the current billing cycle, including pricing changes and service period adjustments that will
-     * occur before the next invoice.
-     */
+    /** Configures how the subscription schedule handles billing for phase transitions. */
     @SerializedName("effective_at")
     EffectiveAt effectiveAt;
 
@@ -497,14 +490,7 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Configures how the subscription schedule handles billing for phase transitions. Possible
-       * values are {@code phase_start} (default) or {@code billing_period_start}. {@code
-       * phase_start} bills based on the current state of the subscription, ignoring changes
-       * scheduled in future phases. {@code billing_period_start} bills predictively for upcoming
-       * phase transitions within the current billing cycle, including pricing changes and service
-       * period adjustments that will occur before the next invoice.
-       */
+      /** Configures how the subscription schedule handles billing for phase transitions. */
       public Builder setEffectiveAt(
           SubscriptionScheduleAmendParams.Amendment.EffectiveAt effectiveAt) {
         this.effectiveAt = effectiveAt;
