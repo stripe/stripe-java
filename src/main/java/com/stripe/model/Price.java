@@ -89,6 +89,13 @@ public class Price extends ApiResource implements HasId, MetadataStore<Price> {
   @SerializedName("deleted")
   Boolean deleted;
 
+  /**
+   * A custom identifier for this price, such as a SKU number or product code, that can be used to
+   * reference records from external systems.
+   */
+  @SerializedName("external_reference")
+  String externalReference;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
