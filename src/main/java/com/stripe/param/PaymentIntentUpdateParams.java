@@ -3421,9 +3421,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /** French meal voucher benefit details for this PaymentIntent. */
       @SerializedName("fr_meal_voucher")
-      FrMealVoucher frMealVoucher;
+      Object frMealVoucher;
 
-      private Benefit(Map<String, Object> extraParams, FrMealVoucher frMealVoucher) {
+      private Benefit(Map<String, Object> extraParams, Object frMealVoucher) {
         this.extraParams = extraParams;
         this.frMealVoucher = frMealVoucher;
       }
@@ -3435,7 +3435,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private FrMealVoucher frMealVoucher;
+        private Object frMealVoucher;
 
         /** Finalize and obtain parameter instance from this builder. */
         public PaymentIntentUpdateParams.PaymentDetails.Benefit build() {
@@ -3474,6 +3474,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** French meal voucher benefit details for this PaymentIntent. */
         public Builder setFrMealVoucher(
             PaymentIntentUpdateParams.PaymentDetails.Benefit.FrMealVoucher frMealVoucher) {
+          this.frMealVoucher = frMealVoucher;
+          return this;
+        }
+
+        /** French meal voucher benefit details for this PaymentIntent. */
+        public Builder setFrMealVoucher(EmptyParam frMealVoucher) {
           this.frMealVoucher = frMealVoucher;
           return this;
         }

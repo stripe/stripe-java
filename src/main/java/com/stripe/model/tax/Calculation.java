@@ -472,7 +472,7 @@ public class Calculation extends ApiResource implements HasId {
        * Indicates whether the jurisdiction was determined by the origin (merchant's address) or
        * destination (customer's address).
        *
-       * <p>One of {@code destination}, or {@code origin}.
+       * <p>One of {@code destination}, {@code origin}, or {@code performance}.
        */
       @SerializedName("sourcing")
       String sourcing;
@@ -565,10 +565,12 @@ public class Calculation extends ApiResource implements HasId {
         /**
          * The tax type, such as {@code vat} or {@code sales_tax}.
          *
-         * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-         * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
-         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, or {@code
-         * vat}.
+         * <p>One of {@code admissions_tax}, {@code amusement_tax}, {@code attendance_tax}, {@code
+         * communications_tax}, {@code entertainment_tax}, {@code gross_receipts_tax}, {@code gst},
+         * {@code hospitality_tax}, {@code hst}, {@code igst}, {@code jct}, {@code lease_tax},
+         * {@code luxury_tax}, {@code pst}, {@code qst}, {@code resort_tax}, {@code
+         * retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, {@code
+         * tourism_tax}, or {@code vat}.
          */
         @SerializedName("tax_type")
         String taxType;
@@ -666,9 +668,11 @@ public class Calculation extends ApiResource implements HasId {
       /**
        * The tax type, such as {@code vat} or {@code sales_tax}.
        *
-       * <p>One of {@code amusement_tax}, {@code communications_tax}, {@code gst}, {@code hst},
-       * {@code igst}, {@code jct}, {@code lease_tax}, {@code pst}, {@code qst}, {@code
-       * retail_delivery_fee}, {@code rst}, {@code sales_tax}, {@code service_tax}, or {@code vat}.
+       * <p>One of {@code admissions_tax}, {@code amusement_tax}, {@code attendance_tax}, {@code
+       * communications_tax}, {@code entertainment_tax}, {@code gross_receipts_tax}, {@code gst},
+       * {@code hospitality_tax}, {@code hst}, {@code igst}, {@code jct}, {@code lease_tax}, {@code
+       * luxury_tax}, {@code pst}, {@code qst}, {@code resort_tax}, {@code retail_delivery_fee},
+       * {@code rst}, {@code sales_tax}, {@code service_tax}, {@code tourism_tax}, or {@code vat}.
        */
       @SerializedName("tax_type")
       String taxType;

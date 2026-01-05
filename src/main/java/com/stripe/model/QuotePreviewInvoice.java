@@ -1250,6 +1250,31 @@ public class QuotePreviewInvoice extends ApiResource implements HasId {
       /** The schedule that generated this invoice. */
       @SerializedName("schedule")
       String schedule;
+
+      /** The subscription associated with this schedule. */
+      @SerializedName("subscription")
+      @Getter(lombok.AccessLevel.NONE)
+      @Setter(lombok.AccessLevel.NONE)
+      ExpandableField<Subscription> subscription;
+
+      /** Get ID of expandable {@code subscription} object. */
+      public String getSubscription() {
+        return (this.subscription != null) ? this.subscription.getId() : null;
+      }
+
+      public void setSubscription(String id) {
+        this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
+      }
+
+      /** Get expanded {@code subscription}. */
+      public Subscription getSubscriptionObject() {
+        return (this.subscription != null) ? this.subscription.getExpanded() : null;
+      }
+
+      public void setSubscriptionObject(Subscription expandableObject) {
+        this.subscription =
+            new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+      }
     }
 
     /**

@@ -2863,11 +2863,32 @@ public class Registration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Us extends StripeObject {
+      @SerializedName("admissions_tax")
+      AdmissionsTax admissionsTax;
+
+      @SerializedName("attendance_tax")
+      AttendanceTax attendanceTax;
+
+      @SerializedName("entertainment_tax")
+      EntertainmentTax entertainmentTax;
+
+      @SerializedName("gross_receipts_tax")
+      GrossReceiptsTax grossReceiptsTax;
+
+      @SerializedName("hospitality_tax")
+      HospitalityTax hospitalityTax;
+
       @SerializedName("local_amusement_tax")
       LocalAmusementTax localAmusementTax;
 
       @SerializedName("local_lease_tax")
       LocalLeaseTax localLeaseTax;
+
+      @SerializedName("luxury_tax")
+      LuxuryTax luxuryTax;
+
+      @SerializedName("resort_tax")
+      ResortTax resortTax;
 
       /**
        * Two-letter US state code (<a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO
@@ -2879,14 +2900,104 @@ public class Registration extends ApiResource implements HasId {
       @SerializedName("state_sales_tax")
       StateSalesTax stateSalesTax;
 
+      @SerializedName("tourism_tax")
+      TourismTax tourismTax;
+
       /**
        * Type of registration in the US.
        *
-       * <p>One of {@code local_amusement_tax}, {@code local_lease_tax}, {@code
-       * state_communications_tax}, {@code state_retail_delivery_fee}, or {@code state_sales_tax}.
+       * <p>One of {@code admissions_tax}, {@code attendance_tax}, {@code entertainment_tax}, {@code
+       * gross_receipts_tax}, {@code hospitality_tax}, {@code local_amusement_tax}, {@code
+       * local_lease_tax}, {@code luxury_tax}, {@code resort_tax}, {@code state_communications_tax},
+       * {@code state_retail_delivery_fee}, {@code state_sales_tax}, or {@code tourism_tax}.
        */
       @SerializedName("type")
       String type;
+
+      /**
+       * For more details about AdmissionsTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AdmissionsTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=admissions_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about AttendanceTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AttendanceTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=attendance_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about EntertainmentTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EntertainmentTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=entertainment_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about GrossReceiptsTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class GrossReceiptsTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=gross_receipts_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about HospitalityTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class HospitalityTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=hospitality_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
 
       /**
        * For more details about LocalAmusementTax, please refer to the <a
@@ -2915,6 +3026,40 @@ public class Registration extends ApiResource implements HasId {
         /**
          * A <a href="https://www.census.gov/library/reference/code-lists/ansi.html">FIPS code</a>
          * representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about LuxuryTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class LuxuryTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=luxury_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
+      }
+
+      /**
+       * For more details about ResortTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ResortTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=resort_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
          */
         @SerializedName("jurisdiction")
         String jurisdiction;
@@ -2956,6 +3101,23 @@ public class Registration extends ApiResource implements HasId {
           @SerializedName("type")
           String type;
         }
+      }
+
+      /**
+       * For more details about TourismTax, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class TourismTax extends StripeObject {
+        /**
+         * A <a
+         * href="https://docs.stripe.com/tax/registering?type=tourism_tax#registration-types">jurisdiction
+         * code</a> representing the local jurisdiction.
+         */
+        @SerializedName("jurisdiction")
+        String jurisdiction;
       }
     }
 

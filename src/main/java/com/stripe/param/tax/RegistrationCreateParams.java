@@ -16161,11 +16161,32 @@ public class RegistrationCreateParams extends ApiRequestParams {
       }
 
       public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("admissions_tax")
+        ADMISSIONS_TAX("admissions_tax"),
+
+        @SerializedName("attendance_tax")
+        ATTENDANCE_TAX("attendance_tax"),
+
+        @SerializedName("entertainment_tax")
+        ENTERTAINMENT_TAX("entertainment_tax"),
+
+        @SerializedName("gross_receipts_tax")
+        GROSS_RECEIPTS_TAX("gross_receipts_tax"),
+
+        @SerializedName("hospitality_tax")
+        HOSPITALITY_TAX("hospitality_tax"),
+
         @SerializedName("local_amusement_tax")
         LOCAL_AMUSEMENT_TAX("local_amusement_tax"),
 
         @SerializedName("local_lease_tax")
         LOCAL_LEASE_TAX("local_lease_tax"),
+
+        @SerializedName("luxury_tax")
+        LUXURY_TAX("luxury_tax"),
+
+        @SerializedName("resort_tax")
+        RESORT_TAX("resort_tax"),
 
         @SerializedName("state_communications_tax")
         STATE_COMMUNICATIONS_TAX("state_communications_tax"),
@@ -16174,7 +16195,10 @@ public class RegistrationCreateParams extends ApiRequestParams {
         STATE_RETAIL_DELIVERY_FEE("state_retail_delivery_fee"),
 
         @SerializedName("state_sales_tax")
-        STATE_SALES_TAX("state_sales_tax");
+        STATE_SALES_TAX("state_sales_tax"),
+
+        @SerializedName("tourism_tax")
+        TOURISM_TAX("tourism_tax");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
