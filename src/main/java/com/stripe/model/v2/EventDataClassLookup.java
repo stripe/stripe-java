@@ -308,6 +308,9 @@ public final class EventDataClassLookup {
         "v2.core.account[defaults].updated",
         com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.core.account[future_requirements].updated",
+        com.stripe.events.V2CoreAccountIncludingFutureRequirementsUpdatedEvent.class);
+    eventClassLookup.put(
         "v2.core.account[identity].updated",
         com.stripe.events.V2CoreAccountIncludingIdentityUpdatedEvent.class);
     eventClassLookup.put(
