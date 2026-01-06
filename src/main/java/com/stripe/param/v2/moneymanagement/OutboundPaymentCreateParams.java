@@ -354,13 +354,22 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /** Delivery options for paper check. */
+    @SerializedName("paper_check")
+    PaperCheck paperCheck;
+
     /** Open Enum. Speed of the payout. */
     @SerializedName("speed")
     Speed speed;
 
-    private DeliveryOptions(BankAccount bankAccount, Map<String, Object> extraParams, Speed speed) {
+    private DeliveryOptions(
+        BankAccount bankAccount,
+        Map<String, Object> extraParams,
+        PaperCheck paperCheck,
+        Speed speed) {
       this.bankAccount = bankAccount;
       this.extraParams = extraParams;
+      this.paperCheck = paperCheck;
       this.speed = speed;
     }
 
@@ -373,12 +382,14 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      private PaperCheck paperCheck;
+
       private Speed speed;
 
       /** Finalize and obtain parameter instance from this builder. */
       public OutboundPaymentCreateParams.DeliveryOptions build() {
         return new OutboundPaymentCreateParams.DeliveryOptions(
-            this.bankAccount, this.extraParams, this.speed);
+            this.bankAccount, this.extraParams, this.paperCheck, this.speed);
       }
 
       /** Open Enum. Method for bank account. */
@@ -415,10 +426,135 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Delivery options for paper check. */
+      public Builder setPaperCheck(
+          OutboundPaymentCreateParams.DeliveryOptions.PaperCheck paperCheck) {
+        this.paperCheck = paperCheck;
+        return this;
+      }
+
       /** Open Enum. Speed of the payout. */
       public Builder setSpeed(OutboundPaymentCreateParams.DeliveryOptions.Speed speed) {
         this.speed = speed;
         return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaperCheck {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Memo printed on the memo field of the check. */
+      @SerializedName("memo")
+      String memo;
+
+      /** Open Enum. Shipping speed of the paper check. Defaults to standard. */
+      @SerializedName("shipping_speed")
+      ShippingSpeed shippingSpeed;
+
+      /** <strong>Required.</strong> Signature for the paper check. */
+      @SerializedName("signature")
+      String signature;
+
+      private PaperCheck(
+          Map<String, Object> extraParams,
+          String memo,
+          ShippingSpeed shippingSpeed,
+          String signature) {
+        this.extraParams = extraParams;
+        this.memo = memo;
+        this.shippingSpeed = shippingSpeed;
+        this.signature = signature;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private String memo;
+
+        private ShippingSpeed shippingSpeed;
+
+        private String signature;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public OutboundPaymentCreateParams.DeliveryOptions.PaperCheck build() {
+          return new OutboundPaymentCreateParams.DeliveryOptions.PaperCheck(
+              this.extraParams, this.memo, this.shippingSpeed, this.signature);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundPaymentCreateParams.DeliveryOptions.PaperCheck#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link OutboundPaymentCreateParams.DeliveryOptions.PaperCheck#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Memo printed on the memo field of the check. */
+        public Builder setMemo(String memo) {
+          this.memo = memo;
+          return this;
+        }
+
+        /** Open Enum. Shipping speed of the paper check. Defaults to standard. */
+        public Builder setShippingSpeed(
+            OutboundPaymentCreateParams.DeliveryOptions.PaperCheck.ShippingSpeed shippingSpeed) {
+          this.shippingSpeed = shippingSpeed;
+          return this;
+        }
+
+        /** <strong>Required.</strong> Signature for the paper check. */
+        public Builder setSignature(String signature) {
+          this.signature = signature;
+          return this;
+        }
+      }
+
+      public enum ShippingSpeed implements ApiRequestParams.EnumParam {
+        @SerializedName("priority")
+        PRIORITY("priority"),
+
+        @SerializedName("standard")
+        STANDARD("standard");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        ShippingSpeed(String value) {
+          this.value = value;
+        }
       }
     }
 

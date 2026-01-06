@@ -30519,47 +30519,25 @@ class GeneratedExamples extends BaseStripeTest {
   public void testRateLimitErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/reporting/report_runs",
+        ApiResource.RequestMethod.GET,
+        "/v2/core/accounts",
         null,
         null,
-        "{\"error\":{\"type\":\"rate_limit\",\"code\":\"report_run_rate_limit_exceeded\"}}",
+        "{\"error\":{\"type\":\"rate_limit\",\"code\":\"account_rate_limit_exceeded\"}}",
         400);
     StripeClient client = new StripeClient(networkSpy);
 
-    com.stripe.param.v2.reporting.ReportRunCreateParams params =
-        com.stripe.param.v2.reporting.ReportRunCreateParams.builder()
-            .setReport("report")
-            .putReportParameter("int_key", new BigDecimal(123))
-            .putReportParameter("string_key", "value")
-            .putReportParameter("boolean_key", true)
-            .putReportParameter(
-                "object_key",
-                new HashMap<String, Object>() {
-                  {
-                    put("object_int_key", new BigDecimal(123));
-                    put("object_string_key", "value");
-                    put("object_boolean_key", true);
-                  }
-                })
-            .putReportParameter(
-                "array_key",
-                new ArrayList<>(
-                    Arrays.asList(new BigDecimal(1), new BigDecimal(2), new BigDecimal(3))))
-            .build();
+    com.stripe.param.v2.core.AccountListParams params =
+        com.stripe.param.v2.core.AccountListParams.builder().build();
 
     try {
-      client.v2().reporting().reportRuns().create(params);
+      client.v2().core().accounts().list(params);
     } catch (RateLimitException e) {
 
     }
     ;
     verifyRequest(
-        BaseAddress.API,
-        ApiResource.RequestMethod.POST,
-        "/v2/reporting/report_runs",
-        params.toMap(),
-        null);
+        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/accounts", params.toMap(), null);
   }
 
   @Test

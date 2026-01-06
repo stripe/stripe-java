@@ -191,6 +191,9 @@ public final class EventNotificationClassLookup {
         "v2.core.account[defaults].updated",
         com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEventNotification.class);
     eventClassLookup.put(
+        "v2.core.account[future_requirements].updated",
+        com.stripe.events.V2CoreAccountIncludingFutureRequirementsUpdatedEventNotification.class);
+    eventClassLookup.put(
         "v2.core.account[identity].updated",
         com.stripe.events.V2CoreAccountIncludingIdentityUpdatedEventNotification.class);
     eventClassLookup.put(

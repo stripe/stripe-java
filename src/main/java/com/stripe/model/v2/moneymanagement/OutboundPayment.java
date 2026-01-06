@@ -149,6 +149,10 @@ public class OutboundPayment extends StripeObject implements HasId {
   @SerializedName("trace_id")
   TraceId traceId;
 
+  /** Information to track this OutboundPayment with the recipient bank. */
+  @SerializedName("tracking_details")
+  TrackingDetails trackingDetails;
+
   /** The &quot;presentment amount&quot; for the OutboundPayment. */
   @Getter
   @Setter
@@ -183,6 +187,10 @@ public class OutboundPayment extends StripeObject implements HasId {
     @SerializedName("bank_account")
     String bankAccount;
 
+    /** Delivery options for paper check. */
+    @SerializedName("paper_check")
+    PaperCheck paperCheck;
+
     /**
      * Open Enum. Speed of the payout.
      *
@@ -190,6 +198,28 @@ public class OutboundPayment extends StripeObject implements HasId {
      */
     @SerializedName("speed")
     String speed;
+
+    /** Delivery options for paper check. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaperCheck extends StripeObject {
+      /** Memo printed on the memo field of the check. */
+      @SerializedName("memo")
+      String memo;
+
+      /**
+       * Open Enum. Shipping speed of the paper check.
+       *
+       * <p>One of {@code priority}, or {@code standard}.
+       */
+      @SerializedName("shipping_speed")
+      String shippingSpeed;
+
+      /** Signature for the paper check. */
+      @SerializedName("signature")
+      String signature;
+    }
   }
 
   /** The FinancialAccount that funds were pulled from. */
@@ -391,5 +421,94 @@ public class OutboundPayment extends StripeObject implements HasId {
     /** The trace ID value if {@code trace_id.status} is {@code supported}, otherwise empty. */
     @SerializedName("value")
     String value;
+  }
+
+  /** Information to track this OutboundPayment with the recipient bank. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TrackingDetails extends StripeObject {
+    /** Paper check tracking details. */
+    @SerializedName("paper_check")
+    PaperCheck paperCheck;
+
+    /** Paper check tracking details. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class PaperCheck extends StripeObject {
+      /**
+       * Open Enum. Carrier of the paper check.
+       *
+       * <p>One of {@code fedex}, or {@code usps}.
+       */
+      @SerializedName("carrier")
+      String carrier;
+
+      /** Check number. */
+      @SerializedName("check_number")
+      String checkNumber;
+
+      /** Postal code of the latest tracking update. */
+      @SerializedName("current_postal_code")
+      String currentPostalCode;
+
+      /** Mailing address of the paper check. */
+      @SerializedName("mailing_address")
+      MailingAddress mailingAddress;
+
+      /** Tracking number for the check. */
+      @SerializedName("tracking_number")
+      String trackingNumber;
+
+      /**
+       * Open Enum. Tracking status of the paper check.
+       *
+       * <p>One of {@code delivered}, {@code in_transit}, or {@code mailed}.
+       */
+      @SerializedName("tracking_status")
+      String trackingStatus;
+
+      /** When the tracking details were last updated. */
+      @SerializedName("updated_at")
+      Instant updatedAt;
+
+      /** Mailing address of the paper check. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MailingAddress extends StripeObject {
+        /** City, district, suburb, town, or village. */
+        @SerializedName("city")
+        String city;
+
+        /**
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
+         */
+        @SerializedName("country")
+        String country;
+
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        @SerializedName("line1")
+        String line1;
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        @SerializedName("line2")
+        String line2;
+
+        /** ZIP or postal code. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** State, county, province, or region. */
+        @SerializedName("state")
+        String state;
+
+        /** Town or district. */
+        @SerializedName("town")
+        String town;
+      }
+    }
   }
 }
