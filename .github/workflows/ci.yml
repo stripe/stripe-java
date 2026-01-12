@@ -19,11 +19,16 @@ on:
       - sdk-release/**
       - feature/**
 
+permissions: {}
+
 jobs:
   build:
     name: Build
 
     runs-on: "ubuntu-24.04"
+
+    permissions:
+      contents: read
 
     steps:
       - uses: extractions/setup-just@v2
@@ -49,6 +54,9 @@ jobs:
     name: Test
 
     runs-on: "ubuntu-24.04"
+
+    permissions:
+      contents: read
 
     strategy:
       fail-fast: false
@@ -110,6 +118,8 @@ jobs:
       endsWith(github.actor, '-stripe')
     needs: [build, test]
     runs-on: "ubuntu-24.04"
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@master
       - name: Setup Java
@@ -172,6 +182,9 @@ jobs:
 
   compat:
     runs-on: "ubuntu-24.04"
+
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
