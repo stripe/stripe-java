@@ -34,6 +34,10 @@ public class TrialOfferCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** A brief, user-friendly name for the trial offer-for identification purposes. */
+  @SerializedName("name")
+  String name;
+
   /**
    * <strong>Required.</strong> Price configuration during the trial period (amount, billing scheme,
    * etc).
@@ -46,11 +50,13 @@ public class TrialOfferCreateParams extends ApiRequestParams {
       EndBehavior endBehavior,
       List<String> expand,
       Map<String, Object> extraParams,
+      String name,
       String price) {
     this.duration = duration;
     this.endBehavior = endBehavior;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.name = name;
     this.price = price;
   }
 
@@ -67,12 +73,14 @@ public class TrialOfferCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String name;
+
     private String price;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TrialOfferCreateParams build() {
       return new TrialOfferCreateParams(
-          this.duration, this.endBehavior, this.expand, this.extraParams, this.price);
+          this.duration, this.endBehavior, this.expand, this.extraParams, this.name, this.price);
     }
 
     /** <strong>Required.</strong> Duration of one service period of the trial. */
@@ -136,6 +144,12 @@ public class TrialOfferCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** A brief, user-friendly name for the trial offer-for identification purposes. */
+    public Builder setName(String name) {
+      this.name = name;
       return this;
     }
 

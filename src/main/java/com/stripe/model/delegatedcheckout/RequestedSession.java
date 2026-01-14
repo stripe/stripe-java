@@ -105,6 +105,10 @@ public class RequestedSession extends ApiResource
   @SerializedName("payment_method_preview")
   PaymentMethodPreview paymentMethodPreview;
 
+  /** The risk details of the requested session. */
+  @SerializedName("risk_details")
+  RiskDetails riskDetails;
+
   @SerializedName("seller_details")
   SellerDetails sellerDetails;
 
@@ -539,21 +543,9 @@ public class RequestedSession extends ApiResource
     @SerializedName("amount_subtotal")
     Long amountSubtotal;
 
-    /** The description of the line item. */
-    @SerializedName("description")
-    String description;
-
-    /** The images of the line item. */
-    @SerializedName("images")
-    List<String> images;
-
     /** The key of the line item. */
     @SerializedName("key")
     String key;
-
-    /** The name of the line item. */
-    @SerializedName("name")
-    String name;
 
     @SerializedName("product_details")
     ProductDetails productDetails;
@@ -770,6 +762,48 @@ public class RequestedSession extends ApiResource
   }
 
   /**
+   * For more details about RiskDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RiskDetails extends StripeObject {
+    /** The risk metadata for the client device. */
+    @SerializedName("client_device_metadata_details")
+    ClientDeviceMetadataDetails clientDeviceMetadataDetails;
+
+    /**
+     * For more details about ClientDeviceMetadataDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ClientDeviceMetadataDetails extends StripeObject {
+      /** The radar session for the client device. */
+      @SerializedName("radar_session")
+      String radarSession;
+
+      /** The referrer of the client device. */
+      @SerializedName("referrer")
+      String referrer;
+
+      /** The remote IP address of the client device. */
+      @SerializedName("remote_ip")
+      String remoteIp;
+
+      /** The time spent on the page by the client device. */
+      @SerializedName("time_on_page_ms")
+      Long timeOnPageMs;
+
+      /** The user agent of the client device. */
+      @SerializedName("user_agent")
+      String userAgent;
+    }
+  }
+
+  /**
    * For more details about SellerDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -840,6 +874,7 @@ public class RequestedSession extends ApiResource
     trySetResponseGetter(fulfillmentDetails, responseGetter);
     trySetResponseGetter(orderDetails, responseGetter);
     trySetResponseGetter(paymentMethodPreview, responseGetter);
+    trySetResponseGetter(riskDetails, responseGetter);
     trySetResponseGetter(sellerDetails, responseGetter);
     trySetResponseGetter(totalDetails, responseGetter);
   }
