@@ -17,6 +17,7 @@ import com.stripe.events.V2CoreAccountIncludingConfigurationRecipientUpdatedEven
 import com.stripe.events.V2CoreAccountIncludingConfigurationStorerCapabilityStatusUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingConfigurationStorerUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingDefaultsUpdatedEventNotification;
+import com.stripe.events.V2CoreAccountIncludingFutureRequirementsUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingIdentityUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountIncludingRequirementsUpdatedEventNotification;
 import com.stripe.events.V2CoreAccountLinkReturnedEventNotification;
@@ -273,6 +274,12 @@ public class StripeEventNotificationHandler {
   public StripeEventNotificationHandler onV2CoreAccountIncludingDefaultsUpdated(
       Callback<V2CoreAccountIncludingDefaultsUpdatedEventNotification> callback) {
     this.register("v2.core.account[defaults].updated", callback);
+    return this;
+  }
+
+  public StripeEventNotificationHandler onV2CoreAccountIncludingFutureRequirementsUpdated(
+      Callback<V2CoreAccountIncludingFutureRequirementsUpdatedEventNotification> callback) {
+    this.register("v2.core.account[future_requirements].updated", callback);
     return this;
   }
 

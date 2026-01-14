@@ -185,6 +185,14 @@ public class FinancialAddress extends StripeObject implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class UsBankAccount extends StripeObject {
+      /** The address of the account holder. */
+      @SerializedName("account_holder_address")
+      AccountHolderAddress accountHolderAddress;
+
+      /** The name of the account holder. */
+      @SerializedName("account_holder_name")
+      String accountHolderName;
+
       /** The account number of the US Bank Account. */
       @SerializedName("account_number")
       String accountNumber;
@@ -208,6 +216,40 @@ public class FinancialAddress extends StripeObject implements HasId {
       /** The swift code of the bank or financial institution. */
       @SerializedName("swift_code")
       String swiftCode;
+
+      /** The address of the account holder. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AccountHolderAddress extends StripeObject {
+        /** The city of the address. */
+        @SerializedName("city")
+        String city;
+
+        /** The country of the address. */
+        @SerializedName("country")
+        String country;
+
+        /** The first line of the address. */
+        @SerializedName("line1")
+        String line1;
+
+        /** The second line of the address. */
+        @SerializedName("line2")
+        String line2;
+
+        /** The postal / zip code of the address. */
+        @SerializedName("postal_code")
+        String postalCode;
+
+        /** The state of the address. */
+        @SerializedName("state")
+        String state;
+
+        /** The town of the address. */
+        @SerializedName("town")
+        String town;
+      }
     }
   }
 }

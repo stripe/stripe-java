@@ -14,6 +14,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class GbBankAccount extends StripeObject implements HasId {
+  /** The alternative reference for this payout method, if it's a projected payout method. */
+  @SerializedName("alternative_reference")
+  AlternativeReference alternativeReference;
+
   /**
    * Whether this bank account object was archived. Bank account objects can be archived through the
    * /archive API, and they will not be automatically archived by Stripe. Archived bank account
@@ -75,6 +79,25 @@ public class GbBankAccount extends StripeObject implements HasId {
   /** The Sort Code of the bank account. */
   @SerializedName("sort_code")
   String sortCode;
+
+  /** The alternative reference for this payout method, if it's a projected payout method. */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AlternativeReference extends StripeObject implements HasId {
+    /** The ID of the alternative resource being referenced. */
+    @Getter(onMethod_ = {@Override})
+    @SerializedName("id")
+    String id;
+
+    /**
+     * The type of the alternative reference (e.g., external_account for V1 external accounts).
+     *
+     * <p>One of {@code external_account}, or {@code payment_method}.
+     */
+    @SerializedName("type")
+    String type;
+  }
 
   /**
    * Information around the status of Confirmation of Payee matching done on this bank account.
