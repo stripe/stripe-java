@@ -187,13 +187,41 @@ public class AccountEvaluation extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Event extends StripeObject {
+    /** Data about a failed login event. */
+    @SerializedName("login_failed")
+    LoginFailed loginFailed;
+
     /** Time at which the event occurred. Measured in seconds since the Unix epoch. */
     @SerializedName("occurred_at")
     Long occurredAt;
 
+    /** Data about a failed registration event. */
+    @SerializedName("registration_failed")
+    RegistrationFailed registrationFailed;
+
     /** The type of event that occurred. */
     @SerializedName("type")
     String type;
+
+    /** Data about a failed login event. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LoginFailed extends StripeObject {
+      /** The reason why this login failed. */
+      @SerializedName("reason")
+      String reason;
+    }
+
+    /** Data about a failed registration event. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RegistrationFailed extends StripeObject {
+      /** The reason why this registration failed. */
+      @SerializedName("reason")
+      String reason;
+    }
   }
 
   /** Account Evaluation Signal resource returned by the Radar Account Evaluations API. */

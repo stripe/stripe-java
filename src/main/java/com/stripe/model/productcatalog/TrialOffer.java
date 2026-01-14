@@ -45,6 +45,10 @@ public class TrialOffer extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** A brief, user-friendly name for the trial offer-for identification purposes. */
+  @SerializedName("name")
+  String name;
+
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
