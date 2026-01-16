@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.core;
 
-import com.stripe.exception.RateLimitException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.v2.core.AccountToken;
 import com.stripe.net.ApiRequest;
@@ -19,21 +18,20 @@ public final class AccountTokenService extends ApiService {
   }
 
   /** Creates an Account Token. */
-  public AccountToken create(AccountTokenCreateParams params)
-      throws StripeException, RateLimitException {
+  public AccountToken create(AccountTokenCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /** Creates an Account Token. */
-  public AccountToken create(RequestOptions options) throws StripeException, RateLimitException {
+  public AccountToken create(RequestOptions options) throws StripeException {
     return create((AccountTokenCreateParams) null, options);
   }
   /** Creates an Account Token. */
-  public AccountToken create() throws StripeException, RateLimitException {
+  public AccountToken create() throws StripeException {
     return create((AccountTokenCreateParams) null, (RequestOptions) null);
   }
   /** Creates an Account Token. */
   public AccountToken create(AccountTokenCreateParams params, RequestOptions options)
-      throws StripeException, RateLimitException {
+      throws StripeException {
     String path = "/v2/core/account_tokens";
     ApiRequest request =
         new ApiRequest(
@@ -45,12 +43,11 @@ public final class AccountTokenService extends ApiService {
     return this.request(request, AccountToken.class);
   }
   /** Retrieves an Account Token. */
-  public AccountToken retrieve(String id) throws StripeException, RateLimitException {
+  public AccountToken retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
   /** Retrieves an Account Token. */
-  public AccountToken retrieve(String id, RequestOptions options)
-      throws StripeException, RateLimitException {
+  public AccountToken retrieve(String id, RequestOptions options) throws StripeException {
     String path = String.format("/v2/core/account_tokens/%s", ApiResource.urlEncodeId(id));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, null, options);

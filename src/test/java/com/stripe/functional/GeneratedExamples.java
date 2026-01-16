@@ -25155,31 +25155,6 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
-  public void testRateLimitErrorServices() throws StripeException {
-    stubRequestReturnError(
-        BaseAddress.API,
-        ApiResource.RequestMethod.GET,
-        "/v2/core/accounts",
-        null,
-        null,
-        "{\"error\":{\"type\":\"rate_limit\",\"code\":\"account_rate_limit_exceeded\"}}",
-        400);
-    StripeClient client = new StripeClient(networkSpy);
-
-    com.stripe.param.v2.core.AccountListParams params =
-        com.stripe.param.v2.core.AccountListParams.builder().build();
-
-    try {
-      client.v2().core().accounts().list(params);
-    } catch (RateLimitException e) {
-
-    }
-    ;
-    verifyRequest(
-        BaseAddress.API, ApiResource.RequestMethod.GET, "/v2/core/accounts", params.toMap(), null);
-  }
-
-  @Test
   public void testTemporarySessionExpiredErrorServices() throws StripeException {
     stubRequestReturnError(
         BaseAddress.METER_EVENTS,

@@ -110,9 +110,6 @@ public abstract class StripeException extends Exception {
       StripeResponseGetter responseGetter) {
     switch (type) {
         // The beginning of the section generated from our OpenAPI spec
-      case "rate_limit":
-        return com.stripe.exception.RateLimitException.parse(
-            body, statusCode, requestId, responseGetter);
       case "temporary_session_expired":
         return com.stripe.exception.TemporarySessionExpiredException.parse(
             body, statusCode, requestId, responseGetter);
