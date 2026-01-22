@@ -3476,6 +3476,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       @SerializedName("abn_amro")
       ABN_AMRO("abn_amro"),
 
+      @SerializedName("adyen")
+      ADYEN("adyen"),
+
       @SerializedName("asn_bank")
       ASN_BANK("asn_bank"),
 

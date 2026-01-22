@@ -1551,6 +1551,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("discount_amount")
     Long discountAmount;
 
+    @SerializedName("error")
+    Errors error;
+
     /**
      * A list of line items, each containing information about a product in the PaymentIntent. There
      * is a maximum of 200 line items.
@@ -1566,6 +1569,28 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
     @SerializedName("tip")
     Tip tip;
+
+    /**
+     * For more details about Errors, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Errors extends StripeObject {
+      /**
+       * The code of the error that occurred when validating the current amount details.
+       *
+       * <p>One of {@code amount_details_amount_mismatch}, or {@code
+       * amount_details_tax_shipping_discount_greater_than_amount}.
+       */
+      @SerializedName("code")
+      String code;
+
+      /** A message providing more details about the error. */
+      @SerializedName("message")
+      String message;
+    }
 
     /**
      * For more details about Shipping, please refer to the <a
@@ -5094,14 +5119,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
       @SerializedName("mandate_options")
       MandateOptions mandateOptions;
-
-      /**
-       * Preferred transaction settlement speed
-       *
-       * <p>One of {@code fastest}, or {@code standard}.
-       */
-      @SerializedName("preferred_settlement_speed")
-      String preferredSettlementSpeed;
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.

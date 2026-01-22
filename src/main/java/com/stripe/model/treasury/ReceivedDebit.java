@@ -368,6 +368,13 @@ public class ReceivedDebit extends ApiResource implements HasId {
      */
     @SerializedName("payout")
     String payout;
+
+    /**
+     * Set if the ReceivedDebit was created due to a <a
+     * href="https://api.stripe.com#topups">Topup</a> object.
+     */
+    @SerializedName("topup")
+    String topup;
   }
 
   /**

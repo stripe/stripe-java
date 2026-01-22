@@ -1093,6 +1093,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     Object discountAmount;
 
     /**
+     * Set to {@code false} to return arithmetic validation errors in the response without failing
+     * the request. Use this when you want the operation to proceed regardless of arithmetic errors
+     * in the line item data.
+     *
+     * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+     * fails. Use this for strict validation that prevents processing with line item data that has
+     * arithmetic inconsistencies.
+     *
+     * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic validation
+     * error to card networks.
+     */
+    @SerializedName("enforce_arithmetic_validation")
+    Boolean enforceArithmeticValidation;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1118,11 +1133,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private AmountDetails(
         Object discountAmount,
+        Boolean enforceArithmeticValidation,
         Map<String, Object> extraParams,
         Object lineItems,
         Object shipping,
         Object tax) {
       this.discountAmount = discountAmount;
+      this.enforceArithmeticValidation = enforceArithmeticValidation;
       this.extraParams = extraParams;
       this.lineItems = lineItems;
       this.shipping = shipping;
@@ -1136,6 +1153,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public static class Builder {
       private Object discountAmount;
 
+      private Boolean enforceArithmeticValidation;
+
       private Map<String, Object> extraParams;
 
       private Object lineItems;
@@ -1147,7 +1166,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentCreateParams.AmountDetails build() {
         return new PaymentIntentCreateParams.AmountDetails(
-            this.discountAmount, this.extraParams, this.lineItems, this.shipping, this.tax);
+            this.discountAmount,
+            this.enforceArithmeticValidation,
+            this.extraParams,
+            this.lineItems,
+            this.shipping,
+            this.tax);
       }
 
       /**
@@ -1173,6 +1197,23 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setDiscountAmount(EmptyParam discountAmount) {
         this.discountAmount = discountAmount;
+        return this;
+      }
+
+      /**
+       * Set to {@code false} to return arithmetic validation errors in the response without failing
+       * the request. Use this when you want the operation to proceed regardless of arithmetic
+       * errors in the line item data.
+       *
+       * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+       * fails. Use this for strict validation that prevents processing with line item data that has
+       * arithmetic inconsistencies.
+       *
+       * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic
+       * validation error to card networks.
+       */
+      public Builder setEnforceArithmeticValidation(Boolean enforceArithmeticValidation) {
+        this.enforceArithmeticValidation = enforceArithmeticValidation;
         return this;
       }
 
@@ -6374,6 +6415,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       public enum Bank implements ApiRequestParams.EnumParam {
         @SerializedName("abn_amro")
         ABN_AMRO("abn_amro"),
+
+        @SerializedName("adyen")
+        ADYEN("adyen"),
 
         @SerializedName("asn_bank")
         ASN_BANK("asn_bank"),
@@ -14859,7 +14903,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           N2__1__0("2.1.0"),
 
           @SerializedName("2.2.0")
-          N2__2__0("2.2.0");
+          N2__2__0("2.2.0"),
+
+          @SerializedName("2.3.0")
+          N2__3__0("2.3.0"),
+
+          @SerializedName("2.3.1")
+          N2__3__1("2.3.1");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
@@ -22660,10 +22710,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("networks")
       Networks networks;
 
-      /** Preferred transaction settlement speed. */
-      @SerializedName("preferred_settlement_speed")
-      ApiRequestParams.EnumParam preferredSettlementSpeed;
-
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
        *
@@ -22707,7 +22753,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           FinancialConnections financialConnections,
           MandateOptions mandateOptions,
           Networks networks,
-          ApiRequestParams.EnumParam preferredSettlementSpeed,
           ApiRequestParams.EnumParam setupFutureUsage,
           String targetDate,
           VerificationMethod verificationMethod) {
@@ -22715,7 +22760,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.financialConnections = financialConnections;
         this.mandateOptions = mandateOptions;
         this.networks = networks;
-        this.preferredSettlementSpeed = preferredSettlementSpeed;
         this.setupFutureUsage = setupFutureUsage;
         this.targetDate = targetDate;
         this.verificationMethod = verificationMethod;
@@ -22734,8 +22778,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private Networks networks;
 
-        private ApiRequestParams.EnumParam preferredSettlementSpeed;
-
         private ApiRequestParams.EnumParam setupFutureUsage;
 
         private String targetDate;
@@ -22749,7 +22791,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
               this.financialConnections,
               this.mandateOptions,
               this.networks,
-              this.preferredSettlementSpeed,
               this.setupFutureUsage,
               this.targetDate,
               this.verificationMethod);
@@ -22803,20 +22844,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         public Builder setNetworks(
             PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.Networks networks) {
           this.networks = networks;
-          return this;
-        }
-
-        /** Preferred transaction settlement speed. */
-        public Builder setPreferredSettlementSpeed(
-            PaymentIntentCreateParams.PaymentMethodOptions.UsBankAccount.PreferredSettlementSpeed
-                preferredSettlementSpeed) {
-          this.preferredSettlementSpeed = preferredSettlementSpeed;
-          return this;
-        }
-
-        /** Preferred transaction settlement speed. */
-        public Builder setPreferredSettlementSpeed(EmptyParam preferredSettlementSpeed) {
-          this.preferredSettlementSpeed = preferredSettlementSpeed;
           return this;
         }
 
@@ -23509,21 +23536,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           Requested(String value) {
             this.value = value;
           }
-        }
-      }
-
-      public enum PreferredSettlementSpeed implements ApiRequestParams.EnumParam {
-        @SerializedName("fastest")
-        FASTEST("fastest"),
-
-        @SerializedName("standard")
-        STANDARD("standard");
-
-        @Getter(onMethod_ = {@Override})
-        private final String value;
-
-        PreferredSettlementSpeed(String value) {
-          this.value = value;
         }
       }
 

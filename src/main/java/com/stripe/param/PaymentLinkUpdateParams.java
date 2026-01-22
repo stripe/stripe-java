@@ -39,12 +39,15 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("custom_fields")
   Object customFields;
 
-  /** Display additional text for your customers using custom text. */
+  /**
+   * Display additional text for your customers using custom text. You can't set this parameter if
+   * {@code ui_mode} is {@code custom}.
+   */
   @SerializedName("custom_text")
   CustomText customText;
 
@@ -362,7 +365,7 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Collect additional information from your customer using custom fields. Up to 3 fields are
-     * supported.
+     * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
      */
     public Builder setCustomFields(EmptyParam customFields) {
       this.customFields = customFields;
@@ -371,14 +374,17 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
 
     /**
      * Collect additional information from your customer using custom fields. Up to 3 fields are
-     * supported.
+     * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
      */
     public Builder setCustomFields(List<PaymentLinkUpdateParams.CustomField> customFields) {
       this.customFields = customFields;
       return this;
     }
 
-    /** Display additional text for your customers using custom text. */
+    /**
+     * Display additional text for your customers using custom text. You can't set this parameter if
+     * {@code ui_mode} is {@code custom}.
+     */
     public Builder setCustomText(PaymentLinkUpdateParams.CustomText customText) {
       this.customText = customText;
       return this;
@@ -5588,7 +5594,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+    /**
+     * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You can't
+     * set this parameter if {@code ui_mode} is {@code custom}.
+     */
     @SerializedName("required")
     Required required;
 
@@ -5651,7 +5660,10 @@ public class PaymentLinkUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+      /**
+       * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You
+       * can't set this parameter if {@code ui_mode} is {@code custom}.
+       */
       public Builder setRequired(PaymentLinkUpdateParams.TaxIdCollection.Required required) {
         this.required = required;
         return this;

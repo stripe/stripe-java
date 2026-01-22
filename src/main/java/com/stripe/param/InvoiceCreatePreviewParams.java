@@ -1409,11 +1409,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
        * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
        * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-       * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
-       * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code sv_nit},
-       * {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code
-       * ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat},
-       * {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
+       * {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
+       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin},
+       * {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code
+       * tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin},
+       * {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
+       * zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -1490,12 +1491,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          * {@code ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code
          * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat},
          * {@code no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
-         * ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
-         * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code
-         * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
-         * {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code
-         * uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
-         * zw_tin}
+         * ph_tin}, {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
+         * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
+         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
+         * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
+         * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin},
+         * or {@code zw_tin}
          */
         public Builder setType(InvoiceCreatePreviewParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1758,6 +1759,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("ph_tin")
         PH_TIN("ph_tin"),
+
+        @SerializedName("pl_nip")
+        PL_NIP("pl_nip"),
 
         @SerializedName("ro_tin")
         RO_TIN("ro_tin"),
