@@ -1683,19 +1683,25 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("promotion_code")
         String promotionCode;
 
+        /** Settings for discount application including service period anchoring. */
+        @SerializedName("settings")
+        Settings settings;
+
         private Add(
             String coupon,
             String discount,
             DiscountEnd discountEnd,
             Map<String, Object> extraParams,
             Long index,
-            String promotionCode) {
+            String promotionCode,
+            Settings settings) {
           this.coupon = coupon;
           this.discount = discount;
           this.discountEnd = discountEnd;
           this.extraParams = extraParams;
           this.index = index;
           this.promotionCode = promotionCode;
+          this.settings = settings;
         }
 
         public static Builder builder() {
@@ -1715,6 +1721,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
           private String promotionCode;
 
+          private Settings settings;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add build() {
             return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add(
@@ -1723,7 +1731,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                 this.discountEnd,
                 this.extraParams,
                 this.index,
-                this.promotionCode);
+                this.promotionCode,
+                this.settings);
           }
 
           /** The coupon code to redeem. */
@@ -1788,6 +1797,13 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           /** The promotion code to redeem. */
           public Builder setPromotionCode(String promotionCode) {
             this.promotionCode = promotionCode;
+            return this;
+          }
+
+          /** Settings for discount application including service period anchoring. */
+          public Builder setSettings(
+              SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings settings) {
+            this.settings = settings;
             return this;
           }
         }
@@ -1883,6 +1899,391 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             private final String value;
 
             Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Settings {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Configures service period cycle anchoring. */
+          @SerializedName("service_period_anchor_config")
+          ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+          /**
+           * The start date of the discount's service period when applying a coupon or promotion
+           * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+           */
+          @SerializedName("start_date")
+          StartDate startDate;
+
+          private Settings(
+              Map<String, Object> extraParams,
+              ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+              StartDate startDate) {
+            this.extraParams = extraParams;
+            this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+            this.startDate = startDate;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            private StartDate startDate;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings build() {
+              return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings(
+                  this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Configures service period cycle anchoring. */
+            public Builder setServicePeriodAnchorConfig(
+                SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings
+                        .ServicePeriodAnchorConfig
+                    servicePeriodAnchorConfig) {
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              return this;
+            }
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+             */
+            public Builder setStartDate(
+                SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings.StartDate
+                    startDate) {
+              this.startDate = startDate;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ServicePeriodAnchorConfig {
+            /**
+             * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+             */
+            @SerializedName("custom")
+            Custom custom;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** The type of service period anchor config. Defaults to {@code inherit} if omitted. */
+            @SerializedName("type")
+            Type type;
+
+            private ServicePeriodAnchorConfig(
+                Custom custom, Map<String, Object> extraParams, Type type) {
+              this.custom = custom;
+              this.extraParams = extraParams;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Custom custom;
+
+              private Map<String, Object> extraParams;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings
+                      .ServicePeriodAnchorConfig
+                  build() {
+                return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings
+                    .ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+              }
+
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              public Builder setCustom(
+                  SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings
+                          .ServicePeriodAnchorConfig.Custom
+                      custom) {
+                this.custom = custom;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              public Builder setType(
+                  SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings
+                          .ServicePeriodAnchorConfig.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Custom {
+              /**
+               * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1
+               * to 31.
+               */
+              @SerializedName("day_of_month")
+              Long dayOfMonth;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+              @SerializedName("hour")
+              Long hour;
+
+              /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("minute")
+              Long minute;
+
+              /** The month to start full cycle periods. Ranges from 1 to 12. */
+              @SerializedName("month")
+              Long month;
+
+              /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("second")
+              Long second;
+
+              private Custom(
+                  Long dayOfMonth,
+                  Map<String, Object> extraParams,
+                  Long hour,
+                  Long minute,
+                  Long month,
+                  Long second) {
+                this.dayOfMonth = dayOfMonth;
+                this.extraParams = extraParams;
+                this.hour = hour;
+                this.minute = minute;
+                this.month = month;
+                this.second = second;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Long dayOfMonth;
+
+                private Map<String, Object> extraParams;
+
+                private Long hour;
+
+                private Long minute;
+
+                private Long month;
+
+                private Long second;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings
+                        .ServicePeriodAnchorConfig.Custom
+                    build() {
+                  return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings
+                      .ServicePeriodAnchorConfig.Custom(
+                      this.dayOfMonth,
+                      this.extraParams,
+                      this.hour,
+                      this.minute,
+                      this.month,
+                      this.second);
+                }
+
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                public Builder setDayOfMonth(Long dayOfMonth) {
+                  this.dayOfMonth = dayOfMonth;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                public Builder setHour(Long hour) {
+                  this.hour = hour;
+                  return this;
+                }
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                public Builder setMinute(Long minute) {
+                  this.minute = minute;
+                  return this;
+                }
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                public Builder setMonth(Long month) {
+                  this.month = month;
+                  return this;
+                }
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                public Builder setSecond(Long second) {
+                  this.second = second;
+                  return this;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("custom")
+              CUSTOM("custom"),
+
+              @SerializedName("inherit")
+              INHERIT("inherit");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          public enum StartDate implements ApiRequestParams.EnumParam {
+            @SerializedName("amendment_start")
+            AMENDMENT_START("amendment_start"),
+
+            @SerializedName("current_period_end")
+            CURRENT_PERIOD_END("current_period_end"),
+
+            @SerializedName("current_period_start")
+            CURRENT_PERIOD_START("current_period_start");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            StartDate(String value) {
               this.value = value;
             }
           }
@@ -2016,12 +2417,21 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
         @SerializedName("promotion_code")
         String promotionCode;
 
+        /** Settings for discount application including service period anchoring. */
+        @SerializedName("settings")
+        Settings settings;
+
         private Set(
-            String coupon, String discount, Map<String, Object> extraParams, String promotionCode) {
+            String coupon,
+            String discount,
+            Map<String, Object> extraParams,
+            String promotionCode,
+            Settings settings) {
           this.coupon = coupon;
           this.discount = discount;
           this.extraParams = extraParams;
           this.promotionCode = promotionCode;
+          this.settings = settings;
         }
 
         public static Builder builder() {
@@ -2037,10 +2447,12 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
           private String promotionCode;
 
+          private Settings settings;
+
           /** Finalize and obtain parameter instance from this builder. */
           public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set build() {
             return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set(
-                this.coupon, this.discount, this.extraParams, this.promotionCode);
+                this.coupon, this.discount, this.extraParams, this.promotionCode, this.settings);
           }
 
           /** The coupon code to replace the {@code discounts} array with. */
@@ -2089,6 +2501,398 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           public Builder setPromotionCode(String promotionCode) {
             this.promotionCode = promotionCode;
             return this;
+          }
+
+          /** Settings for discount application including service period anchoring. */
+          public Builder setSettings(
+              SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings settings) {
+            this.settings = settings;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Settings {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Configures service period cycle anchoring. */
+          @SerializedName("service_period_anchor_config")
+          ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+          /**
+           * The start date of the discount's service period when applying a coupon or promotion
+           * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+           */
+          @SerializedName("start_date")
+          StartDate startDate;
+
+          private Settings(
+              Map<String, Object> extraParams,
+              ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+              StartDate startDate) {
+            this.extraParams = extraParams;
+            this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+            this.startDate = startDate;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            private StartDate startDate;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings build() {
+              return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings(
+                  this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Configures service period cycle anchoring. */
+            public Builder setServicePeriodAnchorConfig(
+                SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings
+                        .ServicePeriodAnchorConfig
+                    servicePeriodAnchorConfig) {
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              return this;
+            }
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+             */
+            public Builder setStartDate(
+                SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings.StartDate
+                    startDate) {
+              this.startDate = startDate;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ServicePeriodAnchorConfig {
+            /**
+             * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+             */
+            @SerializedName("custom")
+            Custom custom;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** The type of service period anchor config. Defaults to {@code inherit} if omitted. */
+            @SerializedName("type")
+            Type type;
+
+            private ServicePeriodAnchorConfig(
+                Custom custom, Map<String, Object> extraParams, Type type) {
+              this.custom = custom;
+              this.extraParams = extraParams;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Custom custom;
+
+              private Map<String, Object> extraParams;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings
+                      .ServicePeriodAnchorConfig
+                  build() {
+                return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings
+                    .ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+              }
+
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              public Builder setCustom(
+                  SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings
+                          .ServicePeriodAnchorConfig.Custom
+                      custom) {
+                this.custom = custom;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              public Builder setType(
+                  SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings
+                          .ServicePeriodAnchorConfig.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Custom {
+              /**
+               * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1
+               * to 31.
+               */
+              @SerializedName("day_of_month")
+              Long dayOfMonth;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+              @SerializedName("hour")
+              Long hour;
+
+              /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("minute")
+              Long minute;
+
+              /** The month to start full cycle periods. Ranges from 1 to 12. */
+              @SerializedName("month")
+              Long month;
+
+              /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("second")
+              Long second;
+
+              private Custom(
+                  Long dayOfMonth,
+                  Map<String, Object> extraParams,
+                  Long hour,
+                  Long minute,
+                  Long month,
+                  Long second) {
+                this.dayOfMonth = dayOfMonth;
+                this.extraParams = extraParams;
+                this.hour = hour;
+                this.minute = minute;
+                this.month = month;
+                this.second = second;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Long dayOfMonth;
+
+                private Map<String, Object> extraParams;
+
+                private Long hour;
+
+                private Long minute;
+
+                private Long month;
+
+                private Long second;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings
+                        .ServicePeriodAnchorConfig.Custom
+                    build() {
+                  return new SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings
+                      .ServicePeriodAnchorConfig.Custom(
+                      this.dayOfMonth,
+                      this.extraParams,
+                      this.hour,
+                      this.minute,
+                      this.month,
+                      this.second);
+                }
+
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                public Builder setDayOfMonth(Long dayOfMonth) {
+                  this.dayOfMonth = dayOfMonth;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                public Builder setHour(Long hour) {
+                  this.hour = hour;
+                  return this;
+                }
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                public Builder setMinute(Long minute) {
+                  this.minute = minute;
+                  return this;
+                }
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                public Builder setMonth(Long month) {
+                  this.month = month;
+                  return this;
+                }
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                public Builder setSecond(Long second) {
+                  this.second = second;
+                  return this;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("custom")
+              CUSTOM("custom"),
+
+              @SerializedName("inherit")
+              INHERIT("inherit");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          public enum StartDate implements ApiRequestParams.EnumParam {
+            @SerializedName("amendment_start")
+            AMENDMENT_START("amendment_start"),
+
+            @SerializedName("current_period_end")
+            CURRENT_PERIOD_END("current_period_end"),
+
+            @SerializedName("current_period_start")
+            CURRENT_PERIOD_START("current_period_start");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            StartDate(String value) {
+              this.value = value;
+            }
           }
         }
       }
@@ -2514,17 +3318,23 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName("promotion_code")
           String promotionCode;
 
+          /** Settings for discount application including service period anchoring. */
+          @SerializedName("settings")
+          Settings settings;
+
           private Discount(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
               Map<String, Object> extraParams,
-              String promotionCode) {
+              String promotionCode,
+              Settings settings) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
             this.promotionCode = promotionCode;
+            this.settings = settings;
           }
 
           public static Builder builder() {
@@ -2542,6 +3352,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
             private String promotionCode;
 
+            private Settings settings;
+
             /** Finalize and obtain parameter instance from this builder. */
             public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount build() {
               return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount(
@@ -2549,7 +3361,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                   this.discount,
                   this.discountEnd,
                   this.extraParams,
-                  this.promotionCode);
+                  this.promotionCode,
+                  this.settings);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -2605,6 +3418,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             /** ID of the promotion code to create a new discount for. */
             public Builder setPromotionCode(String promotionCode) {
               this.promotionCode = promotionCode;
+              return this;
+            }
+
+            /** Settings for discount application including service period anchoring. */
+            public Builder setSettings(
+                SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                    settings) {
+              this.settings = settings;
               return this;
             }
           }
@@ -2860,6 +3681,397 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               private final String value;
 
               Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Settings {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Configures service period cycle anchoring. */
+            @SerializedName("service_period_anchor_config")
+            ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+             */
+            @SerializedName("start_date")
+            StartDate startDate;
+
+            private Settings(
+                Map<String, Object> extraParams,
+                ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+                StartDate startDate) {
+              this.extraParams = extraParams;
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              this.startDate = startDate;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+              private StartDate startDate;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                  build() {
+                return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount
+                    .Settings(this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Configures service period cycle anchoring. */
+              public Builder setServicePeriodAnchorConfig(
+                  SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                          .ServicePeriodAnchorConfig
+                      servicePeriodAnchorConfig) {
+                this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                return this;
+              }
+
+              /**
+               * The start date of the discount's service period when applying a coupon or promotion
+               * code with a service period duration. Defaults to {@code amendment_start} if
+               * omitted.
+               */
+              public Builder setStartDate(
+                  SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                          .StartDate
+                      startDate) {
+                this.startDate = startDate;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ServicePeriodAnchorConfig {
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              @SerializedName("custom")
+              Custom custom;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              @SerializedName("type")
+              Type type;
+
+              private ServicePeriodAnchorConfig(
+                  Custom custom, Map<String, Object> extraParams, Type type) {
+                this.custom = custom;
+                this.extraParams = extraParams;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Custom custom;
+
+                private Map<String, Object> extraParams;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                        .ServicePeriodAnchorConfig
+                    build() {
+                  return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount
+                      .Settings.ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+                }
+
+                /**
+                 * Anchor the service period to a custom date. Type must be {@code custom} to
+                 * specify.
+                 */
+                public Builder setCustom(
+                    SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                            .ServicePeriodAnchorConfig.Custom
+                        custom) {
+                  this.custom = custom;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+                 */
+                public Builder setType(
+                    SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                            .ServicePeriodAnchorConfig.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Custom {
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                @SerializedName("day_of_month")
+                Long dayOfMonth;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                @SerializedName("hour")
+                Long hour;
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("minute")
+                Long minute;
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                @SerializedName("month")
+                Long month;
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("second")
+                Long second;
+
+                private Custom(
+                    Long dayOfMonth,
+                    Map<String, Object> extraParams,
+                    Long hour,
+                    Long minute,
+                    Long month,
+                    Long second) {
+                  this.dayOfMonth = dayOfMonth;
+                  this.extraParams = extraParams;
+                  this.hour = hour;
+                  this.minute = minute;
+                  this.month = month;
+                  this.second = second;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Long dayOfMonth;
+
+                  private Map<String, Object> extraParams;
+
+                  private Long hour;
+
+                  private Long minute;
+
+                  private Long month;
+
+                  private Long second;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings
+                          .ServicePeriodAnchorConfig.Custom
+                      build() {
+                    return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount
+                        .Settings.ServicePeriodAnchorConfig.Custom(
+                        this.dayOfMonth,
+                        this.extraParams,
+                        this.hour,
+                        this.minute,
+                        this.month,
+                        this.second);
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                   * from 1 to 31.
+                   */
+                  public Builder setDayOfMonth(Long dayOfMonth) {
+                    this.dayOfMonth = dayOfMonth;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * SubscriptionScheduleAmendParams.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                  public Builder setHour(Long hour) {
+                    this.hour = hour;
+                    return this;
+                  }
+
+                  /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                  public Builder setMinute(Long minute) {
+                    this.minute = minute;
+                    return this;
+                  }
+
+                  /** The month to start full cycle periods. Ranges from 1 to 12. */
+                  public Builder setMonth(Long month) {
+                    this.month = month;
+                    return this;
+                  }
+
+                  /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                  public Builder setSecond(Long second) {
+                    this.second = second;
+                    return this;
+                  }
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("custom")
+                CUSTOM("custom"),
+
+                @SerializedName("inherit")
+                INHERIT("inherit");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum StartDate implements ApiRequestParams.EnumParam {
+              @SerializedName("amendment_start")
+              AMENDMENT_START("amendment_start"),
+
+              @SerializedName("current_period_end")
+              CURRENT_PERIOD_END("current_period_end"),
+
+              @SerializedName("current_period_start")
+              CURRENT_PERIOD_START("current_period_start");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              StartDate(String value) {
                 this.value = value;
               }
             }
@@ -3367,17 +4579,23 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
           @SerializedName("promotion_code")
           String promotionCode;
 
+          /** Settings for discount application including service period anchoring. */
+          @SerializedName("settings")
+          Settings settings;
+
           private Discount(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
               Map<String, Object> extraParams,
-              String promotionCode) {
+              String promotionCode,
+              Settings settings) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
             this.promotionCode = promotionCode;
+            this.settings = settings;
           }
 
           public static Builder builder() {
@@ -3395,6 +4613,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
 
             private String promotionCode;
 
+            private Settings settings;
+
             /** Finalize and obtain parameter instance from this builder. */
             public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount build() {
               return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount(
@@ -3402,7 +4622,8 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
                   this.discount,
                   this.discountEnd,
                   this.extraParams,
-                  this.promotionCode);
+                  this.promotionCode,
+                  this.settings);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -3458,6 +4679,14 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
             /** ID of the promotion code to create a new discount for. */
             public Builder setPromotionCode(String promotionCode) {
               this.promotionCode = promotionCode;
+              return this;
+            }
+
+            /** Settings for discount application including service period anchoring. */
+            public Builder setSettings(
+                SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                    settings) {
+              this.settings = settings;
               return this;
             }
           }
@@ -3713,6 +4942,397 @@ public class SubscriptionScheduleAmendParams extends ApiRequestParams {
               private final String value;
 
               Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Settings {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Configures service period cycle anchoring. */
+            @SerializedName("service_period_anchor_config")
+            ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+             */
+            @SerializedName("start_date")
+            StartDate startDate;
+
+            private Settings(
+                Map<String, Object> extraParams,
+                ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+                StartDate startDate) {
+              this.extraParams = extraParams;
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              this.startDate = startDate;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+              private StartDate startDate;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                  build() {
+                return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount
+                    .Settings(this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Configures service period cycle anchoring. */
+              public Builder setServicePeriodAnchorConfig(
+                  SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                          .ServicePeriodAnchorConfig
+                      servicePeriodAnchorConfig) {
+                this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                return this;
+              }
+
+              /**
+               * The start date of the discount's service period when applying a coupon or promotion
+               * code with a service period duration. Defaults to {@code amendment_start} if
+               * omitted.
+               */
+              public Builder setStartDate(
+                  SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                          .StartDate
+                      startDate) {
+                this.startDate = startDate;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ServicePeriodAnchorConfig {
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              @SerializedName("custom")
+              Custom custom;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              @SerializedName("type")
+              Type type;
+
+              private ServicePeriodAnchorConfig(
+                  Custom custom, Map<String, Object> extraParams, Type type) {
+                this.custom = custom;
+                this.extraParams = extraParams;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Custom custom;
+
+                private Map<String, Object> extraParams;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                        .ServicePeriodAnchorConfig
+                    build() {
+                  return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount
+                      .Settings.ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+                }
+
+                /**
+                 * Anchor the service period to a custom date. Type must be {@code custom} to
+                 * specify.
+                 */
+                public Builder setCustom(
+                    SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                            .ServicePeriodAnchorConfig.Custom
+                        custom) {
+                  this.custom = custom;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+                 */
+                public Builder setType(
+                    SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                            .ServicePeriodAnchorConfig.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Custom {
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                @SerializedName("day_of_month")
+                Long dayOfMonth;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                @SerializedName("hour")
+                Long hour;
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("minute")
+                Long minute;
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                @SerializedName("month")
+                Long month;
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("second")
+                Long second;
+
+                private Custom(
+                    Long dayOfMonth,
+                    Map<String, Object> extraParams,
+                    Long hour,
+                    Long minute,
+                    Long month,
+                    Long second) {
+                  this.dayOfMonth = dayOfMonth;
+                  this.extraParams = extraParams;
+                  this.hour = hour;
+                  this.minute = minute;
+                  this.month = month;
+                  this.second = second;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Long dayOfMonth;
+
+                  private Map<String, Object> extraParams;
+
+                  private Long hour;
+
+                  private Long minute;
+
+                  private Long month;
+
+                  private Long second;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings
+                          .ServicePeriodAnchorConfig.Custom
+                      build() {
+                    return new SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount
+                        .Settings.ServicePeriodAnchorConfig.Custom(
+                        this.dayOfMonth,
+                        this.extraParams,
+                        this.hour,
+                        this.minute,
+                        this.month,
+                        this.second);
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                   * from 1 to 31.
+                   */
+                  public Builder setDayOfMonth(Long dayOfMonth) {
+                    this.dayOfMonth = dayOfMonth;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * SubscriptionScheduleAmendParams.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                  public Builder setHour(Long hour) {
+                    this.hour = hour;
+                    return this;
+                  }
+
+                  /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                  public Builder setMinute(Long minute) {
+                    this.minute = minute;
+                    return this;
+                  }
+
+                  /** The month to start full cycle periods. Ranges from 1 to 12. */
+                  public Builder setMonth(Long month) {
+                    this.month = month;
+                    return this;
+                  }
+
+                  /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                  public Builder setSecond(Long second) {
+                    this.second = second;
+                    return this;
+                  }
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("custom")
+                CUSTOM("custom"),
+
+                @SerializedName("inherit")
+                INHERIT("inherit");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum StartDate implements ApiRequestParams.EnumParam {
+              @SerializedName("amendment_start")
+              AMENDMENT_START("amendment_start"),
+
+              @SerializedName("current_period_end")
+              CURRENT_PERIOD_END("current_period_end"),
+
+              @SerializedName("current_period_start")
+              CURRENT_PERIOD_START("current_period_start");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              StartDate(String value) {
                 this.value = value;
               }
             }

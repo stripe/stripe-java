@@ -142,6 +142,9 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
   @SerializedName("script")
   Script script;
 
+  @SerializedName("service_period")
+  ServicePeriod servicePeriod;
+
   /** Number of times this coupon has been applied to a customer. */
   @SerializedName("times_redeemed")
   Long timesRedeemed;
@@ -444,10 +447,26 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     String id;
   }
 
+  /**
+   * For more details about ServicePeriod, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ServicePeriod extends StripeObject {
+    @SerializedName("interval")
+    String interval;
+
+    @SerializedName("interval_count")
+    Long intervalCount;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(appliesTo, responseGetter);
     trySetResponseGetter(script, responseGetter);
+    trySetResponseGetter(servicePeriod, responseGetter);
   }
 }

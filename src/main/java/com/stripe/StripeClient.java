@@ -521,6 +521,18 @@ public class StripeClient {
   }
 
   /**
+   * @deprecated StripeClient.frMealVouchersOnboardings() is deprecated, use
+   *     StripeClient.v1().frMealVouchersOnboardings() instead. All functionality under it has been
+   *     copied over to StripeClient.v1().frMealVouchersOnboardings(). See <a
+   *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration
+   *     guide</a> for more on this and tips on migrating to the new v1 namespace.
+   */
+  @Deprecated
+  public com.stripe.service.FrMealVouchersOnboardingService frMealVouchersOnboardings() {
+    return new com.stripe.service.FrMealVouchersOnboardingService(this.getResponseGetter());
+  }
+
+  /**
    * @deprecated StripeClient.fxQuotes() is deprecated, use StripeClient.v1().fxQuotes() instead.
    *     All functionality under it has been copied over to StripeClient.v1().fxQuotes(). See <a
    *     href="https://github.com/stripe/stripe-java/wiki/v1-namespace-in-StripeClient">migration

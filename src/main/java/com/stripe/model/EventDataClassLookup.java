@@ -51,6 +51,7 @@ public final class EventDataClassLookup {
     classLookup.put("fee_refund", com.stripe.model.FeeRefund.class);
     classLookup.put("file", com.stripe.model.File.class);
     classLookup.put("file_link", com.stripe.model.FileLink.class);
+    classLookup.put("fr_meal_vouchers_onboarding", com.stripe.model.FrMealVouchersOnboarding.class);
     classLookup.put("funding_instructions", com.stripe.model.FundingInstructions.class);
     classLookup.put("fx_quote", com.stripe.model.FxQuote.class);
     classLookup.put("invoice", com.stripe.model.Invoice.class);

@@ -1312,7 +1312,10 @@ public class SessionUpdateParams extends ApiRequestParams {
         ONCE("once"),
 
         @SerializedName("repeating")
-        REPEATING("repeating");
+        REPEATING("repeating"),
+
+        @SerializedName("service_period")
+        SERVICE_PERIOD("service_period");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

@@ -92,6 +92,9 @@ public class Discount extends StripeObject implements HasId {
   @SerializedName("schedule")
   String schedule;
 
+  @SerializedName("service_period_details")
+  ServicePeriodDetails servicePeriodDetails;
+
   @SerializedName("source")
   Source source;
 
@@ -147,6 +150,23 @@ public class Discount extends StripeObject implements HasId {
   public void setPromotionCodeObject(PromotionCode expandableObject) {
     this.promotionCode =
         new ExpandableField<PromotionCode>(expandableObject.getId(), expandableObject);
+  }
+
+  /**
+   * For more details about ServicePeriodDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ServicePeriodDetails extends StripeObject {
+    /** The date that the service period was anchored to. */
+    @SerializedName("service_period_anchored_at")
+    Long servicePeriodAnchoredAt;
+
+    /** The date that the service period started. */
+    @SerializedName("start_date")
+    Long startDate;
   }
 
   /**

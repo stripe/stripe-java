@@ -123,6 +123,10 @@ public class CouponCreateParams extends ApiRequestParams {
   @SerializedName("script")
   Script script;
 
+  /** A hash specifying the service period for the coupon. */
+  @SerializedName("service_period")
+  ServicePeriod servicePeriod;
+
   private CouponCreateParams(
       Long amountOff,
       AppliesTo appliesTo,
@@ -138,7 +142,8 @@ public class CouponCreateParams extends ApiRequestParams {
       String name,
       BigDecimal percentOff,
       Long redeemBy,
-      Script script) {
+      Script script,
+      ServicePeriod servicePeriod) {
     this.amountOff = amountOff;
     this.appliesTo = appliesTo;
     this.currency = currency;
@@ -154,6 +159,7 @@ public class CouponCreateParams extends ApiRequestParams {
     this.percentOff = percentOff;
     this.redeemBy = redeemBy;
     this.script = script;
+    this.servicePeriod = servicePeriod;
   }
 
   public static Builder builder() {
@@ -191,6 +197,8 @@ public class CouponCreateParams extends ApiRequestParams {
 
     private Script script;
 
+    private ServicePeriod servicePeriod;
+
     /** Finalize and obtain parameter instance from this builder. */
     public CouponCreateParams build() {
       return new CouponCreateParams(
@@ -208,7 +216,8 @@ public class CouponCreateParams extends ApiRequestParams {
           this.name,
           this.percentOff,
           this.redeemBy,
-          this.script);
+          this.script,
+          this.servicePeriod);
     }
 
     /**
@@ -435,6 +444,12 @@ public class CouponCreateParams extends ApiRequestParams {
      */
     public Builder setScript(CouponCreateParams.Script script) {
       this.script = script;
+      return this;
+    }
+
+    /** A hash specifying the service period for the coupon. */
+    public Builder setServicePeriod(CouponCreateParams.ServicePeriod servicePeriod) {
+      this.servicePeriod = servicePeriod;
       return this;
     }
   }
@@ -708,6 +723,118 @@ public class CouponCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ServicePeriod {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * <strong>Required.</strong> Specifies coupon frequency. Either {@code day}, {@code week},
+     * {@code month} or {@code year}.
+     */
+    @SerializedName("interval")
+    Interval interval;
+
+    /** <strong>Required.</strong> The number of intervals for which the coupon will be applied. */
+    @SerializedName("interval_count")
+    Long intervalCount;
+
+    private ServicePeriod(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+      this.extraParams = extraParams;
+      this.interval = interval;
+      this.intervalCount = intervalCount;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Interval interval;
+
+      private Long intervalCount;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public CouponCreateParams.ServicePeriod build() {
+        return new CouponCreateParams.ServicePeriod(
+            this.extraParams, this.interval, this.intervalCount);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CouponCreateParams.ServicePeriod#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CouponCreateParams.ServicePeriod#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> Specifies coupon frequency. Either {@code day}, {@code week},
+       * {@code month} or {@code year}.
+       */
+      public Builder setInterval(CouponCreateParams.ServicePeriod.Interval interval) {
+        this.interval = interval;
+        return this;
+      }
+
+      /**
+       * <strong>Required.</strong> The number of intervals for which the coupon will be applied.
+       */
+      public Builder setIntervalCount(Long intervalCount) {
+        this.intervalCount = intervalCount;
+        return this;
+      }
+    }
+
+    public enum Interval implements ApiRequestParams.EnumParam {
+      @SerializedName("day")
+      DAY("day"),
+
+      @SerializedName("month")
+      MONTH("month"),
+
+      @SerializedName("week")
+      WEEK("week"),
+
+      @SerializedName("year")
+      YEAR("year");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Interval(String value) {
+        this.value = value;
+      }
+    }
+  }
+
   public enum Duration implements ApiRequestParams.EnumParam {
     @SerializedName("forever")
     FOREVER("forever"),
@@ -716,7 +843,10 @@ public class CouponCreateParams extends ApiRequestParams {
     ONCE("once"),
 
     @SerializedName("repeating")
-    REPEATING("repeating");
+    REPEATING("repeating"),
+
+    @SerializedName("service_period")
+    SERVICE_PERIOD("service_period");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
