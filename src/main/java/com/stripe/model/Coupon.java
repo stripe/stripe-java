@@ -460,6 +460,24 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
 
     @SerializedName("interval_count")
     Long intervalCount;
+
+    @SerializedName("iterations")
+    Iterations iterations;
+
+    /**
+     * For more details about Iterations, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Iterations extends StripeObject {
+      @SerializedName("count")
+      Long count;
+
+      @SerializedName("type")
+      String type;
+    }
   }
 
   @Override

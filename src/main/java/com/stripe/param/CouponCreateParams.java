@@ -746,10 +746,19 @@ public class CouponCreateParams extends ApiRequestParams {
     @SerializedName("interval_count")
     Long intervalCount;
 
-    private ServicePeriod(Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+    /** Specifies the number of times the coupon is contiguously applied. */
+    @SerializedName("iterations")
+    Iterations iterations;
+
+    private ServicePeriod(
+        Map<String, Object> extraParams,
+        Interval interval,
+        Long intervalCount,
+        Iterations iterations) {
       this.extraParams = extraParams;
       this.interval = interval;
       this.intervalCount = intervalCount;
+      this.iterations = iterations;
     }
 
     public static Builder builder() {
@@ -763,10 +772,12 @@ public class CouponCreateParams extends ApiRequestParams {
 
       private Long intervalCount;
 
+      private Iterations iterations;
+
       /** Finalize and obtain parameter instance from this builder. */
       public CouponCreateParams.ServicePeriod build() {
         return new CouponCreateParams.ServicePeriod(
-            this.extraParams, this.interval, this.intervalCount);
+            this.extraParams, this.interval, this.intervalCount, this.iterations);
       }
 
       /**
@@ -810,6 +821,122 @@ public class CouponCreateParams extends ApiRequestParams {
       public Builder setIntervalCount(Long intervalCount) {
         this.intervalCount = intervalCount;
         return this;
+      }
+
+      /** Specifies the number of times the coupon is contiguously applied. */
+      public Builder setIterations(CouponCreateParams.ServicePeriod.Iterations iterations) {
+        this.iterations = iterations;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Iterations {
+      /**
+       * The number of iterations the service period will repeat for. Only used when type is {@code
+       * count}, defaults to 1.
+       */
+      @SerializedName("count")
+      Long count;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * <strong>Required.</strong> The type of iterations, defaults to {@code count} if omitted.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private Iterations(Long count, Map<String, Object> extraParams, Type type) {
+        this.count = count;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long count;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CouponCreateParams.ServicePeriod.Iterations build() {
+          return new CouponCreateParams.ServicePeriod.Iterations(
+              this.count, this.extraParams, this.type);
+        }
+
+        /**
+         * The number of iterations the service period will repeat for. Only used when type is
+         * {@code count}, defaults to 1.
+         */
+        public Builder setCount(Long count) {
+          this.count = count;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CouponCreateParams.ServicePeriod.Iterations#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CouponCreateParams.ServicePeriod.Iterations#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * <strong>Required.</strong> The type of iterations, defaults to {@code count} if omitted.
+         */
+        public Builder setType(CouponCreateParams.ServicePeriod.Iterations.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("count")
+        COUNT("count"),
+
+        @SerializedName("forever")
+        FOREVER("forever");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
       }
     }
 
