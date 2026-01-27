@@ -20,14 +20,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
-   * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details} or
-   * {@code schedule_details} are provided.
-   */
-  @SerializedName("billing_cadence")
-  String billingCadence;
-
-  /**
    * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
    */
   @SerializedName("currency")
@@ -140,7 +132,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
   private InvoiceCreatePreviewParams(
       AutomaticTax automaticTax,
-      String billingCadence,
       String currency,
       String customer,
       String customerAccount,
@@ -157,7 +148,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String subscription,
       SubscriptionDetails subscriptionDetails) {
     this.automaticTax = automaticTax;
-    this.billingCadence = billingCadence;
     this.currency = currency;
     this.customer = customer;
     this.customerAccount = customerAccount;
@@ -181,8 +171,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
   public static class Builder {
     private AutomaticTax automaticTax;
-
-    private String billingCadence;
 
     private String currency;
 
@@ -218,7 +206,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     public InvoiceCreatePreviewParams build() {
       return new InvoiceCreatePreviewParams(
           this.automaticTax,
-          this.billingCadence,
           this.currency,
           this.customer,
           this.customerAccount,
@@ -239,16 +226,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice preview. */
     public Builder setAutomaticTax(InvoiceCreatePreviewParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /**
-     * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
-     * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details}
-     * or {@code schedule_details} are provided.
-     */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
       return this;
     }
 

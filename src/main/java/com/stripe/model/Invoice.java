@@ -2367,10 +2367,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
-    /** Details about the billing cadence that generated this invoice. */
-    @SerializedName("billing_cadence_details")
-    BillingCadenceDetails billingCadenceDetails;
-
     /** Details about the quote that generated this invoice. */
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
@@ -2382,24 +2378,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /**
      * The type of parent that generated this invoice
      *
-     * <p>One of {@code billing_cadence_details}, {@code quote_details}, or {@code
-     * subscription_details}.
+     * <p>One of {@code quote_details}, or {@code subscription_details}.
      */
     @SerializedName("type")
     String type;
-
-    /**
-     * For more details about BillingCadenceDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillingCadenceDetails extends StripeObject {
-      /** The billing cadence that generated this invoice. */
-      @SerializedName("billing_cadence")
-      String billingCadence;
-    }
 
     /**
      * For more details about QuoteDetails, please refer to the <a

@@ -14,12 +14,10 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.SubscriptionAttachCadenceParams;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
 import com.stripe.param.SubscriptionMigrateParams;
-import com.stripe.param.SubscriptionPauseParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -534,34 +532,6 @@ public final class SubscriptionService extends ApiService {
             options);
     return this.request(request, new TypeToken<StripeSearchResult<Subscription>>() {}.getType());
   }
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(String subscription, SubscriptionAttachCadenceParams params)
-      throws StripeException {
-    return attachCadence(subscription, params, (RequestOptions) null);
-  }
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(
-      String subscription, SubscriptionAttachCadenceParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(subscription));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, Subscription.class);
-  }
   /** Upgrade the billing_mode of an existing subscription. */
   public Subscription migrate(String subscription, SubscriptionMigrateParams params)
       throws StripeException {
@@ -573,34 +543,6 @@ public final class SubscriptionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(subscription));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, Subscription.class);
-  }
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(String subscription, SubscriptionPauseParams params)
-      throws StripeException {
-    return pause(subscription, params, (RequestOptions) null);
-  }
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(
-      String subscription, SubscriptionPauseParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(subscription));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

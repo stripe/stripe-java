@@ -9,11 +9,8 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.OrderCancelParams;
 import com.stripe.param.OrderCreateParams;
-import com.stripe.param.OrderListLineItemsParams;
 import com.stripe.param.OrderListParams;
-import com.stripe.param.OrderReopenParams;
 import com.stripe.param.OrderRetrieveParams;
 import com.stripe.param.OrderSubmitParams;
 import com.stripe.param.OrderUpdateParams;
@@ -249,48 +246,6 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             : null;
   }
 
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel() throws StripeException {
-    return cancel((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(RequestOptions options) throws StripeException {
-    return cancel((Map<String, Object>) null, options);
-  }
-
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(Map<String, Object> params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/orders/%s/cancel", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, Order.class);
-  }
-
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(OrderCancelParams params) throws StripeException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(OrderCancelParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/orders/%s/cancel", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, Order.class);
-  }
-
   /** Creates a new {@code open} order object. */
   public static Order create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -369,107 +324,6 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             ApiRequestParams.paramsToMap(params),
             options);
     return getGlobalResponseGetter().request(request, OrderCollection.class);
-  }
-
-  /**
-   * When retrieving an order, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems() throws StripeException {
-    return listLineItems((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an order, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params) throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an order, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.GET, path, params, options);
-    return getResponseGetter().request(request, LineItemCollection.class);
-  }
-
-  /**
-   * When retrieving an order, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(OrderListLineItemsParams params) throws StripeException {
-    return listLineItems(params, (RequestOptions) null);
-  }
-
-  /**
-   * When retrieving an order, there is an includable <strong>line_items</strong> property
-   * containing the first handful of those items. There is also a URL where you can retrieve the
-   * full (paginated) list of line items.
-   */
-  public LineItemCollection listLineItems(OrderListLineItemsParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/orders/%s/line_items", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.GET,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, LineItemCollection.class);
-  }
-
-  /** Reopens a {@code submitted} order. */
-  public Order reopen() throws StripeException {
-    return reopen((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(RequestOptions options) throws StripeException {
-    return reopen((Map<String, Object>) null, options);
-  }
-
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(Map<String, Object> params) throws StripeException {
-    return reopen(params, (RequestOptions) null);
-  }
-
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, Order.class);
-  }
-
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(OrderReopenParams params) throws StripeException {
-    return reopen(params, (RequestOptions) null);
-  }
-
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(OrderReopenParams params, RequestOptions options) throws StripeException {
-    String path = String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, Order.class);
   }
 
   /**

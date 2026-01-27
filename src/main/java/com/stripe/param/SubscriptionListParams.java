@@ -17,10 +17,6 @@ public class SubscriptionListParams extends ApiRequestParams {
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
 
-  /** Filter for subscriptions that have the specified billing cadence. */
-  @SerializedName("billing_cadence")
-  String billingCadence;
-
   /**
    * The collection method of the subscriptions to retrieve. Either {@code charge_automatically} or
    * {@code send_invoice}.
@@ -120,7 +116,6 @@ public class SubscriptionListParams extends ApiRequestParams {
 
   private SubscriptionListParams(
       AutomaticTax automaticTax,
-      String billingCadence,
       CollectionMethod collectionMethod,
       Object created,
       Object currentPeriodEnd,
@@ -137,7 +132,6 @@ public class SubscriptionListParams extends ApiRequestParams {
       Status status,
       String testClock) {
     this.automaticTax = automaticTax;
-    this.billingCadence = billingCadence;
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.currentPeriodEnd = currentPeriodEnd;
@@ -161,8 +155,6 @@ public class SubscriptionListParams extends ApiRequestParams {
 
   public static class Builder {
     private AutomaticTax automaticTax;
-
-    private String billingCadence;
 
     private CollectionMethod collectionMethod;
 
@@ -198,7 +190,6 @@ public class SubscriptionListParams extends ApiRequestParams {
     public SubscriptionListParams build() {
       return new SubscriptionListParams(
           this.automaticTax,
-          this.billingCadence,
           this.collectionMethod,
           this.created,
           this.currentPeriodEnd,
@@ -219,12 +210,6 @@ public class SubscriptionListParams extends ApiRequestParams {
     /** Filter subscriptions by their automatic tax settings. */
     public Builder setAutomaticTax(SubscriptionListParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /** Filter for subscriptions that have the specified billing cadence. */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
       return this;
     }
 

@@ -10,12 +10,10 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.SubscriptionAttachCadenceParams;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
 import com.stripe.param.SubscriptionMigrateParams;
-import com.stripe.param.SubscriptionPauseParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -54,15 +52,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
-
-  /**
-   * The Billing Cadence which controls the timing of recurring invoice generation for this
-   * subscription.If unset, the subscription will bill according to its own configured schedule and
-   * create its own invoices.If set, this subscription will be billed by the cadence instead,
-   * potentially sharing invoices with the other subscriptions linked to that Cadence.
-   */
-  @SerializedName("billing_cadence")
-  String billingCadence;
 
   /**
    * The reference point that aligns future <a
@@ -608,58 +597,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   }
 
   /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(Map<String, Object> params) throws StripeException {
-    return attachCadence(params, (RequestOptions) null);
-  }
-
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, Subscription.class);
-  }
-
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(SubscriptionAttachCadenceParams params) throws StripeException {
-    return attachCadence(params, (RequestOptions) null);
-  }
-
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(SubscriptionAttachCadenceParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, Subscription.class);
-  }
-
-  /**
    * Cancels a customer’s subscription immediately. The customer won’t be charged again for the
    * subscription. After it’s canceled, you can no longer update the subscription or its <a
    * href="https://stripe.com/metadata">metadata</a>.
@@ -960,58 +897,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, Subscription.class);
-  }
-
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(Map<String, Object> params) throws StripeException {
-    return pause(params, (RequestOptions) null);
-  }
-
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, Subscription.class);
-  }
-
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(SubscriptionPauseParams params) throws StripeException {
-    return pause(params, (RequestOptions) null);
-  }
-
-  /**
-   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
-   * generate invoices and will not advance to new billing periods. The subscription can be resumed
-   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
-   */
-  public Subscription pause(SubscriptionPauseParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(this.getId()));
     ApiResource.checkNullTypedParams(path, params);
     ApiRequest request =
         new ApiRequest(

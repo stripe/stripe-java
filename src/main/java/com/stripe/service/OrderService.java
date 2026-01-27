@@ -12,10 +12,8 @@ import com.stripe.net.ApiService;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.OrderCancelParams;
 import com.stripe.param.OrderCreateParams;
 import com.stripe.param.OrderListParams;
-import com.stripe.param.OrderReopenParams;
 import com.stripe.param.OrderRetrieveParams;
 import com.stripe.param.OrderSubmitParams;
 import com.stripe.param.OrderUpdateParams;
@@ -152,56 +150,6 @@ public final class OrderService extends ApiService {
             options);
     return this.request(request, Order.class);
   }
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(String id, OrderCancelParams params) throws StripeException {
-    return cancel(id, params, (RequestOptions) null);
-  }
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(String id, RequestOptions options) throws StripeException {
-    return cancel(id, (OrderCancelParams) null, options);
-  }
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(String id) throws StripeException {
-    return cancel(id, (OrderCancelParams) null, (RequestOptions) null);
-  }
-  /** Cancels the order as well as the payment intent if one is attached. */
-  public Order cancel(String id, OrderCancelParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/orders/%s/cancel", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, Order.class);
-  }
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(String id, OrderReopenParams params) throws StripeException {
-    return reopen(id, params, (RequestOptions) null);
-  }
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(String id, RequestOptions options) throws StripeException {
-    return reopen(id, (OrderReopenParams) null, options);
-  }
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(String id) throws StripeException {
-    return reopen(id, (OrderReopenParams) null, (RequestOptions) null);
-  }
-  /** Reopens a {@code submitted} order. */
-  public Order reopen(String id, OrderReopenParams params, RequestOptions options)
-      throws StripeException {
-    String path = String.format("/v1/orders/%s/reopen", ApiResource.urlEncodeId(id));
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return this.request(request, Order.class);
-  }
   /**
    * Submitting an Order transitions the status to {@code processing} and creates a PaymentIntent
    * object so the order can be paid. If the Order has an {@code amount_total} of 0, no
@@ -230,9 +178,5 @@ public final class OrderService extends ApiService {
             ApiRequestParams.paramsToMap(params),
             options);
     return this.request(request, Order.class);
-  }
-
-  public com.stripe.service.OrderLineItemService lineItems() {
-    return new com.stripe.service.OrderLineItemService(this.getResponseGetter());
   }
 }
