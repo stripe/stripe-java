@@ -639,7 +639,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2025_11_17_CLOVER("2025-11-17.clover"),
 
     @SerializedName("2025-12-15.clover")
-    VERSION_2025_12_15_CLOVER("2025-12-15.clover");
+    VERSION_2025_12_15_CLOVER("2025-12-15.clover"),
+
+    @SerializedName("2026-01-28.clover")
+    VERSION_2026_01_28_CLOVER("2026-01-28.clover");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -733,6 +736,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("capital.financing_offer.replacement_created")
     CAPITAL__FINANCING_OFFER__REPLACEMENT_CREATED("capital.financing_offer.replacement_created"),
+
+    @SerializedName("capital.financing_summary.line_of_credit_update")
+    CAPITAL__FINANCING_SUMMARY__LINE_OF_CREDIT_UPDATE(
+        "capital.financing_summary.line_of_credit_update"),
 
     @SerializedName("capital.financing_transaction.created")
     CAPITAL__FINANCING_TRANSACTION__CREATED("capital.financing_transaction.created"),

@@ -79,6 +79,12 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("prefetch")
   List<String> prefetch;
 
+  @SerializedName("relink_options")
+  RelinkOptions relinkOptions;
+
+  @SerializedName("relink_result")
+  RelinkResult relinkResult;
+
   /**
    * For webview integrations only. Upon completing OAuth login in the native browser, the user will
    * be redirected to this URL to return to your app.
@@ -301,6 +307,53 @@ public class Session extends ApiResource implements HasId {
   public static class ManualEntry extends StripeObject {}
 
   /**
+   * For more details about RelinkOptions, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RelinkOptions extends StripeObject {
+    /**
+     * Requires the end user to repair this specific account during the authentication flow instead
+     * of connecting a different one.
+     */
+    @SerializedName("account")
+    String account;
+
+    /** The authorization to relink in the Session. */
+    @SerializedName("authorization")
+    String authorization;
+  }
+
+  /**
+   * For more details about RelinkResult, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RelinkResult extends StripeObject {
+    /**
+     * The account relinked in the Session. Only present if {@code relink_options[account]} is set
+     * and relink is successful.
+     */
+    @SerializedName("account")
+    String account;
+
+    /** The authorization relinked in the Session. Only present if relink is successful. */
+    @SerializedName("authorization")
+    String authorization;
+
+    /**
+     * Reason for why relink failed. One of {@code no_authorization}, {@code no_account}, or {@code
+     * other}.
+     */
+    @SerializedName("failure_reason")
+    String failureReason;
+  }
+
+  /**
    * For more details about StatusDetails, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -337,6 +390,8 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(filters, responseGetter);
     trySetResponseGetter(limits, responseGetter);
     trySetResponseGetter(manualEntry, responseGetter);
+    trySetResponseGetter(relinkOptions, responseGetter);
+    trySetResponseGetter(relinkResult, responseGetter);
     trySetResponseGetter(statusDetails, responseGetter);
   }
 }

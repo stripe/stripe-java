@@ -22,7 +22,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("adaptive_pricing")
   AdaptivePricing adaptivePricing;
 
-  /** Configure actions after a Checkout Session has expired. */
+  /**
+   * Configure actions after a Checkout Session has expired. You can't set this parameter if {@code
+   * ui_mode} is {@code custom}.
+   */
   @SerializedName("after_expiration")
   AfterExpiration afterExpiration;
 
@@ -83,12 +86,15 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("custom_fields")
   List<SessionCreateParams.CustomField> customFields;
 
-  /** Display additional text for your customers using custom text. */
+  /**
+   * Display additional text for your customers using custom text. You can't set this parameter if
+   * {@code ui_mode} is {@code custom}.
+   */
   @SerializedName("custom_text")
   CustomText customText;
 
@@ -243,6 +249,8 @@ public class SessionCreateParams extends ApiRequestParams {
    *
    * <p>If a <a href="https://docs.stripe.com/api/customers">Customer</a> is created or provided,
    * the names can be saved to the Customer object as well.
+   *
+   * <p>You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("name_collection")
   NameCollection nameCollection;
@@ -260,12 +268,15 @@ public class SessionCreateParams extends ApiRequestParams {
    *
    * <p>For {@code subscription} mode, there is a maximum of 20 line items and optional items with
    * recurring Prices and 20 line items and optional items with one-time Prices.
+   *
+   * <p>You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("optional_items")
   List<SessionCreateParams.OptionalItem> optionalItems;
 
   /**
    * Where the user is coming from. This informs the optimizations that are applied to the session.
+   * You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("origin_context")
   OriginContext originContext;
@@ -391,7 +402,7 @@ public class SessionCreateParams extends ApiRequestParams {
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. {@code submit_type} can only be specified on
    * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
-   * {@code pay} is used.
+   * {@code pay} is used. You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("submit_type")
   SubmitType submitType;
@@ -702,7 +713,10 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Configure actions after a Checkout Session has expired. */
+    /**
+     * Configure actions after a Checkout Session has expired. You can't set this parameter if
+     * {@code ui_mode} is {@code custom}.
+     */
     public Builder setAfterExpiration(SessionCreateParams.AfterExpiration afterExpiration) {
       this.afterExpiration = afterExpiration;
       return this;
@@ -829,7 +843,10 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Display additional text for your customers using custom text. */
+    /**
+     * Display additional text for your customers using custom text. You can't set this parameter if
+     * {@code ui_mode} is {@code custom}.
+     */
     public Builder setCustomText(SessionCreateParams.CustomText customText) {
       this.customText = customText;
       return this;
@@ -1109,6 +1126,8 @@ public class SessionCreateParams extends ApiRequestParams {
      *
      * <p>If a <a href="https://docs.stripe.com/api/customers">Customer</a> is created or provided,
      * the names can be saved to the Customer object as well.
+     *
+     * <p>You can't set this parameter if {@code ui_mode} is {@code custom}.
      */
     public Builder setNameCollection(SessionCreateParams.NameCollection nameCollection) {
       this.nameCollection = nameCollection;
@@ -1143,7 +1162,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Where the user is coming from. This informs the optimizations that are applied to the
-     * session.
+     * session. You can't set this parameter if {@code ui_mode} is {@code custom}.
      */
     public Builder setOriginContext(SessionCreateParams.OriginContext originContext) {
       this.originContext = originContext;
@@ -1331,7 +1350,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * Describes the type of transaction being performed by Checkout in order to customize relevant
      * text on the page, such as the submit button. {@code submit_type} can only be specified on
      * Checkout Sessions in {@code payment} or {@code subscription} mode. If blank or {@code auto},
-     * {@code pay} is used.
+     * {@code pay} is used. You can't set this parameter if {@code ui_mode} is {@code custom}.
      */
     public Builder setSubmitType(SessionCreateParams.SubmitType submitType) {
       this.submitType = submitType;
@@ -5667,7 +5686,8 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The <a href="https://docs.stripe.com/api/tax_rates">tax rates</a> that will be applied to
      * this line item depending on the customer's billing/shipping address. We currently support the
-     * following countries: US, GB, AU, and all countries in the EU.
+     * following countries: US, GB, AU, and all countries in the EU. You can't set this parameter if
+     * {@code ui_mode} is {@code custom}.
      */
     @SerializedName("dynamic_tax_rates")
     List<String> dynamicTaxRates;
@@ -8180,7 +8200,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @Getter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodOptions {
-    /** contains details about the ACSS Debit payment method options. */
+    /**
+     * contains details about the ACSS Debit payment method options. You can't set this parameter if
+     * {@code ui_mode} is {@code custom}.
+     */
     @SerializedName("acss_debit")
     AcssDebit acssDebit;
 
@@ -8612,7 +8635,10 @@ public class SessionCreateParams extends ApiRequestParams {
             this.wechatPay);
       }
 
-      /** contains details about the ACSS Debit payment method options. */
+      /**
+       * contains details about the ACSS Debit payment method options. You can't set this parameter
+       * if {@code ui_mode} is {@code custom}.
+       */
       public Builder setAcssDebit(SessionCreateParams.PaymentMethodOptions.AcssDebit acssDebit) {
         this.acssDebit = acssDebit;
         return this;
@@ -10907,7 +10933,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * Restrictions to apply to the card payment method. For example, you can block specific card
-       * brands.
+       * brands. You can't set this parameter if {@code ui_mode} is {@code custom}.
        */
       @SerializedName("restrictions")
       Restrictions restrictions;
@@ -11147,7 +11173,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         /**
          * Restrictions to apply to the card payment method. For example, you can block specific
-         * card brands.
+         * card brands. You can't set this parameter if {@code ui_mode} is {@code custom}.
          */
         public Builder setRestrictions(
             SessionCreateParams.PaymentMethodOptions.Card.Restrictions restrictions) {
@@ -20395,7 +20421,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
-    /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
+    /**
+     * A future timestamp to anchor the subscription's billing cycle for new subscriptions. You
+     * can't set this parameter if {@code ui_mode} is {@code custom}.
+     */
     @SerializedName("billing_cycle_anchor")
     Long billingCycleAnchor;
 
@@ -20573,7 +20602,10 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** A future timestamp to anchor the subscription's billing cycle for new subscriptions. */
+      /**
+       * A future timestamp to anchor the subscription's billing cycle for new subscriptions. You
+       * can't set this parameter if {@code ui_mode} is {@code custom}.
+       */
       public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
         this.billingCycleAnchor = billingCycleAnchor;
         return this;
@@ -21426,7 +21458,10 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+    /**
+     * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You can't
+     * set this parameter if {@code ui_mode} is {@code custom}.
+     */
     @SerializedName("required")
     Required required;
 
@@ -21488,7 +21523,10 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Describes whether a tax ID is required during checkout. Defaults to {@code never}. */
+      /**
+       * Describes whether a tax ID is required during checkout. Defaults to {@code never}. You
+       * can't set this parameter if {@code ui_mode} is {@code custom}.
+       */
       public Builder setRequired(SessionCreateParams.TaxIdCollection.Required required) {
         this.required = required;
         return this;

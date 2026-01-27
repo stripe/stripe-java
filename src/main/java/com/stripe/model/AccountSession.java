@@ -372,9 +372,9 @@ public class AccountSession extends ApiResource {
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
+         * Whether to allow creation of instant payouts. The default value is {@code enabled} when
+         * Stripe is responsible for negative account balances, and {@code use_dashboard_rules}
+         * otherwise.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
@@ -688,9 +688,9 @@ public class AccountSession extends ApiResource {
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
+         * Whether to allow creation of instant payouts. The default value is {@code enabled} when
+         * Stripe is responsible for negative account balances, and {@code use_dashboard_rules}
+         * otherwise.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
@@ -1052,9 +1052,9 @@ public class AccountSession extends ApiResource {
         Boolean externalAccountCollection;
 
         /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
+         * Whether to allow creation of instant payouts. The default value is {@code enabled} when
+         * Stripe is responsible for negative account balances, and {@code use_dashboard_rules}
+         * otherwise.
          */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;

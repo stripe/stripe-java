@@ -347,6 +347,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("capital.financing_offer.replacement_created")
     CAPITAL__FINANCING_OFFER__REPLACEMENT_CREATED("capital.financing_offer.replacement_created"),
 
+    @SerializedName("capital.financing_summary.line_of_credit_update")
+    CAPITAL__FINANCING_SUMMARY__LINE_OF_CREDIT_UPDATE(
+        "capital.financing_summary.line_of_credit_update"),
+
     @SerializedName("capital.financing_transaction.created")
     CAPITAL__FINANCING_TRANSACTION__CREATED("capital.financing_transaction.created"),
 

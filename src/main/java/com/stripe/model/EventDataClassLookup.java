@@ -174,6 +174,9 @@ public final class EventDataClassLookup {
         "financial_connections.account_ownership",
         com.stripe.model.financialconnections.AccountOwnership.class);
     classLookup.put(
+        "financial_connections.authorization",
+        com.stripe.model.financialconnections.Authorization.class);
+    classLookup.put(
         "financial_connections.institution",
         com.stripe.model.financialconnections.Institution.class);
     classLookup.put(
@@ -220,11 +223,16 @@ public final class EventDataClassLookup {
 
     classLookup.put("radar.account_evaluation", com.stripe.model.radar.AccountEvaluation.class);
     classLookup.put("radar.early_fraud_warning", com.stripe.model.radar.EarlyFraudWarning.class);
+    classLookup.put("radar.payment_evaluation", com.stripe.model.radar.PaymentEvaluation.class);
     classLookup.put("radar.value_list", com.stripe.model.radar.ValueList.class);
     classLookup.put("radar.value_list_item", com.stripe.model.radar.ValueListItem.class);
 
     classLookup.put("reporting.report_run", com.stripe.model.reporting.ReportRun.class);
     classLookup.put("reporting.report_type", com.stripe.model.reporting.ReportType.class);
+
+    classLookup.put("reserve.hold", com.stripe.model.reserve.Hold.class);
+    classLookup.put("reserve.plan", com.stripe.model.reserve.Plan.class);
+    classLookup.put("reserve.release", com.stripe.model.reserve.Release.class);
 
     classLookup.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
 
