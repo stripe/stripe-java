@@ -1852,11 +1852,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
-         */
+        /** Whether instant payouts are enabled for this component. */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
 
@@ -1974,11 +1970,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-           * false}.
-           */
+          /** Whether instant payouts are enabled for this component. */
           public Builder setInstantPayouts(Boolean instantPayouts) {
             this.instantPayouts = instantPayouts;
             return this;
@@ -3638,11 +3630,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
-         */
+        /** Whether instant payouts are enabled for this component. */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
 
@@ -3734,11 +3722,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-           * false}.
-           */
+          /** Whether instant payouts are enabled for this component. */
           public Builder setInstantPayouts(Boolean instantPayouts) {
             this.instantPayouts = instantPayouts;
             return this;
@@ -5480,11 +5464,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-         * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-         * false}.
-         */
+        /** Whether instant payouts are enabled for this component. */
         @SerializedName("instant_payouts")
         Boolean instantPayouts;
 
@@ -5602,11 +5582,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * Whether to allow creation of instant payouts. Defaults to {@code true} when {@code
-           * controller.losses.payments} is set to {@code stripe} for the account, otherwise {@code
-           * false}.
-           */
+          /** Whether instant payouts are enabled for this component. */
           public Builder setInstantPayouts(Boolean instantPayouts) {
             this.instantPayouts = instantPayouts;
             return this;

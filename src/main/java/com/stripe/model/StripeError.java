@@ -93,11 +93,11 @@ public class StripeError extends StripeObject {
    * payouts_limit_exceeded}, {@code payouts_not_allowed}, {@code platform_account_required}, {@code
    * platform_api_key_expired}, {@code postal_code_invalid}, {@code processing_error}, {@code
    * product_inactive}, {@code progressive_onboarding_limit_exceeded}, {@code rate_limit}, {@code
-   * refer_to_customer}, {@code refund_disputed_payment}, {@code resource_already_exists}, {@code
-   * resource_missing}, {@code return_intent_already_processed}, {@code routing_number_invalid},
-   * {@code secret_key_required}, {@code sensitive_data_access_expired}, {@code
-   * sepa_unsupported_account}, {@code setup_attempt_failed}, {@code
-   * setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
+   * refer_to_customer}, {@code refund_disputed_payment}, {@code request_blocked}, {@code
+   * resource_already_exists}, {@code resource_missing}, {@code return_intent_already_processed},
+   * {@code routing_number_invalid}, {@code secret_key_required}, {@code
+   * sensitive_data_access_expired}, {@code sepa_unsupported_account}, {@code setup_attempt_failed},
+   * {@code setup_intent_authentication_failure}, {@code setup_intent_invalid_parameter}, {@code
    * setup_intent_mandate_invalid}, {@code setup_intent_mobile_wallet_unsupported}, {@code
    * setup_intent_setup_attempt_expired}, {@code setup_intent_unexpected_state}, {@code
    * shipping_address_invalid}, {@code shipping_calculation_failed}, {@code sku_inactive}, {@code

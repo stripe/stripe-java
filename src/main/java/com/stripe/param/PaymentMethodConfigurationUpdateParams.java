@@ -215,8 +215,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
   /**
    * Meal vouchers in France, or “titres-restaurant”, is a local benefits program commonly offered
    * by employers for their employees to purchase prepared food and beverages on working days. Check
-   * this <a href="https://docs.stripe.com/payments/benefits/fr-meal-vouchers">page</a> for more
-   * details.
+   * this <a href="https://docs.stripe.com/payments/meal-vouchers/fr-meal-vouchers">page</a> for
+   * more details.
    */
   @SerializedName("fr_meal_voucher_conecs")
   FrMealVoucherConecs frMealVoucherConecs;
@@ -1180,8 +1180,8 @@ public class PaymentMethodConfigurationUpdateParams extends ApiRequestParams {
     /**
      * Meal vouchers in France, or “titres-restaurant”, is a local benefits program commonly offered
      * by employers for their employees to purchase prepared food and beverages on working days.
-     * Check this <a href="https://docs.stripe.com/payments/benefits/fr-meal-vouchers">page</a> for
-     * more details.
+     * Check this <a href="https://docs.stripe.com/payments/meal-vouchers/fr-meal-vouchers">page</a>
+     * for more details.
      */
     public Builder setFrMealVoucherConecs(
         PaymentMethodConfigurationUpdateParams.FrMealVoucherConecs frMealVoucherConecs) {

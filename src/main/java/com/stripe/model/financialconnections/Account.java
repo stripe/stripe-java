@@ -42,6 +42,10 @@ public class Account extends ApiResource implements HasId {
   @SerializedName("account_numbers")
   List<Account.AccountNumber> accountNumbers;
 
+  /** The ID of the Financial Connections Authorization this account belongs to. */
+  @SerializedName("authorization")
+  String authorization;
+
   /** The most recent information about the account's balance. */
   @SerializedName("balance")
   Balance balance;
@@ -131,6 +135,9 @@ public class Account extends ApiResource implements HasId {
    */
   @SerializedName("status")
   String status;
+
+  @SerializedName("status_details")
+  StatusDetails statusDetails;
 
   /**
    * If {@code category} is {@code cash}, one of:
@@ -829,6 +836,44 @@ public class Account extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about StatusDetails, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusDetails extends StripeObject {
+    @SerializedName("inactive")
+    Inactive inactive;
+
+    /**
+     * For more details about Inactive, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Inactive extends StripeObject {
+      /**
+       * The action (if any) to relink the inactive Account.
+       *
+       * <p>One of {@code none}, or {@code relink_required}.
+       */
+      @SerializedName("action")
+      String action;
+
+      /**
+       * The underlying cause of the Account being inactive.
+       *
+       * <p>One of {@code access_denied}, {@code access_expired}, {@code account_closed}, {@code
+       * account_unavailable}, or {@code unspecified}.
+       */
+      @SerializedName("cause")
+      String cause;
+    }
+  }
+
+  /**
    * For more details about TransactionRefresh, please refer to the <a
    * href="https://docs.stripe.com/api">API Reference.</a>
    */
@@ -874,6 +919,7 @@ public class Account extends ApiResource implements HasId {
     trySetResponseGetter(institution, responseGetter);
     trySetResponseGetter(ownership, responseGetter);
     trySetResponseGetter(ownershipRefresh, responseGetter);
+    trySetResponseGetter(statusDetails, responseGetter);
     trySetResponseGetter(transactionRefresh, responseGetter);
   }
 }

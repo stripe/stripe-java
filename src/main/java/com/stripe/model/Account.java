@@ -2575,9 +2575,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("branding")
     Branding branding;
 
-    @SerializedName("capital")
-    Capital capital;
-
     @SerializedName("card_issuing")
     CardIssuing cardIssuing;
 
@@ -2723,23 +2720,6 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       public void setLogoObject(File expandableObject) {
         this.logo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
       }
-    }
-
-    /**
-     * For more details about Capital, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Capital extends StripeObject {
-      /** Per-currency mapping of user-selected destination accounts used to pay out loans. */
-      @SerializedName("payout_destination")
-      Map<String, String> payoutDestination;
-
-      /** Per-currency mapping of all destination accounts eligible to receive loan payouts. */
-      @SerializedName("payout_destination_selector")
-      Map<String, List<String>> payoutDestinationSelector;
     }
 
     /**
@@ -3081,6 +3061,10 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class PaypayPayments extends StripeObject {
+      /** Additional files that are required to support the onboarding process of your business. */
+      @SerializedName("additional_files")
+      List<String> additionalFiles;
+
       /**
        * Whether your business sells digital content or not.
        *
@@ -3088,6 +3072,74 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
        */
       @SerializedName("goods_type")
       String goodsType;
+
+      @SerializedName("site")
+      Site site;
+
+      /**
+       * For more details about Site, please refer to the <a href="https://docs.stripe.com/api">API
+       * Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Site extends StripeObject {
+        @SerializedName("accessible")
+        Accessible accessible;
+
+        @SerializedName("in_development")
+        InDevelopment inDevelopment;
+
+        @SerializedName("restricted")
+        Restricted restricted;
+
+        /**
+         * The status of your business's website.
+         *
+         * <p>One of {@code accessible}, {@code in_development}, or {@code restricted}.
+         */
+        @SerializedName("type")
+        String type;
+
+        /**
+         * For more details about Accessible, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Accessible extends StripeObject {}
+
+        /**
+         * For more details about InDevelopment, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class InDevelopment extends StripeObject {
+          /** Field to indicate that the website password has been provided. */
+          @SerializedName("password_provided")
+          Boolean passwordProvided;
+
+          /** The username needed to access your business's website. */
+          @SerializedName("username")
+          String username;
+        }
+
+        /**
+         * For more details about Restricted, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Restricted extends StripeObject {
+          /** File explaining the payment flow for your business. */
+          @SerializedName("payment_flow_file")
+          String paymentFlowFile;
+        }
+      }
     }
 
     /**
