@@ -132,6 +132,14 @@ public class AccountSession extends ApiResource {
     @SerializedName("account_onboarding")
     AccountOnboarding accountOnboarding;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/agentic-commerce-settings/">agentic
+     * commerce settings</a> embedded component.
+     */
+    @SerializedName("agentic_commerce_settings")
+    AgenticCommerceSettings agenticCommerceSettings;
+
     @SerializedName("balances")
     Balances balances;
 
@@ -286,6 +294,31 @@ public class AccountSession extends ApiResource {
         @SerializedName("external_account_collection")
         Boolean externalAccountCollection;
       }
+    }
+
+    /**
+     * For more details about AgenticCommerceSettings, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AgenticCommerceSettings extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     /**
