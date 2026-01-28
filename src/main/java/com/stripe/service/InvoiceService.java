@@ -181,8 +181,8 @@ public final class InvoiceService extends ApiService {
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create(InvoiceCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -190,8 +190,8 @@ public final class InvoiceService extends ApiService {
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create(RequestOptions options) throws StripeException {
     return create((InvoiceCreateParams) null, options);
@@ -199,8 +199,8 @@ public final class InvoiceService extends ApiService {
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create() throws StripeException {
     return create((InvoiceCreateParams) null, (RequestOptions) null);
@@ -208,8 +208,8 @@ public final class InvoiceService extends ApiService {
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public Invoice create(InvoiceCreateParams params, RequestOptions options) throws StripeException {
     String path = "/v1/invoices";

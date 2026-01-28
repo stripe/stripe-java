@@ -96,7 +96,7 @@ public class PaymentLink extends ApiResource implements HasId, MetadataStore<Pay
 
   /**
    * Collect additional information from your customer using custom fields. Up to 3 fields are
-   * supported.
+   * supported. You can't set this parameter if {@code ui_mode} is {@code custom}.
    */
   @SerializedName("custom_fields")
   List<PaymentLink.CustomField> customFields;

@@ -206,7 +206,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("items")
   SubscriptionItemCollection items;
 
-  /** The most recent invoice this subscription has generated. */
+  /**
+   * The most recent invoice this subscription has generated over its lifecycle (for example, when
+   * it cycles or is updated).
+   */
   @SerializedName("latest_invoice")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
