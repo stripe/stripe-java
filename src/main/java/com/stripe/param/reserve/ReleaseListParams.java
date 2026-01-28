@@ -1,5 +1,5 @@
 // File generated from our OpenAPI spec
-package com.stripe.param;
+package com.stripe.param.reserve;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
@@ -12,7 +12,15 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class OrderListLineItemsParams extends ApiRequestParams {
+public class ReleaseListParams extends ApiRequestParams {
+  /**
+   * Only return ReserveReleases associated with the currency specified by this currency code.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
+   */
+  @SerializedName("currency")
+  String currency;
+
   /**
    * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, starting with
@@ -43,6 +51,18 @@ public class OrderListLineItemsParams extends ApiRequestParams {
   Long limit;
 
   /**
+   * Only return ReserveReleases associated with the ReserveHold specified by this ReserveHold ID.
+   */
+  @SerializedName("reserve_hold")
+  String reserveHold;
+
+  /**
+   * Only return ReserveReleases associated with the ReservePlan specified by this ReservePlan ID.
+   */
+  @SerializedName("reserve_plan")
+  String reservePlan;
+
+  /**
    * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
    * in the list. For instance, if you make a list request and receive 100 objects, ending with
    * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
@@ -51,16 +71,22 @@ public class OrderListLineItemsParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  private OrderListLineItemsParams(
+  private ReleaseListParams(
+      String currency,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String reserveHold,
+      String reservePlan,
       String startingAfter) {
+    this.currency = currency;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.reserveHold = reserveHold;
+    this.reservePlan = reservePlan;
     this.startingAfter = startingAfter;
   }
 
@@ -69,6 +95,8 @@ public class OrderListLineItemsParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String currency;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -77,12 +105,34 @@ public class OrderListLineItemsParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String reserveHold;
+
+    private String reservePlan;
+
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
-    public OrderListLineItemsParams build() {
-      return new OrderListLineItemsParams(
-          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
+    public ReleaseListParams build() {
+      return new ReleaseListParams(
+          this.currency,
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.reserveHold,
+          this.reservePlan,
+          this.startingAfter);
+    }
+
+    /**
+     * Only return ReserveReleases associated with the currency specified by this currency code.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
+     */
+    public Builder setCurrency(String currency) {
+      this.currency = currency;
+      return this;
     }
 
     /**
@@ -99,7 +149,7 @@ public class OrderListLineItemsParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * OrderListLineItemsParams#expand} for the field documentation.
+     * ReleaseListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -112,7 +162,7 @@ public class OrderListLineItemsParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * OrderListLineItemsParams#expand} for the field documentation.
+     * ReleaseListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -125,7 +175,7 @@ public class OrderListLineItemsParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OrderListLineItemsParams#extraParams} for the field documentation.
+     * ReleaseListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -138,7 +188,7 @@ public class OrderListLineItemsParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OrderListLineItemsParams#extraParams} for the field documentation.
+     * See {@link ReleaseListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -154,6 +204,22 @@ public class OrderListLineItemsParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Only return ReserveReleases associated with the ReserveHold specified by this ReserveHold ID.
+     */
+    public Builder setReserveHold(String reserveHold) {
+      this.reserveHold = reserveHold;
+      return this;
+    }
+
+    /**
+     * Only return ReserveReleases associated with the ReservePlan specified by this ReservePlan ID.
+     */
+    public Builder setReservePlan(String reservePlan) {
+      this.reservePlan = reservePlan;
       return this;
     }
 

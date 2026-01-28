@@ -423,9 +423,6 @@ public class Configuration extends ApiResource implements HasId {
     @SerializedName("aud")
     Aud aud;
 
-    @SerializedName("bgn")
-    Bgn bgn;
-
     @SerializedName("cad")
     Cad cad;
 
@@ -515,30 +512,6 @@ public class Configuration extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Aud extends StripeObject {
-      /** Fixed amounts displayed when collecting a tip. */
-      @SerializedName("fixed_amounts")
-      List<Long> fixedAmounts;
-
-      /** Percentages displayed when collecting a tip. */
-      @SerializedName("percentages")
-      List<Long> percentages;
-
-      /**
-       * Below this amount, fixed amounts will be displayed; above it, percentages will be
-       * displayed.
-       */
-      @SerializedName("smart_tip_threshold")
-      Long smartTipThreshold;
-    }
-
-    /**
-     * For more details about Bgn, please refer to the <a href="https://docs.stripe.com/api">API
-     * Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class Bgn extends StripeObject {
       /** Fixed amounts displayed when collecting a tip. */
       @SerializedName("fixed_amounts")
       List<Long> fixedAmounts;

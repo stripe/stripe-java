@@ -4571,6 +4571,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         @SerializedName("abn_amro")
         ABN_AMRO("abn_amro"),
 
+        @SerializedName("adyen")
+        ADYEN("adyen"),
+
         @SerializedName("asn_bank")
         ASN_BANK("asn_bank"),
 
@@ -9635,7 +9638,13 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           N2__1__0("2.1.0"),
 
           @SerializedName("2.2.0")
-          N2__2__0("2.2.0");
+          N2__2__0("2.2.0"),
+
+          @SerializedName("2.3.0")
+          N2__3__0("2.3.0"),
+
+          @SerializedName("2.3.1")
+          N2__3__1("2.3.1");
 
           @Getter(onMethod_ = {@Override})
           private final String value;

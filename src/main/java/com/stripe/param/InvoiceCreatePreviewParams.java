@@ -1432,11 +1432,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
        * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
        * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-       * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
-       * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code sv_nit},
-       * {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code
-       * ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat},
-       * {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
+       * {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
+       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin},
+       * {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code
+       * tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin},
+       * {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
+       * zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -1513,12 +1514,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          * {@code ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code
          * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat},
          * {@code no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
-         * ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
-         * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code
-         * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
-         * {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code
-         * uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
-         * zw_tin}
+         * ph_tin}, {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
+         * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
+         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
+         * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
+         * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin},
+         * or {@code zw_tin}
          */
         public Builder setType(InvoiceCreatePreviewParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1782,6 +1783,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("ph_tin")
         PH_TIN("ph_tin"),
 
+        @SerializedName("pl_nip")
+        PL_NIP("pl_nip"),
+
         @SerializedName("ro_tin")
         RO_TIN("ro_tin"),
 
@@ -1919,17 +1923,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("promotion_code")
     String promotionCode;
 
+    /** Settings for discount application including service period anchoring. */
+    @SerializedName("settings")
+    Settings settings;
+
     private Discount(
         String coupon,
         String discount,
         DiscountEnd discountEnd,
         Map<String, Object> extraParams,
-        String promotionCode) {
+        String promotionCode,
+        Settings settings) {
       this.coupon = coupon;
       this.discount = discount;
       this.discountEnd = discountEnd;
       this.extraParams = extraParams;
       this.promotionCode = promotionCode;
+      this.settings = settings;
     }
 
     public static Builder builder() {
@@ -1947,10 +1957,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private String promotionCode;
 
+      private Settings settings;
+
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceCreatePreviewParams.Discount build() {
         return new InvoiceCreatePreviewParams.Discount(
-            this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
+            this.coupon,
+            this.discount,
+            this.discountEnd,
+            this.extraParams,
+            this.promotionCode,
+            this.settings);
       }
 
       /** ID of the coupon to create a new discount for. */
@@ -2000,6 +2017,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       /** ID of the promotion code to create a new discount for. */
       public Builder setPromotionCode(String promotionCode) {
         this.promotionCode = promotionCode;
+        return this;
+      }
+
+      /** Settings for discount application including service period anchoring. */
+      public Builder setSettings(InvoiceCreatePreviewParams.Discount.Settings settings) {
+        this.settings = settings;
         return this;
       }
     }
@@ -2240,6 +2263,380 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         private final String value;
 
         Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Settings {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Configures service period cycle anchoring. */
+      @SerializedName("service_period_anchor_config")
+      ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+      /**
+       * The start date of the discount's service period when applying a coupon or promotion code
+       * with a service period duration. Defaults to {@code now} if omitted.
+       */
+      @SerializedName("start_date")
+      StartDate startDate;
+
+      private Settings(
+          Map<String, Object> extraParams,
+          ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+          StartDate startDate) {
+        this.extraParams = extraParams;
+        this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+        this.startDate = startDate;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+        private StartDate startDate;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.Discount.Settings build() {
+          return new InvoiceCreatePreviewParams.Discount.Settings(
+              this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.Discount.Settings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.Discount.Settings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Configures service period cycle anchoring. */
+        public Builder setServicePeriodAnchorConfig(
+            InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig
+                servicePeriodAnchorConfig) {
+          this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+          return this;
+        }
+
+        /**
+         * The start date of the discount's service period when applying a coupon or promotion code
+         * with a service period duration. Defaults to {@code now} if omitted.
+         */
+        public Builder setStartDate(
+            InvoiceCreatePreviewParams.Discount.Settings.StartDate startDate) {
+          this.startDate = startDate;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ServicePeriodAnchorConfig {
+        /** Anchor the service period to a custom date. Type must be {@code custom} to specify. */
+        @SerializedName("custom")
+        Custom custom;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The type of service period anchor config. Defaults to {@code
+         * subscription_service_cycle_anchor} if omitted.
+         */
+        @SerializedName("type")
+        Type type;
+
+        private ServicePeriodAnchorConfig(
+            Custom custom, Map<String, Object> extraParams, Type type) {
+          this.custom = custom;
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Custom custom;
+
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig build() {
+            return new InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig(
+                this.custom, this.extraParams, this.type);
+          }
+
+          /** Anchor the service period to a custom date. Type must be {@code custom} to specify. */
+          public Builder setCustom(
+              InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig.Custom
+                  custom) {
+            this.custom = custom;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The type of service period anchor config. Defaults to {@code
+           * subscription_service_cycle_anchor} if omitted.
+           */
+          public Builder setType(
+              InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Custom {
+          /**
+           * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1 to
+           * 31.
+           */
+          @SerializedName("day_of_month")
+          Long dayOfMonth;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+          @SerializedName("hour")
+          Long hour;
+
+          /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+          @SerializedName("minute")
+          Long minute;
+
+          /** The month to start full cycle periods. Ranges from 1 to 12. */
+          @SerializedName("month")
+          Long month;
+
+          /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+          @SerializedName("second")
+          Long second;
+
+          private Custom(
+              Long dayOfMonth,
+              Map<String, Object> extraParams,
+              Long hour,
+              Long minute,
+              Long month,
+              Long second) {
+            this.dayOfMonth = dayOfMonth;
+            this.extraParams = extraParams;
+            this.hour = hour;
+            this.minute = minute;
+            this.month = month;
+            this.second = second;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Long dayOfMonth;
+
+            private Map<String, Object> extraParams;
+
+            private Long hour;
+
+            private Long minute;
+
+            private Long month;
+
+            private Long second;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig.Custom
+                build() {
+              return new InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig
+                  .Custom(
+                  this.dayOfMonth,
+                  this.extraParams,
+                  this.hour,
+                  this.minute,
+                  this.month,
+                  this.second);
+            }
+
+            /**
+             * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1
+             * to 31.
+             */
+            public Builder setDayOfMonth(Long dayOfMonth) {
+              this.dayOfMonth = dayOfMonth;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+            public Builder setHour(Long hour) {
+              this.hour = hour;
+              return this;
+            }
+
+            /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+            public Builder setMinute(Long minute) {
+              this.minute = minute;
+              return this;
+            }
+
+            /** The month to start full cycle periods. Ranges from 1 to 12. */
+            public Builder setMonth(Long month) {
+              this.month = month;
+              return this;
+            }
+
+            /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+            public Builder setSecond(Long second) {
+              this.second = second;
+              return this;
+            }
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("custom")
+          CUSTOM("custom"),
+
+          @SerializedName("subscription_service_cycle_anchor")
+          SUBSCRIPTION_SERVICE_CYCLE_ANCHOR("subscription_service_cycle_anchor");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
+      public enum StartDate implements ApiRequestParams.EnumParam {
+        @SerializedName("current_period_end")
+        CURRENT_PERIOD_END("current_period_end"),
+
+        @SerializedName("current_period_start")
+        CURRENT_PERIOD_START("current_period_start"),
+
+        @SerializedName("now")
+        NOW("now");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        StartDate(String value) {
           this.value = value;
         }
       }
@@ -5368,19 +5765,25 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName("promotion_code")
           String promotionCode;
 
+          /** Settings for discount application including service period anchoring. */
+          @SerializedName("settings")
+          Settings settings;
+
           private Add(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
               Map<String, Object> extraParams,
               Long index,
-              String promotionCode) {
+              String promotionCode,
+              Settings settings) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
             this.index = index;
             this.promotionCode = promotionCode;
+            this.settings = settings;
           }
 
           public static Builder builder() {
@@ -5400,6 +5803,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             private String promotionCode;
 
+            private Settings settings;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add build() {
               return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add(
@@ -5408,7 +5813,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                   this.discountEnd,
                   this.extraParams,
                   this.index,
-                  this.promotionCode);
+                  this.promotionCode,
+                  this.settings);
             }
 
             /** The coupon code to redeem. */
@@ -5473,6 +5879,14 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             /** The promotion code to redeem. */
             public Builder setPromotionCode(String promotionCode) {
               this.promotionCode = promotionCode;
+              return this;
+            }
+
+            /** Settings for discount application including service period anchoring. */
+            public Builder setSettings(
+                InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings
+                    settings) {
+              this.settings = settings;
               return this;
             }
           }
@@ -5570,6 +5984,398 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               private final String value;
 
               Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Settings {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Configures service period cycle anchoring. */
+            @SerializedName("service_period_anchor_config")
+            ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+             */
+            @SerializedName("start_date")
+            StartDate startDate;
+
+            private Settings(
+                Map<String, Object> extraParams,
+                ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+                StartDate startDate) {
+              this.extraParams = extraParams;
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              this.startDate = startDate;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+              private StartDate startDate;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add
+                      .Settings
+                  build() {
+                return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add
+                    .Settings(this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Configures service period cycle anchoring. */
+              public Builder setServicePeriodAnchorConfig(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings
+                          .ServicePeriodAnchorConfig
+                      servicePeriodAnchorConfig) {
+                this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                return this;
+              }
+
+              /**
+               * The start date of the discount's service period when applying a coupon or promotion
+               * code with a service period duration. Defaults to {@code amendment_start} if
+               * omitted.
+               */
+              public Builder setStartDate(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings
+                          .StartDate
+                      startDate) {
+                this.startDate = startDate;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ServicePeriodAnchorConfig {
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              @SerializedName("custom")
+              Custom custom;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              @SerializedName("type")
+              Type type;
+
+              private ServicePeriodAnchorConfig(
+                  Custom custom, Map<String, Object> extraParams, Type type) {
+                this.custom = custom;
+                this.extraParams = extraParams;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Custom custom;
+
+                private Map<String, Object> extraParams;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add
+                        .Settings.ServicePeriodAnchorConfig
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add
+                      .Settings.ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+                }
+
+                /**
+                 * Anchor the service period to a custom date. Type must be {@code custom} to
+                 * specify.
+                 */
+                public Builder setCustom(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings
+                            .ServicePeriodAnchorConfig.Custom
+                        custom) {
+                  this.custom = custom;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+                 */
+                public Builder setType(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings
+                            .ServicePeriodAnchorConfig.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Custom {
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                @SerializedName("day_of_month")
+                Long dayOfMonth;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                @SerializedName("hour")
+                Long hour;
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("minute")
+                Long minute;
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                @SerializedName("month")
+                Long month;
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("second")
+                Long second;
+
+                private Custom(
+                    Long dayOfMonth,
+                    Map<String, Object> extraParams,
+                    Long hour,
+                    Long minute,
+                    Long month,
+                    Long second) {
+                  this.dayOfMonth = dayOfMonth;
+                  this.extraParams = extraParams;
+                  this.hour = hour;
+                  this.minute = minute;
+                  this.month = month;
+                  this.second = second;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Long dayOfMonth;
+
+                  private Map<String, Object> extraParams;
+
+                  private Long hour;
+
+                  private Long minute;
+
+                  private Long month;
+
+                  private Long second;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add
+                          .Settings.ServicePeriodAnchorConfig.Custom
+                      build() {
+                    return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction
+                        .Add.Settings.ServicePeriodAnchorConfig.Custom(
+                        this.dayOfMonth,
+                        this.extraParams,
+                        this.hour,
+                        this.minute,
+                        this.month,
+                        this.second);
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                   * from 1 to 31.
+                   */
+                  public Builder setDayOfMonth(Long dayOfMonth) {
+                    this.dayOfMonth = dayOfMonth;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Add.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                  public Builder setHour(Long hour) {
+                    this.hour = hour;
+                    return this;
+                  }
+
+                  /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                  public Builder setMinute(Long minute) {
+                    this.minute = minute;
+                    return this;
+                  }
+
+                  /** The month to start full cycle periods. Ranges from 1 to 12. */
+                  public Builder setMonth(Long month) {
+                    this.month = month;
+                    return this;
+                  }
+
+                  /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                  public Builder setSecond(Long second) {
+                    this.second = second;
+                    return this;
+                  }
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("custom")
+                CUSTOM("custom"),
+
+                @SerializedName("inherit")
+                INHERIT("inherit");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum StartDate implements ApiRequestParams.EnumParam {
+              @SerializedName("amendment_start")
+              AMENDMENT_START("amendment_start"),
+
+              @SerializedName("current_period_end")
+              CURRENT_PERIOD_END("current_period_end"),
+
+              @SerializedName("current_period_start")
+              CURRENT_PERIOD_START("current_period_start");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              StartDate(String value) {
                 this.value = value;
               }
             }
@@ -5707,15 +6513,21 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName("promotion_code")
           String promotionCode;
 
+          /** Settings for discount application including service period anchoring. */
+          @SerializedName("settings")
+          Settings settings;
+
           private Set(
               String coupon,
               String discount,
               Map<String, Object> extraParams,
-              String promotionCode) {
+              String promotionCode,
+              Settings settings) {
             this.coupon = coupon;
             this.discount = discount;
             this.extraParams = extraParams;
             this.promotionCode = promotionCode;
+            this.settings = settings;
           }
 
           public static Builder builder() {
@@ -5731,10 +6543,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             private String promotionCode;
 
+            private Settings settings;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set build() {
               return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set(
-                  this.coupon, this.discount, this.extraParams, this.promotionCode);
+                  this.coupon, this.discount, this.extraParams, this.promotionCode, this.settings);
             }
 
             /** The coupon code to replace the {@code discounts} array with. */
@@ -5783,6 +6597,406 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             public Builder setPromotionCode(String promotionCode) {
               this.promotionCode = promotionCode;
               return this;
+            }
+
+            /** Settings for discount application including service period anchoring. */
+            public Builder setSettings(
+                InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings
+                    settings) {
+              this.settings = settings;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Settings {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Configures service period cycle anchoring. */
+            @SerializedName("service_period_anchor_config")
+            ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code amendment_start} if omitted.
+             */
+            @SerializedName("start_date")
+            StartDate startDate;
+
+            private Settings(
+                Map<String, Object> extraParams,
+                ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+                StartDate startDate) {
+              this.extraParams = extraParams;
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              this.startDate = startDate;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+              private StartDate startDate;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set
+                      .Settings
+                  build() {
+                return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set
+                    .Settings(this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Configures service period cycle anchoring. */
+              public Builder setServicePeriodAnchorConfig(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings
+                          .ServicePeriodAnchorConfig
+                      servicePeriodAnchorConfig) {
+                this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                return this;
+              }
+
+              /**
+               * The start date of the discount's service period when applying a coupon or promotion
+               * code with a service period duration. Defaults to {@code amendment_start} if
+               * omitted.
+               */
+              public Builder setStartDate(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings
+                          .StartDate
+                      startDate) {
+                this.startDate = startDate;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ServicePeriodAnchorConfig {
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              @SerializedName("custom")
+              Custom custom;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              @SerializedName("type")
+              Type type;
+
+              private ServicePeriodAnchorConfig(
+                  Custom custom, Map<String, Object> extraParams, Type type) {
+                this.custom = custom;
+                this.extraParams = extraParams;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Custom custom;
+
+                private Map<String, Object> extraParams;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set
+                        .Settings.ServicePeriodAnchorConfig
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set
+                      .Settings.ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+                }
+
+                /**
+                 * Anchor the service period to a custom date. Type must be {@code custom} to
+                 * specify.
+                 */
+                public Builder setCustom(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings
+                            .ServicePeriodAnchorConfig.Custom
+                        custom) {
+                  this.custom = custom;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+                 */
+                public Builder setType(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings
+                            .ServicePeriodAnchorConfig.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Custom {
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                @SerializedName("day_of_month")
+                Long dayOfMonth;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                @SerializedName("hour")
+                Long hour;
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("minute")
+                Long minute;
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                @SerializedName("month")
+                Long month;
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("second")
+                Long second;
+
+                private Custom(
+                    Long dayOfMonth,
+                    Map<String, Object> extraParams,
+                    Long hour,
+                    Long minute,
+                    Long month,
+                    Long second) {
+                  this.dayOfMonth = dayOfMonth;
+                  this.extraParams = extraParams;
+                  this.hour = hour;
+                  this.minute = minute;
+                  this.month = month;
+                  this.second = second;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Long dayOfMonth;
+
+                  private Map<String, Object> extraParams;
+
+                  private Long hour;
+
+                  private Long minute;
+
+                  private Long month;
+
+                  private Long second;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set
+                          .Settings.ServicePeriodAnchorConfig.Custom
+                      build() {
+                    return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction
+                        .Set.Settings.ServicePeriodAnchorConfig.Custom(
+                        this.dayOfMonth,
+                        this.extraParams,
+                        this.hour,
+                        this.minute,
+                        this.month,
+                        this.second);
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                   * from 1 to 31.
+                   */
+                  public Builder setDayOfMonth(Long dayOfMonth) {
+                    this.dayOfMonth = dayOfMonth;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.DiscountAction.Set.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                  public Builder setHour(Long hour) {
+                    this.hour = hour;
+                    return this;
+                  }
+
+                  /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                  public Builder setMinute(Long minute) {
+                    this.minute = minute;
+                    return this;
+                  }
+
+                  /** The month to start full cycle periods. Ranges from 1 to 12. */
+                  public Builder setMonth(Long month) {
+                    this.month = month;
+                    return this;
+                  }
+
+                  /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                  public Builder setSecond(Long second) {
+                    this.second = second;
+                    return this;
+                  }
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("custom")
+                CUSTOM("custom"),
+
+                @SerializedName("inherit")
+                INHERIT("inherit");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum StartDate implements ApiRequestParams.EnumParam {
+              @SerializedName("amendment_start")
+              AMENDMENT_START("amendment_start"),
+
+              @SerializedName("current_period_end")
+              CURRENT_PERIOD_END("current_period_end"),
+
+              @SerializedName("current_period_start")
+              CURRENT_PERIOD_START("current_period_start");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              StartDate(String value) {
+                this.value = value;
+              }
             }
           }
         }
@@ -6225,17 +7439,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             @SerializedName("promotion_code")
             String promotionCode;
 
+            /** Settings for discount application including service period anchoring. */
+            @SerializedName("settings")
+            Settings settings;
+
             private Discount(
                 String coupon,
                 String discount,
                 DiscountEnd discountEnd,
                 Map<String, Object> extraParams,
-                String promotionCode) {
+                String promotionCode,
+                Settings settings) {
               this.coupon = coupon;
               this.discount = discount;
               this.discountEnd = discountEnd;
               this.extraParams = extraParams;
               this.promotionCode = promotionCode;
+              this.settings = settings;
             }
 
             public static Builder builder() {
@@ -6253,6 +7473,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
               private String promotionCode;
 
+              private Settings settings;
+
               /** Finalize and obtain parameter instance from this builder. */
               public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount
                   build() {
@@ -6262,7 +7484,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                     this.discount,
                     this.discountEnd,
                     this.extraParams,
-                    this.promotionCode);
+                    this.promotionCode,
+                    this.settings);
               }
 
               /** ID of the coupon to create a new discount for. */
@@ -6319,6 +7542,15 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               /** ID of the promotion code to create a new discount for. */
               public Builder setPromotionCode(String promotionCode) {
                 this.promotionCode = promotionCode;
+                return this;
+              }
+
+              /** Settings for discount application including service period anchoring. */
+              public Builder setSettings(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount
+                          .Settings
+                      settings) {
+                this.settings = settings;
                 return this;
               }
             }
@@ -6579,6 +7811,403 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                 private final String value;
 
                 Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Settings {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** Configures service period cycle anchoring. */
+              @SerializedName("service_period_anchor_config")
+              ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+              /**
+               * The start date of the discount's service period when applying a coupon or promotion
+               * code with a service period duration. Defaults to {@code amendment_start} if
+               * omitted.
+               */
+              @SerializedName("start_date")
+              StartDate startDate;
+
+              private Settings(
+                  Map<String, Object> extraParams,
+                  ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+                  StartDate startDate) {
+                this.extraParams = extraParams;
+                this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                this.startDate = startDate;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+                private StartDate startDate;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount
+                        .Settings
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add
+                      .Discount.Settings(
+                      this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount.Settings#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount.Settings#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** Configures service period cycle anchoring. */
+                public Builder setServicePeriodAnchorConfig(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount
+                            .Settings.ServicePeriodAnchorConfig
+                        servicePeriodAnchorConfig) {
+                  this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                  return this;
+                }
+
+                /**
+                 * The start date of the discount's service period when applying a coupon or
+                 * promotion code with a service period duration. Defaults to {@code
+                 * amendment_start} if omitted.
+                 */
+                public Builder setStartDate(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount
+                            .Settings.StartDate
+                        startDate) {
+                  this.startDate = startDate;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ServicePeriodAnchorConfig {
+                /**
+                 * Anchor the service period to a custom date. Type must be {@code custom} to
+                 * specify.
+                 */
+                @SerializedName("custom")
+                Custom custom;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+                 */
+                @SerializedName("type")
+                Type type;
+
+                private ServicePeriodAnchorConfig(
+                    Custom custom, Map<String, Object> extraParams, Type type) {
+                  this.custom = custom;
+                  this.extraParams = extraParams;
+                  this.type = type;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Custom custom;
+
+                  private Map<String, Object> extraParams;
+
+                  private Type type;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add
+                          .Discount.Settings.ServicePeriodAnchorConfig
+                      build() {
+                    return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add
+                        .Discount.Settings.ServicePeriodAnchorConfig(
+                        this.custom, this.extraParams, this.type);
+                  }
+
+                  /**
+                   * Anchor the service period to a custom date. Type must be {@code custom} to
+                   * specify.
+                   */
+                  public Builder setCustom(
+                      InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount
+                              .Settings.ServicePeriodAnchorConfig.Custom
+                          custom) {
+                    this.custom = custom;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * The type of service period anchor config. Defaults to {@code inherit} if
+                   * omitted.
+                   */
+                  public Builder setType(
+                      InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount
+                              .Settings.ServicePeriodAnchorConfig.Type
+                          type) {
+                    this.type = type;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Custom {
+                  /**
+                   * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                   * from 1 to 31.
+                   */
+                  @SerializedName("day_of_month")
+                  Long dayOfMonth;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                  @SerializedName("hour")
+                  Long hour;
+
+                  /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                  @SerializedName("minute")
+                  Long minute;
+
+                  /** The month to start full cycle periods. Ranges from 1 to 12. */
+                  @SerializedName("month")
+                  Long month;
+
+                  /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                  @SerializedName("second")
+                  Long second;
+
+                  private Custom(
+                      Long dayOfMonth,
+                      Map<String, Object> extraParams,
+                      Long hour,
+                      Long minute,
+                      Long month,
+                      Long second) {
+                    this.dayOfMonth = dayOfMonth;
+                    this.extraParams = extraParams;
+                    this.hour = hour;
+                    this.minute = minute;
+                    this.month = month;
+                    this.second = second;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Long dayOfMonth;
+
+                    private Map<String, Object> extraParams;
+
+                    private Long hour;
+
+                    private Long minute;
+
+                    private Long month;
+
+                    private Long second;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add
+                            .Discount.Settings.ServicePeriodAnchorConfig.Custom
+                        build() {
+                      return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add
+                          .Discount.Settings.ServicePeriodAnchorConfig.Custom(
+                          this.dayOfMonth,
+                          this.extraParams,
+                          this.hour,
+                          this.minute,
+                          this.month,
+                          this.second);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                     * from 1 to 31.
+                     */
+                    public Builder setDayOfMonth(Long dayOfMonth) {
+                      this.dayOfMonth = dayOfMonth;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Add.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                    public Builder setHour(Long hour) {
+                      this.hour = hour;
+                      return this;
+                    }
+
+                    /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                    public Builder setMinute(Long minute) {
+                      this.minute = minute;
+                      return this;
+                    }
+
+                    /** The month to start full cycle periods. Ranges from 1 to 12. */
+                    public Builder setMonth(Long month) {
+                      this.month = month;
+                      return this;
+                    }
+
+                    /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                    public Builder setSecond(Long second) {
+                      this.second = second;
+                      return this;
+                    }
+                  }
+                }
+
+                public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("custom")
+                  CUSTOM("custom"),
+
+                  @SerializedName("inherit")
+                  INHERIT("inherit");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  Type(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              public enum StartDate implements ApiRequestParams.EnumParam {
+                @SerializedName("amendment_start")
+                AMENDMENT_START("amendment_start"),
+
+                @SerializedName("current_period_end")
+                CURRENT_PERIOD_END("current_period_end"),
+
+                @SerializedName("current_period_start")
+                CURRENT_PERIOD_START("current_period_start");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                StartDate(String value) {
                   this.value = value;
                 }
               }
@@ -7102,17 +8731,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             @SerializedName("promotion_code")
             String promotionCode;
 
+            /** Settings for discount application including service period anchoring. */
+            @SerializedName("settings")
+            Settings settings;
+
             private Discount(
                 String coupon,
                 String discount,
                 DiscountEnd discountEnd,
                 Map<String, Object> extraParams,
-                String promotionCode) {
+                String promotionCode,
+                Settings settings) {
               this.coupon = coupon;
               this.discount = discount;
               this.discountEnd = discountEnd;
               this.extraParams = extraParams;
               this.promotionCode = promotionCode;
+              this.settings = settings;
             }
 
             public static Builder builder() {
@@ -7130,6 +8765,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
               private String promotionCode;
 
+              private Settings settings;
+
               /** Finalize and obtain parameter instance from this builder. */
               public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount
                   build() {
@@ -7139,7 +8776,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                     this.discount,
                     this.discountEnd,
                     this.extraParams,
-                    this.promotionCode);
+                    this.promotionCode,
+                    this.settings);
               }
 
               /** ID of the coupon to create a new discount for. */
@@ -7196,6 +8834,15 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               /** ID of the promotion code to create a new discount for. */
               public Builder setPromotionCode(String promotionCode) {
                 this.promotionCode = promotionCode;
+                return this;
+              }
+
+              /** Settings for discount application including service period anchoring. */
+              public Builder setSettings(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount
+                          .Settings
+                      settings) {
+                this.settings = settings;
                 return this;
               }
             }
@@ -7456,6 +9103,403 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                 private final String value;
 
                 Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Settings {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** Configures service period cycle anchoring. */
+              @SerializedName("service_period_anchor_config")
+              ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+              /**
+               * The start date of the discount's service period when applying a coupon or promotion
+               * code with a service period duration. Defaults to {@code amendment_start} if
+               * omitted.
+               */
+              @SerializedName("start_date")
+              StartDate startDate;
+
+              private Settings(
+                  Map<String, Object> extraParams,
+                  ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+                  StartDate startDate) {
+                this.extraParams = extraParams;
+                this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                this.startDate = startDate;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+                private StartDate startDate;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount
+                        .Settings
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set
+                      .Discount.Settings(
+                      this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount.Settings#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount.Settings#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** Configures service period cycle anchoring. */
+                public Builder setServicePeriodAnchorConfig(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount
+                            .Settings.ServicePeriodAnchorConfig
+                        servicePeriodAnchorConfig) {
+                  this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                  return this;
+                }
+
+                /**
+                 * The start date of the discount's service period when applying a coupon or
+                 * promotion code with a service period duration. Defaults to {@code
+                 * amendment_start} if omitted.
+                 */
+                public Builder setStartDate(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount
+                            .Settings.StartDate
+                        startDate) {
+                  this.startDate = startDate;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class ServicePeriodAnchorConfig {
+                /**
+                 * Anchor the service period to a custom date. Type must be {@code custom} to
+                 * specify.
+                 */
+                @SerializedName("custom")
+                Custom custom;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /**
+                 * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+                 */
+                @SerializedName("type")
+                Type type;
+
+                private ServicePeriodAnchorConfig(
+                    Custom custom, Map<String, Object> extraParams, Type type) {
+                  this.custom = custom;
+                  this.extraParams = extraParams;
+                  this.type = type;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Custom custom;
+
+                  private Map<String, Object> extraParams;
+
+                  private Type type;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set
+                          .Discount.Settings.ServicePeriodAnchorConfig
+                      build() {
+                    return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set
+                        .Discount.Settings.ServicePeriodAnchorConfig(
+                        this.custom, this.extraParams, this.type);
+                  }
+
+                  /**
+                   * Anchor the service period to a custom date. Type must be {@code custom} to
+                   * specify.
+                   */
+                  public Builder setCustom(
+                      InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount
+                              .Settings.ServicePeriodAnchorConfig.Custom
+                          custom) {
+                    this.custom = custom;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /**
+                   * The type of service period anchor config. Defaults to {@code inherit} if
+                   * omitted.
+                   */
+                  public Builder setType(
+                      InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount
+                              .Settings.ServicePeriodAnchorConfig.Type
+                          type) {
+                    this.type = type;
+                    return this;
+                  }
+                }
+
+                @Getter
+                @EqualsAndHashCode(callSuper = false)
+                public static class Custom {
+                  /**
+                   * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                   * from 1 to 31.
+                   */
+                  @SerializedName("day_of_month")
+                  Long dayOfMonth;
+
+                  /**
+                   * Map of extra parameters for custom features not available in this client
+                   * library. The content in this map is not serialized under this field's
+                   * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                   * the key is a root-level field (serialized) name in this param object.
+                   * Effectively, this map is flattened to its parent instance.
+                   */
+                  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                  Map<String, Object> extraParams;
+
+                  /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                  @SerializedName("hour")
+                  Long hour;
+
+                  /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                  @SerializedName("minute")
+                  Long minute;
+
+                  /** The month to start full cycle periods. Ranges from 1 to 12. */
+                  @SerializedName("month")
+                  Long month;
+
+                  /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                  @SerializedName("second")
+                  Long second;
+
+                  private Custom(
+                      Long dayOfMonth,
+                      Map<String, Object> extraParams,
+                      Long hour,
+                      Long minute,
+                      Long month,
+                      Long second) {
+                    this.dayOfMonth = dayOfMonth;
+                    this.extraParams = extraParams;
+                    this.hour = hour;
+                    this.minute = minute;
+                    this.month = month;
+                    this.second = second;
+                  }
+
+                  public static Builder builder() {
+                    return new Builder();
+                  }
+
+                  public static class Builder {
+                    private Long dayOfMonth;
+
+                    private Map<String, Object> extraParams;
+
+                    private Long hour;
+
+                    private Long minute;
+
+                    private Long month;
+
+                    private Long second;
+
+                    /** Finalize and obtain parameter instance from this builder. */
+                    public InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set
+                            .Discount.Settings.ServicePeriodAnchorConfig.Custom
+                        build() {
+                      return new InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set
+                          .Discount.Settings.ServicePeriodAnchorConfig.Custom(
+                          this.dayOfMonth,
+                          this.extraParams,
+                          this.hour,
+                          this.minute,
+                          this.month,
+                          this.second);
+                    }
+
+                    /**
+                     * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                     * from 1 to 31.
+                     */
+                    public Builder setDayOfMonth(Long dayOfMonth) {
+                      this.dayOfMonth = dayOfMonth;
+                      return this;
+                    }
+
+                    /**
+                     * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                     * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                     * original map. See {@link
+                     * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putExtraParam(String key, Object value) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.put(key, value);
+                      return this;
+                    }
+
+                    /**
+                     * Add all map key/value pairs to `extraParams` map. A map is initialized for
+                     * the first `put/putAll` call, and subsequent calls add additional key/value
+                     * pairs to the original map. See {@link
+                     * InvoiceCreatePreviewParams.ScheduleDetails.Amendment.ItemAction.Set.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                     * for the field documentation.
+                     */
+                    public Builder putAllExtraParam(Map<String, Object> map) {
+                      if (this.extraParams == null) {
+                        this.extraParams = new HashMap<>();
+                      }
+                      this.extraParams.putAll(map);
+                      return this;
+                    }
+
+                    /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                    public Builder setHour(Long hour) {
+                      this.hour = hour;
+                      return this;
+                    }
+
+                    /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                    public Builder setMinute(Long minute) {
+                      this.minute = minute;
+                      return this;
+                    }
+
+                    /** The month to start full cycle periods. Ranges from 1 to 12. */
+                    public Builder setMonth(Long month) {
+                      this.month = month;
+                      return this;
+                    }
+
+                    /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                    public Builder setSecond(Long second) {
+                      this.second = second;
+                      return this;
+                    }
+                  }
+                }
+
+                public enum Type implements ApiRequestParams.EnumParam {
+                  @SerializedName("custom")
+                  CUSTOM("custom"),
+
+                  @SerializedName("inherit")
+                  INHERIT("inherit");
+
+                  @Getter(onMethod_ = {@Override})
+                  private final String value;
+
+                  Type(String value) {
+                    this.value = value;
+                  }
+                }
+              }
+
+              public enum StartDate implements ApiRequestParams.EnumParam {
+                @SerializedName("amendment_start")
+                AMENDMENT_START("amendment_start"),
+
+                @SerializedName("current_period_end")
+                CURRENT_PERIOD_END("current_period_end"),
+
+                @SerializedName("current_period_start")
+                CURRENT_PERIOD_START("current_period_start");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                StartDate(String value) {
                   this.value = value;
                 }
               }
@@ -11371,17 +13415,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("promotion_code")
         String promotionCode;
 
+        /** Settings for discount application including service period anchoring. */
+        @SerializedName("settings")
+        Settings settings;
+
         private Discount(
             String coupon,
             String discount,
             DiscountEnd discountEnd,
             Map<String, Object> extraParams,
-            String promotionCode) {
+            String promotionCode,
+            Settings settings) {
           this.coupon = coupon;
           this.discount = discount;
           this.discountEnd = discountEnd;
           this.extraParams = extraParams;
           this.promotionCode = promotionCode;
+          this.settings = settings;
         }
 
         public static Builder builder() {
@@ -11399,10 +13449,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           private String promotionCode;
 
+          private Settings settings;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount build() {
             return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount(
-                this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
+                this.coupon,
+                this.discount,
+                this.discountEnd,
+                this.extraParams,
+                this.promotionCode,
+                this.settings);
           }
 
           /** ID of the coupon to create a new discount for. */
@@ -11455,6 +13512,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           /** ID of the promotion code to create a new discount for. */
           public Builder setPromotionCode(String promotionCode) {
             this.promotionCode = promotionCode;
+            return this;
+          }
+
+          /** Settings for discount application including service period anchoring. */
+          public Builder setSettings(
+              InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings settings) {
+            this.settings = settings;
             return this;
           }
         }
@@ -11706,6 +13770,391 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             private final String value;
 
             Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Settings {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Configures service period cycle anchoring. */
+          @SerializedName("service_period_anchor_config")
+          ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+          /**
+           * The start date of the discount's service period when applying a coupon or promotion
+           * code with a service period duration. Defaults to {@code phase_start} if omitted.
+           */
+          @SerializedName("start_date")
+          StartDate startDate;
+
+          private Settings(
+              Map<String, Object> extraParams,
+              ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+              StartDate startDate) {
+            this.extraParams = extraParams;
+            this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+            this.startDate = startDate;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            private StartDate startDate;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings build() {
+              return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings(
+                  this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Configures service period cycle anchoring. */
+            public Builder setServicePeriodAnchorConfig(
+                InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings
+                        .ServicePeriodAnchorConfig
+                    servicePeriodAnchorConfig) {
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              return this;
+            }
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code phase_start} if omitted.
+             */
+            public Builder setStartDate(
+                InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings.StartDate
+                    startDate) {
+              this.startDate = startDate;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ServicePeriodAnchorConfig {
+            /**
+             * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+             */
+            @SerializedName("custom")
+            Custom custom;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** The type of service period anchor config. Defaults to {@code inherit} if omitted. */
+            @SerializedName("type")
+            Type type;
+
+            private ServicePeriodAnchorConfig(
+                Custom custom, Map<String, Object> extraParams, Type type) {
+              this.custom = custom;
+              this.extraParams = extraParams;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Custom custom;
+
+              private Map<String, Object> extraParams;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings
+                      .ServicePeriodAnchorConfig
+                  build() {
+                return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings
+                    .ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+              }
+
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              public Builder setCustom(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings
+                          .ServicePeriodAnchorConfig.Custom
+                      custom) {
+                this.custom = custom;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              public Builder setType(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings
+                          .ServicePeriodAnchorConfig.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Custom {
+              /**
+               * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1
+               * to 31.
+               */
+              @SerializedName("day_of_month")
+              Long dayOfMonth;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+              @SerializedName("hour")
+              Long hour;
+
+              /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("minute")
+              Long minute;
+
+              /** The month to start full cycle periods. Ranges from 1 to 12. */
+              @SerializedName("month")
+              Long month;
+
+              /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("second")
+              Long second;
+
+              private Custom(
+                  Long dayOfMonth,
+                  Map<String, Object> extraParams,
+                  Long hour,
+                  Long minute,
+                  Long month,
+                  Long second) {
+                this.dayOfMonth = dayOfMonth;
+                this.extraParams = extraParams;
+                this.hour = hour;
+                this.minute = minute;
+                this.month = month;
+                this.second = second;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Long dayOfMonth;
+
+                private Map<String, Object> extraParams;
+
+                private Long hour;
+
+                private Long minute;
+
+                private Long month;
+
+                private Long second;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings
+                        .ServicePeriodAnchorConfig.Custom
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings
+                      .ServicePeriodAnchorConfig.Custom(
+                      this.dayOfMonth,
+                      this.extraParams,
+                      this.hour,
+                      this.minute,
+                      this.month,
+                      this.second);
+                }
+
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                public Builder setDayOfMonth(Long dayOfMonth) {
+                  this.dayOfMonth = dayOfMonth;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                public Builder setHour(Long hour) {
+                  this.hour = hour;
+                  return this;
+                }
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                public Builder setMinute(Long minute) {
+                  this.minute = minute;
+                  return this;
+                }
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                public Builder setMonth(Long month) {
+                  this.month = month;
+                  return this;
+                }
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                public Builder setSecond(Long second) {
+                  this.second = second;
+                  return this;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("custom")
+              CUSTOM("custom"),
+
+              @SerializedName("inherit")
+              INHERIT("inherit");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          public enum StartDate implements ApiRequestParams.EnumParam {
+            @SerializedName("current_period_end")
+            CURRENT_PERIOD_END("current_period_end"),
+
+            @SerializedName("current_period_start")
+            CURRENT_PERIOD_START("current_period_start"),
+
+            @SerializedName("phase_start")
+            PHASE_START("phase_start");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            StartDate(String value) {
               this.value = value;
             }
           }
@@ -12587,17 +15036,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           @SerializedName("promotion_code")
           String promotionCode;
 
+          /** Settings for discount application including service period anchoring. */
+          @SerializedName("settings")
+          Settings settings;
+
           private Discount(
               String coupon,
               String discount,
               DiscountEnd discountEnd,
               Map<String, Object> extraParams,
-              String promotionCode) {
+              String promotionCode,
+              Settings settings) {
             this.coupon = coupon;
             this.discount = discount;
             this.discountEnd = discountEnd;
             this.extraParams = extraParams;
             this.promotionCode = promotionCode;
+            this.settings = settings;
           }
 
           public static Builder builder() {
@@ -12615,6 +15070,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
             private String promotionCode;
 
+            private Settings settings;
+
             /** Finalize and obtain parameter instance from this builder. */
             public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount build() {
               return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount(
@@ -12622,7 +15079,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
                   this.discount,
                   this.discountEnd,
                   this.extraParams,
-                  this.promotionCode);
+                  this.promotionCode,
+                  this.settings);
             }
 
             /** ID of the coupon to create a new discount for. */
@@ -12678,6 +15136,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             /** ID of the promotion code to create a new discount for. */
             public Builder setPromotionCode(String promotionCode) {
               this.promotionCode = promotionCode;
+              return this;
+            }
+
+            /** Settings for discount application including service period anchoring. */
+            public Builder setSettings(
+                InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings settings) {
+              this.settings = settings;
               return this;
             }
           }
@@ -12933,6 +15398,395 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
               private final String value;
 
               Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Settings {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** Configures service period cycle anchoring. */
+            @SerializedName("service_period_anchor_config")
+            ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code phase_start} if omitted.
+             */
+            @SerializedName("start_date")
+            StartDate startDate;
+
+            private Settings(
+                Map<String, Object> extraParams,
+                ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+                StartDate startDate) {
+              this.extraParams = extraParams;
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              this.startDate = startDate;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+              private StartDate startDate;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings
+                  build() {
+                return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings(
+                    this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** Configures service period cycle anchoring. */
+              public Builder setServicePeriodAnchorConfig(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings
+                          .ServicePeriodAnchorConfig
+                      servicePeriodAnchorConfig) {
+                this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+                return this;
+              }
+
+              /**
+               * The start date of the discount's service period when applying a coupon or promotion
+               * code with a service period duration. Defaults to {@code phase_start} if omitted.
+               */
+              public Builder setStartDate(
+                  InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings.StartDate
+                      startDate) {
+                this.startDate = startDate;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class ServicePeriodAnchorConfig {
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              @SerializedName("custom")
+              Custom custom;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /**
+               * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+               */
+              @SerializedName("type")
+              Type type;
+
+              private ServicePeriodAnchorConfig(
+                  Custom custom, Map<String, Object> extraParams, Type type) {
+                this.custom = custom;
+                this.extraParams = extraParams;
+                this.type = type;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Custom custom;
+
+                private Map<String, Object> extraParams;
+
+                private Type type;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings
+                        .ServicePeriodAnchorConfig
+                    build() {
+                  return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings
+                      .ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+                }
+
+                /**
+                 * Anchor the service period to a custom date. Type must be {@code custom} to
+                 * specify.
+                 */
+                public Builder setCustom(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings
+                            .ServicePeriodAnchorConfig.Custom
+                        custom) {
+                  this.custom = custom;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /**
+                 * The type of service period anchor config. Defaults to {@code inherit} if omitted.
+                 */
+                public Builder setType(
+                    InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings
+                            .ServicePeriodAnchorConfig.Type
+                        type) {
+                  this.type = type;
+                  return this;
+                }
+              }
+
+              @Getter
+              @EqualsAndHashCode(callSuper = false)
+              public static class Custom {
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                @SerializedName("day_of_month")
+                Long dayOfMonth;
+
+                /**
+                 * Map of extra parameters for custom features not available in this client library.
+                 * The content in this map is not serialized under this field's
+                 * {@code @SerializedName} value. Instead, each key/value pair is serialized as if
+                 * the key is a root-level field (serialized) name in this param object.
+                 * Effectively, this map is flattened to its parent instance.
+                 */
+                @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+                Map<String, Object> extraParams;
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                @SerializedName("hour")
+                Long hour;
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("minute")
+                Long minute;
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                @SerializedName("month")
+                Long month;
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                @SerializedName("second")
+                Long second;
+
+                private Custom(
+                    Long dayOfMonth,
+                    Map<String, Object> extraParams,
+                    Long hour,
+                    Long minute,
+                    Long month,
+                    Long second) {
+                  this.dayOfMonth = dayOfMonth;
+                  this.extraParams = extraParams;
+                  this.hour = hour;
+                  this.minute = minute;
+                  this.month = month;
+                  this.second = second;
+                }
+
+                public static Builder builder() {
+                  return new Builder();
+                }
+
+                public static class Builder {
+                  private Long dayOfMonth;
+
+                  private Map<String, Object> extraParams;
+
+                  private Long hour;
+
+                  private Long minute;
+
+                  private Long month;
+
+                  private Long second;
+
+                  /** Finalize and obtain parameter instance from this builder. */
+                  public InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings
+                          .ServicePeriodAnchorConfig.Custom
+                      build() {
+                    return new InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount
+                        .Settings.ServicePeriodAnchorConfig.Custom(
+                        this.dayOfMonth,
+                        this.extraParams,
+                        this.hour,
+                        this.minute,
+                        this.month,
+                        this.second);
+                  }
+
+                  /**
+                   * <strong>Required.</strong> The day of the month the anchor should be. Ranges
+                   * from 1 to 31.
+                   */
+                  public Builder setDayOfMonth(Long dayOfMonth) {
+                    this.dayOfMonth = dayOfMonth;
+                    return this;
+                  }
+
+                  /**
+                   * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                   * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                   * original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putExtraParam(String key, Object value) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.put(key, value);
+                    return this;
+                  }
+
+                  /**
+                   * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                   * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                   * the original map. See {@link
+                   * InvoiceCreatePreviewParams.ScheduleDetails.Phase.Item.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                   * for the field documentation.
+                   */
+                  public Builder putAllExtraParam(Map<String, Object> map) {
+                    if (this.extraParams == null) {
+                      this.extraParams = new HashMap<>();
+                    }
+                    this.extraParams.putAll(map);
+                    return this;
+                  }
+
+                  /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                  public Builder setHour(Long hour) {
+                    this.hour = hour;
+                    return this;
+                  }
+
+                  /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                  public Builder setMinute(Long minute) {
+                    this.minute = minute;
+                    return this;
+                  }
+
+                  /** The month to start full cycle periods. Ranges from 1 to 12. */
+                  public Builder setMonth(Long month) {
+                    this.month = month;
+                    return this;
+                  }
+
+                  /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                  public Builder setSecond(Long second) {
+                    this.second = second;
+                    return this;
+                  }
+                }
+              }
+
+              public enum Type implements ApiRequestParams.EnumParam {
+                @SerializedName("custom")
+                CUSTOM("custom"),
+
+                @SerializedName("inherit")
+                INHERIT("inherit");
+
+                @Getter(onMethod_ = {@Override})
+                private final String value;
+
+                Type(String value) {
+                  this.value = value;
+                }
+              }
+            }
+
+            public enum StartDate implements ApiRequestParams.EnumParam {
+              @SerializedName("current_period_end")
+              CURRENT_PERIOD_END("current_period_end"),
+
+              @SerializedName("current_period_start")
+              CURRENT_PERIOD_START("current_period_start"),
+
+              @SerializedName("phase_start")
+              PHASE_START("phase_start");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              StartDate(String value) {
                 this.value = value;
               }
             }
@@ -16246,17 +19100,23 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         @SerializedName("promotion_code")
         String promotionCode;
 
+        /** Settings for discount application including service period anchoring. */
+        @SerializedName("settings")
+        Settings settings;
+
         private Discount(
             String coupon,
             String discount,
             DiscountEnd discountEnd,
             Map<String, Object> extraParams,
-            String promotionCode) {
+            String promotionCode,
+            Settings settings) {
           this.coupon = coupon;
           this.discount = discount;
           this.discountEnd = discountEnd;
           this.extraParams = extraParams;
           this.promotionCode = promotionCode;
+          this.settings = settings;
         }
 
         public static Builder builder() {
@@ -16274,10 +19134,17 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
           private String promotionCode;
 
+          private Settings settings;
+
           /** Finalize and obtain parameter instance from this builder. */
           public InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount build() {
             return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount(
-                this.coupon, this.discount, this.discountEnd, this.extraParams, this.promotionCode);
+                this.coupon,
+                this.discount,
+                this.discountEnd,
+                this.extraParams,
+                this.promotionCode,
+                this.settings);
           }
 
           /** ID of the coupon to create a new discount for. */
@@ -16333,6 +19200,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           /** ID of the promotion code to create a new discount for. */
           public Builder setPromotionCode(String promotionCode) {
             this.promotionCode = promotionCode;
+            return this;
+          }
+
+          /** Settings for discount application including service period anchoring. */
+          public Builder setSettings(
+              InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings settings) {
+            this.settings = settings;
             return this;
           }
         }
@@ -16587,6 +19461,395 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             private final String value;
 
             Type(String value) {
+              this.value = value;
+            }
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Settings {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** Configures service period cycle anchoring. */
+          @SerializedName("service_period_anchor_config")
+          ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+          /**
+           * The start date of the discount's service period when applying a coupon or promotion
+           * code with a service period duration. Defaults to {@code now} if omitted.
+           */
+          @SerializedName("start_date")
+          StartDate startDate;
+
+          private Settings(
+              Map<String, Object> extraParams,
+              ServicePeriodAnchorConfig servicePeriodAnchorConfig,
+              StartDate startDate) {
+            this.extraParams = extraParams;
+            this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+            this.startDate = startDate;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private ServicePeriodAnchorConfig servicePeriodAnchorConfig;
+
+            private StartDate startDate;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings build() {
+              return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings(
+                  this.extraParams, this.servicePeriodAnchorConfig, this.startDate);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** Configures service period cycle anchoring. */
+            public Builder setServicePeriodAnchorConfig(
+                InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings
+                        .ServicePeriodAnchorConfig
+                    servicePeriodAnchorConfig) {
+              this.servicePeriodAnchorConfig = servicePeriodAnchorConfig;
+              return this;
+            }
+
+            /**
+             * The start date of the discount's service period when applying a coupon or promotion
+             * code with a service period duration. Defaults to {@code now} if omitted.
+             */
+            public Builder setStartDate(
+                InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings.StartDate
+                    startDate) {
+              this.startDate = startDate;
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class ServicePeriodAnchorConfig {
+            /**
+             * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+             */
+            @SerializedName("custom")
+            Custom custom;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /**
+             * The type of service period anchor config. Defaults to {@code
+             * subscription_service_cycle_anchor} if omitted.
+             */
+            @SerializedName("type")
+            Type type;
+
+            private ServicePeriodAnchorConfig(
+                Custom custom, Map<String, Object> extraParams, Type type) {
+              this.custom = custom;
+              this.extraParams = extraParams;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Custom custom;
+
+              private Map<String, Object> extraParams;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings
+                      .ServicePeriodAnchorConfig
+                  build() {
+                return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings
+                    .ServicePeriodAnchorConfig(this.custom, this.extraParams, this.type);
+              }
+
+              /**
+               * Anchor the service period to a custom date. Type must be {@code custom} to specify.
+               */
+              public Builder setCustom(
+                  InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings
+                          .ServicePeriodAnchorConfig.Custom
+                      custom) {
+                this.custom = custom;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings.ServicePeriodAnchorConfig#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /**
+               * The type of service period anchor config. Defaults to {@code
+               * subscription_service_cycle_anchor} if omitted.
+               */
+              public Builder setType(
+                  InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings
+                          .ServicePeriodAnchorConfig.Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class Custom {
+              /**
+               * <strong>Required.</strong> The day of the month the anchor should be. Ranges from 1
+               * to 31.
+               */
+              @SerializedName("day_of_month")
+              Long dayOfMonth;
+
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+              @SerializedName("hour")
+              Long hour;
+
+              /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("minute")
+              Long minute;
+
+              /** The month to start full cycle periods. Ranges from 1 to 12. */
+              @SerializedName("month")
+              Long month;
+
+              /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+              @SerializedName("second")
+              Long second;
+
+              private Custom(
+                  Long dayOfMonth,
+                  Map<String, Object> extraParams,
+                  Long hour,
+                  Long minute,
+                  Long month,
+                  Long second) {
+                this.dayOfMonth = dayOfMonth;
+                this.extraParams = extraParams;
+                this.hour = hour;
+                this.minute = minute;
+                this.month = month;
+                this.second = second;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Long dayOfMonth;
+
+                private Map<String, Object> extraParams;
+
+                private Long hour;
+
+                private Long minute;
+
+                private Long month;
+
+                private Long second;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings
+                        .ServicePeriodAnchorConfig.Custom
+                    build() {
+                  return new InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings
+                      .ServicePeriodAnchorConfig.Custom(
+                      this.dayOfMonth,
+                      this.extraParams,
+                      this.hour,
+                      this.minute,
+                      this.month,
+                      this.second);
+                }
+
+                /**
+                 * <strong>Required.</strong> The day of the month the anchor should be. Ranges from
+                 * 1 to 31.
+                 */
+                public Builder setDayOfMonth(Long dayOfMonth) {
+                  this.dayOfMonth = dayOfMonth;
+                  return this;
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * InvoiceCreatePreviewParams.SubscriptionDetails.Item.Discount.Settings.ServicePeriodAnchorConfig.Custom#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** The hour of the day the anchor should be. Ranges from 0 to 23. */
+                public Builder setHour(Long hour) {
+                  this.hour = hour;
+                  return this;
+                }
+
+                /** The minute of the hour the anchor should be. Ranges from 0 to 59. */
+                public Builder setMinute(Long minute) {
+                  this.minute = minute;
+                  return this;
+                }
+
+                /** The month to start full cycle periods. Ranges from 1 to 12. */
+                public Builder setMonth(Long month) {
+                  this.month = month;
+                  return this;
+                }
+
+                /** The second of the minute the anchor should be. Ranges from 0 to 59. */
+                public Builder setSecond(Long second) {
+                  this.second = second;
+                  return this;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("custom")
+              CUSTOM("custom"),
+
+              @SerializedName("subscription_service_cycle_anchor")
+              SUBSCRIPTION_SERVICE_CYCLE_ANCHOR("subscription_service_cycle_anchor");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          public enum StartDate implements ApiRequestParams.EnumParam {
+            @SerializedName("current_period_end")
+            CURRENT_PERIOD_END("current_period_end"),
+
+            @SerializedName("current_period_start")
+            CURRENT_PERIOD_START("current_period_start"),
+
+            @SerializedName("now")
+            NOW("now");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            StartDate(String value) {
               this.value = value;
             }
           }

@@ -19,6 +19,7 @@ import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
 import com.stripe.param.SubscriptionMigrateParams;
+import com.stripe.param.SubscriptionPauseParams;
 import com.stripe.param.SubscriptionResumeParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionSearchParams;
@@ -572,6 +573,34 @@ public final class SubscriptionService extends ApiService {
       throws StripeException {
     String path =
         String.format("/v1/subscriptions/%s/migrate", ApiResource.urlEncodeId(subscription));
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(request, Subscription.class);
+  }
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(String subscription, SubscriptionPauseParams params)
+      throws StripeException {
+    return pause(subscription, params, (RequestOptions) null);
+  }
+  /**
+   * Pauses a subscription by transitioning it to the paused status. A paused subscription does not
+   * generate invoices and will not advance to new billing periods. The subscription can be resumed
+   * later using the resume endpoint. Cannot pause subscriptions with attached schedules.
+   */
+  public Subscription pause(
+      String subscription, SubscriptionPauseParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/subscriptions/%s/pause", ApiResource.urlEncodeId(subscription));
     ApiRequest request =
         new ApiRequest(
             BaseAddress.API,

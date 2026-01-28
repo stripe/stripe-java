@@ -1,0 +1,5 @@
+// File generated from our OpenAPI spec
+package com.stripe.model;
+
+public class FrMealVouchersOnboardingCollection
+    extends StripeCollection<FrMealVouchersOnboarding> {}

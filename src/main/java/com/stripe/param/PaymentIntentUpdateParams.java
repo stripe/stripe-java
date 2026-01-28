@@ -1104,6 +1104,21 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     Object discountAmount;
 
     /**
+     * Set to {@code false} to return arithmetic validation errors in the response without failing
+     * the request. Use this when you want the operation to proceed regardless of arithmetic errors
+     * in the line item data.
+     *
+     * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+     * fails. Use this for strict validation that prevents processing with line item data that has
+     * arithmetic inconsistencies.
+     *
+     * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic validation
+     * error to card networks.
+     */
+    @SerializedName("enforce_arithmetic_validation")
+    Boolean enforceArithmeticValidation;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1114,7 +1129,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * A list of line items, each containing information about a product in the PaymentIntent. There
-     * is a maximum of 100 line items.
+     * is a maximum of 200 line items.
      */
     @SerializedName("line_items")
     Object lineItems;
@@ -1129,11 +1144,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private AmountDetails(
         Object discountAmount,
+        Boolean enforceArithmeticValidation,
         Map<String, Object> extraParams,
         Object lineItems,
         Object shipping,
         Object tax) {
       this.discountAmount = discountAmount;
+      this.enforceArithmeticValidation = enforceArithmeticValidation;
       this.extraParams = extraParams;
       this.lineItems = lineItems;
       this.shipping = shipping;
@@ -1147,6 +1164,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Object discountAmount;
 
+      private Boolean enforceArithmeticValidation;
+
       private Map<String, Object> extraParams;
 
       private Object lineItems;
@@ -1158,7 +1177,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentUpdateParams.AmountDetails build() {
         return new PaymentIntentUpdateParams.AmountDetails(
-            this.discountAmount, this.extraParams, this.lineItems, this.shipping, this.tax);
+            this.discountAmount,
+            this.enforceArithmeticValidation,
+            this.extraParams,
+            this.lineItems,
+            this.shipping,
+            this.tax);
       }
 
       /**
@@ -1184,6 +1208,23 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
        */
       public Builder setDiscountAmount(EmptyParam discountAmount) {
         this.discountAmount = discountAmount;
+        return this;
+      }
+
+      /**
+       * Set to {@code false} to return arithmetic validation errors in the response without failing
+       * the request. Use this when you want the operation to proceed regardless of arithmetic
+       * errors in the line item data.
+       *
+       * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+       * fails. Use this for strict validation that prevents processing with line item data that has
+       * arithmetic inconsistencies.
+       *
+       * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic
+       * validation error to card networks.
+       */
+      public Builder setEnforceArithmeticValidation(Boolean enforceArithmeticValidation) {
+        this.enforceArithmeticValidation = enforceArithmeticValidation;
         return this;
       }
 
@@ -1245,7 +1286,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(EmptyParam lineItems) {
         this.lineItems = lineItems;
@@ -1254,7 +1295,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /**
        * A list of line items, each containing information about a product in the PaymentIntent.
-       * There is a maximum of 100 line items.
+       * There is a maximum of 200 line items.
        */
       public Builder setLineItems(
           List<PaymentIntentUpdateParams.AmountDetails.LineItem> lineItems) {
@@ -18282,6 +18323,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         @SerializedName("abn_amro")
         ABN_AMRO("abn_amro"),
 
+        @SerializedName("adyen")
+        ADYEN("adyen"),
+
         @SerializedName("asn_bank")
         ASN_BANK("asn_bank"),
 
@@ -28062,7 +28106,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           N2__1__0("2.1.0"),
 
           @SerializedName("2.2.0")
-          N2__2__0("2.2.0");
+          N2__2__0("2.2.0"),
+
+          @SerializedName("2.3.0")
+          N2__3__0("2.3.0"),
+
+          @SerializedName("2.3.1")
+          N2__3__1("2.3.1");
 
           @Getter(onMethod_ = {@Override})
           private final String value;
