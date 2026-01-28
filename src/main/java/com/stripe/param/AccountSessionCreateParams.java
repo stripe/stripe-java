@@ -156,6 +156,14 @@ public class AccountSessionCreateParams extends ApiRequestParams {
 
     /**
      * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/agentic-commerce-settings/">agentic
+     * commerce settings</a> embedded component.
+     */
+    @SerializedName("agentic_commerce_settings")
+    AgenticCommerceSettings agenticCommerceSettings;
+
+    /**
+     * Configuration for the <a
      * href="https://stripe.com/connect/supported-embedded-components/app-install/">app install</a>
      * embedded component.
      */
@@ -406,6 +414,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
     private Components(
         AccountManagement accountManagement,
         AccountOnboarding accountOnboarding,
+        AgenticCommerceSettings agenticCommerceSettings,
         AppInstall appInstall,
         AppViewport appViewport,
         Balances balances,
@@ -439,6 +448,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         TaxThresholdMonitoring taxThresholdMonitoring) {
       this.accountManagement = accountManagement;
       this.accountOnboarding = accountOnboarding;
+      this.agenticCommerceSettings = agenticCommerceSettings;
       this.appInstall = appInstall;
       this.appViewport = appViewport;
       this.balances = balances;
@@ -480,6 +490,8 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       private AccountManagement accountManagement;
 
       private AccountOnboarding accountOnboarding;
+
+      private AgenticCommerceSettings agenticCommerceSettings;
 
       private AppInstall appInstall;
 
@@ -548,6 +560,7 @@ public class AccountSessionCreateParams extends ApiRequestParams {
         return new AccountSessionCreateParams.Components(
             this.accountManagement,
             this.accountOnboarding,
+            this.agenticCommerceSettings,
             this.appInstall,
             this.appViewport,
             this.balances,
@@ -600,6 +613,17 @@ public class AccountSessionCreateParams extends ApiRequestParams {
       public Builder setAccountOnboarding(
           AccountSessionCreateParams.Components.AccountOnboarding accountOnboarding) {
         this.accountOnboarding = accountOnboarding;
+        return this;
+      }
+
+      /**
+       * Configuration for the <a
+       * href="https://stripe.com/connect/supported-embedded-components/agentic-commerce-settings/">agentic
+       * commerce settings</a> embedded component.
+       */
+      public Builder setAgenticCommerceSettings(
+          AccountSessionCreateParams.Components.AgenticCommerceSettings agenticCommerceSettings) {
+        this.agenticCommerceSettings = agenticCommerceSettings;
         return this;
       }
 
@@ -1349,6 +1373,157 @@ public class AccountSessionCreateParams extends ApiRequestParams {
            * map. See {@link
            * AccountSessionCreateParams.Components.AccountOnboarding.Features#extraParams} for the
            * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AgenticCommerceSettings {
+      /** <strong>Required.</strong> Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** An empty list, because this embedded component has no features. */
+      @SerializedName("features")
+      Features features;
+
+      private AgenticCommerceSettings(
+          Boolean enabled, Map<String, Object> extraParams, Features features) {
+        this.enabled = enabled;
+        this.extraParams = extraParams;
+        this.features = features;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Boolean enabled;
+
+        private Map<String, Object> extraParams;
+
+        private Features features;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountSessionCreateParams.Components.AgenticCommerceSettings build() {
+          return new AccountSessionCreateParams.Components.AgenticCommerceSettings(
+              this.enabled, this.extraParams, this.features);
+        }
+
+        /** <strong>Required.</strong> Whether the embedded component is enabled. */
+        public Builder setEnabled(Boolean enabled) {
+          this.enabled = enabled;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountSessionCreateParams.Components.AgenticCommerceSettings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link
+         * AccountSessionCreateParams.Components.AgenticCommerceSettings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** An empty list, because this embedded component has no features. */
+        public Builder setFeatures(
+            AccountSessionCreateParams.Components.AgenticCommerceSettings.Features features) {
+          this.features = features;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Features(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountSessionCreateParams.Components.AgenticCommerceSettings.Features build() {
+            return new AccountSessionCreateParams.Components.AgenticCommerceSettings.Features(
+                this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.AgenticCommerceSettings.Features#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountSessionCreateParams.Components.AgenticCommerceSettings.Features#extraParams} for
+           * the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
