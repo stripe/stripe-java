@@ -15,6 +15,7 @@ import com.stripe.param.InvoiceAddLinesParams;
 import com.stripe.param.InvoiceAttachPaymentParams;
 import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceCreatePreviewParams;
+import com.stripe.param.InvoiceDetachPaymentParams;
 import com.stripe.param.InvoiceFinalizeInvoiceParams;
 import com.stripe.param.InvoiceListParams;
 import com.stripe.param.InvoiceMarkUncollectibleParams;
@@ -1037,8 +1038,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public static Invoice create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -1047,8 +1048,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public static Invoice create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1061,8 +1062,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public static Invoice create(InvoiceCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -1071,8 +1072,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * This endpoint creates a draft invoice for a given customer. The invoice remains a draft until
    * you <a href="https://stripe.com/docs/api#finalize_invoice">finalize</a> the invoice, which
-   * allows you to <a href="https://stripe.com/docs/api#pay_invoice">pay</a> or <a
-   * href="https://stripe.com/docs/api#send_invoice">send</a> the invoice to your customers.
+   * allows you to <a href="https://stripe.com/api/invoices/pay">pay</a> or <a
+   * href="https://stripe.com/api/invoices/send">send</a> the invoice to your customers.
    */
   public static Invoice create(InvoiceCreateParams params, RequestOptions options)
       throws StripeException {
@@ -1310,6 +1311,52 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     String path = String.format("/v1/invoices/%s", ApiResource.urlEncodeId(this.getId()));
     ApiRequest request =
         new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.DELETE, path, params, options);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
+  public Invoice detachPayment() throws StripeException {
+    return detachPayment((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
+  public Invoice detachPayment(RequestOptions options) throws StripeException {
+    return detachPayment((Map<String, Object>) null, options);
+  }
+
+  /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
+  public Invoice detachPayment(Map<String, Object> params) throws StripeException {
+    return detachPayment(params, (RequestOptions) null);
+  }
+
+  /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
+  public Invoice detachPayment(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/detach_payment", ApiResource.urlEncodeId(this.getId()));
+    ApiRequest request =
+        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
+    return getResponseGetter().request(request, Invoice.class);
+  }
+
+  /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
+  public Invoice detachPayment(InvoiceDetachPaymentParams params) throws StripeException {
+    return detachPayment(params, (RequestOptions) null);
+  }
+
+  /** Detaches a payment from the invoice, removing it from the list of {@code payments}. */
+  public Invoice detachPayment(InvoiceDetachPaymentParams params, RequestOptions options)
+      throws StripeException {
+    String path =
+        String.format("/v1/invoices/%s/detach_payment", ApiResource.urlEncodeId(this.getId()));
+    ApiResource.checkNullTypedParams(path, params);
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.POST,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
     return getResponseGetter().request(request, Invoice.class);
   }
 
@@ -2210,21 +2257,21 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
      * ro_tin}, {@code rs_pib}, {@code sv_nit}, {@code uy_ruc}, {@code ve_rif}, {@code vn_tin},
      * {@code gb_vat}, {@code nz_gst}, {@code au_abn}, {@code au_arn}, {@code in_gst}, {@code
      * no_vat}, {@code no_voec}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
-     * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code tw_vat},
-     * {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid}, {@code li_vat},
-     * {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code
-     * ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code
-     * ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp}, {@code il_vat},
-     * {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code hu_tin}, {@code
-     * si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin}, {@code al_tin},
-     * {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code de_stn}, {@code
-     * ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat}, {@code ma_vat},
-     * {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin}, {@code cd_nif}, {@code
-     * mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif}, {@code mk_vat},
-     * {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code tj_tin}, {@code
-     * ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin}, {@code az_tin}, {@code bd_bin},
-     * {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code cm_niu}, {@code
-     * cv_nif}, {@code bf_ifu}, or {@code unknown}.
+     * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code pl_nip},
+     * {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code li_uid},
+     * {@code li_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code ca_qst}, {@code
+     * ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk}, {@code my_sst}, {@code
+     * sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code id_npwp}, {@code my_frp},
+     * {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat}, {@code bg_uic}, {@code
+     * hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code eg_tin}, {@code ph_tin},
+     * {@code al_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin}, {@code om_vat}, {@code
+     * de_stn}, {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code uz_tin}, {@code md_vat},
+     * {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin}, {@code bb_tin}, {@code
+     * cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code ba_tin}, {@code gn_nif},
+     * {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin}, {@code np_pan}, {@code
+     * tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code aw_tin}, {@code az_tin},
+     * {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin}, {@code la_tin}, {@code
+     * cm_niu}, {@code cv_nif}, {@code bf_ifu}, or {@code unknown}.
      */
     @SerializedName("type")
     String type;
@@ -2320,10 +2367,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parent extends StripeObject {
-    /** Details about the billing cadence that generated this invoice. */
-    @SerializedName("billing_cadence_details")
-    BillingCadenceDetails billingCadenceDetails;
-
     /** Details about the quote that generated this invoice. */
     @SerializedName("quote_details")
     QuoteDetails quoteDetails;
@@ -2335,24 +2378,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /**
      * The type of parent that generated this invoice
      *
-     * <p>One of {@code billing_cadence_details}, {@code quote_details}, or {@code
-     * subscription_details}.
+     * <p>One of {@code quote_details}, or {@code subscription_details}.
      */
     @SerializedName("type")
     String type;
-
-    /**
-     * For more details about BillingCadenceDetails, please refer to the <a
-     * href="https://docs.stripe.com/api">API Reference.</a>
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class BillingCadenceDetails extends StripeObject {
-      /** The billing cadence that generated this invoice. */
-      @SerializedName("billing_cadence")
-      String billingCadence;
-    }
 
     /**
      * For more details about QuoteDetails, please refer to the <a

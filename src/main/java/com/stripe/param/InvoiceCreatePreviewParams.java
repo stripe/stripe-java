@@ -20,14 +20,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
   AutomaticTax automaticTax;
 
   /**
-   * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
-   * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details} or
-   * {@code schedule_details} are provided.
-   */
-  @SerializedName("billing_cadence")
-  String billingCadence;
-
-  /**
    * The currency to preview this invoice in. Defaults to that of {@code customer} if not specified.
    */
   @SerializedName("currency")
@@ -140,7 +132,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
   private InvoiceCreatePreviewParams(
       AutomaticTax automaticTax,
-      String billingCadence,
       String currency,
       String customer,
       String customerAccount,
@@ -157,7 +148,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       String subscription,
       SubscriptionDetails subscriptionDetails) {
     this.automaticTax = automaticTax;
-    this.billingCadence = billingCadence;
     this.currency = currency;
     this.customer = customer;
     this.customerAccount = customerAccount;
@@ -181,8 +171,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
   public static class Builder {
     private AutomaticTax automaticTax;
-
-    private String billingCadence;
 
     private String currency;
 
@@ -218,7 +206,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     public InvoiceCreatePreviewParams build() {
       return new InvoiceCreatePreviewParams(
           this.automaticTax,
-          this.billingCadence,
           this.currency,
           this.customer,
           this.customerAccount,
@@ -239,16 +226,6 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     /** Settings for automatic tax lookup for this invoice preview. */
     public Builder setAutomaticTax(InvoiceCreatePreviewParams.AutomaticTax automaticTax) {
       this.automaticTax = automaticTax;
-      return this;
-    }
-
-    /**
-     * The identifier of the billing cadence for which you’d like to retrieve the upcoming invoice.
-     * Cannot be provided when {@code subscription}, {@code schedule}, {@code subscription_details}
-     * or {@code schedule_details} are provided.
-     */
-    public Builder setBillingCadence(String billingCadence) {
-      this.billingCadence = billingCadence;
       return this;
     }
 
@@ -1432,11 +1409,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
        * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
        * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
        * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-       * {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat}, {@code
-       * sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code sv_nit},
-       * {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code
-       * ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code uz_vat},
-       * {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code zw_tin}
+       * {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
+       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin},
+       * {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code
+       * tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin},
+       * {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
+       * zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -1513,12 +1491,12 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
          * {@code ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code
          * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat},
          * {@code no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
-         * ph_tin}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code sa_vat},
-         * {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin}, {@code
-         * sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code tz_vat},
-         * {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin}, {@code
-         * uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
-         * zw_tin}
+         * ph_tin}, {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
+         * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
+         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
+         * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
+         * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin},
+         * or {@code zw_tin}
          */
         public Builder setType(InvoiceCreatePreviewParams.CustomerDetails.TaxId.Type type) {
           this.type = type;
@@ -1781,6 +1759,9 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
         @SerializedName("ph_tin")
         PH_TIN("ph_tin"),
+
+        @SerializedName("pl_nip")
+        PL_NIP("pl_nip"),
 
         @SerializedName("ro_tin")
         RO_TIN("ro_tin"),

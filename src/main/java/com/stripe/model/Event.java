@@ -120,20 +120,22 @@ public class Event extends ApiResource implements HasId {
    * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
    * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
    * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
-   * capital.financing_offer.replacement_created}, {@code capital.financing_transaction.created},
-   * {@code cash_balance.funds_available}, {@code charge.captured}, {@code charge.dispute.closed},
-   * {@code charge.dispute.created}, {@code charge.dispute.funds_reinstated}, {@code
-   * charge.dispute.funds_withdrawn}, {@code charge.dispute.updated}, {@code charge.expired}, {@code
-   * charge.failed}, {@code charge.pending}, {@code charge.refund.updated}, {@code charge.refunded},
-   * {@code charge.succeeded}, {@code charge.updated}, {@code
-   * checkout.session.async_payment_failed}, {@code checkout.session.async_payment_succeeded},
-   * {@code checkout.session.completed}, {@code checkout.session.expired}, {@code
-   * climate.order.canceled}, {@code climate.order.created}, {@code climate.order.delayed}, {@code
-   * climate.order.delivered}, {@code climate.order.product_substituted}, {@code
-   * climate.product.created}, {@code climate.product.pricing_updated}, {@code coupon.created},
-   * {@code coupon.deleted}, {@code coupon.updated}, {@code credit_note.created}, {@code
-   * credit_note.updated}, {@code credit_note.voided}, {@code customer.created}, {@code
-   * customer.deleted}, {@code customer.discount.created}, {@code customer.discount.deleted}, {@code
+   * capital.financing_offer.replacement_created}, {@code
+   * capital.financing_summary.line_of_credit_update}, {@code
+   * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
+   * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
+   * charge.dispute.funds_reinstated}, {@code charge.dispute.funds_withdrawn}, {@code
+   * charge.dispute.updated}, {@code charge.expired}, {@code charge.failed}, {@code charge.pending},
+   * {@code charge.refund.updated}, {@code charge.refunded}, {@code charge.succeeded}, {@code
+   * charge.updated}, {@code checkout.session.async_payment_failed}, {@code
+   * checkout.session.async_payment_succeeded}, {@code checkout.session.completed}, {@code
+   * checkout.session.expired}, {@code climate.order.canceled}, {@code climate.order.created},
+   * {@code climate.order.delayed}, {@code climate.order.delivered}, {@code
+   * climate.order.product_substituted}, {@code climate.product.created}, {@code
+   * climate.product.pricing_updated}, {@code coupon.created}, {@code coupon.deleted}, {@code
+   * coupon.updated}, {@code credit_note.created}, {@code credit_note.updated}, {@code
+   * credit_note.voided}, {@code customer.created}, {@code customer.deleted}, {@code
+   * customer.discount.created}, {@code customer.discount.deleted}, {@code
    * customer.discount.updated}, {@code customer.source.created}, {@code customer.source.deleted},
    * {@code customer.source.expiring}, {@code customer.source.updated}, {@code
    * customer.subscription.collection_paused}, {@code customer.subscription.collection_resumed},
@@ -237,10 +239,11 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_transfer.returned}, {@code
    * treasury.outbound_transfer.tracking_details_updated}, {@code treasury.received_credit.created},
    * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
-   * treasury.received_debit.created}, {@code billing.credit_balance_transaction.created}, {@code
-   * billing.credit_grant.created}, {@code billing.credit_grant.updated}, {@code
-   * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},
-   * or {@code billing.meter.updated}.
+   * treasury.received_debit.created}, {@code invoice_payment.detached}, {@code
+   * billing.credit_balance_transaction.created}, {@code billing.credit_grant.created}, {@code
+   * billing.credit_grant.updated}, {@code billing.meter.created}, {@code
+   * billing.meter.deactivated}, {@code billing.meter.reactivated}, or {@code
+   * billing.meter.updated}.
    */
   @SerializedName("type")
   String type;

@@ -347,6 +347,10 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("capital.financing_offer.replacement_created")
     CAPITAL__FINANCING_OFFER__REPLACEMENT_CREATED("capital.financing_offer.replacement_created"),
 
+    @SerializedName("capital.financing_summary.line_of_credit_update")
+    CAPITAL__FINANCING_SUMMARY__LINE_OF_CREDIT_UPDATE(
+        "capital.financing_summary.line_of_credit_update"),
+
     @SerializedName("capital.financing_transaction.created")
     CAPITAL__FINANCING_TRANSACTION__CREATED("capital.financing_transaction.created"),
 
@@ -1131,6 +1135,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("treasury.received_debit.created")
     TREASURY__RECEIVED_DEBIT__CREATED("treasury.received_debit.created"),
+
+    @SerializedName("invoice_payment.detached")
+    INVOICE_PAYMENT__DETACHED("invoice_payment.detached"),
 
     @SerializedName("billing.credit_balance_transaction.created")
     BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),

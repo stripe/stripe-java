@@ -10,7 +10,6 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import com.stripe.param.SubscriptionAttachCadenceParams;
 import com.stripe.param.SubscriptionCancelParams;
 import com.stripe.param.SubscriptionCreateParams;
 import com.stripe.param.SubscriptionListParams;
@@ -53,15 +52,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   @SerializedName("automatic_tax")
   AutomaticTax automaticTax;
-
-  /**
-   * The Billing Cadence which controls the timing of recurring invoice generation for this
-   * subscription.If unset, the subscription will bill according to its own configured schedule and
-   * create its own invoices.If set, this subscription will be billed by the cadence instead,
-   * potentially sharing invoices with the other subscriptions linked to that Cadence.
-   */
-  @SerializedName("billing_cadence")
-  String billingCadence;
 
   /**
    * The reference point that aligns future <a
@@ -224,7 +214,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("last_price_migration_error")
   LastPriceMigrationError lastPriceMigrationError;
 
-  /** The most recent invoice this subscription has generated. */
+  /**
+   * The most recent invoice this subscription has generated over its lifecycle (for example, when
+   * it cycles or is updated).
+   */
   @SerializedName("latest_invoice")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -601,58 +594,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
                 .map(x -> new ExpandableField<Discount>(x.getId(), x))
                 .collect(Collectors.toList())
             : null;
-  }
-
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(Map<String, Object> params) throws StripeException {
-    return attachCadence(params, (RequestOptions) null);
-  }
-
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(this.getId()));
-    ApiRequest request =
-        new ApiRequest(BaseAddress.API, ApiResource.RequestMethod.POST, path, params, options);
-    return getResponseGetter().request(request, Subscription.class);
-  }
-
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(SubscriptionAttachCadenceParams params) throws StripeException {
-    return attachCadence(params, (RequestOptions) null);
-  }
-
-  /**
-   * Attach a Billing Cadence to an existing subscription. When attached, the subscription is billed
-   * by the Billing Cadence, potentially sharing invoices with the other subscriptions linked to the
-   * Billing Cadence.
-   */
-  public Subscription attachCadence(SubscriptionAttachCadenceParams params, RequestOptions options)
-      throws StripeException {
-    String path =
-        String.format("/v1/subscriptions/%s/attach_cadence", ApiResource.urlEncodeId(this.getId()));
-    ApiResource.checkNullTypedParams(path, params);
-    ApiRequest request =
-        new ApiRequest(
-            BaseAddress.API,
-            ApiResource.RequestMethod.POST,
-            path,
-            ApiRequestParams.paramsToMap(params),
-            options);
-    return getResponseGetter().request(request, Subscription.class);
   }
 
   /**

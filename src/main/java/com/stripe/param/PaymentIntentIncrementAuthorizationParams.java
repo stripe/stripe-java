@@ -336,6 +336,21 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     Object discountAmount;
 
     /**
+     * Set to {@code false} to return arithmetic validation errors in the response without failing
+     * the request. Use this when you want the operation to proceed regardless of arithmetic errors
+     * in the line item data.
+     *
+     * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+     * fails. Use this for strict validation that prevents processing with line item data that has
+     * arithmetic inconsistencies.
+     *
+     * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic validation
+     * error to card networks.
+     */
+    @SerializedName("enforce_arithmetic_validation")
+    Boolean enforceArithmeticValidation;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -361,11 +376,13 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
 
     private AmountDetails(
         Object discountAmount,
+        Boolean enforceArithmeticValidation,
         Map<String, Object> extraParams,
         Object lineItems,
         Object shipping,
         Object tax) {
       this.discountAmount = discountAmount;
+      this.enforceArithmeticValidation = enforceArithmeticValidation;
       this.extraParams = extraParams;
       this.lineItems = lineItems;
       this.shipping = shipping;
@@ -379,6 +396,8 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
     public static class Builder {
       private Object discountAmount;
 
+      private Boolean enforceArithmeticValidation;
+
       private Map<String, Object> extraParams;
 
       private Object lineItems;
@@ -390,7 +409,12 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentIncrementAuthorizationParams.AmountDetails build() {
         return new PaymentIntentIncrementAuthorizationParams.AmountDetails(
-            this.discountAmount, this.extraParams, this.lineItems, this.shipping, this.tax);
+            this.discountAmount,
+            this.enforceArithmeticValidation,
+            this.extraParams,
+            this.lineItems,
+            this.shipping,
+            this.tax);
       }
 
       /**
@@ -416,6 +440,23 @@ public class PaymentIntentIncrementAuthorizationParams extends ApiRequestParams 
        */
       public Builder setDiscountAmount(EmptyParam discountAmount) {
         this.discountAmount = discountAmount;
+        return this;
+      }
+
+      /**
+       * Set to {@code false} to return arithmetic validation errors in the response without failing
+       * the request. Use this when you want the operation to proceed regardless of arithmetic
+       * errors in the line item data.
+       *
+       * <p>Omit or set to {@code true} to immediately return a 400 error when arithmetic validation
+       * fails. Use this for strict validation that prevents processing with line item data that has
+       * arithmetic inconsistencies.
+       *
+       * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic
+       * validation error to card networks.
+       */
+      public Builder setEnforceArithmeticValidation(Boolean enforceArithmeticValidation) {
+        this.enforceArithmeticValidation = enforceArithmeticValidation;
         return this;
       }
 

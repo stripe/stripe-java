@@ -13,7 +13,7 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class SessionCreateParams extends ApiRequestParams {
-  /** <strong>Required.</strong> The account holder to link accounts for. */
+  /** The account holder to link accounts for. */
   @SerializedName("account_holder")
   AccountHolder accountHolder;
 
@@ -55,6 +55,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("prefetch")
   List<SessionCreateParams.Prefetch> prefetch;
 
+  /** Options for specifying a Session targeted to relinking an authorization. */
+  @SerializedName("relink_options")
+  RelinkOptions relinkOptions;
+
   /**
    * For webview integrations only. Upon completing OAuth login in the native browser, the user will
    * be redirected to this URL to return to your app.
@@ -71,6 +75,7 @@ public class SessionCreateParams extends ApiRequestParams {
       ManualEntry manualEntry,
       List<SessionCreateParams.Permission> permissions,
       List<SessionCreateParams.Prefetch> prefetch,
+      RelinkOptions relinkOptions,
       String returnUrl) {
     this.accountHolder = accountHolder;
     this.expand = expand;
@@ -80,6 +85,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.manualEntry = manualEntry;
     this.permissions = permissions;
     this.prefetch = prefetch;
+    this.relinkOptions = relinkOptions;
     this.returnUrl = returnUrl;
   }
 
@@ -104,6 +110,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private List<SessionCreateParams.Prefetch> prefetch;
 
+    private RelinkOptions relinkOptions;
+
     private String returnUrl;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -117,10 +125,11 @@ public class SessionCreateParams extends ApiRequestParams {
           this.manualEntry,
           this.permissions,
           this.prefetch,
+          this.relinkOptions,
           this.returnUrl);
     }
 
-    /** <strong>Required.</strong> The account holder to link accounts for. */
+    /** The account holder to link accounts for. */
     public Builder setAccountHolder(SessionCreateParams.AccountHolder accountHolder) {
       this.accountHolder = accountHolder;
       return this;
@@ -245,6 +254,12 @@ public class SessionCreateParams extends ApiRequestParams {
         this.prefetch = new ArrayList<>();
       }
       this.prefetch.addAll(elements);
+      return this;
+    }
+
+    /** Options for specifying a Session targeted to relinking an authorization. */
+    public Builder setRelinkOptions(SessionCreateParams.RelinkOptions relinkOptions) {
+      this.relinkOptions = relinkOptions;
       return this;
     }
 
@@ -723,6 +738,93 @@ public class SessionCreateParams extends ApiRequestParams {
 
       Mode(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RelinkOptions {
+    /**
+     * The account to relink. Must belong to the authorization specified in {@code authorization}.
+     */
+    @SerializedName("account")
+    String account;
+
+    /** <strong>Required.</strong> The authorization to relink. */
+    @SerializedName("authorization")
+    String authorization;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private RelinkOptions(String account, String authorization, Map<String, Object> extraParams) {
+      this.account = account;
+      this.authorization = authorization;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private String account;
+
+      private String authorization;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.RelinkOptions build() {
+        return new SessionCreateParams.RelinkOptions(
+            this.account, this.authorization, this.extraParams);
+      }
+
+      /**
+       * The account to relink. Must belong to the authorization specified in {@code authorization}.
+       */
+      public Builder setAccount(String account) {
+        this.account = account;
+        return this;
+      }
+
+      /** <strong>Required.</strong> The authorization to relink. */
+      public Builder setAuthorization(String authorization) {
+        this.authorization = authorization;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.RelinkOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.RelinkOptions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }

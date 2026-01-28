@@ -22,7 +22,7 @@ public class UsBankAccountUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * The bank account's fedwire routing number can be provided for update it was were empty
+   * The bank account's Fedwire routing number can be provided for update if it was empty
    * previously.
    */
   @SerializedName("fedwire_routing_number")
@@ -85,7 +85,7 @@ public class UsBankAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The bank account's fedwire routing number can be provided for update it was were empty
+     * The bank account's Fedwire routing number can be provided for update if it was empty
      * previously.
      */
     public Builder setFedwireRoutingNumber(String fedwireRoutingNumber) {
@@ -94,7 +94,7 @@ public class UsBankAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The bank account's fedwire routing number can be provided for update it was were empty
+     * The bank account's Fedwire routing number can be provided for update if it was empty
      * previously.
      */
     public Builder setFedwireRoutingNumber(EmptyParam fedwireRoutingNumber) {

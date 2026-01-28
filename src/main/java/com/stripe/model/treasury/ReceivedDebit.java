@@ -376,6 +376,13 @@ public class ReceivedDebit extends ApiResource implements HasId {
     /** The ReceivedCredit that Capital withheld from. */
     @SerializedName("received_credit_capital_withholding")
     String receivedCreditCapitalWithholding;
+
+    /**
+     * Set if the ReceivedDebit was created due to a <a
+     * href="https://api.stripe.com#topups">Topup</a> object.
+     */
+    @SerializedName("topup")
+    String topup;
   }
 
   /**

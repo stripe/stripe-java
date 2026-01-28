@@ -149,6 +149,9 @@ public abstract class StripeException extends Exception {
       case "quota_exceeded":
         return com.stripe.exception.QuotaExceededException.parse(
             body, statusCode, requestId, responseGetter);
+      case "rate_limit":
+        return com.stripe.exception.RateLimitException.parse(
+            body, statusCode, requestId, responseGetter);
       case "recipient_not_notifiable":
         return com.stripe.exception.RecipientNotNotifiableException.parse(
             body, statusCode, requestId, responseGetter);

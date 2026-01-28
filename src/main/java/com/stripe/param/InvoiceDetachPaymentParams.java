@@ -12,7 +12,7 @@ import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode(callSuper = false)
-public class OrderReopenParams extends ApiRequestParams {
+public class InvoiceDetachPaymentParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -26,9 +26,15 @@ public class OrderReopenParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private OrderReopenParams(List<String> expand, Map<String, Object> extraParams) {
+  /** The ID of the PaymentIntent to detach from the invoice. */
+  @SerializedName("payment_intent")
+  String paymentIntent;
+
+  private InvoiceDetachPaymentParams(
+      List<String> expand, Map<String, Object> extraParams, String paymentIntent) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.paymentIntent = paymentIntent;
   }
 
   public static Builder builder() {
@@ -40,15 +46,17 @@ public class OrderReopenParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String paymentIntent;
+
     /** Finalize and obtain parameter instance from this builder. */
-    public OrderReopenParams build() {
-      return new OrderReopenParams(this.expand, this.extraParams);
+    public InvoiceDetachPaymentParams build() {
+      return new InvoiceDetachPaymentParams(this.expand, this.extraParams, this.paymentIntent);
     }
 
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * OrderReopenParams#expand} for the field documentation.
+     * InvoiceDetachPaymentParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -61,7 +69,7 @@ public class OrderReopenParams extends ApiRequestParams {
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * OrderReopenParams#expand} for the field documentation.
+     * InvoiceDetachPaymentParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -74,7 +82,7 @@ public class OrderReopenParams extends ApiRequestParams {
     /**
      * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
      * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OrderReopenParams#extraParams} for the field documentation.
+     * InvoiceDetachPaymentParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -87,13 +95,19 @@ public class OrderReopenParams extends ApiRequestParams {
     /**
      * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OrderReopenParams#extraParams} for the field documentation.
+     * See {@link InvoiceDetachPaymentParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** The ID of the PaymentIntent to detach from the invoice. */
+    public Builder setPaymentIntent(String paymentIntent) {
+      this.paymentIntent = paymentIntent;
       return this;
     }
   }
