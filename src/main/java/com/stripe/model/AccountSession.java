@@ -181,6 +181,14 @@ public class AccountSession extends ApiResource {
     @SerializedName("issuing_cards_list")
     IssuingCardsList issuingCardsList;
 
+    /**
+     * Configuration for the <a
+     * href="https://stripe.com/connect/supported-embedded-components/network-cost-passthrough-report/">network
+     * cost passthrough report</a> embedded component.
+     */
+    @SerializedName("network_cost_passthrough_report")
+    NetworkCostPassthroughReport networkCostPassthroughReport;
+
     @SerializedName("notification_banner")
     NotificationBanner notificationBanner;
 
@@ -787,6 +795,31 @@ public class AccountSession extends ApiResource {
         @SerializedName("spend_control_management")
         Boolean spendControlManagement;
       }
+    }
+
+    /**
+     * For more details about NetworkCostPassthroughReport, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class NetworkCostPassthroughReport extends StripeObject {
+      /** Whether the embedded component is enabled. */
+      @SerializedName("enabled")
+      Boolean enabled;
+
+      @SerializedName("features")
+      Features features;
+
+      /**
+       * For more details about Features, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Features extends StripeObject {}
     }
 
     /**
