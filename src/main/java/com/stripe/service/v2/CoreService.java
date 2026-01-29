@@ -21,6 +21,10 @@ public final class CoreService extends ApiService {
     return new com.stripe.service.v2.core.AccountService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.BatchJobService batchJobs() {
+    return new com.stripe.service.v2.core.BatchJobService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.EventDestinationService eventDestinations() {
     return new com.stripe.service.v2.core.EventDestinationService(this.getResponseGetter());
   }
