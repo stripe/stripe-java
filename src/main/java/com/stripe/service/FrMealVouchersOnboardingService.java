@@ -22,21 +22,33 @@ public final class FrMealVouchersOnboardingService extends ApiService {
     super(responseGetter);
   }
 
-  /** Lists French Meal Vouchers Onboarding objects. */
+  /**
+   * Lists {@code French Meal Vouchers Onboarding} objects. The objects are returned in sorted
+   * order, with the most recently created objects appearing first.
+   */
   public StripeCollection<FrMealVouchersOnboarding> list(FrMealVouchersOnboardingListParams params)
       throws StripeException {
     return list(params, (RequestOptions) null);
   }
-  /** Lists French Meal Vouchers Onboarding objects. */
+  /**
+   * Lists {@code French Meal Vouchers Onboarding} objects. The objects are returned in sorted
+   * order, with the most recently created objects appearing first.
+   */
   public StripeCollection<FrMealVouchersOnboarding> list(RequestOptions options)
       throws StripeException {
     return list((FrMealVouchersOnboardingListParams) null, options);
   }
-  /** Lists French Meal Vouchers Onboarding objects. */
+  /**
+   * Lists {@code French Meal Vouchers Onboarding} objects. The objects are returned in sorted
+   * order, with the most recently created objects appearing first.
+   */
   public StripeCollection<FrMealVouchersOnboarding> list() throws StripeException {
     return list((FrMealVouchersOnboardingListParams) null, (RequestOptions) null);
   }
-  /** Lists French Meal Vouchers Onboarding objects. */
+  /**
+   * Lists {@code French Meal Vouchers Onboarding} objects. The objects are returned in sorted
+   * order, with the most recently created objects appearing first.
+   */
   public StripeCollection<FrMealVouchersOnboarding> list(
       FrMealVouchersOnboardingListParams params, RequestOptions options) throws StripeException {
     String path = "/v1/fr_meal_vouchers_onboardings";
@@ -51,16 +63,16 @@ public final class FrMealVouchersOnboardingService extends ApiService {
         request, new TypeToken<StripeCollection<FrMealVouchersOnboarding>>() {}.getType());
   }
   /**
-   * Creates a French Meal Vouchers Onboarding object that represents a restaurant’s onboarding
-   * status and starts the onboarding process.
+   * Creates a {@code French Meal Vouchers Onboarding} object that represents a restaurant’s
+   * onboarding status and starts the onboarding process.
    */
   public FrMealVouchersOnboarding create(FrMealVouchersOnboardingCreateParams params)
       throws StripeException {
     return create(params, (RequestOptions) null);
   }
   /**
-   * Creates a French Meal Vouchers Onboarding object that represents a restaurant’s onboarding
-   * status and starts the onboarding process.
+   * Creates a {@code French Meal Vouchers Onboarding} object that represents a restaurant’s
+   * onboarding status and starts the onboarding process.
    */
   public FrMealVouchersOnboarding create(
       FrMealVouchersOnboardingCreateParams params, RequestOptions options) throws StripeException {
@@ -74,21 +86,41 @@ public final class FrMealVouchersOnboardingService extends ApiService {
             options);
     return this.request(request, FrMealVouchersOnboarding.class);
   }
-  /** Retrieves the details of a French Meal Vouchers Onboarding object. */
+  /**
+   * Retrieves the details of a previously created {@code French Meal Vouchers Onboarding} object.
+   *
+   * <p>Supply the unique {@code French Meal Vouchers Onboarding} ID that was returned from your
+   * previous request, and Stripe returns the corresponding onboarding information.
+   */
   public FrMealVouchersOnboarding retrieve(String id, FrMealVouchersOnboardingRetrieveParams params)
       throws StripeException {
     return retrieve(id, params, (RequestOptions) null);
   }
-  /** Retrieves the details of a French Meal Vouchers Onboarding object. */
+  /**
+   * Retrieves the details of a previously created {@code French Meal Vouchers Onboarding} object.
+   *
+   * <p>Supply the unique {@code French Meal Vouchers Onboarding} ID that was returned from your
+   * previous request, and Stripe returns the corresponding onboarding information.
+   */
   public FrMealVouchersOnboarding retrieve(String id, RequestOptions options)
       throws StripeException {
     return retrieve(id, (FrMealVouchersOnboardingRetrieveParams) null, options);
   }
-  /** Retrieves the details of a French Meal Vouchers Onboarding object. */
+  /**
+   * Retrieves the details of a previously created {@code French Meal Vouchers Onboarding} object.
+   *
+   * <p>Supply the unique {@code French Meal Vouchers Onboarding} ID that was returned from your
+   * previous request, and Stripe returns the corresponding onboarding information.
+   */
   public FrMealVouchersOnboarding retrieve(String id) throws StripeException {
     return retrieve(id, (FrMealVouchersOnboardingRetrieveParams) null, (RequestOptions) null);
   }
-  /** Retrieves the details of a French Meal Vouchers Onboarding object. */
+  /**
+   * Retrieves the details of a previously created {@code French Meal Vouchers Onboarding} object.
+   *
+   * <p>Supply the unique {@code French Meal Vouchers Onboarding} ID that was returned from your
+   * previous request, and Stripe returns the corresponding onboarding information.
+   */
   public FrMealVouchersOnboarding retrieve(
       String id, FrMealVouchersOnboardingRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -102,12 +134,26 @@ public final class FrMealVouchersOnboardingService extends ApiService {
             options);
     return this.request(request, FrMealVouchersOnboarding.class);
   }
-  /** Updates the details of a restaurant’s French Meal Vouchers Onboarding object. */
+  /**
+   * Updates the details of a restaurant’s {@code French Meal Vouchers Onboarding} object by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. After you
+   * update the object, the onboarding process automatically restarts.
+   *
+   * <p>You can only update {@code French Meal Vouchers Onboarding} objects with the {@code
+   * postal_code} field requirement in {@code past_due}.
+   */
   public FrMealVouchersOnboarding update(String id, FrMealVouchersOnboardingUpdateParams params)
       throws StripeException {
     return update(id, params, (RequestOptions) null);
   }
-  /** Updates the details of a restaurant’s French Meal Vouchers Onboarding object. */
+  /**
+   * Updates the details of a restaurant’s {@code French Meal Vouchers Onboarding} object by setting
+   * the values of the parameters passed. Any parameters not provided are left unchanged. After you
+   * update the object, the onboarding process automatically restarts.
+   *
+   * <p>You can only update {@code French Meal Vouchers Onboarding} objects with the {@code
+   * postal_code} field requirement in {@code past_due}.
+   */
   public FrMealVouchersOnboarding update(
       String id, FrMealVouchersOnboardingUpdateParams params, RequestOptions options)
       throws StripeException {
