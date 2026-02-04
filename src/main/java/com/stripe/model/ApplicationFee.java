@@ -116,6 +116,13 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   @SerializedName("refunds")
   FeeRefundCollection refunds;
 
+  /**
+   * Type of settlement for the application fee. One of {@code net_settled} or {@code
+   * gross_settled}.
+   */
+  @SerializedName("settlement_type")
+  String settlementType;
+
   /** Get ID of expandable {@code account} object. */
   public String getAccount() {
     return (this.account != null) ? this.account.getId() : null;
