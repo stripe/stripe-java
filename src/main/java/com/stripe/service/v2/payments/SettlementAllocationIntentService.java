@@ -1,7 +1,9 @@
 // File generated from our OpenAPI spec
 package com.stripe.service.v2.payments;
 
+import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.v2.StripeCollection;
 import com.stripe.model.v2.payments.SettlementAllocationIntent;
 import com.stripe.net.ApiRequest;
 import com.stripe.net.ApiRequestParams;
@@ -11,6 +13,7 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.v2.payments.SettlementAllocationIntentCreateParams;
+import com.stripe.param.v2.payments.SettlementAllocationIntentListParams;
 import com.stripe.param.v2.payments.SettlementAllocationIntentUpdateParams;
 
 public final class SettlementAllocationIntentService extends ApiService {
@@ -18,6 +21,34 @@ public final class SettlementAllocationIntentService extends ApiService {
     super(responseGetter);
   }
 
+  /** Lists all SettlementAllocationIntents. */
+  public StripeCollection<SettlementAllocationIntent> list(
+      SettlementAllocationIntentListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+  /** Lists all SettlementAllocationIntents. */
+  public StripeCollection<SettlementAllocationIntent> list(RequestOptions options)
+      throws StripeException {
+    return list((SettlementAllocationIntentListParams) null, options);
+  }
+  /** Lists all SettlementAllocationIntents. */
+  public StripeCollection<SettlementAllocationIntent> list() throws StripeException {
+    return list((SettlementAllocationIntentListParams) null, (RequestOptions) null);
+  }
+  /** Lists all SettlementAllocationIntents. */
+  public StripeCollection<SettlementAllocationIntent> list(
+      SettlementAllocationIntentListParams params, RequestOptions options) throws StripeException {
+    String path = "/v2/payments/settlement_allocation_intents";
+    ApiRequest request =
+        new ApiRequest(
+            BaseAddress.API,
+            ApiResource.RequestMethod.GET,
+            path,
+            ApiRequestParams.paramsToMap(params),
+            options);
+    return this.request(
+        request, new TypeToken<StripeCollection<SettlementAllocationIntent>>() {}.getType());
+  }
   /** Create a new SettlementAllocationIntent. */
   public SettlementAllocationIntent create(SettlementAllocationIntentCreateParams params)
       throws StripeException {

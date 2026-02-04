@@ -13,7 +13,10 @@ import lombok.Getter;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 public class RateCreateParams extends ApiRequestParams {
-  /** The custom pricing unit that this rate binds to. */
+  /**
+   * The custom pricing unit that this rate binds to. One of {@code unit_amount}, {@code tiers}, or
+   * {@code custom_pricing_unit_amount} is required.
+   */
   @SerializedName("custom_pricing_unit_amount")
   CustomPricingUnitAmount customPricingUnitAmount;
 
@@ -34,19 +37,23 @@ public class RateCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The Metered Item that this rate binds to. */
+  /** <strong>Required.</strong> The Metered Item that this rate binds to. */
   @SerializedName("metered_item")
   String meteredItem;
 
   /**
    * Defines whether the tiered price should be graduated or volume-based. In volume-based tiering,
    * the maximum quantity within a period determines the per-unit price. In graduated tiering, the
-   * pricing changes as the quantity grows into new tiers. Can only be set if {@code tiers} is set.
+   * pricing changes as the quantity grows into new tiers. One of {@code unit_amount}, {@code
+   * tiers}, or {@code custom_pricing_unit_amount} is required.
    */
   @SerializedName("tiering_mode")
   TieringMode tieringMode;
 
-  /** Each element represents a pricing tier. Cannot be set if {@code unit_amount} is provided. */
+  /**
+   * Each element represents a pricing tier. One of {@code unit_amount}, {@code tiers}, or {@code
+   * custom_pricing_unit_amount} is required.
+   */
   @SerializedName("tiers")
   List<RateCreateParams.Tier> tiers;
 
@@ -59,7 +66,8 @@ public class RateCreateParams extends ApiRequestParams {
 
   /**
    * The per-unit amount to be charged, represented as a decimal string in minor currency units with
-   * at most 12 decimal places. Cannot be set if {@code tiers} is provided.
+   * at most 12 decimal places. One of {@code unit_amount}, {@code tiers}, or {@code
+   * custom_pricing_unit_amount} is required.
    */
   @SerializedName("unit_amount")
   String unitAmount;
@@ -117,7 +125,10 @@ public class RateCreateParams extends ApiRequestParams {
           this.unitAmount);
     }
 
-    /** The custom pricing unit that this rate binds to. */
+    /**
+     * The custom pricing unit that this rate binds to. One of {@code unit_amount}, {@code tiers},
+     * or {@code custom_pricing_unit_amount} is required.
+     */
     public Builder setCustomPricingUnitAmount(
         RateCreateParams.CustomPricingUnitAmount customPricingUnitAmount) {
       this.customPricingUnitAmount = customPricingUnitAmount;
@@ -176,7 +187,7 @@ public class RateCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The Metered Item that this rate binds to. */
+    /** <strong>Required.</strong> The Metered Item that this rate binds to. */
     public Builder setMeteredItem(String meteredItem) {
       this.meteredItem = meteredItem;
       return this;
@@ -185,8 +196,8 @@ public class RateCreateParams extends ApiRequestParams {
     /**
      * Defines whether the tiered price should be graduated or volume-based. In volume-based
      * tiering, the maximum quantity within a period determines the per-unit price. In graduated
-     * tiering, the pricing changes as the quantity grows into new tiers. Can only be set if {@code
-     * tiers} is set.
+     * tiering, the pricing changes as the quantity grows into new tiers. One of {@code
+     * unit_amount}, {@code tiers}, or {@code custom_pricing_unit_amount} is required.
      */
     public Builder setTieringMode(RateCreateParams.TieringMode tieringMode) {
       this.tieringMode = tieringMode;
@@ -230,7 +241,8 @@ public class RateCreateParams extends ApiRequestParams {
 
     /**
      * The per-unit amount to be charged, represented as a decimal string in minor currency units
-     * with at most 12 decimal places. Cannot be set if {@code tiers} is provided.
+     * with at most 12 decimal places. One of {@code unit_amount}, {@code tiers}, or {@code
+     * custom_pricing_unit_amount} is required.
      */
     public Builder setUnitAmount(String unitAmount) {
       this.unitAmount = unitAmount;

@@ -76,20 +76,6 @@ public final class RateService extends ApiService {
    * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
    * new Rate Card version if the Metered Item already has a rate on the Rate Card.
    */
-  public RateCardRate create(String rateCardId, RequestOptions options) throws StripeException {
-    return create(rateCardId, (RateCreateParams) null, options);
-  }
-  /**
-   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
-   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
-   */
-  public RateCardRate create(String rateCardId) throws StripeException {
-    return create(rateCardId, (RateCreateParams) null, (RequestOptions) null);
-  }
-  /**
-   * Set the Rate for a Metered Item on the latest version of a Rate Card object. This will create a
-   * new Rate Card version if the Metered Item already has a rate on the Rate Card.
-   */
   public RateCardRate create(String rateCardId, RateCreateParams params, RequestOptions options)
       throws StripeException {
     String path =

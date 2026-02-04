@@ -156,6 +156,9 @@ public class FinancialAccountListParams extends ApiRequestParams {
   }
 
   public enum Type implements ApiRequestParams.EnumParam {
+    @SerializedName("accrued_fees")
+    ACCRUED_FEES("accrued_fees"),
+
     @SerializedName("payments")
     PAYMENTS("payments"),
 

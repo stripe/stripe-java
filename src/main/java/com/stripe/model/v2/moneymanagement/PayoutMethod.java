@@ -174,6 +174,13 @@ public class PayoutMethod extends StripeObject implements HasId {
     @SerializedName("exp_year")
     String expYear;
 
+    /**
+     * Uniquely identifies this particular card number. You can use this attribute to check whether
+     * two recipients who’ve signed up with you are using the same card number, for example.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
     /** The last 4 digits of the card number. */
     @SerializedName("last4")
     String last4;

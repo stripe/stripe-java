@@ -25,6 +25,10 @@ public final class CoreService extends ApiService {
     return new com.stripe.service.v2.core.ClaimableSandboxService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.core.ConnectionSessionService connectionSessions() {
+    return new com.stripe.service.v2.core.ConnectionSessionService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.core.EventDestinationService eventDestinations() {
     return new com.stripe.service.v2.core.EventDestinationService(this.getResponseGetter());
   }

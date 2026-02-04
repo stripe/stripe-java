@@ -164,14 +164,14 @@ public class SubscriptionPauseParams extends ApiRequestParams {
 
     /**
      * Controls whether to debit for accrued metered usage in the current billing period. The
-     * default is {@code false}.
+     * default is {@code true}.
      */
     @SerializedName("outstanding_usage")
     Boolean outstandingUsage;
 
     /**
      * Controls whether to credit for licensed items in the current billing period. The default is
-     * {@code false}.
+     * {@code true}.
      */
     @SerializedName("unused_time")
     Boolean unusedTime;
@@ -227,7 +227,7 @@ public class SubscriptionPauseParams extends ApiRequestParams {
 
       /**
        * Controls whether to debit for accrued metered usage in the current billing period. The
-       * default is {@code false}.
+       * default is {@code true}.
        */
       public Builder setOutstandingUsage(Boolean outstandingUsage) {
         this.outstandingUsage = outstandingUsage;
@@ -236,7 +236,7 @@ public class SubscriptionPauseParams extends ApiRequestParams {
 
       /**
        * Controls whether to credit for licensed items in the current billing period. The default is
-       * {@code false}.
+       * {@code true}.
        */
       public Builder setUnusedTime(Boolean unusedTime) {
         this.unusedTime = unusedTime;

@@ -36,6 +36,13 @@ public class ReceivedCredit extends StripeObject implements HasId {
   BankTransfer bankTransfer;
 
   /**
+   * This object stores details about the originating issuing card spend that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code card_spend}.
+   */
+  @SerializedName("card_spend")
+  CardSpend cardSpend;
+
+  /**
    * Time at which the ReceivedCredit was created. Represented as a RFC 3339 date &amp; time UTC
    * value in millisecond precision, for example: 2022-09-18T13:22:18.123Z.
    */
@@ -111,8 +118,8 @@ public class ReceivedCredit extends StripeObject implements HasId {
   /**
    * Open Enum. The type of flow that caused the ReceivedCredit.
    *
-   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code external_credit}, or {@code
-   * stripe_balance_payment}.
+   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code card_spend}, {@code
+   * external_credit}, or {@code stripe_balance_payment}.
    */
   @SerializedName("type")
   String type;
@@ -318,6 +325,47 @@ public class ReceivedCredit extends StripeObject implements HasId {
       /** The routing number of the account that originated the transfer. */
       @SerializedName("routing_number")
       String routingNumber;
+    }
+  }
+
+  /**
+   * This object stores details about the originating issuing card spend that resulted in the
+   * ReceivedCredit. Present if {@code type} field value is {@code card_spend}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CardSpend extends StripeObject {
+    /** The reference to the issuing card object. */
+    @SerializedName("card_v1_id")
+    String cardV1Id;
+
+    /** Hash containing information about the Dispute that triggered this credit. */
+    @SerializedName("dispute")
+    Dispute dispute;
+
+    /** Hash containing information about the Refund that triggered this credit. */
+    @SerializedName("refund")
+    Refund refund;
+
+    /** Hash containing information about the Dispute that triggered this credit. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Dispute extends StripeObject {
+      /** The reference to the v1 issuing dispute ID. */
+      @SerializedName("issuing_dispute_v1")
+      String issuingDisputeV1;
+    }
+
+    /** Hash containing information about the Refund that triggered this credit. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Refund extends StripeObject {
+      /** The reference to the v1 issuing transaction ID. */
+      @SerializedName("issuing_transaction_v1")
+      String issuingTransactionV1;
     }
   }
 

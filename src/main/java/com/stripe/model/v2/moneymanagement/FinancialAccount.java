@@ -20,6 +20,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class FinancialAccount extends StripeObject implements HasId {
   /**
+   * If this is a {@code accrued_fees} FinancialAccount, this hash include details specific to
+   * {@code accrued_fees} FinancialAccount.
+   */
+  @SerializedName("accrued_fees")
+  AccruedFees accruedFees;
+
+  /**
    * Multi-currency balance of this FinancialAccount, split by availability state. Each balance is
    * represented as a hash where the key is the three-letter ISO currency code, in lowercase, and
    * the value is the amount for that currency.
@@ -116,10 +123,31 @@ public class FinancialAccount extends StripeObject implements HasId {
    * name matching this value. It contains additional information specific to the FinancialAccount
    * type.
    *
-   * <p>One of {@code other}, {@code payments}, or {@code storage}.
+   * <p>One of {@code accrued_fees}, {@code other}, {@code payments}, or {@code storage}.
    */
   @SerializedName("type")
   String type;
+
+  /**
+   * If this is a {@code accrued_fees} FinancialAccount, this hash include details specific to
+   * {@code accrued_fees} FinancialAccount.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AccruedFees extends StripeObject {
+    /** The currencies enabled for fee accrual on this FinancialAccount. */
+    @SerializedName("currencies")
+    List<String> currencies;
+
+    /**
+     * Direction of fee accrual for this FinancialAccount.
+     *
+     * <p>One of {@code payable}, or {@code receivable}.
+     */
+    @SerializedName("direction")
+    String direction;
+  }
 
   /**
    * Multi-currency balance of this FinancialAccount, split by availability state. Each balance is
@@ -267,6 +295,48 @@ public class FinancialAccount extends StripeObject implements HasId {
      */
     @SerializedName("settlement_currencies")
     List<String> settlementCurrencies;
+
+    /** Describes the available balance when it was projected. */
+    @SerializedName("starting_balance")
+    StartingBalance startingBalance;
+
+    /** Describes the available balance when it was projected. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StartingBalance extends StripeObject {
+      /** When the balance was projected. */
+      @SerializedName("at")
+      Instant at;
+
+      /** The available balance at the time when the balance was projected. */
+      @SerializedName("available")
+      Map<String, FinancialAccount.Payments.StartingBalance.Available> available;
+
+      /**
+       * For more details about Available, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Available extends StripeObject {
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * A non-negative integer representing how much to charge in the <a
+         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+         */
+        @SerializedName("value")
+        Long value;
+      }
+    }
   }
 
   /**
