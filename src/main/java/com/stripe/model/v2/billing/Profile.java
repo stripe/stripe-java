@@ -10,6 +10,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Billing Profile is a representation of how a bill is paid, separating payment behavior from
+ * customer identity.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

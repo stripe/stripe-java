@@ -19,6 +19,13 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   String billingCadence;
 
   /**
+   * Details about why the subscription was canceled, if applicable. Includes system-generated
+   * reason.
+   */
+  @SerializedName("cancellation_details")
+  CancellationDetails cancellationDetails;
+
+  /**
    * Current collection status of this subscription.
    *
    * <p>One of {@code awaiting_customer_action}, {@code current}, {@code past_due}, {@code paused},
@@ -87,6 +94,41 @@ public class PricingPlanSubscription extends StripeObject implements HasId {
   /** The ID of the Test Clock of the associated Billing Cadence, if any. */
   @SerializedName("test_clock")
   String testClock;
+
+  /**
+   * Details about why the subscription was canceled, if applicable. Includes system-generated
+   * reason.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CancellationDetails extends StripeObject {
+    /**
+     * Additional comments about why the user canceled the subscription, if the subscription was
+     * canceled explicitly by the user.
+     */
+    @SerializedName("comment")
+    String comment;
+
+    /**
+     * The customer submitted reason for why they canceled, if the subscription was canceled
+     * explicitly by the user.
+     *
+     * <p>One of {@code customer_service}, {@code low_quality}, {@code missing_features}, {@code
+     * other}, {@code switched_service}, {@code too_complex}, {@code too_expensive}, or {@code
+     * unused}.
+     */
+    @SerializedName("feedback")
+    String feedback;
+
+    /**
+     * System-generated reason for cancellation.
+     *
+     * <p>Equal to {@code cancellation_requested}.
+     */
+    @SerializedName("reason")
+    String reason;
+  }
 
   /** Timestamps for collection status transitions. */
   @Getter

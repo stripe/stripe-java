@@ -156,6 +156,10 @@ public class IntentAction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Deactivate extends StripeObject {
+    /** Details about why the cancellation was requested by the user. */
+    @SerializedName("cancellation_details")
+    CancellationDetails cancellationDetails;
+
     /**
      * Allows users to override the collect at behavior.
      *
@@ -182,6 +186,30 @@ public class IntentAction extends StripeObject implements HasId {
      */
     @SerializedName("type")
     String type;
+
+    /** Details about why the cancellation was requested by the user. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CancellationDetails extends StripeObject {
+      /**
+       * Additional comments about why the user canceled the subscription, if the subscription was
+       * canceled explicitly by the user.
+       */
+      @SerializedName("comment")
+      String comment;
+
+      /**
+       * The customer submitted reason for why they canceled, if the subscription was canceled
+       * explicitly by the user.
+       *
+       * <p>One of {@code customer_service}, {@code low_quality}, {@code missing_features}, {@code
+       * other}, {@code switched_service}, {@code too_complex}, {@code too_expensive}, or {@code
+       * unused}.
+       */
+      @SerializedName("feedback")
+      String feedback;
+    }
 
     /**
      * When the deactivate action will take effect. If not specified, the default behavior is

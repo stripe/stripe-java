@@ -22,6 +22,10 @@ public class IntentCreateParams extends ApiRequestParams {
   @SerializedName("cadence")
   String cadence;
 
+  /** Data for creating a new Cadence. */
+  @SerializedName("cadence_data")
+  CadenceData cadenceData;
+
   /**
    * <strong>Required.</strong> Three-letter ISO currency code, in lowercase. Must be a supported
    * currency.
@@ -41,10 +45,12 @@ public class IntentCreateParams extends ApiRequestParams {
   private IntentCreateParams(
       List<IntentCreateParams.Action> actions,
       String cadence,
+      CadenceData cadenceData,
       String currency,
       Map<String, Object> extraParams) {
     this.actions = actions;
     this.cadence = cadence;
+    this.cadenceData = cadenceData;
     this.currency = currency;
     this.extraParams = extraParams;
   }
@@ -58,13 +64,16 @@ public class IntentCreateParams extends ApiRequestParams {
 
     private String cadence;
 
+    private CadenceData cadenceData;
+
     private String currency;
 
     private Map<String, Object> extraParams;
 
     /** Finalize and obtain parameter instance from this builder. */
     public IntentCreateParams build() {
-      return new IntentCreateParams(this.actions, this.cadence, this.currency, this.extraParams);
+      return new IntentCreateParams(
+          this.actions, this.cadence, this.cadenceData, this.currency, this.extraParams);
     }
 
     /**
@@ -96,6 +105,12 @@ public class IntentCreateParams extends ApiRequestParams {
     /** ID of an existing Cadence to use. */
     public Builder setCadence(String cadence) {
       this.cadence = cadence;
+      return this;
+    }
+
+    /** Data for creating a new Cadence. */
+    public Builder setCadenceData(IntentCreateParams.CadenceData cadenceData) {
+      this.cadenceData = cadenceData;
       return this;
     }
 
@@ -714,6 +729,10 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Deactivate {
+      /** Details about why the cancellation is being requested. */
+      @SerializedName("cancellation_details")
+      CancellationDetails cancellationDetails;
+
       /** Allows users to override the collect at behavior. */
       @SerializedName("collect_at")
       CollectAt collectAt;
@@ -743,11 +762,13 @@ public class IntentCreateParams extends ApiRequestParams {
       Type type;
 
       private Deactivate(
+          CancellationDetails cancellationDetails,
           CollectAt collectAt,
           EffectiveAt effectiveAt,
           Map<String, Object> extraParams,
           PricingPlanSubscriptionDetails pricingPlanSubscriptionDetails,
           Type type) {
+        this.cancellationDetails = cancellationDetails;
         this.collectAt = collectAt;
         this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
@@ -760,6 +781,8 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private CancellationDetails cancellationDetails;
+
         private CollectAt collectAt;
 
         private EffectiveAt effectiveAt;
@@ -773,11 +796,19 @@ public class IntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Deactivate build() {
           return new IntentCreateParams.Action.Deactivate(
+              this.cancellationDetails,
               this.collectAt,
               this.effectiveAt,
               this.extraParams,
               this.pricingPlanSubscriptionDetails,
               this.type);
+        }
+
+        /** Details about why the cancellation is being requested. */
+        public Builder setCancellationDetails(
+            IntentCreateParams.Action.Deactivate.CancellationDetails cancellationDetails) {
+          this.cancellationDetails = cancellationDetails;
+          return this;
         }
 
         /** Allows users to override the collect at behavior. */
@@ -836,6 +867,139 @@ public class IntentCreateParams extends ApiRequestParams {
         public Builder setType(IntentCreateParams.Action.Deactivate.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CancellationDetails {
+        /**
+         * Additional comments about why the user canceled the subscription, if the subscription was
+         * canceled explicitly by the user.
+         */
+        @SerializedName("comment")
+        String comment;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The customer submitted reason for why they canceled, if the subscription was canceled
+         * explicitly by the user.
+         */
+        @SerializedName("feedback")
+        Feedback feedback;
+
+        private CancellationDetails(
+            String comment, Map<String, Object> extraParams, Feedback feedback) {
+          this.comment = comment;
+          this.extraParams = extraParams;
+          this.feedback = feedback;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String comment;
+
+          private Map<String, Object> extraParams;
+
+          private Feedback feedback;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Deactivate.CancellationDetails build() {
+            return new IntentCreateParams.Action.Deactivate.CancellationDetails(
+                this.comment, this.extraParams, this.feedback);
+          }
+
+          /**
+           * Additional comments about why the user canceled the subscription, if the subscription
+           * was canceled explicitly by the user.
+           */
+          public Builder setComment(String comment) {
+            this.comment = comment;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Deactivate.CancellationDetails#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Deactivate.CancellationDetails#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The customer submitted reason for why they canceled, if the subscription was canceled
+           * explicitly by the user.
+           */
+          public Builder setFeedback(
+              IntentCreateParams.Action.Deactivate.CancellationDetails.Feedback feedback) {
+            this.feedback = feedback;
+            return this;
+          }
+        }
+
+        public enum Feedback implements ApiRequestParams.EnumParam {
+          @SerializedName("customer_service")
+          CUSTOMER_SERVICE("customer_service"),
+
+          @SerializedName("low_quality")
+          LOW_QUALITY("low_quality"),
+
+          @SerializedName("missing_features")
+          MISSING_FEATURES("missing_features"),
+
+          @SerializedName("other")
+          OTHER("other"),
+
+          @SerializedName("switched_service")
+          SWITCHED_SERVICE("switched_service"),
+
+          @SerializedName("too_complex")
+          TOO_COMPLEX("too_complex"),
+
+          @SerializedName("too_expensive")
+          TOO_EXPENSIVE("too_expensive"),
+
+          @SerializedName("unused")
+          UNUSED("unused");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Feedback(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -3668,6 +3832,1661 @@ public class IntentCreateParams extends ApiRequestParams {
 
       Type(String value) {
         this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CadenceData {
+    /** <strong>Required.</strong> The billing cycle configuration for this Cadence. */
+    @SerializedName("billing_cycle")
+    BillingCycle billingCycle;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** <strong>Required.</strong> Information about the payer for this Cadence. */
+    @SerializedName("payer")
+    Payer payer;
+
+    /** Settings for creating the Cadence. */
+    @SerializedName("settings")
+    Settings settings;
+
+    private CadenceData(
+        BillingCycle billingCycle,
+        Map<String, Object> extraParams,
+        Payer payer,
+        Settings settings) {
+      this.billingCycle = billingCycle;
+      this.extraParams = extraParams;
+      this.payer = payer;
+      this.settings = settings;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private BillingCycle billingCycle;
+
+      private Map<String, Object> extraParams;
+
+      private Payer payer;
+
+      private Settings settings;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public IntentCreateParams.CadenceData build() {
+        return new IntentCreateParams.CadenceData(
+            this.billingCycle, this.extraParams, this.payer, this.settings);
+      }
+
+      /** <strong>Required.</strong> The billing cycle configuration for this Cadence. */
+      public Builder setBillingCycle(IntentCreateParams.CadenceData.BillingCycle billingCycle) {
+        this.billingCycle = billingCycle;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * IntentCreateParams.CadenceData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link IntentCreateParams.CadenceData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** <strong>Required.</strong> Information about the payer for this Cadence. */
+      public Builder setPayer(IntentCreateParams.CadenceData.Payer payer) {
+        this.payer = payer;
+        return this;
+      }
+
+      /** Settings for creating the Cadence. */
+      public Builder setSettings(IntentCreateParams.CadenceData.Settings settings) {
+        this.settings = settings;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class BillingCycle {
+      /** Specific configuration for determining billing dates when type=day. */
+      @SerializedName("day")
+      Day day;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * The number of intervals (specified in the interval attribute) between cadence billings. For
+       * example, type=month and interval_count=3 bills every 3 months. If this is not provided, it
+       * will default to 1.
+       */
+      @SerializedName("interval_count")
+      Long intervalCount;
+
+      /** Specific configuration for determining billing dates when type=month. */
+      @SerializedName("month")
+      Month month;
+
+      /** <strong>Required.</strong> The frequency at which a cadence bills. */
+      @SerializedName("type")
+      Type type;
+
+      /** Specific configuration for determining billing dates when type=week. */
+      @SerializedName("week")
+      Week week;
+
+      /** Specific configuration for determining billing dates when type=year. */
+      @SerializedName("year")
+      Year year;
+
+      private BillingCycle(
+          Day day,
+          Map<String, Object> extraParams,
+          Long intervalCount,
+          Month month,
+          Type type,
+          Week week,
+          Year year) {
+        this.day = day;
+        this.extraParams = extraParams;
+        this.intervalCount = intervalCount;
+        this.month = month;
+        this.type = type;
+        this.week = week;
+        this.year = year;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Day day;
+
+        private Map<String, Object> extraParams;
+
+        private Long intervalCount;
+
+        private Month month;
+
+        private Type type;
+
+        private Week week;
+
+        private Year year;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public IntentCreateParams.CadenceData.BillingCycle build() {
+          return new IntentCreateParams.CadenceData.BillingCycle(
+              this.day,
+              this.extraParams,
+              this.intervalCount,
+              this.month,
+              this.type,
+              this.week,
+              this.year);
+        }
+
+        /** Specific configuration for determining billing dates when type=day. */
+        public Builder setDay(IntentCreateParams.CadenceData.BillingCycle.Day day) {
+          this.day = day;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link IntentCreateParams.CadenceData.BillingCycle#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link IntentCreateParams.CadenceData.BillingCycle#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * The number of intervals (specified in the interval attribute) between cadence billings.
+         * For example, type=month and interval_count=3 bills every 3 months. If this is not
+         * provided, it will default to 1.
+         */
+        public Builder setIntervalCount(Long intervalCount) {
+          this.intervalCount = intervalCount;
+          return this;
+        }
+
+        /** Specific configuration for determining billing dates when type=month. */
+        public Builder setMonth(IntentCreateParams.CadenceData.BillingCycle.Month month) {
+          this.month = month;
+          return this;
+        }
+
+        /** <strong>Required.</strong> The frequency at which a cadence bills. */
+        public Builder setType(IntentCreateParams.CadenceData.BillingCycle.Type type) {
+          this.type = type;
+          return this;
+        }
+
+        /** Specific configuration for determining billing dates when type=week. */
+        public Builder setWeek(IntentCreateParams.CadenceData.BillingCycle.Week week) {
+          this.week = week;
+          return this;
+        }
+
+        /** Specific configuration for determining billing dates when type=year. */
+        public Builder setYear(IntentCreateParams.CadenceData.BillingCycle.Year year) {
+          this.year = year;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Day {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The time at which the billing cycle ends. This field is optional, and if not provided, it
+         * will default to the time at which the cadence was created in UTC timezone.
+         */
+        @SerializedName("time")
+        Time time;
+
+        private Day(Map<String, Object> extraParams, Time time) {
+          this.extraParams = extraParams;
+          this.time = time;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Time time;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.CadenceData.BillingCycle.Day build() {
+            return new IntentCreateParams.CadenceData.BillingCycle.Day(this.extraParams, this.time);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Day#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Day#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The time at which the billing cycle ends. This field is optional, and if not provided,
+           * it will default to the time at which the cadence was created in UTC timezone.
+           */
+          public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Day.Time time) {
+            this.time = time;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Time {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+           * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+           */
+          @SerializedName("hour")
+          Long hour;
+
+          /**
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("minute")
+          Long minute;
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("second")
+          Long second;
+
+          private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
+            this.extraParams = extraParams;
+            this.hour = hour;
+            this.minute = minute;
+            this.second = second;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long hour;
+
+            private Long minute;
+
+            private Long second;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.CadenceData.BillingCycle.Day.Time build() {
+              return new IntentCreateParams.CadenceData.BillingCycle.Day.Time(
+                  this.extraParams, this.hour, this.minute, this.second);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Day.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Day.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+             * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+             */
+            public Builder setHour(Long hour) {
+              this.hour = hour;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setMinute(Long minute) {
+              this.minute = minute;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setSecond(Long second) {
+              this.second = second;
+              return this;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Month {
+        /**
+         * <strong>Required.</strong> The day to anchor the billing on for a type=&quot;month&quot;
+         * billing cycle from 1-31. If this number is greater than the number of days in the month
+         * being billed, this will anchor to the last day of the month. If not provided, this will
+         * default to the day the cadence was created.
+         */
+        @SerializedName("day_of_month")
+        Long dayOfMonth;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-12.
+         * If not provided, this will default to the month the cadence was created. This setting can
+         * only be used for monthly billing cycles with {@code interval_count} of 2, 3, 4 or 6. All
+         * occurrences will be calculated from month provided.
+         */
+        @SerializedName("month_of_year")
+        Long monthOfYear;
+
+        /**
+         * The time at which the billing cycle ends. This field is optional, and if not provided, it
+         * will default to the time at which the cadence was created in UTC timezone.
+         */
+        @SerializedName("time")
+        Time time;
+
+        private Month(
+            Long dayOfMonth, Map<String, Object> extraParams, Long monthOfYear, Time time) {
+          this.dayOfMonth = dayOfMonth;
+          this.extraParams = extraParams;
+          this.monthOfYear = monthOfYear;
+          this.time = time;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long dayOfMonth;
+
+          private Map<String, Object> extraParams;
+
+          private Long monthOfYear;
+
+          private Time time;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.CadenceData.BillingCycle.Month build() {
+            return new IntentCreateParams.CadenceData.BillingCycle.Month(
+                this.dayOfMonth, this.extraParams, this.monthOfYear, this.time);
+          }
+
+          /**
+           * <strong>Required.</strong> The day to anchor the billing on for a
+           * type=&quot;month&quot; billing cycle from 1-31. If this number is greater than the
+           * number of days in the month being billed, this will anchor to the last day of the
+           * month. If not provided, this will default to the day the cadence was created.
+           */
+          public Builder setDayOfMonth(Long dayOfMonth) {
+            this.dayOfMonth = dayOfMonth;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Month#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Month#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The month to anchor the billing on for a type=&quot;month&quot; billing cycle from
+           * 1-12. If not provided, this will default to the month the cadence was created. This
+           * setting can only be used for monthly billing cycles with {@code interval_count} of 2,
+           * 3, 4 or 6. All occurrences will be calculated from month provided.
+           */
+          public Builder setMonthOfYear(Long monthOfYear) {
+            this.monthOfYear = monthOfYear;
+            return this;
+          }
+
+          /**
+           * The time at which the billing cycle ends. This field is optional, and if not provided,
+           * it will default to the time at which the cadence was created in UTC timezone.
+           */
+          public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Month.Time time) {
+            this.time = time;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Time {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+           * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+           */
+          @SerializedName("hour")
+          Long hour;
+
+          /**
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("minute")
+          Long minute;
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("second")
+          Long second;
+
+          private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
+            this.extraParams = extraParams;
+            this.hour = hour;
+            this.minute = minute;
+            this.second = second;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long hour;
+
+            private Long minute;
+
+            private Long second;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.CadenceData.BillingCycle.Month.Time build() {
+              return new IntentCreateParams.CadenceData.BillingCycle.Month.Time(
+                  this.extraParams, this.hour, this.minute, this.second);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Month.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Month.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+             * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+             */
+            public Builder setHour(Long hour) {
+              this.hour = hour;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setMinute(Long minute) {
+              this.minute = minute;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setSecond(Long second) {
+              this.second = second;
+              return this;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Week {
+        /**
+         * <strong>Required.</strong> The day of the week to bill the type=week billing cycle on.
+         * Numbered from 1-7 for Monday to Sunday respectively, based on the ISO-8601 week day
+         * numbering. If not provided, this will default to the day the cadence was created.
+         */
+        @SerializedName("day_of_week")
+        Long dayOfWeek;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The time at which the billing cycle ends. This field is optional, and if not provided, it
+         * will default to the time at which the cadence was created in UTC timezone.
+         */
+        @SerializedName("time")
+        Time time;
+
+        private Week(Long dayOfWeek, Map<String, Object> extraParams, Time time) {
+          this.dayOfWeek = dayOfWeek;
+          this.extraParams = extraParams;
+          this.time = time;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long dayOfWeek;
+
+          private Map<String, Object> extraParams;
+
+          private Time time;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.CadenceData.BillingCycle.Week build() {
+            return new IntentCreateParams.CadenceData.BillingCycle.Week(
+                this.dayOfWeek, this.extraParams, this.time);
+          }
+
+          /**
+           * <strong>Required.</strong> The day of the week to bill the type=week billing cycle on.
+           * Numbered from 1-7 for Monday to Sunday respectively, based on the ISO-8601 week day
+           * numbering. If not provided, this will default to the day the cadence was created.
+           */
+          public Builder setDayOfWeek(Long dayOfWeek) {
+            this.dayOfWeek = dayOfWeek;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Week#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Week#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The time at which the billing cycle ends. This field is optional, and if not provided,
+           * it will default to the time at which the cadence was created in UTC timezone.
+           */
+          public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Week.Time time) {
+            this.time = time;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Time {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+           * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+           */
+          @SerializedName("hour")
+          Long hour;
+
+          /**
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("minute")
+          Long minute;
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("second")
+          Long second;
+
+          private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
+            this.extraParams = extraParams;
+            this.hour = hour;
+            this.minute = minute;
+            this.second = second;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long hour;
+
+            private Long minute;
+
+            private Long second;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.CadenceData.BillingCycle.Week.Time build() {
+              return new IntentCreateParams.CadenceData.BillingCycle.Week.Time(
+                  this.extraParams, this.hour, this.minute, this.second);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Week.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Week.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+             * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+             */
+            public Builder setHour(Long hour) {
+              this.hour = hour;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setMinute(Long minute) {
+              this.minute = minute;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setSecond(Long second) {
+              this.second = second;
+              return this;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Year {
+        /**
+         * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31. If
+         * this number is greater than the number of days in the month being billed, this will
+         * anchor to the last day of the month. If not provided, this will default to the day the
+         * cadence was created.
+         */
+        @SerializedName("day_of_month")
+        Long dayOfMonth;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The month to bill on from 1-12. If not provided, this will default to the month the
+         * cadence was created.
+         */
+        @SerializedName("month_of_year")
+        Long monthOfYear;
+
+        /**
+         * The time at which the billing cycle ends. This field is optional, and if not provided, it
+         * will default to the time at which the cadence was created in UTC timezone.
+         */
+        @SerializedName("time")
+        Time time;
+
+        private Year(
+            Long dayOfMonth, Map<String, Object> extraParams, Long monthOfYear, Time time) {
+          this.dayOfMonth = dayOfMonth;
+          this.extraParams = extraParams;
+          this.monthOfYear = monthOfYear;
+          this.time = time;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Long dayOfMonth;
+
+          private Map<String, Object> extraParams;
+
+          private Long monthOfYear;
+
+          private Time time;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.CadenceData.BillingCycle.Year build() {
+            return new IntentCreateParams.CadenceData.BillingCycle.Year(
+                this.dayOfMonth, this.extraParams, this.monthOfYear, this.time);
+          }
+
+          /**
+           * The day to anchor the billing on for a type=&quot;month&quot; billing cycle from 1-31.
+           * If this number is greater than the number of days in the month being billed, this will
+           * anchor to the last day of the month. If not provided, this will default to the day the
+           * cadence was created.
+           */
+          public Builder setDayOfMonth(Long dayOfMonth) {
+            this.dayOfMonth = dayOfMonth;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Year#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.BillingCycle.Year#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The month to bill on from 1-12. If not provided, this will default to the month the
+           * cadence was created.
+           */
+          public Builder setMonthOfYear(Long monthOfYear) {
+            this.monthOfYear = monthOfYear;
+            return this;
+          }
+
+          /**
+           * The time at which the billing cycle ends. This field is optional, and if not provided,
+           * it will default to the time at which the cadence was created in UTC timezone.
+           */
+          public Builder setTime(IntentCreateParams.CadenceData.BillingCycle.Year.Time time) {
+            this.time = time;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Time {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /**
+           * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+           * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+           */
+          @SerializedName("hour")
+          Long hour;
+
+          /**
+           * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("minute")
+          Long minute;
+
+          /**
+           * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+           * integer between 0 and 59, inclusive.
+           */
+          @SerializedName("second")
+          Long second;
+
+          private Time(Map<String, Object> extraParams, Long hour, Long minute, Long second) {
+            this.extraParams = extraParams;
+            this.hour = hour;
+            this.minute = minute;
+            this.second = second;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Long hour;
+
+            private Long minute;
+
+            private Long second;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.CadenceData.BillingCycle.Year.Time build() {
+              return new IntentCreateParams.CadenceData.BillingCycle.Year.Time(
+                  this.extraParams, this.hour, this.minute, this.second);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Year.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.CadenceData.BillingCycle.Year.Time#extraParams} for the field
+             * documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The hour at which the billing cycle ends. This must be an
+             * integer between 0 and 23, inclusive. 0 represents midnight, and 23 represents 11 PM.
+             */
+            public Builder setHour(Long hour) {
+              this.hour = hour;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The minute at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setMinute(Long minute) {
+              this.minute = minute;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The second at which the billing cycle ends. Must be an
+             * integer between 0 and 59, inclusive.
+             */
+            public Builder setSecond(Long second) {
+              this.second = second;
+              return this;
+            }
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("day")
+        DAY("day"),
+
+        @SerializedName("month")
+        MONTH("month"),
+
+        @SerializedName("week")
+        WEEK("week"),
+
+        @SerializedName("year")
+        YEAR("year");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Payer {
+      /** The ID of the Billing Profile object which determines how a bill will be paid. */
+      @SerializedName("billing_profile")
+      String billingProfile;
+
+      /** Data for creating a new profile. */
+      @SerializedName("billing_profile_data")
+      BillingProfileData billingProfileData;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Payer(
+          String billingProfile,
+          BillingProfileData billingProfileData,
+          Map<String, Object> extraParams) {
+        this.billingProfile = billingProfile;
+        this.billingProfileData = billingProfileData;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private String billingProfile;
+
+        private BillingProfileData billingProfileData;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public IntentCreateParams.CadenceData.Payer build() {
+          return new IntentCreateParams.CadenceData.Payer(
+              this.billingProfile, this.billingProfileData, this.extraParams);
+        }
+
+        /** The ID of the Billing Profile object which determines how a bill will be paid. */
+        public Builder setBillingProfile(String billingProfile) {
+          this.billingProfile = billingProfile;
+          return this;
+        }
+
+        /** Data for creating a new profile. */
+        public Builder setBillingProfileData(
+            IntentCreateParams.CadenceData.Payer.BillingProfileData billingProfileData) {
+          this.billingProfileData = billingProfileData;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link IntentCreateParams.CadenceData.Payer#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link IntentCreateParams.CadenceData.Payer#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class BillingProfileData {
+        /** <strong>Required.</strong> The customer to associate with the profile. */
+        @SerializedName("customer")
+        String customer;
+
+        /**
+         * The default payment method to use when billing this profile. If left blank, the {@code
+         * PaymentMethod} from the {@code PaymentIntent} provided on commit will be used to create
+         * the profile.
+         */
+        @SerializedName("default_payment_method")
+        String defaultPaymentMethod;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private BillingProfileData(
+            String customer, String defaultPaymentMethod, Map<String, Object> extraParams) {
+          this.customer = customer;
+          this.defaultPaymentMethod = defaultPaymentMethod;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String customer;
+
+          private String defaultPaymentMethod;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.CadenceData.Payer.BillingProfileData build() {
+            return new IntentCreateParams.CadenceData.Payer.BillingProfileData(
+                this.customer, this.defaultPaymentMethod, this.extraParams);
+          }
+
+          /** <strong>Required.</strong> The customer to associate with the profile. */
+          public Builder setCustomer(String customer) {
+            this.customer = customer;
+            return this;
+          }
+
+          /**
+           * The default payment method to use when billing this profile. If left blank, the {@code
+           * PaymentMethod} from the {@code PaymentIntent} provided on commit will be used to create
+           * the profile.
+           */
+          public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+            this.defaultPaymentMethod = defaultPaymentMethod;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.Payer.BillingProfileData#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.Payer.BillingProfileData#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Settings {
+      /**
+       * Settings that configure bill generation, which includes calculating totals, tax, and
+       * presenting invoices. If no setting is provided here, the settings from the customer
+       * referenced on the payer will be used. If no customer settings are present, the merchant
+       * default settings will be used.
+       */
+      @SerializedName("bill")
+      Bill bill;
+
+      /**
+       * Settings that configure and manage the behavior of collecting payments. If no setting is
+       * provided here, the settings from the customer referenced from the payer will be used if
+       * they exist. If no customer settings are present, the merchant default settings will be
+       * used.
+       */
+      @SerializedName("collection")
+      Collection collection;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Settings(Bill bill, Collection collection, Map<String, Object> extraParams) {
+        this.bill = bill;
+        this.collection = collection;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Bill bill;
+
+        private Collection collection;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public IntentCreateParams.CadenceData.Settings build() {
+          return new IntentCreateParams.CadenceData.Settings(
+              this.bill, this.collection, this.extraParams);
+        }
+
+        /**
+         * Settings that configure bill generation, which includes calculating totals, tax, and
+         * presenting invoices. If no setting is provided here, the settings from the customer
+         * referenced on the payer will be used. If no customer settings are present, the merchant
+         * default settings will be used.
+         */
+        public Builder setBill(IntentCreateParams.CadenceData.Settings.Bill bill) {
+          this.bill = bill;
+          return this;
+        }
+
+        /**
+         * Settings that configure and manage the behavior of collecting payments. If no setting is
+         * provided here, the settings from the customer referenced from the payer will be used if
+         * they exist. If no customer settings are present, the merchant default settings will be
+         * used.
+         */
+        public Builder setCollection(
+            IntentCreateParams.CadenceData.Settings.Collection collection) {
+          this.collection = collection;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link IntentCreateParams.CadenceData.Settings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link IntentCreateParams.CadenceData.Settings#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Bill {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
+        @SerializedName("id")
+        String id;
+
+        /**
+         * An optional field to specify the version of the Settings to use. If not provided, this
+         * will always default to the live version any time the settings are used.
+         */
+        @SerializedName("version")
+        String version;
+
+        private Bill(Map<String, Object> extraParams, String id, String version) {
+          this.extraParams = extraParams;
+          this.id = id;
+          this.version = version;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          private String version;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.CadenceData.Settings.Bill build() {
+            return new IntentCreateParams.CadenceData.Settings.Bill(
+                this.extraParams, this.id, this.version);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.Settings.Bill#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.Settings.Bill#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The ID of the referenced settings object. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
+
+          /**
+           * An optional field to specify the version of the Settings to use. If not provided, this
+           * will always default to the live version any time the settings are used.
+           */
+          public Builder setVersion(String version) {
+            this.version = version;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Collection {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The ID of the referenced settings object. */
+        @SerializedName("id")
+        String id;
+
+        /**
+         * An optional field to specify the version of the Settings to use. If not provided, this
+         * will always default to the live version any time the settings are used.
+         */
+        @SerializedName("version")
+        String version;
+
+        private Collection(Map<String, Object> extraParams, String id, String version) {
+          this.extraParams = extraParams;
+          this.id = id;
+          this.version = version;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          private String version;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.CadenceData.Settings.Collection build() {
+            return new IntentCreateParams.CadenceData.Settings.Collection(
+                this.extraParams, this.id, this.version);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.Settings.Collection#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.CadenceData.Settings.Collection#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The ID of the referenced settings object. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
+
+          /**
+           * An optional field to specify the version of the Settings to use. If not provided, this
+           * will always default to the live version any time the settings are used.
+           */
+          public Builder setVersion(String version) {
+            this.version = version;
+            return this;
+          }
+        }
       }
     }
   }

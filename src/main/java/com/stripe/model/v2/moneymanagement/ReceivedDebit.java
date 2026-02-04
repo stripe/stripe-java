@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import java.time.Instant;
+import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +32,13 @@ public class ReceivedDebit extends StripeObject implements HasId {
    */
   @SerializedName("bank_transfer")
   BankTransfer bankTransfer;
+
+  /**
+   * This object stores details about the issuing transactions that resulted in the ReceivedDebit.
+   * Present if {@code type} field value is {@code card_spend}.
+   */
+  @SerializedName("card_spend")
+  CardSpend cardSpend;
 
   /**
    * The time at which the ReceivedDebit was created. Represented as a RFC 3339 date &amp; time UTC
@@ -102,8 +110,8 @@ public class ReceivedDebit extends StripeObject implements HasId {
   /**
    * Open enum, the type of the received debit.
    *
-   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code external_debit}, or {@code
-   * stripe_balance_payment}.
+   * <p>One of {@code balance_transfer}, {@code bank_transfer}, {@code card_spend}, {@code
+   * external_debit}, or {@code stripe_balance_payment}.
    */
   @SerializedName("type")
   String type;
@@ -206,6 +214,103 @@ public class ReceivedDebit extends StripeObject implements HasId {
       /** The routing number of the bank that originated the debit. */
       @SerializedName("routing_number")
       String routingNumber;
+    }
+  }
+
+  /**
+   * This object stores details about the issuing transactions that resulted in the ReceivedDebit.
+   * Present if {@code type} field value is {@code card_spend}.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CardSpend extends StripeObject {
+    /** The Issuing Authorization for this card_spend. Contains the reference id and the amount. */
+    @SerializedName("authorization")
+    Authorization authorization;
+
+    /**
+     * The list of card spend transactions. These contain the transaction reference ID and the
+     * amount.
+     */
+    @SerializedName("card_transactions")
+    List<ReceivedDebit.CardSpend.CardTransaction> cardTransactions;
+
+    /** The reference to the card object that resulted in the debit. */
+    @SerializedName("card_v1_id")
+    String cardV1Id;
+
+    /** The Issuing Authorization for this card_spend. Contains the reference id and the amount. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Authorization extends StripeObject {
+      /** Amount associated with this issuing authorization. */
+      @SerializedName("amount")
+      Amount amount;
+
+      /** The reference to the v1 issuing authorization ID. */
+      @SerializedName("issuing_authorization_v1")
+      String issuingAuthorizationV1;
+
+      /** Amount associated with this issuing authorization. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Amount extends StripeObject {
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * A non-negative integer representing how much to charge in the <a
+         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+         */
+        @SerializedName("value")
+        Long value;
+      }
+    }
+
+    /**
+     * For more details about CardTransaction, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardTransaction extends StripeObject {
+      /** Amount associated with this issuing transaction. */
+      @SerializedName("amount")
+      Amount amount;
+
+      /** The reference to the v1 issuing transaction ID. */
+      @SerializedName("issuing_transaction_v1")
+      String issuingTransactionV1;
+
+      /** Amount associated with this issuing transaction. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Amount extends StripeObject {
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * A non-negative integer representing how much to charge in the <a
+         * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+         */
+        @SerializedName("value")
+        Long value;
+      }
     }
   }
 

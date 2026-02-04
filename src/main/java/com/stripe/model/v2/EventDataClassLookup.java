@@ -82,6 +82,7 @@ public final class EventDataClassLookup {
         "v2.core.account_person_token", com.stripe.model.v2.core.AccountPersonToken.class);
     classLookup.put("v2.core.account_token", com.stripe.model.v2.core.AccountToken.class);
     classLookup.put("v2.core.claimable_sandbox", com.stripe.model.v2.core.ClaimableSandbox.class);
+    classLookup.put("v2.core.connection_session", com.stripe.model.v2.core.ConnectionSession.class);
     classLookup.put("v2.core.event", com.stripe.model.v2.core.Event.class);
     classLookup.put("v2.core.event_destination", com.stripe.model.v2.core.EventDestination.class);
 

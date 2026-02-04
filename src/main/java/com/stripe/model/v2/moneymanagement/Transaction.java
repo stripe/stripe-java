@@ -34,9 +34,23 @@ public class Transaction extends StripeObject implements HasId {
   /**
    * Open Enum. A descriptive category used to classify the Transaction.
    *
-   * <p>One of {@code adjustment}, {@code currency_conversion}, {@code inbound_transfer}, {@code
-   * outbound_payment}, {@code outbound_transfer}, {@code received_credit}, {@code received_debit},
-   * {@code return}, or {@code stripe_fee}.
+   * <p>One of {@code adjustment}, {@code advance}, {@code anticipation_repayment}, {@code
+   * balance_transfer}, {@code charge}, {@code charge_failure}, {@code climate_order_purchase},
+   * {@code climate_order_refund}, {@code connect_collection_transfer}, {@code
+   * connect_reserved_funds}, {@code contribution}, {@code currency_conversion}, {@code
+   * dispute_reversal}, {@code financing_paydown}, {@code financing_paydown_reversal}, {@code
+   * inbound_transfer}, {@code inbound_transfer_reversal}, {@code issuing_dispute}, {@code
+   * issuing_dispute_fraud_liability_debit}, {@code issuing_dispute_provisional_credit}, {@code
+   * issuing_dispute_provisional_credit_reversal}, {@code minimum_balance_hold}, {@code
+   * network_cost}, {@code obligation}, {@code outbound_payment}, {@code outbound_payment_reversal},
+   * {@code outbound_transfer}, {@code outbound_transfer_reversal}, {@code
+   * partial_capture_reversal}, {@code payment_network_reserved_funds}, {@code platform_earning},
+   * {@code platform_earning_refund}, {@code platform_fee}, {@code received_credit}, {@code
+   * received_credit_reversal}, {@code received_debit}, {@code received_debit_reversal}, {@code
+   * refund_failure}, {@code return}, {@code risk_reserved_funds}, {@code
+   * stripe_balance_payment_debit}, {@code stripe_balance_payment_debit_reversal}, {@code
+   * stripe_fee}, {@code stripe_fee_tax}, {@code transfer_reversal}, or {@code
+   * unreconciled_customer_funds}.
    */
   @SerializedName("category")
   String category;
@@ -207,12 +221,28 @@ public class Transaction extends StripeObject implements HasId {
     @SerializedName("adjustment")
     String adjustment;
 
+    /** If applicable, the ID of the Application Fee that created this Transaction. */
+    @SerializedName("application_fee")
+    String applicationFee;
+
+    /** If applicable, the ID of the Application Fee Refund that created this Transaction. */
+    @SerializedName("application_fee_refund")
+    String applicationFeeRefund;
+
+    /** If applicable, the ID of the Charge that created this Transaction. */
+    @SerializedName("charge")
+    String charge;
+
     /**
      * In the future, this will be the ID of the currency conversion that created this Transaction.
      * For now, this field is always null.
      */
     @SerializedName("currency_conversion")
     String currencyConversion;
+
+    /** If applicable, the ID of the Dispute that created this Transaction. */
+    @SerializedName("dispute")
+    String dispute;
 
     /** If applicable, the ID of the FeeTransaction that created this Transaction. */
     @SerializedName("fee_transaction")
@@ -230,6 +260,10 @@ public class Transaction extends StripeObject implements HasId {
     @SerializedName("outbound_transfer")
     String outboundTransfer;
 
+    /** If applicable, the ID of the Payout that created this Transaction. */
+    @SerializedName("payout")
+    String payout;
+
     /** If applicable, the ID of the ReceivedCredit that created this Transaction. */
     @SerializedName("received_credit")
     String receivedCredit;
@@ -238,13 +272,39 @@ public class Transaction extends StripeObject implements HasId {
     @SerializedName("received_debit")
     String receivedDebit;
 
+    /** If applicable, the ID of the Refund that created this Transaction. */
+    @SerializedName("refund")
+    String refund;
+
+    /** If applicable, the ID of the Reserve Hold that created this Transaction. */
+    @SerializedName("reserve_hold")
+    String reserveHold;
+
+    /** If applicable, the ID of the Reserve Release that created this Transaction. */
+    @SerializedName("reserve_release")
+    String reserveRelease;
+
+    /** If applicable, the ID of the Topup that created this Transaction. */
+    @SerializedName("topup")
+    String topup;
+
+    /** If applicable, the ID of the Transfer that created this Transaction. */
+    @SerializedName("transfer")
+    String transfer;
+
+    /** If applicable, the ID of the Transfer Reversal that created this Transaction. */
+    @SerializedName("transfer_reversal")
+    String transferReversal;
+
     /**
      * Open Enum. Type of the flow that created the Transaction. The field matching this value will
      * contain the ID of the flow.
      *
-     * <p>One of {@code adjustment}, {@code currency_conversion}, {@code fee_transaction}, {@code
-     * inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code
-     * received_credit}, or {@code received_debit}.
+     * <p>One of {@code adjustment}, {@code application_fee}, {@code application_fee_refund}, {@code
+     * charge}, {@code currency_conversion}, {@code dispute}, {@code fee_transaction}, {@code
+     * inbound_transfer}, {@code outbound_payment}, {@code outbound_transfer}, {@code payout},
+     * {@code received_credit}, {@code received_debit}, {@code refund}, {@code reserve_hold}, {@code
+     * reserve_release}, {@code topup}, {@code transfer}, or {@code transfer_reversal}.
      */
     @SerializedName("type")
     String type;

@@ -70,6 +70,10 @@ public class Adjustment extends StripeObject implements HasId {
   @SerializedName("receipt_url")
   String receiptUrl;
 
+  /** A reference for the Adjustment that associates it with related records or operations. */
+  @SerializedName("reference")
+  String reference;
+
   /** If applicable, contains information about the original flow linked to this Adjustment. */
   @Getter
   @Setter
