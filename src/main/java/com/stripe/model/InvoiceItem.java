@@ -679,14 +679,17 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     @SerializedName("price_details")
     PriceDetails priceDetails;
 
+    @SerializedName("rate_card_custom_pricing_unit_overage_rate_details")
+    RateCardCustomPricingUnitOverageRateDetails rateCardCustomPricingUnitOverageRateDetails;
+
     @SerializedName("rate_card_rate_details")
     RateCardRateDetails rateCardRateDetails;
 
     /**
      * The type of the pricing details.
      *
-     * <p>One of {@code license_fee_details}, {@code price_details}, or {@code
-     * rate_card_rate_details}.
+     * <p>One of {@code license_fee_details}, {@code price_details}, {@code
+     * rate_card_custom_pricing_unit_overage_rate_details}, or {@code rate_card_rate_details}.
      */
     @SerializedName("type")
     String type;
@@ -754,6 +757,31 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
       public void setPriceObject(Price expandableObject) {
         this.price = new ExpandableField<Price>(expandableObject.getId(), expandableObject);
       }
+    }
+
+    /**
+     * For more details about RateCardCustomPricingUnitOverageRateDetails, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class RateCardCustomPricingUnitOverageRateDetails extends StripeObject {
+      /** The ID of the custom pricing unit this item is associated with. */
+      @SerializedName("custom_pricing_unit")
+      String customPricingUnit;
+
+      /** The ID of the custom pricing unit overage rate this item is associated with. */
+      @SerializedName("custom_pricing_unit_overage_rate")
+      String customPricingUnitOverageRate;
+
+      /** The ID of the one-time item this custom pricing unit overage rate is associated with. */
+      @SerializedName("one_time_item")
+      String oneTimeItem;
+
+      /** The ID of the rate card this item is associated with. */
+      @SerializedName("rate_card")
+      String rateCard;
     }
 
     /**
