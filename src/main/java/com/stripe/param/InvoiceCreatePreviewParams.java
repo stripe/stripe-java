@@ -3946,6 +3946,10 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
     @SerializedName("billing_schedules")
     Object billingSchedules;
 
+    /** Object representing the subscription schedule's default settings. */
+    @SerializedName("default_settings")
+    DefaultSettings defaultSettings;
+
     /**
      * Behavior of the subscription schedule and underlying subscription when it ends. Possible
      * values are {@code release} or {@code cancel} with the default being {@code release}. {@code
@@ -3988,6 +3992,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
         BillingBehavior billingBehavior,
         BillingMode billingMode,
         Object billingSchedules,
+        DefaultSettings defaultSettings,
         EndBehavior endBehavior,
         Map<String, Object> extraParams,
         List<InvoiceCreatePreviewParams.ScheduleDetails.Phase> phases,
@@ -3997,6 +4002,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       this.billingBehavior = billingBehavior;
       this.billingMode = billingMode;
       this.billingSchedules = billingSchedules;
+      this.defaultSettings = defaultSettings;
       this.endBehavior = endBehavior;
       this.extraParams = extraParams;
       this.phases = phases;
@@ -4017,6 +4023,8 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
 
       private Object billingSchedules;
 
+      private DefaultSettings defaultSettings;
+
       private EndBehavior endBehavior;
 
       private Map<String, Object> extraParams;
@@ -4034,6 +4042,7 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
             this.billingBehavior,
             this.billingMode,
             this.billingSchedules,
+            this.defaultSettings,
             this.endBehavior,
             this.extraParams,
             this.phases,
@@ -4133,6 +4142,13 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
       public Builder setBillingSchedules(
           List<InvoiceCreatePreviewParams.ScheduleDetails.BillingSchedule> billingSchedules) {
         this.billingSchedules = billingSchedules;
+        return this;
+      }
+
+      /** Object representing the subscription schedule's default settings. */
+      public Builder setDefaultSettings(
+          InvoiceCreatePreviewParams.ScheduleDetails.DefaultSettings defaultSettings) {
+        this.defaultSettings = defaultSettings;
         return this;
       }
 
@@ -11031,6 +11047,95 @@ public class InvoiceCreatePreviewParams extends ApiRequestParams {
           Type(String value) {
             this.value = value;
           }
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DefaultSettings {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Configures how the subscription schedule handles billing for phase transitions. */
+      @SerializedName("phase_effective_at")
+      PhaseEffectiveAt phaseEffectiveAt;
+
+      private DefaultSettings(Map<String, Object> extraParams, PhaseEffectiveAt phaseEffectiveAt) {
+        this.extraParams = extraParams;
+        this.phaseEffectiveAt = phaseEffectiveAt;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private PhaseEffectiveAt phaseEffectiveAt;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceCreatePreviewParams.ScheduleDetails.DefaultSettings build() {
+          return new InvoiceCreatePreviewParams.ScheduleDetails.DefaultSettings(
+              this.extraParams, this.phaseEffectiveAt);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.DefaultSettings#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceCreatePreviewParams.ScheduleDetails.DefaultSettings#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Configures how the subscription schedule handles billing for phase transitions. */
+        public Builder setPhaseEffectiveAt(
+            InvoiceCreatePreviewParams.ScheduleDetails.DefaultSettings.PhaseEffectiveAt
+                phaseEffectiveAt) {
+          this.phaseEffectiveAt = phaseEffectiveAt;
+          return this;
+        }
+      }
+
+      public enum PhaseEffectiveAt implements ApiRequestParams.EnumParam {
+        @SerializedName("billing_period_start")
+        BILLING_PERIOD_START("billing_period_start"),
+
+        @SerializedName("phase_start")
+        PHASE_START("phase_start");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        PhaseEffectiveAt(String value) {
+          this.value = value;
         }
       }
     }

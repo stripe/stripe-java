@@ -62,6 +62,10 @@ public final class BillingService extends ApiService {
     return new com.stripe.service.v2.billing.MeteredItemService(this.getResponseGetter());
   }
 
+  public com.stripe.service.v2.billing.OneTimeItemService oneTimeItems() {
+    return new com.stripe.service.v2.billing.OneTimeItemService(this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.billing.PricingPlanSubscriptionService pricingPlanSubscriptions() {
     return new com.stripe.service.v2.billing.PricingPlanSubscriptionService(
         this.getResponseGetter());

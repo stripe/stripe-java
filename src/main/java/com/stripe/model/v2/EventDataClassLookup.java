@@ -31,6 +31,9 @@ public final class EventDataClassLookup {
         "v2.billing.bill_setting_version", com.stripe.model.v2.billing.BillSettingVersion.class);
     classLookup.put("v2.billing.cadence", com.stripe.model.v2.billing.Cadence.class);
     classLookup.put(
+        "v2.billing.cadence_spend_modifier",
+        com.stripe.model.v2.billing.CadenceSpendModifier.class);
+    classLookup.put(
         "v2.billing.collection_setting", com.stripe.model.v2.billing.CollectionSetting.class);
     classLookup.put(
         "v2.billing.collection_setting_version",
@@ -53,6 +56,7 @@ public final class EventDataClassLookup {
     classLookup.put(
         "v2.billing.meter_event_session", com.stripe.model.v2.billing.MeterEventSession.class);
     classLookup.put("v2.billing.metered_item", com.stripe.model.v2.billing.MeteredItem.class);
+    classLookup.put("v2.billing.one_time_item", com.stripe.model.v2.billing.OneTimeItem.class);
     classLookup.put("v2.billing.pricing_plan", com.stripe.model.v2.billing.PricingPlan.class);
     classLookup.put(
         "v2.billing.pricing_plan_component",
@@ -67,6 +71,9 @@ public final class EventDataClassLookup {
         "v2.billing.pricing_plan_version", com.stripe.model.v2.billing.PricingPlanVersion.class);
     classLookup.put("v2.billing.profile", com.stripe.model.v2.billing.Profile.class);
     classLookup.put("v2.billing.rate_card", com.stripe.model.v2.billing.RateCard.class);
+    classLookup.put(
+        "v2.billing.rate_card_custom_pricing_unit_overage_rate",
+        com.stripe.model.v2.billing.RateCardCustomPricingUnitOverageRate.class);
     classLookup.put("v2.billing.rate_card_rate", com.stripe.model.v2.billing.RateCardRate.class);
     classLookup.put(
         "v2.billing.rate_card_subscription",

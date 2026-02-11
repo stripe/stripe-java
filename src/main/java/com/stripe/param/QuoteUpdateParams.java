@@ -10533,7 +10533,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
      * when the quote is accepted.
      */
     @SerializedName("billing_schedules")
-    Object billingSchedules;
+    List<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules;
 
     /** The customer the Subscription Data override applies to. */
     @SerializedName("customer")
@@ -10590,7 +10590,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
         AppliesTo appliesTo,
         Object billOnAcceptance,
         BillingBehavior billingBehavior,
-        Object billingSchedules,
+        List<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules,
         Object customer,
         Object description,
         EndBehavior endBehavior,
@@ -10620,7 +10620,7 @@ public class QuoteUpdateParams extends ApiRequestParams {
 
       private BillingBehavior billingBehavior;
 
-      private Object billingSchedules;
+      private List<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules;
 
       private Object customer;
 
@@ -10689,15 +10689,12 @@ public class QuoteUpdateParams extends ApiRequestParams {
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * QuoteUpdateParams.SubscriptionDataOverride#billingSchedules} for the field documentation.
        */
-      @SuppressWarnings("unchecked")
       public Builder addBillingSchedule(
           QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule element) {
-        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
-          this.billingSchedules =
-              new ArrayList<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule>();
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
         }
-        ((List<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule>) this.billingSchedules)
-            .add(element);
+        this.billingSchedules.add(element);
         return this;
       }
 
@@ -10707,34 +10704,12 @@ public class QuoteUpdateParams extends ApiRequestParams {
        * {@link QuoteUpdateParams.SubscriptionDataOverride#billingSchedules} for the field
        * documentation.
        */
-      @SuppressWarnings("unchecked")
       public Builder addAllBillingSchedule(
           List<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule> elements) {
-        if (this.billingSchedules == null || this.billingSchedules instanceof EmptyParam) {
-          this.billingSchedules =
-              new ArrayList<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule>();
+        if (this.billingSchedules == null) {
+          this.billingSchedules = new ArrayList<>();
         }
-        ((List<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule>) this.billingSchedules)
-            .addAll(elements);
-        return this;
-      }
-
-      /**
-       * Billing schedules that will be applied to the subscription or subscription schedule created
-       * when the quote is accepted.
-       */
-      public Builder setBillingSchedules(EmptyParam billingSchedules) {
-        this.billingSchedules = billingSchedules;
-        return this;
-      }
-
-      /**
-       * Billing schedules that will be applied to the subscription or subscription schedule created
-       * when the quote is accepted.
-       */
-      public Builder setBillingSchedules(
-          List<QuoteUpdateParams.SubscriptionDataOverride.BillingSchedule> billingSchedules) {
-        this.billingSchedules = billingSchedules;
+        this.billingSchedules.addAll(elements);
         return this;
       }
 
