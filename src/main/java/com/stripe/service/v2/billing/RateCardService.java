@@ -100,6 +100,12 @@ public final class RateCardService extends ApiService {
     return this.request(request, RateCard.class);
   }
 
+  public com.stripe.service.v2.billing.ratecards.CustomPricingUnitOverageRateService
+      customPricingUnitOverageRates() {
+    return new com.stripe.service.v2.billing.ratecards.CustomPricingUnitOverageRateService(
+        this.getResponseGetter());
+  }
+
   public com.stripe.service.v2.billing.ratecards.RateService rates() {
     return new com.stripe.service.v2.billing.ratecards.RateService(this.getResponseGetter());
   }

@@ -139,4 +139,9 @@ public final class CadenceService extends ApiService {
             options);
     return this.request(request, Cadence.class);
   }
+
+  public com.stripe.service.v2.billing.cadences.SpendModifierRuleService spendModifierRules() {
+    return new com.stripe.service.v2.billing.cadences.SpendModifierRuleService(
+        this.getResponseGetter());
+  }
 }

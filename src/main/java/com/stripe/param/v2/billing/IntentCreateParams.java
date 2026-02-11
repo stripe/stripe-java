@@ -300,6 +300,10 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Apply {
+      /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+      @SerializedName("effective_at")
+      EffectiveAt effectiveAt;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -313,14 +317,26 @@ public class IntentCreateParams extends ApiRequestParams {
       @SerializedName("invoice_discount_rule")
       InvoiceDiscountRule invoiceDiscountRule;
 
+      /**
+       * Details for applying a spend modifier rule. Only present if type is spend_modifier_rule.
+       */
+      @SerializedName("spend_modifier_rule")
+      SpendModifierRule spendModifierRule;
+
       /** <strong>Required.</strong> Type of the apply action details. */
       @SerializedName("type")
       Type type;
 
       private Apply(
-          Map<String, Object> extraParams, InvoiceDiscountRule invoiceDiscountRule, Type type) {
+          EffectiveAt effectiveAt,
+          Map<String, Object> extraParams,
+          InvoiceDiscountRule invoiceDiscountRule,
+          SpendModifierRule spendModifierRule,
+          Type type) {
+        this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.invoiceDiscountRule = invoiceDiscountRule;
+        this.spendModifierRule = spendModifierRule;
         this.type = type;
       }
 
@@ -329,16 +345,30 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private EffectiveAt effectiveAt;
+
         private Map<String, Object> extraParams;
 
         private InvoiceDiscountRule invoiceDiscountRule;
+
+        private SpendModifierRule spendModifierRule;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Apply build() {
           return new IntentCreateParams.Action.Apply(
-              this.extraParams, this.invoiceDiscountRule, this.type);
+              this.effectiveAt,
+              this.extraParams,
+              this.invoiceDiscountRule,
+              this.spendModifierRule,
+              this.type);
+        }
+
+        /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+        public Builder setEffectiveAt(IntentCreateParams.Action.Apply.EffectiveAt effectiveAt) {
+          this.effectiveAt = effectiveAt;
+          return this;
         }
 
         /**
@@ -374,10 +404,106 @@ public class IntentCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * Details for applying a spend modifier rule. Only present if type is spend_modifier_rule.
+         */
+        public Builder setSpendModifierRule(
+            IntentCreateParams.Action.Apply.SpendModifierRule spendModifierRule) {
+          this.spendModifierRule = spendModifierRule;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of the apply action details. */
         public Builder setType(IntentCreateParams.Action.Apply.Type type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EffectiveAt {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> When the apply action will take effect. */
+        @SerializedName("type")
+        Type type;
+
+        private EffectiveAt(Map<String, Object> extraParams, Type type) {
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Apply.EffectiveAt build() {
+            return new IntentCreateParams.Action.Apply.EffectiveAt(this.extraParams, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Apply.EffectiveAt#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Apply.EffectiveAt#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> When the apply action will take effect. */
+          public Builder setType(IntentCreateParams.Action.Apply.EffectiveAt.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("current_billing_period_end")
+          CURRENT_BILLING_PERIOD_END("current_billing_period_end"),
+
+          @SerializedName("on_reserve")
+          ON_RESERVE("on_reserve");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
         }
       }
 
@@ -713,9 +839,512 @@ public class IntentCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SpendModifierRule {
+        /** <strong>Required.</strong> What the spend modifier applies to. */
+        @SerializedName("applies_to")
+        AppliesTo appliesTo;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * Details for max billing period spend modifier. Only present if type is
+         * max_billing_period_spend.
+         */
+        @SerializedName("max_billing_period_spend")
+        MaxBillingPeriodSpend maxBillingPeriodSpend;
+
+        /** <strong>Required.</strong> Type of the spend modifier. */
+        @SerializedName("type")
+        Type type;
+
+        private SpendModifierRule(
+            AppliesTo appliesTo,
+            Map<String, Object> extraParams,
+            MaxBillingPeriodSpend maxBillingPeriodSpend,
+            Type type) {
+          this.appliesTo = appliesTo;
+          this.extraParams = extraParams;
+          this.maxBillingPeriodSpend = maxBillingPeriodSpend;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AppliesTo appliesTo;
+
+          private Map<String, Object> extraParams;
+
+          private MaxBillingPeriodSpend maxBillingPeriodSpend;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Apply.SpendModifierRule build() {
+            return new IntentCreateParams.Action.Apply.SpendModifierRule(
+                this.appliesTo, this.extraParams, this.maxBillingPeriodSpend, this.type);
+          }
+
+          /** <strong>Required.</strong> What the spend modifier applies to. */
+          public Builder setAppliesTo(
+              IntentCreateParams.Action.Apply.SpendModifierRule.AppliesTo appliesTo) {
+            this.appliesTo = appliesTo;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Apply.SpendModifierRule#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Apply.SpendModifierRule#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * Details for max billing period spend modifier. Only present if type is
+           * max_billing_period_spend.
+           */
+          public Builder setMaxBillingPeriodSpend(
+              IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
+                  maxBillingPeriodSpend) {
+            this.maxBillingPeriodSpend = maxBillingPeriodSpend;
+            return this;
+          }
+
+          /** <strong>Required.</strong> Type of the spend modifier. */
+          public Builder setType(IntentCreateParams.Action.Apply.SpendModifierRule.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class MaxBillingPeriodSpend {
+          /** <strong>Required.</strong> The maximum amount allowed for the billing period. */
+          @SerializedName("amount")
+          Amount amount;
+
+          /**
+           * <strong>Required.</strong> The configration for the overage rate for the custom pricing
+           * unit.
+           */
+          @SerializedName("custom_pricing_unit_overage_rate")
+          CustomPricingUnitOverageRate customPricingUnitOverageRate;
+
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          private MaxBillingPeriodSpend(
+              Amount amount,
+              CustomPricingUnitOverageRate customPricingUnitOverageRate,
+              Map<String, Object> extraParams) {
+            this.amount = amount;
+            this.customPricingUnitOverageRate = customPricingUnitOverageRate;
+            this.extraParams = extraParams;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Amount amount;
+
+            private CustomPricingUnitOverageRate customPricingUnitOverageRate;
+
+            private Map<String, Object> extraParams;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend build() {
+              return new IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend(
+                  this.amount, this.customPricingUnitOverageRate, this.extraParams);
+            }
+
+            /** <strong>Required.</strong> The maximum amount allowed for the billing period. */
+            public Builder setAmount(
+                IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount
+                    amount) {
+              this.amount = amount;
+              return this;
+            }
+
+            /**
+             * <strong>Required.</strong> The configration for the overage rate for the custom
+             * pricing unit.
+             */
+            public Builder setCustomPricingUnitOverageRate(
+                IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
+                        .CustomPricingUnitOverageRate
+                    customPricingUnitOverageRate) {
+              this.customPricingUnitOverageRate = customPricingUnitOverageRate;
+              return this;
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend#extraParams}
+             * for the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend#extraParams}
+             * for the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class Amount {
+            /** The custom pricing unit amount. */
+            @SerializedName("custom_pricing_unit")
+            CustomPricingUnit customPricingUnit;
+
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> The type of the amount. */
+            @SerializedName("type")
+            Type type;
+
+            private Amount(
+                CustomPricingUnit customPricingUnit, Map<String, Object> extraParams, Type type) {
+              this.customPricingUnit = customPricingUnit;
+              this.extraParams = extraParams;
+              this.type = type;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private CustomPricingUnit customPricingUnit;
+
+              private Map<String, Object> extraParams;
+
+              private Type type;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount
+                  build() {
+                return new IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
+                    .Amount(this.customPricingUnit, this.extraParams, this.type);
+              }
+
+              /** The custom pricing unit amount. */
+              public Builder setCustomPricingUnit(
+                  IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount
+                          .CustomPricingUnit
+                      customPricingUnit) {
+                this.customPricingUnit = customPricingUnit;
+                return this;
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> The type of the amount. */
+              public Builder setType(
+                  IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount
+                          .Type
+                      type) {
+                this.type = type;
+                return this;
+              }
+            }
+
+            @Getter
+            @EqualsAndHashCode(callSuper = false)
+            public static class CustomPricingUnit {
+              /**
+               * Map of extra parameters for custom features not available in this client library.
+               * The content in this map is not serialized under this field's
+               * {@code @SerializedName} value. Instead, each key/value pair is serialized as if the
+               * key is a root-level field (serialized) name in this param object. Effectively, this
+               * map is flattened to its parent instance.
+               */
+              @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+              Map<String, Object> extraParams;
+
+              /** <strong>Required.</strong> The value of the custom pricing unit. */
+              @SerializedName("value")
+              String value;
+
+              private CustomPricingUnit(Map<String, Object> extraParams, String value) {
+                this.extraParams = extraParams;
+                this.value = value;
+              }
+
+              public static Builder builder() {
+                return new Builder();
+              }
+
+              public static class Builder {
+                private Map<String, Object> extraParams;
+
+                private String value;
+
+                /** Finalize and obtain parameter instance from this builder. */
+                public IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
+                        .Amount.CustomPricingUnit
+                    build() {
+                  return new IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
+                      .Amount.CustomPricingUnit(this.extraParams, this.value);
+                }
+
+                /**
+                 * Add a key/value pair to `extraParams` map. A map is initialized for the first
+                 * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+                 * original map. See {@link
+                 * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount.CustomPricingUnit#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putExtraParam(String key, Object value) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.put(key, value);
+                  return this;
+                }
+
+                /**
+                 * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+                 * first `put/putAll` call, and subsequent calls add additional key/value pairs to
+                 * the original map. See {@link
+                 * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.Amount.CustomPricingUnit#extraParams}
+                 * for the field documentation.
+                 */
+                public Builder putAllExtraParam(Map<String, Object> map) {
+                  if (this.extraParams == null) {
+                    this.extraParams = new HashMap<>();
+                  }
+                  this.extraParams.putAll(map);
+                  return this;
+                }
+
+                /** <strong>Required.</strong> The value of the custom pricing unit. */
+                public Builder setValue(String value) {
+                  this.value = value;
+                  return this;
+                }
+              }
+            }
+
+            public enum Type implements ApiRequestParams.EnumParam {
+              @SerializedName("custom_pricing_unit")
+              CUSTOM_PRICING_UNIT("custom_pricing_unit");
+
+              @Getter(onMethod_ = {@Override})
+              private final String value;
+
+              Type(String value) {
+                this.value = value;
+              }
+            }
+          }
+
+          @Getter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CustomPricingUnitOverageRate {
+            /**
+             * Map of extra parameters for custom features not available in this client library. The
+             * content in this map is not serialized under this field's {@code @SerializedName}
+             * value. Instead, each key/value pair is serialized as if the key is a root-level field
+             * (serialized) name in this param object. Effectively, this map is flattened to its
+             * parent instance.
+             */
+            @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+            Map<String, Object> extraParams;
+
+            /** <strong>Required.</strong> ID of the custom pricing unit overage rate. */
+            @SerializedName("id")
+            String id;
+
+            private CustomPricingUnitOverageRate(Map<String, Object> extraParams, String id) {
+              this.extraParams = extraParams;
+              this.id = id;
+            }
+
+            public static Builder builder() {
+              return new Builder();
+            }
+
+            public static class Builder {
+              private Map<String, Object> extraParams;
+
+              private String id;
+
+              /** Finalize and obtain parameter instance from this builder. */
+              public IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
+                      .CustomPricingUnitOverageRate
+                  build() {
+                return new IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend
+                    .CustomPricingUnitOverageRate(this.extraParams, this.id);
+              }
+
+              /**
+               * Add a key/value pair to `extraParams` map. A map is initialized for the first
+               * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.CustomPricingUnitOverageRate#extraParams}
+               * for the field documentation.
+               */
+              public Builder putExtraParam(String key, Object value) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.put(key, value);
+                return this;
+              }
+
+              /**
+               * Add all map key/value pairs to `extraParams` map. A map is initialized for the
+               * first `put/putAll` call, and subsequent calls add additional key/value pairs to the
+               * original map. See {@link
+               * IntentCreateParams.Action.Apply.SpendModifierRule.MaxBillingPeriodSpend.CustomPricingUnitOverageRate#extraParams}
+               * for the field documentation.
+               */
+              public Builder putAllExtraParam(Map<String, Object> map) {
+                if (this.extraParams == null) {
+                  this.extraParams = new HashMap<>();
+                }
+                this.extraParams.putAll(map);
+                return this;
+              }
+
+              /** <strong>Required.</strong> ID of the custom pricing unit overage rate. */
+              public Builder setId(String id) {
+                this.id = id;
+                return this;
+              }
+            }
+          }
+        }
+
+        public enum AppliesTo implements ApiRequestParams.EnumParam {
+          @SerializedName("cadence")
+          CADENCE("cadence");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          AppliesTo(String value) {
+            this.value = value;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("max_billing_period_spend")
+          MAX_BILLING_PERIOD_SPEND("max_billing_period_spend");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("invoice_discount_rule")
-        INVOICE_DISCOUNT_RULE("invoice_discount_rule");
+        INVOICE_DISCOUNT_RULE("invoice_discount_rule"),
+
+        @SerializedName("spend_modifier_rule")
+        SPEND_MODIFIER_RULE("spend_modifier_rule");
 
         @Getter(onMethod_ = {@Override})
         private final String value;
@@ -2493,6 +3122,10 @@ public class IntentCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Remove {
+      /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+      @SerializedName("effective_at")
+      EffectiveAt effectiveAt;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2506,13 +3139,24 @@ public class IntentCreateParams extends ApiRequestParams {
       @SerializedName("invoice_discount_rule")
       String invoiceDiscountRule;
 
+      /** The ID of the spend modifier rule to remove. */
+      @SerializedName("spend_modifier_rule")
+      String spendModifierRule;
+
       /** <strong>Required.</strong> Type of the remove action. */
       @SerializedName("type")
       Type type;
 
-      private Remove(Map<String, Object> extraParams, String invoiceDiscountRule, Type type) {
+      private Remove(
+          EffectiveAt effectiveAt,
+          Map<String, Object> extraParams,
+          String invoiceDiscountRule,
+          String spendModifierRule,
+          Type type) {
+        this.effectiveAt = effectiveAt;
         this.extraParams = extraParams;
         this.invoiceDiscountRule = invoiceDiscountRule;
+        this.spendModifierRule = spendModifierRule;
         this.type = type;
       }
 
@@ -2521,16 +3165,30 @@ public class IntentCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private EffectiveAt effectiveAt;
+
         private Map<String, Object> extraParams;
 
         private String invoiceDiscountRule;
+
+        private String spendModifierRule;
 
         private Type type;
 
         /** Finalize and obtain parameter instance from this builder. */
         public IntentCreateParams.Action.Remove build() {
           return new IntentCreateParams.Action.Remove(
-              this.extraParams, this.invoiceDiscountRule, this.type);
+              this.effectiveAt,
+              this.extraParams,
+              this.invoiceDiscountRule,
+              this.spendModifierRule,
+              this.type);
+        }
+
+        /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+        public Builder setEffectiveAt(IntentCreateParams.Action.Remove.EffectiveAt effectiveAt) {
+          this.effectiveAt = effectiveAt;
+          return this;
         }
 
         /**
@@ -2567,6 +3225,12 @@ public class IntentCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The ID of the spend modifier rule to remove. */
+        public Builder setSpendModifierRule(String spendModifierRule) {
+          this.spendModifierRule = spendModifierRule;
+          return this;
+        }
+
         /** <strong>Required.</strong> Type of the remove action. */
         public Builder setType(IntentCreateParams.Action.Remove.Type type) {
           this.type = type;
@@ -2574,9 +3238,99 @@ public class IntentCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class EffectiveAt {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> When the remove action will take effect. */
+        @SerializedName("type")
+        Type type;
+
+        private EffectiveAt(Map<String, Object> extraParams, Type type) {
+          this.extraParams = extraParams;
+          this.type = type;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Type type;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public IntentCreateParams.Action.Remove.EffectiveAt build() {
+            return new IntentCreateParams.Action.Remove.EffectiveAt(this.extraParams, this.type);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Remove.EffectiveAt#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link IntentCreateParams.Action.Remove.EffectiveAt#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> When the remove action will take effect. */
+          public Builder setType(IntentCreateParams.Action.Remove.EffectiveAt.Type type) {
+            this.type = type;
+            return this;
+          }
+        }
+
+        public enum Type implements ApiRequestParams.EnumParam {
+          @SerializedName("current_billing_period_end")
+          CURRENT_BILLING_PERIOD_END("current_billing_period_end"),
+
+          @SerializedName("on_reserve")
+          ON_RESERVE("on_reserve");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Type(String value) {
+            this.value = value;
+          }
+        }
+      }
+
       public enum Type implements ApiRequestParams.EnumParam {
         @SerializedName("invoice_discount_rule")
-        INVOICE_DISCOUNT_RULE("invoice_discount_rule");
+        INVOICE_DISCOUNT_RULE("invoice_discount_rule"),
+
+        @SerializedName("spend_modifier_rule")
+        SPEND_MODIFIER_RULE("spend_modifier_rule");
 
         @Getter(onMethod_ = {@Override})
         private final String value;

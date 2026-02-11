@@ -132,9 +132,9 @@ public class InboundTransferCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Amount {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -149,7 +149,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * A non-negative integer representing how much to charge in the <a
+     * <strong>Required.</strong> A non-negative integer representing how much to charge in the <a
      * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
     @SerializedName("value")
@@ -178,9 +178,9 @@ public class InboundTransferCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -214,7 +214,7 @@ public class InboundTransferCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A non-negative integer representing how much to charge in the <a
+       * <strong>Required.</strong> A non-negative integer representing how much to charge in the <a
        * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
        */
       public Builder setValue(Long value) {

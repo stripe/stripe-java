@@ -74,17 +74,39 @@ public class IntentAction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Apply extends StripeObject {
+    /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+    @SerializedName("effective_at")
+    EffectiveAt effectiveAt;
+
     /** Details for applying a discount rule to future invoices. */
     @SerializedName("invoice_discount_rule")
     InvoiceDiscountRule invoiceDiscountRule;
 
+    /** Details for applying a spend modifier rule. Only present if type is spend_modifier_rule. */
+    @SerializedName("spend_modifier_rule")
+    SpendModifierRule spendModifierRule;
+
     /**
      * Type of the apply action details.
      *
-     * <p>Equal to {@code invoice_discount_rule}.
+     * <p>One of {@code invoice_discount_rule}, or {@code spend_modifier_rule}.
      */
     @SerializedName("type")
     String type;
+
+    /** When the apply action will take effect. Defaults to on_reserve if not specified. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EffectiveAt extends StripeObject {
+      /**
+       * When the apply action will take effect.
+       *
+       * <p>One of {@code current_billing_period_end}, or {@code on_reserve}.
+       */
+      @SerializedName("type")
+      String type;
+    }
 
     /** Details for applying a discount rule to future invoices. */
     @Getter
@@ -146,6 +168,96 @@ public class IntentAction extends StripeObject implements HasId {
            */
           @SerializedName("type")
           String type;
+        }
+      }
+    }
+
+    /** Details for applying a spend modifier rule. Only present if type is spend_modifier_rule. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SpendModifierRule extends StripeObject implements HasId {
+      /**
+       * What the spend modifier applies to.
+       *
+       * <p>Equal to {@code cadence}.
+       */
+      @SerializedName("applies_to")
+      String appliesTo;
+
+      /** The ID of the spend modifier. */
+      @Getter(onMethod_ = {@Override})
+      @SerializedName("id")
+      String id;
+
+      /**
+       * Details for max billing period spend modifier. Only present if type is
+       * max_billing_period_spend.
+       */
+      @SerializedName("max_billing_period_spend")
+      MaxBillingPeriodSpend maxBillingPeriodSpend;
+
+      /**
+       * Type of the spend modifier.
+       *
+       * <p>Equal to {@code max_billing_period_spend}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * Details for max billing period spend modifier. Only present if type is
+       * max_billing_period_spend.
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class MaxBillingPeriodSpend extends StripeObject {
+        /** The maximum amount allowed for the billing period. */
+        @SerializedName("amount")
+        Amount amount;
+
+        /** The configration for the overage rate for the custom pricing unit. */
+        @SerializedName("custom_pricing_unit_overage_rate")
+        CustomPricingUnitOverageRate customPricingUnitOverageRate;
+
+        /** The maximum amount allowed for the billing period. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Amount extends StripeObject {
+          /** The custom pricing unit amount. */
+          @SerializedName("custom_pricing_unit")
+          CustomPricingUnit customPricingUnit;
+
+          /**
+           * The type of the amount.
+           *
+           * <p>Equal to {@code custom_pricing_unit}.
+           */
+          @SerializedName("type")
+          String type;
+
+          /** The custom pricing unit amount. */
+          @Getter
+          @Setter
+          @EqualsAndHashCode(callSuper = false)
+          public static class CustomPricingUnit extends StripeObject {
+            /** The value of the custom pricing unit. */
+            @SerializedName("value")
+            String value;
+          }
+        }
+
+        /** The configration for the overage rate for the custom pricing unit. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomPricingUnitOverageRate extends StripeObject implements HasId {
+          /** ID of the custom pricing unit overage rate. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
         }
       }
     }
@@ -464,17 +576,39 @@ public class IntentAction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Remove extends StripeObject {
+    /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+    @SerializedName("effective_at")
+    EffectiveAt effectiveAt;
+
     /** The ID of the discount rule to remove for future invoices. */
     @SerializedName("invoice_discount_rule")
     String invoiceDiscountRule;
 
+    /** The ID of the spend modifier rule removed. */
+    @SerializedName("spend_modifier_rule")
+    String spendModifierRule;
+
     /**
      * Type of the remove action.
      *
-     * <p>Equal to {@code invoice_discount_rule}.
+     * <p>One of {@code invoice_discount_rule}, or {@code spend_modifier_rule}.
      */
     @SerializedName("type")
     String type;
+
+    /** When the remove action will take effect. Defaults to on_reserve if not specified. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class EffectiveAt extends StripeObject {
+      /**
+       * When the remove action will take effect.
+       *
+       * <p>One of {@code current_billing_period_end}, or {@code on_reserve}.
+       */
+      @SerializedName("type")
+      String type;
+    }
   }
 
   /** Details for a subscribe action. */
