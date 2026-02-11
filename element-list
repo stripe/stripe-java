@@ -67,6 +67,7 @@ com.stripe.param.testhelpers
 com.stripe.param.treasury
 com.stripe.param.v2.billing
 com.stripe.param.v2.billing.billsettings
+com.stripe.param.v2.billing.cadences
 com.stripe.param.v2.billing.collectionsettings
 com.stripe.param.v2.billing.intents
 com.stripe.param.v2.billing.licensefees
@@ -115,6 +116,7 @@ com.stripe.service.treasury
 com.stripe.service.v2
 com.stripe.service.v2.billing
 com.stripe.service.v2.billing.billsettings
+com.stripe.service.v2.billing.cadences
 com.stripe.service.v2.billing.collectionsettings
 com.stripe.service.v2.billing.intents
 com.stripe.service.v2.billing.licensefees
