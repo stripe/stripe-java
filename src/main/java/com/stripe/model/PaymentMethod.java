@@ -1918,6 +1918,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("logo")
     Logo logo;
 
+    /** A reference to an external payment method, such as a PayPal Billing Agreement ID. */
+    @SerializedName("payment_method_reference")
+    String paymentMethodReference;
+
     /** ID of the Dashboard-only CustomPaymentMethodType. Not expandable. */
     @SerializedName("type")
     String type;
