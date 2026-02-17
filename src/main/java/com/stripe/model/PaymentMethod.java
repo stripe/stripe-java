@@ -1927,6 +1927,14 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String type;
 
     /**
+     * Indicates whether the payment method supports off-session payments.
+     *
+     * <p>Equal to {@code off_session}.
+     */
+    @SerializedName("usage")
+    String usage;
+
+    /**
      * For more details about Logo, please refer to the <a href="https://docs.stripe.com/api">API
      * Reference.</a>
      */

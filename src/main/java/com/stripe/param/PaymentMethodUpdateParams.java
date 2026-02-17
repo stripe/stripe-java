@@ -882,9 +882,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     @SerializedName("payment_method_reference")
     Object paymentMethodReference;
 
-    private Custom(Map<String, Object> extraParams, Object paymentMethodReference) {
+    /** Indicates whether the payment method supports off-session payments. */
+    @SerializedName("usage")
+    Usage usage;
+
+    private Custom(Map<String, Object> extraParams, Object paymentMethodReference, Usage usage) {
       this.extraParams = extraParams;
       this.paymentMethodReference = paymentMethodReference;
+      this.usage = usage;
     }
 
     public static Builder builder() {
@@ -896,9 +901,12 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
       private Object paymentMethodReference;
 
+      private Usage usage;
+
       /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodUpdateParams.Custom build() {
-        return new PaymentMethodUpdateParams.Custom(this.extraParams, this.paymentMethodReference);
+        return new PaymentMethodUpdateParams.Custom(
+            this.extraParams, this.paymentMethodReference, this.usage);
       }
 
       /**
@@ -937,6 +945,24 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       public Builder setPaymentMethodReference(EmptyParam paymentMethodReference) {
         this.paymentMethodReference = paymentMethodReference;
         return this;
+      }
+
+      /** Indicates whether the payment method supports off-session payments. */
+      public Builder setUsage(PaymentMethodUpdateParams.Custom.Usage usage) {
+        this.usage = usage;
+        return this;
+      }
+    }
+
+    public enum Usage implements ApiRequestParams.EnumParam {
+      @SerializedName("off_session")
+      OFF_SESSION("off_session");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Usage(String value) {
+        this.value = value;
       }
     }
   }
