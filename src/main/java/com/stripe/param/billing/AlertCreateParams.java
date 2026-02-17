@@ -35,6 +35,10 @@ public class AlertCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** The configuration of the spend threshold. */
+  @SerializedName("spend_threshold")
+  SpendThreshold spendThreshold;
+
   /** <strong>Required.</strong> The title of the alert. */
   @SerializedName("title")
   String title;
@@ -48,12 +52,14 @@ public class AlertCreateParams extends ApiRequestParams {
       CreditBalanceThreshold creditBalanceThreshold,
       List<String> expand,
       Map<String, Object> extraParams,
+      SpendThreshold spendThreshold,
       String title,
       UsageThreshold usageThreshold) {
     this.alertType = alertType;
     this.creditBalanceThreshold = creditBalanceThreshold;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.spendThreshold = spendThreshold;
     this.title = title;
     this.usageThreshold = usageThreshold;
   }
@@ -71,6 +77,8 @@ public class AlertCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private SpendThreshold spendThreshold;
+
     private String title;
 
     private UsageThreshold usageThreshold;
@@ -82,6 +90,7 @@ public class AlertCreateParams extends ApiRequestParams {
           this.creditBalanceThreshold,
           this.expand,
           this.extraParams,
+          this.spendThreshold,
           this.title,
           this.usageThreshold);
     }
@@ -148,6 +157,12 @@ public class AlertCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** The configuration of the spend threshold. */
+    public Builder setSpendThreshold(AlertCreateParams.SpendThreshold spendThreshold) {
+      this.spendThreshold = spendThreshold;
       return this;
     }
 
@@ -1246,6 +1261,594 @@ public class AlertCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class SpendThreshold {
+    /** <strong>Required.</strong> Defines the period over which spend is aggregated. */
+    @SerializedName("aggregation_period")
+    AggregationPeriod aggregationPeriod;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Filters to scope the spend calculation. */
+    @SerializedName("filters")
+    Filters filters;
+
+    /**
+     * Defines the granularity of spend aggregation. Defaults to {@code pricing_plan_subscription}.
+     */
+    @SerializedName("group_by")
+    GroupBy groupBy;
+
+    /** <strong>Required.</strong> Defines at which value the alert will fire. */
+    @SerializedName("gte")
+    Gte gte;
+
+    private SpendThreshold(
+        AggregationPeriod aggregationPeriod,
+        Map<String, Object> extraParams,
+        Filters filters,
+        GroupBy groupBy,
+        Gte gte) {
+      this.aggregationPeriod = aggregationPeriod;
+      this.extraParams = extraParams;
+      this.filters = filters;
+      this.groupBy = groupBy;
+      this.gte = gte;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AggregationPeriod aggregationPeriod;
+
+      private Map<String, Object> extraParams;
+
+      private Filters filters;
+
+      private GroupBy groupBy;
+
+      private Gte gte;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public AlertCreateParams.SpendThreshold build() {
+        return new AlertCreateParams.SpendThreshold(
+            this.aggregationPeriod, this.extraParams, this.filters, this.groupBy, this.gte);
+      }
+
+      /** <strong>Required.</strong> Defines the period over which spend is aggregated. */
+      public Builder setAggregationPeriod(
+          AlertCreateParams.SpendThreshold.AggregationPeriod aggregationPeriod) {
+        this.aggregationPeriod = aggregationPeriod;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AlertCreateParams.SpendThreshold#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AlertCreateParams.SpendThreshold#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Filters to scope the spend calculation. */
+      public Builder setFilters(AlertCreateParams.SpendThreshold.Filters filters) {
+        this.filters = filters;
+        return this;
+      }
+
+      /**
+       * Defines the granularity of spend aggregation. Defaults to {@code
+       * pricing_plan_subscription}.
+       */
+      public Builder setGroupBy(AlertCreateParams.SpendThreshold.GroupBy groupBy) {
+        this.groupBy = groupBy;
+        return this;
+      }
+
+      /** <strong>Required.</strong> Defines at which value the alert will fire. */
+      public Builder setGte(AlertCreateParams.SpendThreshold.Gte gte) {
+        this.gte = gte;
+        return this;
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Filters {
+      /** Filter by billable item IDs. Maximum of 20 billable items. */
+      @SerializedName("billable_items")
+      List<String> billableItems;
+
+      /** Filter by billing cadence ID. */
+      @SerializedName("billing_cadence")
+      String billingCadence;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Filter by pricing plan ID. */
+      @SerializedName("pricing_plan")
+      String pricingPlan;
+
+      /** Filter by pricing plan subscription ID. */
+      @SerializedName("pricing_plan_subscription")
+      String pricingPlanSubscription;
+
+      private Filters(
+          List<String> billableItems,
+          String billingCadence,
+          Map<String, Object> extraParams,
+          String pricingPlan,
+          String pricingPlanSubscription) {
+        this.billableItems = billableItems;
+        this.billingCadence = billingCadence;
+        this.extraParams = extraParams;
+        this.pricingPlan = pricingPlan;
+        this.pricingPlanSubscription = pricingPlanSubscription;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private List<String> billableItems;
+
+        private String billingCadence;
+
+        private Map<String, Object> extraParams;
+
+        private String pricingPlan;
+
+        private String pricingPlanSubscription;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AlertCreateParams.SpendThreshold.Filters build() {
+          return new AlertCreateParams.SpendThreshold.Filters(
+              this.billableItems,
+              this.billingCadence,
+              this.extraParams,
+              this.pricingPlan,
+              this.pricingPlanSubscription);
+        }
+
+        /**
+         * Add an element to `billableItems` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * AlertCreateParams.SpendThreshold.Filters#billableItems} for the field documentation.
+         */
+        public Builder addBillableItem(String element) {
+          if (this.billableItems == null) {
+            this.billableItems = new ArrayList<>();
+          }
+          this.billableItems.add(element);
+          return this;
+        }
+
+        /**
+         * Add all elements to `billableItems` list. A list is initialized for the first
+         * `add/addAll` call, and subsequent calls adds additional elements to the original list.
+         * See {@link AlertCreateParams.SpendThreshold.Filters#billableItems} for the field
+         * documentation.
+         */
+        public Builder addAllBillableItem(List<String> elements) {
+          if (this.billableItems == null) {
+            this.billableItems = new ArrayList<>();
+          }
+          this.billableItems.addAll(elements);
+          return this;
+        }
+
+        /** Filter by billing cadence ID. */
+        public Builder setBillingCadence(String billingCadence) {
+          this.billingCadence = billingCadence;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AlertCreateParams.SpendThreshold.Filters#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AlertCreateParams.SpendThreshold.Filters#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Filter by pricing plan ID. */
+        public Builder setPricingPlan(String pricingPlan) {
+          this.pricingPlan = pricingPlan;
+          return this;
+        }
+
+        /** Filter by pricing plan subscription ID. */
+        public Builder setPricingPlanSubscription(String pricingPlanSubscription) {
+          this.pricingPlanSubscription = pricingPlanSubscription;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gte {
+      /** The monetary amount. Required when type is {@code amount}. */
+      @SerializedName("amount")
+      Amount amount;
+
+      /** The custom pricing unit amount. Required when type is {@code custom_pricing_unit}. */
+      @SerializedName("custom_pricing_unit")
+      CustomPricingUnit customPricingUnit;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** <strong>Required.</strong> The type of the threshold amount. */
+      @SerializedName("type")
+      Type type;
+
+      private Gte(
+          Amount amount,
+          CustomPricingUnit customPricingUnit,
+          Map<String, Object> extraParams,
+          Type type) {
+        this.amount = amount;
+        this.customPricingUnit = customPricingUnit;
+        this.extraParams = extraParams;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Amount amount;
+
+        private CustomPricingUnit customPricingUnit;
+
+        private Map<String, Object> extraParams;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AlertCreateParams.SpendThreshold.Gte build() {
+          return new AlertCreateParams.SpendThreshold.Gte(
+              this.amount, this.customPricingUnit, this.extraParams, this.type);
+        }
+
+        /** The monetary amount. Required when type is {@code amount}. */
+        public Builder setAmount(AlertCreateParams.SpendThreshold.Gte.Amount amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        /** The custom pricing unit amount. Required when type is {@code custom_pricing_unit}. */
+        public Builder setCustomPricingUnit(
+            AlertCreateParams.SpendThreshold.Gte.CustomPricingUnit customPricingUnit) {
+          this.customPricingUnit = customPricingUnit;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AlertCreateParams.SpendThreshold.Gte#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AlertCreateParams.SpendThreshold.Gte#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** <strong>Required.</strong> The type of the threshold amount. */
+        public Builder setType(AlertCreateParams.SpendThreshold.Gte.Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Amount {
+        /**
+         * <strong>Required.</strong> Three-letter <a href="https://stripe.com/docs/currencies">ISO
+         * code for the currency</a> of the {@code value} parameter.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> An integer representing the amount of the threshold. */
+        @SerializedName("value")
+        Long value;
+
+        private Amount(String currency, Map<String, Object> extraParams, Long value) {
+          this.currency = currency;
+          this.extraParams = extraParams;
+          this.value = value;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String currency;
+
+          private Map<String, Object> extraParams;
+
+          private Long value;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AlertCreateParams.SpendThreshold.Gte.Amount build() {
+            return new AlertCreateParams.SpendThreshold.Gte.Amount(
+                this.currency, this.extraParams, this.value);
+          }
+
+          /**
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://stripe.com/docs/currencies">ISO code for the currency</a> of the {@code
+           * value} parameter.
+           */
+          public Builder setCurrency(String currency) {
+            this.currency = currency;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AlertCreateParams.SpendThreshold.Gte.Amount#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AlertCreateParams.SpendThreshold.Gte.Amount#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> An integer representing the amount of the threshold. */
+          public Builder setValue(Long value) {
+            this.value = value;
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomPricingUnit {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** <strong>Required.</strong> The ID of the custom pricing unit. */
+        @SerializedName("id")
+        String id;
+
+        /**
+         * <strong>Required.</strong> A positive decimal string representing the amount of the
+         * custom pricing unit threshold.
+         */
+        @SerializedName("value")
+        BigDecimal value;
+
+        private CustomPricingUnit(Map<String, Object> extraParams, String id, BigDecimal value) {
+          this.extraParams = extraParams;
+          this.id = id;
+          this.value = value;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String id;
+
+          private BigDecimal value;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AlertCreateParams.SpendThreshold.Gte.CustomPricingUnit build() {
+            return new AlertCreateParams.SpendThreshold.Gte.CustomPricingUnit(
+                this.extraParams, this.id, this.value);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AlertCreateParams.SpendThreshold.Gte.CustomPricingUnit#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AlertCreateParams.SpendThreshold.Gte.CustomPricingUnit#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** <strong>Required.</strong> The ID of the custom pricing unit. */
+          public Builder setId(String id) {
+            this.id = id;
+            return this;
+          }
+
+          /**
+           * <strong>Required.</strong> A positive decimal string representing the amount of the
+           * custom pricing unit threshold.
+           */
+          public Builder setValue(BigDecimal value) {
+            this.value = value;
+            return this;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("amount")
+        AMOUNT("amount"),
+
+        @SerializedName("custom_pricing_unit")
+        CUSTOM_PRICING_UNIT("custom_pricing_unit");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum AggregationPeriod implements ApiRequestParams.EnumParam {
+      @SerializedName("billing")
+      BILLING("billing");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AggregationPeriod(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum GroupBy implements ApiRequestParams.EnumParam {
+      @SerializedName("pricing_plan_subscription")
+      PRICING_PLAN_SUBSCRIPTION("pricing_plan_subscription");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      GroupBy(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class UsageThreshold {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1499,6 +2102,9 @@ public class AlertCreateParams extends ApiRequestParams {
   public enum AlertType implements ApiRequestParams.EnumParam {
     @SerializedName("credit_balance_threshold")
     CREDIT_BALANCE_THRESHOLD("credit_balance_threshold"),
+
+    @SerializedName("spend_threshold")
+    SPEND_THRESHOLD("spend_threshold"),
 
     @SerializedName("usage_threshold")
     USAGE_THRESHOLD("usage_threshold");
