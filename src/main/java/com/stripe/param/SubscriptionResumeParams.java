@@ -35,14 +35,6 @@ public class SubscriptionResumeParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Controls when the subscription transitions from {@code paused} to {@code active}. Determines
-   * how payment on the invoice affects the resumption process.The default is {@code
-   * pending_if_incomplete}.
-   */
-  @SerializedName("payment_behavior")
-  PaymentBehavior paymentBehavior;
-
-  /**
    * Determines how to handle <a
    * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> resulting from
    * the {@code billing_cycle_anchor} being {@code unchanged}. When the {@code billing_cycle_anchor}
@@ -64,13 +56,11 @@ public class SubscriptionResumeParams extends ApiRequestParams {
       BillingCycleAnchor billingCycleAnchor,
       List<String> expand,
       Map<String, Object> extraParams,
-      PaymentBehavior paymentBehavior,
       ProrationBehavior prorationBehavior,
       Long prorationDate) {
     this.billingCycleAnchor = billingCycleAnchor;
     this.expand = expand;
     this.extraParams = extraParams;
-    this.paymentBehavior = paymentBehavior;
     this.prorationBehavior = prorationBehavior;
     this.prorationDate = prorationDate;
   }
@@ -86,8 +76,6 @@ public class SubscriptionResumeParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private PaymentBehavior paymentBehavior;
-
     private ProrationBehavior prorationBehavior;
 
     private Long prorationDate;
@@ -98,7 +86,6 @@ public class SubscriptionResumeParams extends ApiRequestParams {
           this.billingCycleAnchor,
           this.expand,
           this.extraParams,
-          this.paymentBehavior,
           this.prorationBehavior,
           this.prorationDate);
     }
@@ -167,16 +154,6 @@ public class SubscriptionResumeParams extends ApiRequestParams {
     }
 
     /**
-     * Controls when the subscription transitions from {@code paused} to {@code active}. Determines
-     * how payment on the invoice affects the resumption process.The default is {@code
-     * pending_if_incomplete}.
-     */
-    public Builder setPaymentBehavior(SubscriptionResumeParams.PaymentBehavior paymentBehavior) {
-      this.paymentBehavior = paymentBehavior;
-      return this;
-    }
-
-    /**
      * Determines how to handle <a
      * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> resulting from
      * the {@code billing_cycle_anchor} being {@code unchanged}. When the {@code
@@ -211,21 +188,6 @@ public class SubscriptionResumeParams extends ApiRequestParams {
     private final String value;
 
     BillingCycleAnchor(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum PaymentBehavior implements ApiRequestParams.EnumParam {
-    @SerializedName("allow_incomplete")
-    ALLOW_INCOMPLETE("allow_incomplete"),
-
-    @SerializedName("pending_if_incomplete")
-    PENDING_IF_INCOMPLETE("pending_if_incomplete");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    PaymentBehavior(String value) {
       this.value = value;
     }
   }

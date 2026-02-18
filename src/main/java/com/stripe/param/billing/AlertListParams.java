@@ -222,6 +222,9 @@ public class AlertListParams extends ApiRequestParams {
     @SerializedName("credit_balance_threshold")
     CREDIT_BALANCE_THRESHOLD("credit_balance_threshold"),
 
+    @SerializedName("spend_threshold")
+    SPEND_THRESHOLD("spend_threshold"),
+
     @SerializedName("usage_threshold")
     USAGE_THRESHOLD("usage_threshold");
 

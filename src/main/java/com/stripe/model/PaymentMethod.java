@@ -1918,9 +1918,21 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("logo")
     Logo logo;
 
+    /** A reference to an external payment method, such as a PayPal Billing Agreement ID. */
+    @SerializedName("payment_method_reference")
+    String paymentMethodReference;
+
     /** ID of the Dashboard-only CustomPaymentMethodType. Not expandable. */
     @SerializedName("type")
     String type;
+
+    /**
+     * Indicates whether the payment method supports off-session payments.
+     *
+     * <p>Equal to {@code off_session}.
+     */
+    @SerializedName("usage")
+    String usage;
 
     /**
      * For more details about Logo, please refer to the <a href="https://docs.stripe.com/api">API

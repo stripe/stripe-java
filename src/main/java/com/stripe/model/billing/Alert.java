@@ -38,7 +38,8 @@ public class Alert extends ApiResource implements HasId {
   /**
    * Defines the type of the alert.
    *
-   * <p>One of {@code credit_balance_threshold}, or {@code usage_threshold}.
+   * <p>One of {@code credit_balance_threshold}, {@code spend_threshold}, or {@code
+   * usage_threshold}.
    */
   @SerializedName("alert_type")
   String alertType;
@@ -66,6 +67,10 @@ public class Alert extends ApiResource implements HasId {
    */
   @SerializedName("object")
   String object;
+
+  /** Encapsulates the alert's configuration to monitor spend on pricing plan subscriptions. */
+  @SerializedName("spend_threshold")
+  SpendThreshold spendThreshold;
 
   /**
    * Status of the alert. This can be active, inactive or archived.
@@ -484,6 +489,164 @@ public class Alert extends ApiResource implements HasId {
   }
 
   /**
+   * The spend threshold alert configuration enables setting up alerts for when a customer's spend
+   * exceeds a threshold within a billing period.
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SpendThreshold extends StripeObject {
+    /**
+     * Defines the period over which spend is aggregated.
+     *
+     * <p>Equal to {@code billing}.
+     */
+    @SerializedName("aggregation_period")
+    String aggregationPeriod;
+
+    /** Filters to scope the spend calculation. */
+    @SerializedName("filters")
+    Filters filters;
+
+    /**
+     * Defines the granularity of spend aggregation.
+     *
+     * <p>Equal to {@code pricing_plan_subscription}.
+     */
+    @SerializedName("group_by")
+    String groupBy;
+
+    /** The threshold value configuration for a spend threshold alert. */
+    @SerializedName("gte")
+    Gte gte;
+
+    /** Filters to scope the spend calculation for a spend threshold alert. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Filters extends StripeObject {
+      /** Filter by billable item IDs. */
+      @SerializedName("billable_items")
+      List<String> billableItems;
+
+      /** Filter by billing cadence ID. */
+      @SerializedName("billing_cadence")
+      String billingCadence;
+
+      /** Filter by pricing plan ID. */
+      @SerializedName("pricing_plan")
+      String pricingPlan;
+
+      /** Filter by pricing plan subscription ID. */
+      @SerializedName("pricing_plan_subscription")
+      String pricingPlanSubscription;
+    }
+
+    /** The threshold value configuration for a spend threshold alert. */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Gte extends StripeObject {
+      /** The monetary amount. Present when type is {@code amount}. */
+      @SerializedName("amount")
+      Amount amount;
+
+      /** The custom pricing unit amount. Present when type is {@code custom_pricing_unit}. */
+      @SerializedName("custom_pricing_unit")
+      CustomPricingUnit customPricingUnit;
+
+      /**
+       * The type of the threshold amount.
+       *
+       * <p>One of {@code amount}, or {@code custom_pricing_unit}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /**
+       * For more details about Amount, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Amount extends StripeObject {
+        /**
+         * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+         * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+         * currency</a>.
+         */
+        @SerializedName("currency")
+        String currency;
+
+        /** A positive integer representing the amount. */
+        @SerializedName("value")
+        Long value;
+      }
+
+      /**
+       * For more details about CustomPricingUnit, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class CustomPricingUnit extends StripeObject implements HasId {
+        /** The custom pricing unit object. */
+        @SerializedName("custom_pricing_unit_details")
+        CustomPricingUnitDetails customPricingUnitDetails;
+
+        /** Unique identifier for the object. */
+        @Getter(onMethod_ = {@Override})
+        @SerializedName("id")
+        String id;
+
+        /** A positive decimal string representing the amount. */
+        @SerializedName("value")
+        BigDecimal value;
+
+        /**
+         * For more details about CustomPricingUnitDetails, please refer to the <a
+         * href="https://docs.stripe.com/api">API Reference.</a>
+         */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class CustomPricingUnitDetails extends StripeObject implements HasId {
+          /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+          @SerializedName("created")
+          Long created;
+
+          /** The name of the custom pricing unit. */
+          @SerializedName("display_name")
+          String displayName;
+
+          /** Unique identifier for the object. */
+          @Getter(onMethod_ = {@Override})
+          @SerializedName("id")
+          String id;
+
+          /** A lookup key for the custom pricing unit. */
+          @SerializedName("lookup_key")
+          String lookupKey;
+
+          /**
+           * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can
+           * attach to an object. This can be useful for storing additional information about the
+           * object in a structured format.
+           */
+          @SerializedName("metadata")
+          Map<String, String> metadata;
+
+          /** The status of the custom pricing unit. */
+          @SerializedName("status")
+          String status;
+        }
+      }
+    }
+  }
+
+  /**
    * The usage threshold alert configuration enables setting up alerts for when a certain usage
    * threshold on a specific meter is crossed.
    */
@@ -578,6 +741,7 @@ public class Alert extends ApiResource implements HasId {
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(creditBalanceThreshold, responseGetter);
+    trySetResponseGetter(spendThreshold, responseGetter);
     trySetResponseGetter(usageThreshold, responseGetter);
   }
 }
