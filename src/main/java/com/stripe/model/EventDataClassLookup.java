@@ -18,6 +18,7 @@ public final class EventDataClassLookup {
     classLookup.put("account_link", com.stripe.model.AccountLink.class);
     classLookup.put("account_notice", com.stripe.model.AccountNotice.class);
     classLookup.put("account_session", com.stripe.model.AccountSession.class);
+    classLookup.put("account_signals", com.stripe.model.AccountSignals.class);
     classLookup.put("apple_pay_domain", com.stripe.model.ApplePayDomain.class);
     classLookup.put("application", com.stripe.model.Application.class);
     classLookup.put("application_fee", com.stripe.model.ApplicationFee.class);
