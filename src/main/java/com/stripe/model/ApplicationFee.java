@@ -76,6 +76,13 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   @SerializedName("fee_source")
   FeeSource feeSource;
 
+  /**
+   * Polymorphic funding source of the application fee. Includes the type and details of the funding
+   * source.
+   */
+  @SerializedName("funding_source")
+  FundingSource fundingSource;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -338,6 +345,23 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     String type;
   }
 
+  /**
+   * For more details about FundingSource, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FundingSource extends StripeObject {
+    /** The invoice ID associated with this funding source, if applicable. */
+    @SerializedName("invoice")
+    String invoice;
+
+    /** The type of funding source. */
+    @SerializedName("type")
+    String type;
+  }
+
   @Override
   public void setResponseGetter(StripeResponseGetter responseGetter) {
     super.setResponseGetter(responseGetter);
@@ -346,6 +370,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
     trySetResponseGetter(balanceTransaction, responseGetter);
     trySetResponseGetter(charge, responseGetter);
     trySetResponseGetter(feeSource, responseGetter);
+    trySetResponseGetter(fundingSource, responseGetter);
     trySetResponseGetter(originatingTransaction, responseGetter);
     trySetResponseGetter(refunds, responseGetter);
   }
