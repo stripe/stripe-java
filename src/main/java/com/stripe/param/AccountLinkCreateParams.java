@@ -237,6 +237,14 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class CollectionOptions {
     /**
+     * Specifies whether the platform collects external account information from connected accounts
+     * during Connect Onboarding. When set to {@code false}, external account collection is skipped.
+     * Defaults to {@code true}.
+     */
+    @SerializedName("external_account_collection")
+    Boolean externalAccountCollection;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -262,7 +270,11 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     FutureRequirements futureRequirements;
 
     private CollectionOptions(
-        Map<String, Object> extraParams, Fields fields, FutureRequirements futureRequirements) {
+        Boolean externalAccountCollection,
+        Map<String, Object> extraParams,
+        Fields fields,
+        FutureRequirements futureRequirements) {
+      this.externalAccountCollection = externalAccountCollection;
       this.extraParams = extraParams;
       this.fields = fields;
       this.futureRequirements = futureRequirements;
@@ -273,6 +285,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Boolean externalAccountCollection;
+
       private Map<String, Object> extraParams;
 
       private Fields fields;
@@ -282,7 +296,17 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public AccountLinkCreateParams.CollectionOptions build() {
         return new AccountLinkCreateParams.CollectionOptions(
-            this.extraParams, this.fields, this.futureRequirements);
+            this.externalAccountCollection, this.extraParams, this.fields, this.futureRequirements);
+      }
+
+      /**
+       * Specifies whether the platform collects external account information from connected
+       * accounts during Connect Onboarding. When set to {@code false}, external account collection
+       * is skipped. Defaults to {@code true}.
+       */
+      public Builder setExternalAccountCollection(Boolean externalAccountCollection) {
+        this.externalAccountCollection = externalAccountCollection;
+        return this;
       }
 
       /**
