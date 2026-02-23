@@ -15,7 +15,7 @@ import lombok.Getter;
 public class SessionCreateParams extends ApiRequestParams {
   /**
    * The ID of an existing <a
-   * href="https://docs.stripe.com/api/customer_portal/configuration">configuration</a> to use for
+   * href="https://docs.stripe.com/api/customer_portal/configurations">configuration</a> to use for
    * this session, describing its functionality and features. If not specified, the session uses the
    * default configuration.
    */
@@ -138,9 +138,9 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The ID of an existing <a
-     * href="https://docs.stripe.com/api/customer_portal/configuration">configuration</a> to use for
-     * this session, describing its functionality and features. If not specified, the session uses
-     * the default configuration.
+     * href="https://docs.stripe.com/api/customer_portal/configurations">configuration</a> to use
+     * for this session, describing its functionality and features. If not specified, the session
+     * uses the default configuration.
      */
     public Builder setConfiguration(String configuration) {
       this.configuration = configuration;

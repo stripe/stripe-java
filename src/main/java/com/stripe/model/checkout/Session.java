@@ -1321,7 +1321,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown extends StripeObject {
-      /** The value that will pre-fill on the payment page. */
+      /** The value that pre-fills on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -1384,7 +1384,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric extends StripeObject {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -1409,7 +1409,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Text extends StripeObject {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -1461,7 +1461,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AfterSubmit extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -1474,7 +1474,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ShippingAddress extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -1487,7 +1487,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Submit extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -1500,7 +1500,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class TermsOfServiceAcceptance extends StripeObject {
-      /** Text may be up to 1200 characters in length. */
+      /** Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
     }
@@ -1578,19 +1578,20 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
        * no_vat}, {@code no_voec}, {@code za_vat}, {@code ch_vat}, {@code mx_rfc}, {@code sg_uen},
        * {@code ru_inn}, {@code ru_kpp}, {@code ca_bn}, {@code hk_br}, {@code es_cif}, {@code
        * pl_nip}, {@code tw_vat}, {@code th_vat}, {@code jp_cn}, {@code jp_rn}, {@code jp_trn},
-       * {@code li_uid}, {@code li_vat}, {@code my_itn}, {@code us_ein}, {@code kr_brn}, {@code
-       * ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code ca_pst_sk},
-       * {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat}, {@code
-       * id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code is_vat},
-       * {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin}, {@code
-       * eg_tin}, {@code ph_tin}, {@code al_tin}, {@code bh_vat}, {@code kz_bin}, {@code ng_tin},
-       * {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code uz_vat}, {@code
-       * uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code bs_tin},
-       * {@code bb_tin}, {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin}, {@code
-       * ba_tin}, {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code am_tin},
-       * {@code np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin}, {@code
-       * aw_tin}, {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code kg_tin},
-       * {@code la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, or {@code unknown}.
+       * {@code li_uid}, {@code li_vat}, {@code lk_vat}, {@code my_itn}, {@code us_ein}, {@code
+       * kr_brn}, {@code ca_qst}, {@code ca_gst_hst}, {@code ca_pst_bc}, {@code ca_pst_mb}, {@code
+       * ca_pst_sk}, {@code my_sst}, {@code sg_gst}, {@code ae_trn}, {@code cl_tin}, {@code sa_vat},
+       * {@code id_npwp}, {@code my_frp}, {@code il_vat}, {@code ge_vat}, {@code ua_vat}, {@code
+       * is_vat}, {@code bg_uic}, {@code hu_tin}, {@code si_tin}, {@code ke_pin}, {@code tr_tin},
+       * {@code eg_tin}, {@code ph_tin}, {@code al_tin}, {@code bh_vat}, {@code kz_bin}, {@code
+       * ng_tin}, {@code om_vat}, {@code de_stn}, {@code ch_uid}, {@code tz_vat}, {@code uz_vat},
+       * {@code uz_tin}, {@code md_vat}, {@code ma_vat}, {@code by_tin}, {@code ao_tin}, {@code
+       * bs_tin}, {@code bb_tin}, {@code cd_nif}, {@code mr_nif}, {@code me_pib}, {@code zw_tin},
+       * {@code ba_tin}, {@code gn_nif}, {@code mk_vat}, {@code sr_fin}, {@code sn_ninea}, {@code
+       * am_tin}, {@code np_pan}, {@code tj_tin}, {@code ug_tin}, {@code zm_tin}, {@code kh_tin},
+       * {@code aw_tin}, {@code az_tin}, {@code bd_bin}, {@code bj_ifu}, {@code et_tin}, {@code
+       * kg_tin}, {@code la_tin}, {@code cm_niu}, {@code cv_nif}, {@code bf_ifu}, or {@code
+       * unknown}.
        */
       @SerializedName("type")
       String type;
@@ -2839,7 +2840,7 @@ public class Session extends ApiResource implements HasId, MetadataStore<Session
         public static class EuBankTransfer extends StripeObject {
           /**
            * The desired country code of the bank account information. Permitted values include:
-           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
            *
            * <p>One of {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
            */

@@ -14,7 +14,6 @@ import com.stripe.net.BaseAddress;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import com.stripe.param.radar.PaymentEvaluationCreateParams;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -355,10 +354,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Insights extends StripeObject {
-    /** Stripe Radar's evaluation of the likelihood of a card issuer decline on this payment. */
-    @SerializedName("card_issuer_decline")
-    CardIssuerDecline cardIssuerDecline;
-
     /** The timestamp when the evaluation was performed. */
     @SerializedName("evaluated_at")
     Long evaluatedAt;
@@ -366,32 +361,6 @@ public class PaymentEvaluation extends ApiResource implements HasId {
     /** Scores, insights and recommended action for one scorer for this PaymentEvaluation. */
     @SerializedName("fraudulent_dispute")
     FraudulentDispute fraudulentDispute;
-
-    /**
-     * Provides Stripe Radar's evaluation of the likelihood that a payment will be declined by the
-     * card issuer.
-     */
-    @Getter
-    @Setter
-    @EqualsAndHashCode(callSuper = false)
-    public static class CardIssuerDecline extends StripeObject {
-      /**
-       * Stripe Radar's evaluation of the likelihood that the payment will be declined by the card
-       * issuer. Scores range from 0 to 100, with higher values indicating a higher likelihood of
-       * decline.
-       */
-      @SerializedName("model_score")
-      BigDecimal modelScore;
-
-      /**
-       * Recommended action based on the model score. Possible values are {@code block} and {@code
-       * continue}.
-       *
-       * <p>One of {@code block}, or {@code continue}.
-       */
-      @SerializedName("recommended_action")
-      String recommendedAction;
-    }
 
     /** Scores, insights and recommended action for one scorer for this PaymentEvaluation. */
     @Getter

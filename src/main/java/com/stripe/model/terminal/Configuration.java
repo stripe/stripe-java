@@ -39,6 +39,9 @@ public class Configuration extends ApiResource implements HasId {
   @SerializedName("bbpos_wisepos_e")
   BbposWiseposE bbposWiseposE;
 
+  @SerializedName("cellular")
+  Cellular cellular;
+
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -322,6 +325,19 @@ public class Configuration extends ApiResource implements HasId {
     public void setSplashscreenObject(File expandableObject) {
       this.splashscreen = new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  /**
+   * For more details about Cellular, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Cellular extends StripeObject {
+    /** Whether a cellular-capable reader can connect to the internet over cellular. */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   /**
@@ -1105,6 +1121,7 @@ public class Configuration extends ApiResource implements HasId {
     super.setResponseGetter(responseGetter);
     trySetResponseGetter(bbposWisepad3, responseGetter);
     trySetResponseGetter(bbposWiseposE, responseGetter);
+    trySetResponseGetter(cellular, responseGetter);
     trySetResponseGetter(offline, responseGetter);
     trySetResponseGetter(rebootWindow, responseGetter);
     trySetResponseGetter(stripeS700, responseGetter);

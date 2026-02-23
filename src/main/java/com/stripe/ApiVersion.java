@@ -2,6 +2,6 @@
 package com.stripe;
 
 final class ApiVersion {
-  public static final String CURRENT = "2026-01-28.clover";
+  public static final String CURRENT = "2026-02-25.clover";
   public static final String CURRENT_MAJOR = "clover";
 }
