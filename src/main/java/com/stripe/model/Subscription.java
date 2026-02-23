@@ -2503,11 +2503,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TrialSettings extends StripeObject {
-    /** Defines how a subscription behaves when a free trial ends. */
+    /** Defines how a subscription behaves when a trial ends. */
     @SerializedName("end_behavior")
     EndBehavior endBehavior;
 
-    /** Defines how a subscription behaves when a free trial ends. */
+    /** Defines how a subscription behaves when a trial ends. */
     @Getter
     @Setter
     @EqualsAndHashCode(callSuper = false)
