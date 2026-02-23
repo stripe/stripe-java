@@ -45,6 +45,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("filters")
   Filters filters;
 
+  /** Settings for the Hosted UI mode. */
+  @SerializedName("hosted")
+  Hosted hosted;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -102,6 +106,22 @@ public class Session extends ApiResource implements HasId {
 
   @SerializedName("status_details")
   StatusDetails statusDetails;
+
+  /**
+   * The UI mode for this session.
+   *
+   * <p>One of {@code hosted}, or {@code modal}.
+   */
+  @SerializedName("ui_mode")
+  String uiMode;
+
+  /**
+   * The hosted URL for this Session. Redirect customers to this URL to take them to the hosted
+   * authentication flow. This value is only present when the Session is active and the {@code
+   * ui_mode} is {@code hosted}.
+   */
+  @SerializedName("url")
+  String url;
 
   /**
    * To launch the Financial Connections authorization flow, create a {@code Session}. The session’s
@@ -285,6 +305,31 @@ public class Session extends ApiResource implements HasId {
   }
 
   /**
+   * For more details about Hosted, please refer to the <a href="https://docs.stripe.com/api">API
+   * Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Hosted extends StripeObject {
+    /**
+     * How the user enters the hosted flow. You can only use the values {@code email} and {@code
+     * url} if you provide {@code relink_options}.
+     *
+     * <p>One of {@code email}, or {@code url}.
+     */
+    @SerializedName("delivery_method")
+    String deliveryMethod;
+
+    /**
+     * The URL to redirect your customer back to after they link their accounts or cancel this
+     * Session. This parameter is required if {@code ui_mode} is {@code hosted}.
+     */
+    @SerializedName("return_url")
+    String returnUrl;
+  }
+
+  /**
    * For more details about Limits, please refer to the <a href="https://docs.stripe.com/api">API
    * Reference.</a>
    */
@@ -388,6 +433,7 @@ public class Session extends ApiResource implements HasId {
     trySetResponseGetter(accountHolder, responseGetter);
     trySetResponseGetter(accounts, responseGetter);
     trySetResponseGetter(filters, responseGetter);
+    trySetResponseGetter(hosted, responseGetter);
     trySetResponseGetter(limits, responseGetter);
     trySetResponseGetter(manualEntry, responseGetter);
     trySetResponseGetter(relinkOptions, responseGetter);
