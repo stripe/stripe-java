@@ -34,6 +34,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("filters")
   Filters filters;
 
+  /** Settings for hosted Sessions. Required if {@code ui_mode} is {@code hosted}. */
+  @SerializedName("hosted")
+  Hosted hosted;
+
   /** Settings for configuring Session-specific limits. */
   @SerializedName("limits")
   Limits limits;
@@ -66,27 +70,35 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("return_url")
   String returnUrl;
 
+  /** The UI mode of the Session. Defaults to {@code modal}. */
+  @SerializedName("ui_mode")
+  UiMode uiMode;
+
   private SessionCreateParams(
       AccountHolder accountHolder,
       List<String> expand,
       Map<String, Object> extraParams,
       Filters filters,
+      Hosted hosted,
       Limits limits,
       ManualEntry manualEntry,
       List<SessionCreateParams.Permission> permissions,
       List<SessionCreateParams.Prefetch> prefetch,
       RelinkOptions relinkOptions,
-      String returnUrl) {
+      String returnUrl,
+      UiMode uiMode) {
     this.accountHolder = accountHolder;
     this.expand = expand;
     this.extraParams = extraParams;
     this.filters = filters;
+    this.hosted = hosted;
     this.limits = limits;
     this.manualEntry = manualEntry;
     this.permissions = permissions;
     this.prefetch = prefetch;
     this.relinkOptions = relinkOptions;
     this.returnUrl = returnUrl;
+    this.uiMode = uiMode;
   }
 
   public static Builder builder() {
@@ -102,6 +114,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Filters filters;
 
+    private Hosted hosted;
+
     private Limits limits;
 
     private ManualEntry manualEntry;
@@ -114,6 +128,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private String returnUrl;
 
+    private UiMode uiMode;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
@@ -121,12 +137,14 @@ public class SessionCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.filters,
+          this.hosted,
           this.limits,
           this.manualEntry,
           this.permissions,
           this.prefetch,
           this.relinkOptions,
-          this.returnUrl);
+          this.returnUrl,
+          this.uiMode);
     }
 
     /** The account holder to link accounts for. */
@@ -190,6 +208,12 @@ public class SessionCreateParams extends ApiRequestParams {
     /** Filters to restrict the kinds of accounts to collect. */
     public Builder setFilters(SessionCreateParams.Filters filters) {
       this.filters = filters;
+      return this;
+    }
+
+    /** Settings for hosted Sessions. Required if {@code ui_mode} is {@code hosted}. */
+    public Builder setHosted(SessionCreateParams.Hosted hosted) {
+      this.hosted = hosted;
       return this;
     }
 
@@ -269,6 +293,12 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /** The UI mode of the Session. Defaults to {@code modal}. */
+    public Builder setUiMode(SessionCreateParams.UiMode uiMode) {
+      this.uiMode = uiMode;
       return this;
     }
   }
@@ -591,6 +621,96 @@ public class SessionCreateParams extends ApiRequestParams {
 
   @Getter
   @EqualsAndHashCode(callSuper = false)
+  public static class Hosted {
+    /**
+     * How the user should enter the hosted flow. The values {@code email} and {@code url} can only
+     * be used if {@code relink_options} is provided.
+     */
+    @SerializedName("delivery_method")
+    DeliveryMethod deliveryMethod;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Hosted(DeliveryMethod deliveryMethod, Map<String, Object> extraParams) {
+      this.deliveryMethod = deliveryMethod;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private DeliveryMethod deliveryMethod;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.Hosted build() {
+        return new SessionCreateParams.Hosted(this.deliveryMethod, this.extraParams);
+      }
+
+      /**
+       * How the user should enter the hosted flow. The values {@code email} and {@code url} can
+       * only be used if {@code relink_options} is provided.
+       */
+      public Builder setDeliveryMethod(SessionCreateParams.Hosted.DeliveryMethod deliveryMethod) {
+        this.deliveryMethod = deliveryMethod;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.Hosted#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.Hosted#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum DeliveryMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("email")
+      EMAIL("email"),
+
+      @SerializedName("url")
+      URL("url");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      DeliveryMethod(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
   public static class Limits {
     /** <strong>Required.</strong> The number of accounts that can be linked in this Session. */
     @SerializedName("accounts")
@@ -867,6 +987,21 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     Prefetch(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum UiMode implements ApiRequestParams.EnumParam {
+    @SerializedName("hosted")
+    HOSTED("hosted"),
+
+    @SerializedName("modal")
+    MODAL("modal");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    UiMode(String value) {
       this.value = value;
     }
   }

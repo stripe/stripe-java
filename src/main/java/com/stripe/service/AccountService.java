@@ -364,4 +364,8 @@ public final class AccountService extends ApiService {
   public com.stripe.service.AccountPersonService persons() {
     return new com.stripe.service.AccountPersonService(this.getResponseGetter());
   }
+
+  public com.stripe.service.AccountSignalsService signals() {
+    return new com.stripe.service.AccountSignalsService(this.getResponseGetter());
+  }
 }

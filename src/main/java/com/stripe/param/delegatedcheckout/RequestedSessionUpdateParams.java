@@ -472,7 +472,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name. */
+      /** Address line 1, such as the street, PO Box, or company name. */
       @SerializedName("line1")
       Object line1;
 
@@ -597,17 +597,13 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name.
-         */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
-        /**
-         * <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name.
-         */
+        /** Address line 1, such as the street, PO Box, or company name. */
         public Builder setLine1(EmptyParam line1) {
           this.line1 = line1;
           return this;
@@ -1184,9 +1180,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        /**
-         * <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name.
-         */
+        /** Address line 1, such as the street, PO Box, or company name. */
         @SerializedName("line1")
         Object line1;
 
@@ -1313,17 +1307,13 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
             return this;
           }
 
-          /**
-           * <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name.
-           */
+          /** Address line 1, such as the street, PO Box, or company name. */
           public Builder setLine1(String line1) {
             this.line1 = line1;
             return this;
           }
 
-          /**
-           * <strong>Required.</strong> Address line 1, such as the street, PO Box, or company name.
-           */
+          /** Address line 1, such as the street, PO Box, or company name. */
           public Builder setLine1(EmptyParam line1) {
             this.line1 = line1;
             return this;
