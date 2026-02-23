@@ -1947,6 +1947,10 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("script_statement_descriptor")
       ScriptStatementDescriptor scriptStatementDescriptor;
 
+      /** Settings for Smart Disputes automatic response feature. */
+      @SerializedName("smart_disputes")
+      SmartDisputes smartDisputes;
+
       /**
        * Settings for the default <a
        * href="https://stripe.com/connect/statement-descriptors">statement descriptor</a> text.
@@ -1968,6 +1972,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           KonbiniPayments konbiniPayments,
           Object mcc,
           ScriptStatementDescriptor scriptStatementDescriptor,
+          SmartDisputes smartDisputes,
           StatementDescriptor statementDescriptor,
           Support support) {
         this.applied = applied;
@@ -1979,6 +1984,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         this.konbiniPayments = konbiniPayments;
         this.mcc = mcc;
         this.scriptStatementDescriptor = scriptStatementDescriptor;
+        this.smartDisputes = smartDisputes;
         this.statementDescriptor = statementDescriptor;
         this.support = support;
       }
@@ -2006,6 +2012,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private ScriptStatementDescriptor scriptStatementDescriptor;
 
+        private SmartDisputes smartDisputes;
+
         private StatementDescriptor statementDescriptor;
 
         private Support support;
@@ -2022,6 +2030,7 @@ public class AccountUpdateParams extends ApiRequestParams {
               this.konbiniPayments,
               this.mcc,
               this.scriptStatementDescriptor,
+              this.smartDisputes,
               this.statementDescriptor,
               this.support);
         }
@@ -2123,6 +2132,13 @@ public class AccountUpdateParams extends ApiRequestParams {
             AccountUpdateParams.Configuration.Merchant.ScriptStatementDescriptor
                 scriptStatementDescriptor) {
           this.scriptStatementDescriptor = scriptStatementDescriptor;
+          return this;
+        }
+
+        /** Settings for Smart Disputes automatic response feature. */
+        public Builder setSmartDisputes(
+            AccountUpdateParams.Configuration.Merchant.SmartDisputes smartDisputes) {
+          this.smartDisputes = smartDisputes;
           return this;
         }
 
@@ -7644,6 +7660,175 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       @Getter
       @EqualsAndHashCode(callSuper = false)
+      public static class SmartDisputes {
+        /** Settings for Smart Disputes auto_respond. */
+        @SerializedName("auto_respond")
+        AutoRespond autoRespond;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private SmartDisputes(AutoRespond autoRespond, Map<String, Object> extraParams) {
+          this.autoRespond = autoRespond;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private AutoRespond autoRespond;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountUpdateParams.Configuration.Merchant.SmartDisputes build() {
+            return new AccountUpdateParams.Configuration.Merchant.SmartDisputes(
+                this.autoRespond, this.extraParams);
+          }
+
+          /** Settings for Smart Disputes auto_respond. */
+          public Builder setAutoRespond(
+              AccountUpdateParams.Configuration.Merchant.SmartDisputes.AutoRespond autoRespond) {
+            this.autoRespond = autoRespond;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountUpdateParams.Configuration.Merchant.SmartDisputes#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountUpdateParams.Configuration.Merchant.SmartDisputes#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+
+        @Getter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AutoRespond {
+          /**
+           * Map of extra parameters for custom features not available in this client library. The
+           * content in this map is not serialized under this field's {@code @SerializedName} value.
+           * Instead, each key/value pair is serialized as if the key is a root-level field
+           * (serialized) name in this param object. Effectively, this map is flattened to its
+           * parent instance.
+           */
+          @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+          Map<String, Object> extraParams;
+
+          /** The preference for automatic dispute responses. */
+          @SerializedName("preference")
+          Preference preference;
+
+          private AutoRespond(Map<String, Object> extraParams, Preference preference) {
+            this.extraParams = extraParams;
+            this.preference = preference;
+          }
+
+          public static Builder builder() {
+            return new Builder();
+          }
+
+          public static class Builder {
+            private Map<String, Object> extraParams;
+
+            private Preference preference;
+
+            /** Finalize and obtain parameter instance from this builder. */
+            public AccountUpdateParams.Configuration.Merchant.SmartDisputes.AutoRespond build() {
+              return new AccountUpdateParams.Configuration.Merchant.SmartDisputes.AutoRespond(
+                  this.extraParams, this.preference);
+            }
+
+            /**
+             * Add a key/value pair to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.SmartDisputes.AutoRespond#extraParams} for
+             * the field documentation.
+             */
+            public Builder putExtraParam(String key, Object value) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.put(key, value);
+              return this;
+            }
+
+            /**
+             * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+             * `put/putAll` call, and subsequent calls add additional key/value pairs to the
+             * original map. See {@link
+             * AccountUpdateParams.Configuration.Merchant.SmartDisputes.AutoRespond#extraParams} for
+             * the field documentation.
+             */
+            public Builder putAllExtraParam(Map<String, Object> map) {
+              if (this.extraParams == null) {
+                this.extraParams = new HashMap<>();
+              }
+              this.extraParams.putAll(map);
+              return this;
+            }
+
+            /** The preference for automatic dispute responses. */
+            public Builder setPreference(
+                AccountUpdateParams.Configuration.Merchant.SmartDisputes.AutoRespond.Preference
+                    preference) {
+              this.preference = preference;
+              return this;
+            }
+          }
+
+          public enum Preference implements ApiRequestParams.EnumParam {
+            @SerializedName("inherit")
+            INHERIT("inherit"),
+
+            @SerializedName("off")
+            OFF("off"),
+
+            @SerializedName("on")
+            ON("on");
+
+            @Getter(onMethod_ = {@Override})
+            private final String value;
+
+            Preference(String value) {
+              this.value = value;
+            }
+          }
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
       public static class StatementDescriptor {
         /**
          * The default text that appears on statements for non-card charges outside of Japan. For
@@ -13118,9 +13303,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class Amount {
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           @SerializedName("currency")
           Object currency;
@@ -13136,8 +13322,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+           * <strong>Required.</strong> A non-negative integer representing how much to charge in
+           * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+           * unit</a>.
            */
           @SerializedName("value")
           Long value;
@@ -13166,9 +13353,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(String currency) {
               this.currency = currency;
@@ -13176,9 +13364,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(EmptyParam currency) {
               this.currency = currency;
@@ -13216,8 +13405,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * A non-negative integer representing how much to charge in the <a
-             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+             * <strong>Required.</strong> A non-negative integer representing how much to charge in
+             * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+             * unit</a>.
              */
             public Builder setValue(Long value) {
               this.value = value;
@@ -15515,9 +15705,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         @EqualsAndHashCode(callSuper = false)
         public static class Amount {
           /**
-           * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-           * code</a>, in lowercase. Must be a <a
-           * href="https://stripe.com/docs/currencies">supported currency</a>.
+           * <strong>Required.</strong> Three-letter <a
+           * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+           * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+           * currency</a>.
            */
           @SerializedName("currency")
           Object currency;
@@ -15533,8 +15724,9 @@ public class AccountUpdateParams extends ApiRequestParams {
           Map<String, Object> extraParams;
 
           /**
-           * A non-negative integer representing how much to charge in the <a
-           * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+           * <strong>Required.</strong> A non-negative integer representing how much to charge in
+           * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+           * unit</a>.
            */
           @SerializedName("value")
           Long value;
@@ -15564,9 +15756,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(String currency) {
               this.currency = currency;
@@ -15574,9 +15767,10 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-             * code</a>, in lowercase. Must be a <a
-             * href="https://stripe.com/docs/currencies">supported currency</a>.
+             * <strong>Required.</strong> Three-letter <a
+             * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+             * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+             * currency</a>.
              */
             public Builder setCurrency(EmptyParam currency) {
               this.currency = currency;
@@ -15614,8 +15808,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             }
 
             /**
-             * A non-negative integer representing how much to charge in the <a
-             * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
+             * <strong>Required.</strong> A non-negative integer representing how much to charge in
+             * the <a href="https://docs.stripe.com/currencies#minor-units">smallest currency
+             * unit</a>.
              */
             public Builder setValue(Long value) {
               this.value = value;

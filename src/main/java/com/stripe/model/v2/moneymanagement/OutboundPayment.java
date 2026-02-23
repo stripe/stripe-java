@@ -90,6 +90,14 @@ public class OutboundPayment extends StripeObject implements HasId {
   String outboundPaymentQuote;
 
   /**
+   * The purpose of the OutboundPayment.
+   *
+   * <p>Equal to {@code payroll}.
+   */
+  @SerializedName("purpose")
+  String purpose;
+
+  /**
    * A link to the Stripe-hosted receipt for this OutboundPayment. The receipt link remains active
    * for 60 days from the OutboundPayment creation date. After this period, the link will expire and
    * the receipt url value will be null.
