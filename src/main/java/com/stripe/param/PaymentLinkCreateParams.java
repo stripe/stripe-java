@@ -1716,8 +1716,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
-       * The value that will pre-fill the field on the payment page.Must match a {@code value} in
-       * the {@code options} array.
+       * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+       * {@code options} array.
        */
       @SerializedName("default_value")
       String defaultValue;
@@ -1765,8 +1765,8 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that will pre-fill the field on the payment page.Must match a {@code value} in
-         * the {@code options} array.
+         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * {@code options} array.
          */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
@@ -2036,7 +2036,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -2087,7 +2087,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
               this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
         }
 
-        /** The value that will pre-fill the field on the payment page. */
+        /** The value that pre-fills the field on the payment page. */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
           return this;
@@ -2138,7 +2138,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Text {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -2189,7 +2189,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
               this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
         }
 
-        /** The value that will pre-fill the field on the payment page. */
+        /** The value that pre-fills the field on the payment page. */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
           return this;
@@ -2419,7 +2419,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2470,7 +2470,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2490,7 +2490,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2542,7 +2542,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2562,7 +2562,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2613,7 +2613,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -2633,7 +2633,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -2685,7 +2685,7 @@ public class PaymentLinkCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;

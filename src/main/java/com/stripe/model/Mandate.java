@@ -380,6 +380,10 @@ public class Mandate extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class BacsDebit extends StripeObject {
+      /** The display name for the account on this mandate. */
+      @SerializedName("display_name")
+      String displayName;
+
       /**
        * The status of the mandate on the Bacs network. Can be one of {@code pending}, {@code
        * revoked}, {@code refused}, or {@code accepted}.
@@ -400,6 +404,10 @@ public class Mandate extends ApiResource implements HasId {
        */
       @SerializedName("revocation_reason")
       String revocationReason;
+
+      /** The service user number for the account on this mandate. */
+      @SerializedName("service_user_number")
+      String serviceUserNumber;
 
       /** The URL that will contain the mandate that the customer has signed. */
       @SerializedName("url")

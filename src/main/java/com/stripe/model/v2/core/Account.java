@@ -12,9 +12,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * A V2 Account is a representation of a company or individual that a Stripe user does business
- * with. Accounts contain the contact details, Legal Entity information, and configuration required
- * to enable the Account for use across Stripe products.
+ * An Account v2 object represents a company, individual, or other entity that interacts with a
+ * platform on Stripe. It contains both identifying information and properties that control its
+ * behavior and functionality. An Account can have one or more configurations that enable sets of
+ * related features, such as allowing it to act as a merchant or customer. The Accounts v2 API
+ * supports both the Global Payouts preview feature and the Connect-Billing integration preview
+ * feature. However, a particular Account can only access one of them. The Connect-Billing
+ * integration preview feature allows an Account v2 to pay subscription fees to a platform. An
+ * Account v1 required a separate Customer object to pay subscription fees.
  */
 @Getter
 @Setter
@@ -527,6 +532,10 @@ public class Account extends StripeObject implements HasId {
       /** Settings for SEPA Direct Debit payments. */
       @SerializedName("sepa_debit_payments")
       SepaDebitPayments sepaDebitPayments;
+
+      /** Settings for Smart Disputes automatic response feature. */
+      @SerializedName("smart_disputes")
+      SmartDisputes smartDisputes;
 
       /** Statement descriptor. */
       @SerializedName("statement_descriptor")
@@ -3245,6 +3254,38 @@ public class Account extends StripeObject implements HasId {
         String creditorId;
       }
 
+      /** Settings for Smart Disputes automatic response feature. */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class SmartDisputes extends StripeObject {
+        /** Settings for Smart Disputes auto_respond. */
+        @SerializedName("auto_respond")
+        AutoRespond autoRespond;
+
+        /** Settings for Smart Disputes auto_respond. */
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AutoRespond extends StripeObject {
+          /**
+           * The preference for automatic dispute responses.
+           *
+           * <p>One of {@code inherit}, {@code off}, or {@code on}.
+           */
+          @SerializedName("preference")
+          String preference;
+
+          /**
+           * The effective value for automatic dispute responses.
+           *
+           * <p>One of {@code off}, or {@code on}.
+           */
+          @SerializedName("value")
+          String value;
+        }
+      }
+
       /** Statement descriptor. */
       @Getter
       @Setter
@@ -3699,31 +3740,35 @@ public class Account extends StripeObject implements HasId {
          * {@code am_bank_account}, {@code at_bank_account}, {@code au_bank_account}, {@code
          * ba_bank_account}, {@code be_bank_account}, {@code bg_bank_account}, {@code
          * bh_bank_account}, {@code bj_bank_account}, {@code bn_bank_account}, {@code
-         * bs_bank_account}, {@code bw_bank_account}, {@code card}, {@code ca_bank_account}, {@code
-         * ch_bank_account}, {@code ci_bank_account}, {@code crypto_wallet}, {@code
-         * cy_bank_account}, {@code cz_bank_account}, {@code de_bank_account}, {@code
-         * dk_bank_account}, {@code dz_bank_account}, {@code ec_bank_account}, {@code
+         * bs_bank_account}, {@code bt_bank_account}, {@code bw_bank_account}, {@code card}, {@code
+         * ca_bank_account}, {@code ch_bank_account}, {@code ci_bank_account}, {@code
+         * crypto_wallet}, {@code cr_bank_account}, {@code cy_bank_account}, {@code
+         * cz_bank_account}, {@code de_bank_account}, {@code dk_bank_account}, {@code
+         * do_bank_account}, {@code dz_bank_account}, {@code ec_bank_account}, {@code
          * ee_bank_account}, {@code es_bank_account}, {@code et_bank_account}, {@code
          * fi_bank_account}, {@code fr_bank_account}, {@code gb_bank_account}, {@code
-         * gm_bank_account}, {@code gr_bank_account}, {@code gy_bank_account}, {@code
-         * hk_bank_account}, {@code hr_bank_account}, {@code hu_bank_account}, {@code
-         * id_bank_account}, {@code ie_bank_account}, {@code il_bank_account}, {@code
-         * in_bank_account}, {@code is_bank_account}, {@code it_bank_account}, {@code
-         * jm_bank_account}, {@code jo_bank_account}, {@code ke_bank_account}, {@code
-         * kh_bank_account}, {@code kw_bank_account}, {@code lc_bank_account}, {@code
-         * li_bank_account}, {@code lk_bank_account}, {@code lt_bank_account}, {@code
-         * lu_bank_account}, {@code lv_bank_account}, {@code ma_bank_account}, {@code
-         * mc_bank_account}, {@code mg_bank_account}, {@code mn_bank_account}, {@code
-         * mt_bank_account}, {@code mu_bank_account}, {@code mx_bank_account}, {@code
-         * my_bank_account}, {@code na_bank_account}, {@code nl_bank_account}, {@code
-         * no_bank_account}, {@code nz_bank_account}, {@code om_bank_account}, {@code
-         * pa_bank_account}, {@code ph_bank_account}, {@code pl_bank_account}, {@code
-         * pt_bank_account}, {@code qa_bank_account}, {@code ro_bank_account}, {@code
-         * rs_bank_account}, {@code rw_bank_account}, {@code se_bank_account}, {@code
-         * sg_bank_account}, {@code si_bank_account}, {@code sk_bank_account}, {@code
-         * sn_bank_account}, {@code sv_bank_account}, {@code th_bank_account}, {@code
-         * tn_bank_account}, {@code tr_bank_account}, {@code tt_bank_account}, {@code
-         * tz_bank_account}, {@code us_bank_account}, {@code vn_bank_account}, or {@code
+         * gm_bank_account}, {@code gr_bank_account}, {@code gt_bank_account}, {@code
+         * gy_bank_account}, {@code hk_bank_account}, {@code hr_bank_account}, {@code
+         * hu_bank_account}, {@code id_bank_account}, {@code ie_bank_account}, {@code
+         * il_bank_account}, {@code in_bank_account}, {@code is_bank_account}, {@code
+         * it_bank_account}, {@code jm_bank_account}, {@code jo_bank_account}, {@code
+         * ke_bank_account}, {@code kh_bank_account}, {@code kw_bank_account}, {@code
+         * lc_bank_account}, {@code li_bank_account}, {@code lk_bank_account}, {@code
+         * lt_bank_account}, {@code lu_bank_account}, {@code lv_bank_account}, {@code
+         * ma_bank_account}, {@code mc_bank_account}, {@code md_bank_account}, {@code
+         * mg_bank_account}, {@code mk_bank_account}, {@code mn_bank_account}, {@code
+         * mo_bank_account}, {@code mt_bank_account}, {@code mu_bank_account}, {@code
+         * mx_bank_account}, {@code my_bank_account}, {@code mz_bank_account}, {@code
+         * na_bank_account}, {@code nl_bank_account}, {@code no_bank_account}, {@code
+         * nz_bank_account}, {@code om_bank_account}, {@code pa_bank_account}, {@code
+         * pe_bank_account}, {@code ph_bank_account}, {@code pk_bank_account}, {@code
+         * pl_bank_account}, {@code pt_bank_account}, {@code qa_bank_account}, {@code
+         * ro_bank_account}, {@code rs_bank_account}, {@code rw_bank_account}, {@code
+         * se_bank_account}, {@code sg_bank_account}, {@code si_bank_account}, {@code
+         * sk_bank_account}, {@code sn_bank_account}, {@code sv_bank_account}, {@code
+         * th_bank_account}, {@code tn_bank_account}, {@code tr_bank_account}, {@code
+         * tt_bank_account}, {@code tw_bank_account}, {@code tz_bank_account}, {@code
+         * us_bank_account}, {@code uz_bank_account}, {@code vn_bank_account}, or {@code
          * za_bank_account}.
          */
         @SerializedName("type")

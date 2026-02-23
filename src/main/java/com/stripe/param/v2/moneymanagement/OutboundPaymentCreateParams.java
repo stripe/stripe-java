@@ -50,6 +50,10 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @SerializedName("outbound_payment_quote")
   String outboundPaymentQuote;
 
+  /** The purpose of the OutboundPayment. */
+  @SerializedName("purpose")
+  Purpose purpose;
+
   /** Details about the notification settings for the OutboundPayment recipient. */
   @SerializedName("recipient_notification")
   RecipientNotification recipientNotification;
@@ -66,6 +70,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       From from,
       Map<String, String> metadata,
       String outboundPaymentQuote,
+      Purpose purpose,
       RecipientNotification recipientNotification,
       To to) {
     this.amount = amount;
@@ -75,6 +80,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     this.from = from;
     this.metadata = metadata;
     this.outboundPaymentQuote = outboundPaymentQuote;
+    this.purpose = purpose;
     this.recipientNotification = recipientNotification;
     this.to = to;
   }
@@ -98,6 +104,8 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
 
     private String outboundPaymentQuote;
 
+    private Purpose purpose;
+
     private RecipientNotification recipientNotification;
 
     private To to;
@@ -112,6 +120,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
           this.from,
           this.metadata,
           this.outboundPaymentQuote,
+          this.purpose,
           this.recipientNotification,
           this.to);
     }
@@ -207,6 +216,12 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The purpose of the OutboundPayment. */
+    public Builder setPurpose(OutboundPaymentCreateParams.Purpose purpose) {
+      this.purpose = purpose;
+      return this;
+    }
+
     /** Details about the notification settings for the OutboundPayment recipient. */
     public Builder setRecipientNotification(
         OutboundPaymentCreateParams.RecipientNotification recipientNotification) {
@@ -225,9 +240,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
   @EqualsAndHashCode(callSuper = false)
   public static class Amount {
     /**
-     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-     * currency</a>.
+     * <strong>Required.</strong> Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -242,7 +257,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * A non-negative integer representing how much to charge in the <a
+     * <strong>Required.</strong> A non-negative integer representing how much to charge in the <a
      * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
      */
     @SerializedName("value")
@@ -271,9 +286,9 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
-       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
-       * currency</a>.
+       * <strong>Required.</strong> Three-letter <a
+       * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in
+       * lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -307,7 +322,7 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A non-negative integer representing how much to charge in the <a
+       * <strong>Required.</strong> A non-negative integer representing how much to charge in the <a
        * href="https://docs.stripe.com/currencies#minor-units">smallest currency unit</a>.
        */
       public Builder setValue(Long value) {
@@ -691,6 +706,18 @@ public class OutboundPaymentCreateParams extends ApiRequestParams {
         this.recipient = recipient;
         return this;
       }
+    }
+  }
+
+  public enum Purpose implements ApiRequestParams.EnumParam {
+    @SerializedName("payroll")
+    PAYROLL("payroll");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Purpose(String value) {
+      this.value = value;
     }
   }
 }

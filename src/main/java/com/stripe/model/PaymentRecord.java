@@ -1021,17 +1021,11 @@ public class PaymentRecord extends ApiResource implements HasId {
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Affirm extends StripeObject {
-      /**
-       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
-       * transaction's reader is assigned to.
-       */
+      /** ID of the location that this reader is assigned to. */
       @SerializedName("location")
       String location;
 
-      /**
-       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
-       * transaction was made on.
-       */
+      /** ID of the reader this transaction was made on. */
       @SerializedName("reader")
       String reader;
 
@@ -1052,7 +1046,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @SerializedName("order_id")
       String orderId;
 
-      /** Order identifier shown to the merchant in Afterpay’s online portal. */
+      /** Order identifier shown to the merchant in Afterpay's online portal. */
       @SerializedName("reference")
       String reference;
     }
@@ -1604,12 +1598,24 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
+        /**
+         * If you provide a value for {@code address.line1}, the check result is one of {@code
+         * pass}, {@code fail}, {@code unavailable}, or {@code unchecked}.
+         */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
+        /**
+         * If you provide a address postal code, the check result is one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
+         */
         @SerializedName("address_postal_code_check")
         String addressPostalCodeCheck;
 
+        /**
+         * If you provide a CVC, the check results is one of {@code pass}, {@code fail}, {@code
+         * unavailable}, or {@code unchecked}.
+         */
         @SerializedName("cvc_check")
         String cvcCheck;
       }
@@ -1622,6 +1628,7 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Installments extends StripeObject {
+        /** Installment plan selected for the payment. */
         @SerializedName("plan")
         Plan plan;
 
@@ -1680,15 +1687,40 @@ public class PaymentRecord extends ApiResource implements HasId {
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ThreeDSecure extends StripeObject {
+        /**
+         * For authenticated transactions: Indicates how the issuing bank authenticated the
+         * customer.
+         *
+         * <p>One of {@code challenge}, or {@code frictionless}.
+         */
         @SerializedName("authentication_flow")
         String authenticationFlow;
 
+        /**
+         * Indicates the outcome of 3D Secure authentication.
+         *
+         * <p>One of {@code attempt_acknowledged}, {@code authenticated}, {@code exempted}, {@code
+         * failed}, {@code not_supported}, or {@code processing_error}.
+         */
         @SerializedName("result")
         String result;
 
+        /**
+         * Additional information about why 3D Secure succeeded or failed, based on the {@code
+         * result}.
+         *
+         * <p>One of {@code abandoned}, {@code bypassed}, {@code canceled}, {@code
+         * card_not_enrolled}, {@code network_not_supported}, {@code protocol_error}, or {@code
+         * rejected}.
+         */
         @SerializedName("result_reason")
         String resultReason;
 
+        /**
+         * The version of 3D Secure that was used.
+         *
+         * <p>One of {@code 1.0.2}, {@code 2.1.0}, or {@code 2.2.0}.
+         */
         @SerializedName("version")
         String version;
       }
@@ -1870,6 +1902,13 @@ public class PaymentRecord extends ApiResource implements HasId {
       String last4;
 
       /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
        * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
@@ -1910,6 +1949,13 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("read_method")
       String readMethod;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * A collection of fields required to be displayed on receipts. Only required for EMV
@@ -2457,6 +2503,13 @@ public class PaymentRecord extends ApiResource implements HasId {
       String last4;
 
       /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/locations">location</a> that this
+       * transaction's reader is assigned to.
+       */
+      @SerializedName("location")
+      String location;
+
+      /**
        * Identifies which network this charge was processed on. Can be {@code amex}, {@code
        * cartes_bancaires}, {@code diners}, {@code discover}, {@code eftpos_au}, {@code interac},
        * {@code jcb}, {@code link}, {@code mastercard}, {@code unionpay}, {@code visa}, or {@code
@@ -2489,6 +2542,13 @@ public class PaymentRecord extends ApiResource implements HasId {
        */
       @SerializedName("read_method")
       String readMethod;
+
+      /**
+       * ID of the <a href="https://docs.stripe.com/api/terminal/readers">reader</a> this
+       * transaction was made on.
+       */
+      @SerializedName("reader")
+      String reader;
 
       /**
        * A collection of fields required to be displayed on receipts. Only required for EMV

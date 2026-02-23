@@ -123,6 +123,10 @@ public class PayoutMethod extends StripeObject implements HasId {
     @SerializedName("bank_name")
     String bankName;
 
+    /** The branch number of the bank account, if present. */
+    @SerializedName("branch_number")
+    String branchNumber;
+
     /** The country code of the bank account. */
     @SerializedName("country")
     String country;
@@ -146,6 +150,10 @@ public class PayoutMethod extends StripeObject implements HasId {
     /** The list of currencies supported by this bank account. */
     @SerializedName("supported_currencies")
     List<String> supportedCurrencies;
+
+    /** The swift code of the bank or financial institution. */
+    @SerializedName("swift_code")
+    String swiftCode;
   }
 
   /** The PayoutMethodCard object details. */

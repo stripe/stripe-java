@@ -114,13 +114,13 @@ public class Event extends ApiResource implements HasId {
    * {@code account_notice.updated}, {@code application_fee.created}, {@code
    * application_fee.refund.updated}, {@code application_fee.refunded}, {@code balance.available},
    * {@code balance_settings.updated}, {@code billing.alert.triggered}, {@code
-   * billing_portal.configuration.created}, {@code billing_portal.configuration.updated}, {@code
-   * billing_portal.session.created}, {@code capability.updated}, {@code
-   * capital.financing_offer.accepted}, {@code capital.financing_offer.accepted_other_offer}, {@code
-   * capital.financing_offer.canceled}, {@code capital.financing_offer.created}, {@code
-   * capital.financing_offer.expired}, {@code capital.financing_offer.fully_repaid}, {@code
-   * capital.financing_offer.paid_out}, {@code capital.financing_offer.rejected}, {@code
-   * capital.financing_offer.replacement_created}, {@code
+   * billing.credit_grant.created}, {@code billing_portal.configuration.created}, {@code
+   * billing_portal.configuration.updated}, {@code billing_portal.session.created}, {@code
+   * capability.updated}, {@code capital.financing_offer.accepted}, {@code
+   * capital.financing_offer.accepted_other_offer}, {@code capital.financing_offer.canceled}, {@code
+   * capital.financing_offer.created}, {@code capital.financing_offer.expired}, {@code
+   * capital.financing_offer.fully_repaid}, {@code capital.financing_offer.paid_out}, {@code
+   * capital.financing_offer.rejected}, {@code capital.financing_offer.replacement_created}, {@code
    * capital.financing_summary.line_of_credit_update}, {@code
    * capital.financing_transaction.created}, {@code cash_balance.funds_available}, {@code
    * charge.captured}, {@code charge.dispute.closed}, {@code charge.dispute.created}, {@code
@@ -204,18 +204,20 @@ public class Event extends ApiResource implements HasId {
    * radar.early_fraud_warning.created}, {@code radar.early_fraud_warning.updated}, {@code
    * refund.created}, {@code refund.failed}, {@code refund.updated}, {@code
    * reporting.report_run.failed}, {@code reporting.report_run.succeeded}, {@code
-   * reporting.report_type.updated}, {@code review.closed}, {@code review.opened}, {@code
-   * setup_intent.canceled}, {@code setup_intent.created}, {@code setup_intent.requires_action},
-   * {@code setup_intent.setup_failed}, {@code setup_intent.succeeded}, {@code
-   * sigma.scheduled_query_run.created}, {@code source.canceled}, {@code source.chargeable}, {@code
-   * source.failed}, {@code source.mandate_notification}, {@code source.refund_attributes_required},
-   * {@code source.transaction.created}, {@code source.transaction.updated}, {@code
-   * subscription_schedule.aborted}, {@code subscription_schedule.canceled}, {@code
-   * subscription_schedule.completed}, {@code subscription_schedule.created}, {@code
-   * subscription_schedule.expiring}, {@code subscription_schedule.price_migration_failed}, {@code
-   * subscription_schedule.released}, {@code subscription_schedule.updated}, {@code
-   * tax.form.updated}, {@code tax.settings.updated}, {@code tax_rate.created}, {@code
-   * tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
+   * reporting.report_type.updated}, {@code reserve.hold.created}, {@code reserve.hold.updated},
+   * {@code reserve.plan.created}, {@code reserve.plan.disabled}, {@code reserve.plan.expired},
+   * {@code reserve.plan.updated}, {@code reserve.release.created}, {@code review.closed}, {@code
+   * review.opened}, {@code setup_intent.canceled}, {@code setup_intent.created}, {@code
+   * setup_intent.requires_action}, {@code setup_intent.setup_failed}, {@code
+   * setup_intent.succeeded}, {@code sigma.scheduled_query_run.created}, {@code source.canceled},
+   * {@code source.chargeable}, {@code source.failed}, {@code source.mandate_notification}, {@code
+   * source.refund_attributes_required}, {@code source.transaction.created}, {@code
+   * source.transaction.updated}, {@code subscription_schedule.aborted}, {@code
+   * subscription_schedule.canceled}, {@code subscription_schedule.completed}, {@code
+   * subscription_schedule.created}, {@code subscription_schedule.expiring}, {@code
+   * subscription_schedule.price_migration_failed}, {@code subscription_schedule.released}, {@code
+   * subscription_schedule.updated}, {@code tax.form.updated}, {@code tax.settings.updated}, {@code
+   * tax_rate.created}, {@code tax_rate.updated}, {@code terminal.reader.action_failed}, {@code
    * terminal.reader.action_succeeded}, {@code terminal.reader.action_updated}, {@code
    * test_helpers.test_clock.advancing}, {@code test_helpers.test_clock.created}, {@code
    * test_helpers.test_clock.deleted}, {@code test_helpers.test_clock.internal_failure}, {@code
@@ -240,10 +242,9 @@ public class Event extends ApiResource implements HasId {
    * treasury.outbound_transfer.tracking_details_updated}, {@code treasury.received_credit.created},
    * {@code treasury.received_credit.failed}, {@code treasury.received_credit.succeeded}, {@code
    * treasury.received_debit.created}, {@code invoice_payment.detached}, {@code
-   * billing.credit_balance_transaction.created}, {@code billing.credit_grant.created}, {@code
-   * billing.credit_grant.updated}, {@code billing.meter.created}, {@code
-   * billing.meter.deactivated}, {@code billing.meter.reactivated}, or {@code
-   * billing.meter.updated}.
+   * billing.credit_balance_transaction.created}, {@code billing.credit_grant.updated}, {@code
+   * billing.meter.created}, {@code billing.meter.deactivated}, {@code billing.meter.reactivated},
+   * or {@code billing.meter.updated}.
    */
   @SerializedName("type")
   String type;

@@ -308,6 +308,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("billing.alert.triggered")
     BILLING__ALERT__TRIGGERED("billing.alert.triggered"),
 
+    @SerializedName("billing.credit_grant.created")
+    BILLING__CREDIT_GRANT__CREATED("billing.credit_grant.created"),
+
     @SerializedName("billing_portal.configuration.created")
     BILLING_PORTAL__CONFIGURATION__CREATED("billing_portal.configuration.created"),
 
@@ -911,6 +914,27 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("reporting.report_type.updated")
     REPORTING__REPORT_TYPE__UPDATED("reporting.report_type.updated"),
 
+    @SerializedName("reserve.hold.created")
+    RESERVE__HOLD__CREATED("reserve.hold.created"),
+
+    @SerializedName("reserve.hold.updated")
+    RESERVE__HOLD__UPDATED("reserve.hold.updated"),
+
+    @SerializedName("reserve.plan.created")
+    RESERVE__PLAN__CREATED("reserve.plan.created"),
+
+    @SerializedName("reserve.plan.disabled")
+    RESERVE__PLAN__DISABLED("reserve.plan.disabled"),
+
+    @SerializedName("reserve.plan.expired")
+    RESERVE__PLAN__EXPIRED("reserve.plan.expired"),
+
+    @SerializedName("reserve.plan.updated")
+    RESERVE__PLAN__UPDATED("reserve.plan.updated"),
+
+    @SerializedName("reserve.release.created")
+    RESERVE__RELEASE__CREATED("reserve.release.created"),
+
     @SerializedName("review.closed")
     REVIEW__CLOSED("review.closed"),
 
@@ -1141,9 +1165,6 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("billing.credit_balance_transaction.created")
     BILLING__CREDIT_BALANCE_TRANSACTION__CREATED("billing.credit_balance_transaction.created"),
-
-    @SerializedName("billing.credit_grant.created")
-    BILLING__CREDIT_GRANT__CREATED("billing.credit_grant.created"),
 
     @SerializedName("billing.credit_grant.updated")
     BILLING__CREDIT_GRANT__UPDATED("billing.credit_grant.updated"),
