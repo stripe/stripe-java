@@ -6662,8 +6662,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           public static class EuBankTransfer {
             /**
              * <strong>Required.</strong> The desired country code of the bank account information.
-             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
-             * or {@code NL}.
+             * Permitted values include: {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
              */
             @SerializedName("country")
             String country;
@@ -6702,8 +6701,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
               /**
                * <strong>Required.</strong> The desired country code of the bank account
-               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
-               * FR}, {@code IE}, or {@code NL}.
+               * information. Permitted values include: {@code DE}, {@code FR}, {@code IE}, or
+               * {@code NL}.
                */
               public Builder setCountry(String country) {
                 this.country = country;
@@ -7508,10 +7507,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           @SerializedName("description")
           String description;
 
-          /**
-           * End date of the mandate or subscription. If not provided, the mandate will be active
-           * until canceled. If provided, end date should be after start date.
-           */
+          /** End date of the mandate or subscription. */
           @SerializedName("end_date")
           Long endDate;
 
@@ -7589,10 +7585,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
               return this;
             }
 
-            /**
-             * End date of the mandate or subscription. If not provided, the mandate will be active
-             * until canceled. If provided, end date should be after start date.
-             */
+            /** End date of the mandate or subscription. */
             public Builder setEndDate(Long endDate) {
               this.endDate = endDate;
               return this;
@@ -8246,6 +8239,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       @SerializedName("p24")
       P24("p24"),
+
+      @SerializedName("pay_by_bank")
+      PAY_BY_BANK("pay_by_bank"),
 
       @SerializedName("payco")
       PAYCO("payco"),

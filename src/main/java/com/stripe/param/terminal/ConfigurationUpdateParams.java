@@ -22,6 +22,10 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("bbpos_wisepos_e")
   Object bbposWiseposE;
 
+  /** Configuration for cellular connectivity. */
+  @SerializedName("cellular")
+  Object cellular;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -55,7 +59,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   @SerializedName("stripe_s700")
   Object stripeS700;
 
-  /** Tipping configurations for readers. supporting on-reader tips */
+  /** Tipping configurations for readers that support on-reader tips. */
   @SerializedName("tipping")
   Object tipping;
 
@@ -70,6 +74,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
   private ConfigurationUpdateParams(
       Object bbposWisepad3,
       Object bbposWiseposE,
+      Object cellular,
       List<String> expand,
       Map<String, Object> extraParams,
       Object name,
@@ -82,6 +87,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       Object wifi) {
     this.bbposWisepad3 = bbposWisepad3;
     this.bbposWiseposE = bbposWiseposE;
+    this.cellular = cellular;
     this.expand = expand;
     this.extraParams = extraParams;
     this.name = name;
@@ -102,6 +108,8 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     private Object bbposWisepad3;
 
     private Object bbposWiseposE;
+
+    private Object cellular;
 
     private List<String> expand;
 
@@ -128,6 +136,7 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       return new ConfigurationUpdateParams(
           this.bbposWisepad3,
           this.bbposWiseposE,
+          this.cellular,
           this.expand,
           this.extraParams,
           this.name,
@@ -161,6 +170,18 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
     /** An object containing device type specific settings for BBPOS WisePOS E readers. */
     public Builder setBbposWiseposE(EmptyParam bbposWiseposE) {
       this.bbposWiseposE = bbposWiseposE;
+      return this;
+    }
+
+    /** Configuration for cellular connectivity. */
+    public Builder setCellular(ConfigurationUpdateParams.Cellular cellular) {
+      this.cellular = cellular;
+      return this;
+    }
+
+    /** Configuration for cellular connectivity. */
+    public Builder setCellular(EmptyParam cellular) {
+      this.cellular = cellular;
       return this;
     }
 
@@ -276,13 +297,13 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Tipping configurations for readers. supporting on-reader tips */
+    /** Tipping configurations for readers that support on-reader tips. */
     public Builder setTipping(ConfigurationUpdateParams.Tipping tipping) {
       this.tipping = tipping;
       return this;
     }
 
-    /** Tipping configurations for readers. supporting on-reader tips */
+    /** Tipping configurations for readers that support on-reader tips. */
     public Builder setTipping(EmptyParam tipping) {
       this.tipping = tipping;
       return this;
@@ -460,6 +481,81 @@ public class ConfigurationUpdateParams extends ApiRequestParams {
       /** A File ID representing an image to display on the reader. */
       public Builder setSplashscreen(EmptyParam splashscreen) {
         this.splashscreen = splashscreen;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Cellular {
+    /**
+     * <strong>Required.</strong> Determines whether to allow the reader to connect to a cellular
+     * network. Defaults to false.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Cellular(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public ConfigurationUpdateParams.Cellular build() {
+        return new ConfigurationUpdateParams.Cellular(this.enabled, this.extraParams);
+      }
+
+      /**
+       * <strong>Required.</strong> Determines whether to allow the reader to connect to a cellular
+       * network. Defaults to false.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ConfigurationUpdateParams.Cellular#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ConfigurationUpdateParams.Cellular#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }

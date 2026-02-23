@@ -162,7 +162,7 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName("filters")
     List<AlertCreateParams.UsageThreshold.Filter> filters;
 
-    /** <strong>Required.</strong> Defines at which value the alert will fire. */
+    /** <strong>Required.</strong> Defines the threshold value that triggers the alert. */
     @SerializedName("gte")
     Long gte;
 
@@ -263,7 +263,7 @@ public class AlertCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Defines at which value the alert will fire. */
+      /** <strong>Required.</strong> Defines the threshold value that triggers the alert. */
       public Builder setGte(Long gte) {
         this.gte = gte;
         return this;

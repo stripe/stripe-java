@@ -237,6 +237,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("livemode")
   Boolean livemode;
 
+  /** Settings for Managed Payments. */
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
   /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
@@ -1929,6 +1933,23 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         String calculation;
       }
     }
+  }
+
+  /**
+   * For more details about ManagedPayments, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments extends StripeObject {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
   }
 
   /**
@@ -5619,7 +5640,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         public static class EuBankTransfer extends StripeObject {
           /**
            * The desired country code of the bank account information. Permitted values include:
-           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
            *
            * <p>One of {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
            */
@@ -7248,6 +7269,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
       String targetDate;
 
       /**
+       * The purpose of the transaction.
+       *
+       * <p>One of {@code goods}, {@code other}, {@code services}, or {@code unspecified}.
+       */
+      @SerializedName("transaction_purpose")
+      String transactionPurpose;
+
+      /**
        * Bank account verification method.
        *
        * <p>One of {@code automatic}, {@code instant}, or {@code microdeposits}.
@@ -7551,6 +7580,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     trySetResponseGetter(hooks, responseGetter);
     trySetResponseGetter(lastPaymentError, responseGetter);
     trySetResponseGetter(latestCharge, responseGetter);
+    trySetResponseGetter(managedPayments, responseGetter);
     trySetResponseGetter(nextAction, responseGetter);
     trySetResponseGetter(onBehalfOf, responseGetter);
     trySetResponseGetter(paymentDetails, responseGetter);

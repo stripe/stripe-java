@@ -223,6 +223,15 @@ public class SessionCreateParams extends ApiRequestParams {
   Locale locale;
 
   /**
+   * Settings for Managed Payments for this Checkout Session and resulting <a
+   * href="https://stripe.com/api/payment_intents/object">PaymentIntents</a>, <a
+   * href="https://stripe.com/api/invoices/object">Invoices</a>, and <a
+   * href="https://stripe.com/api/subscriptions/object">Subscriptions</a>.
+   */
+  @SerializedName("managed_payments")
+  ManagedPayments managedPayments;
+
+  /**
    * Set of <a href="https://docs.stripe.com/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
    * structured format. Individual keys can be unset by posting an empty value to them. All keys can
@@ -459,6 +468,7 @@ public class SessionCreateParams extends ApiRequestParams {
       InvoiceCreation invoiceCreation,
       List<SessionCreateParams.LineItem> lineItems,
       Locale locale,
+      ManagedPayments managedPayments,
       Map<String, String> metadata,
       Mode mode,
       NameCollection nameCollection,
@@ -509,6 +519,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.invoiceCreation = invoiceCreation;
     this.lineItems = lineItems;
     this.locale = locale;
+    this.managedPayments = managedPayments;
     this.metadata = metadata;
     this.mode = mode;
     this.nameCollection = nameCollection;
@@ -591,6 +602,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Locale locale;
 
+    private ManagedPayments managedPayments;
+
     private Map<String, String> metadata;
 
     private Mode mode;
@@ -669,6 +682,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.invoiceCreation,
           this.lineItems,
           this.locale,
+          this.managedPayments,
           this.metadata,
           this.mode,
           this.nameCollection,
@@ -1046,6 +1060,17 @@ public class SessionCreateParams extends ApiRequestParams {
      */
     public Builder setLocale(SessionCreateParams.Locale locale) {
       this.locale = locale;
+      return this;
+    }
+
+    /**
+     * Settings for Managed Payments for this Checkout Session and resulting <a
+     * href="https://stripe.com/api/payment_intents/object">PaymentIntents</a>, <a
+     * href="https://stripe.com/api/invoices/object">Invoices</a>, and <a
+     * href="https://stripe.com/api/subscriptions/object">Subscriptions</a>.
+     */
+    public Builder setManagedPayments(SessionCreateParams.ManagedPayments managedPayments) {
+      this.managedPayments = managedPayments;
       return this;
     }
 
@@ -2841,8 +2866,8 @@ public class SessionCreateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Dropdown {
       /**
-       * The value that will pre-fill the field on the payment page.Must match a {@code value} in
-       * the {@code options} array.
+       * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+       * {@code options} array.
        */
       @SerializedName("default_value")
       String defaultValue;
@@ -2890,8 +2915,8 @@ public class SessionCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The value that will pre-fill the field on the payment page.Must match a {@code value} in
-         * the {@code options} array.
+         * The value that pre-fills the field on the payment page.Must match a {@code value} in the
+         * {@code options} array.
          */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
@@ -3161,7 +3186,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Numeric {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -3212,7 +3237,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
         }
 
-        /** The value that will pre-fill the field on the payment page. */
+        /** The value that pre-fills the field on the payment page. */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
           return this;
@@ -3263,7 +3288,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Text {
-      /** The value that will pre-fill the field on the payment page. */
+      /** The value that pre-fills the field on the payment page. */
       @SerializedName("default_value")
       String defaultValue;
 
@@ -3314,7 +3339,7 @@ public class SessionCreateParams extends ApiRequestParams {
               this.defaultValue, this.extraParams, this.maximumLength, this.minimumLength);
         }
 
-        /** The value that will pre-fill the field on the payment page. */
+        /** The value that pre-fills the field on the payment page. */
         public Builder setDefaultValue(String defaultValue) {
           this.defaultValue = defaultValue;
           return this;
@@ -3544,7 +3569,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -3595,7 +3620,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -3615,7 +3640,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -3666,7 +3691,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -3686,7 +3711,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -3737,7 +3762,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -3757,7 +3782,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+      /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
       @SerializedName("message")
       String message;
 
@@ -3809,7 +3834,7 @@ public class SessionCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> Text may be up to 1200 characters in length. */
+        /** <strong>Required.</strong> Text can be up to 1200 characters in length. */
         public Builder setMessage(String message) {
           this.message = message;
           return this;
@@ -5991,6 +6016,83 @@ public class SessionCreateParams extends ApiRequestParams {
         TaxBehavior(String value) {
           this.value = value;
         }
+      }
+    }
+  }
+
+  @Getter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ManagedPayments {
+    /**
+     * Set to {@code true} to enable <a
+     * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+     * merchant of record solution, for this session.
+     */
+    @SerializedName("enabled")
+    Boolean enabled;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private ManagedPayments(Boolean enabled, Map<String, Object> extraParams) {
+      this.enabled = enabled;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Boolean enabled;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SessionCreateParams.ManagedPayments build() {
+        return new SessionCreateParams.ManagedPayments(this.enabled, this.extraParams);
+      }
+
+      /**
+       * Set to {@code true} to enable <a
+       * href="https://docs.stripe.com/payments/managed-payments">Managed Payments</a>, Stripe's
+       * merchant of record solution, for this session.
+       */
+      public Builder setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.ManagedPayments#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.ManagedPayments#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
     }
   }
@@ -11269,8 +11371,7 @@ public class SessionCreateParams extends ApiRequestParams {
         public static class EuBankTransfer {
           /**
            * <strong>Required.</strong> The desired country code of the bank account information.
-           * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
-           * or {@code NL}.
+           * Permitted values include: {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
            */
           @SerializedName("country")
           String country;
@@ -11309,8 +11410,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The desired country code of the bank account information.
-             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
-             * or {@code NL}.
+             * Permitted values include: {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
              */
             public Builder setCountry(String country) {
               this.country = country;
