@@ -698,8 +698,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * fails. Use this for strict validation that prevents processing with line item data that has
      * arithmetic inconsistencies.
      *
-     * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic validation
-     * error to card networks.
+     * <p>For card payments, Stripe doesn't send line item data to card networks if there's an
+     * arithmetic validation error.
      */
     @SerializedName("enforce_arithmetic_validation")
     Boolean enforceArithmeticValidation;
@@ -806,8 +806,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * fails. Use this for strict validation that prevents processing with line item data that has
        * arithmetic inconsistencies.
        *
-       * <p>For card payments, Stripe doesn't send line item data if there's an arithmetic
-       * validation error to card networks.
+       * <p>For card payments, Stripe doesn't send line item data to card networks if there's an
+       * arithmetic validation error.
        */
       public Builder setEnforceArithmeticValidation(Boolean enforceArithmeticValidation) {
         this.enforceArithmeticValidation = enforceArithmeticValidation;
@@ -952,7 +952,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
        * most 1024 characters long.
        *
        * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to
-       * the card networks. For Paypal, this field is truncated to 127 characters.
+       * the card networks. For PayPal, this field is truncated to 127 characters.
        */
       @SerializedName("product_name")
       String productName;
@@ -1101,7 +1101,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          * most 1024 characters long.
          *
          * <p>For Cards, this field is truncated to 26 alphanumeric characters before being sent to
-         * the card networks. For Paypal, this field is truncated to 127 characters.
+         * the card networks. For PayPal, this field is truncated to 127 characters.
          */
         public Builder setProductName(String productName) {
           this.productName = productName;
@@ -1144,15 +1144,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @EqualsAndHashCode(callSuper = false)
       public static class PaymentMethodOptions {
         /**
-         * This sub-hash contains line item details that are specific to {@code card} payment
-         * method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code card} payment
+         * method.
          */
         @SerializedName("card")
         Card card;
 
         /**
-         * This sub-hash contains line item details that are specific to {@code card_present}
-         * payment method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code card_present}
+         * payment method.
          */
         @SerializedName("card_present")
         CardPresent cardPresent;
@@ -1168,15 +1168,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * This sub-hash contains line item details that are specific to {@code klarna} payment
-         * method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code klarna} payment
+         * method.
          */
         @SerializedName("klarna")
         Klarna klarna;
 
         /**
-         * This sub-hash contains line item details that are specific to {@code paypal} payment
-         * method.&quot;.
+         * This sub-hash contains line item details that are specific to the {@code paypal} payment
+         * method.
          */
         @SerializedName("paypal")
         Paypal paypal;
@@ -1216,8 +1216,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code card} payment
-           * method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code card} payment
+           * method.
            */
           public Builder setCard(
               PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Card card) {
@@ -1226,8 +1226,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code card_present}
-           * payment method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code card_present}
+           * payment method.
            */
           public Builder setCardPresent(
               PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.CardPresent
@@ -1267,8 +1267,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code klarna} payment
-           * method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code klarna}
+           * payment method.
            */
           public Builder setKlarna(
               PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Klarna
@@ -1278,8 +1278,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           }
 
           /**
-           * This sub-hash contains line item details that are specific to {@code paypal} payment
-           * method.&quot;.
+           * This sub-hash contains line item details that are specific to the {@code paypal}
+           * payment method.
            */
           public Builder setPaypal(
               PaymentIntentConfirmParams.AmountDetails.LineItem.PaymentMethodOptions.Paypal
@@ -1294,7 +1294,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public static class Card {
           /**
            * Identifier that categorizes the items being purchased using a standardized commodity
-           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
            */
           @SerializedName("commodity_code")
           String commodityCode;
@@ -1332,7 +1332,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
             /**
              * Identifier that categorizes the items being purchased using a standardized commodity
-             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
              */
             public Builder setCommodityCode(String commodityCode) {
               this.commodityCode = commodityCode;
@@ -1376,7 +1376,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public static class CardPresent {
           /**
            * Identifier that categorizes the items being purchased using a standardized commodity
-           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+           * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
            */
           @SerializedName("commodity_code")
           String commodityCode;
@@ -1415,7 +1415,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
             /**
              * Identifier that categorizes the items being purchased using a standardized commodity
-             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, etc.
+             * scheme such as (but not limited to) UNSPSC, NAICS, NAPCS, and so on.
              */
             public Builder setCommodityCode(String commodityCode) {
               this.commodityCode = commodityCode;
@@ -15537,8 +15537,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         public static class EuBankTransfer {
           /**
            * <strong>Required.</strong> The desired country code of the bank account information.
-           * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
-           * or {@code NL}.
+           * Permitted values include: {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
            */
           @SerializedName("country")
           String country;
@@ -15577,8 +15576,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
             /**
              * <strong>Required.</strong> The desired country code of the bank account information.
-             * Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE},
-             * or {@code NL}.
+             * Permitted values include: {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
              */
             public Builder setCountry(String country) {
               this.country = country;
@@ -22246,6 +22244,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       @SerializedName("target_date")
       String targetDate;
 
+      /** The purpose of the transaction. */
+      @SerializedName("transaction_purpose")
+      ApiRequestParams.EnumParam transactionPurpose;
+
       /** Bank account verification method. */
       @SerializedName("verification_method")
       VerificationMethod verificationMethod;
@@ -22258,6 +22260,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           ApiRequestParams.EnumParam preferredSettlementSpeed,
           ApiRequestParams.EnumParam setupFutureUsage,
           String targetDate,
+          ApiRequestParams.EnumParam transactionPurpose,
           VerificationMethod verificationMethod) {
         this.extraParams = extraParams;
         this.financialConnections = financialConnections;
@@ -22266,6 +22269,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.preferredSettlementSpeed = preferredSettlementSpeed;
         this.setupFutureUsage = setupFutureUsage;
         this.targetDate = targetDate;
+        this.transactionPurpose = transactionPurpose;
         this.verificationMethod = verificationMethod;
       }
 
@@ -22288,6 +22292,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private String targetDate;
 
+        private ApiRequestParams.EnumParam transactionPurpose;
+
         private VerificationMethod verificationMethod;
 
         /** Finalize and obtain parameter instance from this builder. */
@@ -22300,6 +22306,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
               this.preferredSettlementSpeed,
               this.setupFutureUsage,
               this.targetDate,
+              this.transactionPurpose,
               this.verificationMethod);
         }
 
@@ -22437,6 +22444,20 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
          */
         public Builder setTargetDate(String targetDate) {
           this.targetDate = targetDate;
+          return this;
+        }
+
+        /** The purpose of the transaction. */
+        public Builder setTransactionPurpose(
+            PaymentIntentConfirmParams.PaymentMethodOptions.UsBankAccount.TransactionPurpose
+                transactionPurpose) {
+          this.transactionPurpose = transactionPurpose;
+          return this;
+        }
+
+        /** The purpose of the transaction. */
+        public Builder setTransactionPurpose(EmptyParam transactionPurpose) {
+          this.transactionPurpose = transactionPurpose;
           return this;
         }
 
@@ -23091,6 +23112,27 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         private final String value;
 
         SetupFutureUsage(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum TransactionPurpose implements ApiRequestParams.EnumParam {
+        @SerializedName("goods")
+        GOODS("goods"),
+
+        @SerializedName("other")
+        OTHER("other"),
+
+        @SerializedName("services")
+        SERVICES("services"),
+
+        @SerializedName("unspecified")
+        UNSPECIFIED("unspecified");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        TransactionPurpose(String value) {
           this.value = value;
         }
       }
