@@ -1,5 +1,16 @@
 # Changelog
 
+## 31.4.0-alpha.4 - 2026-02-19
+* [#2156](https://github.com/stripe/stripe-java/pull/2156) Update generated code for private-preview
+  * Add support for new value `spend_threshold` on enums `billing.AlertCreateParams.alertType` and `billing.AlertListParams.alertType`
+  * Add support for `spendThreshold` on `billing.AlertCreateParams` and `billing.Alert`
+  * Add support for `invoiceItem`, `prorationDetails`, `proration`, and `subscription` on `InvoiceLineItem.parent.schedule_details`
+  * Add support for `custom` on `PaymentMethodUpdateParams`
+  * Add support for `paymentMethodReference` and `usage` on `PaymentMethod.custom`
+  * Add support for `outstandingUsageThrough` and `unusedTimeFrom` on `SubscriptionPauseParams.bill_for`
+  * ⚠️ Remove support for `outstandingUsage` and `unusedTime` on `SubscriptionPauseParams.bill_for`
+  * ⚠️ Remove support for `paymentBehavior` on `SubscriptionResumeParams`
+
 ## 31.4.0-alpha.3 - 2026-02-11
 * [#2154](https://github.com/stripe/stripe-java/pull/2154) Update generated code for private-preview
   * Add support for new resources `v2.billing.CadenceSpendModifier`, `v2.billing.OneTimeItem`, and `v2.billing.RateCardCustomPricingUnitOverageRate`
