@@ -25562,6 +25562,34 @@ class GeneratedExamples extends BaseStripeTest {
   }
 
   @Test
+  public void testV2CoreBatchJobPostServices() throws StripeException {
+    stubRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/batch_jobs",
+        null,
+        null,
+        com.stripe.model.v2.core.BatchJob.class,
+        "{\"id\":\"obj_123\",\"object\":\"v2.core.batch_job\",\"url\":\"url\"}");
+    StripeClient client = new StripeClient(networkSpy);
+
+    com.stripe.param.v2.core.BatchJobCreateParams params =
+        com.stripe.param.v2.core.BatchJobCreateParams.builder()
+            .setEndpoint(
+                com.stripe.param.v2.core.BatchJobCreateParams.Endpoint._V1_SUBSCRIPTION_SCHEDULES)
+            .build();
+
+    com.stripe.model.v2.core.BatchJob batchJob = client.v2().core().batchJobs().create(params);
+    assertNotNull(batchJob);
+    verifyRequest(
+        BaseAddress.API,
+        ApiResource.RequestMethod.POST,
+        "/v2/core/batch_jobs",
+        params.toMap(),
+        null);
+  }
+
+  @Test
   public void testV2CoreEventGetServices() throws StripeException {
     stubRequest(
         BaseAddress.API,
