@@ -1,5 +1,19 @@
 # Changelog
 
+## 31.5.0-alpha.1 - 2026-02-25
+This release changes the pinned API version to `2026-02-25.preview`.
+
+* [#2157](https://github.com/stripe/stripe-java/pull/2157) Update generated code for private-preview
+  * Add support for new resource `AccountSignals`
+  * Add support for `retrieve` method on resource `AccountSignals`
+  * Add support for `aggregationPeriod`, `groupBy`, and `triggeredAt` on `billing.AlertTriggered`
+  * Add support for `externalAccountCollection` on `AccountLinkCreateParams.collection_options`
+  * Add support for `fundingSource` on `ApplicationFee`
+  * Change `delegatedcheckout.RequestedSessionConfirmParams.payment_method_data.billing_details.address.line1`, `delegatedcheckout.RequestedSessionCreateParams.fulfillment_details.address.line1`, `delegatedcheckout.RequestedSessionCreateParams.payment_method_data.billing_details.address.line1`, `delegatedcheckout.RequestedSessionUpdateParams.fulfillment_details.address.line1`, and `delegatedcheckout.RequestedSessionUpdateParams.payment_method_data.billing_details.address.line1` to be optional
+  * Add support for `hosted` and `uiMode` on `financialconnections.SessionCreateParams` and `financialconnections.Session`
+  * Add support for `url` on `financialconnections.Session`
+  * Add support for `billingCycleAnchor` on `SubscriptionCreateParams.trial_settings.end_behavior` and `SubscriptionUpdateParams.trial_settings.end_behavior`
+
 ## 31.4.0 - 2026-02-25
 This release changes the pinned API version to `2026-02-25.clover`.
 
