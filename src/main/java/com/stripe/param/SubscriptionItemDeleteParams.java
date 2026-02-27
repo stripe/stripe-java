@@ -28,6 +28,37 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
+   * payment is required but cannot be paid. This allows you to manage scenarios where additional
+   * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
+   * require 3DS authentication to complete payment. See the <a
+   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
+   * Guide</a> for Billing to learn more. This is the default behavior.
+   *
+   * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
+   * when payment is required and await explicit confirmation of the invoice's payment intent. This
+   * allows simpler management of scenarios where additional user actions are needed to pay a
+   * subscription’s invoice. Such as failed payments, <a
+   * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
+   * regulation</a>, or collecting a mandate for a bank debit payment method.
+   *
+   * <p>Use {@code pending_if_incomplete} to update the subscription using <a
+   * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>. When
+   * you use {@code pending_if_incomplete} you can only pass the parameters <a
+   * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
+   * by pending updates</a>.
+   *
+   * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
+   * subscription's invoice cannot be paid. For example, if a payment method requires 3DS
+   * authentication due to SCA regulation and further user action is needed, this parameter does not
+   * update the subscription and returns an error instead. This was the default behavior for API
+   * versions prior to 2019-03-14. See the <a
+   * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
+   */
+  @SerializedName("payment_behavior")
+  PaymentBehavior paymentBehavior;
+
+  /**
    * Determines how to handle <a
    * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the billing
    * cycle changes (e.g., when switching plans, resetting {@code billing_cycle_anchor=now}, or
@@ -48,10 +79,12 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
   private SubscriptionItemDeleteParams(
       Boolean clearUsage,
       Map<String, Object> extraParams,
+      PaymentBehavior paymentBehavior,
       ProrationBehavior prorationBehavior,
       Long prorationDate) {
     this.clearUsage = clearUsage;
     this.extraParams = extraParams;
+    this.paymentBehavior = paymentBehavior;
     this.prorationBehavior = prorationBehavior;
     this.prorationDate = prorationDate;
   }
@@ -65,6 +98,8 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private PaymentBehavior paymentBehavior;
+
     private ProrationBehavior prorationBehavior;
 
     private Long prorationDate;
@@ -72,7 +107,11 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemDeleteParams build() {
       return new SubscriptionItemDeleteParams(
-          this.clearUsage, this.extraParams, this.prorationBehavior, this.prorationDate);
+          this.clearUsage,
+          this.extraParams,
+          this.paymentBehavior,
+          this.prorationBehavior,
+          this.prorationDate);
     }
 
     /**
@@ -111,6 +150,40 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     }
 
     /**
+     * Use {@code allow_incomplete} to transition the subscription to {@code status=past_due} if a
+     * payment is required but cannot be paid. This allows you to manage scenarios where additional
+     * user actions are needed to pay a subscription's invoice. For example, SCA regulation may
+     * require 3DS authentication to complete payment. See the <a
+     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA Migration
+     * Guide</a> for Billing to learn more. This is the default behavior.
+     *
+     * <p>Use {@code default_incomplete} to transition the subscription to {@code status=past_due}
+     * when payment is required and await explicit confirmation of the invoice's payment intent.
+     * This allows simpler management of scenarios where additional user actions are needed to pay a
+     * subscription’s invoice. Such as failed payments, <a
+     * href="https://docs.stripe.com/billing/migration/strong-customer-authentication">SCA
+     * regulation</a>, or collecting a mandate for a bank debit payment method.
+     *
+     * <p>Use {@code pending_if_incomplete} to update the subscription using <a
+     * href="https://docs.stripe.com/billing/subscriptions/pending-updates">pending updates</a>.
+     * When you use {@code pending_if_incomplete} you can only pass the parameters <a
+     * href="https://docs.stripe.com/billing/pending-updates-reference#supported-attributes">supported
+     * by pending updates</a>.
+     *
+     * <p>Use {@code error_if_incomplete} if you want Stripe to return an HTTP 402 status code if a
+     * subscription's invoice cannot be paid. For example, if a payment method requires 3DS
+     * authentication due to SCA regulation and further user action is needed, this parameter does
+     * not update the subscription and returns an error instead. This was the default behavior for
+     * API versions prior to 2019-03-14. See the <a
+     * href="https://docs.stripe.com/changelog/2019-03-14">changelog</a> to learn more.
+     */
+    public Builder setPaymentBehavior(
+        SubscriptionItemDeleteParams.PaymentBehavior paymentBehavior) {
+      this.paymentBehavior = paymentBehavior;
+      return this;
+    }
+
+    /**
      * Determines how to handle <a
      * href="https://docs.stripe.com/billing/subscriptions/prorations">prorations</a> when the
      * billing cycle changes (e.g., when switching plans, resetting {@code
@@ -131,6 +204,27 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;
       return this;
+    }
+  }
+
+  public enum PaymentBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("allow_incomplete")
+    ALLOW_INCOMPLETE("allow_incomplete"),
+
+    @SerializedName("default_incomplete")
+    DEFAULT_INCOMPLETE("default_incomplete"),
+
+    @SerializedName("error_if_incomplete")
+    ERROR_IF_INCOMPLETE("error_if_incomplete"),
+
+    @SerializedName("pending_if_incomplete")
+    PENDING_IF_INCOMPLETE("pending_if_incomplete");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PaymentBehavior(String value) {
+      this.value = value;
     }
   }
 

@@ -457,22 +457,23 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     Long quantity;
 
     /**
-     * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
-     * tax_rates}.
+     * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+     * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
      */
     @SerializedName("tax_amounts")
     Object taxAmounts;
 
     /**
      * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-     * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
+     * {@code custom_line_item} and {@code tax_amounts} is not used.
      */
     @SerializedName("tax_rates")
     Object taxRates;
 
     /**
      * <strong>Required.</strong> Type of the credit note line item, one of {@code
-     * invoice_line_item} or {@code custom_line_item}
+     * invoice_line_item} or {@code custom_line_item}. {@code custom_line_item} is not valid when
+     * the invoice is set up with {@code automatic_tax[enabled]=true}.
      */
     @SerializedName("type")
     Type type;
@@ -644,8 +645,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
-       * tax_rates}.
+       * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+       * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setTaxAmounts(EmptyParam taxAmounts) {
         this.taxAmounts = taxAmounts;
@@ -653,8 +654,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * A list of up to 10 tax amounts for the credit note line item. Cannot be mixed with {@code
-       * tax_rates}.
+       * A list of up to 10 tax amounts for the credit note line item. Not valid when {@code
+       * tax_rates} is used or if invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setTaxAmounts(List<CreditNotePreviewParams.Line.TaxAmount> taxAmounts) {
         this.taxAmounts = taxAmounts;
@@ -691,7 +692,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
 
       /**
        * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-       * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
+       * {@code custom_line_item} and {@code tax_amounts} is not used.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
@@ -700,7 +701,7 @@ public class CreditNotePreviewParams extends ApiRequestParams {
 
       /**
        * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
-       * {@code custom_line_item} and cannot be mixed with {@code tax_amounts}.
+       * {@code custom_line_item} and {@code tax_amounts} is not used.
        */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
@@ -709,7 +710,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
 
       /**
        * <strong>Required.</strong> Type of the credit note line item, one of {@code
-       * invoice_line_item} or {@code custom_line_item}
+       * invoice_line_item} or {@code custom_line_item}. {@code custom_line_item} is not valid when
+       * the invoice is set up with {@code automatic_tax[enabled]=true}.
        */
       public Builder setType(CreditNotePreviewParams.Line.Type type) {
         this.type = type;

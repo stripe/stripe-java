@@ -3885,7 +3885,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
         public static class EuBankTransfer extends StripeObject {
           /**
            * The desired country code of the bank account information. Permitted values include:
-           * {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
+           * {@code DE}, {@code FR}, {@code IE}, or {@code NL}.
            *
            * <p>One of {@code BE}, {@code DE}, {@code ES}, {@code FR}, {@code IE}, or {@code NL}.
            */
@@ -5159,6 +5159,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("target_date")
       String targetDate;
+
+      /**
+       * The purpose of the transaction.
+       *
+       * <p>One of {@code goods}, {@code other}, {@code services}, or {@code unspecified}.
+       */
+      @SerializedName("transaction_purpose")
+      String transactionPurpose;
 
       /**
        * Bank account verification method.

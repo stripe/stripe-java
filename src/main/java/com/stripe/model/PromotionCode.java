@@ -42,7 +42,7 @@ public class PromotionCode extends ApiResource implements HasId, MetadataStore<P
   /**
    * The customer-facing code. Regardless of case, this code must be unique across all active
    * promotion codes for each customer. Valid characters are lower case letters (a-z), upper case
-   * letters (A-Z), and digits (0-9).
+   * letters (A-Z), digits (0-9), and dashes (-).
    */
   @SerializedName("code")
   String code;
