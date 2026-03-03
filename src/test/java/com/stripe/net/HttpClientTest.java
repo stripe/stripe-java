@@ -192,9 +192,8 @@ public class HttpClientTest extends BaseStripeTest {
             RequestOptions.builder().setApiKey("sk_test_123").setMaxNetworkRetries(2).build(),
             ApiMode.V1);
 
-    assertEquals(
-        HttpClient.buildUserAgentString(request),
-        String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION));
+    String userAgent = HttpClient.buildUserAgentString(request);
+    assertTrue(userAgent.startsWith(String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION)));
   }
 
   @Test
@@ -207,8 +206,52 @@ public class HttpClientTest extends BaseStripeTest {
             RequestOptions.builder().setApiKey("sk_test_123").setMaxNetworkRetries(2).build(),
             ApiMode.V2);
 
-    assertEquals(
-        HttpClient.buildUserAgentString(request),
-        String.format("Stripe/v2 JavaBindings/%s", Stripe.VERSION));
+    String userAgent = HttpClient.buildUserAgentString(request);
+    assertTrue(userAgent.startsWith(String.format("Stripe/v2 JavaBindings/%s", Stripe.VERSION)));
+  }
+
+  @Test
+  public void testDetectAIAgent() {
+    String agent = HttpClient.detectAIAgent(key -> key.equals("CLAUDECODE") ? "1" : null);
+    assertEquals("claude_code", agent);
+  }
+
+  @Test
+  public void testDetectAIAgentNoEnv() {
+    String agent = HttpClient.detectAIAgent(key -> null);
+    assertEquals("", agent);
+  }
+
+  @Test
+  public void testDetectAIAgentFirstMatchWins() {
+    String agent =
+        HttpClient.detectAIAgent(
+            key -> {
+              if (key.equals("CURSOR_AGENT") || key.equals("OPENCODE")) return "1";
+              return null;
+            });
+    assertEquals("cursor", agent);
+  }
+
+  @Test
+  public void testBuildUserAgentStringWithAIAgent() throws StripeException {
+    StripeRequest request =
+        StripeRequest.create(
+            ApiResource.RequestMethod.GET,
+            "http://example.com/get",
+            null,
+            RequestOptions.builder().setApiKey("sk_test_123").build(),
+            ApiMode.V1);
+
+    String userAgent = HttpClient.buildUserAgentString(request, "cursor");
+    assertTrue(userAgent.contains("AIAgent/cursor"));
+  }
+
+  @Test
+  public void testBuildXStripeClientUserAgentStringWithAIAgent() {
+    String json = HttpClient.buildXStripeClientUserAgentString("cursor");
+    com.google.gson.JsonObject parsed =
+        com.google.gson.JsonParser.parseString(json).getAsJsonObject();
+    assertEquals("cursor", parsed.get("ai_agent").getAsString());
   }
 }
