@@ -14589,6 +14589,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("paypay_payments")
     PaypayPayments paypayPayments;
 
+    /** Settings specific to the account's use of Smart Disputes. */
+    @SerializedName("smart_disputes")
+    SmartDisputes smartDisputes;
+
     /** Settings specific to the account's tax forms. */
     @SerializedName("tax_forms")
     TaxForms taxForms;
@@ -14609,6 +14613,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Payments payments,
         Payouts payouts,
         PaypayPayments paypayPayments,
+        SmartDisputes smartDisputes,
         TaxForms taxForms,
         Treasury treasury) {
       this.bacsDebitPayments = bacsDebitPayments;
@@ -14622,6 +14627,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.payments = payments;
       this.payouts = payouts;
       this.paypayPayments = paypayPayments;
+      this.smartDisputes = smartDisputes;
       this.taxForms = taxForms;
       this.treasury = treasury;
     }
@@ -14653,6 +14659,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private PaypayPayments paypayPayments;
 
+      private SmartDisputes smartDisputes;
+
       private TaxForms taxForms;
 
       private Treasury treasury;
@@ -14671,6 +14679,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.payments,
             this.payouts,
             this.paypayPayments,
+            this.smartDisputes,
             this.taxForms,
             this.treasury);
       }
@@ -14763,6 +14772,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** Settings specific to the PayPay payments method. */
       public Builder setPaypayPayments(AccountUpdateParams.Settings.PaypayPayments paypayPayments) {
         this.paypayPayments = paypayPayments;
+        return this;
+      }
+
+      /** Settings specific to the account's use of Smart Disputes. */
+      public Builder setSmartDisputes(AccountUpdateParams.Settings.SmartDisputes smartDisputes) {
+        this.smartDisputes = smartDisputes;
         return this;
       }
 
@@ -15948,6 +15963,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @EqualsAndHashCode(callSuper = false)
     public static class Payments {
       /**
+       * When you enable this parameter, the customer of this Account receives an email receipt when
+       * their payment succeeds. If this parameter isn't set, the default value is {@code false}.
+       */
+      @SerializedName("email_customers_on_successful_payment")
+      Boolean emailCustomersOnSuccessfulPayment;
+
+      /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
        * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
@@ -15988,10 +16010,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       Object statementDescriptorKanji;
 
       private Payments(
+          Boolean emailCustomersOnSuccessfulPayment,
           Map<String, Object> extraParams,
           Object statementDescriptor,
           Object statementDescriptorKana,
           Object statementDescriptorKanji) {
+        this.emailCustomersOnSuccessfulPayment = emailCustomersOnSuccessfulPayment;
         this.extraParams = extraParams;
         this.statementDescriptor = statementDescriptor;
         this.statementDescriptorKana = statementDescriptorKana;
@@ -16003,6 +16027,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Boolean emailCustomersOnSuccessfulPayment;
+
         private Map<String, Object> extraParams;
 
         private Object statementDescriptor;
@@ -16014,10 +16040,22 @@ public class AccountUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public AccountUpdateParams.Settings.Payments build() {
           return new AccountUpdateParams.Settings.Payments(
+              this.emailCustomersOnSuccessfulPayment,
               this.extraParams,
               this.statementDescriptor,
               this.statementDescriptorKana,
               this.statementDescriptorKanji);
+        }
+
+        /**
+         * When you enable this parameter, the customer of this Account receives an email receipt
+         * when their payment succeeds. If this parameter isn't set, the default value is {@code
+         * false}.
+         */
+        public Builder setEmailCustomersOnSuccessfulPayment(
+            Boolean emailCustomersOnSuccessfulPayment) {
+          this.emailCustomersOnSuccessfulPayment = emailCustomersOnSuccessfulPayment;
+          return this;
         }
 
         /**
@@ -17128,6 +17166,170 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         GoodsType(String value) {
           this.value = value;
+        }
+      }
+    }
+
+    @Getter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SmartDisputes {
+      /** Smart Disputes auto-respond settings for the account. */
+      @SerializedName("auto_respond")
+      AutoRespond autoRespond;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private SmartDisputes(AutoRespond autoRespond, Map<String, Object> extraParams) {
+        this.autoRespond = autoRespond;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private AutoRespond autoRespond;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public AccountUpdateParams.Settings.SmartDisputes build() {
+          return new AccountUpdateParams.Settings.SmartDisputes(this.autoRespond, this.extraParams);
+        }
+
+        /** Smart Disputes auto-respond settings for the account. */
+        public Builder setAutoRespond(
+            AccountUpdateParams.Settings.SmartDisputes.AutoRespond autoRespond) {
+          this.autoRespond = autoRespond;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.SmartDisputes#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountUpdateParams.Settings.SmartDisputes#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AutoRespond {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The preference setting for auto-respond. Can be 'on', 'off', or 'inherit'. */
+        @SerializedName("preference")
+        Preference preference;
+
+        private AutoRespond(Map<String, Object> extraParams, Preference preference) {
+          this.extraParams = extraParams;
+          this.preference = preference;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private Preference preference;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AccountUpdateParams.Settings.SmartDisputes.AutoRespond build() {
+            return new AccountUpdateParams.Settings.SmartDisputes.AutoRespond(
+                this.extraParams, this.preference);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountUpdateParams.Settings.SmartDisputes.AutoRespond#extraParams} for
+           * the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountUpdateParams.Settings.SmartDisputes.AutoRespond#extraParams} for
+           * the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The preference setting for auto-respond. Can be 'on', 'off', or 'inherit'. */
+          public Builder setPreference(
+              AccountUpdateParams.Settings.SmartDisputes.AutoRespond.Preference preference) {
+            this.preference = preference;
+            return this;
+          }
+        }
+
+        public enum Preference implements ApiRequestParams.EnumParam {
+          @SerializedName("inherit")
+          INHERIT("inherit"),
+
+          @SerializedName("off")
+          OFF("off"),
+
+          @SerializedName("on")
+          ON("on");
+
+          @Getter(onMethod_ = {@Override})
+          private final String value;
+
+          Preference(String value) {
+            this.value = value;
+          }
         }
       }
     }

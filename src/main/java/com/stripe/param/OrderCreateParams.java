@@ -4155,8 +4155,8 @@ public class OrderCreateParams extends ApiRequestParams {
             public static class EuBankTransfer {
               /**
                * <strong>Required.</strong> The desired country code of the bank account
-               * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
-               * FR}, {@code IE}, or {@code NL}.
+               * information. Permitted values include: {@code DE}, {@code FR}, {@code IE}, or
+               * {@code NL}.
                */
               @SerializedName("country")
               String country;
@@ -4195,8 +4195,8 @@ public class OrderCreateParams extends ApiRequestParams {
 
                 /**
                  * <strong>Required.</strong> The desired country code of the bank account
-                 * information. Permitted values include: {@code BE}, {@code DE}, {@code ES}, {@code
-                 * FR}, {@code IE}, or {@code NL}.
+                 * information. Permitted values include: {@code DE}, {@code FR}, {@code IE}, or
+                 * {@code NL}.
                  */
                 public Builder setCountry(String country) {
                   this.country = country;
@@ -15560,15 +15560,15 @@ public class OrderCreateParams extends ApiRequestParams {
        * {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat}, {@code
        * jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code kh_tin},
        * {@code kr_brn}, {@code kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat}, {@code
-       * ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code mx_rfc},
-       * {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat}, {@code
-       * no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code ph_tin},
-       * {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp}, {@code
-       * sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code sr_fin},
-       * {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat}, {@code
-       * tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code uz_tin},
-       * {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin}, or {@code
-       * zw_tin}
+       * lk_vat}, {@code ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif},
+       * {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code
+       * no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc},
+       * {@code ph_tin}, {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code
+       * ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea},
+       * {@code sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code
+       * tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc},
+       * {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code
+       * zm_tin}, or {@code zw_tin}
        */
       @SerializedName("type")
       Type type;
@@ -15641,15 +15641,15 @@ public class OrderCreateParams extends ApiRequestParams {
          * hr_oib}, {@code hu_tin}, {@code id_npwp}, {@code il_vat}, {@code in_gst}, {@code is_vat},
          * {@code jp_cn}, {@code jp_rn}, {@code jp_trn}, {@code ke_pin}, {@code kg_tin}, {@code
          * kh_tin}, {@code kr_brn}, {@code kz_bin}, {@code la_tin}, {@code li_uid}, {@code li_vat},
-         * {@code ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code mr_nif}, {@code
-         * mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin}, {@code no_vat},
-         * {@code no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code pe_ruc}, {@code
-         * ph_tin}, {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn}, {@code ru_kpp},
-         * {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code sn_ninea}, {@code
-         * sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code tr_tin}, {@code tw_vat},
-         * {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein}, {@code uy_ruc}, {@code
-         * uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code za_vat}, {@code zm_tin},
-         * or {@code zw_tin}
+         * {@code lk_vat}, {@code ma_vat}, {@code md_vat}, {@code me_pib}, {@code mk_vat}, {@code
+         * mr_nif}, {@code mx_rfc}, {@code my_frp}, {@code my_itn}, {@code my_sst}, {@code ng_tin},
+         * {@code no_vat}, {@code no_voec}, {@code np_pan}, {@code nz_gst}, {@code om_vat}, {@code
+         * pe_ruc}, {@code ph_tin}, {@code pl_nip}, {@code ro_tin}, {@code rs_pib}, {@code ru_inn},
+         * {@code ru_kpp}, {@code sa_vat}, {@code sg_gst}, {@code sg_uen}, {@code si_tin}, {@code
+         * sn_ninea}, {@code sr_fin}, {@code sv_nit}, {@code th_vat}, {@code tj_tin}, {@code
+         * tr_tin}, {@code tw_vat}, {@code tz_vat}, {@code ua_vat}, {@code ug_tin}, {@code us_ein},
+         * {@code uy_ruc}, {@code uz_tin}, {@code uz_vat}, {@code ve_rif}, {@code vn_tin}, {@code
+         * za_vat}, {@code zm_tin}, or {@code zw_tin}
          */
         public Builder setType(OrderCreateParams.TaxDetails.TaxId.Type type) {
           this.type = type;
@@ -15861,6 +15861,9 @@ public class OrderCreateParams extends ApiRequestParams {
 
         @SerializedName("li_vat")
         LI_VAT("li_vat"),
+
+        @SerializedName("lk_vat")
+        LK_VAT("lk_vat"),
 
         @SerializedName("ma_vat")
         MA_VAT("ma_vat"),

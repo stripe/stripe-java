@@ -133,7 +133,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
 
   /**
    * A unique identifier that can be used to track this OutboundTransfer with recipient bank. Banks
-   * might call this a “reference number” or something similar.
+   * might call this a &quot;reference number&quot; or something similar.
    */
   @SerializedName("trace_id")
   TraceId traceId;
@@ -331,7 +331,7 @@ public class OutboundTransfer extends StripeObject implements HasId {
 
   /**
    * A unique identifier that can be used to track this OutboundTransfer with recipient bank. Banks
-   * might call this a “reference number” or something similar.
+   * might call this a &quot;reference number&quot; or something similar.
    */
   @Getter
   @Setter

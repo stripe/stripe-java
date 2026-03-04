@@ -790,7 +790,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Whether manual entry will be handled by Stripe during the Session. */
+    /** How manual entry should be handled. */
     @SerializedName("mode")
     Mode mode;
 
@@ -839,7 +839,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Whether manual entry will be handled by Stripe during the Session. */
+      /** How manual entry should be handled. */
       public Builder setMode(SessionCreateParams.ManualEntry.Mode mode) {
         this.mode = mode;
         return this;

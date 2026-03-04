@@ -236,6 +236,9 @@ public final class EventDataClassLookup {
     eventClassLookup.put(
         "v2.billing.rate_card.updated", com.stripe.events.V2BillingRateCardUpdatedEvent.class);
     eventClassLookup.put(
+        "v2.billing.rate_card_custom_pricing_unit_overage_rate.created",
+        com.stripe.events.V2BillingRateCardCustomPricingUnitOverageRateCreatedEvent.class);
+    eventClassLookup.put(
         "v2.billing.rate_card_rate.created",
         com.stripe.events.V2BillingRateCardRateCreatedEvent.class);
     eventClassLookup.put(
@@ -418,6 +421,24 @@ public final class EventDataClassLookup {
         com.stripe.events.V2IamApiKeyPermissionsUpdatedEvent.class);
     eventClassLookup.put("v2.iam.api_key.rotated", com.stripe.events.V2IamApiKeyRotatedEvent.class);
     eventClassLookup.put("v2.iam.api_key.updated", com.stripe.events.V2IamApiKeyUpdatedEvent.class);
+    eventClassLookup.put(
+        "v2.iam.stripe_access_grant.approved",
+        com.stripe.events.V2IamStripeAccessGrantApprovedEvent.class);
+    eventClassLookup.put(
+        "v2.iam.stripe_access_grant.canceled",
+        com.stripe.events.V2IamStripeAccessGrantCanceledEvent.class);
+    eventClassLookup.put(
+        "v2.iam.stripe_access_grant.denied",
+        com.stripe.events.V2IamStripeAccessGrantDeniedEvent.class);
+    eventClassLookup.put(
+        "v2.iam.stripe_access_grant.removed",
+        com.stripe.events.V2IamStripeAccessGrantRemovedEvent.class);
+    eventClassLookup.put(
+        "v2.iam.stripe_access_grant.requested",
+        com.stripe.events.V2IamStripeAccessGrantRequestedEvent.class);
+    eventClassLookup.put(
+        "v2.iam.stripe_access_grant.updated",
+        com.stripe.events.V2IamStripeAccessGrantUpdatedEvent.class);
     eventClassLookup.put(
         "v2.money_management.adjustment.created",
         com.stripe.events.V2MoneyManagementAdjustmentCreatedEvent.class);

@@ -2599,6 +2599,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("sepa_debit_payments")
     SepaDebitPayments sepaDebitPayments;
 
+    @SerializedName("smart_disputes")
+    SmartDisputes smartDisputes;
+
     @SerializedName("tax_forms")
     TaxForms taxForms;
 
@@ -2931,6 +2934,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @EqualsAndHashCode(callSuper = false)
     public static class Payments extends StripeObject {
       /**
+       * When enabled, the customer of this Account will receive an email receipt when their payment
+       * is successful. If this parameter is not set, the default value is {@code false}.
+       */
+      @SerializedName("email_customers_on_successful_payment")
+      Boolean emailCustomersOnSuccessfulPayment;
+
+      /**
        * The default text that appears on credit card statements when a charge is made. This field
        * prefixes any dynamic {@code statement_descriptor} specified on the charge.
        */
@@ -3153,6 +3163,35 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       /** SEPA creditor identifier that identifies the company making the payment. */
       @SerializedName("creditor_id")
       String creditorId;
+    }
+
+    /**
+     * For more details about SmartDisputes, please refer to the <a
+     * href="https://docs.stripe.com/api">API Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SmartDisputes extends StripeObject {
+      @SerializedName("auto_respond")
+      AutoRespond autoRespond;
+
+      /**
+       * For more details about AutoRespond, please refer to the <a
+       * href="https://docs.stripe.com/api">API Reference.</a>
+       */
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class AutoRespond extends StripeObject {
+        /** The preference setting for auto-respond. Can be 'on', 'off', or 'inherit'. */
+        @SerializedName("preference")
+        String preference;
+
+        /** The effective value for auto-respond. Can be 'on' or 'off'. */
+        @SerializedName("value")
+        String value;
+      }
     }
 
     /**

@@ -656,6 +656,10 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class SelectedFulfillmentOption {
+      /** The digital fulfillment option. */
+      @SerializedName("digital")
+      Digital digital;
+
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -665,7 +669,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** <strong>Required.</strong> The shipping fulfillment option. */
+      /** The shipping fulfillment option. */
       @SerializedName("shipping")
       Shipping shipping;
 
@@ -674,7 +678,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       Object type;
 
       private SelectedFulfillmentOption(
-          Map<String, Object> extraParams, Shipping shipping, Object type) {
+          Digital digital, Map<String, Object> extraParams, Shipping shipping, Object type) {
+        this.digital = digital;
         this.extraParams = extraParams;
         this.shipping = shipping;
         this.type = type;
@@ -685,6 +690,8 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Digital digital;
+
         private Map<String, Object> extraParams;
 
         private Shipping shipping;
@@ -694,7 +701,15 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption build() {
           return new RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption(
-              this.extraParams, this.shipping, this.type);
+              this.digital, this.extraParams, this.shipping, this.type);
+        }
+
+        /** The digital fulfillment option. */
+        public Builder setDigital(
+            RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Digital
+                digital) {
+          this.digital = digital;
+          return this;
         }
 
         /**
@@ -727,7 +742,7 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /** <strong>Required.</strong> The shipping fulfillment option. */
+        /** The shipping fulfillment option. */
         public Builder setShipping(
             RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Shipping
                 shipping) {
@@ -745,6 +760,88 @@ public class RequestedSessionUpdateParams extends ApiRequestParams {
         public Builder setType(EmptyParam type) {
           this.type = type;
           return this;
+        }
+      }
+
+      @Getter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Digital {
+        /** <strong>Required.</strong> The digital option identifier. */
+        @SerializedName("digital_option")
+        Object digitalOption;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Digital(Object digitalOption, Map<String, Object> extraParams) {
+          this.digitalOption = digitalOption;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object digitalOption;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Digital
+              build() {
+            return new RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption
+                .Digital(this.digitalOption, this.extraParams);
+          }
+
+          /** <strong>Required.</strong> The digital option identifier. */
+          public Builder setDigitalOption(String digitalOption) {
+            this.digitalOption = digitalOption;
+            return this;
+          }
+
+          /** <strong>Required.</strong> The digital option identifier. */
+          public Builder setDigitalOption(EmptyParam digitalOption) {
+            this.digitalOption = digitalOption;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Digital#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * RequestedSessionUpdateParams.FulfillmentDetails.SelectedFulfillmentOption.Digital#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
         }
       }
 

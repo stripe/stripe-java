@@ -8,6 +8,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Generated Microdeposits represent verification deposits sent to a financial address for ownership
+ * verification, containing the deposited amounts and status.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

@@ -161,12 +161,23 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * The usage type for funds in this FinancialAccount. Can be used to specify that the funds are
+     * for Consumer activity.
+     */
+    @SerializedName("funds_usage_type")
+    FundsUsageType fundsUsageType;
+
     /** <strong>Required.</strong> The currencies that this FinancialAccount can hold. */
     @SerializedName("holds_currencies")
     List<String> holdsCurrencies;
 
-    private Storage(Map<String, Object> extraParams, List<String> holdsCurrencies) {
+    private Storage(
+        Map<String, Object> extraParams,
+        FundsUsageType fundsUsageType,
+        List<String> holdsCurrencies) {
       this.extraParams = extraParams;
+      this.fundsUsageType = fundsUsageType;
       this.holdsCurrencies = holdsCurrencies;
     }
 
@@ -177,11 +188,14 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
+      private FundsUsageType fundsUsageType;
+
       private List<String> holdsCurrencies;
 
       /** Finalize and obtain parameter instance from this builder. */
       public FinancialAccountCreateParams.Storage build() {
-        return new FinancialAccountCreateParams.Storage(this.extraParams, this.holdsCurrencies);
+        return new FinancialAccountCreateParams.Storage(
+            this.extraParams, this.fundsUsageType, this.holdsCurrencies);
       }
 
       /**
@@ -211,6 +225,16 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
       }
 
       /**
+       * The usage type for funds in this FinancialAccount. Can be used to specify that the funds
+       * are for Consumer activity.
+       */
+      public Builder setFundsUsageType(
+          FinancialAccountCreateParams.Storage.FundsUsageType fundsUsageType) {
+        this.fundsUsageType = fundsUsageType;
+        return this;
+      }
+
+      /**
        * Add an element to `holdsCurrencies` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
        * FinancialAccountCreateParams.Storage#holdsCurrencies} for the field documentation.
@@ -234,6 +258,21 @@ public class FinancialAccountCreateParams extends ApiRequestParams {
         }
         this.holdsCurrencies.addAll(elements);
         return this;
+      }
+    }
+
+    public enum FundsUsageType implements ApiRequestParams.EnumParam {
+      @SerializedName("business")
+      BUSINESS("business"),
+
+      @SerializedName("consumer")
+      CONSUMER("consumer");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      FundsUsageType(String value) {
+        this.value = value;
       }
     }
   }

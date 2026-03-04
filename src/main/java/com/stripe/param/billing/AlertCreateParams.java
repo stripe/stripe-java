@@ -35,7 +35,10 @@ public class AlertCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The configuration of the spend threshold. */
+  /**
+   * The configuration of the spend threshold. An event fires when the amount consumed exceeds the
+   * threshold, after all credits and discounts are applied but before tax is applied.
+   */
   @SerializedName("spend_threshold")
   SpendThreshold spendThreshold;
 
@@ -160,7 +163,10 @@ public class AlertCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The configuration of the spend threshold. */
+    /**
+     * The configuration of the spend threshold. An event fires when the amount consumed exceeds the
+     * threshold, after all credits and discounts are applied but before tax is applied.
+     */
     public Builder setSpendThreshold(AlertCreateParams.SpendThreshold spendThreshold) {
       this.spendThreshold = spendThreshold;
       return this;
@@ -1522,7 +1528,11 @@ public class AlertCreateParams extends ApiRequestParams {
     @Getter
     @EqualsAndHashCode(callSuper = false)
     public static class Gte {
-      /** The monetary amount. Required when type is {@code amount}. */
+      /**
+       * The monetary amount. Required when type is {@code amount}. The threshold is the
+       * total_before_tax, the amount consumed after all credits and discounts are applied, but
+       * before tax is applied.
+       */
       @SerializedName("amount")
       Amount amount;
 
@@ -1573,7 +1583,11 @@ public class AlertCreateParams extends ApiRequestParams {
               this.amount, this.customPricingUnit, this.extraParams, this.type);
         }
 
-        /** The monetary amount. Required when type is {@code amount}. */
+        /**
+         * The monetary amount. Required when type is {@code amount}. The threshold is the
+         * total_before_tax, the amount consumed after all credits and discounts are applied, but
+         * before tax is applied.
+         */
         public Builder setAmount(AlertCreateParams.SpendThreshold.Gte.Amount amount) {
           this.amount = amount;
           return this;
@@ -1866,7 +1880,7 @@ public class AlertCreateParams extends ApiRequestParams {
     @SerializedName("filters")
     List<AlertCreateParams.UsageThreshold.Filter> filters;
 
-    /** <strong>Required.</strong> Defines at which value the alert will fire. */
+    /** <strong>Required.</strong> Defines the threshold value that triggers the alert. */
     @SerializedName("gte")
     Long gte;
 
@@ -1967,7 +1981,7 @@ public class AlertCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** <strong>Required.</strong> Defines at which value the alert will fire. */
+      /** <strong>Required.</strong> Defines the threshold value that triggers the alert. */
       public Builder setGte(Long gte) {
         this.gte = gte;
         return this;

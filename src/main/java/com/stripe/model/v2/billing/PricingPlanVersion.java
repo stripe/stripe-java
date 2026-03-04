@@ -9,6 +9,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Pricing Plan Version represents a specific configuration of a Pricing Plan at a point in time.
+ * Versions are created automatically when you update a Pricing Plan, allowing you to track changes
+ * and manage which version is active for new subscriptions. Each version has a start date and
+ * optionally an end date if it has been superseded.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)

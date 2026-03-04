@@ -11,6 +11,10 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * A Cadence represents a billing schedule applied to a customer, defining when and how often to
+ * generate invoices, such as on monthly or annual billing cycle.
+ */
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
