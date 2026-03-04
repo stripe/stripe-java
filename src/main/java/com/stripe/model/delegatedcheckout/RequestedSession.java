@@ -31,6 +31,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class RequestedSession extends ApiResource
     implements HasId, MetadataStore<RequestedSession> {
+  /** Affiliate attribution data associated with this requested session. */
+  @SerializedName("affiliate_attributions")
+  List<RequestedSession.AffiliateAttribution> affiliateAttributions;
+
   /** The subtotal amount of the requested session. */
   @SerializedName("amount_subtotal")
   Long amountSubtotal;
@@ -361,6 +365,88 @@ public class RequestedSession extends ApiResource
             ApiRequestParams.paramsToMap(params),
             options);
     return getResponseGetter().request(request, RequestedSession.class);
+  }
+
+  /**
+   * For more details about AffiliateAttribution, please refer to the <a
+   * href="https://docs.stripe.com/api">API Reference.</a>
+   */
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AffiliateAttribution extends StripeObject {
+    /** Agent-scoped campaign identifier. */
+    @SerializedName("campaign_id")
+    String campaignId;
+
+    /** Agent-scoped creative identifier. */
+    @SerializedName("creative_id")
+    String creativeId;
+
+    /** Timestamp when the attribution token expires. */
+    @SerializedName("expires_at")
+    Long expiresAt;
+
+    /** Agent-issued secret to validate the legitimacy of the source of this data. */
+    @SerializedName("identification_token")
+    String identificationToken;
+
+    /** Timestamp for when the attribution token was issued. */
+    @SerializedName("issued_at")
+    Long issuedAt;
+
+    /** Identifier for the attribution agent / affiliate network namespace. */
+    @SerializedName("provider")
+    String provider;
+
+    /** Agent-scoped affiliate/publisher identifier. */
+    @SerializedName("publisher_id")
+    String publisherId;
+
+    /** Freeform key/value pairs for additional non-sensitive per-agent data. */
+    @SerializedName("shared_metadata")
+    Map<String, String> sharedMetadata;
+
+    /** Context about where the attribution originated. */
+    @SerializedName("source")
+    Source source;
+
+    /** Agent-scoped sub-tracking identifier. */
+    @SerializedName("sub_id")
+    String subId;
+
+    /**
+     * Whether this is the first or last touchpoint.
+     *
+     * <p>One of {@code first}, or {@code last}.
+     */
+    @SerializedName("touchpoint")
+    String touchpoint;
+
+    /**
+     * For more details about Source, please refer to the <a href="https://docs.stripe.com/api">API
+     * Reference.</a>
+     */
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Source extends StripeObject {
+      /** The platform of the attribution source. */
+      @SerializedName("platform")
+      String platform;
+
+      /**
+       * The type of the attribution source.
+       *
+       * <p>One of {@code platform}, or {@code url}.
+       */
+      @SerializedName("type")
+      String type;
+
+      /** The URL of the attribution source. */
+      @SerializedName("url")
+      String url;
+    }
   }
 
   /**

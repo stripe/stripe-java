@@ -118,6 +118,7 @@ public final class EventDataClassLookup {
     classLookup.put("apps.secret", com.stripe.model.apps.Secret.class);
 
     classLookup.put("billing.alert", com.stripe.model.billing.Alert.class);
+    classLookup.put("billing.alert_recovered", com.stripe.model.billing.AlertRecovered.class);
     classLookup.put("billing.alert_triggered", com.stripe.model.billing.AlertTriggered.class);
     classLookup.put(
         "billing.credit_balance_summary", com.stripe.model.billing.CreditBalanceSummary.class);
